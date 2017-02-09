@@ -1,0 +1,54 @@
+// Overrides
+.date-picker, .calendar {
+	padding: 0;
+}
+
+
+
+.date-picker {
+
+}
+
+[date-picker] th:hover,
+[date-picker] [ng-switch-when="date"] td span:hover {
+
+}
+
+[date-picker] .now.active {
+	background: #f2f5f7;
+	color: $gray-dark;
+}
+
+[date-picker] .now, [date-picker] .active.active {
+	background: #fff;
+	box-shadow: 0 0 0 4px #ddd;
+	text-shadow: none;
+	color: $gray-dark;
+}
+
+[date-picker].calendar tbody td span:not(.disabled):hover, [date-picker] .now.disabled {
+	color: $gray-dark;
+	background: #f2f5f7;
+	box-shadow: 0 0 0 4px #ddd;
+}
+
+[date-picker].calendar tbody td span.disabled {
+	color: #DCDEDF !important;
+
+	&:hover {
+		background: none;
+		cursor: not-allowed;
+	}
+}
+
+[date-picker].calendar tbody td span:focus {
+	outline: none;
+}
+
+[date-picker] .active.active {
+	background: $gray-light;
+}
+
+[date-picker] .now.disabled {
+
+}

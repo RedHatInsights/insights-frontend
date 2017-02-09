@@ -1,0 +1,14 @@
+.editable-form {
+	label.full-width {
+
+	}
+
+	.form-group-inline {
+		display: inline-block;
+	}
+
+	input[type="time"] {
+		@include rem('padding', 6px 12px);
+		line-height: 1;
+	}
+}

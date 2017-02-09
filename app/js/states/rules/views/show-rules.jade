@@ -1,0 +1,85 @@
+.page
+  .section
+    .rule-breadcrumb.push-top-narrow
+    .row.push-top-narrow
+      .col-sm-12
+        h1.page-title Rule
+    .rha-notifications
+    .row.row-short
+      .col-sm-12
+        form(ng-submit='saveFn()', name='form', ng-show="rule")
+          fieldset
+            legend
+            .form-group
+              label.control-label Plugin
+              p.form-control-static {{ rule.plugin }}
+            .form-group
+              label.control-label Plugin Display Name
+              p.form-control-static {{ rule.plugin_name }}
+            .form-group
+              label.control-label Error key
+              p.form-control-static {{ rule.error_key }}
+            .form-group
+              label.control-label Category
+              p.form-control-static {{ rule.category }}
+            .form-group
+              label.control-label Severity
+              p.form-control-static {{ rule.severity }}
+            .form-group
+              label.control-label Tags
+              ul.rule-tags(ng-if="rule.tags.length")
+                li.tag(ng-repeat="tag in rule.tags track by tag.name")
+                  a(ui-sref="app.admin-rules({tags: [tag.name]})", tooltip='{{tag.description}}') {{tag.name}}
+              p(ng-if="!rule.tags.length") No tags
+            .form-group
+              label.control-label Display Name / Title
+              p.form-control-static {{ rule.description }}
+            .form-group
+              label.control-label DETECTED ISSUE
+              pre {{ rule.reason }}
+            .form-group
+              label.control-label STEPS TO RESOLVE
+              pre {{ rule.resolution }}
+            .form-group
+              label.control-label Summary on (the rules list page)
+              tabset.show-rule-tabs
+                tab(heading="MD")
+                  pre {{ rule.summary }}
+                tab(heading="HTML")
+                  div(ng-bind-html="rule.summary_html | trust_html")
+            .form-group
+              label.control-label Generic messaging
+              tabset.show-rule-tabs
+                tab(heading="MD")
+                  pre {{ rule.generic }}
+                tab(heading="HTML")
+                  div(ng-bind-html="rule.generic_html | trust_html")
+            .form-group
+              label.control-label More Information
+              tabset.show-rule-tabs
+                tab(heading="MD")
+                  pre {{ rule.more_info }}
+                tab(heading="HTML")
+                  div(ng-bind-html="rule.more_info_html | trust_html")
+            .form-group
+              label.control-label Solution ID
+              p.form-control-static {{ rule.node_id }}
+              recommended-kbase(ng-if='rule.node_id', node='rule.node_id', show-label='false')
+            .checkbox.hidden
+              label
+                input(type='checkbox', ng-model='rule.reboot_required', disabled)
+                | Reboot Required
+            .checkbox
+              label
+                input(type='checkbox', ng-model='rule.active', disabled)
+                | Active
+            .checkbox
+              label
+                input(type='checkbox', ng-model='rule.retired', disabled)
+                | Retired
+            .form-group
+              label.control-label
+              button.btn.btn-block.btn-primary(name='preview', ng-click="preview(rule)") Preview
+            .form-group
+              label.control-label
+              button.btn.btn-block.btn-info(ng-click="editInfo(rule)", disabled) Edit

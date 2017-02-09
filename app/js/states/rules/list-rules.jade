@@ -1,0 +1,39 @@
+section
+  //platform-filter
+  rule-filter
+  .section
+    .row.margin-top
+      .col-sm-12
+        .btn-group.pull-right
+          a.btn.btn-sm.btn-app(ui-sref='app.admin-rules', ng-show='user.is_internal') Rules Admin
+          a.btn.btn-sm.btn-app(ui-sref='app.admin-topic', ng-show='user.is_internal') Topics Admin
+        .push-top-narrow.rules-filters(ng-hide="loading")
+    .row.row-short
+      .col-sm-12
+        section(ng-show='loading')
+          .spinner.spinner-lg
+        .rha-notifications
+        .rules-group(ng-hide="loading")
+          .rules-group-content
+            .content-block.content-block-outline(
+              ng-repeat="rule in rules | filter:filter | orderBy:'description'",
+              ng-class="{faded: rule.ack_id, hidden: (hideIgnored && rule.ack_id)}")
+              .header(id="{{::rule.rule_id}}")
+                //TODO: activate new item
+                //.new-item NEW!
+                severity-icon.pull-right(severity="rule.severity")
+                span.title.pointer(ng-click="permalink(rule.rule_id, true, 30)")
+                  i.icon-circle.icon-circle-large(ng-class="rule.category.toLowerCase()")
+                  span {{ ::rule.category }} #{'>'} {{ ::rule.description }}
+                  i.fa.fa-link.permalink
+                span.label.label-default.pull-right(translate, ng-class="{'rule-inactive': rule.ack_id, 'rule-active': !rule.ack_id}") INACTIVE
+              .content.ng-animate-enabled
+                .gray(ng-bind-html='::rule.summary_html | trust_html', target-blank='')
+                .link-pinned.gray.top
+                  //- a.btn.btn-sm(target='_blank', href='{{rule.viewUri}}') View KCS article
+                  recommended-kbase(ng-if='rule.node_id', node='rule.node_id', show-label='false', kcs-title='Knowledgebase Article')
+
+              .footer.footer-short(ng-if="canIgnoreRules")
+                strong(ng-if="rule.impacted_systems !== undefined && !rule.ack_id")
+                  a.pull-left(ui-sref='app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})', translate, ng-disabled="rule.impacted_systems === 0") View Impacted Systems ({{rule.impacted_systems}})
+                rule-toggle.pull-right(rule="rule")

@@ -1,0 +1,17 @@
+.progress {
+
+  .progress-bar {
+    @include font-size(14px);
+    line-height: 1;
+
+    span {
+      @include rem('margin', 2px 0 0 6px);
+      display: inline-block;
+      font-weight: 700;
+    }
+  }
+
+  .progress-bar + .num {
+    font-weight: 700;
+  }
+}

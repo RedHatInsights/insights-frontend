@@ -1,0 +1,232 @@
+// Base Styling for Product Filters
+//==================================================================*/
+.product-filters-modal {
+
+  .container {
+    padding: 0;
+
+    @include media-query(sm) {
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  .single-prod {
+    @include rem('padding', $global-margin $global-padding 100px);
+  }
+}
+
+
+/*-- Modal Formatting --*/
+.product-filters-modal {
+
+  .modal-title {
+    position: relative;
+    @include rem('padding', 16px 14px);
+    background: #403b3f;
+    color: #fff;
+    @include font-size(16px);
+    font-weight: 700;
+
+  }
+
+  .modal-title .fa {
+    position: absolute;
+    right: 16px;
+    top: 12px;
+    @include font-size(22px);
+    z-index: 999;
+  }
+
+  .modal-content {
+    height: 100%;
+  }
+}
+
+
+/*-- Tab Navigation --*/
+.product-filters-modal .tab-navigation {
+  margin: 0;
+  padding: 0;
+  background: #5b5359;
+
+  @include media-query(sm) {
+    @include rem('padding', 0 0 80px);
+    border-right: 4px solid #c8c8c8;
+  }
+
+  .navbar-collapse {
+    padding: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    li {
+      margin-bottom: 1px;
+      background: #f0f0f0;
+    }
+
+    li a {
+      display: block;
+      @include rem('padding', 18px $global-padding);
+      @include font-size(15px);
+      color: #646464;
+      font-weight: bold;
+      @include transition(.2s);
+    }
+
+    li.active a {
+      background: #009aea;
+      color: #fff;
+    }
+
+    li:not(.active) a:hover {
+      @include media-query(sm) {
+        background: darken(#f0f0f0, 70);
+        color: #fff;
+      }
+    }
+  }
+
+  .num {
+    float: right;
+    margin-top: -4px;
+    @include font-size(18px);
+  }
+
+  footer {
+    text-align: center;
+    background: #fff;
+    @include rem('padding', 8px $global-padding);
+
+    @include media-query(sm) {
+      color: #646464;
+      background: #403b3f;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    a,
+    .sep {
+      display: inline-block;
+      color: $blue;
+
+      @include media-query(sm) {
+        color: #fff;
+      }
+    }
+
+    a {
+      font-weight: 700;
+      @include rem('padding', 2px 0);
+    }
+
+    .sep {
+      margin-left: $global-padding;
+      margin-right: $global-padding;
+    }
+  }
+}
+
+
+// Tables
+//==================================================================*/
+.product-filters-modal {
+
+  table {
+    border: none;
+
+    thead {
+      border: 1px solid #ddd;
+      border-bottom: none;
+
+      th {
+        border-left: 1px solid #ddd;
+        border-bottom-width: 1px !important;
+        text-align: left;
+
+        &:first-child { border-left: none; }
+      }
+
+      th, td { @include rem('padding', 8px); }
+    }
+
+    tbody {
+      border: 1px solid #ddd;
+      border-top: none;
+
+      tr {
+        @include transition(.2s);
+
+        &:nth-child(odd) {
+          background: #f2f5f7;
+        }
+      }
+
+      td {
+        @include rem('padding', 8px);
+        border: none;
+        line-height: 1.6;
+
+        &.break { word-break: break-word; }
+      }
+    }
+
+    label { margin: 0; }
+
+    .tbody-scrollable {
+      max-height: 420px;
+      overflow: auto;
+      border-bottom: 5px solid #ddd;
+    }
+  }
+}
+
+
+// Footer in Content
+//==================================================================*/
+.product-filters-modal {
+
+  .tab-content + footer, .single-prod + footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ddd;
+    text-align: center;
+    @include rem('padding', $global-padding);
+
+    @include media-query(sm) {
+      @include rem('padding', $global-padding $global-margin);
+      text-align: right;
+    }
+
+    .btn {
+      display: inline-block;
+      @include rem('margin', 0 4px);
+      @include rem('padding', 5px 20px);
+
+      @include media-query(sm) {
+        @include rem('padding', 9px 40px);
+      	margin: 0;
+      }
+    }
+
+    .btn + .btn { @include media-query(sm) { @include rem('margin-left', 8px); } }
+  }
+
+  .tab-content {
+    @include rem('padding', 0 0 100px);
+
+    @include media-query(sm) {
+      margin-bottom: 40px;
+      @include rem('padding', $global-margin 0 60px);
+    }
+
+  }
+}

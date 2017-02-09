@@ -1,0 +1,37 @@
+.widget.severity-summary
+  ul
+    li
+      .pointer(ng-if="ruleCount.info || !loaded", ui-sref="app.topic({id: 'info'})")
+        .metrics
+          strong {{'Info' | translate}}
+          span.num(ng-if="(ruleCount.info / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.info / ruleCount.total || 0 | number:1}}%)
+        .progress-bar
+          .progress(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.info / ruleCount.total | toWidth')
+          .bar
+      .no-errors(ng-if="!ruleCount.info && loaded")
+        i.fa.fa-check-circle.inline-right(aria-hidden="true")
+        span(translate) You have no issues of info severity
+
+    li
+      .pointer(ng-if="ruleCount.warn || !loaded", ui-sref="app.topic({id: 'warning'})")
+        .metrics
+          strong {{'Warning' | translate}}
+          span.num(ng-if="(ruleCount.warn / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.warn / ruleCount.total || 0 | number:1}}%)
+        .progress-bar
+          .progress.orange(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.warn / ruleCount.total | toWidth')
+          .bar
+      .no-errors(ng-if="!ruleCount.warn && loaded")
+        i.fa.fa-check-circle.inline-right(aria-hidden="true")
+        span(translate) You have no issues of warning severity
+
+    li
+      .pointer(ng-if="ruleCount.error || !loaded", ui-sref="app.topic({id: 'critical'})")
+        .metrics
+          strong {{'Critical' | translate}}
+          span.num(ng-if="(ruleCount.error / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.error / ruleCount.total || 0 | number:1}}%)
+        .progress-bar
+          .progress.red(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.error / ruleCount.total | toWidth')
+          .bar
+      .no-errors(ng-if="!ruleCount.error && loaded")
+        i.fa.fa-check-circle.inline-right(aria-hidden="true")
+        span(translate) You have no issues of critical severity

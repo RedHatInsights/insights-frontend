@@ -1,0 +1,179 @@
+$calendar-header-bg: #0095DB;
+$calendar-content-border-color: #C0C0C0;
+$calendar-btn-background: #006CBE;
+
+
+[date-picker].calendar {
+	width: 100%;
+	padding: 0;
+
+	@include media-query(sm) {
+		width: 310px;
+	}
+
+	table {
+		border: none;
+	}
+
+	tr {
+
+	}
+
+	td {
+
+	}
+
+	.month {
+		display: inline-block;
+		@include rem('padding-top', 8px);
+	}
+
+	.btn {
+		@include rem('padding', 8px 20px);
+		background: #006CBE;
+		color: #fff;
+
+		&.prev { float: left; }
+		&.next { float: right; }
+
+	}
+
+	thead tr {
+		border: none;
+		border-left: none;
+		background: #fff;
+	}
+
+	thead tr th {
+		text-align: center;
+	}
+
+	thead tr:nth-child(2) {
+		border-left: 1px solid $calendar-content-border-color;
+		border-right: 1px solid $calendar-content-border-color;
+
+		th {
+			@include rem('padding', 12px 2px);
+			width: 14.29%;
+			text-align: center;
+			border: none;
+			font-weight: 100;
+			//display: inline-block;
+
+			&:hover {
+				background: none;
+			}
+		}
+	}
+
+	.header, thead tr:first-child {
+		background: $calendar-header-bg;
+		color: #fff;
+		text-transform: uppercase;
+		font-weight: 700;
+		border: 1px solid $calendar-header-bg;
+		border-bottom: none;
+		//@include rem('padding', 8px);
+
+		th {
+			@include rem('padding', 22px 6px);
+			@include border-radius(0);
+			border: none;
+			box-shadow: none;
+			text-align: center;
+			background: $calendar-header-bg;
+		}
+
+		th:first-child, th:nth-child(3) {
+			@include rem('padding', 22px);
+			@include font-size(28px);
+			line-height: 0;
+			font-weight: 700;
+			background: $calendar-btn-background;
+		}
+
+		th:nth-child(2) {
+
+		}
+
+		th:nth-child(3) {
+
+		}
+
+	}
+
+	tbody {
+		border: 1px solid $calendar-content-border-color;
+		border-top: none;
+		background: #fff;
+
+		tr:nth-child(odd) {
+			background: #fff;
+
+			td {
+				background: #fff;
+			}
+		}
+
+		td {
+			@include rem('padding', 6px);
+			font-weight: 700;
+			text-align: center;
+
+			span {
+				width: 30px;
+				height: 30px;
+				@include border-radius(50%);
+
+				&:hover {
+					background: $gray-light;
+				}
+			}
+
+		}
+	}
+
+	.content {
+		@include rem('padding', 12px 8px 8px);
+		background: #fff;
+		border: 1px solid $calendar-content-border-color;
+		border-top: none;
+	}
+
+	.week {
+		@include rem('padding', 4px 0);
+
+		&.hr .day { font-weight: 400; }
+
+		.day {
+			width: 14.2857%;
+			display: inline-block;
+			color: $gray-dark;
+			text-align: center;
+			font-weight: 700;
+
+
+			span {
+				display: inline-block;
+				@include rem('padding', 10px 0 0 0);
+				width: 32px;
+				height: 32px;
+				@include border-radius(50%);
+				@include font-size(13px, 13px);
+
+				&:hover {
+					@include box-shadow(inset 0 0 0 4px #C0C0C0);
+				}
+			}
+
+		}
+
+		.selected {
+
+			span {
+				background: rgba(0,0,0,.2);
+				@include box-shadow(inset 0 0 0 4px #C0C0C0);
+			}
+		}
+	}
+}

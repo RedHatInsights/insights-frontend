@@ -1,0 +1,12 @@
+.actions-rule-filters {
+  background: $gray-light;
+  @include rem('margin', $global-padding -30px);
+  @include rem('padding', $global-padding $global-margin);
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+
+  //@include rem('padding', $global-padding);
+  //border: 1px solid $gray-light;
+  //background: #f2f5f7;
+
+}

@@ -1,0 +1,87 @@
+.modal.modal-wizard {
+  .modal-dialog {
+    //width: 795px; to match action pages
+  }
+
+  .modal-content {
+    @include rem('padding', $global-margin);
+    min-height: 200px;
+  }
+
+  .ui-select-match {
+    padding: 0;
+    box-shadow: none;
+  }
+
+  p { margin: 0; }
+  p + p { @include rem('margin-top', $global-padding); }
+
+
+  .modal-dialog {
+    //width: auto;
+    //@include rem('max-width', 600px);
+  }
+
+  .modal-header {
+    @include font-size(22px);
+    line-height: 1;
+
+    h1,
+    h2,
+    h3 { display: inline-block; }
+
+    i {
+      display: inline-block;
+      @include font-size(64px);
+      line-height: 1;
+      vertical-align: middle;
+
+      & + h1,
+      & + h2,
+      & + h3 {
+        margin: 0;
+        vertical-align: middle;
+        display: inline-block;
+      }
+    }
+  }
+
+  .modal-body {
+    @include rem('padding', $global-padding);
+  }
+
+}
+
+.modal.modal-wizard {
+
+  .btn.btn-square.btn-step {
+    @include rem('padding', $global-margin);
+    background: #f4f4f4;
+    color: $gray-dark;
+    border: 1px solid #ebebeb;
+
+    &:hover { cursor: pointer; }
+
+    &:hover, &.active {
+      color: #fff;
+      background: #03afe8;
+      border-color: #03afe8;
+    }
+
+    span:first-child {
+      @include font-size(24px);
+      line-height: 1;
+      display: block;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.modal.modal-wizard .modal-footer {
+
+  .flexgrid [class^="col-"], .flexgrid div[class*=" col-"] {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}

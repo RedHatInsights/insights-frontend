@@ -1,0 +1,252 @@
+.btn, button {
+    outline: none;
+    border: none;
+
+    &:active, &:focus, &:visited {
+        outline: none !important;
+        @include box-shadow(none);
+    }
+}
+
+.btn.btn-blank {
+    color: $gray-dark;
+    background: none;
+    border: none;
+
+    &:hover {
+        color: darken($gray-dark, 10);
+        background: none;
+    }
+
+    &.blue { color: $blue; }
+}
+
+button.simple,
+.btn.simple {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none;
+}
+
+.notification-count {
+    display: inline-block;
+    @include rem('padding', 4px 8px);
+    background: $gray-dark;
+    text-align: center;
+    font-weight: 700;
+    color: #fff;
+    @include border-radius(8px);
+}
+
+// Originally from the chart reset
+//==================================================================
+.export,
+.reset {
+  button {
+    @include font-size(24px);
+    @include reset-button(8px);
+    @include transition-duration(.6s);
+
+    span {
+      @include rotate(0deg);
+      @include transition-duration(.8s);
+      color: lighten(#252527, 40);
+      display: block;
+    }
+  }
+
+  &.inactive button span {
+    color: lighten(#252527, 80);
+    z-index: 1;
+  }
+}
+
+.reset {
+    &:hover {
+      span {
+        @include rotate(180deg);
+        color: #0fbaf2;
+      }
+    }
+}
+
+.btn-primary {
+  background: #646464;
+  @include border-radius(0);
+  @include transition-duration(.2s);
+  border: 0;
+
+  &:hover {
+    background: darken(#646464, 5);
+  }
+}
+.btn-link {
+  color: $link-color;
+  font-weight: normal;
+  border-radius: 0;
+
+  &,
+  &:active,
+  &.active,
+  &[disabled],
+  fieldset[disabled] & {
+    background-color: transparent;
+    @include box-shadow(none);
+  }
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: transparent;
+  }
+  &:hover,
+  &:focus {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+    background-color: transparent;
+  }
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus {
+      color: $btn-link-disabled-color;
+      text-decoration: none;
+    }
+  }
+}
+
+.btn-outline {
+    background: #FFF;
+    color: #808080;
+    border: 1px solid #ddd;
+
+    &:hover {
+        color: $link-color;
+        background-color: #fff;
+        border-color: $link-color;
+    }
+}
+
+.pull-right {
+    .btn-group {
+        .btn + .btn {
+            margin-left: 12px !important;
+        }
+    }
+}
+
+
+$brand_red: #cc0000;
+
+.btn-white {
+	background: #fff;
+	border-color: #fff;
+
+	&,
+	&:link,
+	&:visited {
+		color: $brand_red;
+	}
+
+	&:hover,
+	&:focus {
+		color: $brand_red;
+		background: darken(#fff, 5);
+		border-color: darken(#fff, 5);
+	}
+}
+
+.btn.btn-circle-icon {
+	background: none;
+	color: $gray-dark;
+	text-transform: none;
+	padding: 0;
+	@include transition(.2s);
+
+	.text, .circle-icon {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.text + .circle-icon { @include rem('margin-left', $global-padding); }
+	.circle-icon + .text { @include rem('margin-left', $global-padding); }
+
+
+	.text {
+		font-weight: 100;
+	}
+
+	.circle-icon {
+		position: relative;
+		display: inline-block;
+		@include font-size(42px);
+		line-height: 1;
+		@include rem('padding',8px);
+		@include border-radius(50px);
+		border: 2px solid $gray;
+		@include opacity(1);
+		@include transition(.2s);
+
+		span {
+			@include opacity(1);
+			@include transform(rotate(0deg));
+			@include transition(.35s);
+		}
+
+		&:before {
+			content: '\f067';
+			color: $gray;
+			font: 20px/3 FontAwesome;
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 100%;
+			height: 100%;
+			@include opacity(0);
+			@include transform(rotate(0deg));
+			@include transition(.2s);
+		}
+	}
+
+	&:hover .circle-icon {
+
+
+		&:before {
+			@include opacity(1);
+			@include transform(rotate(360deg));
+		}
+
+		span {
+			@include transform(rotate(90deg));
+			@include opacity(0);
+		}
+	}
+}
+
+.btn.btn-square {
+  width: 100%;
+  height: 100%;
+  @include rem('padding', $global-padding);
+  text-transform: none;
+}
+
+.full-width-button-wrapper {
+  @include media-query(md) {
+    position: absolute;
+    width: 100%;
+    @include rem('padding', 0 $global-padding);
+    left: 0;
+  }
+}
+
+.full-width-button-wrapper.bottom {
+  @include media-query(md) {
+    @include rem('bottom', $global-padding);
+  }
+}
+
+.full-width-button-wrapper.top {
+  @include media-query(md) {
+    @include rem('top', $global-padding);
+  }
+}

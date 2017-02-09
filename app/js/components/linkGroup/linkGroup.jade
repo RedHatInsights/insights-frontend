@@ -1,0 +1,25 @@
+.member-group(ng-if='group.length === 1')
+  strong
+  type-icon(type-id='group[0].system_type_id', include-text='true')
+  | &nbsp;&nbsp;
+  i.fa.link-status(ng-class='{{getLinkStatus(group[0])}}', title='{{getLinkReportCount(group[0])}}') &nbsp;&nbsp;
+  a(ng-click='goToSystem(group[0])') {{getLinkName(group[0])}}
+.member-group(ng-if='group.length > 1')
+  .member-group-head(ng-click='toggleCollapsed()')
+    i.group-twisty.fa.fa-caret-down(ng-if='!collapsed') &nbsp;&nbsp;
+    i.group-twisty.fa.fa-caret-right(ng-if='collapsed') &nbsp;&nbsp;
+    type-icon(type-id='typeid', include-text='false')
+    span(ng-if='hasReports()')
+      | &nbsp;&nbsp;
+      i.fa.fa-exclamation-triangle.i-warning(
+          tooltip='A system in this group has actions!',
+          tooltip-trigger='mouseenter',
+          tooltip-append-to-body='true',
+          tooltip-placement='top')
+    | {{getLinkGroupText(type_id)}}
+  .member-group-content(ng-if='!collapsed')
+    .row
+      .link-text(ng-repeat='link in group')
+        .col-sm-4
+          i.fa.link-status(ng-class='{{getLinkStatus(link)}}', title='{{getLinkReportCount(link)}}')
+          a(ng-click='goToSystem(link)', title='{{getLinkName(link)}}') &nbsp; {{getLinkName(link)}}

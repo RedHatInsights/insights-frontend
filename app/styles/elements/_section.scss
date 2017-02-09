@@ -1,0 +1,18 @@
+section.full-width {
+	width: auto;
+	@include rem('padding', $global-margin);
+
+	@include media-query(sm) {
+		@include rem('margin-left', -30px);
+		@include rem('margin-right', -30px);
+	}
+}
+
+section + section {
+	@include rem('margin-top', $global-margin);
+}
+
+section.gray {
+	@include rem('padding', $global-margin);
+	background: $gray-light;
+}

@@ -1,0 +1,24 @@
+.help-bar
+  a(ng-click='help.show = !help.show')
+    span.icon-inline
+      i.fa.fa-question-circle
+    | Show help
+  .panel.panel-default(ng-show='help.show')
+    .panel-body
+      h5 Dynamic content
+      p There are multiple ways to make the content of a topic dynamic:
+      ul
+        li
+          a(ng-click='help.appendInterpolation()') interpolation
+        li
+          a(ng-click='help.appendConditional()') conditionals
+      p Here are some examples of values you can use for interpolation:
+        table
+          tbody
+            tr(ng-repeat='tip in help.interpolations')
+              td
+                a(ng-click="help.appendInterpolation($event)") {{tip.key}}
+              td {{tip.value}}
+      p Also, you may find &nbsp;
+        a(href='http://olado.github.io/doT/index.html', target='_blank') doT docs
+        | &nbsp; useful

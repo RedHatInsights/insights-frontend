@@ -1,0 +1,11 @@
+.environment-filter
+  label(translate='translate') Host
+  .dropdown.gray
+    button.btn.btn-default.dropdown-toggle(
+      data-toggle='dropdown',
+      aria-haspopup='true',
+      aria-expanded'false') {{getSelectedDockerHost().hostname}}
+      span.caret
+    ul.dropdown-menu
+      li(ng-repeat='host in getDockerHosts()')
+        a(ng-click='doSelectDockerHost(host)') {{host.hostname}}

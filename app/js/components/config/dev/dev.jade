@@ -1,0 +1,64 @@
+.dev
+  .user
+    h2 Demo Mode
+      div
+        button.btn.btn-small(
+          ng-show='user.demo_mode || user.is_internal', 
+          ng-click='demoModeButtonOnClick()') {{getDemoModeButtonText()}}
+    h2 API Prefix
+    table
+      tbody
+        tr
+          td Presets
+          td
+            select(
+              ng-options="v as k for (k, v) in presets.apiPrefix",
+              ng-model="tmp.apiPrefix",
+              ng-change="updateApiPrefix()")
+        tr
+          td Choose your own adventure
+          td
+            input.full-width(ng-model="tmp.apiPrefix")
+
+    h2 API Version
+    table
+      tbody
+        tr
+          td Presets
+          td
+            select(
+              ng-options="v for v in presets.apiVersions",
+              ng-model="tmp.apiVersion",
+              ng-change="updateApiVersion()")
+
+    div(style='padding-top: 20px;')
+      button.btn.btn-small.pull-right(
+        ng-click='save()') Save API Settings
+
+    h2 Fake user info
+    table
+      tbody
+        tr
+          td email
+          td
+            input(ng-model="user.email")
+        tr
+          td name
+          td
+            input(ng-model="user.first_name")
+            input(ng-model="user.last_name")
+
+    h2 Fake Entitlements
+    table
+      tbody
+        tr
+          td Presets
+          td
+            select(
+              ng-options="k as k for (k, v) in presets.entitlements",
+              ng-model="tmp.tmpEnt",
+              ng-change="setEntitlements()")
+        tr
+          td  State
+          td
+            pre {{getPretty(user.current_entitlements)}}

@@ -1,0 +1,130 @@
+.page.topic-form
+  .row.margin-top
+  .rha-notifications
+  form.form-horizontal(novalidate, name='topicForm')
+    section
+      h2 Topic details
+      .form-group(ng-class="{'has-error': topicForm.title.$invalid && topicForm.title.$dirty}")
+        label.control-label.col-sm-2(for='title') Title
+        .col-sm-10
+          input.form-control#title(type='text', name='title', ng-model='topic.title', required)
+      .form-group(ng-class="{'has-error': topicForm.slug.$invalid && topicForm.slug.$dirty}")
+        label.control-label.col-sm-2(for='title') Slug
+        .col-sm-10
+          .input-group
+            .input-group-addon
+              strong /actions/
+            input.form-control#slug(type='text', name='slug', ng-model='topic.slug')
+      .form-group
+        label.control-label.col-sm-2(for='priority') Priority
+        .col-sm-1
+          p.form-control-static#priority {{topic.priority + 1}}
+        .col-sm-9
+          p.form-control-static
+            | Priority is determined from the order of topics in the &nbsp;
+            a(ui-sref='app.admin-topic') topic admin table
+      .form-group
+        label.control-label.col-sm-2 Topic type
+        .col-sm-10
+          label.radio-inline
+            input#type1(type='radio', ng-model='topicType', value='default', ng-change='topic.alwaysShow = false')
+            | Shown if systems affected (default)&nbsp;
+            i.fa.fa-question-circle(tooltip='This topic will only be shown to a customer if at least one of their systems is affected. More precisely, the topic is shown if any of the active non-ignored rules associated with this topic (see below) has hits (unresolved actions) on customer\'s systems. If the customer used the product filter to select a particular product, the topic is only shown if there are hits for the selected product.')
+          label.radio-inline
+            input#type2(type='radio', ng-model='topicType', value='always', ng-change='topic.alwaysShow = true')
+            | Shown always&nbsp;
+            i.fa.fa-question-circle(tooltip='This topic will be shown always, no matter if customer\'s systems are affected or not. The topic content should use interpolation and conditionals to react to different scenarios (e.g. there are no hits, user has 0 systems registered, product with 0 hits selected, user ignored certain rules, ...)')
+      .form-group(ng-class="{'has-error': error.content}")
+        label.control-label.col-sm-2(for='content') Content
+        .col-sm-10
+          .pull-right
+            yes-no(yes="true", text="markdown")
+            yes-no(yes="true", text="doT")
+          topic-admin-help-bar(text-area='content')
+          textarea.form-control.content#content(placeholder='Topic content', ng-model='topic.content', rows='20')
+          .error.red(ng-show='error.content')
+            strong {{error.content}}
+          button.btn.btn-sm.btn-secondary.pull-right(ng-click='preview(topic, false, true)', ng-disabled="topicForm.$invalid")
+            span.icon-inline
+              i.fa.fa-picture-o
+            | Preview
+      .form-group(ng-class="{'has-error': error.summary}")
+        label.control-label.col-sm-2(for='summary') Summary
+        .col-sm-10
+          .pull-right
+            yes-no(yes="true", text="markdown")
+            yes-no(yes="true", text="doT")
+          topic-admin-help-bar(text-area='summary')
+          textarea.form-control.summary#summary(placeholder='Topic summary', ng-model='topic.summary', rows='10')
+          .error.red(ng-show='error.summary')
+            strong {{error.summary}}
+          button.btn.btn-sm.btn-secondary.pull-right(ng-click='preview(topic, true, false)', ng-disabled="topicForm.$invalid")
+            span.icon-inline
+              i.fa.fa-picture-o
+            | Preview
+      hr
+    section
+      h2 Rule selection
+      p There are multiple ways of associating rules with this topic. Choose the one that best suits the type of this topic.
+      .form-group(ng-class="{selected: ruleBinding === 'tagged'}")
+        .col-sm-2
+          input.col-sm-2(type='radio', name='ruleBinding', ng-model='ruleBinding', value='tagged')
+          label(ng-click="ruleBinding = 'tagged'") Tagged
+        .col-sm-10
+          ui-select(ng-model='topic.tag', append-to-body='false', ng-disabled="ruleBinding !== 'tagged'", on-select='updateTaggedRules()')
+            ui-select-match.form-control.ui-select-match(placeholder='Select a tag')
+              | {{$select.selected}}
+            ui-select-choices.ui-select-choices(repeat="tag in (availableTags | filter: $select.search)")
+              | {{tag}}
+          p.form-control-static
+            span(translate, translate-n='taggedRules.length', translate-plural='There are {{$count}} rules currently tagged with this tag.') There is 1 rule currently tagged with this tag.
+            span &nbsp;This number may change in the future if additional rules are tagged with &nbsp;
+              strong(ng-show='topic.tag') {{topic.tag}}.
+              strong(ng-hide='topic.tag') the tag.
+            span (or if the tag is removed from any of these rules)
+          rule-list-simple(rules='taggedRules', on-select='selectedRule = rule.rule_id', order="['-severityNum', '-count']")
+          p.form-control-static
+            | If you select an existing tag then all the rules tagged with this tag become part of this topic.
+            | This binding is dynamic so if more rules are tagged by this tag in the future, these rules will become part of this topic.
+            | You can also create a&nbsp;
+            a(ui-sref='app.admin-rule-tags') new tag
+      .form-group(ng-class="{selected: ruleBinding === 'explicit'}")
+        .col-sm-2
+          input.col-sm-2(type='radio', name='ruleBinding', ng-model='ruleBinding', value='explicit')
+          label(ng-click="ruleBinding = 'explicit'") Explicit
+        .col-sm-10
+          ui-select(ng-model='select.rule', append-to-body='false', ng-disabled="ruleBinding !== 'explicit'", on-select='addRule($item)')
+            ui-select-match.form-control.ui-select-match(placeholder='Add a rule')
+              | {{$select.selected.description}}
+            ui-select-choices.ui-select-choices(repeat="rule in (getAvailableRules() | filter: {description: $select.search}) | orderBy:['-severityNum', '-date'] track by rule.rule_id")
+              span.icon-inline
+                severity-icon(severity="rule.severity")
+                | &nbsp;{{rule.description}}
+          p.form-control-static You can explicitly pick one or multiple rules.
+          p(ng-hide='topic.rules.length') No rules selected
+          rule-list-simple(rules='topic.rules', on-select='selectedRule = rule.rule_id' on-delete='removeRule(rule)')
+      .form-group(ng-class="{selected: ruleBinding === 'implicit'}")
+        .col-sm-2
+          input.col-sm-2(type='radio', name='ruleBinding', ng-model='ruleBinding', value='implicit')
+          label.text-muted(ng-click="ruleBinding = 'implicit'") Implicit
+        .col-sm-10
+          .row
+            .col-sm-5
+              simple-select(model='topic.category', options='categories', disabled="ruleBinding !== 'implicit'")
+            .col-sm-2.text-center
+              strong AND
+            .col-sm-5
+              simple-select(model='topic.severity', options='severities', disabled="ruleBinding !== 'implicit'")
+
+          .row
+            .col-sm-12
+              p.form-control-static(ng-hide='implicitRules.length') No rules with this category
+              p.form-control-static
+                rule-list-simple(rules='implicitRules', on-select='selectedRule = rule.rule_id', order="['-severityNum', '-count']")
+              p.form-control-static.text-muted
+                | Binds all rules that are of certain severity, belong to a certain category or combination of there of.
+                | This binding is dynamic so if more rules are added for this category/severity in the future, these rules will become part of this topic.
+      hr
+    .btn-group.pull-right
+      button.btn.btn-sm.btn-default(ng-click='goBack()') Cancel
+      button.btn.btn-sm.btn-primary(ng-click='update(topic)', ng-disabled="topicForm.$invalid") Save

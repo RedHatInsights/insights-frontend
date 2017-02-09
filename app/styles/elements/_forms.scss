@@ -1,0 +1,21 @@
+form {
+
+  [class*="col-"] ~ [class*="col-"] {
+    margin-top: 0;
+  }
+
+  &.form-horizontal {
+    label {
+      text-align: right;
+
+      h1,
+      h2,
+      h3,
+      h4 { margin-bottom: 0; }
+    }
+
+    input {
+      width: 100%;
+    }
+  }
+}

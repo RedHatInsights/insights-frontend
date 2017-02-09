@@ -1,0 +1,148 @@
+$define-fa: true !default;
+// Include Settings / Functions
+//==================================================================*/
+@import 'compass';
+@import 'breakpoint';
+@import '../bower_components/font-awesome/scss/font-awesome';
+@import 'includes/vars';
+@import 'includes/mixins';
+@import 'includes/helpers';
+@import 'includes/animations';
+
+
+// Include Elements
+//==================================================================*/
+@import 'elements/base';
+@import 'elements/fonts';
+@import 'elements/angular';
+@import 'elements/loading-block';
+@import 'elements/lists';
+@import 'elements/shapes';
+@import 'elements/section';
+@import 'elements/forms';
+
+
+// Include CSS from bower components
+//==================================================================*/
+@import '../bower_components/ng-tags-input/ng-tags-input';
+@import '../bower_components/angular-datepicker/dist/angular-datepicker';
+@import '../bower_components/ui-select/dist/select';
+@import '../bower_components/sweetalert/lib/sweet-alert';
+@import '../bower_components/c3/c3';
+@import '../bower_components/ng-table/dist/ng-table';
+.flexgrid {
+	@import '../bower_components/flexboxgrid/dist/flexboxgrid';
+}
+
+
+// Include Vendors (used to override bower imports)
+//==================================================================*/
+@import 'vendor/c3';
+@import 'vendor/ng-table';
+@import 'vendor/_animate';
+
+
+// Page Templates
+//==================================================================*/
+@import 'page-templates/systems';
+@import 'page-templates/permissions';
+@import 'page-templates/overview';
+@import 'page-templates/goals-lite';
+@import 'page-templates/actions';
+@import 'page-templates/eval';
+
+
+// Include Components
+//==================================================================*/
+@import 'components/actionbar';
+@import 'components/scrollable';
+@import 'components/pie-charts';
+@import 'components/chart-header';
+@import 'components/breadcrumbs';
+@import 'components/tables';
+@import 'components/filter-search';
+@import 'components/error-infos';
+@import 'components/top-bar';
+@import 'components/tam-panel';
+@import 'components/header';
+@import 'components/utilities-tray';
+@import 'components/filters';
+@import 'components/icons';
+@import 'components/announcements';
+@import 'components/dashboard';
+@import 'components/dashboard-nav';
+@import 'components/pagination';
+@import 'components/groups';
+@import 'components/chart-';
+@import 'components/fa-';
+@import 'components/legend-nav';
+@import 'components/actions-breadcrumbs';
+@import 'components/content-block';
+@import 'components/system-overlay';
+@import 'components/no-actions';
+@import 'components/loader';
+@import 'components/switch';
+@import 'components/dropdown';
+
+@import 'components/splash/landing-page';
+@import 'components/prod-filters-link';
+@import 'components/prod-filters-modal';
+@import 'components/product-selector';
+@import 'components/modals';
+@import 'components/actionbar';
+@import 'components/deployment-select';
+@import 'components/rules';
+@import 'components/rules-group';
+@import 'components/modal-required';
+@import 'components/actions-light';
+@import 'components/user-info';
+@import 'components/profile-image';
+@import 'components/messaging-menu';
+@import 'components/grid-view';
+@import 'components/widget-block';
+@import 'components/editable-form';
+@import 'components/systems-list';
+@import 'components/link-group';
+@import 'components/page-header';
+@import 'components/featured-content';
+@import 'components/topics';
+@import 'components/platform-select';
+@import 'components/flexgrid';
+@import 'components/modal-wizard';
+@import 'components/beta-switch';
+@import 'components/action-rule-filters';
+@import 'components/widgets';
+@import 'components/list-switch';
+@import 'components/progress-bar';
+
+// Maintenance Plan
+//==================================================================*/
+@import 'components/maintenance-planner/maintenance-plan';
+@import 'components/maintenance-planner/date-picker';
+@import 'components/maintenance-planner/calendar';
+
+@import 'components/card';
+@import 'components/inventory';
+
+
+// Namespaced
+//==================================================================*/
+.insights-main-content, .modal {
+	@import 'components/insights/table';
+	@import 'components/insights/actions-details';
+	@import 'components/insights/group-select';
+	@import 'components/insights/config-tabs';
+	@import 'components/insights/panel';
+	@import 'components/insights/lists';
+	@import 'components/insights/insights-main-content';
+	@import 'components/insights/alert';
+	@import 'components/insights/notifications';
+	@import 'components/insights/entitlement';
+	@import 'components/insights/rules';
+}
+
+.insights,
+.insights-main-content {
+	@import 'elements/typography';
+	@import 'elements/buttons';
+}

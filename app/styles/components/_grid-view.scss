@@ -1,0 +1,27 @@
+.grid-view {
+	@include media-query(sm) {
+		display: table;
+	}
+}
+
+.grid-block {
+	margin-left: -15px;
+	margin-right: -15px;
+	@include rem('padding', 15px);
+}
+
+.grid-block + .grid-block {
+	border-top: 1px solid $gray-border-med;
+}
+
+@include media-query(sm) {
+
+	.left-col, .right-col {
+		display: table-cell;
+		vertical-align: top;
+		float: none;
+	}
+
+	.left-col { border-right: 1px solid $gray-border-med; }
+}
+

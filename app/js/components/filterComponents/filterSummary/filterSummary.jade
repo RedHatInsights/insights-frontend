@@ -1,0 +1,4 @@
+.summary-text(ng-repeat='f in fields')
+  span.summary-name {{f.name}}:&nbsp; 
+  span.summary-value {{f.value}}
+  span(ng-if='!$last') &nbsp;&nbsp;&nbsp;&nbsp;

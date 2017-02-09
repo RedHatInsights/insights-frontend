@@ -1,0 +1,293 @@
+.plan-outer-wrap(
+  ng-class="{'col-md-12 active' : edit.isActive(plan.maintenance_id), 'col-md-6': !edit.isActive(plan.maintenance_id)}",
+  id="maintenance-plan-{{plan.maintenance_id}}")
+  .plan-wrap(
+    ng-class="{'active' : edit.isActive(plan.maintenance_id), pointer: !edit.isActive(plan.maintenance_id)}")
+    .content-block.maintenance-plan.updatable(
+      ng-class="{'overdue': plan.overdue && !plan.silenced, updating: loader.loading}")
+      .spinner.spinner-lg(ng-if='loader.loading')
+      .header.plan-header
+        .actions-panel(
+          ng-class="{'active': edit.isActive(plan.maintenance_id), 'inactive' : !edit.isActive(plan.maintenance_id)}")
+          i.fa.fa-trash-o.action(
+            ng-if='edit.isActive(plan.maintenance_id) && !isReadOnly()',
+            ng-click='delete()',
+            tooltip="{{'Delete this plan' | translate}}")
+          i.fa.fa-compress.action(ng-click='minimize()', ng-show='edit.isActive(plan.maintenance_id)')
+          i.fa.fa-moon-o.action(
+            ng-click='silence()',
+            ng-if='plan.overdue && !plan.silenced',
+            tooltip="{{'Snooze this plan' | translate}}")
+        .details(ng-if="!editBasic.active && (!plan.suggestion || plan.suggestion === 'accepted')")
+          .header-title.editable
+            span.icon-inline(ng-if="plan.overdue")
+              i.fa.fa-calendar-times-o.red
+            span.icon-inline(ng-if='!editBasic.active && plan.hidden && isInternal')
+              i.fa.fa-eye-slash
+            h2.title(ng-class="{'red': plan.overdue}", ng-dblclick='editBasic.toggle()')
+              span(ng-if='plan.start') {{plan.start | moment:'dddd, LL':timezone}}
+              span(ng-if='!plan.start', translate) Plan {{plan.maintenance_id}} (Date not set)
+              i.fa.fa-pencil-square-o.edit-toggle(
+                ng-click='editBasic.toggle()',
+                ng-if='!isReadOnly()',
+                tooltip="{{'Click to edit this plan' | translate}}")
+            .nick(ng-if="plan.name.length")
+              strong(translate) Alias:&nbsp;
+              span(ng-if="plan.name.length", ng-dblclick='editBasic.toggle()') &nbsp;{{plan.name}}
+          .date-time.editable(ng-if='plan.start')
+            .group
+              i.fa.fa-clock-o
+              time-range.time-local(
+                start='plan.start',
+                end='plan.end',
+                timezone='timezone.name',
+                ng-dblclick='editBasic.toggle()')
+              i.fa.fa-pencil-square-o.edit-toggle(
+                ng-click='editBasic.toggle()',
+                ng-if='!isReadOnly()',
+                tooltip="{{'Click to edit this plan' | translate}}")
+            .group
+              i.fa.fa-clock-o
+              span(translate) UTC&nbsp;
+              time-range.time-utc(
+                start='plan.start',
+                end='plan.end',
+                timezone="'UTC'",
+                reference-timezone='timezone.name',
+                ng-dblclick='editBasic.toggle()')
+        .details-edit.pull-left(ng-if='editBasic.active')
+          form.editable-form(novalidate, name="editBasicForm", ng-submit="editBasic.save()")
+            .form-group(ng-if="plan.suggestion === 'proposed' && isInternal")
+              label.full-width.red Suggested plan
+              textarea.form-control(
+                placeholder='Describe why Red Hat is suggesting this plan',
+                ng-model='editBasic.description')
+              hr
+            .form-group.title(ng-class="{'has-error': editBasicForm.date.$invalid}")
+              label(translate) Date:&nbsp;
+              input.form-control(
+                type='text',
+                name='date',
+                id="planEditDate-{{plan.maintenance_id}}",
+                date-time,
+                ng-model='editBasic.start',
+                view="date",
+                min-view="date",
+                max-view="date",
+                format="LL",
+                auto-close='true',
+                highlights="calendarDates",
+                timezone='{{timezone.name}}',
+                date-change='dateChanged')
+            .form-group.nick(ng-class="{'has-error': editBasicForm.name.$invalid}")
+              label(translate) Alias:&nbsp;
+              input.form-control(
+                type='text',
+                name='name',
+                placeholder='Alias (optional)',
+                maxlength='255',
+                ng-model='editBasic.name')
+            .date-time
+              .form-group.form-group-inline(ng-class="{'has-error': editBasicForm.time.$invalid}")
+                label.full-width Start time:&nbsp;
+                input.time(
+                  type='time',
+                  name='time',
+                  ng-model='editBasic.time',
+                  ng-change='editBasic.sync()',
+                  step='900',
+                  ng-required='editBasic.start')
+              .form-group.form-group-inline(ng-class="{'has-error': editBasicForm.number.$invalid}")
+                label.full-width Duration:&nbsp;
+                input.duration(
+                  type='number',
+                  name='duration',
+                  min='0',
+                  step='15',
+                  ng-model='editBasic.duration',
+                  ng-required='editBasic.start')
+            .form-group.form-group-inline
+              label.full-width UTC time:&nbsp;
+              | {{editBasic.start | moment:'LLL':'UTC'}}
+            .form-group.form-group-inline
+              label.full-width(translate) Timezone:&nbsp;
+              | {{timezone.long}}&nbsp;
+              a(href='https://www.redhat.com/wapps/ugc/protected/locale.html', target='_blank')
+                | (change)
+            .form-group
+              .pull-right.btn-group(role='group')
+                button.btn.btn-sm.btn-default.action(
+                  type='button',
+                  ng-click="editBasic.toggle()",
+                  translate) Cancel
+                button.btn.btn-sm.btn-accent.action(
+                  type='submit',
+                  ng-disabled="editBasicForm.$invalid",
+                  translate) Save
+        .details-suggested.editable(ng-if="!editBasic.active && (plan.suggestion === 'proposed' || plan.suggestion === 'rejected')")
+          p.description
+            span.icon-inline(ng-if='plan.hidden && isInternal')
+              i.fa.fa-eye-slash
+            span.icon-inline(ng-if="plan.suggestion === 'rejected'")
+              i.fa.fa-meh-o.red(tooltip = 'This suggestion was rejected by the customer')
+            strong(
+              ng-show='plan.description',
+              ng-dblclick='editBasic.toggle()') {{plan.description}}
+            strong(
+              ng-hide='plan.description',
+              ng-dblclick='editBasic.toggle()',
+              translate) This is a plan suggested by Red Hat
+            i.fa.fa-pencil-square-o.edit-toggle(
+              ng-click='editBasic.toggle()',
+              ng-if='!isReadOnly()',
+              tooltip="{{'Click to edit this plan' | translate}}")
+      .plan-summary(ng-class="{'hidden' : edit.isActive(plan.maintenance_id)}")
+        .metrics
+          strong {{plan.actionsDone}}/{{plan.actions.length}}&nbsp;
+          span(translate) Actions resolved
+        .progress-bar
+          .progress(ng-style="plan.actionsDone / plan.actions.length | toWidth")
+          .bar
+
+      // Edit mode
+      .content.content-tabs.nobordertop.active(ng-if='edit.isActive(plan.maintenance_id)')
+        tabset.nav.nav-justified(
+          type="noformat",
+          vertical="false",
+          justified="true",
+          role="tablist")
+
+          // Actions Tab
+          tab(role="tabpanel", heading="{{'Actions' | translate}}", deselect='addRule.reset()')
+            .add-actions(ng-hide='isReadOnly()')
+              .account-selector
+                .account-select
+                  ui-select.gray.maintenance-page-select(
+                    ng-model='addRule.selected',
+                    append-to-body='false',
+                    ng-disabled='!getAvailableRules().length')
+                    ui-select-match.form-control.ui-select-match(placeholder="{{'Add action' | translate}}")
+                      | {{$select.selected._displayAs}}
+                    ui-select-choices.ui-select-choices(
+                      repeat="item in (getAvailableRules() | filter: {_displayAs: $select.search}) | orderBy:['-severityNum', '-report_count'] track by item.rule_id")
+                      span.icon-inline
+                        severity-icon(severity="item.severity")
+                      | {{item._displayAs}} ({{item.report_count}})
+                  .available-actions.table-responsive
+                    maintenance-table-systems(
+                      params='tableParams(addRule.selected, true, true)',
+                      edit='true',
+                      item='addRule.selected',
+                      ng-if='addRule.selected',
+                      on-save='addRule.reset()',
+                      on-cancel='addRule.reset()')
+
+            .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:'-severityNum' | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
+              .header.bordered(ng-init='tableEdit = false')
+                span.icon-inline
+                  severity-icon(severity="rule.severity")
+                strong {{rule.description}}
+                span.pull-right(ng-hide='isReadOnly()')
+                  a(ng-hide='tableEdit', ng-click='tableEdit = true')
+                    strong(
+                      translate,
+                      tooltip="{{'Click to add/remove affected systems' | translate}}") Edit
+                  i.fa.fa-trash-o(
+                    ng-if='tableEdit',
+                    ng-click='removeActions(rule.actions)',
+                    tooltip="{{'Remove this action' | translate}}")
+              .content.nopad.table-responsive
+                maintenance-table-systems(
+                  params='tableParams(rule, true, false)',
+                  edit='tableEdit',
+                  item='rule')
+            pagination.pull-right.pagination-gray(
+              ng-if="plan.rules.length > pager.perPage",
+              total-items="plan.rules.length",
+              ng-model="pager.currentPage",
+              previous-text="«",
+              next-text="»",
+              max-size="3",
+              rotate="false",
+              items-per-page="pager.perPage",
+              ng-change="pager.update()")
+
+          // Systems Tab
+          tab(role="tabpanel", heading="{{'Systems' | translate}}", deselect='addSystem.reset()')
+            .add-actions(ng-hide='isReadOnly()')
+              .account-selector
+                .account-select
+                  ui-select.gray.maintenance-page-select(
+                    ng-model='addSystem.selected',
+                    append-to-body='false',
+                    ng-disabled='!getAvailableSystems().length')
+                    ui-select-match.form-control.ui-select-match(placeholder="{{'Add system' | translate}}")
+                      | {{$select.selected._displayAs}}
+                    ui-select-choices.ui-select-choices(
+                      repeat="item in (getAvailableSystems() | filter: {_displayAs: $select.search}) | orderBy:['_displayAs'] track by item._id",
+                      group-by='groupBySystemType')
+                      | {{item._displayAs}} ({{item.report_count}})
+                  .available-actions.table-responsive
+                    maintenance-table-actions(
+                      params='tableParams(addSystem.selected, false, true)',
+                      edit='true',
+                      item='addSystem.selected',
+                      ng-if='addSystem.selected',
+                      on-save='addSystem.reset()',
+                      on-cancel='addSystem.reset()')
+
+            .content-block.system(
+              ng-repeat="system in (plan.systems | orderBy:'_name' | offset:pager.offset | limitTo:pager.perPage) track by system.system_id")
+              .header.bordered
+                span.icon-inline
+                  type-icon(
+                  type-id='system.system_type_id',
+                  include-text='false')
+                a(ng-click='showSystemModal(system)')
+                  strong {{system._name}} &nbsp;&nbsp;
+                span.item
+                  strong(translate) Last check in:
+                  span(ng-class='system | checkInStyle') &nbsp;&nbsp;{{system.last_check_in | timeAgo}}
+                span.pull-right(ng-hide='isReadOnly()')
+                  a(ng-hide='tableEdit', ng-click='tableEdit = true')
+                    strong(
+                      translate,
+                      tooltip="{{'Click to add/remove actions for this system' | translate}}") Edit
+                  i.fa.fa-trash-o(
+                    ng-if='tableEdit',
+                    ng-click='removeActions(system.actions)',
+                    tooltip="{{'Remove this system' | translate}}")
+                .text-center.red.hidden
+                  strong System restart required&nbsp;&nbsp;
+                  i.fa.fa-refresh
+              .content.nopad.table-responsive
+                maintenance-table-actions(
+                  params='tableParams(system, false, false)',
+                  edit='tableEdit',
+                  item='system')
+            pagination.pull-right.pagination-gray(
+              ng-if="plan.systems.length > pager.perPage",
+              total-items="plan.systems.length",
+              ng-model="pager.currentPage",
+              previous-text="«",
+              next-text="»",
+              max-size="3",
+              rotate="false",
+              items-per-page="pager.perPage",
+              ng-change="pager.update()")
+      footer.footer(ng-show='edit.isActive(plan.maintenance_id)')
+        a.btn.btn-sm.btn-default(ng-if='isInternal && !plan.hidden', ng-click='hidden(true)')
+          i.fa.fa-eye-slash.inline-right
+          span(translate) Hide
+        a.btn.btn-sm.btn-default(ng-if='isInternal && plan.hidden', ng-click='hidden(false)')
+          i.fa.fa-eye.inline-right
+          span(translate) Publish
+        a.btn.btn-sm.btn-accent(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='accept()')
+          i.fa.fa-check.inline-right
+          span(translate) Accept
+        a.btn.btn-sm.btn-default(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='reject()')
+          i.fa.fa-close.inline-right
+          span(translate) Ignore
+        a.btn.btn-sm.btn-open-blue.action.pull-right(translate, ng-click='exportPlan(plan.maintenance_id)')
+          i.fa.fa-download.inline-right
+          span(translate) Export CSV

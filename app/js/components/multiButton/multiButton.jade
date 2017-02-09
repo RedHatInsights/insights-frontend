@@ -1,0 +1,13 @@
+.multi-button
+  .btn-group(data-toggle='buttons')
+    a.btn.btn-xs(
+      id='{{getButtonId(button)}}',
+      ng-class='{"deny-click-cursor": showDenyClickCursor(button)}',
+      style='margin-left: 0px !important;',
+      ng-repeat='button in buttons',
+      ng-click='toggleButton(button)')
+      i.fa(
+        ng-if='buttonHasIconClass(button)', 
+        ng-class='getButtonClass(button)')
+      input(type='checkbox', autocomplete='off')
+      | &nbsp;{{button.label}}

@@ -1,0 +1,44 @@
+<!doctype html>
+<!-- NOTICE: this html file is used only in development!
+	 In production a rewrite of index.html occurs and this file is never used.
+	 You've been warned :D -->
+<html class="legacyfalse chrometwo skiplabs pafoff insights" insights-namespacer="insights-namespacer" ng-class="insightsNamespacer.current">
+  <head>
+    <link href="/chrome_themes/nimbus/css/chrometwo.css" rel="stylesheet" />
+    <script type="text/javascript" src="/webassets/avalon/j/lib/require.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/insightsbeta/">
+    <title>Red Hat Insights</title>
+
+    <meta name="tag"  content="___TAG___">
+    <meta name="description" content="Red Hat Insights - Red Hat's first proactive systems management service">
+    <meta name="viewport" content="width=device-width">
+    <script>
+      // careful here, the ' matter ... see .openshift/action_hooks/build
+      window.insightsGlobal = {
+          tag: '___TAG___',
+          appName: 'insightsbeta',
+          isBeta: true
+        }
+        window.LOGGED_IN = /rh_user=./.test(document.cookie);
+    </script>
+    <link rel="stylesheet" href="css/insights.css?rev=@@hash">
+  </head>
+  <body>
+    <div id="chrometwo">
+      <div id="chromed-app-content">
+        <!--[if lt IE ]9>
+        <div class="ie-unsupported alert alert-danger">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          Using Insights with this browser is unsupported. Please see our
+          <a href="/insights/support/browser" target="_self">Insights browser support policy</a> for more information.
+        </div>
+        <![endif]-->
+        <div ui-view="" class="ng-cloak"></div>
+      </div>
+    </div>
+    <script src="js/insights.js?rev=@@hash"></script>
+  </body>
+</html>

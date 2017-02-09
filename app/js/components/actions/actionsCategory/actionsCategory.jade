@@ -1,0 +1,75 @@
+.row(ng-show="getLoadingDetails()")
+  .col-sm-12
+    .spinner
+    span(translate) Loading Reports…
+
+.row.chart-header.margin-top(ng-hide="getLoadingDetails()")
+  .col-xs-12
+    h1.page-title {{getTitle() | translate | titlecase}}
+
+.row.row-short
+  .col-xs-12
+    actions-breadcrumbs.actions-breadcrumbs
+
+.row.row-short
+  .col-xs-12
+    actions-filters
+
+.row.row-short(ng-init="predicate = 'severityNum'; reverse='true'")
+  .col-sm-12
+    //label(translate) OrderBy
+    #rha-actions-table.content-block.content-block-card-filters
+      header.header
+        .content-tabular
+          ul.filters
+            li.width100.text-filter
+              input(type="text", name="filter", placeholder="Filter")
+            li.title.sortable.width60(ng-class="predicate | sortClass:'name':reverse", ng-click="predicate = 'name'; reverse=!reverse")
+              span(translate) Hostname
+              i.fa(ng-class="{'fa-sort-desc' : reverse && predicate==='name', 'fa-sort-asc' : !reverse && predicate==='name', 'fa-sort': predicate!=='name'}")
+            li.title.sortable.width20(ng-class="predicate | sortClass:'severityNum':reverse", ng-click="predicate = 'severityNum'; reverse=!reverse", ng-hide="isActions()") Type
+              i.fa(ng-class="{'fa-sort-desc' : reverse && predicate==='severityNum', 'fa-sort-asc' : !reverse && predicate==='severityNum', 'fa-sort': predicate!=='severityNum'}")
+            li.title.sortable.width20.text-right-sm(ng-class="predicate | sortClass:'value':reverse", ng-click="predicate = 'value'; reverse=!reverse")
+              span(translate) Count
+              i.fa(ng-class="{'fa-sort-desc' : reverse && predicate==='value', 'fa-sort-asc' : !reverse && predicate==='value', 'fa-sort': predicate!=='value'}")
+
+    .content-block.content-block-card(ng-repeat="group in getData() | orderObjectBy:predicate:reverse", ng-class="{active: group.id === getRule()}")
+      header.header.gray(ng-click='arcClick(group)')
+        .content-tabular
+          ul
+            li.title.width70(ng-click='arcClick(group)') {{group.name | translate}}
+            li.width10
+              .dropdown.subcontext-menu.text-right-sm
+                button#dropdownMenu1.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
+                  i.fa.fa-wrench
+                  span.caret
+                ul.dropdown-menu(aria-labelledby='dropdownMenu1')
+                  li
+                    a(href='#') Action
+                  li
+                    a(href='#') Another action
+                  li
+                    a(href='#') Something else here
+                  li.divider(role='separator')
+                  li
+                    a(href='#') Separated link
+
+            li.count.width20.text-right(ng-click='arcClick(group)')
+              // trucate this number to 8 digits
+              strong {{ group.value }} Actions&nbsp;&nbsp;
+              i.fa.fa-exclamation-circle.red
+
+      .content
+        .content-tabular
+          ul
+            li.severity.width80(ng-hide="isActions()")
+              strong Action type: &nbsp;&nbsp;
+              severity-icon(severity='group.severity')
+              span.sev &nbsp;&nbsp;{{ group.severity | translate }}
+            li.width20.text-right(ng-click='toggleRule(group)', ng-if="!isActions()")
+              a(ng-click='ackAction(group)', ng-hide="isSystemAlert(group)", translate)
+                span Hide this rule&nbsp;&nbsp;
+                i.fa.fa-eye-slash
+.row.row-short
+  .col-xs-12
+    .actions-back

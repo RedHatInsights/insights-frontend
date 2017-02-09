@@ -1,0 +1,55 @@
+.breadcrumb.actions-crumbs {
+    background-color: transparent;
+
+    .ui-select-container {
+
+        span {
+            color: #646464;
+            background: #fff;
+            @include rem('padding', 0 6px 0 0);
+            text-transform: none;
+            font-weight: 500;
+            box-shadow: none;
+        }
+
+        i {
+            font-size: 24px;
+        }
+    }
+
+    .ui-select-bootstrap .ui-select-toggle > .caret {
+        right: 0;
+        top: 36%;
+        border-top: 6px solid #646464;
+        border-right: 6px solid transparent;
+        border-left: 6px solid transparent;
+    }
+}
+
+.breadcrumbs-select {
+
+    .ui-select-choices {
+        width: auto;
+        box-shadow: none;
+        background: #ebebeb;
+        border-radius: 8px;
+        border: none;
+    }
+
+    .dropdown-menu {
+        color: #646464;
+        background: #ebebeb;
+        border-radius: 8px;
+        border: none;
+        box-shadow: none;
+
+        .ui-select-choices-row.active > a {
+            background: none;
+            color: #646464;
+        }
+    }
+}
+
+section + .actions-breadcrumbs, .actions-breadcrumbs + section {
+	@include rem('margin-top', $global-margin);
+}

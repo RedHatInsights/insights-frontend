@@ -1,0 +1,105 @@
+.modal-actions
+  i.fa.fa-close(ng-click="close()")
+
+.modal-header
+  .text-center
+    i.rh-icon-sports-play
+    h2 Create Ansible playbook
+
+
+.modal-body(ng-if='!refresh && available_rules && !loadingReports && !loadingReportsErrorMessage')
+  .row(ng-if='available_rules.length === 0')
+    .col-sm-12
+      span None of the rules for this system have available playbooks
+  .row(ng-if='available_rules.length > 0')
+    .col-sm-10.col-sm-offset-1
+      .rule-select(ng-click='changeRule()')
+        ui-select(ng-model='selected.rule', append-to-body='false')
+          ui-select-match.form-control.ui-select-match(placeholder='Select a rule')
+            span {{selected.rule.description}}
+          ui-select-choices.ui-select-choices(repeat="each_rule in getAvailableRules()")
+            span {{each_rule.description}}
+
+
+.modal-body(ng-if='!refresh && available_rules && !loadingReports && loadingReportsErrorMessage')
+  .row
+    .col-xs-12
+      div(ng-bind-html='loadingReportsErrorMessage | trust_html')
+
+
+.modal-body(ng-if='!refresh && selected.rule && !loadingRule && rule')
+  .row
+    .col-sm-10.col-sm-offset-1
+      strong {{rule.description}}
+  .row
+    .col-sm-10.col-sm-offset-1
+      strong Rule summary: &nbsp;
+      span(ng-bind-html='::rule.summary_html | trust_html')
+
+
+.modal-body(ng-if='!refresh && selected.rule && !loadingRule && rule && !hasPlaybook(rule.rule_id)')
+  .row
+    .col-sm-10.col-sm-offset-1
+      p Insights can not generate a playbook for this rule at this time
+
+
+.modal-body(ng-if='!refresh && selected.rule && !loadingRule && rule && hasPlaybook(rule.rule_id)')
+  .row(ng-if="questions.length > 0")
+    .col-sm-10.col-sm-offset-1(ng-repeat='question in questions track by $index', ng-if='answers.hasOwnProperty(question.name)')
+      a(ng-click='setCurrentQuestion(question, $index)' ng-class='{\'active\':currentQuestion.name === question.name}') Step {{$index + 1}}:
+      span.normal(ng-class='{\'active\':currentQuestion.name === question.name}') {{question.description}}
+    .col-sm-10.col-sm-offset-1(ng-if='!loadingQuestion && questions.length === answersSize')
+      a(ng-click='setCurrentQuestion(null, null)', ng-class='{\'active\':currentQuestion === null}') Step {{questions.length + 1}}:
+      span.normal(ng-class='{\'active\':currentQuestion === null}') Download Playbook
+  .row(ng-if='!loadingQuestion && currentQuestion !== null')
+    .col-sm-12
+      .flexgrid.equalheights
+        .row
+          .col-sm-5.col-sm-offset-1
+            button.btn.btn-square.btn-step(ng-click='saveAnswer(currentQuestion.name, currentQuestion.choices[0].question, currentQuestion.choices[0].value)', ng-class='{\'active\':currentQuestion.choices[0].value === answers[currentQuestion.name].answer}')
+              span {{currentQuestion.choices[0].question.substr(0, currentQuestion.choices[0].question.indexOf(' '))}}
+              span {{currentQuestion.choices[0].question.substr(currentQuestion.choices[0].question.indexOf(' '), currentQuestion.choices[0].question.length)}}
+          .col-sm-5
+            button.btn.btn-square.btn-step(ng-click='saveAnswer(currentQuestion.name, currentQuestion.choices[1].question, currentQuestion.choices[1].value)', ng-class='{\'active\':currentQuestion.choices[1].value === answers[currentQuestion.name].answer}')
+              span {{currentQuestion.choices[1].question.substr(0, currentQuestion.choices[1].question.indexOf(' '))}}
+              span {{currentQuestion.choices[1].question.substr(currentQuestion.choices[1].question.indexOf(' '), currentQuestion.choices[1].question.length)}}
+  .row(ng-if='systems.length === 1')
+    .col-sm-10.col-sm-offset-1
+      span
+        strong Host:&nbsp;
+        | {{getSystemDisplayName(systems[0])}}
+  .row(ng-if='!loadingQuestion && systems.length !== 1')
+    .col-xs-6.text-right
+      a(ng-click="setSystemListActive(!systemListActive)", ng-if='!loadingQuestion')
+        span(ng-if="!systemListActive") View selected system
+        span(ng-if="systemListActive") Hide selected system
+        span(ng-if='systems.length > 1') s
+    .col-xs-6
+      a(ng-click='refreshSettings()')
+        i.fa.fa-refresh &nbsp;&nbsp;
+        stong Reset selections
+
+  .row(ng-if='systemListActive && systems.length !== 1')
+    .col-sm-10.col-sm-offset-1
+      table.table-cp.table-striped
+        thead
+          tr
+            th(translate, colspan=2) Systems
+        tbody
+          tr(ng-repeat="system in systems track by $index")
+            td {{getSystemDisplayName(system)}}
+            td.text-right
+              i.fa.fa-times(ng-click="removeSystem($index)")
+
+
+.modal-body(ng-if='refresh')
+  .row
+    .col-sm-10.col-sm-offset-1
+      p(translate) Refreshing settings. Please select systems to start a new playbook...
+
+
+.modal-footer(ng-if='selected.rule && hasPlaybook(selected.rule.rule_id) && !loadingQuestion && questions.length === answersSize && !refresh')
+  .flexgrid.equalheights
+    .row
+      .col-sm-6.col-sm-offset-3
+        a.btn.btn-square.btn-accent(href="#", ng-click="downloadPlaybook()") Download Playbook

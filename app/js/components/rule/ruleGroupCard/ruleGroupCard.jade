@@ -1,0 +1,46 @@
+.card-group(ng-keypress='keyPressed($event)')
+  header.header
+    .count(translate, translate-n='plugin.hitCount', translate-plural="{{$count}} Systems") 1 System
+    .row
+      .col-sm-9
+        i.fa.fa-users(aria-hidden="true")
+        strong
+          span.text-uppercase(translate) Group: &nbsp;
+          span(ng-if='plugin.categories.length === 1')
+            i.fa.category-icon.inline-right(ng-class="plugin.categories[0].toLowerCase()")
+            | {{plugin.categories[0]}} >
+          span &nbsp; {{plugin.display_name}}
+      .col-sm-3.text-right-sm
+        span(translate, translate-n='plugin.rules.length', translate-plural='{{$count}} Rules in this group') 1 Rule in this group
+  .content.disabled-start(
+      ng-class='{swapping: swapping}',
+      ng-mouseenter='setActive(true)',
+      ng-mouseleave='setActive(false)')
+    .prev(ng-click='previous()', ng-class='{disabled: !hasPrevious()}')
+      i.fa.fa-arrow-left
+    .next(ng-click='next()', ng-class='{disabled: !hasNext()}')
+      i.fa.fa-arrow-right
+    card
+      card-header.flexgrid.equalheights
+        .row
+          //.col-sm-12
+          //  span {{index + 1}} of {{plugin.rules.length}}
+          .col-sm-8
+            .title
+              strong {{index + 1}}&nbsp;
+              em.light of &nbsp;
+              strong {{plugin.rules.length}}: {{rule.description}}
+            span.label.label-default.pull-right.text-uppercase(translate, ng-show='rule.acked') inactive
+          .col-sm-4.text-right-sm
+            severity-icon(severity='rule.severity', label='true')
+      card-content
+        .gray(ng-bind-html='rule.summary_html', target-blank='')
+      .footer.text-right-sm
+        strong
+          a(
+            ui-sref='app.actions-rule({category: rule.category, rule: rule.rule_id})',
+            ng-disabled="rule.hitCount === 0",
+            translate,
+            translate-n='rule.hitCount',
+            translate-plural='View Impacted Systems ({{$count}})')
+            | View Impacted System (1)

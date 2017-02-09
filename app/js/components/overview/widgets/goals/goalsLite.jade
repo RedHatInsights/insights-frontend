@@ -1,0 +1,44 @@
+#goals-lite.goals-lite
+  .row
+    .col-sm-12.block-lg(ng-if="loadingSystemCount && loadingSystemLimit")
+      .spinner.spinner-lg
+    .col-sm-12.block-lg(ng-if="!loadingSystemCount")
+      goals-gauge(ng-init="buildGauge({getGaugeMax: getMaxFreeSystems, getGaugeNumber: getSystemCount})")
+      .info
+        h4(translate) Systems Registered
+        .free(ng-if="!systemLimitReached")
+          span(translate) {{maxFreeSystems - systemCount}} more Insights entitlements available&nbsp;
+          br
+          a(translate, ng-click="registerSystem()") Register more systems
+        .free.full(ng-if="systemLimitReached")
+          span(translate) Congratulations! You have registered 10/10 available systems. To register more systems &nbsp;
+          br
+          a(translate, ng-click="registerSystem()") Request an Insights evaluation
+
+    .col.sm-6.block-md(ng-if="actionsLoading")
+      .spinner.spinner-lg
+    .col-sm-6.block-md(ng-if="securityErrors && !actionsLoading")
+      .count.circle {{securityErrors}}
+      h4(translate) Protect yourself!
+      p(translate) Fix all of your
+        br
+        | {{securityErrors}} security issues
+      a.cta-link(translate, ui-sref="app.actions({category:'security', initialSeverity:'ERROR'})") View security issues
+    .col-sm-6.block-md(ng-if="!securityErrors && !actionsLoading")
+      .check.circle
+        i.fa.fa-check
+      h4(translate) You've fixed all of the high severity security errors
+
+    .col.sm-6.block-md(ng-if="actionsLoading")
+      .spinner.spinner-lg
+    .col-sm-6.block-md(ng-if="stabilityErrors && !actionsLoading")
+      .count.circle {{stabilityErrors}}
+      h4(translate) Increase your uptime!
+      p(translate) Fix all of your
+        br
+        | {{stabilityErrors}} stability issues
+      a.cta-link(translate, ui-sref="app.actions({category:'stability', initialSeverity:'ERROR'})") View stability issues
+    .col-sm-6.block-md(ng-if="!stabilityErrors && !actionsLoading")
+      .check.circle
+        i.fa.fa-check
+      h4(translate) You've fixed all of the high severity stability errors

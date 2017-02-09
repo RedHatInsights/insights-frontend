@@ -1,0 +1,102 @@
+.list-header {
+	@include rem('margin', 0 0 $global-padding/2);
+
+	ul + &, .list + & {
+		@include rem('margin-top', $global-padding);
+	}
+}
+
+.list {
+	margin: 0;
+
+	.item {
+        position: relative;
+        .item-content.faded {
+            @include opacity(.5);
+        }
+    }
+
+	a.link:hover { text-decoration: underline; }
+
+	button { @include transition(.4s); }
+
+	.subheading { @include rem('margin-bottom', $global-padding); }
+
+	p { margin: 0; }
+	p + p { @include rem('margin-top', $global-padding); }
+
+	li {
+		margin: 0;
+
+	}
+
+	li + li {
+		@include rem('margin-top', $global-padding);
+	}
+}
+
+.list.list-simple {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.list.list-striped {
+	//	@include rem('padding', 15px);
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	background: #fff;
+	position: relative;
+	width: 100%;
+	z-index: 9999;
+
+	.striped {
+		@include rem('padding', $global-margin);
+
+		&:nth-child(even) { background: #eaeaea; }
+	}
+
+	.striped + .striped { margin-top: 0; }
+
+	@include media-query(md) {
+		max-width: 970px;
+		width: auto;
+		margin: 0 auto;
+	}
+}
+
+.list.with-icons {
+
+	.striped { @include rem('padding-left', 60px); }
+
+	i {
+		position: absolute;
+		left: 22px;
+		top: 28px;
+		@include font-size(20px);
+	}
+
+	.issue { position: relative; }
+}
+
+ul.pre-code {
+	@include rem('padding', $global-padding);
+	list-style-type: none;
+	background: #DCDFE1;
+	//background: #fff;
+	border: 5px solid darken(#DCDFE1, 10);
+	//border: 5px solid #ececec;
+
+	li {
+		display: inline;
+		font-family: Consolas, Monaco, 'Andale Mono', monospace;
+		@include font-size(13px);
+		line-height: 1;
+	}
+
+	li + li:before {
+		content: ', ';
+	}
+}
+

@@ -1,0 +1,67 @@
+.modal-required {
+
+	.icon-circle, i {
+		width: 14px;
+		height: 14px;
+		@include rem('margin', 0 10px 0 2px);
+	}
+
+	i {
+		color: $gray-dark;
+	}
+
+	section + section {
+		@include rem('margin-top', $global-margin);
+	}
+
+	.modal-header, .modal-body {
+		@include rem('padding-left', $global-margin*2);
+		@include rem('padding-right', $global-margin*2);
+	}
+
+	.modal-header {
+		h2.headline {
+			@include font-size(32px, 42px);
+		}
+
+		@include rem('padding-top', $global-margin);
+		@include rem('padding-bottom', $global-padding);
+
+		@include media-query(sm) {
+			@include rem('padding-top', $global-margin*2);
+			@include rem('padding-bottom', $global-padding);
+		}
+	}
+
+	.modal-body {
+		@include rem('padding-bottom', $global-margin);
+	}
+
+	.modal-dialog {
+		max-width: 620px;
+	}
+
+	.modal-footer {
+		border-color: #C2C1C3;
+		background: $gray-light;
+
+		@include media-query(sm) {
+			@include rem('padding', $global-margin);
+		}
+
+		button.btn.btn-close-modal {
+			display: block;
+			width: 100%;
+			background: $blue;
+			text-transform: none;
+			font-weight: 700;
+			@include rem('padding', $global-padding $global-margin*1.5);
+
+			@include media-query(sm) {
+				display: inline-block;
+				width: auto;
+			}
+		}
+
+	}
+}

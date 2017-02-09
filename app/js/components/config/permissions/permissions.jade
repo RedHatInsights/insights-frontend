@@ -1,0 +1,19 @@
+.user-permissions
+  .row
+    .col-xs-12
+      input(ng-model='newPermission.sso_username')
+      select(ng-options="p as p.label for p in permissions", ng-model="tmpPermission")
+      .btn(ng-click="addNewPermission()") Add
+
+  .row.group-list
+    .col-sm-4(ng-repeat='user in users | filter:newPermission.sso_username')
+      .group.user-permission
+        .name.header
+          a(ng-click='newPermission.sso_username = user') {{user}}
+        .content
+          .permissions
+            .perm(ng-repeat='p in userMap[user]')
+              | {{p.permission.label}}
+              .remove.fa.fa-times(ng-click='removeSingle(p)')
+          .remove.pull-right
+            a.fa.fa-times(ng-click='removeAll(userMap[user])') Remove all!

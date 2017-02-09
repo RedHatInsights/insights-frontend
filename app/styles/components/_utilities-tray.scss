@@ -1,0 +1,52 @@
+.utilities-tray {
+	position: absolute;
+	right: 0;
+
+	i.fa.fa-cogs {
+		@include font-size(21px);
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.tray {
+		position: absolute;
+		right: 40px;
+		top: 0;
+		width: 200px;
+		background: #80797e;
+		text-align: center;
+
+		@include rem('padding', 8px);
+
+		&:after {
+			content: '';
+			position: absolute;
+			right: -8px;
+			top: 7px;
+
+			border-top: 8px solid transparent;
+			border-bottom: 8px solid transparent;
+			border-left: 8px solid #80797e;
+		}
+
+		a {
+			color: #fff;
+			display: inline-block;
+			font-family: 'Open Sans', sans-serif;
+			font-weight: 700;
+
+			&:before {
+				content: '\007C';
+				margin: 0 6px;
+			}
+
+			&:first-child {
+				&:before {
+					display: none;
+				}
+			}
+		}
+	}
+}

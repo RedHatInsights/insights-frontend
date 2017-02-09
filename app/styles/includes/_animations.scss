@@ -1,0 +1,29 @@
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+	&.ng-move,
+  &.ng-enter {
+    -webkit-animation: fadeIn .5s;
+    -moz-animation: fadeIn .5s;
+    -ms-animation: fadeIn .5s;
+    animation: fadeIn .5s;
+  }
+}

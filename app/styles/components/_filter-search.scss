@@ -1,0 +1,49 @@
+.filter-options {
+  .option {
+    @include rem('margin-right', 12px);
+    float: left;
+
+    .title {
+      @include rem('margin', 0);
+      display: inline-block;
+
+      @include font-size(13px);
+      font-weight: 700;
+
+      small {
+        @include font-size(13px);
+        color: #000;
+        font-weight: 400;
+      }
+    }
+
+    input {
+      margin-left: 12px;
+    }
+
+    select {
+      margin-left: 12px;
+    }
+  }
+}
+
+.systems {
+  tbody {
+    tr.purge-pending {
+      td:not(.purging) {
+        display: none;
+      }
+    }
+  }
+}
+
+.filter-mgr {
+  @include rem('min-height', 350px);
+}
+
+.filter-preloader {
+  background-position: center;
+  background-size: 100px 100px;
+  top: 30px;
+  width: 100%;
+}

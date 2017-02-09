@@ -1,0 +1,12 @@
+.topic-summary
+  .row
+    .col-sm-12
+      span.pull-right(ng-show='isContentManager')
+        | [
+        a(ui-sref='app.edit-topic({id: topic.id})') edit
+        | ]
+      h1.page-title
+        span(translate) {{::topic.title}}
+  .row(ng-if='topic.content_html')
+    .col-sm-12
+      .topic-content(ng-bind-html="topic.content_html")

@@ -1,0 +1,27 @@
+.page-wrap.container.eval .main-content {
+  @include rem('padding-top', 40px);
+  @include media-query(md) {
+    @include rem('padding-top', 80px);
+  }
+}
+
+.eval {
+  .text-icon {
+    i {
+      //line-height: 1;
+      //display: inline-block;
+      //float: left;
+      //@include rem('margin-right', $global-margin);
+      //
+      //@include media-query(md) {
+      //  @include font-size(100px);
+      //}
+    }
+
+    i + span {
+      float: left;
+      display: inline-block;
+      @include rem('margin-left', $global-padding);
+    }
+  }
+}

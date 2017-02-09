@@ -1,0 +1,13 @@
+.loading-block {
+  @include rem('min-height', 150px);
+
+  .preloader {
+    @include rem('height', 150px);
+    background-position: center;
+    background-size: 100px 100px;
+    left: 0;
+    position: relative;
+    top: 0;
+    width: 100%;
+  }
+}

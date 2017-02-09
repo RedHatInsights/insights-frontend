@@ -1,0 +1,108 @@
+.page-announcments {
+
+}
+
+//#announcements {
+//  z-index: 99999999;
+//}
+//
+//.announcements {
+//	position: absolute;
+//	right: 60px;
+//	top: -40px;
+//	z-index: 99;
+//
+//	ul {
+//		width: 100%;
+//		list-style-type: none;
+//		overflow: hidden;
+//
+//		li {
+//			width: 100%;
+//			background: rgba(255,255,255,1);
+//			@include rem('padding', 12px);
+//			border: 1px solid #646464;
+//			border-left: 2px solid red;
+//		}
+//	}
+//}
+//
+//.announcements-icon {
+//	position: absolute;
+//	right: 0;
+//	top: -1px;
+//	color: #fff;
+//
+//    a {
+//      color: #fff;
+//      &:hover, &:focus, &:visited {
+//        text-decoration: none;
+//      }
+//    }
+//
+//	&:hover {
+//		cursor: pointer;
+//	}
+//
+//	.fa {
+//		@include font-size(24px);
+//	}
+//
+//	.has-announcement {
+//		position: absolute;
+//		background: red;
+//		width: 12px;
+//		height: 12px;
+//		right: -8px;
+//		@include border-radius(50%);
+//		@include font-size(8px);
+//		text-align: center;
+//
+//		.count {
+//			@extend %vertical-align;
+//		}
+//	}
+//
+//}
+//
+
+.announcement {
+
+
+  &.acked {
+    .header {
+      background: #fff;
+    }
+  }
+
+	// Acked announcement
+	&.read {
+		color: rgba(100,100,100,.7);
+
+		.header {
+			background: #fff;
+		}
+	}
+
+	input + span {
+		margin-left: 0;
+	}
+}
+
+.message-status-toggle {
+  i {
+    //position: absolute;
+    //right: $global-padding;
+    //top: 0;
+    //margin: 0;
+    float: none;
+    display: inline;
+    color: $gray-dark;
+    @include font-size(16px);
+    line-height: 1;
+
+    &.acked {
+      color: $green;
+    }
+  }
+}

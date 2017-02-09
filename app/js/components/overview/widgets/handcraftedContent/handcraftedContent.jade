@@ -1,0 +1,5 @@
+#handcrafted-conent.handcrafted-conent
+  h3
+    strong {{overview.article.title}}
+
+  span.handcrafted-content(ng-bind-html='overview.article.content_html | trust_html')

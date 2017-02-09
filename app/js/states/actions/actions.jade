@@ -1,0 +1,99 @@
+.actions-page
+  //platform-filter
+  new-actions-graph
+
+  section.metrics
+    .row
+      .col-md-7.chart-col.clearfix
+        .chart-container.text-center
+          span.preloader(ng-show='loading')
+          .donut-container
+            .donut-hole
+              .content
+                .num {{stats.rules.total}}
+                .text(translate) Issues
+            .rha-telemetry-donut(stats='stats')
+        .row
+          .col-md-10.col-md-offset-1
+            table.legend
+              tbody
+                tr
+                  td
+                    a.security(ui-sref="app.topic({id: 'security', product: getSelectedProduct()})")
+                      i.fa.fa-square.inline-right.security-color(aria-hidden="true")
+                      span.desc(translate) Security
+                      span.count &nbsp;({{stats.rules.security || 0}})
+                  td
+                    a.availability(ui-sref="app.topic({id: 'availability', product: getSelectedProduct()})")
+                      i.fa.fa-square.inline-right.availability-color(aria-hidden="true")
+                      span.desc(translate) Availability
+                      span.count &nbsp;({{stats.rules.availability || 0}})
+                tr
+                  td
+                    a.stability(ui-sref="app.topic({id: 'stability', product: getSelectedProduct()})")
+                      i.fa.fa-square.inline-right.stability-color(aria-hidden="true")
+                      span.desc(translate) Stability
+                      span.count &nbsp;({{stats.rules.stability || 0}})
+                  td
+                    a.performance(ui-sref="app.topic({id: 'performance', product: getSelectedProduct()})")
+                      i.fa.fa-square.inline-right.performance-color(aria-hidden="true")
+                      span.desc(translate) Performance
+                      span.count &nbsp;({{stats.rules.performance || 0}})
+          //ul.legend
+          //  li
+          //    a.security(ui-sref="app.topic({id: 'security', product: getSelectedProduct()})")
+          //      i.fa.fa-square.inline-right.security-color(aria-hidden="true")
+          //      span.desc(translate) Security
+          //      span.count &nbsp;({{stats.rules.security || 0}})
+          //  li
+          //    a.availability(ui-sref="app.topic({id: 'availability', product: getSelectedProduct()})")
+          //      i.fa.fa-square.inline-right.availability-color(aria-hidden="true")
+          //      span.desc(translate) Availability
+          //      span.count &nbsp;({{stats.rules.availability || 0}})
+          //  li
+          //    a.stability(ui-sref="app.topic({id: 'stability', product: getSelectedProduct()})")
+          //      i.fa.fa-square.inline-right.stability-color(aria-hidden="true")
+          //      span.desc(translate) Stability
+          //      span.count &nbsp;({{stats.rules.stability || 0}})
+          //  li
+          //    a.performance(ui-sref="app.topic({id: 'performance', product: getSelectedProduct()})")
+          //      i.fa.fa-square.inline-right.performance-color(aria-hidden="true")
+          //      span.desc(translate) Performance
+          //      span.count &nbsp;({{stats.rules.performance || 0}})
+
+      .col-md-5
+        card
+          card-header.gray
+            h4(translate) Severity summary
+          card-content
+            severity-summary(stats='stats')
+
+        card
+          card-header.gray
+            h4(translate) Systems with critical actions
+          card-content
+            system-summary(stats='stats')
+
+  section.gray.full-width
+    span.pull-right(ng-show='isContentManager')
+      | [
+      a(ui-sref='app.admin-topic') edit
+      | ]
+    h2.section-title.section-title-red(translate) Featured Topics
+    .flexgrid.equalheights.other-topics
+      .row(ng-if='loader.loading')
+        .spinner.spinner-lg
+      .row(ng-if='featuredTopics.length')
+        other-topic(ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id", ng-show='!loader.loading', topic='topic')
+      .row(ng-if='!show.extraTopics && extraTopics.length')
+        .text-center.extra-topics
+          button.btn.btn-sm.btn-default(ng-click='show.extraTopics = true', translate) More topics
+      .row(ng-if='!featuredTopics.length && !loader.loading')
+        .col-xs-12.text-center
+          strong No topics currently available.&nbsp;
+            a(ui-sref='info.getting-started.direct', translate) Register more systems.
+  section.full-width(ng-if='show.extraTopics')
+    .flexgrid.equalheights.other-topics
+      .row
+        //.spinner.spinner-lg(ng-show='loader.loading')
+        other-topic(ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id", ng-show='!loader.loading', topic='topic')

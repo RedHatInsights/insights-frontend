@@ -1,0 +1,26 @@
+.actionbar {
+	background-color: #f9f9f9;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	font-size: 13px;
+	@include rem('padding', 10px);
+	border-top: 1px solid $gray;
+	text-align: right;
+
+	.action {
+		display: inline-block;
+		@include rem('padding', 5px);
+		border: 1px solid #ddd;
+		@include rem('margin-left', 10px);
+		@include transition(.2s);
+
+		&:hover {
+			background: $gray-dark;
+			border-color: $gray-dark;
+			color: #fff;
+		}
+	}
+	i { padding-right: 5px; }
+}

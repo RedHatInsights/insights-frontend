@@ -1,0 +1,50 @@
+.logo-insights {
+	margin: 0;
+	@include font-size(18px);
+	line-height: 1;
+	text-transform: uppercase;
+	font-weight: 600;
+
+	@include media-query (xs) {
+		@include font-size(28px);
+		line-height: 1;
+	}
+
+	@include media-query (sm) {
+		@include font-size(48px);
+		line-height: 1;
+		@include rem('margin-bottom', 40px);
+	}
+
+	span, .block {
+		position: relative;
+		display: inline-block;
+		@include rem('padding', 6px 8px);
+		overflow: hidden;
+
+		@include media-query (xs) {
+			@include rem('padding', 6px 12px);
+		}
+
+		@include media-query (sm) {
+			@include rem('padding', 8px 18px);
+		}
+	}
+
+	span {
+		z-index: 2;
+		display: inline-block;
+		padding-left: 0;
+		color: #fff;
+	}
+
+	.block {
+		background: #e62235;
+		font-weight: 700;
+
+		span {
+			display: inline;
+			padding: 0;
+		}
+	}
+}

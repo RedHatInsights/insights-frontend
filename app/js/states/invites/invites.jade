@@ -1,0 +1,79 @@
+.page-wrap.container.eval
+  .main-content.insights-main-content.full-width
+    .row
+      .col-sm-12.text-center(ng-if='loading')
+        i.fa.spinner-lg.spinner
+    .status-error(ng-if='!loading && forbidden')
+      .row
+        .col-sm-12.col-md-8.col-md-offset-2.text-center
+          h1 Your account is not authorized to view this page.
+    .status-available(ng-if='!loading && !forbidden')
+      .row
+        .col-sm-12.col-md-8.col-md-offset-2.text-center
+          h1
+            i.fa.fa-address-book-o(aria-hidden="true")
+            | &nbsp;Insights Evaluation
+      .row
+        .col-sm-12.col-md-8.col-md-offset-2.text-left
+          p
+            | This internal form is used to invite an account to a 30 day evaluation of Red Hat Insights (more info available at &nbsp;
+            a(href="https://mojo.redhat.com/docs/DOC-1104175", target="_blank")
+              b Insights Evaluation guide
+            | )
+
+        .col-sm-12.col-md-8.col-md-offset-2.text-left
+          card.invite(ng-if='!failedInvite  && !successfulInvite')
+            card-content.gray
+              form.form-horizontal
+                .form-group
+                  label.col-sm-4
+                    h4 Account Number
+                  .col-sm-8
+                    input(ng-model='data.account')
+                .form-group
+                  label.col-sm-4
+                    h4 Customer Email
+                  .col-sm-8
+                    input(ng-model='data.email')
+                .form-group
+                  label.col-sm-4
+                    h4 System Count
+                  .col-sm-8.text-left-md
+                    select(ng-options="e as e.systems for e in evals", ng-model="data.newInvite")
+                .row
+                  .col-sm-12.text-center
+                    button.btn.btn-lg.btn-accent(ng-click="createNewInvite()") Invite
+          card.success(ng-if='successfulInvite')
+            card.success
+              card-content.gray.text-center
+                .row
+                  .col-sm-12
+                    h4.nomar
+                      span.icon-check-alt.green(aria-hidden="true") &nbsp;
+                      span.light You have successfully invited&nbsp;
+                      | {{successfulInvite.email}}&nbsp;
+                      span.light with account number&nbsp;
+                      | {{successfulInvite.account_number}}.
+                .row
+                  .col-sm-12.text-center
+                    button.btn.btn-lg.btn-accent(ng-click="reset()") Reload form
+
+          card.failure(ng-if='failedInvite')
+            card.success
+              card-content.gray.text-center
+                .row
+                  .col-sm-12
+                    h4.nomar
+                      i.fa.fa-times-circle.red(aria-hidden="true") &nbsp;
+                      | Invitation to {{failedInvite.email}} with account number {{failedInvite.account_number}} failed. &nbsp;
+                      //If its a duplicate error.  We have a specific message.
+                      span(ng-if='error.status == 409') This account has previously activated a sales invited evaluation. &nbsp;
+                        | Please contact 
+                        a(href='mailto:insights@redhat.com') insights@redhat.com
+                        | &nbsp; to grant additional invitations.
+                      //otherwise, just show the raw error from the api.
+                      span(ng-if='error.status != 409') {{error.data}}
+                .row
+                  .col-sm-12.text-center
+                    button.btn.btn-lg.btn-accent(ng-click="reset()") Try again
+                    

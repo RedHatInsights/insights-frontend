@@ -1,0 +1,151 @@
+$aside_anchor_bg: #5b5359;
+$aside_anchor_hover_bg: #f0f0f0;
+$aside_anchor_color: #252527;
+
+
+.preloader {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+
+	width: 100px;
+	height: 100px;
+	display: block;
+	background-size: 100% auto;
+	@include opacity(.1);
+}
+
+.toggle {
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid #fff;
+	@include transition-duration(.2s);
+
+
+	&.active {
+		@include rotate(180deg);
+	}
+}
+
+menu.nav {
+	@include media-query (sm) {
+		@include rem('margin', 2px 0 0);
+	}
+
+	@include media-query (sm) {
+		width: 100%;
+		float: none;
+	}
+
+	ul {
+		@extend %reset;
+		@extend %clearfix;
+		@include rem('margin-bottom', 1px);
+
+		@include media-query (sm) {
+			@include rem('margin-bottom', 2px);
+		}
+
+		li {
+			@include transition-duration(.2s);
+			@include transition-timing-function(ease-in-out);
+			overflow: auto;
+
+			a {
+				width: 100%;
+				height: 100%;
+				display: block;
+				@include rem('padding', 12px 20px 12px 14px);
+
+				background: $aside_anchor_bg;
+				color: #fff;
+				font-weight: 700;
+				border-bottom: 1px solid darken($aside_anchor_bg, 5%);
+				-webkit-font-smoothing: antialiased;
+				@include transition-duration(.1s);
+				@include transition-timing-function(ease-in-out);
+				@include box-shadow(none);
+
+				&:hover {
+					text-decoration: none;
+					text-indent: 6px;
+				}
+
+				&.current, &:hover {
+					color: $aside_anchor_color;
+					background: $aside_anchor_hover_bg;
+					border-color: darken($aside_anchor_hover_bg, 20%);
+					@include box-shadow(0 4px 0 0 #504a4f, inset -8px 0 10px 0px #ddd);
+				}
+			}
+		}
+	}
+
+	ul ul {
+		margin-bottom: 0;
+		display: none;
+
+		@include media-query (sm) {
+			display: block;
+		}
+
+
+		li {
+
+			a {
+				@include rem('padding', 12px 20px 12px 24px);
+				background: lighten($aside_anchor_bg, 8%);
+
+				&:hover {
+					text-indent: 6px;
+					background: darken(#fff, 10%);
+				}
+			}
+		}
+	}
+}
+
+menu.account {
+	margin: 0;
+
+	li {
+		position: relative;
+		float: left;
+		@include rem('margin-left', 20px);
+
+		a {
+			@include rem('padding', 2px 12px 12px 0);
+			display: block;
+			@include font-size(13px);
+			font-weight: bold;
+			color: #9fa0a1;
+
+			@include transition-duration(.1s);
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+
+			width: 22px;
+			height: 0;
+			background: #fff;
+			@include transition-duration(.1s);
+		}
+
+
+		&.current, &:hover {
+
+			&:after { height: 4px; }
+			a { color: #fff; }
+		}
+
+		&:hover {
+			&:after {
+				bottom: 0;
+			}
+		}
+	}
+}

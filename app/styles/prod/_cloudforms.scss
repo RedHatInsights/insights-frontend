@@ -1,0 +1,56 @@
+.page-title,
+.actions-details,
+.chart-col {
+	margin-top: 0;
+}
+
+.insights-main-content {
+	h1 {
+		margin-top: 0;
+	}
+}
+
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('../assets/fonts/fontawesome-webfont.eot?v=4.2.0');
+	src: url('../assets/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'), url('../assets/fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'), url('../assets/fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'), url('../assets/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body .fa {
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-style: normal;
+}
+
+.chart-icon {	background-image: url("../assets/images/i_chart.png"); }
+.donut-hole { background-image: url('../assets/images/bg_dount-hole-na.png'); }
+
+.donut-container.no-actions .donut:after {
+	@include media-query (xs) {
+		background-image: url('../assets/images/bg_chart-shadow.png');
+	}
+}
+
+.rha-telemetry-donut {
+  &:after {
+    @include media-query (xs) {
+      background-image: url('../assets/images/bg_chart-shadow.png');
+    }
+    @include media-query (md) {
+      background-image: url('../assets/images/bg_chart-shadow.png');
+    }
+	}
+}
+
+.info-page {
+	 .band-white:nth-child(odd) {
+		background: url("../assets/images/bg1.jpg");
+		background-size: cover;
+	 }
+ }

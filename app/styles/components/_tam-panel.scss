@@ -1,0 +1,60 @@
+.user-profile {
+	label { color: #fff; }
+
+	// TODO: chosen not used here atm, might get rid of this
+	.chosen-container-single {
+		width: 100%;
+
+		.chosen-single {
+			background: #3e383c;
+			color: #cccccc;
+			width: 100%;
+		}
+	}
+
+	.tam, .filter {
+		@include rem('margin-bottom', 2px);
+		@include rem('padding', 12px 14px 12px 14px);
+		color: #fff;
+		background: #4d464b;
+
+		input {
+			width: 100%;
+			padding: 2px 8px;
+			border: none;
+			box-shadow: none;
+			background: #3E383C;
+		}
+
+		.fa { color: #999; }
+
+		select {
+			width: 100%;
+			@include rem('min-width', 100px);
+			background: #3e383c;
+			color: #cccccc;
+			border: none;
+		}
+	}
+
+	.tam {
+		@include rem('margin-bottom', 2px);
+		position: relative;
+		//display: block !important;
+		border-bottom: 1px solid #403b3f;
+
+		input { color: #ccc; }
+
+		.tam-icon {
+			@include font-size(10px);
+			color: darken(#ccc, 20);
+		}
+
+		.tam-view-all { right: 40px; }
+	}
+
+	.dropdown-select:after {
+		border-top: 5px solid #F0F0F0;
+		z-index: 1;
+	}
+}

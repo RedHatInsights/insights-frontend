@@ -1,0 +1,76 @@
+.components
+  .page-header
+    h1.page-title Components Library
+
+  section.section-flex-grid
+    h2 Brand new FLEX BOX MODEL layout with equal height layout
+    h3.section-title.red 2 column grid set on the flex-grid container
+    .flexgrid.equalheights
+      .row
+        .col-sm-2
+          .content.gray
+            p testing the content
+        .col-sm-2
+          .content.gray
+            p testing the content
+            p and again
+
+      pre.code-block.code-terminal
+        code.code
+          | .flexgrid.equalheights
+          |   .row
+          |     .col-sm-2
+          |       .content
+          |         p testing the content
+      .row
+        .col-sm-6
+          .content.gray
+            p testing the content
+        .col-sm-6
+          .content.gray
+            p testing the content
+            p and again
+        .col-sm-6
+          .content.gray
+            p testing the content
+            p and again
+        .col-sm-6
+          .content.gray
+            p testing the content
+            p and again
+            p and again
+            p and again
+        .col-sm-6
+          .content.gray
+            p testing the content
+            p and again
+            p and again
+            p and again
+            p and again
+            p and again
+            p and again
+            p and again
+        .col-sm-6
+          .content.gray
+            p testing the content
+            p and again
+            p and again
+            p and again
+
+  section
+    h2 Regular Card
+    card
+      card-header
+        | Some header HTML
+      card-content
+        | Some content HTML
+      card-footer
+
+  section
+    h2 Expandable Card
+    card(expandable=true)
+      card-header
+        | Some header HTML
+      card-content
+        | Some content HTML
+      card-footer

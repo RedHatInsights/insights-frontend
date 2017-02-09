@@ -1,0 +1,59 @@
+section#activate
+  .step-num 1
+  h2.section-header(translate) Activate your evaluation
+  p(translate) If you have purchased an Insights subscription, please skip this step and proceed to the next step.
+  p(translate) To begin using Red Hat Insights, please visit  <a href='https://access.redhat.com/insights/evaluation'>https://access.redhat.com/insights/evaluation</a> to activate any available evaluations associated with your account. This step must be completed prior to any system registration with Insights.
+
+section#install
+  .step-num 2
+  h2.section-header(translate) Install the Red Hat Insights Client and Register Your Systems
+  p(translate) Register your system for updates with Red Hat Subscription Manager to resolve software dependencies:
+  pre.code-block.code-terminal
+    code.language-shell  # subscription-manager register --auto-attach
+  p(translate) Install the Red Hat Insights RPM:
+  pre.code-block.code-terminal
+    code.language-shell  # yum install redhat-access-insights
+
+section#register
+  .step-num 3
+  h2.section-header(translate) Register the system to Red Hat Insights
+  p(translate)
+    strong Note: 
+    | Registration with 
+    a(href="https://access.redhat.com/solutions/11216", target="_blank") Red Hat Network Classic 
+    |  is also available but requires 
+    a(href="#classic", relative-hash, permalink) additional configuration steps.
+  pre.code-block.code-terminal
+    code # redhat-access-insights --register
+  p(translate) After registration, the Insights client will upload initial system information to Red Hat Insights. You should be able to immediately see your system in the 
+   a(ui-sref="app.inventory") Insights user interface.
+  p(translate) The initial analysis results will be available shorty thereafter.
+
+#configOptional.content-block
+  h2.section-header(translate) Optional Configuration Steps
+  .gray-dark
+    section#proxy
+      .step-num 4
+      h3.section-header(translate) Configure Insights Client to use an HTTP proxy
+      p(translate) If you have a web based proxy between your system and the Internet, you can configure the Insights client to connect through it:
+      pre.code-block.code-terminal
+        code.language-shell # vi /etc/redhat-access-insights/redhat-access-insights.conf
+      pre.code-block.code-terminal
+        code # Optional proxy configuration. Example: http://user:pass@192.168.100.50:8080
+        br
+        code proxy=
+        br
+
+    section#classic
+      .step-num 5
+      h3.section-header(translate) Red Hat Network Classic Instructions
+      p(translate) If you've registered your system with Red Hat Network Classic you'll also need to add a username and password:
+      pre.code-block.code-terminal
+        code.language-shell # vi /etc/redhat-access-insights/redhat-access-insights.conf
+      pre.code-block.code-terminal
+        code # Red Hat Customer Portal Credentials
+        br
+        code username=
+        br
+        code password=
+        br

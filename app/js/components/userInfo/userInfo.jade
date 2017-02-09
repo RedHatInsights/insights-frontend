@@ -1,0 +1,48 @@
+.user-info
+  h2.title-widget
+    i.fa.fa-user
+    span(translate) Profile
+
+  menu.messaging-menu
+    .heading.heading-w-profile-image
+      .profile-image
+        img(gravatar-src="user.email" gravatar-size="100" gravatar-d="blank")
+      .info
+        .name
+          strong {{user.first_name}} {{user.last_name}}
+        .last-login
+          strong Last login:
+          date 07/22/15
+
+
+    nav.user-info-nav
+      li
+        a(ui-sref="app.announcements")
+          i.fa.fa-bullhorn
+          span(translate) Announcements
+          span.count {{ alerts.unseen.length }}
+      li(ng-if="false")
+        a
+          i.fa.fa-bell
+          span(translate) Alerts
+          span.count.unread 50
+      li(ng-if="false")
+        a
+          i.fa.fa-bullseye
+          span(translate) Goals
+          span.count 120
+      li(ng-if="false")
+        a
+          i.fa.fa-envelope
+          span(translate) Messages
+          span.count.unread 100
+      li(ng-if="false")
+        a
+          i.fa.fa-comments-o
+          span(translate) Mentions
+          span.count 10
+      li(ng-if="false")
+        a
+          i.fa.fa-certificate
+          span(translate) Marketing
+          span.count 120

@@ -1,0 +1,34 @@
+.updatable(ng-class='{updating: table.loader.loading}')
+  .spinner.spinner-lg(ng-show='table.loader.loading')
+  table.table.nomar.ng-table.maintenance-table
+    thead
+      tr
+        th.text-center(width="6%", ng-show='edit')
+          input.select-all(ng-model="checkboxes.checked", type="checkbox", ng-indeterminate="checkboxes.indeterminate", ng-change='checkboxChecked()')
+        th.sortable(ng-class="table.sorter.getSortClass('display')", ng-click="table.sorter.sort('display')")
+          .sort-indicator(translate) System
+        th.sortable(width="20%", ng-class="table.sorter.getSortClass('system.last_check_in')", ng-click="table.sorter.sort('system.last_check_in')")
+          .sort-indicator(translate) Last check in
+        th.sortable.text-center(width="12%", ng-class="table.sorter.getSortClass('done')", ng-click="table.sorter.sort('done')")
+          .sort-indicator.overflow(translate) Status
+      tr(ng-show='edit')
+        th.filter(colspan='4')
+          input.form-control.nomar-left.input-sm(type='text', placeholder='Filter by system name', ng-model="table.filter.display", ng-change='table.doFilter()')
+    tbody
+      tr(ng-repeat="action in table.data track by action.id", data-id="{{action.id}}",
+        ng-click="checkboxRowClick($event, action.id)",
+        ng-mousedown="checkboxRowClick($event, action.id)")
+        td.text-center(ng-show='edit')
+          input(ng-model='checkboxes.items[action.id]', type="checkbox")
+        td.overflow
+          span.icon-inline
+            type-icon(type-id='action.systemTypeIconId', ng-if='action.systemTypeIconId', include-text='false')
+          span.icon-inline(ng-if='action._type === 2')
+            i.fa.fa-exclamation-circle(tooltip="{{'This action is already part of another plan' | translate}}")
+          a.hostname(ng-click='table.showSystemModal(action.system, table.params.item)') {{action.display}}
+        td
+          span(ng-show='::action.system.last_check_in') {{::action.system.last_check_in | timeAgo}}
+          span(ng-hide='::action.system.last_check_in') --
+        td.status.text-center(width='19%')
+          status-icon(status='action.done')
+    tfoot(maintenance-table-footer)

@@ -1,0 +1,5 @@
+// we do not want this to be blue
+.ng-table th.sortable.sort-desc,
+.ng-table th.sortable.sort-asc {
+    background-color: inherit;
+}

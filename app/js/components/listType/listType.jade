@@ -1,0 +1,5 @@
+.list-switch
+  a.link(ng-click='setListType(listTypes.card)', ng-class="{active: getListType() === listTypes.card}")
+    i.fa.fa-list
+  a.link(ng-click='setListType(listTypes.table)', ng-class="{active: getListType() === listTypes.table}")
+    i.fa.fa-table

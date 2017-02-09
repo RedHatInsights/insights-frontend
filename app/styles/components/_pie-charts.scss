@@ -1,0 +1,172 @@
+.legend {
+  text-align: left;
+
+  thead tr,
+  thead tr:nth-child(odd) {
+    border: 0;
+  }
+
+  .legend-item.active {
+    color: #4c4c4c;
+    font-weight: 700;
+  }
+
+  .legend-item:hover {
+    background: darken(#f2f5f7, 5);
+    cursor: pointer;
+  }
+
+  tr {
+    border: 0;
+
+    td {
+      @include rem('padding', 4px 14px);
+    }
+  }
+
+  .color-block {
+    margin: 0 auto;
+    @include border-radius(0);
+    display: block;
+    height: 12px;
+    width: 12px;
+  }
+
+  .view-all-toggle {
+      cursor: pointer;
+  }
+
+  .view-all-toggle:hover .fa-eye,
+  .view-toggle:hover .fa-eye,
+  .view-toggle:hover .fa-eye-slash {
+      color: $brand-info;
+  }
+}
+
+.donut-container {
+  position: relative;
+  display: inline-block;
+}
+
+$donut-hole-width: 160px;
+$donut-hole-height: 160px;
+
+.donut-hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -$donut-hole-width/2;
+  margin-top: -$donut-hole-height/2;
+  width: $donut-hole-width;
+  height: $donut-hole-height;
+  //margin-left: -90px;
+  //margin-top: -90px;
+  @include border-radius(50%);
+  @include box-shadow(0 2px 5px 3px rgba(0, 0, 0, .2));
+  background: #fff;
+  text-align: center;
+  z-index: 9;
+
+  .content { @extend %vertical-align; }
+
+  .num,
+  .text {
+    color: #969ba0;
+    display: block;
+    text-align: center;
+  }
+
+  .num {
+    @include font-size(26px);
+    line-height: 1;
+    font-weight: 700;
+    color: #585858;
+  }
+
+  .text {
+    @include font-size(16px);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}
+
+//.gauge .donut-hole {
+//  height: 63px;
+//  width: 63px;
+//  position: relative;
+//  margin-left: 0px;
+//
+//  .num {
+//    @include font-size(26px);
+//    padding-left: 10px;
+//    font-weight: 600;
+//
+//    .denominator {
+//      @include font-size(10px);
+//      vertical-align: top;
+//    }
+//  }
+//}
+
+.chart-details {
+  td:nth-child(2),
+  th:nth-child(2) {
+//    text-align: right;
+  }
+
+  tbody tr {
+    @include transition-duration(.2s);
+  }
+
+  tbody tr:hover {
+    background-color: darken(#f2f5f7, 5);
+    cursor: pointer;
+  }
+}
+
+.c3-chart-arc text {
+  @include font-size(16px);
+  fill: #fff;
+  font-weight: 700;
+  position: relative;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 1);
+  z-index: 10000;
+}
+
+.rha-telemetry-donut {
+  position: relative;
+  display: inline-block;
+
+  &:before {
+    @include box-shadow(0 0 12px 0 rgba(0, 0, 0, .2));
+    //@include rem('margin-left', -130px);
+    background: #fff;
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: 320px;
+    left: 0;
+    position: absolute;
+    top: 2px;
+    width: 320px;
+    width: 320px;
+    z-index: 1;
+
+    @include media-query (xs-max) {
+      display: none;
+    }
+  }
+
+  svg {
+    @include rem('margin-top', 5px);
+    position: relative;
+    z-index: 8;
+  }
+
+  .c3-chart-arc {
+    path {
+      stroke: #fff;
+      stroke-width: 5px;
+    }
+  }
+}

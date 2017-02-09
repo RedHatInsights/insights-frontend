@@ -1,0 +1,7 @@
+{
+  "presets": [
+    "es2015-without-strict"
+  ],
+  "compact": true,
+  "ignore": "bower_components"
+}

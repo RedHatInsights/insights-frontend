@@ -1,0 +1,18 @@
+.rules-group {
+	& + .rules-group {
+		@include rem('margin-top', $global-margin);
+	}
+}
+
+.rules-group-gray {
+	.rules-group-content {
+		background: rgba(0,0,0,.025);
+		border: 1px solid #eee;
+		@include rem('padding', 30px);
+
+		.content-block {
+			background: #fff;
+		}
+	}
+}
+

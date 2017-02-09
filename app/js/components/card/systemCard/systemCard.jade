@@ -1,0 +1,73 @@
+.system-card(ng-class="{'stale': !system.isCheckingIn}")
+  card(expandable, on-toggle='toggleContent(ctx)')
+    card-header
+      .row
+        .col-sm-4
+          div(
+            style='display: inline-block;padding:1px;',
+            tooltip='{{checkboxTooltip}}',
+            tooltip-trigger='mouseenter',
+            tooltip-append-to-body='true',
+            tooltip-placement='top')
+            input.selectme(
+              ng-if='checkboxes',
+              type='checkbox',
+              ng-model='checkboxes.items[system.system_id]',
+              ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();',
+              ng-disabled='!selectable'
+              )
+            | &nbsp;&nbsp;
+          type-icon(type-id='system.system_type_id', ng-if='!loading', include-text='true')
+          span(ng-if='!system.isCheckingIn') &nbsp;(stale system)
+          i.fa.spinner-xs.spinner(ng-if='loading')
+        .col-sm-4
+          .ellipsis-wrapper
+            strong.hostname(
+              title='{{hostnameTitle}}',
+              ng-click='showActions(); $event.stopPropagation();',
+              tooltip='{{getSystemName(system)}}',
+              tooltip-trigger='mouseenter',
+              tooltip-append-to-body='true',
+              tooltip-placement='top') &nbsp;{{getSystemName(system)}}
+        .col-sm-4.text-right
+          a.action-count(ng-click='showActions(); $event.stopPropagation();')
+            span.text(translate, translate-n="system.report_count", translate-plural="{{$count}} Actions") {{system.report_count}} Action
+            span.pull-right.status-icon(ng-class="{'success': !system.report_count, 'fail': system.report_count}")
+              i.fa(ng-click='showActions(); $event.stopPropagation();', ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count}")
+    card-content
+      div(ng-if='!system.isCheckingIn')
+        strong Last checkin:&nbsp;
+        span(ng-hide='system.last_check_in', translate) never
+        span(ng-show='system.last_check_in') {{system.last_check_in | timeAgo}}
+
+      .separation-header(ng-if='hasFamilyMembers()')
+        h4 Related Systems
+
+      // Family members
+      .row
+        .col-sm-12
+          .family-members(ng-if='hasFamilyMembers()')
+            .row
+              link-group.link-group.col-md-12(
+                ng-repeat='linkGroup in linkGroups | orderBy: "+priority"',
+                group='linkGroup.members',
+                typeid='linkGroup.system_type_id')
+            // System metadata
+            .separation-header.metadata-separator
+              h4 System Metadata
+
+      .row.row-short
+        .col-sm-12
+          .metadata
+            system-metadata(ng-if='!$parent.card.collapsed', system='system')
+      .row.row-short
+        .col-sm-12
+          .system-card-actions
+            .btn.btn-outline.btn-xs(translate,
+                ng-if='config.isPlannerEnabled',
+                ng-disabled='!system.report_count',
+                ng-click='showMaintenanceModal(system)')
+              | Add to plan
+            .btn.btn-outline.btn-xs(translate, ng-disabled='!system.report_count || !tryPlaybook()', ng-click='openPlaybookModal()') Create playbook
+            .btn.btn-outline.btn-xs(translate, ng-disabled='!selectable', ng-click='unregister()') Unregister
+    card-footer

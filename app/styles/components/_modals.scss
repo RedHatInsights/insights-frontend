@@ -1,0 +1,112 @@
+.modal-actions {
+	position: absolute;
+	right: 30px;
+	top: 25px;
+	z-index: 99;
+
+	.fa {
+		color: rgba(0,0,0,.4);
+		@include font-size(24px);
+		@include transition(.2s);
+		line-height: 1;
+
+		&:hover {
+			color: rgba(0,0,0,.8);
+			cursor: pointer;
+		}
+	}
+}
+
+.modal-content {
+	background: #fff;
+}
+
+
+.modal-title {
+	//@include rem('margin', 0 0 $global-padding);
+	text-overflow: ellipsis;
+	width: 100%;
+	@include font-size(18px);
+	font-weight: 700;
+	line-height: 1;
+	text-align: center;
+
+	h1, h2, h3 {
+		@include font-size(24px);
+		@include rem('margin', 22px 0 2px);
+		text-transform: none;
+		color: #585858;
+	}
+
+	.icon {
+		position: relative;
+		width: 42px;
+		height: 42px;
+		display: inline-block;
+		background: $blue_dark;
+		@include border-radius(50%);
+
+		&:after {
+			content: '';
+			position: absolute;
+			border-left: 14px solid rgba(0, 0, 0, 0);
+			border-right: 14px solid rgba(0, 0, 0, 0);
+			border-top: 14px solid $blue_dark;
+			left: 7px;
+			bottom: -8px;
+		}
+
+		span {
+			padding: 0 0 0 2px;
+			color: #fff;
+			display: block;
+			font-size: 30px;
+			line-height: 1.45;
+		}
+	}
+}
+
+.modal-playbook {
+
+}
+
+.handcrafted-content-modal {
+
+	.modal-dialog {
+		@include media-query(md) {
+			width: 795px;
+		}
+	}
+
+	.modal-content {
+		@include rem('padding', $global-margin);
+	}
+}
+
+.ui-select-match,
+ul.ui-select-choices {
+	padding: 0 !important;
+}
+
+.ui-select-toggle {
+	height: 34px;
+}
+
+.ui-select-container + p {
+    margin-top: 5px !important;
+}
+
+.updatable.updating {
+    position: relative;
+
+    .spinner {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -20px;
+        margin-top: -20px;
+    }
+    > :not(.spinner) {
+        @include opacity(.3);
+    }
+}

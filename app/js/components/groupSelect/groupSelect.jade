@@ -1,0 +1,19 @@
+.hidden-in-product(ng-show='groups.length')
+  label(translate='translate') Groups
+  .dropdown.gray
+    button.btn.btn-default.dropdown-toggle(
+      type='button',
+      data-toggle='dropdown',
+      aria-haspopup='true',
+      aria-expanded='false',
+      ng-disabled='!groups || !groups.length')
+      span(ng-hide='isGroupSelected()', translate) All Groups
+      span(ng-show='isGroupSelected()') {{group.display_name}}
+      span.caret
+    ul.dropdown-menu
+      li
+        a(ng-click='triggerChange(null)', translate) All Groups
+      li(ng-repeat='g in groups')
+        a(ng-click='triggerChange(g)') {{g.display_name}}
+    //select(ng-model='group', ng-options='g as g.display_name for g in groups track by g.id', ng-change='groupChange()')
+    //option(value="", translate) All

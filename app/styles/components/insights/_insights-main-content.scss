@@ -1,0 +1,7 @@
+ul { @include rem('padding-left', 18px); }
+pre { @include rem('margin-top', 10px); }
+ul.pagination { padding: 0; }
+
+& {
+    min-height: 600px;
+}

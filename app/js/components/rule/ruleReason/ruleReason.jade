@@ -1,0 +1,12 @@
+.detail-part
+  h4.section-heading(translate)
+    i.fa.fa-crosshairs(aria-hidden="true") &nbsp;
+    | Detected issues
+  .reason
+    .detail-content(ng-if="report.rule.reason !== 'INSIGHTS-ERROR-INTERPOLATION'",
+      ng-bind-html='report.rule.reason | trust_html',
+      target-blank='')
+    .detail-content(ng-if="report.rule.reason === 'INSIGHTS-ERROR-INTERPOLATION'")
+      p
+        i.fa.fa-exclamation-circle.i-error.inline-right
+        strong(translate) There was a problem obtaining action details. Please try again later.

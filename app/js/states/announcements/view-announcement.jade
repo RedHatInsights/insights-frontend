@@ -1,0 +1,12 @@
+.page-standard.page-announcements.section-announcements
+    .row
+        .col-xs-12(ng-if='loadingAnnouncement')
+            .spinner.spinner-lg
+        .col-xs-12(ng-if='!loadingAnnouncement')
+            strong.pull-right {{announcement.created_at | date}}
+            h1.page-title {{announcement.title}}
+    .row.push-top.border-top
+        .col-xs-12(ng-if='loadingAnnouncement')
+            .spinner.spinner-lg
+        .col-xs-12(ng-if='!loadingAnnouncement')
+            div(ng-bind-html="announcement.body_html | trust_html", target-blank='')

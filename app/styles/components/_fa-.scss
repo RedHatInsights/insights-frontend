@@ -1,0 +1,9 @@
+.insights-main-content {
+	.fa-xlarge {
+		@include font-size(76px);
+	}
+
+	.fa-small {
+		@include font-size(16px);
+	}
+}

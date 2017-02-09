@@ -1,0 +1,29 @@
+.modal-actions
+  i.fa.fa-close.pull-right(ng-click="close()")
+.info#info
+  .content
+    section#install
+      h2.section-header(translate) Install the Red Hat Insights Client and Register Up to 10 Systems for Free
+      p(translate) Register your system for updates with Red Hat Subscription Manager to resolve software dependencies:
+      pre.code-block.code-terminal
+        code.language-shell  # subscription-manager register --auto-attach
+      p(translate) Install the Red Hat Insights RPM:
+      pre.code-block.code-terminal
+        code.language-shell  # yum install redhat-access-insights
+
+    section#register
+      h2.section-header(translate) Register the system to Red Hat Insights
+      pre.code-block.code-terminal
+        code # redhat-access-insights --register
+      p(translate) After registration, the Insights client will upload initial system information to Red Hat Insights. You should be able to immediately see your system in the 
+       a(ui-sref="app.inventory" ng-click="close()") Insights user interface.
+      p(translate) The initial analysis results will be available shorty thereafter.
+
+    section#more
+      h2.section-header(translate) Advanced configuration
+      p(translate)
+        | For more advanced configuration see the 
+        a(href='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', ng-click="close()", translate) getting started guide
+        | .
+
+

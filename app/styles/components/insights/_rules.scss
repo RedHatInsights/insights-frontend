@@ -1,0 +1,12 @@
+.show-rule-tabs {
+	.nav-tabs { margin-top: 5px; }
+
+	.nav-tabs li a {
+		padding: 10px !important;
+		&:after { display: none; }
+	}
+
+	.tab-content {
+		padding: 15px 0;
+	}
+}

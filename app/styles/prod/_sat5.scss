@@ -1,0 +1,26 @@
+.page-title,
+.actions-details,
+.chart-col {
+	margin-top: 0;
+}
+
+.page-title {
+	font-weight: 500;
+	@include font-size(20px);
+}
+
+.actionbar {
+    background-color: white;
+    position: relative;
+    border-top: none;
+}
+
+.action {
+    cursor: pointer;
+}
+
+.insights-main-content {
+	h1 {
+		margin-top: 0;
+	}
+}

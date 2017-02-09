@@ -1,0 +1,13 @@
+.environment-buttons(ng-if='!getRHELOnly()')
+  label(translate='translate') Platform
+  .dropdown.gray
+    button.btn.btn-default.dropdown-toggle(
+      type='button',
+      data-toggle='dropdown',
+      aria-haspopup='true',
+      aria-expanded='false')
+      | {{getProductLabel(getSelectedProduct())}}
+      span.caret
+    ul.dropdown-menu
+      li(ng-repeat='product in products')
+        a(ng-click='doSelectProduct(product)') {{getProductLabel(product)}}

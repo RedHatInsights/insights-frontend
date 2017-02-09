@@ -1,0 +1,40 @@
+.overview
+  .header
+    h1.page-title.title(translate)
+      i.fa.fa-bar-chart
+      span(translate) Overview
+    actions-light
+  .page.flexgrid.equalheights
+    .row
+      .col-md-5.col-lg-6.left-col
+        .grid-block
+          section.widget-block
+            span.pull-right(ng-show='isInternal')
+              | [
+              a(ng-click='edit()') edit
+              | ]
+            h2.title
+              i.fa.fa-fire
+              span(translate) Latest
+            handcrafted-content
+        new-systems
+      .col-md-7.col-lg-6.right-col.border-bottom
+        .grid-block
+          section.widget-block
+            h2.title
+              i.fa.fa-wrench
+              span(translate) Actions&nbsp;
+              span.light(translate) Summary
+              a.cta-link(translate, ui-sref="app.actions") View actions
+            severity-summary(stats='stats')
+
+        .grid-block(ng-if="!paid()")
+          section.widget-block
+            h2.title
+              i.fa.fa-bullseye &nbsp;
+              span(translate) Optimize&nbsp;
+              span.light(translate) Your Experience
+            goals-lite
+
+        .grid-block(ng-if='timezone')
+          maintenance-plan-lite

@@ -1,0 +1,46 @@
+.topic-preview
+  .sample-data
+    a(ng-click='editData = !editData')
+      span.icon-inline
+        i.fa.fa-plus(ng-hide='editData')
+        i.fa.fa-minus(ng-show='editData')
+      | Modify sample data
+    form.form-horizontal(novalidate, ng-show='editData', name='tweaker')
+      .form-group
+        label.control-label.col-sm-2(for='affectedSystemCount') Number of affected systems
+        .col-sm-3
+          input.form-contril(type='number', ng-model='sampleData.systems.affectedCount', min='0')
+      .form-group
+        label.control-label.col-sm-2(for='affectedSystemCount') Rules
+        .col-sm-10
+          table.table.table-bordered.sample-data-table
+            thead
+              tr
+                th Rule ID
+                th Description
+                th Number of hits
+                th Ignored by user (acked)
+            tbody
+              tr(ng-repeat='rule in sampleData.rules track by rule.rule_id')
+                td.rule-id {{rule.rule_id}}
+                td {{rule.description}}
+                td
+                  input.form-control(type='number', ng-model='rule.hitCount', required, min='0')
+                td
+                  input(type='checkbox', ng-model='rule.acked')
+      .form-group
+        button.btn.btn-sm.btn-secondary.pull-right(type='submit', ng-click='updateSampleData()') Update preview
+  hr
+  .spinner(ng-show='loader.loading')
+  .text-center(ng-hide='topic')
+    p This topic will not be shown when there are no hits for it (tweak sample data or switch to 'Shown always' topic type to see it)
+  .actions-page(ng-if='summary', ng-show='topic && !loader.loading')
+    section
+      h2.section-title.section-title-red Topics
+      .row
+        other-topic(topic='topic')
+  .action-details(ng-if='details', ng-show='topic && !loader.loading')
+    section.gray.section-topic-details
+      topic-details(topic='topic')
+    section.section-rules-group-content
+      topic-rule-list(topic='topic')

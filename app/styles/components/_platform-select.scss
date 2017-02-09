@@ -1,0 +1,136 @@
+.platform-select {
+	@include rem('margin', 0 -15px);
+	@include rem('padding', $global-margin);
+	//background: url('../images/bg_product-select2.jpg');
+	background-image: url('https://www.redhat.com/profiles/rh/themes/redhatdotcom/img/home/bkgd-cloud-home-2000x488.jpg');
+	background-size: cover;
+	border-bottom: 8px solid #d9d9d9;
+
+	@include media-query(sm) { @include rem('margin', 0 -30px); }
+
+	h3.section-title { color: #fff; }
+
+	.btn.btn-rounded {
+		@include rem('padding', 4px 12px 4px 4px);
+		background: rgba(0, 0, 0, 0.2);
+		color: #fff;
+		font-weight: 700;
+		border-radius: 24px;
+
+		@include media-query(sm) {
+			position: absolute;
+			right: 0;
+		}
+
+		i {
+			@include rem('margin-right', 6px);
+			background: $blue;
+			@include rem('padding', 8px);
+			color: #fff;
+			border-radius: 50%;
+			text-align: center;
+		}
+
+		&:hover {
+			color: $gray-dark;
+			background: #fff;
+		}
+	}
+
+	.btn-quick-filter {
+		width: 100%;
+		@include rem('padding', $global-padding);
+		@include rem('margin-top', 15px);
+		@include rem('margin-bottom', 15px);
+		text-align: left;
+		background: darken(#494949, 5);
+		background: url("https://www.redhat.com/files/webux/img/bandbg/header-detail-tech-product_linux-2000x941.jpg") center;
+		background: #01447b;
+
+		//&:hover { background: darken(#494949, 20); }
+		&:active, &:active a { color: #fff; }
+
+		//&:active {
+		//	background: darken(#494949, 20);
+		//}
+
+
+		&:active .platform {
+			//border-bottom-color: #2b2b2b;
+		}
+	}
+
+	.platform {
+		//border-bottom: 6px solid $red;
+		@include rem('padding-bottom', 8px);
+
+		@include media-query(sm) { height: 54px; }
+	}
+
+	.summary {
+		text-transform: none;
+		@include rem('margin-top', $global-padding);
+		color: #fff;
+		font-weight: normal;
+
+		a {
+			color: #fff;
+
+			span {
+				color: $platform-summary-a-span-color;
+			}
+
+			&:active {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	.content-block.content-block-card {
+		border: none;
+
+		@include media-query(sm) { @include rem('height', 100px); }
+
+		//&:after {
+		//	content: '';
+		//	position: absolute;
+		//	width: 40px;
+		//	background: $red;
+		//	height: 8px;
+		//	left: $global-padding;
+		//	bottom: 0;
+		//	@include transition(.2s);
+		//}
+	}
+
+
+	a.platform {
+		@include opacity(.8);
+
+		&:hover {
+			@include opacity(1);
+		}
+	}
+}
+
+.platform-select + section {
+	margin-top: 0;
+}
+
+.platform-select.active {
+	//background: #d9d9d9;
+
+	.platform {
+		height: auto;
+		border: none;
+
+		.content {
+			display: none;
+		}
+	}
+}
+
+.platform-select.platform-rhel { background-image: url("https://www.redhat.com/files/webux/img/bandbg/header-detail-tech-product_linux-2000x941.jpg"); }
+.platform-select.platform-osp { background-image: url("https://www.redhat.com/files/webux/img/bandbg/header-detail-tech-product_linux-2000x941.jpg"); }
+.platform-select.platform-rhev { background-image: url("https://www.redhat.com/profiles/rh/themes/redhatdotcom/img/header/header-story-tech-product_line_virtualiz-2000x1357.jpg"); }
+.platform-select.platform-docker { background-image: url("https://www.redhat.com/files/webux/img/bandbg/header-detail-tech-product_linux-2000x941.jpg"); }

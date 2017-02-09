@@ -1,0 +1,15 @@
+section.widget-block
+  h2.title
+    i.fa.fa-wrench
+    span(translate) Plan&nbsp;
+    span.light(translate) Summary
+    a.cta-link(ui-sref='app.maintenance', translate) View planner
+  .maintenance-plan-lite(ng-if='plans.all.length')
+    .suggestions.text-center(ng-if='getFirstSuggestion()', ng-click='openPlan(getFirstSuggestion())')
+      span.icon.icon-inline
+        i.fa.fa-lightbulb-o
+      span(translate, translate-n='plans.suggested[0].actions.length', translate-plural='You have a new plan suggestion ({{$count}} actions)') You have a new plan suggestion (1 action)
+    maintenance-plan-lite-table.error(ng-if='plans.overdue.length', plans='plans.overdue', silence='silence', duration='duration', timezone='timezone', overdue='true')
+    maintenance-plan-lite-table(ng-if='plans.future.length', plans='plans.future', silence='silence', duration='duration', timezone='timezone')
+  div.text-center(ng-if='!(plans.future.length || plans.overdue.length)')
+    a.btn.btn-primary.btn-sm(ui-sref='app.maintenance({newPlan: true})', translate) Create a new plan

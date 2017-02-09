@@ -1,0 +1,18 @@
+.groups
+  section
+    .alert.alert-danger(ng-bind='message', ng-show='message.length > 0', role='alert')
+    group-form
+  section(ng-show='loading')
+    .spinner.spinner-lg
+    span(translate) Loading group list info …
+  section
+    .row
+      .col-xs-12
+        h2.page-title(ng-show='!loading', translate) Groups List
+        .text-center(ng-show='isCreating')
+          .spinner.spinner-lg
+          span(translate) Creating group …
+    .row
+      .col-xs-12
+        .group-list
+          group.group(ng-repeat="group in groups | orderBy:'display_name'")

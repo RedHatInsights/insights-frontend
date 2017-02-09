@@ -1,0 +1,126 @@
+$active-color: #949794;
+$transition-speed: .35s;
+
+.switch {
+	display: table-cell;
+	vertical-align: middle;
+
+	&:hover { cursor: pointer; }
+}
+
+.question {
+	width: 600px;
+	font-size: 20px;
+}
+
+/* ============================================================
+  COMMON
+============================================================ */
+.cmn-toggle {
+	position: absolute;
+	margin-left: -9999px;
+	visibility: hidden;
+
+	& + label {
+		display: block;
+		position: relative;
+		cursor: pointer;
+		outline: none;
+		@include user-select(none);
+	}
+}
+
+
+
+// Round
+//==================================================================*/
+input.cmn-toggle-round + label {
+	padding: 2px;
+	width: 120px;
+	height: 60px;
+	background-color: #dddddd;
+	@include border-radius(60px);
+}
+
+input.cmn-toggle-round + label:before,
+input.cmn-toggle-round + label:after {
+	content: "";
+	top: 1px;
+	left: 1px;
+	bottom: 1px;
+	position: absolute;
+	display: block;
+}
+
+input.cmn-toggle-round + label:before {
+	right: 1px;
+	background-color: #f1f1f1;
+	@include border-radius(60px);
+	@include transition(background $transition-speed);
+}
+
+input.cmn-toggle-round + label:after {
+	width: 58px;
+	background-color: #fff;
+	@include border-radius(100%);
+	@include box-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+	@include transition(margin $transition-speed);
+}
+
+
+// Square
+//==================================================================*/
+input.cmn-toggle-square {
+
+	& + label {
+		padding: 4px;
+		width: 68px;
+		height: 36px;
+		background-color: #ebeef0;
+		@include border-radius(6px);
+		@include transition(background $transition-speed);
+
+		&:before,
+		&:after {
+			content: "";
+			top: 4px;
+			right: 4px;
+			bottom: 4px;
+			left: 4px;
+			position: absolute;
+			display: block;
+		}
+
+		/* switch background ------------------------------------------------------------------------- */
+		&:before {
+			background-color: #f7fafc;
+			@include border-radius(4px);
+			@include transition(background $transition-speed);
+		}
+
+		&:after {
+			top: 4px;
+			bottom: 4px;
+			left: 4px;
+			width: 30px;
+			background-color: #fff;
+			@include border-radius(4px);
+			@include box-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+			@include transition(margin $transition-speed);
+		}
+	}
+
+	/* Switch toggle button ------------------------------------------------------------------------- */
+	&:checked + label {
+//		background: darken($active-color, 15);
+	}
+
+	/* Switch toggle button ------------------------------------------------------------------------- */
+	&:checked + label:after { margin-left: 30px; }
+}
+
+
+// Color
+//==================================================================*/
+input.cmn-toggle:checked + label:before { background-color: $active-color; }
+input.cmn-toggle-round:checked + label:after { margin-left: 40px; }

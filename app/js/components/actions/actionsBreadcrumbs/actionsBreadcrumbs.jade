@@ -1,0 +1,6 @@
+.actions-breadcrumbs
+  ol.breadcrumb.actions-crumbs(ng-show="getCrumbs().length")
+    li(ng-repeat='crumb in getCrumbs()', ng-class="{active: $last}" ng-show="getCrumbs().length > 1")
+      a(ng-hide="$last", ng-click='crumbClick(crumb)') {{crumb.label | translate | titlecase}}
+      span(ng-show="$last && $index < 2") {{crumb.label| translate | titlecase }}
+      span(ng-show="$last && $index >= 2") {{crumb.label| translate}}

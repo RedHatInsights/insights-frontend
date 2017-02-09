@@ -1,0 +1,74 @@
+.error-info {
+	.field {
+		@include rem('margin-bottom', 5px);
+
+		textarea {
+			height: 250px;
+			width: 100%;
+		}
+	}
+
+	.plugin select {
+		width: 320px;
+	}
+
+	.error_key select {
+		width: 320px;
+	}
+
+	.category {
+		display: inline-block;
+	}
+
+	.severity {
+		display: inline-block;
+		margin-left: 15px;
+	}
+
+	input.ng-invalid {
+		@include box-shadow(#f00 0 0 15px);
+	}
+
+	input.changed.ng-dirty.ng-valid {
+		@include box-shadow(#ff0 0 0 5px);
+	}
+
+	textarea.changed.ng-dirty {
+		@extend input;
+	}
+
+	select.changed.ng-dirty {
+		@extend input;
+	}
+}
+
+.error_info_index .preloader {
+	width: 100%;
+	top: 180px;
+	background-size: 100px 100px;
+	background-position: center;
+}
+
+.error-icon {
+		position: absolute;
+		left: 15px;
+		top: -1px;
+		color: #fff;
+		z-index: 1;
+
+		a {
+			color: #fff;
+			&:hover, &:focus, &:visited {
+				text-decoration: none;
+			}
+		}
+
+		&:hover {
+				cursor: pointer;
+		}
+
+		.fa {
+				@include font-size(24px);
+		}
+
+}

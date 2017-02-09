@@ -1,0 +1,64 @@
+.i-info { color: #11baf2 }
+.i-warning { color: #ff7f0e; }
+.i-error { color: #ed1c24; }
+
+.i-mute { color: #CACACA; }
+
+i.fa.category-icon {
+  font-family: 'FontAwesome';
+
+
+  &.stability:before { content: "\f1b3";  }
+  &.security:before { content: "\f132";  }
+  &.availability:before { content: "\f13e"; }
+  &.performance:before { content: "\f0e4"; }
+}
+
+.icon-circle {
+
+    .content-block .header & {
+        margin-top: 0;
+    }
+
+    &.availability {
+        border-color: $availability-color;
+    }
+    &.performance {
+        border-color: $performance-color;
+    }
+    &.security  {
+        border-color: $security-color;
+    }
+    &.stability  {
+        border-color: $stability-color;
+    }
+
+    &.icon-circle-large {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.icon-inline, .inline-right {
+    margin-right: 4px;
+}
+
+.inline-left {
+    margin-left: 4px;
+}
+
+.availability-color {
+    color: $availability-color;
+}
+
+.performance-color {
+    color: $performance-color;
+}
+
+.security-color {
+    color: $security-color;
+}
+
+.stability-color {
+    color: $stability-color;
+}

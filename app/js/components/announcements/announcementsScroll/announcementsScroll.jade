@@ -1,0 +1,43 @@
+.col-sm-12
+  // add the 'active' class only when the caret has been clicked and the notification is expanded
+
+  h3.text-center(ng-if="items.length === 0", translate) You have no announcements.
+  .content-block.content-block-outline.announcement(ng-repeat='a in announcements', ng-class="{'acked': a.acked}")
+    header.header.gray(id="{{::a.id.toString()}}")
+      .row
+        .col-sm-8.col-md-9.col-lg-10
+            .title.pointer(ng-click="permalink(a.id.toString(), true, 30)")
+              span {{a.title}}
+        .col-sm-4.col-md-3.col-lg-2.text-right
+          date
+            strong {{ (a.start || a.created_at) | date }}&nbsp;&nbsp;
+          span.message-status-toggle(ng-class="{'read' : read}")
+            i.fa.fa-check-circle-o.acked(ng-if="a.acked", ng-click="ackAnnouncement(a)")
+            i.fa.fa-circle-o(ng-if="!a.acked", ng-click="ackAnnouncement(a)")
+    .content
+      .row(ng-if="canCreate")
+        .col-sm-9
+          .row(ng-if="canCreate && a.start || a.end")
+            .col-sm-12
+              strong(translate) Start/End:&nbsp;
+              | {{a.start | date}} - {{a.end | date}}
+          .row.row-short(ng-if="a.body")
+            .col-sm-12
+              p {{a.body}}
+        .col-sm-3.text-right
+          strong
+            a(title="Delete", ng-click="deleteAnnouncement(a)") Delete
+            .sep
+            a(title="Edit", ng-click="editAnnouncement(a)") Edit
+      // show dismiss button if announcement has not been acked
+      .row(ng-if="!canCreate && !a.acked")
+        .col-sm-8
+          p {{a.body}}
+        .col-sm-4
+          button.btn(ng-click="ackAnnouncement(a)") Dismiss
+      .row(ng-if="!canCreate && a.acked")
+        .col-sm-12
+          p {{a.body}}
+
+
+    //footer.footer.gray(ng-if="canCreate")

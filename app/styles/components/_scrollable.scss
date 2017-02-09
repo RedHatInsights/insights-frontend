@@ -1,0 +1,16 @@
+.scrollable {
+    max-height: 340px;
+    overflow-y: auto;
+    @include media-query (sm) {
+        max-height: 370px;
+    }
+}
+
+.scrollable-table {
+    border-bottom: 4px solid #ececec;
+    margin-bottom: 20px;
+
+    table {
+        margin-bottom: 0;
+    }
+}

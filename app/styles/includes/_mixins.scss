@@ -1,0 +1,206 @@
+%clearfix:before,
+%clearfix:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+%clearfix:after {
+  clear: both;
+}
+
+@mixin clearfix() {
+	*zoom: 1;
+
+	&:before, &:after {
+		content: " "; /* 1 */
+		display: table; /* 2 */
+	}
+
+	&:after {
+		clear: both;
+	}
+}
+
+%vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+
+@mixin v-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.v-align {
+  @include v-align;
+}
+
+%reset {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin reset {
+  margin: 0;
+  padding: 0;
+}
+
+%font_blue { color: $blue; }
+
+@mixin margin($margin) {
+
+}
+
+@mixin reset-button($padding) {
+  margin: 0;
+  @include rem('padding', $padding);
+  background: none;
+  @include border-radius(0);
+}
+
+// Button mixin
+@mixin button($text-color, $bg-color) {
+  font: 12px bold sans-serif;
+  border: none;
+  line-height: 1;
+  @include box-shadow(none);
+  @include button-color($text-color, $bg-color);
+  //&:hover, &:focus { @include button-color($text-color, lighten($bg-color, 10%)); }
+  &:active { background: darken($bg-color, 5%); }
+}
+
+// Color button mixin
+@mixin button-color($text-color, $bg-color) {
+  color: $text-color;
+  background: $bg-color;
+}
+
+
+// Convert Px to Rem
+// =================================================================/
+
+// Global Convert
+// -------------------------------------------------------------/
+@mixin rem($property, $values) {
+
+  // Create a couple of empty lists as output buffers.
+  $font-size: $base-font-size;
+  $px-values: ();
+  $rem-values: ();
+
+  // Loop through the $values list
+  @each $value in $values {
+
+    // For each property value, if it's in rem or px, derive both rem and
+    // px values for it and add those to the end of the appropriate buffer.
+    // Ensure all pixel values are rounded to the nearest pixel.
+    @if $value == 0 or $value == 0px {
+
+      // 0 -- use it without a unit
+      $px-values: join($px-values, 0);
+      $rem-values: join($rem-values, 0);
+
+    } @else if type-of($value) == number and not unitless($value) and (unit($value) == px) {
+
+      // px value given - calculate rem value from font-size
+      $new-rem-value: $value / $font-size;
+      $px-values: join($px-values, round($value));
+      $rem-values: join($rem-values, unquote("#{$new-rem-value}rem"));
+
+    } @else if type-of($value) == number and not unitless($value) and (unit($value) == '%') {
+
+      // % value given - don't add px or rem
+      $px-values: join($px-values, unquote(#{$value}));
+      $rem-values: join($rem-values, unquote(#{$value}));
+
+    } @else if $value == auto {
+
+      // auto - don't add px or rem
+      $px-values: join($px-values, auto);
+      $rem-values: join($rem-values, auto);
+
+    } @else {
+
+      // unitless value - use those directly as rem and calculate the px-fallback
+      $px-values: join($px-values, round($value * $font-size));
+      $rem-values: join($rem-values, unquote("#{$value}rem"));
+    }
+  }
+
+  // output the converted rules
+  #{$property}: $px-values;
+  #{$property}: $rem-values;
+
+}
+
+@mixin font-size($size, $line: $size * 1.4) {
+  font-size: ($size);
+  font-size: ($size / $base-font-size) + rem;
+  line-height: $line;
+  line-height: ($line / $base-font-size) + rem;
+}
+
+@mixin media-query($point) {
+  @if($point == xs) {
+  @include breakpoint($xs) {
+      @content;
+    }
+  } @elseif($point == sm) {
+    @include breakpoint($sm, $no-query: true) {
+      @content;
+    }
+  } @elseif($point == md) {
+    @include breakpoint($md, $no-query: true) {
+      @content;
+    }
+  } @elseif($point == lg) {
+    @include breakpoint($lg, $no-query: true) {
+      @content;
+    }
+  } @elseif($point == xl) {
+    @include breakpoint($xl, $no-query: true) {
+      @content;
+    }
+  } @elseif($point == xs-max) {
+    @include breakpoint(max-width $xs, $no-query: true) {
+      @content;
+    }
+  } @elseif($point == sm-max) {
+    @include breakpoint(max-width $sm, $no-query: true) {
+      @content;
+    }
+  } @elseif($point == md-max) {
+    @include breakpoint(max-width $md, $no-query: true) {
+      @content;
+    }
+  } @elseif($point == lg-max) {
+    @include breakpoint(max-width $lg, $no-query: true) {
+      @content;
+    }
+  } @elseif($point == xl-max) {
+    @include breakpoint(max-width $xl, $no-query: true) {
+      @content;
+    }
+  }
+
+}
+
+
+// Inline Retina Display Media Query
+// =================================================================/
+
+@mixin at2x($image, $width, $height) {
+
+  @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6/2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
+    background-image: url($image);
+    background-size: $width $height;
+  }
+
+}

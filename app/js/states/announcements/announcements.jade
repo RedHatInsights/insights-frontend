@@ -1,0 +1,15 @@
+div.page-standard.page-announcements.section-announcements
+  .row
+    .col-sm-12
+      h1.page-title(translate) Announcements
+  .row(ng-if="canCreate")
+    .col-sm-12
+      label.full-width(translate) Show hidden
+      .switch
+        input#cmn-toggle-2.cmn-toggle.cmn-toggle-square(type="checkbox", ng-model="params.showHidden", ng-change="reload()")
+        label(for="cmn-toggle-2")
+  .row
+    announcements-scroll(announcementId="{{$scope.announcementId}}")
+  .row.row-short
+    .col-xs-12
+      a.pull-right.btn.btn-app(ui-sref="app.new-announcement", ng-if="canCreate") Create Announcement

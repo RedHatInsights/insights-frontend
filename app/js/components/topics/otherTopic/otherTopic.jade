@@ -1,0 +1,10 @@
+.col-sm-4
+  .content-block.content-block-card.anchored-footer.topic-card
+    header.header
+      h4 {{topic.title}}
+      div
+        span.count(translate, translate-n='topic.affectedSystemCount', translate-plural='{{$count}} Systems') 1 System
+    .description.gray(ng-bind-html='topic.summary_html ? topic.summary_html : Xtopic.content_html | trust_html')
+    .footer.text-right-sm
+      strong
+        a.pointer(translate, ui-sref="app.topic({id: topic.slug ? topic.slug : topic.id, product: getSelectedProduct()})") View More

@@ -1,0 +1,60 @@
+.container.info-page-intro.text-center.band.band-hero
+  .row
+    .col-sm-12
+      insights-logo
+.band.band-white.info-page.band-last
+  .container.info-page
+    .row
+      .col-md-12
+        section.section
+          h1(translate) Security
+        section.section.introduction#introduction
+          h3(translate) Introduction
+          p(translate) Red Hat Insights provides a mechanism for customers to get actionable intelligence regarding  suggested improvements to deployed Red Hat software. As part of this optional offering, Red Hat processes configuration data about a customer’s environment using Red Hat hosted and/or provided tools; this document covers the security measures Red Hat puts in place to provide secure transmission, processing, and analysis of this data by those tools.
+          p(translate) Red Hat is committed to evaluating, implementing and monitoring the industry security standards for those tools as they continue to evolve.
+
+        section.section.on-premise#on-premise
+          h3(translate) On Premise Security
+          p(translate) Security of customer systems is paramount and Red Hat Insights has made extensive efforts to ensure that our shipped software meets the highest standards.
+          ul
+            li(translate) Insights software which executes on premise has been through a security review by Red Hat Product Security which is the same team that addresses security concerns in all other products across the Red Hat portfolio.
+            li(translate) Communication with Red Hat can be sent through secure proxies for audit and network ACLs.
+            li(translate) Enrollment is opt-in, which means we’ll never collect data from systems without your explicit approval and can be scheduled daily or weekly.
+            li(translate) All communication with Red Hat occurs over encrypted channels using TLS
+            li(translate) All TLS traffic with Red Hat servers is verified with a trusted certificate that is bundled with the application, ensuring that communications can not be intercepted, such as by a man in the middle attack.
+            li(translate) The default communication model from client systems to Red Hat servers occurs with mutual TLS or two-way authentication using digital certificates.
+
+        section.section.client-side#client-side
+          h3(translate) Client Side On Premise Data Control
+          p(translate) Red Hat Insights allows customers to have control of the information that is monitored for analytical purposes; and Red Hat Insights makes it simple for subscribers to view  the information which is monitored.
+          ul
+            li(translate) Red Hat Insights collects both targeted and minimal system information rather than entire logs.
+            li(translate) Red Hat automatically attempts to remove critical security information such as passwords before uploading when stored in standard locations
+            li(translate) Common types of sensitive information can be opted out of through pre-built configuration profiles
+            li(translate) Subscribers can blacklist any command, file, or piece of metadata that they prefer not be monitored by Red Hat Insights.
+            li(translate) The commands, files, and metadata monitored by Red Hat Insights are listed in a single file that is GPG signed and available at any time for easy inspection.
+            li(translate) Personally Identifiable Information is not collected.
+
+        section.section.infrastructure#infrastructure
+          h3(translate) Infrastructure Security
+          p(translate) Security of customer data in Red Hat is a priority and every effort is made to ensure that information is not unnecessarily persisted and that it is secured using industry standard best practices.
+          ul
+            li(translate) All customer data is stored within a secure physical data center with controlled access.
+            li(translate) Our internal 3-tiered infrastructure is compartmentalized into different physical networks and firewalled to ensure services are isolated for maximum security.
+            li(translate) All volumes containing customer data at rest are encrypted with LUKS encryption
+            li(translate) All parts of the internal infrastructure transmit their logs to a centralized log aggregator for inspection and analysis.
+
+        section.section.best-practices#best-practices
+          h3(translate) Development Best Practices
+          ul
+            li(translate) All software is analyzed with static code analyzers and all reported issues are fixed before code is deployed into production.
+            li(translate) Code is peer reviewed.
+
+.band.band-alt.band-narrow.info-page
+  .container
+    .row
+      .col-md-12
+        section.section
+          h3(translate) Additional Resources
+          a.btn.btn-app.cta-link.cta-link-sm.cta-link-white.info-links(href='https://access.redhat.com/products/red-hat-insights#getstarted', translate) Getting started with Red Hat Insights
+          a.btn.btn-app.cta-link.cta-link-sm.cta-link-white.info-links(ui-sref='login', translate) Log in to Red Hat Insights

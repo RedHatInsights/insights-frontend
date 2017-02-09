@@ -1,0 +1,14 @@
+.beta-switch
+  a.btn.btn-default(ng-click='switchVersion(true)', ng-show='!isOnBeta()')
+    // The default "take me to the Beta page" option
+    span(translate) Try Insights Beta
+
+  a(ng-show='isOnBeta() && !isOptedIn()', ng-click='switchStatus(true)')
+    // in this case we are on Beta, but it is not our default
+    span(translate) Default to
+    span.btn.btn-blue(translate) Beta
+
+  a(ng-click='leaveBeta()', ng-show='isOnBeta() && isOptedIn()')
+    // in this case the user is on Beta and Opted in... if they click they want to leave the Beta experience
+    span(translate) Leave
+    span.btn(translate) Beta

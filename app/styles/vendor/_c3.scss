@@ -1,0 +1,17 @@
+.c3-chart-bars {
+  .c3-target-maxSystems {
+    path {
+      fill: #CFCFCF !important;
+      stroke-width: 1px !important;
+      stroke: #CFCFCF !important;
+    }
+  }
+
+  .c3-target-systemsRegistered {
+    path {
+      fill: #9DBECF !important;
+      stroke-width: 1px !important;
+      stroke: darken(#9DBECF, 10) !important;
+    }
+  }
+}

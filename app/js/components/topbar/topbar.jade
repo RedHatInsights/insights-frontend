@@ -1,0 +1,22 @@
+.top-bar
+  .top-wrapper
+    .row
+      .col-xs-2.col-sm-6
+        feedback-button.feedback
+      .col-xs-10.col-sm-6.text-right
+        menu.notifications
+          bullhorn(icon='fa-bullhorn', type='announcements')
+          alerts(icon='fa-globe', type='alerts')
+        span.sep
+        span.dropdown.help(dropdown='', on-toggle='toggled(open)')
+          a.dropdown-toggle(href='', dropdown-toggle='')
+            strong.small(translate) Help
+            i.inline-left.fa.fa-question-circle
+          ul.dropdown-menu
+            li
+              a(href='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', translate) Getting Started
+              a(ui-sref='info.info', translate) More Info
+              a(ui-sref='info.security', translate) Security
+              // if this is the Portal hosted Insights... link to the Portal Browser Support Policy page
+              a(href='/help/browsers', target='_self', translate, ng-if="isPortal") Browser Support
+              a(href='/r/insights/docs/', translate) Insights API Documentation

@@ -1,0 +1,68 @@
+section.section#prerequisites
+  .step-num 1
+  h2.section-header(translate) Prerequisites
+  ul
+    li(translate) Red Hat CloudForms version 4.0 or later
+    li(translate) The CloudForms 4.0 appliance must be registered to either Satellite Server version 6.1.5 or later or to Customer Portal Subscription Management hosted subscription service.
+    li(translate) Smart State Analysis capability is enabled for Red Hat Enterprise Linux virtual machines.
+
+section#activate
+  .step-num 2
+  h2.section-header(translate) Activate your evaluation
+  p(translate) If you have purchased an Insights subscription, please skip this step and proceed to the next step.
+  p(translate) To begin using Red Hat Insights, please visit  <a href='https://access.redhat.com/insights/evaluation'>https://access.redhat.com/insights/evaluation</a> to activate any available evaluations associated with your account. This step must be completed prior to any system registration with Insights.
+
+section.section#registerappliance
+  .step-num 3
+  h2.section-header(translate) Verify CloudForms Appliance registration
+  p(translate) All appliances configured for the UI role that will be used to view Red Hat Insights reports must be registered for Red Hat updates.  In the CloudForms Management Engine UI, navigate to <strong>Configure -&gt; Configuration</strong>. Select a zone and verify that the appropriate appliance is registered.
+  p(translate)
+    strong Note:&nbsp;
+    | The Satellite Server organization to which the CloudForms appliance is registered must have Insights enabled.
+  img.screenshot(src="images/img-cfme-appliance-register.jpg")
+
+section.section#configuresmartstate
+  .step-num 4
+  h2.section-header(translate) Configure Smart State Analysis
+  p(translate) Configure the Smart State Analysis profile for your appliances to collect the contents of the file <strong>/etc/redhat-access-insights/machine-id</strong>
+  img.screenshot(src="images/img-cfme-smartstate-config.png")
+
+
+section.section#register
+  .step-num 5
+  h2.section-header(translate) Register Your Virtual Machines
+  p(translate) <strong> Important:</strong> All virtual machines must be registered to the same Red Hat account as the CloudForms appliance.
+  p(translate) To register virtual machines to Red Hat Insights, you'll need to install the Insights client RPM and then register virtual machines to the Insights service.
+  p(translate) Install the RPM in the virtual machine:
+  pre.code-block.code-terminal
+    code.language-shell # yum install redhat-access-insights
+  p(translate) Register the system to Insights service:
+  pre.code-block.code-terminal
+    code.language-shell # redhat-access-insights --register
+  p(translate) These steps can be automated using the configuration tool of your choice.
+
+section.section#runsmartstate
+  .step-num 6
+  h2.section-header(translate) Run Smart State Analysis on RHEL virtual machines
+  p(translate) A Smart State Analysis must be run once on all RHEL virtual machines you have registered to Red Hat Insights.  This step is only required once. If a new virtual machine is created afterward, then a Smart State Analysis need only be run on that new virtual machine after it has been registered to Insights.
+  p(translate) For more information on how to configure and run Smart State Analysis, see the official CloudForms &nbsp;
+    a(href="https://access.redhat.com/documentation/en-US/Red_Hat_CloudForms/3.2/html/Insight_Guide/sect-Virtual_Machines.html#sect-Analyzing_Virtual_Machines_and_Templates") documentation.
+
+
+section.section#viewingandmanaging
+  .step-num 7
+  h2.section-header(translate) View Reports and Manage Red Hat Insights From the CloudForms UI
+  p.margin-top(translate) To view Insights reports in the CloudForms UI, navigate to <strong>Red Hat Insights -&gt; Overview</strong>.
+  img.screenshot(src="images/img-cfme-insights-overview.png")
+  p.margin-top(translate) To view and manage Insights rules, navigate to <strong>Red Hat Insights -&gt; Rules</strong>.
+  img.screenshot(src="images/img-cfme-insights-rules.png")
+  p.margin-top(translate) To view the list of systems that are reporting data to Insights, navigate to <strong>Red Hat Insights -&gt; Systems</strong>.
+  img.screenshot(src="images/img-cfme-insights-systems.png")
+
+
+section.section#userroles
+  .step-num 8
+  h2.section-header(translate) Assign Red Hat Insights to user roles
+  p(translate) By default, only super administrators can view Insights Report and Configuration screens. You can give users who are not super administrators access to the Insights screens by assigning the appropriate features to their roles.
+  img.screenshot(src="images/img-cfme-insights-features.png")
+  p(translate) In addition to the feature controls above, a user can only view Insights reports on those virtual machines to which the user has permission to view in CloudForms.

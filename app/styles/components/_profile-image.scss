@@ -1,0 +1,69 @@
+.dashboard-navigation-container {
+  .profile-image {
+   	@include media-query(sm) {
+		position: absolute;
+		left: 50%;
+		top: 24px;
+		margin-left: -40px;
+		width: 80px;
+		height: 80px;
+	}
+
+	@include media-query(md) {
+		width: 100px;
+		height: 100px;
+		margin-left: -50px;
+	}
+  }
+}
+
+.user-info {
+  .profile-image {
+    position: absolute;
+    top: 30px;
+    left: -5px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.profile-image {
+  	&:hover { cursor: pointer; }
+	position: relative;
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+	display: inline-block;
+
+	@include border-radius(50%);
+	border: 6px solid #857e83;
+	@include box-shadow(0 2px 4px 0px #252527);
+	background-image: url("../images/i_user-fallback.png");
+	background-size: cover;
+	background-position: center center;
+
+	@include opacity(1);
+	@include transition(.2s);
+
+    @include media-query(md) {
+      width: 100px;
+      height: 100px;
+    }
+
+	a {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		@include rem('padding', 6px 4px 8px);
+		background: rgba(0,0,0,.6);
+
+		@include font-size(12px);
+		font-weight: 700;
+		color: #fff;
+		text-align: center;
+		opacity: 0;
+	}
+
+	&:hover a { opacity: 1; }
+}

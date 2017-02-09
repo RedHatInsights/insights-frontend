@@ -1,0 +1,23 @@
+.acks.row.active
+  .col-md-8
+    h2.page-title(translate) Settings
+    p(translate)
+      strong Note: 
+      | These are account wide. You must be an Org Admin to make these changes.
+  .col-md-12
+    section(ng-show='loading')
+      .spinner.spinner-lg
+      span(translate) Loading Settings
+  .col-md-12
+    section(ng-hide='loading')
+      table.table.table-striped
+        thead
+          tr
+            th(translate) Setting
+            th(translate) Value
+        tbody
+          tr(ng-repeat='setting in settings')
+            td {{setting.name}}
+            td 
+              input(type='checkbox' ng-model='setting.value') 
+      button(ng-click='save()', translate) Save

@@ -1,0 +1,11 @@
+.deployment-select {
+
+	&.inline {
+		@include rem('padding', 12px 0 0 4px);
+
+		.breadcrumb {
+			display: inline;
+			padding: 0;
+		}
+	}
+}

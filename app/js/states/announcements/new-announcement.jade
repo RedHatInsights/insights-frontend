@@ -1,0 +1,54 @@
+.page-standard.page-announcements.section-announcements
+  .row
+    .col-xs-12
+      h1.page-title New Announcement
+  .row(ng-if='announcementError')
+    .col-xs-12.col-lg-8.alert.alert-danger
+      span.col-xs-9
+        span.icon-inline
+          i.glyphicon.glyphicon-exclamation-sign
+        span(translate) {{announcementError}}
+  .row
+    .col-xs-12.col-m-8
+      form.form-horizontal(ng-submit='create()', name='form')
+        fieldset
+          .row
+            .col-xs-12
+              label.control-label Title
+              input.form-control(ng-model='announcement.title', type='text', placeholder='Announcement Title', required)
+          .row.row-short
+            .col-xs-12
+              label.control-label Slug
+              input.form-control(ng-model='announcement.slug', type='text', placeholder='Slug', required)
+          .row.row-short
+            .col-xs-12
+              label.control-label Body
+              textarea.form-control(ng-model='announcement.body', type='text', placeholder='Body')
+          .row.row-short
+            .col-xs-12
+              label.control-label
+                | Start Date&nbsp;
+                small ex: 2016-01-01T12:00:00.000Z
+              input.form-control(ng-model='announcement.start', type='text', placeholder='Start Date', required)
+          .row.row-short
+            .col-xs-12
+              label.control-label
+                | End Date&nbsp;
+                small ex: 2016-01-01T12:00:00.000Z
+              input.form-control(ng-model='announcement.end', type='text', placeholder='End Date')
+          .row.row-short
+            .col-xs-12
+              label.checkbox-inline
+                input(type='checkbox', name='hidden', value='true', ng-model='announcement.hidden')
+                | &nbsp;
+              label.control-label(for='hidden') Hidden
+          .row.row-short
+            .col-xs-12
+              label.checkbox-inline
+                input(type='checkbox', name='important', value='false', ng-model='announcement.important')
+                | &nbsp;
+              label.control-label(for='hidden') Important
+          .row
+            .col-xs-12
+              a(ui-sref='app.announcements') Back to Announcements
+              button.btn.btn-app.pull-right(name='submit', ng-disabled='form.$error.required') Create Announcement

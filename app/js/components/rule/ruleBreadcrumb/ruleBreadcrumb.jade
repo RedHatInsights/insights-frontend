@@ -1,0 +1,9 @@
+ol.breadcrumb
+  li
+    a(translate, ui-sref='app.rules') Rules
+  li
+    a(ui-sref='app.admin-rules') Rules Admin
+  li(ng-if='rule')
+    span {{ rule.plugin }}|{{ rule.error_key }}
+  li(ng-if="insightsNamespacer.current === 'insights-app-admin-rule-tags'")
+    a(ui-sref='app.admin-rule-tags') Tags

@@ -1,0 +1,3 @@
+.content(ng-hide='card.expandable && (card.collapsed || card.loading)')
+  .spinner.spinner-xs(ng-show='card.loading', ng-if='card.expandable')
+  div(ng-transclude)

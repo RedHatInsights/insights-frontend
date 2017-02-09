@@ -1,0 +1,25 @@
+card(expandable='true', init-collapsed='initCollapsed', on-toggle='resetShowMore(ctx)')
+  card-header
+    h3.title
+      severity-icon.rule-margin(severity="report.rule.severity")
+      | {{ report.rule.category }} #{'>'} {{ report.rule.description }}
+  card-content.content.ng-animate-enabled
+    .row
+      .col-sm-12
+        .rule-reason
+    .row.row-short
+      .col-sm-12
+        .rule-resolution
+        .recommended-kbase(ng-if='report.rule.node_id', node='report.rule.node_id')
+    .row.row-short(ng-show='report.rule.more_info')
+      .col-xs-12
+        .text-center.border-top
+          .nomar.push-top-narrow.pointer(ng-click='show.moreInfo = !show.moreInfo')
+            a.link
+              strong {{show.moreInfo ? 'Hide' : 'Show'}}  more info &nbsp;
+              i.fa(ng-class="{'fa-caret-up': show.moreInfo, 'fa-caret-down': !show.moreInfo}")
+    .footer.more-info.ng-animate-enabled(collapse="!show.moreInfo")
+      div(ng-bind-html='report.rule.more_info_html | trust_html',
+        ng-show='report.rule.more_info',
+        target-blank='')
+    rule-debug(ng-if='rule')

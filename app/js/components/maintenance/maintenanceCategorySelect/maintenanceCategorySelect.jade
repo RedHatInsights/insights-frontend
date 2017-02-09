@@ -1,0 +1,17 @@
+.category-select
+  .dropdown.gray
+    button.btn.btn-default.dropdown-toggle(
+      type='button',
+      data-toggle='dropdown',
+      aria-haspopup='true',
+      aria-expanded='false')
+      span {{selected.label}} ({{plans[selected.id].length}})
+      span.caret.dropdown-caret
+    ul.dropdown-menu
+      li(
+        ng-repeat='option in options',
+        ng-if='plans[option.id].length || option.id !== "suggested"')
+        a(
+          ng-click='select(option)',
+          ng-disabled='!plans[option.id].length && option.id !== "unscheduled"')
+          | {{option.label}} ({{plans[option.id].length}})

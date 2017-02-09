@@ -1,0 +1,39 @@
+.page-header {
+
+  .page-title { margin-top: 0 }
+  .row {
+    margin-bottom: 0;
+  }
+}
+
+.create-error {
+  h1,
+  h2,
+  h3 {
+    @include font-size(14px);
+    margin: 0;
+  }
+
+  input {
+    max-width: 100%;
+    width: auto;
+  }
+
+  .field-group {
+    @include media-query (sm) {
+      float: left;
+      margin-left: 4%;
+      width: 48%;
+    }
+
+    &:first-of-type { @include media-query (sm) { margin-left: 0; } }
+
+    label {
+      display: block;
+      text-transform: uppercase;
+      width: 100%;
+    }
+
+    input { width: 100%; }
+  }
+}

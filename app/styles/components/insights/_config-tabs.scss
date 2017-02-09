@@ -1,0 +1,14 @@
+.config-tabs {
+
+    .nav-faux-tabs {
+        padding-left: 0;
+
+        li.active { font-weight: 700; }
+        li a { max-height: 50px; }
+        li a:after {
+            display: none;
+        }
+    }
+
+    .tab-pane { padding: 0; }
+}

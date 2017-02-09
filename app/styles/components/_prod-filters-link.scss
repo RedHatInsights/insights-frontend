@@ -1,0 +1,28 @@
+.prod-filters-link {
+  position: relative;
+  display: block;
+  background: #009aea;
+  color: #fff;
+  @include rem('padding', 6px 12px);
+  @include transition(.2s);
+  text-transform: uppercase;
+  font-weight: 700;
+  @include font-size(12px);
+  border-top: 1px solid #63BEFF;
+
+  // icon
+  .fa {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    color: #fff;
+    @include transition(.4s);
+  }
+
+  &:hover {
+    background: lighten(#009aea, 7);
+    @include rem('padding', 6px 12px 6px 16px);
+
+    .fa { right: 16px; }
+  }
+}

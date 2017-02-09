@@ -1,0 +1,13 @@
+.panel {
+	@include border-radius(0);
+
+	.panel-heading {
+		@include border-radius(0);
+
+                a {
+                    i.fa {
+                        color: white;
+                    }
+                }
+	}
+}

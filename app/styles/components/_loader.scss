@@ -1,0 +1,122 @@
+/*
+ *  SpinKit https://github.com/tobiasahlin/SpinKit
+ */
+
+ @-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform:rotate(359deg);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.spinner {
+  @include animation(rotation .6s infinite linear);
+
+  border-bottom: 4px solid rgba(0,0,0,.25);
+  border-left: 4px solid rgba(0,0,0,.25);
+  border-right: 4px solid rgba(0,0,0,.25);
+  border-top: 4px solid rgba(0,0,0,.75);
+  @include border-radius(100%);
+
+  margin: 0 auto;
+  position: relative;
+  display: block; // make sure it's a block
+
+  @include rem('height', $base_font_size*2);
+  @include rem('width', $base_font_size*2);
+
+  &.spinner-inline {
+    display: inline-block;
+    margin-right: 3px;
+    vertical-align: middle;
+  }
+  &.spinner-lg {
+    border-width: 5px;
+    @include rem('height', $base_font_size*2.5);
+    @include rem('width', $base_font_size*2.5);
+  }
+  &.spinner-sm {
+    border-width: 3px;
+    @include rem('height', $base_font_size*1.5);
+    @include rem('width', $base_font_size*1.5);
+  }
+  &.spinner-xs {
+    border-width: 2px;
+    @include rem('height', $base_font_size);
+    @include rem('width', $base_font_size);
+  }
+}
+
+
+.sk-spinner-wandering-cubes.sk-spinner {
+  margin: 0 auto;
+  width: 32px;
+  height: 32px;
+  position: relative; }
+.sk-spinner-wandering-cubes .sk-cube1, .sk-spinner-wandering-cubes .sk-cube2 {
+  background-color: #333;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-animation: sk-wanderingCubeMove 1.8s infinite ease-in-out;
+          animation: sk-wanderingCubeMove 1.8s infinite ease-in-out; }
+.sk-spinner-wandering-cubes .sk-cube2 {
+  -webkit-animation-delay: -0.9s;
+          animation-delay: -0.9s; }
+
+@-webkit-keyframes sk-wanderingCubeMove {
+  25% {
+    -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);
+            transform: translateX(42px) rotate(-90deg) scale(0.5); }
+
+  50% {
+    /* Hack to make FF rotate in the right direction */
+    -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
+            transform: translateX(42px) translateY(42px) rotate(-179deg); }
+
+  50.1% {
+    -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);
+            transform: translateX(42px) translateY(42px) rotate(-180deg); }
+
+  75% {
+    -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+            transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5); }
+
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg); } }
+
+@keyframes sk-wanderingCubeMove {
+  25% {
+    -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);
+            transform: translateX(42px) rotate(-90deg) scale(0.5); }
+
+  50% {
+    /* Hack to make FF rotate in the right direction */
+    -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
+            transform: translateX(42px) translateY(42px) rotate(-179deg); }
+
+  50.1% {
+    -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);
+            transform: translateX(42px) translateY(42px) rotate(-180deg); }
+
+  75% {
+    -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+            transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5); }
+
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg); } }

@@ -1,0 +1,44 @@
+$bg-featured-content: #f2f5f7;
+$border-color-featured-content: $gray-light;
+
+.featured-content {
+	background: $bg-featured-content;
+
+	@include media-query(sm) {
+		border-top: 1px solid $border-color-featured-content;
+		border-bottom: 1px solid $border-color-featured-content;
+	}
+
+	&.row {
+		@include media-query(sm) {
+			display: table;
+		}
+
+		[class^='col-'], [class*=' col-'] {
+			@include media-query(sm) {
+				display: table-cell;
+				float: none;
+			}
+		}
+	}
+
+	.content, .nav-col {
+		@include rem('padding-top', $global-padding);
+		@include rem('padding-bottom', $global-padding);
+
+	}
+
+	.content {
+		@include media-query(sm) {
+			@include rem('padding-left', $global-padding);
+		}
+	}
+
+	.nav-col { background: #fff; }
+
+	ul.nav {
+		@include reset;
+
+		@include media-query(md) { @include rem('padding-right', $global-padding); }
+	}
+}

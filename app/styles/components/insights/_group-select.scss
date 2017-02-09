@@ -1,0 +1,34 @@
+.group-select {
+    border: none;
+	width: 100%;
+
+    select {
+		@include appearance(none);
+    }
+}
+
+.group-select.dropdown-select {
+	select {
+		width: 100%;
+	}
+}
+
+.group-select.rounded {
+	select {
+		border-radius: 8px !important;
+		border: 4px solid #ebeef0;
+	}
+}
+
+.table-filters {
+
+	select {
+		background-color: #f7fafc;
+		@include rem('padding', 6px 30px 6px 12px);
+		line-height: 1;
+	}
+
+	.dropdown-select:after {
+		z-index: 1;
+	}
+}

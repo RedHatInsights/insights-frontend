@@ -1,0 +1,11 @@
+.row(ng-if='loading')
+  .col-sm-12
+    i.fa.spinner-xs.spinner
+    span Loading...
+.row.system-metadata(ng-if='!loading')
+  .col-sm-6(ng-repeat='facts in systemFacts')
+    table.meta-table.table-fixed
+      tbody
+        tr(ng-repeat='data in facts')
+          td(translate) {{data.label}}
+          td.metadata-value(translate) {{data.value}}

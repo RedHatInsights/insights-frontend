@@ -1,0 +1,21 @@
+table.table.table-separated
+  thead.lite
+    tr
+      th.count(width="5%")
+        span {{plans.length}}
+      th(ng-if='overdue', width="30%", translate) Overdue Plans
+      th(ng-if='!overdue', width="30%", translate) Scheduled Plans
+      th.start(translate) Start
+      th.duration(translate) Duration
+      th(width="11%", translate) Actions
+      th(ng-if='overdue', width="40")
+  tbody
+    tr(ng-repeat="plan in (plans | limitTo:3 | orderBy:'start') track by plan.maintenance_id")
+      td(colspan="2", ng-click="openPlan(plan)")
+        strong {{plan.start | moment:'LL':timezone}}
+      td.start(ng-click="openPlan(plan)") {{plan.start | moment:'LT':timezone | lowercase}}
+      td.duration(ng-click="openPlan(plan)", translate, translate-n='duration(plan.start, plan.end)', translate-plural='{{$count}} minutes') 1 minute
+      td.action-count(ng-click="openPlan(plan)")
+        span {{plan.actionsDone}}/{{plan.actions.length}}
+      td.dismiss(ng-if='overdue', ng-click='silence(plan)')
+        i.fa.fa-moon-o

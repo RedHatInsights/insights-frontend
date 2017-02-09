@@ -1,0 +1,37 @@
+.article-modal
+  form.form-horizontal(novalidate, name='articleForm')
+    h2 Overview content
+    .form-group.row
+      label.control-label.col-sm-2(for='title') Article
+      .col-sm-10
+        ui-select(ng-model='selected.article', append-to-body='false', on-select='load($item.id)')
+          ui-select-match.form-control.ui-select-match(placeholder='Select an article')
+            | {{selected.article.id}}
+          ui-select-choices.ui-select-choices(repeat="article in articles")
+            | {{article.id}}
+    .form-group.row.row-short(ng-class="{'has-error': articleForm.title.$invalid && articleForm.title.$dirty}")
+      label.control-label.col-sm-2(for='title') Title
+      .col-sm-10
+        input.form-control#title(type='text', name='title', ng-model='article.title', maxlength='255', required)
+    .form-group.row.row-short(ng-class="{'has-error': error.content}")
+      .col-sm-12
+        .pull-right
+          yes-no(yes="true", text="markdown")
+          | &nbsp;
+          yes-no(no="true", text="doT")
+        textarea.form-control.content#content(placeholder='Overview content', ng-model='article.content', rows='20')
+    .row
+      .col-sm-6
+        button.btn.btn-sm.btn-secondary(ng-click='preview()', ng-disabled="articleForm.$invalid")
+          span.icon-inline
+            i.fa.fa-picture-o
+          | Preview
+      .col-sm-6.text-right
+        button.btn.btn-sm.btn-default(ng-click='close()') Cancel
+        button.btn.btn-sm.btn-primary(ng-click='save()', ng-disabled="articleForm.$invalid") Save
+  .row(ng-if='previewData')
+    hr
+    .col-sm-12
+      h3
+        strong {{previewData.title}}
+      span.handcrafted-content(ng-bind-html='previewData.content_html | trust_html')

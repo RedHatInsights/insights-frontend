@@ -1,0 +1,17 @@
+.modal-actions
+  i.fa.fa-close.pull-right(ng-click="close()")
+.info#info
+  .content
+    section#install
+      h2.section-header(translate) You have reached your maximum <br /> number of registered systems!
+      p
+        span(ng-if="isEvaluation", translate) You have reached your evaluation limit of 10 registered systems for Red Hat Insights.
+        span(ng-if="!isEvaluation", translate) You have reached your maximum number of registered systems for Red Hat Insights.
+        | &nbsp;
+        span(translate)  To increase your available Red Hat Insights registrations, please
+        | &nbsp;
+        a(href='http://www.redhat.com/en/about/contact/sales', translate) contact your Red Hat sales representative
+        | &nbsp;
+        span(translate) to purchase Insights or request a 90 day evaluation.
+      p
+        a(href='http://access.redhat.com/insights/info/#availability', translate) Learn more about Red Hat Insights availability

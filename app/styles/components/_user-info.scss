@@ -1,0 +1,54 @@
+$user-info-color: $gray-dark;
+
+
+.user-info {
+
+  .messaging-menu {
+    @include rem('margin-top', 20px);
+  }
+
+  menu {
+    nav {
+      ul {
+
+      }
+
+      li {
+
+      }
+
+      a {
+
+      }
+    }
+  }
+
+
+
+  .fa span {
+    @include rem('padding-left', 0.5);
+  }
+
+  .lbl {
+    font-weight: bold;
+    font-size: medium;
+    @include rem('padding', 2 0);
+  }
+
+  .heading {
+
+  }
+
+  .item {
+    background-color: #f5f7f9;
+    border: 1px solid #ededed;
+    :hover {
+      background-color: #fff;
+    }
+    .item-inner {
+      font-weight: bold;
+      padding: .5em;
+      padding-left: 1em;
+    }
+  }
+}

@@ -1,0 +1,4 @@
+// this is to hide angular templates before they load
+// this is usually injected by angular.js, however this needs to be
+// here because we load angular async
+.ng-cloak { display: none !important; }

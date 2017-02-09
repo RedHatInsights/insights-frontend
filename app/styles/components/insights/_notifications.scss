@@ -1,0 +1,180 @@
+.top-bar .notifications {
+	@include rem('margin-top', 4px);
+	margin-top: 0;
+	display: inline-block;
+	color: #fff;
+  position: static;
+  
+  @include media-query(sm) { position: relative; }
+
+	.dropdown {
+    position: static;
+		padding: 0;
+		display: inline-block;
+
+    @include media-query(sm) {
+    	position: relative;
+    }
+	}
+
+	.open>.dropdown-toggle.dropdown-toggle {
+		background: none;
+		color: #fff;
+	}
+
+	a.dropdown-toggle {
+		position: relative;
+		@include rem('padding', 6px);
+
+		&:hover,
+		&:focus,
+		&.focus,
+		&:active,
+		&.active {
+			background: none;
+
+			i {
+				color: #fff;
+			}
+		}
+	}
+
+	.count {
+		position: absolute;
+		top: -4px;
+		right: -8px;
+		@include rem('padding', 4px);
+		background: $red;
+		color: #fff;
+		@include font-size(11px);
+		font-weight: 700;
+		line-height: 1;
+		@include border-radius(8px);
+	}
+
+	.dropdown-menu {
+    right: 0;
+
+    &:after {
+      display: none;
+      @include media-query(sm) {
+        display: block;
+      }
+      content: " ";
+      bottom: 100%;
+      right: 10px;
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border: solid transparent;
+      border-color: rgba(242, 245, 247, 0);
+      border-bottom-color: #f2f5f7;
+      border-width: 8px;
+      margin-left: -8px;
+    }
+  }
+
+	ul {
+    left: 0;
+    padding: 0;
+    background: none;
+    color: $gray-dark;
+    box-shadow: none;
+    border: 1px solid $gray;
+    @include box-shadow(0 0 8px 0 rgba(0,0,0,.2));
+
+		@include media-query(sm) {
+			min-width: 300px;
+      left: auto;
+      right: 0;
+      @include rem('margin-top', 4px);
+      padding: 0;
+      background: none;
+      color: $gray-dark;
+      box-shadow: none;
+      border: 1px solid $gray;
+      @include box-shadow(0 0 8px 0 rgba(0,0,0,.2));
+    }
+    
+    @include media-query(md) { min-width: 430px; }
+
+		li {
+			@include rem('padding', $global-padding);
+			background: $gray-light;
+			color: $gray-dark;
+			@include font-size(13px);
+
+      b, strong, p {
+        -ms-word-break: break-all;
+        word-break: break-all;
+      }
+
+      .message-status-toggle i {
+        position: absolute;
+        right: $global-padding;
+        top: 0;
+        margin: 0;
+      }
+
+
+      &.acked  {
+				background: #fff;
+				color: rgba(100,100,100,.7);
+			}
+
+			& + li {
+				border-top: 1px solid $gray;
+			}
+
+			&.unread {
+			}
+
+			.message {
+				position: relative;
+				@include rem('padding-right', 12px);
+			}
+
+			.status {
+				position: absolute;
+				right: 10px;
+				top: 0;
+				display: inline-block;
+
+				@include font-size(16px);
+				@include text-shadow(0 1px 1px #888);
+				@include transition(.2s);
+				color: $blue;
+				text-shadow: none;
+				line-height: 1;
+
+				.open {
+					color: $gray;
+				}
+			}
+
+			&.view-all {
+				padding: 0;
+        border-top: 1px solid $gray;
+
+				.btn {
+					text-transform: none;
+					@include rem('padding', 14px 6px);
+				}
+			}
+		}
+	}
+
+	.row + .row {
+		@include rem('margin-top', 4px);
+	}
+}
+
+.top-bar {
+  // Position the cols to static for dropdowns
+  .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    position: static;
+    @include media-query(sm) { position: relative; }
+  }
+}
+

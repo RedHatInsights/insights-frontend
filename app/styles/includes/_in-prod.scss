@@ -1,0 +1,28 @@
+body {
+    background: none;
+}
+
+.c3:after {
+	background-image: none;
+}
+
+.insights-main-content {
+	@include font-size(14px);
+}
+
+.insights-main-content table,
+.insights-main-content .legend table {
+	margin-bottom: 0 !important;
+}
+
+.insights-main-content {
+    .table>thead {
+        background-image: none;
+        background-color: #fff;
+        background-clip: initial;
+    }
+}
+
+.hidden-in-product {
+	display: none;
+}

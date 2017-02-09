@@ -1,0 +1,15 @@
+.system-selector {
+	@include rem('margin-bottom', $global-margin);
+	@include rem('padding-bottom', $global-padding);
+	border-bottom: 5px solid #ddd;
+
+	.filters {
+		margin-top: 0;
+		@include font-size(14px);
+		line-height: 1;
+
+		@include media-query (lg) {
+			float: right;
+		}
+	}
+}

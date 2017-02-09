@@ -1,0 +1,25 @@
+.chart-header {
+  color: #585858;
+
+  .intro {
+    @include rem('margin', 24px 0 34px);
+    @include rem('padding', 0 0 34px);
+    @include font-size(18px, 27px);
+    border-bottom: 1px solid #ddd;
+  }
+
+  p {
+    @include media-query (lg) {
+      @include rem('margin-top', 20px);
+    }
+  }
+
+    .logo {
+        margin-bottom: 20px;
+
+        &.logo-sap {
+            margin-left: -20px;
+            margin-top: -52px;
+        }
+    }
+}

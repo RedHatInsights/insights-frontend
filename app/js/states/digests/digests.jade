@@ -1,0 +1,36 @@
+.digests-page.wrapper
+  section
+    h1 Digests
+
+    .row
+      .col-sm-12
+        h2 Num: How man Rules hit in my account?
+        actionsLite
+    .row
+      .col-sm-12
+        h2 Num: Insights system score
+        strong 66
+        digest-graph(digest-key='score', digest='digest_score' ng-if="!loading")
+
+    .row
+      .col-sm-12
+        h2 Chart: Total hits, by category over time
+        digest-graph(digest-key='category', digest='digest_category' ng-if="!loading")
+    .row
+      .col-sm-6
+        h2 Chart: Total hits, by severity over time
+        digest-graph(digest-key='severity', digest='digest_severity' ng-if="!loading")
+
+
+    .row
+      .col-xs-12
+        h2 Chart: Total registered machines, over time, and not checking in line
+
+    .row
+      .col-sm-6
+        h2 List/Table: 50 worst Systems
+        p with hostname, registered date, and score
+      .col-sm-6
+        h2 List/Table: Rules that have hits.
+        p grouped by criticality, sub grouped by count
+

@@ -1,0 +1,11 @@
+variables:
+  API_BASE: "http://labs-git.usersys.redhat.com/manager/api/builds/"
+  LAB_ID: "insights"
+
+before_script:
+  - echo "running build prep"
+  - sudo umount /mnt/extra/home/gitlab-runner/builds/*/*/labs/insights/app/bower_components || true
+  - sudo umount /mnt/extra/home/gitlab-runner/builds/*/*/labs/insights/node_modules         || true
+
+job:
+  script: ./build.sh

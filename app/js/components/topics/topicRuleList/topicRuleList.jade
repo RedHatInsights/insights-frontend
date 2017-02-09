@@ -1,0 +1,49 @@
+.topic-rule-list
+  list-type.text-right-sm
+  .row.row-short(ng-show='getListType() === listTypes.card')
+    .col-sm-12
+      .card-list
+        .card-list-item(ng-repeat="plugin in plugins | orderBy: sorter.predicate : sorter.reverse track by plugin.plugin_id")
+          rule-group-card(ng-if="plugin.type === 'group'", plugin='plugin')
+          card(ng-if="plugin.type === 'rule'", ng-class='{faded: plugin.acked}')
+            card-header
+              i.fa.category-icon.inline-right(ng-class="plugin.rule.category.toLowerCase()")
+              span.title {{ ::plugin.rule.category }} #{'>'} {{ ::plugin.rule.description }}
+              .count(translate, translate-n='plugin.hitCount', translate-plural="{{$count}} Systems") 1 System
+              severity-icon.pull-right(severity="plugin.rule.severity", label='true')
+              span.label.label-default.pull-right(ng-class="{'rule-inactive': plugin.acked, 'rule-active': !plugin.acked}", translate) INACTIVE
+            card-content
+              .gray(ng-bind-html='::plugin.rule.summary_html', target-blank='')
+            .footer.text-right-sm
+              strong(ng-hide='plugin.rule.acked')
+                a(
+                  ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
+                  ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
+
+  .row.row-short(ng-show='getListType() === listTypes.table')
+    .col-sm-12
+      table#rha-rules-table.table.ng-table.break-word
+        thead
+          tr
+            th.sortable(ng-class="sorter.getSortClass('description')", ng-click="sorter.sort('description')")
+              .sort-indicator(translate) Rule
+            th.text-center.sortable(ng-class="sorter.getSortClass('severity')", ng-click="sorter.sort('severity')")
+              .sort-indicator(translate) Sev
+            th.text-center.sortable(ng-class="sorter.getSortClass('hitCount')", ng-click="sorter.sort('hitCount')")
+              .sort-indicator(translate) Systems
+        tbody
+          tr.legend-item(ng-repeat="rule in topic.rules | filter:filterZero | orderBy: sorter.predicate : sorter.reverse track by rule.rule_id", ng-class="{acked: rule.acked}")
+            td(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
+              i.fa.category-icon(ng-class="plugin.rule.category.toLowerCase()")
+              span {{rule.description | translate}}
+            td.filter-on.text-center(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
+              severity-icon(severity='rule.severity')
+            td.text-center(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)') {{ rule.hitCount }}
+
+  .row.row-short(ng-show='!showRulesWithNoHits && hiddenCount')
+    .col-sm-12.text-center
+      button.btn.btn-sm.btn-default(ng-click='showAll()', translate) Show rules without actions ({{hiddenCount}} more)
+
+  .row.row-short(ng-show='!showCards')
+    .col-xs-12
+      .actions-back

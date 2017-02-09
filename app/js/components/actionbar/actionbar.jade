@@ -1,0 +1,4 @@
+.actionbar
+  .action(ng-repeat='action in myActions', ng-click='action.fn()')
+    i.pointer.fa(ng-class='action.icon')
+    | {{action.title | translate}}

@@ -1,0 +1,28 @@
+h1, h2, h3, h4, h5, h6 {
+  -webkit-font-smoothing: antialiased;
+  color: #585858;
+}
+
+h2.headline {
+  color: $blue;
+  @include font-size(32px);
+  font-weight: 100;
+}
+
+.page-title {
+  @include font-size(24px);
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.headline.headline-medium {
+  @include font-size(32px);
+}
+
+.green {
+  color: green;
+}
+
+.blue {
+  color: #31c7ff;
+}

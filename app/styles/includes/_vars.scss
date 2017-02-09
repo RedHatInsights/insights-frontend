@@ -1,0 +1,143 @@
+// Layout Settings
+//==================================================================*/
+html { font-size: 100%; }
+
+// Media Queries
+//--------------------------------------------------------------*/
+$xs: 480px;
+$sm: 768px;
+$md: 992px;
+$lg: 1200px;
+
+
+$base-font-size: 16px;
+$base-color: #4c4c4c;
+$base-font-family: 'Overpass', Arial, Helvetica, sans-serif;
+
+// Global Settings
+//==================================================================*/
+$global-padding: 15px;
+$global-margin: 30px;
+
+
+// Color Settings
+//==================================================================*/
+
+// Brand Specific
+//--------------------------------------------------------------*/
+$blue: #2097e6;
+$red: #c00;
+$blue_dark: #0085cf;
+$gray-light: #f2f5f7;
+$green: #46b631;
+$gray-med: #6e6e6e;
+$brand-primary: #c00;
+
+$brand-secondary: #d9d9d9;
+$brand-secondary: #d9d9d9;
+
+$brand-tert: #969ba0;
+$brand-tert-med: #7a858b;
+$brand-tert-dark: #59666e;
+
+$availability-color: #1F77B4;
+$performance-color: #2c96cb;
+$security-color: #6d868d;
+$stability-color: #46b631;
+
+
+// Buttons
+//==================================================================*/
+$btn-primary-bg: #252527;
+$btn-primary-bg-hover: #49494d;
+
+$text-color: #646464;
+$gray: #d9d9d9;
+$gray-dark: #646464;
+$gray-border-med: #ddd;
+
+$labs-form-font: #646464;
+
+$button-font-color: #fff;
+
+// Information and Validation
+//--------------------------------------------------------------*/
+$brand-info: #428bca;
+$brand-error: #d9534f;
+$brand-success: #5cb85c;
+
+// Text and Links
+//--------------------------------------------------------------*/
+$link-color: $brand-info;
+$link-color-hover: darken($link-color, 15%);
+$link-hover-color: darken($link-color, 15%);
+$link-hover-decoration: underline !default;
+$btn-link-disabled-color: $gray-light !default;
+// Form Block Hover
+//==================================================================*/
+$form-block-hover: #f7f7f7;
+
+// Typography Settings
+//==================================================================*/
+
+// Headings
+//--------------------------------------------------------------*/
+$header-font-family: 'Open Sans', 'Liberation Sans', Helvetica, Arial;
+$header-font-weight: normal;
+$header-font-style: normal;
+$header-line-height: 1.3;
+$header-top-margin: 5px;
+$header-bottom-margin: 20px;
+$header-text-rendering: optimizeLegibility;
+
+$h1-font-size: 49px;
+$h2-font-size: 49px;
+$h3-font-size: 20px;
+$h4-font-size: 23px;
+$h5-font-size: 18px;
+$h6-font-size: 16px;
+
+// Paragraphs
+//--------------------------------------------------------------*/
+$paragraph-font-weight: normal;
+$paragraph-font-size: $base-font-size;
+$paragraph-line-height: 26px;
+$paragraph-margin-bottom: 20px;
+$paragraph-text-rendering: optimizeLegibility;
+
+// Links
+//--------------------------------------------------------------*/
+$link-text-decoration: none;
+
+// Blockquotes
+//--------------------------------------------------------------*/
+$blockquote-padding: 10px 20px;
+$blockquote-margin: 0 0 20px;
+
+// Alerts Settings
+//==================================================================*/
+$alertbox-font-color: #fff;
+$alertbox-margin: 16px;
+
+// Media Settings
+//==================================================================*/
+$figure-background: #000;
+$figure-margin: 0 0 16px;
+$figure-opacity: .9;
+$figure-opacity-hover: 1;
+
+// Forms Settings
+//==================================================================*/
+$form-margin: 0 0 16px;
+
+// Buttons Settings
+//==================================================================*/
+$button-padding: 11px;
+$button-background: $brand-primary;
+$button-text-color: #fff;
+$button-font-family: 'Overpass', 'Liberation Sans', Arimo, 'Trebuchet MS', 'Bitstream Vera Sans', Helvetica, Arial;
+
+// Table Settings
+//==================================================================*/
+$table-cell-padding: 8px;
+$table-cell-border: 1px solid $brand-primary;

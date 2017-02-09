@@ -1,0 +1,123 @@
+$platform-summary-a-span-color: #36bbff;
+
+.actions-page {
+
+}
+
+.action-categories {
+	.category-list {
+		//@include reset;
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+
+	}
+}
+
+aside {
+	word-break: break-all;
+}
+
+aside + aside {
+	@include rem('margin-top', $global-margin);
+}
+
+aside.content-block {
+	background: #fff;
+}
+
+.insights-app-actions .wrapper {
+	min-height: 720px;
+}
+
+.actions-page .featured-content {
+	@include rem('margin-top', $global-margin);
+
+	@include media-query(sm) {
+		@include rem('margin-left', -$global-margin);
+		@include rem('margin-right', -$global-margin);
+	}
+}
+
+.actions-page .page-header {
+	margin-bottom: 0;
+}
+
+.actions-page {
+	section {
+		@include clearfix;
+	}
+
+    input.filter {
+		@include rem('margin-bottom', $global-padding);
+    }
+}
+
+section.metrics {
+  @include rem('padding-top', $global-margin);
+  @include rem('margin-bottom', $global-margin);
+}
+
+section.action-categories {
+  @include rem('padding-top', $global-margin);
+	@include rem('margin-bottom', $global-margin);
+	text-align: center;
+
+	.fa {
+		@include font-size(62px);
+		line-height: 1;
+		display: inline-block;
+		vertical-align: middle;
+		color: #cdcecf;
+		@include rem('margin-right', $global-padding);
+	}
+
+	ul {
+		@include reset;
+		display: inline-block;
+	}
+
+
+	li {
+
+		a {
+			font-weight: 700;
+			color: $gray-dark;
+
+			&:hover {
+				color: lighten($gray-dark, 10);
+			}
+		}
+
+		.count {
+			text-decoration: underline;
+			line-height: 2;
+		}
+		.stability .count { color: $stability-color; }
+		.availability .count { color: $availability-color; }
+		.security .count { color: $security-color; }
+		.performance .count { color: $performance-color; }
+	}
+}
+
+.topic-summary {
+	position: relative;
+
+	i {
+		position: absolute;
+		left: 0;
+		top: 0;
+		text-align: center;
+		//@include border-radius(50%);
+		@include font-size(24px);
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		background: $gray-dark;
+		color: #fff;
+	}
+}
+
+.extra-topics {
+	margin: auto;
+}

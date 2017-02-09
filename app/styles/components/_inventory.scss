@@ -1,0 +1,134 @@
+.inventory .separator-noline {
+  padding-bottom: 20px;
+}
+.inventory .separator-line {
+  border-bottom: 1px solid #eee;
+  margin: 0px 10px 0px 10px;
+}
+.inventory .separator-line-full {
+  border-bottom: 1px solid #eee;
+  margin: 20px 0px 20px 0px;
+}
+
+.inventory-actions {
+  display: table;
+  width: 100%;
+  padding-bottom: 5px;
+  padding-top: 20px;
+}
+
+.inventory-actions .right {
+  display: table-cell;
+  text-align: right;
+  vertical-align: middle;
+  width: 33%;
+}
+.inventory-actions .middle {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: bold;
+}
+.inventory-actions .system-total {
+  h3 {
+    display: inline-block;
+  }
+}
+.bulk-actions {
+	@include media-query(sm) {
+		@include rem('padding-left', 42px);
+	}
+    .btn + .btn {
+        margin-left: 12px;
+    }
+}
+//.inventory-actions .left {
+//  padding-left: 11px;
+//  display: table-cell;
+//  vertical-align: middle;
+//  width: 33%;
+//}
+.inventory-actions .caret {
+  margin-left: 3px;
+}
+.inventory-actions .expand-all-icon {
+  margin-left: 5px;
+}
+.inventory-actions .action-btn {
+  font-weight: bold;
+  font-size: 1em;
+  margin-left: 5px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+}
+.inventory-actions .action-checkbox {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+//.inventory-filters-summary {
+//  background-color: #f2f5f7;
+//  width: 100%;
+//  padding-left: 20px;
+//}
+.inventory-filters, .inventory-filters-summary {
+  .padding-bottom {
+    padding-bottom: 20px;
+  }
+}
+
+.multiple-button {
+	@include rem('margin-top', $global-padding);
+}
+
+.single-system {
+  padding-top: 20px;
+  .system-head {
+    text-align: center;
+  }
+  .system-icon {
+    font-size: 40px;
+  }
+  .system-name {
+    padding-top: 5px;
+  }
+  .links {
+    padding-top : 10px;
+  }
+  .metadata {
+    padding-top : 10px;
+  }
+  .actions {
+    padding-top : 10px;
+  }
+}
+
+.inventory-actions .expand-all-btn {
+  margin-right: 10px;
+}
+
+.system-card-actions {
+  .btn + .btn {
+    margin-left: 10px;
+  }
+}
+
+.sweet-alert {
+  .unregister-conflict {
+    ul {
+      margin-top: 6px;
+    }
+
+    * + p {
+      margin-top: 12px;
+    }
+
+    p, li {
+      text-align: left;
+    }
+  }
+}
+
+h3.system-count {
+    display: inline;
+}

@@ -1,0 +1,165 @@
+.donut-container.no-actions {
+
+	.zero, .actions-found {
+		line-height: 1;
+		font-weight: 700;
+	}
+
+	.zero {
+		position: relative;
+		@include font-size(14px);
+		color: #2c96cb;
+		letter-spacing: .25em;
+
+		&:before, &:after {
+			content: '';
+			position: absolute;
+			top: 8px;
+			border-top: 2px solid transparent;
+			border-bottom: 2px solid transparent;
+		}
+
+		&:before {
+			left: 32px;
+			border-right: 16px solid #2c96cb;
+		}
+
+		&:after {
+			right: 34px;
+			border-left: 16px solid #2c96cb;
+		}
+	}
+
+	.actions-found {
+		@include font-size(10px);
+		line-height: 1;
+	}
+
+	.perfect {
+		@include font-size(25px);
+		line-height: 1;
+		color: #0f2a32;
+		font-weight: 700;
+		@include rem('margin-top', 4px);
+	}
+
+	.status {
+		background: #6d868d;
+		display: inline-block;
+		@include rem('margin-top', 9px);
+		@include rem('padding', 3px 9px);
+		color: #fff;
+		font-weight: 700;
+		@include font-size(13px);
+		line-height: 1;
+		@include border-radius(12px);
+		letter-spacing: .25em;
+	}
+
+	.donut-hole {
+		width: 164px;
+		height: 164px;
+		margin-left: -82px;
+		top: 50px;
+		background: url('../images/bg_dount-hole-na.png') no-repeat center #fff;
+		background-size: 100%;
+	}
+
+	.donut-hole .content {
+		@include transform(none);
+		top: 0;
+		@include rem('padding-top', 38px);
+		text-transform: uppercase;
+	}
+
+	.donut {
+		width: 250px;
+		height: 250px;
+		display: block;
+
+		&:before {
+			@include box-shadow(0 0 12px 0 rgba(0, 0, 0, .2));
+			@include rem('margin-left', -130px);
+			@include background(linear-gradient(to bottom, #2c96ca, #46b531));
+			border-radius: 50%;
+			content: '';
+			display: block;
+			height: 260px;
+			left: 50%;
+			position: absolute;
+			top: 2px;
+			width: 260px;
+			z-index: 1;
+			border: 15px solid #fff;
+
+			@include media-query (xs-max) { display: none; }
+		}
+
+		&:after {
+			background-position: center top;
+			background-repeat: no-repeat;
+			background-size: auto;
+			content: '';
+			display: block;
+			height: 100%;
+			left: 4%;
+			position: absolute;
+			top: 0;
+			width: 92%;
+
+            @include media-query (xs) { background-image: url('../images/bg_chart-shadow.png'); }
+
+			@include media-query (md) {
+				background-size: 108% auto;
+				background-position: center -16px;
+			}
+
+			@include media-query (lg) { background-size: 95% auto; }
+
+		}
+	}
+}
+
+.donut-container.no-actions.no-systems {
+  .content {
+    top: 28px;
+  }
+
+  .none {
+    color: black;
+    font-weight: bold;
+    font-size: xx-large;
+  }
+
+  .donut-hole {
+    background: white;
+  }
+
+  .actions-found {
+    padding-top: 5px;
+  }
+
+  .donut {
+    &:before {
+      @include background(linear-gradient(to bottom, #3E5257, #6D868D));
+    }
+  }
+}
+
+.perfect {
+  .donut {
+    &:after {
+      background-image: none !important;
+    }
+  }
+
+  text-align: center;
+}
+
+.no-systems-registered {
+  font-weight: bold;
+
+  .alert {
+    margin-top: 20px;
+  }
+}

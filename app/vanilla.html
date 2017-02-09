@@ -1,0 +1,35 @@
+<!doctype html>
+<html class="insights">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <title>Red Hat Insights</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="css/cloudforms.css">
+  </head>
+  <body>
+
+    <div id="chrometwo">
+      <div id="chromed-app-content">
+        <div ui-view="" class="ng-cloak"></div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      window.chrometwo_ready = function(cb) {
+        document.addEventListener('DOMContentLoaded', cb);
+      };
+    </script>
+
+      <script src="js/insights.js"></script>
+      <script type="text/javascript">
+      angular.module('insights').config(['InsightsConfigProvider', '$locationProvider', function(InsightsConfigProvider, $locationProvider) {
+        $locationProvider.html5Mode(false);
+        InsightsConfigProvider.setAuthenticate(false);
+        InsightsConfigProvider.setApiPrefix('http://' + window.location.hostname + ':8080/r/insights/');
+      }]);
+    </script>
+  </body>
+</html>

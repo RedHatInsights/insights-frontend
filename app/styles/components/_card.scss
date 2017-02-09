@@ -1,0 +1,213 @@
+.card-group {
+  > header {
+    @include rem('padding', $global-padding);
+    background-color: $gray-light;
+    border: 1px solid #DDD;
+    border-left: 8px solid $gray;
+
+    i + span, i + strong { @include rem('margin-left', 8px); }
+  }
+
+  .count {
+    @include font-size(18px);
+    font-weight: 100;
+  }
+
+  > .content {
+    position: relative;
+    padding: 0;
+
+    .prev, .next {
+      position: absolute;
+      top: 0;
+      width: 60px;
+      height: 60px;
+      background: $blue;
+      color: #fff;
+      @include font-size(22px, 58px);
+      font-family: "FontAwesome";
+      text-align: center;
+      @include opacity(0);
+      @include transition(.1s);
+      transition-delay: .2s;
+      cursor: pointer;
+    }
+
+    .prev {
+      left: -100px;
+    }
+
+    .next {
+      right: -100px;
+    }
+
+
+    // Hover styles
+    &:hover {
+
+      .prev.disabled,
+      .next.disabled {
+        background: $gray;
+        color: lighten($gray, 10);
+        //@include opacity(.8);
+        cursor: not-allowed;
+      }
+
+      .prev,
+      .next {
+        @include opacity(1);
+      }
+
+      .prev { left: -60px; }
+      .next { right: -60px; }
+    }
+  }
+
+  > footer {}
+
+  // Re-style card
+  .content-block-card {
+
+    .header {
+      background: #fff;
+      border-top: none;
+
+      &.flexgrid {
+        padding-bottom: 0;
+
+        [class^="col-"],
+        [class*=" col-"] {
+          @include rem('padding-bottom', $global-padding);
+        }
+      }
+    }
+  }
+}
+
+.card-group > .header, .content-block-card .header {
+  position: relative;
+
+  .count {
+    background: $blue;
+    position: absolute;
+    top: -$global-padding;
+    right: $global-padding;
+    color: #fff;
+    @include font-size(12px);
+    line-height: 1;
+    font-weight: 700;
+    @include rem('padding', 6px 12px);
+    @include border-radius(12px);
+  }
+}
+
+.member-group {
+  .member-group-content {
+    padding-top: 5px;
+
+    .link-text { padding-left: 16px; }
+  }
+}
+
+.system-card {
+	& + .system-card { @include rem('margin-top', $global-padding); }
+
+  .metadata-separator { @include rem('margin-top', $global-padding); }
+
+  .header-table {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .ellipsis-wrapper {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+
+  .status-icon { @include rem('margin-left', 5px); }
+}
+
+.system-card.stale, .content-block-card.stale {
+  color: #a94442;
+  font-style: italic;
+
+  .content-block, input { border-color: #a94442; }
+
+  header { background: #f2dede; }
+  .content, footer, .footer { background: #fbf2f2; }
+
+}
+
+
+
+.insights-main-content table.stale tbody {
+  tr { background: #f2dede; }
+  tr:nth-child(odd) { background: #fbf2f2; }
+}
+
+
+.insights-main-content table tbody {
+  tr.stale { background: #f2dede; }
+  tr.stale:nth-child(odd) { background: #fbf2f2; }
+}
+
+.separation-header {
+
+  h4 {
+    display: flex;
+	  text-transform: uppercase;
+	  @include font-size(14px);
+		font-weight: 700;
+  }
+
+  h4:after {
+    border-bottom: groove 2px;
+    flex: 1;
+    content: '';
+    margin: auto auto;
+    color: black;
+  }
+
+	h4:before { @include rem('margin', auto 8px auto 0); }
+	h4:after { @include rem('margin', auto 0 auto 8px); }
+}
+
+.metadata-separator { @include rem('margin-top', $global-padding); }
+
+.insights-card .content {
+  display: block;
+}
+
+.card-table-header {
+  @include rem('margin', $global-padding auto);
+  @include rem('padding', $global-padding/2 $global-padding);
+  border-bottom: 4px solid $gray;
+
+  &.offset { @include rem('margin-left', 25px); }
+}
+
+.card-list-item + .card-list-item {
+    @include rem('margin-top', $global-margin);
+}
+
+.card-table-bulk-actions {
+  i {
+    @include rem('margin-right', 6px);
+    @include font-size(18px);
+    line-height: 1;
+  }
+
+  @include rem('margin', 0 auto $global-padding auto);
+  @include rem('padding-bottom', $global-padding);
+  //border-bottom: 2px solid $gray;
+
+  &.offset { @include rem('margin-left', 25px); }
+
+  .btn + .btn {
+    margin-left: 15px;
+  }
+}
