@@ -4,6 +4,7 @@
 const statesModule = require('../');
 const find = require('lodash/collection/find');
 const pick = require('lodash/object/pick');
+const diff = require('lodash/array/difference');
 
 /**
  * @ngInject
@@ -55,12 +56,16 @@ function InventoryCtrl(
 
     $scope.QuickFilters = QuickFilters;
     $scope.systems = [];
+    $scope.allSystems = null;
     $scope.errored = false;
     $scope.actionFilter = null;
     $scope.loading = InventoryService.loading;
 
     $scope.sorter = new Utils.Sorter(false, order);
     $scope.sorter.predicate = 'toString';
+
+    $scope.allSelected = false;
+    $scope.reallyAllSelected = false;
 
     $scope.$on('reload:data', function () {
         cleanTheScope();
@@ -100,7 +105,7 @@ function InventoryCtrl(
         });
     }
 
-    function buildRequestQueryParams() {
+    function buildRequestQueryParams (paginate) {
         const query = FilterService.buildRequestQueryParams();
 
         // offline / systems not checking in
@@ -124,8 +129,11 @@ function InventoryCtrl(
         }
 
         //pagination
-        query.page_size = InventoryService.getPageSize();
-        query.page = InventoryService.getPage();
+        if (paginate) {
+            query.page_size = InventoryService.getPageSize();
+            query.page = InventoryService.getPage();
+        }
+
         return query;
     }
 
@@ -157,7 +165,7 @@ function InventoryCtrl(
             SystemsService.systems = $scope.systems;
         }
 
-        let query = buildRequestQueryParams();
+        let query = buildRequestQueryParams(true);
 
         let promise = null;
         if (FilterService.getParentNode() !== null) {
@@ -228,8 +236,14 @@ function InventoryCtrl(
         $scope.checkboxes.update($scope.getSelectableSystems());
     }
 
+    function addSystems(newSys, oldSys) {
+        if ($scope.reallyAllSelected) {
+            $scope.checkboxes.checkboxChecked(true, diff(newSys, oldSys));
+        }
+    }
+
     $scope.$watchCollection('checkboxes.items', updateCheckboxes);
-    $scope.$watchCollection('systems', updateCheckboxes);
+    $scope.$watchCollection('systems', addSystems);
 
     $scope.canUnregisterSystem = function (system) {
         var canSelect = true;
@@ -303,6 +317,58 @@ function InventoryCtrl(
         }
 
         $scope.loading = false;
+    };
+
+    $scope.selectAll = function () {
+        $scope.allSelected = !$scope.allSelected;
+
+        // disabling the select all checkbox will also deselect everything unseen
+        if ($scope.reallyAllSelected) {
+            $scope.reallyAllSelected = false;
+        }
+    };
+
+    $scope.reallySelectAll = function () {
+        function getAllSystems() {
+
+            // For when ALL are selected, not just all visible
+            // condensed version of 'getData()'
+            let query = buildRequestQueryParams(false);
+            let promise = null;
+
+            if (FilterService.getParentNode() !== null) {
+                query.includeSelf = true;
+                promise = System.getSystemLinks(FilterService.getParentNode(), query);
+            } else {
+                promise = System.getSystemsLatest(query);
+            }
+
+            return promise;
+        }
+
+        // select ALL, not just all visible
+        if ($scope.allSystems === null) {
+            // first load of all systems
+            $scope.loading = true;
+            getAllSystems().then(res => {
+                $scope.allSystems = res.data.resources;
+                $scope.reallyAllSelected = true;
+                $scope.loading = false;
+            });
+        } else {
+            // already loaded, just set the flag
+            $scope.reallyAllSelected = true;
+        }
+    };
+
+    $scope.totalSystems = function () {
+        return InventoryService.getTotal();
+    };
+
+    $scope.allSystemsShown = function () {
+        // don't show the 'select all __' prompt
+        //  if all systems are already shown
+        return InventoryService.getTotal() === $scope.systems.length;
     };
 }
 

@@ -39,7 +39,7 @@ function inventoryActionsCtrl(
     };
 
     $scope.$watch('checkboxes.items', function () {
-        const selected = $scope.checkboxes.getSelected($scope.systems);
+        const selected = $scope.systemsToAction();
 
         if (selected.length && !$scope.isUnregistrableSelected()) {
             $scope.unregisterButtonTooltip = gettextCatalog.getString(
@@ -51,7 +51,7 @@ function inventoryActionsCtrl(
     }, true);
 
     $scope.doUnregisterSelected = function () {
-        const selected = $scope.checkboxes.getSelected($scope.systems);
+        const selected = $scope.systemsToAction();
         const parts = partition(selected, $scope.canUnregisterSystem);
 
         function unregister() {
@@ -97,12 +97,12 @@ function inventoryActionsCtrl(
     };
 
     $scope.isUnregistrableSelected = function () {
-        return $scope.checkboxes.getSelected($scope.systems)
+        return $scope.systemsToAction()
             .filter($scope.canUnregisterSystem).length > 0;
     };
 
     $scope.isFixableSelected = function () {
-        return $scope.checkboxes.getSelected($scope.systems)
+        return $scope.systemsToAction()
             .some(system => system.report_count);
     };
 
@@ -196,12 +196,33 @@ function inventoryActionsCtrl(
     };
 
     $scope.addToPlan = function () {
-        let systems = $scope.checkboxes.getSelected($scope.systems);
+        let systems = $scope.systemsToAction();
         if (!systems.length) {
             return;
         }
 
         MaintenanceService.showMaintenanceModal(null, systems, null);
+    };
+
+    $scope.numberOfSelected = function () {
+        if ($scope.reallyAllSelected) {
+            return $scope.systemsToAction().length;
+        } else {
+            return $scope.checkboxes.totalChecked;
+        }
+    };
+
+    $scope.systemsToAction = function () {
+        // assume true if the system is not shown in the view
+        if ($scope.reallyAllSelected) {
+            return $scope.allSystems.filter(system => {
+                return (!$scope.checkboxes.items.hasOwnProperty(system.system_id) ||
+                        ($scope.checkboxes.items.hasOwnProperty(system.system_id) &&
+                        $scope.checkboxes.items[system.system_id] === true));
+            });
+        } else {
+            return $scope.checkboxes.getSelected($scope.systems);
+        }
     };
 }
 

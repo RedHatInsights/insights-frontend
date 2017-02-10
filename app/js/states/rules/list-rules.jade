@@ -21,12 +21,14 @@ section
               .header(id="{{::rule.rule_id}}")
                 //TODO: activate new item
                 //.new-item NEW!
-                severity-icon.pull-right(severity="rule.severity")
+                .pull-right
+                  span.label.label-default.inline-right(translate, ng-class="{'rule-inactive': rule.ack_id, 'rule-active': !rule.ack_id}") INACTIVE
+                  ansible-icon(value='rule.ansible')
+                  severity-icon.inline-left(severity="rule.severity", label='true')
                 span.title.pointer(ng-click="permalink(rule.rule_id, true, 30)")
                   i.icon-circle.icon-circle-large(ng-class="rule.category.toLowerCase()")
                   span {{ ::rule.category }} #{'>'} {{ ::rule.description }}
                   i.fa.fa-link.permalink
-                span.label.label-default.pull-right(translate, ng-class="{'rule-inactive': rule.ack_id, 'rule-active': !rule.ack_id}") INACTIVE
               .content.ng-animate-enabled
                 .gray(ng-bind-html='::rule.summary_html | trust_html', target-blank='')
                 .link-pinned.gray.top
