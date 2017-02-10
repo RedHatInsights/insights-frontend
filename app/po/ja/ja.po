@@ -7,7 +7,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 "MIME-Version: 1.0\n"
-"PO-Revision-Date: 2017-02-06 01:03+0000\n"
+"PO-Revision-Date: 2017-01-16 02:32+0000\n"
 "Last-Translator: kmoriguc <kmoriguc@redhat.com>\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -78,7 +78,7 @@ msgid "1 system affected by {{id}} issues"
 msgid_plural "{{count}} systems affected by {{id}} issues"
 msgstr[0] "{{$count}} 台のシステムが {{id}} 件の問題で影響を受けています"
 
-#: components/inventory/inventoryActions/inventoryActions.directive.js:81
+#: components/inventory/inventoryActions/inventoryActions.directive.js:79
 msgid "1 system cannot be unregistered"
 msgid_plural "{{count}} systems cannot be unregistered"
 msgstr[0] "{{$count}} 台のシステムが登録解除できません"
@@ -1084,6 +1084,7 @@ msgstr "ホスト"
 msgid "Host &nbsp;"
 msgstr "ホスト &nbsp;"
 
+#: components/inventory/inventoryActions/inventoryActions.directive.js:110
 #: js/components/actions/actionsCategory/actionsCategory.html:1
 msgid "Hostname"
 msgstr "ホスト名"
@@ -1336,7 +1337,7 @@ msgstr ""
 "のような企業と関係を持つことが大事です。市場は常に変化し、新しい技術が次々にリリースされるため、私たちも変化し続けます。Red Hat "
 "が重要なパートナーとして私たちの変化を助けてくれることを期待します。"
 
-#: components/inventory/inventoryActions/inventoryActions.directive.js:120
+#: components/inventory/inventoryActions/inventoryActions.directive.js:118
 #: js/states/inventory/inventory.html:1
 msgid "Last Check In"
 msgstr "最終チェックイン"
@@ -1486,7 +1487,6 @@ msgstr "詳細"
 msgid "More topics"
 msgstr "その他のトピック"
 
-#: components/inventory/inventoryActions/inventoryActions.directive.js:112
 #: js/components/actions/actionsRule/actionsRule.html:1
 #: js/components/system/systemSummaryTable/systemSummaryTable.html:1
 msgid "Name"
@@ -1530,7 +1530,7 @@ msgstr "システムは登録されていません"
 msgid "Not scheduled plans"
 msgstr "プランはスケジュールされていません"
 
-#: components/inventory/inventoryActions/inventoryActions.directive.js:124
+#: components/inventory/inventoryActions/inventoryActions.directive.js:122
 msgid "Number of Actions"
 msgstr "アクション数"
 
@@ -1887,7 +1887,7 @@ msgstr "Red Hat Subscription Manager での更新のためにシステムを登�
 msgid "Registration"
 msgstr "登録"
 
-#: components/inventory/inventoryActions/inventoryActions.directive.js:116
+#: components/inventory/inventoryActions/inventoryActions.directive.js:114
 #: js/components/overview/widgets/newSystems/newSystems.html:1
 msgid "Registration Date"
 msgstr "登録日"
@@ -2000,11 +2000,6 @@ msgstr "保存 &amp; 追加で作成&nbsp;<i class=\"fa fa-save\"></i>"
 msgid "Scheduled Plans"
 msgstr "予定されているプラン"
 
-#: js/components/actions/actionsRuleFilters/actionsRuleFilters.html:1
-#: js/components/inventory/inventoryFilters/inventoryFilters.html:1
-msgid "Search"
-msgstr "検索"
-
 #: components/filterComponents/searchBox/searchBox.directive.js:22
 msgid "Search…"
 msgstr "検索…"
@@ -2061,7 +2056,7 @@ msgstr "重複するアクションを選択しますか?"
 msgid "Select your registration method"
 msgstr "登録方法を選択"
 
-#: components/inventory/inventoryActions/inventoryActions.directive.js:45
+#: components/inventory/inventoryActions/inventoryActions.directive.js:43
 msgid ""
 "Selected systems cannot be unregistered alone. Remove their respective "
 "deployment."
@@ -2213,8 +2208,8 @@ msgid "Systems in This Group"
 msgstr "このグループのシステム"
 
 #: js/states/actions/actions.html:1
-msgid "Systems with critical actions"
-msgstr "重大なアクションのあるシステム"
+msgid "Systems with critical issues"
+msgstr "重大な問題のあるシステム"
 
 #: js/states/splash/splash.html:1
 msgid "TRY IT"
@@ -2600,7 +2595,7 @@ msgstr ""
 msgid "Try Insights Beta"
 msgstr "Insights Beta を試す"
 
-#: components/inventory/inventoryActions/inventoryActions.directive.js:128
+#: components/inventory/inventoryActions/inventoryActions.directive.js:126
 #: js/components/actions/actionsRule/actionsRule.html:1
 #: js/components/system/systemSummaryTable/systemSummaryTable.html:1
 msgid "Type"
@@ -2800,10 +2795,6 @@ msgstr "アラートはありません"
 msgid "You have no announcements"
 msgstr "お知らせはありません"
 
-#: js/components/announcements/announcementsScroll/announcementsScroll.html:1
-msgid "You have no announcements."
-msgstr "通知はありません。"
-
 #: js/components/actions/severitySummary/severitySummary.html:1
 msgid "You have no issues of critical severity"
 msgstr "重大な問題はありません"
@@ -2813,7 +2804,6 @@ msgid "You have no issues of info severity"
 msgstr "重大な情報の問題はありません"
 
 #: js/components/actions/severitySummary/severitySummary.html:1
-#: js/components/actions/systemSummary/systemSummary.html:1
 msgid "You have no issues of warning severity"
 msgstr "重大な警告の問題はありません"
 
@@ -2965,6 +2955,13 @@ msgstr "{{data.value}}"
 msgid ""
 "{{maxFreeSystems - systemCount}} more Insights entitlements available&nbsp;"
 msgstr "{{maxFreeSystems - systemCount}} Insights エンタイトルメントが利用可能&nbsp;"
+
+#: js/components/actions/systemSummary/systemSummary.html:1
+msgid ""
+"{{stats.systems.affected}} out of {{stats.systems.total}} systems have "
+"critical actions"
+msgstr ""
+"{{stats.systems.total}} システム中 {{stats.systems.affected}} で重大なアクションがあります"
 
 #: js/components/card/systemCard/systemCard.html:1
 #: js/states/inventory/inventory.html:1

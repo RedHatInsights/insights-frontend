@@ -10,26 +10,19 @@ function rhaTelemetryActionsSideNavCtrl(
         $scope,
         $state,
         $stateParams,
-        Stats,
+        RhaTelemetryActionsService,
         Categories,
-        FilterService) {
-
-    $scope.product = FilterService.getSelectedProduct();
-    if ($scope.product === 'all') {
-        $scope.product = undefined;
-    }
-
-    $scope.categoryCounts = {};
-    Stats.getRules({
-        product: $scope.product
-    }).then(function (res) {
-        $scope.categoryCounts = res.data;
-    });
+        ActionsBreadcrumbs) {
 
     $scope.categories = Categories;
+    $scope.getCounts  = RhaTelemetryActionsService.getCounts;
     $scope.actions    = false;
     $scope.isActive   = function (category) {
-        return ($scope.actions && $stateParams.id === category);
+        return ($scope.actions && $stateParams.category === category);
+    };
+
+    $scope.onActionsClick = function () {
+        ActionsBreadcrumbs.clear();
     };
 
     $scope.$watch(function () {

@@ -2,7 +2,6 @@ card(expandable='true', init-collapsed='initCollapsed', on-toggle='resetShowMore
   card-header
     h3.title
       severity-icon.rule-margin(severity="report.rule.severity")
-      ansible-icon.inline-right(value='report.rule.ansible')
       | {{ report.rule.category }} #{'>'} {{ report.rule.description }}
   card-content.content.ng-animate-enabled
     .row

@@ -53,7 +53,7 @@ function TopicAdminCtrl($scope, SweetAlert, Topic, $state, Utils) {
     $scope.delete = function (topic) {
         createAlert(
             'Are you sure?',
-            'Topic will be lost.',
+            'You can re-create this topic later by promoting ' + topic.tag + ' again.',
             'Yes',
             function () {
                 Topic.remove(topic.id).then(function () {

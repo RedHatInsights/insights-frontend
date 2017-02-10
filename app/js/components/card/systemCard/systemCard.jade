@@ -64,10 +64,8 @@
         .col-sm-12
           .system-card-actions
             .btn.btn-outline.btn-xs(translate,
-                ng-if='config.isPlannerEnabled',
                 ng-disabled='!system.report_count',
-                ng-click='showMaintenanceModal(system)')
-              | Add to plan
-            .btn.btn-outline.btn-xs(translate, ng-disabled='!system.report_count || !tryPlaybook()', ng-click='openPlaybookModal()') Create playbook
+                ng-click='showMaintenanceModal(system)',
+                ng-if='config.isPlannerEnabled') Add to plan
             .btn.btn-outline.btn-xs(translate, ng-disabled='!selectable', ng-click='unregister()') Unregister
     card-footer

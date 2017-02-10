@@ -172,7 +172,6 @@
                       repeat="item in (getAvailableRules() | filter: {_displayAs: $select.search}) | orderBy:['-severityNum', '-report_count'] track by item.rule_id")
                       span.icon-inline
                         severity-icon(severity="item.severity")
-                      ansible-icon.inline-right(value='item.ansible')
                       | {{item._displayAs}} ({{item.report_count}})
                   .available-actions.table-responsive
                     maintenance-table-systems(
@@ -187,7 +186,6 @@
               .header.bordered(ng-init='tableEdit = false')
                 span.icon-inline
                   severity-icon(severity="rule.severity")
-                ansible-icon.inline-right(value='rule.ansible')
                 strong {{rule.description}}
                 span.pull-right(ng-hide='isReadOnly()')
                   a(ng-hide='tableEdit', ng-click='tableEdit = true')

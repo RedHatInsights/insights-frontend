@@ -1,10 +1,12 @@
 li
-  a(ui-sref='app.actions',
+  a(ng-click='onActionsClick()',
+    ui-sref='app.actions({category: null})',
     ng-class='{current: includes(states.actions, state.current.name)}'
     translate) Actions
 
-  ul(ng-show="actions")
+  // disable sub categories now that we have topics
+  ul(ng-show="actions", ng-if="false")
     li
-      a(ui-sref='app.topic({id: c, product: product})', ng-class="{current: isActive(c)}", ng-repeat="c in categories", ng-if="categoryCounts[c]")
-        span(translate, translate-n="categoryCounts[c]", translate-plural="{{c | translate | titlecase}} ({{$count}})")
+      a(ui-sref='app.actions({category: c})', ng-class="{current: isActive(c)}", ng-repeat="c in categories", ng-if="getCounts()[c]")
+        span(translate, translate-n="getCounts()[c]", translate-plural="{{c | translate | titlecase}} ({{$count}})")
           | {{c | translate | titlecase}} (1)
