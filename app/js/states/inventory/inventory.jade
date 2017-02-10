@@ -22,7 +22,7 @@ section.inventory
                     type="checkbox",
                     ng-indeterminate="checkboxes.indeterminate",
                     ng-model='checkboxes.checked',
-                    ng-change='checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
+                    ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
 
                 th.sortable.nowrap(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')")
                   .sort-indicator(translate) System Name

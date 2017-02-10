@@ -10,8 +10,10 @@
               i.fa.category-icon.inline-right(ng-class="plugin.rule.category.toLowerCase()")
               span.title {{ ::plugin.rule.category }} #{'>'} {{ ::plugin.rule.description }}
               .count(translate, translate-n='plugin.hitCount', translate-plural="{{$count}} Systems") 1 System
-              severity-icon.pull-right(severity="plugin.rule.severity", label='true')
-              span.label.label-default.pull-right(ng-class="{'rule-inactive': plugin.acked, 'rule-active': !plugin.acked}", translate) INACTIVE
+              .pull-right
+                span.label.label-default.inline-right.rule-inactive(ng-if='plugin.acked', translate) INACTIVE
+                ansible-icon(value='rule.ansible')
+                severity-icon.inline-left(severity="plugin.rule.severity", label='true')
             card-content
               .gray(ng-bind-html='::plugin.rule.summary_html', target-blank='')
             .footer.text-right-sm
@@ -27,18 +29,24 @@
           tr
             th.sortable(ng-class="sorter.getSortClass('description')", ng-click="sorter.sort('description')")
               .sort-indicator(translate) Rule
-            th.text-center.sortable(ng-class="sorter.getSortClass('severity')", ng-click="sorter.sort('severity')")
+            th.text-center.sortable(ng-class="sorter.getSortClass('severityNum')", ng-click="sorter.sort('severityNum')")
               .sort-indicator(translate) Sev
             th.text-center.sortable(ng-class="sorter.getSortClass('hitCount')", ng-click="sorter.sort('hitCount')")
               .sort-indicator(translate) Systems
+            th.text-center.sortable(ng-class="sorter.getSortClass('ansible')", ng-click="sorter.sort('ansible')")
+              .sort-indicator(translate) Ansible
         tbody
           tr.legend-item(ng-repeat="rule in topic.rules | filter:filterZero | orderBy: sorter.predicate : sorter.reverse track by rule.rule_id", ng-class="{acked: rule.acked}")
-            td(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
-              i.fa.category-icon(ng-class="plugin.rule.category.toLowerCase()")
-              span {{rule.description | translate}}
+            td(ng-click='!rule.acked && viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
+              a(ng-if='!rule.acked') {{rule.description}}
+              div(ng-if='rule.acked')
+                | {{rule.description}}
+                span.label.label-default.inline-left.rule-inactive(translate) INACTIVE
             td.filter-on.text-center(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
               severity-icon(severity='rule.severity')
             td.text-center(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)') {{ rule.hitCount }}
+            td.text-center
+              ansible-icon(value='rule.ansible')
 
   .row.row-short(ng-show='!showRulesWithNoHits && hiddenCount')
     .col-sm-12.text-center

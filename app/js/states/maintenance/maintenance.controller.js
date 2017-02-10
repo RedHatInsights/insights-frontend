@@ -290,7 +290,7 @@ function MaintenanceCtrl(
     }
 
     $scope.$watchCollection('plans.all', init);
-    $scope.loadPlans().then(function () {
+    $scope.loadPlans(true).then(function () {
         if ($stateParams.newPlan) {
             $scope.quickAdd();
         }

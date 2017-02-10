@@ -35,7 +35,9 @@
     .col-sm-6.text-center-sm
       h3.system-count(translate, translate-n='getTotal()', translate-plural='{{$count}} Systems')
         | 1 System
-      span(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{checkboxes.totalChecked}} Selected)
+      span(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{numberOfSelected()}} Selected)
+      br
+      a(ng-if='allSelected && !reallyAllSelected && !allSystemsShown()' ng-click='reallySelectAll()') &nbsp; Select all {{totalSystems()}} systems
     .col-sm-3.text-right-sm(ng-show='listType() === listTypes.card')
       // expand-all-button.expand-all-btn
       .btn-group.sort-button-group.insights-dropdown(
