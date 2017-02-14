@@ -1,5 +1,7 @@
 node {
   stage('prep') {
+    git 'git@github.com:ansible/insights-frontend.git'
+    git 'https://gitlab.cee.redhat.com/FlipModeSquad/scripts.git'
     sh 'ls -lha .'
     sh './build_scripts/prep.sh'
   }
