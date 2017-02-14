@@ -1,16 +1,22 @@
 node {
-  stage 'prep'
-  sh './build_scripts/prep.sh'
+  stage 'prep' {
+    sh 'ls -lha .'
+    sh './build_scripts/prep.sh'
+  }
 
-  stage 'lint'
-  gulp lint
+  stage 'lint' {
+    sh 'gulp lint'
+  }
 
-  stage 'test'
-  gulp test
+  stage 'test' {
+    sh 'gulp test'
+  }
 
-  stage 'build'
-  sh './build_scripts/build.sh'
+  stage 'build' {
+    sh './build_scripts/build.sh'
+  }
 
-  stage 'deploy'
-  sh 'echo not yet'
+  stage 'deploy' {
+    sh 'echo not yet'
+  }
 }
