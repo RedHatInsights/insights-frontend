@@ -1,7 +1,7 @@
 node {
   stage('prep') {
     git 'git@github.com:ansible/insights-frontend.git'
-    git 'https://gitlab.cee.redhat.com/FlipModeSquad/scripts.git'
+    // git 'https://gitlab.cee.redhat.com/FlipModeSquad/scripts.git'
     sh 'echo $PWD'
     sh 'find /home/jenkins'
     sh './build_scripts/prep.sh'
