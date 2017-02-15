@@ -61,5 +61,3 @@ Make sure you submit a merge request for master first. There may be cases where 
 5. Create a [new pull request](http://labs-git.usersys.redhat.com/labs/insights/merge_requests/new). Use your feature branch as the source branch and `labs/insights, stable-X.Y` as the target branch. Assign the merge request to someone for review.
 
 When submitting a trivial change (e.g. a simple typo fix) that applies cleanly to both master and stable-X.Y branches you can skips the steps described in this section. Instead, only send a merge request against the master branch (as described in "Contributing your changes to master (/insightsbeta)" section). In addition, use merge request label "stable" on the merge request. The label indicates to the reviewer that besides a merge to the master branch, they should also cherry-pick the change to the stable-X.Y branch. Use this shortcut only for simple changes after you verified that the change applies cleanly to both branches. Otherwise, the reviewer will likely reject your merge request.
-
-
