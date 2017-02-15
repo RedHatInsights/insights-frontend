@@ -1,7 +1,8 @@
 node {
 
   stage('clone') {
-    git 'git@github.com:ansible/insights-frontend.git'
+    checkout scm
+    // git 'git@github.com:ansible/insights-frontend.git'
     BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
     echo BRANCH
   }
