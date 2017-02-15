@@ -5,6 +5,7 @@ node {
     // git 'git@github.com:ansible/insights-frontend.git'
     BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
     echo BRANCH
+    echo env.BRANCH_NAME
   }
 
   if (BRANCH == 'master' || BRANCH == 'stable-4.6' || BRANCH == 'production-stable' || BRANCH == 'production-beta') {
