@@ -34,6 +34,7 @@
             .nick(ng-if="plan.name.length")
               strong(translate) Alias:&nbsp;
               span(ng-if="plan.name.length", ng-dblclick='editBasic.toggle()') &nbsp;{{plan.name}}
+            p.red(ng-if="error") {{error}}
           .date-time.editable(ng-if='plan.start')
             .group
               i.fa.fa-clock-o
@@ -293,3 +294,7 @@
         a.btn.btn-sm.btn-open-blue.action.pull-right(translate, ng-click='exportPlan(plan.maintenance_id)')
           i.fa.fa-download.inline-right
           span(translate) Export CSV
+        a.btn.btn-sm.btn-open-blue.action.pull-right(translate, ng-click='generatePlaybook()', ng-disabled='!ansibleSupport', ng-if='user.is_internal')
+          i.svg.ansible-icon.inline-right
+            img(src='images/l_ansible-blue.svg')
+          span(translate) Generate Playbook

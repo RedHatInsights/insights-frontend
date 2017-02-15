@@ -46,12 +46,6 @@ section
           ul.dropdown-menu
             li(ng-if='config.isPlannerEnabled',)
               a(ng-click='addToPlan()', translate) Add to plan
-            li(
-              ng-if='ruleHasPlaybook()',
-              tooltip='{{unregisterButtonTooltip}}')
-              a.pointer-events-auto(
-                ng-click='openPlaybookModal()',
-                translate) Create Playbook
 
       .col-sm-6
         list-type.text-right-sm

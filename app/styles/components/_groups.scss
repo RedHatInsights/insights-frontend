@@ -1,5 +1,23 @@
 $group-container-color: $gray-light;
 
+.group {
+  .group-title-table {
+    table {
+      td {
+        line-height: 1;
+      }
+      td.black {
+        background: $gray-dark;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.group + .group {
+  @include rem('margin-top', $global-margin);
+}
+
 .group-list + .group-list {
 	@include rem('margin-top', $global-margin);
 	@include media-query (md) { margin-top: 0; }

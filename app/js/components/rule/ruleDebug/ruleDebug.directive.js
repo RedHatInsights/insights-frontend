@@ -85,13 +85,9 @@ function RuleDebugCtrl(
 
     $scope.buildPreview();
 
-    // TODO: this should not be needed here!
-    if (!SystemsService.getSystemTypes().length) {
-        System.getSystemTypes().then(function (res) {
-            $scope.systemTypes = res.data;
-            SystemsService.setSystemTypes(res.data);
-        });
-    }
+    SystemsService.populateSystemTypes(false).then(function () {
+        $scope.systemTypes = SystemsService.getSystemTypes();
+    });
 
     // TODO: workaround for https://trello.com/c/Ps2lXYGr/21
     function readSystem (r) {

@@ -27,20 +27,6 @@ function systemCardCtrl(
     $scope.showMaintenanceModal = MaintenanceService.showMaintenanceModal;
     $scope.config = InsightsConfig;
 
-    $scope.tryPlaybook = function tryPlaybook() {
-        // this function looks at an incoming rule and tells the view wether or not
-        // to light up the create playbook button. This should also work on inventory
-        // but this impl does not cover that.
-
-        if ($scope.rule && $scope.rule.rule_id) {
-            // we know we were sent here from an actionsRule page
-            return AnsibleService.checkPlaybook($scope.rule.rule_id);
-        }
-
-        // TODO implement feature for inventory
-        return true;
-    };
-
     $scope.systemHostnameHover = function ($event) {
         var element = $event.relatedTarget;
         if (!$scope.hostnameTitle && element.offsetWidth < element.scrollWidth) {
@@ -144,30 +130,6 @@ function systemCardCtrl(
 
     $scope.showActions = function () {
         InventoryService.showSystemModal($scope.system);
-    };
-
-    $scope.openPlaybookModal = function () {
-        var selectedSystem = $scope.system;
-        var selectedSystems = [$scope.system];
-        $modal.open({
-            templateUrl: 'js/components/playbook/playbookModal.html',
-            windowClass: 'modal-playbook modal-wizard ng-animate-enabled',
-            backdropClass: 'system-backdrop ng-animate-enabled',
-            controller: 'PlaybookModalCtrl',
-            resolve: {
-                system: function () {
-                    return selectedSystem;
-                },
-
-                systems: function () {
-                    return selectedSystems;
-                },
-
-                rule: function () {
-                    return $scope.rule;
-                }
-            }
-        });
     };
 
     $scope.unregister = function () {

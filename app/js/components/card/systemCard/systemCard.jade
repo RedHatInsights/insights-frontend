@@ -68,6 +68,5 @@
                 ng-disabled='!system.report_count',
                 ng-click='showMaintenanceModal(system)')
               | Add to plan
-            .btn.btn-outline.btn-xs(translate, ng-disabled='!system.report_count || !tryPlaybook()', ng-click='openPlaybookModal()') Create playbook
             .btn.btn-outline.btn-xs(translate, ng-disabled='!selectable', ng-click='unregister()') Unregister
     card-footer

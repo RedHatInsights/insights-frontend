@@ -152,6 +152,15 @@ $expand-bar-bg: #f2f5f7;
             .btn + .btn {
                 @include rem('margin-left', 10px);
             }
+
+            i.svg.ansible-icon {
+                width: auto;
+                display: inline-block;
+
+                & + span {
+                    margin: 0;
+                }
+            }
         }
 
         .editable {

@@ -18,7 +18,6 @@ function ActionsRuleCtrl(
         $q,
         RhaTelemetryActionsService,
         ActionsBreadcrumbs,
-        AnsibleService,
         InsightsConfig,
         ListTypeService,
         User,
@@ -69,36 +68,6 @@ function ActionsRuleCtrl(
 
         return disable;
     };
-
-    $scope.ruleHasPlaybook = function () {
-        if ($scope.ruleDetails) {
-            return AnsibleService.checkPlaybook($scope.ruleDetails.rule_id);
-        }
-
-        return false;
-    };
-
-    $scope.openPlaybookModal = rejectIfNoSystemSelected(function () {
-        $modal.open({
-            templateUrl: 'js/components/playbook/playbookModal.html',
-            windowClass: 'modal-playbook modal-wizard ng-animate-enabled',
-            backdropClass: 'system-backdrop ng-animate-enabled',
-            controller: 'PlaybookModalCtrl',
-            resolve: {
-                system: function () {
-                    return null;
-                },
-
-                systems: function () {
-                    return $scope.checkboxes.getSelected($scope.ruleSystems);
-                },
-
-                rule: function () {
-                    return RhaTelemetryActionsService.getRuleDetails();
-                }
-            }
-        });
-    });
 
     function rejectIfNoSystemSelected (fn) {
         return function () {
@@ -226,10 +195,7 @@ function ActionsRuleCtrl(
                 RhaTelemetryActionsService.setIsScrolling(false);
             });
 
-        let systemTypesPromise =
-            System.getSystemTypes().then(function (systemTypes) {
-                SystemsService.setSystemTypes(systemTypes.data);
-            });
+        let systemTypesPromise = SystemsService.populateSystemTypes(false);
 
         let topicBreadCrumbPromise =
             Topic.get($stateParams.category).success(function (topic) {
@@ -243,8 +209,6 @@ function ActionsRuleCtrl(
             });
 
         let productSpecific = System.getProductSpecificData();
-
-        AnsibleService.initAnswers();
 
         $q.all([populateDetailsPromise, systemTypesPromise, topicBreadCrumbPromise,
             productSpecific])

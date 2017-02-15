@@ -2,6 +2,7 @@
 
 var apiModule = require('./');
 var map = require('lodash/collection/map');
+const URI = require('urijs');
 
 /**
  * @ngInject
@@ -111,6 +112,17 @@ function Maintenance(
             '?accept=csv' +
             AccountService.current('&');
         $window.location.assign(url);
+    };
+
+    api.generatePlaybook = function (planId, data) {
+        data = data || {};
+        const v3root = InsightsConfig.apiPrefix + 'v3/';
+        const url = URI(v3root);
+        url.segment('maintenance');
+        url.segment(String(planId));
+        url.segment('playbook');
+        url.addSearch(AccountService.queryParam());
+        return $http.post(url.toString(), data);
     };
 
     api.SUGGESTION = Object.freeze({
