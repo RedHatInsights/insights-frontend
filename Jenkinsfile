@@ -1,4 +1,4 @@
-node {
+node('insights-frontend-slave') {
 
   stage('clone') {
     checkout scm
