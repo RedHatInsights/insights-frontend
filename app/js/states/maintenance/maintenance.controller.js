@@ -165,9 +165,8 @@ function MaintenanceCtrl(
     SystemsService) {
 
     $scope.systemTypes = [];
-    System.getSystemTypes().then(function (res) {
-        $scope.systemTypes = res.data;
-        SystemsService.setSystemTypes(res.data); // TODO: this should not be needed here!
+    SystemsService.populateSystemTypes(false).then(function () {
+        $scope.systemTypes = SystemsService.getSystemTypes();
     });
 
     $scope.BasicEditHandler = BasicEditHandler;

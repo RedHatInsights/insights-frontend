@@ -30,9 +30,15 @@
 
 	}
 
-	li + li {
-		@include rem('margin-top', $global-padding);
-	}
+	//li + li {
+	//	@include rem('margin-top', $global-padding);
+	//}
+}
+
+.list-unstyled,
+.modal ul.list-unstyled {
+  @include reset;
+  //padding-left: 0;
 }
 
 .list.list-simple {

@@ -1,130 +1,148 @@
 'use strict';
 
 var servicesModule = require('./');
+const pluck = require('lodash/collection/pluck');
 
 /**
  * @ngInject
  */
-function AnsibleService(Playbooks) {
-
-    var yamlFile = Playbooks.NoRuleSelected.playbook;
-    var yamlFileVariables = Playbooks.NoRuleSelected.playbook_variables;
-    var filename = Playbooks.NoRuleSelected.filename;
+function AnsibleService(SystemsService) {
 
     var ansibleService = {};
+    var plan = null;
 
     ansibleService.questions = [];
 
-    ansibleService.answers = {};
+    ansibleService.resolutions = {};
 
-    ansibleService.initAnswers = function () {
-        ansibleService.answers = {};
+    /**
+     * Initializes the state of AnsibleService if the maintenance_id is unique
+     *   (hasn't already been initialized) or if the user wants to force init
+     */
+    ansibleService.init = function (ambiguousResolutions, maintenancePlan, force) {
+        if (plan === null ||
+            maintenancePlan.maintenance_id !== plan.maintenance_id ||
+            force === true) {
+            plan = maintenancePlan;
+            ansibleService.resolutions = {};
+            ansibleService.questions = [];
+
+            ambiguousResolutions.forEach((resolution) => {
+                resolution.hasAnswer = false;
+                ansibleService.questions.push(resolution);
+            });
+        }
     };
 
     /**
-     * adds a user's answer to the answer set. The question key should correspond
-     * to the variable that is being replaced in the ansible playbook
+     * adds a user's answer to the resolution set
      */
-    ansibleService.saveAnswer = function (questionName, question, answer) {
-        ansibleService.answers[questionName] = {
-            question: question,
-            answer: answer
-        };
+    ansibleService.saveResolution = function (
+        ruleId,
+        systemTypeId,
+        resolution,
+        qIndex,
+        description) {
+
+        ansibleService.resolutions[ruleId + '-' + systemTypeId] =
+            {
+                rule_id: ruleId,
+                system_type_id: systemTypeId,
+                resolution_type: resolution,
+                description: description
+            };
+
+        ansibleService.questions[qIndex].hasAnswer = true;
     };
 
     /**
-     * substitutes variable placeholders with answers from the answers set
+     * Check to see if all questions have been answered
      */
-    function buildYamlFile (systems) {
-        var answer;
-        var variable;
-        var yamlToReturn = setHosts(systems, yamlFile);
-        for (answer in ansibleService.answers) {
-            if (ansibleService.answers.hasOwnProperty(answer)) {
-
-                // replace !-ed variables with false unless the user selected false
-                // in which case we will replace it with true
-                yamlToReturn = yamlToReturn.replace('{{!' + answer + '}}',
-                    (ansibleService.answers[answer].answer.toLowerCase() === 'false'));
-
-                // replace all other variables
-                yamlToReturn = yamlToReturn.replace('{{' + answer + '}}',
-                    ansibleService.answers[answer].answer);
-            }
-        }
-
-        for (variable in yamlFileVariables) {
-            if (yamlFileVariables.hasOwnProperty(variable)) {
-
-                // replace !-ed variables with false unless the user selected false
-                // in which case we will replace it with true
-                yamlToReturn = yamlToReturn.replace('{{!' + variable + '}}',
-                    JSON.stringify(!yamlFileVariables[variable]));
-
-                // replace all other variables
-                yamlToReturn = yamlToReturn.replace('{{' + variable + '}}',
-                    JSON.stringify(yamlFileVariables[variable]));
-            }
-        }
-
-        return yamlToReturn;
-    }
+    ansibleService.hasAllQuestionsAnswered = function () {
+        return ansibleService.questions.length ===
+            Object.keys(ansibleService.resolutions).length;
+    };
 
     /**
-     * replaces {{hosts}} variable in yaml file with the systems selected
+     * Returns the resolution type for the given question.
+     * If one does not exist, return the first option of the questions
+     * resolution options by default
+     *
+     * @return {String} resolution type for the given question
      */
-    function setHosts (systems, playbook) {
-        var selectedSystems = [];
-        systems.forEach(function (value) {
-            selectedSystems.push(value.hostname);
+    ansibleService.getResolutionType = function (question) {
+        let resolution = ansibleService.getResolution(
+            question.rule_id,
+            question.system_type_id);
+
+        if (resolution === undefined) {
+            // set resolution_type to equal first option by default
+            resolution = question.resolutions[0];
+        }
+
+        resolution = resolution.resolution_type;
+
+        return resolution;
+    };
+
+    ansibleService.getResolution = function (rule_id, system_type_id) {
+        return ansibleService.resolutions[rule_id + '-' + system_type_id];
+    };
+
+    /**
+     * Formats the resolutions to fit the api's desired structure
+     */
+    ansibleService.getFormattedResolutions = function () {
+        let formattedResolutions = {ignoreUnsupported: true, resolutions: []};
+        let key;
+        let resolution;
+        for (key in ansibleService.resolutions) {
+            resolution = ansibleService.resolutions[key];
+
+            formattedResolutions.resolutions.push({
+                rule_id: resolution.rule_id,
+                system_type_id: resolution.system_type_id,
+                resolution_type: resolution.resolution_type
+            });
+        }
+
+        return formattedResolutions;
+    };
+
+    /**
+     * Gathers all systems that have actions that will be resolved by the generated
+     * playbook and organizes them by their system_type
+     */
+    ansibleService.getSystemSummary = function () {
+        let systemSummary = {};
+
+        // gets the list of rules that have an ansible_resolution for this plan
+        let ruleList = plan.rules.filter((rule) => {
+            return pluck(ansibleService.questions, 'rule_id')
+                   .includes(rule.rule_id);
         });
 
-        return playbook.replace('{{hosts}}', '[' + selectedSystems.toString() + ']');
-    }
-
-    /**
-     * downloads the playbook
-     */
-    ansibleService.downloadPlaybook = function (systems) {
-        var element = document.createElement('a');
-        var href = 'data:' + 'text/plain;charset=utf-8,';
-        var event = new MouseEvent('click', {
-            canBubble: true,
-            cancelable: true,
-            view: window
+        // Creates a hashmap of {product_code: {system_type<Object>, systems<Array>}}:
+        // 1) Gets each system from the actions of the rules in ruleList
+        // 2) Creates a new hask key using the system_type.product_code if doesn't exist
+        // 3) Adds the system_type object to the object of this hash
+        // 4) Adds the system object to the object of this hash
+        ruleList.forEach((rule) => {
+            let systemType = null;
+            rule.actions.forEach((action) => {
+                systemType = SystemsService.getSystemType(action.system.system_type_id);
+                if (systemType.product_code in systemSummary) {
+                    systemSummary[systemType.product_code].systems.push(action.system);
+                } else {
+                    systemSummary[systemType.product_code] = {
+                        system_type: systemType,
+                        systems: [action.system]
+                    };
+                }
+            });
         });
-        var playbook = buildYamlFile(systems);
-        href +=  encodeURIComponent(playbook);
 
-        element.setAttribute('href', href);
-        element.setAttribute('download', filename);
-        element.dispatchEvent(event);
-    };
-
-    ansibleService.checkPlaybook = function (rule_id) {
-        return rule_id in Playbooks;
-    };
-
-    /**
-     * sets the playbook to use from the playbooks constants
-     */
-    ansibleService.setPlaybook = function (rule_id) {
-        var playbook_index = rule_id;
-
-        if (!playbook_index) {
-            playbook_index = 'NoRuleInScope';
-        }
-
-        if (!(playbook_index in Playbooks)) {
-            playbook_index = 'NoPlaybookForRule';
-        }
-
-        yamlFile = Playbooks[playbook_index].playbook;
-        yamlFileVariables = Playbooks[playbook_index].playbook_variables;
-        filename = Playbooks[playbook_index].filename;
-
-        ansibleService.questions = Playbooks[playbook_index].questions;
-        ansibleService.initAnswers();
+        return systemSummary;
     };
 
     return ansibleService;

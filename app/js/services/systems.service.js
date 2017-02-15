@@ -25,8 +25,23 @@ function SystemsService($filter,
         '<code>redhat-access-insights --register</code> ' +
         'must be run from each unregistered system.</p>';
 
-    systemsService.setSystemTypes = function (systemTypes) {
-        _systemTypes = systemTypes;
+    /**
+     * Populates _systemTypes if _systemTypes is empty.
+     * This method also provides a way to force populate for refreshing the list.
+     *
+     * @returns {Promise}
+     */
+    systemsService.populateSystemTypes = function (doForcePopulate) {
+        if (_systemTypes.length > 0 && !doForcePopulate) {
+            // system types are already populated. Return a resolved promise
+            return Promise.resolve();
+        }
+        else {
+            return System.getSystemTypes()
+            .then((response) => {
+                _systemTypes = response.data;
+            });
+        }
     };
 
     systemsService.getSystemTypes = function () {
