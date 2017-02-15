@@ -22,14 +22,15 @@ node('insights-frontend-slave') {
     sh 'gulp test'
   }
 
-  stage('build') {
-    sh 'bash ~/scripts/scripts/build.sh'
-  }
-
   if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'stable-4.6' || env.BRANCH_NAME == 'production-stable' || env.BRANCH_NAME == 'production-beta') {
+    stage('build') {
+      sh 'bash ~/scripts/scripts/build.sh'
+    }
+    stage('deploy_prep') {
+      sh 'bash ~/scripts/scripts/deploy_prep.sh'
+    }
     stage('deploy') {
       sh 'bash ~/scripts/scripts/deploy.sh'
     }
   }
-
 }
