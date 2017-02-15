@@ -19,7 +19,7 @@ function topicRuleListCtrl ($filter,
         order);
 
     $scope.filterZero = function filterZero(rule) {
-        if ($scope.showRulesWithNoHits || rule.hitCount > 0) {
+        if ($scope.showRulesWithNoHits || (rule.hitCount > 0 && !rule.acked)) {
             return true;
         }
 

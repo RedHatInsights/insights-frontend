@@ -12,7 +12,9 @@ function alertsCtrl($rootScope,
                     RhaTelemetryActionsService,
                     System,
                     TopbarAlertsService,
-                    MaintenanceService) {
+                    MaintenanceService,
+                    FilterService,
+                    InventoryService) {
 
     $scope.service = TopbarAlertsService;
 
@@ -52,6 +54,13 @@ function alertsCtrl($rootScope,
     }
 
     function goToInventory () {
+        FilterService.setOnline(false);
+        FilterService.setOffline(true);
+        InventoryService.setSort({
+            field: 'last_check_in',
+            direction: 'DESC'
+        });
+
         $state.go('app.inventory', {
             offline: true
         });
