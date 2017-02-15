@@ -17,6 +17,6 @@ node {
   }
 
   stage('deploy') {
-    sh 'echo not yet'
+    sh 'bash ./build_scripts/deploy.sh'
   }
 }
