@@ -47,7 +47,8 @@ gulp.task('release-tag', function () {
 
 gulp.task('release-commit', function () {
     const version = priv.getVersion();
-    git.commit(`Release ${version}`, '--all');
+    gulp.src(['./package.json', './bower.json'])
+        .pipe(git.commit(`Release ${version}`));
 });
 
 gulp.task('release', ['releasepatch']);
