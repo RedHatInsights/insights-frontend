@@ -47,7 +47,7 @@ See the next section for instructions on how to do that.
 1. Fork the master branch into a new feature branch (name the branch features/XXXX)
 2. Add and commit your changes.
 3. Squash your commits to achieve reasonable level of granularity
-4. Push your branch (git push origin INSIGHTS-XXXX)
+4. Push your branch (git push origin features/XXXX)
 5. Create a [new pull request](https://github.com/ansible/insights-frontend/compare?expand=1). Use your feature branch as the source branch and `master` as the target branch. Assign the merge request to someone for review.
 
 **Contributing your changes to stable-X.Y (/insights)**
