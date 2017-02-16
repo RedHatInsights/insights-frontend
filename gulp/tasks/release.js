@@ -5,6 +5,7 @@ const config = require('../config');
 const gulp = require('gulp');
 const runSequence = require('run-sequence');
 const git = require('gulp-git');
+const fs = require('fs');
 
 function buildAndRelease(cb, bump) {
     git.status({args: '--porcelain'}, function (err, stdout) {
@@ -30,9 +31,17 @@ We want the release commits to not include any additional changes.
         cb = cb || function () {};
         global.isProd = true;
         global.isRelease = true;
-        runSequence(bump, cb);
+        runSequence(bump, 'release-tag', 'release-commit', cb);
     });
 }
+
+gulp.task('release-tag', function () {
+    const json = JSON.parse(fs.readFileSync('./package.json'));
+    git.tag(json.version, `Release ${json.version}`);
+});
+
+gulp.task('release-commit', function () {
+});
 
 gulp.task('release', ['releasepatch']);
 
