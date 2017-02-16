@@ -11,11 +11,20 @@ function buildAndRelease(cb, bump) {
         if (err) throw err;
 
         if (stdout !== '') {
-            throw new Error(`Refusing to do a gulp release!
+            let modified = false;
+            stdout.split('\n').forEach(function (line) {
+                if (line.match(/[ ]*M/)) {
+                    modified = true;
+                }
+            });
+
+            if (modified) {
+                throw new Error(`Refusing to do a gulp release!
 This release task does a Git commit and tag.
 Please stash or commit everything before you continue.
 We want the release commits to not include any additional changes.
 `);
+            }
         }
 
         cb = cb || function () {};
