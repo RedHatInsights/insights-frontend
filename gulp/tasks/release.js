@@ -1,26 +1,55 @@
+/*global require, global*/
 'use strict';
 
-var config = require('../config');
-var gulp = require('gulp');
-var runSequence = require('run-sequence');
+const config = require('../config');
+const gulp = require('gulp');
+const runSequence = require('run-sequence');
+const git = require('gulp-git');
+const fs = require('fs');
+const priv = {};
+
+priv.getVersion = function getVersion () {
+    return JSON.parse(fs.readFileSync('./package.json')).version;
+};
 
 function buildAndRelease(cb, bump) {
-    cb = cb || function () {};
+    git.status({args: '--porcelain'}, function (err, stdout) {
+        if (err) throw err;
 
-    global.isProd = true;
-    global.isRelease = true;
-    runSequence(
-        'kill-dev',
-        'clean-all',
-        'styles',
-        'images',
-        'fonts',
-        'views',
-        'browserify',
-        bump,
-        'copyrelease',
-        cb);
+        if (stdout !== '') {
+            let modified = false;
+            stdout.split('\n').forEach(function (line) {
+                if (line.match(/[ ]*M/)) {
+                    modified = true;
+                }
+            });
+
+            if (modified) {
+                throw new Error(`Refusing to do a gulp release!
+This release task does a Git commit and tag.
+Please stash or commit everything before you continue.
+We want the release commits to not include any additional changes.
+`);
+            }
+        }
+
+        cb = cb || function () {};
+        global.isProd = true;
+        global.isRelease = true;
+        runSequence(bump, 'release-tag', 'release-commit', cb);
+    });
 }
+
+gulp.task('release-tag', function () {
+    const version = priv.getVersion();
+    git.tag(version, `Release ${version}`);
+});
+
+gulp.task('release-commit', function () {
+    const version = priv.getVersion();
+    gulp.src(['./package.json', './bower.json'])
+        .pipe(git.commit(`Release ${version}`));
+});
 
 gulp.task('release', ['releasepatch']);
 
