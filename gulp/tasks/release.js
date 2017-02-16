@@ -9,11 +9,7 @@ function buildAndRelease(cb, bump) {
     cb = cb || function () {};
     global.isProd = true;
     global.isRelease = true;
-    runSequence(
-        'lint',
-        'test',
-        bump,
-        cb);
+    runSequence(bump, cb);
 }
 
 gulp.task('release', ['releasepatch']);
