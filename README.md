@@ -48,17 +48,17 @@ See the next section for instructions on how to do that.
 2. Add and commit your changes.
 3. Squash your commits to achieve reasonable level of granularity
 4. Push your branch (git push origin INSIGHTS-XXXX)
-5. Create a [new pull request](http://labs-git.usersys.redhat.com/labs/insights/merge_requests/new). Use your feature branch as the source branch and `labs/insights, master` as the target branch. Assign the merge request to someone for review.
+5. Create a [new pull request](https://github.com/ansible/insights-frontend/compare?expand=1). Use your feature branch as the source branch and `master` as the target branch. Assign the merge request to someone for review.
 
 **Contributing your changes to stable-X.Y (/insights)**
 
 Make sure you submit a merge request for master first. There may be cases where a merge request for master is needed but these are rare.
 
-1. Fork the stable-X.Y branch into a new feature branch. Use a `-stable` suffix to distinguish this branch from the one for master. Name the branch INSIGHTS-XXXX-stable if this change is tracked by a JIRA issue.
+1. Fork the stable-X.Y branch into a new feature branch. Use a `-stable` suffix to distinguish this branch from the one for master. Name the branch features/XXXX-stable.
 2. Add and commit your changes. You can use `git cherry-pick` to take specific commits from another branch and apply them.
 3. Squash your commits to achieve reasonable level of granularity
-4. Push your branch (git push origin INSIGHTS-XXXX-stable)
-5. Create a [new pull request](http://labs-git.usersys.redhat.com/labs/insights/merge_requests/new). Use your feature branch as the source branch and `labs/insights, stable-X.Y` as the target branch. Assign the merge request to someone for review.
+4. Push your branch (git push origin features/XXXX-stable)
+5. Create a [new pull request](https://github.com/ansible/insights-frontend/compare?expand=1). Use your feature branch as the source branch and `stable-X.Y` as the target branch. Assign the merge request to someone for review.
 
 When submitting a trivial change (e.g. a simple typo fix) that applies cleanly to both master and stable-X.Y branches you can skips the steps described in this section. Instead, only send a merge request against the master branch (as described in "Contributing your changes to master (/insightsbeta)" section). In addition, use merge request label "stable" on the merge request. The label indicates to the reviewer that besides a merge to the master branch, they should also cherry-pick the change to the stable-X.Y branch. Use this shortcut only for simple changes after you verified that the change applies cleanly to both branches. Otherwise, the reviewer will likely reject your merge request.
 
