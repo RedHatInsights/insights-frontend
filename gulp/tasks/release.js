@@ -1,24 +1,18 @@
+/*global require, global*/
 'use strict';
 
-var config = require('../config');
-var gulp = require('gulp');
-var runSequence = require('run-sequence');
+const config = require('../config');
+const gulp = require('gulp');
+const runSequence = require('run-sequence');
 
 function buildAndRelease(cb, bump) {
     cb = cb || function () {};
-
     global.isProd = true;
     global.isRelease = true;
     runSequence(
-        'kill-dev',
-        'clean-all',
-        'styles',
-        'images',
-        'fonts',
-        'views',
-        'browserify',
+        'lint',
+        'test',
         bump,
-        'copyrelease',
         cb);
 }
 
