@@ -44,7 +44,7 @@ Every change should go to master `(/insightsbeta)`.
 Optionally, you may also want to apply your changes to stable-X.Y `(/insights)`.
 See the next section for instructions on how to do that.
 
-1. Fork the master branch into a new feature branch (name the branch INSIGHTS-XXXX if this change is tracked by a JIRA issue)
+1. Fork the master branch into a new feature branch (name the branch features/XXXX)
 2. Add and commit your changes.
 3. Squash your commits to achieve reasonable level of granularity
 4. Push your branch (git push origin INSIGHTS-XXXX)
