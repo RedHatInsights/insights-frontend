@@ -10,12 +10,16 @@ function severityIconCtrl($scope, gettextCatalog) {
         if (severity === 'INFO') {
             $scope.iconClass = 'i-info fa-info-circle';
             $scope.labelClass = 'i-info';
-            $scope.labelValue = gettextCatalog.getString('Info');
+            $scope.labelValue = gettextCatalog.getString('Low');
         } else if (severity === 'WARN') {
             $scope.iconClass = 'i-warning fa-warning';
             $scope.labelClass = 'i-warning';
-            $scope.labelValue = gettextCatalog.getString('Warning');
+            $scope.labelValue = gettextCatalog.getString('Medium');
         } else if (severity === 'ERROR') {
+            $scope.iconClass = 'i-error fa-times-circle';
+            $scope.labelClass = 'i-error';
+            $scope.labelValue = gettextCatalog.getString('High');
+        } else if (severity === 'CRITICAL') {
             $scope.iconClass = 'i-error fa-times-circle';
             $scope.labelClass = 'i-error';
             $scope.labelValue = gettextCatalog.getString('Critical');
