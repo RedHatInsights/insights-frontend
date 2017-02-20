@@ -58,3 +58,6 @@ static/
 app/fonts/
 app/images/
 
+static
+app/fonts
+app/images
