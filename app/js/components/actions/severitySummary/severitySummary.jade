@@ -1,7 +1,7 @@
 .widget.severity-summary
   ul
     li
-      .pointer(ng-if="ruleCount.info || !loaded", ui-sref="app.topic({id: 'info'})")
+      .pointer(ng-if="ruleCount.info || !loaded", ui-sref="app.topic({id: 'low'})")
         .metrics
           strong {{'Low' | translate}}
           span.num(ng-if="(ruleCount.info / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.info / ruleCount.total || 0 | number:1}}%)
@@ -13,7 +13,7 @@
         span(translate) You have no issues of low severity
 
     li
-      .pointer(ng-if="ruleCount.warn || !loaded", ui-sref="app.topic({id: 'warning'})")
+      .pointer(ng-if="ruleCount.warn || !loaded", ui-sref="app.topic({id: 'medium'})")
         .metrics
           strong {{'Medium' | translate}}
           span.num(ng-if="(ruleCount.warn / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.warn / ruleCount.total || 0 | number:1}}%)
@@ -25,7 +25,7 @@
         span(translate) You have no issues of medium severity
 
     li
-      .pointer(ng-if="ruleCount.error || !loaded", ui-sref="app.topic({id: 'critical'})")
+      .pointer(ng-if="ruleCount.error || !loaded", ui-sref="app.topic({id: 'high'})")
         .metrics
           strong {{'High' | translate}}
           span.num(ng-if="(ruleCount.error / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.error / ruleCount.total || 0 | number:1}}%)
