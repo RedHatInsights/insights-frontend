@@ -2,7 +2,7 @@
 'use strict';
 
 const componentsModule = require('../../');
-const findWhere = require('lodash/collection/findWhere');
+const find = require('lodash/collection/find');
 const get = require('lodash/object/get');
 
 /**
@@ -34,7 +34,7 @@ function ActionsRuleCtrl(
         MaintenanceService,
         Topic) {
 
-    let params = $state.params;
+    //let params = $state.params;
     let category = $stateParams.category;
     let priv = {};
     $scope.allSystems = [];
@@ -119,9 +119,11 @@ function ActionsRuleCtrl(
         }
     };
 
+    /* Temporarily disabled. Should be fixed as part of https://trello.com/c/CFOHQSd1/135
     $state.transitionTo(
         'app.actions-rule',
         FilterService.updateParams(params), { notify: false });
+    */
 
     $scope.$on('group:change', getData);
     $scope.$on('filterService:doFilter', function () {
@@ -255,18 +257,14 @@ function ActionsRuleCtrl(
     priv.initialDisplay = function () {
         let search = $location.search();
         let machine_id = search.machine;
-        let report;
-        let reports;
 
         if (!machine_id) {
             return;
         }
 
-        reports = $scope.getReportDetails();
-        report  = findWhere(reports, { machine_id: machine_id });
-
-        if (report && report.system) {
-            $scope.showSystem(report.system);
+        const system = find($scope.allSystems, { system_id: machine_id });
+        if (system) {
+            $scope.showSystem(system);
         }
 
         $location.replace();
