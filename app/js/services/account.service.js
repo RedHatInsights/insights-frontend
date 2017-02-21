@@ -36,6 +36,12 @@ function AccountService($rootScope, User, InsightsConfig) {
 
         number: function () {
             return account;
+        },
+
+        queryParam: function () {
+            return {
+                account_number: account
+            };
         }
     };
 }

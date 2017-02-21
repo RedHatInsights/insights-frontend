@@ -17,7 +17,7 @@ function Stats($http, InsightsConfig, AccountService) {
             uri.segment(segment);
         }
 
-        uri.addSearch('account_number', AccountService.number());
+        uri.addSearch(AccountService.queryParam());
         if (params) {
             uri.addSearch(params);
         }
