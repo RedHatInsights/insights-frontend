@@ -20,8 +20,8 @@ function severityIconCtrl($scope, gettextCatalog) {
             $scope.labelClass = 'i-error';
             $scope.labelValue = gettextCatalog.getString('High');
         } else if (severity === 'CRITICAL') {
-            $scope.iconClass = 'i-error fa-times-circle';
-            $scope.labelClass = 'i-error';
+            $scope.iconClass = 'fa-bomb';
+            $scope.labelClass = '';
             $scope.labelValue = gettextCatalog.getString('Critical');
         } else {
             $scope.iconClass = '';
