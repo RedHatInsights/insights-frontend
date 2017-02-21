@@ -121,11 +121,13 @@ function checkInStyle() {
 
 function momentFilter () {
     return function (input, format, timezone) {
-        if (angular.isObject(timezone) && 'name' in timezone) {
-            timezone = timezone.name;
+        let result = moment(input);
+
+        if (timezone) {
+            result = result.tz(timezone);
         }
 
-        return moment(input).tz(timezone).format(format);
+        return result.format(format);
     };
 }
 

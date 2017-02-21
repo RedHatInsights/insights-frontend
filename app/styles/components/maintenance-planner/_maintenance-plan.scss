@@ -85,7 +85,7 @@ $expand-bar-bg: #f2f5f7;
 				}
 
 				.time { @include rem('width', 120px); }
-				.duration { @include rem('width', 60px); }
+				.duration { @include rem('width', 70px); }
 
 				.form-group-inline + .form-group-inline { @include rem('margin-left', 6px); }
 			}
@@ -824,7 +824,7 @@ div[class^="col-"], div[class*=" col-"] { @include transition(.4s); }
   }
 
 	.form-group { @include rem('margin-bottom', $global-padding); }
-	.duration { width: 60px; }
+	.duration { width: 70px; }
 	.time { width: 120px; }
 }
 

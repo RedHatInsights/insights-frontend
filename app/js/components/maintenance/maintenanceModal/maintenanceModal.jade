@@ -12,7 +12,7 @@
         ui-select-match.form-control.ui-select-match(placeholder='Select a plan')
           span(ng-if='!selected.plan.start && !selected.plan.name.length') PLAN {{selected.plan.maintenance_id}}
           span(ng-if='!selected.plan.start && selected.plan.name.length') {{selected.plan.name}}
-          span(ng-if='selected.plan.start') {{selected.plan.start | moment:'LL':timezone}}
+          span(ng-if='selected.plan.start') {{selected.plan.start | moment:'LL'}}
             span(ng-show='selected.plan.name.length') &nbsp;({{selected.plan.name}})
         ui-select-choices.ui-select-choices(
           repeat="plan in availablePlans | searchMaintenancePlans: $select.search",
@@ -20,7 +20,7 @@
           group-filter='planOrderFn')
           span(ng-if='!plan.start && !plan.name.length') PLAN {{plan.maintenance_id}}
           span(ng-if='!plan.start && plan.name.length') {{plan.name}}
-          span(ng-if='plan.start') {{plan.start | moment:'LL':timezone}}
+          span(ng-if='plan.start') {{plan.start | moment:'LL'}}
             span(ng-show='plan.name.length') &nbsp;({{plan.name}})
 
     .row.new-plan-alias(ng-if='selected.plan.new')
