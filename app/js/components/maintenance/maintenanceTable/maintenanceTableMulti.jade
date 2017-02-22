@@ -1,0 +1,33 @@
+.updatable(ng-class='{updating: table.loader.loading}')
+  .spinner.spinner-lg(ng-show='table.loader.loading')
+  table.table.nomar.ng-table.maintenance-table
+    thead
+      tr
+        th.text-center(ng-show='edit')
+          input.select-all(ng-model="checkboxes.checked", type="checkbox", ng-indeterminate="checkboxes.indeterminate", ng-change='checkboxChecked()')
+        th.sortable(ng-class="table.sorter.getSortClass('display')", ng-click="table.sorter.sort('display')")
+          .sort-indicator(translate) Action
+        th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.severityNum')", ng-click="table.sorter.sort('rule.severityNum')")
+          .sort-indicator(translate) Severity
+        th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.ansible')", ng-click="table.sorter.sort('rule.ansible')")
+          .sort-indicator(translate) Ansible
+        th.sortable.text-center(ng-class="table.sorter.getSortClass('reports.length')", ng-click="table.sorter.sort('reports.length')")
+          .sort-indicator(translate) Systems
+      tr(ng-show='edit')
+        th.filter(colspan='100%')
+          input.form-control.nomar-left.input-sm(type='text', placeholder='Filter by rule name', ng-model="table.filter.display", ng-change='table.doFilter()')
+    tbody
+      tr(ng-repeat="action in table.data track by action.id", data-id="{{action.id}}",
+        ng-click="checkboxRowClick($event, action.id)",
+        ng-mousedown="checkboxRowClick($event, action.id)")
+        td.text-center(ng-show='edit')
+          input(ng-model='checkboxes.items[action.id]', type="checkbox")
+        td.overflow
+          | {{action.display}}
+        td.text-center
+          severity-icon(severity="action.rule.severity")
+        td.status.text-center
+          ansible-icon(value='action.rule.ansible')
+        td.status.text-center
+          | {{action.reports.length}}
+    tfoot(maintenance-table-footer)
