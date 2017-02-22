@@ -176,7 +176,7 @@
                       on-save='addRule.reset()',
                       on-cancel='addRule.reset()')
 
-            .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:'-severityNum' | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
+            .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', '-actions.length', 'rule_id'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
               .header.bordered(ng-init='tableEdit = false')
                 span.icon-inline
                   severity-icon(severity="rule.severity")
@@ -232,7 +232,7 @@
                       on-cancel='addSystem.reset()')
 
             .content-block.system(
-              ng-repeat="system in (plan.systems | orderBy:'_name' | offset:pager.offset | limitTo:pager.perPage) track by system.system_id")
+              ng-repeat="system in (plan.systems | orderBy:['_name', 'system_id'] | offset:pager.offset | limitTo:pager.perPage) track by system.system_id")
               .header.bordered
                 span.icon-inline
                   type-icon(
