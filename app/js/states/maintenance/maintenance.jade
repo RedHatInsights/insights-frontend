@@ -2,19 +2,16 @@
   .page-header(ng-class="{'inactive': !expandBar, 'active': expandBar}")
     .content-block
       .create-plan-actions.text-right.pull-right
-        a.create-plan(ng-click="quickAdd()", ng-show='isDefined(timezone)')
+        a.create-plan(ng-click="quickAdd()")
           span(translate) &nbsp;Create a plan
           i.fa.fa-plus-circle
-        //a.create-plan(ng-click="broadcast('stepOne')", ng-show="!expandBar", ng-if='isDefined(timezone)')
-          span(translate) &nbsp;New plan (wizard)&nbsp;
-          i.fa.fa-plus-circle
-        a.create-plan(ng-click='newSuggestion()', ng-show='isDefined(timezone)', ng-if='isInternal')
+        a.create-plan(ng-click='newSuggestion()', ng-if='isInternal')
           small.red(translate) New suggested plan
             i.fa.fa-plus-circle
       h1.page-title.pull-left
         i.fa.fa-wrench &nbsp;
         span(translate) Planner
-    maintenance-plan-bar(ng-if='isDefined(timezone)')
+    maintenance-plan-bar
 
   .page
     .row.search
@@ -23,19 +20,19 @@
       .col-sm-4.col-md-3
         maintenance-category-select(category='category', on-select='setCategory(category)')
 
-    .row.row-short(ng-show='loading || !isDefined(timezone)')
+    .row.row-short(ng-show='loading')
       .col-xs-12
         .load.text-center
           .spinner.spinner-lg
           span(translate) Loading plans…
     .rha-notifications
-    div(ng-if='!loading && isDefined(timezone)')
+    div(ng-if='!loading')
       .row(ng-if="!shownPlans.length")
         .text-center
           h4(translate) No plans
       .row(ng-if="category === 'future' || category === 'past'", ng-repeat="plansPerMonth in shownPlansByMonth")
         .col-sm-12
-          h3 {{plansPerMonth[0].start | moment:'MMMM YYYY':timezone}}
+          h3 {{plansPerMonth[0].start | moment:'MMMM YYYY'}}
         maintenance-plan(
           ng-repeat="plan in plansPerMonth | searchMaintenancePlans: searchTerm track by plan.maintenance_id")
       .row(ng-if="category === 'unscheduled' || category === 'suggested'")

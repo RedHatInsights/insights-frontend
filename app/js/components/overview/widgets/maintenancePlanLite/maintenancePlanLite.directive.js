@@ -13,8 +13,7 @@ function MaintenancePlanLiteCtrl($scope, Maintenance, MaintenanceService, $state
     $scope.duration = function (start, end) {
         return moment.duration(
             moment(end)
-            .tz($scope.timezone.name)
-            .diff(moment(start).tz($scope.timezone.name))).asMinutes();
+            .diff(moment(start))).asMinutes();
     };
 
     $scope.silence = function (plan) {

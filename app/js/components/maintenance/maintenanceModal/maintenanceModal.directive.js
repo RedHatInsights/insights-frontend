@@ -27,7 +27,6 @@ function maintenanceModalCtrl($scope,
                               System,
                               Utils,
                               $state,
-                              TimezoneService,
                               gettextCatalog,
                               ModalUtils,
                               $q,
@@ -52,7 +51,6 @@ function maintenanceModalCtrl($scope,
         throw new Error(`Invalid parameters ${system}, ${rule}, ${systems}`);
     }
 
-    $scope.timezone = TimezoneService;
     $scope.plans = MaintenanceService.plans;
     $scope.system = system;
     $scope.loader = new Utils.Loader();

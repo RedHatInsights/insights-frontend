@@ -5,12 +5,7 @@ var statesModule = require('../');
 /**
  * @ngInject
  */
-function AppCtrl($scope, $rootScope, TimezoneService, User, PermissionService) {
-    TimezoneService.promise.then(function (timezone) {
-        $scope.timezone = timezone;
-        $scope.$broadcast('timezone:change');
-    });
-
+function AppCtrl($scope, $rootScope, User, PermissionService) {
     User.asyncCurrent(function (user) {
         $rootScope.isContentManager =
             (PermissionService.has(user, PermissionService.PERMS.CONTENT_MANAGER));

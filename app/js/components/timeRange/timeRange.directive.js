@@ -19,14 +19,15 @@ function timeRangeCtrl($scope) {
     var dateFormat = 'MMM D';
 
     function init() {
-        $scope.startTime = moment($scope.start).tz($scope.timezone);
-        $scope.endTime = moment($scope.end).tz($scope.timezone);
+        $scope.startTime = moment($scope.start);
+        $scope.endTime = moment($scope.end);
 
-        let referenceDate =
-            moment($scope.start).tz(
-                ($scope.referenceTimezone ?
-                    $scope.referenceTimezone :
-                    $scope.timezone));
+        if ($scope.timezone) {
+            $scope.startTime = $scope.startTime.tz($scope.timezone);
+            $scope.endTime = $scope.endTime.tz($scope.timezone);
+        }
+
+        let referenceDate = moment($scope.start);
 
         // start/end dates are only shown if they differ from the reference date
         $scope.startDate = false;
@@ -46,7 +47,7 @@ function timeRangeCtrl($scope) {
 
     init();
 
-    $scope.$watchGroup(['start', 'end', 'timezone', 'referenceTimezone'], init);
+    $scope.$watchGroup(['start', 'end', 'timezone'], init);
 }
 
 function timeRange() {
@@ -58,8 +59,7 @@ function timeRange() {
         scope: {
             start: '=start',
             end: '=end',
-            timezone: '=timezone',
-            referenceTimezone: '=?referenceTimezone'
+            timezone: '=?timezone'
         }
     };
 }
