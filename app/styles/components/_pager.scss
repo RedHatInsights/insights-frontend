@@ -1,0 +1,33 @@
+.pager {
+
+}
+
+.modal .pager {
+  margin: 0 -30px;
+}
+
+.pager.pager-steps {
+  padding: 0;
+  text-align: left;
+
+  li {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+  }
+
+  li a {
+    display: block;
+    width: 100%;
+  }
+
+  a.btn, button {
+    @include rem('padding', $global-padding);
+    background: $blue;
+    text-transform: none;
+    
+    &:hover {
+      background: darken($blue, 10);
+    }
+  }
+}

@@ -8,6 +8,26 @@
     }
 }
 
+.btn .svg {
+  display: block;
+  width: 34px;
+  height: auto;
+
+  & + span {
+    @include rem('margin-left', 12px);
+  }
+}
+
+.btn.btn-open-gray {
+  text-transform: none;
+  border: 1px solid $gray;
+  //@include rem('padding', $global-padding);
+  color: $gray-dark;
+  background: #fff;
+}
+
+
+
 .btn.btn-blank {
     color: $gray-dark;
     background: none;

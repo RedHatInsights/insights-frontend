@@ -4,25 +4,32 @@ var componentsModule = require('../../');
 var assign = require('lodash/object/assign');
 var map = require('lodash/collection/map');
 const find = require('lodash/collection/find');
+const FileSaver = require('file-saver');
+const parseHeader = require('parse-http-header');
+const some = require('lodash/collection/some');
 
 /**
  * @ngInject
  */
 function maintenancePlanCtrl(
+    $modal,
+    $rootScope,
     $scope,
+    $timeout,
+    gettextCatalog,
+    AnsibleAPIErrors,
+    AnsibleErrors,
+    DataUtils,
     Maintenance,
-    Utils,
     MaintenanceService,
     SweetAlert,
-    gettextCatalog,
-    $timeout,
-    DataUtils,
     SystemsService,
-    $rootScope) {
+    Utils) {
 
     $scope.pager = new Utils.Pager(10);
     $scope.loader = new Utils.Loader();
     $scope.exportPlan = Maintenance.exportPlan;
+    $scope.error = null;
 
     $scope.editBasic = new $scope.BasicEditHandler(
         $scope.plan,
@@ -149,12 +156,67 @@ function maintenancePlanCtrl(
     $scope.minimize = function () {
         // don't minimize right away because that messes up with the global click handler
         $timeout(function () {
+            $scope.error = null;
             $scope.edit.deactivate($scope.plan.maintenance_id);
         });
     };
 
     $scope.export = function () {
         Maintenance.exportPlan($scope.plan.maintenance_id);
+    };
+
+    function openPlaybookModal(questions, unsupportedRules) {
+        $modal.open({
+            templateUrl:
+                'js/components/maintenance/maintenancePlaybook/maintenancePlaybook.html',
+            windowClass: 'modal-playbook modal-wizard ng-animate-enabled',
+            backdropClass: 'system-backdrop ng-animate-enabled',
+            controller: 'MaintenancePlaybook',
+            resolve: {
+                plan: function () {
+                    return $scope.plan;
+                },
+
+                questions: function () {
+                    return questions;
+                },
+
+                unsupportedRules: function () {
+                    return unsupportedRules;
+                }
+            }
+        });
+    }
+
+    $scope.generatePlaybook = function () {
+        Maintenance.generatePlaybook($scope.plan.maintenance_id)
+        .then(function generatedPlaybook(response) {
+            if (response.status === 200) {
+                const disposition = response.headers('content-disposition');
+                const filename = parseHeader(disposition).filename.replace(/"/g, '');
+                const blob = new Blob([response.data],
+                                      {type: response.headers('content-type')});
+                FileSaver.saveAs(blob, filename);
+            }
+        },
+
+        function handlePlaybookError (resp) {
+            if (resp.status === 400) {
+                if (resp.data.error.key === AnsibleAPIErrors.AmbiguousResolution) {
+                    openPlaybookModal(resp.data.error.details, null);
+                } else if (resp.data.error.key === AnsibleAPIErrors.UnsupportedRule) {
+                    openPlaybookModal(null, resp.data.error.details);
+                } else if (
+                    resp.data.error.key === AnsibleAPIErrors.MaintenanceNothingToFix ||
+                    resp.data.error.key === AnsibleAPIErrors.MaintenanceEmpty) {
+                    $scope.error = AnsibleErrors.NoActions;
+                } else {
+                    $scope.error = AnsibleErrors.GeneralFailure;
+                }
+            } else {
+                $scope.error = AnsibleErrors.GeneralFailure;
+            }
+        });
     };
 
     $scope.dateChanged = function (unused, value, explicit) {
@@ -168,6 +230,7 @@ function maintenancePlanCtrl(
             $scope.editBasic.toggle();
         }
 
+        $scope.error = null;
         $scope.edit.deactivate($scope.plan.maintenance_id);
     };
 
@@ -179,11 +242,13 @@ function maintenancePlanCtrl(
         if ($scope.edit.isActive($scope.plan.maintenance_id) &&
             !$scope.editBasic.active) {
 
+            $scope.error = null;
             $scope.edit.deactivate($scope.plan.maintenance_id);
         }
     });
 
     $scope.update = $scope.loader.bind(function (data) {
+        $scope.error = null;
         return Maintenance.updatePlan($scope.plan.maintenance_id, data);
     });
 
@@ -249,6 +314,13 @@ function maintenancePlanCtrl(
     $scope.groupBySystemType = function (system) {
         return SystemsService.getSystemTypeDisplayName(system.system_type_id);
     };
+
+    function checkAnsibleSupport () {
+        $scope.error = null;
+        $scope.ansibleSupport = some($scope.plan.actions, 'rule.ansible');
+    }
+
+    $scope.$watch('plan.actions', checkAnsibleSupport);
 }
 
 function AddActionSelectionHandler ($scope) {

@@ -80,8 +80,14 @@
 
 .modal.modal-wizard .modal-footer {
 
+  border: none;
+
   .flexgrid [class^="col-"], .flexgrid div[class*=" col-"] {
     margin-bottom: 0;
     padding-bottom: 0;
+  }
+
+  &.navigation {
+
   }
 }

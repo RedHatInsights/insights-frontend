@@ -17,6 +17,53 @@
 	}
 }
 
+.modal {
+
+  .group {
+    .group-title {
+
+      & + .group-content {
+        @include rem('margin-top', $global-padding/2);
+      }
+
+    }
+
+
+    .group-pretitle + .group-title {
+      @include rem('margin-top', $global-padding);
+    }
+
+    .group-title.group-title-table + .group-content {
+      @include rem('margin-top', $global-margin);
+    }
+
+    .group-content {
+
+    }
+  }
+}
+
+.modal-content:hover {
+  cursor: auto;
+}
+
+
+.modal-header i.svg {
+  @include rem('width', 54px);
+  @include rem('margin-right', 12px);
+
+  //& + h1,
+  //& + h2,
+  //& + h3,
+  //& + h4 { @include rem('margin-left', 12px); }
+  //
+  //h1 + &,
+  //h2 + &,
+  //h3 + &,
+  //h4 + & { @include rem('margin-right', 12px); }
+
+}
+
 .modal-content {
 	background: #fff;
 }
@@ -67,6 +114,12 @@
 }
 
 .modal-playbook {
+    
+    .modal-dialog {
+        @include media-query(md) {
+            width: 795px;
+        }
+    }
 
 }
 

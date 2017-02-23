@@ -99,8 +99,7 @@ function InventoryCtrl(
     function initInventory() {
         //get system types
         $scope.loading = true;
-        System.getSystemTypes().then(function (systemTypes) {
-            SystemsService.setSystemTypes(systemTypes.data);
+        SystemsService.populateSystemTypes(false).then(function () {
             getData(false);
         });
     }

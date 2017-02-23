@@ -1,5 +1,7 @@
 $pagination-gray-color: #c6c6c6;
 $pagination-gray-background: #c6c6c6;
+$pagination-width: 16px;
+$pagination-height: $pagination-width;
 
 .pagination {
 
@@ -23,4 +25,49 @@ $pagination-gray-background: #c6c6c6;
 		background-color: $pagination-gray-background;
 		border-color: $pagination-gray-background;
 	}
+}
+
+ul.pagination.pagination-dots {
+
+  margin: 0;
+  display: block;
+  text-align: center;
+
+  > li { display: inline-block; }
+  > li:not(.active) > a {
+    background: $pagination-gray-background;
+    border-color: darken($pagination-gray-background, 20)
+  }
+
+  li {
+    margin: 0 4px;
+  }
+
+  li a {
+    width: $pagination-width;
+    height: $pagination-height;
+    margin: -1px;
+    padding: 0;
+    display: block;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 50% !important;
+  }
+
+  &>.disabled>span,
+  &>.disabled>span:hover,
+  &>.disabled>span:focus,
+  &>.disabled>a,
+  &>.disabled>a:hover,
+  &>.disabled>a:focus {
+    border-color: #888;
+    background: #F2F5F7;
+  }
+
+  .modal-content {
+    &:hover {
+      cursor: auto;
+    }
+  }
 }
