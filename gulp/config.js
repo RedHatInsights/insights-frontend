@@ -4,7 +4,7 @@ var pkg = require('../package');
 module.exports = {
     'pkg': pkg,
     'syncport': 9000,
-    'syncproxyport': 3000,
+    'syncproxyport': 9000,
 
     'styles': {
         'src': ['app/styles/**/*.scss', '!app/styles/base.scss', '!app/styles/cloudforms.scss', '!app/styles/sat5.scss', '!app/styles/sat6.scss'],

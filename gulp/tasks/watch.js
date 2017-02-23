@@ -10,7 +10,7 @@ var config  = require('../config'),
     '!app/js/templates.js' // do not run browserify on template cache change
 ];
 
-gulp.task('watch', [ 'browserSync', 'server'], function () {
+gulp.task('watch', ['server'], function () {
 
     gulp.watch(config.scripts.src.concat(exclude), ['lint', 'bro']);
     gulp.watch(config.styles.src.concat(exclude),  ['styles']);
