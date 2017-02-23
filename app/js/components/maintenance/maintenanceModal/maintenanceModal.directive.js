@@ -7,6 +7,7 @@ const indexBy = require('lodash/collection/indexBy');
 const map = require('lodash/collection/map');
 const flatten = require('lodash/array/flatten');
 const groupBy = require('lodash/collection/groupBy');
+const constant = require('lodash/utility/constant');
 
 const MODES = {
     rule: 'rule',
@@ -97,7 +98,7 @@ function maintenanceModalCtrl($scope,
 
             // if the system is part of the plan already, use that object
             let item = system;
-            if ($scope.selected.plan && $scope.selected.plan.systems) {
+            if (!$scope.newPlan && $scope.selected.plan && $scope.selected.plan.systems) {
                 item = find($scope.selected.plan.systems,
                     {system_id: system.system_id}) || item;
             }
@@ -105,29 +106,42 @@ function maintenanceModalCtrl($scope,
             params = MaintenanceService.actionTableParams(
                 item, $scope.getPlan(), item.actions, $scope.loader);
 
-            // preselect all actions that are not planned in another plan
-            preselectAvailableActions(params, function (action) {
-                return action._type !==
-                    MaintenanceService.MAINTENANCE_ACTION_TYPE.PLANNED_ELSEWHERE;
-            });
+            if (rule) { // preselect the given rule if any
+                preselectAvailableActions(params, function (action) {
+                    return action.rule.rule_id === rule.rule_id;
+                });
+            }
         } else if ($scope.mode === MODES.rule) {
 
             // if the rule is part of the plan already, use that object
             let item = rule;
-            if ($scope.selected.plan && $scope.selected.plan.rules) {
+            if (!$scope.newPlan && $scope.selected.plan && $scope.selected.plan.rules) {
                 item = find($scope.selected.plan.rules, {id: rule.rule_id}) || item;
             }
 
             params = MaintenanceService.systemTableParams(
                 item, $scope.getPlan(), item.actions, $scope.loader);
 
-            // select previously selected systems in the planner table
+            // index selected systems by their ID
             let selectedSystemsById = indexBy(systems, 'system_id');
 
-            // preselect actions previously selected by the user on Actions page 3
-            preselectAvailableActions(params, function (action) {
-                return action.id in selectedSystemsById;
-            });
+            // only display available systems selected on the previous screen
+            // TODO: we can eliminate this altogether once we switch to creating plan
+            // actions from (system_id, rule_id) as opposed to report.id
+            const overriden = params.getAvailableActions;
+            params.getAvailableActions = function () {
+                return overriden.call(params).then(function (available) {
+                    return available.filter(function (action) {
+                        return action.system.system_id in selectedSystemsById;
+                    });
+                });
+            };
+
+            // and preselect them all
+            preselectAvailableActions(params, constant(true));
+
+            // suppress actions already in plan
+            params.getActions = constant([]);
         }
 
         // if this is a new plan then we need to create it on-save
@@ -223,8 +237,8 @@ function maintenanceModalCtrl($scope,
         });
     };
 
-    $scope.$watch('plans.all', function (value) {
-        if (value) {
+    $scope.$watch('plans.all', function () {
+        if (MaintenanceService.plans.future) {
             $scope.availablePlans = MaintenanceService.plans.future.concat(
                 MaintenanceService.plans.unscheduled);
 
