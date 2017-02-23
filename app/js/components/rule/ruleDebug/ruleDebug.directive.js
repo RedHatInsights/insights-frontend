@@ -10,7 +10,6 @@ function RuleDebugCtrl(
     $scope,
     Rule,
     Report,
-    TimezoneService,
     $state,
     System,
     $q,

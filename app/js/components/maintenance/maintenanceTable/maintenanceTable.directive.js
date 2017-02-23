@@ -27,3 +27,6 @@ componentsModule.directive(
 componentsModule.directive(
     'maintenanceTableActions',
     maintenanceTable('maintenanceTableActions.html'));
+componentsModule.directive(
+    'maintenanceTableMulti',
+    maintenanceTable('maintenanceTableMulti.html'));

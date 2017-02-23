@@ -33,7 +33,6 @@ function maintenancePlanCtrl(
 
     $scope.editBasic = new $scope.BasicEditHandler(
         $scope.plan,
-        $scope.timezone,
         Maintenance,
         Utils,
         $scope.loader.bind(function (name, description, start, end, handler) {

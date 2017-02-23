@@ -25,7 +25,7 @@
             span.icon-inline(ng-if='!editBasic.active && plan.hidden && isInternal')
               i.fa.fa-eye-slash
             h2.title(ng-class="{'red': plan.overdue}", ng-dblclick='editBasic.toggle()')
-              span(ng-if='plan.start') {{plan.start | moment:'dddd, LL':timezone}}
+              span(ng-if='plan.start') {{plan.start | moment:'dddd, LL'}}
               span(ng-if='!plan.start', translate) Plan {{plan.maintenance_id}} (Date not set)
               i.fa.fa-pencil-square-o.edit-toggle(
                 ng-click='editBasic.toggle()',
@@ -41,7 +41,6 @@
               time-range.time-local(
                 start='plan.start',
                 end='plan.end',
-                timezone='timezone.name',
                 ng-dblclick='editBasic.toggle()')
               i.fa.fa-pencil-square-o.edit-toggle(
                 ng-click='editBasic.toggle()',
@@ -53,8 +52,7 @@
               time-range.time-utc(
                 start='plan.start',
                 end='plan.end',
-                timezone="'UTC'",
-                reference-timezone='timezone.name',
+                timezone="'UTC'"
                 ng-dblclick='editBasic.toggle()')
         .details-edit.pull-left(ng-if='editBasic.active')
           form.editable-form(novalidate, name="editBasicForm", ng-submit="editBasic.save()")
@@ -78,7 +76,6 @@
                 format="LL",
                 auto-close='true',
                 highlights="calendarDates",
-                timezone='{{timezone.name}}',
                 date-change='dateChanged')
             .form-group.nick(ng-class="{'has-error': editBasicForm.name.$invalid}")
               label(translate) Alias:&nbsp;
@@ -110,11 +107,6 @@
             .form-group.form-group-inline
               label.full-width UTC time:&nbsp;
               | {{editBasic.start | moment:'LLL':'UTC'}}
-            .form-group.form-group-inline
-              label.full-width(translate) Timezone:&nbsp;
-              | {{timezone.long}}&nbsp;
-              a(href='https://www.redhat.com/wapps/ugc/protected/locale.html', target='_blank')
-                | (change)
             .form-group
               .pull-right.btn-group(role='group')
                 button.btn.btn-sm.btn-default.action(
@@ -184,7 +176,7 @@
                       on-save='addRule.reset()',
                       on-cancel='addRule.reset()')
 
-            .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:'-severityNum' | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
+            .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', '-actions.length', 'rule_id'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
               .header.bordered(ng-init='tableEdit = false')
                 span.icon-inline
                   severity-icon(severity="rule.severity")
@@ -240,7 +232,7 @@
                       on-cancel='addSystem.reset()')
 
             .content-block.system(
-              ng-repeat="system in (plan.systems | orderBy:'_name' | offset:pager.offset | limitTo:pager.perPage) track by system.system_id")
+              ng-repeat="system in (plan.systems | orderBy:['_name', 'system_id'] | offset:pager.offset | limitTo:pager.perPage) track by system.system_id")
               .header.bordered
                 span.icon-inline
                   type-icon(

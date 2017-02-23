@@ -65,10 +65,9 @@ EditToggleHandler.prototype.transition = function (id) {
 
 //This handles the "basic" edit mode of a plan. Activated by clicking the hidden
 //'Click to edit this plan' button next to the plan name.
-function BasicEditHandler(plan, timezone, Maintenance, Utils, cb) {
+function BasicEditHandler(plan, Maintenance, Utils, cb) {
     this.active = false;
     this.plan = plan;
-    this.timezone = timezone;
     this.Maintenance = Maintenance;
     this.Utils = Utils;
     this.cb = cb;
@@ -79,7 +78,7 @@ BasicEditHandler.prototype.init = function () {
         this.name = this.plan.name;
         this.description = this.plan.description;
         if (this.plan.start) {
-            this.start = moment(this.plan.start).tz(this.timezone.name);
+            this.start = moment(this.plan.start);
             let d = this.start;
 
             // we need to convert to Date (which possibly uses a different timezone)
@@ -90,7 +89,7 @@ BasicEditHandler.prototype.init = function () {
     } else {
         this.name = '';
         this.description = '';
-        this.start = moment().tz(this.timezone.name).startOf('day');
+        this.start = moment().startOf('day');
         this.dateChanged(this.start);
     }
 };
@@ -132,8 +131,8 @@ BasicEditHandler.prototype.getStart = function () {
 };
 
 BasicEditHandler.prototype.getEnd = function () {
-    if (this.start && this.duration) {
-        return this.start.clone().add(this.duration, 'm').toDate();
+    if (this.start) {
+        return this.start.clone().add(Math.max(this.duration, 1), 'm').toDate();
     }
 
     return null;
@@ -182,7 +181,7 @@ function MaintenanceCtrl(
                     return angular.isDefined(plan.start);
                 })
                 .map(function (plan) {
-                    return moment(plan.start).tz($scope.timezone.name);
+                    return moment(plan.start);
                 });
     };
 
@@ -207,10 +206,6 @@ function MaintenanceCtrl(
     };
 
     $scope.redrawPlans = function () {
-        if (!angular.isDefined($scope.timezone)) {
-            return;
-        }
-
         let category = $scope.category || DEFAULT_CATEGORY;
         let plans = MaintenanceService.plans[category];
 
@@ -218,7 +213,7 @@ function MaintenanceCtrl(
             // group by year/month then transform into array of arrays for ordering
             plans = sortBy(plans, 'start');
             let groupedPlans = values(groupBy(plans, function (plan) {
-                var start = moment(plan.start).tz($scope.timezone.name);
+                var start = moment(plan.start);
                 return start.year() + '-' + start.month();
             }));
 
@@ -254,13 +249,6 @@ function MaintenanceCtrl(
         }
     };
 
-    $scope.$on('timezone:change', function () {
-        $scope.$broadcast('pickerUpdate', ['planCreateDate', /planEditDate-[\d+]/], {
-            timezone: $scope.timezone.name
-        });
-        $scope.refreshCalendar();
-    });
-
     $scope.broadcast = function (name) {
         $scope.$broadcast(name);
     };
@@ -283,9 +271,7 @@ function MaintenanceCtrl(
     };
 
     function init() {
-        if ($scope.timezone) {
-            $scope.redrawPlans();
-        }
+        $scope.redrawPlans();
     }
 
     $scope.$watchCollection('plans.all', init);

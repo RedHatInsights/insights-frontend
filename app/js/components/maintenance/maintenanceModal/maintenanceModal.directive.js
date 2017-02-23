@@ -7,6 +7,7 @@ const indexBy = require('lodash/collection/indexBy');
 const map = require('lodash/collection/map');
 const flatten = require('lodash/array/flatten');
 const groupBy = require('lodash/collection/groupBy');
+const constant = require('lodash/utility/constant');
 
 const MODES = {
     rule: 'rule',
@@ -27,7 +28,6 @@ function maintenanceModalCtrl($scope,
                               System,
                               Utils,
                               $state,
-                              TimezoneService,
                               gettextCatalog,
                               ModalUtils,
                               $q,
@@ -52,23 +52,29 @@ function maintenanceModalCtrl($scope,
         throw new Error(`Invalid parameters ${system}, ${rule}, ${systems}`);
     }
 
-    $scope.timezone = TimezoneService;
     $scope.plans = MaintenanceService.plans;
     $scope.system = system;
     $scope.loader = new Utils.Loader();
     $scope.selected = {};
+    $scope.newPlan = true;
     $scope.rule = rule;
     $scope.systems = systems;
 
-    $scope.$watch('selected.plan', function (value) {
-        if (value) {
-            if (systems && !rule) {
-                buildMultiTableParams().then(function (tableParams) {
-                    $scope.tableParams = tableParams;
-                });
-            } else {
-                $scope.tableParams = buildTableParams();
-            }
+    $scope.getPlan = function () {
+        if (!$scope.newPlan && $scope.selected.plan) {
+            return $scope.selected.plan;
+        }
+
+        return {};
+    };
+
+    $scope.$watchGroup(['selected.plan', 'newPlan'], function () {
+        $scope.plan = ($scope.newPlan) ? {} : $scope.selected.plan;
+
+        if (systems && !rule) {
+            $scope.tableParams = buildMultiTableParams();
+        } else {
+            $scope.tableParams = buildTableParams();
         }
     });
 
@@ -92,49 +98,62 @@ function maintenanceModalCtrl($scope,
 
             // if the system is part of the plan already, use that object
             let item = system;
-            if ($scope.selected.plan && $scope.selected.plan.systems) {
+            if (!$scope.newPlan && $scope.selected.plan && $scope.selected.plan.systems) {
                 item = find($scope.selected.plan.systems,
                     {system_id: system.system_id}) || item;
             }
 
             params = MaintenanceService.actionTableParams(
-                item, $scope.selected.plan, item.actions, $scope.loader);
+                item, $scope.getPlan(), item.actions, $scope.loader);
 
-            // preselect all actions that are not planned in another plan
-            preselectAvailableActions(params, function (action) {
-                return action._type !==
-                    MaintenanceService.MAINTENANCE_ACTION_TYPE.PLANNED_ELSEWHERE;
-            });
+            if (rule) { // preselect the given rule if any
+                preselectAvailableActions(params, function (action) {
+                    return action.rule.rule_id === rule.rule_id;
+                });
+            }
         } else if ($scope.mode === MODES.rule) {
 
             // if the rule is part of the plan already, use that object
             let item = rule;
-            if ($scope.selected.plan && $scope.selected.plan.rules) {
+            if (!$scope.newPlan && $scope.selected.plan && $scope.selected.plan.rules) {
                 item = find($scope.selected.plan.rules, {id: rule.rule_id}) || item;
             }
 
             params = MaintenanceService.systemTableParams(
-                item, $scope.selected.plan, item.actions, $scope.loader);
+                item, $scope.getPlan(), item.actions, $scope.loader);
 
-            // select previously selected systems in the planner table
+            // index selected systems by their ID
             let selectedSystemsById = indexBy(systems, 'system_id');
 
-            // preselect actions previously selected by the user on Actions page 3
-            preselectAvailableActions(params, function (action) {
-                return action.id in selectedSystemsById;
-            });
+            // only display available systems selected on the previous screen
+            // TODO: we can eliminate this altogether once we switch to creating plan
+            // actions from (system_id, rule_id) as opposed to report.id
+            const overriden = params.getAvailableActions;
+            params.getAvailableActions = function () {
+                return overriden.call(params).then(function (available) {
+                    return available.filter(function (action) {
+                        return action.system.system_id in selectedSystemsById;
+                    });
+                });
+            };
+
+            // and preselect them all
+            preselectAvailableActions(params, constant(true));
+
+            // suppress actions already in plan
+            params.getActions = constant([]);
         }
 
         // if this is a new plan then we need to create it on-save
         // instead of updating existing plan
         let update = params.update;
         params.update = function (toAdd) {
-            if ($scope.selected.plan && !$scope.selected.plan.new) {
+            if ($scope.selected.plan && !$scope.newPlan) {
                 return update.call(params, toAdd);
             }
 
             return MaintenanceService.plans.create({
-                name: $scope.selected.plan.alias,
+                name: $scope.newPlanAlias,
                 reports: toAdd
             }).then(function (plan) {
                 $scope.selected.plan = plan;
@@ -156,12 +175,12 @@ function maintenanceModalCtrl($scope,
             }
         });
 
-        return $q.all(promises).then(function (responses) {
+        const availableActions = $q.all(promises).then(function (responses) {
             const reports = flatten(map(responses, 'data.reports'));
             reports.forEach(report => DataUtils.readRule(report.rule)); // severityNum
             const reportsByRuleId = groupBy(reports, 'rule_id');
 
-            const availableActions = Object.keys(reportsByRuleId).map(function (ruleId) {
+            return Object.keys(reportsByRuleId).map(function (ruleId) {
                 const reports = reportsByRuleId[ruleId];
                 const rule = reports[0].rule;
                 return {
@@ -173,38 +192,38 @@ function maintenanceModalCtrl($scope,
                     reports: reports
                 };
             });
-
-            return {
-                getActions: function () {
-                    return [];
-                },
-
-                getAvailableActions: function () {
-                    return $q.when(availableActions);
-                },
-
-                implicitOrder: {
-                    predicate: 'rule.severityNum',
-                    reverse: true
-                },
-
-                save: function (toAdd) {
-                    const payload = {
-                        name: $scope.selected.plan.alias,
-                        reports: map(flatten(map(toAdd, 'reports')), 'id')
-                    };
-                    if ($scope.selected.plan.maintenance_id) {
-                        return MaintenanceService.plans.update(
-                            $scope.selected.plan, payload);
-                    }
-
-                    return MaintenanceService.plans.create(payload).then(function (plan) {
-                        $scope.selected.plan = plan;
-                        return plan;
-                    });
-                }
-            };
         });
+
+        return {
+            getActions: function () {
+                return [];
+            },
+
+            getAvailableActions: function () {
+                return availableActions;
+            },
+
+            implicitOrder: {
+                predicate: 'rule.severityNum',
+                reverse: true
+            },
+
+            save: function (toAdd) {
+                const payload = {
+                    name: $scope.newPlanAlias,
+                    reports: map(flatten(map(toAdd, 'reports')), 'id')
+                };
+                if (!$scope.newPlan && $scope.selected.plan) {
+                    return MaintenanceService.plans.update(
+                        $scope.selected.plan, payload);
+                }
+
+                return MaintenanceService.plans.create(payload).then(function (plan) {
+                    $scope.selected.plan = plan;
+                    return plan;
+                });
+            }
+        };
     }
 
     $scope.close = function () {
@@ -219,20 +238,18 @@ function maintenanceModalCtrl($scope,
     };
 
     $scope.$watch('plans.all', function () {
-        if ($scope.plansLoaded) {
+        if (MaintenanceService.plans.future) {
             $scope.availablePlans = MaintenanceService.plans.future.concat(
                 MaintenanceService.plans.unscheduled);
-            $scope.availablePlans.push({
-                name: gettextCatalog.getString('Create a new plan'),
-                new: true
-            });
+
+            if (!$scope.selected.plan && $scope.availablePlans.length) {
+                $scope.selected.plan = $scope.availablePlans[0];
+            }
         }
     });
 
     $scope.planGroupFn = function (plan) {
-        if (plan.new) {
-            return;
-        } else if (plan.start) {
+        if (plan.start) {
             return gettextCatalog.getString('Future plans');
         } else {
             return gettextCatalog.getString('Not scheduled plans');
@@ -256,19 +273,7 @@ function maintenanceModalCtrl($scope,
         return groups;
     };
 
-    function init(force) {
-        $scope.plansLoaded = false;
-        MaintenanceService.plans.load(force).then(function setLoaded() {
-            $scope.plansLoaded = true;
-        });
-    }
-
-    init(false);
-
-    $rootScope.$on('reload:data', function () {
-        init(true);
-    });
-
+    MaintenanceService.plans.load(false);
     ModalUtils.suppressEscNavigation($modalInstance);
 }
 
