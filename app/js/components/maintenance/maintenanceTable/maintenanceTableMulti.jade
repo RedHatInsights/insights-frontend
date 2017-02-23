@@ -23,7 +23,7 @@
         td.text-center(ng-show='edit')
           input(ng-model='checkboxes.items[action.id]', type="checkbox")
         td.overflow
-          | {{action.display}}
+          span.wrap {{action.display}}
         td.text-center
           severity-icon(severity="action.rule.severity")
         td.status.text-center

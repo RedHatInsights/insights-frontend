@@ -55,18 +55,25 @@ function maintenanceModalCtrl($scope,
     $scope.system = system;
     $scope.loader = new Utils.Loader();
     $scope.selected = {};
+    $scope.newPlan = true;
     $scope.rule = rule;
     $scope.systems = systems;
 
-    $scope.$watch('selected.plan', function (value) {
-        if (value) {
-            if (systems && !rule) {
-                buildMultiTableParams().then(function (tableParams) {
-                    $scope.tableParams = tableParams;
-                });
-            } else {
-                $scope.tableParams = buildTableParams();
-            }
+    $scope.getPlan = function () {
+        if (!$scope.newPlan && $scope.selected.plan) {
+            return $scope.selected.plan;
+        }
+
+        return {};
+    };
+
+    $scope.$watchGroup(['selected.plan', 'newPlan'], function () {
+        $scope.plan = ($scope.newPlan) ? {} : $scope.selected.plan;
+
+        if (systems && !rule) {
+            $scope.tableParams = buildMultiTableParams();
+        } else {
+            $scope.tableParams = buildTableParams();
         }
     });
 
@@ -96,7 +103,7 @@ function maintenanceModalCtrl($scope,
             }
 
             params = MaintenanceService.actionTableParams(
-                item, $scope.selected.plan, item.actions, $scope.loader);
+                item, $scope.getPlan(), item.actions, $scope.loader);
 
             // preselect all actions that are not planned in another plan
             preselectAvailableActions(params, function (action) {
@@ -112,7 +119,7 @@ function maintenanceModalCtrl($scope,
             }
 
             params = MaintenanceService.systemTableParams(
-                item, $scope.selected.plan, item.actions, $scope.loader);
+                item, $scope.getPlan(), item.actions, $scope.loader);
 
             // select previously selected systems in the planner table
             let selectedSystemsById = indexBy(systems, 'system_id');
@@ -127,12 +134,12 @@ function maintenanceModalCtrl($scope,
         // instead of updating existing plan
         let update = params.update;
         params.update = function (toAdd) {
-            if ($scope.selected.plan && !$scope.selected.plan.new) {
+            if ($scope.selected.plan && !$scope.newPlan) {
                 return update.call(params, toAdd);
             }
 
             return MaintenanceService.plans.create({
-                name: $scope.selected.plan.alias,
+                name: $scope.newPlanAlias,
                 reports: toAdd
             }).then(function (plan) {
                 $scope.selected.plan = plan;
@@ -154,12 +161,12 @@ function maintenanceModalCtrl($scope,
             }
         });
 
-        return $q.all(promises).then(function (responses) {
+        const availableActions = $q.all(promises).then(function (responses) {
             const reports = flatten(map(responses, 'data.reports'));
             reports.forEach(report => DataUtils.readRule(report.rule)); // severityNum
             const reportsByRuleId = groupBy(reports, 'rule_id');
 
-            const availableActions = Object.keys(reportsByRuleId).map(function (ruleId) {
+            return Object.keys(reportsByRuleId).map(function (ruleId) {
                 const reports = reportsByRuleId[ruleId];
                 const rule = reports[0].rule;
                 return {
@@ -171,38 +178,38 @@ function maintenanceModalCtrl($scope,
                     reports: reports
                 };
             });
-
-            return {
-                getActions: function () {
-                    return [];
-                },
-
-                getAvailableActions: function () {
-                    return $q.when(availableActions);
-                },
-
-                implicitOrder: {
-                    predicate: 'rule.severityNum',
-                    reverse: true
-                },
-
-                save: function (toAdd) {
-                    const payload = {
-                        name: $scope.selected.plan.alias,
-                        reports: map(flatten(map(toAdd, 'reports')), 'id')
-                    };
-                    if ($scope.selected.plan.maintenance_id) {
-                        return MaintenanceService.plans.update(
-                            $scope.selected.plan, payload);
-                    }
-
-                    return MaintenanceService.plans.create(payload).then(function (plan) {
-                        $scope.selected.plan = plan;
-                        return plan;
-                    });
-                }
-            };
         });
+
+        return {
+            getActions: function () {
+                return [];
+            },
+
+            getAvailableActions: function () {
+                return availableActions;
+            },
+
+            implicitOrder: {
+                predicate: 'rule.severityNum',
+                reverse: true
+            },
+
+            save: function (toAdd) {
+                const payload = {
+                    name: $scope.newPlanAlias,
+                    reports: map(flatten(map(toAdd, 'reports')), 'id')
+                };
+                if (!$scope.newPlan && $scope.selected.plan) {
+                    return MaintenanceService.plans.update(
+                        $scope.selected.plan, payload);
+                }
+
+                return MaintenanceService.plans.create(payload).then(function (plan) {
+                    $scope.selected.plan = plan;
+                    return plan;
+                });
+            }
+        };
     }
 
     $scope.close = function () {
@@ -216,21 +223,19 @@ function maintenanceModalCtrl($scope,
         });
     };
 
-    $scope.$watch('plans.all', function () {
-        if ($scope.plansLoaded) {
+    $scope.$watch('plans.all', function (value) {
+        if (value) {
             $scope.availablePlans = MaintenanceService.plans.future.concat(
                 MaintenanceService.plans.unscheduled);
-            $scope.availablePlans.push({
-                name: gettextCatalog.getString('Create a new plan'),
-                new: true
-            });
+
+            if (!$scope.selected.plan && $scope.availablePlans.length) {
+                $scope.selected.plan = $scope.availablePlans[0];
+            }
         }
     });
 
     $scope.planGroupFn = function (plan) {
-        if (plan.new) {
-            return;
-        } else if (plan.start) {
+        if (plan.start) {
             return gettextCatalog.getString('Future plans');
         } else {
             return gettextCatalog.getString('Not scheduled plans');
@@ -254,19 +259,7 @@ function maintenanceModalCtrl($scope,
         return groups;
     };
 
-    function init(force) {
-        $scope.plansLoaded = false;
-        MaintenanceService.plans.load(force).then(function setLoaded() {
-            $scope.plansLoaded = true;
-        });
-    }
-
-    init(false);
-
-    $rootScope.$on('reload:data', function () {
-        init(true);
-    });
-
+    MaintenanceService.plans.load(false);
     ModalUtils.suppressEscNavigation($modalInstance);
 }
 

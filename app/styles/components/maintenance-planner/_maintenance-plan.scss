@@ -883,7 +883,7 @@ table.maintenance-table {
   }
 
   // wrap long hostname / rule names in the table
-  a.action, a.hostname {
+  a.action, a.hostname, .wrap {
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
     white-space: -pre-wrap;
