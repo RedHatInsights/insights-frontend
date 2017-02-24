@@ -44,71 +44,70 @@ function systemCardCtrl(
         $scope.loading = true;
         System.getSystemLinks($scope.system.system_id, query).then(function (links) {
                 var linkGroups;
-                var types;
                 var rolePriorities;
 
                 if (links && links.data && links.data.resources) {
-                    $scope.links = links.data.resources;
-                    linkGroups = groupBy($scope.links, function (link) {
-                        return link.system_type_id;
-                    });
+                    SystemsService.getSystemTypesAsync().then(function (types) {
+                        $scope.links = links.data.resources;
+                        linkGroups = groupBy($scope.links, function (link) {
+                            return link.system_type_id;
+                        });
 
-                    types = SystemsService.getSystemTypes();
+                        //most important role is first
+                        rolePriorities = [find(types, {
+                            product_code: Products.osp.code,
+                            role: Products.osp.roles.cluster.code
+                        }),find(types, {
+                            product_code: Products.rhev.code,
+                            role: Products.rhev.roles.cluster.code
+                        }),find(types, {
+                            product_code: Products.ocp.code,
+                            role: Products.ocp.roles.cluster.code
+                        }),find(types, {
+                            product_code: Products.osp.code,
+                            role: Products.osp.roles.director.code
+                        }),find(types, {
+                            product_code: Products.rhev.code,
+                            role: Products.rhev.roles.manager.code
+                        }),find(types, {
+                            product_code: Products.ocp.code,
+                            role: Products.ocp.roles.master.code
+                        }),find(types, {
+                            product_code: Products.docker.code,
+                            role: Products.docker.roles.host.code
+                        }),find(types, {
+                            product_code: Products.osp.code,
+                            role: Products.osp.roles.compute.code
+                        }),find(types, {
+                            product_code: Products.osp.code,
+                            role: Products.osp.roles.controller.code
+                        }),find(types, {
+                            product_code: Products.rhev.code,
+                            role: Products.rhev.roles.hypervisor.code
+                        }),find(types, {
+                            product_code: Products.docker.code,
+                            role: Products.docker.roles.container.code
+                        }),find(types, {
+                            product_code: Products.docker.code,
+                            role: Products.docker.roles.image.code
+                        }),find(types, {
+                            product_code: Products.ocp.code,
+                            role: Products.ocp.roles.node.code
+                        }),find(types, {
+                            product_code: Products.rhel.code,
+                            role: Products.rhel.roles.host.code
+                        })];
 
-                    //most important role is first
-                    rolePriorities = [find(types, {
-                        product_code: Products.osp.code,
-                        role: Products.osp.roles.cluster.code
-                    }),find(types, {
-                        product_code: Products.rhev.code,
-                        role: Products.rhev.roles.cluster.code
-                    }),find(types, {
-                        product_code: Products.ocp.code,
-                        role: Products.ocp.roles.cluster.code
-                    }),find(types, {
-                        product_code: Products.osp.code,
-                        role: Products.osp.roles.director.code
-                    }),find(types, {
-                        product_code: Products.rhev.code,
-                        role: Products.rhev.roles.manager.code
-                    }),find(types, {
-                        product_code: Products.ocp.code,
-                        role: Products.ocp.roles.master.code
-                    }),find(types, {
-                        product_code: Products.docker.code,
-                        role: Products.docker.roles.host.code
-                    }),find(types, {
-                        product_code: Products.osp.code,
-                        role: Products.osp.roles.compute.code
-                    }),find(types, {
-                        product_code: Products.osp.code,
-                        role: Products.osp.roles.controller.code
-                    }),find(types, {
-                        product_code: Products.rhev.code,
-                        role: Products.rhev.roles.hypervisor.code
-                    }),find(types, {
-                        product_code: Products.docker.code,
-                        role: Products.docker.roles.container.code
-                    }),find(types, {
-                        product_code: Products.docker.code,
-                        role: Products.docker.roles.image.code
-                    }),find(types, {
-                        product_code: Products.ocp.code,
-                        role: Products.ocp.roles.node.code
-                    }),find(types, {
-                        product_code: Products.rhel.code,
-                        role: Products.rhel.roles.host.code
-                    })];
-
-                    $scope.linkGroups = map(linkGroups, function (value, key) {
-                        var priority = findIndex(
-                            rolePriorities,
-                            {id: parseInt(key)});
-                        return {
-                            priority: priority,
-                            system_type_id: key,
-                            members: value
-                        };
+                        $scope.linkGroups = map(linkGroups, function (value, key) {
+                            var priority = findIndex(
+                                rolePriorities,
+                                {id: parseInt(key)});
+                            return {
+                                priority: priority,
+                                system_type_id: key,
+                                members: value
+                            };
+                        });
                     });
                 }
             }).then(function () {

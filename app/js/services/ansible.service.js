@@ -1,12 +1,11 @@
 'use strict';
 
 var servicesModule = require('./');
-const pluck = require('lodash/collection/pluck');
 
 /**
  * @ngInject
  */
-function AnsibleService(SystemsService) {
+function AnsibleService() {
 
     var ansibleService = {};
     var plan = null;
@@ -107,42 +106,6 @@ function AnsibleService(SystemsService) {
         }
 
         return formattedResolutions;
-    };
-
-    /**
-     * Gathers all systems that have actions that will be resolved by the generated
-     * playbook and organizes them by their system_type
-     */
-    ansibleService.getSystemSummary = function () {
-        let systemSummary = {};
-
-        // gets the list of rules that have an ansible_resolution for this plan
-        let ruleList = plan.rules.filter((rule) => {
-            return pluck(ansibleService.questions, 'rule_id')
-                   .includes(rule.rule_id);
-        });
-
-        // Creates a hashmap of {product_code: {system_type<Object>, systems<Array>}}:
-        // 1) Gets each system from the actions of the rules in ruleList
-        // 2) Creates a new hask key using the system_type.product_code if doesn't exist
-        // 3) Adds the system_type object to the object of this hash
-        // 4) Adds the system object to the object of this hash
-        ruleList.forEach((rule) => {
-            let systemType = null;
-            rule.actions.forEach((action) => {
-                systemType = SystemsService.getSystemType(action.system.system_type_id);
-                if (systemType.product_code in systemSummary) {
-                    systemSummary[systemType.product_code].systems.push(action.system);
-                } else {
-                    systemSummary[systemType.product_code] = {
-                        system_type: systemType,
-                        systems: [action.system]
-                    };
-                }
-            });
-        });
-
-        return systemSummary;
     };
 
     return ansibleService;

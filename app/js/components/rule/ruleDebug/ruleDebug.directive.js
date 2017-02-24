@@ -84,10 +84,6 @@ function RuleDebugCtrl(
 
     $scope.buildPreview();
 
-    SystemsService.populateSystemTypes(false).then(function () {
-        $scope.systemTypes = SystemsService.getSystemTypes();
-    });
-
     // TODO: workaround for https://trello.com/c/Ps2lXYGr/21
     function readSystem (r) {
         r.system.toString = Utils.getSystemDisplayName(r.system);

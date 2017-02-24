@@ -7,6 +7,7 @@ const find = require('lodash/collection/find');
 const FileSaver = require('file-saver');
 const parseHeader = require('parse-http-header');
 const some = require('lodash/collection/some');
+const get = require('lodash/object/get');
 
 /**
  * @ngInject
@@ -311,7 +312,9 @@ function maintenancePlanCtrl(
     };
 
     $scope.groupBySystemType = function (system) {
-        return SystemsService.getSystemTypeDisplayName(system.system_type_id);
+        // this is safe as system select won't be shown before system types are loaded
+        return get(SystemsService.getSystemTypeUnsafe(system.system_type_id),
+            'displayName');
     };
 
     function checkAnsibleSupport () {

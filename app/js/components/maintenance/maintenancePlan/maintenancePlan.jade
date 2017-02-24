@@ -215,7 +215,8 @@
                   ui-select.gray.maintenance-page-select(
                     ng-model='addSystem.selected',
                     append-to-body='false',
-                    ng-disabled='!getAvailableSystems().length')
+                    ng-disabled='!getAvailableSystems().length',
+                    ng-if='systemTypes.length')
                     ui-select-match.form-control.ui-select-match(placeholder="{{'Add system' | translate}}")
                       | {{$select.selected._displayAs}}
                     ui-select-choices.ui-select-choices(

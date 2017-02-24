@@ -195,8 +195,6 @@ function ActionsRuleCtrl(
                 RhaTelemetryActionsService.setIsScrolling(false);
             });
 
-        let systemTypesPromise = SystemsService.populateSystemTypes(false);
-
         let topicBreadCrumbPromise =
             Topic.get($stateParams.category).success(function (topic) {
                 ActionsBreadcrumbs.setCrumb({
@@ -210,8 +208,8 @@ function ActionsRuleCtrl(
 
         let productSpecific = System.getProductSpecificData();
 
-        $q.all([populateDetailsPromise, systemTypesPromise, topicBreadCrumbPromise,
-            productSpecific])
+        $q.all([populateDetailsPromise, SystemsService.getSystemTypesAsync(),
+            topicBreadCrumbPromise, productSpecific])
             .finally(function () {
                 $scope.loading = false;
                 priv.initialDisplay();

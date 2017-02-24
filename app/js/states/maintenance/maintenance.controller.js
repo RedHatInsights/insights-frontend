@@ -159,14 +159,7 @@ function MaintenanceCtrl(
     PermalinkService,
     $state,
     $rootScope,
-    DataUtils,
-    System,
     SystemsService) {
-
-    $scope.systemTypes = [];
-    SystemsService.populateSystemTypes(false).then(function () {
-        $scope.systemTypes = SystemsService.getSystemTypes();
-    });
 
     $scope.BasicEditHandler = BasicEditHandler;
     $scope.available = MaintenanceService.available;
@@ -282,6 +275,10 @@ function MaintenanceCtrl(
     });
 
     MaintenanceService.loadAvailableSystemsAndRules();
+
+    SystemsService.getSystemTypesAsync().then(function (systemTypes) {
+        $scope.systemTypes = systemTypes;
+    });
 
     $rootScope.$on('reload:data', function () {
         $scope.loader.loading = false; // disable loader throttling for reload

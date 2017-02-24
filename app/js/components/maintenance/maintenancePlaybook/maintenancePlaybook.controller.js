@@ -35,17 +35,19 @@ function MaintenancePlaybook($modalInstance,
         $scope.currentQuestion = null;
         $scope.listLimit = $scope.MINIMUM_NUMBER_OF_ITEMS;
 
-        if (unsupportedRules === null) {
-            AnsibleService.init(questions,
-                                $scope.plan,
-                                false);
-            $scope.questions = AnsibleService.questions;
-            $scope.systemSummary = AnsibleService.getSystemSummary();
-        } else {
-            setRulesWithoutPlays();
-        }
+        // make sure system types are loaded before going further
+        SystemsService.getSystemTypesAsync().then(function () {
+            if (unsupportedRules === null) {
+                AnsibleService.init(questions,
+                    $scope.plan,
+                    false);
+                $scope.questions = AnsibleService.questions;
+            } else {
+                setRulesWithoutPlays();
+            }
 
-        initStep();
+            initStep();
+        });
     }
 
     $scope.close = function () {
@@ -88,7 +90,9 @@ function MaintenancePlaybook($modalInstance,
 
             let ruleWithoutPlay = {
                 rule_id: rule.rule_id,
-                system_type: SystemsService.getSystemType(rule.system_type_id),
+
+                // this is safe as system types are awaited within init()
+                system_type: SystemsService.getSystemTypeUnsafe(rule.system_type_id),
                 description: fullRule.description,
                 category: fullRule.category,
                 severity: fullRule.severity,
@@ -133,7 +137,9 @@ function MaintenancePlaybook($modalInstance,
                         rule_id: rule.rule_id,
                         category: rule.category,
                         description: rule.description,
-                        system_type: SystemsService.getSystemType(
+
+                        // this is safe as system types are awaited within init()
+                        system_type: SystemsService.getSystemTypeUnsafe(
                             action.system.system_type_id)
                     };
 
@@ -265,7 +271,8 @@ function MaintenancePlaybook($modalInstance,
         $scope.currentQuestion.resolution_type =
             AnsibleService.getResolutionType($scope.currentQuestion);
 
-        $scope.currentQuestion.system_type = SystemsService.getSystemType(
+        // this is safe as system types are awaited within init()
+        $scope.currentQuestion.system_type = SystemsService.getSystemTypeUnsafe(
             $scope.currentQuestion.system_type_id);
 
         // gets systems that match the rule and system type for the current question
