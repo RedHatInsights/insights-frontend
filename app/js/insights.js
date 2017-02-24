@@ -97,3 +97,14 @@ angular.module('insights').run(require('./boot'));
 angular.module('insights').config(require('./routes'));
 angular.module('insights').config(require('./config'));
 
+// workaround for https://github.com/angular-ui/ui-select/issues/1560
+ angular.module('ui.select').run(function ($animate) {
+    const overridden = $animate.enabled;
+    $animate.enabled = function (elem) {
+        if (elem && elem.className.includes('ui-select-choices')) {
+            return false;
+        }
+
+        return overridden(elem);
+    }
+})
