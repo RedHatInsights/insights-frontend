@@ -40,6 +40,7 @@ $define-fa: true !default;
 @import 'vendor/c3';
 @import 'vendor/ng-table';
 @import 'vendor/_animate';
+@import 'vendor/plotly';
 
 
 // Page Templates
@@ -50,6 +51,11 @@ $define-fa: true !default;
 @import 'page-templates/goals-lite';
 @import 'page-templates/actions';
 @import 'page-templates/eval';
+
+
+// Scaffolding extensions
+//==================================================================*/
+@import 'scaffolding/tabs';
 
 
 // Include Components
@@ -117,6 +123,7 @@ $define-fa: true !default;
 @import 'components/pager';
 @import 'components/icon-group';
 @import 'components/severity-icon';
+@import 'components/gauges';
 
 
 // Maintenance Plan

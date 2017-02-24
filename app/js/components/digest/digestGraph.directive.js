@@ -1,36 +1,38 @@
+/*global require*/
 'use strict';
 
 var componentsModule = require('../');
-var c3 = require('c3');
+var d3 = Plotly.d3;
 
 /**
  * @ngInject
  */
 function digestGraphController($scope) {
+    var jQuery = window.jQuery;
+
     // puke chart to page
-    c3.generate({
-        bindto: '[digest-key=' + $scope.digestKey + ']',
-        size: {
-            height: 400,
-            width: 800
-        },
-        data: {
-            x: 'timeseries',
-            json: $scope.digest.data, // .data.data.data.data...
-            zoom: {
-                enabled: true
-            },
-            groups:$scope.digest.groups,
-            types: $scope.digest.types
-        },
-        axis: {
-            x: {
-                type: 'timeseries',
-                tick: {
-                    format: '%Y-%m-%d'
-                }
-            }
-        }
+    // var bindto = document.querySelector('[digest-key=' + $scope.digestKey + ']');
+    // Plotly.newPlot(
+    //     bindto, $scope.digest.data, $scope.digest.layout, $scope.digest.options);
+
+    var gd3 = d3.select('[digest-key=' + $scope.digestKey + ']')
+        .append('div')
+        .style({
+            width: '100%',
+            height: '400px'
+        });
+
+    var gd = gd3.node();
+
+    Plotly.newPlot(
+        gd, $scope.digest.data, $scope.digest.layout, $scope.digest.options);
+
+    window.addEventListener('resize', function () {
+        Plotly.Plots.resize(gd);
+    });
+
+    jQuery('a[data-toggle="tab"]').on('shown.bs.tab', function () {
+        Plotly.Plots.resize(gd);
     });
 }
 
@@ -42,7 +44,9 @@ function digestGraph() {
         replace: true,
         scope: {
             digest: '=',
-            digestKey: '@'
+            digestKey: '@',
+            width: '@',
+            chartType: '@'
         }
     };
 }
