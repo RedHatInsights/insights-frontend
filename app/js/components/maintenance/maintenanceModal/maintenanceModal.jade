@@ -34,13 +34,14 @@
               span(ng-if='selected.plan.start') {{selected.plan.start | moment:'LL'}}
                 span(ng-show='selected.plan.name.length') &nbsp;({{selected.plan.name}})
             ui-select-choices.ui-select-choices(
-              repeat="plan in availablePlans | searchMaintenancePlans: $select.search",
+              repeat="plan in availablePlans | searchMaintenancePlans: $select.search | orderBy:['start', getPlanName, 'maintenance_id']",
               group-by='planGroupFn',
               group-filter='planOrderFn')
               span(ng-if='!plan.start && !plan.name.length') PLAN {{plan.maintenance_id}}
               span(ng-if='!plan.start && plan.name.length') {{plan.name}}
               span(ng-if='plan.start') {{plan.start | moment:'LL'}}
-                span(ng-show='plan.name.length') &nbsp;({{plan.name}})
+                span(ng-show='plan.name.length') &nbsp;{{plan.name}}
+                span(ng-hide='plan.name.length') &nbsp;PLAN {{plan.maintenance_id}}
 
     .row.available-actions
       .content-block.maintenance-plan.rule(

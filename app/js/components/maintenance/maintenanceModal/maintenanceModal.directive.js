@@ -273,6 +273,14 @@ function maintenanceModalCtrl($scope,
         return groups;
     };
 
+    $scope.getPlanName = function (plan) {
+        if (plan.name && plan.name.length) {
+            return plan.name;
+        }
+
+        return 'PLAN';
+    };
+
     MaintenanceService.plans.load(false);
     ModalUtils.suppressEscNavigation($modalInstance);
 }
