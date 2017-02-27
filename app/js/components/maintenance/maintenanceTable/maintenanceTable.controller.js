@@ -78,11 +78,6 @@ function MaintenanceTable(
             $scope.checkboxes.checked, ctrl.filteredActions);
     };
 
-    // checkboxes
-    ctrl.colspan = function (value) {
-        return ($scope.edit) ? value + 1 : value;
-    };
-
     $scope.$watchGroup(['item', 'edit'], function () {
         ctrl.filter = {};
         evalActions();
