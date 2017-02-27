@@ -1,6 +1,7 @@
 .updatable(ng-class='{updating: table.loader.loading}')
   .spinner.spinner-lg(ng-show='table.loader.loading')
-  table.table.nomar.ng-table.maintenance-table
+  // cols set so that footer knows how many cols to span
+  table.table.nomar.ng-table.maintenance-table(ng-init='cols = 5')
     thead
       tr
         th.text-center(ng-show='edit')
@@ -14,7 +15,7 @@
         th.sortable.text-center(ng-class="table.sorter.getSortClass('reports.length')", ng-click="table.sorter.sort('reports.length')")
           .sort-indicator(translate) Systems
       tr(ng-show='edit')
-        th.filter(colspan='100%')
+        th.filter(colspan='5')
           input.form-control.nomar-left.input-sm(type='text', placeholder='Filter by rule name', ng-model="table.filter.display", ng-change='table.doFilter()')
     tbody
       tr(ng-repeat="action in table.data track by action.id", data-id="{{action.id}}",
