@@ -17,7 +17,7 @@ function categoryMultiButtonCtrl(
         $scope.categoryButtons.push({
             label: category,
             stateKey: key + category,
-            icon: category + '-category-icon',
+            icon: ['category-icon', category.toLowerCase()],
             toggleCallback: function () {
                 FilterService.doFilter();
                 $scope.onClick();
