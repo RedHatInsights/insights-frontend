@@ -1,7 +1,6 @@
 'use strict';
 
 var componentsModule = require('../');
-var find = require('lodash/collection/find');
 
 /**
  * @ngInject
@@ -25,9 +24,9 @@ function linkGroupCtrl($scope, $state, InventoryService, SystemsService) {
         return hasReports;
     };
 
-    $scope.getLinkGroupText = function () {
-        var type = find(SystemsService.getSystemTypes(), {id: parseInt($scope.typeid)});
-        var text = '';
+    SystemsService.getSystemTypeAsync($scope.typeid).then(function (type) {
+        let text = '';
+
         if (type) {
             text = $scope.group.length + ' ' + type.displayName;
             if ($scope.group.length !== 1) {
@@ -35,8 +34,8 @@ function linkGroupCtrl($scope, $state, InventoryService, SystemsService) {
             }
         }
 
-        return text;
-    };
+        $scope.linkGroupText = text;
+    });
 
     $scope.getLinkReportCount = function (link) {
         var report_count = link.report_count;

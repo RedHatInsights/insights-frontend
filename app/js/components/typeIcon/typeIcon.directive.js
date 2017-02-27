@@ -9,13 +9,14 @@ function typeIconCtrl($scope, SystemsService) {
     $scope.systemTypeIcon = '';
     $scope.systemTypeDisplayName = '';
     $scope.systemTypeDisplayNameShort = '';
-    let systemType = SystemsService.getSystemType($scope.typeId);
 
-    if (systemType) {
-        $scope.systemTypeIcon = systemType.imageClass;
-        $scope.systemTypeDisplayName = systemType.displayName;
-        $scope.systemTypeDisplayNameShort = systemType.displayNameShort;
-    }
+    SystemsService.getSystemTypeAsync($scope.typeId).then(function (systemType) {
+        if (systemType) {
+            $scope.systemTypeIcon = systemType.imageClass;
+            $scope.systemTypeDisplayName = systemType.displayName;
+            $scope.systemTypeDisplayNameShort = systemType.displayNameShort;
+        }
+    });
 }
 
 function typeIcon() {

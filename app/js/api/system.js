@@ -20,7 +20,6 @@ function System(
     DataUtils) {
 
     var root = InsightsConfig.apiRoot;
-    var _systemTypesDfd;
     var _systemDfd;
     var _systemStatusDfd;
 
@@ -133,19 +132,12 @@ function System(
         },
 
         getSystemTypes: function () {
-            var url;
+            const url = root + 'system_types';
 
-            if (_systemTypesDfd) {
-                return _systemTypesDfd;
-            }
-
-            url = root + 'system_types';
-            _systemTypesDfd = $http.get(url);
-            _systemTypesDfd.then(function (response) {
-                return decorateSystemTypes(response.data);
+            return $http.get(url).then(function (response) {
+                decorateSystemTypes(response.data);
+                return response;
             });
-
-            return _systemTypesDfd;
         },
 
         getSystems: function () {

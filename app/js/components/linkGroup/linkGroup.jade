@@ -16,7 +16,7 @@
           tooltip-trigger='mouseenter',
           tooltip-append-to-body='true',
           tooltip-placement='top')
-    | {{getLinkGroupText(type_id)}}
+    | {{linkGroupText}}
   .member-group-content(ng-if='!collapsed')
     .row
       .link-text(ng-repeat='link in group')

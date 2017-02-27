@@ -13,7 +13,6 @@ function SystemsService($filter,
                         SweetAlert,
                         System) {
     var systemsService = {};
-    var _systemTypes = [];
     var _newestSystems = null;
     var _UNREGISTER_TEXT_SINGLE =
         '<h5>This will unregister the selected system from Red Hat Insights.' +
@@ -25,62 +24,27 @@ function SystemsService($filter,
         '<code>redhat-access-insights --register</code> ' +
         'must be run from each unregistered system.</p>';
 
-    /**
-     * Populates _systemTypes if _systemTypes is empty.
-     * This method also provides a way to force populate for refreshing the list.
-     *
-     * @returns {Promise}
-     */
-    systemsService.populateSystemTypes = function (doForcePopulate) {
-        if (_systemTypes.length > 0 && !doForcePopulate) {
-            // system types are already populated. Return a resolved promise
-            return Promise.resolve();
-        }
-        else {
-            return System.getSystemTypes()
-            .then((response) => {
-                _systemTypes = response.data;
-            });
-        }
+    let systemTypes = [];
+
+    // system type indication is ubiquitous - let's eagerly load this
+    const systemTypesDfd = System.getSystemTypes().then((response) => {
+        systemTypes = response.data;
+        return response.data;
+    });
+
+    // unsafe because there is no guarantee system types have been loaded
+    systemsService.getSystemTypeUnsafe = function (system_type_id) {
+        return find(systemTypes, {id: parseInt(system_type_id)});
     };
 
-    systemsService.getSystemTypes = function () {
-        return _systemTypes;
+    systemsService.getSystemTypesAsync = function () {
+        return systemTypesDfd;
     };
 
-    systemsService.getSystemType = function (system_type_id) {
-        var type = find(systemsService.getSystemTypes(), {id: parseInt(system_type_id)});
-        return type;
-    };
-
-    systemsService.getSystemTypeIcon = function (system_type_id) {
-        var type = systemsService.getSystemType(system_type_id);
-        var response = '';
-        if (type) {
-            response = type.imageClass;
-        }
-
-        return response;
-    };
-
-    systemsService.getSystemTypeDisplayNameShort = function (system_type_id) {
-        var type = systemsService.getSystemType(system_type_id);
-        var response = '';
-        if (type) {
-            response = type.displayNameShort;
-        }
-
-        return response;
-    };
-
-    systemsService.getSystemTypeDisplayName = function (system_type_id) {
-        var type = systemsService.getSystemType(system_type_id);
-        var response = '';
-        if (type) {
-            response = type.displayName;
-        }
-
-        return response;
+    systemsService.getSystemTypeAsync = function (system_type_id) {
+        return systemsService.getSystemTypesAsync().then(function () {
+            return systemsService.getSystemTypeUnsafe(system_type_id);
+        });
     };
 
     function unregisterSystems(systems) {

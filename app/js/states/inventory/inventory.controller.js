@@ -99,7 +99,7 @@ function InventoryCtrl(
     function initInventory() {
         //get system types
         $scope.loading = true;
-        SystemsService.populateSystemTypes(false).then(function () {
+        SystemsService.getSystemTypesAsync().then(function () {
             getData(false);
         });
     }
@@ -269,7 +269,9 @@ function InventoryCtrl(
             role: 'hypervisor'
         }];
         var systemType = pick(
-            find(SystemsService.getSystemTypes(), {id: system.system_type_id}),
+
+            // this is safe as system types are awaited within initInventory()
+            SystemsService.getSystemTypeUnsafe(system.system_type_id),
             'product_code',
             'role');
 
