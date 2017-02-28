@@ -74,7 +74,7 @@ function ActionsRuleCtrl(
             let selectedSystems = $scope.checkboxes.getSelected($scope.ruleSystems);
             $scope.setNoSystemsSelected(selectedSystems.length === 0);
             if (selectedSystems.length) {
-                return fn();
+                return fn.apply(null, arguments);
             }
         };
     }
@@ -255,14 +255,14 @@ function ActionsRuleCtrl(
         priv.initCtrl();
     }
 
-    $scope.addToPlan = rejectIfNoSystemSelected(function () {
+    $scope.addToPlan = rejectIfNoSystemSelected(function (newPlan) {
         var systems = $scope.checkboxes.getSelected($scope.ruleSystems);
         if (!systems.length) {
             return;
         }
 
         let rule = RhaTelemetryActionsService.getRuleDetails();
-        MaintenanceService.showMaintenanceModal(null, systems, rule);
+        MaintenanceService.showMaintenanceModal(null, systems, rule, newPlan);
     });
 }
 

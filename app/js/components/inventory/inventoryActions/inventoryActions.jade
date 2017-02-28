@@ -1,62 +1,8 @@
 .inventory-actions
   .row
-    .col-sm-3.bulk-actions-dropdown
-      .bulk-actions
-        input.action-checkbox(
-          tooltip="{{'Select All' | translate}}",
-          tooltip-trigger='mouseenter',
-          tooltip-append-to-body='true',
-          tooltip-placement='top',
-          type="checkbox",
-          ng-indeterminate="checkboxes.indeterminate",
-          ng-model='checkboxes.checked',
-          ng-change='checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())',
-          ng-show='listType() === listTypes.card')
-
-        .btn-group.insights-dropdown
-          a.btn.btn-outline.btn-xs.dropdown-toggle(
-            data-toggle='dropdown',
-            aria-haspopup='true',
-            aria-expanded='false',
-            translate,
-            ng-disabled='!checkboxes.totalChecked') Actions
-            i.caret.dropdown-caret
-          ul.dropdown-menu
-            li(ng-if='config.isPlannerEnabled')
-              a(ng-click='addToPlan()',
-                ng-disabled='!isFixableSelected()',
-                translate) Add to plan
-            li(tooltip='{{unregisterButtonTooltip}}')
-              a.pointer-events-auto(
-                ng-disabled='!isUnregistrableSelected()',
-                ng-click='isUnregistrableSelected() && doUnregisterSelected()',
-                translate) Unregister
-
-    .col-sm-6.text-center-sm
+    .col-sm-12.text-center-sm
       h3.system-count(translate, translate-n='getTotal()', translate-plural='{{$count}} Systems')
         | 1 System
       span(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{numberOfSelected()}} Selected)
       br
       a(ng-if='allSelected && !reallyAllSelected && !allSystemsShown()' ng-click='reallySelectAll()') &nbsp; Select all {{totalSystems()}} systems
-    .col-sm-3.text-right-sm(ng-show='listType() === listTypes.card')
-      // expand-all-button.expand-all-btn
-      .btn-group.sort-button-group.insights-dropdown(
-        tooltip="{{'Sort Field' | translate}}",
-        tooltip-trigger='mouseenter',
-        tooltip-append-to-body='true',
-        tooltip-placement='top')
-        a.btn.btn-outline.btn-xs.dropdown-toggle(
-          data-toggle='dropdown',
-          aria-haspopup='true',
-          aria-expanded'false') {{getSortLabel(getSortField())}}
-          i.caret.dropdown-caret
-        ul.dropdown-menu.dropdown-menu-right
-          li(ng-repeat='item in sortItems')
-            a(ng-click='doSort(item)') {{getSortLabel(item.field)}}
-      i.fa.fa-2x.sort-dir(
-        ng-class='getSortIconClasses()',
-        tooltip="{{'Sort Direction' | translate}}"
-        tooltip-trigger='mouseenter',
-        tooltip-append-to-body='true',
-        tooltip-placement='top',
-        ng-click='toggleSortDirection()')

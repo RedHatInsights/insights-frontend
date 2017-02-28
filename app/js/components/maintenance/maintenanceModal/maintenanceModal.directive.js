@@ -31,9 +31,11 @@ function maintenanceModalCtrl($scope,
                               gettextCatalog,
                               ModalUtils,
                               $q,
-                              DataUtils) {
+                              DataUtils,
+                              newPlan) {
     $scope.MODES = MODES;
     $scope.tableEdit = true;
+    $scope.newPlan = newPlan;
 
     // normalize - if multiselect contains only one system treat as simple case
     if (!rule && systems) {
@@ -56,7 +58,6 @@ function maintenanceModalCtrl($scope,
     $scope.system = system;
     $scope.loader = new Utils.Loader();
     $scope.selected = {};
-    $scope.newPlan = true;
     $scope.rule = rule;
     $scope.systems = systems;
 
