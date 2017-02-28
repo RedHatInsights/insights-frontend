@@ -21,7 +21,9 @@ function ActionsCtrl(
     SystemsService,
     TopicService,
     Utils,
-    Stats) {
+    Stats,
+    ActionbarService,
+    Export) {
 
     const params = $state.params;
     $scope.stats = {};
@@ -101,6 +103,12 @@ function ActionsCtrl(
     $scope.$on('filterService:doFilter', loadStats);
 
     loadStats();
+
+    if (InsightsConfig.allowExport) {
+        ActionbarService.addExportAction(function () {
+            Export.getReports();
+        });
+    }
 }
 
 statesModule.controller('ActionsCtrl', ActionsCtrl);

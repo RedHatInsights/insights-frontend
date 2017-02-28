@@ -32,7 +32,10 @@ function ActionsRuleCtrl(
         SystemsService,
         Topic,
         User,
-        Utils) {
+        Utils,
+        ActionbarService,
+        Export,
+        Group) {
 
     //let params = $state.params;
     let category = $stateParams.category;
@@ -299,6 +302,12 @@ function ActionsRuleCtrl(
 
         $scope.loading = false;
     };
+
+    if (InsightsConfig.allowExport) {
+        ActionbarService.addExportAction(function () {
+            Export.getReports(null, $stateParams.rule, Group.current().id);
+        });
+    }
 }
 
 componentsModule.controller('ActionsRuleCtrl', ActionsRuleCtrl);

@@ -26,7 +26,10 @@ function InventoryCtrl(
         QuickFilters,
         PreferenceService,
         Utils,
-        ListTypeService) {
+        ListTypeService,
+        ActionbarService,
+        Export,
+        Group) {
 
     function updateParams(params) {
         params = FilterService.updateParams(params);
@@ -377,6 +380,22 @@ function InventoryCtrl(
         //  if all systems are already shown
         return InventoryService.getTotal() === $scope.systems.length;
     };
+
+    if (InsightsConfig.allowExport) {
+        ActionbarService.addExportAction(function () {
+            let stale;
+
+            if (FilterService.getOnline() && !FilterService.getOffline()) {
+                stale = false;
+            }
+
+            if (!FilterService.getOnline() && FilterService.getOffline()) {
+                stale = true;
+            }
+
+            Export.getReports(null, null, Group.current().id, stale);
+        });
+    }
 }
 
 statesModule.controller('InventoryCtrl', InventoryCtrl);
