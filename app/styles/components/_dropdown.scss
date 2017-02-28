@@ -19,6 +19,7 @@
 
 .dropdown {
 
+  button.btn,
   button {
     width: 100%;
     display: block;
@@ -43,6 +44,10 @@
 
     li > a {
       @include rem('padding', 8px $global-padding);
+    }
+
+    li a {
+      @include rem('padding', 8px 22px 8px $global-padding);
     }
   }
 }

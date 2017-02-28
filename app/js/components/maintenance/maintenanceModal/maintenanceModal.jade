@@ -5,7 +5,7 @@
   .modal-header
     .text-center
       i.rh-icon-book
-      h2 Add to plan
+      h2(translate) Plan / Playbook Builder
   .content-block
     .form-group
       .row.row-short
@@ -20,7 +20,8 @@
             maxlength='255',
             ng-disabled='!newPlan',
             ng-model='newPlanAlias',
-            placeholder="{{'Plan Alias (optional)' | translate}}")
+            placeholder="{{'Plan Alias (optional)' | translate}}",
+            autofocus)
       .row.row-short
         .radio.col-sm-4
           label.control-label

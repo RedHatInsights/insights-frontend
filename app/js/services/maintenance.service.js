@@ -126,7 +126,7 @@ function MaintenanceService(
         });
     };
 
-    service.showMaintenanceModal = function (system, systems, rule) {
+    service.showMaintenanceModal = function (system, systems, rule, newPlan) {
         $modal.open({
             templateUrl: 'js/components/maintenance/' +
             'maintenanceModal/maintenanceModal.html',
@@ -144,6 +144,10 @@ function MaintenanceService(
 
                 rule: function () {
                     return rule || false;
+                },
+
+                newPlan: function () {
+                    return (newPlan === undefined) ? true : newPlan;
                 }
             }
         });

@@ -34,20 +34,29 @@ section
 
     // Show Create Playbook, Add to Plan if at least one system has been selected
     .row.row-short
-      .col-sm-6
-        .btn-group.insights-dropdown
-          a.btn.btn-outline.btn-xs.dropdown-toggle(
+      .col-sm-3.col-lg-2
+        .dropdown
+          button.btn.btn-default.dropdown-toggle(
             data-toggle='dropdown',
             aria-haspopup='true',
             aria-expanded='false',
             translate,
             ng-disabled='!checkboxes.totalChecked || !config.isPlannerEnabled') Actions
-            i.caret.dropdown-caret
+            span.caret
           ul.dropdown-menu
             li(ng-if='config.isPlannerEnabled',)
-              a(ng-click='addToPlan()', translate) Add to plan
-
-      .col-sm-6
+              a(ng-click='addToPlan(true)', translate) Create a new Plan/Playbook
+                ansible-icon.inline-left(
+                  value='true',
+                  show-tooltip='false')
+            li(ng-if='config.isPlannerEnabled',)
+              a(ng-click='addToPlan(false)',
+                ng-disabled='!plans.future.length && !plans.unscheduled.length',
+                translate) Add to existing Plan/Playbook
+                ansible-icon.inline-left(
+                  value='plans.future.length || plans.unscheduled.length',
+                  show-tooltip='false')
+      .col-sm-6.col-sm-offset-3.col-lg-offset-4
         list-type.text-right-sm
 
     .row.row-short

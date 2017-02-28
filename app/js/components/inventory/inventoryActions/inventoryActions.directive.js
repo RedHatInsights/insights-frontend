@@ -32,6 +32,7 @@ function inventoryActionsCtrl(
     $scope.listTypes = ListTypeService.types();
     $scope.listType =  ListTypeService.getType;
     $scope.config = InsightsConfig;
+    $scope.plans = MaintenanceService.plans;
 
     $scope.getSortLabel = function (field) {
         var item = find($scope.sortItems, {field: field});
@@ -195,13 +196,13 @@ function inventoryActionsCtrl(
             };
     };
 
-    $scope.addToPlan = function () {
+    $scope.addToPlan = function (newPlan) {
         let systems = $scope.systemsToAction();
         if (!systems.length) {
             return;
         }
 
-        MaintenanceService.showMaintenanceModal(null, systems, null);
+        MaintenanceService.showMaintenanceModal(null, systems, null, newPlan);
     };
 
     $scope.numberOfSelected = function () {
