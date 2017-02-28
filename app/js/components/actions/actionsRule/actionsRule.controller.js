@@ -108,7 +108,7 @@ function ActionsRuleCtrl(
     $scope.getReportDetails = RhaTelemetryActionsService.getReportDetails;
     $scope.loading = true;
     $scope.loadingSystems = true;
-    $scope.predicate = 'system.hostname';
+    $scope.predicate = 'toString';
     $scope.ospRuleResolution = '';
 
     $scope.search = {
