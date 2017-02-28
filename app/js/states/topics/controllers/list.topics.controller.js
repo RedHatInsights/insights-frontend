@@ -15,7 +15,10 @@ function TopicRuleListCtrl(
         DataUtils,
         QuickFilters,
         PermalinkService,
-        ActionsBreadcrumbs) {
+        ActionsBreadcrumbs,
+        InsightsConfig,
+        ActionbarService,
+        Export) {
 
     FilterService.parseBrowserQueryParams();
     FilterService.setShowFilters(false);
@@ -51,6 +54,12 @@ function TopicRuleListCtrl(
 
     $rootScope.$on('reload:data', getData);
     getData();
+
+    if (InsightsConfig.allowExport) {
+        ActionbarService.addExportAction(function () {
+            Export.getReports($stateParams.id);
+        });
+    }
 }
 
 statesModule.controller('TopicRuleListCtrl', TopicRuleListCtrl);

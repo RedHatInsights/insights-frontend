@@ -5,9 +5,10 @@ var servicesModule = require('./');
 /**
  * @ngInject
  */
-function ActionbarService() {
+function ActionbarService(gettextCatalog) {
     var _actions = [];
-    return {
+
+    const result = {
         actions: _actions,
         add: function (action) {
             _actions.push(action);
@@ -22,6 +23,16 @@ function ActionbarService() {
             _actions.length = 0;
         }
     };
+
+    result.addExportAction = function (callback) {
+        result.add({
+            icon: 'fa-download',
+            title: gettextCatalog.getString('Export CSV'),
+            fn: callback
+        });
+    };
+
+    return result;
 }
 
 servicesModule.factory('ActionbarService', ActionbarService);

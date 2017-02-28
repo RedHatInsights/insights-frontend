@@ -9,7 +9,7 @@
 	border-top: 1px solid $gray;
 	text-align: right;
 
-	.action {
+	button.action {
 		display: inline-block;
 		@include rem('padding', 5px);
 		border: 1px solid #ddd;
