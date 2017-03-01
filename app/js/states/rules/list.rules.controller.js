@@ -142,6 +142,7 @@ function ListRuleCtrl(
     function getData() {
         let promises = [];
         let query = FilterService.buildRequestQueryParams();
+        query.include = 'article';
         let ruleSummaryPromise = Rule.getRulesLatest(query)
             .success(function (ruleResult) {
                 $scope._rules = reject(ruleResult.resources, function (r) {
