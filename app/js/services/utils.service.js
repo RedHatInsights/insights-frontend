@@ -134,7 +134,8 @@ function Utils($filter, $rootScope, Events) {
                 return false;
             }
 
-            if (target.tagName === 'TD' && $event.type === 'click') {
+            if ((target.tagName === 'TD' || target.tagName === 'SPAN') &&
+                    $event.type === 'click') {
                 checkboxes.items[id] = !checkboxes.items[id];
             }
 
