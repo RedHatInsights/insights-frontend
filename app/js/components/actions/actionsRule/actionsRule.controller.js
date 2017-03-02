@@ -9,29 +9,30 @@ const get = require('lodash/object/get');
  * @ngInject
  */
 function ActionsRuleCtrl(
-        $scope,
+        $filter,
+        $location,
+        $modal,
+        $q,
         $rootScope,
+        $scope,
+        $state,
         $stateParams,
         $timeout,
-        $modal,
-        $location,
-        $q,
-        RhaTelemetryActionsService,
         ActionsBreadcrumbs,
+        FilterService,
         InsightsConfig,
         ListTypeService,
-        User,
-        $state,
-        System,
-        FilterService,
-        Report,
-        SystemsService,
+        MaintenanceService,
         PermalinkService,
         PreferenceService,
-        Utils,
         QuickFilters,
-        MaintenanceService,
-        Topic) {
+        Report,
+        RhaTelemetryActionsService,
+        System,
+        SystemsService,
+        Topic,
+        User,
+        Utils) {
 
     //let params = $state.params;
     let category = $stateParams.category;
@@ -44,6 +45,8 @@ function ActionsRuleCtrl(
     $scope.ruleSystems = [];
     $scope.QuickFilters = QuickFilters;
     $scope.config = InsightsConfig;
+    $scope.predicate = 'toString';
+    $scope.reverse = false;
 
     FilterService.parseBrowserQueryParams();
     FilterService.setShowFilters(false);
@@ -108,7 +111,6 @@ function ActionsRuleCtrl(
     $scope.getReportDetails = RhaTelemetryActionsService.getReportDetails;
     $scope.loading = true;
     $scope.loadingSystems = true;
-    $scope.predicate = 'toString';
     $scope.ospRuleResolution = '';
 
     $scope.search = {
@@ -190,6 +192,8 @@ function ActionsRuleCtrl(
 
                 RhaTelemetryActionsService.setIsScrolling(true);
                 RhaTelemetryActionsService.resetPaging();
+                RhaTelemetryActionsService.orderRuleSystems($scope.predicate,
+                    $scope.reverse);
                 $scope.ruleSystems = RhaTelemetryActionsService.getRuleSystemsPage();
                 $scope.allSystems = RhaTelemetryActionsService.getRuleSystems();
                 RhaTelemetryActionsService.setIsScrolling(false);
@@ -264,6 +268,37 @@ function ActionsRuleCtrl(
         let rule = RhaTelemetryActionsService.getRuleDetails();
         MaintenanceService.showMaintenanceModal(null, systems, rule, newPlan);
     });
+
+    /**
+     * Sorts tables and cards based on column selected
+     */
+    $scope.sort = function (column) {
+        $scope.loading = true;
+
+        $scope.reverse = !$scope.reverse;
+
+        // if sorting by a different column then sort ascending unless it's last_check_in
+        if ($scope.predicate !== column) {
+            $scope.reverse = false;
+
+            // last_check_in is different because we are ordering by timestamp but
+            // displaying the timeago format
+            if (column === 'last_check_in') {
+                $scope.reverse = true;
+            }
+        }
+
+        $scope.predicate = column;
+
+        RhaTelemetryActionsService.setIsScrolling(true);
+        RhaTelemetryActionsService.resetPaging();
+        RhaTelemetryActionsService.orderRuleSystems($scope.predicate,
+            $scope.reverse);
+        $scope.ruleSystems = RhaTelemetryActionsService.getRuleSystemsPage();
+        RhaTelemetryActionsService.setIsScrolling(false);
+
+        $scope.loading = false;
+    };
 }
 
 componentsModule.controller('ActionsRuleCtrl', ActionsRuleCtrl);

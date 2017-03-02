@@ -14,9 +14,10 @@ var indexBy = require('lodash/collection/indexBy');
  * @ngInject
  */
 function ActionsService(
-    $state,
+    $filter,
     $q,
     $rootScope,
+    $state,
     Report,
     Rule,
     System,
@@ -401,6 +402,17 @@ function ActionsService(
                 }
             });
         }
+    };
+
+    /**
+     * Orders ruleSystems by supplied predicate and reverse
+     *
+     * @param {string} predicate property to sort by
+     * @param {boolean} reverse if true, descending order
+     */
+    pub.orderRuleSystems = function (predicate, reverse) {
+        vars.ruleSystems = $filter('orderBy')(vars.ruleSystems,
+            reverse ? '-' + predicate : predicate);
     };
 
     if (InsightsConfig.autoRefresh && !isNaN(InsightsConfig.autoRefresh)) {
