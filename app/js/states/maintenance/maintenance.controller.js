@@ -35,6 +35,7 @@ EditToggleHandler.prototype.reset = function () {
 };
 
 EditToggleHandler.prototype.activate = function (id) {
+    this.items = {};
     this.items[id] = true;
     this.updateUrl();
 };
