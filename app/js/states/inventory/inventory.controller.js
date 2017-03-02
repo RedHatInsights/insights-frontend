@@ -303,6 +303,12 @@ function InventoryCtrl(
             InventoryService.setSortField(column);
             InventoryService.setSortDirection('ASC');
             $scope.reverse = false;
+
+            // special case where we are sorting by timestamp but visually
+            // showing timeago
+            if (column === 'last_check_in') {
+                InventoryService.setSortDirection('DESC');
+            }
         }
 
         // if we have the full inventory list then use local sorting
