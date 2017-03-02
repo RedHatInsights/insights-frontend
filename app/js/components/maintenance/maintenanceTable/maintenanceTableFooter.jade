@@ -5,4 +5,4 @@ tr(ng-show='edit')
       button.btn.btn-sm.btn-app(ng-click='table.save()', ng-disabled='!checkboxes.totalChecked', translate) Save
 tr(ng-if="table.filteredActions.length > table.pager.perPage")
   td(colspan='{{cols || 4}}')
-    pagination.pull-right.pagination-gray(total-items="table.filteredActions.length", ng-model="table.pager.currentPage", previous-text="«", next-text="»", max-size="3", rotate="false", items-per-page="table.pager.perPage", ng-change="table.page()")
+    pagination.pull-right.pagination-blue(total-items="table.filteredActions.length", ng-model="table.pager.currentPage", previous-text="«", next-text="»", max-size="3", rotate="false", items-per-page="table.pager.perPage", ng-change="table.page()")

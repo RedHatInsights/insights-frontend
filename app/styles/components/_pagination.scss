@@ -2,6 +2,8 @@ $pagination-gray-color: #c6c6c6;
 $pagination-gray-background: #c6c6c6;
 $pagination-width: 16px;
 $pagination-height: $pagination-width;
+$pagination-blue-color: #0088ce;
+$pagination-blue-background: #0088ce;
 
 .pagination {
 
@@ -25,6 +27,24 @@ $pagination-height: $pagination-width;
 		background-color: $pagination-gray-background;
 		border-color: $pagination-gray-background;
 	}
+}
+
+.pagination.pagination-blue {
+    color: $pagination-gray-color;
+
+    a { color: $pagination-blue-color; }
+    a:hover {
+        background-color: #646464;
+        color: white;
+    }
+
+    .active > a,
+    .pager-current > a,
+    a:focus {
+        color: #fff;
+        background-color: $pagination-blue-background;
+        border-color: $pagination-blue-background;
+    }
 }
 
 ul.pagination.pagination-dots {
