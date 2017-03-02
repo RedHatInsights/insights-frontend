@@ -200,10 +200,6 @@
               ng-if="plan.rules.length > pager.perPage",
               total-items="plan.rules.length",
               ng-model="pager.currentPage",
-              previous-text="«",
-              next-text="»",
-              max-size="3",
-              rotate="false",
               items-per-page="pager.perPage",
               ng-change="pager.update()")
 
@@ -265,10 +261,6 @@
               ng-if="plan.systems.length > pager.perPage",
               total-items="plan.systems.length",
               ng-model="pager.currentPage",
-              previous-text="«",
-              next-text="»",
-              max-size="3",
-              rotate="false",
               items-per-page="pager.perPage",
               ng-change="pager.update()")
       footer.footer(ng-show='edit.isActive(plan.maintenance_id)')

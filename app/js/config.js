@@ -17,7 +17,8 @@ function Config(
     $anchorScrollProvider,
     $animateProvider,
     $tooltipProvider,
-    tagsInputConfigProvider) {
+    tagsInputConfigProvider,
+    paginationConfig) {
 
     // strict mode requires a trailing slash
     $urlMatcherFactoryProvider.strictMode(false);
@@ -88,6 +89,11 @@ function Config(
         loadOnEmpty: 'true',
         selectFirstMatch: 'false'
     });
+
+    paginationConfig.maxSize = 5;
+    paginationConfig.previousText = '«';
+    paginationConfig.nextText = '»';
+
 }
 
 module.exports = Config;
