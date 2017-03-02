@@ -196,7 +196,7 @@
                   params='tableParams(rule, true, false)',
                   edit='tableEdit',
                   item='rule')
-            pagination.pull-right.pagination-gray(
+            pagination.pull-right.pagination-blue(
               ng-if="plan.rules.length > pager.perPage",
               total-items="plan.rules.length",
               ng-model="pager.currentPage",
@@ -261,7 +261,7 @@
                   params='tableParams(system, false, false)',
                   edit='tableEdit',
                   item='system')
-            pagination.pull-right.pagination-gray(
+            pagination.pull-right.pagination-blue(
               ng-if="plan.systems.length > pager.perPage",
               total-items="plan.systems.length",
               ng-model="pager.currentPage",
