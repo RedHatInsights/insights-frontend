@@ -2,7 +2,9 @@
 
 casper.waitAndClick = function waitAndClick(selector, cb) {
     if (selector) {
-        casper.waitForSelector(selector).thenClick(selector);
+        casper.waitForSelector(selector, function clickSelector() {
+            this.click(selector);
+        });
         if (cb) { cb.apply(this); }
     } else {
         throw new Error('Test Code Error: waitAndClick got an undefined selector: ' + selector);

@@ -7,7 +7,7 @@ const funcs  = require('./funcs');
 require('./check_inputs.js');
 
 console.log('Using base: ' + funcs.getUrl(''));
-casper.options.waitTimeout = 10 * 1000;
+casper.options.waitTimeout = 20 * 1000;
 
 // load my extensions
 require('./casper_extensions');
