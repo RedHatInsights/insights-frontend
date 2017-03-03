@@ -16,7 +16,6 @@ constantsModule.constant(
     });
 
 // entitlements constants
-constantsModule.constant('MaxFreeSystems', 10);
 constantsModule.constant('TrialSku', 'SER0482');
 
 // tableToCards breakpoint
