@@ -16,6 +16,7 @@ Development
 
 **Getting started**
 
+0. Clone the assets repo `git clone git@gitlab.cee.redhat.com:FlipModeSquad/insights-frontend-assets.git`
 1. Symlink the insights-frontend-assets static directory to insights-frontend
     - ln -s {path-to-insights-frontend-assets}/static/ {path-to-insights-frontend}/
 2. Symlink the insights-frontend-assets fonts and images to insights-frontend/app
@@ -32,6 +33,25 @@ Once the API and `accessproxy` are both running, you can access the UI at:
 http://ci.foo.redhat.com:1337/insightsbeta or http://ci.foo.redhat.com:1337/insights
 
 Once loaded, you can switch to your local API instance by going to /insightsbeta/config/dev and then picking the "local" API Root preset.
+
+**Branching**
+
+There are 3 branches that will automatically push code out:
+
+- master pushes code to Beta CI then if smoke tests pass to Beta Prod
+- stable-4.x pushes code to Stable CI
+- production-stable pushes code to Stable Prod
+
+All development branches should be prefixed with one of the following
+
+- features/   (for normal work intended to go to master)
+- stable/     (for patches intended to go to stable)
+- test/       (misc stuff)
+
+i.e.
+```
+[master]$ git checkout -b features/super_cool_feature
+```
 
 **Localization**
 
