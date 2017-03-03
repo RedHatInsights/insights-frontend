@@ -56,7 +56,12 @@ function OnRun(
 
     let firstStateChange = true;
     $rootScope.$on('$stateChangeStart', function (event, next, nextParams) {
-        if (firstStateChange && next.name.startsWith('app.')) {
+        const nextState = next.name;
+        if (nextState === 'evaluation') {
+            firstStateChange = false;
+        }
+
+        if (firstStateChange && nextState.startsWith('app.')) {
             firstStateChange = false;
             event.preventDefault();
             $state.go('evaluation', {
