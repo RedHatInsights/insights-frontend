@@ -12,7 +12,7 @@
           .sort-indicator(translate) Severity
         th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.ansible')", ng-click="table.sorter.sort('rule.ansible')")
           .sort-indicator(translate) Ansible
-        th.sortable.text-center(ng-class="table.sorter.getSortClass('reports.length')", ng-click="table.sorter.sort('reports.length')")
+        th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.report_count')", ng-click="table.sorter.sort('rule.report_count')")
           .sort-indicator(translate) Systems
       tr(ng-show='edit')
         th.filter(colspan='5')
@@ -30,5 +30,5 @@
         td.status.text-center
           ansible-icon(value='action.rule.ansible')
         td.status.text-center
-          | {{action.reports.length}}
+          | {{action.rule.report_count}}
     tfoot(maintenance-table-footer)
