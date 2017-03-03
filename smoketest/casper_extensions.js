@@ -1,4 +1,4 @@
-/*global casper*/
+/*global casper, require*/
 
 const env             = require('system').env; // because on the container instance process is not global?
 const IMAGE_BASE_PATH = '/tmp/images/' + env.TEST_TRY_NUM;
@@ -15,12 +15,12 @@ casper.waitAndClick = function waitAndClick(selector, cb) {
 };
 
 casper.thenDebugImage = function thenDebugImage() {
-    casper.thenCapture(null, true);
+    casper.thenCapture('debug');
 };
 
-casper.thenCapture = function thenCapture(name, debug) {
+casper.thenCapture = function thenCapture(name) {
     casper.then(function () {
-        if (debug) { casper.capture(IMAGE_BASE_PATH + '/tmp.jpg'); }
+        if (!name === 'debug') { casper.capture(IMAGE_BASE_PATH + '/debug.jpg'); }
         casper.capture(IMAGE_BASE_PATH + '/' + name + '.jpg');
     });
 };
