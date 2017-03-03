@@ -4,6 +4,7 @@ const env    = require('system').env; // because on the container instance proce
 const lodash = require('lodash');
 const el     = require('./elements');
 const funcs  = require('./funcs');
+
 require('./check_inputs.js');
 
 console.log('Using base: ' + funcs.getUrl(''));
@@ -41,7 +42,7 @@ casper.then(function tryLogin () {
 casper.then(function () {
     casper.test.begin('Smoke Test', function (test) {
         casper.test.on('fail', function () {
-            casper.thenCapture('/tmp/fail.jpg');
+            casper.thenCapture('fail');
         });
 
         casper.then(function () {

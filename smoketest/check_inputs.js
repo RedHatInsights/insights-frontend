@@ -12,5 +12,5 @@ function dieIfEmpty(key)  {
 dieIfEmpty('TEST_URL');
 dieIfEmpty('TEST_USERNAME');
 dieIfEmpty('TEST_PASSWORD');
-
+dieIfEmpty('TEST_TRY_NUM');
 

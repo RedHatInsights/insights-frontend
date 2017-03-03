@@ -1,5 +1,5 @@
 #!/bin/bash
-reset 2>&1 || true
+TEST_TRY_NUM=$1
 time casperjs \
      --cookies-file=/tmp/cookies \
      --load-images=false \
