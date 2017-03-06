@@ -54,7 +54,13 @@ Session.vim
 .browserify-cache.json
 
 #### tracked in the assets repo
+static
 static/
+app/fonts
 app/fonts/
+app/images
 app/images/
 
+static
+app/fonts
+app/images
