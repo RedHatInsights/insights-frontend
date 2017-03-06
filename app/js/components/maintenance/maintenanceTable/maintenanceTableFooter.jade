@@ -1,7 +1,7 @@
 tr(ng-show='edit')
   td(colspan='{{cols || 4}}')
     .pull-right.btn-group(role='group')
-      button.btn.btn-sm.btn-default(ng-click='table.cancel()', translate) Cancel
+      button.btn.btn-sm.btn-blank(ng-click='table.cancel()', translate) Cancel
       button.btn.btn-sm.btn-accent(ng-click='table.save()', ng-disabled='!checkboxes.totalChecked', translate) Save
 tr(ng-if="table.filteredActions.length > table.pager.perPage")
   td(colspan='{{cols || 4}}')
