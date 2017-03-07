@@ -23,7 +23,8 @@
         li(ng-repeat="rule in rulesWithoutPlays | orderBy:['category','description'] | limitTo:listLimit")
           i.fa.category-icon.inline-right(ng-class="rule.category.toLowerCase()")
           b {{ rule.category }} 
-          | #{'>'} {{ rule.description }} for {{rule.system_type.displayNameShort}}
+          | #{'>'} {{ rule.description }} for&nbsp;
+          b {{rule.system_type.displayNameShort}}
       a(ng-show="listLimit !== undefined && listLimit < rulesWithoutPlays.length",
         ng-click="listLimit = undefined",
         translate) View More ({{rulesWithoutPlays.length - listLimit}})
@@ -110,7 +111,9 @@
           ul
             li(ng-repeat="(key, rule) in rulesWithPlays | limitTo: listLimit")
               i.fa.category-icon.inline-right(ng-class="rule.category.toLowerCase()")
-              span {{ rule.category }} #{'>'} {{ rule.description }} for {{ rule.system_type.displayNameShort }}
+              b {{ rule.category }}
+              | #{'>'} {{ rule.description }} for&nbsp;
+              b {{ rule.system_type.displayNameShort }}
               ul(ng-show='rule.solution !== undefined')
                 li {{ rule.solution }}
           a(ng-show="listLimit !== undefined && listLimit < rulesWithPlays.length",
