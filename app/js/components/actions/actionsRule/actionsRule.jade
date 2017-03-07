@@ -88,6 +88,7 @@ section
             tbody
               tr(ng-click='checkboxes.rowClick($event, system.system_id)',
                  ng-mousedown='checkboxes.rowClick($event, system.system_id)',
+                 ng-class="{'stale': !system.isCheckingIn}",
                  ng-repeat='system in ruleSystems',
                  data-id="{{system.system_id}}")
                 td(style='width: 30px')
