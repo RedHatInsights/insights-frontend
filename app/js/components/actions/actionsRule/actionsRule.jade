@@ -25,9 +25,9 @@ section
             ng-indeterminate='checkboxes.indeterminate',
             ng-model='checkboxes.checked',
             ng-change='checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
-          label(translate) &nbsp; Name
+          label(translate) &nbsp; Type
         .col-sm-4
-          strong(translate) Host &nbsp;
+          strong(translate) Name &nbsp;
           span(ng-if='checkboxes.totalChecked') &nbsp;({{checkboxes.totalChecked}} Selected)
         .col-sm-4.text-right
           strong(translate) Action Count

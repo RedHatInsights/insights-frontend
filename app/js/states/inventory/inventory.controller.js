@@ -232,9 +232,11 @@ function InventoryCtrl(
     };
 
     $scope.checkboxes = new Utils.Checkboxes('system_id');
+    setTotalSystemsSelected();
 
     function updateCheckboxes () {
         $scope.checkboxes.update($scope.getSelectableSystems());
+        setTotalSystemsSelected();
     }
 
     function addSystems(newSys, oldSys) {
@@ -373,6 +375,30 @@ function InventoryCtrl(
     $scope.totalSystems = function () {
         return InventoryService.getTotal();
     };
+
+    function setTotalSystemsSelected () {
+
+        // if all systems are shown just count the checkboxes
+        if ($scope.systems.length === InventoryService.getTotal()) {
+            $scope.totalSystemsSelected = visiblySelectedSystemsCount();
+        }
+        else if ($scope.reallyAllSelected) {
+            $scope.totalSystemsSelected = InventoryService.getTotal();
+
+            // remove systems in view that are not checked
+            $scope.totalSystemsSelect -=
+                ($scope.checkboxes.items - visiblySelectedSystemsCount());
+        } else {
+            $scope.totalSystemsSelected = $scope.checkboxes.totalChecked;
+        }
+    }
+
+    function visiblySelectedSystemsCount () {
+        return $scope.systems.filter(system => {
+            return ($scope.checkboxes.items.hasOwnProperty(system.system_id) &&
+                $scope.checkboxes.items[system.system_id] === true);
+        }).length;
+    }
 
     $scope.allSystemsShown = function () {
         // don't show the 'select all __' prompt
