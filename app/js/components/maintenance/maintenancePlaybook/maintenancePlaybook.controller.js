@@ -18,6 +18,7 @@ function MaintenancePlaybook($modalInstance,
                              AnsibleErrors,
                              AnsibleService,
                              Maintenance,
+                             ModalUtils,
                              SystemsService) {
 
     $scope.RULES_WITHOUT_PLAYS = 0;
@@ -366,6 +367,7 @@ function MaintenancePlaybook($modalInstance,
     };
 
     init();
+    ModalUtils.suppressEscNavigation($modalInstance);
 }
 
 componentsModule.controller('MaintenancePlaybook', MaintenancePlaybook);
