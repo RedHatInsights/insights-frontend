@@ -24,7 +24,6 @@ section
                 .pull-right
                   span.label.label-default.inline-right(translate, ng-class="{'rule-inactive': rule.ack_id, 'rule-active': !rule.ack_id}") INACTIVE
                   ansible-icon(value='rule.ansible')
-                  severity-icon.inline-left(severity="rule.severity", label='true')
                 span.title.pointer(ng-click="permalink(rule.rule_id, true, 30)")
                   i.fa.category-icon.inline-right(ng-class="rule.category.toLowerCase()")
                   span {{ ::rule.category }} #{'>'} {{ ::rule.description }}
@@ -38,6 +37,32 @@ section
                   recommended-kbase(ng-if='rule.node_id', node='rule.node_id', show-label='false', kcs-title='Knowledgebase Article')
 
               .footer.footer-short(ng-if="canIgnoreRules")
-                strong(ng-if="rule.impacted_systems !== undefined && !rule.ack_id")
-                  a.pull-left(ui-sref='app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})', translate, ng-disabled="rule.impacted_systems === 0") View Impacted Systems ({{rule.impacted_systems}})
-                rule-toggle.pull-right(rule="rule")
+                .row
+                  .col-sm-6
+                    //severity-icon.inline-left(severity="rule.severity", label='true')
+                    .uber-sev.uber-sev-small
+                      .sev-block.impact
+                        span.title
+                          strong(ng-class='labelClass') Low&nbsp;
+                          span Impact
+                        img(src="../images/i_low.svg")
+                      .sev-block.probability
+                        span.title
+                          strong(ng-class='labelClass') Medium&nbsp;
+                          span Probability
+                        img(src="../images/i_med.svg")
+                      .sev-block.total-risk
+                        span.title
+                          strong(ng-class='labelClass') High&nbsp;
+                          span Risk
+                        img(src="../images/i_high.svg")
+                      .sev-block.total-risk
+                        span.title
+                          strong(ng-class='labelClass') Critical&nbsp;
+                          span Risk
+                        img(src="../images/i_critical.svg")
+                  .col-sm-6.text-right
+                    strong(ng-if="rule.impacted_systems !== undefined && !rule.ack_id")
+                      a(ui-sref='app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})', translate, ng-disabled="rule.impacted_systems === 0") View Impacted Systems ({{rule.impacted_systems}})
+                    .sep
+                    rule-toggle(rule="rule")
