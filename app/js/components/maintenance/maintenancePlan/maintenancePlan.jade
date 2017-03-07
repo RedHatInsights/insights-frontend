@@ -279,7 +279,11 @@
         a.btn.btn-sm.btn-open-blue.action.pull-right(translate, ng-click='exportPlan(plan.maintenance_id)')
           i.fa.fa-download.inline-right
           span(translate) Export CSV
-        a.btn.btn-sm.btn-open-blue.action.pull-right(translate, ng-click='generatePlaybook()', ng-disabled='!ansibleSupport', ng-if='user.is_internal')
+        a.btn.btn-sm.btn-open-blue.action.pull-right(
+            translate,
+            ng-click='generatePlaybook()',
+            ng-disabled='!ansibleSupport',
+            ng-if='user.is_internal || user.account_number === "659582"')
           i.svg.ansible-icon.inline-right
             img(src='images/l_ansible-blue.svg')
           span(translate) Generate Playbook
