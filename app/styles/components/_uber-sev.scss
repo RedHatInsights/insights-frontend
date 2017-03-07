@@ -1,0 +1,25 @@
+.uber-sev {
+
+  .sev-block {
+    display: inline-block;
+  }
+
+  .title, img {
+    align-self: flex-end;
+  }
+
+  .title + img {
+    @include rem('margin-left', 6px);
+  }
+
+  .title { }
+
+  img {
+    width: 16px;
+    height: auto;
+  }
+}
+
+.uber-sev.uber-sev-small {
+
+}
