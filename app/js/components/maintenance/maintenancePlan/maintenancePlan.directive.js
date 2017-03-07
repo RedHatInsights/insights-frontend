@@ -53,6 +53,7 @@ function maintenancePlanCtrl(
                     });
                 } else {
                     $scope.plan.name = name;
+                    handler.plan = $scope.plan;
                 }
             });
         }));
