@@ -104,7 +104,7 @@
                   step='15',
                   ng-model='editBasic.duration',
                   ng-required='editBasic.start')
-            .form-group.form-group-inline
+            .form-group.form-group-inline(ng-if='editBasic.start')
               label.full-width UTC time:&nbsp;
               | {{editBasic.start | moment:'LLL':'UTC'}}
             .form-group
