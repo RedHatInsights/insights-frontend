@@ -395,6 +395,13 @@ function InventoryCtrl(
             Export.getReports(null, null, Group.current().id, stale);
         });
     }
+
+    if (params.machine) {
+        const system = {
+            system_id: params.machine
+        };
+        $scope.showActions(system, true);
+    }
 }
 
 statesModule.controller('InventoryCtrl', InventoryCtrl);

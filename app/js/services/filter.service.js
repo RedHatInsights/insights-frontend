@@ -24,6 +24,16 @@ function FilterService(
     var _rhelOnly = false;
     var _offline = true;
     var _online = true;
+    var _machine = null;
+
+    filterService.setMachine = function (machine) {
+        _machine = machine;
+        filterService.setQueryParam('machine', machine);
+    };
+
+    filterService.getMachine = function () {
+        return _machine;
+    };
 
     filterService.setRHELOnly = function (rhelOnly) {
         _rhelOnly = rhelOnly;
@@ -90,11 +100,8 @@ function FilterService(
 
     filterService.setQueryParam = function (name, value) {
         var obj = $location.search();
-        obj[name] = null;
-        if (value) {
-            obj[name] = value;
-            $location.search(obj);
-        }
+        obj[name] = value;
+        $location.search(obj);
     };
 
     filterService.getSearchTerm = function () {
@@ -393,6 +400,10 @@ function FilterService(
                 const online = (params.online === 'true');
                 filterService.setOnline(online);
             }
+        }
+
+        if (params.machine) {
+            filterService.setMachine(params.machine);
         }
     };
 

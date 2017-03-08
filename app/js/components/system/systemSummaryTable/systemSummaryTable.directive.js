@@ -101,9 +101,6 @@ function systemSummaryTableCtrl(
             };
             let currentSearch = $location.search();
             $location.replace();
-            if (currentSearch.machine) {
-                sortObj.machine = currentSearch.machine;
-            }
 
             if (currentSearch.ospProducts) {
                 sortObj.ospProducts = currentSearch.ospProducts;
@@ -248,9 +245,6 @@ function systemSummaryTableCtrl(
         if (system) {
             return $scope.showSystem(system);
         }
-
-        $location.replace();
-        $location.search('machine', null);
     }
 
     $scope.$watch('systems', function (systems) {

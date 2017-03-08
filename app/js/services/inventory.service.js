@@ -2,7 +2,7 @@
 
 var servicesModule = require('./');
 
-function InventoryService($location, $modal, FilterService) {
+function InventoryService($location, $modal, FilterService, System) {
     var inventoryService = {};
     var _sort = {
         field: 'toString',
@@ -103,34 +103,45 @@ function InventoryService($location, $modal, FilterService) {
 
     inventoryService._systemModal = null;
 
-    inventoryService.showSystemModal = function (system) {
+    inventoryService.showSystemModal = function (system, loadSystem) {
 
-        function openModal(opts) {
-            if (inventoryService._systemModal) {
-                return; // Only one modal at a time please
+        function displayModal(system) {
+            function openModal(opts) {
+                if (inventoryService._systemModal) {
+                    return; // Only one modal at a time please
+                }
+
+                inventoryService._systemModal = $modal.open(opts);
+                inventoryService._systemModal.result.finally(function () {
+                    inventoryService._systemModal = null;
+                });
             }
 
-            inventoryService._systemModal = $modal.open(opts);
-            inventoryService._systemModal.result.finally(function () {
-                inventoryService._systemModal = null;
+            openModal({
+                templateUrl: 'js/components/system/systemModal/systemModal.html',
+                windowClass: 'system-modal ng-animate-enabled',
+                backdropClass: 'system-backdrop ng-animate-enabled',
+                controller: 'SystemModalCtrl',
+                resolve: {
+                    system: function () {
+                        return system;
+                    },
+
+                    rule: function () {
+                        return false;
+                    }
+                }
             });
         }
 
-        openModal({
-            templateUrl: 'js/components/system/systemModal/systemModal.html',
-            windowClass: 'system-modal ng-animate-enabled',
-            backdropClass: 'system-backdrop ng-animate-enabled',
-            controller: 'SystemModalCtrl',
-            resolve: {
-                system: function () {
-                    return system;
-                },
+        if (loadSystem) {
+            System.getSingleSystem(system.system_id).then(function (system) {
+                displayModal(system.data);
+            });
+        } else {
+            displayModal(system);
+        }
 
-                rule: function () {
-                    return false;
-                }
-            }
-        });
     };
 
     return inventoryService;
