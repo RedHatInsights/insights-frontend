@@ -5,7 +5,6 @@ card(expandable='true', init-collapsed='initCollapsed', on-toggle='resetShowMore
       ansible-icon.inline-right(value='report.rule.ansible')
       | {{ report.rule.category }} #{'>'} {{ report.rule.description }}
   card-content.content.ng-animate-enabled
-    severity-numbers(rule='report.rule')
     .row
       .col-sm-12
         .rule-reason
