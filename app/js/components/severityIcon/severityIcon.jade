@@ -1,3 +1,24 @@
-span.severity
-  i.fa(ng-class='iconClass')
-  strong.error(ng-if='label', ng-class='labelClass') &nbsp;{{labelValue}}
+//span.severity
+//  i.fa(ng-class='iconClass')
+//  strong.error(ng-if='label', ng-class='labelClass') &nbsp;{{labelValue}}
+.uber-sev.uber-sev-small
+  .sev-block.impact
+    span.title
+      //strong(ng-class='labelClass') Low&nbsp;
+      span Impact
+    img(src="../images/i_low.svg")
+  .sev-block.probability
+    span.title
+      //strong(ng-class='labelClass') Medium&nbsp;
+      span Probability
+    img(src="../images/i_med.svg")
+  .sev-block.total-risk
+    span.title
+      //strong(ng-class='labelClass') High&nbsp;
+      strong Total Risk
+    img(src="../images/i_high.svg")
+  //.sev-block.total-risk
+  //  span.title
+  //    strong(ng-class='labelClass') Critical&nbsp;
+  //    strong Total Risk
+  //  img(src="../images/i_critical.svg")

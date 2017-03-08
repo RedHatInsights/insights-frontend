@@ -39,28 +39,7 @@ section
               .footer.footer-short(ng-if="canIgnoreRules")
                 .row
                   .col-sm-6
-                    //severity-icon.inline-left(severity="rule.severity", label='true')
-                    .uber-sev.uber-sev-small
-                      .sev-block.impact
-                        span.title
-                          strong(ng-class='labelClass') Low&nbsp;
-                          span Impact
-                        img(src="../images/i_low.svg")
-                      .sev-block.probability
-                        span.title
-                          strong(ng-class='labelClass') Medium&nbsp;
-                          span Probability
-                        img(src="../images/i_med.svg")
-                      .sev-block.total-risk
-                        span.title
-                          strong(ng-class='labelClass') High&nbsp;
-                          span Risk
-                        img(src="../images/i_high.svg")
-                      .sev-block.total-risk
-                        span.title
-                          strong(ng-class='labelClass') Critical&nbsp;
-                          span Risk
-                        img(src="../images/i_critical.svg")
+                    severity-icon(severity="rule.severity", label='true')
                   .col-sm-6.text-right
                     strong(ng-if="rule.impacted_systems !== undefined && !rule.ack_id")
                       a(ui-sref='app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})', translate, ng-disabled="rule.impacted_systems === 0") View Impacted Systems ({{rule.impacted_systems}})
