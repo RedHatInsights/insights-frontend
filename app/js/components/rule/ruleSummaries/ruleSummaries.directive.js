@@ -72,13 +72,6 @@ function RuleSummariesCtrl(
             getSystemReports();
         }
     }
-
-    function setMachine(id) {
-        $location.replace();
-        $location.search('machine', id);
-    }
-
-    setMachine($scope.machineId);
 }
 
 function ruleSummaries() {
