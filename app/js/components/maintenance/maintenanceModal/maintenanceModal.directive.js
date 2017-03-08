@@ -279,7 +279,7 @@ function maintenanceModalCtrl($scope,
             return plan.name;
         }
 
-        return 'PLAN';
+        return gettextCatalog.getString('Untitled plan');
     };
 
     MaintenanceService.plans.load(false);

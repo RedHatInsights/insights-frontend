@@ -25,17 +25,16 @@
             span.icon-inline(ng-if='!editBasic.active && plan.hidden && isInternal')
               i.fa.fa-eye-slash
             h2.title(ng-class="{'red': plan.overdue}", ng-dblclick='editBasic.toggle()')
-              span(ng-if='plan.start') {{plan.start | moment:'dddd, LL'}}
-              span(ng-if='!plan.start', translate) Plan {{plan.maintenance_id}} (Date not set)
+              span(ng-if="plan.name.length", ng-dblclick='editBasic.toggle()') {{plan.name}}
+              span(ng-if='!plan.name || !plan.name.length', translate) Untitled plan ({{plan.maintenance_id}})
               i.fa.fa-pencil-square-o.edit-toggle(
                 ng-click='editBasic.toggle()',
                 ng-if='!isReadOnly()',
                 tooltip="{{'Click to edit this plan' | translate}}")
-            .nick(ng-if="plan.name.length")
-              strong(translate) Alias:&nbsp;
-              span(ng-if="plan.name.length", ng-dblclick='editBasic.toggle()') &nbsp;{{plan.name}}
             p.red(ng-if="error") {{error}}
           .date-time.editable(ng-if='plan.start')
+            .start(ng-if='plan.start')
+              b {{plan.start | moment:'dddd, LL'}}
             .group
               i.fa.fa-clock-o
               time-range.time-local(
@@ -62,6 +61,14 @@
                 placeholder='Describe why Red Hat is suggesting this plan',
                 ng-model='editBasic.description')
               hr
+            .form-group.nick(ng-class="{'has-error': editBasicForm.name.$invalid}")
+              label(translate) Alias:&nbsp;
+              input.form-control(
+                type='text',
+                name='name',
+                placeholder='Untitled plan',
+                maxlength='255',
+                ng-model='editBasic.name')
             .form-group.title(ng-class="{'has-error': editBasicForm.date.$invalid}")
               label(translate) Date:&nbsp;
               input.form-control(
@@ -77,14 +84,6 @@
                 auto-close='true',
                 highlights="calendarDates",
                 date-change='dateChanged')
-            .form-group.nick(ng-class="{'has-error': editBasicForm.name.$invalid}")
-              label(translate) Alias:&nbsp;
-              input.form-control(
-                type='text',
-                name='name',
-                placeholder='Alias (optional)',
-                maxlength='255',
-                ng-model='editBasic.name')
             .date-time
               .form-group.form-group-inline(ng-class="{'has-error': editBasicForm.time.$invalid}")
                 label.full-width Start time:&nbsp;

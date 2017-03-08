@@ -176,7 +176,7 @@ $expand-bar-bg: #f2f5f7;
 	    &.header-title .edit-toggle {
                 position: absolute;
                 right: -8px;
-                top: 0;
+                top: -3px;
             }
         }
 
@@ -253,7 +253,7 @@ $expand-bar-bg: #f2f5f7;
 
 		h2.title {
 			display: inline-block;
-			text-transform: uppercase;
+			//text-transform: uppercase;
 			//@include font-size(16px);
 
 			i {
@@ -316,6 +316,8 @@ $expand-bar-bg: #f2f5f7;
 					@include media-query(md) {
 						float: right;
 					}
+                    margin-top: 0;
+                    @include rem('margin-left', $global-padding);
 				}
 			}
 
