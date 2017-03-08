@@ -89,11 +89,10 @@ function Routes($stateProvider) {
     $stateProvider
         .state('app.inventory', {
             url: '/inventory?product&roles&osp_deployment' +
-                '&docker_host&search_term&sort_field&sort_dir&offline',
+                '&docker_host&search_term&sort_field&sort_dir&offline&online',
             templateUrl: 'js/states/inventory/inventory.html',
             controller: 'InventoryCtrl',
-            title: 'Inventory',
-            reloadOnSearch: false
+            title: 'Inventory'
         });
 
     // Rule routes

@@ -13,7 +13,6 @@ function InventoryCtrl(
         $scope,
         $rootScope,
         $filter,
-        $location,
         $state,
         System,
         InventoryService,

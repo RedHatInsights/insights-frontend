@@ -239,7 +239,6 @@ function FilterService(
     };
 
     filterService.updateParams = function (url_params) {
-        var offline;
         if (!url_params.search_term && filterService.getSearchTerm()) {
             url_params.search_term = filterService.getSearchTerm();
         }
@@ -278,15 +277,11 @@ function FilterService(
             }
         }
 
-        offline = (url_params.offline === 'true');
-        if (!offline &&
-            filterService.getOffline()) {
+        if (!url_params.offline) {
             url_params.offline = filterService.getOffline();
         }
 
-        let online = (url_params.online === 'true');
-        if (!online &&
-            filterService.getOnline()) {
+        if (!url_params.online) {
             url_params.online = filterService.getOnline();
         }
 
@@ -296,7 +291,6 @@ function FilterService(
     filterService.parseBrowserQueryParams = function () {
         var roles;
         var params = $location.search();
-        var offline;
         if (params.product) {
             filterService.setSelectedProduct(params.product);
         }
@@ -385,14 +379,20 @@ function FilterService(
             });
         }
 
-        offline = (params.offline === 'true');
-        if (offline) {
-            filterService.setOffline(offline);
-        }
+        //this is invalid, revert both back to true
+        if (params.offline === 'false' && params.online === 'false') {
+            filterService.setOffline(true);
+            filterService.setOnline(true);
+        } else {
+            if (params.offline) {
+                const offline = (params.offline === 'true');
+                filterService.setOffline(offline);
+            }
 
-        let online = (params.online === 'true');
-        if (online) {
-            filterService.setOnline(online);
+            if (params.online) {
+                const online = (params.online === 'true');
+                filterService.setOnline(online);
+            }
         }
     };
 
