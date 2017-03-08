@@ -3,6 +3,6 @@
     .col-sm-12.text-center-sm
       h3.system-count(translate, translate-n='getTotal()', translate-plural='{{$count}} Systems')
         | 1 System
-      span(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{numberOfSelected()}} Selected)
+      span(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected)
       br
       a(ng-if='allSelected && !reallyAllSelected && !allSystemsShown()' ng-click='reallySelectAll()') &nbsp; Select all {{totalSystems()}} systems

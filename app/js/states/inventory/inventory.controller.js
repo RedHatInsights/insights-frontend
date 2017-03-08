@@ -236,6 +236,13 @@ function InventoryCtrl(
 
     function updateCheckboxes () {
         $scope.checkboxes.update($scope.getSelectableSystems());
+
+        if (visiblySelectedSystemsCount() === $scope.systems.length && !$scope.loading) {
+            $scope.allSelected = true;
+        } else {
+            $scope.allSelected = false;
+        }
+
         setTotalSystemsSelected();
     }
 
@@ -364,11 +371,13 @@ function InventoryCtrl(
             getAllSystems().then(res => {
                 $scope.allSystems = res.data.resources;
                 $scope.reallyAllSelected = true;
+                $scope.totalSystemsSelected = $scope.allSystems.length;
                 $scope.loading = false;
             });
         } else {
             // already loaded, just set the flag
             $scope.reallyAllSelected = true;
+            $scope.totalSystemsSelected = $scope.allSystems.length;
         }
     };
 
@@ -386,10 +395,11 @@ function InventoryCtrl(
             $scope.totalSystemsSelected = InventoryService.getTotal();
 
             // remove systems in view that are not checked
-            $scope.totalSystemsSelect -=
-                ($scope.checkboxes.items - visiblySelectedSystemsCount());
+            $scope.totalSystemsSelected -=
+                (Object.keys($scope.checkboxes.items).length -
+                    visiblySelectedSystemsCount());
         } else {
-            $scope.totalSystemsSelected = $scope.checkboxes.totalChecked;
+            $scope.totalSystemsSelected = visiblySelectedSystemsCount();
         }
     }
 

@@ -205,14 +205,6 @@ function inventoryActionsCtrl(
         MaintenanceService.showMaintenanceModal(null, systems, null, newPlan);
     };
 
-    $scope.numberOfSelected = function () {
-        if ($scope.reallyAllSelected) {
-            return $scope.systemsToAction().length;
-        } else {
-            return $scope.checkboxes.totalChecked;
-        }
-    };
-
     $scope.systemsToAction = function () {
         // assume true if the system is not shown in the view
         if ($scope.reallyAllSelected) {

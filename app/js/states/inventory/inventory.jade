@@ -17,11 +17,11 @@ section.inventory
               type="checkbox",
               ng-indeterminate="checkboxes.indeterminate",
               ng-model='checkboxes.checked',
-              ng-change='checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
+              ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
             label(translate) &nbsp; Type
           .col-sm-4
             strong(translate) Name &nbsp;
-            span(ng-if='checkboxes.totalChecked') &nbsp;({{totalSystemsSelected}} Selected)
+            span(ng-show='totalSystemsSelected') &nbsp;({{totalSystemsSelected}} Selected)
           .col-sm-4.text-right
             strong(translate) Action Count
 
