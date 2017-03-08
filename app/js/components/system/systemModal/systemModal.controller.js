@@ -1,4 +1,4 @@
-/*global require, angular*/
+/*global require*/
 'use strict';
 
 var componentsModule = require('../../');
@@ -10,25 +10,18 @@ function SystemModalCtrl(
     $scope,
     $rootScope,
     $location,
+    $timeout,
     $modalInstance,
     system,
     rule,
     AnalyticsService,
     Utils,
-    $timeout) {
-
-    var stateChangeUnreg;
-    var escUnreg;
+    FilterService) {
 
     $scope.report = {};
 
     function close() {
         $modalInstance.dismiss('close');
-    }
-
-    function setMachine(id) {
-        $location.replace();
-        $location.search('machine', id);
     }
 
     AnalyticsService.triggerEvent('InsightsCompletion');
@@ -48,9 +41,16 @@ function SystemModalCtrl(
 
     $scope.close = close;
 
-    $modalInstance.result.then(angular.noop, function () {
-        setMachine(null);
+    FilterService.setMachine($scope.system.system_id);
 
+    const stateChangeUnreg = $rootScope.$on('$stateChangeStart', close);
+
+    const escUnreg = $rootScope.$on('telemetry:esc', function ($event) {
+        $event.preventDefault();
+        return false;
+    });
+
+    $modalInstance.result.then(angular.noop, function () {
         // defer unregistering of the esc suppressor
         $timeout(function () {
             escUnreg();
@@ -58,16 +58,9 @@ function SystemModalCtrl(
         });
     });
 
-    setMachine($scope.system.machine_id);
-    stateChangeUnreg = $rootScope.$on('$stateChangeStart', close);
-
-    escUnreg = $rootScope.$on('telemetry:esc', function ($event) {
-        $event.preventDefault();
-        return false;
-    });
-
-    $scope.$on('destroy', function () {
-        stateChangeUnreg();
+    $scope.$on('modal.closing', function () {
+        console.log('modal closing');
+        FilterService.setMachine(null);
         escUnreg();
     });
 
