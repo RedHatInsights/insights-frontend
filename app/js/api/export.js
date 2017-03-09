@@ -32,6 +32,26 @@ function Export($http, InsightsConfig, AccountService, $window) {
 
             uri.addSearch(AccountService.queryParam());
             $window.location.assign(uri.toString());
+        },
+
+        getSystems: function (group, stale, search) {
+            const uri = URI(v3root);
+            uri.segment('systems');
+
+            if (group) {
+                uri.addSearch('group', group);
+            }
+
+            if (stale !== undefined) {
+                uri.addSearch('stale', stale);
+            }
+
+            if (search) {
+                uri.addSearch('search', search);
+            }
+
+            uri.addSearch(AccountService.queryParam());
+            $window.location.assign(uri.toString());
         }
     };
 }
