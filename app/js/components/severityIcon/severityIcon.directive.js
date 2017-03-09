@@ -22,10 +22,14 @@ function severityIconCtrl($scope) {
     }
 
     $scope.impactIcon = function () {
+        // DEBUG remove before shipping
+        if (!$scope.rule.rec_impact)     { $scope.rule.rec_impact =     Math.floor(Math.random() * 4) + 1; };
         return icon($scope.rule.rec_impact);
     };
 
     $scope.probabilityIcon = function () {
+        // DEBUG remove before shipping
+        if (!$scope.rule.rec_likelihood) { $scope.rule.rec_likelihood = Math.floor(Math.random() * 4) + 1; };
         return icon($scope.rule.rec_likelihood);
     };
 
