@@ -7,7 +7,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 "MIME-Version: 1.0\n"
-"PO-Revision-Date: 2017-02-06 01:03+0000\n"
+"PO-Revision-Date: 2017-03-08 04:35+0000\n"
 "Last-Translator: kmoriguc <kmoriguc@redhat.com>\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -15,8 +15,8 @@ msgstr ""
 "X-Generator: Zanata 3.9.6\n"
 
 #: js/components/inventory/inventoryActions/inventoryActions.html:1
-msgid "&nbsp; ({{checkboxes.totalChecked}} Selected)"
-msgstr "&nbsp; ({{checkboxes.totalChecked}} を選択)"
+msgid "&nbsp; ({{numberOfSelected()}} Selected)"
+msgstr "&nbsp; ({{numberOfSelected()}} を選択)"
 
 #: js/components/actions/actionsRule/actionsRule.html:1
 msgid "&nbsp; Name"
@@ -63,7 +63,7 @@ msgid "1 minute"
 msgid_plural "{{$count}} minutes"
 msgstr[0] "{{$count}} 分"
 
-#: components/topbar/alerts/alerts.directive.js:33
+#: components/topbar/alerts/alerts.directive.js:35
 msgid "1 new system not checking in"
 msgid_plural "{{count}} new systems not checking in"
 msgstr[0] "{{count}} 台の新規システムがチェックインしていません"
@@ -506,6 +506,7 @@ msgstr "エラーが発生しました。もう一度やり直してください
 msgid "Announcements"
 msgstr "お知らせ"
 
+#: js/components/topics/topicRuleList/topicRuleList.html:1
 #: js/states/getting-started/views/getting-started-sat5.html:1
 msgid "Ansible"
 msgstr "Ansible"
@@ -2439,6 +2440,16 @@ msgstr "この問題はまだ解決されていません。このフィールド
 #: js/components/statusIcon/statusIcon.html:1
 msgid "This issue has been resolved"
 msgstr "この問題は解決しています"
+
+#: components/ansibleIcon/ansibleIcon.directive.js:12
+msgid ""
+"This rule has Ansible support. Use the Planner to generate an Ansible "
+"playbook."
+msgstr "このルールには Ansible サポートがあります。プランナーを使って Ansible playbook を生成してください。"
+
+#: components/ansibleIcon/ansibleIcon.directive.js:17
+msgid "This rules does not have Ansible support"
+msgstr "このルールには Ansible サポートがありません"
 
 #: components/maintenance/maintenanceTable/maintenanceTable.controller.js:49
 msgid ""
