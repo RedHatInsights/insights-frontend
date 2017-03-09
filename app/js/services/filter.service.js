@@ -113,10 +113,21 @@ function FilterService(
         filterService.setQueryParam('search_term', searchTerm);
     };
 
+    /**
+     * resets all filters and broadcasts doFilter
+     */
     filterService.clearAll = function () {
+        const resetParent = {
+            system_id: 'all'
+        };
+
+        filterService.setSearchTerm('');
+        filterService.setSelectedDockerHost(resetParent);
+        filterService.setSelectedOSPDeployment(resetParent);
         filterService.setSelectedProduct('all');
         MultiButtonService.setState('inventoryWithActions', true);
         MultiButtonService.setState('inventoryWithoutActions', true);
+        filterService.doFilter();
     };
 
     filterService.doFilter = function () {

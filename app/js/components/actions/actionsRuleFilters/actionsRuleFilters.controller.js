@@ -11,13 +11,7 @@ function actionsRuleFiltersCtrl($scope, FilterService, Events, Group) {
     $scope.validSummaryFields = ['product', 'group', 'osp_deployment', 'docker_host'];
 
     $scope.resetFilters = function () {
-        const resetParent = {
-            system_id: 'all'
-        };
-        FilterService.setSelectedDockerHost(resetParent);
-        FilterService.setSelectedOSPDeployment(resetParent);
-        FilterService.setSelectedProduct('all');
-        FilterService.doFilter();
+        FilterService.clearAll();
         Group.setCurrent({});
         $scope.$emit('group:change', {});
         $scope.$broadcast(Events.filters.reset);

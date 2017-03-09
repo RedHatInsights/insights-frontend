@@ -7,14 +7,10 @@ var componentsModule = require('../../');
  */
 function inventoryFiltersCtrl(
     $scope,
-    $rootScope,
-    $timeout,
-    $location,
-    Account,
-    SystemsService,
-    System,
-    MultiButtonService,
-    FilterService) {
+    Events,
+    FilterService,
+    Group,
+    MultiButtonService) {
 
     $scope.getShowFilters = FilterService.getShowFilters;
     $scope.getSelectedProduct = FilterService.getSelectedProduct;
@@ -34,6 +30,13 @@ function inventoryFiltersCtrl(
         }
 
         return response;
+    };
+
+    $scope.resetFilters = function () {
+        FilterService.clearAll();
+        Group.setCurrent({});
+        $scope.$emit('group:change', {});
+        $scope.$broadcast(Events.filters.reset);
     };
 }
 
