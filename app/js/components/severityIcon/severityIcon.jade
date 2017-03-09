@@ -1,13 +1,13 @@
 .uber-sev.uber-sev-small
   .sev-block.impact(ng-if='!probabilityOnly && !riskOnly')
     span.title(ng-if='!noLabels')
-      span Impact
+      span(translate) Impact
     img(src="{{impactIcon()}}")
   .sev-block.probability(ng-if='!impactOnly && !riskOnly')
     span.title(ng-if='!noLabels')
-      span Probability
+      span(translate) Probability
     img(src="{{probabilityIcon()}}")
   .sev-block.total-risk(ng-if='!probabilityOnly && !impactOnly')
     span.title(ng-if='!noLabels')
-      strong Total Risk
+      strong(translate) Total Risk
     img(src="{{riskIcon()}}")
