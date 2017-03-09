@@ -1,7 +1,7 @@
 ul.rule-list.list-unstyled
   li(ng-repeat="rule in (rules | orderBy:order | limitTo:limit) track by rule.rule_id")
     span.icon-inline
-      severity-icon(severity="rule.severity")
+      severity-icon(rule='rule')
     | {{rule.description}} &nbsp;
     a(ng-click='onSelect({rule: rule})') [{{rule.rule_id}}]&nbsp;
     i.fa.fa-times(ng-click='onDelete({rule: rule})', ng-hide='readOnly')

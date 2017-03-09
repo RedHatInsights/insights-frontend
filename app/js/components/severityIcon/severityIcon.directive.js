@@ -35,7 +35,6 @@ function severityIconCtrl($scope) {
 
     $scope.riskIcon = function () {
         if (typeof $scope.rule.severity !== 'number') {
-
             // map the strings to sev #s til #s are in place
             return {
                 INFO: icon(1),
