@@ -18,10 +18,10 @@
             .footer
               .row
                 .col-sm-6
-                  severity-icon(severity="plugin.rule.severity", label='true')
+                  severity-icon(rule='plugin.rule', severity="plugin.rule.severity", label='true')
                 .col-sm-6.text-right
                   strong(ng-hide='plugin.rule.acked')
-                    a(
+                    a(translate,
                       ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
                       ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
 
@@ -56,11 +56,11 @@
 
             // START UBER-SEV
             td.filter-on.text-center.uber-sev-icon(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
-              severity-icon(rule='rule' impact-only='true' no-labels='true')
+              severity-icon(rule='rule', impact-only='true', no-labels='true')
             td.filter-on.text-center.uber-sev-icon(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
-              severity-icon(rule='rule' probability-only='true' no-labels='true')
+              severity-icon(rule='rule', probability-only='true', no-labels='true')
             td.filter-on.text-center.uber-sev-icon(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
-              severity-icon(rule='rule' risk-only='true' no-labels='true')
+              severity-icon(rule='rule', risk-only='true', no-labels='true')
             // END UBER-SEV
 
             td.text-center(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)') {{ rule.hitCount }}
