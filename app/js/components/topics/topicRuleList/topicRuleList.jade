@@ -18,7 +18,10 @@
             .footer
               .row
                 .col-sm-6
-                  severity-icon(rule='plugin.rule', severity="plugin.rule.severity", label='true')
+                  .icon-group.icon-group-severity
+                    severity-icon(severity='plugin.rule.rec_impact', type='impact')
+                    severity-icon(severity='plugin.rule.rec_likelihood', type='likelihood')
+                    severity-icon(severity='plugin.rule.severity', type='severity')
                 .col-sm-6.text-right
                   strong(ng-hide='plugin.rule.acked')
                     a(translate,
