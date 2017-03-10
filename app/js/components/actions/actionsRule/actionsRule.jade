@@ -6,7 +6,7 @@ section.actions-rule-details.gray(ng-hide='loading')
       ansible-icon(value='ruleDetails.ansible')
     | {{ruleDetails.description}}
   p(ng-bind-html='ruleDetails.generic_html | trust_html')
-  .icon-group.icon-group-severity
+  .icon-group.icon-group-severity(ng-if='!loading')
     severity-icon(severity='ruleDetails.rec_impact', type='impact')
     severity-icon(severity='ruleDetails.rec_likelihood', type='likelihood')
     severity-icon(severity='ruleDetails.severity', type='severity')

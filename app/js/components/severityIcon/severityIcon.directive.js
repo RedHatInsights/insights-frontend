@@ -50,9 +50,6 @@ function severityIconCtrl($scope, gettextCatalog) {
     // it should not change and there is no point in re calculating it
     $scope.init = function init () {
         if (!$scope.severity) {
-            // dirty hack until the API stuff is shipping
-            // for matt
-            // $scope.severity = Math.floor(Math.random() * 4) + 1;
             $scope.severity = 'UNKNOWN';
         }
 
