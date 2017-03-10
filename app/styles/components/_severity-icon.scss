@@ -1,37 +1,3 @@
-.uber-sev {
-
-  .sev-block {
-    display: inline-block;
-  }
-
-  .sev-block + .sev-block {
-    @include rem('margin-left', $global-padding);
-  }
-
-  .title, img {
-    display: inline-block;
-    vertical-align: bottom;
-  }
-
-  .title + img {
-    @include rem('margin-left', 6px);
-  }
-
-  img {
-    width: 20px;
-    height: auto;
-  }
-
-  .title {
-    line-height: .75;
-  }
-
-  &.bordered {
-    border: 1px solid $gray;
-    @include rem('padding', 8px $global-padding $global-padding);
-  }
-}
-
 .severity-icon {
 
   i {
@@ -56,10 +22,14 @@
       vertical-align: bottom;
     }
   }
-}
 
-table tbody tr td.uber-sev {
-  vertical-align: middle;
+  span + i {
+    @include rem('margin-left', 6px);
+  }
+
+  .severity {
+    font-weight: 700;
+  }
 }
 
 table {
@@ -67,52 +37,5 @@ table {
     i.low { background-image: url('../images/i_low-table.svg'); }
     i.med { background-image: url('../images/i_med-table.svg'); }
     i.high { background-image: url('../images/i_high-table.svg'); }
-  }
-}
-
-.uber-sev.uber-sev-small {
-
-}
-
-table .uber-sev,
-.content-block footer .uber-sev,
-.uber-sev.uber-sev-small {
-
-  img {
-    width: 16px;
-    height: auto;
-  }
-}
-
-.actions-rule-details .uber-sev,
-.rule-summaries .uber-sev {
-  display: inline-block;
-  background: #fff;
-}
-
-.rule-summaries .uber-sev {
-  background: $gray-light;
-}
-
-table img.uber-sev-icon,
-table td.uber-sev-icon {
-  vertical-align: middle;
-
-  img {
-    width: 16px;
-    height: auto;
-  }
-}
-
-table {
-  td.uber-sev-icon {
-    vertical-align: middle;
-  }
-
-  td.uber-sev-icon img,
-  img {
-    width: 16px;
-    height: auto;
-    vertical-align: middle;
   }
 }
