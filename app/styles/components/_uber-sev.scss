@@ -32,6 +32,33 @@
   }
 }
 
+.sev-icon {
+  width: 16px;
+  height: 20px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  &.low { background-image: url('../images/i_low.svg'); }
+  &.med { background-image: url('../images/i_med.svg'); }
+  &.high { background-image: url('../images/i_high.svg'); }
+  &.critical { background-image: url('../images/i_critical.svg'); }
+}
+
+table tbody tr td.uber-sev {
+  vertical-align: middle;
+
+  .sev-icon {
+    //width: 16px;
+    //height: 20px;
+    //display: inline-block;
+
+    &.low { background-image: url('../images/i_low-table.svg'); }
+    &.med { background-image: url('../images/i_med-table.svg'); }
+    &.high { background-image: url('../images/i_high-table.svg'); }
+  }
+}
+
 .uber-sev.uber-sev-small {
 
 }
@@ -46,16 +73,24 @@ table .uber-sev,
   }
 }
 
-.actions-rule-details .uber-sev {
+.actions-rule-details .uber-sev,
+.rule-summaries .uber-sev {
   display: inline-block;
   background: #fff;
 }
 
+.rule-summaries .uber-sev {
+  background: $gray-light;
+}
+
 table img.uber-sev-icon,
-table td.uber-sev-icon img {
-  width: 16px;
-  height: auto;
+table td.uber-sev-icon {
   vertical-align: middle;
+
+  img {
+    width: 16px;
+    height: auto;
+  }
 }
 
 table {
