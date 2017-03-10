@@ -1,10 +1,9 @@
 .system-overlay
   .modal-actions
-      .fa.fa-close.pull-right(ng-click='close()')
+    .fa.fa-close.pull-right(ng-click='close()')
   .modal-title
     .icon
       span.fa.fa-globe
-
     h2(ng-if='system.display_name')
       .ellipsis-overflow
         span {{ system.display_name }}
