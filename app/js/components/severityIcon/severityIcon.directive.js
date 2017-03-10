@@ -1,3 +1,4 @@
+/*global require*/
 'use strict';
 
 var componentsModule = require('../');
@@ -6,63 +7,52 @@ var componentsModule = require('../');
  * @ngInject
  */
 function severityIconCtrl($scope) {
-    function icon (level) {
+    const priv = {};
+
+    priv.iconClass = function iconClass (level) {
         switch (level) {
             case 1:
-                return '../images/i_low.svg';
+                return 'low';
             case 2:
-                return '../images/i_med.svg';
+                return 'med';
             case 3:
-                return '../images/i_high.svg';
+                return 'high';
             case 4:
-                return '../images/i_critical.svg';
+                return 'critical';
             default:
-                return '';
+                return 'unknown';
         }
-    }
-
-    $scope.impactIcon = function () {
-        // DEBUG remove before shipping
-        if (!$scope.rule.rec_impact) {
-            $scope.rule.rec_impact = Math.floor(Math.random() * 4) + 1;
-        }
-
-        return icon($scope.rule.rec_impact);
     };
 
-    $scope.probabilityIcon = function () {
-        // DEBUG remove before shipping
-        if (!$scope.rule.rec_likelihood) {
-            $scope.rule.rec_likelihood = Math.floor(Math.random() * 4) + 1;
-        }
-
-        return icon($scope.rule.rec_likelihood);
+    // pre compute this so the digest cycles dont re-run iconClass
+    priv.sevClassMap = {
+        // for now handle the stringed severity... this will go away once sevs are 1 - 4
+        INFO: priv.iconClass(1),
+        WARN: priv.iconClass(2),
+        ERROR: priv.iconClass(3),
+        CRITICAL: priv.iconClass(4),
+        1: priv.iconClass(1),
+        2: priv.iconClass(2),
+        3: priv.iconClass(3),
+        4: priv.iconClass(4)
     };
 
-    $scope.riskIcon = function () {
-        if (typeof $scope.rule.severity !== 'number') {
-            // map the strings to sev #s til #s are in place
-            return {
-                INFO: icon(1),
-                WARN: icon(2),
-                ERROR: icon(3),
-                CRITICAL: icon(4)
-            }[$scope.rule.severity];
-        }
-
-        return icon($scope.rule.severity);
+    // init the var on the scope
+    // it should not change and there is no point in re calculating it
+    $scope.init = function init () {
+        if (!$scope.severity) { $scope.severity = Math.floor(Math.random() * 4) + 1; }
+        $scope.sevClass = priv.sevClassMap[$scope.severity];
     };
+
+    $scope.init();
 }
 
 function severityIcon () {
     return {
         scope: {
-            rule: '=',
-            label: '=',
-            impactOnly: '=',
-            probabilityOnly: '=',
-            riskOnly: '=',
-            noLabels: '='
+            type: '=',
+            severity: '=?bind', // opt bind just for hacked in optional include of sev
+            label: '='
         },
         templateUrl: 'js/components/severityIcon/severityIcon.html',
         restrict: 'EC',
