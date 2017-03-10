@@ -1,4 +1,3 @@
-.uber-sev(class="{{type}}", ng-init="init()")
-  span.title(ng-if='label')
-    span(translate) {{label}}
-  .sev-icon(class="{{sevClass}}")
+.severity-icon(class="{{type}}", ng-init="init()")
+  span.title(ng-if='label', translate) {{label}}
+  i(class="{{sevClass}}")
