@@ -7,9 +7,9 @@ section.actions-rule-details.gray(ng-hide='loading')
     | {{ruleDetails.description}}
   p(ng-bind-html='ruleDetails.generic_html | trust_html')
   .icon-group
-    severity-icon(severity="ruleDetails.rec_impact", label="Impact")
-    severity-icon(severity="ruleDetails.rec_likelihood", label="Probability")
-    severity-icon(severity="ruleDetails.severity", label="Total Risk", type='total-risk')
+    severity-icon(severity='ruleDetails.rec_impact', type='impact')
+    severity-icon(severity='ruleDetails.rec_likelihood', type='likelihood')
+    severity-icon(severity='ruleDetails.severity', type='severity')
 section
   h1.page-title(translate, ng-if='ruleDetails.type !== "osp"') Impacted Systems ({{allSystems.length}})
   h1.page-title(translate, ng-if='ruleDetails.type === "osp"') Impacted Deployments
