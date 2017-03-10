@@ -25,6 +25,8 @@ function severityIconCtrl($scope) {
     };
 
     // pre compute this so the digest cycles dont re-run iconClass
+    // we really only use this once since the refactor
+    // it is nice an delcaritive though, leaving it in
     priv.sevClassMap = {
         // for now handle the stringed severity... this will go away once sevs are 1 - 4
         INFO: priv.iconClass(1),
@@ -40,19 +42,21 @@ function severityIconCtrl($scope) {
     // init the var on the scope
     // it should not change and there is no point in re calculating it
     $scope.init = function init () {
-        if (!$scope.severity) { $scope.severity = Math.floor(Math.random() * 4) + 1; }
+        if (!$scope.severity) {
+            // dirty hack until the API stuff is shipping
+            // for matt
+            $scope.severity = Math.floor(Math.random() * 4) + 1;
+        }
         $scope.sevClass = priv.sevClassMap[$scope.severity];
     };
-
-    $scope.init();
 }
 
 function severityIcon () {
     return {
         scope: {
-            type: '=',
-            severity: '=?bind', // opt bind just for hacked in optional include of sev
-            label: '='
+            type: '@',
+            label: '@',
+            severity: '<' // opt bind just for hacked in optional include of sev
         },
         templateUrl: 'js/components/severityIcon/severityIcon.html',
         restrict: 'EC',
