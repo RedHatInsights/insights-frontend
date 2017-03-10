@@ -6,7 +6,7 @@ var componentsModule = require('../');
 /**
  * @ngInject
  */
-function severityIconCtrl($scope) {
+function severityIconCtrl($scope, gettextCatalog) {
     const priv = {};
 
     priv.iconClass = function iconClass (level) {
@@ -22,6 +22,12 @@ function severityIconCtrl($scope) {
             default:
                 return 'unknown';
         }
+    };
+
+    priv.typeMap = {
+        impact: gettextCatalog.getString('Impact'),
+        likelihood: gettextCatalog.getString('Likelihood'),
+        severity: gettextCatalog.getString('Total Risk')
     };
 
     // pre compute this so the digest cycles dont re-run iconClass
@@ -49,6 +55,13 @@ function severityIconCtrl($scope) {
             // $scope.severity = Math.floor(Math.random() * 4) + 1;
             $scope.severity = 'UNKNOWN';
         }
+
+        // if a type is specified and the label is not overridden
+        // set the label per the typeMap
+        if ($scope.type && !$scope.label) {
+            $scope.label = priv.typeMap[$scope.type];
+        }
+
         $scope.sevClass = priv.sevClassMap[$scope.severity];
     };
 }
