@@ -281,8 +281,7 @@
         a.btn.btn-sm.btn-open-blue.action.pull-right(
             translate,
             ng-click='generatePlaybook()',
-            ng-disabled='!ansibleSupport',
-            ng-if='user.is_internal || user.account_number === "659582"')
+            ng-disabled='!ansibleSupport')
           i.svg.ansible-icon.inline-right
             img(src='images/l_ansible-blue.svg')
           span(translate) Generate Playbook
