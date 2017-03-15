@@ -3,8 +3,8 @@ section.inventory
   inventory-filters
   .rha-notifications
   .animate-wrapper
-    inventory-actions.ng-animate-enabled(ng-hide='loading')
-    div(infinite-scroll='doScroll()', infinite-scroll-disabled='disableScroll()', infinite-scroll-immediate-check='false', infinite-scroll-distance='.5')
+    inventory-actions.ng-animate-enabled(ng-hide='reloading')
+    div(infinite-scroll='doScroll()', infinite-scroll-disabled='disableScroll()', infinite-scroll-immediate-check='false', infinite-scroll-distance='.5', ng-hide='reloading')
 
       .card-table-header(ng-show='listType() === listTypes.card')
         .row.row-short
@@ -18,12 +18,12 @@ section.inventory
               ng-indeterminate="checkboxes.indeterminate",
               ng-model='checkboxes.checked',
               ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
-            label(translate) &nbsp; Type
+            label(translate, ng-click="sort('system_type_id')") &nbsp; Type
           .col-sm-4
-            strong(translate) Name &nbsp;
+            strong(translate, ng-click="sort('toString')") Name &nbsp;
             span(ng-show='totalSystemsSelected') &nbsp;({{totalSystemsSelected}} Selected)
           .col-sm-4.text-right
-            strong(translate) Action Count
+            strong(translate, ng-click="sort('report_count')") Action Count
 
       .row.row-short
         .col-sm-3.col-lg-2
@@ -56,28 +56,7 @@ section.inventory
                 ng-disabled='!isUnregistrableSelected()',
                 ng-click='isUnregistrableSelected() && doUnregisterSelected()',
                 translate) Unregister
-        .col-sm-4.col-lg-3
-          .dropdown.sort-dir
-            button.btn.btn-default.dropdown-toggle(
-              tooltip="{{'Sort Field' | translate}}",
-              tooltip-trigger='mouseenter',
-              tooltip-append-to-body='true',
-              tooltip-placement='top',
-              data-toggle='dropdown',
-              aria-haspopup='true',
-              aria-expanded'false') {{getSortLabel(getSortField())}}
-                span.caret
-            ul.dropdown-menu.dropdown-menu-right
-              li(ng-repeat='item in sortItems')
-                a(ng-click='doSort(item)') {{getSortLabel(item.field)}}
-          i.fa.fa-2x.sort-dir(
-            ng-class='getSortIconClasses()',
-            tooltip="{{'Sort Direction' | translate}}"
-            tooltip-trigger='mouseenter',
-            tooltip-append-to-body='true',
-            tooltip-placement='top',
-            ng-click='toggleSortDirection()')
-        .col-sm-3.col-lg-2.col-sm-offset-2.col-lg-offset-5
+        .col-sm-7.col-lg-5.col-sm-offset-2.col-lg-offset-5
           list-type.text-right-sm
 
       .row.row-short

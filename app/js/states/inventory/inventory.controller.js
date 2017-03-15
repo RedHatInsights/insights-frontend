@@ -62,6 +62,7 @@ function InventoryCtrl(
     $scope.errored = false;
     $scope.actionFilter = null;
     $scope.loading = InventoryService.loading;
+    $scope.reloading = false;
 
     $scope.sorter = new Utils.Sorter(false, order);
     $scope.sorter.predicate = 'toString';
@@ -142,6 +143,7 @@ function InventoryCtrl(
         $scope.loading = true;
 
         if (!scrolling) {
+            $scope.reloading = true;
             InventoryService.goToPage(0);
         }
 
@@ -180,7 +182,7 @@ function InventoryCtrl(
             .error(function () {
                 $scope.errored = true;
             }).finally(function () {
-                InventoryService.loading = $scope.loading = false;
+                InventoryService.loading = $scope.loading = $scope.reloading = false;
             });
     }
 
@@ -327,14 +329,13 @@ function InventoryCtrl(
             $scope.sorter.predicate = column;
             $scope.sorter.reverse = $scope.reverse;
             order();
+            $scope.loading = false;
         }
         else {
             // reset dataset
             cleanTheScope();
             getData(false);
         }
-
-        $scope.loading = false;
     };
 
     $scope.selectAll = function () {

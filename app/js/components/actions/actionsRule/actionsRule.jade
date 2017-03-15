@@ -25,12 +25,12 @@ section
             ng-indeterminate='checkboxes.indeterminate',
             ng-model='checkboxes.checked',
             ng-change='checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
-          label(translate) &nbsp; Type
+          label(translate, ng-click="sort('system_type_id')") &nbsp; Type
         .col-sm-4
-          strong(translate) Name &nbsp;
+          strong(translate, ng-click="sort('toString')") Name &nbsp;
           span(ng-if='checkboxes.totalChecked') &nbsp;({{checkboxes.totalChecked}} Selected)
         .col-sm-4.text-right
-          strong(translate) Action Count
+          strong(translate, ng-click="sort('report_count')") Action Count
 
     // Show Create Playbook, Add to Plan if at least one system has been selected
     .row.row-short
