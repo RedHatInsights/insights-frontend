@@ -78,7 +78,7 @@ function MaintenancePlaybook($modalInstance,
     };
 
     /**
-     * Gets the rules that do not have supported playbooks
+     * Gets the rules that do not have supported Playbooks
      */
     function setRulesWithoutPlays () {
         $scope.rulesWithoutPlays = [];
@@ -105,7 +105,7 @@ function MaintenancePlaybook($modalInstance,
     }
 
     /**
-     * Gets the list of rules that are being fixed with this playbook
+     * Gets the list of rules that are being fixed with this Playbook
      */
     function setRulesWithPlays () {
 
@@ -313,7 +313,7 @@ function MaintenancePlaybook($modalInstance,
     };
 
     /**
-     * Posts to maintenance/:id/playbook to create the playbook given the resolutions
+     * Posts to maintenance/:id/playbook to create the Playbook given the resolutions
      */
     $scope.downloadPlaybook = function () {
         if ($scope.validateQuestions) {
