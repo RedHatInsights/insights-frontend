@@ -1,12 +1,15 @@
 //platform-filter
 actions-breadcrumbs.actions-breadcrumbs.push-top-narrow(ng-hide='loading')
-section.gray(ng-hide='loading')
+section.actions-rule-details.gray(ng-hide='loading')
   h2
-    .severity-icon.fa-small(ng-if='ruleDetails.severity', severity='ruleDetails.severity')
     .pull-right
       ansible-icon(value='ruleDetails.ansible')
-    | &nbsp;{{ruleDetails.description}}
+    | {{ruleDetails.description}}
   p(ng-bind-html='ruleDetails.generic_html | trust_html')
+  .icon-group.icon-group-severity(ng-if='!loading')
+    severity-icon(severity='ruleDetails.rec_impact', type='impact')
+    severity-icon(severity='ruleDetails.rec_likelihood', type='likelihood')
+    severity-icon(severity='ruleDetails.severity', type='severity')
 section
   h1.page-title(translate, ng-if='ruleDetails.type !== "osp"') Impacted Systems ({{allSystems.length}})
   h1.page-title(translate, ng-if='ruleDetails.type === "osp"') Impacted Deployments

@@ -1,9 +1,16 @@
 card(expandable='true', init-collapsed='initCollapsed', on-toggle='resetShowMore(ctx)')
   card-header
-    h3.title
-      severity-icon.rule-margin(severity="report.rule.severity")
-      ansible-icon.inline-right(value='report.rule.ansible')
-      | {{ report.rule.category }} #{'>'} {{ report.rule.description }}
+    .row
+      .col-sm-12
+        h3.title
+          ansible-icon.inline-right(value='report.rule.ansible')
+          | {{ report.rule.category }} #{'>'} {{ report.rule.description }}
+    .row.row-short
+      .col-sm-12
+        .icon-group.icon-group-severity
+          severity-icon(severity='report.rule.rec_impact', type='impact')
+          severity-icon(severity='report.rule.rec_likelihood', type='likelihood')
+          severity-icon(severity='report.rule.severity', type='severity')
   card-content.content.ng-animate-enabled
     .row
       .col-sm-12

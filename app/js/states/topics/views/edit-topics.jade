@@ -98,7 +98,7 @@
               | {{$select.selected.description}}
             ui-select-choices.ui-select-choices(repeat="rule in (getAvailableRules() | filter: {description: $select.search}) | orderBy:['-severityNum', '-date'] track by rule.rule_id")
               span.icon-inline
-                severity-icon(severity="rule.severity")
+                severity-icon(rule="rule")
                 | &nbsp;{{rule.description}}
           p.form-control-static You can explicitly pick one or multiple rules.
           p(ng-hide='topic.rules.length') No rules selected

@@ -46,7 +46,7 @@
         ng-if='plan && tableParams && mode === MODES.rule')
         .header.bordered
           span.icon-inline
-            severity-icon(severity="rule.severity")
+            severity-icon(rule="rule")
           strong {{rule.description}}
         .nopad.table-responsive
           maintenance-table-systems(

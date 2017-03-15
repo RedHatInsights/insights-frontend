@@ -10,7 +10,7 @@ const obj =  {
             categoryTitle:   '.topic-summary .page-title span span'
         },
         page3: {
-            severityIcon:       '.main-content .wrapper section.gray h2 .severity-icon',
+            severityIcon:       '.main-content .severity-icon i',
             ruleTitle:          '.main-content .wrapper section.gray h2',
             impactedSystems:    '.main-content .wrapper section h1.page-title span',
             firstSystemInTable: '.main-content .wrapper section table.table.nomar tbody tr:nth-of-type(1) td:nth-of-type(3) a'
