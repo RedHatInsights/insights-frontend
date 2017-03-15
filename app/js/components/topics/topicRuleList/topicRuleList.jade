@@ -13,14 +13,20 @@
               .pull-right
                 span.label.label-default.inline-right.rule-inactive(ng-if='plugin.acked', translate) INACTIVE
                 ansible-icon(value='rule.ansible')
-                severity-icon.inline-left(severity="plugin.rule.severity", label='true')
             card-content
               .gray(ng-bind-html='::plugin.rule.summary_html', target-blank='')
-            .footer.text-right-sm
-              strong(ng-hide='plugin.rule.acked')
-                a(
-                  ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
-                  ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
+            .footer
+              .row
+                .col-sm-6
+                  .icon-group.icon-group-severity
+                    severity-icon(severity='plugin.rule.rec_impact', type='impact')
+                    severity-icon(severity='plugin.rule.rec_likelihood', type='likelihood')
+                    severity-icon(severity='plugin.rule.severity', type='severity')
+                .col-sm-6.text-right
+                  strong(ng-hide='plugin.rule.acked')
+                    a(translate,
+                      ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
+                      ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
 
   .row.row-short(ng-show='getListType() === listTypes.table')
     .col-sm-12
@@ -29,8 +35,16 @@
           tr
             th.sortable(ng-class="sorter.getSortClass('description')", ng-click="sorter.sort('description')")
               .sort-indicator(translate) Rule
-            th.text-center.sortable(ng-class="sorter.getSortClass('severityNum')", ng-click="sorter.sort('severityNum')")
-              .sort-indicator(translate) Sev
+
+            // START UBER-SEV
+            th.text-center.sortable(ng-class="sorter.getSortClass('likeliness')", ng-click="sorter.sort('likeliness')")
+              .sort-indicator(translate) Likeliness
+            th.text-center.sortable(ng-class="sorter.getSortClass('impact')", ng-click="sorter.sort('impact')")
+              .sort-indicator(translate) Impact
+            th.text-center.sortable(ng-class="sorter.getSortClass('totalRisk')", ng-click="sorter.sort('totalRisk')")
+              .sort-indicator(translate) Total Risk
+            // END UBER-SEV
+
             th.text-center.sortable(ng-class="sorter.getSortClass('hitCount')", ng-click="sorter.sort('hitCount')")
               .sort-indicator(translate) Systems
             th.text-center.sortable(ng-class="sorter.getSortClass('ansible')", ng-click="sorter.sort('ansible')")
@@ -42,8 +56,16 @@
               div(ng-if='rule.acked')
                 | {{rule.description}}
                 span.label.label-default.inline-left.rule-inactive(translate) INACTIVE
-            td.filter-on.text-center(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
-              severity-icon(severity='rule.severity')
+
+            // START UBER-SEV
+            td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
+              severity-icon(severity='rule.rec_impact')
+            td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
+              severity-icon(severity='rule.rec_likelihood')
+            td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
+              severity-icon(severity='rule.severity', type='total-risk')
+            // END UBER-SEV
+
             td.text-center(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)') {{ rule.hitCount }}
             td.text-center
               ansible-icon(value='rule.ansible')

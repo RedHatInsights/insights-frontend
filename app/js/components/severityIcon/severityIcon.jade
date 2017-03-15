@@ -1,3 +1,6 @@
-span.severity
-  i.fa(ng-class='iconClass')
-  strong.error(ng-if='label', ng-class='labelClass') &nbsp;{{labelValue}}
+.uber-sev.uber-sev-small
+  .sev-block(class="{{type}}")
+    span.title(ng-if='label')
+      span(translate) {{label}}
+    .sev-icon(class="{{sevClass}}")
+    p {{sevClass}}

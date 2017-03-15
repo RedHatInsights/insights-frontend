@@ -162,10 +162,12 @@
                       | {{$select.selected._displayAs}}
                     ui-select-choices.ui-select-choices(
                       repeat="item in (getAvailableRules() | filter: {_displayAs: $select.search}) | orderBy:['-severityNum', '-report_count'] track by item.rule_id")
-                      span.icon-inline
-                        severity-icon(severity="item.severity")
                       ansible-icon.inline-right(value='item.ansible')
                       | {{item._displayAs}} ({{item.report_count}})
+                      .icon-group.icon-group-severity(ng-if='!loading')
+                        severity-icon(severity='item.rec_impact', type='impact')
+                        severity-icon(severity='item.rec_likelihood', type='likelihood')
+                        severity-icon(severity='item.severity', type='severity')
                   .available-actions.table-responsive
                     maintenance-table-systems(
                       params='tableParams(addRule.selected, true, true)',
@@ -177,10 +179,12 @@
 
             .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', '-actions.length', 'rule_id'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
               .header.bordered(ng-init='tableEdit = false')
-                span.icon-inline
-                  severity-icon(severity="rule.severity")
                 ansible-icon.inline-right(value='rule.ansible')
                 strong {{rule.description}}
+                .icon-group.icon-group-severity(ng-if='!loading')
+                  severity-icon(severity='rule.rec_impact', type='impact')
+                  severity-icon(severity='rule.rec_likelihood', type='likelihood')
+                  severity-icon(severity='rule.severity', type='severity')
                 span.pull-right(ng-hide='isReadOnly()')
                   a(ng-hide='tableEdit', ng-click='tableEdit = true')
                     strong(

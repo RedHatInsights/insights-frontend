@@ -76,7 +76,7 @@
     "merge-stream": "0.1.8",
     "moment": "^2.11.2",
     "moment-timezone": "^0.5.1",
-    "phantomjs": "^1.9.17",
+    "phantomjs": "^2.1.1",
     "pretty-hrtime": "1.0.0",
     "protractor": "2.5.1",
     "run-sequence": "1.1.0",
