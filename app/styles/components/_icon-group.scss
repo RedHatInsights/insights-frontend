@@ -1,0 +1,29 @@
+.icon-group {
+
+}
+
+.icon-group.icon-group-severity {
+  display: inline-block;
+
+  &.gray,
+  &.white {
+    @include rem('padding', $global-padding/2 $global-padding);
+    border: 1px solid $gray;
+  }
+
+  &.gray { background: $gray-light; }
+  &.white { background: #fff; }
+
+  // Contextually add gray background
+  .rule-summary &,
+  .actions-rule-details & { @extend .icon-group.gray; }
+
+
+  // Contextually add white background
+  .actions-rule-details & { @extend .icon-group.white; }
+
+  .severity-icon { display: inline-block; }
+  .severity-icon + .severity-icon { @include rem('margin-left', $global-padding); }
+
+}
+
