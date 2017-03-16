@@ -2,6 +2,7 @@
 'use strict';
 
 var componentsModule = require('../');
+var Plotly = window.Plotly;
 var d3 = Plotly.d3;
 
 /**
