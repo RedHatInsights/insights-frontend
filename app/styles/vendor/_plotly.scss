@@ -1,0 +1,9 @@
+.plot-container {
+  > .svg-container {
+    width: 100%;
+  }
+}
+
+.graph-filters + .digest-graph {
+  @include rem('margin-top', $global-margin);
+}

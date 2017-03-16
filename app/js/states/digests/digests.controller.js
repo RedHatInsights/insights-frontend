@@ -2,47 +2,216 @@
 
 const statesModule = require('../');
 const takeRight = require('lodash/array/takeRight');
+const last = require('lodash/array/last');
+const findIndex = require('lodash/array/findIndex');
+const sortBy = require('lodash/collection/sortBy');
+const placeholder = require('./placeholder.json');
+const TIME_PERIOD = 30;
 
 /**
  * @ngInject
  */
-function DigestsCtrl($scope, DigestService) {
-    function constructDigest (keys, digest_base) {
-        var new_digest = angular.copy(digest_base);
-        new_digest.data = {
-            timeseries: digest_base.data.timeseries
-        };
+function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
+    var digestPromise = DigestService.digestsByType('eval');
+    var systemPromise = System.getSystems();
+    var rulePromise = Rule.getRulesLatest();
 
-        // types for graph appearance
-        new_digest.types = {};
-        keys.forEach(function (k) {
-            new_digest.data[k] = takeRight(digest_base.data[k], 30);
-            new_digest.types[k] = 'area';
-        });
-
-        // groups for graph appearance
-        new_digest.groups = [keys];
-        return new_digest;
+    function percentChange(data) {
+        return Math.round((data[1] - data[0]) / 100);
     }
+
+    function justLineGraph(digestBase, dataType, name, color) {
+        return {
+            data: [
+                {
+                    x: takeRight(digestBase.timeseries, TIME_PERIOD),
+                    y: takeRight(digestBase[dataType], TIME_PERIOD),
+                    mode: 'lines',
+                    name: name,
+                    line: {
+                        width: 3,
+                        color: color
+                    }
+                }
+            ],
+            layout: {
+                margin: { t: 10, l: 40, r: 10, b: 40 },
+                showlegend:true,
+                legend: {orientation: 'h'}
+            },
+            options: {
+                displayModeBar: false
+            }
+        };
+    }
+
+    function getTenWorst(systems) {
+        systems = takeRight(sortBy(systems,
+            function (s) {
+                return s.report_count;
+            }
+        ), 10);
+        systems.reverse();
+        return systems;
+    }
+
+    $scope.checkboxValues = {
+        availability: true,
+        security: true,
+        stability: true,
+        performance: true
+    };
+
+    $scope.toggleDataSources = function (e) {
+        // TODO: move this shit along with the checkboxes into digestGraph
+        //       for Plotly call abstraction
+        var category = e.target.name;
+        var catIdx;
+        var metricsChart = document.querySelector('[digest-key=metrics]').children[0];
+
+        // Note the differerence --
+        // Remove traces based on index data attribute of digest_metrics
+        // Add traces based on index in digest_metrics_data
+        if ($scope.checkboxValues[category]) {
+            catIdx = findIndex($scope.digest_metrics_data, function (d) {
+                return d.name.toLowerCase() === category;
+            });
+
+            Plotly.addTraces(metricsChart, $scope.digest_metrics_data[catIdx]);
+        } else {
+            catIdx = findIndex($scope.digest_metrics.data, function (d) {
+                return d.name.toLowerCase() === category;
+            });
+
+            Plotly.deleteTraces(metricsChart, catIdx);
+        }
+    };
+
+    $scope.dateFormat = function (dateString) {
+        var date = new Date(dateString);
+        return date.getMonth() + '-' + date.getDay() + '-' + date.getFullYear();
+    };
 
     $scope.loading = true;
 
-    DigestService.digestsByType('eval').then(function (res) {
-        var digest_base = res.data.resources[0];
+    $scope.showSystem = InventoryService.showSystemModal;
 
-        $scope.digest_score = constructDigest(
-            ['score', 'total_registered', 'total_distinct_rules'], digest_base);
-        $scope.digest_severity = constructDigest(
-            ['sev_error', 'sev_warn', 'sev_info'], digest_base);
-        $scope.digest_category = constructDigest(
-            ['category_availability', 'category_performance',
-             'category_security', 'category_stabilty'], digest_base);
+    Promise.all([digestPromise, systemPromise, rulePromise]).then(function (responses) {
+        var res = responses[0];
+        var sysres = responses[1];
+        var ruleres = responses[2];
 
-        // category_stabilty misspelled in database data
+        var digestBase = res.data.resources[0].data;
 
+        // use placeholder data
+        digestBase = placeholder.resources[0].data;
+
+        $scope.latest_score = takeRight(digestBase.score, 1)[0].toFixed(2);
+
+        // current counts by category
+        $scope.digest_hits_per_cat = [
+            {
+                current: last(digestBase.category_security),
+                percentChange: percentChange(
+                    takeRight(digestBase.category_security, 2)),
+                icon: 'fa-shield',
+                label: 'Security'
+            },
+            {
+                current: last(digestBase.category_availability),
+                percentChange: percentChange(
+                    takeRight(digestBase.category_availability, 2)),
+                icon: 'fa-hand-paper-o',
+                label: 'Availability'
+            },
+            {
+                current: last(digestBase.category_stability),
+                percentChange: percentChange(
+                    takeRight(digestBase.category_stability, 2)),
+                icon: 'fa-cubes',
+                label: 'Stability'
+            },
+            {
+                current: last(digestBase.category_performance),
+                percentChange: percentChange(
+                    takeRight(digestBase.category_performance, 2)),
+                icon: 'fa-tachometer',
+                label: 'Performance'
+            }
+        ];
+
+        // metrics
+        //   big graphic
+        //   systems not checking in
+        //   total system actions
+        $scope.digest_metrics_data = [
+            {
+                x: takeRight(digestBase.timeseries, TIME_PERIOD),
+                y: takeRight(digestBase.total_distinct_rules, TIME_PERIOD),
+                type: 'bar',
+                name: 'Total Actions',
+                marker: {
+                    color: '#97cde6'
+                }
+            },
+            {
+                x: takeRight(digestBase.timeseries, TIME_PERIOD),
+                y: takeRight(digestBase.category_security, TIME_PERIOD),
+                type: 'scatter',
+                name: 'Security',
+                marker: {
+                    color: '#e77baf'
+                }
+            },
+            {
+                x: takeRight(digestBase.timeseries, TIME_PERIOD),
+                y: takeRight(digestBase.category_availability, TIME_PERIOD),
+                type: 'scatter',
+                name: 'Availability',
+                marker: {
+                    color: '#f3923e'
+                }
+            },
+            {
+                x: takeRight(digestBase.timeseries, TIME_PERIOD),
+                y: takeRight(digestBase.category_availability, TIME_PERIOD),
+                type: 'scatter',
+                name: 'Stability',
+                marker: {
+                    color: '#3badde'
+                }
+            },
+            {
+                x: takeRight(digestBase.timeseries, TIME_PERIOD),
+                y: takeRight(digestBase.category_performance, TIME_PERIOD),
+                type: 'scatter',
+                name: 'Performance',
+                marker: {
+                    color: '#a5d786'
+                }
+            }
+        ];
+        $scope.digest_metrics = {
+            data: angular.copy($scope.digest_metrics_data),
+            layout: {
+                margin: { t: 10, l: 40, r: 10, b: 40 },
+                showlegend:true,
+                legend: {orientation: 'h'}
+            },
+            options: {
+                displayModeBar: false
+            }
+        };
+
+        $scope.digest_registered = justLineGraph(
+            digestBase, 'total_registered', 'Registered Systems', '#97cde6');
+        $scope.digest_score = justLineGraph(
+            digestBase, 'score', 'Score', '#3083FB');
+
+        $scope.topTenWorstSystems = getTenWorst(sysres.data.resources);
+        $scope.topTenRules = getTenWorst(ruleres.data.resources);
         $scope.loading = false;
     });
 }
 
 statesModule.controller('DigestsCtrl', DigestsCtrl);
-

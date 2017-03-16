@@ -1,36 +1,106 @@
 .digests-page.wrapper
+  .page-header(ng-class="{'inactive': !expandBar, 'active': expandBar}")
+    h1.page-title
+      i.fa.fa-bar-chart &nbsp;
+      span(translate) Executive Report
   section
-    h1 Digests
-
     .row
-      .col-sm-12
-        h2 Num: How man Rules hit in my account?
-        actionsLite
-    .row
-      .col-sm-12
-        h2 Num: Insights system score
-        strong 66
-        digest-graph(digest-key='score', digest='digest_score' ng-if="!loading")
+      .col-sm-3
+        h2.section-title Overall score
+        .gauge.gauge-circle.score.score_good
+          span {{latest_score}}
+      .col-sm-9
+        h2.section-title Weekly action count by category
+        .row.padding-top
+          .col-xs-6.col-md-3(ng-repeat='cat in digest_hits_per_cat')
+            .gauge.gauge-count-and-change
+              .count-and-change
+                .count.large.bold {{cat.current}}
+                .change
+                  i.fa.fa-caret-up.increase(ng-if='cat.percentChange > 0')
+                  i.fa.fa-caret-down.decrease(ng-if='cat.percentChange < 0')
+                    //- something plus-minus?
+                  i.fa.fa-minus.no-change(ng-if='cat.percentChange === 0')
+                  span &nbsp;{{cat.percentChange}}%
+              .title
+                i.fa(aria-hidden="true" ng-class='cat.icon')
+                strong.uppercase &nbsp;{{cat.label}}
 
-    .row
-      .col-sm-12
-        h2 Chart: Total hits, by category over time
-        digest-graph(digest-key='category', digest='digest_category' ng-if="!loading")
-    .row
-      .col-sm-6
-        h2 Chart: Total hits, by severity over time
-        digest-graph(digest-key='severity', digest='digest_severity' ng-if="!loading")
+  section.gray.full-width
+    //h2.section-title.red Metrics
+    // omitting nav-tabs styling bc of !important conflicts
+    ul.nav.nav-tabs-simple.underline(role='tablist')
+      li.active(role='presentation')
+        a(href='#metrics', aria-controls='metrics', role='tab', data-toggle='tab') Action trends
+      li(role='presentation')
+        a(href='#systemsRegistered', aria-controls='systemsRegistered', role='tab', data-toggle='tab') System registration history
+      li(role='presentation')
+        a(href='#scoreHistory', aria-controls='messages', role='tab', data-toggle='tab') Score history
+
+    // Tab panes
+    .tab-content
+      #metrics.metrics.tab-pane.fade.in.active(role='tabpanel')
+        .graph.graph-filters
+          .row
+            .col-sm-3.col-sm-offset-9
+              .dropdown
+                a#dropdown-example(data-target='#', href='http://example.com', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                  | Category
+                  span.caret
+                ul.dropdown-menu(aria-labelledby='dropdown-example')
+                  li
+                    label.checkbox-inline
+                      input(type="checkbox", name="availability", id="checkbox.availability", ng-model='checkboxValues.availability', ng-click='toggleDataSources($event)')
+                      | Availability
+                  li
+                    label.checkbox-inline
+                      input(type="checkbox", name="stability", id="checkbox.stability", ng-model='checkboxValues.stability', ng-click='toggleDataSources($event)')
+                      | Stability
+                  li
+                    label.checkbox-inline
+                      input(type="checkbox", name="performance", id="checkbox.performance", ng-model='checkboxValues.performance', ng-click='toggleDataSources($event)')
+                      | Performance
+                  li
+                    label.checkbox-inline
+                      input(type="checkbox", name="security", id="checkbox.security", ng-model='checkboxValues.security', ng-click='toggleDataSources($event)')
+                      | Security
+        digest-graph.digest-graph(digest-key='metrics', digest='digest_metrics' height='400' ng-if="!loading")
+      #systemsRegistered.tab-pane.fade(role='tabpanel')
+        digest-graph.digest-graph(digest-key='registered', digest='digest_registered' height='400' ng-if="!loading")
+      #scoreHistory.tab-pane.fade(role='tabpanel')
+        digest-graph.digest-graph(digest-key='score', digest='digest_score' height='400' ng-if="!loading")
 
 
-    .row
-      .col-xs-12
-        h2 Chart: Total registered machines, over time, and not checking in line
 
+  section
     .row
-      .col-sm-6
-        h2 List/Table: 50 worst Systems
-        p with hostname, registered date, and score
-      .col-sm-6
-        h2 List/Table: Rules that have hits.
-        p grouped by criticality, sub grouped by count
+      .col-md-6
+        h2.section-title Ten Most Impacted Systems
+        //with hostname, registered date, and score
+        table.table-break
+          thead
+            tr
+              th.hostname Hostname
+              th Registered Date
+              th Hits
+          tbody
+            tr(ng-repeat='system in topTenWorstSystems')
+              td.hostname
+                a(ng-click='showSystem(system)') {{ system.hostname }}
+              td {{ dateFormat(system.created_at) }}
+              td {{ system.report_count }}
 
+      .col-md-6
+        h2.section-title Ten Most Frequently Hit Rules
+        // grouped by criticality, sub grouped by count
+        table
+          thead
+            tr
+              th Rule
+              th Criticality
+              //th Score
+          tbody
+            tr(ng-repeat='rule in topTenRules')
+              td 
+                a(ui-sref="app.actions-rule({rule: rule.rule_id})") {{ rule.description }}
+              td {{ rule.severity }}
