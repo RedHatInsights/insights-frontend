@@ -1,5 +1,6 @@
 'use strict';
 
+var Plotly = window.Plotly;
 const statesModule = require('../');
 const takeRight = require('lodash/array/takeRight');
 const last = require('lodash/array/last');
