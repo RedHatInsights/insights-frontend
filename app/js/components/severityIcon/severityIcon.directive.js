@@ -1,7 +1,8 @@
 /*global require*/
 'use strict';
 
-var componentsModule = require('../');
+const componentsModule = require('../');
+const has = require('lodash/object/has');
 
 /**
  * @ngInject
@@ -21,6 +22,16 @@ function severityIconCtrl($scope, gettextCatalog) {
                 return 'critical';
             default:
                 return 'unknown';
+        }
+    };
+
+    priv.checkTypes = function () {
+        // check to ensure a valid type is given!
+        if ($scope.type && $scope.type) {
+            if (has(priv.typeMap, $scope.type)) {
+                return;
+            }
+            throw new Error('Invalid severity-icon type selected! ' + $scope.type);
         }
     };
 
@@ -49,8 +60,18 @@ function severityIconCtrl($scope, gettextCatalog) {
     // init the var on the scope
     // it should not change and there is no point in re calculating it
     $scope.init = function init () {
+        priv.checkTypes();
+
         if (!$scope.severity) {
             $scope.severity = 'UNKNOWN';
+        }
+
+        // this is a hack to support ERROR to 4 in the hamburger
+        // until critical sev is supported properly
+        if ($scope.type && $scope.type === 'severity') {
+            if ($scope.severity === 'ERROR' || $scope.severity === 3) {
+                $scope.severity = 4;
+            }
         }
 
         // if a type is specified and the label is not overridden
@@ -60,6 +81,7 @@ function severityIconCtrl($scope, gettextCatalog) {
         }
 
         $scope.sevClass = priv.sevClassMap[$scope.severity];
+
     };
 }
 
