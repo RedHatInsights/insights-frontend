@@ -24,12 +24,12 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
             return 1;
         }
 
-        if (direction < 0 ) {
+        if (direction < 0) {
             return -1;
         }
 
         return 0;
-    };
+    }
 
     function justLineGraph(digestBase, dataType, name, color) {
         return {
