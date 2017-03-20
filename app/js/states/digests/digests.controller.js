@@ -55,6 +55,16 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
         };
     }
 
+    function getHitsPerCat(label, lineBase, icon) {
+        return {
+            current: last(lineBase),
+            direction: getDirection(
+                takeRight(lineBase, 2)),
+            icon: icon,
+            label: label
+        };
+    }
+
     function getTenWorst(items) {
         items = takeRight(sortBy(items,
             function (i) {
@@ -112,38 +122,27 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
         var ruleres = responses[2];
         var digestBase = res.data.resources[0].data;
 
+        function getDigestMetricsLine(category, lineBase, color) {
+            // warning this function needs to have access to digestBase.timeseries
+            return {
+                x: takeRight(digestBase.timeseries, TIME_PERIOD),
+                y: takeRight(lineBase, TIME_PERIOD),
+                type: 'scatter',
+                name: category,
+                marker: {
+                    color: color
+                }
+            };
+        }
+
         $scope.latest_score = takeRight(digestBase.scores, 1)[0].toFixed(2);
 
         // current counts by category
         $scope.digest_hits_per_cat = [
-            {
-                current: last(digestBase.security),
-                direction: getDirection(
-                    takeRight(digestBase.security, 2)),
-                icon: 'fa-shield',
-                label: 'Security'
-            },
-            {
-                current: last(digestBase.availability),
-                direction: getDirection(
-                    takeRight(digestBase.availability, 2)),
-                icon: 'fa-hand-paper-o',
-                label: 'Availability'
-            },
-            {
-                current: last(digestBase.stability),
-                direction: getDirection(
-                    takeRight(digestBase.stability, 2)),
-                icon: 'fa-cubes',
-                label: 'Stability'
-            },
-            {
-                current: last(digestBase.performance),
-                direction: getDirection(
-                    takeRight(digestBase.performance, 2)),
-                icon: 'fa-tachometer',
-                label: 'Performance'
-            }
+            getHitsPerCat('Security', digestBase.security, 'fa-shield'),
+            getHitsPerCat('Availability', digestBase.availability, 'fa-hand-paper-o'),
+            getHitsPerCat('Stability', digestBase.stability, 'fa-cubes'),
+            getHitsPerCat('Performance', digestBase.performance, 'fa-tachometer')
         ];
 
         // metrics
@@ -157,46 +156,15 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
                 type: 'bar',
                 name: 'Total Actions',
                 marker: {
-                    color: '#97cde6'
+                    color: '#c7e7f6'
                 }
             },
-            {
-                x: takeRight(digestBase.timeseries, TIME_PERIOD),
-                y: takeRight(digestBase.security, TIME_PERIOD),
-                type: 'scatter',
-                name: 'Security',
-                marker: {
-                    color: '#e77baf'
-                }
-            },
-            {
-                x: takeRight(digestBase.timeseries, TIME_PERIOD),
-                y: takeRight(digestBase.availability, TIME_PERIOD),
-                type: 'scatter',
-                name: 'Availability',
-                marker: {
-                    color: '#f3923e'
-                }
-            },
-            {
-                x: takeRight(digestBase.timeseries, TIME_PERIOD),
-                y: takeRight(digestBase.availability, TIME_PERIOD),
-                type: 'scatter',
-                name: 'Stability',
-                marker: {
-                    color: '#3badde'
-                }
-            },
-            {
-                x: takeRight(digestBase.timeseries, TIME_PERIOD),
-                y: takeRight(digestBase.performance, TIME_PERIOD),
-                type: 'scatter',
-                name: 'Performance',
-                marker: {
-                    color: '#a5d786'
-                }
-            }
+            getDigestMetricsLine('Security', digestBase.security, '#e77baf'),
+            getDigestMetricsLine('Availability', digestBase.availability, '#f3923e'),
+            getDigestMetricsLine('Stability', digestBase.stability, '#3badde'),
+            getDigestMetricsLine('Performance', digestBase.performance, '#a5d786')
         ];
+
         $scope.digest_metrics = {
             data: angular.copy($scope.digest_metrics_data),
             layout: {
