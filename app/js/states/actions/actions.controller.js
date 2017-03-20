@@ -94,7 +94,7 @@ function ActionsCtrl(
 
         Stats.getSystems({
             product: product,
-            minSeverity: 'CRITICAL'
+            minSeverity: 'ERROR'
         }).then(function (res) {
             $scope.stats.systems = res.data;
         });
