@@ -1,7 +1,7 @@
 /*global angular, require*/
 'use strict';
 
-var Plotly = window.Plotly;
+const Plotly = require('plotly.js/lib/index-basic');
 const statesModule = require('../');
 const takeRight = require('lodash/array/takeRight');
 const last = require('lodash/array/last');

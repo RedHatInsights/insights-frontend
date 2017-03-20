@@ -97,7 +97,6 @@
             tr(ng-repeat='rule in topTenRules')
               td
                 a(ui-sref="app.actions-rule({rule: rule.rule_id})") {{ rule.description }}
+              td {{rule.impacted_systems}}
               td
-                {{rule.impacted_systems}}
-              td.text-right
                 severity-icon(severity='rule.severity', type='severity', label='')

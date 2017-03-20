@@ -1,9 +1,9 @@
 /*global require*/
 'use strict';
 
-var componentsModule = require('../');
-var Plotly = window.Plotly;
-var d3 = Plotly.d3;
+const componentsModule = require('../');
+const Plotly = require('plotly.js/lib/index-basic');
+const d3 = Plotly.d3;
 
 /**
  * @ngInject
