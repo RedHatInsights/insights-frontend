@@ -79,7 +79,7 @@ function Routes($stateProvider) {
     // Digest routes
     $stateProvider
         .state('app.digests', {
-            url: '/digests/',
+            url: '/reports/executive/',
             templateUrl: 'js/states/digests/digests.html',
             controller: 'DigestsCtrl',
             title: 'Digests'
