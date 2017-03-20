@@ -7,7 +7,6 @@ const takeRight = require('lodash/array/takeRight');
 const last = require('lodash/array/last');
 const findIndex = require('lodash/array/findIndex');
 const sortBy = require('lodash/collection/sortBy');
-const placeholder = require('./placeholder.json');
 const TIME_PERIOD = 30;
 
 /**
@@ -111,41 +110,37 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
         var res = responses[0];
         var sysres = responses[1];
         var ruleres = responses[2];
-
         var digestBase = res.data.resources[0].data;
 
-        // use placeholder data
-        digestBase = placeholder.resources[0].data;
-
-        $scope.latest_score = takeRight(digestBase.score, 1)[0].toFixed(2);
+        $scope.latest_score = takeRight(digestBase.scores, 1)[0].toFixed(2);
 
         // current counts by category
         $scope.digest_hits_per_cat = [
             {
-                current: last(digestBase.category_security),
+                current: last(digestBase.security),
                 direction: getDirection(
-                    takeRight(digestBase.category_security, 2)),
+                    takeRight(digestBase.security, 2)),
                 icon: 'fa-shield',
                 label: 'Security'
             },
             {
-                current: last(digestBase.category_availability),
+                current: last(digestBase.availability),
                 direction: getDirection(
-                    takeRight(digestBase.category_availability, 2)),
+                    takeRight(digestBase.availability, 2)),
                 icon: 'fa-hand-paper-o',
                 label: 'Availability'
             },
             {
-                current: last(digestBase.category_stability),
+                current: last(digestBase.stability),
                 direction: getDirection(
-                    takeRight(digestBase.category_stability, 2)),
+                    takeRight(digestBase.stability, 2)),
                 icon: 'fa-cubes',
                 label: 'Stability'
             },
             {
-                current: last(digestBase.category_performance),
+                current: last(digestBase.performance),
                 direction: getDirection(
-                    takeRight(digestBase.category_performance, 2)),
+                    takeRight(digestBase.performance, 2)),
                 icon: 'fa-tachometer',
                 label: 'Performance'
             }
@@ -158,7 +153,7 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
         $scope.digest_metrics_data = [
             {
                 x: takeRight(digestBase.timeseries, TIME_PERIOD),
-                y: takeRight(digestBase.total_distinct_rules, TIME_PERIOD),
+                y: takeRight(digestBase.distinct_rules, TIME_PERIOD),
                 type: 'bar',
                 name: 'Total Actions',
                 marker: {
@@ -167,7 +162,7 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
             },
             {
                 x: takeRight(digestBase.timeseries, TIME_PERIOD),
-                y: takeRight(digestBase.category_security, TIME_PERIOD),
+                y: takeRight(digestBase.security, TIME_PERIOD),
                 type: 'scatter',
                 name: 'Security',
                 marker: {
@@ -176,7 +171,7 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
             },
             {
                 x: takeRight(digestBase.timeseries, TIME_PERIOD),
-                y: takeRight(digestBase.category_availability, TIME_PERIOD),
+                y: takeRight(digestBase.availability, TIME_PERIOD),
                 type: 'scatter',
                 name: 'Availability',
                 marker: {
@@ -185,7 +180,7 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
             },
             {
                 x: takeRight(digestBase.timeseries, TIME_PERIOD),
-                y: takeRight(digestBase.category_availability, TIME_PERIOD),
+                y: takeRight(digestBase.availability, TIME_PERIOD),
                 type: 'scatter',
                 name: 'Stability',
                 marker: {
@@ -194,7 +189,7 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
             },
             {
                 x: takeRight(digestBase.timeseries, TIME_PERIOD),
-                y: takeRight(digestBase.category_performance, TIME_PERIOD),
+                y: takeRight(digestBase.performance, TIME_PERIOD),
                 type: 'scatter',
                 name: 'Performance',
                 marker: {
@@ -215,9 +210,9 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
         };
 
         $scope.digest_registered = justLineGraph(
-            digestBase, 'total_registered', 'Registered Systems', '#97cde6');
+            digestBase, 'checkins_per_day', 'Registered Systems', '#97cde6');
         $scope.digest_score = justLineGraph(
-            digestBase, 'score', 'Score', '#3083FB');
+            digestBase, 'scores', 'Score', '#3083FB');
 
         $scope.topTenWorstSystems = getTenWorst(sysres.data.resources);
         $scope.topTenRules = getTenWorst(ruleres.data.resources);
