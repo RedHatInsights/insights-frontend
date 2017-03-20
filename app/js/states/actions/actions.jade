@@ -40,28 +40,6 @@
                       i.fa.fa-square.inline-right.performance-color(aria-hidden="true")
                       span.desc(translate) Performance
                       span.count &nbsp;({{stats.rules.performance || 0}})
-          //ul.legend
-          //  li
-          //    a.security(ui-sref="app.topic({id: 'security', product: getSelectedProduct()})")
-          //      i.fa.fa-square.inline-right.security-color(aria-hidden="true")
-          //      span.desc(translate) Security
-          //      span.count &nbsp;({{stats.rules.security || 0}})
-          //  li
-          //    a.availability(ui-sref="app.topic({id: 'availability', product: getSelectedProduct()})")
-          //      i.fa.fa-square.inline-right.availability-color(aria-hidden="true")
-          //      span.desc(translate) Availability
-          //      span.count &nbsp;({{stats.rules.availability || 0}})
-          //  li
-          //    a.stability(ui-sref="app.topic({id: 'stability', product: getSelectedProduct()})")
-          //      i.fa.fa-square.inline-right.stability-color(aria-hidden="true")
-          //      span.desc(translate) Stability
-          //      span.count &nbsp;({{stats.rules.stability || 0}})
-          //  li
-          //    a.performance(ui-sref="app.topic({id: 'performance', product: getSelectedProduct()})")
-          //      i.fa.fa-square.inline-right.performance-color(aria-hidden="true")
-          //      span.desc(translate) Performance
-          //      span.count &nbsp;({{stats.rules.performance || 0}})
-
       .col-md-5
         card
           card-header.gray
@@ -69,7 +47,7 @@
           card-content
             severity-summary(stats='stats')
 
-        card
+        card(ng-if='stats.systems')
           card-header.gray
             h4(translate) Systems with critical actions
           card-content
@@ -96,5 +74,4 @@
   section.full-width(ng-if='show.extraTopics')
     .flexgrid.equalheights.other-topics
       .row
-        //.spinner.spinner-lg(ng-show='loader.loading')
         other-topic(ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id", ng-show='!loader.loading', topic='topic')

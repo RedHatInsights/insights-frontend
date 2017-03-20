@@ -35,15 +35,14 @@
       .no-errors(ng-if="!ruleCount.error && loaded")
         i.fa.fa-check-circle.inline-right(aria-hidden="true")
         span(translate) You have no issues of high severity
-
-    li
-      .pointer(ng-if="ruleCount.critical || !loaded", ui-sref="app.topic({id: 'critical'})")
-        .metrics
-          strong {{'Critical' | translate}}
-          span.num(ng-if="(ruleCount.critical / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.critical / ruleCount.total || 0 | number:1}}%)
-        .progress-bar
-          .progress.red(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.critical / ruleCount.total | toWidth')
-          .bar
-      .no-errors(ng-if="!ruleCount.critical && loaded")
-        i.fa.fa-check-circle.inline-right(aria-hidden="true")
-        span(translate) You have no issues of critical severity
+    //- li
+    //-   .pointer(ng-if="ruleCount.critical || !loaded", ui-sref="app.topic({id: 'critical'})")
+    //-     .metrics
+    //-       strong {{'Critical' | translate}}
+    //-       span.num(ng-if="(ruleCount.critical / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.critical / ruleCount.total || 0 | number:1}}%)
+    //-     .progress-bar
+    //-       .progress.red(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.critical / ruleCount.total | toWidth')
+    //-       .bar
+    //-   .no-errors(ng-if="!ruleCount.critical && loaded")
+    //-     i.fa.fa-check-circle.inline-right(aria-hidden="true")
+    //-     span(translate) You have no issues of critical severity
