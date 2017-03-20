@@ -1,3 +1,4 @@
+/*global angular, require*/
 'use strict';
 
 var Plotly = window.Plotly;
@@ -17,9 +18,18 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
     var systemPromise = System.getSystems();
     var rulePromise = Rule.getRulesLatest();
 
-    function percentChange(data) {
-        return Math.round((data[1] - data[0]) / 100);
-    }
+    function getDirection(data) {
+        const direction = data[1] - data[0];
+        if (direction > 0) {
+            return 1;
+        }
+
+        if (direction < 0 ) {
+            return -1;
+        }
+
+        return 0;
+    };
 
     function justLineGraph(digestBase, dataType, name, color) {
         return {
@@ -46,14 +56,14 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
         };
     }
 
-    function getTenWorst(systems) {
-        systems = takeRight(sortBy(systems,
-            function (s) {
-                return s.report_count;
+    function getTenWorst(items) {
+        items = takeRight(sortBy(items,
+            function (i) {
+                return i.report_count;
             }
         ), 10);
-        systems.reverse();
-        return systems;
+        items.reverse();
+        return items;
     }
 
     $scope.checkboxValues = {
@@ -113,28 +123,28 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
         $scope.digest_hits_per_cat = [
             {
                 current: last(digestBase.category_security),
-                percentChange: percentChange(
+                direction: getDirection(
                     takeRight(digestBase.category_security, 2)),
                 icon: 'fa-shield',
                 label: 'Security'
             },
             {
                 current: last(digestBase.category_availability),
-                percentChange: percentChange(
+                direction: getDirection(
                     takeRight(digestBase.category_availability, 2)),
                 icon: 'fa-hand-paper-o',
                 label: 'Availability'
             },
             {
                 current: last(digestBase.category_stability),
-                percentChange: percentChange(
+                direction: getDirection(
                     takeRight(digestBase.category_stability, 2)),
                 icon: 'fa-cubes',
                 label: 'Stability'
             },
             {
                 current: last(digestBase.category_performance),
-                percentChange: percentChange(
+                direction: getDirection(
                     takeRight(digestBase.category_performance, 2)),
                 icon: 'fa-tachometer',
                 label: 'Performance'
