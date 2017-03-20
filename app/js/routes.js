@@ -82,7 +82,7 @@ function Routes($stateProvider) {
             url: '/reports/executive/',
             templateUrl: 'js/states/digests/digests.html',
             controller: 'DigestsCtrl',
-            title: 'Digests'
+            title: 'Executive Reports'
         });
 
     // System routes
