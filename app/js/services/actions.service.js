@@ -270,6 +270,11 @@ function ActionsService(
         var ruleDeferred;
         var namePromises = [];
 
+        // offline / systems not checking in
+        if (FilterService.getOffline() !== FilterService.getOnline()) {
+            systemsQuery.offline = FilterService.getOffline().toString();
+        }
+
         pub.setLoadingDetails(true);
         systemsQuery.rule = encodeURIComponent(rule_id);
         if (FilterService.getParentNode()) {
