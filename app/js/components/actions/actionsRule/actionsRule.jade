@@ -8,11 +8,13 @@ section.actions-rule-details.gray(ng-hide='loading')
   p(ng-bind-html='ruleDetails.generic_html | trust_html')
   all-severity-icons(rule='ruleDetails', ng-if='!loading')
 section
-  h1.page-title(translate, ng-if='ruleDetails.type !== "osp"') {{allSystems.length}} Impacted Systems
-  h1.page-title(translate, ng-if='ruleDetails.type === "osp"') Impacted Deployments
   .row
     .col-sm-12
       actions-rule-filters
+  .row
+    .col-sm-12.text-center-sm
+      h3(translate, ng-if='ruleDetails.type !== "osp"') {{allSystems.length}} Impacted Systems
+      h3(translate, ng-if='ruleDetails.type === "osp"') Impacted Deployments
 
   div(infinite-scroll='doScroll()', infinite-scroll-disabled='disableScroll()', infinite-scroll-immediate-check='false')
 

@@ -125,6 +125,8 @@ function FilterService(
         filterService.setSelectedDockerHost(resetParent);
         filterService.setSelectedOSPDeployment(resetParent);
         filterService.setSelectedProduct('all');
+        filterService.setOnline(true);
+        filterService.setOffline(true);
         MultiButtonService.setState('inventoryWithActions', true);
         MultiButtonService.setState('inventoryWithoutActions', true);
         filterService.doFilter();
