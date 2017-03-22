@@ -162,7 +162,7 @@
                       | {{$select.selected._displayAs}}
                     ui-select-choices.ui-select-choices(
                       repeat="item in (getAvailableRules() | filter: {_displayAs: $select.search}) | orderBy:['-severityNum', '-report_count'] track by item.rule_id")
-                      ansible-icon.inline-right(value='item.ansible')
+                      ansible-icon.inline-right(value='item.ansible', show-planner-line='false')
                       | {{item._displayAs}} ({{item.report_count}})
                       .icon-group.icon-group-severity(ng-if='!loading')
                         severity-icon(severity='item.rec_impact', type='impact')
@@ -179,7 +179,7 @@
 
             .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', '-actions.length', 'rule_id'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
               .header.bordered(ng-init='tableEdit = false')
-                ansible-icon.inline-right(value='rule.ansible')
+                ansible-icon.inline-right(value='rule.ansible', show-planner-line='false')
                 strong {{rule.description}}
                 .icon-group.icon-group-severity(ng-if='!loading')
                   severity-icon(severity='rule.rec_impact', type='impact')
