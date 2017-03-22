@@ -18,7 +18,7 @@ function ansibleIconCtrl($scope, gettextCatalog) {
             if (value) {
                 $scope.tooltip = gettextCatalog.getString(
                     'This rule has Ansible support. ' +
-                    'Use the Planner to generate an Ansible playbook.');
+                    'Use the Planner to generate an Ansible Playbook.');
             } else {
                 $scope.tooltip = gettextCatalog
                     .getString('This rules does not have Ansible support');
