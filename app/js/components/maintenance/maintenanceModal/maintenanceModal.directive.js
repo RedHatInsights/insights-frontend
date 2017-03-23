@@ -283,7 +283,7 @@ function maintenanceModalCtrl($scope,
             return plan.name;
         }
 
-        return gettextCatalog.getString('Untitled plan');
+        return gettextCatalog.getString('Unnamed plan');
     };
 
     MaintenanceService.plans.load(false);
