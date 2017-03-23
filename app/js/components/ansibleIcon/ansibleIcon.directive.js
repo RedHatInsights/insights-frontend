@@ -1,3 +1,4 @@
+/*global require*/
 'use strict';
 
 var componentsModule = require('../');
@@ -8,7 +9,7 @@ var componentsModule = require('../');
 function ansibleIconCtrl($scope, gettextCatalog) {
     const plannerLine = gettextCatalog.getString(
         'Use the Planner to generate an Ansible Playbook.');
-    const possitive = gettextCatalog.getString('This rule has Ansible support.');
+    const positive = gettextCatalog.getString('This rule has Ansible support.');
     const negative = gettextCatalog.getString('This rules does not have Ansible support');
 
     $scope.$watch('value', function (value) {
@@ -21,9 +22,9 @@ function ansibleIconCtrl($scope, gettextCatalog) {
 
         if ($scope.showTooltip || $scope.showTooltip === undefined) {
             if (value) {
-                $scope.tooltip = possitive;
+                $scope.tooltip = positive;
                 if ($scope.showPlannerLine || $scope.showPlannerLine === undefined) {
-                    $scope.tooltip += ' ' + plannerLine;
+                    $scope.tooltip += ` ${plannerLine}`;
                 }
             } else {
                 $scope.tooltip = negative;
