@@ -7,7 +7,6 @@ var componentsModule = require('../../');
  * @ngInject
  */
 function TrimmedTextCtrl($scope) {
-    console.log($scope.length);
     if ($scope.text.length > $scope.length) {
         $scope.trimmedText = $scope.text.slice(0, $scope.length) + '…';
     } else {
