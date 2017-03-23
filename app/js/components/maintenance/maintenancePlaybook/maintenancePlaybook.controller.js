@@ -4,6 +4,7 @@
 var componentsModule = require('../../');
 const FileSaver = require('file-saver');
 const parseHeader = require('parse-http-header');
+const each = require('lodash/collection/forEach');
 
 /**
  * @ngInject
@@ -19,6 +20,7 @@ function MaintenancePlaybook($modalInstance,
                              AnsibleService,
                              Maintenance,
                              ModalUtils,
+                             Rule,
                              SystemsService) {
 
     $scope.RULES_WITHOUT_PLAYS = 0;
@@ -108,7 +110,6 @@ function MaintenancePlaybook($modalInstance,
      * Gets the list of rules that are being fixed with this Playbook
      */
     function setRulesWithPlays () {
-
         let rulesWithPlays = {};
         let platformRule = {};
         let excludeRule = false;
@@ -162,6 +163,19 @@ function MaintenancePlaybook($modalInstance,
         });
 
         $scope.rulesWithPlays = rulesWithPlays;
+
+        // fetch resolution descriptions for non-ambiguous rules so that we can show
+        // them on the summary page
+        each(rulesWithPlays, function (rule) {
+            if (!rule.solution) {
+                Rule.listAnsibleResolutions(rule.rule_id, rule.system_type.id)
+                .success(function (resolutions) {
+                    if (resolutions.length === 1) { // should always be the case
+                        rule.solution = resolutions[0].description;
+                    }
+                });
+            }
+        });
     }
 
     /**

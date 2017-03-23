@@ -1,5 +1,6 @@
 'use strict';
 var apiModule = require('./');
+const URI = require('urijs');
 
 /**
  * @ngInject
@@ -81,6 +82,16 @@ function Rule($http, InsightsConfig, AccountService, PreferenceService, Utils, $
 
         exportRules: function () {
             $window.location.assign(root + 'rules/admin?internal=true&accept=csv');
+        },
+
+        listAnsibleResolutions: function (ruleId, systemTypeId) {
+            const v3root = InsightsConfig.apiPrefix + 'v3/';
+            const url = URI(v3root);
+            url.segment('rules');
+            url.segment(ruleId);
+            url.segment('ansible-resolutions');
+            url.segment(String(systemTypeId));
+            return $http.get(url.toString());
         }
     };
 }
