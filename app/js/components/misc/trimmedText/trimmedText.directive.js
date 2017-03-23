@@ -7,8 +7,10 @@ var componentsModule = require('../../');
  * @ngInject
  */
 function TrimmedTextCtrl($scope) {
+    $scope.showTooltip = false;
     if ($scope.text.length > $scope.length) {
         $scope.trimmedText = $scope.text.slice(0, $scope.length) + '…';
+        $scope.showTooltip = true;
     } else {
         $scope.trimmedText = $scope.text;
     }
