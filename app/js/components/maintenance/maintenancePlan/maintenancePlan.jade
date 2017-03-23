@@ -182,21 +182,19 @@
 
             .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', '-actions.length', 'rule_id'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
               .header.bordered(ng-init='tableEdit = false')
-                ansible-icon.inline-right(value='rule.ansible', show-planner-line='false')
-                strong {{rule.description}}
-                .icon-group.icon-group-severity(ng-if='!loading')
-                  severity-icon(severity='rule.rec_impact', type='impact')
-                  severity-icon(severity='rule.rec_likelihood', type='likelihood')
-                  severity-icon(severity='rule.severity', type='severity')
-                span.pull-right(ng-hide='isReadOnly()')
-                  a(ng-hide='tableEdit', ng-click='tableEdit = true')
-                    strong(
-                      translate,
-                      tooltip="{{'Click to add/remove affected systems' | translate}}") Edit
-                  i.fa.fa-trash-o(
-                    ng-if='tableEdit',
-                    ng-click='removeActions(rule.actions)',
-                    tooltip="{{'Remove this action' | translate}}")
+                .title
+                  ansible-icon.inline-right(value='rule.ansible', show-planner-line='false')
+                  strong {{rule.description}}
+                  span.pull-right(ng-hide='isReadOnly()')
+                    a(ng-hide='tableEdit', ng-click='tableEdit = true')
+                      strong(
+                        translate,
+                        tooltip="{{'Click to add/remove affected systems' | translate}}") Edit
+                    i.fa.fa-trash-o(
+                      ng-if='tableEdit',
+                      ng-click='removeActions(rule.actions)',
+                      tooltip="{{'Remove this action' | translate}}")
+                all-severity-icons(rule='rule', ng-if='!loading')
               .content.nopad.table-responsive
                 maintenance-table-systems(
                   params='tableParams(rule, true, false)',
