@@ -165,7 +165,7 @@
                       .row
                         .col-sm-8.valign-bottom
                           ansible-icon.inline-right(value='item.ansible', show-planner-line='false')
-                          span.limit-80 {{item._displayAs}}&nbsp;
+                          span.limit-90(tooltip='{{item._displayAs}}') {{item._displayAs}}&nbsp;
                           b ({{item.report_count}})
 
                         //trimmed-text(text="{{item._displayAs}}" length=70)
