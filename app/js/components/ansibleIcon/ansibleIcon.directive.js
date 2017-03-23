@@ -1,3 +1,4 @@
+/*global require*/
 'use strict';
 
 var componentsModule = require('../');
@@ -6,6 +7,11 @@ var componentsModule = require('../');
  * @ngInject
  */
 function ansibleIconCtrl($scope, gettextCatalog) {
+    const plannerLine = gettextCatalog.getString(
+        'Use the Planner to generate an Ansible Playbook.');
+    const positive = gettextCatalog.getString('This rule has Ansible support.');
+    const negative = gettextCatalog.getString('This rules does not have Ansible support');
+
     $scope.$watch('value', function (value) {
         if (value) {
             $scope.icon = 'images/l_ansible-blue.svg';
@@ -16,12 +22,12 @@ function ansibleIconCtrl($scope, gettextCatalog) {
 
         if ($scope.showTooltip || $scope.showTooltip === undefined) {
             if (value) {
-                $scope.tooltip = gettextCatalog.getString(
-                    'This rule has Ansible support. ' +
-                    'Use the Planner to generate an Ansible Playbook.');
+                $scope.tooltip = positive;
+                if ($scope.showPlannerLine || $scope.showPlannerLine === undefined) {
+                    $scope.tooltip += ` ${plannerLine}`;
+                }
             } else {
-                $scope.tooltip = gettextCatalog
-                    .getString('This rules does not have Ansible support');
+                $scope.tooltip = negative;
             }
         }
     });
@@ -31,7 +37,8 @@ function ansibleIcon() {
     return {
         scope: {
             value: '=',
-            showTooltip: '='
+            showTooltip: '=',
+            showPlannerLine: '='
         },
         templateUrl: 'js/components/ansibleIcon/ansibleIcon.html',
         restrict: 'E',

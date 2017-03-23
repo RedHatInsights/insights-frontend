@@ -25,8 +25,8 @@
             span.icon-inline(ng-if='!editBasic.active && plan.hidden && isInternal')
               i.fa.fa-eye-slash
             h2.title(ng-class="{'red': plan.overdue}", ng-dblclick='editBasic.toggle()')
-              span(ng-if="plan.name.length", ng-dblclick='editBasic.toggle()') {{plan.name}}
-              span(ng-if='!plan.name || !plan.name.length', translate) Untitled plan ({{plan.maintenance_id}})
+              span(ng-if="plan.name.length", ng-dblclick='editBasic.toggle()') {{plan.name}} ({{plan.maintenance_id}})
+              span(ng-if='!plan.name || !plan.name.length', translate) Unnamed plan ({{plan.maintenance_id}})
               i.fa.fa-pencil-square-o.edit-toggle(
                 ng-click='editBasic.toggle()',
                 ng-if='!isReadOnly()',
@@ -62,11 +62,11 @@
                 ng-model='editBasic.description')
               hr
             .form-group.nick(ng-class="{'has-error': editBasicForm.name.$invalid}")
-              label(translate) Alias:&nbsp;
+              label(translate) Plan Name:&nbsp;
               input.form-control(
                 type='text',
                 name='name',
-                placeholder='Untitled plan',
+                placeholder="{{'Unnamed plan' | translate}}",
                 maxlength='255',
                 ng-model='editBasic.name')
             .form-group.title(ng-class="{'has-error': editBasicForm.date.$invalid}")
@@ -164,7 +164,7 @@
                       repeat="item in (getAvailableRules() | filter: {_displayAs: $select.search}) | orderBy:['-severityNum', '-report_count'] track by item.rule_id")
                       .row
                         .col-sm-8.valign-bottom
-                          ansible-icon.inline-right(value='item.ansible')
+                          ansible-icon.inline-right(value='item.ansible', show-planner-line='false')
                           span.limit-90(tooltip='{{item._displayAs}}') {{item._displayAs}}&nbsp;
                           b ({{item.report_count}})
 
@@ -183,7 +183,7 @@
             .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', '-actions.length', 'rule_id'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
               .header.bordered(ng-init='tableEdit = false')
                 .title
-                  ansible-icon.inline-right(value='rule.ansible')
+                  ansible-icon.inline-right(value='rule.ansible', show-planner-line='false')
                   strong {{rule.description}}
                   span.pull-right(ng-hide='isReadOnly()')
                     a(ng-hide='tableEdit', ng-click='tableEdit = true')

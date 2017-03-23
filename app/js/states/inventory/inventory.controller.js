@@ -392,7 +392,7 @@ function InventoryCtrl(
                 stale = true;
             }
 
-            Export.getReports(null, null, Group.current().id, stale);
+            Export.getSystems(Group.current().id, stale, FilterService.getSearchTerm());
         });
     }
 
