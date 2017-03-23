@@ -36,10 +36,7 @@
       .footer
         .row
           .col-sm-6
-            .icon-group.icon-group-severity(ng-if="!swapping")
-              severity-icon(severity='rule.rec_impact', type='impact')
-              severity-icon(severity='rule.rec_likelihood', type='likelihood')
-              severity-icon(severity='rule.severity', type='severity')
+            all-severity-icons(rule='rule', ng-if='!swapping')
           .col-sm-6.text-right-sm
             strong
               a(
