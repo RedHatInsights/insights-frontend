@@ -75,10 +75,10 @@ section.inventory
                     ng-model='checkboxes.checked',
                     ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
 
-                th.sortable.nowrap(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')")
-                  .sort-indicator(translate) System Name
                 th.sortable.nowrap(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')")
                   .sort-indicator(translate) System Type
+                th.sortable.nowrap(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')")
+                  .sort-indicator(translate) System Name
                 th.sortable.nowrap(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')")
                   .sort-indicator(translate) Last Check In
                 th.sortable.nowrap(ng-class="predicate | sortClass:'report_count':reverse", ng-click="sort('report_count')")
@@ -95,10 +95,10 @@ section.inventory
                     type='checkbox',
                     ng-model='checkboxes.items[system.system_id]',
                     ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();')
-                td.nowrap.long-name
-                  a(ng-click="showActions(system)") {{system.toString}}
                 td.nowrap
                   type-icon(type-id='system.system_type_id', include-text='true')
+                td.nowrap.long-name
+                  a(ng-click="showActions(system)") {{system.toString}}
                 td.nowrap {{ system.last_check_in | timeAgo }}
                 td.nowrap
                   a.action-count(ng-click='showActions(system)')
