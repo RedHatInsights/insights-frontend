@@ -115,7 +115,7 @@
               | #{'>'} {{ rule.description }} for&nbsp;
               b {{ rule.system_type.displayNameShort }}
               ul(ng-show='rule.solution !== undefined')
-                li {{ rule.solution }}
+                li {{ rule.solution() }}
           a(ng-show="listLimit !== undefined && listLimit < rulesWithPlays.length",
             ng-click="listLimit = undefined",
             translate) View More ({{rulesWithPlays.length - listLimit}})
