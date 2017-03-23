@@ -162,10 +162,15 @@
                       | {{$select.selected._displayAs}}
                     ui-select-choices.ui-select-choices(
                       repeat="item in (getAvailableRules() | filter: {_displayAs: $select.search}) | orderBy:['-severityNum', '-report_count'] track by item.rule_id")
-                      ansible-icon.inline-right(value='item.ansible', show-planner-line='false')
-                      trimmed-text(text="{{item._displayAs}}" length=70)
-                      | &nbsp;({{item.report_count}})
-                      severity-icon.pull-right(severity='item.severity', type='severity')
+                      .row
+                        .col-sm-8.valign-bottom
+                          ansible-icon.inline-right(value='item.ansible', show-planner-line='false')
+                          span.limit-80 {{item._displayAs}}&nbsp;
+                          b ({{item.report_count}})
+
+                        //trimmed-text(text="{{item._displayAs}}" length=70)
+                        .col-sm-4.text-right
+                          severity-icon.pull-right(severity='item.severity', type='severity')
                   .available-actions.table-responsive
                     maintenance-table-systems(
                       params='tableParams(addRule.selected, true, true)',
