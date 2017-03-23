@@ -163,7 +163,8 @@
                     ui-select-choices.ui-select-choices(
                       repeat="item in (getAvailableRules() | filter: {_displayAs: $select.search}) | orderBy:['-severityNum', '-report_count'] track by item.rule_id")
                       ansible-icon.inline-right(value='item.ansible', show-planner-line='false')
-                      | {{item._displayAs}} ({{item.report_count}})
+                      trimmed-text(text="{{item._displayAs}}" length=70)
+                      | &nbsp;({{item.report_count}})
                       severity-icon.pull-right(severity='item.severity', type='severity')
                   .available-actions.table-responsive
                     maintenance-table-systems(
