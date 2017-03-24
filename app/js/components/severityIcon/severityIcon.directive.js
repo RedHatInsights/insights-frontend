@@ -31,8 +31,10 @@ function severityIconCtrl($scope, gettextCatalog) {
             if (has(priv.typeMap, $scope.type)) {
                 return;
             }
+
             throw new Error('Invalid severity-icon type selected! ' + $scope.type);
         }
+
         throw new Error('No severity-icon type selected! ' + $scope.type);
     };
 
