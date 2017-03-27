@@ -34,6 +34,8 @@ function severityIconCtrl($scope, gettextCatalog) {
 
             throw new Error('Invalid severity-icon type selected! ' + $scope.type);
         }
+
+        throw new Error('No severity-icon type selected! ' + $scope.type);
     };
 
     priv.typeMap = {
@@ -67,6 +69,9 @@ function severityIconCtrl($scope, gettextCatalog) {
             $scope.severity = 'UNKNOWN';
         }
 
+        // do this before the severity mapping stuff happens
+        $scope.tooltip = `${priv.typeMap[$scope.type]}: ${$scope.severity}`;
+
         // this is a hack to support ERROR to 4 in the hamburger
         // until critical sev is supported properly
         if ($scope.type && $scope.type === 'severity') {
@@ -82,7 +87,6 @@ function severityIconCtrl($scope, gettextCatalog) {
         }
 
         $scope.sevClass = priv.sevClassMap[$scope.severity];
-
     };
 }
 
