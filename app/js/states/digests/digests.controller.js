@@ -135,7 +135,7 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
             };
         }
 
-        $scope.latest_score = takeRight(digestBase.scores, 1)[0].toFixed(2);
+        $scope.latest_score = takeRight(digestBase.scores, 1)[0];
 
         // current counts by category
         $scope.digest_hits_per_cat = [
