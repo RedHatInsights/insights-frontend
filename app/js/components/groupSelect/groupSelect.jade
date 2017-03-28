@@ -14,6 +14,6 @@
       li
         a(ng-click='triggerChange(null)', translate) All Groups
       li(ng-repeat='g in groups | orderBy:"display_name" track by g.id')
-        a(ng-click='triggerChange(g)') {{g.display_name}}
-    //select(ng-model='group', ng-options='g as g.display_name for g in groups track by g.id', ng-change='groupChange()')
-    //option(value="", translate) All
+        a(ng-click='triggerChange(g)')
+          trimmed-text(length="40", text="{{g.display_name}}")
+
