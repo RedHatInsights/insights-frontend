@@ -46,7 +46,7 @@
           td.cat
             category-icon(category='record.rule.category', tooltip='{{record.rule.category}}')
           td
-            severity-icon.severity(rule='record.rule', tooltip='{{record.rule.severity}}')
+            severity-icon.severity(severity='record.rule.severity', type='severity', label='')
           td
             rule-state-icon(state='record.state', tooltip='{{record.state}}')
           td.count {{record.count}}
