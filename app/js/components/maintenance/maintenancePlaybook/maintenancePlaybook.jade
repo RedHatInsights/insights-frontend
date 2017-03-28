@@ -137,7 +137,7 @@
 .modal-footer
   ul.row.pager.pager-steps(ng-if='step === RESOLVE_QUESTIONS || step === SUMMARY')
     li.previous.col-sm-6
-      a.btn.btn-accent(ng-click='prevStep()', ng-if='(step !== RESOLVE_QUESTIONS || rulesWithoutPlays.length > 0) && currentQuestion.index > 0)', translate)
+      a.btn.btn-accent(ng-click='prevStep()', ng-if='step === SUMMARY || currentQuestion.index > 0 || rulesWithoutPlays.length > 0', translate)
         i.fa.fa-chevron-left
         | &nbsp;&nbsp;Previous
     li.next.col-sm-6(ng-if='step !== SUMMARY')
