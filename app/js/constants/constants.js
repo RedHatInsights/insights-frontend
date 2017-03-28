@@ -7,6 +7,9 @@
 
 var constantsModule = require('./');
 
+constantsModule.constant('GettingStartedUrl',
+    'https://access.redhat.com/products/red-hat-insights');
+
 constantsModule.constant(
     'QuickFilters', {
         summaryTypes: {

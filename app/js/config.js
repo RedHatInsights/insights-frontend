@@ -31,8 +31,6 @@ function Config(
 
     // Route redirects
     $urlRouterProvider.when('/error_infos', '/rules/admin/');
-    $urlRouterProvider.when('/getting-started/',
-        'https://access.redhat.com/products/red-hat-insights#getstarted');
     $urlRouterProvider.when('/info/security', '/security/');
 
     //https://github.com/angular-ui/ui-router/wiki/
