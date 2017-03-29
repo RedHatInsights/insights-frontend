@@ -12,7 +12,7 @@ const TIME_PERIOD = 30;
 /**
  * @ngInject
  */
-function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
+function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Severities) {
     var digestPromise = DigestService.digestsByType('eval');
     var systemPromise = System.getSystems();
     var rulePromise = Rule.getRulesLatest();
@@ -73,6 +73,24 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
         ), 10);
         items.reverse();
         return items;
+    }
+
+    function ruleAppendixSorting(rules) {
+        rules = sortBy(rules, function (r) {
+
+            // this is gross but sortBy seems to sort the numbers
+            //  alphabetically instead of numerically when dual-sorting,
+            //  so pad with zeroes
+            // of course, this breaks if a rule has 10 billion hits
+            var paddedcount = '0000000000' + r.report_count;
+            paddedcount = paddedcount.substr(('' + r.report_count).length);
+            return [Severities.indexOf(r.severity), paddedcount];
+        }).filter(function (r) {
+            return r.report_count > 0;
+        });
+
+        rules.reverse();
+        return rules;
     }
 
     $scope.checkboxValues = {
@@ -184,6 +202,7 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService) {
 
         $scope.topTenWorstSystems = getTenWorst(sysres.data.resources);
         $scope.topTenRules = getTenWorst(ruleres.data.resources);
+        $scope.allRuleHits = ruleAppendixSorting(ruleres.data.resources);
         $scope.loading = false;
     });
 }
