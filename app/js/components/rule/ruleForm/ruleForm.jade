@@ -46,7 +46,7 @@ form(ng-submit='saveFn()', name='form', novalidate)
         label.control-label Category 
         select.form-control(ng-model='rule.category', type='text', ng-options="c as c for c in categories | titlecase", required, ng-disabled='!canEdit')
       .col-xs-6.col-sm-4
-        label.control-label Total Rish 
+        label.control-label Total Risk
         select.form-control(ng-model='rule.severity', type='text', ng-options="s as s for s in severities", required, ng-disabled='!canEdit')
     .row.row-short
       .col-xs-12
