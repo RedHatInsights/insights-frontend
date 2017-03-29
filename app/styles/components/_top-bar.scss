@@ -97,5 +97,16 @@
       }
     }
   }
-}
 
+  .group-select {
+	label {
+		color: $gray;
+	}
+	button span {
+		color: #333;
+	}
+    .dropdown {
+      display: inline-block;
+    }
+  }
+}
