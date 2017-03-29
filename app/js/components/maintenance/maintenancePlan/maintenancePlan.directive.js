@@ -8,6 +8,7 @@ const FileSaver = require('file-saver');
 const parseHeader = require('parse-http-header');
 const some = require('lodash/collection/some');
 const get = require('lodash/object/get');
+const sortBy = require('lodash/collection/sortBy');
 
 /**
  * @ngInject
@@ -21,6 +22,7 @@ function maintenancePlanCtrl(
     AnsibleAPIErrors,
     AnsibleErrors,
     DataUtils,
+    Group,
     Maintenance,
     MaintenanceService,
     SweetAlert,
@@ -31,6 +33,8 @@ function maintenancePlanCtrl(
     $scope.loader = new Utils.Loader();
     $scope.exportPlan = Maintenance.exportPlan;
     $scope.error = null;
+
+    const CURRENT_GROUP_PREFIX = gettextCatalog.getString('Current Group');
 
     $scope.editBasic = new $scope.BasicEditHandler(
         $scope.plan,
@@ -312,10 +316,37 @@ function maintenancePlanCtrl(
         return $scope.plan.isReadOnly() && !$scope.isInternal;
     };
 
+    $scope.registerGroupChangeListener = function (uiSelect) {
+        const unregister = $rootScope.$on('group:change', function () {
+            if (uiSelect.refreshItems) {
+                uiSelect.refreshItems();
+            }
+        });
+
+        $scope.$on('$destroy', unregister);
+    };
+
     $scope.groupBySystemType = function (system) {
+        const group = Group.current();
+
+        if (group.display_name !== undefined) {
+            if (find(group.systems, {system_id: system.system_id})) {
+                return `${CURRENT_GROUP_PREFIX}: ${group.display_name}`;
+            }
+        }
+
         // this is safe as system select won't be shown before system types are loaded
         return get(SystemsService.getSystemTypeUnsafe(system.system_type_id),
             'displayName');
+    };
+
+    $scope.groupFilter = function (groups) {
+        return sortBy(groups, function (group) {
+
+            // prefix is used so that current groups is first always
+            const prefix = (group.name.startsWith(CURRENT_GROUP_PREFIX)) ? 0 : 1;
+            return `${prefix}-${group.name}`;
+        });
     };
 
     function checkAnsibleSupport () {

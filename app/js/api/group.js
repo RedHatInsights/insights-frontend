@@ -130,7 +130,17 @@ function Group($http, $q, $rootScope, InsightsConfig, AccountService) {
             return $http.delete(root + 'groups/' + group.id + AccountService.current());
         },
 
-        reload: getData
+        reload: getData,
+
+        queryParam: function () {
+            if (_currentGroup && _currentGroup.id) {
+                return {
+                    group: _currentGroup.id
+                };
+            }
+
+            return {};
+        }
     };
 }
 

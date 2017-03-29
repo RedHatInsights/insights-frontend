@@ -1,19 +1,22 @@
-.hidden-in-product(ng-show='groups.length')
-  label(translate='translate') Groups
+.hidden-in-product.group-select
+  label(translate='translate') Group
   .dropdown.gray
     button.btn.btn-default.dropdown-toggle(
       type='button',
       data-toggle='dropdown',
       aria-haspopup='true',
       aria-expanded='false',
-      ng-disabled='!groups || !groups.length')
-      span(ng-hide='isGroupSelected()', translate) All Groups
-      span(ng-show='isGroupSelected()') {{group.display_name}}
+      ng-disabled='disabled')
+      span.text(ng-show='!isGroupSelected() && !disabled', translate) Group select
+      span.text(ng-show='disabled', translate) All Systems
+      span.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
       span.caret
     ul.dropdown-menu
       li
-        a(ng-click='triggerChange(null)', translate) All Groups
+        a(ng-click='triggerChange(null)', translate) All Systems
       li(ng-repeat='g in groups | orderBy:"display_name" track by g.id')
         a(ng-click='triggerChange(g)')
           trimmed-text(length="35", text="{{g.display_name}}")
-
+      li.divider(role='separator')
+      li
+        a(ui-sref="app.config({tab: 'groups'})", translate) Create a group
