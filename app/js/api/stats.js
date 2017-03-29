@@ -6,10 +6,10 @@ const URI = require('urijs');
 /**
 * @ngInject
 */
-function Stats($http, InsightsConfig, AccountService) {
+function Stats($http, InsightsConfig, AccountService, Group) {
     const v3root = InsightsConfig.apiPrefix + 'v3/';
 
-    function buildUri (segment, params) {
+    function buildUri (segment, params, ignoreGroup) {
         const uri = URI(v3root);
         uri.segment('stats');
 
@@ -18,6 +18,11 @@ function Stats($http, InsightsConfig, AccountService) {
         }
 
         uri.addSearch(AccountService.queryParam());
+
+        if (!ignoreGroup) {
+            uri.addSearch(Group.queryParam());
+        }
+
         if (params) {
             uri.addSearch(params);
         }
@@ -34,8 +39,8 @@ function Stats($http, InsightsConfig, AccountService) {
             return $http.get(buildUri('systems', params));
         },
 
-        getRules: function (params) {
-            return $http.get(buildUri('rules', params));
+        getRules: function (params, ignoreGroup) {
+            return $http.get(buildUri('rules', params, ignoreGroup));
         }
     };
 }

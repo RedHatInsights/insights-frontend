@@ -2,7 +2,9 @@
   .row
     //.col-sm-4
     //  product-select
-    .col-sm-6
+    .col-sm-3
+      check-in-select
+    .col-sm-6.col-sm-offset-3
       label.invisible(translate='translate') Search
       search-box(on-search='search.doFilter(model)')
     //.col-sm-4
@@ -14,8 +16,6 @@
       div(ng-show='getSelectedProduct() === "docker"')
         docker-host-select
         //docker-type-multi-button //GET /latest/rules doesn't support roles yet
-    .col-sm-4.col-sm-offset-2
-      group-select(round='false')
   .row.row-short
     .col-sm-6
       a(ng-click="resetFilters()")
@@ -23,7 +23,3 @@
         i.fa.fa-refresh
     .col-sm-6.text-right
       expand-all-button(ng-show="!loading && !loadingSystems")
-
-  .row
-    .col-sm-3
-      check-in-select

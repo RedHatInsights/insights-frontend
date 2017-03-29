@@ -222,8 +222,10 @@
                     ui-select-match.form-control.ui-select-match(placeholder="{{'Add system' | translate}}")
                       | {{$select.selected._displayAs}}
                     ui-select-choices.ui-select-choices(
-                      repeat="item in (getAvailableSystems() | filter: {_displayAs: $select.search}) | orderBy:['_displayAs'] track by item._id",
-                      group-by='groupBySystemType')
+                      repeat="item in (available.systems | filter: {_displayAs: $select.search}) | orderBy:['_displayAs'] track by item._id",
+                      group-by='groupBySystemType',
+                      group-filter='groupFilter'
+                      ng-init='registerGroupChangeListener($select)')
                       | {{item._displayAs}} ({{item.report_count}})
               .row.row-short(ng-if='addSystem.selected')
                 .col-sm-12
