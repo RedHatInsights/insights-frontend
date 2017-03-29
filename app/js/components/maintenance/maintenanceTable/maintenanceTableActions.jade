@@ -25,7 +25,7 @@
             i.fa.fa-exclamation-circle(tooltip="{{'This action is already part of another plan' | translate}}")
           a.action(ng-click='table.showSystemModal(table.params.item, action.rule)') {{action.display}}
         td.text-center
-          severity-icon(severity='action.rule.severity')
+          severity-icon(severity='action.rule.severity', type='severity', label='')
         td.status.text-center
           status-icon(status='action.done')
     tfoot(maintenance-table-footer)

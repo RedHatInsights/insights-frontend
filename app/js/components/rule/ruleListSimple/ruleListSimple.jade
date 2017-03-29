@@ -1,9 +1,10 @@
 ul.rule-list.list-unstyled
   li(ng-repeat="rule in (rules | orderBy:order | limitTo:limit) track by rule.rule_id")
-    span.icon-inline
-      severity-icon(rule='rule')
-    | {{rule.description}} &nbsp;
+    .title {{rule.description}} &nbsp;
     a(ng-click='onSelect({rule: rule})') [{{rule.rule_id}}]&nbsp;
     i.fa.fa-times(ng-click='onDelete({rule: rule})', ng-hide='readOnly')
+    // I know I know
+    br
+    all-severity-icons(rule='rule')
   li(ng-show='rules.length > 10 && limit')
     a(ng-click='limit = undefined') … ({{rules.length - limit}} more)
