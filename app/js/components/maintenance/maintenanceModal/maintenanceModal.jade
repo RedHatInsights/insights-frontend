@@ -45,9 +45,9 @@
       .content-block.maintenance-plan.rule(
         ng-if='plan && tableParams && mode === MODES.rule')
         .header.bordered
-          span.icon-inline
-            severity-icon(rule="rule")
-          strong {{rule.description}}
+          .title
+            strong {{rule.description}}
+          all-severity-icons(rule='rule', ng-if='!loader.loading')
         .nopad.table-responsive
           maintenance-table-systems(
             params='tableParams',

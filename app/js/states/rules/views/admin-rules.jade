@@ -30,7 +30,7 @@
           th.sortable.cat(ng-class="predicate | sortClass:'rule.category':reverse", ng-click="predicate = 'rule.category'; reverse=!reverse") 
             .sort-indicator.vertical Category
           th.sortable.sev(ng-class="predicate | sortClass:'rule.severityNum':reverse", ng-click="predicate = 'rule.severityNum'; reverse=!reverse") 
-            .sort-indicator.vertical Severity
+            .sort-indicator.vertical Total Risk
           th.sortable.sev(ng-class="predicate | sortClass:'state':reverse", ng-click="predicate = 'state'; reverse=!reverse") 
             .sort-indicator.vertical State
           th.sortable.count(ng-class="predicate | sortClass:'count':reverse", ng-click="predicate = 'count'; reverse=!reverse") 
@@ -46,7 +46,7 @@
           td.cat
             category-icon(category='record.rule.category', tooltip='{{record.rule.category}}')
           td
-            severity-icon.severity(rule='record.rule', tooltip='{{record.rule.severity}}')
+            severity-icon.severity(severity='record.rule.severity', type='severity', label='')
           td
             rule-state-icon(state='record.state', tooltip='{{record.state}}')
           td.count {{record.count}}
