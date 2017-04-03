@@ -420,6 +420,14 @@ function MaintenanceService(
         });
     };
 
+    service.getPlanName = function (plan) {
+        if (!plan.name || !plan.name.length) {
+            return `${gettextCatalog.getString('Unnamed plan')} (${plan.maintenance_id})`;
+        }
+
+        return plan.name;
+    };
+
     $rootScope.$on('maintenance:planChanged', function () {
         service.plans.process();
     });
