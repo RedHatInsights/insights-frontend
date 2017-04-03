@@ -156,3 +156,13 @@ body, .insights body {
 .pointer-events-auto {
     pointer-events: auto !important;
 }
+
+a.link {
+  color: $blue;
+  text-decoration: underline;
+
+  &:hover {
+    color: darken($blue, 10);
+    text-decoration: underline;
+  }
+}

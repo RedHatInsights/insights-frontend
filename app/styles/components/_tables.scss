@@ -215,9 +215,14 @@ $sortable_border_color_active: red;
 		color: #fff;
 	}
 
-    thead.lite th {
-      font-weight: 100;
-    }
+  thead th {
+    font-weight: 700;
+  }
+
+  thead.lite th {
+    font-weight: 100;
+  }
+
 
 	thead {
         th, td, tr {
