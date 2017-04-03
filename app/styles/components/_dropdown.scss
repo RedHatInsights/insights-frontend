@@ -59,6 +59,25 @@
   }
 }
 
+.dropdown.dropdown-blue,
+.ui-select-bootstrap.dropdown.dropdown-blue {
+  $dropdown-blue-line-height: 1;
+
+  .btn {
+    background: $blue;
+    color: #fff;
+    line-height: $dropdown-blue-line-height;
+  }
+
+  .btn span { color: #fff; }
+
+  input[type="search"] {
+    @include rem('padding', 12px 30px 12px 12px);
+    @include font-size(14px);
+    line-height: $dropdown-blue-line-height;
+  }
+}
+
 .open>.dropdown-menu {
   //width: 100%;
 }
@@ -66,6 +85,7 @@
 .ui-select-bootstrap.dropdown {
   .form-control {
     height: auto;
+    width: auto;
   }
 
   .btn {
@@ -74,5 +94,12 @@
     @include rem('padding', 7px $global-margin 7px 12px);
     text-transform: none;
   }
+
+  .ui-select-toggle,
+  input[type="search"] {
+    @include rem('padding', 12px 30px 12px 12px);
+  }
+
+  input:placeholder-shown {  }
 }
 
