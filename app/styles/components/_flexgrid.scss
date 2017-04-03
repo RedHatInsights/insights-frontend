@@ -13,11 +13,12 @@
     }
 	}
 
-	[class^="col-"], div[class*=" col-"] {
+	[class^="col-"],
+  div[class*=" col-"] {
 		margin-top: 0;
 		@include rem('padding-left', $global-padding);
 		@include rem('padding-right', $global-padding);
-		@include rem('padding-bottom', $global-padding);
+		@include rem('padding-bottom', $global-margin);
 		float: none;
 
     @include media-query(sm-max) {
@@ -28,9 +29,15 @@
 			flex-basis: 100%;
 			max-width: 100%;
 		}
+  }
 
-		@include media-query(sm) { @include rem('padding-bottom', $global-margin); }
-	}
+  .row.row-short {
+
+    [class^="col-"],
+    div[class*=" col-"] {
+      @include rem('padding-bottom', $global-padding);
+    }
+  }
 
 	.content {
 		@include media-query(sm) {
@@ -39,8 +46,6 @@
 		}
 	}
 	&.equalheights { .content { height: 100%; } }
-
-  &.equalheights .card {
-    height: 100%;
-  }
+  &.equalheights .card { height: 100%; }
+  .row + .row { margin-top: 0; }
 }
