@@ -8,6 +8,7 @@ var find = require('lodash/collection/find');
  * @ngInject
  */
 function MaintenancePlanLiteCtrl($scope, Maintenance, MaintenanceService, $state) {
+    $scope.MaintenanceService = MaintenanceService;
     $scope.plans = MaintenanceService.plans;
 
     $scope.duration = function (start, end) {
