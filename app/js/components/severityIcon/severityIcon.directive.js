@@ -60,6 +60,13 @@ function severityIconCtrl($scope, gettextCatalog) {
         4: priv.iconClass(4)
     };
 
+    priv.numberToStringMap = {
+        1: gettextCatalog.getString('Low'),
+        2: gettextCatalog.getString('Medium'),
+        3: gettextCatalog.getString('High'),
+        4: gettextCatalog.getString('Critical')
+    };
+
     // init the var on the scope
     // it should not change and there is no point in re calculating it
     $scope.init = function init () {
@@ -68,9 +75,6 @@ function severityIconCtrl($scope, gettextCatalog) {
         if (!$scope.severity) {
             $scope.severity = 'UNKNOWN';
         }
-
-        // do this before the severity mapping stuff happens
-        $scope.tooltip = `${priv.typeMap[$scope.type]}: ${$scope.severity}`;
 
         // this is a hack to support ERROR to 4 in the hamburger
         // until critical sev is supported properly
@@ -86,6 +90,8 @@ function severityIconCtrl($scope, gettextCatalog) {
             $scope.label = priv.typeMap[$scope.type];
         }
 
+        $scope.tooltip = `${priv.typeMap[$scope.type]}: ` +
+            `${priv.numberToStringMap[$scope.severity]}`;
         $scope.sevClass = priv.sevClassMap[$scope.severity];
     };
 }
