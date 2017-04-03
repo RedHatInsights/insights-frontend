@@ -9,7 +9,26 @@ section.widget-block
       span.icon.icon-inline
         i.fa.fa-lightbulb-o
       span(translate, translate-n='plans.suggested[0].actions.length', translate-plural='You have a new plan suggestion ({{$count}} actions)') You have a new plan suggestion (1 action)
-    maintenance-plan-lite-table.error(ng-if='plans.overdue.length', plans='plans.overdue', silence='silence', duration='duration', overdue='true')
     maintenance-plan-lite-table(ng-if='plans.future.length', plans='plans.future', silence='silence', duration='duration')
-  div.text-center(ng-if='!(plans.future.length || plans.overdue.length)')
-    a.btn.btn-primary.btn-sm(ui-sref='app.maintenance({newPlan: true})', translate) Create a new plan
+
+    table.table.table-separated(ng-if='!plans.future.length')
+      thead.lite
+        tr
+          th(translate) Newest Plans
+          th(width="11%", translate) Actions
+      tbody
+        tr(ng-repeat="plan in (plans.unscheduled | limitTo:3 | orderBy:'-maintenance_id') track by plan.maintenance_id")
+          td.start(ng-click='openPlan(plan)')
+            a {{MaintenanceService.getPlanName(plan)}}
+          td.action-count(ng-click="openPlan(plan)")
+            span {{plan.actionsDone}}/{{plan.actions.length}}
+
+  .maintenance-plan-lite-footer.text-center
+    div(ng-if='stats.rules.ansible')
+      strong.success(translate, translate-n='stats.rules.ansible', translate-plural='{{$count}} issues can be resolved automatically') 1 issues can be resolved automatically
+      span(translate) &nbsp;using&nbsp;
+      ansible-icon.inline-right(value = 'true')
+      span(translate) Ansible
+    div
+      a
+        strong(ui-sref='app.maintenance({newPlan: true})', translate) Create a new Plan/Playbook
