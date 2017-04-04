@@ -9,6 +9,11 @@
     height: 28px;
   }
 
+  &.likelihood,
+  &.impact {
+    i { background-position: center 4px; }
+  }
+
   i {
     width: 24px;
     height: 28px;
@@ -24,7 +29,6 @@
     &.low,
     &.med,
     &.high {
-      background-position: center bottom;
     }
 
     &.unknown { text-align: center; }
@@ -47,10 +51,9 @@
   }
 }
 
-table {
-  //.severity-icon {
-  //  i.low { background-image: url('../images/i_low-table.svg'); }
-  //  i.med { background-image: url('../images/i_med-table.svg'); }
-  //  i.high { background-image: url('../images/i_high-table.svg'); }
-  //}
+table .severity-icon {
+  &.likelihood,
+  &.impact {
+    i { background-position: center center; }
+  }
 }
