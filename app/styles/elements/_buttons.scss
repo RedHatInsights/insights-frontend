@@ -159,21 +159,10 @@ button.simple,
 $brand_red: #cc0000;
 
 .btn-white {
-	background: #fff;
-	border-color: #fff;
-
-	&,
-	&:link,
-	&:visited {
-		color: $brand_red;
-	}
-
-	&:hover,
-	&:focus {
-		color: $brand_red;
-		background: darken(#fff, 5);
-		border-color: darken(#fff, 5);
-	}
+	border: 1px solid #c5c7c9;
+  color: #333;
+  background: #fff;
+  padding: .4375rem .75rem;
 }
 
 .btn.btn-circle-icon {

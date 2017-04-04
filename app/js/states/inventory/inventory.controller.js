@@ -10,9 +10,10 @@ const diff = require('lodash/array/difference');
  * @ngInject
  */
 function InventoryCtrl(
-        $scope,
-        $rootScope,
         $filter,
+        $modal,
+        $rootScope,
+        $scope,
         $state,
         System,
         InventoryService,
@@ -24,6 +25,7 @@ function InventoryCtrl(
         FilterService,
         QuickFilters,
         PreferenceService,
+        User,
         Utils,
         ListTypeService,
         ActionbarService,
@@ -94,6 +96,10 @@ function InventoryCtrl(
         cleanTheScope();
         initInventory();
     });
+
+    let systemModal = null;
+
+    $scope.isPortal = InsightsConfig.isPortal;
 
     function cleanTheScope() {
         $scope.checkboxes.reset();
@@ -416,6 +422,44 @@ function InventoryCtrl(
         //  if all systems are already shown
         return InventoryService.getTotal() === $scope.systems.length;
     };
+
+    /**
+     * calls register new system modal
+     */
+    $scope.registerSystem = function () {
+        var systemLimitReached = false;
+        User.asyncCurrent(function (user) {
+            systemLimitReached = user.current_entitlements ?
+                user.current_entitlements.systemLimitReached :
+                !user.is_internal;
+
+            if (user.current_entitlements && user.current_entitlements.unlimitedRHEL) {
+                systemLimitReached = false;
+            }
+        });
+
+        openModal({
+            templateUrl: 'js/components/system/addSystemModal/' +
+                (systemLimitReached ? 'upgradeSubscription.html' : 'addSystemModal.html'),
+            windowClass: 'system-modal ng-animate-enabled',
+            backdropClass: 'system-backdrop ng-animate-enabled',
+            controller: 'AddSystemModalCtrl'
+        });
+    };
+
+    /**
+     * opens modal if a modal isn't currently opened
+     */
+    function openModal(opts) {
+        if (systemModal) {
+            return; // Only one modal at a time please
+        }
+
+        systemModal = $modal.open(opts);
+        systemModal.result.finally(function () {
+            systemModal = null;
+        });
+    }
 
     if (InsightsConfig.allowExport) {
         ActionbarService.addExportAction(function () {
