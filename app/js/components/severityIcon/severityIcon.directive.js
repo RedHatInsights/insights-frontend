@@ -64,7 +64,12 @@ function severityIconCtrl($scope, gettextCatalog) {
         1: gettextCatalog.getString('Low'),
         2: gettextCatalog.getString('Medium'),
         3: gettextCatalog.getString('High'),
-        4: gettextCatalog.getString('Critical')
+        4: gettextCatalog.getString('Critical'),
+        INFO: gettextCatalog.getString('Low'),
+        WARN: gettextCatalog.getString('Medium'),
+        ERROR: gettextCatalog.getString('High'),
+        CRITICAL: gettextCatalog.getString('Critical'),
+        UNKNOWN: gettextCatalog.getString('Unknown')
     };
 
     // init the var on the scope
