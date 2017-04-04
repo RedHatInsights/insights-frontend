@@ -32,6 +32,8 @@
         a(href='#systemsRegistered', aria-controls='systemsRegistered', role='tab', data-toggle='tab', translate) System registration history
       li(role='presentation')
         a(href='#scoreHistory', aria-controls='messages', role='tab', data-toggle='tab', translate) Score history
+      li(role='presentation')
+        a(href='#allRuleHits', aria-controls='allRules', role='tab' data-toggle='tab', translate) All Rule hits
 
     // Tab panes
     .tab-content
@@ -65,6 +67,21 @@
         digest-graph.digest-graph(digest-key='registered', digest='digest_registered' height='400' ng-if="!loading")
       #scoreHistory.tab-pane.fade(role='tabpanel')
         digest-graph.digest-graph(digest-key='score', digest='digest_score' height='400' ng-if="!loading")
+      #allRuleHits.tab-pane.fade(role='tabpanel' ng-if="!loading")
+        //- inline style... remove this later
+        table(style='background-color: #fff')
+          thead
+            tr
+              th(translate) Rule
+              th(translate) Impacted Systems
+              th(translate) Total Risk
+          tbody
+            tr(ng-repeat='rule in allRuleHits')
+              td
+                a(ui-sref="app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})") {{ rule.description }}
+              td {{rule.report_count}}
+              td
+                severity-icon(severity='rule.severity', type='severity', label='')
 
 
 
