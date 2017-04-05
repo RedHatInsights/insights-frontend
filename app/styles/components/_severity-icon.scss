@@ -1,24 +1,19 @@
 .severity-icon {
 
-  &.severity i.low { background-image: url('../images/i_low-bordered.svg'); }
-  &.severity i.med { background-image: url('../images/i_med-bordered.svg'); }
-  &.severity i.high { background-image: url('../images/i_high-bordered.svg'); }
-  &.severity i.critical { background-image: url('../images/i_critical-bordered.svg'); }
   &.severity i {
-    width: 24px;
-    height: 28px;
-  }
-
-  &.likelihood,
-  &.impact {
-    i { background-position: center 4px; }
+    border: 2px solid #AFAFAF;
+    @include border-radius(4px);
   }
 
   i {
-    width: 24px;
-    height: 28px;
+    border: 2px solid rgba(255, 255, 255, 0);
+    @include border-radius(4px);
+    width: 26px;
+    height: 30px;
     display: inline-block;
     background-repeat: no-repeat;
+    position: relative;
+    top: 5px;
     background-position: center center;
 
     &.low { background-image: url('../images/i_low.svg'); }
