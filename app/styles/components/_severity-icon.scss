@@ -3,7 +3,7 @@
   &.severity i {
     width: 24px;
     height: 28px;
-    border: 2px solid #AFAFAF;
+    @include box-shadow(0 0 0 2px #AFAFAF);
     @include border-radius(4px);
   }
 
@@ -19,10 +19,10 @@
     background-repeat: no-repeat;
     background-position: center center;
 
-    &.low { background-image: url('../images/i_low.svg'); }
-    &.med { background-image: url('../images/i_med.svg'); }
-    &.high { background-image: url('../images/i_high.svg'); }
-    &.critical { background-image: url('../images/i_critical.svg'); }
+    &.low { background-image: url('../images/i_severity-low.svg'); }
+    &.med { background-image: url('../images/i_severity-med.svg'); }
+    &.high { background-image: url('../images/i_severity-high.svg'); }
+    &.critical { background-image: url('../images/i_severity-critical.svg'); }
 
     &.low,
     &.med,
