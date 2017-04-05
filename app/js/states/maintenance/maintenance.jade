@@ -37,4 +37,4 @@
           ng-repeat="plan in plansPerMonth | searchMaintenancePlans: searchTerm track by plan.maintenance_id")
       .row(ng-if="category === 'unscheduled' || category === 'suggested'")
         maintenance-plan(
-          ng-repeat="plan in shownPlans | searchMaintenancePlans: searchTerm track by plan.maintenance_id")
+          ng-repeat="plan in shownPlans | searchMaintenancePlans: searchTerm | orderBy:'-maintenance_id' track by plan.maintenance_id")
