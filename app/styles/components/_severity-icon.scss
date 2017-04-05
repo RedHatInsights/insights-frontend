@@ -1,12 +1,10 @@
 .severity-icon {
 
-  &.severity i.low { background-image: url('../images/i_low-bordered.svg'); }
-  &.severity i.med { background-image: url('../images/i_med-bordered.svg'); }
-  &.severity i.high { background-image: url('../images/i_high-bordered.svg'); }
-  &.severity i.critical { background-image: url('../images/i_critical-bordered.svg'); }
   &.severity i {
     width: 24px;
     height: 28px;
+    border: 2px solid #AFAFAF;
+    @include border-radius(4px);
   }
 
   &.likelihood,
