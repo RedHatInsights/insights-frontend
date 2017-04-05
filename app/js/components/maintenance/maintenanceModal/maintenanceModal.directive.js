@@ -155,7 +155,7 @@ function maintenanceModalCtrl($scope,
 
             return MaintenanceService.plans.create({
                 name: $scope.newPlanAlias,
-                reports: toAdd
+                add: toAdd
             }).then(function (plan) {
                 $scope.selected.plan = plan;
                 return plan;

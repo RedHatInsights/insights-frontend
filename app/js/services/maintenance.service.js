@@ -9,6 +9,7 @@ const reject = require('lodash/collection/reject');
 const remove = require('lodash/array/remove');
 const some = require('lodash/collection/some');
 const assign = require('lodash/object/assign');
+const pick = require('lodash/object/pick');
 
 /**
  * @ngInject
@@ -170,13 +171,15 @@ function MaintenanceService(
 
     TableParams.prototype.update = function (toAdd, toRemove) {
         return service.plans.update(this.plan, {
-            reports: toAdd,
+            add: toAdd,
             delete: toRemove
         });
     };
 
     TableParams.prototype.save = function (toAdd, toRemove) {
-        return this.update(map(toAdd, 'rid'), map(toRemove, 'mid'));
+        return this.update(
+            map(toAdd, item => pick(item, ['rule_id', 'system_id'])),
+            map(toRemove, 'mid'));
     };
 
     service.systemTableParams = function (rule, plan, actions, loader) {
@@ -211,7 +214,8 @@ function MaintenanceService(
                         display: report.system._name,
                         system: report.system,
                         done: false,
-                        rid: report.id,
+                        system_id: report.system.system_id,
+                        rule_id: rule.rule_id,
                         _type: (report.id in plannedActions) ?
                             MAINTENANCE_ACTION_TYPE.PLANNED_ELSEWHERE :
                             MAINTENANCE_ACTION_TYPE.AVAILABLE,
@@ -251,7 +255,8 @@ function MaintenanceService(
                         display: report.rule.description,
                         rule: report.rule,
                         done: false,
-                        rid: report.id,
+                        system_id: system.system_id,
+                        rule_id: report.rule.rule_id,
                         _type: (report.id in plannedActions) ?
                             MAINTENANCE_ACTION_TYPE.PLANNED_ELSEWHERE :
                             MAINTENANCE_ACTION_TYPE.AVAILABLE
