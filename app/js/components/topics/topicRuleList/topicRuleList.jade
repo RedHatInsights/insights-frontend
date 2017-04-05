@@ -35,7 +35,7 @@
 
             // START UBER-SEV
             th.text-center.sortable(ng-class="sorter.getSortClass('likeliness')", ng-click="sorter.sort('likeliness')")
-              .sort-indicator(translate) Likeliness
+              .sort-indicator(translate) Likelihood
             th.text-center.sortable(ng-class="sorter.getSortClass('impact')", ng-click="sorter.sort('impact')")
               .sort-indicator(translate) Impact
             th.text-center.sortable(ng-class="sorter.getSortClass('totalRisk')", ng-click="sorter.sort('totalRisk')")
@@ -56,9 +56,9 @@
 
             // START UBER-SEV
             td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
-              severity-icon(severity='rule.rec_impact', type='impact', label='')
-            td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
               severity-icon(severity='rule.rec_likelihood', type='likelihood', label='')
+            td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
+              severity-icon(severity='rule.rec_impact', type='impact', label='')
             td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
               severity-icon(severity='rule.severity', type='severity', label='')
             // END UBER-SEV

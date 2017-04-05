@@ -1,16 +1,30 @@
 .severity-icon {
 
+  &.severity i {
+    border: 2px solid #AFAFAF;
+    @include border-radius(4px);
+  }
+
   i {
-    width: 16px;
-    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0);
+    @include border-radius(4px);
+    width: 26px;
+    height: 30px;
     display: inline-block;
     background-repeat: no-repeat;
+    position: relative;
+    top: 5px;
     background-position: center center;
 
     &.low { background-image: url('../images/i_low.svg'); }
     &.med { background-image: url('../images/i_med.svg'); }
     &.high { background-image: url('../images/i_high.svg'); }
     &.critical { background-image: url('../images/i_critical.svg'); }
+
+    &.low,
+    &.med,
+    &.high {
+    }
 
     &.unknown { text-align: center; }
     &.unknown:after {
@@ -32,10 +46,9 @@
   }
 }
 
-table {
-  .severity-icon {
-    i.low { background-image: url('../images/i_low-table.svg'); }
-    i.med { background-image: url('../images/i_med-table.svg'); }
-    i.high { background-image: url('../images/i_high-table.svg'); }
+table .severity-icon {
+  &.likelihood,
+  &.impact {
+    i { background-position: center center; }
   }
 }
