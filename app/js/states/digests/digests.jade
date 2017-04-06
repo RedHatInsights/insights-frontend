@@ -38,35 +38,11 @@
     // Tab panes
     .tab-content
       #metrics.metrics.tab-pane.fade.in.active(role='tabpanel')
-        .graph.graph-filters
-          .row
-            .col-sm-3.col-sm-offset-9
-              .dropdown
-                a#dropdown-example(data-target='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', translate)
-                  | Category
-                  span.caret
-                ul.dropdown-menu(aria-labelledby='dropdown-example')
-                  li
-                    label.checkbox-inline
-                      input(type="checkbox", name="availability", id="checkbox.availability", ng-model='checkboxValues.availability', ng-click='toggleDataSources($event)', translate)
-                      | Availability
-                  li
-                    label.checkbox-inline
-                      input(type="checkbox", name="stability", id="checkbox.stability", ng-model='checkboxValues.stability', ng-click='toggleDataSources($event)', translate)
-                      | Stability
-                  li
-                    label.checkbox-inline
-                      input(type="checkbox", name="performance", id="checkbox.performance", ng-model='checkboxValues.performance', ng-click='toggleDataSources($event)', translate)
-                      | Performance
-                  li
-                    label.checkbox-inline
-                      input(type="checkbox", name="security", id="checkbox.security", ng-model='checkboxValues.security', ng-click='toggleDataSources($event)', translate)
-                      | Security
-        digest-graph.digest-graph(digest-key='metrics', digest='digest_metrics' height='400' ng-if="!loading")
+        digest-graph(drop-down='Category', digest-key='metrics', digest='digest_metrics' height='400' ng-if="!loading")
       #systemsRegistered.tab-pane.fade(role='tabpanel')
-        digest-graph.digest-graph(digest-key='registered', digest='digest_registered' height='400' ng-if="!loading")
+        digest-graph(digest-key='registered', digest='digest_registered' height='400' ng-if="!loading")
       #scoreHistory.tab-pane.fade(role='tabpanel')
-        digest-graph.digest-graph(digest-key='score', digest='digest_score' height='400' ng-if="!loading")
+        digest-graph(digest-key='score', digest='digest_score' height='400' ng-if="!loading")
       #allRuleHits.tab-pane.fade(role='tabpanel' ng-if="!loading")
         //- inline style... remove this later
         table(style='background-color: #fff')
