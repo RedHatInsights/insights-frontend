@@ -31,7 +31,7 @@
     "del": "1.2.0",
     "envify": "~3.4.0",
     "express-http-proxy": "0.10.1",
-    "git-guppy": "^1.0.0",
+    "git-guppy": "^1.2.1",
     "got": "^6.7.1",
     "gulp": "3.9.1",
     "gulp-angular-gettext": "~2.1.0",
