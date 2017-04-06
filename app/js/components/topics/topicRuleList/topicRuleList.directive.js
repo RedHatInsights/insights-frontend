@@ -12,7 +12,7 @@ function topicRuleListCtrl ($filter,
                             RuleService,
                             Utils) {
 
-    $scope.config = InsightsConfig
+    $scope.config = InsightsConfig;
     $scope.listTypes = ListTypeService.types();
     $scope.getListType = ListTypeService.getType;
     $scope.sorter = new Utils.Sorter({
