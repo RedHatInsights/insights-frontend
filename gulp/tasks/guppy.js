@@ -23,7 +23,7 @@ priv.isRunner = function isRunner () {
 
 gulp.task('pre-commit', guppy.src('pre-commit', function () {}));
 
-if (priv.isRunner) {
+if (priv.isRunner()) {
     // basically do a noop on the gitlab runners
     gulp.task('pre-push', [], guppy.src('pre-push', function () {}));
 } else {
