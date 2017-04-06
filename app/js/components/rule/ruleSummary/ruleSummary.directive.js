@@ -6,7 +6,9 @@ var componentsModule = require('../../');
  * @ngInject
  */
 function RuleSummaryCtrl(
-    $scope) {
+    $scope,
+    InsightsConfig) {
+    $scope.config = InsightsConfig;
 
     // this needs to be an object so that is can be accessed from the transcluded scope
     $scope.show = {

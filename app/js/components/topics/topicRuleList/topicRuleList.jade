@@ -12,7 +12,7 @@
               .count(translate, translate-n='plugin.hitCount', translate-plural="{{$count}} Systems") 1 System
               .pull-right
                 span.label.label-default.inline-right.rule-inactive(ng-if='plugin.acked', translate) INACTIVE
-                ansible-icon(value='rule.ansible')
+                ansible-icon(value='rule.ansible', ng-if='config.isPlannerEnabled')
             card-content
               .gray(ng-bind-html='::plugin.rule.summary_html', target-blank='')
             .footer
@@ -44,7 +44,10 @@
 
             th.text-center.sortable(ng-class="sorter.getSortClass('hitCount')", ng-click="sorter.sort('hitCount')")
               .sort-indicator(translate) Systems
-            th.text-center.sortable(ng-class="sorter.getSortClass('ansible')", ng-click="sorter.sort('ansible')")
+            th.text-center.sortable(
+              ng-if='config.isPlannerEnabled',
+              ng-class="sorter.getSortClass('ansible')",
+              ng-click="sorter.sort('ansible')")
               .sort-indicator(translate) Ansible
         tbody
           tr.legend-item(ng-repeat="rule in topic.rules | filter:filterZero | orderBy: sorter.predicate : sorter.reverse track by rule.rule_id", ng-class="{acked: rule.acked}")
@@ -64,7 +67,7 @@
             // END UBER-SEV
 
             td.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)') {{ rule.hitCount }}
-            td.text-center.align-vertical
+            td.text-center.align-vertical(ng-if='config.isPlannerEnabled')
               ansible-icon(value='rule.ansible')
 
   .row.row-short(ng-show='!showRulesWithNoHits && hiddenCount')
