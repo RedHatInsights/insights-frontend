@@ -3,7 +3,7 @@ card(expandable='true', init-collapsed='initCollapsed', on-toggle='resetShowMore
     .row
       .col-sm-12
         h3.title
-          ansible-icon.inline-right(value='report.rule.ansible')
+          ansible-icon.inline-right(value='report.rule.ansible', ng-if='config.isPlannerEnabled')
           | {{ report.rule.category }} #{'>'} {{ report.rule.description }}
     .row.row-short
       .col-sm-12

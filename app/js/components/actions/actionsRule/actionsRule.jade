@@ -2,7 +2,7 @@
 actions-breadcrumbs.actions-breadcrumbs.push-top-narrow(ng-hide='loading')
 section.actions-rule-details.gray(ng-hide='loading')
   h2
-    .pull-right
+    .pull-right(ng-if='config.isPlannerEnabled')
       ansible-icon(value='ruleDetails.ansible')
     | {{ruleDetails.description}}
   p(ng-bind-html='ruleDetails.generic_html | trust_html')

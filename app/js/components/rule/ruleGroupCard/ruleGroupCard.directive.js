@@ -4,7 +4,8 @@ var componentsModule = require('../../');
 const LEFT_ARROW_KEY = 37;
 const RIGHT_ARROW_KEY = 39;
 
-function ruleGroupCardCtrl ($scope, $timeout, $document) {
+function ruleGroupCardCtrl ($scope, $timeout, $document, InsightsConfig) {
+    $scope.config = InsightsConfig;
 
     var active = false;
     $scope.setActive = function (val) {

@@ -29,7 +29,7 @@
               em.light of &nbsp;
               strong {{plugin.rules.length}}: {{rule.description}}
             span.label.label-default.pull-right.text-uppercase(translate, ng-show='rule.acked') inactive
-          .col-sm-4.text-right-sm
+          .col-sm-4.text-right-sm(ng-if='config.isPlannerEnabled')
             ansible-icon(value='rule.ansible')
       card-content
         .gray(ng-bind-html='rule.summary_html', target-blank='')
