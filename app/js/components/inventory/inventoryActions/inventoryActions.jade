@@ -5,4 +5,9 @@
         | 1 System
       span(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected)
       br
-      a(ng-if='allSelected && !reallyAllSelected && !allSystemsShown()' ng-click='reallySelectAll()') &nbsp; Select all {{totalSystems()}} systems
+      a.link(
+      ng-click="registerSystem()",
+      ng-if="isPortal")
+        span.icon.icon-inline
+          i.fa.fa-plus
+        strong(translate) Register More
