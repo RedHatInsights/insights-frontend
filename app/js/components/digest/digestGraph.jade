@@ -1,1 +1,14 @@
-div
+.graph-container
+  .graph.graph-filters(ng-if='dropDown')
+    .row
+      .col-sm-3.col-sm-offset-9
+        .dropdown
+          a#dropdown-example(data-target='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', translate)
+            div(translate) {{dropDown}}
+            span.caret
+          ul.dropdown-menu(aria-labelledby='dropdown-example')
+            li(ng-repeat='trace in traces')
+              label.checkbox-inline
+                input(type="checkbox", name="availability", ng-model='trace.enabled', ng-click='toggleTrace(trace)')
+                div(translate) {{trace.name}}
+  .digest-graph
