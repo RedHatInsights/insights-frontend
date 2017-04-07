@@ -7,6 +7,7 @@ const takeRight = require('lodash/array/takeRight');
 const last = require('lodash/array/last');
 const findIndex = require('lodash/array/findIndex');
 const sortBy = require('lodash/collection/sortBy');
+const filter = require('lodash/collection/filter');
 const TIME_PERIOD = 30;
 
 /**
@@ -71,6 +72,12 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
                 return i.report_count;
             }
         ), 10);
+
+        // throw out 0 hit items
+        items = filter(items, function (i) {
+            return i.report_count > 0;
+        });
+
         items.reverse();
         return items;
     }
