@@ -33,7 +33,7 @@ function digestGraphController($scope) {
     });
 
     jQuery('a[data-toggle="tab"]').on('shown.bs.tab', function () {
-        Plotly.Plots.resize(gd);
+        Plotly.Plots.resize(gd).then($scope.$emit('plotly.resized.' + $scope.digestKey));
     });
 }
 

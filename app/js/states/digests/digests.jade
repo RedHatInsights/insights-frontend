@@ -1,8 +1,9 @@
 .digests-page.wrapper
   .page-header(ng-class="{'inactive': !expandBar, 'active': expandBar}")
-    h1.page-title
+    h1.page-title.pull-left
       i.fa.fa-bar-chart &nbsp;
       span(translate) Executive Report
+    a.btn.pull-right(ng-click='printPage()') Print this report
   section
     .row
       .col-sm-3
@@ -11,7 +12,7 @@
           span {{latest_score}}
       .col-sm-9
         h2.section-title(translate) Weekly action count by category
-        .row.padding-top
+        .row.padding-top(id='categoryCounts')
           .col-xs-6.col-md-3(ng-repeat='cat in digest_hits_per_cat')
             .gauge.gauge-count-and-change
               .count-and-change
@@ -69,7 +70,7 @@
         digest-graph.digest-graph(digest-key='score', digest='digest_score' height='400' ng-if="!loading")
       #allRuleHits.tab-pane.fade(role='tabpanel' ng-if="!loading")
         //- inline style... remove this later
-        table(style='background-color: #fff')
+        table(id='allRuleHitsTable' style='background-color: #fff')
           thead
             tr
               th(translate) Rule

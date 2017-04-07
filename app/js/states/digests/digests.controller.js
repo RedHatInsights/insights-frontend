@@ -7,6 +7,8 @@ const takeRight = require('lodash/array/takeRight');
 const last = require('lodash/array/last');
 const findIndex = require('lodash/array/findIndex');
 const sortBy = require('lodash/collection/sortBy');
+const html2canvas = require('html2canvas');
+const Jspdf = require('jspdf');
 const TIME_PERIOD = 30;
 
 /**
@@ -128,6 +130,125 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
     $scope.dateFormat = function (dateString) {
         var date = new Date(dateString);
         return date.getMonth() + '-' + date.getDay() + '-' + date.getFullYear();
+    };
+
+    $scope.printPage = function () {
+        var digestPromises = [];
+        var graphsToCapture = [];
+
+        digestPromises.push(html2canvas(
+            document.querySelector('.gauge.gauge-circle.score.score_good')));
+        digestPromises.push(html2canvas(document.querySelector('#categoryCounts')));
+
+        graphsToCapture = [{
+            key: 'metrics'
+        },{
+            key: 'registered',
+            tabSelector: '[href=\'#systemsRegistered\']'
+        },{
+            key: 'score',
+            tabSelector: '[href=\'#scoreHistory\']'
+        },{
+            graphId: '#allRuleHitsTable',
+            tabSelector: '[href=\'#allRuleHits\']'
+        }];
+
+        // M A X I M U M   J A N K
+        graphsToCapture.forEach(graph => {
+            let selector;
+
+            if (graph.hasOwnProperty('graphId')) {
+                selector = graph.graphId;
+            } else {
+                selector = '[digest-key=' + graph.key + ']';
+            }
+
+            if (graphsToCapture.indexOf(graph) === 0) {
+                digestPromises.push(html2canvas(document.querySelector(selector)));
+            } else {
+                if (graph.hasOwnProperty('key')) {
+                    digestPromises.push(
+                        new Promise((resolve) => {
+                            document.querySelector(graph.tabSelector).click();
+                            $scope.$on('plotly.resized.' + graph.key, () => {
+                                setTimeout(() => {
+                                    html2canvas(document.querySelector(selector))
+                                    .then((canvas) => {
+                                        resolve(canvas);
+                                    });
+                                }, 1000);
+                            });
+                        })
+                    );
+                } else {
+                    digestPromises.push(
+                        new Promise((resolve) => {
+                            document.querySelector(graph.tabSelector).click();
+                            setTimeout(() => {
+                                html2canvas(document.querySelector(selector))
+                                .then((canvas) => {
+                                    resolve(canvas);
+                                });
+                            }, 1000);
+                        })
+                    );
+                }
+            }
+        });
+
+        Promise.all(digestPromises)
+        .then(function (canvas) {
+            var pdf = new Jspdf();
+
+            var score = canvas[0];
+            var catCounts = canvas[1];
+            var metrics = canvas[2];
+            var registered = canvas[3];
+            var scorehistory = canvas[4];
+            var allrulehits = canvas[5];
+
+            var pageHeight = 295;
+            var leftover = allrulehits.height / 5 + 20 - pageHeight;
+            var y = 0;
+
+            // reset view
+            document.querySelector('[href=\'#metrics\']').click();
+
+            pdf.text(10, 20, 'Overall Score');
+            pdf.text(60, 20, 'Weekly Action Count by Category');
+            pdf.addImage(
+                score.toDataURL(), 'PNG', 10, 25,
+                score.width / 5, score.height / 5);
+            pdf.addImage(
+                catCounts.toDataURL(), 'PNG', 60, 25,
+                catCounts.width / 5, catCounts.height / 5);
+            pdf.text(10, 55, 'Action Trends');
+            pdf.addImage(
+                metrics.toDataURL(), 'PNG', 10, 60,
+                metrics.width / 5, metrics.height / 5);
+            pdf.addImage(
+                registered.toDataURL(), 'PNG', 10, 140,
+                registered.width / 5, registered.height / 5);
+            pdf.addImage(
+                scorehistory.toDataURL(), 'PNG', 10, 220,
+                scorehistory.width / 5, scorehistory.height / 5);
+            pdf.addPage();
+
+            pdf.addImage(
+                allrulehits.toDataURL(), 'PNG', 10, 20,
+                allrulehits.width / 5, allrulehits.height / 5);
+
+            while (leftover >= 0) {
+                y = leftover - allrulehits.height / 5;
+                pdf.addPage();
+                pdf.addImage(
+                    allrulehits.toDataURL(), 'PNG', 10, y,
+                    allrulehits.width / 5, allrulehits.height / 5);
+                leftover -= pageHeight;
+            }
+
+            pdf.save('test.pdf');
+        });
     };
 
     $scope.loading = true;
