@@ -4,37 +4,59 @@
 const componentsModule = require('../');
 const Plotly = require('plotly.js/lib/index-basic');
 const d3 = Plotly.d3;
+const priv = {};
+
+priv.initTraces = function initTraces($scope) {
+    const legendElements = window.jQuery('#metrics g.traces');
+    $scope.traces = [];
+    $scope.digest.data.forEach(function (data, index) {
+        const traceObject = {
+            index: index,
+            legendElement: window.jQuery(legendElements[index]),
+            name: data.name,
+            enabled: true
+        };
+
+        $scope.traces.push(traceObject);
+        traceObject.legendElement.click(function () {
+            traceObject.enabled = !traceObject.enabled;
+            $scope.$apply();
+        });
+    });
+};
 
 /**
  * @ngInject
  */
 function digestGraphController($scope) {
-    var jQuery = window.jQuery;
+    const jQuery = window.jQuery;
 
-    // puke chart to page
-    // var bindto = document.querySelector('[digest-key=' + $scope.digestKey + ']');
-    // Plotly.newPlot(
-    //     bindto, $scope.digest.data, $scope.digest.layout, $scope.digest.options);
-
-    var gd3 = d3.select('[digest-key=' + $scope.digestKey + ']')
+    const graphNode = d3.select('[digest-key=' + $scope.digestKey + '] .digest-graph')
         .append('div')
         .style({
             width: '100%',
             height: '400px'
-        });
-
-    var gd = gd3.node();
+        }).node();
 
     Plotly.newPlot(
-        gd, $scope.digest.data, $scope.digest.layout, $scope.digest.options);
+        graphNode, $scope.digest.data, $scope.digest.layout, $scope.digest.options);
 
     window.addEventListener('resize', function () {
-        Plotly.Plots.resize(gd);
+        Plotly.Plots.resize(graphNode);
     });
 
     jQuery('a[data-toggle="tab"]').on('shown.bs.tab', function () {
-        Plotly.Plots.resize(gd);
+        Plotly.Plots.resize(graphNode);
     });
+
+    $scope.toggleTrace = function toggleTrace(trace) {
+        trace.enable = !trace.enabled;
+        const val = trace.enabled ? true : 'legendonly';
+        Plotly.restyle(graphNode, 'visible', [val], [trace.index]);
+    };
+
+    // THIS MUST BE AFTER THE GRAPH IS BUILT
+    priv.initTraces($scope, graphNode);
 }
 
 function digestGraph() {
@@ -44,6 +66,7 @@ function digestGraph() {
         controller: digestGraphController,
         replace: true,
         scope: {
+            dropDown: '@',
             digest: '=',
             digestKey: '@',
             width: '@',

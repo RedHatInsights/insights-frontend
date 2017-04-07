@@ -1,11 +1,9 @@
 /*global angular, require*/
 'use strict';
 
-const Plotly = require('plotly.js/lib/index-basic');
 const statesModule = require('../');
 const takeRight = require('lodash/array/takeRight');
 const last = require('lodash/array/last');
-const findIndex = require('lodash/array/findIndex');
 const sortBy = require('lodash/collection/sortBy');
 const filter = require('lodash/collection/filter');
 const TIME_PERIOD = 30;
@@ -105,31 +103,6 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
         security: true,
         stability: true,
         performance: true
-    };
-
-    $scope.toggleDataSources = function (e) {
-        // TODO: move this shit along with the checkboxes into digestGraph
-        //       for Plotly call abstraction
-        var category = e.target.name;
-        var catIdx;
-        var metricsChart = document.querySelector('[digest-key=metrics]').children[0];
-
-        // Note the differerence --
-        // Remove traces based on index data attribute of digest_metrics
-        // Add traces based on index in digest_metrics_data
-        if ($scope.checkboxValues[category]) {
-            catIdx = findIndex($scope.digest_metrics_data, function (d) {
-                return d.name.toLowerCase() === category;
-            });
-
-            Plotly.addTraces(metricsChart, $scope.digest_metrics_data[catIdx]);
-        } else {
-            catIdx = findIndex($scope.digest_metrics.data, function (d) {
-                return d.name.toLowerCase() === category;
-            });
-
-            Plotly.deleteTraces(metricsChart, catIdx);
-        }
     };
 
     $scope.dateFormat = function (dateString) {
