@@ -16,9 +16,7 @@
   }
 
   span,
-  strong {
-    + i { @include rem('margin-left', 4px); }
-  }
+  strong { + i { @include rem('margin-left', 4px); } }
 
   i {
     & + span,
@@ -26,16 +24,6 @@
   }
 
   a { color: #fff; }
-
-	.top-wrapper { position: relative; }
-	.dropdown { z-index: 99; }
-
-	.dropdown-toggle {
-		color: #fff;
-		background-color: transparent;
-		//font-size: 20px;
-    padding: 0;
-	}
 
 	.help {
     &.open>.dropdown-toggle.dropdown-toggle { background: rgba(0,0,0,.2); color: #fff; }
@@ -59,54 +47,67 @@
 
   .sep {
     color: #fff;
-    &:before {
-      content: '|';
-    }
+
+    &:before { content: '|'; }
   }
 
-  .feedback {
+  .btn-feedback {
     color: $gray;
-    //@include font-size(18px);
+    text-align: left;
+    @include rem('margin-bottom', $global-padding);
 
-    &.btn {
-      text-align: left;
-      @include rem('padding', 6px 12px);
-      strong {
-        display: none;
-
-        @include media-query(sm) {
-          display: inline;
-        }
-      }
-    }
-    span,
-    strong {
-      //@include opacity(0);
-      //margin-left: -20px;
-      //@include transition(.2s);
-
-      //font-weight: 100;
-      //@include font-size(12px);
+    @include media-query(sm) {
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      margin-bottom: 0;
+      @include rem('padding', $global-padding $global-padding $global-padding 0);
+      background: none;
     }
 
-    &:hover {
-      span,
-      strong {
-        //@include opacity(1);
-        //margin-left: 4px;
-      }
-    }
+    &:hover { color: #fff; }
   }
 
-  .group-select {
-	label {
-		color: $gray;
-	}
-	button span {
-		color: #333;
-	}
-    .dropdown {
+  label {
+    margin: 0;
+    color: #fff;
+    @include font-size(16px, 16px);
+  }
+
+  label + label,
+  label + .dropdown,
+  .dropdown + .dropdown {
+    @include rem('margin-left', $global-padding/2);
+  }
+
+  button span { color: #333; }
+
+  .dropdown {
+    display: inline-block;
+    text-overflow: ellipsis;
+
+    @include media-query(sm) {
+    	max-width: 80%;
+    }
+
+    button {
+      max-width: 100%;
+      //overflow: hidden;
+      //text-overflow: ellipsis;
+      word-wrap: normal;
+      white-space: nowrap;
+    }
+
+    .text {
       display: inline-block;
+    }
+
+    .text.active {
+      max-width: 95%;
+      text-overflow: ellipsis;
+      word-wrap: normal;
+      overflow: hidden;
+      vertical-align: middle;
     }
   }
 }

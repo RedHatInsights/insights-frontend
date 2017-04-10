@@ -1,24 +1,25 @@
 .top-bar
-  .top-wrapper
-    .row
-      .col-xs-3.col-sm-3
-        feedback-button.feedback
-      .col-xs-3.col-sm-3
+  feedback-button.btn-feedback
+  .row
+    .col-sm-7.col-md-8
+      // .global-filters.disabled
+        .disabled class added if the filters are not applicable to view
+      .global-filters
         group-select
-      .col-xs-6.col-sm-6.text-right
-        menu.notifications
-          bullhorn(icon='fa-bullhorn', type='announcements')
-          alerts(icon='fa-globe', type='alerts')
-        span.sep
-        span.dropdown.help(dropdown='', on-toggle='toggled(open)')
-          a.dropdown-toggle(href='', dropdown-toggle='')
-            strong.small(translate) Help
-            i.inline-left.fa.fa-question-circle
-          ul.dropdown-menu
-            li
-              a(href='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', translate) Getting Started
-              a(ui-sref='info.info', translate) More Info
-              a(ui-sref='info.security', translate) Security
-              // if this is the Portal hosted Insights... link to the Portal Browser Support Policy page
-              a(href='/help/browsers', target='_self', translate, ng-if="isPortal") Browser Support
-              a(href='/r/insights/docs/', translate) Insights API Documentation
+    .col-sm-5.col-md-4.text-right-sm
+      menu.notifications
+        bullhorn(icon='fa-bullhorn', type='announcements')
+        alerts(icon='fa-globe', type='alerts')
+      span.sep
+      span.dropdown.help(dropdown='', on-toggle='toggled(open)')
+        a.dropdown-toggle(href='', dropdown-toggle='')
+          strong.small(translate) Help
+          i.inline-left.fa.fa-question-circle
+        ul.dropdown-menu
+          li
+            a(href='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', translate) Getting Started
+            a(ui-sref='info.info', translate) More Info
+            a(ui-sref='info.security', translate) Security
+            // if this is the Portal hosted Insights... link to the Portal Browser Support Policy page
+            a(href='/help/browsers', target='_self', translate, ng-if="isPortal") Browser Support
+            a(href='/r/insights/docs/', translate) Insights API Documentation

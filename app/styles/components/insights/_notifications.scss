@@ -17,6 +17,12 @@
     }
 	}
 
+  .dropdown-toggle {
+    color: #fff;
+    background-color: transparent;
+    padding: 0;
+  }
+
 	.open>.dropdown-toggle.dropdown-toggle {
 		background: none;
 		color: #fff;
