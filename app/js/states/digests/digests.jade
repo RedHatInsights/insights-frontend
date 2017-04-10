@@ -60,8 +60,6 @@
                 td
                   severity-icon(severity='rule.severity', type='severity', label='')
 
-
-
     section
       .row
         .col-md-6
@@ -75,7 +73,7 @@
             tbody
               tr(ng-repeat='system in topTenWorstSystems')
                 td.hostname
-                  a(ng-click='showSystem(system)') {{ system.hostname }}
+                  a(ng-click='showSystem(system)') {{ system | getSystemDisplayName }}
                 td {{ system.report_count }}
 
         .col-md-6
