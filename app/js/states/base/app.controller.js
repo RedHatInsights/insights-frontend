@@ -17,6 +17,12 @@ function AppCtrl($scope, $rootScope, User, PermissionService) {
             window.jQuery('html').toggleClass('fullscreen');
         }
     };
+
+
+    $scope.collapseExpand = function () {
+        $scope.isNavCollapsed = true;
+        $scope.isCollapsed = false;
+    };
 }
 
 statesModule.controller('AppCtrl', AppCtrl);
