@@ -21,19 +21,11 @@
 
   button.btn,
   button {
-    width: 100%;
-    display: block;
-    @include rem('padding-right', $global-margin);
     text-align: left;
     border: 1px solid #c5c7c9;
     text-transform: none;
-  }
 
-  .caret {
-    position: absolute;
-    right: $global-padding;
-    top: 48%;
-    border-width: 5px;
+    .caret { @include rem('margin-left', $global-padding/2); }
   }
 
   .dropdown-menu {
@@ -42,13 +34,8 @@
     border: 1px solid #c5c7c9;
     min-width: 100%;
 
-    li > a {
-      @include rem('padding', 8px $global-padding);
-    }
-
-    li a {
-      @include rem('padding', 8px 22px 8px $global-padding);
-    }
+    li > a { @include rem('padding', 8px $global-padding); }
+    li a { @include rem('padding', 8px 22px 8px $global-padding); }
   }
 }
 
@@ -79,7 +66,6 @@
 }
 
 .open>.dropdown-menu {
-  //width: 100%;
 }
 
 .ui-select-bootstrap.dropdown {
