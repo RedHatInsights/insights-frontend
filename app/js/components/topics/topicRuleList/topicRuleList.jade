@@ -4,7 +4,29 @@
     .col-sm-12
       .card-list
         .card-list-item(ng-repeat="plugin in plugins | orderBy: sorter.predicate : sorter.reverse track by plugin.plugin_id")
-          rule-group-card(ng-if="plugin.type === 'group'", plugin='plugin')
+          card(ng-if="plugin.type === 'group'", plugin='plugin')
+            card-header
+              i.fa.category-icon.inline-right(ng-class="plugin.rule.category.toLowerCase()")
+              span.title.text-uppercase(translate) Group: &nbsp;
+              span.title(ng-if='plugin.categories.length === 1')
+                i.fa.category-icon.inline-right(ng-class="plugin.categories[0].toLowerCase()")
+                | {{plugin.categories[0]}} >
+              span.title &nbsp; {{plugin.display_name}}
+              .count(translate, translate-n='plugin.hitCount', translate-plural="{{$count}} Systems") 1 System
+              .pull-right
+                span.label.label-default.inline-right.rule-inactive(ng-if='plugin.acked', translate) INACTIVE
+                ansible-icon(value='rule.ansible', ng-if='config.isPlannerEnabled')
+            card-content
+              .gray(ng-bind-html='::plugin.rules[0].summary_html', target-blank='')
+            .footer
+              .row
+                .col-sm-6
+                  all-severity-icons(rule='plugin')
+                .col-sm-6.text-right
+                  strong(ng-hide='plugin.acked')
+                    a(translate,
+                      ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.plugin_id})',
+                      ng-disabled="plugin.hitCount === 0") View Impacted Systems
           card(ng-if="plugin.type === 'rule'", ng-class='{faded: plugin.acked}')
             card-header
               i.fa.category-icon.inline-right(ng-class="plugin.rule.category.toLowerCase()")

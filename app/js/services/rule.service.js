@@ -75,7 +75,9 @@ function RuleService ($filter) {
                 result.type = 'group';
             }
 
-            result.severityNum = _max(result.rules, 'severityNum').severityNum;
+            let severityRule = _max(result.rules, 'severityNum');
+            result.severityNum = severityRule.severityNum;
+            result.severity = severityRule.severity;
 
             result.categories = uniq(map(result.rules, 'category'));
 
@@ -84,11 +86,17 @@ function RuleService ($filter) {
 
             // a plugin is acked as long as every single rule is acked
             result.acked = every(result.rules, 'acked');
+            result.ansible = every(result.rules, 'ansible');
 
             result.display_name = result.rules[0].plugin_name;
             if (result.display_name in PLUGIN_NAMES) {
                 result.display_name = PLUGIN_NAMES[result.display_name];
             }
+
+            // use largest value for first impact, likelihood, and total risk as group
+            // values
+            result.rec_impact = _max(result.rules, 'rec_impact');
+            result.rec_likelihood = _max(result.rules, 'rec_likelihood');
 
             return result;
         });
