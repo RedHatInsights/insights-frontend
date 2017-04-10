@@ -1,3 +1,4 @@
+/*global require, angular*/
 'use strict';
 
 var componentsModule = require('../');
@@ -190,6 +191,12 @@ function timeAgo () {
     };
 }
 
+function getSystemDisplayName (Utils) {
+    return function (system) {
+        return Utils.getSystemDisplayName(system);
+    };
+}
+
 componentsModule.filter('trust_html', trust_html);
 componentsModule.filter('titlecase', titlecase);
 componentsModule.filter('sortClass', sortClass);
@@ -200,6 +207,7 @@ componentsModule.filter('toWidth', toWidth);
 componentsModule.filter('checkInStyle', checkInStyle);
 componentsModule.filter('searchMaintenancePlans', searchMaintenancePlans);
 componentsModule.filter('moment', momentFilter);
+componentsModule.filter('getSystemDisplayName', getSystemDisplayName);
 componentsModule.filter('isEmpty', function () {
     return isEmpty;
 });
