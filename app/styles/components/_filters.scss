@@ -208,15 +208,11 @@
 .inventory-filters, .rule-filters {
   background-color: #f2f5f7;
 
-	@include media-query(sm) {
-    @include rem('margin', 0 -30px);
-  }
   @include media-query(md) {
     .search-box-wrapper {
       width: 50%;
     }
   }
-	@include rem('margin', 0 -15px);
 
   .deny-click-cursor {
     cursor: not-allowed;
@@ -369,24 +365,6 @@
     @extend .fa-circle;
     color: gray;
 }
-
-//.platform-filters {
-//    background-color: black;
-//    padding: 0 30px 30px 30px;
-//    margin-left: -30px;
-//    margin-right: -30px;
-//
-//    .row-short {
-//      margin-top: 0px;
-//      margin-top: 0px;
-//    }
-//
-//    h3 {
-//        color: white !IMPORTANT;
-//        margin-bottom: 0px;
-//        margin-top: 30px;
-//    }
-//}
 
 .platform-filters > .row > .col-md-4:nth-child(4n+1) {
     clear: both;

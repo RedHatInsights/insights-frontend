@@ -7,10 +7,12 @@ section.actions-rule-details.gray(ng-hide='loading')
     | {{ruleDetails.description}}
   p(ng-bind-html='ruleDetails.generic_html | trust_html')
   all-severity-icons(rule='ruleDetails', ng-if='!loading')
-section
-  .row
-    .col-sm-12
-      actions-rule-filters
+
+.row
+  .col-sm-12
+    actions-rule-filters
+
+.content-wrap
   .row
     .col-sm-12.text-center-sm
       h3(translate, ng-if='ruleDetails.type !== "osp"') {{allSystems.length}} Impacted Systems

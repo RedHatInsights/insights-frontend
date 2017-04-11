@@ -2,10 +2,13 @@ section.full-width {
 	width: auto;
 	@include rem('padding', $global-margin);
 
-	@include media-query(sm) {
-		@include rem('margin-left', -30px);
-		@include rem('margin-right', -30px);
-	}
+
+  .content-wrap & {
+    @include media-query(sm) {
+      @include rem('margin-left', -30px);
+      @include rem('margin-right', -30px);
+    }
+  }
 }
 
 section + section {
@@ -13,6 +16,6 @@ section + section {
 }
 
 section.gray {
-	@include rem('padding', $global-margin);
 	background: $gray-light;
+  @include rem('padding', $global-margin);
 }
