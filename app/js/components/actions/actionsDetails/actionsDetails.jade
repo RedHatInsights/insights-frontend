@@ -1,6 +1,7 @@
 div(ng-show="getLoadingDetails()")
   .spinner
   span(translate) Loading Reports…
+
 .row.chart-header(ng-hide="getLoadingDetails()")
   .col-xs-12
     h1.page-title {{getTitle() | translate | titlecase}}
@@ -9,7 +10,7 @@ div(ng-show="getLoadingDetails()")
   .col-xs-12
     actions-breadcrumbs.actions-breadcrumbs
 
-.row.row-short
+.row.row-short(ng-hide="getLoadingDetails()")
   .col-xs-12
     actions-filters
 
