@@ -25,9 +25,7 @@ $expand-bar-bg: #f2f5f7;
 		position: relative;
 		padding: 0;
 		background: #F9F9F9;
-		@include rem('margin', 0 -15px 15px);
 		@include rem('padding-bottom', $global-padding);
-		@include media-query(sm) { @include rem('margin', 0 -30px 30px); }
 
 		&.active { @include rem('padding-bottom', $global-margin); }
 

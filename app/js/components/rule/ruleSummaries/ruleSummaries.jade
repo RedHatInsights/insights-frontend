@@ -1,19 +1,20 @@
-.row(ng-if='loading.isLoading')
-  .col-xs-12
-    .loading-block.text-center
-      .detail-part
-        .spinner.spinner-lg
-        | {{getLoadingMessage()}}
-.row(ng-hide='!system.reports || !system.reports.length || loading.isLoading')
-  .col-xs-12.text-right
-    expand-all-button
-.row(ng-if='(!system.reports || !system.reports.length) && !loading.isLoading && !system.__fake && !errorMessage')
-  .col-xs-12
-    p.text-center
-      span.icon.icon-inline.success
-        i.fa.fa-check-circle
-      span(translate) No actions
-.row(ng-if='!loading.isLoading && !system.__fake && errorMessage')
-  .col-xs-12
-    div(ng-bind-html='errorMessage | trust_html')
-.rule-summary.system-overlay-item.content-block(report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports')
+.content-wrap
+  .row(ng-if='loading.isLoading')
+    .col-xs-12
+      .loading-block.text-center
+        .detail-part
+          .spinner.spinner-lg
+          | {{getLoadingMessage()}}
+  .row(ng-hide='!system.reports || !system.reports.length || loading.isLoading')
+    .col-xs-12.text-right
+      expand-all-button
+  .row(ng-if='(!system.reports || !system.reports.length) && !loading.isLoading && !system.__fake && !errorMessage')
+    .col-xs-12
+      p.text-center
+        span.icon.icon-inline.success
+          i.fa.fa-check-circle
+        span(translate) No actions
+  .row(ng-if='!loading.isLoading && !system.__fake && errorMessage')
+    .col-xs-12
+      div(ng-bind-html='errorMessage | trust_html')
+  .rule-summary.system-overlay-item.content-block(report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports')

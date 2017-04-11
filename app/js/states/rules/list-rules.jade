@@ -1,49 +1,50 @@
 section
   //platform-filter
   rule-filter
-  .section
-    .row.margin-top
-      .col-sm-12
-        .btn-group.pull-right
-          a.btn.btn-sm.btn-app(ui-sref='app.admin-rules', ng-show='user.is_internal') Rules Admin
-          a.btn.btn-sm.btn-app(ui-sref='app.admin-topic', ng-show='user.is_internal') Topics Admin
-        .push-top-narrow.rules-filters(ng-hide="loading")
-    .row.row-short
-      .col-sm-12
-        section(ng-show='loading')
-          .spinner.spinner-lg
-        .rha-notifications
-        .rules-group(ng-hide="loading")
-          .rules-group-content
-            .content-block.content-block-outline(
-              ng-repeat="rule in rules | filter:filter | orderBy:'description'",
-              ng-class="{faded: rule.ack_id, hidden: (hideIgnored && rule.ack_id)}")
-              .header(id="{{::rule.rule_id}}")
-                //TODO: activate new item
-                //.new-item NEW!
-                .pull-right
-                  span.label.label-default.inline-right(translate, ng-class="{'rule-inactive': rule.ack_id, 'rule-active': !rule.ack_id}") INACTIVE
-                  ansible-icon(value='rule.ansible', ng-if='config.isPlannerEnabled')
-                span.title.pointer(ng-click="permalink(rule.rule_id, true, 30)")
-                  i.fa.category-icon.inline-right(ng-class="rule.category.toLowerCase()")
-                  span {{ ::rule.category }} #{'>'} {{ ::rule.description }}
-                  i.fa.fa-link.permalink
+  .content-wrap
+    .section
+      .row
+        .col-sm-12
+          .btn-group.pull-right
+            a.btn.btn-sm.btn-app(ui-sref='app.admin-rules', ng-show='user.is_internal') Rules Admin
+            a.btn.btn-sm.btn-app(ui-sref='app.admin-topic', ng-show='user.is_internal') Topics Admin
+          .push-top-narrow.rules-filters(ng-hide="loading")
+      .row.row-short
+        .col-sm-12
+          section(ng-show='loading')
+            .spinner.spinner-lg
+          .rha-notifications
+          .rules-group(ng-hide="loading")
+            .rules-group-content
+              .content-block.content-block-outline(
+                ng-repeat="rule in rules | filter:filter | orderBy:'description'",
+                ng-class="{faded: rule.ack_id, hidden: (hideIgnored && rule.ack_id)}")
+                .header(id="{{::rule.rule_id}}")
+                  //TODO: activate new item
+                  //.new-item NEW!
+                  .pull-right
+                    span.label.label-default.inline-right(translate, ng-class="{'rule-inactive': rule.ack_id, 'rule-active': !rule.ack_id}") INACTIVE
+                    ansible-icon(value='rule.ansible', ng-if='config.isPlannerEnabled')
+                  span.title.pointer(ng-click="permalink(rule.rule_id, true, 30)")
+                    i.fa.category-icon.inline-right(ng-class="rule.category.toLowerCase()")
+                    span {{ ::rule.category }} #{'>'} {{ ::rule.description }}
+                    i.fa.fa-link.permalink
 
-              .content.ng-animate-enabled
-                .gray(ng-bind-html='::rule.summary_html | trust_html', target-blank='')
-                .link-pinned.gray.top
-                  //- a.btn.btn-sm(target='_blank', href='{{rule.viewUri}}') View KCS article
-                  a(ng-if='rule.node_id', href='{{rule.article}}', target='_blank') Knowledgebase
+                .content.ng-animate-enabled
+                  .gray(ng-bind-html='::rule.summary_html | trust_html', target-blank='')
+                  .link-pinned.gray.top
+                    //- a.btn.btn-sm(target='_blank', href='{{rule.viewUri}}') View KCS article
+                    a(ng-if='rule.node_id', href='{{rule.article}}', target='_blank') Knowledgebase
 
-              .footer.footer-short(ng-if="canIgnoreRules")
-                .row
-                  .col-sm-6
-                    .icon-group.icon-group-severity
-                      severity-icon(severity='rule.rec_impact', type='impact')
-                      severity-icon(severity='rule.rec_likelihood', type='likelihood')
-                      severity-icon(severity='rule.severity', type='severity')
-                  .col-sm-6.text-right
-                    strong(ng-if="rule.impacted_systems !== undefined && !rule.ack_id")
-                      a(ui-sref='app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})', translate, ng-disabled="rule.impacted_systems === 0") View Impacted Systems ({{rule.impacted_systems}})
-                    .sep
-                    rule-toggle(rule="rule")
+                .footer.footer-short(ng-if="canIgnoreRules")
+                  .row
+                    .col-sm-6
+                      .icon-group.icon-group-severity
+                        severity-icon(severity='rule.rec_impact', type='impact')
+                        severity-icon(severity='rule.rec_likelihood', type='likelihood')
+                        severity-icon(severity='rule.severity', type='severity')
+                    .col-sm-6.text-right
+                      strong(ng-if="rule.impacted_systems !== undefined && !rule.ack_id")
+                        a(ui-sref='app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})', translate, ng-disabled="rule.impacted_systems === 0") View Impacted Systems ({{rule.impacted_systems}})
+                      .sep
+                      rule-toggle(rule="rule")

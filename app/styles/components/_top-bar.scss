@@ -1,19 +1,7 @@
 .top-bar {
 	@include rem('padding', 12px $global-padding);
-  margin-left: -$global-padding;
-  margin-right: -$global-padding;
   @include font-size(20px);
 	background: #646464;
-
-  @include media-query(sm) {
-    margin-left: -$global-margin;
-    margin-right: -$global-margin;
-  }
-
-  .insights-app-overview & {
-    margin-left: 0;
-    margin-right: 0;
-  }
 
   span,
   strong { + i { @include rem('margin-left', 4px); } }
