@@ -25,7 +25,10 @@
     border: 1px solid #c5c7c9;
     text-transform: none;
 
-    .caret { @include rem('margin-left', $global-padding/2); }
+    .caret {
+      @include transition(.2s);
+      @include rem('margin-left', $global-padding/2);
+    }
   }
 
   .dropdown-menu {
@@ -89,3 +92,24 @@
   input:placeholder-shown {  }
 }
 
+
+.dropdown.full-width {
+  button { width: 100%; }
+
+  .caret {
+    float: right;
+    margin-top: 6px;
+  }
+}
+
+.ui-filters .dropdown {
+  button { width: 100%; }
+  .caret {
+    float: right;
+    margin-top: 6px;
+  }
+}
+
+.dropdown.open .caret {
+  transform: rotate(180deg);
+}
