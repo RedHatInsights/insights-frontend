@@ -5,36 +5,5 @@
   side-nav
   .main-content.insights-main-content(data-esc-key="")
     topbar
-    #ui-filters.ui-filters.collapses
-      label Topic
-      .row
-        .col-sm-12
-          button.btn(href="#") Network Bonding
-          button.btn(href="#") Configuring kdump
-          button.btn(href="#") High Severity OpenSSL Issues
-      .row
-        .col-sm-4
-          //label(translate='translate')
-          //  i.fa.fa-globe(aria-hidden="true")
-          //  | Global filters
-          .dropdown
-            button.btn.dropdown-toggle(
-            type='button',
-            data-toggle='dropdown',
-            aria-haspopup='true',
-            aria-expanded='false')
-              span.text(ng-show='!isGroupSelected() || disabled', translate) Group select
-              span.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
-              span.caret
-            ul.dropdown-menu
-              li
-                a(ng-click='triggerChange(null)', translate) All Systems
-              li(ng-repeat='g in groups | orderBy:"display_name" track by g.id')
-                a(ng-click='triggerChange(g)')
-                  trimmed-text(length="35", text="{{g.display_name}}")
-    a.toggle(role='button', data-toggle='collapse', href='#ui-filters', aria-expanded='false', aria-controls='ui-filters')
-      i.fa.fa-arrow-circle-down(aria-hidden="true")
-
-
     .wrapper(ui-view="")
     actionbar

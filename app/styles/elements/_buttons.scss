@@ -1,4 +1,5 @@
-.btn, button {
+.btn,
+button {
     outline: none;
     border: none;
 
@@ -6,6 +7,13 @@
         outline: none !important;
         @include box-shadow(none);
     }
+}
+
+.btn,
+button {
+  span + i {
+    @include rem('margin-left', 6px);
+  }
 }
 
 .btn .svg {
@@ -158,13 +166,6 @@ button.simple,
 
 $brand_red: #cc0000;
 
-.btn-white {
-	border: 1px solid #c5c7c9;
-  color: #333;
-  background: #fff;
-  padding: .4375rem .75rem;
-}
-
 .btn.btn-circle-icon {
 	background: none;
 	color: $gray-dark;
@@ -258,4 +259,29 @@ $brand_red: #cc0000;
   @include media-query(md) {
     @include rem('top', $global-padding);
   }
+}
+
+.btn-soft {
+  @include border-radius(4px);
+}
+
+.btn-softer {
+  @include border-radius(24px);
+}
+
+.btn-filter {
+  color: $blue;
+  background: #fff;
+  border: 1px solid #c5c7c9;
+}
+
+.btn.btn-filter:hover {
+  background: darken(#fff, 10);
+}
+
+.btn.btn-filter.active {
+  color: #fff;
+  background: $blue;
+  border-color: $blue;
+  box-shadow: none;
 }

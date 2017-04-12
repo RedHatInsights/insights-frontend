@@ -2,6 +2,68 @@
   .page-header
     h1.page-title Components Library
 
+  region
+    #ui-filters.ui-filters
+      section
+        label.title Topic with buttons
+        .row
+          .col-sm-12
+            button.btn.btn-filter.btn-soft(href="#", ng-class="{'active' : active1}", ng-click="active1 = !active1") Network Bonding
+            button.btn.btn-filter.btn-soft(href="#", ng-class="{'active' : active2}", ng-click="active2 = !active2") Configuring kdump
+            // Add .active to the button on click
+            button.btn.btn-filter.btn-soft(href="#", ng-class="{'active' : active3}", ng-click="active3 = !active3") High Severity OpenSSL Issues
+      section
+        .row
+          .col-sm-3
+            label(translate='translate') System type
+            .dropdown
+              button.btn.dropdown-toggle(
+                type='button',
+                data-toggle='dropdown',
+                aria-haspopup='true',
+                aria-expanded='false')
+                span.text(ng-show='!isGroupSelected() || disabled', translate) Group select
+                span.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(ng-click='triggerChange(null)', translate) All Systems
+                li(ng-repeat='g in groups | orderBy:"display_name" track by g.id')
+                  a(ng-click='triggerChange(g)')
+                    trimmed-text(length="35", text="{{g.display_name}}")
+          .col-sm-3
+            label(translate='translate') Example of selections
+            .dropdown
+              button.btn.dropdown-toggle(
+                type='button',
+                data-toggle='dropdown',
+                aria-haspopup='true',
+                aria-expanded='false')
+                span.text(ng-show='!isGroupSelected() || disabled', translate) -- 3 selected
+                span.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(ng-click='triggerChange(null)', translate) All
+                li(ng-repeat='g in groups | orderBy:"display_name" track by g.id')
+                  a(ng-click='triggerChange(g)')
+                    trimmed-text(length="35", text="{{g.display_name}}") Option 1
+    // ng-if this
+    #ui-filters_active-filters.ui-filters__active-filters
+      button.btn-soft.btn-gray()
+        span RHEL Server
+        i.fa.fa-close
+      button.btn-soft.btn-gray()
+        span RHEL Server
+        i.fa.fa-close
+
+    #ui-filters__control-bar.ui-filters__control-bar.collapsed(data-toggle='collapse', href='#ui-filters', aria-expanded='false', aria-controls='ui-filters')
+      a.toggle(role='button')
+        i.fa.fa-arrow-circle-down(aria-hidden="true")
+
+
+  br
+  br
   section.section-flex-grid
     h2 Brand new FLEX BOX MODEL layout with equal height layout
     h3.section-title.red 2 column grid set on the flex-grid container
