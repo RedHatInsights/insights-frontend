@@ -8,6 +8,7 @@ $bg-page-header: #F9F9F9;
 	@include rem('padding', $global-margin);
   margin: 0;
 
+
 	&.active { @include rem('padding-bottom', $global-margin); }
 
 	.content-block {

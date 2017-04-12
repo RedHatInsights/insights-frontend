@@ -3,7 +3,6 @@
     h1.page-title Components Library
 
   region
-<<<<<<< HEAD
     // apply '.collapse.in' to show section on page load
     #ui-filters.ui-filters.collpase.in
       section#topics
@@ -26,17 +25,7 @@
               button.btn.btn-filter.btn-soft.btn-large(href="#", ng-class="{'active' : active3}", ng-click="active3 = !active3")
                 i.fa.fa-bookmark(aria-hidden="true")
                 span High Severity OpenSSL Issues
-=======
-    #ui-filters.ui-filters
-      section
-        label.title Topic with buttons
-        .row
-          .col-sm-12
-            button.btn.btn-filter.btn-soft(href="#", ng-class="{'active' : active1}", ng-click="active1 = !active1") Network Bonding
-            button.btn.btn-filter.btn-soft(href="#", ng-class="{'active' : active2}", ng-click="active2 = !active2") Configuring kdump
-            // Add .active to the button on click
-            button.btn.btn-filter.btn-soft(href="#", ng-class="{'active' : active3}", ng-click="active3 = !active3") High Severity OpenSSL Issues
->>>>>>> Adding existing selection removal buttons
+
       section
         .row
           .col-sm-3
@@ -74,21 +63,12 @@
                   a(ng-click='triggerChange(g)')
                     trimmed-text(length="35", text="{{g.display_name}}") Option 1
     // ng-if this
-<<<<<<< HEAD
     #ui-filters_active-filters.ui-filters__active-filters(ng-hide="removeFilter1 && removeFilter2")
       button.btn-soft.btn-gray(ng-click="removeFilter1=true", ng-show="!removeFilter1")
         span RHEL Server
         i.fa.fa-close
       button.btn-soft.btn-gray(ng-click="removeFilter2=true", ng-show="!removeFilter2")
         span Container
-=======
-    #ui-filters_active-filters.ui-filters__active-filters
-      button.btn-soft.btn-gray()
-        span RHEL Server
-        i.fa.fa-close
-      button.btn-soft.btn-gray()
-        span RHEL Server
->>>>>>> Adding existing selection removal buttons
         i.fa.fa-close
 
     #ui-filters__control-bar.ui-filters__control-bar.collapsed(data-toggle='collapse', href='#ui-filters', aria-expanded='false', aria-controls='ui-filters')
