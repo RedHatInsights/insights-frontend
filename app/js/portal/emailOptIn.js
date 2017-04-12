@@ -3,7 +3,7 @@
 /**
  * @ngInject
  */
-function emailUtils(User, System, Messaging) {
+function emailUtils(User, System, Messaging, Blog) {
 
     let optedIn = false;
 
@@ -28,6 +28,7 @@ function emailUtils(User, System, Messaging) {
 
     function optUserIn() {
 
+        Blog.subscribe();
         return Messaging.getCampaigns().success(function (campaigns) {
             campaigns.forEach(function (campaign) {
                 campaign.enrolled = true;
