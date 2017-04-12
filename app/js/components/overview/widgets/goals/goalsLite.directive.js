@@ -8,11 +8,16 @@ var reduce = require('lodash/reduce');
  */
 function GoalsLiteDirectiveCtrl(
     $scope,
+    System,
+    Evaluation,
     HttpHeaders,
     $q,
     Report) {
 
     var priv = {};
+
+    // Gauge requires a function
+    $scope.getMaxFreeSystems = function () { return $scope.maxFreeSystems; };
 
     priv.getSevCount = function (sev, data) {
         return reduce(data, function (sum, obj) {
@@ -44,9 +49,41 @@ function GoalsLiteDirectiveCtrl(
 
         promises.push(stabilityErrorPromise);
 
+        $scope.loadingSystemLimit = true;
+        const systemPromise =  System.getSystems(false).then(function (result) {
+            return result.data.total;
+        });
+
+        const evalPromise = Evaluation.getEvaluationStatus().then(function (status) {
+            return systemPromise.then(function (systemTotal) {
+                const currentEval = status.current;
+                $scope.systemCount = systemTotal;
+                $scope.maxFreeSystems = currentEval ? currentEval.systems : 0;
+                $scope.systemLimitReached = systemTotal >= $scope.maxFreeSystems;
+
+                if (currentEval) {
+                    const activationDate = new Date(Date.parse(currentEval.created_at));
+
+                    activationDate.setDate(activationDate.getDate() +
+                        currentEval.duration);
+
+                    $scope.expiration = activationDate.toDateString();
+                }
+
+            });
+        }).catch(function () {
+            $scope.errored = true;
+        }).finally(function () {
+            $scope.loadingSystemLimit = false;
+        });
+
+        $scope.getSystemCount = function () { return systemPromise; };
+
+        promises.push(evalPromise);
         $q.all(promises).finally(function promisesFinally() {
             $scope.actionsLoading = false;
         });
+
     };
 
     $scope.$on('account:change', function () {
