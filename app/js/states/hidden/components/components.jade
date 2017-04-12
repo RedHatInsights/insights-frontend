@@ -114,22 +114,12 @@
 
 
     // ng-if this
-<<<<<<< HEAD
-
-    #ui-filters_active-filters.ui-filters__active-filters
-      button.btn-soft.btn-gray()
-        span RHEL Server
-        i.fa.fa-close
-      button.btn-soft.btn-gray()
-        span RHEL Server
-=======
     #ui-filters_active-filters.ui-filters__active-filters(ng-hide="removeFilter1 && removeFilter2")
       button.btn-soft.btn-gray(ng-click="removeFilter1=true", ng-show="!removeFilter1")
         span Systems filter
         i.fa.fa-close
       button.btn-soft.btn-gray(ng-click="removeFilter2=true", ng-show="!removeFilter2")
         span Another type of filter
->>>>>>> Adding scaffolding adjustments
         i.fa.fa-close
 
     #ui-filters__control-bar.ui-filters__control-bar.collapsed(data-toggle='collapse', href='#ui-filters', aria-expanded='false', aria-controls='ui-filters')

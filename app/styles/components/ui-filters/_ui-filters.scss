@@ -13,7 +13,7 @@ $ui-filters-background: #F9F9F9;
 // xxxxxxxxxxxxxxxxxxxxxxxx
 // Temp, remove after .content-wrap is merged
 .ui-filters {
-  @include negative-margin;
+
   &:after {
     content: '';
     clear: all;
@@ -35,10 +35,6 @@ $ui-filters-background: #F9F9F9;
   .btn {
     text-transform: none;
     @include rem('padding', $global-padding/2 $global-padding);
-
-    &.btn-large {
-      @include rem('padding', 20px);
-    }
   }
 
   // Button spacing
