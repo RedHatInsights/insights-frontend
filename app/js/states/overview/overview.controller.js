@@ -27,10 +27,6 @@ function OverviewCtrl(
                     isPaid = true;
                 }
 
-                else if (ents.totalRHEL && ents.totalRHEL > 10) {
-                    isPaid = true;
-                }
-
                 else if (ents.unlimitedRHEL) {
                     isPaid = true;
                 }

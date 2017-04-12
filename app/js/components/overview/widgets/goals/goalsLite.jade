@@ -1,5 +1,17 @@
 #goals-lite.goals-lite
   .row
+    .col-sm-12.block-lg(ng-if="loadingSystemLimit")
+      .spinner.spinner-lg
+    .col-sm-12.block-lg(ng-if="!loadingSystemLimit")
+      goals-gauge(ng-init="buildGauge({getGaugeMax: getMaxFreeSystems, getGaugeNumber: getSystemCount})")
+      .info
+        h4(translate) Systems Registered
+        .free(ng-if="!systemLimitReached")
+          span(translate) {{maxFreeSystems - systemCount}} more Insights entitlements available&nbsp;
+          br
+          span Your entitlement will expire on {{expiration}}
+        .free.full(ng-if="systemLimitReached")
+          span(translate) Congratulations! You have registered all available systems. 
     .col.sm-6.block-md(ng-if="actionsLoading")
       .spinner.spinner-lg
     .col-sm-6.block-md(ng-if="securityErrors && !actionsLoading")
