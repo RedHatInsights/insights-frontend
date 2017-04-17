@@ -1,13 +1,13 @@
 .goals-lite {
-	@include rem('padding-left', $global-padding);
-	@include rem('padding-right', $global-padding);
-	//color: #fff;
+  .info-box {
+    @include rem('padding-left', $global-padding);
+    @include rem('padding-right', $global-padding);
+  }
 
 	.block-lg, .block-md {
 		@include clearfix;
 		@include rem('padding', $global-padding);
 		background: #0095DB;
-
 	}
 
 
