@@ -15,10 +15,16 @@
         #section-collapse.collapse.in
           .row
             .col-sm-12
-              button.btn.btn-filter.btn-soft.btn-large(href="#", ng-class="{'active' : active1}", ng-click="active1 = !active1") Network Bonding
-              button.btn.btn-filter.btn-soft.btn-large(href="#", ng-class="{'active' : active2}", ng-click="active2 = !active2") Configuring kdump
+              button.btn.btn-filter.btn-soft.btn-large(href="#", ng-class="{'active' : active1}", ng-click="active1 = !active1")
+                i.fa.fa-bookmark(aria-hidden="true")
+                span Network Bonding
+              button.btn.btn-filter.btn-soft.btn-large(href="#", ng-class="{'active' : active2}", ng-click="active2 = !active2")
+                i.fa.fa-bookmark(aria-hidden="true")
+                span Configuring kdump
               // Add .active to the button on click
-              button.btn.btn-filter.btn-soft.btn-large(href="#", ng-class="{'active' : active3}", ng-click="active3 = !active3") High Severity OpenSSL Issues
+              button.btn.btn-filter.btn-soft.btn-large(href="#", ng-class="{'active' : active3}", ng-click="active3 = !active3")
+                i.fa.fa-bookmark(aria-hidden="true")
+                span High Severity OpenSSL Issues
       section
         .row
           .col-sm-3

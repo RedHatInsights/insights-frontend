@@ -11,7 +11,8 @@ button {
 
 .btn,
 button {
-  span + i {
+  span + i,
+  i + span {
     @include rem('margin-left', 6px);
   }
 }
