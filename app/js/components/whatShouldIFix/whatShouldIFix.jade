@@ -1,0 +1,11 @@
+section.widget-block
+  h2.title
+    i.fa.fa-heartbeat
+    span(translate) Recommended Fixes
+  table
+    tr(ng-repeat='r in rules')
+      td(style='width:80%')
+        a(ui-sref='app.actions-rule({category: rule.category, rule: rule.rule_id})') {{ r.error_key }}
+        .small {{ r.description }}
+      td(style='width:20%')
+        ansible-icon(value='r.ansible', show-tooltip='true')
