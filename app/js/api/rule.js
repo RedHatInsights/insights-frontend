@@ -85,8 +85,7 @@ function Rule($http, InsightsConfig, AccountService, PreferenceService, Utils, $
         },
 
         listAnsibleResolutions: function (ruleId, systemTypeId) {
-            const v3root = InsightsConfig.apiPrefix + 'v3/';
-            const url = URI(v3root);
+            const url = URI(root);
             url.segment('rules');
             url.segment(ruleId);
             url.segment('ansible-resolutions');
