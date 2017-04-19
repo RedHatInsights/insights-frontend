@@ -34,11 +34,11 @@
               .sort-indicator(translate) Rule
 
             // START UBER-SEV
-            th.text-center.sortable(ng-class="sorter.getSortClass('likeliness')", ng-click="sorter.sort('likeliness')")
+            th.text-center.sortable(ng-class="sorter.getSortClass('rec_likelihood')", ng-click="sorter.sort('rec_likelihood')")
               .sort-indicator(translate) Likelihood
-            th.text-center.sortable(ng-class="sorter.getSortClass('impact')", ng-click="sorter.sort('impact')")
+            th.text-center.sortable(ng-class="sorter.getSortClass('rec_impact')", ng-click="sorter.sort('rec_impact')")
               .sort-indicator(translate) Impact
-            th.text-center.sortable(ng-class="sorter.getSortClass('totalRisk')", ng-click="sorter.sort('totalRisk')")
+            th.text-center.sortable(ng-class="sorter.getSortClass('severityNum')", ng-click="sorter.sort('severityNum')")
               .sort-indicator(translate) Total Risk
             // END UBER-SEV
 
