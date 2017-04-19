@@ -24,7 +24,7 @@ function InsightsConfig() {
     var fetchRelatedSolution = false;
     var gettingStartedLink = null;
     var apiPrefix = '/r/insights/';
-    var apiVersion = 'v2';
+    var apiVersion = 'v3';
     var apiRoot = concatRoot();
     var defaultApiPrefix = apiPrefix;
     var acctKey = 'telemetry:account_number';

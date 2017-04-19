@@ -7,10 +7,8 @@ const URI = require('urijs');
 * @ngInject
 */
 function Stats($http, InsightsConfig, AccountService, Group) {
-    const v3root = InsightsConfig.apiPrefix + 'v3/';
-
     function buildUri (segment, params, ignoreGroup) {
-        const uri = URI(v3root);
+        const uri = URI(InsightsConfig.apiRoot);
         uri.segment('stats');
 
         if (segment) {
