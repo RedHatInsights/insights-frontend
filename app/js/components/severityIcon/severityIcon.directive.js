@@ -81,14 +81,6 @@ function severityIconCtrl($scope, gettextCatalog) {
             $scope.severity = 'UNKNOWN';
         }
 
-        // this is a hack to support ERROR to 4 in the hamburger
-        // until critical sev is supported properly
-        if ($scope.type && $scope.type === 'severity') {
-            if ($scope.severity === 'ERROR' || $scope.severity === 3) {
-                $scope.severity = 4;
-            }
-        }
-
         // if a type is specified and the label is not overridden
         // set the label per the typeMap
         if ($scope.type && !$scope.label) {
