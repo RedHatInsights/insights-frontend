@@ -43,12 +43,12 @@
         .col-md-5
           card
             card-header.gray
-              h4(translate) Severity summary
+              h4(translate) Risk summary
             card-content
               severity-summary(stats='stats')
           card(ng-if='stats.systems')
             card-header.gray
-              h4(translate) Systems with critical actions
+              h4(translate) Systems with critical risk
             card-content
               system-summary(stats='stats')
 
