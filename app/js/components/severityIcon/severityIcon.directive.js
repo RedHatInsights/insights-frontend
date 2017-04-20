@@ -2,7 +2,7 @@
 'use strict';
 
 const componentsModule = require('../');
-const has = require('lodash/object/has');
+const has = require('lodash/has');
 
 /**
  * @ngInject
