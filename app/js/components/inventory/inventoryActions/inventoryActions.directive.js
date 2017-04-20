@@ -3,7 +3,7 @@
 var componentsModule = require('../../');
 var find = require('lodash/collection/find');
 const partition = require('lodash/collection/partition');
-const clone = require('lodash/lang/clone');
+const clone = require('lodash/clone');
 const groupBy = require('lodash/collection/groupBy');
 const map = require('lodash/collection/map');
 
