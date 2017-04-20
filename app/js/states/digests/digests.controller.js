@@ -2,7 +2,7 @@
 'use strict';
 
 const statesModule = require('../');
-const takeRight = require('lodash/array/takeRight');
+const takeRight = require('lodash/takeRight');
 const last = require('lodash/last');
 const sortBy = require('lodash/sortBy');
 const filter = require('lodash/filter');
