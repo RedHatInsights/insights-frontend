@@ -2,7 +2,7 @@
 'use strict';
 
 var componentsModule = require('../../');
-var pick = require('lodash/object/pick');
+var pick = require('lodash/pick');
 var find = require('lodash/find');
 
 /**

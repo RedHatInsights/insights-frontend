@@ -3,7 +3,7 @@
 
 var componentsModule = require('../../');
 var cloneDeep = require('lodash/cloneDeep');
-var pick = require('lodash/object/pick');
+var pick = require('lodash/pick');
 
 /**
  * @ngInject

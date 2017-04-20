@@ -9,7 +9,7 @@ const reject = require('lodash/collection/reject');
 const remove = require('lodash/array/remove');
 const some = require('lodash/collection/some');
 const assign = require('lodash/assign');
-const pick = require('lodash/object/pick');
+const pick = require('lodash/pick');
 
 /**
  * @ngInject

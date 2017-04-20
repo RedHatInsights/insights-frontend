@@ -3,7 +3,7 @@
 
 const statesModule = require('../');
 const find = require('lodash/find');
-const pick = require('lodash/object/pick');
+const pick = require('lodash/pick');
 const diff = require('lodash/difference');
 
 /**
