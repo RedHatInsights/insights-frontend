@@ -1,5 +1,5 @@
 'use strict';
-const assign = require('lodash/object/assign');
+const assign = require('lodash/assign');
 const isArray = require('lodash/lang/isArray');
 
 /**

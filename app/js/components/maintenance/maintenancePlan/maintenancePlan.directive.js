@@ -1,7 +1,7 @@
 'use strict';
 
 var componentsModule = require('../../');
-var assign = require('lodash/object/assign');
+var assign = require('lodash/assign');
 var map = require('lodash/collection/map');
 const find = require('lodash/collection/find');
 const FileSaver = require('file-saver');

@@ -8,7 +8,7 @@ const indexBy = require('lodash/keyBy');
 const reject = require('lodash/collection/reject');
 const remove = require('lodash/array/remove');
 const some = require('lodash/collection/some');
-const assign = require('lodash/object/assign');
+const assign = require('lodash/assign');
 const pick = require('lodash/object/pick');
 
 /**

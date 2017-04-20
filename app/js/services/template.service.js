@@ -1,7 +1,7 @@
 'use strict';
 
 const servicesModule = require('./');
-const assign = require('lodash/object/assign');
+const assign = require('lodash/assign');
 
 /**
  * Utilities for using angular for rendering / interpolating templates.
