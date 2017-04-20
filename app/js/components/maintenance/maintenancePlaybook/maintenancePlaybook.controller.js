@@ -6,7 +6,7 @@ const FileSaver = require('file-saver');
 const parseHeader = require('parse-http-header');
 const each = require('lodash/collection/forEach');
 const some = require('lodash/collection/some');
-const constant = require('lodash/utility/constant');
+const constant = require('lodash/constant');
 const uniq = require('lodash/array/uniq');
 
 /**

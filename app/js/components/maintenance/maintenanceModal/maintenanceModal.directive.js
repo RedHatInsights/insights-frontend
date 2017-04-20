@@ -6,7 +6,7 @@ const find = require('lodash/collection/find');
 const indexBy = require('lodash/keyBy');
 const map = require('lodash/collection/map');
 const flatten = require('lodash/array/flatten');
-const constant = require('lodash/utility/constant');
+const constant = require('lodash/constant');
 
 const MODES = {
     rule: 'rule',
