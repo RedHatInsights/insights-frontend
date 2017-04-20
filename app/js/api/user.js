@@ -2,7 +2,7 @@
 'use strict';
 
 var apiModule = require('./');
-var indexBy = require('lodash/collection/indexBy');
+var indexBy = require('lodash/keyBy');
 var priv = {};
 
 priv.tryFakeUser = function (_user) {

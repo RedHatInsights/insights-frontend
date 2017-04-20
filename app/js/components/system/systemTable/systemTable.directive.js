@@ -1,7 +1,7 @@
 'use strict';
 
 var componentsModule = require('../../');
-var indexBy = require('lodash/collection/indexBy');
+var indexBy = require('lodash/keyBy');
 var reject = require('lodash/collection/reject');
 
 /**

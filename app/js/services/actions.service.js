@@ -8,7 +8,7 @@ var map = require('lodash/collection/map');
 var reduce = require('lodash/collection/reduce');
 var indexOf = require('lodash/array/indexOf');
 var groupBy = require('lodash/collection/groupBy');
-var indexBy = require('lodash/collection/indexBy');
+var indexBy = require('lodash/keyBy');
 
 /**
  * @ngInject
