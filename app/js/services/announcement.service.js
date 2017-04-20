@@ -17,7 +17,8 @@ function AnnouncementService($rootScope, Announcement) {
         return Announcement.getAnnouncements(params).success(function (announcements) {
             pub.announcements.length = 0;
             pub.unseen.count = 0;
-            angular.forEach(announcements, function (a) {
+
+            announcements.forEach(function (a) {
                 if (a.acked === false) {
                     pub.unseen.count += 1;
                 }
