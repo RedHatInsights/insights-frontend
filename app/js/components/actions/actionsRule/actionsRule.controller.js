@@ -3,7 +3,7 @@
 
 const componentsModule = require('../../');
 const find = require('lodash/find');
-const get = require('lodash/object/get');
+const get = require('lodash/get');
 
 /**
  * @ngInject

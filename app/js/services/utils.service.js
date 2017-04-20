@@ -6,7 +6,7 @@ var forOwn = require('lodash/forOwn');
 var capitalize = require('lodash/capitalize');
 var groupBy = require('lodash/collection/groupBy');
 var values = require('lodash/object/values');
-var get = require('lodash/object/get');
+var get = require('lodash/get');
 
 function Pager (perPage) {
     this.perPage = perPage || 15;

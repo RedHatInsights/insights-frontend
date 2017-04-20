@@ -7,7 +7,7 @@ const find = require('lodash/find');
 const FileSaver = require('file-saver');
 const parseHeader = require('parse-http-header');
 const some = require('lodash/collection/some');
-const get = require('lodash/object/get');
+const get = require('lodash/get');
 const sortBy = require('lodash/collection/sortBy');
 
 /**

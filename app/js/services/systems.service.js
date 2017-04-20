@@ -1,7 +1,7 @@
 'use strict';
 
 var servicesModule = require('./');
-var get = require('lodash/object/get');
+var get = require('lodash/get');
 var arrayRemove = require('lodash/array/remove');
 var find = require('lodash/find');
 
