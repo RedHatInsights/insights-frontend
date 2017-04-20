@@ -7,7 +7,7 @@ const parseHeader = require('parse-http-header');
 const each = require('lodash/forEach');
 const some = require('lodash/some');
 const constant = require('lodash/constant');
-const uniq = require('lodash/array/uniq');
+const uniq = require('lodash/uniq');
 
 /**
  * @ngInject

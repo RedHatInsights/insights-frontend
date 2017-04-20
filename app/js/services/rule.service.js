@@ -6,7 +6,7 @@ var groupBy = require('lodash/groupBy');
 var _max = require('lodash/max');
 var sum = require('lodash/sum');
 var every = require('lodash/every');
-var uniq = require('lodash/array/uniq');
+var uniq = require('lodash/uniq');
 var map = require('lodash/map');
 
 // this is a temporary cheat until this data is available in the API

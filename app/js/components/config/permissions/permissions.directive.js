@@ -3,7 +3,7 @@
 var componentsModule = require('../../');
 var groupBy = require('lodash/groupBy');
 var map = require('lodash/map');
-var uniq = require('lodash/array/uniq');
+var uniq = require('lodash/uniq');
 
 /**
  * @ngInject
