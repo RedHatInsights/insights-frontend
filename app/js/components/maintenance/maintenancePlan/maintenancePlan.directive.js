@@ -8,7 +8,7 @@ const FileSaver = require('file-saver');
 const parseHeader = require('parse-http-header');
 const some = require('lodash/some');
 const get = require('lodash/get');
-const sortBy = require('lodash/collection/sortBy');
+const sortBy = require('lodash/sortBy');
 
 /**
  * @ngInject

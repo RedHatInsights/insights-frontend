@@ -6,7 +6,7 @@ var filter = require('lodash/filter');
 var findWhere = require('lodash/find');
 var isString = require('lodash/isString');
 var isEmpty = require('lodash/isEmpty');
-var sortby = require('lodash/collection/sortBy');
+var sortby = require('lodash/sortBy');
 
 /**
  * @ngInject

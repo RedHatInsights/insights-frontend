@@ -4,7 +4,7 @@
 const statesModule = require('../');
 const takeRight = require('lodash/array/takeRight');
 const last = require('lodash/last');
-const sortBy = require('lodash/collection/sortBy');
+const sortBy = require('lodash/sortBy');
 const filter = require('lodash/filter');
 const TIME_PERIOD = 30;
 
