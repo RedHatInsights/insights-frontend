@@ -4,7 +4,7 @@ var componentsModule = require('../../');
 var find = require('lodash/find');
 var findIndex = require('lodash/findIndex');
 var map = require('lodash/collection/map');
-var groupBy = require('lodash/collection/groupBy');
+var groupBy = require('lodash/groupBy');
 
 function systemCardCtrl(
     $scope,

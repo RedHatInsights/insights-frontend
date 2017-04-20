@@ -1,7 +1,7 @@
 'use strict';
 
 var statesModule = require('../');
-var groupBy = require('lodash/collection/groupBy');
+var groupBy = require('lodash/groupBy');
 var sortBy = require('lodash/collection/sortBy');
 var values = require('lodash/object/values');
 var moment = require('moment-timezone');

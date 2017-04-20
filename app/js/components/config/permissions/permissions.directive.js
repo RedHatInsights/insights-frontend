@@ -1,7 +1,7 @@
 'use strict';
 
 var componentsModule = require('../../');
-var groupBy = require('lodash/collection/groupBy');
+var groupBy = require('lodash/groupBy');
 var map = require('lodash/collection/map');
 var uniq = require('lodash/array/uniq');
 

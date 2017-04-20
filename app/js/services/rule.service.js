@@ -2,7 +2,7 @@
 
 var servicesModule = require('./');
 
-var groupBy = require('lodash/collection/groupBy');
+var groupBy = require('lodash/groupBy');
 var _max = require('lodash/math/max');
 var sum = require('lodash/math/sum');
 var every = require('lodash/every');
