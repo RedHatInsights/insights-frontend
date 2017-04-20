@@ -1,7 +1,7 @@
 'use strict';
 
 var componentsModule = require('../../');
-var partition = require('lodash/collection/partition');
+var partition = require('lodash/partition');
 
 function topicRuleListCtrl ($filter,
                             $rootScope,
