@@ -2,7 +2,7 @@
 
 var componentsModule = require('../../');
 var indexBy = require('lodash/keyBy');
-var reject = require('lodash/collection/reject');
+var reject = require('lodash/reject');
 
 /**
  * @ngInject

@@ -6,7 +6,7 @@ var find = require('lodash/find');
 var map = require('lodash/map');
 var pick = require('lodash/pick');
 var remove = require('lodash/array/remove');
-var reject = require('lodash/collection/reject');
+var reject = require('lodash/reject');
 var sortBy = require('lodash/collection/sortBy');
 const capitalize = require('lodash/capitalize');
 

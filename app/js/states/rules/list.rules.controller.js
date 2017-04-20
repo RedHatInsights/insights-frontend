@@ -1,7 +1,7 @@
 'use strict';
 
 const statesModule = require('../');
-const reject = require('lodash/collection/reject');
+const reject = require('lodash/reject');
 
 /**
  * @ngInject

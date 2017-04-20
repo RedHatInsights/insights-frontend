@@ -2,7 +2,7 @@
 'use strict';
 
 var servicesModule = require('./');
-var reject = require('lodash/collection/reject');
+var reject = require('lodash/reject');
 var filter = require('lodash/filter');
 var map = require('lodash/map');
 var reduce = require('lodash/reduce');

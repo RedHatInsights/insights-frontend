@@ -4,7 +4,7 @@ var componentsModule = require('../../');
 var isEmpty = require('lodash/isEmpty');
 var indexBy = require('lodash/keyBy');
 var countBy = require('lodash/countBy');
-var reject = require('lodash/collection/reject');
+var reject = require('lodash/reject');
 
 /**
  * @ngInject
