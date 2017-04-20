@@ -2,7 +2,7 @@
 
 const servicesModule = require('./');
 const filter = require('lodash/filter');
-const map = require('lodash/collection/map');
+const map = require('lodash/map');
 const flatten = require('lodash/flatten');
 const indexBy = require('lodash/keyBy');
 const reject = require('lodash/collection/reject');

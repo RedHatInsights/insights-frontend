@@ -3,7 +3,7 @@
 var componentsModule = require('../../');
 var find = require('lodash/find');
 var findIndex = require('lodash/findIndex');
-var map = require('lodash/collection/map');
+var map = require('lodash/map');
 var groupBy = require('lodash/groupBy');
 
 function systemCardCtrl(

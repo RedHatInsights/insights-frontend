@@ -4,7 +4,7 @@
 const componentsModule = require('../../');
 const find = require('lodash/find');
 const indexBy = require('lodash/keyBy');
-const map = require('lodash/collection/map');
+const map = require('lodash/map');
 const flatten = require('lodash/flatten');
 const constant = require('lodash/constant');
 

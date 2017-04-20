@@ -1,7 +1,7 @@
 'use strict';
 
 var apiModule = require('./');
-var map = require('lodash/collection/map');
+var map = require('lodash/map');
 const URI = require('urijs');
 
 /**

@@ -3,7 +3,7 @@
 
 var statesModule = require('../../');
 var find = require('lodash/find');
-var map = require('lodash/collection/map');
+var map = require('lodash/map');
 var pick = require('lodash/object/pick');
 var remove = require('lodash/array/remove');
 var reject = require('lodash/collection/reject');

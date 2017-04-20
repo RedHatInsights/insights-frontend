@@ -6,7 +6,7 @@ var sortBy = require('lodash/collection/sortBy');
 var isEmpty = require('lodash/isEmpty');
 var isArray = require('lodash/isArray');
 var moment = require('moment-timezone');
-var map = require('lodash/collection/map');
+var map = require('lodash/map');
 
 /**
  * @ngInject

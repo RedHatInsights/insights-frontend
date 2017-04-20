@@ -2,7 +2,7 @@
 
 var componentsModule = require('../../');
 var assign = require('lodash/assign');
-var map = require('lodash/collection/map');
+var map = require('lodash/map');
 const find = require('lodash/find');
 const FileSaver = require('file-saver');
 const parseHeader = require('parse-http-header');

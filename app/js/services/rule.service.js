@@ -7,7 +7,7 @@ var _max = require('lodash/math/max');
 var sum = require('lodash/math/sum');
 var every = require('lodash/every');
 var uniq = require('lodash/array/uniq');
-var map = require('lodash/collection/map');
+var map = require('lodash/map');
 
 // this is a temporary cheat until this data is available in the API
 const PLUGIN_NAMES = {

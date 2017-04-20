@@ -5,7 +5,7 @@ var find = require('lodash/find');
 const partition = require('lodash/collection/partition');
 const clone = require('lodash/clone');
 const groupBy = require('lodash/groupBy');
-const map = require('lodash/collection/map');
+const map = require('lodash/map');
 
 const UNREGISTER_TYPE_CONFICT =
     'js/components/inventory/inventoryActions/unregisterConflict.html';
