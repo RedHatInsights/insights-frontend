@@ -20,11 +20,14 @@ function rhaTelemetryActionsSideNavCtrl(
     }
 
     $scope.categoryCounts = {};
-    Stats.getRules({
-        product: $scope.product
-    }).then(function (res) {
-        $scope.categoryCounts = res.data;
-    });
+
+    function init () {
+        Stats.getRules({
+            product: $scope.product
+        }).then(function (res) {
+            $scope.categoryCounts = res.data;
+        });
+    }
 
     $scope.categories = Categories;
     $scope.actions    = false;
@@ -38,6 +41,9 @@ function rhaTelemetryActionsSideNavCtrl(
 
         $scope.actions = actions;
     });
+
+    $scope.$on('group:change', init);
+    init();
 }
 
 function rhaTelemetryActionsSideNav() {
