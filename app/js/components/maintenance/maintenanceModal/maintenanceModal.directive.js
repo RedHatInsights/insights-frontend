@@ -2,7 +2,7 @@
 'use strict';
 
 const componentsModule = require('../../');
-const find = require('lodash/collection/find');
+const find = require('lodash/find');
 const indexBy = require('lodash/keyBy');
 const map = require('lodash/collection/map');
 const flatten = require('lodash/array/flatten');

@@ -2,7 +2,7 @@
 
 var componentsModule = require('../../../');
 var moment = require('moment-timezone');
-var find = require('lodash/collection/find');
+var find = require('lodash/find');
 
 /**
  * @ngInject

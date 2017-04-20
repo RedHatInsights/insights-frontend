@@ -3,7 +3,7 @@
 var servicesModule = require('./');
 var get = require('lodash/object/get');
 var arrayRemove = require('lodash/array/remove');
-var find = require('lodash/collection/find');
+var find = require('lodash/find');
 
 function SystemsService($filter,
                         $rootScope,

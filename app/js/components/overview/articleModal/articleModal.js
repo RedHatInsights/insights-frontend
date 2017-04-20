@@ -3,7 +3,7 @@
 
 var componentsModule = require('../../');
 var pick = require('lodash/object/pick');
-var find = require('lodash/collection/find');
+var find = require('lodash/find');
 
 /**
  * @ngInject

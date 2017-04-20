@@ -2,7 +2,7 @@
 'use strict';
 
 const componentsModule = require('../../');
-const find = require('lodash/collection/find');
+const find = require('lodash/find');
 const get = require('lodash/object/get');
 
 /**

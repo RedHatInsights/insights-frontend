@@ -1,7 +1,7 @@
 'use strict';
 
 var componentsModule = require('../../');
-var find = require('lodash/collection/find');
+var find = require('lodash/find');
 var findIndex = require('lodash/array/findIndex');
 var map = require('lodash/collection/map');
 var groupBy = require('lodash/collection/groupBy');

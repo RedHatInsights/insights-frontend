@@ -1,7 +1,7 @@
 'use strict';
 
 var componentsModule = require('../../');
-var find = require('lodash/collection/find');
+var find = require('lodash/find');
 const partition = require('lodash/collection/partition');
 const clone = require('lodash/clone');
 const groupBy = require('lodash/collection/groupBy');

@@ -2,7 +2,7 @@
 /*global confirm*/
 
 var statesModule = require('../../');
-var find = require('lodash/collection/find');
+var find = require('lodash/find');
 var map = require('lodash/collection/map');
 var pick = require('lodash/object/pick');
 var remove = require('lodash/array/remove');

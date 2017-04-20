@@ -1,7 +1,7 @@
 'use strict';
 
 var apiModule = require('./');
-var find = require('lodash/collection/find');
+var find = require('lodash/find');
 
 /**
  * @ngInject

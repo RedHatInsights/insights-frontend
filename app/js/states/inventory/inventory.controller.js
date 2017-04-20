@@ -2,7 +2,7 @@
 'use strict';
 
 const statesModule = require('../');
-const find = require('lodash/collection/find');
+const find = require('lodash/find');
 const pick = require('lodash/object/pick');
 const diff = require('lodash/difference');
 
