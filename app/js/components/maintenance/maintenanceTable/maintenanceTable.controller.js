@@ -3,7 +3,7 @@
 var componentsModule = require('../../');
 var isEmpty = require('lodash/lang/isEmpty');
 var indexBy = require('lodash/keyBy');
-var countBy = require('lodash/collection/countBy');
+var countBy = require('lodash/countBy');
 var reject = require('lodash/collection/reject');
 
 /**
