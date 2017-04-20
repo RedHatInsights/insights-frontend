@@ -2,7 +2,7 @@
 
 var servicesModule = require('./');
 var get = require('lodash/get');
-var arrayRemove = require('lodash/array/remove');
+var arrayRemove = require('lodash/remove');
 var find = require('lodash/find');
 
 function SystemsService($filter,

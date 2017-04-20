@@ -2,7 +2,7 @@
 
 const servicesModule = require('./');
 const sum = require('lodash/math/sum');
-const remove = require('lodash/array/remove');
+const remove = require('lodash/remove');
 
 /**
  * @ngInject
