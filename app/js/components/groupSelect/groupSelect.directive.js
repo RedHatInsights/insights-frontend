@@ -2,7 +2,7 @@
 
 var componentsModule = require('../');
 var isEmpty = require('lodash/lang/isEmpty');
-const includes = require('lodash/collection/includes');
+const includes = require('lodash/includes');
 
 // group-select is disabled in these states
 const DISABLED_STATES = [

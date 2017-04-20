@@ -1,7 +1,7 @@
 'use strict';
 
 var componentsModule = require('../');
-const includes = require('lodash/collection/includes');
+const includes = require('lodash/includes');
 
 /**
  * @ngInject
