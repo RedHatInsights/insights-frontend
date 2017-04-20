@@ -3,7 +3,7 @@
 var statesModule = require('../');
 var groupBy = require('lodash/groupBy');
 var sortBy = require('lodash/sortBy');
-var values = require('lodash/object/values');
+var values = require('lodash/values');
 var moment = require('moment-timezone');
 var CATEGORY_PREFERENCE_KEY = 'maintenance_plan_category';
 
