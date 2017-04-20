@@ -2,7 +2,7 @@
 
 var componentsModule = require('../../');
 
-var filter = require('lodash/collection/filter');
+var filter = require('lodash/filter');
 var findWhere = require('lodash/find');
 var isString = require('lodash/lang/isString');
 var isEmpty = require('lodash/lang/isEmpty');

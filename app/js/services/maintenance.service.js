@@ -1,7 +1,7 @@
 'use strict';
 
 const servicesModule = require('./');
-const filter = require('lodash/collection/filter');
+const filter = require('lodash/filter');
 const map = require('lodash/collection/map');
 const flatten = require('lodash/array/flatten');
 const indexBy = require('lodash/keyBy');
