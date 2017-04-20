@@ -4,7 +4,7 @@
 const statesModule = require('../');
 const find = require('lodash/collection/find');
 const pick = require('lodash/object/pick');
-const diff = require('lodash/array/difference');
+const diff = require('lodash/difference');
 
 /**
  * @ngInject
