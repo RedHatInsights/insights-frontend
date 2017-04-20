@@ -1,6 +1,6 @@
 'use strict';
 const assign = require('lodash/assign');
-const isArray = require('lodash/lang/isArray');
+const isArray = require('lodash/isArray');
 
 /**
  * Adds arbitrary properties to ui-state objects. This allows Enterprise integration users
