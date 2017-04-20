@@ -1,7 +1,7 @@
 'use strict';
 
 var componentsModule = require('../../');
-var throttle = require('lodash/function/throttle');
+var throttle = require('lodash/throttle');
 
 const defaultThrottle = 500;
 
