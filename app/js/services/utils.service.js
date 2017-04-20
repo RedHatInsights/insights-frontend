@@ -1,12 +1,12 @@
 /*global window, document, angular, require*/
 'use strict';
 
-var servicesModule = require('./');
-var forOwn = require('lodash/forOwn');
-var capitalize = require('lodash/capitalize');
-var groupBy = require('lodash/groupBy');
-var values = require('lodash/values');
-var get = require('lodash/get');
+const servicesModule = require('./');
+const forOwn = require('lodash/forOwn');
+const upperFirst = require('lodash/upperFirst');
+const groupBy = require('lodash/groupBy');
+const values = require('lodash/values');
+const get = require('lodash/get');
 
 function Pager (perPage) {
     this.perPage = perPage || 15;
@@ -28,9 +28,9 @@ function Utils($filter, $rootScope, Events) {
     utils.generateAccessors = function (pub, vars) {
         // console.time('generateAccessors');
         forOwn(vars, function (ignore, key) {
-            var cap = capitalize(key);
-            var getter = 'get' + cap;
-            var setter = 'set' + cap;
+            const cap = upperFirst(key);
+            const getter = 'get' + cap;
+            const setter = 'set' + cap;
 
             pub[getter] = function () {
                 // for debugging dont delete
