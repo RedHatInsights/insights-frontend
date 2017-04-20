@@ -2,7 +2,7 @@
 'use strict';
 
 var componentsModule = require('../../');
-var cloneDeep = require('lodash/lang/cloneDeep');
+var cloneDeep = require('lodash/cloneDeep');
 var pick = require('lodash/object/pick');
 
 /**
