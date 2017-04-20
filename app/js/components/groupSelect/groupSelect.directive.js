@@ -1,7 +1,7 @@
 'use strict';
 
 var componentsModule = require('../');
-var isEmpty = require('lodash/lang/isEmpty');
+var isEmpty = require('lodash/isEmpty');
 const includes = require('lodash/includes');
 
 // group-select is disabled in these states

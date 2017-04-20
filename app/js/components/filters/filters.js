@@ -3,7 +3,7 @@
 
 var componentsModule = require('../');
 var sortBy = require('lodash/collection/sortBy');
-var isEmpty = require('lodash/lang/isEmpty');
+var isEmpty = require('lodash/isEmpty');
 var isArray = require('lodash/isArray');
 var moment = require('moment-timezone');
 var map = require('lodash/collection/map');
