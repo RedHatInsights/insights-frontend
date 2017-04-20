@@ -4,7 +4,7 @@
 var componentsModule = require('../');
 var c3 = require('c3');
 var d3 = require('d3');
-const capitalize = require('lodash/string/capitalize');
+const capitalize = require('lodash/capitalize');
 
 function generateChart(nameMapper) {
     return c3.generate({

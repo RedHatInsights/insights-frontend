@@ -8,7 +8,7 @@ var pick = require('lodash/object/pick');
 var remove = require('lodash/array/remove');
 var reject = require('lodash/collection/reject');
 var sortBy = require('lodash/collection/sortBy');
-const capitalize = require('lodash/string/capitalize');
+const capitalize = require('lodash/capitalize');
 
 /**
  * @ngInject

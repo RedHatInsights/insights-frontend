@@ -3,7 +3,7 @@
 
 var servicesModule = require('./');
 var forOwn = require('lodash/object/forOwn');
-var capitalize = require('lodash/string/capitalize');
+var capitalize = require('lodash/capitalize');
 var groupBy = require('lodash/collection/groupBy');
 var values = require('lodash/object/values');
 var get = require('lodash/object/get');
