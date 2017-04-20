@@ -1,7 +1,7 @@
 'use strict';
 
 const servicesModule = require('./');
-const sum = require('lodash/sum');
+const sumBy = require('lodash/sumBy');
 const remove = require('lodash/remove');
 
 /**
@@ -15,7 +15,7 @@ function TopbarAlertsService () {
     };
 
     function updateCounts () {
-        service.unackedCount = sum(service.items, i => (i.acked) ? 0 : 1);
+        service.unackedCount = sumBy(service.items, i => (i.acked) ? 0 : 1);
     }
 
     service.push = function (item) {

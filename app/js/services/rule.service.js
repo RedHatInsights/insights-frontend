@@ -4,7 +4,7 @@ var servicesModule = require('./');
 
 var groupBy = require('lodash/groupBy');
 var _max = require('lodash/max');
-var sum = require('lodash/sum');
+var sumBy = require('lodash/sumBy');
 var every = require('lodash/every');
 var uniq = require('lodash/uniq');
 var map = require('lodash/map');
@@ -80,7 +80,7 @@ function RuleService ($filter) {
             result.categories = uniq(map(result.rules, 'category'));
 
             // sum up hitCounts for the plugin
-            result.hitCount = sum(result.rules, 'hitCount');
+            result.hitCount = sumBy(result.rules, 'hitCount');
 
             // a plugin is acked as long as every single rule is acked
             result.acked = every(result.rules, 'acked');
