@@ -4,7 +4,7 @@ var componentsModule = require('../../');
 
 var filter = require('lodash/filter');
 var findWhere = require('lodash/find');
-var isString = require('lodash/lang/isString');
+var isString = require('lodash/isString');
 var isEmpty = require('lodash/isEmpty');
 var sortby = require('lodash/collection/sortBy');
 
