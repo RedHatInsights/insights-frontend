@@ -7,7 +7,7 @@ const flatten = require('lodash/flatten');
 const indexBy = require('lodash/keyBy');
 const reject = require('lodash/reject');
 const remove = require('lodash/remove');
-const some = require('lodash/collection/some');
+const some = require('lodash/some');
 const assign = require('lodash/assign');
 const pick = require('lodash/pick');
 
