@@ -2,7 +2,7 @@
 
 var componentsModule = require('../../');
 var find = require('lodash/find');
-var findIndex = require('lodash/array/findIndex');
+var findIndex = require('lodash/findIndex');
 var map = require('lodash/collection/map');
 var groupBy = require('lodash/collection/groupBy');
 
