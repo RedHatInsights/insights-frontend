@@ -1,7 +1,7 @@
 'use strict';
 
 const servicesModule = require('./');
-const sum = require('lodash/math/sum');
+const sum = require('lodash/sum');
 const remove = require('lodash/remove');
 
 /**
