@@ -1,10 +1,11 @@
+/*global require*/
 'use strict';
 
 var gulp = require('gulp');
 var spawn = require('child_process').spawn;
 
 gulp.task('component-list', function (done) {
-	var proc = spawn('python', ['component_list.py']);
+	var proc = spawn('python', ['scripts/component_list.py']);
 	var output = '';
 	var err = '';
 	proc.stdout.on('data', function(data) {
@@ -16,7 +17,7 @@ gulp.task('component-list', function (done) {
 	proc.on('close', function() {
 		console.log(output);
 		if (err) {
-			console.log(err)
+			console.log(err);
 		}
 		done();
 	});

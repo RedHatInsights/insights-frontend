@@ -1,24 +1,10 @@
 import os
 import re
 
-ignore = ['a', 'abbr', 'address', 'area', 'article', 'aside', 'audio',
-          'b', 'base', 'bdi', 'bdo', 'blockquote', 'body', 'br', 'button',
-          'canvas', 'caption', 'cite', 'code', 'col', 'colgroup',
-          'datalist', 'dd', 'del', 'details', 'dfn', 'dialog', 'div',
-          'dl', 'dt', 'em', 'embed', 'fieldset', 'figcaption', 'figure',
-          'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head',
-          'header', 'hr', 'html', 'i', 'iframe', 'img', 'input', 'ins',
-          'kbd', 'keygen', 'label', 'legend', 'li', 'link', 'main', 'map',
-          'mark', 'menu', 'menuitem', 'meta', 'meter', 'nav', 'noscript',
-          'object', 'ol', 'optgroup', 'option', 'output', 'p', 'param',
-          'picture', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's',
-          'samp', 'script', 'section', 'select', 'small', 'source',
-          'span', 'strong', 'style', 'sub', 'summary', 'sup', 'table',
-          'tbody', 'td', 'textarea', 'tfoot', 'th', 'thead', 'time',
-          'title', 'tr', 'track', 'u', 'ul', 'var', 'video', 'wbr']
 jaderegex = r'^([^\.\s\{\}\(\)\#\/\|]+).*$'
-seen_components = {}
+js_component_regex = '.*componentsModule.directive\((.*?)\,.*\).*'
 
+seen_components = {}
 
 def process_paren(line, paren):
     # sort and count parentheses
@@ -58,27 +44,53 @@ def parseJade(jadefile):
                 open_lines = []
             comprgx = re.match(jaderegex, l)
             comp = comprgx.group(1) if comprgx else None
-            if comp and comp not in ignore:
-                if comp not in seen_components:
-                    seen_components[comp] = {'occurs': 0, 'in_files': [basicfpath]}
+
+            # here we can check if the component is in seen_components
+            # because the first pass found them *all* in the JS and
+            # added them to the dict already
+            if comp and comp in seen_components:
                 seen_components[comp]['occurs'] += 1
                 if basicfpath not in seen_components[comp]['in_files']:
                     seen_components[comp]['in_files'].append(basicfpath)
 
+def parseJs(path):
+    with open(path, 'r') as jsfile:
+        for line in jsfile:
+            matches = re.match(js_component_regex, line)
+            if matches and matches.group(1):
+                component = matches.group(1)
 
-def recurseDown(filepath):
+                # strip ' or " we dont know which were used by the dev
+                # although if " was used... curse that person
+                component = component.replace("'", '').replace('"', '')
+
+                # turn the camel cased component into a - seperated string
+                component = re.sub('(?=[A-Z])', '-', component).lower()
+
+                # add to the seen_components dict
+                seen_components[component] = {'occurs': 0, 'in_files': []}
+
+def recurseDown(filepath, func):
     for f in os.listdir(filepath):
         fullpath = os.path.join(filepath, f)
         if os.path.isdir(fullpath):
-            recurseDown(fullpath)
+            recurseDown(fullpath, func)
 
         if os.path.isfile(fullpath):
             fil, ext = os.path.splitext(fullpath)
-            if ext == '.jade':
-                parseJade(fullpath)
+            func(fullpath, ext)
+
+def jadeHandler(fullpath, ext):
+    if ext == '.jade':
+        parseJade(fullpath)
+
+def jsHandler(fullpath, ext):
+    if ext == '.js':
+        parseJs(fullpath)
 
 toplvl = os.path.join(os.getcwd(), 'app', 'js')
-recurseDown(toplvl)
+recurseDown(toplvl, jsHandler)
+recurseDown(toplvl, jadeHandler)
 
 for comp in sorted(seen_components.keys()):
     occurs = seen_components[comp]['occurs']
