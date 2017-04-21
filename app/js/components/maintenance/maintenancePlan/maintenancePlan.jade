@@ -71,6 +71,7 @@
                 ng-model='editBasic.name')
             .form-group.title(ng-class="{'has-error': editBasicForm.date.$invalid}")
               label(translate) Date:&nbsp;
+                i.fa.fa-question-circle(tooltip='{{editDateTooltip}}')
               input.form-control(
                 type='text',
                 name='date',
