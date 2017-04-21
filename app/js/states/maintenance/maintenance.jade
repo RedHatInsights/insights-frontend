@@ -17,7 +17,7 @@
     .row.search
       .col-sm-8.col-md-9
         search-box(ng-model='searchTerm')
-      .col-sm-4.col-md-3
+      .col-sm-4.col-md-3.ui-filters
         maintenance-category-select(category='category', on-select='setCategory(category)')
 
     .row.row-short(ng-show='loading')
