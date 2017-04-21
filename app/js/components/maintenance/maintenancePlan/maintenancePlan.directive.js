@@ -34,6 +34,12 @@ function maintenancePlanCtrl(
     $scope.exportPlan = Maintenance.exportPlan;
     $scope.error = null;
 
+    $scope.editDateTooltip = gettextCatalog.getString(
+        'Date, time and duration of a maintenance window can be defined here. ' +
+        'If a maintenance window for this plan is set then Insights will verify that ' +
+        'all the actions in this plan are resolved once the window ends. Insights will ' +
+        'warn you this plan is not fully resolved when the maintenance window ends.');
+
     const CURRENT_GROUP_PREFIX = gettextCatalog.getString('Current Group');
 
     $scope.editBasic = new $scope.BasicEditHandler(
