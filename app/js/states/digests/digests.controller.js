@@ -6,6 +6,7 @@ const takeRight = require('lodash/takeRight');
 const last = require('lodash/last');
 const sortBy = require('lodash/sortBy');
 const filter = require('lodash/filter');
+const sum = require('lodash/sum');
 const TIME_PERIOD = 30;
 
 /**
@@ -105,6 +106,14 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
         performance: true
     };
 
+    function calculateResolvedIssues (digest) {
+        return sum(takeRight(digest.resolved, TIME_PERIOD));
+    }
+
+    $scope.timePeriod = function () {
+        return TIME_PERIOD;
+    };
+
     $scope.dateFormat = function (dateString) {
         var date = new Date(dateString);
         return date.getMonth() + '-' + date.getDay() + '-' + date.getFullYear();
@@ -192,6 +201,7 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
         $scope.topTenWorstSystems = getTenWorst(sysres.data.resources);
         $scope.topTenRules = getTenWorst(ruleres.data.resources);
         $scope.allRuleHits = ruleAppendixSorting(ruleres.data.resources);
+        $scope.resolvedIssues = calculateResolvedIssues(digestBase);
         $scope.loading = false;
     });
 }
