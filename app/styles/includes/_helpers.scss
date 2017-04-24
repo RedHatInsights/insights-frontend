@@ -11,6 +11,64 @@
     .pad100 { @include rem('padding', 100px); }
 }
 
+.limit-10 {
+  max-width: 10%;
+}
+
+.limit-20 {
+  max-width: 20%;
+}
+
+.limit-30 {
+  max-width: 30%;
+}
+
+.limit-40 {
+  max-width: 40%;
+}
+
+.limit-50 {
+  max-width: 50%;
+}
+
+.limit-60 {
+  max-width: 60%;
+}
+
+.limit-70 {
+  max-width: 70%;
+}
+
+.limit-80 {
+  max-width: 80%;
+}
+
+.limit-90 {
+  max-width: 90%;
+}
+
+
+
+.limit-10,
+.limit-20,
+.limit-30,
+.limit-40,
+.limit-50,
+.limit-60,
+.limit-70,
+.limit-80,
+.limit-90 {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+}
+
+.valign-bottom {
+  vertical-align: bottom;
+}
+
+
 .row.offset {
   @include rem('padding-left', 40px);
 }

@@ -10,10 +10,10 @@ const diff = require('lodash/array/difference');
  * @ngInject
  */
 function InventoryCtrl(
-        $scope,
-        $rootScope,
         $filter,
-        $location,
+        $modal,
+        $rootScope,
+        $scope,
         $state,
         System,
         InventoryService,
@@ -25,6 +25,7 @@ function InventoryCtrl(
         FilterService,
         QuickFilters,
         PreferenceService,
+        User,
         Utils,
         ListTypeService,
         ActionbarService,
@@ -63,6 +64,7 @@ function InventoryCtrl(
     $scope.errored = false;
     $scope.actionFilter = null;
     $scope.loading = InventoryService.loading;
+    $scope.reloading = false;
 
     $scope.sorter = new Utils.Sorter(false, order);
     $scope.sorter.predicate = 'toString';
@@ -94,6 +96,10 @@ function InventoryCtrl(
         cleanTheScope();
         initInventory();
     });
+
+    let systemModal = null;
+
+    $scope.isPortal = InsightsConfig.isPortal;
 
     function cleanTheScope() {
         $scope.checkboxes.reset();
@@ -143,6 +149,7 @@ function InventoryCtrl(
         $scope.loading = true;
 
         if (!scrolling) {
+            $scope.reloading = true;
             InventoryService.goToPage(0);
         }
 
@@ -181,7 +188,7 @@ function InventoryCtrl(
             .error(function () {
                 $scope.errored = true;
             }).finally(function () {
-                InventoryService.loading = $scope.loading = false;
+                InventoryService.loading = $scope.loading = $scope.reloading = false;
             });
     }
 
@@ -233,9 +240,18 @@ function InventoryCtrl(
     };
 
     $scope.checkboxes = new Utils.Checkboxes('system_id');
+    setTotalSystemsSelected();
 
     function updateCheckboxes () {
         $scope.checkboxes.update($scope.getSelectableSystems());
+
+        if (visiblySelectedSystemsCount() === $scope.systems.length && !$scope.loading) {
+            $scope.allSelected = true;
+        } else {
+            $scope.allSelected = false;
+        }
+
+        setTotalSystemsSelected();
     }
 
     function addSystems(newSys, oldSys) {
@@ -319,14 +335,13 @@ function InventoryCtrl(
             $scope.sorter.predicate = column;
             $scope.sorter.reverse = $scope.reverse;
             order();
+            $scope.loading = false;
         }
         else {
             // reset dataset
             cleanTheScope();
             getData(false);
         }
-
-        $scope.loading = false;
     };
 
     $scope.selectAll = function () {
@@ -363,11 +378,13 @@ function InventoryCtrl(
             getAllSystems().then(res => {
                 $scope.allSystems = res.data.resources;
                 $scope.reallyAllSelected = true;
+                $scope.totalSystemsSelected = $scope.allSystems.length;
                 $scope.loading = false;
             });
         } else {
             // already loaded, just set the flag
             $scope.reallyAllSelected = true;
+            $scope.totalSystemsSelected = $scope.allSystems.length;
         }
     };
 
@@ -375,11 +392,74 @@ function InventoryCtrl(
         return InventoryService.getTotal();
     };
 
+    function setTotalSystemsSelected () {
+
+        // if all systems are shown just count the checkboxes
+        if ($scope.systems.length === InventoryService.getTotal()) {
+            $scope.totalSystemsSelected = visiblySelectedSystemsCount();
+        }
+        else if ($scope.reallyAllSelected) {
+            $scope.totalSystemsSelected = InventoryService.getTotal();
+
+            // remove systems in view that are not checked
+            $scope.totalSystemsSelected -=
+                (Object.keys($scope.checkboxes.items).length -
+                    visiblySelectedSystemsCount());
+        } else {
+            $scope.totalSystemsSelected = visiblySelectedSystemsCount();
+        }
+    }
+
+    function visiblySelectedSystemsCount () {
+        return $scope.systems.filter(system => {
+            return ($scope.checkboxes.items.hasOwnProperty(system.system_id) &&
+                $scope.checkboxes.items[system.system_id] === true);
+        }).length;
+    }
+
     $scope.allSystemsShown = function () {
         // don't show the 'select all __' prompt
         //  if all systems are already shown
         return InventoryService.getTotal() === $scope.systems.length;
     };
+
+    /**
+     * calls register new system modal
+     */
+    $scope.registerSystem = function () {
+        var systemLimitReached = false;
+        User.asyncCurrent(function (user) {
+            systemLimitReached = user.current_entitlements ?
+                user.current_entitlements.systemLimitReached :
+                !user.is_internal;
+
+            if (user.current_entitlements && user.current_entitlements.unlimitedRHEL) {
+                systemLimitReached = false;
+            }
+        });
+
+        openModal({
+            templateUrl: 'js/components/system/addSystemModal/' +
+                (systemLimitReached ? 'upgradeSubscription.html' : 'addSystemModal.html'),
+            windowClass: 'system-modal ng-animate-enabled',
+            backdropClass: 'system-backdrop ng-animate-enabled',
+            controller: 'AddSystemModalCtrl'
+        });
+    };
+
+    /**
+     * opens modal if a modal isn't currently opened
+     */
+    function openModal(opts) {
+        if (systemModal) {
+            return; // Only one modal at a time please
+        }
+
+        systemModal = $modal.open(opts);
+        systemModal.result.finally(function () {
+            systemModal = null;
+        });
+    }
 
     if (InsightsConfig.allowExport) {
         ActionbarService.addExportAction(function () {
@@ -393,8 +473,15 @@ function InventoryCtrl(
                 stale = true;
             }
 
-            Export.getReports(null, null, Group.current().id, stale);
+            Export.getSystems(Group.current().id, stale, FilterService.getSearchTerm());
         });
+    }
+
+    if (params.machine) {
+        const system = {
+            system_id: params.machine
+        };
+        $scope.showActions(system, true);
     }
 }
 

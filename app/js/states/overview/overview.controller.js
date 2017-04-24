@@ -68,7 +68,7 @@ function OverviewCtrl(
         loadPlans(true);
     });
 
-    Stats.getRules().then(function (res) {
+    Stats.getRules({include: 'ansible'}, true).then(function (res) {
         $scope.stats.rules = res.data;
     });
 }

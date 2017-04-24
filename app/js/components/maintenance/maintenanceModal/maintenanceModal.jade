@@ -13,41 +13,41 @@
           label.control-label
             input(type='radio', ng-model='newPlan', ng-value='true')
             strong Create new plan
-        .col-sm-8
+        .col-sm-8(ng-click='!newPlan && (newPlan = true)')
           input.form-control(
             type='text',
             name='name',
             maxlength='255',
             ng-disabled='!newPlan',
             ng-model='newPlanAlias',
-            placeholder="{{'Plan Alias (optional)' | translate}}",
+            placeholder="{{'Plan Name' | translate}}",
             autofocus)
       .row.row-short
         .radio.col-sm-4
           label.control-label
             input(type='radio', ng-model='newPlan', ng-value='false', ng-disabled='!availablePlans.length')
             strong Add to existing plan
-        .col-sm-8
+        .col-sm-8(ng-click='newPlan && (newPlan = false)')
           ui-select(ng-model='selected.plan', append-to-body='false', ng-disabled='newPlan')
             ui-select-match.form-control.ui-select-match(placeholder='Select a plan')
-              span(ng-if='!selected.plan.name.length') PLAN {{selected.plan.maintenance_id}}
-              span(ng-if='selected.plan.name.length') {{selected.plan.name}}
+              span(ng-if='!selected.plan.name.length', translate) Unnamed plan ({{selected.plan.maintenance_id}})
+              span(ng-if='selected.plan.name.length') {{selected.plan.name}} ({{selected.plan.maintenance_id}})
               span(ng-if='selected.plan.start') &nbsp;- {{selected.plan.start | moment:'LL'}}
             ui-select-choices.ui-select-choices(
               repeat="plan in availablePlans | searchMaintenancePlans: $select.search | orderBy:['start', getPlanName, 'maintenance_id']",
               group-by='planGroupFn',
               group-filter='planOrderFn')
-              span(ng-if='!plan.name.length') PLAN {{plan.maintenance_id}}
-              span(ng-if='plan.name.length') {{plan.name}}
+              span(ng-if='!plan.name.length', translate) Unnamed plan ({{plan.maintenance_id}})
+              span(ng-if='plan.name.length') {{plan.name}} ({{plan.maintenance_id}})
               span(ng-if='plan.start') &nbsp; - {{plan.start | moment:'LL'}}
 
     .row.available-actions
       .content-block.maintenance-plan.rule(
         ng-if='plan && tableParams && mode === MODES.rule')
         .header.bordered
-          span.icon-inline
-            severity-icon(severity="rule.severity")
-          strong {{rule.description}}
+          .title
+            strong {{rule.description}}
+          all-severity-icons(rule='rule', ng-if='!loader.loading')
         .nopad.table-responsive
           maintenance-table-systems(
             params='tableParams',

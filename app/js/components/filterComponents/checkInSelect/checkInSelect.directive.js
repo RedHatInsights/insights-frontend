@@ -6,7 +6,7 @@ const find = require('lodash/collection/find');
 /**
  * @ngInject
  */
-function checkInSelectCtrl($scope, gettextCatalog, FilterService) {
+function checkInSelectCtrl($scope, gettextCatalog, Events, FilterService) {
     $scope.options = [
         {
             id: 'all',
@@ -45,6 +45,12 @@ function checkInSelectCtrl($scope, gettextCatalog, FilterService) {
     }
 
     read();
+
+    $scope.$on(Events.filters.reset, function () {
+        $scope.select(find($scope.options, (option) => {
+            return option.id === 'all';
+        }));
+    });
 }
 
 function checkInSelect() {

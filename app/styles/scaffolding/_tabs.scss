@@ -1,0 +1,103 @@
+ul.nav.nav-tabs-simple {
+  position: relative;
+  border: none;
+  padding: 0;
+
+  li {
+    display: inline-block;
+  }
+
+  li a {
+    // Reset
+    margin: 0;
+    @include rem('padding', $global-padding/2 $global-padding);
+    border: none;
+    background: none;
+
+    // Re-style
+    font-weight: 700;
+    color: $gray-dark;
+    text-transform: uppercase;
+    @include transition(.2s);
+  }
+
+  li.active>a,
+  li.active>a:hover,
+  li.active>a:focus,
+  li a:hover {
+    background: rgba(255,255,255,.8);
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(0,0,0,.1);
+      display: block;
+  }
+
+  .nav-tabs>li.active>a,
+  .nav-tabs>li.active>a:hover,
+  .nav-tabs>li.active>a:focus {
+    background: rgba(255,255,255,.4);
+    }
+  }
+
+  .tab-pane {
+    padding: 0;
+  }
+
+  &.underline {
+    border-bottom: 1px solid $gray;
+  }
+
+  + .tab-content {
+    .tab-pane {
+      padding: 0;
+    }
+  }
+}
+
+.metrics {
+  position: relative;
+
+  .graph-filters {
+    //position: absolute;
+    //z-index: 99;
+    //right: 0;
+    //top: 0;
+    //@include rem('padding', 8px);
+    //background: rgba(255,255,255,.5);
+
+    .dropdown {
+      background: rgba(255,255,255,.5);
+
+      a {
+        color: $gray-dark;
+        font-weight: 700;
+        @include rem('padding', 8px);
+        display: block;
+        border: 1px solid $gray;
+      }
+    }
+
+    .dropdown .dropdown-menu {
+      @include rem('padding', 4px);
+    }
+  }
+}
+
+table {
+  a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  //.hostname {
+  //  display: block;
+  //  width: 50%;
+  //}
+
+}

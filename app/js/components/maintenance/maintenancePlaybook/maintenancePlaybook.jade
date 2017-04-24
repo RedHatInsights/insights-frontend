@@ -5,7 +5,7 @@
   .text-center
     i.svg
       img(src= "images/l_ansible-black.svg")
-    h2(translate) Create Ansible playbook
+    h2(translate) Create Ansible Playbook
 
 // Screen 1 - Rules Without Plays
 .modal-body(ng-if='step === RULES_WITHOUT_PLAYS && rulesWithoutPlays.length > 0')
@@ -16,14 +16,15 @@
           span(translate,
                translate-n="rulesWithoutPlays.length",
                translate-plural="These rules") This rule
-          span(translate) &nbsp;will not be included in this playbook.
+          span(translate) &nbsp;will not be included in this Playbook.
   .row
     .col-sm-12
       ul
         li(ng-repeat="rule in rulesWithoutPlays | orderBy:['category','description'] | limitTo:listLimit")
           i.fa.category-icon.inline-right(ng-class="rule.category.toLowerCase()")
           b {{ rule.category }} 
-          | #{'>'} {{ rule.description }} for {{rule.system_type.displayNameShort}}
+          | #{'>'} {{ rule.description }} for&nbsp;
+          b {{rule.system_type.displayNameShort}}
       a(ng-show="listLimit !== undefined && listLimit < rulesWithoutPlays.length",
         ng-click="listLimit = undefined",
         translate) View More ({{rulesWithoutPlays.length - listLimit}})
@@ -101,7 +102,7 @@
     .col-sm-12
       .group
         .group-pretitle
-          b(translate) This playbook will resolve the following rules:
+          b(translate) This Playbook will resolve the following rules:
 
   .row.row-short
     .col-sm-12
@@ -110,9 +111,11 @@
           ul
             li(ng-repeat="(key, rule) in rulesWithPlays | limitTo: listLimit")
               i.fa.category-icon.inline-right(ng-class="rule.category.toLowerCase()")
-              span {{ rule.category }} #{'>'} {{ rule.description }} for {{ rule.system_type.displayNameShort }}
+              b {{ rule.category }}
+              | #{'>'} {{ rule.description }} for&nbsp;
+              b {{ rule.system_type.displayNameShort }}
               ul(ng-show='rule.solution !== undefined')
-                li {{ rule.solution }}
+                li {{ rule.solution() }}
           a(ng-show="listLimit !== undefined && listLimit < rulesWithPlays.length",
             ng-click="listLimit = undefined",
             translate) View More ({{rulesWithPlays.length - listLimit}})
@@ -134,7 +137,7 @@
 .modal-footer
   ul.row.pager.pager-steps(ng-if='step === RESOLVE_QUESTIONS || step === SUMMARY')
     li.previous.col-sm-6
-      a.btn.btn-accent(ng-click='prevStep()', translate)
+      a.btn.btn-accent(ng-click='prevStep()', ng-if='step === SUMMARY || currentQuestion.index > 0 || rulesWithoutPlays.length > 0', translate)
         i.fa.fa-chevron-left
         | &nbsp;&nbsp;Previous
     li.next.col-sm-6(ng-if='step !== SUMMARY')

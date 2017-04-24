@@ -8,7 +8,7 @@
         th.sortable(ng-class="table.sorter.getSortClass('display')", ng-click="table.sorter.sort('display')")
           .sort-indicator(translate) Action
         th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.severityNum')", ng-click="table.sorter.sort('rule.severityNum')")
-          .sort-indicator(translate) Severity
+          .sort-indicator(translate) Total Risk
         th.sortable.text-center(ng-class="table.sorter.getSortClass('done')", ng-click="table.sorter.sort('done')")
           .sort-indicator(translate) Status
       tr(ng-show='edit')
@@ -25,7 +25,7 @@
             i.fa.fa-exclamation-circle(tooltip="{{'This action is already part of another plan' | translate}}")
           a.action(ng-click='table.showSystemModal(table.params.item, action.rule)') {{action.display}}
         td.text-center
-          severity-icon(severity="action.rule.severity")
+          severity-icon(severity='action.rule.severity', type='severity', label='')
         td.status.text-center
           status-icon(status='action.done')
     tfoot(maintenance-table-footer)

@@ -1,12 +1,12 @@
 .widget.key-issues
   .row
     .col-sm-12
-      .pointer(ng-if="ruleCount.warn || !loaded", ui-sref="app.topic({id: 'critical'})")
+      .pointer(ng-if="stats.systems.affected > 0 || !loaded", ui-sref="app.topic({id: 'critical'})")
         .metrics
-          strong {{stats.systems.affected}} of {{stats.systems.total}} systems have critical actions
+          strong(translate) {{stats.systems.affected}} of {{stats.systems.total}} systems have critical actions
         .progress-bar
           .progress.red(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='stats.systems.affected / stats.systems.total | toWidth')
           .bar
-      .no-errors(ng-if="!ruleCount.warn && loaded")
+      .no-errors(ng-if="stats.systems.affected === 0 && loaded")
         i.fa.fa-check-circle.inline-right(aria-hidden="true")
-        span(translate) You have no issues of warning severity
+        span(translate) You have no issues of critical severity

@@ -1,12 +1,14 @@
-section.gray.inventory-filters
-  .row
-    .col-sm-6
-      label.invisible(translate='translate') Search
-      search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000')
-    .col-sm-4.col-sm-offset-2
-      group-select
+section.gray.inventory-filters.ui-filters
   .row
     .col-sm-3
       check-in-select
     .col-sm-3
       actions-select
+    .col-sm-6
+      label.invisible(translate='translate') Search
+      search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000')
+  .row.row-short
+    .col-sm-6
+      a(ng-click="resetFilters()")
+        strong Reset filters &nbsp;
+        i.fa.fa-refresh

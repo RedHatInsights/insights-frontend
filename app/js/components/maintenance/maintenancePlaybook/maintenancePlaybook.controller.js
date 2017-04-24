@@ -4,6 +4,10 @@
 var componentsModule = require('../../');
 const FileSaver = require('file-saver');
 const parseHeader = require('parse-http-header');
+const each = require('lodash/collection/forEach');
+const some = require('lodash/collection/some');
+const constant = require('lodash/utility/constant');
+const uniq = require('lodash/array/uniq');
 
 /**
  * @ngInject
@@ -18,6 +22,8 @@ function MaintenancePlaybook($modalInstance,
                              AnsibleErrors,
                              AnsibleService,
                              Maintenance,
+                             ModalUtils,
+                             Rule,
                              SystemsService) {
 
     $scope.RULES_WITHOUT_PLAYS = 0;
@@ -42,6 +48,7 @@ function MaintenancePlaybook($modalInstance,
                     $scope.plan,
                     false);
                 $scope.questions = AnsibleService.questions;
+                setRulesWithPlays();
             } else {
                 setRulesWithoutPlays();
             }
@@ -69,7 +76,6 @@ function MaintenancePlaybook($modalInstance,
         if (step === $scope.questions.length) {
             $scope.step = $scope.SUMMARY;
             $scope.currentQuestion = null;
-            setRulesWithPlays();
         } else {
             $scope.step = $scope.RESOLVE_QUESTIONS;
             setCurrentQuestion(step);
@@ -77,7 +83,7 @@ function MaintenancePlaybook($modalInstance,
     };
 
     /**
-     * Gets the rules that do not have supported playbooks
+     * Gets the rules that do not have supported Playbooks
      */
     function setRulesWithoutPlays () {
         $scope.rulesWithoutPlays = [];
@@ -104,63 +110,73 @@ function MaintenancePlaybook($modalInstance,
     }
 
     /**
-     * Gets the list of rules that are being fixed with this playbook
+     * Gets the list of rules that are being fixed with this Playbook
      */
     function setRulesWithPlays () {
 
-        let rulesWithPlays = {};
-        let platformRule = {};
-        let excludeRule = false;
+        // first, deduplicate rule_id/system_type_id combinations
+        let uniqueActions = uniq($scope.plan.actions, false, function (action) {
+            return `${action.rule.rule_id}:${action.system.system_type_id}`;
+        });
 
-        $scope.plan.rules.forEach((rule) => {
-            rule.actions.forEach((action) => {
+        // filter out rules with no Ansible support
+        if ($scope.rulesWithoutPlays !== undefined &&
+            $scope.rulesWithoutPlays.length > 0) {
+            uniqueActions = uniqueActions.filter(function (action) {
+                return !some($scope.rulesWithoutPlays, function (ruleWithoutPlay) {
+                    return (
+                        action.system.system_type_id === ruleWithoutPlay.system_type.id &&
+                        action.rule.rule_id === ruleWithoutPlay.rule_id);
+                });
+            });
+        }
 
-                excludeRule = false;
+        const platformRules = uniqueActions.map(function (action) {
+            return {
+                rule_id: action.rule.rule_id,
+                category: action.rule.category,
+                description: action.rule.description,
 
-                // if rule.rule_id and action.system.system_type_id exists in any
-                // ruleWithoutPlay, omit the rule
-                if ($scope.rulesWithoutPlays !== undefined &&
-                    $scope.rulesWithoutPlays.length > 0) {
-                    $scope.rulesWithoutPlays.forEach((ruleWithoutPlay) => {
+                // this is safe as system types are awaited within init()
+                system_type: SystemsService.getSystemTypeUnsafe(
+                    action.system.system_type_id)
+            };
+        });
 
-                        if (action.system.system_type_id ===
-                            ruleWithoutPlay.system_type.id &&
-                            rule.rule_id === ruleWithoutPlay.rule_id) {
-                            excludeRule = true;
-                        }
-                    });
-                }
-
-                // if rule has play, add it to rulesWithPlays
-                if (!excludeRule) {
-                    platformRule = {
-                        rule_id: rule.rule_id,
-                        category: rule.category,
-                        description: rule.description,
-
-                        // this is safe as system types are awaited within init()
-                        system_type: SystemsService.getSystemTypeUnsafe(
-                            action.system.system_type_id)
-                    };
-
-                    platformRule.solution = AnsibleService.getResolution(
+        // set or fetch resolution descriptions to be shown on summary page
+        each(platformRules, function (platformRule) {
+            if (questions && some(questions, {
+                rule_id: platformRule.rule_id,
+                system_type_id: platformRule.system_type.id
+            })) {
+                // this is an ambiguous rule - show the selected resolution on summary
+                platformRule.solution = function () {
+                    const resolution = AnsibleService.getResolution(
                         platformRule.rule_id,
                         platformRule.system_type.id);
 
-                    // solution will be undefined if play was not ambiguous
-                    if (platformRule.solution !== undefined) {
-                        platformRule.solution = platformRule.solution.description;
+                    if (resolution !== undefined) {
+                        return resolution.description;
                     }
+                };
+            } else {
 
-                    // use Hashmap to prevent duplicates
-                    rulesWithPlays[
-                        platformRule.rule_id + '-' + platformRule.system_type.id] =
-                            platformRule;
-                }
-            });
+                // this is a non-ambiguous rule - fetch the resolution description
+                Rule.listAnsibleResolutions(
+                    platformRule.rule_id, platformRule.system_type.id)
+                .success(function (resolutions) {
+                    if (resolutions.length === 1) { // should always be the case
+                        platformRule.solution = constant(resolutions[0].description);
+                    } else {
+                        throw new Error(`Unexpected number of resolutions ` +
+                            `(${resolutions.length}) for ${platformRule.rule_id}, ` +
+                            `${platformRule.system_type.id}`);
+                    }
+                });
+            }
         });
 
-        $scope.rulesWithPlays = rulesWithPlays;
+        $scope.rulesWithPlays = platformRules;
     }
 
     /**
@@ -300,7 +316,6 @@ function MaintenancePlaybook($modalInstance,
             setCurrentQuestion(qIndex);
         } else {
             $scope.currentQuestion = null;
-            setRulesWithPlays();
         }
     }
 
@@ -312,7 +327,7 @@ function MaintenancePlaybook($modalInstance,
     };
 
     /**
-     * Posts to maintenance/:id/playbook to create the playbook given the resolutions
+     * Posts to maintenance/:id/playbook to create the Playbook given the resolutions
      */
     $scope.downloadPlaybook = function () {
         if ($scope.validateQuestions) {
@@ -366,6 +381,7 @@ function MaintenancePlaybook($modalInstance,
     };
 
     init();
+    ModalUtils.suppressEscNavigation($modalInstance);
 }
 
 componentsModule.controller('MaintenancePlaybook', MaintenancePlaybook);

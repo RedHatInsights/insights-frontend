@@ -53,6 +53,7 @@ function TopicRuleListCtrl(
     }
 
     $rootScope.$on('reload:data', getData);
+    $scope.$on('group:change', getData);
     getData();
 
     if (InsightsConfig.allowExport) {

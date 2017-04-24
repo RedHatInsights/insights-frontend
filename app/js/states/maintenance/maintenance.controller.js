@@ -86,6 +86,10 @@ BasicEditHandler.prototype.init = function () {
             // so that we can bind the input to it
             this.time = new Date(d.year(), d.month(), d.day(), d.hour(), d.minute());
             this.duration = Math.round((this.plan.end - this.plan.start) / (60 * 1000));
+        } else {
+            this.start = null;
+            this.time = null;
+            this.duration = null;
         }
     } else {
         this.name = '';

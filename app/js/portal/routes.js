@@ -3,7 +3,8 @@
 /**
  * @ngInject
  */
-function Routes($stateProvider, $locationProvider, $urlRouterProvider) {
+function Routes($stateProvider, $locationProvider, $urlRouterProvider,
+                GettingStartedUrl) {
 
     // App Routes
 
@@ -119,35 +120,24 @@ function Routes($stateProvider, $locationProvider, $urlRouterProvider) {
             unauthenticated: true
         });
 
-    // Getting Started redirect
-    const accessInsights = 'https://access.redhat.com/products/red-hat-insights';
-
     function redirectGetStarted (from, to) {
         $urlRouterProvider.when(from,
             function () {
-                window.location = (accessInsights + to);
+                window.location = (GettingStartedUrl + to);
             }
         );
     }
 
     redirectGetStarted('/getting-started/cloudforms/', '#cloudforms');
-
     redirectGetStarted('/getting-started/containers/', '#containers');
-
     redirectGetStarted('/getting-started/direct/', '#direct');
-
     redirectGetStarted('/getting-started/openshift/', '#openshift');
-
     redirectGetStarted('/getting-started/osp/', '#osp');
-
     redirectGetStarted('/getting-started/rhev/', '#rhv');
-
     redirectGetStarted('/getting-started/rhv/', '#rhv');
-
     redirectGetStarted('/getting-started/satellite/6/', '#satellite6');
-
     redirectGetStarted('/getting-started/satellite/5/', '#satellite5');
-
+    redirectGetStarted('/getting-started', '#getstarted');
     redirectGetStarted('/getting-started/', '#getstarted');
 
     $stateProvider

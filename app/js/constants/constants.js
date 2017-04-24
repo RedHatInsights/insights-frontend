@@ -7,6 +7,9 @@
 
 var constantsModule = require('./');
 
+constantsModule.constant('GettingStartedUrl',
+    'https://access.redhat.com/products/red-hat-insights');
+
 constantsModule.constant(
     'QuickFilters', {
         summaryTypes: {
@@ -16,7 +19,6 @@ constantsModule.constant(
     });
 
 // entitlements constants
-constantsModule.constant('MaxFreeSystems', 10);
 constantsModule.constant('TrialSku', 'SER0482');
 
 // tableToCards breakpoint

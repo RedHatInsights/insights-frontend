@@ -1,0 +1,54 @@
+.severity-icon {
+
+  &.severity i {
+    border: 2px solid #AFAFAF;
+    @include border-radius(4px);
+  }
+
+  i {
+    border: 2px solid rgba(255, 255, 255, 0);
+    @include border-radius(4px);
+    width: 26px;
+    height: 30px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    position: relative;
+    top: 5px;
+    background-position: center center;
+
+    &.low { background-image: url('../images/i_severity-low.svg'); }
+    &.med { background-image: url('../images/i_severity-med.svg'); }
+    &.high { background-image: url('../images/i_severity-high.svg'); }
+    &.critical { background-image: url('../images/i_severity-critical.svg'); }
+
+    &.low,
+    &.med,
+    &.high {
+    }
+
+    &.unknown { text-align: center; }
+    &.unknown:after {
+      content: "\f05e";
+      display: inline-block;
+      font-family: 'FontAwesome';
+      font-style: normal;
+      color: #ccc;
+      vertical-align: bottom;
+    }
+  }
+
+  span + i {
+    @include rem('margin-left', 6px);
+  }
+
+  .severity {
+    font-weight: 700;
+  }
+}
+
+table .severity-icon {
+  &.likelihood,
+  &.impact {
+    i { background-position: center center; }
+  }
+}

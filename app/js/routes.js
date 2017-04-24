@@ -79,17 +79,17 @@ function Routes($stateProvider) {
     // Digest routes
     $stateProvider
         .state('app.digests', {
-            url: '/digests/',
+            url: '/reports/executive/',
             templateUrl: 'js/states/digests/digests.html',
             controller: 'DigestsCtrl',
-            title: 'Digests'
+            title: 'Executive Reports'
         });
 
     // System routes
     $stateProvider
         .state('app.inventory', {
             url: '/inventory?product&roles&osp_deployment' +
-                '&docker_host&search_term&sort_field&sort_dir&offline',
+                '&docker_host&search_term&sort_field&sort_dir&offline&online&machine',
             templateUrl: 'js/states/inventory/inventory.html',
             controller: 'InventoryCtrl',
             title: 'Inventory',

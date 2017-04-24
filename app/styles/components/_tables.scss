@@ -11,6 +11,22 @@ input[type="checkbox"] + span { margin-left: 10px; }
 	}
 }
 
+table.table-break {
+  table-layout: fixed;
+  width: 100%;
+
+  td {
+    //word-wrap: break-word;         /* All browsers since IE 5.5+ */
+    //overflow-wrap: break-word;
+  }
+  
+  td.hostname, th.hostname {
+    display: table-cell;
+    width: 50%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
 
 table a, table a:link { @extend %font_blue; }
 
@@ -199,9 +215,14 @@ $sortable_border_color_active: red;
 		color: #fff;
 	}
 
-    thead.lite th {
-      font-weight: 100;
-    }
+  thead th {
+    font-weight: 700;
+  }
+
+  thead.lite th {
+    font-weight: 100;
+  }
+
 
 	thead {
         th, td, tr {

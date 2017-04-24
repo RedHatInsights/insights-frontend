@@ -10,10 +10,10 @@ const obj =  {
             categoryTitle:   '.topic-summary .page-title span span'
         },
         page3: {
-            severityIcon:       '.main-content .wrapper section.gray h2 .severity-icon',
+            severityIcon:       '.main-content .severity-icon i',
             ruleTitle:          '.main-content .wrapper section.gray h2',
-            impactedSystems:    '.main-content .wrapper section h1.page-title span',
-            firstSystemInTable: '.main-content .wrapper section table.table.nomar tbody tr:nth-of-type(1) td:nth-of-type(3) a'
+            impactedSystems:    '.main-content .wrapper section h3 span',
+            firstSystemInTable: '.main-content .wrapper div table.table.nomar tbody tr:nth-of-type(1) td:nth-of-type(3) a'
         }
     },
     planner: {
@@ -27,7 +27,7 @@ const obj =  {
         }
     },
     inventory: {
-        firstSystemInTable: '.inventory .animate-wrapper table.ng-table tbody tr:nth-of-type(1) td.long-name:nth-of-type(2) a',
+        firstSystemInTable: '.inventory table.ng-table tbody tr:nth-of-type(1) td.long-name a',
         searchBox:          '.inventory .input-group',
         checkinSelect:      '.inventory .checkin-select',
         actionsSelect:      '.inventory .actions-select',

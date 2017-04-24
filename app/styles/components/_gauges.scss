@@ -1,0 +1,73 @@
+.gauge.gauge-circle {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include font-size(42px);
+  font-weight: 700;
+  text-align: center;
+  border-radius: 50%;
+  border: 10px solid #006CBE;
+}
+
+.gauge.gauge-count-and-change {
+  height: auto;
+
+  .digests-page & {
+    @include media-query(xs) {
+    	@include rem('margin-top', $global-margin);
+      @include rem('margin-bottom', $global-margin);
+    }
+
+    @include media-query(sm) {
+    	margin-top: 0;
+      @include rem('margin-bottom', $global-padding);
+    }
+
+    @include media-query(md) {
+      margin-top: 0;
+    }
+  }
+
+  .count-and-change {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .count {
+    line-height: 1;
+  }
+
+  .title {
+    display: block;
+  }
+
+  .change {
+    .increase {
+      color: $red;
+    }
+    .decrease {
+      color: $green;
+    }
+    .no-change {
+      color: $gray;
+    }
+  }
+}
+
+.gauge {
+
+  &.gauge-circle {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include font-size(42px);
+    font-weight: 700;
+    text-align: center;
+    border-radius: 50%;
+    border: 10px solid #3083FB;
+  }
+}

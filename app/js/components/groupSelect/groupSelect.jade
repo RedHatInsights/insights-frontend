@@ -1,19 +1,26 @@
-.hidden-in-product(ng-show='groups.length')
-  label(translate='translate') Groups
-  .dropdown.gray
-    button.btn.btn-default.dropdown-toggle(
+.hidden-in-product.group-select
+  label
+    i.fa.fa-globe(aria-hidden="true")
+    span(translate) Global filters
+  .dropdown
+    button.btn.dropdown-toggle(
       type='button',
       data-toggle='dropdown',
       aria-haspopup='true',
       aria-expanded='false',
-      ng-disabled='!groups || !groups.length')
-      span(ng-hide='isGroupSelected()', translate) All Groups
-      span(ng-show='isGroupSelected()') {{group.display_name}}
+      ng-disabled='disabled')
+      span.text(ng-show='!isGroupSelected() && !disabled', translate) Group select
+      span.text(ng-show='disabled', translate) All Systems
+      span.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
       span.caret
     ul.dropdown-menu
       li
-        a(ng-click='triggerChange(null)', translate) All Groups
+        a(ng-click='triggerChange(null)', translate) All Systems
       li(ng-repeat='g in groups | orderBy:"display_name" track by g.id')
-        a(ng-click='triggerChange(g)') {{g.display_name}}
-    //select(ng-model='group', ng-options='g as g.display_name for g in groups track by g.id', ng-change='groupChange()')
-    //option(value="", translate) All
+        a(ng-click='triggerChange(g)')
+          trimmed-text(length="35", text="{{g.display_name}}")
+      li.divider(role='separator')
+      li
+        a(ui-sref="app.config({tab: 'groups'})", translate) Create a group
+  a.add-group(ui-sref="app.config({tab: 'groups'})", tooltip='Create a new group', translate)
+    i.fa.fa-plus-circle.pad-left(aria-hidden="true")

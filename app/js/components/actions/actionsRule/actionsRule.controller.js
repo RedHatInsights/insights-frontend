@@ -235,9 +235,6 @@ function ActionsRuleCtrl(
         if (system) {
             $scope.showSystem(system);
         }
-
-        $location.replace();
-        $location.search('machine', null);
     };
 
     priv.initCtrl = function () {

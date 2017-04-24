@@ -6,7 +6,11 @@ const find = require('lodash/collection/find');
 /**
  * @ngInject
  */
-function actionsSelectCtrl($scope, gettextCatalog, MultiButtonService, FilterService) {
+function actionsSelectCtrl($scope,
+                           gettextCatalog,
+                           Events,
+                           MultiButtonService,
+                           FilterService) {
     $scope.options = [
         {
             id: 'all',
@@ -33,7 +37,7 @@ function actionsSelectCtrl($scope, gettextCatalog, MultiButtonService, FilterSer
         FilterService.doFilter();
     };
 
-    function read() {
+    function read () {
         $scope.selected = find($scope.options, {
             withActions: MultiButtonService.getState('inventoryWithActions'),
             withoutActions: MultiButtonService.getState('inventoryWithoutActions')
@@ -46,6 +50,12 @@ function actionsSelectCtrl($scope, gettextCatalog, MultiButtonService, FilterSer
     }
 
     read();
+
+    $scope.$on(Events.filters.reset, function () {
+        $scope.select(find($scope.options, (option) => {
+            return option.id === 'all';
+        }));
+    });
 }
 
 function actionsSelect() {

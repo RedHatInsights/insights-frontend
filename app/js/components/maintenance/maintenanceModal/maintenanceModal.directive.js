@@ -6,7 +6,6 @@ const find = require('lodash/collection/find');
 const indexBy = require('lodash/collection/indexBy');
 const map = require('lodash/collection/map');
 const flatten = require('lodash/array/flatten');
-const groupBy = require('lodash/collection/groupBy');
 const constant = require('lodash/utility/constant');
 
 const MODES = {
@@ -32,7 +31,8 @@ function maintenanceModalCtrl($scope,
                               ModalUtils,
                               $q,
                               DataUtils,
-                              newPlan) {
+                              newPlan,
+                              Subset) {
     $scope.MODES = MODES;
     $scope.tableEdit = true;
     $scope.newPlan = newPlan;
@@ -155,7 +155,7 @@ function maintenanceModalCtrl($scope,
 
             return MaintenanceService.plans.create({
                 name: $scope.newPlanAlias,
-                reports: toAdd
+                add: toAdd
             }).then(function (plan) {
                 $scope.selected.plan = plan;
                 return plan;
@@ -166,32 +166,25 @@ function maintenanceModalCtrl($scope,
     }
 
     function buildMultiTableParams () {
-        const promises = [];
         $scope.fixableSystems = $scope.systems.filter(function (system) {
-            if (system.report_count > 0) {
-                promises.push(System.getSystemReports(system.system_id));
-                return true;
-            } else {
-                return false;
-            }
+            return system.report_count > 0;
         });
 
-        const availableActions = $q.all(promises).then(function (responses) {
-            const reports = flatten(map(responses, 'data.reports'));
-            reports.forEach(report => DataUtils.readRule(report.rule)); // severityNum
-            const reportsByRuleId = groupBy(reports, 'rule_id');
+        const systemIds = map($scope.fixableSystems, 'system_id');
 
-            return Object.keys(reportsByRuleId).map(function (ruleId) {
-                const reports = reportsByRuleId[ruleId];
-                const rule = reports[0].rule;
-                return {
-                    id: ruleId,
-                    display: rule.description,
-                    mid: ruleId,
-                    rule: rule,
-                    done: false,
-                    reports: reports
-                };
+        // if this is ever used in Satellite it should send the real branch_id instead
+        // of null here
+        const availableActions = Subset.create(null, systemIds).then(function (res) {
+            return Subset.getRulesWithHits(res.data.hash).then(function (res) {
+                return map(res.data.resources, function (rule) {
+                    return {
+                        id: rule.rule_id,
+                        display: rule.description,
+                        mid: rule.rule_id,
+                        rule: rule,
+                        done: false
+                    };
+                });
             });
         });
 
@@ -210,9 +203,20 @@ function maintenanceModalCtrl($scope,
             },
 
             save: function (toAdd) {
+                // cartesian product of selected systems and rules
+                // the API is clever enough to filter out combinations with no reports
+                const add = flatten(map(toAdd, function (rule) {
+                    return map(systemIds, function (system_id) {
+                        return {
+                            system_id,
+                            rule_id: rule.rule.rule_id
+                        };
+                    });
+                }));
+
                 const payload = {
                     name: $scope.newPlanAlias,
-                    reports: map(flatten(map(toAdd, 'reports')), 'id')
+                    add
                 };
                 if (!$scope.newPlan && $scope.selected.plan) {
                     return MaintenanceService.plans.update(
@@ -279,7 +283,7 @@ function maintenanceModalCtrl($scope,
             return plan.name;
         }
 
-        return 'PLAN';
+        return gettextCatalog.getString('Unnamed plan');
     };
 
     MaintenanceService.plans.load(false);

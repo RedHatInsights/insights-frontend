@@ -6,7 +6,7 @@ var URI = require('urijs');
 /**
  * @ngInject
  */
-function Topic($http, $q, InsightsConfig, AccountService) {
+function Topic($http, $q, InsightsConfig, AccountService, Group) {
     var topicsUri = 'topics';
     var root = InsightsConfig.apiRoot;
 
@@ -18,6 +18,8 @@ function Topic($http, $q, InsightsConfig, AccountService) {
             if (angular.isDefined(limit)) {
                 uri.addSearch('limit', limit);
             }
+
+            uri.addSearch(Group.queryParam());
 
             return $http.get(uri.toString());
         },
@@ -31,6 +33,8 @@ function Topic($http, $q, InsightsConfig, AccountService) {
             if (product) {
                 uri.addSearch('product', product);
             }
+
+            uri.addSearch(Group.queryParam());
 
             return $http.get(uri.toString());
         },

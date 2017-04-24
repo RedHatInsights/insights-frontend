@@ -9,10 +9,10 @@
         th.sortable(ng-class="table.sorter.getSortClass('display')", ng-click="table.sorter.sort('display')")
           .sort-indicator(translate) Action
         th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.severityNum')", ng-click="table.sorter.sort('rule.severityNum')")
-          .sort-indicator(translate) Severity
+          .sort-indicator(translate) Total Risk
         th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.ansible')", ng-click="table.sorter.sort('rule.ansible')")
           .sort-indicator(translate) Ansible
-        th.sortable.text-center(ng-class="table.sorter.getSortClass('reports.length')", ng-click="table.sorter.sort('reports.length')")
+        th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.report_count')", ng-click="table.sorter.sort('rule.report_count')")
           .sort-indicator(translate) Systems
       tr(ng-show='edit')
         th.filter(colspan='5')
@@ -26,9 +26,9 @@
         td.overflow
           span.wrap {{action.display}}
         td.text-center
-          severity-icon(severity="action.rule.severity")
+          severity-icon(severity="action.rule.severity", type='severity', label='')
         td.status.text-center
           ansible-icon(value='action.rule.ansible')
         td.status.text-center
-          | {{action.reports.length}}
+          | {{action.rule.report_count}}
     tfoot(maintenance-table-footer)

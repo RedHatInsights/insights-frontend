@@ -1,18 +1,26 @@
 //platform-filter
-actions-breadcrumbs.actions-breadcrumbs.push-top-narrow(ng-hide='loading')
-section.gray(ng-hide='loading')
-  h2
-    .severity-icon.fa-small(ng-if='ruleDetails.severity', severity='ruleDetails.severity')
-    .pull-right
-      ansible-icon(value='ruleDetails.ansible')
-    | &nbsp;{{ruleDetails.description}}
-  p(ng-bind-html='ruleDetails.generic_html | trust_html')
-section
-  h1.page-title(translate, ng-if='ruleDetails.type !== "osp"') Impacted Systems ({{allSystems.length}})
-  h1.page-title(translate, ng-if='ruleDetails.type === "osp"') Impacted Deployments
-  .row
-    .col-sm-12
-      actions-rule-filters
+.row
+  .col-sm-12
+    actions-rule-filters
+
+
+.content-wrap(ng-hide='loading')
+  actions-breadcrumbs.actions-breadcrumbs.push-top(ng-hide='loading')
+
+  section.actions-rule-details.gray
+    h2
+      .pull-right(ng-if='config.isPlannerEnabled')
+        ansible-icon(value='ruleDetails.ansible')
+      | {{ruleDetails.description}}
+    p(ng-bind-html='ruleDetails.generic_html | trust_html')
+    all-severity-icons(rule='ruleDetails', ng-if='!loading')
+
+
+  section
+    .row
+      .col-sm-12.text-center-sm
+        h3(translate, ng-if='ruleDetails.type !== "osp"') {{allSystems.length}} Impacted Systems
+        h3(translate, ng-if='ruleDetails.type === "osp"') Impacted Deployments
 
   div(infinite-scroll='doScroll()', infinite-scroll-disabled='disableScroll()', infinite-scroll-immediate-check='false')
 
@@ -25,12 +33,12 @@ section
             ng-indeterminate='checkboxes.indeterminate',
             ng-model='checkboxes.checked',
             ng-change='checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
-          label(translate) &nbsp; Name
+          label(translate, ng-click="sort('system_type_id')") &nbsp; Type
         .col-sm-4
-          strong(translate) Host &nbsp;
+          strong(translate, ng-click="sort('toString')") Name &nbsp;
           span(ng-if='checkboxes.totalChecked') &nbsp;({{checkboxes.totalChecked}} Selected)
         .col-sm-4.text-right
-          strong(translate) Action Count
+          strong(translate, ng-click="sort('report_count')") Action Count
 
     // Show Create Playbook, Add to Plan if at least one system has been selected
     .row.row-short
@@ -88,6 +96,7 @@ section
             tbody
               tr(ng-click='checkboxes.rowClick($event, system.system_id)',
                  ng-mousedown='checkboxes.rowClick($event, system.system_id)',
+                 ng-class="{'stale': !system.isCheckingIn}",
                  ng-repeat='system in ruleSystems',
                  data-id="{{system.system_id}}")
                 td(style='width: 30px')
