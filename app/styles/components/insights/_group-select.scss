@@ -32,3 +32,16 @@
 		z-index: 1;
 	}
 }
+
+.group-select .dropdown + .add-group {
+  @include rem('margin-left', 8px);
+}
+
+.group-select .add-group {
+  @include opacity(.5);
+  @include transition(.2s);
+
+  &:hover {
+    @include opacity(1);
+  }
+}

@@ -1,6 +1,7 @@
 div(ng-show="getLoadingDetails()")
   .spinner
   span(translate) Loading Reports…
+
 .row.chart-header(ng-hide="getLoadingDetails()")
   .col-xs-12
     h1.page-title {{getTitle() | translate | titlecase}}
@@ -9,36 +10,37 @@ div(ng-show="getLoadingDetails()")
   .col-xs-12
     actions-breadcrumbs.actions-breadcrumbs
 
-.row.row-short
+.row.row-short(ng-hide="getLoadingDetails()")
   .col-xs-12
     actions-filters
 
-.row.row-short(ng-init="predicate = 'severityNum'; reverse='true'")
-  .col-xs-12
-    #legend.legend
-      table#rha-actions-table.table.ng-table
-        thead
-          tr
-            th.sortable(ng-class="predicate | sortClass:'name':reverse", ng-click="predicate = 'name'; reverse=!reverse")
-              .sort-indicator
-                span.chart-icon
-                span(translate) Section
-            th.text-center.sortable(style="width: 30px", ng-class="predicate | sortClass:'severityNum':reverse", ng-click="predicate = 'severityNum'; reverse=!reverse", ng-hide="isActions()")
-              .sort-indicator(translate) Sev
-            th.text-center.sortable(width="80px", ng-class="predicate | sortClass:'value':reverse", ng-click="predicate = 'value'; reverse=!reverse")
-              .sort-indicator(translate) Count
-            th.text-center(style="width: 40;", ng-hide="isActions()")
-        tbody
-          tr.legend-item(ng-repeat="group in getData() | orderObjectBy:predicate:reverse", ng-class="{active: group.id === getRule()}")
-            td(ng-click='arcClick(group)')
-              span.icon-circle(ng-style="{borderColor: group.color || 'inherit'}")
-              | {{group.name | translate}}
-            td.filter-on.text-center(ng-click='arcClick(group)', ng-hide="isActions()")
-              severity-icon(severity='group.severity')
-            td.text-center(ng-click='arcClick(group)') {{ group.value }}
-            td.view-toggle.text-center(ng-click='toggleRule(group)', ng-if="!isActions()")
-              a(ng-click='ackAction(group)', ng-hide="isSystemAlert(group)", translate)
-                span Hide
-.row.row-short
-  .col-xs-12
-    .actions-back
+.content-wrap
+  .row.row-short(ng-init="predicate = 'severityNum'; reverse='true'")
+    .col-xs-12
+      #legend.legend
+        table#rha-actions-table.table.ng-table
+          thead
+            tr
+              th.sortable(ng-class="predicate | sortClass:'name':reverse", ng-click="predicate = 'name'; reverse=!reverse")
+                .sort-indicator
+                  span.chart-icon
+                  span(translate) Section
+              th.text-center.sortable(style="width: 30px", ng-class="predicate | sortClass:'severityNum':reverse", ng-click="predicate = 'severityNum'; reverse=!reverse", ng-hide="isActions()")
+                .sort-indicator(translate) Sev
+              th.text-center.sortable(width="80px", ng-class="predicate | sortClass:'value':reverse", ng-click="predicate = 'value'; reverse=!reverse")
+                .sort-indicator(translate) Count
+              th.text-center(style="width: 40;", ng-hide="isActions()")
+          tbody
+            tr.legend-item(ng-repeat="group in getData() | orderObjectBy:predicate:reverse", ng-class="{active: group.id === getRule()}")
+              td(ng-click='arcClick(group)')
+                span.icon-circle(ng-style="{borderColor: group.color || 'inherit'}")
+                | {{group.name | translate}}
+              td.filter-on.text-center(ng-click='arcClick(group)', ng-hide="isActions()")
+                severity-icon(severity='group.severity')
+              td.text-center(ng-click='arcClick(group)') {{ group.value }}
+              td.view-toggle.text-center(ng-click='toggleRule(group)', ng-if="!isActions()")
+                a(ng-click='ackAction(group)', ng-hide="isSystemAlert(group)", translate)
+                  span Hide
+  .row.row-short
+    .col-xs-12
+      .actions-back

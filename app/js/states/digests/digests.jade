@@ -1,95 +1,94 @@
-.digests-page.wrapper
+.digests-page
   .page-header(ng-class="{'inactive': !expandBar, 'active': expandBar}")
     h1.page-title
       i.fa.fa-bar-chart &nbsp;
       span(translate) Executive Report
-  section
-    .row
-      .col-sm-3
-        h2.section-title(translate) Overall score
-        .gauge.gauge-circle.score.score_good
-          span {{latest_score}}
-      .col-sm-9
-        h2.section-title(translate) Weekly action count by category
-        .row.padding-top
-          .col-xs-6.col-md-3(ng-repeat='cat in digest_hits_per_cat')
-            .gauge.gauge-count-and-change
-              .count-and-change
-                .count.large.bold {{cat.current}}
-                .change
-                  i.fa.fa-caret-up.increase(ng-if='cat.direction > 0')
-                  i.fa.fa-caret-down.decrease(ng-if='cat.direction < 0')
-                  i.fa.fa-minus.no-change(ng-if='cat.direction === 0')
-              .title
-                i.fa(aria-hidden="true" ng-class='cat.icon')
-                strong.uppercase &nbsp;{{cat.label}}
+  .content-wrap
+    section
+      .row
+        .col-sm-3
+          h2.section-title(translate) Overall score
+          .gauge.gauge-circle.score.score_good
+            span {{latest_score}}
+        .col-sm-9
+          h2.section-title(translate) Weekly action count by category
+          .row.padding-top
+            .col-xs-6.col-md-3(ng-repeat='cat in digest_hits_per_cat')
+              .gauge.gauge-count-and-change
+                .count-and-change
+                  .count.large.bold {{cat.current}}
+                  .change
+                    i.fa.fa-caret-up.increase(ng-if='cat.direction > 0')
+                    i.fa.fa-caret-down.decrease(ng-if='cat.direction < 0')
+                    i.fa.fa-minus.no-change(ng-if='cat.direction === 0')
+                .title
+                  i.fa(aria-hidden="true" ng-class='cat.icon')
+                  strong.uppercase &nbsp;{{cat.label}}
 
-  section.gray.full-width
-    ul.nav.nav-tabs-simple.underline(role='tablist')
-      li.active(role='presentation')
-        a(href='#metrics', aria-controls='metrics', role='tab', data-toggle='tab', translate) Action trends
-      li(role='presentation')
-        a(href='#systemsRegistered', aria-controls='systemsRegistered', role='tab', data-toggle='tab', translate) System registration history
-      li(role='presentation')
-        a(href='#scoreHistory', aria-controls='messages', role='tab', data-toggle='tab', translate) Score history
-      li(role='presentation')
-        a(href='#allRuleHits', aria-controls='allRules', role='tab' data-toggle='tab', translate) All Rule hits
+    section.gray.full-width
+      ul.nav.nav-tabs-simple.underline(role='tablist')
+        li.active(role='presentation')
+          a(href='#metrics', aria-controls='metrics', role='tab', data-toggle='tab', translate) Action trends
+        li(role='presentation')
+          a(href='#systemsRegistered', aria-controls='systemsRegistered', role='tab', data-toggle='tab', translate) System registration history
+        li(role='presentation')
+          a(href='#scoreHistory', aria-controls='messages', role='tab', data-toggle='tab', translate) Score history
+        li(role='presentation')
+          a(href='#allRuleHits', aria-controls='allRules', role='tab' data-toggle='tab', translate) All Rule hits
 
-    // Tab panes
-    .tab-content
-      #metrics.metrics.tab-pane.fade.in.active(role='tabpanel')
-        digest-graph(drop-down='Category', digest-key='metrics', digest='digest_metrics' height='400' ng-if="!loading")
-      #systemsRegistered.tab-pane.fade(role='tabpanel')
-        digest-graph(digest-key='registered', digest='digest_registered' height='400' ng-if="!loading")
-      #scoreHistory.tab-pane.fade(role='tabpanel')
-        digest-graph(digest-key='score', digest='digest_score' height='400' ng-if="!loading")
-      #allRuleHits.tab-pane.fade(role='tabpanel' ng-if="!loading")
-        //- inline style... remove this later
-        table(style='background-color: #fff')
-          thead
-            tr
-              th(translate) Rule
-              th(translate) Impacted Systems
-              th(translate) Total Risk
-          tbody
-            tr(ng-repeat='rule in allRuleHits')
-              td
-                a(ui-sref="app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})") {{ rule.description }}
-              td {{rule.report_count}}
-              td
-                severity-icon(severity='rule.severity', type='severity', label='')
+      // Tab panes
+      .tab-content
+        #metrics.metrics.tab-pane.fade.in.active(role='tabpanel')
+          digest-graph(drop-down='Category', digest-key='metrics', digest='digest_metrics' height='400' ng-if="!loading")
+        #systemsRegistered.tab-pane.fade(role='tabpanel')
+          digest-graph(digest-key='registered', digest='digest_registered' height='400' ng-if="!loading")
+        #scoreHistory.tab-pane.fade(role='tabpanel')
+          digest-graph(digest-key='score', digest='digest_score' height='400' ng-if="!loading")
+        #allRuleHits.tab-pane.fade(role='tabpanel' ng-if="!loading")
+          //- inline style... remove this later
+          table(style='background-color: #fff')
+            thead
+              tr
+                th(translate) Rule
+                th(translate) Impacted Systems
+                th(translate) Total Risk
+            tbody
+              tr(ng-repeat='rule in allRuleHits')
+                td
+                  a(ui-sref="app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})") {{ rule.description }}
+                td {{rule.report_count}}
+                td
+                  severity-icon(severity='rule.severity', type='severity', label='')
 
+    section
+      .row
+        .col-md-6
+          h2.section-title(translate) Ten Most Impacted Systems
+          //with hostname, registered date, and score
+          table.table-break
+            thead
+              tr
+                th.hostname(translate) Hostname
+                th(translate) Hits
+            tbody
+              tr(ng-repeat='system in topTenWorstSystems')
+                td.hostname
+                  a(ng-click='showSystem(system)') {{ system | getSystemDisplayName }}
+                td {{ system.report_count }}
 
-
-  section
-    .row
-      .col-md-6
-        h2.section-title(translate) Ten Most Impacted Systems
-        //with hostname, registered date, and score
-        table.table-break
-          thead
-            tr
-              th.hostname(translate) Hostname
-              th(translate) Hits
-          tbody
-            tr(ng-repeat='system in topTenWorstSystems')
-              td.hostname
-                a(ng-click='showSystem(system)') {{ system.hostname }}
-              td {{ system.report_count }}
-
-      .col-md-6
-        h2.section-title Ten Most Frequently Hit Rules
-        // grouped by criticality, sub grouped by count
-        table
-          thead
-            tr
-              th(translate) Rule
-              th(translate) Impacted Systems
-              th(translate) Total Risk
-          tbody
-            tr(ng-repeat='rule in topTenRules')
-              td
-                a(ui-sref="app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})") {{ rule.description }}
-              td {{rule.impacted_systems}}
-              td
-                severity-icon(severity='rule.severity', type='severity', label='')
+        .col-md-6
+          h2.section-title Ten Most Frequently Hit Rules
+          // grouped by criticality, sub grouped by count
+          table
+            thead
+              tr
+                th(translate) Rule
+                th(translate) Impacted Systems
+                th(translate) Total Risk
+            tbody
+              tr(ng-repeat='rule in topTenRules')
+                td
+                  a(ui-sref="app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})") {{ rule.description }}
+                td {{rule.impacted_systems}}
+                td
+                  severity-icon(severity='rule.severity', type='severity', label='')
