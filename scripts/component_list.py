@@ -68,7 +68,7 @@ def parseJs(path):
                 component = re.sub('(?=[A-Z])', '-', component).lower()
 
                 # add to the seen_components dict
-                seen_components[component] = {'occurs': 0, 'in_files': []}
+                seen_components[component] = {'occurs': 0, 'src': path, 'in_files': []}
 
 def recurseDown(filepath, func):
     for f in os.listdir(filepath):
@@ -94,8 +94,7 @@ recurseDown(toplvl, jadeHandler)
 
 for comp in sorted(seen_components.keys()):
     occurs = seen_components[comp]['occurs']
-    print(comp.ljust(32) + ': {0} occurrence{1}'.format(
-        occurs,
-        '' if occurs == 1 else 's'))
+    jsFile = seen_components[comp]['src'].replace(toplvl, '')
+    print('{0}: {1} occurrence{2} ({3})'.format(comp.ljust(32), occurs, '' if occurs == 1 else 's', jsFile))
     for f in seen_components[comp]['in_files']:
         print(''.ljust(34) + '\t' + f)
