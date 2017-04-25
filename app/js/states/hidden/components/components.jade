@@ -5,7 +5,7 @@
   region
     // apply '.collapse.in' to show section on page load
     #ui-filters.ui-filters.collpase.in
-      section#topics
+      //section#topics
         label.title
           span Topic with buttons
           i.fa.fa-caret-square-o-down(aria-hidden="true",
@@ -129,75 +129,76 @@
 
   br
   br
-  section.section-flex-grid
-    h2 Brand new FLEX BOX MODEL layout with equal height layout
-    h3.section-title.red 2 column grid set on the flex-grid container
-    .flexgrid.equalheights
-      .row
-        .col-sm-2
-          .content.gray
-            p testing the content
-        .col-sm-2
-          .content.gray
-            p testing the content
-            p and again
+  .content-wrap
+    section.section-flex-grid
+      h2 Brand new FLEX BOX MODEL layout with equal height layout
+      h3.section-title.red 2 column grid set on the flex-grid container
+      .flexgrid.equalheights
+        .row
+          .col-sm-2
+            .content.gray
+              p testing the content
+          .col-sm-2
+            .content.gray
+              p testing the content
+              p and again
 
-      pre.code-block.code-terminal
-        code.code
-          | .flexgrid.equalheights
-          |   .row
-          |     .col-sm-2
-          |       .content
-          |         p testing the content
-      .row
-        .col-sm-6
-          .content.gray
-            p testing the content
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-            p and again
-            p and again
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-            p and again
-            p and again
-            p and again
-            p and again
-            p and again
-            p and again
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-            p and again
-            p and again
+        pre.code-block.code-terminal
+          code.code
+            | .flexgrid.equalheights
+            |   .row
+            |     .col-sm-2
+            |       .content
+            |         p testing the content
+        .row
+          .col-sm-6
+            .content.gray
+              p testing the content
+          .col-sm-6
+            .content.gray
+              p testing the content
+              p and again
+          .col-sm-6
+            .content.gray
+              p testing the content
+              p and again
+          .col-sm-6
+            .content.gray
+              p testing the content
+              p and again
+              p and again
+              p and again
+          .col-sm-6
+            .content.gray
+              p testing the content
+              p and again
+              p and again
+              p and again
+              p and again
+              p and again
+              p and again
+              p and again
+          .col-sm-6
+            .content.gray
+              p testing the content
+              p and again
+              p and again
+              p and again
 
-  section
-    h2 Regular Card
-    card
-      card-header
-        | Some header HTML
-      card-content
-        | Some content HTML
-      card-footer
+    section
+      h2 Regular Card
+      card
+        card-header
+          | Some header HTML
+        card-content
+          | Some content HTML
+        card-footer
 
-  section
-    h2 Expandable Card
-    card(expandable=true)
-      card-header
-        | Some header HTML
-      card-content
-        | Some content HTML
-      card-footer
+    section
+      h2 Expandable Card
+      card(expandable=true)
+        card-header
+          | Some header HTML
+        card-content
+          | Some content HTML
+        card-footer
