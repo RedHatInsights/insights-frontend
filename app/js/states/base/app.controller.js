@@ -2,7 +2,9 @@
 
 var statesModule = require('../');
 
-// @ngInject
+/**
+ * @ngInject
+ */
 function AppCtrl($scope, $rootScope, User, PermissionService) {
     User.asyncCurrent(function (user) {
         $rootScope.isContentManager =
@@ -15,8 +17,7 @@ function AppCtrl($scope, $rootScope, User, PermissionService) {
             window.jQuery('html').toggleClass('fullscreen');
         }
     };
-
-
+    
     $scope.collapseExpand = function () {
         $scope.isNavCollapsed = true;
         $scope.isCollapsed = false;
