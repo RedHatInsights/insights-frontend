@@ -11,12 +11,8 @@ button {
 
 .btn,
 button {
-<<<<<<< HEAD
   span + i,
   i + span {
-=======
-  span + i {
->>>>>>> Adding existing selection removal buttons
     @include rem('margin-left', 6px);
   }
 }
