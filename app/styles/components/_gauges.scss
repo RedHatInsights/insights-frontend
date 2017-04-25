@@ -11,6 +11,22 @@
   border: 10px solid #006CBE;
 }
 
+.gauge.gauge-circle.score {
+  /* colored the same as severity levels */
+  &.score_lvl4 {
+      border-color: #94D400;
+  }
+  &.score_lvl3 {
+      border-color: #DEC800;
+  }
+  &.score_lvl2 {
+      border-color: #F39800;
+  }
+  &.score_lvl1 {
+      border-color: #CC0000;
+  }
+}
+
 .gauge.gauge-count-and-change {
   height: auto;
 

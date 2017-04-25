@@ -135,6 +135,14 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
 
         $scope.latest_score = takeRight(digestBase.scores, 1)[0];
 
+        // max score is 850, min is 250.  Levels calculated by
+        //  separating the 600 range into 4 segments and dividing
+        //  score by segment length (150)
+        const level = Math.ceil(($scope.latest_score - 250) / 150) || 1;
+        const scoreDiv = angular.element(
+            document.querySelector('.gauge.gauge-circle.score'));
+        scoreDiv.addClass('score_lvl' + level);
+
         // current counts by category
         $scope.digest_hits_per_cat = [
             getHitsPerCat('Security', digestBase.security, 'fa-shield'),
