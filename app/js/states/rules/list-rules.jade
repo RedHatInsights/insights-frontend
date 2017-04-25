@@ -34,7 +34,7 @@ section
                   .gray(ng-bind-html='::rule.summary_html | trust_html', target-blank='')
                   .link-pinned.gray.top
                     //- a.btn.btn-sm(target='_blank', href='{{rule.viewUri}}') View KCS article
-                    a(ng-if='rule.node_id', href='{{rule.article}}', target='_blank') Knowledgebase
+                    a(ng-if='rule.article', href='{{rule.article}}', target='_blank') Knowledgebase
 
                 .footer.footer-short(ng-if="canIgnoreRules")
                   .row
