@@ -2,9 +2,7 @@
 
 var statesModule = require('../');
 
-/**
- * @ngInject
- */
+// @ngInject
 function AppCtrl($scope, $rootScope, User, PermissionService) {
     User.asyncCurrent(function (user) {
         $rootScope.isContentManager =
