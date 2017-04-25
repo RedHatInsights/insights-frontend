@@ -10,20 +10,21 @@ function ActionsCtrl(
     $scope,
     $stateParams,
     $state,
+    ActionbarService,
     ActionsBreadcrumbs,
+    Categories,
+    Export,
     FilterService,
     InsightsConfig,
     InventoryService,
     PreferenceService,
     QuickFilters,
     RhaTelemetryActionsService,
+    Stats,
     System,
     SystemsService,
     TopicService,
-    Utils,
-    Stats,
-    ActionbarService,
-    Export) {
+    Utils) {
 
     const params = $state.params;
     $scope.stats = {};
@@ -91,6 +92,7 @@ function ActionsCtrl(
             product: product
         }).then(function (res) {
             $scope.stats.rules = res.data;
+            setCategoryTopics(res.data);
         });
 
         Stats.getSystems({
@@ -98,6 +100,24 @@ function ActionsCtrl(
             minSeverity: 'CRITICAL'
         }).then(function (res) {
             $scope.stats.systems = res.data;
+        });
+    }
+
+    /**
+     * adds non-empty categories  to $scope.categoryTopics
+     */
+    function setCategoryTopics(rules) {
+        let categoryCount;
+        $scope.categoryTopics = [];
+
+        Categories.forEach((category) => {
+            categoryCount = rules[category];
+            if (categoryCount !== undefined && categoryCount > 0 && category !== 'all') {
+                $scope.categoryTopics.push({
+                    id:    category,
+                    count: categoryCount
+                });
+            }
         });
     }
 

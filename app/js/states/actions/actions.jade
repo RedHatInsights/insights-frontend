@@ -15,31 +15,21 @@
                   .text(translate) Issues
               .rha-telemetry-donut(stats='stats')
           .row
-            .col-md-10.col-md-offset-1
+            .col-lg-10.col-lg-offset-1
               table.legend
                 tbody
                   tr
-                    td
-                      a.security(ui-sref="app.topic({id: 'security', product: getSelectedProduct()})")
-                        i.fa.fa-square.inline-right.security-color(aria-hidden="true")
-                        span.desc(translate) Security
-                        span.count &nbsp;({{stats.rules.security || 0}})
-                    td
-                      a.availability(ui-sref="app.topic({id: 'availability', product: getSelectedProduct()})")
-                        i.fa.fa-square.inline-right.availability-color(aria-hidden="true")
-                        span.desc(translate) Availability
-                        span.count &nbsp;({{stats.rules.availability || 0}})
-                  tr
-                    td
-                      a.stability(ui-sref="app.topic({id: 'stability', product: getSelectedProduct()})")
-                        i.fa.fa-square.inline-right.stability-color(aria-hidden="true")
-                        span.desc(translate) Stability
-                        span.count &nbsp;({{stats.rules.stability || 0}})
-                    td
-                      a.performance(ui-sref="app.topic({id: 'performance', product: getSelectedProduct()})")
-                        i.fa.fa-square.inline-right.performance-color(aria-hidden="true")
-                        span.desc(translate) Performance
-                        span.count &nbsp;({{stats.rules.performance || 0}})
+                    td(ng-repeat='category in categoryTopics.slice(0,(categoryTopics.length > 3 ? 2 : categoryTopics.length))')
+                      a(ng-class='category.id', ui-sref="app.topic({id: category.id, product: getSelectedProduct()})")
+                        i.fa.fa-square.inline-right(ng-class="category.id + '-color'", aria-hidden="true")
+                        span.desc(translate) {{category.id | titlecase}}
+                        span.count &nbsp;({{category.count}})
+                  tr(ng-if='categoryTopics.length > 3')
+                    td(ng-repeat='category in categoryTopics.slice(2,categoryTopics.length)')
+                      a(ng-class='category.id', ui-sref="app.topic({id: category.id, product: getSelectedProduct()})")
+                        i.fa.fa-square.inline-right(ng-class="category.id + '-color'", aria-hidden="true")
+                        span.desc(translate) {{category.id | titlecase}}
+                        span.count &nbsp;({{category.count}})
         .col-md-5
           card
             card-header.gray
