@@ -20,7 +20,8 @@ function ConfigDevCtrl($scope, User, InsightsConfig) {
         },
         apiVersions: [
             'v1',
-            'v2'
+            'v2',
+            'v3'
         ],
         entitlements: {
             paid: {

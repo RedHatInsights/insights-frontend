@@ -116,8 +116,7 @@ function Maintenance(
 
     api.generatePlaybook = function (planId, data) {
         data = data || {};
-        const v3root = InsightsConfig.apiPrefix + 'v3/';
-        const url = URI(v3root);
+        const url = URI(root);
         url.segment('maintenance');
         url.segment(String(planId));
         url.segment('playbook');

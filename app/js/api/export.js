@@ -7,11 +7,10 @@ const URI = require('urijs');
 * @ngInject
 */
 function Export($http, InsightsConfig, AccountService, $window) {
-    const v3root = `${InsightsConfig.apiPrefix}v3/exports`;
 
     return {
         getReports: function (topic, rule, group, stale) {
-            const uri = URI(v3root);
+            const uri = URI(InsightsConfig.apiRoot);
             uri.segment('reports');
 
             if (topic) {
@@ -35,7 +34,7 @@ function Export($http, InsightsConfig, AccountService, $window) {
         },
 
         getSystems: function (group, stale, search) {
-            const uri = URI(v3root);
+            const uri = URI(InsightsConfig.apiRoot);
             uri.segment('systems');
 
             if (group) {

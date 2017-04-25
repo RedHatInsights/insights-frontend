@@ -36,19 +36,22 @@ function EditTopicCtrl(
     });
 
     $scope.severities = [{
-        id: 'ERROR',
+        id: 'CRITICAL',
         label: 'Critical'
     }, {
+        id: 'ERROR',
+        label: 'High'
+    }, {
         id: 'WARN',
-        label: 'Warning'
+        label: 'Medium'
     }, {
         id: 'INFO',
-        label: 'Info'
+        label: 'Low'
     }];
 
     $scope.severities.unshift({
         id: null,
-        label: 'Any severity'
+        label: 'Any Risk'
     });
 
     $scope.error = {};
