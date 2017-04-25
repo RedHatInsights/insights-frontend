@@ -21,6 +21,12 @@
 .row + .row, .row.row-tall { @include rem('margin-top', $global-margin); }
 .row.row-short { @include rem('margin-top', $global-padding); }
 .row.offset { @include rem('margin-left', 40px); }
+.row-sep {
+  @include rem('margin-top', 15px);
+  @include rem('margin-bottom', 15px);
+  height: 1px;
+  background: #d9d9d9;
+}
 
 input.rounded {
 	border: 4px solid #ebeef0;
