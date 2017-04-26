@@ -7,7 +7,7 @@ const parseHeader = require('parse-http-header');
 const each = require('lodash/forEach');
 const some = require('lodash/some');
 const constant = require('lodash/constant');
-const uniq = require('lodash/uniq');
+const uniqBy = require('lodash/uniqBy');
 
 /**
  * @ngInject
@@ -115,7 +115,7 @@ function MaintenancePlaybook($modalInstance,
     function setRulesWithPlays () {
 
         // first, deduplicate rule_id/system_type_id combinations
-        let uniqueActions = uniq($scope.plan.actions, false, function (action) {
+        let uniqueActions = uniqBy($scope.plan.actions, function (action) {
             return `${action.rule.rule_id}:${action.system.system_type_id}`;
         });
 
