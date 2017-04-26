@@ -347,12 +347,9 @@ function maintenancePlanCtrl(
     };
 
     $scope.groupFilter = function (groups) {
-        return sortBy(groups, function (group) {
-
-            // prefix is used so that current groups is first always
-            const prefix = (group.name.startsWith(CURRENT_GROUP_PREFIX)) ? 0 : 1;
-            return `${prefix}-${group.name}`;
-        });
+        return sortBy(groups, [function (group) {
+            return !group.name.startsWith(CURRENT_GROUP_PREFIX);
+        }, 'name']);
     };
 
     function checkAnsibleSupport () {

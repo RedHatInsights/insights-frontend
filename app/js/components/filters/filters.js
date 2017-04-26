@@ -7,6 +7,7 @@ var isEmpty = require('lodash/isEmpty');
 var isArray = require('lodash/isArray');
 var moment = require('moment-timezone');
 var map = require('lodash/map');
+const overSome = require('lodash/overSome');
 
 /**
  * @ngInject
@@ -176,12 +177,9 @@ function searchMaintenancePlans($filter) {
             matchesAny('rules', 'rule_id')
         ];
 
-        return plans.filter(function (plan) {
-            // TODO: replace with overSome once we have lodash 4 available
-            return predicates.some(function (predicate) {
-                return predicate(plan);
-            });
-        });
+        const someMatches = overSome(predicates);
+
+        return plans.filter(someMatches);
     };
 }
 
