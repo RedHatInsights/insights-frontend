@@ -2,20 +2,9 @@
   .row
     .col-sm-12.block-lg(ng-if="loadingSystemLimit")
       .spinner.spinner-lg
-
-  // Delete this row when done testing
-  .row
-    .col-sm-12
-      a(ng-init="case1=false", ng-click="case1 = !case1") Case 1
-      a(ng-init="case2=true", ng-click="case2 = !case2") Case 2
-
   .goals-lite
-    // ----------------------------
-    // If systems are registered
-    // ----------------------------
     .info-box
-      // Remove 'case1 &&' when done styling
-      .row(ng-if="case1 && !loadingSystemLimit")
+      .row(ng-if="systemCount > 0 && !loadingSystemLimit")
         .col-sm-12.block-lg
           goals-gauge(ng-init="buildGauge({getGaugeMax: getMaxFreeSystems, getGaugeNumber: getSystemCount})")
           .info
@@ -23,7 +12,7 @@
             .free(ng-if="!systemLimitReached")
               span(translate) {{maxFreeSystems - systemCount}} more Insights entitlements available&nbsp;
               br
-              span Your entitlement will expire on {{expiration}}
+              span Your evaluation will expire on {{expiration}}
             .free.full(ng-if="systemLimitReached")
               span(translate) Congratulations! You have registered all available systems.
         .col.sm-6.block-md(ng-if="actionsLoading")
@@ -53,12 +42,7 @@
           .check.circle
             i.fa.fa-check
           h4(translate) You have no high severity stability errors
-
-    // ----------------------------
-    // If no systems are registered
-    // ----------------------------
-    // Remove 'case2' when done styling; add appropriate ng-if
-    .row(ng-if="case2")
+    .row(ng-if="systemCount === 0")
       .col-sm-12.text-center
         h3 You have no systems registered. Take full advantage of Red Hat Insights by&nbsp;
           // need to make this link clickable
