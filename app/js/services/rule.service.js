@@ -3,7 +3,7 @@
 var servicesModule = require('./');
 
 var groupBy = require('lodash/groupBy');
-var _max = require('lodash/max');
+var maxBy = require('lodash/maxBy');
 var sumBy = require('lodash/sumBy');
 var every = require('lodash/every');
 var uniq = require('lodash/uniq');
@@ -75,7 +75,7 @@ function RuleService ($filter) {
                 result.type = 'group';
             }
 
-            result.severityNum = _max(result.rules, 'severityNum').severityNum;
+            result.severityNum = maxBy(result.rules, 'severityNum').severityNum;
 
             result.categories = uniq(map(result.rules, 'category'));
 
