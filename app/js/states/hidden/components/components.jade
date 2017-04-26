@@ -2,75 +2,203 @@
   .page-header
     h1.page-title Components Library
 
-  section.section-flex-grid
-    h2 Brand new FLEX BOX MODEL layout with equal height layout
-    h3.section-title.red 2 column grid set on the flex-grid container
-    .flexgrid.equalheights
-      .row
-        .col-sm-2
-          .content.gray
-            p testing the content
-        .col-sm-2
-          .content.gray
-            p testing the content
-            p and again
+  region
+    // apply '.collapse.in' to show section on page load
+    #ui-filters.ui-filters.collpase.in
+      //section#topics
+        label.title
+          span Topic with buttons
+          i.fa.fa-caret-square-o-down(aria-hidden="true",
+            data-toggle='collapse', href='#section-collapse', aria-expanded='false', aria-controls='#section-collapse')
+        // need to namespace the sections
+        // apply '.collapse.in' to show section on page load
+        #section-collapse.collapse.in
+          .row
+            .col-sm-12
+              button.btn.btn-filter.btn-soft.btn-large(href="#", ng-class="{'active' : active1}", ng-click="active1 = !active1")
+                i.fa.fa-bookmark(aria-hidden="true")
+                span Network Bonding
+              button.btn.btn-filter.btn-soft.btn-large(href="#", ng-class="{'active' : active2}", ng-click="active2 = !active2")
+                i.fa.fa-bookmark(aria-hidden="true")
+                span Configuring kdump
+              // Add .active to the button on click
+              button.btn.btn-filter.btn-soft.btn-large(href="#", ng-class="{'active' : active3}", ng-click="active3 = !active3")
+                i.fa.fa-bookmark(aria-hidden="true")
+                span High Severity OpenSSL Issues
 
-      pre.code-block.code-terminal
-        code.code
-          | .flexgrid.equalheights
-          |   .row
-          |     .col-sm-2
-          |       .content
-          |         p testing the content
-      .row
-        .col-sm-6
-          .content.gray
-            p testing the content
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-            p and again
-            p and again
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-            p and again
-            p and again
-            p and again
-            p and again
-            p and again
-            p and again
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-            p and again
-            p and again
 
-  section
-    h2 Regular Card
-    card
-      card-header
-        | Some header HTML
-      card-content
-        | Some content HTML
-      card-footer
+      section
+        .row
+          .col-md-6
+            label(translate) System type
+            .option-group.flexbox
+              .row
+                .col-md-6
+                  label(translate)
+                    input(type="checkbox")
+                    span RHEL Server
 
-  section
-    h2 Expandable Card
-    card(expandable=true)
-      card-header
-        | Some header HTML
-      card-content
-        | Some content HTML
-      card-footer
+                .col-md-6
+                  label(translate)
+                    input(type="checkbox")
+                    span Container
+
+                .col-md-6
+                  label(translate)
+                    input(type="checkbox")
+                    span Container Host
+
+                .col-md-6
+                  label(translate)
+                    input(type="checkbox")
+                    span Container Image
+          .col-md-6
+            label(translate) System type
+            .option-group.flexbox
+              .row
+                .col-md-6
+                  label(translate)
+                    input(type="checkbox")
+                    span RHEL Server
+
+                .col-md-6
+                  label(translate)
+                    input(type="checkbox")
+                    span Container
+
+                .col-md-6
+                  label(translate)
+                    input(type="checkbox")
+                    span Container Host
+
+                .col-md-6
+                  label(translate)
+                    input(type="checkbox")
+                    span Container Image
+        .row-sep
+        .row
+          .col-md-4
+            label(translate='translate') System type
+            .dropdown
+              button.btn.dropdown-toggle(
+              type='button',
+              data-toggle='dropdown',
+              aria-haspopup='true',
+              aria-expanded='false')
+                span.text(ng-show='!isGroupSelected() || disabled', translate) Group select
+                span.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(ng-click='triggerChange(null)', translate) All Systems
+                li(ng-repeat='g in groups | orderBy:"display_name" track by g.id')
+                  a(ng-click='triggerChange(g)')
+                    trimmed-text(length="35", text="{{g.display_name}}")
+          .col-md-4
+            label(translate='translate') Example of selections
+            .dropdown
+              button.btn.dropdown-toggle(
+              type='button',
+              data-toggle='dropdown',
+              aria-haspopup='true',
+              aria-expanded='false')
+                span.text(ng-show='!isGroupSelected() || disabled', translate) -- 3 selected
+                span.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(ng-click='triggerChange(null)', translate) All
+                li(ng-repeat='g in groups | orderBy:"display_name" track by g.id')
+                  a(ng-click='triggerChange(g)')
+                    trimmed-text(length="35", text="{{g.display_name}}") Option 1
+
+
+    // ng-if this
+    #ui-filters_active-filters.ui-filters__active-filters(ng-hide="removeFilter1 && removeFilter2")
+      button.btn-soft.btn-gray(ng-click="removeFilter1=true", ng-show="!removeFilter1")
+        span Systems filter
+        i.fa.fa-close
+      button.btn-soft.btn-gray(ng-click="removeFilter2=true", ng-show="!removeFilter2")
+        span Another type of filter
+        i.fa.fa-close
+
+    #ui-filters__control-bar.ui-filters__control-bar.collapsed(data-toggle='collapse', href='#ui-filters', aria-expanded='false', aria-controls='ui-filters')
+      a.toggle(role='button')
+        i.fa.fa-arrow-circle-down(aria-hidden="true")
+
+
+  br
+  br
+  .content-wrap
+    section.section-flex-grid
+      h2 Brand new FLEX BOX MODEL layout with equal height layout
+      h3.section-title.red 2 column grid set on the flex-grid container
+      .flexgrid.equalheights
+        .row
+          .col-sm-2
+            .content.gray
+              p testing the content
+          .col-sm-2
+            .content.gray
+              p testing the content
+              p and again
+
+        pre.code-block.code-terminal
+          code.code
+            | .flexgrid.equalheights
+            |   .row
+            |     .col-sm-2
+            |       .content
+            |         p testing the content
+        .row
+          .col-sm-6
+            .content.gray
+              p testing the content
+          .col-sm-6
+            .content.gray
+              p testing the content
+              p and again
+          .col-sm-6
+            .content.gray
+              p testing the content
+              p and again
+          .col-sm-6
+            .content.gray
+              p testing the content
+              p and again
+              p and again
+              p and again
+          .col-sm-6
+            .content.gray
+              p testing the content
+              p and again
+              p and again
+              p and again
+              p and again
+              p and again
+              p and again
+              p and again
+          .col-sm-6
+            .content.gray
+              p testing the content
+              p and again
+              p and again
+              p and again
+
+    section
+      h2 Regular Card
+      card
+        card-header
+          | Some header HTML
+        card-content
+          | Some content HTML
+        card-footer
+
+    section
+      h2 Expandable Card
+      card(expandable=true)
+        card-header
+          | Some header HTML
+        card-content
+          | Some content HTML
+        card-footer
