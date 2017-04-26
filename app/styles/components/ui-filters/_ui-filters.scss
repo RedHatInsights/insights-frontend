@@ -13,19 +13,6 @@ $ui-filters-background: #F9F9F9;
 }
 
 
-// xxxxxxxxxxxxxxxxxxxxxxxx
-// Temp, remove after .content-wrap is merged
-.ui-filters {
-
-  &:after {
-    content: '';
-    clear: all;
-  }
-}
-// xxxxxxxxxxxxxxxxxxxxxxxx
-
-
-
 // UI filter styling
 // ------------------------
 .ui-filters {
@@ -45,10 +32,15 @@ $ui-filters-background: #F9F9F9;
   .btn + .btn {
     @include rem('margin-left', $global-padding);
   }
+
+  [class^="col-"],
+  div[class*=" col-"] {
+
+  }
 }
 
 
-// UI filter helpers
+// UI filter layout
 // ------------------------
 .ui-filters {
   section {  }
@@ -56,6 +48,15 @@ $ui-filters-background: #F9F9F9;
     @include rem('padding-top', $global-margin);
     border-top: 1px solid $gray;
   }
+
+  .filter-group + .filter-group {
+    @include media-query(md) {
+      border-left: 1px solid #d9d9d9;
+    }
+  }
+
+  label { font-weight: 100; }
+  label.label { font-weight: 700; }
 }
 
 

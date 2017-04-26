@@ -27,10 +27,11 @@
                 span High Severity OpenSSL Issues
 
 
-      section
+      section.flexgrid.equalheights
         .row
-          .col-md-6
-            label(translate) System type
+          .col-md-4.filter-group
+            label(translate)
+              strong System type
             .option-group.flexbox
               .row
                 .col-md-6
@@ -52,33 +53,75 @@
                   label(translate)
                     input(type="checkbox")
                     span Container Image
-          .col-md-6
-            label(translate) System type
+
+          .col-md-3.filter-group
+            label(translate)
+              strong Severity type
             .option-group.flexbox
               .row
                 .col-md-6
                   label(translate)
                     input(type="checkbox")
-                    span RHEL Server
+                    span Low
 
                 .col-md-6
                   label(translate)
                     input(type="checkbox")
-                    span Container
+                    span Medium
 
                 .col-md-6
                   label(translate)
                     input(type="checkbox")
-                    span Container Host
+                    span High
 
                 .col-md-6
                   label(translate)
                     input(type="checkbox")
-                    span Container Image
+                    span Critical
+
+          .col-md-3.filter-group
+            label(translate)
+              strong Severity type
+            .radio-group
+              .radio-inline
+                label(translate)
+                  input(type="radio", name="inlineRadioOptions", id="radio1", value="option1")
+                  span All
+
+              .radio-inline
+                label(translate)
+                  input(type="radio", name="inlineRadioOptions", id="radio2", value="option2")
+                  span Stale
+
+              .radio-inline
+                label(translate)
+                  input(type="radio", name="inlineRadioOptions", id="radio3", value="option3")
+                  span Checking in
+
         .row-sep
         .row
-          .col-md-4
-            label(translate='translate') System type
+          .col-md-4.filter-group
+            label(translate)
+              strong Severity type
+            .radio-group
+              .radio-inline
+                label(translate)
+                  input(type="radio", name="inlineRadioOptions", id="radio1", value="option1")
+                  span All
+
+              .radio-inline
+                label(translate)
+                  input(type="radio", name="inlineRadioOptions", id="radio2", value="option2")
+                  span Stale
+
+              .radio-inline
+                label(translate)
+                  input(type="radio", name="inlineRadioOptions", id="radio3", value="option3")
+                  span Checking in
+
+          .col-md-4.filter-group
+            label(translate='translate')
+              strong System type
             .dropdown
               button.btn.dropdown-toggle(
               type='button',
@@ -94,7 +137,7 @@
                 li(ng-repeat='g in groups | orderBy:"display_name" track by g.id')
                   a(ng-click='triggerChange(g)')
                     trimmed-text(length="35", text="{{g.display_name}}")
-          .col-md-4
+          .col-md-4.filter-group
             label(translate='translate') Example of selections
             .dropdown
               button.btn.dropdown-toggle(
