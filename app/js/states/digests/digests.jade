@@ -3,7 +3,17 @@
     h1.page-title
       i.fa.fa-bar-chart &nbsp;
       span(translate) Executive Report
-  .content-wrap
+  .content-wrap.margin-top(ng-show='loading')
+    .text-center
+      .spinner.spinner-lg
+  .content-wrap.margin-top(ng-show='!loading && systemsTilTen > 0')
+    .row
+      .col-sm-12.col-md-8.col-md-offset-2.text-center
+        h1(translate) Executive Reporting requires 10 or more systems to be registered with Insights.
+        h2(translate) Please register {{systemsTilTen}} more system
+          span(ng-if='systemsTilTen !== 1') s
+          | &nbsp;to enable reporting for your account.
+  .content-wrap.margin-top(ng-show='!loading && systemsTilTen < 1')
     section
       .row
         .col-sm-3
