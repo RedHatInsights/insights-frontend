@@ -5,7 +5,7 @@ const componentsModule = require('../../');
 const find = require('lodash/find');
 const indexBy = require('lodash/keyBy');
 const map = require('lodash/map');
-const flatten = require('lodash/flatten');
+const flatMap = require('lodash/flatMap');
 const constant = require('lodash/constant');
 
 const MODES = {
@@ -205,14 +205,14 @@ function maintenanceModalCtrl($scope,
             save: function (toAdd) {
                 // cartesian product of selected systems and rules
                 // the API is clever enough to filter out combinations with no reports
-                const add = flatten(map(toAdd, function (rule) {
+                const add = flatMap(toAdd, function (rule) {
                     return map(systemIds, function (system_id) {
                         return {
                             system_id,
                             rule_id: rule.rule.rule_id
                         };
                     });
-                }));
+                });
 
                 const payload = {
                     name: $scope.newPlanAlias,

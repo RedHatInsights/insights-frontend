@@ -3,7 +3,7 @@
 const servicesModule = require('./');
 const filter = require('lodash/filter');
 const map = require('lodash/map');
-const flatten = require('lodash/flatten');
+const flatMap = require('lodash/flatMap');
 const indexBy = require('lodash/keyBy');
 const reject = require('lodash/reject');
 const remove = require('lodash/remove');
@@ -55,7 +55,7 @@ function MaintenanceService(
                 (!plan.end || plan.end > now);
         });
 
-        return indexBy(reject(flatten(map(plans, 'actions')), 'done'),
+        return indexBy(reject(flatMap(plans, 'actions'), 'done'),
             'current_report.id');
     }
 
