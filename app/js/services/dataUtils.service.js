@@ -2,6 +2,8 @@
 'use strict';
 
 var servicesModule = require('./');
+const clone = require('lodash/clone');
+const some = require('lodash/some');
 
 function DataUtils(Utils, Severities) {
     var service = {};
@@ -61,13 +63,17 @@ function DataUtils(Utils, Severities) {
             service.readRule(action.rule);
         });
 
-        plan.rules = Utils.groupByObject(plan.actions, 'rule.id', 'rule', 'actions');
+        plan.rules = Utils.groupByObject(plan.actions, 'rule.id', 'rule', 'actions')
+            .map(clone);
         plan.systems = Utils.groupByObject(
             plan.actions, 'system.system_id', 'system', 'actions');
 
         countDone(plan);
         plan.systems.forEach(countDone);
         plan.rules.forEach(countDone);
+        plan.rules.forEach(function (rule) {
+            rule.ansible = some(rule.actions, 'rule.ansible');
+        });
 
         plan.start = readDate(plan.start);
         plan.end = readDate(plan.end);
