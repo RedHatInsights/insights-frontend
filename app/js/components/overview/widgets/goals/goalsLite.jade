@@ -23,7 +23,7 @@
           p(translate) Fix all of your
             br
             | {{securityErrors}} security issues
-          a.cta-link(translate, ui-sref="app.actions({category:'security', initialSeverity:'ERROR'})") View security issues
+          a.cta-link(translate, ui-sref="app.topic({id: 'security'})") View security issues
         .col-sm-6.block-md(ng-if="!securityErrors && !actionsLoading")
           .check.circle
             i.fa.fa-check
@@ -37,7 +37,7 @@
           p(translate) Fix all of your
             br
             | {{stabilityErrors}} stability issues
-          a.cta-link(translate, ui-sref="app.actions({category:'stability', initialSeverity:'ERROR'})") View stability issues
+          a.cta-link(translate, ui-sref="app.topic({id: 'stability'})") View stability issues
         .col-sm-6.block-md(ng-if="!stabilityErrors && !actionsLoading")
           .check.circle
             i.fa.fa-check
@@ -46,4 +46,4 @@
       .col-sm-12.text-center
         h3 You have no systems registered. Take full advantage of Red Hat Insights by&nbsp;
           // need to make this link clickable
-          a.link(translate, ui-sref="access.redhat.com/products/red-hat-insights#getstarted", target="_blank") registering systems.
+          a.link(translate, href="https://access.redhat.com/products/red-hat-insights#getstarted", target="_blank") registering systems.
