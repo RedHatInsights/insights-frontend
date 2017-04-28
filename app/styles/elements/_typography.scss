@@ -26,3 +26,7 @@ h2.headline {
 .blue {
   color: #31c7ff;
 }
+
+.large-text {
+  @include font-size(16px);
+}
