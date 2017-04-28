@@ -188,6 +188,7 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
         $scope.digest_score = justLineGraph(
             digestBase, 'scores', 'Score', '#3083FB');
 
+        $scope.systemsTilTen = 10 - sysres.data.resources.length;
         $scope.topTenWorstSystems = getTenWorst(sysres.data.resources);
         $scope.topTenRules = getTenWorst(ruleres.data.resources);
         $scope.allRuleHits = ruleAppendixSorting(ruleres.data.resources);
