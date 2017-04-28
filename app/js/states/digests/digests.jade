@@ -10,8 +10,8 @@
     .row
       .col-sm-12.col-md-8.col-md-offset-2.text-center
         h1(translate) Executive Reporting requires 10 or more systems to be registered with Insights.
-        h2(translate) Please register {{systemsTilTen}} more system
-          span(ng-if='systemsTilTen !== 1') s
+        h2(translate) Please register 
+          span(translate, translate-n='systemsTilTen', translate-plural='{{$count}} more systems') {{systemsTilTen}} more system
           | &nbsp;to enable reporting for your account.
   .content-wrap.margin-top(ng-show='!loading && systemsTilTen < 1')
     section
@@ -39,6 +39,15 @@
                 .title
                   i.fa(aria-hidden="true" ng-class='cat.icon')
                   strong.uppercase &nbsp;{{cat.label}}
+      .row
+        .col-sm-3
+        .col-sm-9
+          span.large-text(ng-show='!loading', translate)
+            i.fa.fa-check-circle.green(ng-if='resolvedIssues > 0')
+            i.fa.fa-exclamation-circle.red(ng-if='resolvedIssues === 0')
+            | &nbsp;You've resolved&nbsp;
+            strong(ng-class='{"green": resolvedIssues > 0, "red": resolvedIssues === 0}', translate, translate-n='resolvedIssues', translate-plural='{{$count}} issues') {{resolvedIssues}} issue
+            | &nbsp;in the past {{timePeriod()}} days.
 
     section.gray.full-width
       ul.nav.nav-tabs-simple.underline(role='tablist')
