@@ -14,7 +14,9 @@ function topicDetails ($rootScope) {
             topic: '='
         },
         link: function (scope) {
-            scope.isContentManager = $rootScope.isContentManager;
+            $rootScope.$watch('isContentManager', function (value) {
+                scope.isContentManager = value;
+            });
         }
     };
 }
