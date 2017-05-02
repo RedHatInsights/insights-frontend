@@ -7,6 +7,9 @@
         | ]
       h1.page-title
         span(translate) {{::topic.title}}
+        .fa.fa-eye-slash.inline-left.red(
+            tooltip='This topic is hidden. Only internal users can see it.'
+            ng-if='topic.hidden')
   .row(ng-if='topic.content_html')
     .col-sm-12
       .topic-content(ng-bind-html="topic.content_html")
