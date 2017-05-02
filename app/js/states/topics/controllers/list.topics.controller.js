@@ -26,6 +26,10 @@ function TopicRuleListCtrl(
     $scope.loading = true;
     $scope.QuickFilters = QuickFilters;
 
+    function notFound() {
+        $state.go('app.actions');
+    }
+
     function getData() {
         let product;
         if (FilterService.getSelectedProduct() !== 'all') {
@@ -33,6 +37,10 @@ function TopicRuleListCtrl(
         }
 
         Topic.get($stateParams.id, product).success(function (topic) {
+            if (topic.hidden && !$scope.isInternal) {
+                return notFound();
+            }
+
             $scope._topic = topic;
             topic.rules.forEach(DataUtils.readRule);
             ActionsBreadcrumbs.init($stateParams);
@@ -44,11 +52,15 @@ function TopicRuleListCtrl(
                 }
             });
             PermalinkService.scroll(null, 30);
-        }).error(function () {
-            $scope.errored = true;
-        }).then(function () {
+
             $scope.topic = $scope._topic;
             $scope.loading = false;
+        }).catch(function (res) {
+            if (res.status === 404) {
+                return notFound();
+            }
+
+            $scope.errored = true;
         });
     }
 
