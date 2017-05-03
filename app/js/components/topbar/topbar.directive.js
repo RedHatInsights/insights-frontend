@@ -2,12 +2,27 @@
 'use strict';
 
 var componentsModule = require('../');
+const includes = require('lodash/includes');
+
+// global filters are disabled in these states
+const DISABLED_STATES = [
+    'app.config',
+    'app.digests',
+    'app.rules'
+];
 
 /**
  * @ngInject
  */
-function TopbarCtrl($scope, InsightsConfig) {
+function TopbarCtrl($scope, InsightsConfig, $state) {
     $scope.isPortal = InsightsConfig.isPortal;
+
+    function checkState () {
+        $scope.disabled = includes(DISABLED_STATES, $state.current.name);
+    }
+
+    $scope.$on('$stateChangeSuccess', checkState);
+    checkState();
 }
 
 /**
