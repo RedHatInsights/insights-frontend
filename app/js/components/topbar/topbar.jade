@@ -23,3 +23,5 @@
             // if this is the Portal hosted Insights... link to the Portal Browser Support Policy page
             a(href='/help/browsers', target='_self', translate, ng-if="isPortal") Browser Support
             a(href='/r/insights/docs/', translate) Insights API Documentation
+            a(ng-show='showDemoButton() && !toggleDemoText()', ng-click='toggleDemoAccount()', translate) Enable Demo Account
+            a(ng-show='showDemoButton() && toggleDemoText()', ng-click='toggleDemoAccount()', translate) Disable Demo Account
