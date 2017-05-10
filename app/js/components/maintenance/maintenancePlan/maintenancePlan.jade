@@ -152,37 +152,6 @@
 
           // Actions Tab
           tab(role="tabpanel", heading="{{'Actions' | translate}}", deselect='addRule.reset()')
-            .add-actions(ng-hide='isReadOnly()')
-              .row
-                .col-sm-12
-                  ui-select.dropdown-blue.maintenance-page-select(
-                    ng-model='addRule.selected',
-                    append-to-body='false',
-                    ng-disabled='!getAvailableRules().length')
-                    ui-select-match.form-control.ui-select-match(placeholder="{{'Add action' | translate}}")
-                      | {{$select.selected._displayAs}}
-                    ui-select-choices.ui-select-choices(
-                      repeat="item in (getAvailableRules() | filter: {_displayAs: $select.search}) | orderBy:['-severityNum', '-report_count'] track by item.rule_id")
-                      .row
-                        .col-sm-8.valign-bottom
-                          ansible-icon.inline-right(value='item.ansible', show-planner-line='false')
-                          span.limit-90(tooltip='{{item._displayAs}}') {{item._displayAs}}&nbsp;
-                          b ({{item.report_count}})
-
-                        //trimmed-text(text="{{item._displayAs}}" length=70)
-                        .col-sm-4.text-right
-                          severity-icon.pull-right(severity='item.severity', type='severity')
-              .row.row-short(ng-if='addRule.selected')
-                .col-sm-12
-                  .available-actions.table-responsive
-                    maintenance-table-systems(
-                      params='tableParams(addRule.selected, true, true)',
-                      edit='true',
-                      item='addRule.selected',
-                      ng-if='addRule.selected',
-                      on-save='addRule.reset()',
-                      on-cancel='addRule.reset()')
-
             .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', '-actions.length', 'rule_id'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
               .header.bordered(ng-init='tableEdit = false')
                 .title
@@ -203,6 +172,7 @@
                   params='tableParams(rule, true, false)',
                   edit='tableEdit',
                   item='rule')
+            div(translate, ng-if='!plan.rules.length') This plan is empty
             pagination.pull-right.pagination-blue(
               ng-if="plan.rules.length > pager.perPage",
               total-items="plan.rules.length",
@@ -212,33 +182,6 @@
 
           // Systems Tab
           tab(role="tabpanel", heading="{{'Systems' | translate}}", deselect='addSystem.reset()')
-            .add-actions(ng-hide='isReadOnly()')
-              .row
-                .col-sm-5
-                  ui-select.dropdown-blue.maintenance-page-select(
-                    ng-model='addSystem.selected',
-                    append-to-body='false',
-                    ng-disabled='!getAvailableSystems().length',
-                    ng-if='systemTypes.length')
-                    ui-select-match.form-control.ui-select-match(placeholder="{{'Add system' | translate}}")
-                      | {{$select.selected._displayAs}}
-                    ui-select-choices.ui-select-choices(
-                      repeat="item in (available.systems | filter: {_displayAs: $select.search}) | orderBy:['_displayAs'] track by item._id",
-                      group-by='groupBySystemType',
-                      group-filter='groupFilter'
-                      ng-init='registerGroupChangeListener($select)')
-                      | {{item._displayAs}} ({{item.report_count}})
-              .row.row-short(ng-if='addSystem.selected')
-                .col-sm-12
-                  .available-actions.table-responsive
-                    maintenance-table-actions(
-                      params='tableParams(addSystem.selected, false, true)',
-                      edit='true',
-                      item='addSystem.selected',
-                      ng-if='addSystem.selected',
-                      on-save='addSystem.reset()',
-                      on-cancel='addSystem.reset()')
-
             .content-block.system(
               ng-repeat="system in (plan.systems | orderBy:['_name', 'system_id'] | offset:pager.offset | limitTo:pager.perPage) track by system.system_id")
               .header.bordered
@@ -268,6 +211,7 @@
                   params='tableParams(system, false, false)',
                   edit='tableEdit',
                   item='system')
+            div(translate, ng-if='!plan.systems.length') This plan is empty
             pagination.pull-right.pagination-blue(
               ng-if="plan.systems.length > pager.perPage",
               total-items="plan.systems.length",
@@ -287,6 +231,10 @@
         a.btn.btn-sm.btn-default(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='reject()')
           i.fa.fa-close.inline-right
           span(translate) Ignore
+        a.btn.btn-sm.btn-accent.pull-right(
+          ng-click='MaintenanceService.showMaintenanceModal(null, null, plan)',
+          ng-if='!isReadOnly()')
+          span(translate) Add actions
         a.btn.btn-sm.btn-open-blue.action.pull-right(translate, ng-click='exportPlan(plan.maintenance_id)')
           i.fa.fa-download.inline-right
           span(translate) Export CSV

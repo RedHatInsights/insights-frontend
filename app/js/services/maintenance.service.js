@@ -66,7 +66,7 @@ function MaintenanceService(
     };
 
     function processSystems() {
-        System.getSystemsLatest({report_count: 'gt0'}).then(function (response) {
+        return System.getSystemsLatest({report_count: 'gt0'}).then(function (response) {
             const systems = response.data.resources;
             systems.forEach(function (system) {
                 DataUtils.readSystem(system);
@@ -127,7 +127,7 @@ function MaintenanceService(
         });
     };
 
-    service.showMaintenanceModal = function (system, systems, rule, newPlan) {
+    service.showMaintenanceModal = function (systems, rule, existingPlan) {
         $modal.open({
             templateUrl: 'js/components/maintenance/' +
             'maintenanceModal/maintenanceModal.html',
@@ -135,10 +135,6 @@ function MaintenanceService(
             backdropClass: 'system-backdrop ng-animate-enabled',
             controller: 'maintenanceModalCtrl',
             resolve: {
-                system: function () {
-                    return system || false;
-                },
-
                 systems: function () {
                     return systems || false;
                 },
@@ -147,8 +143,8 @@ function MaintenanceService(
                     return rule || false;
                 },
 
-                newPlan: function () {
-                    return (newPlan === undefined) ? true : newPlan;
+                existingPlan: function () {
+                    return existingPlan;
                 }
             }
         });

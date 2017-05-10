@@ -24,7 +24,6 @@ function systemCardCtrl(
     $scope.hostnameTitle = null;
     $scope.selected = false;
     $scope.plans = MaintenanceService.plans.all;
-    $scope.showMaintenanceModal = MaintenanceService.showMaintenanceModal;
     $scope.config = InsightsConfig;
 
     $scope.systemHostnameHover = function ($event) {

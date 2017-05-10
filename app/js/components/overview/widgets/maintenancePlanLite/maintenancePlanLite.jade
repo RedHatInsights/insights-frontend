@@ -41,5 +41,5 @@ section.widget-block
 
     .row
       .col-sm-12.text-center
-        a.btn.btn-accent(ui-sref='app.maintenance({newPlan: true})')
+        a.btn.btn-accent(ng-click='MaintenanceService.showMaintenanceModal()')
           strong(translate) Create a new Plan/Playbook

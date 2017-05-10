@@ -13,7 +13,7 @@
         th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.ansible')", ng-click="table.sorter.sort('rule.ansible')")
           .sort-indicator(translate) Ansible
         th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.report_count')", ng-click="table.sorter.sort('rule.report_count')")
-          .sort-indicator(translate) Systems
+          .sort-indicator(translate) Affected Systems
       tr(ng-show='edit')
         th.filter(colspan='5')
           input.form-control.nomar-left.input-sm(type='text', placeholder='Filter by rule name', ng-model="table.filter.display", ng-change='table.doFilter()')
@@ -24,7 +24,8 @@
         td.text-center(ng-show='edit')
           input(ng-model='checkboxes.items[action.id]', type="checkbox")
         td.overflow
-          span.wrap {{action.display}}
+          a(ng-href='./actions/{{action.rule.category}}/{{action.id}}', target='_blank')
+            span.wrap {{action.display}}
         td.text-center
           severity-icon(severity="action.rule.severity", type='severity', label='')
         td.status.text-center

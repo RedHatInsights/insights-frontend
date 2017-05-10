@@ -170,6 +170,7 @@ function MaintenanceCtrl(
     $scope.available = MaintenanceService.available;
     $scope.isDefined = angular.isDefined;
     $scope.loader = new Utils.Loader();
+    $scope.MaintenanceService = MaintenanceService;
 
     // used in calendars for highlighting days on which maintenance is already scheduled
     $scope.calendarDates = [];
@@ -257,10 +258,6 @@ function MaintenanceCtrl(
         });
     }
 
-    $scope.quickAdd = function () {
-        return addPlan({});
-    };
-
     $scope.newSuggestion = function () {
         return addPlan({
             suggestion: Maintenance.SUGGESTION.PROPOSED,
@@ -273,11 +270,7 @@ function MaintenanceCtrl(
     }
 
     $scope.$watchCollection('plans.all', init);
-    $scope.loadPlans(true).then(function () {
-        if ($stateParams.newPlan) {
-            $scope.quickAdd();
-        }
-    });
+    $scope.loadPlans(true);
 
     MaintenanceService.loadAvailableSystemsAndRules();
 
