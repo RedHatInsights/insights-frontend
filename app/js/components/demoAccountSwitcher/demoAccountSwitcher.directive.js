@@ -5,7 +5,7 @@ var componentsModule = require('../');
 /**
  * @ngInject
  */
-function demoAccountButtonCtrl($scope, PermissionService) {
+function demoAccountSwitcherCtrl($scope, PermissionService) {
     function demoAccountEnabled() {
         if ($scope.account_number === '6') {
             return true;
@@ -29,7 +29,7 @@ function demoAccountButtonCtrl($scope, PermissionService) {
         }
     };
 
-    $scope.showDemoButton = function () {
+    $scope.showDemoSwitcher = function () {
         let user = $scope.user;
         let PERMS = PermissionService.PERMS;
 
@@ -42,10 +42,11 @@ function demoAccountButtonCtrl($scope, PermissionService) {
     };
 }
 
-function demoAccountButton() {
+function demoAccountSwitcher() {
     return {
-        controller: demoAccountButtonCtrl
+        templateUrl: 'js/components/demoAccountSwitcher/demoAccountSwitcher.html',
+        controller: demoAccountSwitcherCtrl
     };
 }
 
-componentsModule.directive('demoAccountButton', demoAccountButton);
+componentsModule.directive('demoAccountSwitcher', demoAccountSwitcher);
