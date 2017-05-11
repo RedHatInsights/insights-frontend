@@ -11,6 +11,7 @@ function Export($http, InsightsConfig, AccountService, $window) {
     return {
         getReports: function (topic, rule, group, stale) {
             const uri = URI(InsightsConfig.apiRoot);
+            uri.segment('exports');
             uri.segment('reports');
 
             if (topic) {
@@ -35,6 +36,7 @@ function Export($http, InsightsConfig, AccountService, $window) {
 
         getSystems: function (group, stale, search) {
             const uri = URI(InsightsConfig.apiRoot);
+            uri.segment('exports');
             uri.segment('systems');
 
             if (group) {
