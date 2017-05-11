@@ -167,7 +167,6 @@ function MaintenanceCtrl(
     SystemsService) {
 
     $scope.BasicEditHandler = BasicEditHandler;
-    $scope.available = MaintenanceService.available;
     $scope.isDefined = angular.isDefined;
     $scope.loader = new Utils.Loader();
     $scope.MaintenanceService = MaintenanceService;
@@ -272,8 +271,6 @@ function MaintenanceCtrl(
     $scope.$watchCollection('plans.all', init);
     $scope.loadPlans(true);
 
-    MaintenanceService.loadAvailableSystemsAndRules();
-
     SystemsService.getSystemTypesAsync().then(function (systemTypes) {
         $scope.systemTypes = systemTypes;
     });
@@ -281,7 +278,6 @@ function MaintenanceCtrl(
     $rootScope.$on('reload:data', function () {
         $scope.loader.loading = false; // disable loader throttling for reload
         $scope.loadPlans(true);
-        MaintenanceService.loadAvailableSystemsAndRules();
     });
 }
 

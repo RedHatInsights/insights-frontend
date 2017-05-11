@@ -44,7 +44,6 @@ function maintenanceModalCtrl($scope,
     $scope.rule = rule;
     $scope.systems = systems;
     $scope.Group = Group;
-    $scope.MaintenanceService = MaintenanceService;
 
     if (angular.isObject(existingPlan)) {
         $scope.newPlan = false;
@@ -355,14 +354,6 @@ function maintenanceModalCtrl($scope,
         return gettextCatalog.getString('Unnamed plan');
     };
 
-    MaintenanceService.plans.load(false);
-    ModalUtils.suppressEscNavigation($modalInstance);
-
-    if (!MaintenanceService.available.systems.length) {
-        // TODO: remove once https://trello.com/c/xKS9cX3d/116 is fixed
-        MaintenanceService.loadAvailableSystemsAndRules();
-    }
-
     function ruleToActionMapper (systemIds, groupId) {
         return function (rule) {
             const value = {
@@ -402,6 +393,7 @@ function maintenanceModalCtrl($scope,
     $scope.searchSystems = function (value) {
         const params = {
             page_size: 30,
+            page: 1,
             report_count: 'gt0'
         };
 
@@ -426,6 +418,9 @@ function maintenanceModalCtrl($scope,
                 sortBy($scope.availableSystems, ['toString', 'system_id'])[0];
         }
     });
+
+    MaintenanceService.plans.load(false);
+    ModalUtils.suppressEscNavigation($modalInstance);
 }
 
 function maintenanceModal() {
