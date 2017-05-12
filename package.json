@@ -4,7 +4,7 @@
   "description": "Front-end for Red Hat Insights",
   "repository": {
     "type": "git",
-    "url": "http://labs-git.usersys.redhat.com/labs/insights.git"
+    "url": "https://github.com/RedHatInsights/insights-frontend.git"
   },
   "private": true,
   "dependencies": {
