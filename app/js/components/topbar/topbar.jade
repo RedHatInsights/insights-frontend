@@ -4,8 +4,8 @@
     .col-sm-7.col-md-8
       // .global-filters.disabled
         .disabled class added if the filters are not applicable to view
-      .global-filters
-        group-select
+      .global-filters(ng-class='{disabled: disabled}')
+        group-select(disabled='disabled')
     .col-sm-5.col-md-4.text-right-sm
       menu.notifications
         bullhorn(icon='fa-bullhorn', type='announcements')
