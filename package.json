@@ -91,6 +91,6 @@
     "preprotractor": "npm run update-webdriver",
     "protractor": "npm run protractor test/protractor.conf.js",
     "start": "forever server.js",
-    "test": "karma start test/karma.conf.js"
+    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS test/karma.conf.js"
   }
 }
