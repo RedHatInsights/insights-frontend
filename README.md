@@ -1,4 +1,7 @@
 # Insights Front End
+[![Build Status](https://travis-ci.org/RedHatInsights/insights-frontend.svg?branch=master)](https://travis-ci.org/RedHatInsights/insights-frontend)
+[![dependencies Status](https://david-dm.org/RedHatInsights/insights-frontend/status.svg)](https://david-dm.org/RedHatInsights/insights-frontend)
+[![devDependencies Status](https://david-dm.org/RedHatInsights/insights-frontend/dev-status.svg)](https://david-dm.org/RedHatInsights/insights-frontend?type=dev)
 
 Development
 ---
@@ -16,7 +19,7 @@ Development
 
 **Getting started**
 
-0. Clone the assets repo `git clone git@gitlab.cee.redhat.com:FlipModeSquad/insights-frontend-assets.git`
+1. Clone the assets repo `git clone git@gitlab.cee.redhat.com:FlipModeSquad/insights-frontend-assets.git`
 1. Symlink the insights-frontend-assets static directory to insights-frontend
     - ln -s {path-to-insights-frontend-assets}/static/ {path-to-insights-frontend}/
 2. Symlink the insights-frontend-assets fonts and images to insights-frontend/app
