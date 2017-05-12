@@ -64,9 +64,14 @@ function OverviewCtrl(
         loadPlans(true);
     });
 
-    Stats.getRules({include: 'ansible'}, true).then(function (res) {
-        $scope.stats.rules = res.data;
-    });
+    function loadStats () {
+        Stats.getRules({include: 'ansible'}).then(function (res) {
+            $scope.stats.rules = res.data;
+        });
+    }
+
+    loadStats();
+    $scope.$on('group:change', loadStats);
 }
 
 statesModule.controller('OverviewCtrl', OverviewCtrl);
