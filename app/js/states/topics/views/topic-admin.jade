@@ -11,12 +11,12 @@
           th URL
           th Rules
           th
-          th
+            | Visibility
+            i.fa.fa-question-circle.inline-left(tooltip='Controls when this topic shows up for a customer in the topic list (actions page).')
+          th Actions
       tbody
         tr.ng-cloak(ng-repeat="topic in topics track by topic.id", ng-show='!loader.loading')
           td
-            span.icon-inline(ng-show='topic.hidden')
-              i.fa.fa-eye-slash(tooltip='This topic is hidden')
             a(ui-sref='app.topic({id: topic.slug ? topic.slug : topic.id})') {{topic.title}}
           td
             a(ui-sref='app.topic({id: topic.slug ? topic.slug : topic.id})') /actions/{{topic.slug ? topic.slug : topic.id}}
@@ -28,6 +28,12 @@
               em(ng-if='topic.category && topic.severity') ,&nbsp;
               em(ng-if='topic.severity') {{topic.severity}}
           td
+            span(ng-if='topic.listed === "always"') Always
+            span(ng-if='topic.listed === "has_hits"') If systems affected
+            span(ng-if='topic.listed === "never"') Never
+            span.icon-inline(ng-show='topic.hidden')
+              i.red.fa.fa-eye-slash.inline-left(tooltip='This topic is not published. Only internal users can see it. Use the actions column to publish this topic.')
+          td
             span.icon-inline(ng-show='topic.hidden', ng-click='hide(topic, false)')
               i.fa.fa-eye(tooltip='Publish this topic')
             span.icon-inline(ng-hide='topic.hidden', ng-click='hide(topic, true)')
@@ -37,7 +43,6 @@
                 i.fa.fa-pencil-square-o.pointer
             span.icon-inline
               i.fa.fa-remove(ng-click='delete(topic)', tooltip='Remove this topic')
-          td
             a.icon-inline(ng-click='move(topic, true)', ng-disabled='topic.priority === 0', tooltip='Move this topic higher in the priority list. This affects the order in which topics are presented to customers.')
               i.fa.fa-arrow-up
             a.icon-inline(ng-click='move(topic, false)', ng-disabled='topic.priority === topics.length - 1', tooltip='Move this topic lower in the priority list. This affects the order in which topics are presented to customers.')
