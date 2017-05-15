@@ -23,6 +23,7 @@ function ActionsCtrl(
     Stats,
     System,
     SystemsService,
+    Topic,
     TopicService,
     Utils) {
 
@@ -55,6 +56,11 @@ function ActionsCtrl(
 
             $scope.featuredTopics = topics.slice(0, 3);
             $scope.extraTopics = topics.slice(3);
+
+            Topic.get('incidents', FilterService.getSelectedProduct()).success(
+                function (topic) {
+                    $scope.incidents = topic;
+                });
         });
     });
 

@@ -1,6 +1,6 @@
 .topic-rule-list
   list-type.text-right-sm
-  .row.row-short(ng-show='getListType() === listTypes.card')
+  .row.row-short(ng-show='getListType() === listTypes.card && loading === false')
     .col-sm-12
       .card-list
         .card-list-item(ng-repeat="plugin in plugins | orderBy: sorter.predicate : sorter.reverse track by plugin.plugin_id")
@@ -25,7 +25,7 @@
                       ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
                       ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
 
-  .row.row-short(ng-show='getListType() === listTypes.table')
+  .row.row-short(ng-show='getListType() === listTypes.table && loading === false')
     .col-sm-12
       table#rha-rules-table.table.ng-table.break-word
         thead
@@ -56,6 +56,7 @@
               div(ng-if='rule.acked')
                 | {{rule.description}}
                 span.label.label-default.inline-left.rule-inactive(translate) INACTIVE
+              i.pull-right.fa.fa-bullseye(ng-if='isIncident(rule)')
 
             // START UBER-SEV
             td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')

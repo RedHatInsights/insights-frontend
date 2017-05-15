@@ -7,6 +7,7 @@ function topicRuleListCtrl ($filter,
                             $rootScope,
                             $scope,
                             $state,
+                            IncidentsService,
                             InsightsConfig,
                             ListTypeService,
                             RuleService,
@@ -29,8 +30,13 @@ function topicRuleListCtrl ($filter,
     };
 
     function init() {
+        $scope.loading = true;
         $scope.showRulesWithNoHits = false;
         $scope.hiddenCount = 0;
+        IncidentsService.init()
+        .then(function () {
+            $scope.loading = false;
+        });
     }
 
     function updateList (topic) {
@@ -76,6 +82,10 @@ function topicRuleListCtrl ($filter,
 
         updateCards($scope.topic.rules);
     }
+
+    $scope.isIncident = function (rule) {
+        return IncidentsService.isIncident(rule);
+    };
 
     init();
 }

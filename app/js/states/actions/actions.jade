@@ -43,6 +43,15 @@
               system-summary(stats='stats')
 
     section.gray.full-width
+      .flexgrid.equalheights
+        .row(ng-if='loader.loading')
+          .spinner.spinner-lg
+        .row(ng-if='featuredTopics.length', ng-show='!loader.loading')
+          topic-summary(title='Incidents', count='{{incidents.affectedSystemCount}}')
+          topic-summary(title='Risks', count='{{stats.rules.total - incidents.affectedSystemCount}}')
+          topic-summary(title='Total', count='{{stats.rules.total}}')
+
+    section.gray.full-width
       span.pull-right(ng-show='isContentManager')
         | [
         a(ui-sref='app.admin-topic') edit

@@ -2,11 +2,11 @@
   .row
     //.col-sm-4
     //  product-select
-    .col-sm-3
-      check-in-select
-    .col-sm-6.col-sm-offset-3
+    .col-sm-6
       label.invisible(translate='translate') Search
       search-box(on-search='search.doFilter(model)')
+    .col-sm-3.col-sm-offset-3
+      check-in-select
     //.col-sm-4
       div(ng-show='getSelectedProduct() === "osp"')
         osp-deployment-select
