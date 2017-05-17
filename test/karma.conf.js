@@ -1,8 +1,9 @@
+/*global require, module*/
 'use strict';
 
-var istanbul = require('browserify-istanbul');
-var debowerify = require('debowerify');
-var babelify = require('babelify');
+require('babelify');
+// const istanbul = require('browserify-istanbul');
+const debowerify = require('debowerify');
 const fs = require('fs');
 const babelrc = JSON.parse(fs.readFileSync('.babelrc', "utf8"));
 
@@ -14,13 +15,13 @@ module.exports = function (config) {
         frameworks: ['jasmine', 'browserify', 'should'],
 
         preprocessors: {
-            'app/js/*.js': ['browserify', 'coverage'],
-            'app/js/**/*.js': ['browserify', 'coverage'],
+            'app/js/*.js': ['browserify'],
+            'app/js/**/*.js': ['browserify'],
             'test/**/*.js': ['babel']
         },
 
         browsers: ['PhantomJS'],
-        reporters: ['progress', 'coverage'],
+        reporters: ['progress'],
 
         autoWatch: true,
 
@@ -29,10 +30,8 @@ module.exports = function (config) {
             transform: [
                 'babelify',
                 debowerify,
-                'bulkify',
-                istanbul({
-                    ignore: ['**/node_modules/**', '**/test/**']
-                })
+                'bulkify'
+                // istanbul({ ignore: ['**/node_modules/**', '**/test/**'] })
             ]
         },
 
