@@ -20,5 +20,5 @@ gulp.task('clean', function () {
 });
 
 gulp.task('clean-all', ['clean'], function (cb) {
-    del(config.browserify.cacheFile, cb);
+    return del(config.browserify.cacheFile, cb);
 });
