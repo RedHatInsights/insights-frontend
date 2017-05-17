@@ -6,35 +6,20 @@ var componentsModule = require('../');
  * @ngInject
  */
 function demoAccountSwitcherCtrl($scope, PermissionService) {
-    function demoAccountEnabled() {
-        if ($scope.account_number === '6') {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
-    $scope.toggleDemoText = function () {
-        return demoAccountEnabled();
-
-    };
+    $scope.demoAccountEnabled = $scope.account_number === '6';
 
     $scope.toggleDemoAccount = function () {
-        let user = $scope.user;
-
-        if (!demoAccountEnabled()) {
+        if (!$scope.demoAccountEnabled) {
             $scope.accountChange('6');
         } else {
-            $scope.accountChange(user.account_number);
+            $scope.accountChange($scope.user.account_number);
         }
     };
 
     $scope.showDemoSwitcher = function () {
-        let user = $scope.user;
-        let PERMS = PermissionService.PERMS;
-
-        if (user && !PermissionService.has(user, PERMS.SU) &&
-            (user.is_internal || demoAccountEnabled())) {
+        if ($scope.user && ($scope.user.is_internal || $scope.demoAccountEnabled) &&
+            !PermissionService.has($scope.user, PermissionService.PERMS.SU)) {
             return true;
         }
 
