@@ -1,18 +1,22 @@
+/*global require, global*/
 'use strict';
 
-var config = require('../config');
-var gulp = require('gulp');
-var del = require('del');
+const config = require('../config');
+const gulp = require('gulp');
+const del = require('del');
 
-gulp.task('clean', function (cb) {
+gulp.task('clean', function () {
     var toDelete = [config.dist.root];
+
     if (global.isProd) {
         toDelete.push(config.styles.temp);
     }
+
     if (global.isRelease) {
         toDelete.push(config.dist.release);
     }
-    del(toDelete, cb);
+
+    return del(toDelete);
 });
 
 gulp.task('clean-all', ['clean'], function (cb) {
