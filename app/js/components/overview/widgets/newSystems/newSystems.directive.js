@@ -19,6 +19,7 @@ function NewSystemsCtrl($scope, SystemsService, Utils, InventoryService) {
     });
 
     $scope.$on('account:change', load);
+    $scope.$on('group:change', load);
     load();
 }
 

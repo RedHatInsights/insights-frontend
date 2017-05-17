@@ -9,8 +9,8 @@
       aria-haspopup='true',
       aria-expanded='false',
       ng-disabled='disabled')
-      span.text(ng-show='!isGroupSelected() && !disabled', translate) Group select
-      span.text(ng-show='disabled', translate) All Systems
+      span.text(ng-show='!disabled && !isGroupSelected() && !groups.length', translate) Group select
+      span.text(ng-show='disabled || (!isGroupSelected() && groups.length)', translate) All Systems
       span.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
       span.caret
     ul.dropdown-menu

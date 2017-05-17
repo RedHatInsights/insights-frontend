@@ -4,11 +4,13 @@ var servicesModule = require('./');
 var get = require('lodash/get');
 var arrayRemove = require('lodash/remove');
 var find = require('lodash/find');
+const assign = require('lodash/assign');
 
 function SystemsService($filter,
                         $rootScope,
                         $q,
                         gettextCatalog,
+                        Group,
                         Products,
                         SweetAlert,
                         System) {
@@ -191,6 +193,8 @@ function SystemsService($filter,
         if (product && product !== 'all') {
             parameters.product_code = product;
         }
+
+        assign(parameters, Group.queryParam());
 
         return System.getSystemsLatest(parameters).success(function (response) {
             _newestSystems = response.resources;

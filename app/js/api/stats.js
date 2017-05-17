@@ -7,7 +7,7 @@ const URI = require('urijs');
 * @ngInject
 */
 function Stats($http, InsightsConfig, AccountService, Group) {
-    function buildUri (segment, params, ignoreGroup) {
+    function buildUri (segment, params) {
         const uri = URI(InsightsConfig.apiRoot);
         uri.segment('stats');
 
@@ -16,10 +16,7 @@ function Stats($http, InsightsConfig, AccountService, Group) {
         }
 
         uri.addSearch(AccountService.queryParam());
-
-        if (!ignoreGroup) {
-            uri.addSearch(Group.queryParam());
-        }
+        uri.addSearch(Group.queryParam());
 
         if (params) {
             uri.addSearch(params);
@@ -37,8 +34,8 @@ function Stats($http, InsightsConfig, AccountService, Group) {
             return $http.get(buildUri('systems', params));
         },
 
-        getRules: function (params, ignoreGroup) {
-            return $http.get(buildUri('rules', params, ignoreGroup));
+        getRules: function (params) {
+            return $http.get(buildUri('rules', params));
         }
     };
 }
