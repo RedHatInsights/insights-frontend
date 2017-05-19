@@ -143,56 +143,19 @@ function maintenancePlanCtrl(
         Maintenance.exportPlan($scope.plan.maintenance_id);
     };
 
-    function openPlaybookModal(questions, unsupportedRules) {
-        $modal.open({
-            templateUrl:
-                'js/components/maintenance/maintenancePlaybook/maintenancePlaybook.html',
-            windowClass: 'modal-playbook modal-wizard ng-animate-enabled',
-            backdropClass: 'system-backdrop ng-animate-enabled',
-            controller: 'MaintenancePlaybook',
-            resolve: {
-                plan: function () {
-                    return $scope.plan;
-                },
+    $scope.downloadPlaybook = function () {
+        if ($scope.playbookTab) {
+            $scope.playbookTab();
+        }
 
-                questions: function () {
-                    return questions;
-                },
-
-                unsupportedRules: function () {
-                    return unsupportedRules;
-                }
-            }
-        });
-    }
-
-    $scope.generatePlaybook = function () {
-        Maintenance.generatePlaybook($scope.plan.maintenance_id)
-        .then(function generatedPlaybook(response) {
+        Maintenance.downloadPlaybook($scope.plan.maintenance_id)
+        .then(function (response) {
             if (response.status === 200) {
                 const disposition = response.headers('content-disposition');
                 const filename = parseHeader(disposition).filename.replace(/"/g, '');
                 const blob = new Blob([response.data],
                                       {type: response.headers('content-type')});
                 FileSaver.saveAs(blob, filename);
-            }
-        },
-
-        function handlePlaybookError (resp) {
-            if (resp.status === 400) {
-                if (resp.data.error.key === AnsibleAPIErrors.AmbiguousResolution) {
-                    openPlaybookModal(resp.data.error.details, null);
-                } else if (resp.data.error.key === AnsibleAPIErrors.UnsupportedRule) {
-                    openPlaybookModal(null, resp.data.error.details);
-                } else if (
-                    resp.data.error.key === AnsibleAPIErrors.MaintenanceNothingToFix ||
-                    resp.data.error.key === AnsibleAPIErrors.MaintenanceEmpty) {
-                    $scope.error = AnsibleErrors.NoActions;
-                } else {
-                    $scope.error = AnsibleErrors.GeneralFailure;
-                }
-            } else {
-                $scope.error = AnsibleErrors.GeneralFailure;
             }
         });
     };
@@ -318,7 +281,55 @@ function maintenancePlanCtrl(
         $scope.ansibleSupport = some($scope.plan.actions, 'rule.ansible');
     }
 
-    $scope.$watch('plan.actions', checkAnsibleSupport);
+    $scope.$watch('plan.actions', function () {
+        checkAnsibleSupport();
+        $scope.prepareAnsibleTab();
+    });
+
+    $scope.playbookTabLoader = new Utils.Loader(false);
+    $scope.prepareAnsibleTab = $scope.playbookTabLoader.bind(function () {
+        return SystemsService.getSystemTypesAsync().then(function () {
+            return Maintenance.getPlayMetadata($scope.plan.maintenance_id);
+        }).then(function (res) {
+            $scope.plays = res.data;
+
+            $scope.plays.forEach(function (play) {
+                play.systemType = SystemsService.getSystemTypeUnsafe(play.system_type_id);
+            });
+        });
+    });
+
+    $scope.setupPlaybookTabActivator = function (value) {
+        value.$watch('tabs', function (tabs) {
+            if (tabs) {
+                $scope.playbookTab = function () {
+                    tabs[2].select();
+                };
+            }
+        });
+    };
+
+    $scope.resolutionModal = function (play) {
+        const instance = $modal.open({
+            templateUrl:
+            'js/components/maintenance/resolutionModal/resolutionModal.html',
+            windowClass: 'modal-playbook modal-wizard ng-animate-enabled',
+            backdropClass: 'system-backdrop ng-animate-enabled',
+            controller: 'ResolutionModal',
+            resolve: {
+                params: function () {
+                    return {
+                        play,
+                        plan: $scope.plan
+                    };
+                }
+            }
+        });
+
+        instance.result.then(function () {
+            $scope.prepareAnsibleTab();
+        });
+    };
 }
 
 function AddActionSelectionHandler ($scope) {
