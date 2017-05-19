@@ -218,6 +218,43 @@
               ng-model="pager.currentPage",
               items-per-page="pager.perPage",
               ng-change="pager.update()")
+
+          tab(
+            role="tabpanel",
+            disable='!ansibleSupport',
+            ng-init='setupPlaybookTabActivator($parent)',
+            select='prepareAnsibleTab()')
+            tab-heading
+              ansible-icon.inline-right(value='ansibleSupport', showTooltip='false')
+              strong(translate) Playbook Summary
+            .row
+              .col-sm-12
+                .group
+                  .group-pretitle
+                    b(translate) Resolutions included in this playbook:
+            .spinner(ng-show='playbookTabLoader.loading')
+            .row.row-short(ng-hide='playbookTabLoader.loading')
+              .col-sm-12
+                .group
+                  .group-content
+                    ul
+                      li(ng-repeat="play in plays")
+                        i.fa.category-icon.inline-right(ng-class="play.rule.category.toLowerCase()")
+                        b {{ play.rule.category }}
+                        | &nbsp;#{'>'}&nbsp;
+                        a(ui-sref='app.actions-rule({category: play.rule.category.toLowerCase(), rule: play.rule.rule_id})')
+                          strong {{ play.rule.description }}
+                        b &nbsp;/ {{ play.systemType.displayNameShort }}
+                        ul
+                          li
+                            | {{ play.ansible_resolutions[0].description }}
+                            span(ng-if='play.ansible_resolutions.length > 1')
+                              | &nbsp;(
+                              a(tooltip='{{"Multiple resolutions available. Click here to select a different one." | translate}}',
+                                ng-click='resolutionModal(play)')
+                                strong(translate) Modify
+                              | )
+
       footer.footer(ng-show='edit.isActive(plan.maintenance_id)')
         a.btn.btn-sm.btn-default(ng-if='isInternal && !plan.hidden', ng-click='hidden(true)')
           i.fa.fa-eye-slash.inline-right
@@ -240,8 +277,8 @@
           span(translate) Export CSV
         a.btn.btn-sm.btn-open-blue.action.pull-right(
             translate,
-            ng-click='generatePlaybook()',
+            ng-click='downloadPlaybook()',
             ng-disabled='!ansibleSupport')
           i.svg.ansible-icon.inline-right
             img(src='images/l_ansible-blue.svg')
-          span(translate) Generate Playbook
+          span(translate) Download Playbook
