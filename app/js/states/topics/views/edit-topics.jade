@@ -24,16 +24,21 @@
             | Priority is determined from the order of topics in the &nbsp;
             a(ui-sref='app.admin-topic') topic admin table
       .form-group
-        label.control-label.col-sm-2 Topic type
+        label.control-label.col-sm-2 Topic listing behavior
+          i.fa.fa-question-circle.inline-left(tooltip='Controls when this topic shows up for a customer in the topic list (actions page).')
         .col-sm-10
           label.radio-inline
-            input#type1(type='radio', ng-model='topicType', value='default', ng-change='topic.alwaysShow = false')
-            | Shown if systems affected (default)&nbsp;
-            i.fa.fa-question-circle(tooltip='This topic will only be shown to a customer if at least one of their systems is affected. More precisely, the topic is shown if any of the active non-ignored rules associated with this topic (see below) has hits (unresolved actions) on customer\'s systems. If the customer used the product filter to select a particular product, the topic is only shown if there are hits for the selected product.')
+            input(type='radio', ng-model='topic.listed', ng-value="'always'")
+            | Always
+            i.fa.fa-question-circle.inline-left(tooltip='This topic will be shown always, no matter if customer\'s systems are affected or not. The topic content should use interpolation and conditionals to react to different scenarios (e.g. there are no hits, user has 0 systems registered, product with 0 hits selected, user ignored certain rules, ...)')
           label.radio-inline
-            input#type2(type='radio', ng-model='topicType', value='always', ng-change='topic.alwaysShow = true')
-            | Shown always&nbsp;
-            i.fa.fa-question-circle(tooltip='This topic will be shown always, no matter if customer\'s systems are affected or not. The topic content should use interpolation and conditionals to react to different scenarios (e.g. there are no hits, user has 0 systems registered, product with 0 hits selected, user ignored certain rules, ...)')
+            input(type='radio', ng-model='topic.listed', ng-value='"has_hits"')
+            | Systems affected
+            i.fa.fa-question-circle.inline-left(tooltip='This topic will only be shown to a customer if at least one of their systems is affected. More precisely, the topic is shown if any of the active non-ignored rules associated with this topic (see below) has hits (unresolved actions) on customer\'s systems. If the customer used the product filter to select a particular product, the topic is only shown if there are hits for the selected product.')
+          label.radio-inline
+            input(type='radio', ng-model='topic.listed', ng-value='"never"')
+            | Never
+            i.fa.fa-question-circle.inline-left(tooltip='This topic is never shown in the topic list. It can still be accessed by a direct link. It can also be used for backing a widget. Implicit topics (based on severity or category) will typically use this option.')
       .form-group(ng-class="{'has-error': error.content}")
         label.control-label.col-sm-2(for='content') Content
         .col-sm-10
