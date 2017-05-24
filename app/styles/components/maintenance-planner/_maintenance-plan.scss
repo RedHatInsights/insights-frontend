@@ -846,6 +846,12 @@ div[class^="col-"], div[class*=" col-"] { @include transition(.4s); }
     padding: 0;
     box-shadow: none;
   }
+
+  .ui-select-container {
+    input, span {
+      width: 100% !important;
+    }
+  }
 }
 
 table.maintenance-table {

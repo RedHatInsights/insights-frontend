@@ -33,6 +33,7 @@ function maintenancePlanCtrl(
     $scope.loader = new Utils.Loader();
     $scope.exportPlan = Maintenance.exportPlan;
     $scope.error = null;
+    $scope.MaintenanceService = MaintenanceService;
 
     $scope.editDateTooltip = gettextCatalog.getString(
         'Date, time and duration of a maintenance window can be defined here. ' +
@@ -108,33 +109,6 @@ function maintenancePlanCtrl(
 
     $scope.systemTableParams = MaintenanceService.systemTableParams;
     $scope.actionTableParams = MaintenanceService.actionTableParams;
-
-    //filter out rules that are already completely part of the current plan
-    $scope.getAvailableRules = function () {
-        //loop over each $scope.available.rule
-        //count actions on maintenancePlan with rule_id=available.rule_id and !done
-        //if plan.count >= available.count then hide the rule
-        return $scope.available.rules.filter(function (rule) {
-            const availableCount = rule.report_count;
-            const plannedRules = $scope.plan.actions.filter(function (action) {
-                return (!action.done && action.rule && action.rule.id === rule.rule_id);
-            });
-
-            return (plannedRules.length < availableCount);
-        });
-    };
-
-    //filter out systems that are already completely part of the current plan
-    $scope.getAvailableSystems = function () {
-        return $scope.available.systems.filter(function (system) {
-            const availableCount = system.report_count;
-            const plannedSystems = $scope.plan.actions.filter(function (action) {
-                return (action.system && action.system.system_id === system.system_id);
-            });
-
-            return (plannedSystems.length < availableCount);
-        });
-    };
 
     function tryFindItemInPlan (item, systems) {
         if (systems) {

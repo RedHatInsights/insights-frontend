@@ -38,14 +38,14 @@ section.inventory
               //i.caret.dropdown-caret
             ul.dropdown-menu
               li(ng-if='config.isPlannerEnabled')
-                a(ng-click='addToPlan(true)',
+                a(ng-click='addToPlan(false)',
                 ng-disabled='!isFixableSelected()',
                 translate) Create a new Plan/Playbook
                   ansible-icon.inline-left(
                   value='isFixableSelected()',
                   show-tooltip='false')
               li(ng-if='config.isPlannerEnabled')
-                a(ng-click='addToPlan(false)',
+                a(ng-click='addToPlan(true)',
                 ng-disabled='!isFixableSelected() || (!plans.future.length && !plans.unscheduled.length)',
                 translate) Add to existing Plan/Playbook
                   ansible-icon.inline-left(
