@@ -259,14 +259,14 @@ function ActionsRuleCtrl(
         priv.initCtrl();
     }
 
-    $scope.addToPlan = rejectIfNoSystemSelected(function (newPlan) {
+    $scope.addToPlan = rejectIfNoSystemSelected(function (existingPlan) {
         var systems = $scope.checkboxes.getSelected($scope.ruleSystems);
         if (!systems.length) {
             return;
         }
 
         let rule = RhaTelemetryActionsService.getRuleDetails();
-        MaintenanceService.showMaintenanceModal(null, systems, rule, newPlan);
+        MaintenanceService.showMaintenanceModal(systems, rule, existingPlan);
     });
 
     /**

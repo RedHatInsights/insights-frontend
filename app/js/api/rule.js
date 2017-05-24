@@ -5,7 +5,15 @@ const URI = require('urijs');
 /**
  * @ngInject
  */
-function Rule($http, InsightsConfig, AccountService, PreferenceService, Utils, $window) {
+function Rule(
+    $http,
+    $window,
+    AccountService,
+    DataUtils,
+    InsightsConfig,
+    PreferenceService,
+    Utils) {
+
     var root = InsightsConfig.apiRoot;
     return {
         getRulesLatest: function (query) {
@@ -91,6 +99,21 @@ function Rule($http, InsightsConfig, AccountService, PreferenceService, Utils, $
             url.segment('ansible-resolutions');
             url.segment(String(systemTypeId));
             return $http.get(url.toString());
+        },
+
+        getRulesWithHits: function (group) {
+            const uri = URI(root);
+            uri.segment('rules');
+            uri.addSearch('report_count', 'gt0');
+            uri.addSearch(AccountService.queryParam());
+
+            if (group !== undefined) {
+                uri.addSearch({group});
+            }
+
+            return $http.get(uri.toString()).success(function (result) {
+                result.resources.forEach(DataUtils.readRule);
+            });
         }
     };
 }

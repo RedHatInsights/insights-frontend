@@ -7,6 +7,7 @@ const indexBy = require('lodash/keyBy');
 const map = require('lodash/map');
 const flatMap = require('lodash/flatMap');
 const constant = require('lodash/constant');
+const sortBy = require('lodash/sortBy');
 
 const MODES = {
     rule: 'rule',
@@ -20,7 +21,6 @@ const MODES = {
 function maintenanceModalCtrl($scope,
                               $rootScope,
                               $modalInstance,
-                              system,
                               rule,
                               systems,
                               MaintenanceService,
@@ -31,35 +31,69 @@ function maintenanceModalCtrl($scope,
                               ModalUtils,
                               $q,
                               DataUtils,
-                              newPlan,
-                              Subset) {
+                              existingPlan,
+                              Subset,
+                              Rule,
+                              Group) {
     $scope.MODES = MODES;
     $scope.tableEdit = true;
-    $scope.newPlan = newPlan;
+    $scope.selected = {};
+    $scope.plans = MaintenanceService.plans;
+    $scope.loader = new Utils.Loader();
+    $scope.loadingSystems = false;
+    $scope.rule = rule;
+    $scope.systems = systems;
+    $scope.Group = Group;
+
+    if (angular.isObject(existingPlan)) {
+        $scope.newPlan = false;
+        MaintenanceService.plans.load().then(function () {
+            $scope.selected.plan = find(MaintenanceService.plans.all,
+                {maintenance_id: existingPlan.maintenance_id});
+        });
+    } else if (existingPlan === true) {
+        $scope.newPlan = false;
+    } else {
+        $scope.newPlan = true;
+    }
+
+    if (systems && systems.length === 1) {
+        $scope.selected.system = systems[0];
+    }
 
     // normalize - if multiselect contains only one system treat as simple case
     if (!rule && systems) {
         if (systems.length === 1) {
-            system = systems[0];
             systems = false;
             $scope.mode = MODES.system;
         } else {
             $scope.mode = MODES.multi;
+            $scope.systemSelection = 'preselected';
         }
     } else if (rule && systems) {
         $scope.mode = MODES.rule;
-    } else if (system) {
-        $scope.mode = MODES.system;
+        $scope.systemSelection = 'preselected';
+    } else if (!rule && !systems) {
+        $scope.mode = MODES.multi;
+
+        if (Group.groups.length) {
+            $scope.systemSelection = 'group';
+        } else {
+            $scope.systemSelection = 'all';
+        }
+
     } else {
-        throw new Error(`Invalid parameters ${system}, ${rule}, ${systems}`);
+        throw new Error(`Invalid parameters ${rule}, ${systems}`);
     }
 
-    $scope.plans = MaintenanceService.plans;
-    $scope.system = system;
-    $scope.loader = new Utils.Loader();
-    $scope.selected = {};
-    $scope.rule = rule;
-    $scope.systems = systems;
+    if (Group.groups.length) {
+        if (Group.current().id) {
+            $scope.systemSelection = 'group';
+            $scope.selected.group = Group.current();
+        } else {
+            $scope.selected.group = sortBy(Group.groups, ['display_name', 'id'])[0];
+        }
+    }
 
     $scope.getPlan = function () {
         if (!$scope.newPlan && $scope.selected.plan) {
@@ -69,15 +103,38 @@ function maintenanceModalCtrl($scope,
         return {};
     };
 
-    $scope.$watchGroup(['selected.plan', 'newPlan'], function () {
+    function rebuildTable () {
         $scope.plan = ($scope.newPlan) ? {} : $scope.selected.plan;
 
-        if (systems && !rule) {
+        if ($scope.mode === MODES.multi) {
             $scope.tableParams = buildMultiTableParams();
         } else {
             $scope.tableParams = buildTableParams();
         }
-    });
+
+        $scope.$broadcast('maintenance:reload-table');
+    }
+
+    $scope.$watchGroup(['selected.plan', 'newPlan', 'selected.group', 'selected.system'],
+        rebuildTable);
+
+    $scope.systemSelectionChanged = function (selection) {
+        $scope.systemSelection = selection;
+
+        if (selection === 'system') {
+            $scope.mode = MODES.system;
+            $scope.tableParams = null;
+
+            if ($scope.selected.system) {
+                rebuildTable();
+            }
+
+            return;
+        }
+
+        $scope.mode = MODES.multi;
+        rebuildTable();
+    };
 
     function preselectAvailableActions (params, fn) {
         const overriden = params.getAvailableActions;
@@ -93,15 +150,16 @@ function maintenanceModalCtrl($scope,
     }
 
     function buildTableParams () {
+        $scope.noActions = false;
         let params = null;
 
         if ($scope.mode === MODES.system) {
 
             // if the system is part of the plan already, use that object
-            let item = system;
+            let item = $scope.selected.system;
             if (!$scope.newPlan && $scope.selected.plan && $scope.selected.plan.systems) {
                 item = find($scope.selected.plan.systems,
-                    {system_id: system.system_id}) || item;
+                    {system_id: item.system_id}) || item;
             }
 
             params = MaintenanceService.actionTableParams(
@@ -166,27 +224,7 @@ function maintenanceModalCtrl($scope,
     }
 
     function buildMultiTableParams () {
-        $scope.fixableSystems = $scope.systems.filter(function (system) {
-            return system.report_count > 0;
-        });
-
-        const systemIds = map($scope.fixableSystems, 'system_id');
-
-        // if this is ever used in Satellite it should send the real branch_id instead
-        // of null here
-        const availableActions = Subset.create(null, systemIds).then(function (res) {
-            return Subset.getRulesWithHits(res.data.hash).then(function (res) {
-                return map(res.data.resources, function (rule) {
-                    return {
-                        id: rule.rule_id,
-                        display: rule.description,
-                        mid: rule.rule_id,
-                        rule: rule,
-                        done: false
-                    };
-                });
-            });
-        });
+        const availableActions = getAvailableActionsForMultiTable();
 
         return {
             getActions: function () {
@@ -206,12 +244,23 @@ function maintenanceModalCtrl($scope,
                 // cartesian product of selected systems and rules
                 // the API is clever enough to filter out combinations with no reports
                 const add = flatMap(toAdd, function (rule) {
-                    return map(systemIds, function (system_id) {
-                        return {
-                            system_id,
+                    if (rule.systemIds) {
+                        return map(rule.systemIds, function (system_id) {
+                            return {
+                                system_id,
+                                rule_id: rule.rule.rule_id
+                            };
+                        });
+                    } else if (rule.groupId) {
+                        return [{
+                            group_id: rule.groupId,
                             rule_id: rule.rule.rule_id
-                        };
-                    });
+                        }];
+                    } else {
+                        return [{
+                            rule_id: rule.rule.rule_id
+                        }];
+                    }
                 });
 
                 const payload = {
@@ -229,6 +278,38 @@ function maintenanceModalCtrl($scope,
                 });
             }
         };
+    }
+
+    function getAvailableActionsForMultiTable () {
+        if ($scope.systemSelection === 'preselected') {
+            $scope.fixableSystems = $scope.systems.filter(function (system) {
+                return system.report_count > 0;
+            });
+
+            const systemIds = map($scope.fixableSystems, 'system_id');
+
+            // if this is ever used in Satellite it should send the real branch_id instead
+            // of null here
+            return getActionsForSystems(systemIds);
+        } else if ($scope.systemSelection === 'all') {
+            return Rule.getRulesWithHits().then(function (res) {
+                $scope.noActions = res.data.resources.length === 0;
+                return map(res.data.resources, ruleToActionMapper());
+            });
+        } else if ($scope.systemSelection === 'group') {
+            if (!$scope.selected.group || !$scope.selected.group.id) {
+                throw new Error('No group selected'); // should never happen
+            }
+
+            return Rule.getRulesWithHits($scope.selected.group.id).then(function (res) {
+                $scope.noActions = res.data.resources.length === 0;
+                return map(res.data.resources,
+                    ruleToActionMapper(null, $scope.selected.group.id));
+            });
+        } else {
+            throw new Error(
+                `Unexpected systemSelection value: ${$scope.systemSelection}`);
+        }
     }
 
     $scope.close = function () {
@@ -262,20 +343,7 @@ function maintenanceModalCtrl($scope,
     };
 
     $scope.planOrderFn = function (groups) {
-        groups.sort(function (a, b) {
-            // "create new plan" should be first
-            if (!a.name) {
-                return -1;
-            }
-
-            if (!b.name) {
-                return 1;
-            }
-
-            return a.items.length - b.items.length;
-        });
-
-        return groups;
+        return sortBy(groups, ['items.length']);
     };
 
     $scope.getPlanName = function (plan) {
@@ -285,6 +353,71 @@ function maintenanceModalCtrl($scope,
 
         return gettextCatalog.getString('Unnamed plan');
     };
+
+    function ruleToActionMapper (systemIds, groupId) {
+        return function (rule) {
+            const value = {
+                id: rule.rule_id,
+                display: rule.description,
+                mid: rule.rule_id,
+                rule: rule,
+                done: false
+            };
+
+            if (systemIds) {
+                value.systemIds = systemIds;
+            }
+
+            if (groupId) {
+                value.groupId = groupId;
+            }
+
+            return value;
+        };
+    }
+
+    function getActionsForSystems (systemIds) {
+        if (systemIds.length === 0) {
+            $scope.noActions = true;
+            return $q.resolve([]);
+        }
+
+        return Subset.create(null, systemIds).then(function (res) {
+            return Subset.getRulesWithHits(res.data.hash).then(function (res) {
+                $scope.noActions = res.data.resources.length === 0;
+                return map(res.data.resources, ruleToActionMapper(systemIds));
+            });
+        });
+    }
+
+    $scope.searchSystems = function (value) {
+        const params = {
+            page_size: 30,
+            page: 1,
+            report_count: 'gt0'
+        };
+
+        if (value && value.length) {
+            params.search_term = value;
+        }
+
+        const key = String(value);
+        $scope.loadingSystems = key;
+        return System.getSystemsLatest(params).then(function (res) {
+            $scope.availableSystems = res.data.resources;
+        }).finally(function () {
+            if ($scope.loadingSystems === key) {
+                $scope.loadingSystems = false;
+            }
+        });
+    };
+
+    $scope.searchSystems().then(function () {
+        if ($scope.availableSystems.length) {
+            $scope.selected.system =
+                sortBy($scope.availableSystems, ['toString', 'system_id'])[0];
+        }
+    });
 
     MaintenanceService.plans.load(false);
     ModalUtils.suppressEscNavigation($modalInstance);

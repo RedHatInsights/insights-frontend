@@ -78,10 +78,13 @@ function MaintenanceTable(
             $scope.checkboxes.checked, ctrl.filteredActions);
     };
 
-    $scope.$watchGroup(['item', 'edit'], function () {
+    function reload() {
         ctrl.filter = {};
         evalActions();
-    });
+    }
+
+    $scope.$on('maintenance:reload-table', reload);
+    $scope.$watchGroup(['item', 'edit'], reload);
 
     /*
      * Data processing pipeline
