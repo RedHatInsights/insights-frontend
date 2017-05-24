@@ -30,6 +30,9 @@ let _EVENT_ROOTS = [{
 }, {
     name: 'checkboxes',
     events: ['reset']
+}, {
+    name: 'topicFilters',
+    events: ['incident', 'reset']
 }];
 
 constantsModule.constant('Events', buildEvents(_EVENT_ROOTS));

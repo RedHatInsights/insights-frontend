@@ -1,6 +1,7 @@
 'use strict';
 
-var statesModule = require('../../');
+const statesModule = require('../../');
+const get = require('lodash/get');
 
 /**
  * @ngInject
@@ -53,7 +54,7 @@ function TopicRuleListCtrl(
             });
             PermalinkService.scroll(null, 30);
 
-            $scope.topic = $scope._topic;
+            $scope.topic = Object.create($scope._topic);
             $scope.loading = false;
         }).catch(function (res) {
             if (res.status === 404) {
@@ -63,6 +64,31 @@ function TopicRuleListCtrl(
             $scope.errored = true;
         });
     }
+
+    $scope.search = {
+        filters: ['description']
+        .map(prop => function (rule, query) {
+            return String(get(rule, prop)).includes(query);
+        }),
+
+        doFilter: function (query) {
+            $scope.loading = true;
+
+            // refreshes topic and components that reference topic
+            $scope.topic = undefined;
+            $scope.topic = Object.create($scope._topic);
+
+            if (query) {
+                $scope.topic.rules = $scope._topic.rules.filter(function (system) {
+                    return $scope.search.filters.some(f => f(system, query));
+                });
+            } else {
+                $scope.topic.rules = $scope._topic.rules;
+            }
+
+            $scope.loading = false;
+        }
+    };
 
     $rootScope.$on('reload:data', getData);
     $scope.$on('group:change', getData);

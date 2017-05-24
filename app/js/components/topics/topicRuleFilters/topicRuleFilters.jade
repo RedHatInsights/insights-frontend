@@ -1,0 +1,12 @@
+.topic-rule-filters.ui-filters
+  .row
+    .col-sm-6
+      label.invisible(translate='translate') Search
+      search-box(on-search='search.doFilter(model)')
+    .col-sm-4.col-sm-offset-2
+      incidents-tri-state
+  .row.row-short
+    .col-sm-6
+      a(ng-click="resetFilters()")
+        strong Reset filters &nbsp;
+        i.fa.fa-refresh

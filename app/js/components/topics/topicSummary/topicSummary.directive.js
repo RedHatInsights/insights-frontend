@@ -12,7 +12,10 @@ function topicSummary () {
         replace: true,
         scope: {
             count: '@',
-            title: '@'
+            title: '@',
+            isIncident: '=',
+            includeIncidents: '=',
+            topic: '@'
         }
     };
 }

@@ -50,7 +50,7 @@
               ng-click="sorter.sort('ansible')")
               .sort-indicator(translate) Ansible
         tbody
-          tr.legend-item(ng-repeat="rule in topic.rules | filter:filterZero | orderBy: sorter.predicate : sorter.reverse track by rule.rule_id", ng-class="{acked: rule.acked}")
+          tr.legend-item(ng-repeat="rule in filteredRules | filter:filterZero | orderBy: sorter.predicate : sorter.reverse track by rule.rule_id", ng-class="{acked: rule.acked}")
             td(ng-click='!rule.acked && viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
               a(ng-if='!rule.acked') {{rule.description}}
               div(ng-if='rule.acked')

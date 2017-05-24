@@ -1,5 +1,7 @@
 .col-sm-4
-  .content-block.content-block-card.anchored-footer.topic-card
-    header.header
-      h2 {{count}}
-      h5.subtitle {{title}}
+    .content-block.content-block-card.anchored-footer.topic-card
+        header.header
+            h2 
+                span {{count}}
+                i.pull-right.fa.fa-bullseye(ng-if='isIncident')
+            h5.subtitle(ui-sref="app.topic({id: topic, product: getSelectedProduct()})") {{title}}
