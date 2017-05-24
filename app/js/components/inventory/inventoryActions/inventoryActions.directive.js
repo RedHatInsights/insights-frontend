@@ -196,13 +196,13 @@ function inventoryActionsCtrl(
             };
     };
 
-    $scope.addToPlan = function (newPlan) {
+    $scope.addToPlan = function (existingPlan) {
         let systems = $scope.systemsToAction();
         if (!systems.length) {
             return;
         }
 
-        MaintenanceService.showMaintenanceModal(null, systems, null, newPlan);
+        MaintenanceService.showMaintenanceModal(systems, null, existingPlan);
     };
 
     $scope.systemsToAction = function () {

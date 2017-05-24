@@ -53,12 +53,12 @@
             span.caret
           ul.dropdown-menu
             li(ng-if='config.isPlannerEnabled',)
-              a(ng-click='addToPlan(true)', translate) Create a new Plan/Playbook
+              a(ng-click='addToPlan(false)', translate) Create a new Plan/Playbook
                 ansible-icon.inline-left(
                   value='true',
                   show-tooltip='false')
             li(ng-if='config.isPlannerEnabled',)
-              a(ng-click='addToPlan(false)',
+              a(ng-click='addToPlan(true)',
                 ng-disabled='!plans.future.length && !plans.unscheduled.length',
                 translate) Add to existing Plan/Playbook
                 ansible-icon.inline-left(

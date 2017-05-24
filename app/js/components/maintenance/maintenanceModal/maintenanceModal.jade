@@ -12,7 +12,7 @@
         .radio.col-sm-4
           label.control-label
             input(type='radio', ng-model='newPlan', ng-value='true')
-            strong Create new plan
+            strong(translate) Create new plan
         .col-sm-8(ng-click='!newPlan && (newPlan = true)')
           input.form-control(
             type='text',
@@ -27,9 +27,9 @@
           label.control-label
             input(type='radio', ng-model='newPlan', ng-value='false', ng-disabled='!availablePlans.length')
             strong Add to existing plan
-        .col-sm-8(ng-click='newPlan && (newPlan = false)')
+        .col-sm-8(ng-click='newPlan && availablePlans.length && (newPlan = false)')
           ui-select(ng-model='selected.plan', append-to-body='false', ng-disabled='newPlan')
-            ui-select-match.form-control.ui-select-match(placeholder='Select a plan')
+            ui-select-match.form-control.ui-select-match(placeholder="{{'Plan Name' | translate}}")
               span(ng-if='!selected.plan.name.length', translate) Unnamed plan ({{selected.plan.maintenance_id}})
               span(ng-if='selected.plan.name.length') {{selected.plan.name}} ({{selected.plan.maintenance_id}})
               span(ng-if='selected.plan.start') &nbsp;- {{selected.plan.start | moment:'LL'}}
@@ -41,9 +41,50 @@
               span(ng-if='plan.name.length') {{plan.name}} ({{plan.maintenance_id}})
               span(ng-if='plan.start') &nbsp; - {{plan.start | moment:'LL'}}
 
+    .form-group(ng-if='systemSelection !=="preselected"')
+      hr
+      .row.row-short
+        .radio.col-sm-4
+          label.control-label
+            input(type='radio', ng-model='systemSelection', ng-value='"group"', ng-disabled='!Group.groups.length',
+              ng-change='systemSelectionChanged(systemSelection)')
+            strong(translate) System Group
+        .col-sm-8(ng-click='systemSelection !== "group" && Group.groups.length && systemSelectionChanged("group")')
+          ui-select(ng-model='selected.group', append-to-body='false', ng-disabled='systemSelection !== "group"')
+            ui-select-match.form-control.ui-select-match(placeholder="{{'Select group' | translate}}")
+              span {{selected.group.display_name}}
+            ui-select-choices.ui-select-choices(
+              repeat="group in Group.groups | filter:{display_name: $select.search} | orderBy:['display_name', 'id']")
+              span {{group.display_name}}
+      .row.row-short
+        .radio.col-sm-3
+          label.control-label
+            input(type='radio', ng-model='systemSelection', ng-value='"system"',
+              ng-change='systemSelectionChanged(systemSelection)')
+            strong(translate) Specific System
+        .col-sm-1
+          .spinner(ng-show='loadingSystems')
+        .col-sm-8(ng-click='systemSelection !== "system" && systemSelectionChanged("system")')
+          ui-select(ng-model='selected.system', append-to-body='false', ng-disabled='systemSelection !== "system"')
+            ui-select-match.form-control.ui-select-match(placeholder="{{'Select system' | translate}}")
+              span {{selected.system.toString}} ({{selected.system.report_count}})
+            ui-select-choices.ui-select-choices(
+              repeat="system in availableSystems | orderBy:['toString', 'system_id']",
+              refresh='searchSystems($select.search)',
+              refresh-delay='200')
+              span {{system.toString}} ({{system.report_count}})
+      .row.row-short
+        .radio.col-sm-4
+          label.control-label
+            input(type='radio', ng-model='systemSelection', ng-value='"all"',
+              ng-change='systemSelectionChanged(systemSelection)')
+            strong(translate) All Systems
+
+    hr
+
     .row.available-actions
       .content-block.maintenance-plan.rule(
-        ng-if='plan && tableParams && mode === MODES.rule')
+        ng-if='plan && tableParams && mode === MODES.rule && !noActions')
         .header.bordered
           .title
             strong {{rule.description}}
@@ -52,45 +93,53 @@
           maintenance-table-systems(
             params='tableParams',
             edit='tableEdit',
-            item='plan',
+            item='rule',
             on-save='postSave()',
             on-cancel='close()')
 
-      .content-block.maintenance-plan.rule(ng-if='plan && tableParams && mode === MODES.system')
+      .content-block.maintenance-plan.rule(ng-if='plan && tableParams && mode === MODES.system && !noActions')
         .header.bordered
           span.icon-inline
-            type-icon(type-id='system.system_type_id', include-text='false')
+            type-icon(type-id='selected.system.system_type_id', include-text='false')
           a(ng-click='showSystemModal(system)')
-            strong {{system.toString}} &nbsp;&nbsp;
+            strong {{selected.system.toString}} &nbsp;&nbsp;
           span.item
             strong(translate) Last check in:
-            span(ng-class='system | checkInStyle') &nbsp;&nbsp;{{system.last_check_in | timeAgo}}
+            span(ng-class='selected.system | checkInStyle') &nbsp;&nbsp;{{selected.system.last_check_in | timeAgo}}
         .nopad.table-responsive
           maintenance-table-actions(
             params='tableParams',
             edit='tableEdit',
-            item='plan',
+            item='true',
             on-save='postSave()',
             on-cancel='close()')
 
       .content-block.maintenance-plan.rule(
-        ng-if='plan && tableParams && fixableSystems.length && mode === MODES.multi')
+        ng-if='plan && tableParams && mode === MODES.multi && !noActions')
         .header.bordered
           strong(
             translate,
-            translate-n='fixableSystems.length',
-            translate-plural='Available actions for {{$count}} systems') Available actions for 1 system
+            translate-n='systems.length',
+            translate-plural='Actions available for {{$count}} selected systems'
+            ng-if='systemSelection === "preselected"') Actions available for selected system
+          strong(ng-if='systemSelection === "group"')
+            span(translate) Actions available for group: {{selected.group.display_name}}&nbsp;
+            span(
+              translate,
+              translate-n='2'
+              translate-plural='({{$count}} systems)') (1 system)
+          strong(translate, ng-if='systemSelection === "all"') Actions available for your inventory
         .nopad.table-responsive
           maintenance-table-multi(
             params='tableParams',
             edit='tableEdit',
-            item='plan',
+            item='true',
             on-save='postSave()',
             on-cancel='close()')
 
       .content-block(
-        ng-if='tableParams && !fixableSystems.length && mode === MODES.multi')
+        ng-if='tableParams && noActions')
         .text-center
           strong
             i.fa.fa-check-circle.success.inline-right
-            span(translate) No problems to fix on selected systems.
+            span(translate) No actions available on selected systems.

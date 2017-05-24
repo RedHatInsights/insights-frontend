@@ -31,12 +31,7 @@ function MaintenanceService(
     $state,
     gettextCatalog) {
 
-    var service = {
-        available: {
-            systems: [],
-            rules: []
-        }
-    };
+    var service = {};
     var plansDfd = false;
 
     var MAINTENANCE_ACTION_TYPE = Object.freeze({
@@ -57,46 +52,6 @@ function MaintenanceService(
 
         return indexBy(reject(flatMap(plans, 'actions'), 'done'),
             'current_report.id');
-    }
-
-    service.loadAvailableSystemsAndRules = function () {
-        const systemsPromise = processSystems();
-        const rulesPromise = processRules();
-        return $q.all([systemsPromise, rulesPromise]);
-    };
-
-    function processSystems() {
-        System.getSystemsLatest({report_count: 'gt0'}).then(function (response) {
-            const systems = response.data.resources;
-            systems.forEach(function (system) {
-                DataUtils.readSystem(system);
-
-                //TODO: do we need to alias these attributes?
-                Utils.alias('system_id', '_id')(system);
-                Utils.alias('_name', '_displayAs')(system);
-
-                // we use this in the view to distinguish between systems and groups
-                system._type = 'systems';
-            });
-
-            service.available.systems = systems;
-        });
-    }
-
-    function processRules() {
-        Rule.getRulesLatest({report_count: 'gt0'}).then(function (response) {
-            const rules = response.data.resources;
-            rules.forEach(function (rule) {
-                DataUtils.readRule(rule);
-            });
-
-            const alias = Utils.alias('description', '_displayAs');
-            rules.forEach(function (rule) {
-                alias(rule);
-            });
-
-            service.available.rules = rules;
-        });
     }
 
     service.showSystemModal = function (s, rule) {
@@ -127,7 +82,7 @@ function MaintenanceService(
         });
     };
 
-    service.showMaintenanceModal = function (system, systems, rule, newPlan) {
+    service.showMaintenanceModal = function (systems, rule, existingPlan) {
         $modal.open({
             templateUrl: 'js/components/maintenance/' +
             'maintenanceModal/maintenanceModal.html',
@@ -135,10 +90,6 @@ function MaintenanceService(
             backdropClass: 'system-backdrop ng-animate-enabled',
             controller: 'maintenanceModalCtrl',
             resolve: {
-                system: function () {
-                    return system || false;
-                },
-
                 systems: function () {
                     return systems || false;
                 },
@@ -147,8 +98,8 @@ function MaintenanceService(
                     return rule || false;
                 },
 
-                newPlan: function () {
-                    return (newPlan === undefined) ? true : newPlan;
+                existingPlan: function () {
+                    return existingPlan;
                 }
             }
         });

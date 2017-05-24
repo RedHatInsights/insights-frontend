@@ -134,32 +134,6 @@ describe('MaintenanceController', function () {
         scope.category.should.equal('past');
     });
 
-    it('switches to "unscheduled" on new plan creation', function (done) {
-        initCtrl();
-        scope.setCategory('future');
-        scope.$digest();
-        scope.category.should.equal('future');
-
-        // mock
-        api.createPlan = mockAsPromised({
-            data: {
-                id: 345
-            }
-        });
-        api.getMaintenancePlan = mockAsPromised({
-            data: {
-                maintenance_id: 345
-            }
-        });
-
-        scope.quickAdd().then(function () {
-            scope.category.should.equal('unscheduled');
-            done();
-        });
-
-        scope.$digest();
-    });
-
     it('switches to "suggested" on new suggestion creation', function (done) {
         initCtrl();
         scope.setCategory('future');
