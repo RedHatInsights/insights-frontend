@@ -102,7 +102,6 @@ function EditTopicCtrl(
             $scope.topic.rules = [];
         }
 
-        $scope.topicType = ($scope.topic.alwaysShow) ? 'always' : 'default';
         $scope.ruleBinding = $scope.topic.ruleBinding;
         $scope.updateTaggedRules();
     });
@@ -113,8 +112,8 @@ function EditTopicCtrl(
 
     function prepareUpdatePayload (topic) {
         var data = pick(topic,
-            ['id', 'title', 'summary', 'content',
-            'alwaysShow', 'tag', 'category', 'slug', 'severity']);
+            ['id', 'title', 'summary', 'content', 'hidden',
+            'listed', 'tag', 'category', 'slug', 'severity']);
 
         if ($scope.ruleBinding === 'tagged') {
             data.category = data.severity = null;
