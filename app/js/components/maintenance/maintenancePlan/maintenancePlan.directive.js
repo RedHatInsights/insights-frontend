@@ -21,8 +21,6 @@ function maintenancePlanCtrl(
     $timeout,
     gettextCatalog,
     sweetAlert,
-    AnsibleAPIErrors,
-    AnsibleErrors,
     DataUtils,
     Group,
     Maintenance,
