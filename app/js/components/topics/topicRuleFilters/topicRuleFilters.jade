@@ -1,10 +1,12 @@
 .topic-rule-filters.ui-filters
   .row
-    .col-sm-6
+    .col-sm-4
+      incidents-tri-state
+    .col-sm-3
+      total-risk-select
+    .col-sm-5
       label.invisible(translate='translate') Search
       search-box(on-search='search.doFilter(model)')
-    .col-sm-4.col-sm-offset-2
-      incidents-tri-state
   .row.row-short
     .col-sm-6
       a(ng-click="resetFilters()")

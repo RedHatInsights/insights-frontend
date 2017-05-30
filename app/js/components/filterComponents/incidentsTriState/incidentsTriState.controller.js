@@ -14,6 +14,13 @@ function incidentsTriStateCtrl($location, $rootScope, $scope, Events) {
     $scope.$on(Events.topicFilters.reset, function () {
         $scope.showIncidents = 'all';
     });
+
+    function init () {
+        $scope.showIncidents = $location.search().filterIncidents ?
+            $location.search().filterIncidents : 'all';
+    }
+
+    init();
 }
 
 function incidentsTriState() {

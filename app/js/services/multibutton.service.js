@@ -70,7 +70,9 @@ function MultiButton(Categories, Severities) {
         state: true
     };
 
-    Severities.forEach(function (severity) {
+    Severities.map(function (severity) {
+        return severity.value;
+    }).forEach(function (severity) {
         var key = 'severityFilters' + severity;
         var state = false;
         if (severity === 'all') {

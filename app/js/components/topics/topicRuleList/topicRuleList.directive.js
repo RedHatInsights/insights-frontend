@@ -38,6 +38,8 @@ function topicRuleListCtrl ($filter,
         $scope.hiddenCount = 0;
         $scope.filterIncidents = $location.search().filterIncidents;
         $scope.filterIncidents = $scope.filterIncidents ? $scope.filterIncidents : 'all';
+        $scope.totalRisk = $location.search().totalRisk;
+        $scope.totalRisk = $scope.totalRisk ? $scope.totalRisk : 'all';
         IncidentsService.init()
         .then(function () {
             $scope.loading = false;
@@ -65,6 +67,12 @@ function topicRuleListCtrl ($filter,
         updateList($scope.topic);
     });
 
+    // Listens for change in total risk filter
+    $scope.$on(Events.topicFilters.totalRisk, function () {
+        $scope.totalRisk = $location.search().totalRisk;
+        updateList($scope.topic);
+    });
+
     // Listens for Reset filters
     $scope.$on(Events.topicFilters.reset, function () {
         $scope.filterIncidents = 'all';
@@ -81,6 +89,13 @@ function topicRuleListCtrl ($filter,
         } else if ($scope.filterIncidents === 'nonIncidents') {
             rules = _filter(rules, (rule) => {
                 return !IncidentsService.isIncident(rule);
+            });
+        }
+
+        // Filter based on total risk
+        if ($scope.totalRisk !== 'All') {
+            rules = _filter(rules, (rule) => {
+                return rule.severity === $scope.totalRisk;
             });
         }
 

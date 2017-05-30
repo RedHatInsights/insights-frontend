@@ -104,7 +104,9 @@ function DataUtils(Utils, Severities) {
     };
 
     service.readRule = function (rule) {
-        rule.severityNum = Severities.indexOf(rule.severity);
+        rule.severityNum = Severities.map(function (severity) {
+            return severity.value;
+        }).indexOf(rule.severity);
     };
 
     function getRuleState (rule) {
