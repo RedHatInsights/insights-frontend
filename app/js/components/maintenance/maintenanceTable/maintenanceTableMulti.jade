@@ -29,7 +29,7 @@
         td.text-center
           severity-icon(severity="action.rule.severity", type='severity', label='')
         td.status.text-center
-          ansible-icon(value='action.rule.ansible')
+          ansible-icon(value='action.rule.ansible', show-planner-line='false')
         td.status.text-center
           | {{action.rule.report_count}}
     tfoot(maintenance-table-footer)
