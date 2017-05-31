@@ -1,5 +1,5 @@
 {
-  "name": "insights",
+  "name": "insights-frontend",
   "version": "4.11.0",
   "description": "Front-end for Red Hat Insights",
   "repository": {
