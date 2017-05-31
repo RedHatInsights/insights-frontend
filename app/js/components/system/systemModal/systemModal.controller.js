@@ -12,11 +12,14 @@ function SystemModalCtrl(
     $location,
     $timeout,
     $modalInstance,
+    $state,
     system,
     rule,
     AnalyticsService,
     Utils,
-    FilterService) {
+    FilterService,
+    System,
+    Group) {
 
     $scope.report = {};
 
@@ -69,6 +72,16 @@ function SystemModalCtrl(
         }
 
         return $scope.system.system_id;
+    };
+
+    System.getSystemGroups($scope.getUUID()).success(function (groups) {
+        $scope.groups = groups;
+    });
+
+    $scope.groupSelected = function (group) {
+        close();
+        Group.setCurrent(group);
+        $state.go('app.inventory');
     };
 }
 

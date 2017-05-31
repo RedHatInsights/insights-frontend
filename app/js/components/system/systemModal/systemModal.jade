@@ -25,6 +25,15 @@
   system-metadata(system='system')
   .separator
 
+  .row.groups
+    .col-sm-12
+      strong(translate) Groups:
+      ul
+        li.bg-primary(ng-repeat='group in groups track by group.id')
+          a(ng-click='groupSelected(group)') {{group.display_name}}
+
+  .separator
+
   .insights-main-content
     .message.alert.alert-danger.alert-systems-not-checking(ng-if='!system.isCheckingIn')
       span.glyphicon.glyphicon-exclamation-sign.rule-margin
