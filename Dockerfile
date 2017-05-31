@@ -1,2 +1,3 @@
 FROM nginx:alpine
-COPY static-html-directory /usr/share/nginx/html
+COPY insights.conf /etc/nginx/conf.d/insights.conf
+COPY static-html-directory /www
