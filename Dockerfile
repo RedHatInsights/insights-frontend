@@ -14,6 +14,7 @@ COPY build /www-real
 
 EXPOSE 8080
 STOPSIGNAL SIGTERM
+
 # USER nginx
-USER 100 # again per the doc
+USER 100
 CMD ["nginx", "-g", "daemon off;"]
