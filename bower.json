@@ -1,6 +1,6 @@
 {
   "name": "telemetry",
-  "version": "4.10.10",
+  "version": "4.10.11",
   "main": [
     "release/js/insights.js"
   ],
