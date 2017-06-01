@@ -76,6 +76,10 @@ function searchBoxCtrl($scope, gettextCatalog, Events) {
     $scope.$on(Events.filters.reset, function () {
         $scope.model = '';
     });
+
+    $scope.$on(Events.topicFilters.reset, function () {
+        $scope.model = '';
+    });
 }
 
 function searchBox() {

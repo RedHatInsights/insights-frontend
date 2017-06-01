@@ -1,6 +1,6 @@
 .topic-rule-list
   list-type.text-right-sm
-  .row.row-short(ng-show='getListType() === listTypes.card && loading === false')
+  .row.row-short(ng-show='getListType() === listTypes.card && loading === false && plugins.length > 0')
     .col-sm-12
       .card-list
         .card-list-item(ng-repeat="plugin in plugins | orderBy: sorter.predicate : sorter.reverse track by plugin.plugin_id")
@@ -12,7 +12,8 @@
               .count(translate, translate-n='plugin.hitCount', translate-plural="{{$count}} Systems") 1 System
               .pull-right
                 span.label.label-default.inline-right.rule-inactive(ng-if='plugin.acked', translate) INACTIVE
-                ansible-icon(value='rule.ansible', ng-if='config.isPlannerEnabled')
+                incident-icon.inline-right(rule-id='plugin.rule.rule_id') &nbsp;
+                ansible-icon(value='plugin.rule.ansible', ng-if='config.isPlannerEnabled')
             card-content
               .gray(ng-bind-html='::plugin.rule.summary_html', target-blank='')
             .footer
@@ -25,7 +26,7 @@
                       ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
                       ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
 
-  .row.row-short(ng-show='getListType() === listTypes.table && loading === false')
+  .row.row-short(ng-show='getListType() === listTypes.table && loading === false && plugins.length > 0')
     .col-sm-12
       table#rha-rules-table.table.ng-table.break-word
         thead
@@ -56,7 +57,7 @@
               div(ng-if='rule.acked')
                 | {{rule.description}}
                 span.label.label-default.inline-left.rule-inactive(translate) INACTIVE
-              i.pull-right.fa.fa-bullseye(ng-if='isIncident(rule)')
+              incident-icon.pull-right(rule-id='rule.rule_id')
 
             // START UBER-SEV
             td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
@@ -70,6 +71,10 @@
             td.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)') {{ rule.hitCount }}
             td.text-center.align-vertical(ng-if='config.isPlannerEnabled')
               ansible-icon(value='rule.ansible')
+
+  .row.row-short(ng-show='plugins.length === 0')
+    .col-xs-12.text-center
+      strong There are no actions for the selected filters.&nbsp;
 
   .row.row-short(ng-show='!showRulesWithNoHits && hiddenCount')
     .col-sm-12.text-center

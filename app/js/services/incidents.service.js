@@ -24,10 +24,11 @@ function IncidentsService ($q, Topic) {
         });
     };
 
-    service.isIncident = function (rule) {
+    service.isIncident = function (ruleId) {
         let isIncident = incidentRules.find((incident) => {
-            return incident.rule_id === rule.rule_id;
+            return incident.rule_id === ruleId;
         });
+
         return isIncident !== undefined;
     };
 

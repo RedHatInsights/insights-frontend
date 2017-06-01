@@ -31,7 +31,7 @@ function totalRiskSelectCtrl($location,
 
     $scope.$on(Events.topicFilters.reset, function () {
         $scope.selected = find($scope.options, (option) => {
-            return option.id === 'All';
+            return option.value === 'All';
         });
     });
 }

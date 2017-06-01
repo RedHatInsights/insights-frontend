@@ -6,6 +6,7 @@
   section.actions-rule-details.gray
     h2
       .pull-right(ng-if='config.isPlannerEnabled')
+        incident-icon.inline-right(rule-id='ruleDetails.rule_id') &nbsp;
         ansible-icon(value='ruleDetails.ansible')
       | {{ruleDetails.description}}
     p(ng-bind-html='ruleDetails.generic_html | trust_html')

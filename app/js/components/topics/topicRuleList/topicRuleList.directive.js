@@ -39,7 +39,7 @@ function topicRuleListCtrl ($filter,
         $scope.filterIncidents = $location.search().filterIncidents;
         $scope.filterIncidents = $scope.filterIncidents ? $scope.filterIncidents : 'all';
         $scope.totalRisk = $location.search().totalRisk;
-        $scope.totalRisk = $scope.totalRisk ? $scope.totalRisk : 'all';
+        $scope.totalRisk = $scope.totalRisk ? $scope.totalRisk : 'All';
         IncidentsService.init()
         .then(function () {
             $scope.loading = false;
@@ -76,6 +76,7 @@ function topicRuleListCtrl ($filter,
     // Listens for Reset filters
     $scope.$on(Events.topicFilters.reset, function () {
         $scope.filterIncidents = 'all';
+        $scope.totalRisk = 'All';
         updateList($scope.topic);
     });
 
@@ -132,10 +133,6 @@ function topicRuleListCtrl ($filter,
         $scope.filteredRules = applyFilters($scope.topic.rules);
         updateCards($scope.filteredRules);
     }
-
-    $scope.isIncident = function (rule) {
-        return IncidentsService.isIncident(rule);
-    };
 
     init();
 }
