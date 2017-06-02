@@ -6,16 +6,25 @@ var isEmpty = require('lodash/isEmpty');
 /**
  * @ngInject
  */
-function groupSelectCtrl($scope, $rootScope, Group, Events) {
+function groupSelectCtrl(
+    $rootScope,
+    $q,
+    $scope,
+    gettextCatalog,
+    Events,
+    Group,
+    GroupService) {
     Group.init();
     $scope.groups = Group.groups;
     $scope.group = Group.current();
 
     $scope.triggerChange = function (group) {
-        $scope.group = group;
         Group.setCurrent(group);
-        $rootScope.$broadcast('group:change', group);
     };
+
+    $rootScope.$on('group:change', function (event, group) {
+        $scope.group = group;
+    });
 
     $scope.$on('account:change', function () {
         $scope.triggerChange(null);
@@ -28,6 +37,8 @@ function groupSelectCtrl($scope, $rootScope, Group, Events) {
     $scope.$on(Events.filters.reset, function () {
         $scope.group = Group.current();
     });
+
+    $scope.createGroup = GroupService.createGroup;
 }
 
 function groupSelect() {

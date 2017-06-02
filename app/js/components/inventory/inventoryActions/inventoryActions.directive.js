@@ -25,7 +25,9 @@ function inventoryActionsCtrl(
     TemplateService,
     Products,
     ListTypeService,
-    InsightsConfig) {
+    InsightsConfig,
+    Group,
+    GroupService) {
 
     $scope.getTotal = InventoryService.getTotal;
     $scope.listTypes = ListTypeService.types();
@@ -210,6 +212,13 @@ function inventoryActionsCtrl(
             return $scope.checkboxes.getSelected($scope.systems);
         }
     };
+
+    $scope.removeFromGroup = function () {
+        Group.removeSystems(Group.current(), map($scope.systemsToAction(), 'system_id'))
+            .then($scope.reloadInventory);
+    };
+
+    $scope.groupSystems = GroupService.groupSystems;
 }
 
 function inventoryActions() {
