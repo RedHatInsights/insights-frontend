@@ -1,0 +1,104 @@
+@import 'components/ui-filters/ui-filters__control-bar';
+@import 'components/ui-filters/ui-filters__active-filters';
+
+// Vars
+// ------------------------
+$ui-filters-background: #F9F9F9;
+
+// Mixins
+// ------------------------
+@mixin negative-margin() {
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+
+// UI filter styling
+// ------------------------
+.ui-filters {
+  @include rem('padding', $global-margin);
+  background: $ui-filters-background;
+  min-height: 20px;
+
+  // Button styling
+  button,
+  .btn {
+    text-transform: none;
+    @include rem('padding', $global-padding/2 $global-padding);
+  }
+
+  // Button spacing
+  button + button,
+  .btn + .btn {
+    @include rem('margin-left', $global-padding);
+  }
+
+  [class^="col-"],
+  div[class*=" col-"] {
+
+  }
+}
+
+
+// UI filter layout
+// ------------------------
+.ui-filters {
+  section {  }
+  section + section {
+    @include rem('padding-top', $global-margin);
+    border-top: 1px solid $gray;
+  }
+
+  .filter-group + .filter-group {
+    @include media-query(md) {
+      border-left: 1px solid #d9d9d9;
+    }
+  }
+
+  label { font-weight: 100; }
+  label.label { font-weight: 700; }
+}
+
+
+// Control bar styling
+// ------------------------
+.ui-filters__control-bar {
+  position: relative;
+  height: 14px;
+  background: #dfdfdf;
+  text-align: center;
+
+  // toggle button styling
+  .toggle {
+    width: 42px;
+    height: 42px;
+    display: inline-block;
+    @include rem('margin-top', -12px);
+    text-align: center;
+    background: rgba(255,255,255,.8);
+    @include box-shadow(0 0 0 8px rgba(0,0,0,.1));
+    @include border-radius(50%);
+
+    // button hover styling
+    &:hover { @include box-shadow(0 0 0 12px rgba(0,0,0,.1)); }
+
+    // Icon styling
+    i {
+      @include font-size(20px);
+      line-height: 1.6;
+      @include transition(.5s);
+    }
+  }
+}
+
+
+// Rotate the button icoin if filters are open
+.ui-filters__control-bar {
+  i {
+    transform: rotate(180deg);
+  }
+
+  &.collapsed {
+    i { transform: rotate(0deg); }
+  }
+}

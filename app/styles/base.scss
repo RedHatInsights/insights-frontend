@@ -138,6 +138,11 @@ $define-fa: true !default;
 @import 'components/inventory';
 
 
+// UI Filters
+//==================================================================*/
+@import 'components/ui-filters/ui-filters';
+
+
 // Namespaced
 //==================================================================*/
 .insights-main-content, .modal {
