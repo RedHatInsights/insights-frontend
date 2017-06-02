@@ -5,7 +5,7 @@ var statesModule = require('../../');
 /**
  * @ngInject
  */
-function TopicAdminCtrl($scope, SweetAlert, Topic, $state, Utils) {
+function TopicAdminCtrl($scope, sweetAlert, Topic, $state, Utils) {
     $scope.loader = new Utils.Loader();
 
     let loadData = $scope.loader.bind(function () {
@@ -86,19 +86,10 @@ function TopicAdminCtrl($scope, SweetAlert, Topic, $state, Utils) {
     };
 
     function createAlert(title, text, confirmButtonText, cb) {
-        SweetAlert.swal({
+        sweetAlert({
             title: title,
-            text: text,
-            type: 'warning',
-            html: true,
-            confirmButtonColor: '#DD6B55',
-            confirmButtonText: confirmButtonText,
-            showCancelButton: true
-        }, function (isConfirm) {
-            if (isConfirm) {
-                cb();
-            }
-        });
+            text: text
+        }).then(cb);
     }
 }
 

@@ -9,6 +9,7 @@ const parseHeader = require('parse-http-header');
 const some = require('lodash/some');
 const get = require('lodash/get');
 const sortBy = require('lodash/sortBy');
+const swal = require('sweetalert2');
 
 /**
  * @ngInject
@@ -19,13 +20,13 @@ function maintenancePlanCtrl(
     $scope,
     $timeout,
     gettextCatalog,
+    sweetAlert,
     AnsibleAPIErrors,
     AnsibleErrors,
     DataUtils,
     Group,
     Maintenance,
     MaintenanceService,
-    SweetAlert,
     SystemsService,
     Utils) {
 
@@ -85,20 +86,12 @@ function maintenancePlanCtrl(
     });
 
     $scope.delete = function () {
-        SweetAlert.swal({
-            title: gettextCatalog.getString('Are you sure?'),
+        sweetAlert({
             text: gettextCatalog.getString(
-                'You will not be able to recover this maintenance plan'),
-            type: 'warning',
-            html: true,
-            confirmButtonColor: '#DD6B55',
-            confirmButtonText: 'Yes',
-            showCancelButton: true
-        }, $scope.loader.bind(function (isConfirm) {
-            if (isConfirm) {
-                $scope.edit.deactivate($scope.plan.maintenance_id);
-                return Maintenance.deletePlan($scope.plan);
-            }
+                'You will not be able to recover this maintenance plan')
+        }).then($scope.loader.bind(function () {
+            $scope.edit.deactivate($scope.plan.maintenance_id);
+            return Maintenance.deletePlan($scope.plan);
         }));
     };
 
@@ -224,6 +217,10 @@ function maintenancePlanCtrl(
             return;
         }
 
+        if (swal.isVisible()) {
+            return;
+        }
+
         if ($scope.edit.isActive($scope.plan.maintenance_id) &&
             !$scope.editBasic.active) {
 
@@ -252,20 +249,10 @@ function maintenancePlanCtrl(
         }
 
         if (!value) {
-            SweetAlert.swal({
-                title: gettextCatalog.getString('Are you sure?'),
+            sweetAlert({
                 text: gettextCatalog.getString(
-                    'You are about to send a plan suggestion to the customer.'),
-                type: 'warning',
-                html: true,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Yes',
-                showCancelButton: true
-            }, function (isConfirm) {
-                if (isConfirm) {
-                    cb();
-                }
-            });
+                    'You are about to send a plan suggestion to the customer.')
+            }).then(cb);
         } else {
             cb();
         }
@@ -373,7 +360,7 @@ function maintenancePlan($document) {
                     return;  // clicking on a modal does not retract a plan
                 }
 
-                if (isContainedBy($event, 'sweet-alert')) {
+                if (isContainedBy($event, 'swal2-container')) {
                     return;  // clicking on a sweet-alert does not retract a plan
                 }
 

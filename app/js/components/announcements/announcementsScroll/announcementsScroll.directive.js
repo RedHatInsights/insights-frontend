@@ -10,11 +10,11 @@ function announcementsScrollCtrl(
     $state,
     $stateParams,
     $timeout,
+    sweetAlert,
     AnnouncementService,
     User,
     PermalinkService,
-    PermissionService,
-    SweetAlert) {
+    PermissionService) {
 
     $scope.params = {showAll: true};
     AnnouncementService.init($scope.params);
@@ -44,16 +44,8 @@ function announcementsScrollCtrl(
     };
 
     $scope.deleteAnnouncement = function (announcement) {
-        SweetAlert.swal({
-            title: 'Are you sure?',
-            type: 'warning',
-            confirmButtonColor: '#DD6B55',
-            confirmButtonText: 'Yes',
-            showCancelButton: true
-        }, function (isConfirm) {
-            if (isConfirm) {
-                AnnouncementService.deleteAnnouncement(announcement);
-            }
+        sweetAlert().then(function () {
+            AnnouncementService.deleteAnnouncement(announcement);
         });
     };
 
