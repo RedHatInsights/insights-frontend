@@ -138,6 +138,12 @@ $define-fa: true !default;
 @import 'components/inventory';
 
 
+// Table Filters
+//==================================================================*/
+@import 'components/toolbar/toolbar';
+@import 'components/toolbar/toolbar--table-filters';
+
+
 // Namespaced
 //==================================================================*/
 .insights-main-content, .modal {

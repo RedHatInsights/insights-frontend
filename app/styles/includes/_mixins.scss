@@ -204,3 +204,12 @@
   }
 
 }
+
+// Input placeholder mixin
+// ------------------------
+@mixin placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}

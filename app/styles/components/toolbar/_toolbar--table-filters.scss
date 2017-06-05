@@ -1,0 +1,8 @@
+.toolbar.toolbar--table-filters {
+  @include rem('padding', $global-padding);
+  background: $gray-light;
+
+  .list-switch {
+    display: inline-block;
+  }
+}
