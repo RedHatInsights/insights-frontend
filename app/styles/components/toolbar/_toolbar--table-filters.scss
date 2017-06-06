@@ -1,5 +1,5 @@
 .toolbar.toolbar--table-filters {
-  @include rem('padding', $global-padding);
+  @include rem('padding', $global-padding/2);
   background: $gray-light;
 
   .list-switch {
