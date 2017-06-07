@@ -19,13 +19,14 @@
 
 .dropdown {
 
+  [translate] { display: inline-block; }
+
   button.btn,
   button {
     text-align: left;
     border: 1px solid #c5c7c9;
     text-transform: none;
 
-    [translate] { display: inline-block; }
 
     .caret {
       @include transition(.2s);
