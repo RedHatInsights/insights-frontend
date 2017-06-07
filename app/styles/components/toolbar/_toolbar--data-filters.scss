@@ -1,4 +1,4 @@
-.toolbar.toolbar--table-filters {
+.toolbar.toolbar--data-filters {
   position: relative;
   @include rem('margin-bottom', $global-padding);
   background: $gray-light;
@@ -9,7 +9,7 @@
   .flexgrid div[class*=" col-"] {
     @include rem('padding-bottom', $global-padding/2);
 
-    @include media-query(sm) {
+    @include media-query(md) {
     	@include rem('padding-bottom', 0);
       vertical-align: middle;
     }
@@ -19,22 +19,22 @@
   .checkbox { margin: 0; }
 
   // tableFilterHeader
-  .tableFiltersHeader {
+  .dataFiltersHeader {
     label { margin: 0; }
   }
 
-  .tableFiltersHeader,
-  .tableFiltersBody,
-  .tableFiltersFooter {
+  .dataFiltersHeader,
+  .dataFiltersBody,
+  .dataFiltersFooter {
     .flexgrid {
       @include rem('padding', $global-padding);
     }
   }
 
 
-  // tableFilterBody
-  .tableFiltersBody,
-  .tableFiltersFooter {
+  // dataFilterBody
+  .dataFiltersBody,
+  .dataFiltersFooter {
     border-top: 1px solid $gray;
     background: $gray-light;
     @include transition(.2s);
@@ -65,8 +65,8 @@
 }
 
 
-// tableFilterHeader elements
-.tableFiltersHeader {
+// dataFilterHeader elements
+.toolbar .dataFiltersHeader {
   position: relative;
 
   button {
@@ -98,8 +98,9 @@
 
     input {
       min-width: 70%;
-      @include rem('margin-left', $global-padding/2);
-      @include rem('padding-left', $global-padding/2);
+      @include rem('margin', -4px auto -4px $global-padding/2);
+      @include rem('padding', 4px 8px);
+      outline: none;
     }
   }
 
@@ -108,12 +109,26 @@
   }
 }
 
-// tableFilterBody elements
-.tableFiltersBody {
+// dataFilterBody elements
+.toolbar .dataFiltersBody {
   //position: absolute;
   //top: 100%;
 }
 
-.tableFiltersFooter {
+.toolbar .dataFiltersFooter {
   @include rem('padding', $global-padding);
+
+  .active-filters {
+    button,
+    .reset {
+      @include rem('margin-left', $global-padding/2);
+    }
+
+    .btn {
+      @include rem('padding', 4px 8px);
+      text-transform: none;
+
+      span + i { @include rem('margin-left', $global-padding/2); }
+    }
+  }
 }
