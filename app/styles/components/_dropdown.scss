@@ -25,6 +25,8 @@
     border: 1px solid #c5c7c9;
     text-transform: none;
 
+    [translate] { display: inline-block; }
+
     .caret {
       @include transition(.2s);
       @include rem('margin-left', $global-padding/2);
