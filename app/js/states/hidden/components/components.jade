@@ -5,19 +5,20 @@
   .content-wrap
     section
       .toolbar.toolbar--table-filters
-        #tableFiltersHeader.tableFiltersHeader.flexgrid.equalheights
-          .row
-            .col-sm-8
-              label.search
-                strong Search
-                input(type1="text", placeholder="for rule or system")
-            .col-sm-4.text-right-sm
-              button.btn.btn-blank.filterToggle(data-toggle='collapse', href='#tableFiltersBody', aria-expanded='false', aria-controls='tableFiltersBody')
-                span Data filters
-                i.fa.fa-filter(aria-hidden="true")
+        #tableFiltersHeader.tableFiltersHeader
+          .flexgrid
+            .row
+              .col-sm-8
+                label.search
+                  strong Search
+                  input(type1="text", placeholder="for rule or system")
+              .col-sm-4.text-right-sm
+                button.btn.btn-blank.filterToggle(data-toggle='collapse', href='#tableFiltersBody', aria-expanded='false', aria-controls='tableFiltersBody')
+                  span Data filters
+                  i.fa.fa-filter(aria-hidden="true")
 
-              .sep
-              list-type
+                .sep
+                list-type
         #tableFiltersBody.tableFiltersBody.collapse.in
           .flexgrid.equalheights
             .row
