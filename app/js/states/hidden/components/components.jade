@@ -5,20 +5,143 @@
   .content-wrap
     section
       .toolbar.toolbar--table-filters
-        #tableFiltersControls
+        #tableFiltersHeader.tableFiltersHeader.flexgrid.equalheights
           .row
-            .col-sm-6
-            .col-sm-6.text-right
-              button.btn.btn-blank.filterToggle(data-toggle='collapse', href='#tableFilters', aria-expanded='false', aria-controls='tableFilters')
+            .col-sm-8
+              label.search
+                strong Search
+                input(type1="text", placeholder="for rule or system")
+            .col-sm-4.text-right-sm
+              button.btn.btn-blank.filterToggle(data-toggle='collapse', href='#tableFiltersBody', aria-expanded='false', aria-controls='tableFiltersBody')
                 span Data filters
-                i.caret(aria-hidden="true")
+                i.fa.fa-filter(aria-hidden="true")
 
               .sep
               list-type
-        #tableFilters.tableFilters.collapse
-          .row
-            .col-sm-4
-              div test
+        #tableFiltersBody.tableFiltersBody.collapse.in
+          .flexgrid.equalheights
+            .row
+              .col-md-4.filter-group
+                label(translate)
+                  strong System type&nbsp;
+                .row
+                  .col-md-12
+                    .dropdown.full-width
+                      button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                        div(translate) All
+                        span.caret
+                      ul.dropdown-menu(aria-labelledby="dropdownMenu1")
+                        li(ng-repeat='trace in traces', ng-click='$event.stopPropagation()')
+                          a(href="#") Option 1
+                        li
+                          a(href="#") Option 2
+                        li
+                          a(href="#") Option 3
+                        li
+                          a(href="#") Option 4
+                        li
+                          a(href="#") Option 5
+              .col-md-4.filter-group
+
+
+              .col-md-4.filter-group
+                label(translate)
+                  strong System status
+                .radio-group
+                  .radio-inline
+                    label
+                      input(type="radio", name="inlineRadioOptions", id="radio1", value="option1")
+                      | All
+                  .radio-inline
+                    label(translate)
+                      input(type="radio", name="inlineRadioOptions", id="radio2", value="option2")
+                      | Stale
+                  .radio-inline
+                    label(translate)
+                      input(type="radio", name="inlineRadioOptions", id="radio3", value="option3")
+                      | Checking in
+
+        //#tableFiltersBody.tableFiltersBody.collapse.in
+          .flexgrid.equalheights
+            .row
+              .col-md-4.filter-group
+                label(translate)
+                  strong System type&nbsp;
+                .option-group.flexbox
+                  .row
+                    .col-md-6
+                      .checkbox
+                        label(translate)
+                          input(type="checkbox")
+                          | RHEL Server
+                    .col-md-6
+                      .checkbox
+                        label(translate)
+                          input(type="checkbox")
+                          | Container
+                    .col-md-6
+                      .checkbox
+                        label(translate)
+                          input(type="checkbox")
+                          | Container Host
+                    .col-md-6
+                      .checkbox
+                        label(translate)
+                          input(type="checkbox")
+                          | Container Image
+
+                  .row
+                    .col-sm-12
+                      a(href="#") Check all
+
+                  //.row
+                    .col-md-12
+                      span.red At least one checkbox needs to remain checked
+              .col-md-4.filter-group
+                label(translate)
+                  strong Severity type
+                .option-group.flexbox
+                  .row
+                    .col-md-6
+                      .checkbox
+                        label(translate)
+                          input(type="checkbox")
+                          | Low
+                    .col-md-6
+                      .checkbox
+                        label(translate)
+                          input(type="checkbox")
+                          | Medium
+                    .col-md-6
+                      .checkbox
+                        label(translate)
+                          input(type="checkbox")
+                          | High
+                    .col-md-6
+                      .checkbox
+                        label(translate)
+                          input(type="checkbox")
+                          | Critical
+              .col-md-4.filter-group
+                label(translate)
+                  strong System status
+                .radio-group
+                  .radio-inline
+                    label
+                      input(type="radio", name="inlineRadioOptions", id="radio1", value="option1")
+                      | All
+                  .radio-inline
+                    label(translate)
+                      input(type="radio", name="inlineRadioOptions", id="radio2", value="option2")
+                      | Stale
+                  .radio-inline
+                    label(translate)
+                      input(type="radio", name="inlineRadioOptions", id="radio3", value="option3")
+                      | Checking in
+        #tableFiltersFooter.tableFiltersFooter
+          button.btn
+            span System type: Option selected
+            i.fa.fa-times-circle-o
 
       .row
         .col-sm-12
