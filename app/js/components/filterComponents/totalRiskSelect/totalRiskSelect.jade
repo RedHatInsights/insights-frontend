@@ -1,13 +1,14 @@
-.checkin-select
-  label(translate) Total Risk
+.filter-group
+  label(translate) 
+    strong Total Risk
   .dropdown
-    button.btn.btn-default.dropdown-toggle(
+    button.btn.dropdown-toggle(
       type='button',
       data-toggle='dropdown',
       aria-haspopup='true',
       aria-expanded='false')
-      span {{selected.label}}
+      span.text.active(ng-model='label') {{label}}
       span.caret
     ul.dropdown-menu
       li(ng-repeat='option in options')
-        a(ng-click='select(option)') {{option.label}}
+        a(href='#', ng-click='select(option)') {{option.label}}

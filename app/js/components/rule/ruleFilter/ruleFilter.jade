@@ -2,6 +2,9 @@ section.gray.rule-filters
   .row
     .col-md-12
       .search-box-wrapper 
-        search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000')
+        .input-group
+            span.input-group-addon
+              .i.fa.fa-search
+            search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000')
     .col-md-12
       category-multi-button

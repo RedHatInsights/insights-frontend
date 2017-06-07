@@ -6,22 +6,27 @@ constantsModule.constant('Severities', [
     {
         label: 'All',
         value: 'All',
-        icon: 'all'
+        icon: 'all',
+        tag: 'Total Risk: All'
     }, {
         label: 'Low',
         value: 'INFO',
-        icon:  'low'
+        icon: 'low',
+        tag: 'Total Risk: Low'
     }, {
         label: 'Medium',
         value: 'WARN',
-        icon: 'med'
+        icon: 'med',
+        tag: 'Total Risk: Medium'
     }, {
         label: 'High',
         value: 'ERROR',
-        icon: 'high'
+        icon: 'high',
+        tag: 'Total Risk: High'
     }, {
         label: 'Critical',
         value: 'CRITICAL',
-        icon: 'critical'
+        icon: 'critical',
+        tag: 'Total Risk: Critical'
     }
 ]);

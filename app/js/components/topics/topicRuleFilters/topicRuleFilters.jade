@@ -1,14 +1,6 @@
-.topic-rule-filters.ui-filters
-  .row
-    .col-sm-4
-      incidents-tri-state
-    .col-sm-3
-      total-risk-select
-    .col-sm-5
-      label.invisible(translate='translate') Search
-      search-box(on-search='search.doFilter(model)')
-  .row.row-short
-    .col-sm-6
-      a(ng-click="resetFilters()")
-        strong Reset filters &nbsp;
-        i.fa.fa-refresh
+section
+  collapsable-filter(expandable='true', init-collapsed='false', tags='tags', search-placeholder="Filter by rule", search='search')
+    collapsable-filter-content
+      .row
+          incidents-tri-state.col-md-6
+          total-risk-select.col-md-6

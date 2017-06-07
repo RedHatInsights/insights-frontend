@@ -16,7 +16,10 @@
   .content-wrap
     .row.search
       .col-sm-8.col-md-9
-        search-box(ng-model='searchTerm')
+        .input-group
+          span.input-group-addon
+            .i.fa.fa-search
+          search-box(ng-model='searchTerm')
       .col-sm-4.col-md-3.ui-filters
         maintenance-category-select(category='category', on-select='setCategory(category)')
 

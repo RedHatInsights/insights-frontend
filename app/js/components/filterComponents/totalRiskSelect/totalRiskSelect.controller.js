@@ -13,26 +13,46 @@ function totalRiskSelectCtrl($location,
                              Events,
                              Severities) {
     $scope.options = Severities;
+    $scope.label = 'All';
 
     $scope.select = function (option) {
         $scope.selected = option;
-        $location.search().totalRisk = $scope.selected.value;
-        $rootScope.$broadcast(Events.topicFilters.totalRisk);
+        $scope.label = option.label;
+        $location.search()[Events.filters.totalRisk] = $scope.selected.value;
+
+        // If 'All' is selected there is no reason to store the filter
+        if ($scope.selected.value === 'All') {
+            delete $location.search()[Events.filters.totalRisk];
+        }
+
+        $rootScope.$broadcast(Events.filters.totalRisk);
     };
 
     function read() {
         $scope.selected = find($scope.options, (option) => {
-            return option.value === $location.search().totalRisk ?
-                $location.search().totalRisk : 'All';
+            return option.value === $location.search()[Events.filters.totalRisk];
         });
+
+        $scope.selected = $scope.selected ? $scope.selected :
+            find($scope.options, (option) => {
+                return option.value === 'All';
+            });
+
+        $scope.label = $scope.selected.label;
     }
+
+    $scope.$on(Events.filters.totalRisk, function () {
+        read();
+    });
 
     read();
 
-    $scope.$on(Events.topicFilters.reset, function () {
+    $scope.$on(Events.filters.reset, function () {
         $scope.selected = find($scope.options, (option) => {
             return option.value === 'All';
         });
+
+        $scope.label = $scope.selected.label;
     });
 }
 

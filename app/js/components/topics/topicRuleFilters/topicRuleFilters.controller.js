@@ -5,13 +5,24 @@ var componentsModule = require('../../');
 /**
  * @ngInject
  */
-function topicRuleFiltersCtrl($scope, FilterService, Events, Group) {
+function topicRuleFiltersCtrl($location, $scope, Events) {
 
-    $scope.resetFilters = function () {
-        Group.setCurrent({});
-        $scope.$emit('group:change', {});
-        $scope.$broadcast(Events.topicFilters.reset);
-    };
+    $scope.tags = {};
+
+    function initTags () {
+        addTag(Events.filters.incident);
+        addTag(Events.filters.totalRisk);
+    }
+
+    function addTag (tag) {
+        let value = $location.search()[tag];
+
+        if (value) {
+            $scope.tags[tag] = value;
+        }
+    }
+
+    initTags();
 }
 
 function topicRuleFilters() {

@@ -1,8 +1,8 @@
-.col-toggle
-    label.full-width(translate) Incidents
-    input(type="radio", ng-model="showIncidents", value='all', ng-change='filterIncidents()')
-    span &nbsp; All &nbsp;
-    input(type="radio", ng-model="showIncidents", value='incidents', ng-change='filterIncidents()')
-    span &nbsp; Incident &nbsp;
-    input(type="radio", ng-model="showIncidents", value='nonIncidents', ng-change='filterIncidents()')
-    span &nbsp; No Incident &nbsp;
+.filter-group
+    label(translate)
+        strong Incidents
+    .radio-group
+        .radio-inline(ng-repeat='(k, v) in incidentFilters')
+            label(translate)
+                input(type="radio", name='incidentFilterRadio' ng-model="showIncidents", value='{{k}}', ng-click='filterIncidents(k)')
+                span {{v.title}}

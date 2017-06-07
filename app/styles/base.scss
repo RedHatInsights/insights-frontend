@@ -137,6 +137,16 @@ $define-fa: true !default;
 @import 'components/card';
 @import 'components/inventory';
 
+// Table Filters
+//==================================================================*
+@import 'components/toolbar/toolbar';
+@import 'components/toolbar/toolbar--data-filters';
+
+
+// UI Filters
+//==================================================================*/
+@import 'components/ui-filters/ui-filters';
+
 
 // Namespaced
 //==================================================================*/

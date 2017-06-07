@@ -36,9 +36,9 @@ function topicRuleListCtrl ($filter,
         $scope.loading = true;
         $scope.showRulesWithNoHits = false;
         $scope.hiddenCount = 0;
-        $scope.filterIncidents = $location.search().filterIncidents;
+        $scope.filterIncidents = $location.search()[Events.filters.incident];
         $scope.filterIncidents = $scope.filterIncidents ? $scope.filterIncidents : 'all';
-        $scope.totalRisk = $location.search().totalRisk;
+        $scope.totalRisk = $location.search()[Events.filters.totalRisk];
         $scope.totalRisk = $scope.totalRisk ? $scope.totalRisk : 'All';
         IncidentsService.init()
         .then(function () {
@@ -62,19 +62,21 @@ function topicRuleListCtrl ($filter,
     });
 
     // Listens for change in incidents filter
-    $scope.$on(Events.topicFilters.incident, function () {
-        $scope.filterIncidents = $location.search().filterIncidents;
+    $scope.$on(Events.filters.incident, function () {
+        $scope.filterIncidents = $location.search()[Events.filters.incident];
+        $scope.filterIncidents = $scope.filterIncidents ? $scope.filterIncidents : 'all';
         updateList($scope.topic);
     });
 
     // Listens for change in total risk filter
-    $scope.$on(Events.topicFilters.totalRisk, function () {
-        $scope.totalRisk = $location.search().totalRisk;
+    $scope.$on(Events.filters.totalRisk, function () {
+        $scope.totalRisk = $location.search()[Events.filters.totalRisk];
+        $scope.totalRisk = $scope.totalRisk ? $scope.totalRisk : 'All';
         updateList($scope.topic);
     });
 
     // Listens for Reset filters
-    $scope.$on(Events.topicFilters.reset, function () {
+    $scope.$on(Events.filters.reset, function () {
         $scope.filterIncidents = 'all';
         $scope.totalRisk = 'All';
         updateList($scope.topic);
@@ -85,11 +87,11 @@ function topicRuleListCtrl ($filter,
         // Filter based on incidents value
         if ($scope.filterIncidents === 'incidents') {
             rules = _filter(rules, (rule) => {
-                return IncidentsService.isIncident(rule);
+                return IncidentsService.isIncident(rule.rule_id);
             });
         } else if ($scope.filterIncidents === 'nonIncidents') {
             rules = _filter(rules, (rule) => {
-                return !IncidentsService.isIncident(rule);
+                return !IncidentsService.isIncident(rule.rule_id);
             });
         }
 

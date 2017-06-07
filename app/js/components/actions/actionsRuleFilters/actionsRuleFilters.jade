@@ -4,7 +4,10 @@
     //  product-select
     .col-sm-6
       label.invisible(translate='translate') Search
-      search-box(on-search='search.doFilter(model)')
+      .input-group
+        span.input-group-addon
+          .i.fa.fa-search
+        search-box(on-search='search.doFilter(model)')
     .col-sm-3.col-sm-offset-3
       check-in-select
     //.col-sm-4
