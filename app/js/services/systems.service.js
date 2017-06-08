@@ -90,16 +90,18 @@ function SystemsService($filter,
     };
 
     systemsService.getSystemFacts = function (system, metadata) {
+        var server_type = get(metadata, 'system_information.product_name');
+        var virtual_machines = ['VMware Virtual Platform',
+                                   'VirtualBox',
+                                   'KVM',
+                                   'Bochs',
+                                   'Virtual Machine'];
 
         // add system data
         var systemData = [];
         systemData.push({
             label: 'OS',
             value: $filter('productShortName')(get(metadata, 'release'))
-        });
-        systemData.push({
-            label: 'Hardware Platform',
-            value: getHardwarePlatform(metadata)
         });
 
         if (system.product_code === Products.docker.code) {
@@ -145,6 +147,60 @@ function SystemsService($filter,
             value: $filter('timeAgo')(get(system, 'last_check_in'))
         });
 
+        systemData.push({
+            label: 'Timezone',
+            value: formatTimezoneString(metadata)
+        });
+
+        if (virtual_machines.indexOf(server_type) !== -1) {
+            systemData.push({
+                label: 'Server Type',
+                value: 'Virtual'
+            });
+
+            systemData.push({
+                label: 'Server Provider',
+                value: get(metadata, 'system_information.product_name')
+            });
+        } else if (server_type) {
+            systemData.push({
+                label: 'Server Type',
+                value: 'Physical'
+            });
+        }
+
+        systemData.push({
+            label: 'Vendor',
+            value: get(metadata, 'system_information.manufacturer')
+        });
+
+        systemData.push({
+            label: 'Model',
+            value: get(metadata, 'system_information.family')
+        });
+
+        systemData.push({
+            label: 'Version',
+            value: get(metadata, 'system_information.version')
+        });
+
+        systemData.push({
+            label: 'Serial Number',
+            value: get(metadata, 'system_information.serial_number')
+        });
+
+        systemData.push({
+            label: `Satellite ${get(metadata, 'satellite_information.version')}`,
+            value: get(metadata, 'satellite_information.hostname')
+        });
+
+        getListeningProcessesInformation(metadata).forEach(function (processInfo) {
+            systemData.push({
+                label: processInfo.label,
+                value: processInfo.value
+            });
+        });
+
         // remove items that are undefined
         arrayRemove(systemData, function (n) {
             return n.value === undefined ||
@@ -157,29 +213,71 @@ function SystemsService($filter,
             systemData.slice(Math.ceil(systemData.length / 2), systemData.length)];
     };
 
-    function getHardwarePlatform (metadata) {
-        var systemInfoProperties = ['system_information.product_name',
-                                'system_information.version',
-                                'system_information.family',
-                                'system_information.manufacturer'];
-        var i = 0;
-        var value = get(metadata, systemInfoProperties[systemInfoProperties.length - 1]);
+    function formatTimezoneString(metadata) {
+        const tzString = get(metadata, 'timezone_information.timezone');
+        let offset = parseInt(get(metadata, 'timezone_information.utcoffset'));
+        let offsetStr;
 
-        // intentionally skips over last element
-        // since the value is set to it by default
-        // if none of the other elements have whitespace
-        for (i = 0; i < systemInfoProperties.length - 1; i++) {
+        // Formats the utc offset from seconds to (+/-)HH:MM
+        // Example: +04:00, -12:00
+        if (offset) {
+            const offset_hrs = Math.floor(Math.abs(offset / 3600));
+            const offset_min = Math.abs((offset % 3600) / 3600) * 60;
 
-            // we don't care about first character whitespace
-            if (get(metadata, systemInfoProperties[i]) &&
-                get(metadata, systemInfoProperties[i]).substring(1).indexOf(' ') >= 0) {
+            if (offset < 0) {
+                offsetStr = '-';
+            } else if (offset >= 0) {
+                offsetStr = '+';
+            }
 
-                value = get(metadata, systemInfoProperties[i]);
+            if (offset_hrs < 10 && offset_min < 10) {
+                offsetStr += `0${offset_hrs}:0${offset_min}`;
+            } else if (offset_hrs > 10 && offset_min > 10) {
+                offsetStr += `${offset_hrs}:${offset_min}`;
+            } else if (offset_hrs < 10 && offset_min > 10) {
+                offsetStr += `0${offset_hrs}:${offset_min}`;
+            } else if (offset_hrs > 10 && offset_min < 10) {
+                offsetStr += `${offset_hrs}:0${offset_min}`;
+            }
+
+            // Puts the timezone name behind the offset
+            // Example: +0400 (EDT)
+            if (tzString) {
+                offsetStr += ` (${tzString})`;
+            }
+
+            return offsetStr;
+        } else if (tzString) {
+            return `${tzString}`;
+        }
+    }
+
+    function getListeningProcessesInformation(metadata) {
+        let processes = [];
+
+        let i = 0;
+        while (true) {
+            let name = get(metadata, `listening_processes.${i}.process_name`);
+            let ip = get(metadata, `listening_processes.${i}.ip_addr`);
+            let port = get(metadata, `listening_processes.${i}.port`);
+
+            if (name && port) {
+                if (port.substring(0, 1) !== ':') {
+                    port = ':' + port;
+                }
+
+                processes.push({
+                    label: `Process ${name}`,
+                    value: (ip || '') + port
+                });
+            } else {
                 break;
             }
+
+            i++;
         }
 
-        return value;
+        return processes;
     }
 
     systemsService.populateNewestSystems = function (product) {
