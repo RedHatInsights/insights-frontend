@@ -36,19 +36,22 @@ We want the release commits to not include any additional changes.
         cb = cb || function () {};
         global.isProd = true;
         global.isRelease = true;
-        runSequence(bump, 'release-tag', 'release-commit', cb);
+        runSequence(bump, 'release-commit', 'release-tag', cb);
     });
 }
 
 gulp.task('release-tag', function () {
     const version = priv.getVersion();
-    git.tag(version, `Release ${version}`);
+    git.tag(version, `Release TEST ${version}`, function (err) {
+        if (err) { throw err; }
+    });
 });
 
-gulp.task('release-commit', function () {
+gulp.task('release-commit', function (cb) {
     const version = priv.getVersion();
     gulp.src(['./package.json', './bower.json'])
-        .pipe(git.commit(`Release ${version}`));
+        .pipe(git.commit(`Release ${version}`))
+        .on('end', cb);
 });
 
 gulp.task('release', ['releasepatch']);

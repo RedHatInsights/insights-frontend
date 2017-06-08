@@ -2,8 +2,8 @@
   .graph.graph-filters(ng-if='dropDown')
     .row
       .col-sm-3.col-sm-offset-9
-        .dropdown.show
-          a(data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+        .dropdown.full-width.show
+          button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
             div(translate) {{dropDown}}
             span.caret
           ul.dropdown-menu
