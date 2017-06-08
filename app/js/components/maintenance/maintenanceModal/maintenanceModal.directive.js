@@ -393,7 +393,7 @@ function maintenanceModalCtrl($scope,
     $scope.searchSystems = function (value) {
         const params = {
             page_size: 30,
-            page: 1,
+            page: 0,
             report_count: 'gt0'
         };
 
