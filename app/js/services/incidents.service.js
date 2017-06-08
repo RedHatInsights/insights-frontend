@@ -6,8 +6,8 @@ var servicesModule = require('./');
  * @ngInject
  */
 function IncidentsService ($q, Topic) {
-    var service = {};
-    var incidentRules = [];
+    let service = {};
+    let incidentRules = [];
 
     service.init = function () {
         if (incidentRules.length === 0) {

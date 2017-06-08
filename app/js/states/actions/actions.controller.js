@@ -74,6 +74,7 @@ function ActionsCtrl(
                 }
 
                 $scope.incidentCount = rulesWithHits;
+                $scope.incidentSystemCount = topic.affectedSystemCount;
             });
         });
     });

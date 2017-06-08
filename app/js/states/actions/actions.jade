@@ -1,11 +1,12 @@
 .actions-page
   //platform-filter
   new-actions-graph
+
   .content-wrap
     section.metrics
       .rha-notifications
       .row
-        .col-md-7.chart-col.clearfix
+        .col-md-6.chart-col.clearfix
           .chart-container.text-center
             span.preloader(ng-show='loading')
             .donut-container
@@ -30,17 +31,120 @@
                         i.fa.fa-square.inline-right(ng-class="category.id + '-color'", aria-hidden="true")
                         span.desc(translate) {{category.id | titlecase}}
                         span.count &nbsp;({{category.count}})
-        .col-md-5
+        .col-md-6
+          card.widget.widgetIncidentSummary(id="widgetIncidentSummary", ng-show='incidentCount > 0')
+            card-header.gray
+              h4(translate) Incident summary
+            card-content.flexgrid.equalheights
+              .row
+                .col-sm-3
+                  #countComparison.countComparison
+                    .count
+                      .num {{incidentCount}}
+                      .desc(translate) Incidents
+                    .count
+                      .num {{incidentSystemCount}}
+                      .desc(translate) Systems
+                .col-sm-9.border-left
+                  .icon-inline
+                    i.fa.fa-bullseye
+                    p(translate) An&nbsp;
+                      strong incident&nbsp;
+                      | is an issue that is currently or has already affected systems. {{incidentCount}} of {{stats.rules.total}} issues are INCIDENTS affecting {{incidentSystemCount}} systems. It is imperative that these incidents be addressed to ensure optimal performance.
+                    br
+                    a.link.strong(translate, href="linkToRules") View incidents
+
+          card.widget.widgetIncidentSummary(id="widgetIncidentSummary", ng-show='incidentCount === 0')
+            card-header.gray
+              h4(translate) Incident summary
+            card-content.flexgrid.equalheights
+              .row
+                .col-md-12
+                  #countComparison.countComparison
+                    .count
+                      span.num.success 0
+                      span.desc incidents
+                .col-md-12
+                  .icon-inline
+                    i.fa.fa-bullseye
+                    p(translate) An&nbsp;
+                      strong incident&nbsp;
+                      | is an issue that is currently or has already affected systems. You have 0 issues that are INCIDENTS. It is imperative that these incidents be addressed to ensure optimal performance.
+
+
+          //card.widget.widgetIncidentSummary(id="widgetIncidentSummary")
+          //  card-header.gray
+          //    h4(translate) Incident summary
+          //  card-content.flexgrid.equalheights
+          //    .row
+          //      .col-md-5
+          //        #countComparison.countComparison
+          //          .count
+          //            span.num 24
+          //            span.desc incidents
+          //          .count
+          //            span.num 48
+          //            span.desc systems
+          //      .col-md-7
+          //        .icon-inline
+          //          i.fa.fa-bullseye
+          //          p(translate) An&nbsp;
+          //            strong incident&nbsp;
+          //            | is an issue that is currently or has already affected systems. 24 of 62 issues are INCIDENTS affecting 48 systems. It is imperative that these incidents be addressed to ensure optimal performance.
+          //          br
+          //          a.link.strong(translate, hre="linkToRules") View incidents
+          //
+          //
+          //card.widget.widgetIncidentSummary(id="widgetIncidentSummary")
+          //  card-header.gray
+          //    h4(translate) Incident summary
+          //  card-content.flexgrid.equalheights
+          //    .row.border-bottom
+          //      .col-md-12
+          //        #countComparison.countComparison
+          //          .row
+          //            .col-sm-6.text-center
+          //              .count
+          //                span.num 24
+          //                span.desc incidents
+          //            .col-sm-6.text-center
+          //              .count
+          //                span.num 48
+          //                span.desc systems
+          //    .row
+          //      .col-md-12
+          //        .icon-inline
+          //          i.fa.fa-bullseye
+          //          p(translate) An&nbsp;
+          //            strong incident&nbsp;
+          //            | is an issue that is currently or has already affected systems. 24 of 62 issues are INCIDENTS affecting 48 systems. It is imperative that these incidents be addressed to ensure optimal performance.
+          //          br
+          //          a.link.strong(translate, hre="linkToRules") View incidents
+          //
+          //
+          //card.widget.widgetIncidentSummary(id="widgetIncidentSummary")
+          //  card-header.gray
+          //    h4(translate) Incident summary
+          //  card-content.flexgrid.equalheights
+          //    .row
+          //      .col-md-12
+          //        #countComparison.countComparison
+          //          .count
+          //            span.num.success 0
+          //            span.desc incidents
+          //      .col-md-12
+          //        .icon-inline
+          //          i.fa.fa-bullseye
+          //          p(translate) An&nbsp;
+          //            strong incident&nbsp;
+          //            | is an issue that is currently or has already affected systems. You have 0 issues that are INCIDENTS. It is imperative that these incidents be addressed to ensure optimal performance.
+
+
           card
             card-header.gray
               h4(translate) Risk summary
             card-content
               severity-summary(stats='stats')
-          card(ng-if='stats.systems')
-            card-header.gray
-              h4(translate) Systems with critical risk
-            card-content
-              system-summary(stats='stats')
 
     section.gray.full-width
       span.pull-right(ng-show='isContentManager')

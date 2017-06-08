@@ -125,7 +125,6 @@ function collapsableFilter() {
             }
 
             bindCssClass(scope, element, '!collapsed', 'expanded');
-            bindCssClass(scope, element, 'expandable', 'content-block-expandable');
         }
     };
 }

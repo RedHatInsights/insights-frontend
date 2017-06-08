@@ -44,7 +44,7 @@ i.fa.fa-bullseye {
 }
 
 .icon-inline, .inline-right {
-    margin-right: 4px;
+
 }
 
 .inline-left {
@@ -74,4 +74,15 @@ i.fa.fa-bullseye {
 
 h2 .ansible-icon img {
     width: 32px;
+}
+
+.icon-inline {
+  position: relative;
+  @include rem('padding-left', 18px);
+
+  i {
+    position: absolute;
+    left: 0;
+  }
+
 }
