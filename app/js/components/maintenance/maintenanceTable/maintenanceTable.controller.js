@@ -14,7 +14,7 @@ function MaintenanceTable(
     $filter,
     Utils,
     MaintenanceService,
-    SweetAlert,
+    sweetAlert,
     gettextCatalog) {
 
     var ctrl = this;
@@ -44,7 +44,7 @@ function MaintenanceTable(
                 [MaintenanceService.MAINTENANCE_ACTION_TYPE.PLANNED_ELSEWHERE];
 
             if (overlapCount) {
-                return SweetAlert.swal({
+                return sweetAlert({
                     title: gettextCatalog.getString('Select overlapping actions?'),
                     text: gettextCatalog.getPlural(overlapCount,
                         'This selection contains an action that  ' +
@@ -54,21 +54,15 @@ function MaintenanceTable(
                         'that are already part of another plan. ' +
                         'Do you want to include these actions?',
                         {count: overlapCount}),
-                    type: 'info',
-                    confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'Yes',
-                    showCancelButton: true,
-                    cancelButtonText: 'No'
-                }, function (isConfirm) {
-                    var actions = ctrl.filteredActions;
-                    if (!isConfirm) {
-                        actions =
-                            reject(actions, {
-                                _type: MaintenanceService.
-                                    MAINTENANCE_ACTION_TYPE.PLANNED_ELSEWHERE
-                            });
-                    }
-
+                    cancelButtonText: gettextCatalog.getString('No')
+                }).then(function () {
+                    return ctrl.filteredActions;
+                }).catch(function () {
+                    return reject(ctrl.filteredActions, {
+                        _type: MaintenanceService.
+                        MAINTENANCE_ACTION_TYPE.PLANNED_ELSEWHERE
+                    });
+                }).then(function (actions) {
                     $scope.checkboxes.checkboxChecked($scope.checkboxes.checked, actions);
                 });
             }
