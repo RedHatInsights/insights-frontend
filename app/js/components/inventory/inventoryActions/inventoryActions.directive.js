@@ -3,7 +3,6 @@
 var componentsModule = require('../../');
 var find = require('lodash/find');
 const partition = require('lodash/partition');
-const clone = require('lodash/clone');
 const groupBy = require('lodash/groupBy');
 const map = require('lodash/map');
 
@@ -16,11 +15,11 @@ const UNREGISTER_TYPE_CONFICT =
 function inventoryActionsCtrl(
     $scope,
     $rootScope,
+    sweetAlert,
     InventoryService,
     FilterService,
     SystemsService,
     MaintenanceService,
-    SweetAlert,
     $timeout,
     gettextCatalog,
     TemplateService,
@@ -77,23 +76,17 @@ function inventoryActionsCtrl(
             TemplateService.renderTemplate(UNREGISTER_TYPE_CONFICT, {
                 roles: roles,
                 validCount: parts[0].length
-            }).then(function (text) {
-                const opts = clone(SweetAlert.DEFAULT_WARNING_OPTS);
-                opts.title = gettextCatalog.getPlural(parts[1].length,
-                    '1 system cannot be unregistered',
-                    '{{count}} systems cannot be unregistered',
-                    {count: parts[1].length});
-                opts.text = text;
+            }).then(function (html) {
+                const opts = {
+                    title: gettextCatalog.getPlural(parts[1].length,
+                        '1 system cannot be unregistered',
+                        '{{count}} systems cannot be unregistered',
+                        {count: parts[1].length}),
+                    html
+                };
 
-                return SweetAlert.swal(opts);
-            }).then(function (decision) {
-                if (decision) {
-
-                    // this is ugly but it takes SweetAlert about 100ms to retract
-                    // during that period a new SweetAlert cannot be open
-                    $timeout(unregister, 200);
-                }
-            });
+                return sweetAlert(opts);
+            }).then(unregister);
         }
     };
 

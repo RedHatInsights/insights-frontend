@@ -18,9 +18,9 @@ function systemSummaryTableCtrl(
     $filter,
     $modal,
     $location,
+    sweetAlert,
     System,
     NgTableParams,
-    SweetAlert,
     Utils,
     InsightsConfig,
     gettextCatalog,
@@ -366,37 +366,29 @@ function systemSummaryTableCtrl(
                 count: count
             });
 
-        SweetAlert.swal({
-            title: 'Are you sure?',
-            text: message,
-            type: 'warning',
-            confirmButtonColor: '#DD6B55',
-            confirmButtonText: 'Yes',
-            html: true,
-            showCancelButton: true
-        }, function (isConfirm) {
-            if (isConfirm) {
-                for (let i = 0; i < toDelete.length; i++) {
-                    System.deleteSystem(toDelete[i]);
-                }
+        sweetAlert({
+            html: message
+        }).then(function () {
+            for (let i = 0; i < toDelete.length; i++) {
+                System.deleteSystem(toDelete[i]);
+            }
 
-                for (let i = data.length - 1; i >= 0; i--) {
-                    let system = data[i];
-                    if (toDelete.indexOf(system.machine_id) !== -1) {
-                        data.splice(i, 1);
-                        if ($scope.summary && system.reports && system.reports.length) {
-                            $scope.summary.red--;
-                        } else if ($scope.summary &&
-                                   system.reports &&
-                                   !system.reports.length) {
+            for (let i = data.length - 1; i >= 0; i--) {
+                let system = data[i];
+                if (toDelete.indexOf(system.machine_id) !== -1) {
+                    data.splice(i, 1);
+                    if ($scope.summary && system.reports && system.reports.length) {
+                        $scope.summary.red--;
+                    } else if ($scope.summary &&
+                        system.reports &&
+                        !system.reports.length) {
 
-                            $scope.summary.green--;
-                        }
+                        $scope.summary.green--;
                     }
                 }
-
-                $scope.tableParams.reload();
             }
+
+            $scope.tableParams.reload();
         });
     };
 

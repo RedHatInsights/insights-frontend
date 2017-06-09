@@ -1,68 +1,28 @@
 'use strict';
 
-var servicesModule = require('./');
-var swal = require('sweetalert');
+const servicesModule = require('./');
+const swal = require('sweetalert2');
 
 /**
  * @ngInject
  */
-function SweetAlert($rootScope, $q) {
-    return {
-        swal: function (arg1, arg2, arg3) {
-            const defer = $q.defer();
-            $rootScope.$evalAsync(function () {
-                if (typeof (arg2) === 'function') {
-                    swal(arg1, function (isConfirm) {
-                        $rootScope.$evalAsync(function () {
-                            arg2(isConfirm);
-                            defer.resolve(isConfirm);
-                        });
-                    }, arg3);
-                } else if (typeof arg1 === 'object' && !angular.isDefined(arg2)) {
-                    swal(arg1, function (val) {
-                        defer.resolve(val);
-                    });
-                } else {
-                    swal(arg1, arg2, arg3);
-                }
-            });
+function sweetAlert($rootScope, $q, gettextCatalog) {
 
-            return defer.promise;
-        },
+    const DEFAULTS = {
+        title: gettextCatalog.getString('Are you sure?'),
+        type: 'warning',
+        confirmButtonColor: '#08C0FC',
+        confirmButtonText: gettextCatalog.getString('Yes'),
+        showCancelButton: true,
+        cancelButtonText: gettextCatalog.getString('Cancel')
+    };
 
-        success: function (title, message) {
-            $rootScope.$evalAsync(function () {
-                swal(title, message, 'success');
-            });
-        },
-
-        error: function (title, message) {
-            $rootScope.$evalAsync(function () {
-                swal(title, message, 'error');
-            });
-        },
-
-        warning: function (title, message) {
-            $rootScope.$evalAsync(function () {
-                swal(title, message, 'warning');
-            });
-        },
-
-        info: function (title, message) {
-            $rootScope.$evalAsync(function () {
-                swal(title, message, 'info');
-            });
-        },
-
-        DEFAULT_WARNING_OPTS: Object.freeze({
-            title: 'Are you sure?',
-            type: 'warning',
-            confirmButtonColor: '#DD6B55',
-            confirmButtonText: 'Yes',
-            html: true,
-            showCancelButton: true
-        })
+    return function (options) {
+        const opts = angular.extend({}, DEFAULTS, options);
+        const defer = $q.defer();
+        swal(opts).then(defer.resolve).catch(defer.reject);
+        return defer.promise;
     };
 }
 
-servicesModule.factory('SweetAlert', SweetAlert);
+servicesModule.factory('sweetAlert', sweetAlert);
