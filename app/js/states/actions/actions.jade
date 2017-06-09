@@ -52,7 +52,7 @@
                       strong incident&nbsp;
                       | is an issue that is currently or has already affected systems. {{incidentCount}} of {{stats.rules.total}} issues are INCIDENTS affecting {{incidentSystemCount}} systems. It is imperative that these incidents be addressed to ensure optimal performance.
                     br
-                    a.link.strong(translate, href="linkToRules") View incidents
+                    a.link.strong(translate, ui-sref="app.topic({id: 'incidents'})") View incidents
 
           card.widget.widgetIncidentSummary(id="widgetIncidentSummary", ng-show='incidentCount === 0')
             card-header.gray

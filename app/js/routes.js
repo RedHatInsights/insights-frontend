@@ -53,11 +53,14 @@ function Routes($stateProvider) {
         })
 
         .state('app.topic', {
-            url: '/actions/:id?product',
+            url: '/actions/:id',
             templateUrl: 'js/states/topics/views/topic-list.html',
             controller: 'TopicRuleListCtrl',
             title: 'Actions',
-            actions: true
+            actions: true,
+            params: {
+                'filters:totalRisk': 'All'
+            }
         });
 
     $stateProvider

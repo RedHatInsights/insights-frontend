@@ -20,6 +20,7 @@ function ActionsRuleCtrl(
         $timeout,
         ActionsBreadcrumbs,
         FilterService,
+        IncidentsService,
         InsightsConfig,
         ListTypeService,
         MaintenanceService,
@@ -179,6 +180,8 @@ function ActionsRuleCtrl(
     function getData() {
         $scope.loading = true;
 
+        IncidentsService.init();
+
         let populateDetailsPromise =
             RhaTelemetryActionsService.populateDetails().then(function () {
                 let ruleDetails = RhaTelemetryActionsService.getRuleDetails();
@@ -298,6 +301,10 @@ function ActionsRuleCtrl(
         RhaTelemetryActionsService.setIsScrolling(false);
 
         $scope.loading = false;
+    };
+
+    $scope.isIncident = function (ruleId) {
+        return IncidentsService.isIncident(ruleId);
     };
 
     if (InsightsConfig.allowExport) {

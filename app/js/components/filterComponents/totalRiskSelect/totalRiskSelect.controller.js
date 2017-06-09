@@ -18,7 +18,7 @@ function totalRiskSelectCtrl($location,
     $scope.select = function (option) {
         $scope.selected = option;
         $scope.label = option.label;
-        $location.search()[Events.filters.totalRisk] = $scope.selected.value;
+        $location.search(Events.filters.totalRisk, $scope.selected.value);
 
         // If 'All' is selected there is no reason to store the filter
         if ($scope.selected.value === 'All') {

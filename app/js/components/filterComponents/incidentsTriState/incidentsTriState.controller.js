@@ -11,11 +11,11 @@ function incidentsTriStateCtrl($location, $rootScope, $scope, Events, IncidentFi
 
     $scope.filterIncidents = function (key) {
         $scope.showIncidents = key;
-        $location.search()[Events.filters.incident] = $scope.showIncidents;
+        $location.search(Events.filters.incident, $scope.showIncidents);
 
         // If 'All' is selected there is no reason to store the filter
         if ($scope.showIncidents === 'all') {
-            delete $location.search()[Events.filters.totalRisk];
+            delete $location.search()[Events.filters.incident];
         }
 
         $rootScope.$broadcast(Events.filters.incident);

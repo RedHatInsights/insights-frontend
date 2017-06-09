@@ -9,6 +9,7 @@ function topicRuleListCtrl ($filter,
                             $rootScope,
                             $scope,
                             $state,
+                            $stateParams,
                             Events,
                             IncidentsService,
                             InsightsConfig,
@@ -36,6 +37,13 @@ function topicRuleListCtrl ($filter,
         $scope.loading = true;
         $scope.showRulesWithNoHits = false;
         $scope.hiddenCount = 0;
+
+        if ($stateParams[Events.filters.totalRisk] &&
+            $stateParams[Events.filters.totalRisk] !== 'All') {
+            $location.search(Events.filters.totalRisk,
+                $stateParams[Events.filters.totalRisk]);
+        }
+
         $scope.filterIncidents = $location.search()[Events.filters.incident];
         $scope.filterIncidents = $scope.filterIncidents ? $scope.filterIncidents : 'all';
         $scope.totalRisk = $location.search()[Events.filters.totalRisk];

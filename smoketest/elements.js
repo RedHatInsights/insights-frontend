@@ -53,7 +53,7 @@ const obj =  {
 };
 
 ['security', 'availability', 'stability', 'performance'].forEach(function (category) {
-    obj.actions.page1['legend_' + category] = 'table.legend a.' + category;
+    obj.actions.page1['legend_' + category] = 'table.legend td a.' + category;
 });
 
 var i = 1;
