@@ -14,12 +14,10 @@ section.widget-block
               .desc(translate) {{ r.description }}
           .row.row-metrics
             .col-sm-6
-              .icon-inline
-                .severity-icon.severity(ng-init='init()', type='severity', severity='rule.severity')
-                  // end ngIf: label
-                  i.critical(tooltip='Total Risk: Critical')
-                  span.severity(translate='translate')
-                    span.ng-binding.ng-scope Total Risk
+              .icon-inline.severity-icon
+                severity-icon(severity='r.severity', type='severity', label='')
+                span.severity(translate='translate')
+                  span.ng-binding.ng-scope &nbsp;Total Risk
             .col-sm-6
               .icon-inline
                 i.fa.fa-desktop(aria-hidden="true") &nbsp;
