@@ -45,3 +45,15 @@
     @include opacity(1);
   }
 }
+
+li.system-group {
+    i.group-control {
+        visibility: hidden;
+    }
+
+    &:hover {
+        i.group-control {
+            visibility: visible;
+        }
+    }
+}
