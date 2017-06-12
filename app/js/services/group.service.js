@@ -11,6 +11,19 @@ const some = require('lodash/some');
 */
 function GroupService($q, gettextCatalog, sweetAlert, Group) {
 
+    function groupNameValidator (name) {
+        if (!name || typeof name !== 'string' || !name.length) {
+            return $q.reject(gettextCatalog
+                .getString('Please specify a system group name'));
+        }
+
+        if (some(Group.groups, group => group.display_name === name)) {
+            return $q.reject(gettextCatalog.getString('Name already used'));
+        }
+
+        return $q.resolve();
+    }
+
     function groupSystems (selectedSystems) {
 
         function assignSystemsToGroup (group) {
@@ -61,18 +74,7 @@ function GroupService($q, gettextCatalog, sweetAlert, Group) {
             type: undefined,
             confirmButtonText: gettextCatalog.getString('Save'),
             inputPlaceholder: gettextCatalog.getString('Group name'),
-            inputValidator: function (name) {
-                if (!name || typeof name !== 'string' || !name.length) {
-                    return $q.reject(gettextCatalog
-                        .getString('Please specify a system group name'));
-                }
-
-                if (some(Group.groups, group => group.display_name === name)) {
-                    return $q.reject(gettextCatalog.getString('Name already used'));
-                }
-
-                return $q.resolve();
-            }
+            inputValidator: groupNameValidator
         }).then(function (name) {
             return Group.createGroup({
                 display_name: name
@@ -80,9 +82,27 @@ function GroupService($q, gettextCatalog, sweetAlert, Group) {
         });
     }
 
+    function deleteGroup (group) {
+        const html = gettextCatalog.getString(
+            'You will not be able to recover <code>{{name}}</code>',
+            {
+                name: group.display_name
+            });
+        sweetAlert({
+            html
+        }).then(function () {
+            return Group.deleteGroup(group);
+        }).then(function () {
+            if (group.id === Group.current().id) {
+                Group.setCurrent();
+            }
+        });
+    }
+
     return {
         groupSystems,
-        createGroup
+        createGroup,
+        deleteGroup
     };
 }
 

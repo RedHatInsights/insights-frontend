@@ -5,20 +5,9 @@ var componentsModule = require('../');
 /**
  * @ngInject
  */
-function groupCtrl($scope, sweetAlert, Group, gettextCatalog) {
+function groupCtrl($scope, sweetAlert, Group, gettextCatalog, GroupService) {
     $scope.isCollapsed = false;
-
-    $scope.deleteGroup = function (group) {
-        const html = gettextCatalog.getString(
-            'You will not be able to recover <code>{{name}}</code>', {
-                name: group.display_name
-            });
-        sweetAlert({
-            html
-        }).then(function () {
-            Group.deleteGroup(group);
-        });
-    };
+    $scope.deleteGroup = GroupService.deleteGroup;
 }
 
 function group() {

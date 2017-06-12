@@ -39,6 +39,7 @@ function groupSelectCtrl(
     });
 
     $scope.createGroup = GroupService.createGroup;
+    $scope.deleteGroup = GroupService.deleteGroup;
 }
 
 function groupSelect() {
