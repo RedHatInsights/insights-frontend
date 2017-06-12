@@ -2,7 +2,7 @@
 
 var servicesModule = require('./');
 
-function InventoryService($location, $modal, FilterService, System) {
+function InventoryService($location, $modal, FilterService, System, InsightsConfig) {
     var inventoryService = {};
     var _sort = {
         field: 'toString',
@@ -106,6 +106,11 @@ function InventoryService($location, $modal, FilterService, System) {
     inventoryService.showSystemModal = function (system, loadSystem) {
 
         function displayModal(system) {
+            if (typeof InsightsConfig.systemShowSystem === 'function') {
+                InsightsConfig.systemShowSystem(system);
+                return;
+            }
+
             function openModal(opts) {
                 if (inventoryService._systemModal) {
                     return; // Only one modal at a time please

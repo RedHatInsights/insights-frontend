@@ -146,13 +146,13 @@ function ActionsRuleCtrl(
     $scope.showSystem = function (system) {
         let systems;
 
-        if (typeof InsightsConfig.actionsShowSystem === 'function') {
-            return InsightsConfig.actionsShowSystem(system.toString());
-        }
-
         systems = RhaTelemetryActionsService.getClusterAffectedSystems();
         if (typeof system === 'string' && systems && systems.hasOwnProperty(system)) {
             system = systems[system];
+        }
+
+        if (typeof InsightsConfig.actionsShowSystem === 'function') {
+            return InsightsConfig.actionsShowSystem(system);
         }
 
         $modal.open({
