@@ -193,7 +193,7 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
         };
 
         $scope.digest_registered = justLineGraph(
-            digestBase, 'checkins_per_day', 'Registered Systems', '#97cde6');
+            digestBase, 'checkins_per_day', 'Active Systems', '#97cde6');
         $scope.digest_score = justLineGraph(
             digestBase, 'scores', 'Score', '#3083FB');
 
