@@ -10,9 +10,9 @@ function incidentIconCtrl($scope, gettextCatalog, IncidentsService) {
     $scope.tooltip = gettextCatalog.getString('This is an incident. ' +
         'An incident means that this has already occurred.');
 
-    $scope.isIncident = function (ruleId) {
-        return IncidentsService.isIncident(ruleId);
-    };
+    IncidentsService.init().then(() => {
+        $scope.isIncident = IncidentsService.isIncident($scope.ruleId);
+    });
 }
 
 function incidentIcon() {
