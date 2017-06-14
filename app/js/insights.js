@@ -20,8 +20,7 @@ require('ui-select');
 require('angular-gravatar');
 require('ng-table');
 require('angular-datepicker');
-require('ng-tags-input');
-require('ngInfiniteScroll');
+require('ng-infinite-scroll');
 
 require('./components/ui-bootstrap-custom');
 
@@ -54,7 +53,6 @@ let requires = [
     'ngSanitize',
     'ui.gravatar',
     'datePicker',
-    'ngTagsInput',
     'infinite-scroll'
 ];
 
@@ -101,6 +99,10 @@ angular.module('insights').config(require('./config'));
 angular.module('ui.select').run(function ($animate) {
     const overridden = $animate.enabled;
     $animate.enabled = function (elem) {
+        if (elem.hasOwnProperty('length') && elem.length === 1) {
+            elem = elem[0];
+        }
+
         if (elem && elem.className.includes('ui-select-choices')) {
             return false;
         }

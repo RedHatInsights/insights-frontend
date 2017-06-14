@@ -17,7 +17,6 @@ function Config(
     $anchorScrollProvider,
     $animateProvider,
     $tooltipProvider,
-    tagsInputConfigProvider,
     paginationConfig) {
 
     // strict mode requires a trailing slash
@@ -72,20 +71,6 @@ function Config(
         appendToBody: true,
         trigger: 'mouseenter',
         placement: 'top'
-    });
-
-    tagsInputConfigProvider.setDefaults('tagsInput', {
-        allowedTagsPattern: /^[a-z0-9\.\-]+$/,
-        keyProperty: 'name',
-        displayProperty: 'name',
-        minLength: '2',
-        template: 'js/components/tag/tag.html'
-    });
-    tagsInputConfigProvider.setDefaults('autoComplete', {
-        minLength: '0',
-        loadOnFocus: 'true',
-        loadOnEmpty: 'true',
-        selectFirstMatch: 'false'
     });
 
     paginationConfig.maxSize = 5;
