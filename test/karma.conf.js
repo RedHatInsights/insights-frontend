@@ -3,7 +3,6 @@
 
 require('babelify');
 // const istanbul = require('browserify-istanbul');
-const debowerify = require('debowerify');
 const fs = require('fs');
 const babelrc = JSON.parse(fs.readFileSync('.babelrc', "utf8"));
 
@@ -29,7 +28,6 @@ module.exports = function (config) {
             debug: true,
             transform: [
                 'babelify',
-                debowerify,
                 'bulkify'
                 // istanbul({ ignore: ['**/node_modules/**', '**/test/**'] })
             ]
@@ -46,7 +44,7 @@ module.exports = function (config) {
             'app/js/**/*js',
 
             // app-specific code
-            'app/bower_components/angular-mocks/angular-mocks.js',
+            'node_modules/angular-mocks/angular-mocks.js',
 
             // test files
             'test/unit/**/*.js'
