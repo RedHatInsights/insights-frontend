@@ -26,7 +26,7 @@ module.exports = {
     },
 
     'fonts': {
-        'src': ['app/fonts/**/*', 'app/bower_components/font-awesome/fonts/*'],
+        'src': ['app/fonts/**/*', 'node_modules/font-awesome/fonts/*'],
         'dest': 'build/fonts'
     },
 

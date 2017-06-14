@@ -3,7 +3,7 @@ $define-fa: true !default;
 //==================================================================*/
 @import 'compass';
 @import 'breakpoint';
-@import '../bower_components/font-awesome/scss/font-awesome';
+@import '../../node_modules/font-awesome/scss/font-awesome';
 @import 'includes/vars';
 @import 'includes/mixins';
 @import 'includes/helpers';
@@ -24,19 +24,19 @@ $define-fa: true !default;
 
 // Include CSS from bower components
 //==================================================================*/
-@import '../bower_components/ng-tags-input/ng-tags-input';
-@import '../bower_components/angular-datepicker/dist/angular-datepicker';
-@import '../bower_components/ui-select/dist/select';
-@import '../bower_components/sweetalert2/dist/sweetalert2';
-@import '../bower_components/c3/c3';
-@import '../bower_components/ng-table/dist/ng-table';
-.flexgrid {
-	@import '../bower_components/flexboxgrid/dist/flexboxgrid';
-}
+@import '../../node_modules/angular-datepicker/dist/angular-datepicker';
+@import '../../node_modules/ui-select/dist/select';
+@import '../../node_modules/sweetalert2/dist/sweetalert2';
+@import '../../node_modules/c3/c3';
+@import '../../node_modules/ng-table/dist/ng-table';
 
+.flexgrid {
+  @import '../../node_modules/flexboxgrid/dist/flexboxgrid';
+}
 
 // Include Vendors (used to override bower imports)
 //==================================================================*/
+// @import 'vendor/';
 @import 'vendor/c3';
 @import 'vendor/ng-table';
 @import 'vendor/_animate';
