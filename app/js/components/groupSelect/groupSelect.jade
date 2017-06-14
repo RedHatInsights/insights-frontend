@@ -17,10 +17,9 @@
       li
         a(ng-click='triggerChange(null)', translate) All Systems
       li.system-group(ng-repeat='g in groups | orderBy:"display_name" track by g.id')
-        a
-          span(ng-click='triggerChange(g)')
-            trimmed-text(length="35", text="{{g.display_name}}")
-            | &nbsp;({{g.systems.length}})
-          i.fa.fa-remove.group-control.inline-left(ng-click='deleteGroup(g)', tooltip="{{'Delete group' | translate}}")
+        a(ng-click='triggerChange(g)')
+          trimmed-text(length="35", text="{{g.display_name}}")
+          | &nbsp;({{g.systems.length}})
+          i.fa.fa-remove.group-control.inline-left(ng-click='deleteGroup(g); $event.stopPropagation();', tooltip="{{'Delete group' | translate}}")
   a.add-group(ng-click='createGroup()', tooltip='{{"Create new system group" | translate}}')
     i.fa.fa-plus-circle.pad-left(aria-hidden="true")

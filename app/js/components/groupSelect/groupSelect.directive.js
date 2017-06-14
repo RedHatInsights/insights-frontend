@@ -10,7 +10,9 @@ function groupSelectCtrl(
     $rootScope,
     $q,
     $scope,
+    $state,
     gettextCatalog,
+    sweetAlert,
     Events,
     Group,
     GroupService) {
@@ -38,7 +40,29 @@ function groupSelectCtrl(
         $scope.group = Group.current();
     });
 
-    $scope.createGroup = GroupService.createGroup;
+    $scope.createGroup = function () {
+        GroupService.createGroup().then(function (group) {
+            const html = gettextCatalog.getString(
+                'Use <strong>Actions</strong> dropdown in the inventory to add systems ' +
+                'to the <code>{{name}}</code> group',
+                {
+                    name: group.display_name
+                });
+
+            return sweetAlert({
+                title: gettextCatalog.getString('Group created'),
+                confirmButtonText: gettextCatalog.getString('OK'),
+                type: 'info',
+                html,
+                showCancelButton: false
+            });
+        }).then(function () {
+            if ($state.current.name !== 'app.inventory') {
+                $state.go('app.inventory');
+            }
+        });
+    };
+
     $scope.deleteGroup = GroupService.deleteGroup;
 }
 

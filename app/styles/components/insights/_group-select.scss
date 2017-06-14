@@ -57,3 +57,12 @@ li.system-group {
         }
     }
 }
+
+.group-select ul.dropdown-menu {
+    height: auto;
+    overflow-x: hidden;
+    max-height: 200px;
+    @include media-query (md) {
+        max-height: 600px;
+    }
+}

@@ -72,7 +72,7 @@ function GroupService($q, gettextCatalog, sweetAlert, Group) {
             title: gettextCatalog.getString('Create new System Group'),
             input: 'text',
             type: undefined,
-            confirmButtonText: gettextCatalog.getString('Save'),
+            confirmButtonText: gettextCatalog.getString('Create'),
             inputPlaceholder: gettextCatalog.getString('Group name'),
             inputValidator: groupNameValidator
         }).then(function (name) {
