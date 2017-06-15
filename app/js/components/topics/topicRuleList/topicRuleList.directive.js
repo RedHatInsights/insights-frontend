@@ -34,7 +34,6 @@ function topicRuleListCtrl ($filter,
     };
 
     function init() {
-        $scope.loading = true;
         $scope.showRulesWithNoHits = false;
         $scope.hiddenCount = 0;
 
@@ -48,10 +47,6 @@ function topicRuleListCtrl ($filter,
         $scope.filterIncidents = $scope.filterIncidents ? $scope.filterIncidents : 'all';
         $scope.totalRisk = $location.search()[Events.filters.totalRisk];
         $scope.totalRisk = $scope.totalRisk ? $scope.totalRisk : 'All';
-        IncidentsService.init()
-        .then(function () {
-            $scope.loading = false;
-        });
     }
 
     function updateList (topic) {

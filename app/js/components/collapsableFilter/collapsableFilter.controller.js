@@ -15,35 +15,10 @@ function CollapsableFilterCtrl($location,
                                IncidentFilters,
                                Severities) {
 
-    function toggleContent () {
-        $scope.collapsed = !$scope.collapsed;
-    }
-
-    // collapsed by default unless overriden with init-collapsed
-    $scope.collapsed = !angular.isDefined($scope.initCollapsed) ||
-        Boolean($scope.initCollapsed);
-
-    $scope.toggleContent = function () {
-        if ($scope.expandable) {
-            $q.when($scope.onToggle({
-                ctx: {
-                    collapsing: $scope.collapsed
-                }
-            })).then(toggleContent);
-        }
-    };
-
     $scope.removeFilter = function (tagId) {
-        delete $location.search()[tagId];
+        $location.search(tagId, null);
         delete $scope.tags[tagId];
         $rootScope.$broadcast(tagId);
-    };
-
-    $scope.resetFilters = function () {
-        Group.setCurrent({});
-        $scope.$emit('group:change', {});
-        $rootScope.$broadcast(Events.filters.reset);
-        $scope.tags = {};
     };
 
     $scope.hasTags = function () {
@@ -51,17 +26,16 @@ function CollapsableFilterCtrl($location,
     };
 
     $scope.$on(Events.filters.incident, function () {
-        if ($location.search()[Events.filters.incident]) {
-            $scope.tags[Events.filters.incident] =
-                IncidentFilters[
-                    $location.search()[Events.filters.incident]].tag;
-        } else {
-            delete $scope.tags[Events.filters.incident];
-        }
+        addIncidentTag();
     });
 
     $scope.$on(Events.filters.totalRisk, function () {
-        if ($location.search()[Events.filters.totalRisk]) {
+        addTotalRiskTag();
+    });
+
+    function addTotalRiskTag () {
+        if ($location.search()[Events.filters.totalRisk] &&
+            $location.search()[Events.filters.totalRisk] !== 'All') {
             $scope.tags[Events.filters.totalRisk] =
                 Severities.find((severity) => {
                     return severity.value ===
@@ -70,9 +44,27 @@ function CollapsableFilterCtrl($location,
         } else {
             delete $scope.tags[Events.filters.totalRisk];
         }
-    });
+    }
+
+    function addIncidentTag () {
+        if ($location.search()[Events.filters.incident] &&
+            $location.search()[Events.filters.incident] !== 'all') {
+            $scope.tags[Events.filters.incident] =
+                IncidentFilters[
+                    $location.search()[Events.filters.incident]].tag;
+        } else {
+            delete $scope.tags[Events.filters.incident];
+        }
+    }
+
+    function initTags () {
+        $scope.tags = {};
+        addTotalRiskTag();
+        addIncidentTag();
+    }
 
     this.api = $scope;
+    initTags();
 }
 
 /**
@@ -93,38 +85,8 @@ function collapsableFilter() {
         transclude: true,
         controller: CollapsableFilterCtrl,
         scope: {
-            expandable: '@',
-            initCollapsed: '=',
-            tags: '=',
             searchPlaceholder: '@',
-            search: '=',
-
-            // called when the card is being collapsed / expanded
-            // the actual transition happens after this callback returns
-            // if the callback returns a promise then the transition happens once the
-            // promise completes (if the promise is rejected then the transition is
-            // ignored)
-            onToggle: '&'
-        },
-        /*
-         * Workaround for https://github.com/angular/angular.js/issues/5695
-         * If both directive declaration and template's root element declare ng-class
-         * then angular merges its contents which results in invalid JSON
-         * Instead of declaring ng-class we handle 'expanded' and
-         * 'content-block-expandable' classes programatically here.
-         */
-        link: function (scope, element) {
-            function bindCssClass($scope, element, expression, cls) {
-                $scope.$watch(expression, function (val) {
-                    if (val) {
-                        element.addClass(cls);
-                    } else {
-                        element.removeClass(cls);
-                    }
-                });
-            }
-
-            bindCssClass(scope, element, '!collapsed', 'expanded');
+            search: '='
         }
     };
 }

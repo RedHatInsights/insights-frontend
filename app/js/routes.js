@@ -53,7 +53,7 @@ function Routes($stateProvider) {
         })
 
         .state('app.topic', {
-            url: '/actions/:id',
+            url: '/actions/:id?product',
             templateUrl: 'js/states/topics/views/topic-list.html',
             controller: 'TopicRuleListCtrl',
             title: 'Actions',

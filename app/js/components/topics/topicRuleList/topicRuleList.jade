@@ -1,5 +1,5 @@
 .topic-rule-list
-  .row.row-short(ng-show='getListType() === listTypes.card && loading === false && plugins.length > 0')
+  .row.row-short(ng-show='getListType() === listTypes.card && plugins.length > 0')
     .col-sm-12
       .card-list
         .card-list-item(ng-repeat="plugin in plugins | orderBy: sorter.predicate : sorter.reverse track by plugin.plugin_id")
@@ -25,7 +25,7 @@
                       ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
                       ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
 
-  .row.row-short(ng-show='getListType() === listTypes.table && loading === false && plugins.length > 0')
+  .row.row-short(ng-show='getListType() === listTypes.table && plugins.length > 0')
     .col-sm-12
       table#rha-rules-table.table.ng-table.break-word
         thead

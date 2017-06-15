@@ -25,8 +25,6 @@ function RuleSummaryCtrl(
             $scope.show.moreInfo = false;
         }
     };
-
-    console.log($scope.report.rule_id);
 }
 
 function ruleSummary() {

@@ -5,24 +5,8 @@ var componentsModule = require('../../');
 /**
  * @ngInject
  */
-function topicRuleFiltersCtrl($location, $scope, Events) {
+function topicRuleFiltersCtrl() {
 
-    $scope.tags = {};
-
-    function initTags () {
-        addTag(Events.filters.incident);
-        addTag(Events.filters.totalRisk);
-    }
-
-    function addTag (tag) {
-        let value = $location.search()[tag];
-
-        if (value) {
-            $scope.tags[tag] = value;
-        }
-    }
-
-    initTags();
 }
 
 function topicRuleFilters() {
