@@ -144,9 +144,8 @@ function ActionsRuleCtrl(
     $scope.plans = MaintenanceService.plans;
 
     $scope.showSystem = function (system) {
-        let systems;
+        const systems = RhaTelemetryActionsService.getClusterAffectedSystems();
 
-        systems = RhaTelemetryActionsService.getClusterAffectedSystems();
         if (typeof system === 'string' && systems && systems.hasOwnProperty(system)) {
             system = systems[system];
         }
