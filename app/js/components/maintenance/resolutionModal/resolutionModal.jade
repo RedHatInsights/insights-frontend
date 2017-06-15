@@ -5,7 +5,7 @@
   .text-center
     i.svg
       img(src= "static/images/l_ansible-black.svg")
-    h2(translate) Modify Playbook
+    h2(translate) Choose Resolution
 
 .modal-body
   .row
@@ -50,9 +50,17 @@
                     ng-value='resolution.resolution_type')
               | {{resolution.description}}
 
+  .row
+    .col-sm-12
+      p(translate) This setting can be changed anytime in the&nbsp;
+        strong(translate) Playbook Settings&nbsp;
+        | tab
+
 .modal-footer
   ul.row.pager.pager-steps
     li.previous.col-sm-6
-      a.btn.btn-accent(ng-click='cancel()', translate) Cancel
+      a.btn.btn-accent(ng-click='cancel()')
+        span(translate, ng-if='params.initial') Skip
+        span(translate, ng-if='!params.initial') Cancel
     li.next.col-sm-6
       a.btn.btn-accent(ng-click='save()', translate) Save
