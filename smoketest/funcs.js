@@ -1,6 +1,7 @@
 /*global require, module, process*/
 
-const env     = require('system').env; // because on the container instance process is not global?
+// const env     = require('system').env; // because on the container instance process is not global?
+const env     = process.env;
 const lodash  = require('lodash');
 const el      = require('./elements');
 const funcs   = {};
@@ -8,6 +9,7 @@ const baseUrl = env.TEST_URL;
 
 funcs.getUrl = function getUrl(path) {
     // console.log('getUrl: ' + baseUrl + path);
+    if (!path) { return baseUrl; }
     return baseUrl + path;
 };
 

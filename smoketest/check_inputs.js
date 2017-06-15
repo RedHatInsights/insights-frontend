@@ -1,6 +1,7 @@
 /*global require*/
 
-const env    = require('system').env; // because on the container instance process is not global?
+// const env    = require('system').env; // because on the container instance process is not global?
+const env    = process.env;
 const lodash = require('lodash');
 
 function dieIfEmpty(key)  {
