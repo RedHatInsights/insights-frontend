@@ -19,6 +19,7 @@ function maintenancePlanCtrl(
     $rootScope,
     $scope,
     $timeout,
+    $document,
     gettextCatalog,
     sweetAlert,
     DataUtils,
@@ -313,6 +314,17 @@ function maintenancePlanCtrl(
         return MaintenanceService.showMaintenanceModal(null, null, $scope.plan)
             .then($scope.prepareAnsibleTab);
     };
+
+    function deleteHandler (event) {
+        if ($scope.edit.isActive($scope.plan.maintenance_id) && event.keyCode === 46) {
+            $scope.delete();
+        }
+    }
+
+    $document.on('keydown', deleteHandler);
+    $scope.$on('$destroy', function () {
+        $document.off('keydown', deleteHandler);
+    });
 }
 
 function AddActionSelectionHandler ($scope) {
