@@ -4,7 +4,7 @@ var config = require('../config');
 var gulp = require('gulp');
 
 gulp.task('openshift', function () {
-    gulp.src(['server.js', 'package.json', 'bower.json'])
+    gulp.src(['server.js', 'package.json'])
         .pipe(gulp.dest(config.dist.root));
 
     return gulp.src(['.openshift/**/*'])
