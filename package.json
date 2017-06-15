@@ -76,6 +76,8 @@
     "merge-stream": "~1.0.x",
     "moment": "~2.18.x",
     "moment-timezone": "~0.5.x",
+    "nightmare": "^2.10.0",
+    "nightmare-wait-for-url": "0.0.2",
     "phantomjs": "~2.1.x",
     "plotly.js": "~1.27.x",
     "pretty-hrtime": "~1.0.x",
@@ -86,7 +88,8 @@
     "uglifyify": "~3.0.x",
     "urijs": "~1.17.1",
     "vinyl-buffer": "~1.0.x",
-    "vinyl-source-stream": "~1.1.x"
+    "vinyl-source-stream": "~1.1.x",
+    "xvfb": "^0.2.3"
   },
   "scripts": {
     "preprotractor": "npm run update-webdriver",
