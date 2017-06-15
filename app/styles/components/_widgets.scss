@@ -6,6 +6,32 @@
     .progress.orange { background: #F39800; }
     .progress.red { background: #CC0000; }
   }
+
+
+  // add padding when cols are stacked
+  table {
+    .row + .row {
+      @include rem('margin-top', $global-padding/2);
+    }
+
+    [class^="col-"],
+    div[class*=" col-"] {
+      @include rem('padding', 0 $global-padding);
+    }
+
+
+    //[class^="col-"],
+    //div[class*=" col-"] {
+    //  @include rem('padding', $global-padding $global-padding 8px);
+    //
+    //
+    //  // add padding when cols are stacked
+    //  & + [class^="col-"],
+    //  div[class*=" col-"] {
+    //    @include rem('padding-top', $global-padding/2);
+    //  }
+    //}
+  }
 }
 
 .widget.severity-summary {
@@ -87,3 +113,14 @@ $bar-height: $grad-height + 4;
 .widget.migration-trend {
 
 }
+
+.widget.widget-whatShouldIFix {
+  td {
+    @include rem('padding', $global-padding);
+  }
+
+  .row.metrics {
+    align-items: center;
+  }
+}
+

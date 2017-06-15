@@ -18,7 +18,9 @@
               i.fa.fa-fire
               span(translate) Latest
             handcrafted-content
-        new-systems
+        .grid-block
+          what-should-i-fix
+
       .col-md-7.col-lg-6.right-col.border-bottom
         .grid-block
           section.widget-block
@@ -28,6 +30,8 @@
               span.light(translate) Summary
               a.cta-link(translate, ui-sref="app.actions") View actions
             severity-summary(stats='stats')
+
+        new-systems
 
         .grid-block(ng-if="!paid()")
           section.widget-block
@@ -39,3 +43,5 @@
 
         .grid-block(ng-if='config.isPlannerEnabled')
           maintenance-plan-lite
+
+
