@@ -279,10 +279,7 @@ function maintenancePlanCtrl(
         $scope.ansibleSupport = some($scope.plan.actions, 'rule.ansible');
     }
 
-    $scope.$watch('plan.actions', function () {
-        checkAnsibleSupport();
-        $scope.prepareAnsibleTab();
-    });
+    $scope.$watch('plan.actions', checkAnsibleSupport);
 
     $scope.playbookTabLoader = new Utils.Loader(false);
     $scope.prepareAnsibleTab = $scope.playbookTabLoader.bind(function () {
@@ -308,25 +305,13 @@ function maintenancePlanCtrl(
     };
 
     $scope.resolutionModal = function (play) {
-        const instance = $modal.open({
-            templateUrl:
-            'js/components/maintenance/resolutionModal/resolutionModal.html',
-            windowClass: 'modal-playbook modal-wizard ng-animate-enabled',
-            backdropClass: 'system-backdrop ng-animate-enabled',
-            controller: 'ResolutionModal',
-            resolve: {
-                params: function () {
-                    return {
-                        play,
-                        plan: $scope.plan
-                    };
-                }
-            }
-        });
+        return MaintenanceService.resolutionModal($scope.plan, play, false)
+            .then($scope.prepareAnsibleTab);
+    };
 
-        instance.result.then(function () {
-            $scope.prepareAnsibleTab();
-        });
+    $scope.addActions = function () {
+        return MaintenanceService.showMaintenanceModal(null, null, $scope.plan)
+            .then($scope.prepareAnsibleTab);
     };
 }
 
