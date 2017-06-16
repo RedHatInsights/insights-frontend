@@ -14,7 +14,7 @@ const nightmare = Nightmare({
         'ignore-certificate-errors': true
     },
     waitTimeout: 20 * 1000,
-    show: true
+    show: false
 });
 
 require('./extensions')(nightmare);
