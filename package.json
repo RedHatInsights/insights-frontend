@@ -87,7 +87,8 @@
     "uglifyify": "~3.0.x",
     "urijs": "~1.17.1",
     "vinyl-buffer": "~1.0.x",
-    "vinyl-source-stream": "~1.1.x"
+    "vinyl-source-stream": "~1.1.x",
+    "xvfb": "^0.2.3"
   },
   "scripts": {
     "preprotractor": "npm run update-webdriver",

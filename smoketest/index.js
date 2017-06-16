@@ -1,20 +1,28 @@
 /*global require, casper, process, describe, it, after*/
 
-
 const env       = process.env;
 const lodash    = require('lodash');
 const Nightmare = require('nightmare');
 const should    = require('should');
+const fs        = require('fs');
 
 const el        = require('./elements');
 const funcs     = require('./funcs');
+
+if (fs.existsSync('/I_AM_A_RUNNER')) {
+    const Xvfb = require('xvfb');
+    const xvfb = new Xvfb({
+        silent: true
+    });
+    xvfb.startSync();
+}
 
 const nightmare = Nightmare({
     switches: {
         'ignore-certificate-errors': true
     },
     waitTimeout: 20 * 1000,
-    show: false
+    show: true
 });
 
 require('./extensions')(nightmare);
