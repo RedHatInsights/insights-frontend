@@ -10,6 +10,7 @@ const el        = require('./elements');
 const funcs     = require('./funcs');
 
 if (fs.existsSync('/I_AM_A_RUNNER')) {
+    console.log('STARTING XVFB');
     const Xvfb = require('xvfb');
     const xvfb = new Xvfb({
         silent: true
