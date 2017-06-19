@@ -1,30 +1,41 @@
-/*global casper, module, require*/
+/*global describe, it module, require*/
 
-const el    = require('../elements');
+const el    = require('../elements.js');
 const funcs = require('../funcs');
-const stash = {};
 
-module.exports = function (test) {
-    casper.thenOpen(funcs.getUrl('/overview/'));
+module.exports = (nightmare) => {
+    describe('Planner', () => {
+        it('should let you create a plan', (done) => {
+            const name = `SmokeTest_${funcs.getRandomString(20)}`;
 
-    // click the planner nav
-    casper.waitAndClick(el.nav.planner);
-    casper.wrap('PlannerLandingPage', el.planner.createPlan, function () {
-        funcs.navExists(test);
-    });
+            nightmare
+                // nav to planner
+                .waitAndClick(el.nav.planner)
+                .waitAll('nav')
 
-    // click create a plan
-    casper.waitAndClick(el.planner.createPlan);
-    casper.wrap('CreatePlan', el.planner.openPlan.planCompress, function () {
-        funcs.itemsPresent(test, 'planner.openPlan');
-    });
+                // click create plan
+                .waitAndClick(el.planner.createPlan)
+                .waitAll('planner.createModal')
 
-    // click edit title
-    casper.waitAndClick(el.planner.openPlan.editToggle);
-    casper.wrap('Edit Plan Details', el.planner.editMeta.name, function () {
-        funcs.itemsPresent(test, el.planner.editMeta);
-        stash.name = funcs.getRandomString(20);
-        this.sendKeys(el.planner.editMeta.name, stash.name);
-        casper.thenDebugImage();
+                // insert title
+                .insert(el.planner.createModal.name, name)
+                .waitAndClick(el.planner.createModal.firstAction) // .check() does not work in our app
+                .waitAndClick(el.planner.createModal.save)
+
+                // verify the name is now changed
+                .wait(el.planner.openPlan.name)
+                .evaluate((el) => {
+                    return document.querySelector(el.planner.openPlan.name).textContent;
+                }, el)
+                .then((newName) => {
+                    newName.should.match(new RegExp(`^${name}.*`));
+                    nightmare
+                        .waitAndClick(el.planner.openPlan.delete)
+                        .waitAndClick(el.planner.swal.yes)
+                        .then(done)
+                        .catch(done);
+                        // TODO confirm delete
+                }).catch(done);
+        });
     });
 };

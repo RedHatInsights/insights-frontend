@@ -1,44 +1,57 @@
-/*global casper, module, require*/
+/*global describe, it module, require*/
 
-const el    = require('../elements');
-const funcs = require('../funcs');
-const stash = {};
+const el = require('../elements.js');
 
-module.exports = function (test) {
-    casper.thenOpen(funcs.getUrl('/overview/'));
+module.exports = (nightmare) => {
+    describe('Actions', () => {
+        it('should be able to get to the System Modal through Actions', (done) => {
+            nightmare
+                .wrap('page one', (n) => {
+                    n.waitAndClick(el.nav.actions)
+                        .waitAll('nav')
+                        .waitAll('actions.page1');
+                })
 
-    // click the actions nav
-    casper.waitAndClick(el.nav.actions);
-    casper.wrap('ActionsStep1', el.actions.page1.donutHole, function () {
-        funcs.navExists(test);
-        funcs.itemsPresent(test, 'actions.page1');
-        test.assertSelectorHasText(el.actions.page1.legend_security, 'Security');
+                .wrap('page two', (n) => {
+                    n.waitAndClick(el.actions.page1.legend_security)
+                        .waitAll('nav')
+                        .waitAll('actions.page2');
+                })
+
+                .wrap('page one', (n) => {
+                    n.waitAndClick(el.actions.page2.firstRuleInTable)
+                        .waitAll('nav')
+                        .waitAll('actions.page3')
+                        .evaluate((el) => {
+                            return {
+                                ruleNamePage3: document.querySelector(el.actions.page3.ruleTitle).textContent,
+                                systemNamePage3: document.querySelector(el.actions.page3.firstSystemInTable).textContent
+                            };
+                        }, el);
+                })
+                .then((stash) => {
+                    nightmare
+                        .wrap('page three', (n) => {
+                            n.waitAndClick(el.actions.page3.firstSystemInTable)
+                                .waitAll('nav')
+                                .waitAll('systemModal')
+                                .evaluate((el, stash) => {
+                                    stash.ruleNameModal = document.querySelector(el.systemModal.firstRule).textContent.trim();
+                                    stash.systemNameModal =  document.querySelector(el.systemModal.hostname).textContent.trim();
+                                    return stash;
+                                }, el, stash);
+                        })
+                        .then((stash) => {
+                            nightmare.wrap('system modal', (n) => {
+                                stash.ruleNameModal.should.equal(`Security > ${stash.ruleNamePage3}`);
+                                stash.systemNamePage3.should.equal(stash.systemNameModal);
+                                n.waitAndClick(el.systemModal.exButton)
+                                    .waitAll('nav')
+                                    .then(done)
+                                    .catch(done);
+                            });
+                        }).catch(done);
+                }).catch(done);
+        });
     });
-
-    // click the security legend thing under the wheel
-    casper.waitAndClick(el.actions.page1.legend_security);
-    casper.wrap('ActionsStep2', el.actions.page2.firstRuleInTable, function () {
-        funcs.navExists(test);
-        funcs.itemsPresent(test, 'actions.page2');
-        test.assertSelectorHasText(el.actions.page2.categoryTitle, 'Security');
-    });
-
-    // click on the first security rule in the table
-    casper.waitAndClick(el.actions.page2.firstRuleInTable);
-    casper.wrap('ActionsStep3', el.actions.page3.firstSystemInTable, function () {
-        funcs.navExists(test);
-        funcs.itemsPresent(test, 'actions.page3');
-        stash.ruleName = casper.fetchText(el.actions.page3.ruleTitle);
-        stash.systemName = casper.fetchText(el.actions.page3.firstSystemInTable);
-    });
-
-    // click on the first system in the table
-    casper.waitAndClick(el.actions.page3.firstSystemInTable);
-    casper.wrap('ActionsStep4_SystemModal', el.systemModal.firstRule, function () {
-        funcs.navExists(test);
-        funcs.itemsPresent(test, 'systemModal');
-        test.assertSelectorHasText(el.systemModal.firstRule, 'Security > ' + stash.ruleName.trim());
-        test.assertSelectorHasText(el.systemModal.hostname, stash.systemName);
-    });
-    casper.waitAndClick(el.systemModal.exButton);
 };

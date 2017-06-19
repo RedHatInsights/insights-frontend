@@ -77,6 +77,7 @@
     "moment": "~2.18.x",
     "moment-timezone": "~0.5.x",
     "nightmare": "^2.10.0",
+    "nightmare-wait-for-url": "0.0.2",
     "phantomjs": "~2.1.x",
     "plotly.js": "~1.27.x",
     "pretty-hrtime": "~1.0.x",
