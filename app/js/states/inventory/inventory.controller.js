@@ -32,6 +32,8 @@ function InventoryCtrl(
         Export,
         Group) {
 
+    $scope.Group = Group;
+
     function updateParams(params) {
         params = FilterService.updateParams(params);
         if (!params.sort_field) {
@@ -483,6 +485,11 @@ function InventoryCtrl(
         };
         $scope.showActions(system, true);
     }
+
+    $scope.reloadInventory = function () {
+        cleanTheScope();
+        getData(false);
+    };
 }
 
 statesModule.controller('InventoryCtrl', InventoryCtrl);

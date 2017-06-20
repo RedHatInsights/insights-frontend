@@ -6,16 +6,27 @@ var isEmpty = require('lodash/isEmpty');
 /**
  * @ngInject
  */
-function groupSelectCtrl($scope, $rootScope, Group, Events) {
+function groupSelectCtrl(
+    $rootScope,
+    $q,
+    $scope,
+    $state,
+    gettextCatalog,
+    sweetAlert,
+    Events,
+    Group,
+    GroupService) {
     Group.init();
     $scope.groups = Group.groups;
     $scope.group = Group.current();
 
     $scope.triggerChange = function (group) {
-        $scope.group = group;
         Group.setCurrent(group);
-        $rootScope.$broadcast('group:change', group);
     };
+
+    $rootScope.$on('group:change', function (event, group) {
+        $scope.group = group;
+    });
 
     $scope.$on('account:change', function () {
         $scope.triggerChange(null);
@@ -28,6 +39,31 @@ function groupSelectCtrl($scope, $rootScope, Group, Events) {
     $scope.$on(Events.filters.reset, function () {
         $scope.group = Group.current();
     });
+
+    $scope.createGroup = function () {
+        GroupService.createGroup().then(function (group) {
+            const html = gettextCatalog.getString(
+                'Use <strong>Actions</strong> dropdown in the inventory to add systems ' +
+                'to the <code>{{name}}</code> group',
+                {
+                    name: group.display_name
+                });
+
+            return sweetAlert({
+                title: gettextCatalog.getString('Group created'),
+                confirmButtonText: gettextCatalog.getString('OK'),
+                type: 'info',
+                html,
+                showCancelButton: false
+            });
+        }).then(function () {
+            if ($state.current.name !== 'app.inventory') {
+                $state.go('app.inventory');
+            }
+        });
+    };
+
+    $scope.deleteGroup = GroupService.deleteGroup;
 }
 
 function groupSelect() {

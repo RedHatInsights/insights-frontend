@@ -4,8 +4,6 @@
   tabset.config-tabs
     tab(heading="{{'Hidden Rules'|translate}}", active="current.hidden", ng-click="tabClick('hidden')")
       config-hidden(ng-if="current.hidden")
-    tab(heading="{{'Groups'|translate}}", active="current.groups", ng-click="tabClick('groups')")
-      config-groups(ng-if="current.groups")
     tab(heading="{{'Messaging'|translate}}", active="current.messaging", ng-click="tabClick('messaging')")
       config-messaging(ng-if="current.messaging")
     tab(heading="{{'Settings'|translate}}", active="current.settings", ng-click="tabClick('settings')")
