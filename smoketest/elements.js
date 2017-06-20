@@ -63,10 +63,12 @@ const obj =  {
     },
     betaSwitch: '.beta-switch',
     goToApp: '.landing-page-top .container .row a.btn-app:nth-of-type(2)',
-    loginForm: '#kc-form-login',
-    loginFormUsername: '#username',
-    loginFormPassword: '#password',
-    loginFormSubmit: '#_eventId_submit'
+    login: {
+        form: '#kc-form-login',
+        username: '#username',
+        password: '#password',
+        submit: '#_eventId_submit'
+    }
 };
 
 ['security', 'availability', 'stability', 'performance'].forEach(function (category) {

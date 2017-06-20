@@ -42,10 +42,10 @@ module.exports = (nightmare) => {
                             stash.results.systemNamePage3.should.equal(stash.results.systemNameModal);
                             nightmare.waitAndClick(el.systemModal.exButton)
                                 .waitAll('nav')
-                                .then(done)
-                                .catch(done);
-                        }).catch(done);
-                }).catch(done);
+                                .then(nightmare.myDone(done))
+                                .catch(nightmare.myDone(done));
+                        }).catch(nightmare.myDone(done));
+                }).catch(nightmare.myDone(done));
         });
     });
 };

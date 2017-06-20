@@ -3,7 +3,6 @@
 const env       = process.env;
 const el        = require('./elements');
 const funcs     = require('./funcs');
-const URI       = require('urijs');
 const nightmare = funcs.getNightmare();
 
 require('should');
@@ -14,11 +13,14 @@ nightmare.on('console', (log, msg) => {
     console.log(`[browser] ${msg}`);
 });
 
-nightmare.on('did-stop-loading', function () {
-    nightmare.url(function (ignore, url) {
-        const image = `${URI(url).path()}.png`.replace('/', '').replace(/\//g, '.').replace(/[.]{2,}/g, '.');
-        nightmare.screenshot(`/tmp/images/${env.TEST_TRY_NUM}/${image}`);
-    });
+[
+    'did-stop-loading'
+    // 'will-navigate',
+    // 'dom-ready',
+    // 'did-navigate',
+    // 'did-navigate-in-page'
+].forEach((event) => {
+    nightmare.on(event, nightmare.doScreenShot(event));
 });
 
 describe('Insights Portal Smoke Test', function () {
@@ -28,21 +30,18 @@ describe('Insights Portal Smoke Test', function () {
         nightmare.end(done);
     });
 
-    describe('Setup', () => {
-        it('should be able to "Go To Application" and login', () => {
-            return nightmare
+    describe('Setup', function () {
+        it('should be able to "Go To Application" and login', (done) => {
+                nightmare
                 .goto(funcs.getUrl())
-                .getText(el.goToApp)
-                .click(el.goToApp)
-                .wait(el.loginFormUsername)
-                .insert(el.loginFormUsername, env.TEST_USERNAME)
-                .insert(el.loginFormPassword, env.TEST_PASSWORD)
-                .waitAndClick(el.loginFormSubmit)
+                .waitAndClick(el.goToApp)
+                .waitAll('login')
+                .insert(el.login.username, env.TEST_USERNAME)
+                .insert(el.login.password, env.TEST_PASSWORD)
+                .waitAndClick(el.login.submit)
                 .waitAll('nav')
-                .catch((e) => {
-                    console.dir(e);
-                    nightmare.screenshot('/tmp/images/fail_setup.png');
-                });
+                .then(nightmare.myDone(done))
+                .catch(nightmare.myDone(done));
         });
     });
 

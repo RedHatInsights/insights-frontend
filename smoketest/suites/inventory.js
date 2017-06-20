@@ -15,13 +15,15 @@ module.exports = (nightmare) => {
                         .waitAll('systemModal')
                         .getText(el.systemModal.hostname)
                         .then((hostName) => {
+                            console.log(`systemName: ${systemName}`);
+                            console.log(`hostName: ${hostName}`);
                             systemName.should.equal(hostName);
                             nightmare.waitAndClick(el.systemModal.exButton)
                                 .waitAll('nav')
-                                .then(done)
-                                .catch(done);
-                        }).catch(done);
-                }).catch(done);
+                                .then(nightmare.myDone(done))
+                                .catch(nightmare.myDone(done));
+                        }).catch(nightmare.myDone(done));
+                }).catch(nightmare.myDone(done));
         });
     });
 };

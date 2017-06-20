@@ -32,10 +32,10 @@ module.exports = (nightmare) => {
                     nightmare
                         .waitAndClick(el.planner.openPlan.delete)
                         .waitAndClick(el.planner.swal.yes)
-                        .then(done)
-                        .catch(done);
+                        .then(nightmare.myDone(done))
+                        .catch(nightmare.myDone(done));
                         // TODO confirm delete
-                }).catch(done);
+                }).catch(nightmare.myDone(done));
         });
     });
 };

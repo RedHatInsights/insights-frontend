@@ -4,12 +4,16 @@
 const env       = process.env;
 const fs        = require('fs');
 const Nightmare = require('nightmare');
-const crypto    = require("crypto");
+const crypto    = require('crypto');
 const funcs     = {};
 const baseUrl   = env.TEST_URL;
 
+funcs.noop = () => {};
+
 funcs.getNightmare = () => {
     const nightmareConf = {
+        width: 800,
+        height: 900,
         switches: {
             'ignore-certificate-errors': true
         },
