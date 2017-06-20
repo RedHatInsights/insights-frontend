@@ -1,12 +1,17 @@
 'use strict';
 
-var componentsModule = require('../../');
-var partition = require('lodash/partition');
+const componentsModule = require('../../');
+const partition = require('lodash/partition');
+const _filter = require('lodash/filter');
 
 function topicRuleListCtrl ($filter,
+                            $location,
                             $rootScope,
                             $scope,
                             $state,
+                            $stateParams,
+                            Events,
+                            IncidentsService,
                             InsightsConfig,
                             ListTypeService,
                             RuleService,
@@ -31,6 +36,17 @@ function topicRuleListCtrl ($filter,
     function init() {
         $scope.showRulesWithNoHits = false;
         $scope.hiddenCount = 0;
+
+        if ($stateParams[Events.filters.totalRisk] &&
+            $stateParams[Events.filters.totalRisk] !== 'All') {
+            $location.search(Events.filters.totalRisk,
+                $stateParams[Events.filters.totalRisk]);
+        }
+
+        $scope.filterIncidents = $location.search()[Events.filters.incident];
+        $scope.filterIncidents = $scope.filterIncidents ? $scope.filterIncidents : 'all';
+        $scope.totalRisk = $location.search()[Events.filters.totalRisk];
+        $scope.totalRisk = $scope.totalRisk ? $scope.totalRisk : 'All';
     }
 
     function updateList (topic) {
@@ -38,7 +54,8 @@ function topicRuleListCtrl ($filter,
             return;
         }
 
-        updateCards(topic.rules);
+        $scope.filteredRules = applyFilters($scope.topic.rules);
+        updateCards($scope.filteredRules);
     }
 
     $rootScope.$on('account:change', init);
@@ -46,6 +63,50 @@ function topicRuleListCtrl ($filter,
         $scope.showRulesWithNoHits = (topic && topic.hitCount === 0);
         updateList(topic);
     });
+
+    // Listens for change in incidents filter
+    $scope.$on(Events.filters.incident, function () {
+        $scope.filterIncidents = $location.search()[Events.filters.incident];
+        $scope.filterIncidents = $scope.filterIncidents ? $scope.filterIncidents : 'all';
+        updateList($scope.topic);
+    });
+
+    // Listens for change in total risk filter
+    $scope.$on(Events.filters.totalRisk, function () {
+        $scope.totalRisk = $location.search()[Events.filters.totalRisk];
+        $scope.totalRisk = $scope.totalRisk ? $scope.totalRisk : 'All';
+        updateList($scope.topic);
+    });
+
+    // Listens for Reset filters
+    $scope.$on(Events.filters.reset, function () {
+        $scope.filterIncidents = 'all';
+        $scope.totalRisk = 'All';
+        updateList($scope.topic);
+    });
+
+    function applyFilters (rules) {
+
+        // Filter based on incidents value
+        if ($scope.filterIncidents === 'incidents') {
+            rules = _filter(rules, (rule) => {
+                return IncidentsService.isIncident(rule.rule_id);
+            });
+        } else if ($scope.filterIncidents === 'nonIncidents') {
+            rules = _filter(rules, (rule) => {
+                return !IncidentsService.isIncident(rule.rule_id);
+            });
+        }
+
+        // Filter based on total risk
+        if ($scope.totalRisk !== 'All') {
+            rules = _filter(rules, (rule) => {
+                return rule.severity === $scope.totalRisk;
+            });
+        }
+
+        return rules;
+    }
 
     function updateCards (rules) {
         if (!$scope.showRulesWithNoHits) {
@@ -74,7 +135,8 @@ function topicRuleListCtrl ($filter,
                 '-' + $scope.sorter.predicate :
                 $scope.sorter.predicate)]);
 
-        updateCards($scope.topic.rules);
+        $scope.filteredRules = applyFilters($scope.topic.rules);
+        updateCards($scope.filteredRules);
     }
 
     init();

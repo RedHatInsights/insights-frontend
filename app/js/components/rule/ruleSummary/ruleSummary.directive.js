@@ -10,7 +10,7 @@ function RuleSummaryCtrl(
     InsightsConfig) {
     $scope.config = InsightsConfig;
 
-    // this needs to be an object so that is can be accessed from the transcluded scope
+    // this needs to be an object so that it can be accessed from the transcluded scope
     $scope.show = {
         moreInfo: false
     };

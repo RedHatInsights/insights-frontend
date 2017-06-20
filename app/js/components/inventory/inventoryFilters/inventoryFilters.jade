@@ -6,7 +6,10 @@ section.gray.inventory-filters.ui-filters
       actions-select
     .col-sm-6
       label.invisible(translate='translate') Search
-      search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000')
+      .input-group
+        span.input-group-addon
+          .i.fa.fa-search
+        search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', is-full-length='true')
   .row.row-short
     .col-sm-6
       a(ng-click="resetFilters()")

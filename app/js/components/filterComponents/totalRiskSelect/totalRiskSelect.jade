@@ -1,0 +1,14 @@
+.filter-group
+  label(translate) 
+    strong Total Risk
+  .dropdown.full-width
+    button.btn.dropdown-toggle(
+      type='button',
+      data-toggle='dropdown',
+      aria-haspopup='true',
+      aria-expanded='false')
+      span.text.active(ng-model='label') {{label | translate}}
+      span.caret
+    ul.dropdown-menu
+      li(ng-repeat='option in options')
+        a(href='#', ng-click='select(option)') {{option.label | translate}}

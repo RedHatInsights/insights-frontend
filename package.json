@@ -76,6 +76,8 @@
     "merge-stream": "~1.0.x",
     "moment": "~2.18.x",
     "moment-timezone": "~0.5.x",
+    "nightmare": "^2.10.0",
+    "nightmare-wait-for-url": "0.0.2",
     "phantomjs": "~2.1.x",
     "plotly.js": "~1.27.x",
     "pretty-hrtime": "~1.0.x",
@@ -87,7 +89,6 @@
     "urijs": "~1.17.1",
     "vinyl-buffer": "~1.0.x",
     "vinyl-source-stream": "~1.1.x",
-
     "angular-scroll": "~0.7.x",
     "angular": "~1.5.x",
     "angular-mocks": "~1.5.x",
@@ -110,7 +111,8 @@
     "ng-infinite-scroll": "~1.3.x",
     "flexboxgrid": "~6.3.x",
     "ngclipboard": "~1.1.x",
-    "sweetalert2": "~6.6.x"
+    "sweetalert2": "~6.6.x",
+    "xvfb": "^0.2.3"
   },
   "scripts": {
     "preprotractor": "npm run update-webdriver",

@@ -53,11 +53,12 @@ function ActionsService(
     vars.rules = [];
     vars.rule = null;
     vars.ruleDetails = null;
-    vars.totalRuleSystems = 0;
     vars.severities = {};
-    vars.severityNames = Severities;
-    vars.total = 0;
+    vars.severityNames = Severities.map(function (severity) {return severity.value;});
+
     vars.systemNames = null;
+    vars.total = 0;
+    vars.totalRuleSystems = 0;
 
     // do this as soon as all the accessibles are defined (aka define vars, run dis)
     Utils.generateAccessors(pub, vars);

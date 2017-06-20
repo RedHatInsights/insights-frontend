@@ -1,11 +1,10 @@
-.input-group
-  span.input-group-addon
-    .i.fa.fa-search
-  input.search-box.form-control(
-    type='text',
-    autofocus
-    placeholder='{{placeholder}}',
-    ng-keypress='keyPressed($event)',
-    ng-model='model',
-    ng-change='change()'
-  )
+span
+    input(
+      type='text',
+      autofocus
+      placeholder='{{placeholder}}',
+      ng-keypress='keyPressed($event)',
+      ng-model='model',
+      ng-change='change()',
+      ng-class="{'search-box form-control': isFullLength}"
+    )
