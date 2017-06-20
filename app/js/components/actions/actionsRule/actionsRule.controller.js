@@ -144,15 +144,14 @@ function ActionsRuleCtrl(
     $scope.plans = MaintenanceService.plans;
 
     $scope.showSystem = function (system) {
-        let systems;
+        const systems = RhaTelemetryActionsService.getClusterAffectedSystems();
 
-        if (typeof InsightsConfig.actionsShowSystem === 'function') {
-            return InsightsConfig.actionsShowSystem(system.toString());
-        }
-
-        systems = RhaTelemetryActionsService.getClusterAffectedSystems();
         if (typeof system === 'string' && systems && systems.hasOwnProperty(system)) {
             system = systems[system];
+        }
+
+        if (typeof InsightsConfig.actionsShowSystem === 'function') {
+            return InsightsConfig.actionsShowSystem(system);
         }
 
         $modal.open({
