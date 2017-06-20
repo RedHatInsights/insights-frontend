@@ -3,7 +3,6 @@
 const env       = process.env;
 const el        = require('./elements');
 const funcs     = require('./funcs');
-const fs        = require('fs');
 const URI       = require('urijs');
 const nightmare = funcs.getNightmare();
 
@@ -11,18 +10,14 @@ require('should');
 require('./check_inputs.js');
 require('./extensions')(nightmare);
 
-if (!fs.existsSync('/tmp/images')){
-    fs.mkdirSync('/tmp/images');
-}
-
 nightmare.on('console', (log, msg) => {
     console.log(`[browser] ${msg}`);
 });
 
 nightmare.on('did-stop-loading', function () {
     nightmare.url(function (ignore, url) {
-        const image = URI(url).path().replace('/', '').replace(/\//g, '.');
-        nightmare.screenshot(`/tmp/images/${image}.png`);
+        const image = `${URI(url).path()}.png`.replace('/', '').replace(/\//g, '.').replace(/[.]{2,}/g, '.');
+        nightmare.screenshot(`/tmp/images/${image}`);
     });
 });
 
