@@ -3,14 +3,23 @@
 const env       = process.env;
 const el        = require('./elements');
 const funcs     = require('./funcs');
+const fs        = require('fs');
 const nightmare = funcs.getNightmare();
 
 require('should');
 require('./check_inputs.js');
 require('./extensions')(nightmare);
 
+if (!fs.existsSync('/tmp/images')){
+    fs.mkdirSync('/tmp/images');
+}
+
 nightmare.on('console', (log, msg) => {
     console.log(`[browser] ${msg}`);
+});
+
+nightmare.on('did-stop-loading', function () {
+    nightmare.screenshot('/tmp/images/debug.png');
 });
 
 describe('Insights Portal Smoke Test', function () {
@@ -30,7 +39,11 @@ describe('Insights Portal Smoke Test', function () {
                 .insert(el.loginFormUsername, env.TEST_USERNAME)
                 .insert(el.loginFormPassword, env.TEST_PASSWORD)
                 .waitAndClick(el.loginFormSubmit)
-                .waitAll('nav');
+                .waitAll('nav')
+                .catch((e) => {
+                    console.dir(e);
+                    nightmare.screenshot('/tmp/images/fail_setup.png');
+                });
         });
     });
 
