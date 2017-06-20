@@ -45,3 +45,24 @@
     @include opacity(1);
   }
 }
+
+li.system-group {
+    i.group-control {
+        visibility: hidden;
+    }
+
+    &:hover {
+        i.group-control {
+            visibility: visible;
+        }
+    }
+}
+
+.group-select ul.dropdown-menu {
+    height: auto;
+    overflow-x: hidden;
+    max-height: 200px;
+    @include media-query (md) {
+        max-height: 600px;
+    }
+}

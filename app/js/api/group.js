@@ -80,6 +80,8 @@ function Group($http, $q, $rootScope, InsightsConfig, AccountService) {
             } else {
                 _currentGroup = {};
             }
+
+            $rootScope.$broadcast('group:change', group);
         },
 
         removeSystem: removeSystem,
