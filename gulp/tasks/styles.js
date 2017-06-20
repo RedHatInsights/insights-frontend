@@ -1,20 +1,20 @@
 'use strict';
 
-var config = require('../config');
-var gulp = require('gulp');
-var gulpif = require('gulp-if');
-var handleErrors = require('../util/handleErrors');
-var browserSync = require('browser-sync');
-var compass = require('gulp-compass');
+const config = require('../config');
+const gulp = require('gulp');
+const gulpif = require('gulp-if');
+const handleErrors = require('../util/handleErrors');
+const browserSync = require('browser-sync');
+const compass = require('gulp-compass');
 
 gulp.task('styles', function () {
-    var styles = global.isRelease ? config.styles.srcRelease : config.styles.src;
-    var vendorStyles = config.styles.vendor;
-    var outputStyle = global.isProd ? 'compressed' : 'nested';
+    let styles = global.isRelease ? config.styles.srcRelease : config.styles.src;
+    const vendorStyles = config.styles.vendor;
+    const outputStyle = global.isProd ? 'compressed' : 'nested';
 
     for (let i = 0; i < vendorStyles.length; i++) {
         vendorStyles[i] = '!' + vendorStyles[i];
-        vendorStyles[i] = vendorStyles[i].replace('bower_components', 'styles/vendor');
+        vendorStyles[i] = vendorStyles[i].replace('styles/vendor');
     }
 
     styles = styles.concat(vendorStyles);
@@ -24,8 +24,9 @@ gulp.task('styles', function () {
             css: config.styles.temp,
             style: outputStyle,
             import_path: [
-                './app/bower_components/bootstrap-sass-official/' +
-                'vendor/assets/stylesheets'],
+                './node_modules/flexboxgrid/css/',
+                './node_modules/bootstrap-sass/vendor/assets/stylesheets/'
+            ],
             require: ['sass-css-importer']
         }))
         .on('error', handleErrors)
