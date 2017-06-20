@@ -1,0 +1,42 @@
+// Control bar styling
+// ------------------------
+.ui-filters__control-bar {
+  position: relative;
+  height: 14px;
+  background: #dfdfdf;
+  text-align: center;
+
+  // toggle button styling
+  .toggle {
+    width: 42px;
+    height: 42px;
+    display: inline-block;
+    @include rem('margin-top', -12px);
+    text-align: center;
+    background: rgba(255,255,255,.8);
+    @include box-shadow(0 0 0 8px rgba(0,0,0,.1));
+    @include border-radius(50%);
+
+    // button hover styling
+    &:hover { @include box-shadow(0 0 0 12px rgba(0,0,0,.1)); }
+
+    // Icon styling
+    i {
+      @include font-size(20px);
+      line-height: 1.6;
+      @include transition(.5s);
+    }
+  }
+}
+
+
+// Rotate the button icoin if filters are open
+.ui-filters__control-bar {
+  i {
+    transform: rotate(180deg);
+  }
+
+  &.collapsed {
+    i { transform: rotate(0deg); }
+  }
+}

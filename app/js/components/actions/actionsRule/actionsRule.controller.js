@@ -20,6 +20,7 @@ function ActionsRuleCtrl(
         $timeout,
         ActionsBreadcrumbs,
         FilterService,
+        IncidentsService,
         InsightsConfig,
         ListTypeService,
         MaintenanceService,
@@ -146,13 +147,13 @@ function ActionsRuleCtrl(
     $scope.showSystem = function (system) {
         let systems;
 
-        if (typeof InsightsConfig.actionsShowSystem === 'function') {
-            return InsightsConfig.actionsShowSystem(system.toString());
-        }
-
         systems = RhaTelemetryActionsService.getClusterAffectedSystems();
         if (typeof system === 'string' && systems && systems.hasOwnProperty(system)) {
             system = systems[system];
+        }
+
+        if (typeof InsightsConfig.actionsShowSystem === 'function') {
+            return InsightsConfig.actionsShowSystem(system);
         }
 
         $modal.open({
@@ -178,6 +179,8 @@ function ActionsRuleCtrl(
 
     function getData() {
         $scope.loading = true;
+
+        IncidentsService.init();
 
         let populateDetailsPromise =
             RhaTelemetryActionsService.populateDetails().then(function () {
@@ -299,6 +302,8 @@ function ActionsRuleCtrl(
 
         $scope.loading = false;
     };
+
+    $scope.isIncident = IncidentsService.isIncident;
 
     if (InsightsConfig.allowExport) {
         ActionbarService.addExportAction(function () {

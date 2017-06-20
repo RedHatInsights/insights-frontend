@@ -1,0 +1,34 @@
+.countComparison {
+  //display: inline-block;
+  //width: 100%;
+
+  .count {
+    //@include rem('padding', 0 0 $global-padding);
+    @include rem('padding', $global-padding 0);
+  }
+
+  .count + .count {
+    border-top: 1px solid $gray;
+  }
+
+  .count .num {
+    @include font-size(34px, 34px);
+    font-weight: 700;
+    
+    &.text-danger {
+      color: $red;
+    }
+  }
+
+  .count .desc {
+
+  }
+
+
+  span.num + span.desc {
+    display: inline-block;
+    @include rem('padding-left', $global-padding/2);
+  }
+
+
+}

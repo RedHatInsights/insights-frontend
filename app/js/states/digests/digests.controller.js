@@ -90,7 +90,9 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
             // of course, this breaks if a rule has 10 billion hits
             var paddedcount = '0000000000' + r.report_count;
             paddedcount = paddedcount.substr(('' + r.report_count).length);
-            return [Severities.indexOf(r.severity), paddedcount];
+            return [Severities.map(function (severity) {
+                return severity.value;
+            }).indexOf(r.severity), paddedcount];
         }).filter(function (r) {
             return r.report_count > 0;
         });
@@ -193,7 +195,7 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
         };
 
         $scope.digest_registered = justLineGraph(
-            digestBase, 'checkins_per_day', 'Registered Systems', '#97cde6');
+            digestBase, 'checkins_per_day', 'Active Systems', '#97cde6');
         $scope.digest_score = justLineGraph(
             digestBase, 'scores', 'Score', '#3083FB');
 

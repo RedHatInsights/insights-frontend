@@ -124,11 +124,44 @@ function Maintenance(
         return $http.post(url.toString(), data);
     };
 
+    api.downloadPlaybook = function (planId) {
+        const url = URI(root);
+        url.segment('maintenance');
+        url.segment(String(planId));
+        url.segment('playbook');
+        url.addSearch(AccountService.queryParam());
+        return $http.get(url.toString());
+    };
+
     api.SUGGESTION = Object.freeze({
         PROPOSED: 'proposed',
         ACCEPTED: 'accepted',
         REJECTED: 'rejected'
     });
+
+    api.getPlayMetadata = function (planId) {
+        const url = URI(root);
+        url.segment('maintenance');
+        url.segment(String(planId));
+        url.segment('playbook');
+        url.segment('plays');
+        url.addSearch(AccountService.queryParam());
+        return $http.get(url.toString());
+    };
+
+    api.saveResolutionPreference = function (planId, ruleId, systemTypeId, resolution) {
+        const url = URI(root);
+        url.segment('maintenance');
+        url.segment(String(planId));
+        url.segment('playbook');
+        url.segment('plays');
+        url.segment(ruleId);
+        url.segment(String(systemTypeId));
+        url.addSearch(AccountService.queryParam());
+        return $http.put(url.toString(), {
+            resolution_type: resolution
+        });
+    };
 
     return api;
 }

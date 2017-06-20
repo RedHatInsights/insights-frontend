@@ -1,6 +1,6 @@
-/*global casper, require*/
+/*global casper, require, process*/
 
-const env             = require('system').env; // because on the container instance process is not global?
+const env    = process.env;
 const IMAGE_BASE_PATH = '/tmp/images/' + env.TEST_TRY_NUM;
 
 casper.waitAndClick = function waitAndClick(selector, cb) {

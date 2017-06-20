@@ -1,6 +1,9 @@
 /*global module*/
 
 const obj =  {
+    overview: {
+        severitySummary: '.overview .widget.severity-summary'
+    },
     actions: {
         page1: {
             donutHole: '.donut-container .donut-hole'
@@ -18,11 +21,22 @@ const obj =  {
     },
     planner: {
         createPlan: '.maintenance-page .create-plan',
+        createModal: {
+            name:        '.maintenance-plan-modal input[name="name"]',
+            firstAction: '.maintenance-modal table > tbody > tr:nth-child(1) > td:nth-child(1) > input',
+            save:        '.maintenance-modal tfoot button.btn-accent'
+        },
         editMeta: {
-            name: '.maintenance-page .plan-wrap.active .form-group.nick input'
+            name: '.maintenance-page .plan-wrap.active .form-group.nick input',
+            save: '.maintenance-page .plan-wrap.active button[type="submit"]'
+        },
+        swal: {
+            yes: '.swal2-container button.swal2-confirm'
         },
         openPlan: {
+            name:         '.maintenance-page .plan-wrap.active .title',
             planCompress: '.maintenance-page .actions-panel.active .fa-compress.action',
+            delete:       '.maintenance-page .actions-panel.active .fa-trash-o',
             editToggle:   '.maintenance-page .plan-wrap.active .title .edit-toggle'
         }
     },
@@ -49,11 +63,16 @@ const obj =  {
     },
     betaSwitch: '.beta-switch',
     goToApp: '.landing-page-top .container .row a.btn-app:nth-of-type(2)',
-    loginForm: '#kc-form-login'
+    login: {
+        form: '#kc-form-login',
+        username: '#username',
+        password: '#password',
+        submit: '#_eventId_submit'
+    }
 };
 
 ['security', 'availability', 'stability', 'performance'].forEach(function (category) {
-    obj.actions.page1['legend_' + category] = 'table.legend a.' + category;
+    obj.actions.page1['legend_' + category] = 'table.legend td a.' + category;
 });
 
 var i = 1;

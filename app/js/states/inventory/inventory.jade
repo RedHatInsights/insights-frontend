@@ -51,6 +51,14 @@ section.inventory
                   ansible-icon.inline-left(
                   value='isFixableSelected() && (plans.future.length || plans.unscheduled.length)',
                   show-tooltip='false')
+              li
+                a(ng-click='groupSystems(systemsToAction())', translate) Group systems
+              li(ng-if='Group.current().id')
+                a(ng-click='removeFromGroup()')
+                  span(translate,
+                    translate-n='systemsToAction().length',
+                    translate-plural='Remove systems from group') Remove system from group
+                  strong &nbsp;{{Group.current().display_name}}
               li(tooltip='{{unregisterButtonTooltip}}')
                 a.pointer-events-auto(
                 ng-disabled='!isUnregistrableSelected()',

@@ -1,0 +1,58 @@
+.modal-actions
+  i.fa.fa-close(ng-click="cancel()")
+
+.modal-header
+  .text-center
+    i.svg
+      img(src= "images/l_ansible-black.svg")
+    h2(translate) Modify Playbook
+
+.modal-body
+  .row
+    .col-sm-12
+      .group
+        .group-title.group-title-table
+          table
+            tbody
+              tr
+                td
+                  i.fa.category-icon.inline-right(ng-class="params.play.rule.category.toLowerCase()")
+                  b {{ params.play.rule.category }} #{'>'} {{ params.play.rule.description }}
+  .row
+    .col-sm-12
+      .group
+        .group-title
+          i.fa.fa-times-circle(ng-class='systemType.imageClass')
+          b &nbsp; {{systemType.displayName}}
+        .group-content
+          ul
+            li(ng-repeat="system in systems | limitTo:listLimit | orderBy:'toString'")
+              | {{system.toString}}
+          a(ng-show="listLimit !== undefined && listLimit < systems.length",
+            ng-click="listLimit = undefined",
+            translate) View More ({{systems.length - listLimit}})
+          a(ng-show="listLimit === undefined",
+            ng-click="listLimit = MINIMUM_NUMBER_OF_ITEMS",
+            translate) View Less
+
+  .row
+    .col-sm-12
+      .group
+        .group-title
+          b(translate) Would you like to:
+        .group-content
+          .radio(ng-repeat='resolution in resolutions track by resolution.resolution_type')
+            label(for='resolution-type-{{$index}}')
+              input(type='radio',
+                    ng-model='selected.resolutionType',
+                    name='resolution-type',
+                    id='resolution-type-{{$index}}',
+                    ng-value='resolution.resolution_type')
+              | {{resolution.description}}
+
+.modal-footer
+  ul.row.pager.pager-steps
+    li.previous.col-sm-6
+      a.btn.btn-accent(ng-click='cancel()', translate) Cancel
+    li.next.col-sm-6
+      a.btn.btn-accent(ng-click='save()', translate) Save
