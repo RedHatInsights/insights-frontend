@@ -17,7 +17,7 @@ nightmare.on('console', (log, msg) => {
 nightmare.on('did-stop-loading', function () {
     nightmare.url(function (ignore, url) {
         const image = `${URI(url).path()}.png`.replace('/', '').replace(/\//g, '.').replace(/[.]{2,}/g, '.');
-        nightmare.screenshot(`/tmp/images/${image}`);
+        nightmare.screenshot(`/tmp/images/${env.TEST_TRY_NUM}/${image}`);
     });
 });
 
