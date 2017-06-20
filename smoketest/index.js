@@ -4,6 +4,7 @@ const env       = process.env;
 const el        = require('./elements');
 const funcs     = require('./funcs');
 const fs        = require('fs');
+const URI       = require('urijs');
 const nightmare = funcs.getNightmare();
 
 require('should');
@@ -19,7 +20,10 @@ nightmare.on('console', (log, msg) => {
 });
 
 nightmare.on('did-stop-loading', function () {
-    nightmare.screenshot('/tmp/images/debug.png');
+    nightmare.url(function (ignore, url) {
+        const image = URI(url).path().replace('/', '').replace(/\//g, '.');
+        nightmare.screenshot(`/tmp/images/${image}.png`);
+    });
 });
 
 describe('Insights Portal Smoke Test', function () {
