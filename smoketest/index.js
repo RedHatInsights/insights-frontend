@@ -24,6 +24,7 @@ describe('Insights Portal Smoke Test', function () {
         it('should be able to "Go To Application" and login', () => {
             return nightmare
                 .goto(funcs.getUrl())
+                .getText(el.goToApp)
                 .click(el.goToApp)
                 .wait(el.loginFormUsername)
                 .insert(el.loginFormUsername, env.TEST_USERNAME)

@@ -18,25 +18,28 @@ module.exports = (nightmare) => {
                 .waitAndClick(el.actions.page2.firstRuleInTable)
                 .waitAll('nav')
                 .waitAll('actions.page3')
-                .evaluate((el) => {
-                    return {
-                        ruleNamePage3: document.querySelector(el.actions.page3.ruleTitle).textContent,
-                        systemNamePage3: document.querySelector(el.actions.page3.firstSystemInTable).textContent
-                    };
-                }, el)
+                .getStash({
+                    results: {},
+                    selectors: {
+                        ruleNamePage3: el.actions.page3.ruleTitle,
+                        systemNamePage3: el.actions.page3.firstSystemInTable
+                    }
+                })
                 .then((stash) => {
                     nightmare
                         .waitAndClick(el.actions.page3.firstSystemInTable)
                         .waitAll('nav')
                         .waitAll('systemModal')
-                        .evaluate((el, stash) => {
-                            stash.ruleNameModal = document.querySelector(el.systemModal.firstRule).textContent.trim();
-                            stash.systemNameModal =  document.querySelector(el.systemModal.hostname).textContent.trim();
-                            return stash;
-                        }, el, stash)
+                        .getStash({
+                            results: stash.results,
+                            selectors: {
+                                ruleNameModal: el.systemModal.firstRule,
+                                systemNameModal: el.systemModal.hostname
+                            }
+                        })
                         .then((stash) => {
-                            stash.ruleNameModal.should.equal(`Security > ${stash.ruleNamePage3}`);
-                            stash.systemNamePage3.should.equal(stash.systemNameModal);
+                            stash.results.ruleNameModal.should.equal(`Security > ${stash.results.ruleNamePage3}`);
+                            stash.results.systemNamePage3.should.equal(stash.results.systemNameModal);
                             nightmare.waitAndClick(el.systemModal.exButton)
                                 .waitAll('nav')
                                 .then(done)

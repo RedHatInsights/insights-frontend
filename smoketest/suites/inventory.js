@@ -9,20 +9,13 @@ module.exports = (nightmare) => {
                 .waitAndClick(el.nav.inventory)
                 .waitAll('nav')
                 .waitAll('inventory')
-                .evaluate((el) => {
-                    return document.querySelector(el.inventory.firstSystemInTable).textContent;
-                }, el)
+                .getText(el.inventory.firstSystemInTable)
                 .then((systemName) => {
                     nightmare.click(el.inventory.firstSystemInTable)
                         .waitAll('systemModal')
-                        .evaluate((el, systemName) => {
-                            return {
-                                systemName: systemName,
-                                hostName: document.querySelector(el.systemModal.hostname).textContent
-                            };
-                        }, el, systemName)
-                        .then((o) => {
-                            o.systemName.should.equal(o.hostName);
+                        .getText(el.systemModal.hostname)
+                        .then((hostName) => {
+                            systemName.should.equal(hostName);
                             nightmare.waitAndClick(el.systemModal.exButton)
                                 .waitAll('nav')
                                 .then(done)

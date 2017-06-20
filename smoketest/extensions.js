@@ -1,17 +1,36 @@
 /*global require, process, module*/
 
-const lodash = require('lodash');
-const el     = require('./elements');
+const Nightmare = require('nightmare');
+const lodash    = require('lodash');
+const el        = require('./elements');
+
+Nightmare.action(
+    'getText',
+    function (selector, done) {
+        this.evaluate_now(function (selector) {
+            return document.querySelector(selector).textContent;
+        }, done, selector);
+    }
+);
+
+Nightmare.action(
+    'getStash',
+    function (stash, done) {
+        this.evaluate_now(function (stash) {
+            window._.forOwn(stash.selectors, (v, k) => {
+                stash.results[k] = document.querySelector(v).textContent;
+                delete stash.selectors[k];
+            });
+            return stash;
+        }, done, stash);
+    }
+);
 
 module.exports = (nightmare) => {
     nightmare.waitAndClick = (el) => {
-        return nightmare.wait(el).click(el);
-    };
-
-    nightmare.wrap = (msg, fn) => {
-        console.log(`      - ${msg}`);
-        fn(nightmare);
-        return nightmare;
+        return nightmare
+            .wait(el)
+            .click(el);
     };
 
     nightmare.waitAll = (base) => {
