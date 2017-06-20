@@ -5,7 +5,7 @@ const el = require('../elements.js');
 module.exports = (nightmare) => {
     describe('Inventory', () => {
         it('should be able to get to the System Modal through Inventory', (done) => {
-            return nightmare
+            nightmare
                 .waitAndClick(el.nav.inventory)
                 .waitAll('nav')
                 .waitAll('inventory')
