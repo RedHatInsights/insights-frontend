@@ -4,24 +4,24 @@ section.widget-block
     span(translate) Recommended Fixes
   #whatShouldIFix.whatShouldIFix.widget.widget-whatShouldIFix
     table.table.table-separated
-      tr(ng-repeat='r in rules')
-        td
-          .row
-            .col-sm-12
-              a(ui-sref='app.actions-rule({category: r.category.toLowerCase(), rule: r.rule_id})') {{ r.error_key }}
-          .row
-            .col-sm-12
-              .desc(translate) {{ r.description }}
-          .row.row-metrics
-            .col-sm-6
-              .icon-inline.severity-icon
-                severity-icon(severity='r.severity', type='severity', label='')
-                span.severity(translate='translate')
-                  span.ng-binding.ng-scope &nbsp;Total Risk
-            .col-sm-6
-              .icon-inline
-                i.fa.fa-desktop(aria-hidden="true") &nbsp;
-                span(translate, translate-n='r.impacted_systems', translate-plural='{{$count}} systems affected') {{ r.impacted_systems }} system affected
+      thead.lite
+        tr()
+          th(translate) Issue
+          th(translate) Total Risk
+          th(translate) Ansible
 
-        td(width="12%")
-          ansible-icon(value='r.ansible', show-tooltip='true')
+
+      tbody
+        tr(ng-repeat='r in rules')
+          td
+            a(ui-sref='app.actions-rule({category: r.category.toLowerCase(), rule: r.rule_id})') {{ r.error_key }}
+          td
+            //.icon-inline.severity-icon
+            //  span.severity(translate='translate')
+            //    span.ng-binding.ng-scope &nbsp;Total Risk
+            severity-icon(severity='r.severity', type='severity', label='')
+          //td
+          //  span(translate, translate-n='r.impacted_systems', translate-plural='{{$count}} systems affected') {{ r.impacted_systems }} system affected
+
+          td
+            ansible-icon(value='r.ansible', show-tooltip='true')
