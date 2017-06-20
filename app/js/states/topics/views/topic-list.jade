@@ -7,7 +7,7 @@
       topic-details(ng-hide='loading', topic='topic')
     topic-rule-filters(ng-hide='loading')
     section.section-rules-group-content
-      topic-rule-list(ng-hide='loading', topic='topic')
+      topic-rule-list(ng-if='!loading', topic='topic')
 
   // Spinner
   .margin-top.text-center(ng-show="loading")

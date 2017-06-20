@@ -303,9 +303,7 @@ function ActionsRuleCtrl(
         $scope.loading = false;
     };
 
-    $scope.isIncident = function (ruleId) {
-        return IncidentsService.isIncident(ruleId);
-    };
+    $scope.isIncident = IncidentsService.isIncident;
 
     if (InsightsConfig.allowExport) {
         ActionbarService.addExportAction(function () {

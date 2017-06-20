@@ -7,13 +7,15 @@ const get = require('lodash/get');
  * @ngInject
  */
 function TopicRuleListCtrl(
+        $q,
+        $rootScope,
         $scope,
         $state,
-        $rootScope,
         $stateParams,
         Topic,
         FilterService,
         DataUtils,
+        IncidentsService,
         QuickFilters,
         PermalinkService,
         ActionsBreadcrumbs,
@@ -33,11 +35,18 @@ function TopicRuleListCtrl(
 
     function getData() {
         let product;
+        let promises = [];
+
         if (FilterService.getSelectedProduct() !== 'all') {
             product = FilterService.getSelectedProduct();
         }
 
-        Topic.get($stateParams.id, product).success(function (topic) {
+        // preload incidents topic to prevent multiple calls from incidentIcon
+        const initIncidents = IncidentsService.init();
+
+        promises.push(initIncidents);
+
+        const initTopic = Topic.get($stateParams.id, product).success(function (topic) {
             if (topic.hidden && !$scope.isInternal) {
                 return notFound();
             }
@@ -55,13 +64,18 @@ function TopicRuleListCtrl(
             PermalinkService.scroll(null, 30);
 
             $scope.topic = Object.create($scope._topic);
-            $scope.loading = false;
         }).catch(function (res) {
             if (res.status === 404) {
                 return notFound();
             }
 
             $scope.errored = true;
+        });
+
+        promises.push(initTopic);
+
+        $q.all(promises).finally(function promisesFinally() {
+            $scope.loading = false;
         });
     }
 

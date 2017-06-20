@@ -5,4 +5,4 @@
         .radio-inline(ng-repeat='(k, v) in incidentFilters')
             label(translate)
                 input(type="radio", name='incidentFilterRadio' ng-model="showIncidents", value='{{k}}', ng-click='filterIncidents(k)')
-                span {{v.title}}
+                span {{v.title | translate}}

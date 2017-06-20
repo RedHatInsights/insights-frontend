@@ -48,9 +48,13 @@
                 .col-sm-9.border-left
                   .icon-inline
                     i.fa.fa-bullseye
-                    p(translate) An&nbsp;
-                      strong incident&nbsp;
-                      | is an issue that is currently or has already affected systems. {{incidentCount}} of {{stats.rules.total}} issues are INCIDENTS affecting {{incidentSystemCount}} systems. It is imperative that these incidents be addressed to ensure optimal performance.
+                    p An&nbsp;
+                      strong(translate) incident&nbsp;
+                      | is an issue that is currently or has already affected systems. {{incidentCount}} of 
+                      span(translate, translate-n="stats.rules.total", translate-plural=" {{$count}} issues") {{stats.rules.total}} issue 
+                      span(translate, translate-n="incidentCount", translate-plural="&nbsp;are INCIDENTS affecting") is an INCIDENT affecting 
+                      span(translate, translate-n="incidentSystemCount", translate-plural="&nbsp;{{$count}} systems.") {{incidentSystemCount}} system. 
+                      span(translate)&nbsp;It is imperative that these incidents be addressed to ensure optimal performance.
                     br
                     a.link.strong(translate, ui-sref="app.topic({id: 'incidents'})") View incidents
 

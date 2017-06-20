@@ -7,8 +7,8 @@
       data-toggle='dropdown',
       aria-haspopup='true',
       aria-expanded='false')
-      span.text.active(ng-model='label') {{label}}
+      span.text.active(ng-model='label') {{label | translate}}
       span.caret
     ul.dropdown-menu
       li(ng-repeat='option in options')
-        a(href='#', ng-click='select(option)') {{option.label}}
+        a(href='#', ng-click='select(option)') {{option.label | translate}}

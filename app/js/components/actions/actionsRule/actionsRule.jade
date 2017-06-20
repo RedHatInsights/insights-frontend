@@ -7,7 +7,7 @@
     h4(ng-if='isIncident(ruleDetails.rule_id)')
       .icon-inline
         incident-icon(rule-id='ruleDetails.rule_id') &nbsp;
-        span.red This issue is an incident, it has already occurred.
+        span.red(translate) This issue is an incident, it has already occurred.
     h2
       .pull-right(ng-if='config.isPlannerEnabled')
         ansible-icon(value='ruleDetails.ansible')

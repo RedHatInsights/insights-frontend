@@ -1,6 +1,6 @@
 'use strict';
 
-var constantsModule = require('./');
+let constantsModule = require('./');
 
 constantsModule.constant('Severities', [
     {
