@@ -57,7 +57,10 @@ function Routes($stateProvider) {
             templateUrl: 'js/states/topics/views/topic-list.html',
             controller: 'TopicRuleListCtrl',
             title: 'Actions',
-            actions: true
+            actions: true,
+            params: {
+                'filters:totalRisk': 'All'
+            }
         });
 
     $stateProvider

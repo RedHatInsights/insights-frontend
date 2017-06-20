@@ -20,6 +20,7 @@ function ActionsRuleCtrl(
         $timeout,
         ActionsBreadcrumbs,
         FilterService,
+        IncidentsService,
         InsightsConfig,
         ListTypeService,
         MaintenanceService,
@@ -179,6 +180,8 @@ function ActionsRuleCtrl(
     function getData() {
         $scope.loading = true;
 
+        IncidentsService.init();
+
         let populateDetailsPromise =
             RhaTelemetryActionsService.populateDetails().then(function () {
                 let ruleDetails = RhaTelemetryActionsService.getRuleDetails();
@@ -299,6 +302,8 @@ function ActionsRuleCtrl(
 
         $scope.loading = false;
     };
+
+    $scope.isIncident = IncidentsService.isIncident;
 
     if (InsightsConfig.allowExport) {
         ActionbarService.addExportAction(function () {

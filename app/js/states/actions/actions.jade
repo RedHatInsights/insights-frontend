@@ -1,13 +1,17 @@
 .actions-page
   //platform-filter
   new-actions-graph
-  .content-wrap
+
+  .content-wrap(ng-show='loader.loading')
+    .row(ng-if='loader.loading')
+          .spinner.spinner-lg
+
+  .content-wrap(ng-show='!loader.loading')
     section.metrics
       .rha-notifications
       .row
-        .col-md-7.chart-col.clearfix
+        .col-md-6.chart-col.clearfix
           .chart-container.text-center
-            span.preloader(ng-show='loading')
             .donut-container
               .donut-hole
                 .content
@@ -30,17 +34,55 @@
                         i.fa.fa-square.inline-right(ng-class="category.id + '-color'", aria-hidden="true")
                         span.desc(translate) {{category.id | titlecase}}
                         span.count &nbsp;({{category.count}})
-        .col-md-5
+        .col-md-6
+          card.widget.widgetIncidentSummary(id="widgetIncidentSummary", ng-show='incidentCount > 0')
+            card-header.gray
+              h4(translate) Incident summary
+            card-content.flexgrid.equalheights
+              .row
+                .col-sm-3
+                  #countComparison.countComparison
+                    .count
+                      .num {{incidentCount}}
+                      .desc(translate) Incidents
+                    .count
+                      .num {{incidentSystemCount}}
+                      .desc(translate) Systems
+                .col-sm-9.border-left
+                  .icon-inline
+                    i.fa.fa-bullseye
+                    p An&nbsp;
+                      strong(translate) incident&nbsp;
+                      | is an issue that is currently or has already affected systems. {{incidentCount}} of 
+                      span(translate, translate-n="stats.rules.total", translate-plural=" {{$count}} issues") {{stats.rules.total}} issue 
+                      span(translate, translate-n="incidentCount", translate-plural="&nbsp;are INCIDENTS affecting") is an INCIDENT affecting 
+                      span(translate, translate-n="incidentSystemCount", translate-plural="&nbsp;{{$count}} systems.") {{incidentSystemCount}} system. 
+                      span(translate)&nbsp;It is imperative that these incidents be addressed to ensure optimal performance.
+                    br
+                    a.link.strong(translate, ui-sref="app.topic({id: 'incidents'})") View incidents
+
+          card.widget.widgetIncidentSummary(id="widgetIncidentSummary", ng-show='incidentCount === 0')
+            card-header.gray
+              h4(translate) Incident summary
+            card-content.flexgrid.equalheights
+              .row
+                .col-md-12
+                  #countComparison.countComparison
+                    .count
+                      span.num.success 0
+                      span.desc incidents
+                .col-md-12
+                  .icon-inline
+                    i.fa.fa-bullseye
+                    p(translate) An&nbsp;
+                      strong incident&nbsp;
+                      | is an issue that is currently or has already affected systems. You have 0 issues that are INCIDENTS.
+
           card
             card-header.gray
               h4(translate) Risk summary
             card-content
               severity-summary(stats='stats')
-          card(ng-if='stats.systems')
-            card-header.gray
-              h4(translate) Systems with critical risk
-            card-content
-              system-summary(stats='stats')
 
     section.gray.full-width
       span.pull-right(ng-show='isContentManager')
@@ -49,18 +91,16 @@
         | ]
       h2.section-title.section-title-red(translate) Featured Topics
       .flexgrid.equalheights.other-topics
-        .row(ng-if='loader.loading')
-          .spinner.spinner-lg
         .row(ng-if='featuredTopics.length')
-          other-topic(ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id", ng-show='!loader.loading', topic='topic')
+          other-topic(ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id", topic='topic')
         .row(ng-if='!show.extraTopics && extraTopics.length')
           .text-center.extra-topics
             button.btn.btn-sm.btn-default(ng-click='show.extraTopics = true', translate) More topics
-        .row(ng-if='!featuredTopics.length && !loader.loading')
+        .row(ng-if='!featuredTopics.length')
           .col-xs-12.text-center
             strong No topics currently available.&nbsp;
               a(ui-sref='info.getting-started.direct', translate) Register more systems.
     section.full-width(ng-if='show.extraTopics')
       .flexgrid.equalheights.other-topics
         .row
-          other-topic(ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id", ng-show='!loader.loading', topic='topic')
+          other-topic(ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id", topic='topic')

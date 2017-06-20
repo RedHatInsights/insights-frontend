@@ -116,3 +116,8 @@
 .dropdown.open .caret {
   transform: rotate(180deg);
 }
+
+.dropdown.inline {
+  display: inline-block;
+  width: auto;
+} 
