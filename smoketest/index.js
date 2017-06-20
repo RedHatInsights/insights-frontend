@@ -1,64 +1,51 @@
-/*global require, casper*/
+/*global require, process, describe, it, after*/
 
-const env    = require('system').env; // because on the container instance process is not global?
-const lodash = require('lodash');
-const el     = require('./elements');
-const funcs  = require('./funcs');
+const env       = process.env;
+const el        = require('./elements');
+const funcs     = require('./funcs');
+const nightmare = funcs.getNightmare();
 
+require('should');
 require('./check_inputs.js');
+require('./extensions')(nightmare);
 
-console.log('Using base: ' + funcs.getUrl(''));
-casper.options.waitTimeout = 10 * 1000;
-
-// load my extensions
-require('./casper_extensions');
-
-casper.start(funcs.getUrl('/splash/'), function openHome() {
-    // require('./mydebug').init(this.page);
-    this.page.viewportSize = { width: 1600, height: 900 };
+nightmare.on('console', (log, msg) => {
+    console.log(`[browser] ${msg}`);
 });
 
-casper.wrap('ClickGoToApp', el.goToApp, function clickGoToApp() {
-    casper.waitAndClick(el.goToApp);
+[
+    'did-stop-loading'
+    // 'will-navigate',
+    // 'dom-ready',
+    // 'did-navigate',
+    // 'did-navigate-in-page'
+].forEach((event) => {
+    nightmare.on(event, nightmare.doScreenShot(event));
 });
 
-casper.then(function waitForLoginUrl() {
-    this.waitForUrl(/https:\/\/.*?(\/auth)/);
-});
+describe('Insights Portal Smoke Test', function () {
+    this.timeout(45 * 1000);
 
-casper.then(function tryLogin () {
-    if (!lodash.includes(this.getCurrentUrl(), '/overview')) {
-        casper.wrap('FillLoginForm', el.loginForm, function () {
-            this.fill(el.loginForm, {
-                username: env.TEST_USERNAME,
-                password: env.TEST_PASSWORD
-            }, true);
-            this.thenDebugImage();
-        });
-    }
-});
+    after((done) => {
+        nightmare.end(done);
+    });
 
-// Until the run multiple test.begin issue is worked out
-// wrap everything in one big test suite
-casper.then(function () {
-    casper.test.begin('Smoke Test', function (test) {
-        casper.test.on('fail', function () {
-            casper.thenCapture('fail');
-        });
-
-        casper.then(function () {
-            test.assertUrlMatch(/https:\/\/.*?\/overview[/]*/, 'After auth we land on Overview');
-            this.thenDebugImage();
-        });
-
-        require('./suites/actions')(test);
-        require('./suites/inventory')(test);
-        // require('./suites/planner')(test);
-
-        casper.then(function () {
-            test.done();
+    describe('Setup', function () {
+        it('should be able to "Go To Application" and login', (done) => {
+                nightmare
+                .goto(funcs.getUrl())
+                .waitAndClick(el.goToApp)
+                .waitAll('login')
+                .insert(el.login.username, env.TEST_USERNAME)
+                .insert(el.login.password, env.TEST_PASSWORD)
+                .waitAndClick(el.login.submit)
+                .waitAll('nav')
+                .then(nightmare.myDone(done))
+                .catch(nightmare.myDone(done));
         });
     });
-});
 
-casper.run();
+    require('./suites/actions')(nightmare);
+    require('./suites/inventory')(nightmare);
+    require('./suites/planner')(nightmare);
+});

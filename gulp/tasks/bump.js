@@ -5,7 +5,7 @@ var gulp = require('gulp');
 var bump = require('gulp-bump');
 
 function _bump(type) {
-    return gulp.src(['./package.json', './bower.json'])
+    return gulp.src(['./package.json'])
         .pipe(bump({
             type: type
         }))
