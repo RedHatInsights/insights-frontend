@@ -142,6 +142,21 @@ $define-fa: true !default;
 @import 'components/card';
 @import 'components/inventory';
 
+// Table Filters
+//==================================================================*
+@import 'components/toolbar/toolbar';
+@import 'components/toolbar/toolbar--data-filters';
+
+
+// Data visualization
+//==================================================================*/
+@import 'components/data-visualization/count-comparison';
+
+
+// UI Filters
+//==================================================================*/
+@import 'components/ui-filters/ui-filters';
+
 
 // Namespaced
 //==================================================================*/

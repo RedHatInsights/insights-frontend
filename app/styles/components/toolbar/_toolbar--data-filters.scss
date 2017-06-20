@@ -1,0 +1,134 @@
+.toolbar.toolbar--data-filters {
+  position: relative;
+  @include rem('margin-bottom', $global-padding);
+  background: $gray-light;
+
+
+  // Adjusting the standard flexgrid bottom padding for closer grouping
+  .flexgrid [class^="col-"],
+  .flexgrid div[class*=" col-"] {
+    @include rem('padding-bottom', $global-padding/2);
+
+    @include media-query(md) {
+        @include rem('padding-bottom', 0);
+      vertical-align: middle;
+    }
+  }
+
+  .flexgrid { align-items: center; }
+  .checkbox { margin: 0; }
+
+  // tableFilterHeader
+  .dataFiltersHeader {
+    label { margin: 0; }
+  }
+
+  .dataFiltersHeader,
+  .dataFiltersBody,
+  .dataFiltersFooter {
+    .flexgrid {
+      @include rem('padding', $global-padding);
+    }
+  }
+
+
+  // dataFilterBody
+  .dataFiltersBody,
+  .dataFiltersFooter {
+    border-top: 1px solid $gray;
+    background: $gray-light;
+    @include transition(.2s);
+  }
+
+
+  .list-switch {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 0;
+
+    a {
+      @include rem('padding', 0 4px);
+      @include font-size(18px);
+      line-height: 0;
+
+      i { line-height: 1; }
+    }
+
+    .link + .link {
+      margin-right: 0;
+    }
+  }
+
+  label {
+    font-weight: 400;
+  }
+}
+
+
+// dataFilterHeader elements
+.toolbar .dataFiltersHeader {
+  position: relative;
+
+  button {
+    @include rem('padding', 0 4px);
+    text-transform: none;
+    line-height: 1;
+
+    span + i {
+      @include rem('padding-left', 8px);
+    }
+  }
+
+  input {
+    @include placeholder() {
+      @include font-size(14px);
+      line-height: 1;
+    };
+  }
+
+  .input-group {
+    label + input,
+    label + .form-control {
+      @include rem('margin-left', 8px);
+    }
+  }
+
+  .search {
+    display: block;
+
+    input {
+      min-width: 70%;
+      @include rem('margin', -4px auto -4px $global-padding/2);
+      @include rem('padding', 4px 8px);
+      outline: none;
+    }
+  }
+
+  .sep {
+    color: $gray;
+  }
+}
+
+// dataFilterBody elements
+.toolbar .dataFiltersBody {
+  //position: absolute;
+  //top: 100%;
+}
+
+.toolbar .dataFiltersFooter {
+  @include rem('padding', $global-padding);
+
+  .active-filters {
+    button,
+    .reset {
+      @include rem('margin-left', $global-padding/2);
+    }
+
+    .btn {
+      @include rem('padding', 4px 8px);
+      text-transform: none;
+
+      span + i { @include rem('margin-left', $global-padding/2); }
+    }
+  }
+}
