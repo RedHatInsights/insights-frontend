@@ -23,6 +23,7 @@ function ActionsCtrl(
     Stats,
     System,
     SystemsService,
+    Topic,
     TopicService,
     Utils) {
 
@@ -55,6 +56,26 @@ function ActionsCtrl(
 
             $scope.featuredTopics = topics.slice(0, 3);
             $scope.extraTopics = topics.slice(3);
+
+            let product;
+            if (FilterService.getSelectedProduct() !== 'all') {
+                product = FilterService.getSelectedProduct();
+            }
+
+            Topic.get('incidents', product).success((topic) => {
+                let rulesWithHits = 0;
+
+                if (topic.rules) {
+                    topic.rules.forEach((rule) => {
+                        if (rule.hitCount > 0) {
+                            rulesWithHits++;
+                        }
+                    });
+                }
+
+                $scope.incidentCount = rulesWithHits;
+                $scope.incidentSystemCount = topic.affectedSystemCount;
+            });
         });
     });
 

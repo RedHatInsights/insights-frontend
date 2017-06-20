@@ -1,13 +1,13 @@
 //platform-filter
-.row
-  .col-sm-12
-    actions-rule-filters
-
 
 .content-wrap(ng-hide='loading')
-  actions-breadcrumbs.actions-breadcrumbs.push-top(ng-hide='loading')
+  actions-breadcrumbs.actions-breadcrumbs.push-top-narrow(ng-hide='loading')
 
   section.actions-rule-details.gray
+    h4(ng-if='isIncident(ruleDetails.rule_id)')
+      .icon-inline
+        incident-icon(rule-id='ruleDetails.rule_id') &nbsp;
+        span.red(translate) This issue is an incident, it has already occurred.
     h2
       .pull-right(ng-if='config.isPlannerEnabled')
         ansible-icon(value='ruleDetails.ansible')
@@ -15,6 +15,10 @@
     p(ng-bind-html='ruleDetails.generic_html | trust_html')
     all-severity-icons(rule='ruleDetails', ng-if='!loading')
 
+  section
+    .row
+      .col-sm-12
+        actions-rule-filters
 
   section
     .row

@@ -380,7 +380,9 @@ function FilterService(
         }
 
         if (params.severity) {
-            Severities.forEach(function (severity) {
+            Severities.map(function (s) {
+                return s.value;
+            }).forEach(function (severity) {
                 if (severity === params.severity) {
                     MultiButtonService.setState('severityFilters' + severity, true);
                 } else {
@@ -542,7 +544,9 @@ function FilterService(
 
         //severity
         if (includeParam('severity')) {
-            Severities.forEach(function (severity) {
+            Severities.map(function (s) {
+                return s.value;
+            }).forEach(function (severity) {
                 if (MultiButtonService.getState('severityFilters' + severity) &&
                     severity !== 'All') {
 

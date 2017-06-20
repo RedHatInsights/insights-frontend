@@ -19,6 +19,7 @@ const defaultThrottle = 500;
  * @ngInject
  */
 function searchBoxCtrl($scope, gettextCatalog, Events) {
+
     $scope.placeholder = $scope.placeholder || gettextCatalog.getString('Search…');
 
     function doOnSearch () {
@@ -88,7 +89,8 @@ function searchBox() {
             placeholder: '@',
             model: '=?ngModel',
             onSearch: '&?',
-            throttle: '@'
+            throttle: '@',
+            isFullLength: '='
         }
     };
 }
