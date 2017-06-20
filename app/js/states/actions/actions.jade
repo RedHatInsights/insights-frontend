@@ -2,13 +2,16 @@
   //platform-filter
   new-actions-graph
 
-  .content-wrap
+  .content-wrap(ng-show='loader.loading')
+    .row(ng-if='loader.loading')
+          .spinner.spinner-lg
+
+  .content-wrap(ng-show='!loader.loading')
     section.metrics
       .rha-notifications
       .row
         .col-md-6.chart-col.clearfix
           .chart-container.text-center
-            span.preloader(ng-show='loading')
             .donut-container
               .donut-hole
                 .content
@@ -88,18 +91,16 @@
         | ]
       h2.section-title.section-title-red(translate) Featured Topics
       .flexgrid.equalheights.other-topics
-        .row(ng-if='loader.loading')
-          .spinner.spinner-lg
         .row(ng-if='featuredTopics.length')
-          other-topic(ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id", ng-show='!loader.loading', topic='topic')
+          other-topic(ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id", topic='topic')
         .row(ng-if='!show.extraTopics && extraTopics.length')
           .text-center.extra-topics
             button.btn.btn-sm.btn-default(ng-click='show.extraTopics = true', translate) More topics
-        .row(ng-if='!featuredTopics.length && !loader.loading')
+        .row(ng-if='!featuredTopics.length')
           .col-xs-12.text-center
             strong No topics currently available.&nbsp;
               a(ui-sref='info.getting-started.direct', translate) Register more systems.
     section.full-width(ng-if='show.extraTopics')
       .flexgrid.equalheights.other-topics
         .row
-          other-topic(ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id", ng-show='!loader.loading', topic='topic')
+          other-topic(ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id", topic='topic')
