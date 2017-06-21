@@ -43,6 +43,11 @@ $define-fa: true !default;
 @import 'vendor/plotly';
 
 
+// Icon fonts
+//==================================================================*/
+@import 'icons/_icons-insights.css';
+
+
 // Page Templates
 //==================================================================*/
 @import 'page-templates/systems';
@@ -126,7 +131,6 @@ $define-fa: true !default;
 @import 'components/gauges';
 @import 'components/global-filters';
 @import 'components/demo-account-switcher';
-@import 'components/fonts';
 
 
 // Maintenance Plan
