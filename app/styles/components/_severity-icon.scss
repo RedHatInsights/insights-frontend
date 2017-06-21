@@ -16,10 +16,10 @@
     top: 5px;
     background-position: center center;
 
-    &.low { background-image: url('../images/i_severity-low.svg'); }
-    &.med { background-image: url('../images/i_severity-med.svg'); }
-    &.high { background-image: url('../images/i_severity-high.svg'); }
-    &.critical { background-image: url('../images/i_severity-critical.svg'); }
+    &.low { background-image: url('../static/images/i_severity-low.svg'); }
+    &.med { background-image: url('../static/images/i_severity-med.svg'); }
+    &.high { background-image: url('../static/images/i_severity-high.svg'); }
+    &.critical { background-image: url('../static/images/i_severity-critical.svg'); }
 
     &.low,
     &.med,

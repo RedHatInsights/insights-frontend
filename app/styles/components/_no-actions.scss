@@ -61,7 +61,7 @@
 		height: 164px;
 		margin-left: -82px;
 		top: 50px;
-		background: url('../images/bg_dount-hole-na.png') no-repeat center #fff;
+		background: url('../static/images/bg_dount-hole-na.png') no-repeat center #fff;
 		background-size: 100%;
 	}
 
@@ -107,7 +107,7 @@
 			top: 0;
 			width: 92%;
 
-            @include media-query (xs) { background-image: url('../images/bg_chart-shadow.png'); }
+            @include media-query (xs) { background-image: url('../static/images/bg_chart-shadow.png'); }
 
 			@include media-query (md) {
 				background-size: 108% auto;

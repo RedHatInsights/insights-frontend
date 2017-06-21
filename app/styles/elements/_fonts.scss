@@ -2,33 +2,33 @@
 //==================================================================
 @font-face {
   font-family: Overpass;
-  src: url('../fonts/overpass_regular-web.eot');
-  src: url('../fonts/overpass_regular-web.eot?#iefix') format('eot'),
-  url(../fonts/overpass_regular-web.woff) format('woff'),
-  url(../fonts/overpass_regular-web.ttf) format('truetype'),
-  url(../fonts/overpass_regular-web.svg#webfontLTZe4IYH) format('svg');
+  src: url('../static/fonts/overpass_regular-web.eot');
+  src: url('../static/fonts/overpass_regular-web.eot?#iefix') format('eot'),
+  url(../static/fonts/overpass_regular-web.woff) format('woff'),
+  url(../static/fonts/overpass_regular-web.ttf) format('truetype'),
+  url(../static/fonts/overpass_regular-web.svg#webfontLTZe4IYH) format('svg');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: OverpassBold;
-  src: url('../fonts/overpass_bold-web.eot');
-  src: url('../fonts/overpass_bold-web.eot?#iefix') format('eot'),
-  url(../fonts/overpass_bold-web.woff) format('woff'),
-  url(../fonts/overpass_bold-web.ttf) format('truetype'),
-  url(../fonts/overpass_bold-web.svg#webfontzAU82Ltw) format('svg');
+  src: url('../static/fonts/overpass_bold-web.eot');
+  src: url('../static/fonts/overpass_bold-web.eot?#iefix') format('eot'),
+  url(../static/fonts/overpass_bold-web.woff) format('woff'),
+  url(../static/fonts/overpass_bold-web.ttf) format('truetype'),
+  url(../static/fonts/overpass_bold-web.svg#webfontzAU82Ltw) format('svg');
   font-weight: 800;
   font-style: normal;
 }
 
 @font-face {
   font-family: OverpassLight;
-  src: url('../fonts/overpass_light-webfont.eot');
-  src: url('../fonts/overpass_light-webfont.eot?#iefix') format('eot'),
-  url(../fonts/overpass_light-webfont.woff) format('woff'),
-  url(../fonts/overpass_light-webfont.ttf) format('truetype'),
-  url(../fonts/overpass_light-webfont.svg#webfontzAU82Ltw) format('svg');
+  src: url('../static/fonts/overpass_light-webfont.eot');
+  src: url('../static/fonts/overpass_light-webfont.eot?#iefix') format('eot'),
+  url(../static/fonts/overpass_light-webfont.woff) format('woff'),
+  url(../static/fonts/overpass_light-webfont.ttf) format('truetype'),
+  url(../static/fonts/overpass_light-webfont.svg#webfontzAU82Ltw) format('svg');
   font-weight: 400;
   font-style: normal;
   letter-spacing: .05em;
