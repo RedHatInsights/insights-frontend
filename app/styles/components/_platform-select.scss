@@ -1,7 +1,7 @@
 .platform-select {
 	@include rem('margin', 0 -15px);
 	@include rem('padding', $global-margin);
-	//background: url('../images/bg_product-select2.jpg');
+	//background: url('../static/images/bg_product-select2.jpg');
 	background-image: url('https://www.redhat.com/profiles/rh/themes/redhatdotcom/img/home/bkgd-cloud-home-2000x488.jpg');
 	background-size: cover;
 	border-bottom: 8px solid #d9d9d9;
