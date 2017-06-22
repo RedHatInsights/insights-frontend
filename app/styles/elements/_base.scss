@@ -15,6 +15,7 @@
     @include rem('padding-right', $global-padding);
 }
 
+.page-wrap { z-index: auto; }
 
 .main-content .row { margin-bottom: 0; }
 .pointer { cursor: pointer !important; }
