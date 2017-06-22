@@ -6,7 +6,7 @@ var componentsModule = require('../');
 /**
  * @ngInject
  */
-function CollapsableFilterCtrl($location,
+function CollapsibleFilterCtrl($location,
                                $q,
                                $rootScope,
                                $scope,
@@ -70,20 +70,20 @@ function CollapsableFilterCtrl($location,
 /**
  * @ngInject
  */
-function CollapsableFilterContentLink(scope, element, attrs, collapsableFilter) {
-    scope.collapsableFilter = collapsableFilter.api;
+function CollapsibleFilterContentLink(scope, element, attrs, collapsibleFilter) {
+    scope.collapsibleFilter = collapsibleFilter.api;
 }
 
 /**
  * @ngInject
  */
-function collapsableFilter() {
+function collapsibleFilter() {
     return {
-        templateUrl: 'js/components/collapsableFilter/collapsableFilter.html',
+        templateUrl: 'js/components/collapsibleFilter/collapsibleFilter.html',
         restrict: 'E',
         replace: true,
         transclude: true,
-        controller: CollapsableFilterCtrl,
+        controller: CollapsibleFilterCtrl,
         scope: {
             searchPlaceholder: '@',
             search: '='
@@ -94,16 +94,16 @@ function collapsableFilter() {
 /**
  * @ngInject
  */
-function collapsableFilterContent() {
+function collapsibleFilterContent() {
     return {
-        templateUrl: 'js/components/collapsableFilter/collapsableFilterContent.html',
+        templateUrl: 'js/components/collapsibleFilter/collapsibleFilterContent.html',
         restrict: 'E',
         replace: true,
         transclude: true,
-        link: CollapsableFilterContentLink,
-        require: '^collapsableFilter'
+        link: CollapsibleFilterContentLink,
+        require: '^collapsibleFilter'
     };
 }
 
-componentsModule.directive('collapsableFilter', collapsableFilter);
-componentsModule.directive('collapsableFilterContent', collapsableFilterContent);
+componentsModule.directive('collapsibleFilter', collapsibleFilter);
+componentsModule.directive('collapsibleFilterContent', collapsibleFilterContent);

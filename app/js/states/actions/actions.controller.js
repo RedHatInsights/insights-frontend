@@ -67,7 +67,7 @@ function ActionsCtrl(
 
                 if (topic.rules) {
                     topic.rules.forEach((rule) => {
-                        if (rule.hitCount > 0) {
+                        if (rule.hitCount > 0 && !rule.acked) {
                             rulesWithHits++;
                         }
                     });
