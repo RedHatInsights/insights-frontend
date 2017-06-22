@@ -17,6 +17,4 @@ gulp.task('watch', [ 'browserSync', 'server'], function () {
     gulp.watch(config.views.watch.concat(exclude), function () {
         runSequence ('views', 'bro');
     });
-    gulp.watch(config.images.src, ['images']);
-    gulp.watch(config.fonts.src,  ['fonts']);
 });

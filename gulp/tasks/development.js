@@ -8,7 +8,7 @@ var funcs = {};
 
 funcs.dev = function (cb) {
     cb = cb || function () {};
-    runSequence('views', ['copy.translations', 'static', 'copy', 'styles', 'images', 'fonts', 'browserify'], 'watch', cb);
+    runSequence('views', ['copy.translations', 'static', 'copy', 'styles', 'browserify'], 'watch', cb);
 };
 
 gulp.task('dev-smoke', ['clean'], function (cb) {
