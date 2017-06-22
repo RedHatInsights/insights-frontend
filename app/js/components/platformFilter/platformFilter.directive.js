@@ -320,7 +320,7 @@ function platformFilterCtrl(
     $scope.getImage = function () {
         var product = $scope.getSelectedProduct();
         if (product && product !== 'all') {
-            return 'images/l_' + product + '.svg';
+            return 'static/images/l_' + product + '.svg';
         }
 
         return false;
