@@ -23,6 +23,7 @@ section
                   //.new-item NEW!
                   .pull-right
                     span.label.label-default.inline-right(translate, ng-class="{'rule-inactive': rule.ack_id, 'rule-active': !rule.ack_id}") INACTIVE
+                    incident-icon.inline-right(rule-id='rule.rule_id') &nbsp;
                     ansible-icon(value='rule.ansible', ng-if='config.isPlannerEnabled')
                   span.title.pointer(ng-click="permalink(rule.rule_id, true, 30)")
                     i.fa.category-icon.inline-right(ng-class="rule.category.toLowerCase()")
