@@ -1,6 +1,8 @@
+/*global module, require*/
 'use strict';
 
-var pkg = require('../package');
+const pkg = require('../package');
+
 module.exports = {
     'pkg': pkg,
     'syncport': 9000,
@@ -19,17 +21,6 @@ module.exports = {
         'src':  ['app/js/**/*.js'],
         'dest': 'build/js'
     },
-
-    'images': {
-        'src': 'app/images/**/*',
-        'dest': 'build/images'
-    },
-
-    'fonts': {
-        'src': ['app/fonts/**/*', 'node_modules/font-awesome/fonts/*'],
-        'dest': 'build/fonts'
-    },
-
     'views': {
         'watch': [
             'app/index.html',

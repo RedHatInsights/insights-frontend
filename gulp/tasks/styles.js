@@ -1,3 +1,4 @@
+/*global require, global*/
 'use strict';
 
 const config = require('../config');
@@ -6,6 +7,7 @@ const gulpif = require('gulp-if');
 const handleErrors = require('../util/handleErrors');
 const browserSync = require('browser-sync');
 const compass = require('gulp-compass');
+const replace = require('gulp-replace');
 
 gulp.task('styles', function () {
     let styles = global.isRelease ? config.styles.srcRelease : config.styles.src;
@@ -30,6 +32,7 @@ gulp.task('styles', function () {
             require: ['sass-css-importer']
         }))
         .on('error', handleErrors)
+        .pipe(replace('../fonts', '../static/fonts'))
         .pipe(gulp.dest(config.styles.dest))
         .pipe(gulpif(browserSync.active, browserSync.reload({
             stream: true
