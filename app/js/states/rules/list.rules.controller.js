@@ -14,6 +14,7 @@ function ListRuleCtrl(
         $state,
         Cluster,
         FilterService,
+        IncidentsService,
         InsightsConfig,
         PermalinkService,
         PreferenceService,
@@ -156,6 +157,10 @@ function ListRuleCtrl(
             });
 
         promises.push(ruleSummaryPromise);
+
+        const incidents = IncidentsService.init();
+
+        promises.push(incidents);
 
         $q.all(promises).then(function listRulesAllPromises() {
             $scope.loading = false;

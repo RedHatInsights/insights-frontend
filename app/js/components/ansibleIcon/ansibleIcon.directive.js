@@ -14,10 +14,10 @@ function ansibleIconCtrl($scope, gettextCatalog) {
 
     $scope.$watch('value', function (value) {
         if (value) {
-            $scope.icon = 'images/l_ansible-blue.svg';
+            $scope.icon = 'static/images/l_ansible-blue.svg';
 
         } else {
-            $scope.icon = 'images/l_ansible-unsupported.svg';
+            $scope.icon = 'static/images/l_ansible-unsupported.svg';
         }
 
         if ($scope.showTooltip || $scope.showTooltip === undefined) {
