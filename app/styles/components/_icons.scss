@@ -84,5 +84,11 @@ h2 .ansible-icon img {
     position: absolute;
     left: 0;
   }
-
 }
+
+h1, h2, h3, h4, h5, h6 { &.icon-inline, .icon-inline { i { top: 4px; } } }
+h1 { &.icon-inline, .icon-inline { @include rem('padding-left', 30px); } }
+h2 { &.icon-inline, .icon-inline { @include rem('padding-left', 32px); } }
+h3 { &.icon-inline, .icon-inline { @include rem('padding-left', 24px); } }
+h4 { &.icon-inline, .icon-inline { @include rem('padding-left', 22px); } }
+h5, h6 { &.icon-inline, .icon-inline { @include rem('padding-left', 18px); } }
