@@ -1,6 +1,6 @@
 .landing-page {
   .band.ansible {
-    background: url("../images/bg_ansible.jpg") no-repeat;
+    background: url("../static/images/bg_ansible.jpg") no-repeat;
     background-size: cover;
     color: #fff;
 
@@ -23,7 +23,7 @@
 		background: #000;
 
 		@include media-query(sm) {
-			background: url("../images/bg_landing-hero.jpg") no-repeat;
+			background: url("../static/images/bg_landing-hero.jpg") no-repeat;
 			background-size: 100% auto;
 		}
 	}
@@ -34,7 +34,7 @@
 		color: #fff;
 		text-align: center;
 		margin: 0;
-		background: url("../images/bg_landing-hero.jpg") no-repeat;
+		background: url("../static/images/bg_landing-hero.jpg") no-repeat;
 		background-size: cover;
 
 		@include media-query(sm) {
@@ -84,7 +84,7 @@
 	}
 
 	.band-whispy {
-		background: url("../images/bg_whispy.jpg");
+		background: url("../static/images/bg_whispy.jpg");
 		background-size: cover;
 	}
 
