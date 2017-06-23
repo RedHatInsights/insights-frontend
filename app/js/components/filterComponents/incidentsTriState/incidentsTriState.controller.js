@@ -15,26 +15,46 @@ function incidentsTriStateCtrl($location, $rootScope, $scope, Events, IncidentFi
 
         // If 'All' is selected there is no reason to store the filter
         if ($scope.showIncidents === 'all') {
-            delete $location.search()[Events.filters.incident];
+            $location.search(Events.filters.incident, null);
         }
 
-        $rootScope.$broadcast(Events.filters.incident);
+        $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.incident);
+        $rootScope.$broadcast(Events.filters.incident, $scope.showIncidents);
     };
 
     $scope.$on(Events.filters.reset, function () {
-        $scope.showIncidents = 'all';
+        resetFilter();
     });
 
-    function read () {
-        $scope.showIncidents = $location.search()[Events.filters.incident] ?
-            $location.search()[Events.filters.incident] : 'all';
+    $scope.$on(Events.filters.removeTag, function (event, filter) {
+        if (filter === Events.filters.incident) {
+            resetFilter();
+            $rootScope.$broadcast(filter, 'all');
+        }
+    });
+
+    function resetFilter () {
+        $scope.showIncidents = 'all';
+        $location.search(Events.filters.incident, null);
     }
 
-    $scope.$on(Events.filters.incident, function () {
-        read();
-    });
+    function getTag () {
+        let tag = IncidentFilters[$scope.showIncidents].tag;
+        if ($scope.showIncidents === 'all') {
+            tag = null;
+        }
 
-    read();
+        return tag;
+    }
+
+    function init () {
+        $scope.showIncidents = $location.search()[Events.filters.incident] ?
+            $location.search()[Events.filters.incident] : 'all';
+
+        $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.incident);
+    }
+
+    init();
 }
 
 function incidentsTriState() {

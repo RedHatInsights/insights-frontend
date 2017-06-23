@@ -65,16 +65,14 @@ function topicRuleListCtrl ($filter,
     });
 
     // Listens for change in incidents filter
-    $scope.$on(Events.filters.incident, function () {
-        $scope.filterIncidents = $location.search()[Events.filters.incident];
-        $scope.filterIncidents = $scope.filterIncidents ? $scope.filterIncidents : 'all';
+    $scope.$on(Events.filters.incident, function (event, value) {
+        $scope.filterIncidents = value;
         updateList($scope.topic);
     });
 
     // Listens for change in total risk filter
-    $scope.$on(Events.filters.totalRisk, function () {
-        $scope.totalRisk = $location.search()[Events.filters.totalRisk];
-        $scope.totalRisk = $scope.totalRisk ? $scope.totalRisk : 'All';
+    $scope.$on(Events.filters.totalRisk, function (event, value) {
+        $scope.totalRisk = value;
         updateList($scope.topic);
     });
 

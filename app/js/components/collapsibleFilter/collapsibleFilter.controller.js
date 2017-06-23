@@ -10,57 +10,27 @@ function CollapsibleFilterCtrl($location,
                                $q,
                                $rootScope,
                                $scope,
-                               Events,
-                               Group,
-                               IncidentFilters,
-                               Severities) {
+                               Events) {
 
     $scope.removeFilter = function (tagId) {
-        $location.search(tagId, null);
         delete $scope.tags[tagId];
-        $rootScope.$broadcast(tagId);
+        $rootScope.$broadcast(Events.filters.removeTag, tagId);
     };
 
     $scope.hasTags = function () {
         return Object.keys($scope.tags).length > 0;
     };
 
-    $scope.$on(Events.filters.incident, function () {
-        addIncidentTag();
-    });
+    $scope.$on(Events.filters.tag, function (event, tag, filter) {
+        $scope.tags[filter] = tag;
 
-    $scope.$on(Events.filters.totalRisk, function () {
-        addTotalRiskTag();
-    });
-
-    function addTotalRiskTag () {
-        if ($location.search()[Events.filters.totalRisk] &&
-            $location.search()[Events.filters.totalRisk] !== 'All') {
-            $scope.tags[Events.filters.totalRisk] =
-                Severities.find((severity) => {
-                    return severity.value ===
-                        $location.search()[Events.filters.totalRisk];
-                }).tag;
-        } else {
-            delete $scope.tags[Events.filters.totalRisk];
+        if (tag === null) {
+            delete $scope.tags[filter];
         }
-    }
-
-    function addIncidentTag () {
-        if ($location.search()[Events.filters.incident] &&
-            $location.search()[Events.filters.incident] !== 'all') {
-            $scope.tags[Events.filters.incident] =
-                IncidentFilters[
-                    $location.search()[Events.filters.incident]].tag;
-        } else {
-            delete $scope.tags[Events.filters.incident];
-        }
-    }
+    });
 
     function initTags () {
         $scope.tags = {};
-        addTotalRiskTag();
-        addIncidentTag();
     }
 
     this.api = $scope;
