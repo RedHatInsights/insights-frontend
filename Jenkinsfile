@@ -1,6 +1,7 @@
 node('insights-frontend-slave') {
   stage('load_jenkinsfile') {
-    sh 'curl -qk https://$GITHUBTOKEN@raw.githubusercontent.com/RedHatInsights/insights-build/master/frontend/Jenkinsfile > /tmp/Jenkinsfile'
-    load '/tmp/Jenkinsfile'
+    sh 'curl -qLv https://$GITHUBTOKEN@github.com/RedHatInsights/insights-build/archive/master.zip > /tmp/master.zip'
+    sh 'unzip /tmp/master.zip -d /tmp/'
+    load '/tmp/insights-build-master/frontend/Jenkinsfile'
   }
 }
