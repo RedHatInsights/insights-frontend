@@ -6,7 +6,7 @@ const find = require('lodash/find');
 /**
  * @ngInject
  */
-function checkInSelectCtrl($scope, gettextCatalog, Events, FilterService) {
+function checkInSelectCtrl($rootScope, $scope, gettextCatalog, Events, FilterService) {
     $scope.options = [
         {
             id: 'all',
@@ -31,7 +31,17 @@ function checkInSelectCtrl($scope, gettextCatalog, Events, FilterService) {
         FilterService.setOnline(option.online);
         FilterService.setOffline(option.offline);
         FilterService.doFilter();
+        $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.checkInSelect);
     };
+
+    function getTag () {
+        let tag = $scope.selected.label;
+        if ($scope.selected.id === 'all') {
+            tag = null;
+        }
+
+        return tag;
+    }
 
     function read() {
         $scope.selected = find($scope.options, {
@@ -42,6 +52,8 @@ function checkInSelectCtrl($scope, gettextCatalog, Events, FilterService) {
             throw new Error('Invalid online selector state: ' +
                 FilterService.getOnline() + ':' + FilterService.getOffline());
         }
+
+        $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.checkInSelect);
     }
 
     read();
@@ -50,6 +62,14 @@ function checkInSelectCtrl($scope, gettextCatalog, Events, FilterService) {
         $scope.select(find($scope.options, (option) => {
             return option.id === 'all';
         }));
+    });
+
+    $scope.$on(Events.filters.removeTag, function (event, filter) {
+        if (filter === Events.filters.checkInSelect) {
+            $scope.select(find($scope.options, (option) => {
+                return option.id === 'all';
+            }));
+        }
     });
 }
 

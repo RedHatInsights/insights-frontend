@@ -76,7 +76,9 @@ function FilterService(
 
     filterService.setOffline = function (offline) {
         _offline = offline;
-        filterService.setQueryParam('offline', offline.toString());
+
+        let param = offline.toString() === 'all' ? null : offline.toString();
+        filterService.setQueryParam('offline', param);
     };
 
     filterService.setOnline = function (online) {

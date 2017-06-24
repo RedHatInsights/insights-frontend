@@ -1,28 +1,5 @@
-.actions-rule-filters.ui-filters
-  .row
-    //.col-sm-4
-    //  product-select
-    .col-sm-6
-      label.invisible(translate='translate') Search
-      .input-group
-        span.input-group-addon
-          .i.fa.fa-search
-        search-box(on-search='search.doFilter(model)', is-full-length='true')
-    .col-sm-3.col-sm-offset-3
-      check-in-select
-    //.col-sm-4
-      div(ng-show='getSelectedProduct() === "osp"')
-        osp-deployment-select
-        //osp-type-multi-button //GET /latest/rules doesn't support roles yet
-      div(ng-show='getSelectedProduct() === "rhev"')
-        //rhev-type-multi-button //GET /latest/rules doesn't support roles yet
-      div(ng-show='getSelectedProduct() === "docker"')
-        docker-host-select
-        //docker-type-multi-button //GET /latest/rules doesn't support roles yet
-  .row.row-short
-    .col-sm-6
-      a(ng-click="resetFilters()")
-        strong Reset filters &nbsp;
-        i.fa.fa-refresh
-    .col-sm-6.text-right
-      expand-all-button(ng-show="!loading && !loadingSystems")
+section
+  collapsible-filter(search-placeholder="Filter by name", search='search')
+    collapsible-filter-content
+      .row
+        check-in-select.col-lg-3.col-md-4.col-sm-5
