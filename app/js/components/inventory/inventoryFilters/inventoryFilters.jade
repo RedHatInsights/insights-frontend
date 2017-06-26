@@ -1,17 +1,6 @@
-section.gray.inventory-filters.ui-filters
-  .row
-    .col-sm-3
-      check-in-select
-    .col-sm-3
-      actions-select
-    .col-sm-6
-      label.invisible(translate='translate') Search
-      .input-group
-        span.input-group-addon
-          .i.fa.fa-search
-        search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', is-full-length='true')
-  .row.row-short
-    .col-sm-6
-      a(ng-click="resetFilters()")
-        strong Reset filters &nbsp;
-        i.fa.fa-refresh
+section
+  collapsible-filter(search-placeholder="Filter by rule", search='search')
+    collapsible-filter-content
+      .row
+        check-in-select.col-lg-4.col-md-5
+        actions-select.col-lg-3.col-md-4.col-sm-5

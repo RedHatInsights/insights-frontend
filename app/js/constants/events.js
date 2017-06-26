@@ -26,7 +26,8 @@ let _EVENT_ROOTS = [{
     events: ['expandAll', 'collapseAll']
 }, {
     name: 'filters',
-    events: ['checkInSelect',
+    events: ['actionsSelect',
+             'checkInSelect',
              'incident',
              'populatedProducts',
              'reset',

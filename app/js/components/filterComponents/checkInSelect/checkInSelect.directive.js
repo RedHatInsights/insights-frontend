@@ -12,17 +12,20 @@ function checkInSelectCtrl($rootScope, $scope, gettextCatalog, Events, FilterSer
             id: 'all',
             label: gettextCatalog.getString('All'),
             online: true,
-            offline: true
+            offline: true,
+            tag: null
         }, {
             id: 'online',
             label: gettextCatalog.getString('Checking In'),
             online: true,
-            offline: false
+            offline: false,
+            tag: gettextCatalog.getString('Status: Checking In')
         }, {
             id: 'offline',
             label: gettextCatalog.getString('Stale'),
             online: false,
-            offline: true
+            offline: true,
+            tag: gettextCatalog.getString('Status: Stale')
         }
     ];
 
@@ -35,12 +38,7 @@ function checkInSelectCtrl($rootScope, $scope, gettextCatalog, Events, FilterSer
     };
 
     function getTag () {
-        let tag = $scope.selected.label;
-        if ($scope.selected.id === 'all') {
-            tag = null;
-        }
-
-        return tag;
+        return $scope.selected.tag;
     }
 
     function read() {
