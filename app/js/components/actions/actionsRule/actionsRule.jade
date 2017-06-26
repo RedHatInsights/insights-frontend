@@ -4,7 +4,7 @@
   actions-breadcrumbs.actions-breadcrumbs.push-top-narrow(ng-hide='loading')
 
   section.actions-rule-details.gray
-    h4(ng-if='isIncident(ruleDetails.rule_id)')
+    h4(ng-if='isIncident(ruleDetails.rule_id)').hidden
       .icon-inline
         incident-icon(rule-id='ruleDetails.rule_id') &nbsp;
         span.red(translate) This issue is an incident, it has already occurred.
