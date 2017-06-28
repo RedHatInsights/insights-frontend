@@ -1,15 +1,15 @@
 @font-face {
   font-family: 'insights-icons';
-  src:  url(../insights-frontend-assets/app/fonts/insights-icons.eot);
-  src:  url(../insights-frontend-assets/app/fonts/insights-icons.eot?#iefix) format('embedded-opentype'),
-    url(../insights-frontend-assets/app/fonts/insights-icons.ttf) format('truetype'),
-    url(../insights-frontend-assets/app/fonts/insights-icons.woff) format('woff'),
-    url(../insights-frontend-assets/app/fonts/insights-icons.svg) format('svg');
+  src:  url('../static/fonts/insights-icons.eot?cm6div');
+  src:  url('../static/fonts/insights-icons.eot?cm6div#iefix') format('embedded-opentype'),
+  url('../static/fonts/insights-icons.ttf?cm6div') format('truetype'),
+  url('../static/fonts/insights-icons.woff?cm6div') format('woff'),
+  url('../static/fonts/insights-icons.svg?cm6div#insights-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+i[class^="icon-"], i[class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'insights-icons' !important;
   speak: none;
@@ -24,31 +24,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-i_severity-critical:before {
-  content: "\e902";
-  color: #c00;
-}
-.icon-i_severity-high-bottom:before {
-  content: "\e903";
-  color: #f39800;
-}
-.icon-i_severity-high-top:before {
+.icon-severity-critical:before {
   content: "\e904";
-  color: #ccc;
 }
-.icon-i_severity-low-bottom:before {
-  content: "\e905";
-  color: #94d400;
+.icon-severity-high:before {
+  content: "\e903";
 }
-.icon-i_severity-low-top:before {
-  content: "\e906";
-  color: #ccc;
-}
-.icon-i_severity-med-bottom:before {
-  content: "\e900";
-  color: #dec800;
-}
-.icon-i_severity-med-top:before {
+.icon-severity-low:before {
   content: "\e901";
+}
+.icon-severity-bars:before {
+  content: "\e900";
   color: #ccc;
 }
+.icon-severity-med:before {
+  content: "\e902";
+}
+
