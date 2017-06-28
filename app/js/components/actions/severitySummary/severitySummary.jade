@@ -9,7 +9,7 @@
           .progress.green(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.info / ruleCount.total | toWidth')
           .bar
       .no-errors(ng-if="!ruleCount.info && loaded")
-        i.fa.fa-check-circle.inline-right(aria-hidden="true")
+        i.fa.fa-check-circle.inline-right.green(aria-hidden="true")
         span(translate) You have no issues of low severity
 
     li
@@ -21,7 +21,7 @@
           .progress.yellow(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.warn / ruleCount.total | toWidth')
           .bar
       .no-errors(ng-if="!ruleCount.warn && loaded")
-        i.fa.fa-check-circle.inline-right(aria-hidden="true")
+        i.fa.fa-check-circle.inline-right.green(aria-hidden="true")
         span(translate) You have no issues of medium severity
 
     li
@@ -33,7 +33,7 @@
           .progress.orange(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.error / ruleCount.total | toWidth')
           .bar
       .no-errors(ng-if="!ruleCount.error && loaded")
-        i.fa.fa-check-circle.inline-right(aria-hidden="true")
+        i.fa.fa-check-circle.inline-right.green(aria-hidden="true")
         span(translate) You have no issues of high severity
     li
       .pointer(ng-if="ruleCount.critical || !loaded", ui-sref="app.topic({id: 'critical-risk', 'filters:totalRisk': 'CRITICAL'})")
@@ -44,5 +44,5 @@
           .progress.red(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.critical / ruleCount.total | toWidth')
           .bar
       .no-errors(ng-if="!ruleCount.critical && loaded")
-        i.fa.fa-check-circle.inline-right(aria-hidden="true")
+        i.fa.fa-check-circle.inline-right.green(aria-hidden="true")
         span(translate) You have no issues of critical severity
