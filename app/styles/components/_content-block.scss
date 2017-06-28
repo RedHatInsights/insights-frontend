@@ -121,19 +121,6 @@ $maintenance-plan-border-color: #dedede;
         text-decoration: underline;
       }
     }
-
-    .link-pinned.ungray {
-      background-color: transparent;
-      @include rem('padding', 5px 0px);
-      right: $global-padding;
-
-      .btn {
-        background: none;
-        color: $gray-dark;
-        text-decoration: underline;
-      }
-    }
-
 	}
 
 
