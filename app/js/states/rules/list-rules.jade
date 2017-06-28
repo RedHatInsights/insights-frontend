@@ -31,11 +31,12 @@ section
                     i.fa.fa-link.permalink
 
                 .content.ng-animate-enabled
-                    .row.row-short
-                      .col-sm-12
-                        a.pull-right(ng-if='rule.article', href='{{rule.article}}', target='_blank') Knowledgebase
-                        .link-pinned.ungray.top
-                    .gray(ng-bind-html='::rule.summary_html | trust_html', target-blank='')
+                  .row
+                    .col-sm-12.text-right
+                      a(ng-if='rule.article', href='{{rule.article}}', target='_blank') Knowledgebase
+                  .row.row-short
+                    .col-sm-12
+                      .gray(ng-bind-html='::rule.summary_html | trust_html', target-blank='')
                   
 
                 .footer.footer-short(ng-if="canIgnoreRules")
