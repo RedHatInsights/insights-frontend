@@ -33,7 +33,7 @@ section
                 .content.ng-animate-enabled
                   .row
                     .col-sm-12.text-right
-                      a(ng-if='rule.article', href='{{rule.article}}', target='_blank') Knowledgebase
+                      a(ng-if='rule.article', href='{{rule.article}}', translate, target='_blank') Knowledgebase
                   .row.row-short
                     .col-sm-12
                       .gray(ng-bind-html='::rule.summary_html | trust_html', target-blank='')
