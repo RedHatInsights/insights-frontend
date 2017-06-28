@@ -72,6 +72,14 @@ function severityIconCtrl($scope, gettextCatalog) {
         UNKNOWN: gettextCatalog.getString('Unknown')
     };
 
+    $scope.getClass = (type) => {
+        if (type === 'severity') {
+            return 'total-risk';
+        }
+
+        return type;
+    };
+
     // init the var on the scope
     // it should not change and there is no point in re calculating it
     $scope.init = function init () {
