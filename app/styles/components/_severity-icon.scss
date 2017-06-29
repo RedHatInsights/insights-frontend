@@ -1,68 +1,23 @@
-//.severity-icon {
-//
-//  &.severity i {
-//    border: 2px solid #AFAFAF;
-//    @include border-radius(4px);
-//  }
-//
-//  i {
-//    border: 2px solid rgba(255, 255, 255, 0);
-//    @include border-radius(4px);
-//    width: 26px;
-//    height: 30px;
-//    display: inline-block;
-//    background-repeat: no-repeat;
-//    position: relative;
-//    top: 5px;
-//    background-position: center center;
-//
-//    &.low { background-image: url('../static/images/i_severity-low.svg'); }
-//    &.med { background-image: url('../static/images/i_severity-med.svg'); }
-//    &.high { background-image: url('../static/images/i_severity-high.svg'); }
-//    &.critical { background-image: url('../static/images/i_severity-critical.svg'); }
-//
-//    &.low,
-//    &.med,
-//    &.high {
-//    }
-//
-//    &.unknown { text-align: center; }
-//    &.unknown:after {
-//      content: "\f05e";
-//      display: inline-block;
-//      font-family: 'FontAwesome';
-//      font-style: normal;
-//      color: #ccc;
-//      vertical-align: bottom;
-//    }
-//  }
-//
-//  span + i {
-//    @include rem('margin-left', 6px);
-//  }
-//
-//  .severity {
-//    font-weight: 700;
-//  }
-//}
-
-//table .severity-icon {
-//  &.likelihood,
-//  &.impact {
-//    i { background-position: center center; }
-//  }
-//}
-
 .severity {
   display: inline-block;
 
+  .title {
+    display: inline-block;
+    font-weight: 700;
+  }
+
+  // set margin-left of the second element
+  i + .title,
+  .title + i {
+    @include rem('margin-left', $global-padding/2);
+  }
 }
 
-.severity + .severity { @include rem('margin-left', $global-padding/2); }
+.severity + .severity { @include rem('margin-left', $global-padding); }
 
 i.severity-icon {
   font-family: 'insights-icons';
-  @include font-size(24px);
+  @include font-size(22px);
   line-height: 1;
   position: relative;
   display: inline-block;
@@ -76,7 +31,7 @@ i.severity-icon {
   &:before {
     content: "\e900";
     position: absolute;
-    color: #ccc;
+    color: #bfbfbf;
   }
 
   &:after { position: relative; }
@@ -103,5 +58,12 @@ i.severity-icon {
       content: "\e904";
       color: #CC0000;
     }
+  }
+
+  &.total-risk {
+    @include rem('padding-bottom', 4px);
+    box-shadow: 0 0 0 2px #AFAFAF;
+    border-radius: 4px;
+    background: #fff;
   }
 }
