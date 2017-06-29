@@ -10,13 +10,29 @@ function systemMetadataCtrl($scope, System, SystemsService) {
 
     if ($scope.system && $scope.system.system_id) {
         $scope.loading = true;
+
+        // System.getSystemMetadata($scope.system.system_id)
+        // .then(function (metadata) {
+        //     $scope.systemFacts =
+        //       SystemsService.getSystemFacts($scope.system, metadata.data);
+        //     $scope.loading = false;
+        // });
+
         System.getSystemMetadata($scope.system.system_id)
         .then(function (metadata) {
-            $scope.systemFacts =
-              SystemsService.getSystemFacts($scope.system, metadata.data);
+            $scope.initialMetadata =
+                SystemsService.getInitialSystemMetadata($scope.system, metadata.data);
             $scope.loading = false;
         });
     }
+
+    $scope.getUUID = function () {
+        if ($scope.system.machine_id) {
+            return $scope.system.machine_id; // for legacy
+        }
+
+        return $scope.system.system_id;
+    };
 }
 
 function systemMetadata() {
