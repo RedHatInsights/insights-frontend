@@ -68,9 +68,6 @@ function generateChartCtrl($scope, $element) {
             });
         });
     };
-
-    $scope.checkGaugeMax = $scope.gaugeMax > 0;
-
 }
 
 /**
