@@ -15,16 +15,13 @@ Development
 4. sass-css-importer (Installed via `gem install --pre sass-css-importer`)
 4. breakpoint (Installed via `gem install breakpoint`)
 5. accessproxy (Installed from https://github.com/redhataccess/accessproxy)
-6. insights-frontend-assets (https://gitlab.cee.redhat.com/FlipModeSquad/insights-frontend-assets)
+6. insights-frontend-assets (https://github.com/RedHatInsights/insights-frontend-assets)
 
 **Getting started**
 
 1. Clone the assets repo `git clone git@gitlab.cee.redhat.com:FlipModeSquad/insights-frontend-assets.git`
-1. Symlink the insights-frontend-assets static directory to insights-frontend
+2. Symlink the insights-frontend-assets static directory to insights-frontend
     - ln -s {path-to-insights-frontend-assets}/static/ {path-to-insights-frontend}/
-2. Symlink the insights-frontend-assets fonts and images to insights-frontend/app
-    - ln -s {path-to-insights-frontend-assets}/app/fonts/ {path-to-insights-frontend}/app/
-    - ln -s {path-to-insights-frontend-assets}/app/images/ {path-to-insights-frontend}/app/
 3. `npm install`
     - This may print some errors on optional dependencies.  This is okay.
 4. `bower install`
