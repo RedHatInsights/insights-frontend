@@ -11,7 +11,7 @@ function FilterService(
     Categories) {
 
     var filterService = {};
-    var _category = 'all';
+    var _category = $location.search().category || 'all';
     var _selectedProduct = 'all';
     var _parentNode = null;
     var _dockerHosts = [];

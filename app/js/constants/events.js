@@ -30,6 +30,7 @@ let _EVENT_ROOTS = [{
              'categorySelect',
              'checkInSelect',
              'incident',
+             'maintenanceCategorySelect',
              'populatedProducts',
              'reset',
              'totalRisk',

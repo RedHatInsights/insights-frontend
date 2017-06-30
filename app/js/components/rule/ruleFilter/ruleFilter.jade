@@ -1,10 +1,5 @@
-section.gray.rule-filters
-  .row
-    .col-md-12
-      .search-box-wrapper 
-        .input-group
-            span.input-group-addon
-              .i.fa.fa-search
-            search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', is-full-length='true')
-    .col-md-12
-      category-select
+section
+  collapsible-filter(search-placeholder="Filter by rule", search='search', throttle='1000')
+    collapsible-filter-content
+      .row
+        category-select.col-md-12

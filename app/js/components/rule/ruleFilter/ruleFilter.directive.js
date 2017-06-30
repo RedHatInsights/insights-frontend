@@ -12,6 +12,13 @@ function ruleFilterCtrl($scope, FilterService) {
 
     $scope.validSummaryFields =
         ['product', 'category', 'osp_deployment', 'docker_host', 'role'];
+
+    $scope.search = {
+        doFilter: function (query) {
+            $scope.filter.setSearchTerm(query);
+            $scope.filter.doFilter();
+        }
+    };
 }
 
 function ruleFilter() {

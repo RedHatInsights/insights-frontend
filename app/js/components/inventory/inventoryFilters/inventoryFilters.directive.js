@@ -32,6 +32,13 @@ function inventoryFiltersCtrl(
         return response;
     };
 
+    $scope.search = {
+        doFilter: function (query) {
+            $scope.filter.setSearchTerm(query);
+            $scope.filter.doFilter();
+        }
+    };
+
     $scope.resetFilters = function () {
         FilterService.clearAll();
         Group.setCurrent({});

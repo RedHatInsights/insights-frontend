@@ -29,12 +29,12 @@ function CollapsibleFilterCtrl($location,
         }
     });
 
-    function initTags () {
+    function init () {
         $scope.tags = {};
     }
 
     this.api = $scope;
-    initTags();
+    init();
 }
 
 /**
@@ -56,7 +56,10 @@ function collapsibleFilter() {
         controller: CollapsibleFilterCtrl,
         scope: {
             searchPlaceholder: '@',
-            search: '='
+            search: '=',
+            throttle: '=?',
+            model: '=?',
+            hideListSwitch: '=?'
         }
     };
 }

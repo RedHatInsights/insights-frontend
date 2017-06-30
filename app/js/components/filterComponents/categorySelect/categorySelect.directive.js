@@ -5,7 +5,12 @@ const componentsModule = require('../../');
 /**
  * @ngInject
  */
-function categorySelectCtrl($rootScope, $scope, gettextCatalog, Events, FilterService) {
+function categorySelectCtrl($location,
+                            $rootScope,
+                            $scope,
+                            gettextCatalog,
+                            Events,
+                            FilterService) {
     $scope.options = {
         all: {
             label: gettextCatalog.getString('All'),
@@ -43,7 +48,10 @@ function categorySelectCtrl($rootScope, $scope, gettextCatalog, Events, FilterSe
     }
 
     function read() {
-        $scope.selected = $scope.options[FilterService.getCategory()];
+        let category = $location.search().category ?
+            $location.search().category : FilterService.getCategory();
+
+        $scope.selected = $scope.options[category];
         $rootScope.$broadcast(Events.filters.tag,
                               getTag(),
                               Events.filters.categorySelect);
@@ -52,12 +60,12 @@ function categorySelectCtrl($rootScope, $scope, gettextCatalog, Events, FilterSe
     read();
 
     $scope.$on(Events.filters.reset, function () {
-        $scope.selected = $scope.options.all;
+        $scope.select('all');
     });
 
     $scope.$on(Events.filters.removeTag, function (event, filter) {
         if (filter === Events.filters.categorySelect) {
-            $scope.selected = $scope.options.all;
+            $scope.select('all');
         }
     });
 }

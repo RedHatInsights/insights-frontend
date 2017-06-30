@@ -5,15 +5,15 @@
         .col-sm-6.col-md-8
           label.search
             strong(translate) Search
-            search-box(on-search='search.doFilter(model)', placeholder='{{searchPlaceholder}}')
+            search-box(on-search='search.doFilter(model)', placeholder='{{searchPlaceholder}}', throttle='{{throttle}}', ng-model='model')
         .col-sm-6.col-md-4.text-right-sm
           button.btn.btn-blank.filterToggle(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody')
             span(translate) Data filters
             i.fa.fa-filter(aria-hidden="true")
-          .sep
-          list-type
+          .sep(ng-hide='hideListSwitch')
+          list-type(ng-hide='hideListSwitch')
 
-  #dataFiltersBody.dataFiltersBody.collapse.in
+  #dataFiltersBody.dataFiltersBody.collapse.out
     div(ng-transclude)
 
   #dataFiltersFooter.dataFiltersFooter(ng-show='hasTags()', ng-model='tags')
