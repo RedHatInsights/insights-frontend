@@ -31,8 +31,6 @@
   }
 }
 
-
-
 .system-metadata {
   display: -webkit-flex;
   display: flex;
@@ -43,24 +41,28 @@
   }
 
   .row.basic-information {
-    border: 1px solid $gray-light;
+    border: 1px solid #ddd;
 
     .col-sm-9 {
+      @include rem('padding', $global-padding * 2);
       word-wrap: break-word;
     }
 
     .col-sm-3 {
-      padding-top: 15px;
-      padding-bottom: 15px;
+      @include rem('padding', $global-padding);
+      display: flex;
+      text-align: right;
       vertical-align: middle;
 
       .logo-circle {
-        border: 1px solid $gray-light;
-        border-radius: 100px;
+        @include rem('border-radius', 10);
+        border: 1px solid #ddd;
+        height: auto;
+        width: auto;
         color: white;
         font-weight: bold;
-        display: table;
-        padding: 15px;
+        margin: 0 auto;
+        padding: $global-padding * 2;
       }
     }
   }

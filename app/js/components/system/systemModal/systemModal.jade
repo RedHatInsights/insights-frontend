@@ -1,26 +1,26 @@
 .system-overlay
   .modal-actions
     .fa.fa-close.pull-right(ng-click='close()')
-  .modal-title
-    .icon
-      span.fa.fa-globe
-    h2(ng-if='system.display_name')
-      .ellipsis-overflow
-        span {{ system.display_name }}
-    .ellipsis-overflow(ng-if='system.display_name')
-      // if the display name exists.... show the hostname small
-      .ellipsis-overflow
-        .small-name-info(ng-if="system.hostname") hostname: {{ system.hostname }}
+  //- .modal-title
+  //-   .icon
+  //-     span.fa.fa-globe
+  //-   h2(ng-if='system.display_name')
+  //-     .ellipsis-overflow
+  //-       span {{ system.display_name }}
+  //-   .ellipsis-overflow(ng-if='system.display_name')
+  //-     // if the display name exists.... show the hostname small
+  //-     .ellipsis-overflow
+  //-       .small-name-info(ng-if="system.hostname") hostname: {{ system.hostname }}
 
-    // dont show hostname if it is not avalible
-    h2(ng-if="system.hostname && !system.display_name")
-      b(translate) hostname:
-      .ellipsis-overflow
-        span {{ system.hostname }}
+  //-   // dont show hostname if it is not avalible
+  //-   h2(ng-if="system.hostname && !system.display_name")
+  //-     b(translate) hostname:
+  //-     .ellipsis-overflow
+  //-       span {{ system.hostname }}
 
-    // always show the uuid.... it must exist
-    .ellipsis-overflow
-      .small-name-info UUID: {{ getUUID() }}
+  //-   // always show the uuid.... it must exist
+  //-   .ellipsis-overflow
+  //-     .small-name-info UUID: {{ getUUID() }}
 
   system-metadata(system='system')
   .separator
