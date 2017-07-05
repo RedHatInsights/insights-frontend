@@ -93,11 +93,13 @@ $ui-filters-background: #F9F9F9;
 
 // Rotate the button icoin if filters are open
 .ui-filters__control-bar {
-  i {
-    transform: rotate(180deg);
-  }
+  .toggle {
+    i.collapsed {
+      transform: rotate(180deg);
+    }
 
-  &.collapsed {
-    i { transform: rotate(0deg); }
+    &.collapsed {
+      i { transform: rotate(0deg); }
+    }
   }
 }

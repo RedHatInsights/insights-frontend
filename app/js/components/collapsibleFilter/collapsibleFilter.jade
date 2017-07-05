@@ -1,17 +1,17 @@
 .toolbar.toolbar--data-filters
-  #dataFiltersHeader.dataFiltersHeader
-    .flexgrid
-      .row
-        .col-sm-6.col-md-8
-          label.search
-            strong(translate) Search
-            search-box(on-search='search.doFilter(model)', placeholder='{{searchPlaceholder}}', throttle='{{throttle}}', ng-model='model')
-        .col-sm-6.col-md-4.text-right-sm
-          button.btn.btn-blank.filterToggle(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody')
-            span(translate) Data filters
-            i.fa.fa-filter(aria-hidden="true")
-          .sep(ng-hide='hideListSwitch')
-          list-type(ng-hide='hideListSwitch')
+  //- #dataFiltersHeader.dataFiltersHeader
+  //-   .flexgrid
+  //-     .row
+  //-       .col-sm-6.col-md-8
+  //-         label.search
+  //-           strong(translate) Search
+  //-           search-box(on-search='search.doFilter(model)', placeholder='{{searchPlaceholder}}', throttle='{{throttle}}', ng-model='model')
+        //- .col-sm-6.col-md-4.text-right-sm
+        //-   button.btn.btn-blank.filterToggle(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody')
+        //-     span(translate) Data filters
+        //-     i.fa.fa-filter(aria-hidden="true")
+        //-   .sep(ng-hide='hideListSwitch')
+        //-   list-type(ng-hide='hideListSwitch')
 
   #dataFiltersBody.dataFiltersBody.collapse.out
     div(ng-transclude)
@@ -23,3 +23,7 @@
       button.btn.btn-accent(ng-repeat="(key, value) in tags", ng-click='removeFilter(key)')
         span(translate) {{value | translate}}
         i.fa.fa-times-circle-o(aria-hidden="true")
+
+  .ui-filters__control-bar
+    .toggle
+      i.fa.fa-arrow-circle-down(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody')
