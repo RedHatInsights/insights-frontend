@@ -128,6 +128,10 @@ function topicRuleListCtrl ($filter,
         $state.go('app.actions-rule', {category: category, rule: ruleId});
     };
 
+    $scope.checkIncident = function (rule_id) {
+        return IncidentsService.isIncident(rule_id);
+    };
+
     function order() {
         $scope.topic.rules = $filter('orderBy')($scope.topic.rules,
             ['_type',
