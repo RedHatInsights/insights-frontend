@@ -14,7 +14,6 @@ function inventoryFiltersCtrl(
 
     $scope.getShowFilters = FilterService.getShowFilters;
     $scope.getSelectedProduct = FilterService.getSelectedProduct;
-    $scope.filter = FilterService;
 
     $scope.MultiButtonService = MultiButtonService;
 
@@ -30,13 +29,6 @@ function inventoryFiltersCtrl(
         }
 
         return response;
-    };
-
-    $scope.search = {
-        doFilter: function (query) {
-            $scope.filter.setSearchTerm(query);
-            $scope.filter.doFilter();
-        }
     };
 
     $scope.resetFilters = function () {

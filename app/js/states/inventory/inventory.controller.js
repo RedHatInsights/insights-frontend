@@ -33,6 +33,7 @@ function InventoryCtrl(
         Group) {
 
     $scope.Group = Group;
+    $scope.filter = FilterService;
 
     function updateParams(params) {
         params = FilterService.updateParams(params);

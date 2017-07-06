@@ -23,6 +23,11 @@
 
     section
       .row
+        .col-sm-6.col-md-8
+          search-box(on-search='search.doFilter(model)', placeholder='Find a system')
+        .col-sm-6.col-md-4.text-right-sm
+            list-type(ng-hide='hideListSwitch')
+      .row
         .col-sm-12.text-center-sm
           h3(translate, ng-if='ruleDetails.type !== "osp"') {{allSystems.length}} Impacted Systems
           h3(translate, ng-if='ruleDetails.type === "osp"') Impacted Deployments

@@ -7,10 +7,11 @@ section
   .content-wrap
     .section
       .row
-        .col-sm-12
-          .btn-group.pull-right
-            a.btn.btn-sm.btn-app(ui-sref='app.admin-topic', ng-show='user.is_internal') Topics Admin
-          .push-top-narrow.rules-filters(ng-hide="loading")
+        .col-sm-6.col-md-8
+          search-box(search-placeholder="Filter by rule", on-search='search.doFilter(model)')
+        .col-sm-6.col-md-4.btn-group
+          a.btn.btn-sm.btn-app.pull-right(ui-sref='app.admin-topic', ng-show='user.is_internal') Topics Admin
+        .push-top-narrow.rules-filters(ng-hide="loading")
       .row.row-short
         .col-sm-12
           section(ng-show='loading')

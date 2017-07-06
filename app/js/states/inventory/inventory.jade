@@ -6,6 +6,11 @@ section.inventory
   inventory-filters
   .rha-notifications
   .content-wrap
+    .row
+        .col-sm-6.col-md-8
+          search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder='Find a system')
+        .col-sm-6.col-md-4.text-right-sm
+          list-type
     inventory-actions.ng-animate-enabled(ng-hide='reloading')
     div(infinite-scroll='doScroll()', infinite-scroll-disabled='disableScroll()', infinite-scroll-immediate-check='false', infinite-scroll-distance='.5', ng-hide='reloading')
 
@@ -67,8 +72,6 @@ section.inventory
                 ng-disabled='!isUnregistrableSelected()',
                 ng-click='isUnregistrableSelected() && doUnregisterSelected()',
                 translate) Unregister
-        .col-sm-8.col-lg-10
-          list-type.text-right-sm
 
       .row.row-short
         .col-md-12
