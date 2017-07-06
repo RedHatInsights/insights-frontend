@@ -52,12 +52,14 @@
         tbody
           tr.legend-item(ng-repeat="rule in filteredRules | filter:filterZero | orderBy: sorter.predicate : sorter.reverse track by rule.rule_id", ng-class="{acked: rule.acked}")
             td(ng-click='!rule.acked && viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
-              a(ng-if='!rule.acked') {{rule.description}}
-              div(ng-if='rule.acked')
+              .icon-inline-right
+                incident-icon(rule-id='rule.rule_id')
+              .rule-description(ng-if='rule.acked')
                 | {{rule.description}}
                 span.label.label-default.inline-left.rule-inactive(translate) INACTIVE
-              incident-icon.pull-right(rule-id='rule.rule_id')
 
+              a(ng-class="{'icon-inline-right' : checkIncident(rule.rule_id)}", ng-if='!rule.acked') {{rule.description}}
+                
             // START UBER-SEV
             td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
               severity-icon(severity='rule.rec_likelihood', type='likelihood', label='')
