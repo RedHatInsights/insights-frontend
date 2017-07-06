@@ -1,19 +1,38 @@
-.system-metadata-table {
-  .metadata-tab {
-    @include rem('padding-top', $global-padding);
-    @include rem('padding-bottom', $global-padding);
-    border: 1px solid #ddd;
-    text-align: center;
+.expandableDataTable {
+  ul {
     display: inline-block;
+    @include reset();
+
+
+    @include media-query(md) {
+      &:hover {
+        li span { display: inline-block; }
+      }
+    }
   }
 
-  .extend-tabs-icon {
-    padding: $global-padding 0;
-    text-align: center;
+  ul li {
     display: inline-block;
+
+    i {
+
+    }
+
+    span {
+      display: none;
+    }
   }
 
-  i {
-    line-height: inherit;
+  
+
+}
+
+.expandableDataTable.expanded,
+.expandableDataTable.hover {
+
+  ul li {
+    span {
+      display: inline-block;
+    }
   }
 }

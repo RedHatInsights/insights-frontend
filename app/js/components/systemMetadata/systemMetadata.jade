@@ -31,12 +31,30 @@
           tr(ng-repeat='facts in initialMetadata')
             td(translate) {{facts.label}}
             td.metadata-value(translate) {{facts.value}}
-#expandableDataTable.expandableDataTable(ng-if='!loading', ng-click='toggleTabs()')
-  .table-toggle
-  ul
-    li
-      i.fa.fa-camera-retro
-      span(translate) Networking
-    li
-      i.fa.fa-camera-retro
+//#expandableDataTable.expandableDataTable(ng-if='!loading', ng-click='toggleTabs()')
+//  .table-toggle
+//  ul
+//    li
+//      i.fa.fa-camera-retro
+//      span(translate) Networking
+//    li
+//      i.fa.fa-camera-retro
 
+#expandableDataTable.expandableDataTable.expandeds
+  .toggle(ng-click="expanded != expanded")
+    i.fa.fa-home
+
+  // Nav tabs
+  ul.nav(role='tablist')
+    li.active(role='presentation')
+      a(href='#network', aria-controls='network', role='tab', data-toggle='tab')
+        i.fa.fa-camera-retro
+        span(translate) Networking
+    li(role='presentation')
+      a(href='#network2', aria-controls='network2', role='tab', data-toggle='tab')
+        i.fa.fa-camera-retro
+        span(translate) Networking2
+  // Tab panes
+  .tab-content
+    #network.tab-pane.active(role='network') this is network 1
+    #network2.tab-pane(role='network2') this is network 2
