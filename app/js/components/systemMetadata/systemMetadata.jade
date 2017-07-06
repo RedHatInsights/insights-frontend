@@ -6,23 +6,24 @@
   .row.system-metadata(ng-if='!loading')
     .col-sm-8
       .row.basic-information
-        .col-sm-3
+        .col-sm-4
           .logo-circle
             img(src='static/images/heartbleed.svg')
-        .col-sm-9
-          .small-name-info(ng-if="system.hostname && !system.display_name")
-            span(translate) hostname:
-          .ellipsis-overflow
-            b {{ system.hostname }}
+        .col-sm-8
+          .name-info(ng-if="system.hostname && !system.display_name")
+            i.fa.fa-camera-retro &nbsp;
+            span(translate) Hostname:
+            .ellipsis-overflow
+              b {{ system.hostname }}
 
           // always show the uuid.... it must exist
           .ellipsis-overflow
             .small-name-info UUID:
               .ellipsis-overflow
                 b {{ getUUID() }}
-      .row.alert-bar
+      .row.alert-bar(ng-if='!system.isCheckingIn')
         .col-sm-12
-          .message.alert.alert-danger.alert-systems-not-checking(ng-if='!system.isCheckingIn')
+          .message.alert.alert-danger.alert-systems-not-checking
             span(translate) This system is not checking in.
     .col-sm-4
       table.meta-table.table-fixed
@@ -30,3 +31,12 @@
           tr(ng-repeat='facts in initialMetadata')
             td(translate) {{facts.label}}
             td.metadata-value(translate) {{facts.value}}
+#expandableDataTable.expandableDataTable(ng-if='!loading', ng-click='toggleTabs()')
+  .table-toggle
+  ul
+    li
+      i.fa.fa-camera-retro
+      span(translate) Networking
+    li
+      i.fa.fa-camera-retro
+

@@ -32,7 +32,8 @@
 }
 
 .system-metadata {
-  display: -webkit-flex;
+  @include rem('padding-left', $global-padding * 2.5);
+  padding-right: 0rem;
   display: flex;
   flex-wrap: wrap;
 
@@ -43,26 +44,36 @@
   .row.basic-information {
     border: 1px solid #ddd;
 
-    .col-sm-9 {
+    .col-sm-8 {
       @include rem('padding', $global-padding * 2);
       word-wrap: break-word;
+
+      .name-info {
+        b {
+          @include font-size(25px);
+        }
+      }
     }
 
-    .col-sm-3 {
+    .col-sm-4 {
       @include rem('padding', $global-padding);
-      display: flex;
-      text-align: right;
-      vertical-align: middle;
+      @include rem('padding-left', $global-padding * 2);
 
       .logo-circle {
         @include rem('border-radius', 10);
         border: 1px solid #ddd;
-        height: auto;
-        width: auto;
         color: white;
+        position: relative;
+        border-radius: 50%;
+        padding-top: 100%;
         font-weight: bold;
         margin: 0 auto;
         padding: $global-padding * 2;
+
+        img {
+            display: block;
+            background-size: auto;
+        }
       }
     }
   }

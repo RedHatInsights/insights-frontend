@@ -197,7 +197,7 @@ function SystemsService($filter,
 
         systemData.push({
             label: 'Registration Date',
-            value: 'tempRD'
+            value: $filter('timeAgo')(get(system, 'created_at'))
         });
 
         systemData.push({

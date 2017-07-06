@@ -26,6 +26,8 @@ function systemMetadataCtrl($scope, System, SystemsService) {
         });
     }
 
+    $scope.metadataCategories = ['Networking', 'System'];
+
     $scope.getUUID = function () {
         if ($scope.system.machine_id) {
             return $scope.system.machine_id; // for legacy
