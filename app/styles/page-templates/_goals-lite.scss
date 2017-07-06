@@ -68,6 +68,18 @@
 		//line-height: 2;
 	}
 
+	.spinner-box {
+		@include rem('padding', $global-padding);
+		height: 75px;
+		background: $gray-light;
+		border: 1px solid $gray-border-med;
+		width: 100%;
+ 
+		.loading-text {
+		@include rem('padding', $global-padding);
+		}
+    }
+
 	.block-md {
 		text-align: center;
 		background: $gray-light;
