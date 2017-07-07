@@ -60,7 +60,8 @@
   ul.row.pager.pager-steps
     li.previous.col-sm-6
       a.btn.btn-accent(ng-click='cancel()')
-        span(translate, ng-if='params.initial') Skip
-        span(translate, ng-if='!params.initial') Cancel
+        span(translate, ng-if='params.steps === 1') Use defaults
+        span(translate, ng-if='params.steps > 1') Use defaults for {{params.steps}} rules
+        span(translate, ng-if='!params.steps') Cancel
     li.next.col-sm-6
       a.btn.btn-accent(ng-click='save()', translate) Save
