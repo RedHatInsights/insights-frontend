@@ -1,10 +1,10 @@
 #goals-lite
-  .row
-    .col-sm-12.block-lg(ng-if="loadingSystemLimit")
+  .row(ng-if='loading')
+    .col-sm-12.block-lg
       .spinner.spinner-lg
-  .goals-lite
+  .goals-lite(ng-if='!loading')
     .info-box
-      .row(ng-if="systemCount > 0 && !loadingSystemLimit")
+      .row(ng-if="systemCount > 0")
         .col-sm-12.block-lg
           goals-gauge(ng-init="buildGauge({getGaugeMax: getMaxFreeSystems, getGaugeNumber: getSystemCount})")
           .info
@@ -15,30 +15,26 @@
               span Your evaluation will expire on {{expiration}}
             .free.full(ng-if="systemLimitReached")
               span(translate) Congratulations! You have registered all available systems.
-        .col.sm-12.spinner-box(ng-if="actionsLoading")
-          .spinner.spinner-lg.pull-left
-          .text-right.pull-left.loading-text
-            span(translate) Loading...
-        .col-sm-6.block-md(ng-if="securityErrors && !actionsLoading")
+        .col-sm-6.block-md(ng-if="securityErrors")
           .count.circle {{securityErrors}}
           h4(translate) Protect yourself!
           p(translate) Fix all of your
             br
             | {{securityErrors}} security issues
           a.cta-link(translate, ui-sref="app.topic({id: 'security'})") View security issues
-        .col-sm-6.block-md(ng-if="!securityErrors && !actionsLoading")
+        .col-sm-6.block-md(ng-if="!securityErrors")
           .check.circle
             i.fa.fa-check
           h4(translate) You have no high severity security errors
  
-        .col-sm-6.block-md(ng-if="stabilityErrors && !actionsLoading")
+        .col-sm-6.block-md(ng-if="stabilityErrors")
           .count.circle {{stabilityErrors}}
           h4(translate) Increase your uptime!
           p(translate) Fix all of your
             br
             | {{stabilityErrors}} stability issues
           a.cta-link(translate, ui-sref="app.topic({id: 'stability'})") View stability issues
-        .col-sm-6.block-md(ng-if="!stabilityErrors && !actionsLoading")
+        .col-sm-6.block-md(ng-if="!stabilityErrors")
           .check.circle
             i.fa.fa-check
           h4(translate) You have no high severity stability errors
