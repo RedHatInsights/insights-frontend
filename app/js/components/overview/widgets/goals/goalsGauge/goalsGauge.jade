@@ -1,4 +1,5 @@
 .gauge
     .chart-wrapper
     .chart-metrics
-        span {{gaugeNumber + '/' +  gaugeMax}}
+        span(ng-if='gaugeMax === 0') {{gaugeNumber}}
+        span(ng-if='gaugeMax > 0') {{gaugeNumber + '/' +  gaugeMax}}
