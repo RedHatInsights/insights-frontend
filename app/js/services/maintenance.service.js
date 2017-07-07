@@ -388,7 +388,7 @@ function MaintenanceService(
         service.plans.remove(id);
     });
 
-    service.resolutionModal = function (plan, play, initial) {
+    service.resolutionModal = function (plan, play, steps) {
         const instance = $modal.open({
             templateUrl:
             'js/components/maintenance/resolutionModal/resolutionModal.html',
@@ -400,7 +400,7 @@ function MaintenanceService(
                     return {
                         play,
                         plan,
-                        initial
+                        steps
                     };
                 }
             }
@@ -422,11 +422,14 @@ function MaintenanceService(
     }
 
     function doPrompt (plan, toPrompt) {
-        return toPrompt.reduce(function (acc, play) {
+        return toPrompt.reduce(function (acc, play, index) {
             return acc.then(function () {
-                return service.resolutionModal(plan, play, true);
+                return service.resolutionModal(plan, play, toPrompt.length - index);
             });
-        }, $q.resolve());
+        }, $q.resolve()).catch(function () {
+            // empty catch handler that prevents the promise from being rejected
+            // if "use defaults" is clicked on resolution modal
+        });
     }
 
     function playComparator (one, two) {
