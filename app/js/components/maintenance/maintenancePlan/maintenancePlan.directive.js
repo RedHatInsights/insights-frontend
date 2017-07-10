@@ -10,6 +10,9 @@ const some = require('lodash/some');
 const get = require('lodash/get');
 const sortBy = require('lodash/sortBy');
 const swal = require('sweetalert2');
+const filter = require('lodash/filter');
+const flatMap = require('lodash/flatMap');
+const uniqBy = require('lodash/uniqBy');
 
 /**
  * @ngInject
@@ -149,6 +152,7 @@ function maintenancePlanCtrl(
 
         Maintenance.downloadPlaybook($scope.plan.maintenance_id)
         .then(function (response) {
+            $scope.scrollToPlan($scope.plan.maintenance_id);
             if (response.status === 200) {
                 const disposition = response.headers('content-disposition');
                 const filename = parseHeader(disposition).filename.replace(/"/g, '');
@@ -291,7 +295,14 @@ function maintenancePlanCtrl(
 
             $scope.plays.forEach(function (play) {
                 play.systemType = SystemsService.getSystemTypeUnsafe(play.system_type_id);
+                play.systems = map(filter($scope.plan.actions, function (action) {
+                    return action.rule.rule_id === play.rule.rule_id &&
+                        action.system.system_type_id === play.system_type_id;
+                }), 'system');
             });
+
+            $scope.systemsToReboot = uniqBy(flatMap(filter($scope.plays,
+                'ansible_resolutions[0].needs_reboot'), 'systems'), 'system_id');
         });
     });
 
@@ -308,6 +319,30 @@ function maintenancePlanCtrl(
     $scope.resolutionModal = function (play) {
         return MaintenanceService.resolutionModal($scope.plan, play, 0, 0)
             .then($scope.prepareAnsibleTab);
+    };
+
+    $scope.rebootModal = function () {
+        return sweetAlert({
+            title: gettextCatalog.getString('Configure System Reboot'),
+            text: gettextCatalog.getString(
+                'Some of the automated resolutions in this plan require system reboot ' +
+                'in order for the changes to take effect. You can either let the ' +
+                'Ansible Playbook reboot the systems automatically or you can reboot ' +
+                'them yourself at your convenience.'),
+            type: undefined,
+            input: 'radio',
+            inputValue: String($scope.plan.allow_reboot === true),
+            inputOptions: {
+                true: gettextCatalog.getString('Reboot systems automatically'),
+                false: gettextCatalog.getString('Do not reboot systems')
+            },
+            confirmButtonText: gettextCatalog.getString('Save')
+        }).then(function (result) {
+            result = (result === 'true');
+
+            // TODO actually persist somewhere
+            $scope.plan.allow_reboot = result;
+        });
     };
 
     $scope.addActions = function () {

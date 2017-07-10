@@ -1,0 +1,5 @@
+span
+  a(ng-click='expanded = !expanded') {{label}}
+  ul(ng-if='expanded')
+    li(ng-repeat="system in systems | orderBy: 'toString' track by system.system_id")
+      a(ng-click='InventoryService.showSystemModal(system, true)') {{system.toString}}
