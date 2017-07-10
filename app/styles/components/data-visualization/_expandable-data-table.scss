@@ -2,6 +2,7 @@
   .toggle {
     border: none;
     display: inline-block;
+    @include rem('padding-right', 10px);
   }
 
   ul.nav {
@@ -48,6 +49,7 @@
 
 .responsiveTable {
   overflow-x: auto;
+  @include rem('padding-left', 10px);
 }
 
 .expandableDataTable.expanded {
