@@ -8,7 +8,15 @@
             i.fa.fa-clone.fa-4x(ng-show="getSystemType() === 'Virtual'", tooltip="{{'Server type: Virtual' | translate}}")
             i.fa.fa-server.fa-4x(ng-show="getSystemType() !== 'Virtual'", tooltip="{{'Server type: Physical' | translate}}")
             .text
-              h2.name.ellipsis-overflow {{ system.displayName || system.display_name || system.hostname }}
+              .name
+                h2.name.ellipsis-overflow.editable(ng-if='!edit.value', ng-dblclick='rename()') {{ edit.name }}
+                  i.fa.fa-pencil-square-o.edit-toggle#edit-toggle(ng-click='rename()')
+                input#system-name-input(
+                    ng-if='edit.value',
+                    type='text',
+                    ng-model='edit.name',
+                    ng-disabled='edit.value === "frozen"',
+                    ng-keyup='$event.keyCode == 13 && submit($event)')
 
               .hostname.ellipsis-overflow
                 b Hostname:&nbsp;
