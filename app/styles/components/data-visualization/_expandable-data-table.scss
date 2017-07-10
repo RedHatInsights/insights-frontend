@@ -20,10 +20,13 @@
     color: black;
   }
 
+  li.active {
+    background-color: #ddd;
+  }
+
   ul.nav li {
     display: inline-block;
     border: 1px solid #ddd;
-    border-bottom: none;
 
     span {
       display: none;
@@ -40,16 +43,43 @@
   }
 }
 
-// .table-responsive {
-//   th, td {
-//     border: 1px solid #ddd;
-//     text-align: center !IMPORTANT;
-//   }
-// }
+.tab-content.expanded {
+  @include rem('padding', 0);
+  overflow: auto;
+
+  .tab-pane.active {
+    @include rem('padding', 0);
+    @include rem('padding-left', $global-padding);
+  }
+}
 
 .responsiveTable {
-  overflow-x: auto;
+  overflow: auto;
   @include rem('padding-left', 10px);
+
+  table {
+    th {
+      background: $gray-light;
+      text-align: center !IMPORTANT;
+    }
+
+    tr {
+      background: none !IMPORTANT;
+
+      td {
+        font-weight: normal !IMPORTANT;
+        background: none !IMPORTANT;
+        text-align: center !IMPORTANT;
+      }
+    }
+  }
+}
+
+.noAvailableData {
+  text-align: center;
+  border: 1px solid #ddd;
+  @include font-size(25px);
+  @include rem('padding', $global-padding * 2);
 }
 
 .expandableDataTable.expanded {

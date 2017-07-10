@@ -9,8 +9,9 @@ let find = require('lodash/find');
 function systemMetadataCtrl($scope, System, SystemsService, $timeout) {
     let timer;
     let system_metadata;
-    $scope.metadataCategories = ['Networking', 'System'];
+    $scope.tableRowLimit = 10;
     $scope.expandedTabs = false;
+    $scope.isValidMetadata = true;
     $scope.expandIndefinite = false;
     $scope.loading = false;
 
@@ -28,7 +29,13 @@ function systemMetadataCtrl($scope, System, SystemsService, $timeout) {
     }
 
     $scope.getMetadata = function (category) {
-        return find(system_metadata, {category: category}).labels;
+        $scope.metadata = find(system_metadata, {category: category});
+
+        $scope.metadata.values.forEach(function (values) {
+            if (values.length === 0) {
+                $scope.isValidMetadata = false;
+            }
+        });
     };
 
     $scope.expandTabsIndefinite = function () {

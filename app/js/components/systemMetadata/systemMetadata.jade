@@ -40,20 +40,22 @@
     li(role='presentation')
       a(href='#network', aria-controls='network', role='tab', data-toggle='tab')
         i.fa.fa-camera-retro &nbsp;
-        span(translate) Networking
+        span(translate) Network
     li(role='presentation')
       a(href='#network2', aria-controls='network2', role='tab', data-toggle='tab')
         i.fa.fa-camera-retro &nbsp;
-        span(translate) Networking2
+        span(translate) System
   // Tab panes
   .tab-content
-    #network.tab-pane.active(role='network')
-      .responsiveTable
+    #network.tab-pane(ng-init="getMetadata('network')", role='network')
+      .responsiveTable(ng-if="!isVaildMetadata")
         table
           thead
             tr
-              th(ng-repeat="data in getMetadata('network')", translate) {{data}}
+              th(ng-repeat="name in metadata.labels", translate) {{name}}
           tbody
-           tr(ng-repeat="data in getMetadata('network')")
-              td(ng-repeat="value in data.values") {{value}}
+           tr(ng-repeat="values in metadata.values | limitTo: tableRowLimit")
+              td(ng-repeat="value in values") {{value}}
+      .noAvailableData(ng-if="isVaildMetadata")
+        span(translate) No Network Data Available
     #network2.tab-pane(role='network2') this is network 2
