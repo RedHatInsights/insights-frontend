@@ -31,13 +31,75 @@
   }
 }
 
-
 .system-metadata {
+  @include rem('padding', 0);
+  @include rem('padding-left', $global-padding * 2.5);
+  padding-right: 0rem;
+  display: flex;
+  flex-wrap: wrap;
+
   .metadata-value {
     word-wrap: break-word;
   }
 
+  .row.basic-information {
+    border: 1px solid #ddd;
+
+    .col-sm-8 {
+      @include rem('padding', $global-padding * 2);
+      word-wrap: break-word;
+
+      .name-info {
+        b {
+          @include font-size(15px);
+        }
+      }
+    }
+
+    .col-sm-4 {
+      @include rem('padding', $global-padding);
+      @include rem('padding-left', $global-padding * 2);
+
+      .logo-circle {
+        @include rem('border-radius', 10);
+        border: 1px solid #ddd;
+        color: white;
+        position: relative;
+        border-radius: 50%;
+        padding-top: 100%;
+        font-weight: bold;
+        margin: 0 auto;
+        padding: $global-padding * 2;
+
+        img {
+            display: block;
+            background-size: auto;
+        }
+      }
+    }
+  }
+
+  .row.alert-bar {
+    margin-top: 0;
+
+    .col-sm-12 {
+        padding: 0;
+    }
+
+    .message.alert.alert-danger.alert-systems-not-checking {
+      margin-bottom: 0;
+    }
+  }
+
   table {
+    width: 100%;
+    height: 100%;
+
+    tbody {
+      width: 100%;
+      height: 100%;
+    }
+
     td {
       border: 1px solid #ddd !IMPORTANT;
     }

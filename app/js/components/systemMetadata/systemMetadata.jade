@@ -2,10 +2,58 @@
   .col-sm-12
     i.fa.spinner-xs.spinner
     span Loading...
-.row.system-metadata(ng-if='!loading')
-  .col-sm-6(ng-repeat='facts in systemFacts')
-    table.meta-table.table-fixed
-      tbody
-        tr(ng-repeat='data in facts')
-          td(translate) {{data.label}}
-          td.metadata-value(translate) {{data.value}}
+.flexgrid.equalheights
+  .row.system-metadata(ng-if='!loading')
+    .col-sm-8
+      .row.basic-information
+        .col-sm-4
+          .logo-circle
+            img(src='static/images/heartbleed.svg')
+        .col-sm-8
+          .name-info(ng-if="system.hostname && !system.display_name")
+            i.fa.fa-camera-retro &nbsp;
+            span(translate) Hostname:
+            .ellipsis-overflow
+              b {{ system.hostname }}
+
+          // always show the uuid.... it must exist
+          .ellipsis-overflow
+            .small-name-info UUID:
+              .ellipsis-overflow
+                b {{ getUUID() }}
+      .row.alert-bar(ng-if='!system.isCheckingIn')
+        .col-sm-12
+          .message.alert.alert-danger.alert-systems-not-checking
+            span(translate) This system is not checking in.
+    .col-sm-4
+      table.meta-table.table-fixed
+        tbody
+          tr(ng-repeat='facts in initialMetadata')
+            td(translate) {{facts.label}}
+            td.metadata-value(translate) {{facts.value}}
+
+#expandableDataTable.expandableDataTable(ng-if='!loading', ng-class="{expanded: expandedTabs || expandIndefinite}")
+  .toggle(ng-class="{expanded: expandIndefinite}", ng-click='toggleTabsIndefinite()')
+    i.fa.fa-home
+  // Nav tabs
+  ul.nav(role='tablist', ng-mouseenter="expandTabContent()", ng-mouseleave="tabCollapseTimer()", ng-click="expandTabsIndefinite()")
+    li(role='presentation')
+      a(href='#network', aria-controls='network', role='tab', data-toggle='tab')
+        i.fa.fa-camera-retro &nbsp;
+        span(translate) Networking
+    li(role='presentation')
+      a(href='#network2', aria-controls='network2', role='tab', data-toggle='tab')
+        i.fa.fa-camera-retro &nbsp;
+        span(translate) Networking2
+  // Tab panes
+  .tab-content
+    #network.tab-pane.active(role='network')
+      .responsiveTable
+        table
+          thead
+            tr
+              th(ng-repeat="data in getMetadata('network')", translate) {{data}}
+          tbody
+           tr(ng-repeat="data in getMetadata('network')")
+              td(ng-repeat="value in data.values") {{value}}
+    #network2.tab-pane(role='network2') this is network 2

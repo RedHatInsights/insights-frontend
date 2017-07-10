@@ -18,9 +18,14 @@
         ul.dropdown-menu
           li
             a(href='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', translate) Getting Started
+          li
             a(ui-sref='info.info', translate) More Info
+          li
             a(ui-sref='info.security', translate) Security
             // if this is the Portal hosted Insights... link to the Portal Browser Support Policy page
+          li
             a(href='/help/browsers', target='_self', translate, ng-if="isPortal") Browser Support
+          li
             a(href='/r/insights/docs/', translate) Insights API Documentation
+          li
             demo-account-switcher

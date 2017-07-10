@@ -5,6 +5,11 @@
 .icon-group.icon-group-severity {
   display: inline-block;
 
+  i + .title,
+  .title + i {
+    @include rem('margin-left', $global-padding/2);
+  }
+
   &.gray,
   &.white {
     @include rem('padding', $global-padding/2 $global-padding);

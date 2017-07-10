@@ -114,23 +114,57 @@ function SystemsService($filter,
             value: get(metadata, 'bios_information.vendor') +
                 ' ' + get(metadata, 'bios_information.version')
         });
+
         systemData.push({
             label: 'BIOS Release Date',
             value: get(metadata, 'bios_information.release_date')
         });
 
-        if (system.product_code === Products.rhel.code ||
-                (system.product_code === Products.osp.code &&
-                    system.role === Products.osp.roles.cluster.code)) {
+        systemData.push({
+            label: 'Timezone',
+            value: formatTimezoneString(metadata)
+        });
+
+        if (virtual_machines.indexOf(server_type) !== -1) {
             systemData.push({
-                label: 'Registration Date',
-                value: $filter('timeAgo')(get(system, 'created_at'))
+                label: 'Server Type',
+                value: 'Virtual'
+            });
+
+            systemData.push({
+                label: 'Server Provider',
+                value: get(metadata, 'system_information.product_name')
+            });
+        } else if (server_type) {
+            systemData.push({
+                label: 'Server Type',
+                value: 'Physical'
             });
         }
 
         systemData.push({
-            label: 'Last Check-in',
-            value: $filter('timeAgo')(get(system, 'last_check_in'))
+            label: 'Vendor',
+            value: get(metadata, 'system_information.manufacturer')
+        });
+
+        systemData.push({
+            label: 'Model',
+            value: get(metadata, 'system_information.family')
+        });
+
+        systemData.push({
+            label: 'Version',
+            value: get(metadata, 'system_information.version')
+        });
+
+        systemData.push({
+            label: 'Serial Number',
+            value: get(metadata, 'system_information.serial_number')
+        });
+
+        systemData.push({
+            label: `Satellite ${get(metadata, 'satellite_information.version')}`,
+            value: get(metadata, 'satellite_information.hostname')
         });
 
         systemData.push({
@@ -199,6 +233,95 @@ function SystemsService($filter,
             systemData.slice(Math.ceil(systemData.length / 2), systemData.length)];
     };
 
+    systemsService.getSystemMetadata = function (metadata) {
+        let systemMetadata = [];
+        systemMetadata.push(getListeningProcesses(metadata));
+
+        return systemMetadata;
+    };
+
+    systemsService.getInitialSystemMetadata = function (system, metadata) {
+        let systemData = [];
+
+        // if (system.product_code === Products.rhel.code ||
+        //         (system.product_code === Products.osp.code &&
+        //             system.role === Products.osp.roles.cluster.code)) {
+        //     systemData.push({
+        //         label: 'Registration Date',
+        //         value: $filter('timeAgo')(get(system, 'created_at'))
+        //     });
+        // }
+
+        systemData.push({
+            label: 'OS',
+            value: $filter('productShortName')(get(metadata, 'release'))
+        });
+
+        systemData.push({
+            label: 'Registration Date',
+            value: $filter('timeAgo')(get(system, 'created_at'))
+        });
+
+        systemData.push({
+            label: 'Last Check-in',
+            value: $filter('timeAgo')(get(system, 'last_check_in'))
+        });
+
+        systemData.push({
+            label: 'temp init data',
+            value: 'tempInitD'
+        });
+
+        // remove items that are undefined
+        arrayRemove(systemData, function (n) {
+            return n.value === undefined ||
+                n.value === 'undefined undefined' ||
+                n.value.indexOf('NaN') > -1;
+        });
+
+        return systemData;
+    };
+
+    function getListeningProcesses(metadata) {
+        let processes = {
+            category: 'network',
+            labels: [
+            {
+                name: 'Process Name',
+                values: []
+            }, {
+                name: 'IP Address',
+                values: []
+            }, {
+                name: 'Port',
+                values: []
+            }]
+        };
+
+        let i = 0;
+        while (true) {
+            let name = get(metadata, `listening_processes.${i}.process_name`);
+            let ip = get(metadata, `listening_processes.${i}.ip_addr`);
+            let port = get(metadata, `listening_processes.${i}.port`);
+
+            if (name && port) {
+                if (port.substring(0, 1) !== ':') {
+                    port = ':' + port;
+                }
+
+                processes.labels[0].values.push(name);
+                processes.labels[1].values.push(ip || 'Unknown');
+                processes.labels[2].values.push(port);
+            } else {
+                break;
+            }
+
+            i++;
+        }
+
+        return processes;
+    }
+
     function formatTimezoneString(metadata) {
         const tzString = get(metadata, 'timezone_information.timezone');
         let offset = parseInt(get(metadata, 'timezone_information.utcoffset'));
@@ -236,34 +359,6 @@ function SystemsService($filter,
         } else if (tzString) {
             return `${tzString}`;
         }
-    }
-
-    function getListeningProcessesInformation(metadata) {
-        let processes = [];
-
-        let i = 0;
-        while (true) {
-            let name = get(metadata, `listening_processes.${i}.process_name`);
-            let ip = get(metadata, `listening_processes.${i}.ip_addr`);
-            let port = get(metadata, `listening_processes.${i}.port`);
-
-            if (name && port) {
-                if (port.substring(0, 1) !== ':') {
-                    port = ':' + port;
-                }
-
-                processes.push({
-                    label: `Process ${name}`,
-                    value: (ip || '') + port
-                });
-            } else {
-                break;
-            }
-
-            i++;
-        }
-
-        return processes;
     }
 
     systemsService.populateNewestSystems = function (product) {

@@ -40,7 +40,10 @@
     border: 1px solid #c5c7c9;
     min-width: 100%;
 
-    li > a { @include rem('padding', 8px $global-padding); }
+    li > a {
+      display: block;
+      @include rem('padding', 8px $global-padding);
+    }
     li a { @include rem('padding', 8px 22px 8px $global-padding); }
   }
 }
