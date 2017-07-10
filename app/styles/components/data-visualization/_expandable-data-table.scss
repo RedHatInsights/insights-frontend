@@ -20,10 +20,13 @@
     color: black;
   }
 
+  li.active {
+    background-color: #ddd;
+  }
+
   ul.nav li {
     display: inline-block;
     border: 1px solid #ddd;
-    border-bottom: none;
 
     span {
       display: none;
@@ -33,28 +36,55 @@
 
 .tab-content {
   @include rem('padding', 0);
+}
 
-  .tab-pane.active {
-    @include rem('padding', 0);
-    @include rem('padding-left', $global-padding);
+.tab-content.expanded {
+  @include rem('padding', 0);
+  overflow: auto;
+}
+
+.tab-pane.active {
+  @include rem('padding', 0);
+  @include rem('padding-left', $global-padding);
+}
+
+.tab-pane.active.noData {
+  @include rem('padding-left', 25px);
+}
+
+.responsiveTable {
+  overflow: auto;
+  @include rem('padding-left', 10px);
+
+  table {
+    th {
+      background: $gray-light;
+      text-align: center !IMPORTANT;
+    }
+
+    tr {
+      background: none !IMPORTANT;
+
+      td {
+        font-weight: normal !IMPORTANT;
+        background: none !IMPORTANT;
+        text-align: center !IMPORTANT;
+      }
+    }
   }
 }
 
-// .table-responsive {
-//   th, td {
-//     border: 1px solid #ddd;
-//     text-align: center !IMPORTANT;
-//   }
-// }
-
-.responsiveTable {
-  overflow-x: auto;
-  @include rem('padding-left', 10px);
+.noAvailableData {
+  text-align: center;
+  border: 1px solid #ddd;
+  @include font-size(25px);
+  @include rem('padding', $global-padding);
 }
 
 .expandableDataTable.expanded {
   .toggle.expanded {
     display: inline-block;
+    @include rem('padding-right', 10px);
 
     i {
       transform: rotate(90deg);

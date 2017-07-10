@@ -214,13 +214,6 @@ function SystemsService($filter,
             value: get(metadata, 'satellite_information.hostname')
         });
 
-        getListeningProcessesInformation(metadata).forEach(function (processInfo) {
-            systemData.push({
-                label: processInfo.label,
-                value: processInfo.value
-            });
-        });
-
         // remove items that are undefined
         arrayRemove(systemData, function (n) {
             return n.value === undefined ||
@@ -285,17 +278,8 @@ function SystemsService($filter,
     function getListeningProcesses(metadata) {
         let processes = {
             category: 'network',
-            labels: [
-            {
-                name: 'Process Name',
-                values: []
-            }, {
-                name: 'IP Address',
-                values: []
-            }, {
-                name: 'Port',
-                values: []
-            }]
+            labels: ['Process Name', 'IP Address', 'Port'],
+            values: []
         };
 
         let i = 0;
@@ -310,8 +294,8 @@ function SystemsService($filter,
                 }
 
                 processes.labels[0].values.push(name);
-                processes.labels[1].values.push(ip || 'Unknown');
                 processes.labels[2].values.push(port);
+                processes.labels[1].values.push(ip || 'Unknown');
             } else {
                 break;
             }
