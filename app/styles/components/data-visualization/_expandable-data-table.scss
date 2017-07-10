@@ -1,38 +1,90 @@
 .expandableDataTable {
-  ul {
+  .toggle {
+    border: none;
     display: inline-block;
-    @include reset();
+  }
 
+  ul.nav {
+    display: inline-block;
+    @include rem('padding-left', 2px);
 
     @include media-query(md) {
-      &:hover {
-        li span { display: inline-block; }
+      li span {
+        display: inline-block;
       }
     }
   }
 
-  ul li {
+  .fa {
+    color: black;
+  }
+
+  ul.nav li {
     display: inline-block;
-
-    i {
-
-    }
+    border: 1px solid #ddd;
+    border-bottom: none;
 
     span {
       display: none;
     }
   }
-
-  
-
 }
 
-.expandableDataTable.expanded,
-.expandableDataTable.hover {
+.tab-content {
+  @include rem('padding', 0);
 
-  ul li {
+  .tab-pane.active {
+    @include rem('padding', 0);
+    @include rem('padding-left', $global-padding);
+  }
+}
+
+// .table-responsive {
+//   th, td {
+//     border: 1px solid #ddd;
+//     text-align: center !IMPORTANT;
+//   }
+// }
+
+.responsiveTable {
+  overflow-x: auto;
+}
+
+.expandableDataTable.expanded {
+  .toggle.expanded {
+    display: inline-block;
+
+    i {
+      transform: rotate(90deg);
+      transition: transform .1s linear;
+    }
+
+    .fa {
+      color: red;
+    }
+  }
+
+  li.active {
+    background-color: #ddd;
+  }
+
+  ul.nav>li>a:focus {
+    background-color: transparent;
+    outline: none;
+  }
+
+  ul.nav {
+    @include rem('padding-left', 2px);
+
+    li {
+      &:hover {
+        background-color: $gray-light;
+      }
+    }
+
     span {
       display: inline-block;
+      color: black;
     }
   }
 }

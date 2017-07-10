@@ -32,6 +32,7 @@
 }
 
 .system-metadata {
+  @include rem('padding', 0);
   @include rem('padding-left', $global-padding * 2.5);
   padding-right: 0rem;
   display: flex;
@@ -50,7 +51,7 @@
 
       .name-info {
         b {
-          @include font-size(25px);
+          @include font-size(15px);
         }
       }
     }

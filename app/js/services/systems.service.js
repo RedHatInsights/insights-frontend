@@ -114,6 +114,7 @@ function SystemsService($filter,
             value: get(metadata, 'bios_information.vendor') +
                 ' ' + get(metadata, 'bios_information.version')
         });
+
         systemData.push({
             label: 'BIOS Release Date',
             value: get(metadata, 'bios_information.release_date')
@@ -178,6 +179,13 @@ function SystemsService($filter,
             systemData.slice(Math.ceil(systemData.length / 2), systemData.length)];
     };
 
+    systemsService.getSystemMetadata = function (metadata) {
+        let systemMetadata = [];
+        systemMetadata.push(getListeningProcesses(metadata));
+
+        return systemMetadata;
+    };
+
     systemsService.getInitialSystemMetadata = function (system, metadata) {
         let systemData = [];
 
@@ -220,8 +228,21 @@ function SystemsService($filter,
         return systemData;
     };
 
-    systemsService.getListeningProcesses = function (metadata) {
-        let processes = [];
+    function getListeningProcesses(metadata) {
+        let processes = {
+            category: 'network',
+            labels: [
+            {
+                name: 'Process Name',
+                values: []
+            }, {
+                name: 'IP Address',
+                values: []
+            }, {
+                name: 'Port',
+                values: []
+            }]
+        };
 
         let i = 0;
         while (true) {
@@ -234,10 +255,9 @@ function SystemsService($filter,
                     port = ':' + port;
                 }
 
-                processes.push({
-                    name: name,
-                    value: (ip || '') + port
-                });
+                processes.labels[0].values.push(name);
+                processes.labels[1].values.push(ip || 'Unknown');
+                processes.labels[2].values.push(port);
             } else {
                 break;
             }
@@ -245,15 +265,8 @@ function SystemsService($filter,
             i++;
         }
 
-        // remove items that are undefined
-        arrayRemove(processes, function (n) {
-            return n.value === undefined ||
-                n.value === 'undefined undefined' ||
-                n.value.indexOf('NaN') > -1;
-        });
-
         return processes;
-    };
+    }
 
     function formatTimezoneString(metadata) {
         const tzString = get(metadata, 'timezone_information.timezone');
