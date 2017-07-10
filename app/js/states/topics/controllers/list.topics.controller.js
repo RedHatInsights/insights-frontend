@@ -82,7 +82,7 @@ function TopicRuleListCtrl(
     $scope.search = {
         filters: ['description']
         .map(prop => function (rule, query) {
-            return String(get(rule, prop)).includes(query);
+            return String(get(rule, prop)).toUpperCase().includes(query.toUpperCase());
         }),
 
         doFilter: function (query) {
