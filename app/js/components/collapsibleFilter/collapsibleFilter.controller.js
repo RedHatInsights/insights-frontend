@@ -6,7 +6,8 @@ var componentsModule = require('../');
 /**
  * @ngInject
  */
-function CollapsibleFilterCtrl($location,
+function CollapsibleFilterCtrl($element,
+                               $location,
                                $q,
                                $rootScope,
                                $scope,
@@ -27,6 +28,14 @@ function CollapsibleFilterCtrl($location,
         if (tag === null) {
             delete $scope.tags[filter];
         }
+    });
+
+    $element.bind('show.bs.collapse', function () {
+        console.log('filters are expanded');
+    });
+
+    $element.bind('hidden.bs.collapse', function () {
+        console.log('filters are hidden');
     });
 
     function init () {
