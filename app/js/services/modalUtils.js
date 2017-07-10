@@ -21,8 +21,17 @@ function ModalUtils ($rootScope, $timeout) {
         });
     }
 
+    function preventModalCloseOnEsc ($scope) {
+        return $scope.$on('modal.closing', function (event, reason) {
+            if (reason === 'escape key press') {
+                event.preventDefault();
+            }
+        });
+    }
+
     return {
-        suppressEscNavigation: suppressEscNavigation
+        suppressEscNavigation: suppressEscNavigation,
+        preventModalCloseOnEsc
     };
 }
 
