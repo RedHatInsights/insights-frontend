@@ -878,3 +878,7 @@ table.maintenance-table {
     word-break: break-all;
   }
 }
+
+.play + .play {
+    margin-top: $global-padding;
+}

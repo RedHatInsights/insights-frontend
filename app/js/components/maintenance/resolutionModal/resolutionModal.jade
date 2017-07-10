@@ -16,8 +16,7 @@
             tbody
               tr
                 td
-                  i.fa.category-icon.inline-right(ng-class="params.play.rule.category.toLowerCase()")
-                  b {{ params.play.rule.category }} #{'>'} {{ params.play.rule.description }}
+                  b {{ params.play.rule.description }}
   .row
     .col-sm-12
       .group
@@ -49,6 +48,9 @@
                     id='resolution-type-{{$index}}',
                     ng-value='resolution.resolution_type')
               | {{resolution.description}}
+              i.fa.fa-power-off.red.inline-left(
+                ng-if='resolution.needs_reboot',
+                tooltip = "{{'This resolution requires a system reboot' | translate}}")
 
   .row
     .col-sm-12

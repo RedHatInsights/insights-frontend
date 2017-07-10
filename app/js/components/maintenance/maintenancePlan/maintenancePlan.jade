@@ -233,25 +233,46 @@
               .col-sm-12
                 .group
                   .group-pretitle
-                    b(translate) Resolutions included in this playbook:
+                    b(translate) Overview of Plays included in Ansible Playbook:
             .spinner(ng-show='playbookTabLoader.loading')
             .row.row-short(ng-hide='playbookTabLoader.loading')
               .col-sm-12
                 .group
                   .group-content
-                    ul
-                      li(ng-repeat="play in plays")
-                        .pull-right(ng-if='play.ansible_resolutions.length > 1')
-                          a(ng-click='resolutionModal(play)')
-                            i.fa.fa-cogs(tooltip='{{"Multiple resolutions available. Click here to select a different one." | translate}}')
-                        i.fa.category-icon.inline-right(ng-class="play.rule.category.toLowerCase()")
-                        b {{ play.rule.category }}
-                        | &nbsp;#{'>'}&nbsp;
-                        a(ui-sref='app.actions-rule({category: play.rule.category.toLowerCase(), rule: play.rule.rule_id})')
-                          strong {{ play.rule.description }}
-                        b &nbsp;/ {{ play.systemType.displayNameShort }}
-                        ul
-                          li {{ play.ansible_resolutions[0].description }}
+                    .play(ng-repeat='play in plays')
+                      .pull-right
+                        a(ng-if='play.ansible_resolutions.length > 1', ng-click='resolutionModal(play)')
+                          i.fa.fa-cogs(tooltip='{{"Multiple resolutions available. Click here to select a different one." | translate}}')
+                      a(ui-sref='app.actions-rule({category: play.rule.category.toLowerCase(), rule: play.rule.rule_id})')
+                        strong {{ play.rule.description }}
+                      .systems
+                        b(translate) Systems:&nbsp;
+                        expandable-system-list(systems='play.systems', label='{{play.systems.length}} x {{play.systemType.displayNameShort}}')
+                      .resolution
+                        b(translate) Resolution:&nbsp;
+                        | {{ play.ansible_resolutions[0].description }}
+                        i.fa.fa-power-off.red.inline-left(
+                          ng-if='play.ansible_resolutions[0].needs_reboot',
+                          tooltip = "{{'System reboot is required to resolve this issue' | translate}}")
+
+                    .play(ng-if='systemsToReboot.length')
+                      .pull-right
+                        a(ng-click='rebootModal(play)')
+                          i.fa.fa-cogs(tooltip='{{"Enable / disable automatic system restart" | translate}}')
+                      b.red
+                        span(translate, ng-if='plan.allow_reboot') System Reboot
+                        s(translate, ng-if='!plan.allow_reboot') System Reboot
+                      .systems
+                        b(translate) Systems:&nbsp;
+                        expandable-system-list(systems='systemsToReboot')
+                      .resolution
+                        b(translate) Description:&nbsp;
+                        span(translate) Some of the resolutions above require system reboot in order for the changes to take effect.&nbsp;
+                        span(translate) This playbook&nbsp;
+                        b(translate, ng-if='plan.allow_reboot') will reboot the systems automatically
+                        span(ng-if='!plan.allow_reboot')
+                          b(translate) will not reboot the systems.&nbsp;
+                          span(translate) The systems will need to be rebooted manually.
 
       footer.footer(ng-show='edit.isActive(plan.maintenance_id)')
         a.btn.btn-sm.btn-default(ng-if='isInternal && !plan.hidden', ng-click='hidden(true)')
