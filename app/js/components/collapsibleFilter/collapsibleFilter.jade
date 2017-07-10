@@ -1,16 +1,15 @@
-.toolbar.toolbar--data-filters
-
-  #dataFiltersBody.dataFiltersBody.collapse.out
+#dataFilters.dataFilters(ng-class="open : isOpen")
+  header#dataFiltersBody.data-filters-body.collapse
     div(ng-transclude)
 
-  #dataFiltersFooter.dataFiltersFooter(ng-show='hasTags()', ng-model='tags')
-    .active-filters
+  section#dataFiltersFooter.data-filters-footer(ng-show='hasTags()', ng-model='tags')
+    .active-filters.flexgrid
       strong(translate) Active filters:&nbsp;
       // remove filter on click
       button.btn.btn-accent(ng-repeat="(key, value) in tags", ng-click='removeFilter(key)')
         span(translate) {{value | translate}}
         i.fa.fa-times-circle-o(aria-hidden="true")
 
-  .ui-filters__control-bar
-    .toggle
-      i.fa.fa-arrow-circle-down(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody')
+  footer#dataFiltersControlBar.data-filters-control-bar
+    .toggle(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody', ng-click='isOpen = !isOpen')
+      i.fa.fa-arrow-circle-down
