@@ -20,10 +20,6 @@
     color: black;
   }
 
-  li.active {
-    background-color: #ddd;
-  }
-
   ul.nav li {
     display: inline-block;
     border: 1px solid #ddd;
@@ -83,8 +79,8 @@
 
 .expandableDataTable.expanded {
   .toggle.expanded {
-    display: inline-block;
     @include rem('padding-right', 10px);
+    transition: transform .2s linear;
 
     i {
       transform: rotate(90deg);
@@ -107,7 +103,6 @@
 
   ul.nav {
     @include rem('padding-left', 2px);
-
     li {
       &:hover {
         background-color: $gray-light;

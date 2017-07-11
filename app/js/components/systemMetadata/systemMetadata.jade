@@ -4,28 +4,29 @@
     span Loading...
 .flexgrid.equalheights
   .row.system-metadata(ng-if='!loading')
-    .col-sm-8
+    .col-sm-7
       .row.basic-information
         .col-sm-4
-          .logo-circle
-            img(src='static/images/heartbleed.svg')
+          .img-wrapper
+            img(class="img-circle" src='static/images/l_ansible-black.svg')
         .col-sm-8
-          .name-info(ng-if="system.hostname && !system.display_name")
-            i.fa.fa-camera-retro &nbsp;
-            span(translate) Hostname:
-            .ellipsis-overflow
-              b {{ system.hostname }}
-
-          // always show the uuid.... it must exist
-          .ellipsis-overflow
-            .small-name-info UUID:
+          .info-wrapper
+            .name-info.align-middle(ng-if="system.hostname && !system.display_name")
+              i.fa.fa-camera-retro &nbsp;
+              span(translate) Hostname:
               .ellipsis-overflow
-                b {{ getUUID() }}
+                b {{ system.hostname }}
+
+            // always show the uuid.... it must exist
+            .ellipsis-overflow
+              .small-name-info UUID:
+                .ellipsis-overflow
+                  b {{ getUUID() }}
       .row.alert-bar(ng-if='!system.isCheckingIn')
         .col-sm-12
           .message.alert.alert-danger.alert-systems-not-checking
             span(translate) This system is not checking in.
-    .col-sm-4
+    .col-sm-5
       table.meta-table.table-fixed
         tbody
           tr(ng-repeat='facts in initialMetadata')
