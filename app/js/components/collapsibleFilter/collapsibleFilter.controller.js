@@ -32,10 +32,12 @@ function CollapsibleFilterCtrl($element,
 
     $element.bind('show.bs.collapse', function () {
         console.log('filters are expanded');
+        $("#dataFilters, #dataFiltersControlBar").addClass('expanded').removeClass('collapsed');
     });
 
     $element.bind('hidden.bs.collapse', function () {
         console.log('filters are hidden');
+        $("#dataFilters, #dataFiltersControlBar").addClass('collapsed').removeClass('expanded');
     });
 
     function init () {

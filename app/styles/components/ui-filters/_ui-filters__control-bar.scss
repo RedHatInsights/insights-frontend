@@ -27,7 +27,7 @@
     // Icon styling
     i {
       @include font-size(20px);
-      line-height: 1.6;
+      line-height: 2;
       @include transition(.5s);
     }
   }
@@ -36,7 +36,6 @@
 
 // Rotate the button icoin if filters are open
 .data-filters-control-bar {
-  i { transform: rotate(180deg); }
-
-  .toggle.collapsed i { transform: rotate(0deg); }
+  i { transform: rotate(0deg); }
+  &.expanded i { transform: rotate(180deg); }
 }
