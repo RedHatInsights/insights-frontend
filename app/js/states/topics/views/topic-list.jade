@@ -1,8 +1,5 @@
 .actions-page.actions-back
-  .page-header
-    h1.page-title.pull-left
-      i.fa.fa-file-text &nbsp;
-      span(translate) Actions
+  page-header(title="Actions", icon="fa-file-text")
   topic-rule-filters(ng-hide='loading')
 
   .content-wrap(ng-hide="loading")

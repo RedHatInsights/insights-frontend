@@ -1,5 +1,5 @@
 .maintenance-page
-  .page-header(ng-class="{'inactive': !expandBar, 'active': expandBar}")
+  page-header(title="Planner", icon="fa-wrench", ng-class="{'inactive': !expandBar, 'active': expandBar}")
     .content-block
       .create-plan-actions.text-right.pull-right
         a.create-plan(ng-click='MaintenanceService.showMaintenanceModal()')
@@ -8,9 +8,6 @@
         a.create-plan(ng-click='newSuggestion()', ng-if='isInternal')
           small.red(translate) New suggested plan
             i.fa.fa-plus-circle
-      h1.page-title.pull-left
-        i.fa.fa-wrench &nbsp;
-        span(translate) Planner
     maintenance-plan-bar
 
   section
