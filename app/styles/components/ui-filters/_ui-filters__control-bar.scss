@@ -2,7 +2,7 @@
 // ------------------------
 .data-filters-control-bar {
   position: relative;
-  height: 14px;
+  height: 2px;
   background: #dfdfdf;
   text-align: center;
 
@@ -12,7 +12,7 @@
     width: 42px;
     height: 42px;
     display: inline-block;
-    @include rem('margin-top', -12px);
+    @include rem('margin-top', -20px);
     text-align: center;
     background: rgba(255,255,255,.9);
     @include box-shadow(0 0 0 8px rgba(0,0,0,.1));
@@ -46,7 +46,7 @@
     }
   }
 
-  &.expanded .toggle {
+  .open & .toggle {
     background: #a9a9a9;
     color: #fff;
 

@@ -1,4 +1,6 @@
-#dataFilters.dataFilters(ng-class="{open: open}")
+#dataFilters.dataFilters(ng-class="{open: open, tags: hasTags()}")
+  #dataFiltersBody.data-filters-body.collapse
+    div(ng-transclude)
 
   #activeFilter.active-filters(ng-show='hasTags()', ng-model='tags')
     .flexgrid
@@ -8,11 +10,7 @@
         span(translate) {{value | translate}}
         i.fa.fa-times-circle-o(aria-hidden="true")
 
-  .tray
-    #dataFiltersBody.data-filters-body.collapse
-      div(ng-transclude)
-
-    footer#dataFiltersControlBar.data-filters-control-bar
-      .toggle(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody')
-        i.fa.fa-filter
-        i.fa.fa-close
+  footer#dataFiltersControlBar.data-filters-control-bar
+    .toggle(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody')
+      i.fa.fa-filter
+      i.fa.fa-close

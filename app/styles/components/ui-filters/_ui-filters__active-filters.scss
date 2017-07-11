@@ -1,9 +1,9 @@
-$dataFilter-active-filters-bg: #f9f9f9;
+$dataFilter-active-filters-bg: rgba(255,255,255,.8);
 $dataFilter-active-filters-border-color: #d9d9d9;
 
 .dataFilters .active-filters {
   background: $dataFilter-active-filters-bg;
-  border-bottom: 1px solid $dataFilter-active-filters-border-color;
+  border-top: 1px solid $dataFilter-active-filters-border-color;
   @include rem('padding', $global-padding $global-margin);
 
   &.flexgrid { @include rem('padding', $global-padding $global-margin); }
