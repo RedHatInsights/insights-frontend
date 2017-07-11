@@ -1,8 +1,5 @@
 .digests-page
-  .page-header(ng-class="{'inactive': !expandBar, 'active': expandBar}")
-    h1.page-title
-      i.fa.fa-bar-chart &nbsp;
-      span(translate) Executive Report
+  page-header(title="Executive Report", icon="fa-bar-chart", ng-class="{'inactive': !expandBar, 'active': expandBar}")
   .content-wrap.margin-top(ng-show='loading')
     .text-center
       .spinner.spinner-lg
