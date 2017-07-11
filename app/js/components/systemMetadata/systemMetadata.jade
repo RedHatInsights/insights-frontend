@@ -33,12 +33,15 @@
             td(translate) {{facts.label}}
             td.metadata-value(translate) {{facts.value}}
 
-#expandableDataTable.expandableDataTable(ng-init="getMetadata('network')", ng-if='!loading', ng-class="{expanded: expandedTabs || expandIndefinite}")
-  .toggle(href='#network', aria-controls='network', data-toggle='tab', ng-class="{expanded: expandIndefinite}", ng-click='toggleTabsIndefinite()')
-    i.fa.fa-home
+#expandableDataTable.expandableDataTable(ng-init="getData('network')", ng-if='!loading', ng-class="{expanded: expandedTabs || expandIndefinite}")
+  .toggle(href='#defaultTab', aria-controls='defaultTab', role='tab', data-toggle='tab',
+          ng-class="{expandedIndefinite: expandIndefinite}", ng-click='toggleTabsIndefinite()')
+    i.fa.fa-home(href='#network', aria-controls='network', role='tab', data-toggle='tab')
+
   // Nav tabs
-  ul.nav(role='tablist', ng-mouseenter="expandTabContent()", ng-mouseleave="tabCollapseTimer()", ng-click="expandTabsIndefinite()")
-    li(role='presentation')
+  ul.nav(ng-class="{expandedIndefinite: expandIndefinite}", role='tablist', ng-mouseenter="expandTabContent()",
+         ng-mouseleave="tabCollapseTimer()", ng-click="expandTabsIndefinite()")
+    li#defaultTab(role='presentation')
       a(href='#network', aria-controls='network', role='tab', data-toggle='tab')
         i.fa.fa-camera-retro &nbsp;
         span(translate) Network
@@ -46,17 +49,18 @@
       a(href='#network2', aria-controls='network2', role='tab', data-toggle='tab')
         i.fa.fa-camera-retro &nbsp;
         span(translate) System
+
   // Tab panes
-  .tab-content
-    #network.tab-pane(ng-class='{noData: !isValidMetadata}', role='network')
-      .responsiveTable(ng-if="isValidMetadata")
+  .tab-content(ng-class="{hidden: !expandTabs && !expandIndefinite}")
+    #network.tab-pane(ng-class='{noData: !isValidData}', role='network')
+      .responsiveTable(ng-if="isValidData")
         table
           thead
             tr
-              th(ng-repeat="name in metadata.labels", translate) {{name}}
+              th(ng-repeat="label in tableData.labels", translate) {{label}}
           tbody
-           tr(ng-repeat="values in metadata.values | limitTo: tableRowLimit")
+           tr(ng-repeat="values in tableData.values | limitTo: tableRowLimit")
               td(ng-repeat="value in values") {{value}}
-      .noAvailableData(ng-if="!isValidMetadata")
+      .noAvailableData(ng-if="!isValidData")
         span(translate) No Network Data Available
     #network2.tab-pane(role='network2') this is network 2

@@ -10,8 +10,9 @@ function systemMetadataCtrl($scope, System, SystemsService, $timeout) {
     let timer;
     let system_metadata;
     $scope.tableRowLimit = 10;
+    $scope.isValidData = true;
     $scope.expandedTabs = false;
-    $scope.isValidMetadata = true;
+    $scope.showData = false;
     $scope.expandIndefinite = false;
     $scope.loading = false;
 
@@ -28,18 +29,16 @@ function systemMetadataCtrl($scope, System, SystemsService, $timeout) {
         });
     }
 
-    $scope.getMetadata = function (category) {
-        $scope.metadata = find(system_metadata, {category: category});
+    $scope.getData = function (category) {
+        $scope.tableData = find(system_metadata, {category: category});
 
-        if ($scope.metadata.values.length === 0) {
-            $scope.isValidMetadata = false;
+        if ($scope.tableData.values.length === 0) {
+            $scope.isValidData = false;
         }
     };
 
     $scope.expandTabsIndefinite = function () {
-        if (timer) {
-            $timeout.cancel(timer);
-        }
+        cancelTimer();
 
         if ($scope.expandedTabs) {
             $scope.expandedTabs = false;
@@ -49,9 +48,7 @@ function systemMetadataCtrl($scope, System, SystemsService, $timeout) {
     };
 
     $scope.toggleTabsIndefinite = function () {
-        if (timer) {
-            $timeout.cancel(timer);
-        }
+        cancelTimer();
 
         if ($scope.expandedTabs) {
             $scope.expandedTabs = false;
@@ -61,9 +58,7 @@ function systemMetadataCtrl($scope, System, SystemsService, $timeout) {
     };
 
     $scope.expandTabContent = function () {
-        if (timer) {
-            $timeout.cancel(timer);
-        }
+        cancelTimer();
 
         $scope.expandedTabs = true;
     };
@@ -81,6 +76,12 @@ function systemMetadataCtrl($scope, System, SystemsService, $timeout) {
 
         return $scope.system.system_id;
     };
+
+    function cancelTimer() {
+        if (timer) {
+            $timeout.cancel(timer);
+        }
+    }
 }
 
 function systemMetadata() {

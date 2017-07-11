@@ -30,13 +30,12 @@
   }
 }
 
-.tab-content {
-  @include rem('padding', 0);
+.hidden {
+  display: none;
 }
 
-.tab-content.expanded {
+.tab-content {
   @include rem('padding', 0);
-  overflow: auto;
 }
 
 .tab-pane.active {
@@ -78,7 +77,7 @@
 }
 
 .expandableDataTable.expanded {
-  .toggle.expanded {
+  .toggle.expandedIndefinite {
     @include rem('padding-right', 10px);
     transition: transform .2s linear;
 
@@ -92,10 +91,6 @@
     }
   }
 
-  li.active {
-    background-color: #ddd;
-  }
-
   ul.nav>li>a:focus {
     background-color: transparent;
     outline: none;
@@ -103,10 +98,30 @@
 
   ul.nav {
     @include rem('padding-left', 2px);
+
     li {
       &:hover {
         background-color: $gray-light;
       }
+    }
+
+    span {
+      display: inline-block;
+      color: black;
+    }
+  }
+
+  ul.nav.expandedIndefinite {
+    @include rem('padding-left', 2px);
+
+    li {
+      &:hover {
+        background-color: $gray-light;
+      }
+    }
+
+    li.active {
+      background-color: #ddd;
     }
 
     span {
