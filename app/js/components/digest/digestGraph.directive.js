@@ -64,7 +64,7 @@ function digestGraph() {
         templateUrl: 'js/components/digest/digestGraph.html',
         restrict: 'E',
         controller: digestGraphController,
-        replace: true,
+        replace: false,
         scope: {
             dropDown: '@',
             digest: '=',

@@ -9,7 +9,7 @@ function topicDetails ($rootScope) {
     return {
         templateUrl: 'js/components/topics/topicDetails/topicDetails.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: {
             topic: '='
         },

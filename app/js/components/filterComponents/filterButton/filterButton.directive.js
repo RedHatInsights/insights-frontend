@@ -14,7 +14,7 @@ function filterButton() {
     return {
         templateUrl: 'js/components/filterComponents/filterButton/filterButton.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: filterButtonCtrl
     };
 }

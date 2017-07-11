@@ -39,7 +39,7 @@ function dockerTypeMultiButton() {
         templateUrl: 'js/components/filterComponents/productFilters/' +
             'docker/dockerTypeMultiButton/dockerTypeMultiButton.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: dockerTypeMultiButtonCtrl
     };
 }

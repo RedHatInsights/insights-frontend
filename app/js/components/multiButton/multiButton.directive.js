@@ -102,7 +102,7 @@ function multiButton(MultiButtonService) {
     return {
         templateUrl: 'js/components/multiButton/multiButton.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: multiButtonCtrl,
         scope: {
             buttons: '=',

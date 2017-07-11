@@ -50,7 +50,7 @@ function rhaTelemetryActionsSideNav() {
     return {
         templateUrl: 'js/components/sideNav/actionsSideNav/actionsSideNav.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: rhaTelemetryActionsSideNavCtrl
     };
 }

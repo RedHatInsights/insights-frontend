@@ -429,7 +429,7 @@ function maintenanceModal() {
                      'maintenanceModal/maintenanceModal.html',
         restrict: 'E',
         controller: maintenanceModalCtrl,
-        replace: true
+        replace: false
     };
 }
 

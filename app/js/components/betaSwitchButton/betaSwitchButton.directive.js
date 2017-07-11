@@ -38,7 +38,7 @@ function betaSwitchButton() {
         templateUrl: 'js/components/betaSwitchButton/betaSwitchButton.html',
         restrict: 'E',
         controller: betaSwitchButtonCtrl,
-        replace: true
+        replace: false
     };
 }
 

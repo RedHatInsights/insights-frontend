@@ -77,7 +77,7 @@ function goalsGauge() {
     return {
         templateUrl: 'js/components/overview/widgets/goals/goalsGauge/goalsGauge.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: true,
         controller: generateChartCtrl
     };

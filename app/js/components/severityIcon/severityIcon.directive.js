@@ -110,7 +110,7 @@ function severityIcon () {
         },
         templateUrl: 'js/components/severityIcon/severityIcon.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: severityIconCtrl
     };
 }

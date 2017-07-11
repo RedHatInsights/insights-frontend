@@ -59,7 +59,7 @@ function rhaTelemetryDonut(
     Categories) {
     return {
         restrict: 'C',
-        replace: true,
+        replace: false,
         link: function ($scope) {
             RhaTelemetryActionsService.setDonutChart(
                 generateChart(RhaTelemetryActionsService.mapName));

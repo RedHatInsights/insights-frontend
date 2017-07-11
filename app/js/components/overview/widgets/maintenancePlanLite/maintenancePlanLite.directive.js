@@ -38,7 +38,7 @@ function MaintenancePlanLite() {
         templateUrl: 'js/components/overview/widgets/' +
             'maintenancePlanLite/maintenancePlanLite.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: true,
         controller: MaintenancePlanLiteCtrl
     };

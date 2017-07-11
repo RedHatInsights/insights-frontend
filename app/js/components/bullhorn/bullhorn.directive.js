@@ -46,7 +46,7 @@ function bullhorn() {
     return {
         templateUrl: 'js/components/bullhorn/bullhorn.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: {
             type: '@type',
             icon: '@icon'

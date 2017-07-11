@@ -225,7 +225,7 @@ function inventoryActions() {
     return {
         templateUrl: 'js/components/inventory/inventoryActions/inventoryActions.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: inventoryActionsCtrl
     };
 }

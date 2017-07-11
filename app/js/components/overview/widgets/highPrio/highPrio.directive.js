@@ -33,7 +33,7 @@ function HighPrio() {
     return {
         templateUrl: 'js/components/overview/widgets/highPrio/highPrio.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: {},
         controller: HighPrioCtrl
     };

@@ -21,7 +21,7 @@ function ruleResolution() {
     return {
         templateUrl: 'js/components/rule/ruleResolution/ruleResolution.html',
         restrict: 'EC',
-        replace: true,
+        replace: false,
         controller: ruleResolutionCtrl
     };
 }

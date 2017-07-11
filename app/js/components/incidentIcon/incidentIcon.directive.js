@@ -19,7 +19,7 @@ function incidentIcon() {
     return {
         templateUrl: 'js/components/incidentIcon/incidentIcon.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: incidentIconCtrl,
         scope: {
             ruleId: '='

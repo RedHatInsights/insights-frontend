@@ -42,7 +42,7 @@ function ansibleIcon() {
         },
         templateUrl: 'js/components/ansibleIcon/ansibleIcon.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: ansibleIconCtrl
     };
 }

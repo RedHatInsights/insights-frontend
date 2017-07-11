@@ -38,7 +38,7 @@ function sideNav() {
     return {
         templateUrl: 'js/components/sideNav/sideNav.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: sideNavCtrl
     };
 }

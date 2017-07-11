@@ -16,7 +16,7 @@ function actionbar() {
     return {
         templateUrl: 'js/components/actionbar/actionbar.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: actionbarCtrl
     };
 }

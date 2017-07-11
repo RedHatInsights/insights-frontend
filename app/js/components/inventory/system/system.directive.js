@@ -12,7 +12,7 @@ function system() {
     return {
         templateUrl: 'js/components/inventory/system/system.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: systemCtrl
     };
 }

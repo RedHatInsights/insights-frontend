@@ -20,7 +20,7 @@ function ospDeploymentSelect() {
         templateUrl: 'js/components/filterComponents/productFilters/' +
             'osp/ospDeploymentSelect/ospDeploymentSelect.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: ospDeploymentSelectCtrl
     };
 }

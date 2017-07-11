@@ -81,7 +81,7 @@ function collapsibleFilter() {
     return {
         templateUrl: 'js/components/collapsibleFilter/collapsibleFilter.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         transclude: true,
         controller: CollapsibleFilterCtrl,
         scope: {
@@ -98,7 +98,7 @@ function collapsibleFilterContent() {
     return {
         templateUrl: 'js/components/collapsibleFilter/collapsibleFilterContent.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         transclude: true,
         link: CollapsibleFilterContentLink,
         require: '^collapsibleFilter'

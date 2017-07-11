@@ -70,7 +70,7 @@ function groupSelect() {
     return {
         templateUrl: 'js/components/groupSelect/groupSelect.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: groupSelectCtrl,
         scope: {
             round: '=',

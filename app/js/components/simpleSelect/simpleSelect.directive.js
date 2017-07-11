@@ -38,7 +38,7 @@ function simpleSelect() {
         },
         templateUrl: 'js/components/simpleSelect/simpleSelect.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: simpleSelectCtrl
     };
 }

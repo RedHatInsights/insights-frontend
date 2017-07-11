@@ -357,7 +357,7 @@ function maintenancePlan($document) {
         templateUrl: 'js/components/maintenance/maintenancePlan/maintenancePlan.html',
         restrict: 'E',
         controller: maintenancePlanCtrl,
-        replace: true,
+        replace: false,
         link: function (scope, element) {
             function clickHandler($event) {
 

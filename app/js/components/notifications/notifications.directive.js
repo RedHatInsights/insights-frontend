@@ -23,7 +23,7 @@ function rhaNotifications() {
     return {
         templateUrl: 'js/components/notifications/notifications.html',
         restrict: 'C',
-        replace: true,
+        replace: false,
         controller: rhaNotificationsCtrl
     };
 }

@@ -659,7 +659,7 @@ angular.module('ui.bootstrap.modal', [])
   function ($animate ,  $modalStack) {
     return {
       restrict: 'EA',
-      replace: true,
+      replace: false,
       templateUrl: 'template/modal/backdrop.html',
       compile: function (tElement, tAttrs) {
         tElement.addClass(tAttrs.backdropClass);
@@ -687,7 +687,7 @@ angular.module('ui.bootstrap.modal', [])
       scope: {
         index: '@'
       },
-      replace: true,
+      replace: false,
       transclude: true,
       templateUrl: function(tElement, tAttrs) {
         return tAttrs.templateUrl || 'template/modal/window.html';
@@ -1270,7 +1270,7 @@ angular.module('ui.bootstrap.pagination', [])
     require: ['pagination', '?ngModel'],
     controller: 'PaginationController',
     templateUrl: 'template/pagination/pagination.html',
-    replace: true,
+    replace: false,
     link: function(scope, element, attrs, ctrls) {
       var paginationCtrl = ctrls[0], ngModelCtrl = ctrls[1];
 
@@ -1381,7 +1381,7 @@ angular.module('ui.bootstrap.pagination', [])
     require: ['pager', '?ngModel'],
     controller: 'PaginationController',
     templateUrl: 'template/pagination/pager.html',
-    replace: true,
+    replace: false,
     link: function(scope, element, attrs, ctrls) {
       var paginationCtrl = ctrls[0], ngModelCtrl = ctrls[1];
 
@@ -1873,7 +1873,7 @@ function ($animate ,  $sce ,  $compile ,  $templateRequest) {
 .directive( 'tooltipPopup', function () {
   return {
     restrict: 'EA',
-    replace: true,
+    replace: false,
     scope: { content: '@', placement: '@', popupClass: '@', animation: '&', isOpen: '&' },
     templateUrl: 'template/tooltip/tooltip-popup.html'
   };
@@ -1886,7 +1886,7 @@ function ($animate ,  $sce ,  $compile ,  $templateRequest) {
 .directive( 'tooltipTemplatePopup', function () {
   return {
     restrict: 'EA',
-    replace: true,
+    replace: false,
     scope: { contentExp: '&', placement: '@', popupClass: '@', animation: '&', isOpen: '&',
       originScope: '&' },
     templateUrl: 'template/tooltip/tooltip-template-popup.html'
@@ -1902,7 +1902,7 @@ function ($animate ,  $sce ,  $compile ,  $templateRequest) {
 .directive( 'tooltipHtmlPopup', function () {
   return {
     restrict: 'EA',
-    replace: true,
+    replace: false,
     scope: { contentExp: '&', placement: '@', popupClass: '@', animation: '&', isOpen: '&' },
     templateUrl: 'template/tooltip/tooltip-html-popup.html'
   };
@@ -1920,7 +1920,7 @@ Deprecated
 .directive( 'tooltipHtmlUnsafePopup', function () {
   return {
     restrict: 'EA',
-    replace: true,
+    replace: false,
     scope: { content: '@', placement: '@', popupClass: '@', animation: '&', isOpen: '&' },
     templateUrl: 'template/tooltip/tooltip-html-unsafe-popup.html'
   };
@@ -2042,7 +2042,7 @@ angular.module('ui.bootstrap.tabs', [])
   return {
     restrict: 'EA',
     transclude: true,
-    replace: true,
+    replace: false,
     scope: {
       type: '@'
     },
@@ -2139,7 +2139,7 @@ angular.module('ui.bootstrap.tabs', [])
   return {
     require: '^tabset',
     restrict: 'EA',
-    replace: true,
+    replace: false,
     templateUrl: 'template/tabs/tab.html',
     transclude: true,
     scope: {

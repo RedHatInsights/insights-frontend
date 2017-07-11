@@ -27,7 +27,7 @@ function dockerHostSelect() {
         templateUrl: 'js/components/filterComponents/productFilters/' +
             'docker/dockerHostSelect/dockerHostSelect.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: dockerHostSelectCtrl
     };
 }

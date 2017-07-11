@@ -88,7 +88,7 @@ function goalsBar() {
     return {
         templateUrl: 'js/components/goals/goalsBar/goalsBar.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: generateBarCtrl
     };
 }

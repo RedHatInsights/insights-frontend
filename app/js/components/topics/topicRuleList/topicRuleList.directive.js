@@ -153,7 +153,7 @@ function topicRuleList () {
     return {
         templateUrl: 'js/components/topics/topicRuleList/topicRuleList.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: topicRuleListCtrl,
         scope: {
             topic: '='

@@ -6,7 +6,7 @@ function insightsTagline() {
     return {
         templateUrl: 'js/components/insightsTagline/insightsTagline.html',
         restrict: 'EC',
-        replace: true
+        replace: false
     };
 }
 
