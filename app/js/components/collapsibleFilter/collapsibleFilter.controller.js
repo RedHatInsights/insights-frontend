@@ -31,13 +31,24 @@ function CollapsibleFilterCtrl($element,
     });
 
     $element.bind('show.bs.collapse', function () {
-        console.log('filters are expanded');
-        $("#dataFilters, #dataFiltersControlBar").addClass('expanded').removeClass('collapsed');
+        jQuery('#dataFilters, #dataFiltersControlBar').addClass('expanded');
+        jQuery('#dataFilters, #dataFiltersControlBar').removeClass('collapsed');
+
+        //var el = document.querySelectorAll('#dataFilters, #dataFiltersControlBar');
+        //for (var i = 0; i < el.length; i++) {
+        //    el[i].className += ' testing';
+        //}
     });
 
     $element.bind('hidden.bs.collapse', function () {
-        console.log('filters are hidden');
-        $("#dataFilters, #dataFiltersControlBar").addClass('collapsed').removeClass('expanded');
+        jQuery('#dataFilters, #dataFiltersControlBar').addClass('collapsed');
+        jQuery('#dataFilters, #dataFiltersControlBar').removeClass('expanded');
+
+        //var el = document.querySelectorAll('#dataFilters, #dataFiltersControlBar');
+        //for (var i = 0; i < el.length; i++) {
+        //    el[i].className += ' testing';
+        //}
+
     });
 
     function init () {

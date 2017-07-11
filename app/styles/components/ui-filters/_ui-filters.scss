@@ -65,4 +65,8 @@ $data-filters-background: #F9F9F9;
   .btn + .btn {
     @include rem('margin-left', $global-padding);
   }
+
+  .dropdown {
+    @extend .full-width;
+  }
 }

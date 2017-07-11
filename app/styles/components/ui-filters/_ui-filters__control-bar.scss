@@ -13,10 +13,11 @@
     display: inline-block;
     @include rem('margin-top', -12px);
     text-align: center;
-    background: rgba(255,255,255,.8);
+    background: rgba(255,255,255,.9);
     @include box-shadow(0 0 0 8px rgba(0,0,0,.1));
     @include border-radius(50%);
     border: none;
+    //@include transition(.2s);
 
     // button hover styling
     &:hover {
@@ -28,14 +29,23 @@
     i {
       @include font-size(20px);
       line-height: 2;
-      @include transition(.5s);
     }
+  }
+
+  &.expanded .toggle {
+    background: #a9a9a9;
+    color: #fff;
   }
 }
 
 
 // Rotate the button icoin if filters are open
 .data-filters-control-bar {
-  i { transform: rotate(0deg); }
-  &.expanded i { transform: rotate(180deg); }
+  i {
+    //transform: rotate(0deg);
+  }
+
+  &.expanded i {
+    //transform: rotate(180deg);
+  }
 }
