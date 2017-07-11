@@ -16,9 +16,6 @@ $data-filters-background: #F9F9F9;
 // UI filter styling
 // ------------------------
 .dataFilters {
-  position: absolute;
-  width: 100%;
-  z-index: 10;
   background: $data-filters-background;
   //@include transition(.2s);
   @include box-shadow(0 0 0 rgba(0,0,0,0));
@@ -70,3 +67,11 @@ $data-filters-background: #F9F9F9;
     @extend .full-width;
   }
 }
+
+.dataFilters .tray {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  background: $data-filters-background;
+}
+

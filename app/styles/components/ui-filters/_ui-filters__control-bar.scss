@@ -8,6 +8,7 @@
 
   // toggle button styling
   .toggle {
+    position: relative;
     width: 42px;
     height: 42px;
     display: inline-block;
@@ -27,14 +28,35 @@
 
     // Icon styling
     i {
+      position: absolute;
+      left: 30%;
       @include font-size(20px);
       line-height: 2;
+    }
+
+    i.fa.fa-filter {
+      left: 32%;
+      @include opacity(1);
+      color: $blue;
+    }
+
+    i.fa.fa-close {
+      @include opacity(0);
+      color: #fff;
     }
   }
 
   &.expanded .toggle {
     background: #a9a9a9;
     color: #fff;
+
+    i.fa.fa-filter {
+      @include opacity(0);
+    }
+
+    i.fa.fa-close {
+      @include opacity(1);
+    }
   }
 }
 

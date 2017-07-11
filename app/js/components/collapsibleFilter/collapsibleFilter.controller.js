@@ -1,7 +1,8 @@
 /*global require*/
 'use strict';
 
-var componentsModule = require('../');
+const componentsModule = require('../');
+const priv = {};
 
 /**
  * @ngInject
@@ -30,26 +31,15 @@ function CollapsibleFilterCtrl($element,
         }
     });
 
-    $element.bind('show.bs.collapse', function () {
-        jQuery('#dataFilters, #dataFiltersControlBar').addClass('expanded');
-        jQuery('#dataFilters, #dataFiltersControlBar').removeClass('collapsed');
+    priv.toggleTray = function () {
+        // for matt to apply the open class on some parent stuff
+        // that bs does not apply classes to
+        $scope.open = !$scope.open;
+        $scope.$digest();
+    };
 
-        //var el = document.querySelectorAll('#dataFilters, #dataFiltersControlBar');
-        //for (var i = 0; i < el.length; i++) {
-        //    el[i].className += ' testing';
-        //}
-    });
-
-    $element.bind('hidden.bs.collapse', function () {
-        jQuery('#dataFilters, #dataFiltersControlBar').addClass('collapsed');
-        jQuery('#dataFilters, #dataFiltersControlBar').removeClass('expanded');
-
-        //var el = document.querySelectorAll('#dataFilters, #dataFiltersControlBar');
-        //for (var i = 0; i < el.length; i++) {
-        //    el[i].className += ' testing';
-        //}
-
-    });
+    $element.bind('show.bs.collapse', priv.toggleTray);
+    $element.bind('hidden.bs.collapse', priv.toggleTray);
 
     function init () {
         $scope.tags = {};
