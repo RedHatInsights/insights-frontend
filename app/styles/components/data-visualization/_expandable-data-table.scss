@@ -36,21 +36,20 @@
 
 .tab-content {
   @include rem('padding', 0);
-
-  .tab-pane.active {
-    @include rem('padding', 0);
-    @include rem('padding-left', $global-padding);
-  }
 }
 
 .tab-content.expanded {
   @include rem('padding', 0);
   overflow: auto;
+}
 
-  .tab-pane.active {
-    @include rem('padding', 0);
-    @include rem('padding-left', $global-padding);
-  }
+.tab-pane.active {
+  @include rem('padding', 0);
+  @include rem('padding-left', $global-padding);
+}
+
+.tab-pane.active.noData {
+  @include rem('padding-left', 25px);
 }
 
 .responsiveTable {
@@ -79,12 +78,13 @@
   text-align: center;
   border: 1px solid #ddd;
   @include font-size(25px);
-  @include rem('padding', $global-padding * 2);
+  @include rem('padding', $global-padding);
 }
 
 .expandableDataTable.expanded {
   .toggle.expanded {
     display: inline-block;
+    @include rem('padding-right', 10px);
 
     i {
       transform: rotate(90deg);

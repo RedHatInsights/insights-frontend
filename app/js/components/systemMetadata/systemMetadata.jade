@@ -32,8 +32,8 @@
             td(translate) {{facts.label}}
             td.metadata-value(translate) {{facts.value}}
 
-#expandableDataTable.expandableDataTable(ng-if='!loading', ng-class="{expanded: expandedTabs || expandIndefinite}")
-  .toggle(ng-class="{expanded: expandIndefinite}", ng-click='toggleTabsIndefinite()')
+#expandableDataTable.expandableDataTable(ng-init="getMetadata('network')", ng-if='!loading', ng-class="{expanded: expandedTabs || expandIndefinite}")
+  .toggle(href='#network', aria-controls='network', data-toggle='tab', ng-class="{expanded: expandIndefinite}", ng-click='toggleTabsIndefinite()')
     i.fa.fa-home
   // Nav tabs
   ul.nav(role='tablist', ng-mouseenter="expandTabContent()", ng-mouseleave="tabCollapseTimer()", ng-click="expandTabsIndefinite()")
@@ -47,8 +47,8 @@
         span(translate) System
   // Tab panes
   .tab-content
-    #network.tab-pane(ng-init="getMetadata('network')", role='network')
-      .responsiveTable(ng-if="!isVaildMetadata")
+    #network.tab-pane(ng-class='{noData: !isValidMetadata}', role='network')
+      .responsiveTable(ng-if="isValidMetadata")
         table
           thead
             tr
@@ -56,6 +56,6 @@
           tbody
            tr(ng-repeat="values in metadata.values | limitTo: tableRowLimit")
               td(ng-repeat="value in values") {{value}}
-      .noAvailableData(ng-if="isVaildMetadata")
+      .noAvailableData(ng-if="!isValidMetadata")
         span(translate) No Network Data Available
     #network2.tab-pane(role='network2') this is network 2

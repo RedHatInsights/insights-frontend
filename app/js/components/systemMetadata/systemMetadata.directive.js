@@ -31,11 +31,9 @@ function systemMetadataCtrl($scope, System, SystemsService, $timeout) {
     $scope.getMetadata = function (category) {
         $scope.metadata = find(system_metadata, {category: category});
 
-        $scope.metadata.values.forEach(function (values) {
-            if (values.length === 0) {
-                $scope.isValidMetadata = false;
-            }
-        });
+        if ($scope.metadata.values.length === 0) {
+            $scope.isValidMetadata = false;
+        }
     };
 
     $scope.expandTabsIndefinite = function () {
