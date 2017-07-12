@@ -106,7 +106,8 @@ function Routes($stateProvider) {
             templateUrl: 'js/states/rules/list-rules.html',
             controller: 'ListRuleCtrl',
             title: 'Rules',
-            hideGroup: true
+            hideGroup: true,
+            reloadOnSearch: false
         });
 
     // Planner routes

@@ -141,6 +141,7 @@ function ListRuleCtrl(
     }
 
     function getData() {
+        $scope.loading = true;
         let promises = [];
         let query = FilterService.buildRequestQueryParams();
         query.include = 'article';
