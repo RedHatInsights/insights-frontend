@@ -126,7 +126,7 @@
             span(translate) Actions available for group: {{selected.group.display_name}}&nbsp;
             span(
               translate,
-              translate-n='2'
+              translate-n='selected.group.systems.length'
               translate-plural='({{$count}} systems)') (1 system)
           strong(translate, ng-if='systemSelection === "all"') Actions available for your inventory
         .nopad.table-responsive
