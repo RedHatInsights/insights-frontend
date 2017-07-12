@@ -1,7 +1,7 @@
 .widget.severity-summary
   ul
     li
-      .pointer(ng-if="ruleCount.info || !loaded", ui-sref="app.topic({id: 'low-risk', 'filters:totalRisk': 'INFO'})")
+      .pointer(ng-if="false || true", ui-sref="app.topic({id: 'low-risk', 'filters:totalRisk': 'INFO'})")
         .metrics
           strong {{'Low' | translate}}
           span.num(ng-if="(ruleCount.info / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.info / ruleCount.total || 0 | number:1}}%)

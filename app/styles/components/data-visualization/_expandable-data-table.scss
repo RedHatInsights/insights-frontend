@@ -1,0 +1,143 @@
+@mixin meta-icon-padding(){
+  @include rem('padding-right', 10px);
+  @include rem('padding-left', 2px);
+}
+
+.expandableDataTable {
+  .toggle {
+    border: none;
+    display: inline-block;
+    @include meta-icon-padding();
+  }
+
+  ul.nav {
+    display: inline-block;
+    @include rem('padding-left', 2px);
+
+    @include media-query(md) {
+      li span {
+        display: inline-block;
+      }
+    }
+  }
+
+  .fa {
+    color: #585858;
+  }
+
+  ul.nav li {
+    display: inline-block;
+    border: 1px solid #ddd;
+
+    span {
+      display: none;
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.tab-content {
+  @include rem('padding', 0);
+}
+
+.tab-pane.active {
+  @include rem('padding', 0);
+  @include rem('padding-left', $global-padding);
+}
+
+.tab-pane.active.noData {
+  @include rem('padding-left', 25px);
+}
+
+.tabname {
+  padding-left: 5px;
+}
+
+.responsiveTable {
+  overflow: auto;
+  @include rem('padding-left', 10px);
+
+  table {
+    th {
+      background: $gray-light;
+      text-align: center !IMPORTANT;
+    }
+
+    tr {
+      background: none !IMPORTANT;
+
+      td {
+        font-weight: normal !IMPORTANT;
+        background: none !IMPORTANT;
+        text-align: center !IMPORTANT;
+      }
+    }
+  }
+}
+
+.noAvailableData {
+  text-align: center;
+  border: 1px solid #ddd;
+  @include font-size(25px);
+  @include rem('padding', $global-padding);
+}
+
+.expandableDataTable.expanded {
+  .toggle.expandedIndefinite {
+    @include meta-icon-padding();
+    transition: transform .2s linear;
+
+    i {
+      transform: rotate(135deg);
+      transition: transform .2s linear;
+    }
+
+    .fa {
+      color: red;
+    }
+  }
+
+
+
+  ul.nav>li>a:focus {
+    background-color: transparent;
+    outline: none;
+  }
+
+  ul.nav {
+    @include rem('padding-left', 2px);
+
+    li {
+      &:hover {
+        background-color: $gray-light;
+      }
+    }
+
+    span {
+      display: inline-block;
+      color: black;
+    }
+  }
+
+  ul.nav.expandedIndefinite {
+    @include rem('padding-left', 2px);
+
+    li {
+      &:hover {
+        background-color: $gray-light;
+      }
+    }
+
+    li.active {
+      background-color: #ddd;
+    }
+
+    span {
+      display: inline-block;
+      color: black;
+    }
+  }
+}
