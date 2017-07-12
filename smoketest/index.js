@@ -45,7 +45,7 @@ describe('Insights Portal Smoke Test', function () {
         });
     });
 
-    // require('./suites/actions')(nightmare);
-    // require('./suites/inventory')(nightmare);
+    require('./suites/actions')(nightmare);
+    require('./suites/inventory')(nightmare);
     require('./suites/planner')(nightmare);
 });
