@@ -115,7 +115,7 @@ function Routes($stateProvider) {
         .state('app.maintenance', {
             // the parameter is optional and allows the maintenance view to be bookmarked
             // with "quick-edit" of a specific plan open
-            url: '/planner/{maintenance_id}',
+            url: '/planner/{maintenance_id}?tab',
             templateUrl: 'js/states/maintenance/maintenance.html',
             controller: 'MaintenanceCtrl',
             title: 'Planner',

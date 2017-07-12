@@ -14,6 +14,12 @@ const filter = require('lodash/filter');
 const flatMap = require('lodash/flatMap');
 const uniqBy = require('lodash/uniqBy');
 
+const TAB_MAPPING = {
+    undefined: 0,
+    systems: 1,
+    playbook: 2
+};
+
 /**
  * @ngInject
  */
@@ -21,6 +27,8 @@ function maintenancePlanCtrl(
     $modal,
     $rootScope,
     $scope,
+    $state,
+    $stateParams,
     $timeout,
     $document,
     gettextCatalog,
@@ -146,8 +154,8 @@ function maintenancePlanCtrl(
     };
 
     $scope.downloadPlaybook = function () {
-        if ($scope.playbookTab) {
-            $scope.playbookTab();
+        if ($scope.selectTab) {
+            $scope.selectTab('playbook');
         }
 
         Maintenance.downloadPlaybook($scope.plan.maintenance_id)
@@ -306,14 +314,40 @@ function maintenancePlanCtrl(
         });
     });
 
-    $scope.setupPlaybookTabActivator = function (value) {
+    $scope.setupTabActivator = function (value) {
         value.$watch('tabs', function (tabs) {
             if (tabs) {
-                $scope.playbookTab = function () {
-                    tabs[2].select();
+                $scope.selectTab = function (name, ignoreUrl) {
+                    const tab = TAB_MAPPING[name];
+
+                    if (tab !== undefined) {
+                        tabs[tab].select();
+                        if (!ignoreUrl) {
+                            $scope.tabSelected(name);
+                        }
+                    }
                 };
             }
         });
+    };
+
+    $scope.tabSelected = function () {
+
+        // this double-assignment is a workaround for how ui-bootstrap handles selection
+        $scope.tabSelected = function (name) {
+            $state.transitionTo($state.current, {
+                maintenance_id: $stateParams.maintenance_id,
+                tab: name
+            }, {
+                notify: false,
+                reload: false,
+                location: 'replace'
+            });
+        };
+
+        if ($stateParams.maintenance_id && $stateParams.tab && $scope.selectTab) {
+            $scope.selectTab($stateParams.tab, true);
+        }
     };
 
     $scope.resolutionModal = function (play) {
@@ -337,11 +371,13 @@ function maintenancePlanCtrl(
                 false: gettextCatalog.getString('Do not reboot systems')
             },
             confirmButtonText: gettextCatalog.getString('Save')
-        }).then(function (result) {
-            result = (result === 'true');
+        }).then(function (allow_reboot) {
+            allow_reboot = (allow_reboot === 'true');
 
-            // TODO actually persist somewhere
-            $scope.plan.allow_reboot = result;
+            return Maintenance.updatePlan($scope.plan.maintenance_id, { allow_reboot })
+            .then(function () {
+                $scope.plan.allow_reboot = allow_reboot;
+            });
         });
     };
 

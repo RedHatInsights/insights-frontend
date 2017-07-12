@@ -151,7 +151,7 @@
           role="tablist")
 
           // Actions Tab
-          tab(role="tabpanel", heading="{{'Actions' | translate}}", deselect='addRule.reset()')
+          tab(role="tabpanel", heading="{{'Actions' | translate}}", deselect='addRule.reset()', select='tabSelected()')
             .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', '-actions.length', 'rule_id'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
               .header.bordered(ng-init='tableEdit = false')
                 .title
@@ -183,7 +183,7 @@
               ng-change="pager.update()")
 
           // Systems Tab
-          tab(role="tabpanel", heading="{{'Systems' | translate}}", deselect='addSystem.reset()')
+          tab(role="tabpanel", heading="{{'Systems' | translate}}", deselect='addSystem.reset()', select='tabSelected("systems")')
             .content-block.system(
               ng-repeat="system in (plan.systems | orderBy:['_name', 'system_id'] | offset:pager.offset | limitTo:pager.perPage) track by system.system_id")
               .header.bordered
@@ -224,8 +224,8 @@
           tab(
             role="tabpanel",
             disable='!ansibleSupport',
-            ng-init='setupPlaybookTabActivator($parent)',
-            select='prepareAnsibleTab()')
+            ng-init='setupTabActivator($parent)',
+            select='tabSelected("playbook"); prepareAnsibleTab()')
             tab-heading
               ansible-icon.inline-right(value='ansibleSupport', showTooltip='false')
               strong(translate) Playbook Settings
