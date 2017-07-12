@@ -28,7 +28,7 @@ Development
 4. `bundle install`
 5. `gulp` (or `gulp dev-stable` to do work on the stable mode application)
 6. For running insights-proxy see https://github.com/RedHatInsights/insights-proxy/blob/master/README.md
-   - the following should work though `# docker run --net=host -e HTTPS=true -e MODE=all/content -p1337:1337 -ti docker.io/iphands/insightsproxy`
+   - the following should work though `# docker run --net=host -e MODE=all/content -p1337:1337 -ti docker.io/iphands/insightsproxy`
 
 Once the node server and `insights-proxy` are both running, you can access the UI at:
 
