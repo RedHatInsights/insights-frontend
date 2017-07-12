@@ -1,5 +1,7 @@
-/*global describe, it module, require*/
+/*global describe, it module, require, process*/
 
+const env   = process.env;
+const got   = require('got');
 const el    = require('../elements.js');
 const funcs = require('../funcs');
 
@@ -32,9 +34,21 @@ module.exports = (nightmare) => {
                     nightmare
                         .waitAndClick(el.planner.openPlan.delete)
                         .waitAndClick(el.planner.swal.yes)
-                        .then(nightmare.myDone(done))
+                        // .then(nightmare.myDone(done))
                         .catch(nightmare.myDone(done));
-                        // TODO confirm delete
+                    // TODO confirm delete
+
+                    // delete wasnt working, retying here
+                    // TODO fix this ^
+                    // this is just a call to prod for cleanup
+                    // a hack to prevent a mess
+                    // it is not good test code
+                    const id = newName.match(/\(([0-9]*)\)$/)[1];
+                    got.delete(`https://access.redhat.com/r/insights/v2/maintenance/${id}`, {
+                        auth: `${env.TEST_USERNAME}:${env.TEST_PASSWORD}`
+                    }).finally(() => {
+                        nightmare.myDone(done);
+                    });
                 }).catch(nightmare.myDone(done));
         });
     });
