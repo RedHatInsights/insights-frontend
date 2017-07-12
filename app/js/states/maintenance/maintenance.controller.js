@@ -57,7 +57,12 @@ EditToggleHandler.prototype.updateUrl = function () {
 };
 
 EditToggleHandler.prototype.transition = function (id) {
-    this.$state.transitionTo(this.$state.current, {maintenance_id: id}, {
+    const tab = (id) ? this.$stateParams.tab : undefined;
+
+    this.$state.transitionTo(this.$state.current, {
+        maintenance_id: id,
+        tab
+    }, {
         notify: false,
         reload: false,
         location: 'replace'
