@@ -36,19 +36,19 @@
 #expandableDataTable.expandableDataTable(ng-init="getData('network')", ng-if='!loading', ng-class="{expanded: expandedTabs || expandIndefinite}")
   .toggle(href='#defaultTab', aria-controls='defaultTab', role='tab', data-toggle='tab',
           ng-class="{expandedIndefinite: expandIndefinite}", ng-click='toggleTabsIndefinite()')
-    i.fa.fa-home(href='#network', aria-controls='network', role='tab', data-toggle='tab')
+    i.fa.fa-plus(href='#network', aria-controls='network', role='tab', data-toggle='tab')
 
   // Nav tabs
   ul.nav(ng-class="{expandedIndefinite: expandIndefinite}", role='tablist', ng-mouseenter="expandTabContent()",
          ng-mouseleave="tabCollapseTimer()", ng-click="expandTabsIndefinite()")
     li#defaultTab(role='presentation')
       a(href='#network', aria-controls='network', role='tab', data-toggle='tab')
-        i.fa.fa-camera-retro &nbsp;
-        span(translate) Network
+        i.fa.fa-sitemap &nbsp;
+        span(translate).tabname Network
     li(role='presentation')
       a(href='#network2', aria-controls='network2', role='tab', data-toggle='tab')
-        i.fa.fa-camera-retro &nbsp;
-        span(translate) System
+        i.fa.fa-desktop &nbsp;
+        span(translate).tabname System
 
   // Tab panes
   .tab-content(ng-class="{hidden: !expandTabs && !expandIndefinite}")
