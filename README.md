@@ -11,26 +11,35 @@ Development
 2. gulp (Installed via `sudo npm install gulp -g`)
 3. bower (Installed via `sudo npm install bower -g`)
 4. bundle (Installed via `gem install bundle`)
-4. compass (Installed via `gem install compass`)
-4. sass-css-importer (Installed via `gem install --pre sass-css-importer`)
-4. breakpoint (Installed via `gem install breakpoint`)
-5. accessproxy (Installed from https://github.com/redhataccess/accessproxy)
-6. insights-frontend-assets (https://github.com/RedHatInsights/insights-frontend-assets)
+5. compass (Installed via `gem install compass`)
+6. sass-css-importer (Installed via `gem install --pre sass-css-importer`)
+7. breakpoint (Installed via `gem install breakpoint`)
+8. insights-frontend-assets (https://github.com/RedHatInsights/insights-frontend-assets)
+9. insights-proxy (https://github.com/RedHatInsights/insights-proxy) or accessproxy (https://github.com/redhataccess/accessproxy)
 
 **Getting started**
 
 1. Clone the assets repo `git clone git@gitlab.cee.redhat.com:FlipModeSquad/insights-frontend-assets.git`
 2. Symlink the insights-frontend-assets static directory to insights-frontend
     - ln -s {path-to-insights-frontend-assets}/static/ {path-to-insights-frontend}/
+    - *Note* use the full path as Node gets tripped up by relative pathing here
 3. `npm install`
     - This may print some errors on optional dependencies.  This is okay.
-4. `bower install`
-5. `bundle install`
-6. `gulp` (or `gulp dev-stable` to do work on the stable mode application)
+4. `bundle install`
+5. `gulp` (or `gulp dev-stable` to do work on the stable mode application)
+6. For running insights-proxy see https://github.com/RedHatInsights/insights-proxy/blob/master/README.md
+   - the following should work though `# docker run --net=host -e HTTPS=true -e MODE=all/content -p1337:1337 -ti docker.io/iphands/insightsproxy`
 
-Once the API and `accessproxy` are both running, you can access the UI at:
+Once the node server and `insights-proxy` are both running, you can access the UI at:
 
-http://ci.foo.redhat.com:1337/insightsbeta or http://ci.foo.redhat.com:1337/insights
+- http://prod.foo.redhat.com:1337/insights
+- http://stage.foo.redhat.com:1337/insights
+- http://qa.foo.redhat.com:1337/insights
+- http://ci.foo.redhat.com:1337/insights
+- http://prod.foo.redhat.com:1337/insightsbeta
+- http://stage.foo.redhat.com:1337/insightsbeta
+- http://qa.foo.redhat.com:1337/insightsbeta
+- http://ci.foo.redhat.com:1337/insightsbeta
 
 Once loaded, you can switch to your local API instance by going to /insightsbeta/config/dev and then picking the "local" API Root preset.
 
@@ -44,6 +53,7 @@ There are 3 branches that will automatically push code out:
 
 All development branches should be prefixed with one of the following
 
+- fixes/      (for simple non feature bug fixes)
 - features/   (for normal work intended to go to master)
 - stable/     (for patches intended to go to stable)
 - test/       (misc stuff)
