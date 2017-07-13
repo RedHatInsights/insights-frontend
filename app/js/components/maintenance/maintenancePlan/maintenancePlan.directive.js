@@ -306,7 +306,7 @@ function maintenancePlanCtrl(
     };
 
     $scope.resolutionModal = function (play) {
-        return MaintenanceService.resolutionModal($scope.plan, play, 0)
+        return MaintenanceService.resolutionModal($scope.plan, play, 0, 0)
             .then($scope.prepareAnsibleTab);
     };
 

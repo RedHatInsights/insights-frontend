@@ -73,6 +73,7 @@ ul.pagination.pagination-dots {
     white-space: nowrap;
     overflow: hidden;
     border-radius: 50% !important;
+    cursor: default;
   }
 
   &>.disabled>span,

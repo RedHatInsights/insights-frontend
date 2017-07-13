@@ -388,7 +388,9 @@ function MaintenanceService(
         service.plans.remove(id);
     });
 
-    service.resolutionModal = function (plan, play, steps) {
+    service.resolutionModal = function (plan, play, steps, index) {
+        index = index || 0;
+
         const instance = $modal.open({
             templateUrl:
             'js/components/maintenance/resolutionModal/resolutionModal.html',
@@ -400,7 +402,8 @@ function MaintenanceService(
                     return {
                         play,
                         plan,
-                        steps
+                        steps,
+                        index
                     };
                 }
             }
@@ -424,7 +427,7 @@ function MaintenanceService(
     function doPrompt (plan, toPrompt) {
         return toPrompt.reduce(function (acc, play, index) {
             return acc.then(function () {
-                return service.resolutionModal(plan, play, toPrompt.length - index);
+                return service.resolutionModal(plan, play, toPrompt.length, index);
             });
         }, $q.resolve()).catch(function () {
             // empty catch handler that prevents the promise from being rejected
