@@ -2,11 +2,11 @@
   //platform-filter
   new-actions-graph
 
-  .content-wrap(ng-show='loader.loading')
-    .row(ng-if='loader.loading')
-          .spinner.spinner-lg
+  .content-wrap(ng-if='loading')
+    .row.ng-animate-enabled
+      .spinner.spinner-lg
 
-  .content-wrap(ng-show='!loader.loading')
+  .content-wrap(ng-if='!loading')
     section.metrics
       .rha-notifications
       .row
@@ -35,48 +35,11 @@
                         span.desc(translate) {{category.id | titlecase}}
                         span.count &nbsp;({{category.count}})
         .col-md-6
-          card.widget.widgetIncidentSummary(id="widgetIncidentSummary", ng-show='incidentCount > 0')
+          card.widget.widgetIncidentSummary(id="widgetIncidentSummary")
             card-header.gray
               h4(translate) Incident summary
             card-content.flexgrid.equalheights
-              .row
-                .col-sm-3
-                  #countComparison.countComparison
-                    .count
-                      .num {{incidentCount}}
-                      .desc(translate) Incidents
-                    .count
-                      .num {{incidentSystemCount}}
-                      .desc(translate) Systems
-                .col-sm-9.border-left
-                  .icon-inline
-                    i.fa.fa-bullseye
-                    p An&nbsp;
-                      strong(translate) incident&nbsp;
-                      | is an issue that is currently or has already affected systems. {{incidentCount}} of 
-                      span(translate, translate-n="stats.rules.total", translate-plural=" {{$count}} issues") {{stats.rules.total}} issue 
-                      span(translate, translate-n="incidentCount", translate-plural="&nbsp;are INCIDENTS affecting") &nbsp;is an INCIDENT affecting 
-                      span(translate, translate-n="incidentSystemCount", translate-plural="&nbsp;{{$count}} systems.") &nbsp;{{incidentSystemCount}} system. 
-                      span(translate) &nbsp;It is imperative that these incidents be addressed to ensure optimal performance.
-                    br
-                    a.link.strong(translate, ui-sref="app.topic({id: 'incidents'})") View incidents
-
-          card.widget.widgetIncidentSummary(id="widgetIncidentSummary", ng-show='incidentCount === 0')
-            card-header.gray
-              h4(translate) Incident summary
-            card-content.flexgrid.equalheights
-              .row
-                .col-md-12
-                  #countComparison.countComparison
-                    .count
-                      span.num.success 0
-                      span.desc incidents
-                .col-md-12
-                  .icon-inline
-                    i.fa.fa-bullseye
-                    p(translate) An&nbsp;
-                      strong incident&nbsp;
-                      | is an issue that is currently or has already affected systems. You have 0 issues that are INCIDENTS.
+              incident-summary(incident-count='incidentCount', incident-system-count='incidentSystemCount', rule-hits='stats.rules.total')
 
           card
             card-header.gray
