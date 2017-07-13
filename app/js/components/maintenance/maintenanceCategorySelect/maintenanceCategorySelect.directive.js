@@ -17,6 +17,10 @@ function maintenanceCategorySelectCtrl($rootScope,
     $scope.plans = MaintenanceService.plans;
 
     $scope.options = [{
+        id: 'all',
+        label: gettextCatalog.getString('All'),
+        tag: null
+    }, {
         id: 'suggested',
         label: gettextCatalog.getString('Suggestions'),
         tag: gettextCatalog.getString('Maintenance: Suggestions')
@@ -46,7 +50,7 @@ function maintenanceCategorySelectCtrl($rootScope,
     }
 
     $scope.$watch('category', function (category) {
-        $scope.selected = find($scope.options, {id: category});
+        $scope.select(find($scope.options, {id: category}));
     });
 
     $scope.$on(Events.filters.reset, function () {

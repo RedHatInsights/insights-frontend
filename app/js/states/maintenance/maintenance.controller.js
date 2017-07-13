@@ -7,7 +7,7 @@ var values = require('lodash/values');
 var moment = require('moment-timezone');
 var CATEGORY_PREFERENCE_KEY = 'maintenance_plan_category';
 
-const DEFAULT_CATEGORY = 'unscheduled';
+const DEFAULT_CATEGORY = 'all';
 
 // tracks which plans are expanded into the edit mode
 // This handles the mode activated by the first click on a plan.
@@ -221,6 +221,10 @@ function MaintenanceCtrl(
             }
 
             $scope.shownPlansByMonth = groupedPlans;
+        } else if ($scope.category === 'all') {
+            plans = plans.filter((plan) => {
+                return plan.suggestion === null;
+            });
         } else {
             plans = sortBy(plans, 'maintenance_id');
         }
