@@ -24,10 +24,10 @@ function ActionsCtrl(
     System,
     SystemsService,
     Topic,
-    TopicService,
-    Utils) {
+    TopicService) {
 
     const params = $state.params;
+    $scope.loading = true;
     $scope.stats = {};
     $scope.show = {
         extraTopics: false
@@ -43,13 +43,13 @@ function ActionsCtrl(
 
     $scope.QuickFilters = QuickFilters;
 
-    $scope.loader = new Utils.Loader(false);
     $scope.getSelectedProduct = FilterService.getSelectedProduct;
 
-    let reload = $scope.loader.bind(function () {
+    let reload = function () {
+        $scope.loading = true;
         RhaTelemetryActionsService.reload();
 
-        return TopicService.reload(FilterService.getSelectedProduct()).then(function () {
+        TopicService.reload(FilterService.getSelectedProduct()).then(function () {
             const topics = TopicService.topics.filter(topic => {
                 return topic.ruleBinding !== 'implicit';
             });
@@ -75,9 +75,10 @@ function ActionsCtrl(
 
                 $scope.incidentCount = rulesWithHits;
                 $scope.incidentSystemCount = topic.affectedSystemCount;
+                $scope.loading = false;
             });
         });
-    });
+    };
 
     $scope.$on('filterService:doFilter', reload);
     $scope.$on('osp:deployment_changed', reload);
@@ -89,13 +90,13 @@ function ActionsCtrl(
 
     ActionsBreadcrumbs.init($stateParams);
 
-    const getData = $scope.loader.bind(function () {
+    const getData = function () {
         System.getProductSpecificData().then(function () {
             RhaTelemetryActionsService.populateData();
         });
 
-        return reload();
-    });
+        reload();
+    };
 
     if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
         $rootScope.$on('user:loaded', getData);

@@ -120,7 +120,7 @@ function ActionsRuleCtrl(
     $scope.search = {
         filters: ['system_id', 'hostname', 'display_name']
         .map(prop => function (system, query) {
-            return String(get(system, prop)).includes(query);
+            return String(get(system, prop)).toUpperCase().includes(query.toUpperCase());
         }),
 
         doFilter: function (query) {
