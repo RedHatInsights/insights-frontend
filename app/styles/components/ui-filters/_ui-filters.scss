@@ -16,7 +16,8 @@ $data-filters-background: #F9F9F9;
 // UI filter styling
 // ------------------------
 .dataFilters {
-  //@include transition(.2s);
+  position: relative;
+  z-index: 10;
   @include box-shadow(0 0 0 rgba(0,0,0,0));
 
   &.expanded { @include box-shadow(0 8px 12px rgba(0,0,0,.15)); }
