@@ -21,13 +21,20 @@
     width: 100%;
   }
 
-  a.btn, button {
+  .btn{
     @include rem('padding', $global-padding);
-    background: $blue;
     text-transform: none;
-    
-    &:hover {
-      background: darken($blue, 10);
-    }
+  }
+
+  .btn.next,
+  .btn.prev,
+  .btn.save, 
+  {
+    background: $blue;
+    &:hover { background: darken($blue, 10); }
+  }
+
+  .btn.cancel{
+    @extend .btn-open;
   }
 }

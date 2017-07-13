@@ -26,6 +26,14 @@
   background: #fff;
 }
 
+.btn.btn-open {
+  border: 1px solid $gray-border-med;
+  color: $gray-dark;
+
+  &:hover {
+    background: darken($gray-light, 10);
+  }
+}
 
 
 .btn.btn-blank {

@@ -6,18 +6,12 @@ var componentsModule = require('../../');
  * @ngInject
  */
 function expandableSystemListCtrl ($scope, gettextCatalog, InventoryService) {
-    $scope.InventoryService = InventoryService;
+    $scope.toggle = function () {
+        $scope.limit = ($scope.limit) ? undefined : 3;
+    };
 
-    if (!$scope.label) {
-        $scope.label = gettextCatalog.getPlural(
-            $scope.systems.length,
-            '1 System',
-            '{{count}} Systems',
-            {
-                count: $scope.systems.length
-            }
-        );
-    }
+    $scope.toggle();
+    $scope.InventoryService = InventoryService;
 }
 
 function expandableSystemList () {
@@ -28,8 +22,7 @@ function expandableSystemList () {
         controller: expandableSystemListCtrl,
         replace: true,
         scope: {
-            systems: '<',
-            label: '@?'
+            systems: '<'
         }
     };
 }

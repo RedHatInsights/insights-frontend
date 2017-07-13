@@ -48,9 +48,11 @@
                     id='resolution-type-{{$index}}',
                     ng-value='resolution.resolution_type')
               | {{resolution.description}}
-              i.fa.fa-power-off.red.inline-left(
+              br
+              i.fa.fa-repeat.red.inline-left(
                 ng-if='resolution.needs_reboot',
                 tooltip = "{{'This resolution requires a system reboot' | translate}}")
+              strong.red(ng-if='resolution.needs_reboot') &nbsp;Reboot Required
 
   .row
     .col-sm-12
@@ -71,8 +73,8 @@
 .modal-footer
   ul.row.pager.pager-steps
     li.previous.col-sm-6
-      a.btn.btn-accent(ng-click='cancel()')
+      a.btn.cancel(ng-click='cancel()')
         span(translate, ng-if='params.steps') Skip and use defaults
         span(translate, ng-if='!params.steps') Cancel
     li.next.col-sm-6
-      a.btn.btn-accent(ng-click='save()', translate) Save
+      a.btn.save(ng-click='save()', translate) Save
