@@ -14,8 +14,11 @@ function ansibleIconCtrl($scope, gettextCatalog) {
 
     $scope.$watch('value', function (value) {
         if (value) {
-            $scope.icon = 'static/images/l_ansible-blue.svg';
-
+            if ($scope.white) {
+                $scope.icon = 'static/images/l_ansible-white.svg';
+            } else {
+                $scope.icon = 'static/images/l_ansible-blue.svg';
+            }
         } else {
             $scope.icon = 'static/images/l_ansible-unsupported.svg';
         }
@@ -31,6 +34,8 @@ function ansibleIconCtrl($scope, gettextCatalog) {
             }
         }
     });
+
+    $scope.svgClass = ($scope.white) ? 'ansible-icon-white' : 'ansible-icon';
 }
 
 function ansibleIcon() {
@@ -38,7 +43,8 @@ function ansibleIcon() {
         scope: {
             value: '=',
             showTooltip: '=',
-            showPlannerLine: '='
+            showPlannerLine: '=',
+            white: '<'
         },
         templateUrl: 'js/components/ansibleIcon/ansibleIcon.html',
         restrict: 'E',

@@ -1,5 +1,8 @@
 span
-  a(ng-click='expanded = !expanded') {{label}}
-  ul(ng-if='expanded')
-    li(ng-repeat="system in systems | orderBy: 'toString' track by system.system_id")
-      a(ng-click='InventoryService.showSystemModal(system, true)') {{system.toString}}
+  ul
+    li(ng-repeat="system in systems | orderBy: 'toString' | limitTo:limit track by system.system_id")
+      a(href='#', ng-click='InventoryService.showSystemModal(system, true)') {{system.toString}}
+  div(ng-if='limit && systems.length > limit')
+    a(href='#', ng-click='toggle()', translate) + {{systems.length - limit}} more
+  div(ng-if='!limit')
+      a(href='#', ng-click='toggle()', translate) Hide

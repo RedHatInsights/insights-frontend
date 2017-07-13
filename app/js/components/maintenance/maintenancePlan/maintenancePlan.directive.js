@@ -355,35 +355,15 @@ function maintenancePlanCtrl(
             .then($scope.prepareAnsibleTab);
     };
 
-    $scope.rebootModal = function () {
-        return sweetAlert({
-            title: gettextCatalog.getString('Configure System Reboot'),
-            text: gettextCatalog.getString(
-                'Some of the automated resolutions in this plan require system reboot ' +
-                'in order for the changes to take effect. You can either let the ' +
-                'Ansible Playbook reboot the systems automatically or you can reboot ' +
-                'them yourself at your convenience.'),
-            type: undefined,
-            input: 'radio',
-            inputValue: String($scope.plan.allow_reboot === true),
-            inputOptions: {
-                true: gettextCatalog.getString('Reboot systems automatically'),
-                false: gettextCatalog.getString('Do not reboot systems')
-            },
-            confirmButtonText: gettextCatalog.getString('Save')
-        }).then(function (allow_reboot) {
-            allow_reboot = (allow_reboot === 'true');
-
-            return Maintenance.updatePlan($scope.plan.maintenance_id, { allow_reboot })
-            .then(function () {
-                $scope.plan.allow_reboot = allow_reboot;
-            });
-        });
-    };
-
     $scope.addActions = function () {
         return MaintenanceService.showMaintenanceModal(null, null, $scope.plan)
             .then($scope.prepareAnsibleTab);
+    };
+
+    $scope.allowRebootChanged = function () {
+        return Maintenance.updatePlan($scope.plan.maintenance_id, {
+            allow_reboot: $scope.plan.allow_reboot
+        });
     };
 
     function deleteHandler (event) {

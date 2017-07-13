@@ -20,6 +20,7 @@ $define-fa: true !default;
 @import 'elements/shapes';
 @import 'elements/section';
 @import 'elements/forms';
+@import 'elements/tabs';
 
 
 // Include CSS from bower components
@@ -46,6 +47,11 @@ $define-fa: true !default;
 // Icon fonts
 //==================================================================*/
 @import 'icons/icons-insights';
+
+
+// Utilities
+//==================================================================*/
+@import 'components/utilities/toggle-slider';
 
 
 // Page Templates
@@ -156,6 +162,7 @@ $define-fa: true !default;
 // Data visualization
 //==================================================================*/
 @import 'components/data-visualization/count-comparison';
+
 
 
 // UI Filters
