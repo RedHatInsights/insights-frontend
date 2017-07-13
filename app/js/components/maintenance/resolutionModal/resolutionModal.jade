@@ -56,12 +56,21 @@
         strong(translate) Playbook Settings&nbsp;
         | tab
 
+  .row(ng-if='params.steps > 1')
+    .col-sm-12
+        ul.pagination.pagination-dots
+          li(ng-repeat='i in range(params.index) track by $index')
+            a.sr-only
+          li.active
+            a.sr-only
+          li(ng-repeat='i in range(params.steps - params.index - 1) track by $index')
+            a.sr-only
+
 .modal-footer
   ul.row.pager.pager-steps
     li.previous.col-sm-6
       a.btn.btn-accent(ng-click='cancel()')
-        span(translate, ng-if='params.steps === 1') Use defaults
-        span(translate, ng-if='params.steps > 1') Use defaults for {{params.steps}} rules
+        span(translate, ng-if='params.steps') Skip and use defaults
         span(translate, ng-if='!params.steps') Cancel
     li.next.col-sm-6
       a.btn.btn-accent(ng-click='save()', translate) Save
