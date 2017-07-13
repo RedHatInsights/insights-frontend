@@ -8,7 +8,6 @@ const fs = require('fs');
 const sourcemaps = require('gulp-sourcemaps');
 const streamify = require('gulp-streamify');
 const uglify = require('gulp-uglify');
-const ngAnnotate = require('browserify-ngannotate');
 const bro = require('gulp-bro');
 const buffer = require('vinyl-buffer');
 const browserSync = require('browser-sync');
@@ -35,14 +34,14 @@ gulp.task('bro', function () {
                 prelude: fs.readFileSync(preludePath, 'utf8'),
                 preludePath: preludePath,
                 plugin: [banify(config.bannedPackages)],
-                transform: [ ngAnnotate, 'brfs',
-                    'bulkify', envify({ _: 'purge', NODE_ENV: env })]
+                transform: [ 'brfs', 'bulkify', envify({ _: 'purge', NODE_ENV: env })]
             }))
            .pipe(gulpif(createSourcemap, buffer()))
            .pipe(gulpif(createSourcemap, sourcemaps.init({ loadMaps: true })))
            .pipe(gulpif(global.isProd, babel({
                 presets: ['es2015-without-strict'],
-                compact: true
+                compact: true,
+                plugins: ['angularjs-annotate']
             }).on('error', function (e) {
                 console.log('babel error');
                 console.log(e);
