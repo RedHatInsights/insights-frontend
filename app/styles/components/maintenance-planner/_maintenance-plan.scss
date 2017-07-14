@@ -4,6 +4,7 @@ $maintenance-plan-padding: 20px;
 $maintenance-plan-spacing: 20px;
 $maintenance-button-bg: #0095DB;
 $expand-bar-bg: #f2f5f7;
+$maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 .maintenance-page-select {
   input.ui-select-search,
@@ -453,109 +454,6 @@ $expand-bar-bg: #f2f5f7;
 			th.nopad, td.nopad {
 				padding-left: 0;
 				padding-right: 0;
-			}
-		}
-	}
-
-	.content-tabs {
-		padding: 0;
-		display: none;
-
-		&.active {
-			display: block;
-		}
-
-		.content-block { margin: 0;  }
-		.content-block, .add-actions + .content-block { @include rem('margin-top', $global-margin); }
-
-		.nav {
-			padding: 0;
-			background: #f2f5f7;
-
-			> li {
-				width: 1%;
-				display: table-cell;
-				background: #f2f5f7;
-				//border-bottom: 1px solid $maintenance-plan-border-color;
-				border: none;
-				border-left: none;
-				border-bottom: none;
-				border-right: 1px solid #dedede;
-
-				&:not(.active) {
-					background: #fafafa;
-					//border-left: 1px solid #dedede;
-					border-bottom: 1px solid #dedede;
-
-					a { color: #B7B7B7; }
-				}
-
-				&.active a:hover { cursor: default; }
-				&:last-child {
-					border-right: none;
-				}
-
-				&:not(.active):hover {
-					background: #fff;
-					//border-bottom: none;
-
-					a {
-						color: #646464;
-					}
-				}
-
-				//@include media-query(sm) { border-left: 1px solid $maintenance-plan-border-color; }
-
-				&.active {
-					background: #fff;
-					//border-bottom-color: #fff;
-				}
-
-				&:first-child { border-left: none; }
-
-				a {
-					background: none;
-					color: $gray-dark;
-					font-weight: 700;
-					//border-bottom-color: #fff;
-					@include rem('padding', 10px 0 10px $maintenance-plan-padding);
-					text-align: left;
-
-					@include media-query(sm) {
-						text-align: center;
-						@include rem('padding', 12px 0);
-					}
-
-					@include media-query(md) {
-						@include rem('padding', 10px 0 10px $maintenance-plan-padding);
-						text-align: left;
-					}
-
-					&:hover { background: none; }
-				}
-			}
-		}
-
-
-		.tab-content {
-			@include rem('padding', $maintenance-plan-padding);
-			background: #fff;
-
-			.tab-pane {
-				@include clearfix;
-				padding: 0;
-			}
-		}
-
-		table {
-			a {
-				text-decoration: underline;
-				position: relative;
-			}
-			tr {
-				td {
-
-				}
 			}
 		}
 	}
