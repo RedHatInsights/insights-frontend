@@ -250,6 +250,7 @@ function MaintenanceService(
             service.plans.overdue = [];
             service.plans.unscheduled = [];
             service.plans.suggested = [];
+            service.plans.notSuggested = [];
             service.plans.all.forEach(function (plan) {
                 // filter out hidden plans
                 // TODO: this is what backend is supposed to do
@@ -270,8 +271,11 @@ function MaintenanceService(
                             service.plans.overdue.push(plan);
                         }
                     }
+
+                    service.plans.notSuggested.push(plan);
                 } else {
                     service.plans.unscheduled.push(plan);
+                    service.plans.notSuggested.push(plan);
                 }
             });
 

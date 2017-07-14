@@ -116,10 +116,10 @@ describe('MaintenanceController', function () {
         });
     });
 
-    it('opens "unscheduled" category by default', function () {
+    it('opens "all" category by default', function () {
         initCtrl();
         scope.$digest();
-        scope.category.should.equal('unscheduled');
+        scope.category.should.equal('all');
     });
 
     it('switches to different category', function () {

@@ -17,7 +17,7 @@ function maintenanceCategorySelectCtrl($rootScope,
     $scope.plans = MaintenanceService.plans;
 
     $scope.options = [{
-        id: 'all',
+        id: 'notSuggested',
         label: gettextCatalog.getString('All'),
         tag: null
     }, {
@@ -40,6 +40,7 @@ function maintenanceCategorySelectCtrl($rootScope,
 
     $scope.select = function (option) {
         $scope.onSelect({category: option.id});
+        $scope.selected = option;
         $rootScope.$broadcast(Events.filters.tag,
                              getTag(option),
                              Events.filters.maintenanceCategorySelect);
