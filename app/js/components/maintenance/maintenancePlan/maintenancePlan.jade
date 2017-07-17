@@ -152,7 +152,7 @@
 
           // Actions Tab
           tab(role="tabpanel", heading="{{'Actions' | translate}}", deselect='addRule.reset()', select='tabSelected()')
-            .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', '-actions.length', 'rule_id'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
+            .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', 'rule_id', '-actions.length'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
               .header.bordered(ng-init='tableEdit = false')
                 .title
                   ansible-icon.inline-right(value='rule.ansible', show-planner-line='false')
