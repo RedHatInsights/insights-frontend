@@ -119,7 +119,7 @@ describe('MaintenanceController', function () {
     it('opens "all" category by default', function () {
         initCtrl();
         scope.$digest();
-        scope.category.should.equal('all');
+        scope.category.should.equal('notSuggested');
     });
 
     it('switches to different category', function () {

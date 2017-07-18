@@ -196,7 +196,9 @@ function MaintenanceCtrl(
         });
     });
 
-    $scope.scrollToPlan = function (id) {
+    $scope.scrollToPlan = function (id, cat) {
+        let category = cat || MaintenanceService.plans.findCategory(id);
+        $scope.setCategory(category);
         $scope.edit.activate(id);
         PermalinkService.scroll('maintenance-plan-' + id);
     };
@@ -219,7 +221,7 @@ function MaintenanceCtrl(
             }
 
             $scope.shownPlansByMonth = groupedPlans;
-        } else if (category !== 'notSuggested') {
+        } else {
             plans = sortBy(plans, 'maintenance_id');
         }
 

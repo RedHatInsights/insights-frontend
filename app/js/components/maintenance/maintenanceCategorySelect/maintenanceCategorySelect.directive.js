@@ -12,7 +12,7 @@ function maintenanceCategorySelectCtrl($rootScope,
                                        Events,
                                        MaintenanceService) {
 
-    let ogCategory = $scope.category;
+    const defaultCategory = 'notSuggested';
 
     $scope.plans = MaintenanceService.plans;
 
@@ -39,33 +39,36 @@ function maintenanceCategorySelectCtrl($rootScope,
     }];
 
     $scope.select = function (option) {
-        $scope.onSelect({category: option.id});
         $scope.selected = option;
+        $scope.onSelect({category: option.id});
         $rootScope.$broadcast(Events.filters.tag,
                              getTag(option),
                              Events.filters.maintenanceCategorySelect);
     };
 
     function getTag (option) {
-        return find($scope.options, {id: option.id}).tag;
+        return option.tag;
     }
 
     $scope.$watch('category', function (category) {
-        $scope.select(find($scope.options, {id: category}));
+        $scope.selected = (find($scope.options, {id: category}));
+        $rootScope.$broadcast(Events.filters.tag,
+                             getTag($scope.selected),
+                             Events.filters.maintenanceCategorySelect);
     });
 
     $scope.$on(Events.filters.reset, function () {
-        $scope.select(find($scope.options, {id: ogCategory}));
+        $scope.select(find($scope.options, {id: defaultCategory}));
     });
 
     $scope.$on(Events.filters.removeTag, function (event, filter) {
         if (filter === Events.filters.maintenanceCategorySelect) {
-            $scope.select(find($scope.options, {id: ogCategory}));
+            $scope.select(find($scope.options, {id: defaultCategory}));
         }
     });
 
     $rootScope.$broadcast(Events.filters.tag,
-                          getTag({id: ogCategory}),
+                          getTag({id: defaultCategory}),
                           Events.filters.maintenanceCategorySelect);
 }
 
