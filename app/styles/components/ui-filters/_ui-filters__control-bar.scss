@@ -9,33 +9,35 @@
   // toggle button styling
   .toggle {
     position: relative;
-    width: 42px;
-    height: 42px;
+    //width: 42px;
+    //height: 42px;
     display: inline-block;
+    @include rem('padding', 4px 6px);
     @include rem('margin-top', -20px);
     text-align: center;
     background: rgba(255,255,255,.9);
-    @include box-shadow(0 0 0 8px rgba(0,0,0,.1));
-    @include border-radius(50%);
+    @include box-shadow(0 0 0 4px rgba(0,0,0,.1));
+    @include border-radius(4px);
     border: none;
+    line-height: 1;
     //@include transition(.2s);
 
     // button hover styling
     &:hover {
-      @include box-shadow(0 0 0 12px rgba(0,0,0,.1));
+      @include box-shadow(0 0 0 8px rgba(0,0,0,.1));
       cursor: pointer;
     }
 
     // Icon styling
     i {
-      position: absolute;
-      left: 30%;
-      @include font-size(20px);
-      line-height: 2;
+      //position: absolute;
+      //left: 30%;
+      //@include font-size(20px);
+      //line-height: 2;
     }
 
     i.fa.fa-filter {
-      left: 32%;
+      //left: 32%;
       @include opacity(1);
       color: $blue;
     }
