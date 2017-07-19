@@ -30,7 +30,8 @@ function MaintenanceService(
     DataUtils,
     TopbarAlertsService,
     $state,
-    gettextCatalog) {
+    gettextCatalog,
+    Events) {
 
     var service = {};
     var plansDfd = false;
@@ -384,11 +385,11 @@ function MaintenanceService(
         return plan.name;
     };
 
-    $rootScope.$on('maintenance:planChanged', function () {
+    $rootScope.$on(Events.planner.planChanged, function () {
         service.plans.process();
     });
 
-    $rootScope.$on('maintenance:planDeleted', function (event, id) {
+    $rootScope.$on(Events.planner.planDeleted, function (event, id) {
         service.plans.remove(id);
     });
 

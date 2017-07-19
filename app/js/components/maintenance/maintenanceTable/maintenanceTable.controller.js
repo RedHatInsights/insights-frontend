@@ -15,7 +15,8 @@ function MaintenanceTable(
     Utils,
     MaintenanceService,
     sweetAlert,
-    gettextCatalog) {
+    gettextCatalog,
+    Events) {
 
     var ctrl = this;
 
@@ -77,7 +78,7 @@ function MaintenanceTable(
         evalActions();
     }
 
-    $scope.$on('maintenance:reload-table', reload);
+    $scope.$on(Events.planner.reloadTable, reload);
     $scope.$watchGroup(['item', 'edit'], reload);
 
     /*

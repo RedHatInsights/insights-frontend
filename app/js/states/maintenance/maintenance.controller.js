@@ -69,92 +69,6 @@ EditToggleHandler.prototype.transition = function (id) {
     });
 };
 
-//This handles the "basic" edit mode of a plan. Activated by clicking the hidden
-//'Click to edit this plan' button next to the plan name.
-function BasicEditHandler(plan, Maintenance, Utils, cb) {
-    this.active = false;
-    this.plan = plan;
-    this.Maintenance = Maintenance;
-    this.Utils = Utils;
-    this.cb = cb;
-}
-
-BasicEditHandler.prototype.init = function () {
-    if (this.plan) {
-        this.name = this.plan.name;
-        this.description = this.plan.description;
-        if (this.plan.start) {
-            this.start = moment(this.plan.start);
-            let d = this.start;
-
-            // we need to convert to Date (which possibly uses a different timezone)
-            // so that we can bind the input to it
-            this.time = new Date(d.year(), d.month(), d.day(), d.hour(), d.minute());
-            this.duration = Math.round((this.plan.end - this.plan.start) / (60 * 1000));
-        } else {
-            this.start = null;
-            this.time = null;
-            this.duration = null;
-        }
-    } else {
-        this.name = '';
-        this.description = '';
-        this.start = moment().startOf('day');
-        this.dateChanged(this.start);
-    }
-};
-
-BasicEditHandler.prototype.dateChanged = function (value) {
-    if (value && !this.time) {
-        this.time =
-            new Date(
-                this.start.year(),
-                this.start.month(),
-                this.start.day(),
-                22, 0);
-        this.duration = 60;
-        this.sync();
-    }
-};
-
-BasicEditHandler.prototype.sync = function () {
-    if (this.start && this.time) {
-        this.start.hours(this.time.getHours());
-        this.start.minutes(this.time.getMinutes());
-    }
-};
-
-BasicEditHandler.prototype.toggle = function () {
-    if (!this.active) {
-        this.init();
-    }
-
-    this.active = !this.active;
-};
-
-BasicEditHandler.prototype.getStart = function () {
-    if (this.start) {
-        return this.start.clone().toDate();
-    }
-
-    return null;
-};
-
-BasicEditHandler.prototype.getEnd = function () {
-    if (this.start) {
-        return this.start.clone().add(Math.max(this.duration, 1), 'm').toDate();
-    }
-
-    return null;
-};
-
-BasicEditHandler.prototype.save = function () {
-    this.sync();
-    if (this.cb) {
-        return this.cb(this.name, this.description, this.getStart(), this.getEnd(), this);
-    }
-};
-
 /**
  * @ngInject
  */
@@ -171,7 +85,6 @@ function MaintenanceCtrl(
     $rootScope,
     SystemsService) {
 
-    $scope.BasicEditHandler = BasicEditHandler;
     $scope.isDefined = angular.isDefined;
     $scope.loader = new Utils.Loader();
     $scope.MaintenanceService = MaintenanceService;
