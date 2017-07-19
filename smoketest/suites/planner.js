@@ -1,5 +1,7 @@
-/*global describe, it module, require*/
+/*global describe, it module, require, process*/
 
+const env   = process.env;
+const got   = require('got');
 const el    = require('../elements.js');
 const funcs = require('../funcs');
 
@@ -32,9 +34,26 @@ module.exports = (nightmare) => {
                     nightmare
                         .waitAndClick(el.planner.openPlan.delete)
                         .waitAndClick(el.planner.swal.yes)
-                        .then(nightmare.myDone(done))
+                        .wait(750) // seems like we just needed to wait a few ms after clicking for the XHR request to go through
+                        .then(() => {
+                            const id   = newName.match(/\(([0-9]*)\)$/)[1];
+                            const url  = `https://access.redhat.com/r/insights/v2/maintenance/${id}`;
+                            const opts = { auth: `${env.TEST_USERNAME}:${env.TEST_PASSWORD}` };
+
+                            // todo should not use the prod url here
+                            got.delete(url, opts)
+                                .then(nightmare.myDone(done, `Error: plan ${id} still exists!`))
+                                .catch((e) => {
+                                    if (e.statusCode === 404) {
+                                        // should 404, dis good pass the test
+                                        nightmare.myDone(done)();
+                                        return;
+                                    }
+                                    // if any other code fail
+                                    nightmare.myDone(done)(e);
+                                });
+                        })
                         .catch(nightmare.myDone(done));
-                        // TODO confirm delete
                 }).catch(nightmare.myDone(done));
         });
     });

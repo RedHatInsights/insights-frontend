@@ -42,6 +42,10 @@ function ResolutionModal($modalInstance,
         });
     };
 
+    $scope.range = function (num) {
+        return new Array(num);
+    };
+
     $scope.cancel = function () {
         $modalInstance.dismiss('close');
     };

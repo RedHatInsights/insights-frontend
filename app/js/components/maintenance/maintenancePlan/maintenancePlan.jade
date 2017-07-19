@@ -166,7 +166,9 @@
                       ng-if='tableEdit',
                       ng-click='removeActions(rule.actions)',
                       tooltip="{{'Remove this action' | translate}}")
-                all-severity-icons(rule='rule', ng-if='!loading')
+                .row.row-short
+                  .col-sm-12
+                    all-severity-icons(rule='rule', ng-if='!loading')
               .content.nopad.table-responsive
                 maintenance-table-systems(
                   params='tableParams(rule, true, false)',
@@ -226,7 +228,7 @@
             select='prepareAnsibleTab()')
             tab-heading
               ansible-icon.inline-right(value='ansibleSupport', showTooltip='false')
-              strong(translate) Playbook Summary
+              strong(translate) Playbook Settings
             .row
               .col-sm-12
                 .group
@@ -239,6 +241,9 @@
                   .group-content
                     ul
                       li(ng-repeat="play in plays")
+                        .pull-right(ng-if='play.ansible_resolutions.length > 1')
+                          a(ng-click='resolutionModal(play)')
+                            i.fa.fa-cogs(tooltip='{{"Multiple resolutions available. Click here to select a different one." | translate}}')
                         i.fa.category-icon.inline-right(ng-class="play.rule.category.toLowerCase()")
                         b {{ play.rule.category }}
                         | &nbsp;#{'>'}&nbsp;
@@ -246,14 +251,7 @@
                           strong {{ play.rule.description }}
                         b &nbsp;/ {{ play.systemType.displayNameShort }}
                         ul
-                          li
-                            | {{ play.ansible_resolutions[0].description }}
-                            span(ng-if='play.ansible_resolutions.length > 1')
-                              | &nbsp;(
-                              a(tooltip='{{"Multiple resolutions available. Click here to select a different one." | translate}}',
-                                ng-click='resolutionModal(play)')
-                                strong(translate) Modify
-                              | )
+                          li {{ play.ansible_resolutions[0].description }}
 
       footer.footer(ng-show='edit.isActive(plan.maintenance_id)')
         a.btn.btn-sm.btn-default(ng-if='isInternal && !plan.hidden', ng-click='hidden(true)')
@@ -269,7 +267,7 @@
           i.fa.fa-close.inline-right
           span(translate) Ignore
         a.btn.btn-sm.btn-accent.pull-right(
-          ng-click='MaintenanceService.showMaintenanceModal(null, null, plan)',
+          ng-click='addActions()',
           ng-if='!isReadOnly()')
           span(translate) Add actions
         a.btn.btn-sm.btn-open-blue.action.pull-right(translate, ng-click='exportPlan(plan.maintenance_id)')

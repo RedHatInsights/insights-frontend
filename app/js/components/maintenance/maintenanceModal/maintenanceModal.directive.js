@@ -66,6 +66,7 @@ function maintenanceModalCtrl($scope,
         if (systems.length === 1) {
             systems = false;
             $scope.mode = MODES.system;
+            $scope.systemSelection = 'system';
         } else {
             $scope.mode = MODES.multi;
             $scope.systemSelection = 'preselected';
@@ -208,15 +209,20 @@ function maintenanceModalCtrl($scope,
         let update = params.update;
         params.update = function (toAdd) {
             if ($scope.selected.plan && !$scope.newPlan) {
-                return update.call(params, toAdd);
+                return MaintenanceService.promptResolutionIfNeeded(function () {
+                    return update.call(params, toAdd);
+                }, $scope.selected.plan);
+
             }
 
-            return MaintenanceService.plans.create({
-                name: $scope.newPlanAlias,
-                add: toAdd
-            }).then(function (plan) {
-                $scope.selected.plan = plan;
-                return plan;
+            return MaintenanceService.promptResolutionIfNeeded(function () {
+                return MaintenanceService.plans.create({
+                    name: $scope.newPlanAlias,
+                    add: toAdd
+                }).then(function (plan) {
+                    $scope.selected.plan = plan;
+                    return plan;
+                });
             });
         };
 
@@ -268,13 +274,17 @@ function maintenanceModalCtrl($scope,
                     add
                 };
                 if (!$scope.newPlan && $scope.selected.plan) {
-                    return MaintenanceService.plans.update(
-                        $scope.selected.plan, payload);
+                    return MaintenanceService.promptResolutionIfNeeded(function () {
+                        return MaintenanceService.plans.update(
+                            $scope.selected.plan, payload);
+                    }, $scope.selected.plan);
                 }
 
-                return MaintenanceService.plans.create(payload).then(function (plan) {
-                    $scope.selected.plan = plan;
-                    return plan;
+                return MaintenanceService.promptResolutionIfNeeded(function () {
+                    return MaintenanceService.plans.create(payload).then(function (plan) {
+                        $scope.selected.plan = plan;
+                        return plan;
+                    });
                 });
             }
         };
@@ -317,7 +327,7 @@ function maintenanceModalCtrl($scope,
     };
 
     $scope.postSave = function () {
-        $scope.close();
+        $modalInstance.close();
         $state.go('app.maintenance', {
             maintenance_id: $scope.selected.plan.maintenance_id
         });
@@ -413,7 +423,7 @@ function maintenanceModalCtrl($scope,
     };
 
     $scope.searchSystems().then(function () {
-        if ($scope.availableSystems.length) {
+        if ($scope.availableSystems.length && !$scope.selected.system) {
             $scope.selected.system =
                 sortBy($scope.availableSystems, ['toString', 'system_id'])[0];
         }

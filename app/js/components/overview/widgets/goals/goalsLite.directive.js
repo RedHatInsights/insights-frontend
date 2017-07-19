@@ -7,12 +7,13 @@ var reduce = require('lodash/reduce');
  * @ngInject
  */
 function GoalsLiteDirectiveCtrl(
+    $q,
     $scope,
     System,
     Evaluation,
     HttpHeaders,
-    $q,
-    Report) {
+    Report,
+    Stats) {
 
     var priv = {};
 
@@ -28,34 +29,24 @@ function GoalsLiteDirectiveCtrl(
     };
 
     priv.getActionsData = function () {
-        $scope.actionsLoading = true;
+        $scope.loading = true;
 
         const promises = [];
-        const securityErrorPromise = Report.headReports({
-            category: 'Security',
-            severity: 'ERROR'
-        }).then(function securityErrorPromiseHandler(response) {
-            $scope.securityErrors = response.headers(HttpHeaders.resourceCount);
-        });
+        const statsRulesPromise = Stats.getRules()
+            .then(function (stats) {
+                $scope.securityErrors = stats.data.security;
+                $scope.stabilityErrors = stats.data.stability;
+            });
 
-        promises.push(securityErrorPromise);
+        promises.push(statsRulesPromise);
 
-        const stabilityErrorPromise = Report.headReports({
-            category: 'Stability',
-            severity: 'ERROR'
-        }).then(function stabilityErrorPromiseHandler(response) {
-            $scope.stabilityErrors = response.headers(HttpHeaders.resourceCount);
-        });
-
-        promises.push(stabilityErrorPromise);
-
-        $scope.loadingSystemLimit = true;
-        const systemPromise =  System.getSystems(false).then(function (result) {
-            return result.data.total;
-        });
+        const statsSystemsPromise = Stats.getSystems()
+            .then(function (stats) {
+                return stats.data.total;
+            });
 
         const evalPromise = Evaluation.getEvaluationStatus().then(function (status) {
-            return systemPromise.then(function (systemTotal) {
+            return statsSystemsPromise.then(function (systemTotal) {
                 const currentEval = status.current;
                 $scope.systemCount = systemTotal;
                 $scope.maxFreeSystems = currentEval ? currentEval.systems : 0;
@@ -71,18 +62,15 @@ function GoalsLiteDirectiveCtrl(
                 }
 
             });
-        }).catch(function () {
-            $scope.errored = true;
-        }).finally(function () {
-            $scope.loadingSystemLimit = false;
         });
-
-        $scope.getSystemCount = function () { return systemPromise; };
 
         promises.push(evalPromise);
+
         $q.all(promises).finally(function promisesFinally() {
-            $scope.actionsLoading = false;
+            $scope.loading = false;
         });
+
+        $scope.getSystemCount = function () { return statsSystemsPromise; };
 
     };
 

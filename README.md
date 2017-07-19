@@ -11,26 +11,37 @@ Development
 2. gulp (Installed via `sudo npm install gulp -g`)
 3. bower (Installed via `sudo npm install bower -g`)
 4. bundle (Installed via `gem install bundle`)
-4. compass (Installed via `gem install compass`)
-4. sass-css-importer (Installed via `gem install --pre sass-css-importer`)
-4. breakpoint (Installed via `gem install breakpoint`)
-5. accessproxy (Installed from https://github.com/redhataccess/accessproxy)
-6. insights-frontend-assets (https://github.com/RedHatInsights/insights-frontend-assets)
+5. compass (Installed via `gem install compass`)
+6. sass-css-importer (Installed via `gem install --pre sass-css-importer`)
+7. breakpoint (Installed via `gem install breakpoint`)
+8. insights-frontend-assets (https://github.com/RedHatInsights/insights-frontend-assets)
+9. insights-proxy (https://github.com/RedHatInsights/insights-proxy) or accessproxy (https://github.com/redhataccess/accessproxy)
 
 **Getting started**
-
-1. Clone the assets repo `git clone git@gitlab.cee.redhat.com:FlipModeSquad/insights-frontend-assets.git`
-2. Symlink the insights-frontend-assets static directory to insights-frontend
-    - ln -s {path-to-insights-frontend-assets}/static/ {path-to-insights-frontend}/
-3. `npm install`
+1. Init the assets submodule
+    - `$ git submodule init && git submodule update`
+2. Install NPM dependencies
+    - `$ npm install`
     - This may print some errors on optional dependencies.  This is okay.
-4. `bower install`
-5. `bundle install`
-6. `gulp` (or `gulp dev-stable` to do work on the stable mode application)
+3. Install compass
+    - `$ bundle install`
+4. Start the development server
+    - `$ gulp`
+    - Or `$ gulp dev-stable` to do work on the stable mode application
+5. Run the Insights proxy
+    - `# docker run --net=host -e MODE=all/content -p1337:1337 -ti docker.io/iphands/insightsproxy`
+    - Or install and use the accessproxy npm cli app
 
-Once the API and `accessproxy` are both running, you can access the UI at:
+Once the node server and `insights-proxy` are both running, you can access the UI at:
 
-http://ci.foo.redhat.com:1337/insightsbeta or http://ci.foo.redhat.com:1337/insights
+- http://prod.foo.redhat.com:1337/insights
+- http://stage.foo.redhat.com:1337/insights
+- http://qa.foo.redhat.com:1337/insights
+- http://ci.foo.redhat.com:1337/insights
+- http://prod.foo.redhat.com:1337/insightsbeta
+- http://stage.foo.redhat.com:1337/insightsbeta
+- http://qa.foo.redhat.com:1337/insightsbeta
+- http://ci.foo.redhat.com:1337/insightsbeta
 
 Once loaded, you can switch to your local API instance by going to /insightsbeta/config/dev and then picking the "local" API Root preset.
 
@@ -44,6 +55,7 @@ There are 3 branches that will automatically push code out:
 
 All development branches should be prefixed with one of the following
 
+- fixes/      (for simple non feature bug fixes)
 - features/   (for normal work intended to go to master)
 - stable/     (for patches intended to go to stable)
 - test/       (misc stuff)
@@ -87,5 +99,3 @@ Make sure you submit a merge request for master first. There may be cases where 
 5. Create a [new pull request](https://github.com/ansible/insights-frontend/compare?expand=1). Use your feature branch as the source branch and `stable-X.Y` as the target branch. Assign the merge request to someone for review.
 
 When submitting a trivial change (e.g. a simple typo fix) that applies cleanly to both master and stable-X.Y branches you can skips the steps described in this section. Instead, only send a merge request against the master branch (as described in "Contributing your changes to master (/insightsbeta)" section). In addition, use merge request label "stable" on the merge request. The label indicates to the reviewer that besides a merge to the master branch, they should also cherry-pick the change to the stable-X.Y branch. Use this shortcut only for simple changes after you verified that the change applies cleanly to both branches. Otherwise, the reviewer will likely reject your merge request.
-
-

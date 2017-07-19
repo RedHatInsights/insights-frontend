@@ -10,6 +10,7 @@ const remove = require('lodash/remove');
 const some = require('lodash/some');
 const assign = require('lodash/assign');
 const pick = require('lodash/pick');
+const diffWith = require('lodash/differenceWith');
 
 /**
  * @ngInject
@@ -83,7 +84,7 @@ function MaintenanceService(
     };
 
     service.showMaintenanceModal = function (systems, rule, existingPlan) {
-        $modal.open({
+        return $modal.open({
             templateUrl: 'js/components/maintenance/' +
             'maintenanceModal/maintenanceModal.html',
             windowClass: 'maintenance-modal modal-wizard ng-animate-enabled',
@@ -102,7 +103,7 @@ function MaintenanceService(
                     return existingPlan;
                 }
             }
-        });
+        }).result;
     };
 
     function TableParams (plan, item, savedActions, loader) {
@@ -386,6 +387,79 @@ function MaintenanceService(
     $rootScope.$on('maintenance:planDeleted', function (event, id) {
         service.plans.remove(id);
     });
+
+    service.resolutionModal = function (plan, play, steps, index) {
+        index = index || 0;
+
+        const instance = $modal.open({
+            templateUrl:
+            'js/components/maintenance/resolutionModal/resolutionModal.html',
+            windowClass: 'modal-playbook modal-wizard ng-animate-enabled',
+            backdropClass: 'system-backdrop ng-animate-enabled',
+            controller: 'ResolutionModal',
+            resolve: {
+                params: function () {
+                    return {
+                        play,
+                        plan,
+                        steps,
+                        index
+                    };
+                }
+            }
+        });
+
+        return instance.result;
+    };
+
+    function getMultiResolutionRules (plan) {
+        return Maintenance.getPlayMetadata(plan.maintenance_id).then(function (res) {
+            return res.data.filter(play => play.ansible_resolutions.length > 1);
+        }).catch(function (res) {
+            if (res.status === 404) {
+
+                // the endpoint returns 404 if there are no ansible-enabled rules
+                return [];
+            }
+        });
+    }
+
+    function doPrompt (plan, toPrompt) {
+        return toPrompt.reduce(function (acc, play, index) {
+            return acc.then(function () {
+                return service.resolutionModal(plan, play, toPrompt.length, index);
+            });
+        }, $q.resolve()).catch(function () {
+            // empty catch handler that prevents the promise from being rejected
+            // if "use defaults" is clicked on resolution modal
+        });
+    }
+
+    function playComparator (one, two) {
+        return one.system_type_id === two.system_type_id &&
+            one.rule.rule_id === two.rule.rule_id;
+    }
+
+    /**
+     * Compares the list of multi-resolution plays before and after the change.
+     * The user is prompted to choose a resolution for the new ones.
+     */
+    service.promptResolutionIfNeeded = function (fn, plan) {
+        let dfd = $q.resolve([]);
+
+        if (plan) {
+            dfd = dfd.then(() => getMultiResolutionRules(plan));
+        }
+
+        return dfd.then(function (before) {
+            return fn().then(function (plan) {
+                return getMultiResolutionRules(plan).then(function (after) {
+                    const diff = diffWith(after, before, playComparator);
+                    return doPrompt(plan, diff);
+                });
+            });
+        });
+    };
 
     return service;
 }
