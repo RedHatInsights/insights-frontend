@@ -39,6 +39,9 @@ let _EVENT_ROOTS = [{
 }, {
     name: 'checkboxes',
     events: ['reset']
+}, {
+    name: 'planner',
+    events: ['planChanged', 'planDeleted', 'reloadTable']
 }];
 
 constantsModule.constant('Events', buildEvents(_EVENT_ROOTS));
