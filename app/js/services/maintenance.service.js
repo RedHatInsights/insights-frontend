@@ -235,7 +235,9 @@ function MaintenanceService(
         if (force || !plansDfd) {
             plansDfd = Maintenance.getMaintenancePlans().then(function (plans) {
                 service.plans.all = plans;
-                return service.plans.process();
+                return service.plans.process().then(function () {
+                    $rootScope.$broadcast(Events.planner.plansLoaded);
+                });
             });
         }
 

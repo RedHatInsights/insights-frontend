@@ -8,6 +8,11 @@ var isArray = require('lodash/isArray');
 var moment = require('moment-timezone');
 var map = require('lodash/map');
 const overSome = require('lodash/overSome');
+const groupBy = require('lodash/groupBy');
+const memoize = require('lodash/memoize');
+const values = require('lodash/values');
+const orderBy = require('lodash/orderBy');
+const partial = require('lodash/partial');
 
 /**
  * @ngInject
@@ -133,54 +138,55 @@ function momentFilter () {
     };
 }
 
-function searchMaintenancePlans($filter) {
-    return function (plans, searchTerm) {
-        if (!plans || !isArray(plans)) {
-            return [];
+function searchMaintenancePlans ($filter, plans, searchTerm) {
+    if (!plans || !isArray(plans)) {
+        return [];
+    }
+
+    if (!searchTerm) {
+        return plans;
+    }
+
+    function contains(string) {
+        if (string && typeof string !== 'string') {
+            string = string.toString();
         }
 
-        if (!searchTerm) {
-            return plans;
-        }
+        return string &&
+               string.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+    }
 
-        function contains(string) {
-            if (string && typeof string !== 'string') {
-                string = string.toString();
-            }
+    function matches (prop) {
+        return function (plan) {
+            return contains(plan[prop]);
+        };
+    }
 
-            return string &&
-                   string.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-        }
+    function matchesAny (array, prop) {
+        return function (plan) {
+            return map(plan[array], prop).some(contains);
+        };
+    }
 
-        function matches (prop) {
-            return function (plan) {
-                return contains(plan[prop]);
-            };
-        }
+    const predicates = [
+        matches('maintenance_id'),
+        matches('name'),
+        function (plan) {
+            return plan.name === null && contains('Unnamed plan');
+        },
 
-        function matchesAny (array, prop) {
-            return function (plan) {
-                return map(plan[array], prop).some(contains);
-            };
-        }
+        function (plan) {
+            return contains($filter('date')(plan.start, 'fullDate'));
+        },
 
-        const predicates = [
-            matches('maintenance_id'),
-            matches('name'),
-            function (plan) {
-                return contains($filter('date')(plan.start, 'fullDate'));
-            },
+        matchesAny('systems', 'hostname'),
+        matchesAny('systems', 'display_name'),
+        matchesAny('rules', 'description'),
+        matchesAny('rules', 'rule_id')
+    ];
 
-            matchesAny('systems', 'hostname'),
-            matchesAny('systems', 'display_name'),
-            matchesAny('rules', 'description'),
-            matchesAny('rules', 'rule_id')
-        ];
-
-        const someMatches = overSome(predicates);
-
-        return plans.filter(someMatches);
-    };
+    const someMatches = overSome(predicates);
+    return plans.filter(someMatches);
 }
 
 function timeAgo () {
@@ -195,6 +201,17 @@ function getSystemDisplayName (Utils) {
     };
 }
 
+function groupPlans (plans) {
+    plans.forEach(plan => plan.month = moment(plan.start).format('YYYY-MM'));
+    return orderBy(values(groupBy(plans, 'month')), ['0.month'], ['desc']);
+}
+
+function cached (fn, keyFn, $rootScope, ...events) {
+    const wrapped = memoize(fn, keyFn);
+    events.forEach(event => $rootScope.$on(event, () => wrapped.cache.clear()));
+    return wrapped;
+}
+
 componentsModule.filter('trust_html', trust_html);
 componentsModule.filter('titlecase', titlecase);
 componentsModule.filter('sortClass', sortClass);
@@ -203,7 +220,6 @@ componentsModule.filter('orderObjectBy', orderObjectBy);
 componentsModule.filter('offset', offset);
 componentsModule.filter('toWidth', toWidth);
 componentsModule.filter('checkInStyle', checkInStyle);
-componentsModule.filter('searchMaintenancePlans', searchMaintenancePlans);
 componentsModule.filter('moment', momentFilter);
 componentsModule.filter('getSystemDisplayName', getSystemDisplayName);
 componentsModule.filter('isEmpty', function () {
@@ -211,3 +227,19 @@ componentsModule.filter('isEmpty', function () {
 });
 
 componentsModule.filter('timeAgo', timeAgo);
+
+componentsModule.filter('searchMaintenancePlans', function ($filter, $rootScope, Events) {
+    return cached(
+        partial(searchMaintenancePlans, $filter),
+        (plans, searchTerm) => `${searchTerm}|${map(plans, 'maintenance_id').join(',')}`,
+        $rootScope,
+        Events.planner.plansLoaded); // flush cache when plans reloaded
+});
+
+componentsModule.filter('groupPlans', function ($rootScope, Events) {
+    return cached (
+        groupPlans,
+        plans => map(plans, plan => `${plan.maintenance_id}:${plan.start}`).join(','),
+        $rootScope,
+        Events.planner.plansLoaded); // flush cache when plans reloaded
+});
