@@ -21,15 +21,15 @@
 		@include rem('padding-bottom', $global-margin);
 		float: none;
 
-    @include media-query(sm-max) {
-      width: 100%;
-    }
-
+    @include media-query(sm-max) { width: 100%; }
 		@include media-query(xs-max) {
 			flex-basis: 100%;
 			max-width: 100%;
 		}
   }
+
+  &.stacked { [class^="col-"], div[class*=" col-"] { padding-bottom: 0; } }
+  &.flexend { [class^="col-"], div[class*=" col-"] { align-self: flex-end; } }
 
   .row.row-short {
 
