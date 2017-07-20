@@ -133,6 +133,8 @@ $maintenance-plan-border-color: #dedede;
 		@include clearfix();
 		height: auto;
 		//background: #f5f5f5;
+		//include rem('line-height', 35px);
+		vertical-align: bottom;
 
 		&.footer-short {
 			@include rem('padding', 10px 20px);
