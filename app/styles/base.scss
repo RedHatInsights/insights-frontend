@@ -63,6 +63,11 @@ $define-fa: true !default;
 @import 'scaffolding/tabs';
 
 
+// Utilities
+//==================================================================*/
+@import 'components/utilities/table-search';
+
+
 // Include Components
 //==================================================================*/
 @import 'components/actionbar';

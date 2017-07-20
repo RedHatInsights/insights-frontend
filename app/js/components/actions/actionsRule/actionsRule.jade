@@ -7,7 +7,7 @@
 
   .content-wrap(ng-hide='loading')
 
-    actions-breadcrumbs.actions-breadcrumbs.push-top-narrow(ng-hide='loading')
+    actions-breadcrumbs.actions-breadcrumbs(ng-hide='loading')
 
     section.actions-rule-details.gray
       h4(ng-if='isIncident(ruleDetails.rule_id)')

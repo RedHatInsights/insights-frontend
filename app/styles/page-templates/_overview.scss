@@ -28,29 +28,6 @@ $overview-bg-header: #fafafa;
     }
   }
 
-
-  .header {
-    @include clearfix;
-    @include rem('padding', $global-padding);
-    border-bottom: 5px solid #e9e9e9;
-    background-color: $overview-bg-header;
-
-    .page-title {
-      @include rem('margin-bottom', 20px);
-      @include media-query(sm) {
-        @include rem('margin', 20px 0 0 $global-padding);
-        // @include rem('padding-top', 20px);
-        float: left;
-      }
-    }
-
-    .wrap {
-      padding-top: .25em;
-      font-weight: bold;
-      font-size: xx-large;
-    }
-  }
-  
   .action-block {
     @include rem('margin-bottom', $global-margin);
     border: 1px solid $gray;

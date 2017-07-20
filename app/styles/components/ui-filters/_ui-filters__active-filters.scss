@@ -4,7 +4,7 @@ $dataFilter-active-filters-border-color: #d9d9d9;
 .dataFilters .active-filters {
   background: $dataFilter-active-filters-bg;
   border-top: 1px solid $dataFilter-active-filters-border-color;
-  @include rem('padding', $global-padding $global-margin);
+  @include rem('padding', 20px $global-margin);
 
   &.flexgrid { @include rem('padding', $global-padding $global-margin); }
 

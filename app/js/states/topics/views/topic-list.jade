@@ -6,17 +6,18 @@
   topic-rule-filters(ng-hide='loading')
 
   .content-wrap(ng-hide="loading")
-    actions-breadcrumbs.actions-breadcrumbs.push-top(ng-hide="loading")
+    actions-breadcrumbs.actions-breadcrumbs(ng-hide="loading")
 
     section.gray.section-topic-details
       topic-details(ng-hide='loading', topic='topic')
 
-    section
-      .row
-        .col-sm-6.col-md-8
-          search-box(search-placeholder="Filter by rule", on-search='search.doFilter(model)')
-        .col-sm-6.col-md-4.text-right-sm
-          list-type
+    section.table-search
+      .flexgrid.equalheights
+        .row
+          .col-xs-6
+            search-box(search-placeholder="Filter by rule", on-search='search.doFilter(model)')
+          .col-xs-6.text-right
+            list-type
 
     section.section-rules-group-content
       topic-rule-list(ng-if='!loading', topic='topic')

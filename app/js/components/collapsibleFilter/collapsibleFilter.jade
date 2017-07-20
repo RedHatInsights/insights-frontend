@@ -11,8 +11,8 @@
         i.fa.fa-times-circle-o(aria-hidden="true")
 
   footer#dataFiltersControlBar.data-filters-control-bar
-    .toggle(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody')
+    .toggle(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody', ng-class="{active: open}")
       .icon-inline
-        i.fa.fa-filter
-        i.fa.fa-close
+        i.fa.fa-caret-down
+        i.fa.fa-caret-down
         strong Page Filters

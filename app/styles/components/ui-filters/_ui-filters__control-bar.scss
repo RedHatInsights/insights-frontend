@@ -9,57 +9,64 @@
   // toggle button styling
   .toggle {
     position: relative;
-    //width: 42px;
-    //height: 42px;
+    top: -11px;
     display: inline-block;
-    @include rem('padding', 4px 6px);
-    @include rem('margin-top', -20px);
+    @include rem('padding', 6px 12px);
     text-align: center;
-    background: rgba(255,255,255,.9);
+    background: $blue;
+    color: #fff;
     @include box-shadow(0 0 0 4px rgba(0,0,0,.1));
-    @include border-radius(4px);
+    @include border-radius(14px);
     border: none;
     line-height: 1;
-    //@include transition(.2s);
 
     // button hover styling
-    &:hover {
-      @include box-shadow(0 0 0 8px rgba(0,0,0,.1));
+    &:hover,
+    &.active {
+      @include box-shadow(0 0 0 6px rgba(0,0,0,.1));
       cursor: pointer;
     }
 
-    // Icon styling
-    i {
-      //position: absolute;
-      //left: 30%;
-      //@include font-size(20px);
-      //line-height: 2;
-    }
-
-    i.fa.fa-filter {
-      //left: 32%;
-      @include opacity(1);
-      color: $blue;
-    }
-
-    i.fa.fa-close {
-      @include opacity(0);
+    &.active {
+      background: #a9a9a9;
       color: #fff;
+      transform: rotate(0deg);
+      @include transition(.2s);
+
+      i { transform: rotate(180deg); }
     }
+
+    .icon-inline {
+      margin: 0;
+      @include rem('padding-left', 18px);
+      @include rem('padding-right', 18px);
+
+      i + i {
+        left: auto;
+        right: 0;
+      }
+    }
+
+    //i.fa.fa-filter { @include opacity(1); }
+    //
+    //i.fa.fa-close {
+    //  @include opacity(0);
+    //  color: #fff;
+    //}
   }
 
-  .open & .toggle {
-    background: #a9a9a9;
-    color: #fff;
-
-    i.fa.fa-filter {
-      @include opacity(0);
-    }
-
-    i.fa.fa-close {
-      @include opacity(1);
-    }
-  }
+  //.open & .toggle {
+  //  background: #a9a9a9;
+  //  color: #fff;
+  //
+  //  i.fa.fa-filter {
+  //    @include opacity(0);
+  //  }
+  //
+  //  i.fa.fa-close {
+  //    @include opacity(1);
+  //  }
+  //}
 }
 
 

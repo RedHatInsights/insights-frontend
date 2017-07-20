@@ -5,14 +5,15 @@ section
       span(translate) Rules
   rule-filter
   .content-wrap
-    .section
+    section.table-search
       .row
-        .col-sm-6.col-md-8
+        .col-xs-6
           search-box(search-placeholder="Filter by rule", on-search='search.doFilter(model)')
-        .col-sm-6.col-md-4.btn-group
+        .col-xs-6.btn-group
           a.btn.btn-sm.btn-app.pull-right(ui-sref='app.admin-topic', ng-show='user.is_internal') Topics Admin
         .push-top-narrow.rules-filters(ng-hide="loading")
-      .row.row-short
+    section
+      .row
         .col-sm-12
           section(ng-show='loading')
             .spinner.spinner-lg
