@@ -21,38 +21,16 @@
       p(ng-bind-html='ruleDetails.generic_html | trust_html')
       all-severity-icons(rule='ruleDetails', ng-if='!loading')
 
-    section
+    section.table-search
       .row
-        .col-sm-6.col-md-8
+        .col-xs-6
           search-box(on-search='search.doFilter(model)', placeholder='Find a system')
-        .col-sm-6.col-md-4.text-right-sm
-            list-type(ng-hide='hideListSwitch')
-      .row
-        .col-sm-12.text-center-sm
-          h3(translate, ng-if='ruleDetails.type !== "osp"') {{allSystems.length}} Impacted Systems
-          h3(translate, ng-if='ruleDetails.type === "osp"') Impacted Deployments
 
     div(infinite-scroll='doScroll()', infinite-scroll-disabled='disableScroll()', infinite-scroll-immediate-check='false')
 
-      .card-table-header(ng-show='getListType() === listTypes.card')
-        .row
-          .col-sm-4
-            input.action-checkbox(
-              tooltip='Select All',
-              type='checkbox',
-              ng-indeterminate='checkboxes.indeterminate',
-              ng-model='checkboxes.checked',
-              ng-change='checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
-            label(translate, ng-click="sort('system_type_id')") &nbsp; Type
-          .col-sm-4
-            strong(translate, ng-click="sort('toString')") Name &nbsp;
-            span(ng-if='checkboxes.totalChecked') &nbsp;({{checkboxes.totalChecked}} Selected)
-          .col-sm-4.text-right
-            strong(translate, ng-click="sort('report_count')") Action Count
-
       // Show Create Playbook, Add to Plan if at least one system has been selected
       .row.row-short
-        .col-sm-3.col-lg-2
+        .col-xs-4.col-sm-2
           .dropdown
             button.btn.btn-default.dropdown-toggle(
               data-toggle='dropdown',
@@ -74,14 +52,34 @@
                   ansible-icon.inline-left(
                     value='plans.future.length || plans.unscheduled.length',
                     show-tooltip='false')
+        .col-xs-8.col-sm-8.text-center
+          h3(translate, ng-if='ruleDetails.type !== "osp"') {{allSystems.length}} Impacted Systems
+          h3(translate, ng-if='ruleDetails.type === "osp"') Impacted Deployments
+        .col-xs-4.col-sm-2.hidden-xs.text-right
+          list-type(ng-hide='hideListSwitch')
 
-      .row.row-short
+      .card-table-header(ng-show='getListType() === listTypes.card')
+        .row
+          .col-sm-4
+            input.action-checkbox(
+            tooltip='Select All',
+            type='checkbox',
+            ng-indeterminate='checkboxes.indeterminate',
+            ng-model='checkboxes.checked',
+            ng-change='checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
+            label(translate, ng-click="sort('system_type_id')") &nbsp; Type
+          .col-sm-4
+            strong(translate, ng-click="sort('toString')") Name &nbsp;
+            span(ng-if='checkboxes.totalChecked') &nbsp;({{checkboxes.totalChecked}} Selected)
+          .col-sm-4.text-right
+            strong(translate, ng-click="sort('report_count')") Action Count
+            
+      .row.row-short(ng-show='getListType() === listTypes.card')
         .col-sm-12
           system-card(ng-repeat='system in ruleSystems',
             system='system',
             rule='ruleDetails',
-            checkboxes='checkboxes',
-            ng-show='getListType() === listTypes.card')
+            checkboxes='checkboxes')
 
       .row.row-short(ng-show='getListType() === listTypes.table')
           .col-sm-12
