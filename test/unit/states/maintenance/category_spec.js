@@ -119,7 +119,7 @@ describe('MaintenanceController', function () {
     it('opens "all" category by default', function () {
         initCtrl();
         scope.$digest();
-        scope.category.should.equal('notSuggested');
+        scope.category.should.equal('all');
     });
 
     it('switches to different category', function () {
@@ -130,50 +130,6 @@ describe('MaintenanceController', function () {
         scope.category.should.equal('future');
 
         scope.setCategory('past');
-        scope.$digest();
-        scope.category.should.equal('past');
-    });
-
-    it('switches to "suggested" on new suggestion creation', function (done) {
-        initCtrl();
-        scope.setCategory('future');
-        scope.$digest();
-        scope.category.should.equal('future');
-
-        // mock
-        api.createPlan = mockAsPromised({
-            data: {
-                id: 346
-            }
-        });
-        api.getMaintenancePlan = mockAsPromised({
-            data: {
-                maintenance_id: 346,
-                suggestion: 'proposed'
-            }
-        });
-
-        scope.newSuggestion().then(function () {
-            scope.category.should.equal('suggested');
-            done();
-        });
-
-        scope.$digest();
-    });
-
-    it('opens "past" if a state param for a specific plan is set', function () {
-        api.getMaintenancePlans = mockAsPromised([
-            {
-                maintenance_id: 1,
-                suggestion: 'proposed'
-            }, {
-                maintenance_id: 2,
-                end: new Date(2010, 1, 1)
-            }
-        ]);
-        params.maintenance_id = 2;
-
-        initCtrl();
         scope.$digest();
         scope.category.should.equal('past');
     });

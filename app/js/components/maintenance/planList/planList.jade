@@ -1,0 +1,16 @@
+.plans
+  .row(ng-if='!group')
+    maintenance-plan(ng-repeat='plan in plans | orderBy:"-maintenance_id" | limitTo:pager.perPage:pager.offset track by plan.maintenance_id')
+  .row(
+    ng-if='group',
+    ng-repeat='month in (plans | orderBy:["-start","-maintenance_id"] | limitTo:pager.perPage:pager.offset | groupPlans)')
+    .col-sm-12
+      h3 {{month[0].start | moment:'MMMM YYYY'}}
+    maintenance-plan(ng-repeat='plan in month | orderBy:"-start" track by plan.maintenance_id')
+  .row.row-short
+    pagination.pull-right.pagination-blue(
+      ng-if="plans.length > pager.perPage",
+      total-items="plans.length",
+      ng-model="pager.currentPage",
+      items-per-page="pager.perPage",
+      ng-change="pager.update()")

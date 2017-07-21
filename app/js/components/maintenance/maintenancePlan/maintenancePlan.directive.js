@@ -248,7 +248,6 @@ function maintenancePlanCtrl(
 
         Maintenance.downloadPlaybook($scope.plan.maintenance_id)
         .then(function (response) {
-            $scope.scrollToPlan($scope.plan.maintenance_id);
             if (response.status === 200) {
                 const disposition = response.headers('content-disposition');
                 const filename = parseHeader(disposition).filename.replace(/"/g, '');
@@ -532,8 +531,11 @@ function maintenancePlan($document) {
                     return;
                 }
 
-                if ((active && !planHit && bodyHit) || (!active && planHit)) {
-                    scope.edit.toggle(scope.plan.maintenance_id);
+                if (!active && planHit) {
+                    scope.edit.activate(scope.plan.maintenance_id);
+                } else if (bodyHit && !isContainedBy($event, 'plan-wrap') &&
+                    Object.keys(scope.edit.items).length) {
+                    scope.edit.reset();
                 }
             }
 

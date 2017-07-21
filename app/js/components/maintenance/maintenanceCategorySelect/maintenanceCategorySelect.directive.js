@@ -12,12 +12,12 @@ function maintenanceCategorySelectCtrl($rootScope,
                                        Events,
                                        MaintenanceService) {
 
-    const defaultCategory = 'notSuggested';
+    const defaultCategory = 'all';
 
     $scope.plans = MaintenanceService.plans;
 
     $scope.options = [{
-        id: 'notSuggested',
+        id: 'all',
         label: gettextCatalog.getString('All'),
         tag: null
     }, {
