@@ -7,7 +7,7 @@ var values = require('lodash/values');
 var moment = require('moment-timezone');
 var CATEGORY_PREFERENCE_KEY = 'maintenance_plan_category';
 
-const DEFAULT_CATEGORY = 'notSuggested';
+const DEFAULT_CATEGORY = 'all';
 
 // tracks which plans are expanded into the edit mode
 // This handles the mode activated by the first click on a plan.
@@ -74,6 +74,7 @@ EditToggleHandler.prototype.transition = function (id) {
  */
 function MaintenanceCtrl(
     $scope,
+    $timeout,
     Maintenance,
     Utils,
     $stateParams,
@@ -83,7 +84,8 @@ function MaintenanceCtrl(
     PermalinkService,
     $state,
     $rootScope,
-    SystemsService) {
+    SystemsService,
+    Events) {
 
     $scope.isDefined = angular.isDefined;
     $scope.loader = new Utils.Loader();
@@ -114,11 +116,16 @@ function MaintenanceCtrl(
         });
     });
 
-    $scope.scrollToPlan = function (id, cat) {
-        let category = cat || MaintenanceService.plans.findCategory(id);
-        $scope.setCategory(category);
-        $scope.edit.activate(id);
-        PermalinkService.scroll('maintenance-plan-' + id);
+    $scope.scrollToPlan = function (id) {
+        if ($scope.category !== 'all') {
+            $scope.setCategory('all');
+        }
+
+        $timeout(function () {
+            $scope.edit.activate(id);
+            $rootScope.$broadcast(Events.planner.openPlan, id);
+            PermalinkService.scroll('maintenance-plan-' + id, 50);
+        });
     };
 
     $scope.redrawPlans = function () {

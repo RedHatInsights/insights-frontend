@@ -32,17 +32,21 @@
             span(translate) Loading plans…
       .rha-notifications
       div(ng-if='!loading')
-        .row(ng-if="!shownPlans.length")
+        .row(ng-if="!plans[category].length")
           .text-center
             h4(translate) No plans
-        .row(ng-if="category === 'future' || category === 'past'", ng-repeat="plansPerMonth in shownPlansByMonth")
-          .col-sm-12
-            h3 {{plansPerMonth[0].start | moment:'MMMM YYYY'}}
-          maintenance-plan(
-            ng-repeat="plan in plansPerMonth | searchMaintenancePlans: searchTerm track by plan.maintenance_id")
-        .row(ng-if="category === 'unscheduled' || category === 'suggested'")
-          maintenance-plan(
-            ng-repeat="plan in shownPlans | searchMaintenancePlans: searchTerm | orderBy:'-maintenance_id' track by plan.maintenance_id")
-        .row(ng-if="category === 'notSuggested'")
-          maintenance-plan(
-            ng-repeat="plan in shownPlans | searchMaintenancePlans: searchTerm | orderBy:['suggestion !== null', '-start', '-maintenance_id'] track by plan.maintenance_id")
+
+        plan-list(ng-if="category === 'unscheduled'", plans='plans.unscheduled | searchMaintenancePlans: searchTerm', page-size='8')
+        plan-list(ng-if="category === 'suggested'", plans='plans.suggested | searchMaintenancePlans: searchTerm', page-size='8')
+        plan-list(ng-if="category === 'past'", plans='plans.past | searchMaintenancePlans: searchTerm', group='true', page-size='6')
+        plan-list(ng-if="category === 'future'", plans='plans.future | searchMaintenancePlans: searchTerm', group='true', page-size='6')
+
+        span(ng-if="category === 'all'")
+          h2(translate, ng-if='plans.suggested.length') Suggested Plans
+          plan-list(plans='plans.suggested | searchMaintenancePlans: searchTerm', page-size='2')
+
+          h2(translate, ng-if='plans.unscheduled.length') Plans
+          plan-list(plans='plans.unscheduled | searchMaintenancePlans: searchTerm', page-size='6')
+
+          h2(translate, ng-if='plans.scheduled.length') Scheduled Plans
+          plan-list(plans='plans.scheduled | searchMaintenancePlans: searchTerm', group='true', page-size='4')

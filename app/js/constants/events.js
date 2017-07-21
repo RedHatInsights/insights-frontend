@@ -41,7 +41,7 @@ let _EVENT_ROOTS = [{
     events: ['reset']
 }, {
     name: 'planner',
-    events: ['planChanged', 'planDeleted', 'reloadTable', 'plansLoaded']
+    events: ['planChanged', 'planDeleted', 'reloadTable', 'plansLoaded', 'openPlan']
 }];
 
 constantsModule.constant('Events', buildEvents(_EVENT_ROOTS));
