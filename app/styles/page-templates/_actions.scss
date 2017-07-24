@@ -54,8 +54,8 @@ aside.content-block {
 }
 
 section.metrics {
-  @include rem('padding-top', $global-margin);
   @include rem('margin-bottom', $global-margin);
+  padding-top: 0;
 }
 
 section.action-categories {

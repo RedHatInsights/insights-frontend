@@ -6,23 +6,26 @@ const find = require('lodash/find');
 /**
  * @ngInject
  */
-function checkInSelectCtrl($scope, gettextCatalog, Events, FilterService) {
+function checkInSelectCtrl($rootScope, $scope, gettextCatalog, Events, FilterService) {
     $scope.options = [
         {
             id: 'all',
             label: gettextCatalog.getString('All'),
             online: true,
-            offline: true
+            offline: true,
+            tag: null
         }, {
             id: 'online',
             label: gettextCatalog.getString('Checking In'),
             online: true,
-            offline: false
+            offline: false,
+            tag: gettextCatalog.getString('Status: Checking In')
         }, {
             id: 'offline',
             label: gettextCatalog.getString('Stale'),
             online: false,
-            offline: true
+            offline: true,
+            tag: gettextCatalog.getString('Status: Stale')
         }
     ];
 
@@ -31,7 +34,12 @@ function checkInSelectCtrl($scope, gettextCatalog, Events, FilterService) {
         FilterService.setOnline(option.online);
         FilterService.setOffline(option.offline);
         FilterService.doFilter();
+        $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.checkInSelect);
     };
+
+    function getTag () {
+        return $scope.selected.tag;
+    }
 
     function read() {
         $scope.selected = find($scope.options, {
@@ -42,6 +50,8 @@ function checkInSelectCtrl($scope, gettextCatalog, Events, FilterService) {
             throw new Error('Invalid online selector state: ' +
                 FilterService.getOnline() + ':' + FilterService.getOffline());
         }
+
+        $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.checkInSelect);
     }
 
     read();
@@ -50,6 +60,14 @@ function checkInSelectCtrl($scope, gettextCatalog, Events, FilterService) {
         $scope.select(find($scope.options, (option) => {
             return option.id === 'all';
         }));
+    });
+
+    $scope.$on(Events.filters.removeTag, function (event, filter) {
+        if (filter === Events.filters.checkInSelect) {
+            $scope.select(find($scope.options, (option) => {
+                return option.id === 'all';
+            }));
+        }
     });
 }
 

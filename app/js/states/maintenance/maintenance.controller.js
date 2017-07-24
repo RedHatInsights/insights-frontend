@@ -7,7 +7,7 @@ var values = require('lodash/values');
 var moment = require('moment-timezone');
 var CATEGORY_PREFERENCE_KEY = 'maintenance_plan_category';
 
-const DEFAULT_CATEGORY = 'unscheduled';
+const DEFAULT_CATEGORY = 'notSuggested';
 
 // tracks which plans are expanded into the edit mode
 // This handles the mode activated by the first click on a plan.
@@ -197,7 +197,7 @@ function MaintenanceCtrl(
     });
 
     $scope.scrollToPlan = function (id, cat) {
-        var category = cat || MaintenanceService.plans.findCategory(id);
+        let category = cat || MaintenanceService.plans.findCategory(id);
         $scope.setCategory(category);
         $scope.edit.activate(id);
         PermalinkService.scroll('maintenance-plan-' + id);
@@ -241,6 +241,7 @@ function MaintenanceCtrl(
             $scope.category = value;
             PreferenceService.set(CATEGORY_PREFERENCE_KEY, $scope.category, false);
             $scope.redrawPlans();
+
             if (!suppressEditReset) {
                 $scope.edit.reset();
             }

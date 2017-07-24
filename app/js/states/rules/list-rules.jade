@@ -1,14 +1,19 @@
 section
-  //platform-filter
+  .page-header
+    h1.page-title.pull-left
+      i.fa.fa-institution &nbsp;
+      span(translate) Rules
   rule-filter
   .content-wrap
-    .section
+    section.table-search
       .row
-        .col-sm-12
-          .btn-group.pull-right
-            a.btn.btn-sm.btn-app(ui-sref='app.admin-topic', ng-show='user.is_internal') Topics Admin
-          .push-top-narrow.rules-filters(ng-hide="loading")
-      .row.row-short
+        .col-xs-6
+          search-box(search-placeholder="Filter by rule", on-search='search.doFilter(model)')
+        .col-xs-6.btn-group
+          a.btn.btn-sm.btn-app.pull-right(ui-sref='app.admin-topic', ng-show='user.is_internal') Topics Admin
+        .push-top-narrow.rules-filters(ng-hide="loading")
+    section
+      .row
         .col-sm-12
           section(ng-show='loading')
             .spinner.spinner-lg

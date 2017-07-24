@@ -11,6 +11,7 @@ function FilterService(
     Categories) {
 
     var filterService = {};
+    var _category = $location.search().category || 'all';
     var _selectedProduct = 'all';
     var _parentNode = null;
     var _dockerHosts = [];
@@ -76,7 +77,9 @@ function FilterService(
 
     filterService.setOffline = function (offline) {
         _offline = offline;
-        filterService.setQueryParam('offline', offline.toString());
+
+        let param = offline.toString() === 'all' ? null : offline.toString();
+        filterService.setQueryParam('offline', param);
     };
 
     filterService.setOnline = function (online) {
@@ -111,6 +114,15 @@ function FilterService(
     filterService.setSearchTerm = function (searchTerm) {
         _searchTerm = searchTerm;
         filterService.setQueryParam('search_term', searchTerm);
+    };
+
+    filterService.setCategory = function (category) {
+        _category = category;
+        filterService.setQueryParam('category', category);
+    };
+
+    filterService.getCategory = function () {
+        return _category;
     };
 
     /**
@@ -556,14 +568,8 @@ function FilterService(
         }
 
         //category
-        if (includeParam('category')) {
-            Categories.forEach(function (category) {
-                if (MultiButtonService.getState('categoryFilters' + category) &&
-                    category !== 'all') {
-
-                    query.category = category;
-                }
-            });
+        if (includeParam('category') && _category !== 'all') {
+            query.category = _category;
         }
 
         return query;

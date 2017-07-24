@@ -1,11 +1,21 @@
 section.inventory
-  //platform-filter
+  .page-header
+    h1.page-title.pull-left
+      i.fa.fa-database &nbsp;
+      span(translate) Inventory &nbsp;-&nbsp;
+      span(ng-hide='reloading')
+        span.system-count(translate, translate-n='getTotal()', translate-plural='{{$count}} Systems')
+          | 1 System
+        small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected)
+
   inventory-filters
   .rha-notifications
-  .content-wrap
-    inventory-actions.ng-animate-enabled(ng-hide='reloading')
-    div(infinite-scroll='doScroll()', infinite-scroll-disabled='disableScroll()', infinite-scroll-immediate-check='false', infinite-scroll-distance='.5', ng-hide='reloading')
-
+  .content-wrap(ng-hide='reloading')
+    .table-search
+      .row
+        .col-xs-6
+          search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder='Find a system')
+    section(infinite-scroll='doScroll()', infinite-scroll-disabled='disableScroll()', infinite-scroll-immediate-check='false', infinite-scroll-distance='.5')
       .card-table-header(ng-show='listType() === listTypes.card')
         .row.row-short
           .col-sm-4
@@ -26,7 +36,7 @@ section.inventory
             strong(translate, ng-click="sort('report_count')") Action Count
 
       .row.row-short.table-options
-        .col-sm-4.col-lg-2
+        .col-xs-6
           .dropdown
             button.btn.btn-default.dropdown-toggle(
               data-toggle='dropdown',
@@ -64,8 +74,8 @@ section.inventory
                 ng-disabled='!isUnregistrableSelected()',
                 ng-click='isUnregistrableSelected() && doUnregisterSelected()',
                 translate) Unregister
-        .col-sm-8.col-lg-10
-          list-type.text-right-sm
+        .col-xs-6.text-right-sm
+          list-type
 
       .row.row-short
         .col-md-12
@@ -123,7 +133,7 @@ section.inventory
             checkboxes='checkboxes',
             checkbox-tooltip="canSelectSystem(system) ? defaultTooltip : getDisabledCheckboxTooltip(system)"
           )
-  .animate-wrapper
+  .animate-wrapper.margin-top
     .row.row-short.ng-animate-enabled(ng-show='loading')
       .col-xs-12
         .load.text-center
