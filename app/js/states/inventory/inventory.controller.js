@@ -53,7 +53,6 @@ function InventoryCtrl(
     $scope.showActions = InventoryService.showSystemModal;
 
     $scope.listTypes = ListTypeService.types();
-    $scope.setListType = ListTypeService.setType;
 
     FilterService.setSearchTerm('');
     FilterService.setShowFilters(false);

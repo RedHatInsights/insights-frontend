@@ -2,41 +2,20 @@ section.inventory
   .page-header
     h1.page-title.pull-left
       i.fa.fa-database &nbsp;
-      span(translate) Inventory &nbsp;-&nbsp;
-      span(ng-hide='reloading')
-        span.system-count(translate, translate-n='getTotal()', translate-plural='{{$count}} Systems')
-          | 1 System
-        small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected)
+      span(translate) Inventory
 
   inventory-filters
   .rha-notifications
-  .content-wrap(ng-hide='reloading')
+  .content-wrap
     .table-search
       .row
         .col-xs-6
           search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder='Find a system')
-    section(infinite-scroll='doScroll()', infinite-scroll-disabled='disableScroll()', infinite-scroll-immediate-check='false', infinite-scroll-distance='.5')
-      .card-table-header(ng-show='listType() === listTypes.card')
-        .row.row-short
-          .col-sm-4
-            input.action-checkbox(
-              tooltip="{{'Select All' | translate}}",
-              tooltip-trigger='mouseenter',
-              tooltip-append-to-body='true',
-              tooltip-placement='top',
-              type="checkbox",
-              ng-indeterminate="checkboxes.indeterminate",
-              ng-model='checkboxes.checked',
-              ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
-            label(translate, ng-click="sort('system_type_id')") &nbsp; Type
-          .col-sm-4
-            strong(translate, ng-click="sort('toString')") Name &nbsp;
-            span(ng-show='totalSystemsSelected') &nbsp;({{totalSystemsSelected}} Selected)
-          .col-sm-4.text-right
-            strong(translate, ng-click="sort('report_count')") Action Count
+
+    section(infinite-scroll='doScroll()', infinite-scroll-disabled='disableScroll()', infinite-scroll-immediate-check='false', infinite-scroll-distance='.5', ng-hide='reloading')
 
       .row.row-short.table-options
-        .col-xs-6
+        .col-xs-4.col-sm-2
           .dropdown
             button.btn.btn-default.dropdown-toggle(
               data-toggle='dropdown',
@@ -74,8 +53,39 @@ section.inventory
                 ng-disabled='!isUnregistrableSelected()',
                 ng-click='isUnregistrableSelected() && doUnregisterSelected()',
                 translate) Unregister
-        .col-xs-6.text-right-sm
+        .col-xs-8.col-sm-8.text-center
+          span(ng-hide='reloading')
+            h3.system-count(translate, translate-n='totalSystems()', translate-plural='{{$count}} Systems') 1 System
+            small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected)
+        .col-sm-2.hidden-xs.text-right-sm
           list-type
+
+      .card-table-header(ng-show='getListType() === listTypes.card')
+        .row
+          .col-sm-4
+            input.action-checkbox(
+              tooltip="{{'Select All' | translate}}",
+              tooltip-trigger='mouseenter',
+              tooltip-append-to-body='true',
+              tooltip-placement='top',
+              type="checkbox",
+              ng-indeterminate="checkboxes.indeterminate",
+              ng-model='checkboxes.checked',
+              ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
+            label(translate, ng-click="sort('system_type_id')") &nbsp; Type
+          .col-sm-4
+            strong(translate, ng-click="sort('toString')") Name
+          .col-sm-4.text-right
+            strong(translate, ng-click="sort('report_count')") Action Count
+
+      .row.row-short(ng-show='getListType() === listTypes.card')
+        .col-sm-12
+          system-card.ng-animate-enabled(
+            ng-repeat='system in systems track by system.system_id',
+            system='system',
+            checkboxes='checkboxes',
+            checkbox-tooltip="canSelectSystem(system) ? defaultTooltip : getDisabledCheckboxTooltip(system)"
+          )
 
       .row.row-short
         .col-md-12
@@ -124,15 +134,6 @@ section.inventory
                     span.pull-right.status-icon(ng-class="{'success': !system.report_count, 'fail': system.report_count}")
                       i.fa(ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count}")
 
-      .row.row-short
-        .col-sm-12
-          system-card.ng-animate-enabled(
-            ng-show='getListType() === listTypes.card',
-            ng-repeat='system in systems track by system.system_id',
-            system='system',
-            checkboxes='checkboxes',
-            checkbox-tooltip="canSelectSystem(system) ? defaultTooltip : getDisabledCheckboxTooltip(system)"
-          )
   .animate-wrapper.margin-top
     .row.row-short.ng-animate-enabled(ng-show='loading')
       .col-xs-12

@@ -53,8 +53,10 @@
                     value='plans.future.length || plans.unscheduled.length',
                     show-tooltip='false')
         .col-xs-8.col-sm-8.text-center
-          h3(translate, ng-if='ruleDetails.type !== "osp"') {{allSystems.length}} Impacted Systems
-          h3(translate, ng-if='ruleDetails.type === "osp"') Impacted Deployments
+          span(ng-if='!loadingSystems')
+            h3.system-count(translate, translate-n='{{allSystems.length}}', translate-plural='{{$count}} Impacted Systems', ng-if='ruleDetails.type !== "osp"') 1 Impacted System
+            h3.system-count(translate, translate-n='{{allSystems.length}}', translate-plural='{{$count}} Impacted Deployments', ng-if='ruleDetails.type === "osp"') 1 Impacted Deployment
+            small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{checkboxes.totalChecked}} Selected)
         .col-xs-4.col-sm-2.hidden-xs.text-right
           list-type(ng-hide='hideListSwitch')
 
@@ -70,7 +72,6 @@
             label(translate, ng-click="sort('system_type_id')") &nbsp; Type
           .col-sm-4
             strong(translate, ng-click="sort('toString')") Name &nbsp;
-            span(ng-if='checkboxes.totalChecked') &nbsp;({{checkboxes.totalChecked}} Selected)
           .col-sm-4.text-right
             strong(translate, ng-click="sort('report_count')") Action Count
             
