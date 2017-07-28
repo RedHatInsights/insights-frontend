@@ -6,7 +6,7 @@ const el    = require('../elements.js');
 const funcs = require('../funcs');
 
 module.exports = (nightmare) => {
-    describe('Planner', () => {
+    describe.skip('Planner', () => { // disabled temporarily as it intermittently fails to clean up the created plan which polutes 540155
         it('should let you create a plan', (done) => {
             const name = `SmokeTest_${funcs.getRandomString(20)}`;
 
