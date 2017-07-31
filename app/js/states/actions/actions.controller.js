@@ -16,7 +16,6 @@ function ActionsCtrl(
     Export,
     FilterService,
     InsightsConfig,
-    InventoryService,
     PreferenceService,
     QuickFilters,
     RhaTelemetryActionsService,
