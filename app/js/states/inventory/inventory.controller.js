@@ -33,7 +33,7 @@ function InventoryCtrl(
         Export,
         Group) {
 
-    const DEFAULT_PAGE_SIZE = 10;
+    const DEFAULT_PAGE_SIZE = 15;
 
     $scope.Group = Group;
     $scope.filter = FilterService;
@@ -84,7 +84,7 @@ function InventoryCtrl(
 
     $scope.$on('group:change', function () {
         cleanTheScope();
-        initInventory();
+        getData(false);
     });
 
     $scope.$on('filterService:doFilter', function () {
@@ -92,14 +92,9 @@ function InventoryCtrl(
         getData(false);
     });
 
-    $scope.$on('osp:deployment_changed', function () {
-        cleanTheScope();
-        initInventory();
-    });
-
     $scope.$on('systems:unregistered', function () {
         cleanTheScope();
-        initInventory();
+        getData();
     });
 
     let systemModal = null;
