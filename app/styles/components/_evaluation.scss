@@ -1,0 +1,37 @@
+$eval-header-font-size: 40px;
+$eval-subheader-font-size: 25px;
+$eval-content-font-size: 16px;
+
+.eval{
+
+	h1.eval-header{ @include font-size($eval-header-font-size); }
+
+	h2.eval-subhead{
+		@include font-size($eval-subheader-font-size);
+		font-family: Overpass;
+		text-transform: uppercase;
+
+	}
+
+	h3.eval-content{
+		@include font-size($eval-content-font-size);
+		font-weight: 500;
+	}
+
+	hr.eval-hr{ border-color: $brand-tert-med; }
+
+	ul.sales-info{
+		list-style-type: none;
+		.fa{
+			color: $text-color;
+		}
+	}
+
+	.flexgrid.equalheights .content-block-card { 
+		height: 100%
+	}
+
+	.sales-cards{
+		@include rem(margin-top, $global-margin);
+	}
+}
