@@ -171,6 +171,7 @@ function ActionsService(
             ackDeferred.then(rulesDeferred);
 
             rulesDeferred.success(function (response) {
+                console.log(response);
                 pub.setRules(response.resources);
                 priv.processRules();
             });

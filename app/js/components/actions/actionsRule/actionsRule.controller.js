@@ -38,6 +38,8 @@ function ActionsRuleCtrl(
         Export,
         Group) {
 
+    const DEFAULT_PAGE_SIZE = 15;
+
     //let params = $state.params;
     let category = $stateParams.category;
     let priv = {};
@@ -52,6 +54,7 @@ function ActionsRuleCtrl(
     $scope.predicate = 'toString';
     $scope.reverse = false;
     $scope.loading = true;
+    $scope.pager = new Utils.Pager(DEFAULT_PAGE_SIZE);
 
     FilterService.parseBrowserQueryParams();
     FilterService.setShowFilters(false);
@@ -183,6 +186,7 @@ function ActionsRuleCtrl(
         $scope.loadingSystems = true;
 
         IncidentsService.init();
+        $scope.pager.reset();
 
         let populateDetailsPromise =
             RhaTelemetryActionsService.populateDetails().then(function () {
@@ -225,6 +229,7 @@ function ActionsRuleCtrl(
         $q.all([populateDetailsPromise, SystemsService.getSystemTypesAsync(),
             topicBreadCrumbPromise, productSpecific])
             .finally(function () {
+                console.log($scope.allSystems);
                 $scope.loading = false;
                 priv.initialDisplay();
             });
