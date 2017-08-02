@@ -1,9 +1,45 @@
-.inventory-actions
-  .row
-    .col-sm-12.text-center-sm
-      h3.system-count(translate, translate-n='getTotal()', translate-plural='{{$count}} Systems')
-        | 1 System
-      span(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected)
+.row.row-short.table-options
+  .col-xs-4.col-sm-2
+    .dropdown
+      button.btn.btn-default.dropdown-toggle(
+        data-toggle='dropdown',
+        aria-haspopup='true',
+        aria-expanded='false',
+        translate,
+        ng-disabled='!checkboxes.totalChecked') Actions
+          span.caret
+      ul.dropdown-menu
+        li(ng-if='config.isPlannerEnabled')
+          a(ng-click='addToPlan(false)',
+          ng-disabled='!isFixableSelected()',
+          translate) Create a new Plan/Playbook
+            ansible-icon.inline-left(
+            value='isFixableSelected()',
+            show-tooltip='false')
+        li(ng-if='config.isPlannerEnabled')
+          a(ng-click='addToPlan(true)',
+          ng-disabled='!isFixableSelected() || (!plans.future.length && !plans.unscheduled.length)',
+          translate) Add to existing Plan/Playbook
+            ansible-icon.inline-left(
+            value='isFixableSelected() && (plans.future.length || plans.unscheduled.length)',
+            show-tooltip='false')
+        li
+          a(ng-click='groupSystems(systemsToAction())', translate) Group systems
+        li(ng-if='Group.current().id')
+          a(ng-click='removeFromGroup()')
+            span(translate,
+              translate-n='systemsToAction().length',
+              translate-plural='Remove systems from group') Remove system from group
+            strong &nbsp;{{Group.current().display_name}}
+        li(tooltip='{{unregisterButtonTooltip}}')
+          a.pointer-events-auto(
+          ng-disabled='!isUnregistrableSelected()',
+          ng-click='isUnregistrableSelected() && doUnregisterSelected()',
+          translate) Unregister
+  .col-xs-8.col-sm-8.text-center
+    span(ng-hide='reloading')
+      h3.system-count(translate, translate-n='totalSystems()', translate-plural='{{$count}} Systems') 1 System
+      small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected)
       br
       a.link(
       ng-click="registerSystem()",
@@ -11,3 +47,5 @@
         span.icon.icon-inline
           i.fa.fa-plus
         strong(translate) Register More
+  .col-sm-2.hidden-xs.text-right-sm
+    list-type

@@ -5,8 +5,16 @@ $bg-page-header: #F9F9F9;
 	position: relative;
 	padding: 0;
 	background: $bg-page-header;
-	@include rem('padding', $global-margin);
+	@include rem('padding', 18px $global-margin);
   margin: 0;
+
+  h1.page-header,
+  .page-header {
+    @include font-size(22px);
+    line-height: 1;
+    font-weight: 800;
+    margin: 0;
+  }
 
 	&.active { @include rem('padding-bottom', $global-margin); }
 

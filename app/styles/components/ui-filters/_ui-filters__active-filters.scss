@@ -1,10 +1,18 @@
-$ui-filter__active-filters-bg: #f9f9f9;
-$ui-filter__active-filters-border-color: #d9d9d9;
+$dataFilter-active-filters-bg: rgba(255,255,255,.8);
+$dataFilter-active-filters-border-color: #d9d9d9;
 
-.ui-filters__active-filters {
-  background: $ui-filter__active-filters-bg;
-  border-top: 1px solid $ui-filter__active-filters-border-color;
-  @include rem('padding', $global-padding $global-margin);
+.dataFilters .active-filters {
+  background: $dataFilter-active-filters-bg;
+  border-top: 1px solid $dataFilter-active-filters-border-color;
+  @include rem('padding', 20px $global-margin);
 
-  button + button { @include rem('margin-left', $global-padding); }
+  &.flexgrid { @include rem('padding', $global-padding $global-margin); }
+
+  button + button,
+  strong + button { @include rem('margin-left', $global-padding/2); }
+
+  button {
+    @include rem('padding', 4px 8px);
+    i { @include rem('margin-left', 8px); }
+  }
 }

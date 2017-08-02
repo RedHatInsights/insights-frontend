@@ -1,25 +1,18 @@
-.toolbar.toolbar--data-filters
-  #dataFiltersHeader.dataFiltersHeader
-    .flexgrid
-      .row
-        .col-sm-6.col-md-8
-          label.search
-            strong(translate) Search
-            search-box(on-search='search.doFilter(model)', placeholder='{{searchPlaceholder}}')
-        .col-sm-6.col-md-4.text-right-sm
-          button.btn.btn-blank.filterToggle(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody')
-            span(translate) Data filters
-            i.fa.fa-filter(aria-hidden="true")
-          .sep
-          list-type
-
-  #dataFiltersBody.dataFiltersBody.collapse.in
+#dataFilters.dataFilters(ng-class="{open: open, tags: hasTags()}")
+  #dataFiltersBody.data-filters-body.collapse
     div(ng-transclude)
 
-  #dataFiltersFooter.dataFiltersFooter(ng-show='hasTags()', ng-model='tags')
-    .active-filters
+  #activeFilter.active-filters(ng-show='hasTags()', ng-model='tags')
+    .flexgrid
       strong(translate) Active filters:&nbsp;
       // remove filter on click
       button.btn.btn-accent(ng-repeat="(key, value) in tags", ng-click='removeFilter(key)')
         span(translate) {{value | translate}}
         i.fa.fa-times-circle-o(aria-hidden="true")
+
+  footer#dataFiltersControlBar.data-filters-control-bar
+    .toggle(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody', ng-class="{active: open}")
+      .icon-inline
+        i.fa.fa-caret-down
+        i.fa.fa-caret-down
+        strong Page Filters

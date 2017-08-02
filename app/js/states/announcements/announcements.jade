@@ -1,7 +1,9 @@
-div.page-standard.page-announcements.section-announcements
-  .row
-    .col-sm-12
-      h1.page-title(translate) Announcements
+.page-header
+    h1.page-title.pull-left
+      i.fa.fa-bullhorn &nbsp;
+      span(translate) Announcements
+
+.content-wrap
   .row(ng-if="canCreate")
     .col-sm-12
       label.full-width(translate) Show hidden

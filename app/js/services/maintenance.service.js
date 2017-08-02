@@ -30,7 +30,8 @@ function MaintenanceService(
     DataUtils,
     TopbarAlertsService,
     $state,
-    gettextCatalog) {
+    gettextCatalog,
+    Events) {
 
     var service = {};
     var plansDfd = false;
@@ -234,7 +235,9 @@ function MaintenanceService(
         if (force || !plansDfd) {
             plansDfd = Maintenance.getMaintenancePlans().then(function (plans) {
                 service.plans.all = plans;
-                return service.plans.process();
+                return service.plans.process().then(function () {
+                    $rootScope.$broadcast(Events.planner.plansLoaded);
+                });
             });
         }
 
@@ -250,6 +253,7 @@ function MaintenanceService(
             service.plans.overdue = [];
             service.plans.unscheduled = [];
             service.plans.suggested = [];
+            service.plans.scheduled = [];
             service.plans.all.forEach(function (plan) {
                 // filter out hidden plans
                 // TODO: this is what backend is supposed to do
@@ -270,6 +274,8 @@ function MaintenanceService(
                             service.plans.overdue.push(plan);
                         }
                     }
+
+                    service.plans.scheduled.push(plan);
                 } else {
                     service.plans.unscheduled.push(plan);
                 }
@@ -380,11 +386,11 @@ function MaintenanceService(
         return plan.name;
     };
 
-    $rootScope.$on('maintenance:planChanged', function () {
+    $rootScope.$on(Events.planner.planChanged, function () {
         service.plans.process();
     });
 
-    $rootScope.$on('maintenance:planDeleted', function (event, id) {
+    $rootScope.$on(Events.planner.planDeleted, function (event, id) {
         service.plans.remove(id);
     });
 

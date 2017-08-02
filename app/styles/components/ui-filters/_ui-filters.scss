@@ -3,7 +3,7 @@
 
 // Vars
 // ------------------------
-$ui-filters-background: #F9F9F9;
+$data-filters-background: #F9F9F9;
 
 // Mixins
 // ------------------------
@@ -15,34 +15,28 @@ $ui-filters-background: #F9F9F9;
 
 // UI filter styling
 // ------------------------
-.ui-filters {
-  @include rem('padding', $global-margin);
-  background: $ui-filters-background;
-  min-height: 20px;
+.dataFilters {
+  position: relative;
+  z-index: 10;
+  @include box-shadow(0 0 0 rgba(0,0,0,0));
 
-  // Button styling
-  button,
-  .btn {
-    text-transform: none;
-    @include rem('padding', $global-padding/2 $global-padding);
-  }
-
-  // Button spacing
-  button + button,
-  .btn + .btn {
-    @include rem('margin-left', $global-padding);
-  }
+  &.expanded { @include box-shadow(0 8px 12px rgba(0,0,0,.15)); }
 
   [class^="col-"],
   div[class*=" col-"] {
-
+    @include media-query(sm) {
+      padding-bottom: $global-padding;
+    }
   }
-}
+
+  // Areas
+  .data-filters-header,
+  .data-filters-body {
+    background: $data-filters-background;
+    .flexgrid { @include rem('padding', $global-padding $global-margin); }
+  }
 
 
-// UI filter layout
-// ------------------------
-.ui-filters {
   section {  }
   section + section {
     @include rem('padding-top', $global-margin);
@@ -55,49 +49,28 @@ $ui-filters-background: #F9F9F9;
     }
   }
 
+
+  // Labels
   label.label { font-weight: 700; }
-}
 
+  // Buttons
+  button,
+  .btn {
+    text-transform: none;
+    @include rem('padding', $global-padding/2 $global-padding);
+  }
 
-// Control bar styling
-// ------------------------
-.ui-filters__control-bar {
-  position: relative;
-  height: 14px;
-  background: #dfdfdf;
-  text-align: center;
+  // Button layout
+  button + button,
+  .btn + .btn {
+    @include rem('margin-left', $global-padding);
+  }
 
-  // toggle button styling
-  .toggle {
-    width: 42px;
-    height: 42px;
-    display: inline-block;
-    @include rem('margin-top', -12px);
-    text-align: center;
-    background: rgba(255,255,255,.8);
-    @include box-shadow(0 0 0 8px rgba(0,0,0,.1));
-    @include border-radius(50%);
-
-    // button hover styling
-    &:hover { @include box-shadow(0 0 0 12px rgba(0,0,0,.1)); }
-
-    // Icon styling
-    i {
-      @include font-size(20px);
-      line-height: 1.6;
-      @include transition(.5s);
-    }
+  .dropdown {
+    @extend .full-width;
   }
 }
 
-
-// Rotate the button icoin if filters are open
-.ui-filters__control-bar {
-  i {
-    transform: rotate(180deg);
-  }
-
-  &.collapsed {
-    i { transform: rotate(0deg); }
-  }
+.dataFilters.tags {
+  @include rem('margin-bottom', $global-margin);
 }

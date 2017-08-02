@@ -10,6 +10,102 @@ const some = require('lodash/some');
 const get = require('lodash/get');
 const sortBy = require('lodash/sortBy');
 const swal = require('sweetalert2');
+const filter = require('lodash/filter');
+const flatMap = require('lodash/flatMap');
+const uniqBy = require('lodash/uniqBy');
+const moment = require('moment-timezone');
+
+const TAB_MAPPING = {
+    undefined: 0,
+    systems: 1,
+    playbook: 2
+};
+
+//This handles the "basic" edit mode of a plan. Activated by clicking the hidden
+//'Click to edit this plan' button next to the plan name.
+function BasicEditHandler(plan, Maintenance, Utils, cb) {
+    this.active = false;
+    this.plan = plan;
+    this.Maintenance = Maintenance;
+    this.Utils = Utils;
+    this.cb = cb;
+}
+
+BasicEditHandler.prototype.init = function () {
+    if (this.plan) {
+        this.name = this.plan.name;
+        this.description = this.plan.description;
+        if (this.plan.start) {
+            this.start = moment(this.plan.start);
+            let d = this.start;
+
+            // we need to convert to Date (which possibly uses a different timezone)
+            // so that we can bind the input to it
+            this.time = new Date(d.year(), d.month(), d.day(), d.hour(), d.minute());
+            this.duration = Math.round((this.plan.end - this.plan.start) / (60 * 1000));
+        } else {
+            this.start = null;
+            this.time = null;
+            this.duration = null;
+        }
+    } else {
+        this.name = '';
+        this.description = '';
+        this.start = moment().startOf('day');
+        this.dateChanged(this.start);
+    }
+};
+
+BasicEditHandler.prototype.dateChanged = function (value) {
+    if (value && !this.time) {
+        this.time =
+            new Date(
+                this.start.year(),
+                this.start.month(),
+                this.start.day(),
+                22, 0);
+        this.duration = 60;
+        this.sync();
+    }
+};
+
+BasicEditHandler.prototype.sync = function () {
+    if (this.start && this.time) {
+        this.start.hours(this.time.getHours());
+        this.start.minutes(this.time.getMinutes());
+    }
+};
+
+BasicEditHandler.prototype.toggle = function () {
+    if (!this.active) {
+        this.init();
+    }
+
+    this.active = !this.active;
+};
+
+BasicEditHandler.prototype.getStart = function () {
+    if (this.start) {
+        return this.start.clone().toDate();
+    }
+
+    return null;
+};
+
+BasicEditHandler.prototype.getEnd = function () {
+    if (this.start) {
+        return this.start.clone().add(Math.max(this.duration, 1), 'm').toDate();
+    }
+
+    return null;
+};
+
+BasicEditHandler.prototype.save = function () {
+    this.sync();
+    if (this.cb) {
+        return this.cb(this.name, this.description, this.getStart(), this.getEnd(), this);
+    }
+};
 
 /**
  * @ngInject
@@ -18,11 +114,14 @@ function maintenancePlanCtrl(
     $modal,
     $rootScope,
     $scope,
+    $state,
+    $stateParams,
     $timeout,
     $document,
     gettextCatalog,
     sweetAlert,
     DataUtils,
+    Events,
     Group,
     Maintenance,
     MaintenanceService,
@@ -43,7 +142,7 @@ function maintenancePlanCtrl(
 
     const CURRENT_GROUP_PREFIX = gettextCatalog.getString('Current Group');
 
-    $scope.editBasic = new $scope.BasicEditHandler(
+    $scope.editBasic = new BasicEditHandler(
         $scope.plan,
         Maintenance,
         Utils,
@@ -57,8 +156,8 @@ function maintenancePlanCtrl(
                 end: end
             }).then(function () {
                 handler.active = false;
-
-                if ($scope.plan.end !== end || $scope.plan.start !== start) {
+                if (!Utils.datesEqual($scope.plan.end, end) ||
+                    !Utils.datesEqual($scope.plan.start, start)) {
                     $scope.loadPlans(true).then(function () {
                         $scope.scrollToPlan($scope.plan.maintenance_id);
                     });
@@ -143,8 +242,8 @@ function maintenancePlanCtrl(
     };
 
     $scope.downloadPlaybook = function () {
-        if ($scope.playbookTab) {
-            $scope.playbookTab();
+        if ($scope.selectTab) {
+            $scope.selectTab('playbook');
         }
 
         Maintenance.downloadPlaybook($scope.plan.maintenance_id)
@@ -205,8 +304,8 @@ function maintenancePlanCtrl(
 
             $scope.update(data).then(function () {
                 assign($scope.plan, data);
-                $rootScope.$broadcast(
-                    'maintenance:planChanged', $scope.plan.maintenance_id);
+                $rootScope.$broadcast(Events.planner.planChanged,
+                    $scope.plan.maintenance_id);
             });
         }
 
@@ -224,7 +323,7 @@ function maintenancePlanCtrl(
         var data = {suggestion: Maintenance.SUGGESTION.ACCEPTED};
         $scope.update(data).then(function () {
             assign($scope.plan, data);
-            $rootScope.$broadcast('maintenance:planChanged', $scope.plan.maintenance_id);
+            $rootScope.$broadcast(Events.planner.planChanged, $scope.plan.maintenance_id);
             $scope.scrollToPlan($scope.plan.maintenance_id);
         });
     };
@@ -234,7 +333,7 @@ function maintenancePlanCtrl(
         $scope.update(data).then(function () {
             assign($scope.plan, data);
             $scope.plan.hidden = true;
-            $rootScope.$broadcast('maintenance:planChanged', $scope.plan.maintenance_id);
+            $rootScope.$broadcast(Events.planner.planChanged, $scope.plan.maintenance_id);
             if (!MaintenanceService.plans.suggested.length) {
                 $scope.setCategory('unscheduled');
             }
@@ -291,18 +390,51 @@ function maintenancePlanCtrl(
 
             $scope.plays.forEach(function (play) {
                 play.systemType = SystemsService.getSystemTypeUnsafe(play.system_type_id);
+                play.systems = map(filter($scope.plan.actions, function (action) {
+                    return action.rule.rule_id === play.rule.rule_id &&
+                        action.system.system_type_id === play.system_type_id;
+                }), 'system');
             });
+
+            $scope.systemsToReboot = uniqBy(flatMap(filter($scope.plays,
+                'ansible_resolutions[0].needs_reboot'), 'systems'), 'system_id');
         });
     });
 
-    $scope.setupPlaybookTabActivator = function (value) {
+    $scope.setupTabActivator = function (value) {
         value.$watch('tabs', function (tabs) {
             if (tabs) {
-                $scope.playbookTab = function () {
-                    tabs[2].select();
+                $scope.selectTab = function (name, ignoreUrl) {
+                    const tab = TAB_MAPPING[name];
+
+                    if (tab !== undefined) {
+                        tabs[tab].select();
+                        if (!ignoreUrl) {
+                            $scope.tabSelected(name);
+                        }
+                    }
                 };
             }
         });
+    };
+
+    $scope.tabSelected = function () {
+
+        // this double-assignment is a workaround for how ui-bootstrap handles selection
+        $scope.tabSelected = function (name) {
+            $state.transitionTo($state.current, {
+                maintenance_id: $stateParams.maintenance_id,
+                tab: name
+            }, {
+                notify: false,
+                reload: false,
+                location: 'replace'
+            });
+        };
+
+        if ($stateParams.maintenance_id && $stateParams.tab && $scope.selectTab) {
+            $scope.selectTab($stateParams.tab, true);
+        }
     };
 
     $scope.resolutionModal = function (play) {
@@ -313,6 +445,12 @@ function maintenancePlanCtrl(
     $scope.addActions = function () {
         return MaintenanceService.showMaintenanceModal(null, null, $scope.plan)
             .then($scope.prepareAnsibleTab);
+    };
+
+    $scope.allowRebootChanged = function () {
+        return Maintenance.updatePlan($scope.plan.maintenance_id, {
+            allow_reboot: $scope.plan.allow_reboot
+        });
     };
 
     function deleteHandler (event) {
@@ -393,8 +531,11 @@ function maintenancePlan($document) {
                     return;
                 }
 
-                if ((active && !planHit && bodyHit) || (!active && planHit)) {
-                    scope.edit.toggle(scope.plan.maintenance_id);
+                if (!active && planHit) {
+                    scope.edit.activate(scope.plan.maintenance_id);
+                } else if (bodyHit && !isContainedBy($event, 'plan-wrap') &&
+                    Object.keys(scope.edit.items).length) {
+                    scope.edit.reset();
                 }
             }
 

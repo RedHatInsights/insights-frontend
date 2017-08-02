@@ -1,0 +1,27 @@
+.table-search {
+  input {
+    @include rem('padding', 6px 6px 6px 2px);
+    @include font-size(14px);
+    border: none;
+    border-bottom: 1px solid $gray;
+    @include transition(.2s);
+    font-weight: 700;
+
+    @include media-query(md) { width: 80%; }
+
+    &::placeholder { font-weight: 500; }
+
+    &:focus {
+      outline: none;
+      background: #f2f5f7;
+      @include rem('padding', 6px 2px 6px 6px);
+    }
+  }
+
+  .flexgrid {
+    [class^="col-"],
+    div[class*=" col-"] {
+      padding-bottom: 0;
+    }
+  }
+}

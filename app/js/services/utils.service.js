@@ -355,6 +355,14 @@ function Utils($filter, $rootScope, Events) {
         return value;
     };
 
+    utils.datesEqual = function (d1, d2) {
+        if (d1 === d2) {
+            return true;
+        }
+
+        return new Date(d1).getTime() === new Date(d2).getTime();
+    };
+
     return utils;
 }
 

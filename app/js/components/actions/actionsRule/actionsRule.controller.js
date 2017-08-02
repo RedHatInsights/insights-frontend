@@ -51,6 +51,7 @@ function ActionsRuleCtrl(
     $scope.config = InsightsConfig;
     $scope.predicate = 'toString';
     $scope.reverse = false;
+    $scope.loading = true;
 
     FilterService.parseBrowserQueryParams();
     FilterService.setShowFilters(false);
@@ -179,6 +180,7 @@ function ActionsRuleCtrl(
 
     function getData() {
         $scope.loading = true;
+        $scope.loadingSystems = true;
 
         IncidentsService.init();
 
@@ -203,6 +205,8 @@ function ActionsRuleCtrl(
                 $scope.ruleSystems = RhaTelemetryActionsService.getRuleSystemsPage();
                 $scope.allSystems = RhaTelemetryActionsService.getRuleSystems();
                 RhaTelemetryActionsService.setIsScrolling(false);
+                $scope.loadingSystems = false;
+
             });
 
         let topicBreadCrumbPromise =

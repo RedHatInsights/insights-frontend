@@ -67,12 +67,12 @@ i.fa.fa-bullseye {
     color: $stability-color;
 }
 
-.ansible-icon img {
+.ansible-icon img, .ansible-icon-white img {
     width: 14px;
     height: auto;
 }
 
-h2 .ansible-icon img {
+h2 .ansible-icon img, h2 .ansible-icon-white img {
     width: 32px;
 }
 

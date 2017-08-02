@@ -13,31 +13,40 @@
         span(translate) Planner
     maintenance-plan-bar
 
-  .content-wrap
-    .row.search
-      .col-sm-8.col-md-9
-        .input-group
-          span.input-group-addon
-            .i.fa.fa-search
-          search-box(ng-model='searchTerm', is-full-length='true')
-      .col-sm-4.col-md-3
-        maintenance-category-select(category='category', on-select='setCategory(category)')
+  section
+    collapsible-filter
+      collapsible-filter-content
+        .row
+          maintenance-category-select.col-xs-6.col-md-4.col-lg-3(category='category', on-select='setCategory(category)')
 
-    .row.row-short(ng-show='loading')
-      .col-xs-12
-        .load.text-center
-          .spinner.spinner-lg
-          span(translate) Loading plans…
-    .rha-notifications
-    div(ng-if='!loading')
-      .row(ng-if="!shownPlans.length")
-        .text-center
-          h4(translate) No plans
-      .row(ng-if="category === 'future' || category === 'past'", ng-repeat="plansPerMonth in shownPlansByMonth")
-        .col-sm-12
-          h3 {{plansPerMonth[0].start | moment:'MMMM YYYY'}}
-        maintenance-plan(
-          ng-repeat="plan in plansPerMonth | searchMaintenancePlans: searchTerm track by plan.maintenance_id")
-      .row(ng-if="category === 'unscheduled' || category === 'suggested'")
-        maintenance-plan(
-          ng-repeat="plan in shownPlans | searchMaintenancePlans: searchTerm | orderBy:'-maintenance_id' track by plan.maintenance_id")
+  .content-wrap
+    section.table-search
+      .row
+        .col-xs-6
+          search-box(ng-model='searchTerm')
+    section
+      .row.row-short(ng-show='loading')
+        .col-xs-12
+          .load.text-center
+            .spinner.spinner-lg
+            span(translate) Loading plans…
+      .rha-notifications
+      div(ng-if='!loading')
+        .row(ng-if="!plans[category].length")
+          .text-center
+            h4(translate) No plans
+
+        plan-list(ng-if="category === 'unscheduled'", plans='plans.unscheduled | searchMaintenancePlans: searchTerm', page-size='8')
+        plan-list(ng-if="category === 'suggested'", plans='plans.suggested | searchMaintenancePlans: searchTerm', page-size='8')
+        plan-list(ng-if="category === 'past'", plans='plans.past | searchMaintenancePlans: searchTerm', group='true', page-size='6')
+        plan-list(ng-if="category === 'future'", plans='plans.future | searchMaintenancePlans: searchTerm', group='true', page-size='6')
+
+        span(ng-if="category === 'all'")
+          h2(translate, ng-if='plans.suggested.length') Suggested Plans
+          plan-list(plans='plans.suggested | searchMaintenancePlans: searchTerm', page-size='2')
+
+          h2(translate, ng-if='plans.unscheduled.length') Plans
+          plan-list(plans='plans.unscheduled | searchMaintenancePlans: searchTerm', page-size='6')
+
+          h2(translate, ng-if='plans.scheduled.length') Scheduled Plans
+          plan-list(plans='plans.scheduled | searchMaintenancePlans: searchTerm', group='true', page-size='4')
