@@ -1,0 +1,9 @@
+.row
+  form(ng-submit='create(newGroup)')
+    .col-xs-12.col-sm-8.col-md-7
+      label(translate) Create a new group
+      input.full-width(ng-model='newGroup.display_name', placeholder="{{'Enter new group name'|translate}}")
+    .col-xs-12.col-sm-4.col-md-2
+      a.pointer.add-group(ng-disabled='!newGroup.display_name', ng-click='create(newGroup)')
+        i.fa.fa-plus &nbsp;
+        span(translate) Add Group
