@@ -15,6 +15,7 @@ var indexBy = require('lodash/keyBy');
  */
 function ActionsService(
     $filter,
+    $location,
     $q,
     $rootScope,
     $state,
@@ -36,16 +37,14 @@ function ActionsService(
     pub.vars = vars; // just so we can unit test em
     // window.pub = pub; // just for debugging, commentme
 
+    vars.allSystems = null;
     vars.category = null;
-    vars.clusterAffectedSystems = null;
     vars.counts = {};
     vars.data = {};
     vars.dataLoaded = false;
     vars.donutChart = null;
     vars.initialSeverity = null;
-    vars.isScrolling = false;
     vars.loading = false;
-    vars.loadingDetails = false;
     vars.oldCols = [];
     vars.page = 0;
     vars.pageSize = 10;
@@ -53,6 +52,7 @@ function ActionsService(
     vars.rules = [];
     vars.rule = null;
     vars.ruleDetails = null;
+
     vars.severities = {};
     vars.severityNames = Severities.map(function (severity) {return severity.value;});
 
@@ -171,7 +171,6 @@ function ActionsService(
             ackDeferred.then(rulesDeferred);
 
             rulesDeferred.success(function (response) {
-                console.log(response);
                 pub.setRules(response.resources);
                 priv.processRules();
             });
@@ -264,126 +263,191 @@ function ActionsService(
         Ack.createAck(rule).then(priv.processRules);
     };
 
-    //actions details
-    pub.populateDetails = function () {
-        var rule_id = pub.getRule();
-        var systemsQuery = FilterService.buildRequestQueryParams(null, ['role']);
-        var systemDeferred;
-        var ruleDeferred;
-        var namePromises = [];
+    /**
+     * Builds systemsQuery for retrieving the systems affected by the current action
+     *
+     * @param paginate if false retrieves all systems affected by the current action
+     * @param pager contains the current page and page size values
+     */
+    priv.buildSystemsQuery = function (paginate, pager) {
+        let systemsQuery = FilterService.buildRequestQueryParams(null, ['role']);
+
+        systemsQuery.rule = encodeURIComponent(pub.getRule());
+
+        if (paginate) {
+
+            // UI paging starts at 1, programmatic page starts at 0
+            systemsQuery.page = (pager.currentPage - 1);
+            systemsQuery.page_size = pager.perPage;
+        }
 
         // offline / systems not checking in
         if (FilterService.getOffline() !== FilterService.getOnline()) {
             systemsQuery.offline = FilterService.getOffline().toString();
         }
 
-        pub.setLoadingDetails(true);
-        systemsQuery.rule = encodeURIComponent(rule_id);
+        systemsQuery.sort_by = $location.search().sort_field;
+        systemsQuery.sort_dir = $location.search().sort_direction;
+
+        return systemsQuery;
+    };
+
+    /**
+     * Sets ruleSystems to the list of systems on the current page
+     *
+     * @param pager contains the current page and page size values
+     * @param paginate if false sets allSystems to all of the systems affected by the
+     *        current action
+     * @param systems the systems returned by the query
+     */
+    priv.setRuleSystems = function (pager, paginate, systems) {
+        const offset = (pager.currentPage - 1) * pager.perPage;
+
+        if (!paginate) {
+            vars.allSystems = systems.resources;
+            vars.ruleSystems = vars.allSystems.slice(offset, priv.getPageEnd(
+                                                                vars.allSystems,
+                                                                pager.currentPage - 1,
+                                                                pager.perPage));
+        } else {
+            vars.ruleSystems = systems.resources;
+        }
+
+        vars.totalRuleSystems = systems.total;
+    };
+
+    /**
+     * Returns the index of the last item in the current page
+     */
+    priv.getPageEnd = function (source, page, pageSize) {
+        if (source === null) {
+            return 0;
+        }
+
+        let offset = page * pageSize;
+        return (offset + pageSize) < source.length ?
+                    (offset + pageSize) : source.length;
+    };
+
+    /**
+     * Populates the affectedHosts so that the systemModal may pull this data
+     */
+    priv.populateAffectedHosts = function (results) {
+        // Check the results for any possible affected_hosts in the report details
+        let namePromises = [];
+        let affectedHosts = false;
+
+        if (results && results[0] && results[0].data && results[0].data.length > 0) {
+            affectedHosts = [];
+            for (let i in results[0].data) {
+                affectedHosts.push(results[0].data[i].system_id);
+            }
+        }
+
+        // If affected hosts were found, then retrieve their system names
+        if (affectedHosts) {
+            for (let j in affectedHosts) {
+                namePromises.push(
+                    System.getSingleSystem(affectedHosts[j])
+                        .success(function (systemResult) {
+                            return systemResult;
+                        })
+                );
+            }
+
+            return $q.all(namePromises).then(function (nameResults) {
+                if (nameResults) {
+                    vars.systemNames = {};
+                    vars.systems = {};
+                    for (let theSystemKey in nameResults) {
+                        let theSystem = nameResults[theSystemKey].data;
+                        let theSystemId = theSystem.system_id;
+                        let theSystemName = theSystem.toString;
+                        vars.systems[theSystemId] = theSystem;
+                        vars.systemNames[theSystemId] = theSystemName;
+                    }
+                }
+            });
+        }
+    };
+
+    /**
+     * Builds the query for getting the next page for actions page 3
+     *
+     * @param paginate if false pulls all systems affected by this action
+     * @param pager contains the current page and page size of the page being pulled
+     */
+    pub.buildSystemsDeferred = function (paginate, pager) {
+        let systemDeferred;
+        let systemsQuery = priv.buildSystemsQuery(paginate, pager);
+
         if (FilterService.getParentNode()) {
             systemsQuery.includeSelf = true;
             systemDeferred =
                 System.getSystemLinks(
                     FilterService.getParentNode(),
                     systemsQuery).success(function (systems) {
-                        vars.ruleSystems = systems.resources;
-                        vars.totalRuleSystems = vars.ruleSystems.length;
+                        priv.setRuleSystems(pager, paginate, systems);
                     });
         } else {
             systemDeferred = System.getSystemsLatest(systemsQuery)
                 .success(function (response) {
-                    vars.ruleSystems = response.resources;
-                    vars.totalRuleSystems = vars.ruleSystems.length;
+                    priv.setRuleSystems(pager, paginate, response);
                 });
         }
 
-        ruleDeferred = Rule.byId(rule_id).success(function (rule) {
+        return systemDeferred;
+    };
+
+    /**
+     * Populates the data needed for actions page 3
+     *
+     * Sets ruleSystems to the first page of systems
+     *
+     * @param paginate if false pulls all systems affected by this action
+     * @param pager contains the current page and page size of the page being pulled
+     */
+    pub.initActionsRule = function (pager) {
+        let systemDeferred = pub.buildSystemsDeferred(true, pager);
+
+        let ruleDeferred = Rule.byId(pub.getRule()).success(function (rule) {
             vars.ruleDetails = rule;
         });
 
         return $q.all([systemDeferred, ruleDeferred]).then(function (results) {
-
-            // Check the results for any possible affected_hosts in the report details
-            var affectedHosts = false;
-
-            if (results && results[0] && results[0].data && results[0].data.length > 0) {
-                affectedHosts = [];
-                for (let i in results[0].data) {
-                    affectedHosts.push(results[0].data[i].system_id);
-                }
-            }
-
-            // If affected hosts were found, then retrieve their system names
-            if (affectedHosts) {
-                for (let j in affectedHosts) {
-                    namePromises.push(
-                        System.getSingleSystem(affectedHosts[j])
-                            .success(function (systemResult) {
-                                return systemResult;
-                            })
-                    );
-                }
-
-                return $q.all(namePromises).then(function (nameResults) {
-                    if (nameResults) {
-                        vars.systemNames = {};
-                        vars.systems = {};
-                        for (let theSystemKey in nameResults) {
-                            let theSystem = nameResults[theSystemKey].data;
-                            let theSystemId = theSystem.system_id;
-                            let theSystemName = theSystem.toString;
-                            vars.systems[theSystemId] = theSystem;
-                            vars.systemNames[theSystemId] = theSystemName;
-                        }
-                    }
-
-                    pub.setLoadingDetails(false);
-                });
-
-            // Otherwise carry on as usual
-            } else {
-                pub.setLoadingDetails(false);
-            }
+            return priv.populateAffectedHosts(results);
         });
     };
 
-    pub.resetPaging = function () {
-        vars.page = 0;
-    };
-
-    pub.nextPage = function () {
-        vars.page++;
-    };
-
     /**
-     * returns a page of rule systems using the page and pageSize variables
+     * Gets the current page for the actionsRule page (actions page 3)
+     *
+     * @param paginate if false pulls all systems affected by this action
+     * @param pager contains the current page and page size of the page being pulled
      */
-    pub.getRuleSystemsPage = function () {
-        if (vars.ruleSystems === null) {
-            return [];
+    pub.getActionsRulePage = function (paginate, pager) {
+        let systemDeferred;
+
+        // if we already have all of the systems affected use vars.allSystems
+        if (vars.allSystems === null) {
+            systemDeferred = pub.buildSystemsDeferred(paginate, pager)
+                .then(function (results) {
+                    return priv.populateAffectedHosts(results);
+                });
+        }
+        else {
+            systemDeferred = $q.resolve(true);
+
+            //TODO: need to determine if user is sorting the results
+            vars.ruleSystems = vars.allSystems.slice(
+                                        ((pager.currentPage - 1) * pager.perPage),
+                                        priv.getPageEnd(
+                                            vars.allSystems,
+                                            pager.currentPage - 1,
+                                            pager.perPage));
         }
 
-        let scrollingRuleSystems = vars.ruleSystems;
-        let offset = vars.page * vars.pageSize;
-
-        if (vars.isScrolling && offset < vars.ruleSystems.length) {
-            scrollingRuleSystems = vars.ruleSystems.slice(offset, pub.getPageEnd());
-            JSON.stringify(scrollingRuleSystems);
-        }
-
-        return scrollingRuleSystems;
-    };
-
-    /**
-     * returns the index of the last item in the current page
-     */
-    pub.getPageEnd = function () {
-        if (vars.ruleSystems === null) {
-            return 0;
-        }
-
-        let offset = vars.page * vars.pageSize;
-        return (offset + vars.pageSize) < vars.ruleSystems.length ?
-                    (offset + vars.pageSize) : vars.ruleSystems.length;
+        return systemDeferred;
     };
 
     pub.reload = function () {
@@ -409,17 +473,6 @@ function ActionsService(
                 }
             });
         }
-    };
-
-    /**
-     * Orders ruleSystems by supplied predicate and reverse
-     *
-     * @param {string} predicate property to sort by
-     * @param {boolean} reverse if true, descending order
-     */
-    pub.orderRuleSystems = function (predicate, reverse) {
-        vars.ruleSystems = $filter('orderBy')(vars.ruleSystems,
-            reverse ? '-' + predicate : predicate);
     };
 
     if (InsightsConfig.autoRefresh && !isNaN(InsightsConfig.autoRefresh)) {
