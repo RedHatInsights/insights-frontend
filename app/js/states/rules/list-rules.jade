@@ -8,7 +8,7 @@ section
     section.table-search
       .row
         .col-xs-6
-          search-box(search-placeholder="Filter by rule", on-search='search(model)', throttle='1000')
+          search-box(placeholder="{{'Search rules' | translate}}", on-search='search(model)', throttle='1000')
         .col-xs-6.btn-group
           a.btn.btn-sm.btn-app.pull-right(ui-sref='app.admin-topic', ng-show='user.is_internal') Topics Admin
         .push-top-narrow.rules-filters(ng-hide="loading")

@@ -24,7 +24,7 @@
     section.table-search
       .row
         .col-xs-6
-          search-box(on-search='search.doFilter(model)', placeholder='Find a system')
+          search-box(on-search='search.doFilter(model)', placeholder="{{'Find a system' | translate}}")
 
     div(infinite-scroll='doScroll()', infinite-scroll-disabled='disableScroll()', infinite-scroll-immediate-check='false')
 
