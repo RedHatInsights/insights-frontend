@@ -92,11 +92,19 @@ $marker-height: $marker-width;
       font-weight: 700;
     }
 
-    &.decrease { color: $red;
+    &.nochange {
+      width: 25px;
+      height: 25px;
+      left: -6px;
+    }
+
+    &.decrease {
+      color: $red;
       .fa.fa-caret-down { display: block; }
     }
 
-    &.increase { color: $green;
+    &.increase {
+      color: $green;
       .fa.fa-caret-up { display: block; }
     }
 
