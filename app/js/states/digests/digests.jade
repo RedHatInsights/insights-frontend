@@ -16,16 +16,41 @@
   .content-wrap.margin-top(ng-show='!loading && systemsTilTen < 1')
     section
       .row
-        .col-sm-3
+        .col-md-4
           h2.section-title(translate) Overall score
-          .gauge.gauge-circle.score(
-              tooltip='The average system score for your entire account. A system\'s score is based on the number of actions, weighted by severity. You can improve this score by fixing issues in your infrastructure. Score ranges from 250 to 850.',
-              tooltip-trigger='mouseenter',
-              tooltip-append-to-body='true',
-              tooltip-placement='right',
-              translate)
-            span {{latest_score}}
-        .col-sm-9
+
+          .gauge.gauge-score
+            .crop
+              .grad
+
+            .pivot(style="transform: rotate(30deg)")
+              .arm
+                // need a conditional notating either a decrease or increase. if no change, show 0 and no caret
+                // rotation is the inverse of angle calc
+                .marker.decrease(style="transform: rotate(-30deg)")
+                  .num 15
+                  i.fa.fa-caret-up(aria-hidden="true")
+                  i.fa.fa-caret-down(aria-hidden="true")
+
+            .score
+              h3 {{latest_score}}
+              span Score is fair
+
+
+            footer.footer
+              span.num.floor 250
+              span.num.ceiling 850
+
+
+            //.gauge.gauge-circle.score(
+            //  tooltip='The average system score for your entire account. A system\'s score is based on the number of actions, weighted by severity. You can improve this score by fixing issues in your infrastructure. Score ranges from 250 to 850.',
+            //  tooltip-trigger='mouseenter',
+            //  tooltip-append-to-body='true',
+            //  tooltip-placement='right',
+            //  translate)
+            //span {{latest_score}}
+
+        .col-md-8
           h2.section-title(translate) Weekly action count by category
           .row.padding-top
             .col-xs-6.col-md-3(ng-repeat='cat in digest_hits_per_cat')

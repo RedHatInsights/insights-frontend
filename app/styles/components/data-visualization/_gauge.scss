@@ -1,0 +1,148 @@
+$gauge-score-width: 220px;
+$gauge-score-height: $gauge-score-width;
+$gauge-score-thickness: 26px;
+$gauge-score-inner: $gauge-score-width - $gauge-score-thickness;
+
+$marker-width: 50px;
+$marker-height: $marker-width;
+
+.gauge.gauge-score {
+  position: relative;
+  max-width: 310px;
+  height: $gauge-score-height/2;
+  @include clearfix;
+
+  .grad,
+  .grad:after {
+    border-radius: 50%;
+  }
+
+  .crop {
+    position: relative;
+    height: $gauge-score-height/2;
+    display: inline-block;
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
+
+    &:after {
+      content: '';
+      width: $gauge-score-thickness;
+      height: $gauge-score-thickness;
+      border-radius: 50%;
+      background: #ed1c24;
+    }
+
+  }
+
+  .grad {
+    width: $gauge-score-width;
+    height: $gauge-score-height;
+    position: relative;
+    display: inline-block;
+    background: #ed1c24;
+    background: linear-gradient(to right, #ed1c24 0%,#f7941d 25%,#fff200 50%,#27aae1 75%,#009444 100%);
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: $gauge-score-thickness/2;
+      top: $gauge-score-thickness/2;
+      width: $gauge-score-inner;
+      height: $gauge-score-inner;
+      display: block;
+      background: #fff;
+    }
+  }
+
+
+  .pivot {
+    position: absolute;
+    width: 1px;
+    right: 50%;
+    top: 100%;
+    transform: rotate(0deg);
+  }
+
+  .arm {
+    position: absolute;
+    width: $gauge-score-width/2;
+    right: 0;
+    height: 1px;
+
+  }
+
+  .marker {
+    position: absolute;
+    left: -18px;
+    bottom: -$marker-height/2;
+    width: $marker-width;
+    height: $marker-height;
+    text-align: center;
+    border: 8px solid rgba(255,0,0,0.8);
+    transform: rotate(0deg);
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 0 0 6px rgba(255,255,255,.9), 0 0 8px 10px rgba(0,0,0,.1);
+    border-radius: 50%;
+
+    .num {
+      @include rem('margin-top', 6px);
+      @include font-size(16px);
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    &.decrease { color: $red;
+      .fa.fa-caret-down { display: block; }
+    }
+
+    &.increase { color: $green;
+      .fa.fa-caret-up { display: block; }
+    }
+
+    .fa {
+      display: none;
+      @include font-size(18px);
+      line-height: .5;
+    }
+
+  }
+
+
+  .score {
+    position: absolute;
+    width: 50%;
+    left: 25%;
+    top: 46%;
+    text-align: center;
+
+    h3 {
+      @include font-size(46px);
+      line-height: 1;
+      margin: 0;
+    }
+
+    span { font-weight: 700; }
+  }
+
+  footer {
+    $floor-margin: 24px;
+
+    @include rem('margin-top', 8px);
+
+    .num {
+      color: #9A9A9A;
+      font-weight: 700;
+    }
+
+
+    .floor {
+      @include rem('margin-left', $floor-margin);
+    }
+
+    .ceiling {
+      float: right;
+      @include rem('margin-right', $floor-margin);
+    }
+  }
+}
