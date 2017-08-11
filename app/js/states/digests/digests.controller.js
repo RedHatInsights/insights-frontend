@@ -131,6 +131,8 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
         var ruleres = responses[2];
         var digestBase = res.data.resources[0].data;
 
+        console.log(res.data.resources);
+
         function getDigestMetricsLine(category, lineBase, color) {
             // warning this function needs to have access to digestBase.timeseries
             return {
@@ -145,6 +147,8 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
         }
 
         $scope.latest_score = takeRight(digestBase.scores, 1)[0];
+        $scope.score_difference = $scope.latest_score -
+            digestBase.scores[digestBase.scores.length - 2];
 
         // max score is 850, min is 250.  Levels calculated by
         //  separating the 600 range into 4 segments and dividing
