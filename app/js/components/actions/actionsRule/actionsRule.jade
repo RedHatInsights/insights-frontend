@@ -92,7 +92,7 @@
                     ng-indeterminate="checkboxes.indeterminate",
                     ng-model='checkboxes.checked',
                     ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
-                th.sortable(style='width: 27%;', ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')")
+                th.sortable(style='width: 27%;', ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')")
                   .sort-indicator(translate) Type
                 th.sortable(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')")
                   .sort-indicator(translate) Name

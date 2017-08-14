@@ -438,7 +438,6 @@ function ActionsService(
         else {
             systemDeferred = $q.resolve(true);
 
-            //TODO: need to determine if user is sorting the results
             vars.ruleSystems = vars.allSystems.slice(
                                         ((pager.currentPage - 1) * pager.perPage),
                                         priv.getPageEnd(
@@ -448,6 +447,23 @@ function ActionsService(
         }
 
         return systemDeferred;
+    };
+
+    /**
+     * Sort actionsRule page (actions page 3)
+     *
+     * @param pager contains the page size of the page being pulled
+     */
+    pub.sortActionsRulePage = function (pager, predicate, reverse) {
+
+        // if we already have all of the systems affected sort allSystems
+        if (vars.allSystems !== null) {
+
+            vars.allSystems = $filter('orderBy')(vars.allSystems,
+                reverse ? '-' + predicate : predicate);
+        }
+
+        return pub.getActionsRulePage(true, pager);
     };
 
     pub.reload = function () {

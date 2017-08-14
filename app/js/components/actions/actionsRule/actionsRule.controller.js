@@ -37,15 +37,12 @@ function ActionsRuleCtrl(
         Export,
         Group) {
 
-    const DEFAULT_PAGE_SIZE = 15;
     const REVERSE_TO_DIRECTION = {
         false: 'ASC',
         true: 'DESC'
     };
 
-    //let params = $state.params;
     let category = $stateParams.category;
-    let priv = {};
 
     $scope.allSelected = false;
     $scope.config = InsightsConfig;
@@ -108,8 +105,6 @@ function ActionsRuleCtrl(
         FilterService.doFilter();
     };
 
-    // filters: ['system_id', 'hostname', 'display_name']
-
     $scope.checkboxes = new Utils.Checkboxes('system_id');
     $scope.$watchCollection('checkboxes.items', updateCheckboxes);
 
@@ -168,7 +163,7 @@ function ActionsRuleCtrl(
      * Get first page of systems
      * If url has a machine_id then open up the systemModal with given machine_id
      */
-    priv.initialDisplay = function () {
+    function initialDisplay () {
         $scope.loading = true;
         $scope.loadingSystems = true;
 
@@ -225,9 +220,9 @@ function ActionsRuleCtrl(
 
                 InventoryService.showSystemModal(system, true);
             });
-    };
+    }
 
-    priv.initCtrl = function () {
+    function initCtrl () {
         User.asyncCurrent(function () {
             $scope.isInternal = User.current.is_internal;
         });
@@ -241,14 +236,14 @@ function ActionsRuleCtrl(
             REVERSE_TO_DIRECTION[$scope.reverse]);
 
         //initialize pager and grab paging params from url
-        $scope.pager = new Utils.Pager(DEFAULT_PAGE_SIZE);
+        $scope.pager = new Utils.Pager();
         $scope.pager.currentPage = $location.search().page ? $location.search().page :
                                                              $scope.pager.currentPage;
         $scope.pager.perPage = $location.search().pageSize ? $location.search().pageSize :
                                                              $scope.pager.perPage;
 
-        priv.initialDisplay();
-    };
+        initialDisplay();
+    }
 
     $rootScope.$on('productFilter:change', function () {
         if ($state.current.name === 'app.actions-rule') {
@@ -259,9 +254,9 @@ function ActionsRuleCtrl(
     $scope.$on('account:change', getData);
 
     if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
-        $rootScope.$on('user:loaded', priv.initCtrl);
+        $rootScope.$on('user:loaded', initCtrl);
     } else {
-        priv.initCtrl();
+        initCtrl();
     }
 
     $scope.addToPlan = rejectIfNoSystemSelected(function (existingPlan) {
@@ -275,8 +270,6 @@ function ActionsRuleCtrl(
     });
 
     $scope.sort = function (column) {
-        $scope.loading = true;
-        $scope.predicate = column;
 
         // just changing the sort direction
         if (column === $scope.predicate) {
@@ -292,6 +285,8 @@ function ActionsRuleCtrl(
             }
         }
 
+        $scope.predicate = column;
+
         // store sort fields in FilterService for systems query
         FilterService.setQueryParam('sort_field', $scope.predicate);
         FilterService.setQueryParam('sort_direction',
@@ -299,7 +294,16 @@ function ActionsRuleCtrl(
 
         // reset dataset
         $scope.resetPaging();
-        getData(true);
+        $scope.loadingSystems = true;
+
+        return RhaTelemetryActionsService.sortActionsRulePage($scope.pager,
+                                                              $scope.predicate,
+                                                              $scope.reverse)
+        .then(function () {
+            $scope.ruleSystems = RhaTelemetryActionsService.getRuleSystems();
+            $scope.totalRuleSystems = RhaTelemetryActionsService.getTotalRuleSystems();
+            $scope.loadingSystems = false;
+        });
     };
 
     // reset checkboxes and pager when sorting
