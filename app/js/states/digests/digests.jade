@@ -13,7 +13,7 @@
         h2(translate) Please register 
           span(translate, translate-n='systemsTilTen', translate-plural='{{$count}} more systems') {{systemsTilTen}} more system
           | &nbsp;to enable reporting for your account.
-  .content-wrap.margin-top(ng-show='!loading && systemsTilTen < 1')
+  .content-wrap(ng-show='!loading && systemsTilTen < 1')
     section
       .row
         .col-md-4
@@ -24,32 +24,30 @@
               .grad
 
             // rotation is the angle calc
-            .pivot(style="transform: rotate(30deg)")
+            .pivot(style="transform: rotate({{(latest_score-250)*.3}}deg)")
               .arm
                 // need a conditional notating either a decrease or increase. if no change, show 0 and no caret
                 // rotation is the inverse of angle calc
                 .marker(style="transform: rotate(-30deg)", ng-class="{'decrease': score_difference < 0, 'increase': score_difference > 0}")
-                  .num {{score_difference}}
+                  // I need a  conditional here that controls tooltip content
+                  //tooltip='Your score has increased by 15 points',
+                  //tooltip-trigger='mouseenter',
+                  //tooltip-append-to-body='true',
+                  //tooltip-placement='top',
+                  //translate)
+
                   i.fa.fa-caret-up(aria-hidden="true")
+                  .num {{score_difference}}
                   i.fa.fa-caret-down(aria-hidden="true")
 
             .score
               h3 {{latest_score}}
-              span Score is fair
+              span Score is excellent
 
 
             footer.footer
               span.num.floor 250
               span.num.ceiling 850
-
-
-            //.gauge.gauge-circle.score(
-            //  tooltip='The average system score for your entire account. A system\'s score is based on the number of actions, weighted by severity. You can improve this score by fixing issues in your infrastructure. Score ranges from 250 to 850.',
-            //  tooltip-trigger='mouseenter',
-            //  tooltip-append-to-body='true',
-            //  tooltip-placement='right',
-            //  translate)
-            //span {{latest_score}}
 
         .col-md-8
           h2.section-title(translate) Weekly action count by category

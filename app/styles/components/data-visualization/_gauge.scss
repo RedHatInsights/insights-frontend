@@ -78,6 +78,7 @@ $marker-height: $marker-width;
     bottom: -$marker-height/2;
     width: $marker-width;
     height: $marker-height;
+    @include rem('padding-top', 5px);
     text-align: center;
     border: 8px solid rgba(255,0,0,0.8);
     transform: rotate(0deg);
@@ -86,7 +87,6 @@ $marker-height: $marker-width;
     border-radius: 50%;
 
     .num {
-      @include rem('margin-top', 6px);
       @include font-size(16px);
       line-height: 1;
       font-weight: 700;
@@ -96,6 +96,8 @@ $marker-height: $marker-width;
       width: 25px;
       height: 25px;
       left: -6px;
+
+      .num { display: none; }
     }
 
     &.decrease {
@@ -105,6 +107,7 @@ $marker-height: $marker-width;
 
     &.increase {
       color: $green;
+      border-color: $green;
       .fa.fa-caret-up { display: block; }
     }
 
