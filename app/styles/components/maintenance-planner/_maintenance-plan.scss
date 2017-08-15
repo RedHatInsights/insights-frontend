@@ -34,7 +34,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 	.page-header {
 		position: relative;
-		padding: 0;
 		background: #F9F9F9;
 		@include rem('padding-bottom', $global-padding);
 
