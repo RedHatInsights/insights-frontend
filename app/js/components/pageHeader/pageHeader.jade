@@ -1,5 +1,8 @@
-.page-header
-  h1.page-title.pull-left
-    i.fa(class="{{icon}}") &nbsp;
-    span(translate) {{titleTranslated}}
-  div(ng-transclude)
+.page-header.content-wrap
+    .content-block
+        div(ng-transclude)
+        h1.page-title.pull-left
+            span.icon-inline
+                i.fa(class="{{icon}}")
+            span(translate) {{titleTranslated}}
+  
