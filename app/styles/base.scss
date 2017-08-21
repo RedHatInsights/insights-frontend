@@ -30,6 +30,7 @@ $define-fa: true !default;
 @import '../../node_modules/sweetalert2/dist/sweetalert2';
 @import '../../node_modules/c3/c3';
 @import '../../node_modules/ng-table/dist/ng-table';
+@import '../../node_modules/material-components-web/dist/material-components-web';
 
 .flexgrid {
   @import '../../node_modules/flexboxgrid/dist/flexboxgrid';
@@ -142,6 +143,8 @@ $define-fa: true !default;
 @import 'components/gauges';
 @import 'components/global-filters';
 @import 'components/demo-account-switcher';
+
+@import 'components/materials';
 
 
 // Maintenance Plan
