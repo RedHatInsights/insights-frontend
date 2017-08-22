@@ -1,0 +1,13 @@
+.risk-of-change-select
+  label(translate) Risk of Change
+  .dropdown
+    button.btn.btn-default.dropdown-toggle(
+      type='button',
+      data-toggle='dropdown',
+      aria-haspopup='true',
+      aria-expanded='false')
+      span {{selected.label}}
+      span.caret
+    ul.dropdown-menu
+      li(ng-repeat='(key, value) in options')
+        a(ng-click='select(key)') {{value.label}}

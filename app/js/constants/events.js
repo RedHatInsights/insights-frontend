@@ -33,6 +33,7 @@ let _EVENT_ROOTS = [{
              'maintenanceCategorySelect',
              'populatedProducts',
              'reset',
+             'riskOfChangeSelect',
              'totalRisk',
              'tag',
              'removeTag']

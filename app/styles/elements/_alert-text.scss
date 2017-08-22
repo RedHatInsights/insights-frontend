@@ -1,0 +1,23 @@
+$alert-text-blue: $blue;
+$alert-text-green: $green;
+$alert-text-orange: $orange;
+$alert-text-red: $red;
+
+.alert-text {
+  color: #fff;
+  display: inline-block;
+  @include rem('padding', 4px $global-padding/2);
+  background: $gray;
+
+  &.alert-text-blue { background: $alert-text-blue; }
+  &.alert-text-green { background: $alert-text-green; }
+  &.alert-text-orange { background: $alert-text-orange; }
+  &.alert-text-red { background: $alert-text-red; }
+}
+
+
+// Space msg-block following span or strong appropriately
+strong,
+span {
+  & + .alert-text { @include rem('margin-left', $global-padding/2); }
+}

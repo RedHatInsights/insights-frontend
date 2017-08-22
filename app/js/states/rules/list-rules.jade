@@ -34,7 +34,10 @@ section
 
                 .content.ng-animate-enabled
                   .row
-                    .col-sm-12.text-right
+                    .col-sm-6
+                      rule-toggle(rule="rule")
+
+                    .col-sm-6.text-right
                       a(ng-if='rule.article', href='{{rule.article}}', translate, target='_blank') Knowledgebase
                   .row.row-short
                     .col-sm-12
@@ -42,16 +45,17 @@ section
 
                 .footer.footer-short(ng-if="canIgnoreRules")
                   .row
-                    .col-sm-6
+                    .col-sm-8
                       .icon-group.icon-group-severity
                         severity-icon(severity='rule.rec_impact', type='impact')
                         severity-icon(severity='rule.rec_likelihood', type='likelihood')
                         severity-icon(severity='rule.severity', type='severity')
-                    .col-sm-6.text-right
+                      risk-of-change
+                    .col-sm-4.text-right
+
                       strong(ng-if="rule.impacted_systems !== undefined && !rule.ack_id")
                         a(ui-sref='app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})', translate, ng-disabled="rule.impacted_systems === 0") View Impacted Systems ({{rule.impacted_systems}})
-                      .sep
-                      rule-toggle(rule="rule")
+
               .row.row-short(ng-show='rules.length === 0')
                 .col-xs-12.text-center
                   strong(translate) There are no rules for the selected filters.&nbsp;

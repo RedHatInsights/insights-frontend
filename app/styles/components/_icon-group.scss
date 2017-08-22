@@ -12,7 +12,7 @@
 
   &.gray,
   &.white {
-    @include rem('padding', $global-padding/2 $global-padding);
+    @include rem('padding', $global-padding/2);
     border: 1px solid $gray;
   }
 
@@ -29,6 +29,5 @@
 
   .severity-icon { display: inline-block; }
   .severity-icon + .severity-icon { @include rem('margin-left', $global-padding); }
-
 }
 

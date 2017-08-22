@@ -47,7 +47,8 @@
                     name='resolution-type',
                     id='resolution-type-{{$index}}',
                     ng-value='resolution.resolution_type')
-              | {{resolution.description}}
+              risk-of-change(change-risk='resolution.resolution_risk', hide-label='true')
+              span {{resolution.description}}
               br
               i.fa.fa-repeat.red.inline-left(
                 ng-if='resolution.needs_reboot',

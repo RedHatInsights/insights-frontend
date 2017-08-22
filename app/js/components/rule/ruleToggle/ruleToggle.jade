@@ -1,2 +1,4 @@
-a.red(ng-hide="isSystemAlert(rule.rule_id)")
-  strong(ng-click="ackAction()") {{text}}
+.toggle(ng-click='ackAction()')
+    .toggle-slider(ng-class='{active: rule.ack_id}')
+    b(translate='translate')
+        span {{text}}

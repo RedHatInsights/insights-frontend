@@ -1,0 +1,18 @@
+.risk-of-change {
+  display: inline-block;
+  @include rem('margin-top', $global-padding);
+
+  @include media-query(md) {
+  	margin-top: 0;
+    @include rem('margin-left', $global-padding);
+  }
+
+  i {
+    @include font-size(18px);
+    line-height: 1.5;
+  }
+
+  .icon-inline {
+    padding-left: 24px;
+  }
+}
