@@ -17,7 +17,7 @@ function Digest($http, InsightsConfig, AccountService) {
         },
 
         getDigestsByType: function (digest_type_id) {
-            var url = root + 'digests?remote_branch=-1&digest_type_id=' +
+            var url = root + 'digests?remote_branch=-2&digest_type_id=' +
                              digest_type_id +
                              AccountService.current('&');
             return $http.get(url);
