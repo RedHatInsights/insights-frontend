@@ -168,6 +168,11 @@ function ListRuleCtrl(
         });
     }
 
+    $scope.search = function (model) {
+        FilterService.setSearchTerm(model);
+        FilterService.doFilter();
+    };
+
     if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
         $rootScope.$on('user:loaded', getData);
     } else {

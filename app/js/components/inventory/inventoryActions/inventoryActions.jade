@@ -39,7 +39,11 @@
   .col-xs-8.col-sm-8.text-center
     span(ng-hide='reloading')
       h3.system-count(translate, translate-n='totalSystems()', translate-plural='{{$count}} Systems') 1 System
-      small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected)
+      small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected
+        span(ng-show='allSelected && pager.perPage < totalSystems()') .
+          a(ng-show='!reallyAllSelected', ng-click='reallySelectAll()', translate) &nbsp;Select All Systems.
+          a(ng-show='reallyAllSelected', ng-click='deselectAll()', translate) &nbsp;Deselect All Systems.
+        span )
       br
       a.link(
       ng-click="registerSystem()",

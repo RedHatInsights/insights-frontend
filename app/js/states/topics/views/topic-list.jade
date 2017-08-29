@@ -1,8 +1,5 @@
 .actions-page.actions-back
-  .page-header
-    h1.page-title.pull-left
-      i.fa.fa-file-text &nbsp;
-      span(translate) Actions
+  page-header(title="Actions", icon="fa-file-text")
   topic-rule-filters(ng-hide='loading')
 
   .content-wrap(ng-hide="loading")
@@ -15,7 +12,7 @@
       .flexgrid.equalheights
         .row
           .col-xs-6
-            search-box(search-placeholder="Filter by rule", on-search='search.doFilter(model)')
+            search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
           .col-xs-6.text-right
             list-type
 

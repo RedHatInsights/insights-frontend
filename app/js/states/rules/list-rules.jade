@@ -1,14 +1,11 @@
 section
-  .page-header
-    h1.page-title.pull-left
-      i.fa.fa-institution &nbsp;
-      span(translate) Rules
+  page-header(title="Rules", icon="fa-institution")
   rule-filter
   .content-wrap
     section.table-search
       .row
         .col-xs-6
-          search-box(search-placeholder="Filter by rule", on-search='search.doFilter(model)')
+          search-box(placeholder="{{'Search rules' | translate}}", on-search='search(model)', throttle='1000')
         .col-xs-6.btn-group
           a.btn.btn-sm.btn-app.pull-right(ui-sref='app.admin-topic', ng-show='user.is_internal') Topics Admin
         .push-top-narrow.rules-filters(ng-hide="loading")

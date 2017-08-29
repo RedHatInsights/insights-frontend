@@ -80,7 +80,6 @@ function ActionsCtrl(
     };
 
     $scope.$on('filterService:doFilter', reload);
-    $scope.$on('osp:deployment_changed', reload);
     $scope.$on('group:change', reload);
 
     RhaTelemetryActionsService.setInitialSeverity($stateParams.initialSeverity);

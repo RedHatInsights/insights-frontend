@@ -33,7 +33,7 @@ function InventoryCtrl(
         Export,
         Group) {
 
-    const DEFAULT_PAGE_SIZE = 10;
+    const DEFAULT_PAGE_SIZE = 15;
 
     $scope.Group = Group;
     $scope.filter = FilterService;
@@ -84,7 +84,7 @@ function InventoryCtrl(
 
     $scope.$on('group:change', function () {
         cleanTheScope();
-        initInventory();
+        getData(false);
     });
 
     $scope.$on('filterService:doFilter', function () {
@@ -92,14 +92,9 @@ function InventoryCtrl(
         getData(false);
     });
 
-    $scope.$on('osp:deployment_changed', function () {
-        cleanTheScope();
-        initInventory();
-    });
-
     $scope.$on('systems:unregistered', function () {
         cleanTheScope();
-        initInventory();
+        getData();
     });
 
     let systemModal = null;
@@ -210,6 +205,7 @@ function InventoryCtrl(
         $location.search('pageSize', $scope.pager.perPage);
         getData(true);
         $scope.pager.update();
+        $scope.checkboxes.reset();
     };
 
     function parseBrowserQueryParams() {
@@ -247,6 +243,7 @@ function InventoryCtrl(
             $scope.allSelected = true;
         } else {
             $scope.allSelected = false;
+            $scope.reallyAllSelected = false;
         }
 
         setTotalSystemsSelected();
@@ -351,6 +348,12 @@ function InventoryCtrl(
         }
     };
 
+    $scope.deselectAll = function () {
+        $scope.reallyAllSelected = false;
+        $scope.allSelected = false;
+        $scope.checkboxes.reset();
+    };
+
     $scope.reallySelectAll = function () {
         function getAllSystems() {
 
@@ -392,11 +395,7 @@ function InventoryCtrl(
 
     function setTotalSystemsSelected () {
 
-        // if all systems are shown just count the checkboxes
-        if ($scope.systems.length === InventoryService.getTotal()) {
-            $scope.totalSystemsSelected = visiblySelectedSystemsCount();
-        }
-        else if ($scope.reallyAllSelected) {
+        if ($scope.reallyAllSelected) {
             $scope.totalSystemsSelected = InventoryService.getTotal();
 
             // remove systems in view that are not checked
@@ -409,10 +408,12 @@ function InventoryCtrl(
     }
 
     function visiblySelectedSystemsCount () {
-        return $scope.systems.filter(system => {
+        let value = $scope.systems.filter(system => {
             return ($scope.checkboxes.items.hasOwnProperty(system.system_id) &&
                 $scope.checkboxes.items[system.system_id] === true);
         }).length;
+
+        return value;
     }
 
     $scope.allSystemsShown = function () {
