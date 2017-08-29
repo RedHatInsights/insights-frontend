@@ -1,16 +1,12 @@
 section.inventory
-  .page-header
-    h1.page-title.pull-left
-      i.fa.fa-database &nbsp;
-      span(translate) Inventory
-
+  page-header(title="Inventory", icon="fa-database")
   inventory-filters
   .rha-notifications
   .content-wrap
     .table-search
       .row
         .col-xs-6
-          search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder='Find a system')
+          search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder="{{'Find a system' | translate}}")
 
     inventory-actions
 

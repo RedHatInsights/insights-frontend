@@ -33,6 +33,7 @@ function InventoryService($modal, FilterService, System, InsightsConfig) {
 
     inventoryService.toggleSortDirection = function () {
         _sort.direction = (_sort.direction === 'ASC') ? 'DESC' : 'ASC';
+        FilterService.setQueryParam('sort_dir', _sort.direction);
     };
 
     inventoryService.getSort = function () {
