@@ -1,0 +1,54 @@
+$toggle-status-width: 14px;
+
+.toggle {
+  input[type="checkbox"] { display: none; }
+  border: none !important;
+
+  b,
+  span,
+  strong {
+    & + .toggle-slider { @include rem('margin-left', $global-padding/2); }
+  }
+
+  .toggle-slider {
+    & + b,
+    & + span,
+    & + strong { @include rem('margin-left', $global-padding/2); }
+  }
+}
+
+.toggle-slider {
+  position: relative;
+  display: inline-block;
+  background: $gray;
+  width: $toggle-status-width * 2;
+  height: $toggle-status-width + 2;
+  vertical-align: middle;
+  border-radius: $toggle-status-width * 3;
+
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    display: inline-block;
+    width: $toggle-status-width;
+    height: $toggle-status-width;
+    background: #fff;
+    border: 1px solid $gray;
+    border-radius: 50%;
+    transition: .2s;
+  }
+
+  &.active {
+    background: $blue;
+
+    &:before {
+      left: $toggle-status-width - 1;
+      border-color: $blue;
+    }
+  }
+
+  input[type="checkbox"] { display: none !important; }
+}

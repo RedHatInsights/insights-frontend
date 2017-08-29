@@ -11,6 +11,7 @@ const diff = require('lodash/difference');
  */
 function InventoryCtrl(
         $filter,
+        $location,
         $modal,
         $rootScope,
         $scope,
@@ -32,7 +33,10 @@ function InventoryCtrl(
         Export,
         Group) {
 
+    const DEFAULT_PAGE_SIZE = 15;
+
     $scope.Group = Group;
+    $scope.filter = FilterService;
 
     function updateParams(params) {
         params = FilterService.updateParams(params);
@@ -52,7 +56,6 @@ function InventoryCtrl(
     $scope.showActions = InventoryService.showSystemModal;
 
     $scope.listTypes = ListTypeService.types();
-    $scope.setListType = ListTypeService.setType;
 
     FilterService.setSearchTerm('');
     FilterService.setShowFilters(false);
@@ -81,7 +84,7 @@ function InventoryCtrl(
 
     $scope.$on('group:change', function () {
         cleanTheScope();
-        initInventory();
+        getData(false);
     });
 
     $scope.$on('filterService:doFilter', function () {
@@ -89,14 +92,9 @@ function InventoryCtrl(
         getData(false);
     });
 
-    $scope.$on('osp:deployment_changed', function () {
-        cleanTheScope();
-        initInventory();
-    });
-
     $scope.$on('systems:unregistered', function () {
         cleanTheScope();
-        initInventory();
+        getData();
     });
 
     let systemModal = null;
@@ -104,12 +102,21 @@ function InventoryCtrl(
     $scope.isPortal = InsightsConfig.isPortal;
 
     function cleanTheScope() {
+        $scope.pager = new Utils.Pager(DEFAULT_PAGE_SIZE);
         $scope.checkboxes.reset();
     }
 
     function initInventory() {
-        //get system types
         $scope.loading = true;
+
+        //initialize pager and grab paging params from url
+        $scope.pager = new Utils.Pager(DEFAULT_PAGE_SIZE);
+        $scope.pager.currentPage = $location.search().page ? $location.search().page :
+                                                             $scope.pager.currentPage;
+        $scope.pager.perPage = $location.search().pageSize ? $location.search().pageSize :
+                                                             $scope.pager.perPage;
+
+        //get system types
         SystemsService.getSystemTypesAsync().then(function () {
             getData(false);
         });
@@ -140,19 +147,20 @@ function InventoryCtrl(
 
         //pagination
         if (paginate) {
-            query.page_size = InventoryService.getPageSize();
-            query.page = InventoryService.getPage();
+            query.page_size = $scope.pager.perPage;
+
+            // programmatic page starts at 0 while ui page starts at 1
+            query.page = ($scope.pager.currentPage - 1);
         }
 
         return query;
     }
 
-    function getData(scrolling) {
+    function getData(paginate) {
         $scope.loading = true;
 
-        if (!scrolling) {
+        if (!paginate) {
             $scope.reloading = true;
-            InventoryService.goToPage(0);
         }
 
         function getSystemsResponseHandler(response) {
@@ -164,14 +172,8 @@ function InventoryCtrl(
                 systems = response.resources;
             }
 
-            if (scrolling) {
-                $scope.systems = $scope.systems.concat(response.resources);
-                InventoryService.setIsScrolling(false);
-                InventoryService.setTotal(response.total);
-            } else {
-                $scope.systems = response.resources;
-                InventoryService.setTotal(response.total);
-            }
+            $scope.systems = response.resources;
+            InventoryService.setTotal(response.total);
 
             SystemsService.systems = $scope.systems;
         }
@@ -199,21 +201,11 @@ function InventoryCtrl(
     };
 
     $scope.doScroll = function () {
-        InventoryService.nextPage();
-        InventoryService.setIsScrolling(true);
+        $location.search('page', $scope.pager.currentPage);
+        $location.search('pageSize', $scope.pager.perPage);
         getData(true);
-    };
-
-    $scope.disableScroll = function () {
-        let disable = false;
-        if (InventoryService.getIsScrolling() ||
-            !$scope.systems ||
-            $scope.systems.length >= InventoryService.getTotal()) {
-
-            disable = true;
-        }
-
-        return disable;
+        $scope.pager.update();
+        $scope.checkboxes.reset();
     };
 
     function parseBrowserQueryParams() {
@@ -251,6 +243,7 @@ function InventoryCtrl(
             $scope.allSelected = true;
         } else {
             $scope.allSelected = false;
+            $scope.reallyAllSelected = false;
         }
 
         setTotalSystemsSelected();
@@ -355,6 +348,12 @@ function InventoryCtrl(
         }
     };
 
+    $scope.deselectAll = function () {
+        $scope.reallyAllSelected = false;
+        $scope.allSelected = false;
+        $scope.checkboxes.reset();
+    };
+
     $scope.reallySelectAll = function () {
         function getAllSystems() {
 
@@ -396,11 +395,7 @@ function InventoryCtrl(
 
     function setTotalSystemsSelected () {
 
-        // if all systems are shown just count the checkboxes
-        if ($scope.systems.length === InventoryService.getTotal()) {
-            $scope.totalSystemsSelected = visiblySelectedSystemsCount();
-        }
-        else if ($scope.reallyAllSelected) {
+        if ($scope.reallyAllSelected) {
             $scope.totalSystemsSelected = InventoryService.getTotal();
 
             // remove systems in view that are not checked
@@ -413,10 +408,12 @@ function InventoryCtrl(
     }
 
     function visiblySelectedSystemsCount () {
-        return $scope.systems.filter(system => {
+        let value = $scope.systems.filter(system => {
             return ($scope.checkboxes.items.hasOwnProperty(system.system_id) &&
                 $scope.checkboxes.items[system.system_id] === true);
         }).length;
+
+        return value;
     }
 
     $scope.allSystemsShown = function () {

@@ -6,7 +6,8 @@ const find = require('lodash/find');
 /**
  * @ngInject
  */
-function actionsSelectCtrl($scope,
+function actionsSelectCtrl($rootScope,
+                           $scope,
                            gettextCatalog,
                            Events,
                            MultiButtonService,
@@ -16,17 +17,20 @@ function actionsSelectCtrl($scope,
             id: 'all',
             label: gettextCatalog.getString('All'),
             withActions: true,
-            withoutActions: true
+            withoutActions: true,
+            tag: null
         }, {
             id: 'affected',
             label: gettextCatalog.getString('Affected'),
             withActions: true,
-            withoutActions: false
+            withoutActions: false,
+            tag: gettextCatalog.getString('Health: Affected')
         }, {
             id: 'healthy',
             label: gettextCatalog.getString('Healthy'),
             withActions: false,
-            withoutActions: true
+            withoutActions: true,
+            tag: gettextCatalog.getString('Health: Healthy')
         }
     ];
 
@@ -35,7 +39,12 @@ function actionsSelectCtrl($scope,
         MultiButtonService.setState('inventoryWithActions', option.withActions);
         MultiButtonService.setState('inventoryWithoutActions', option.withoutActions);
         FilterService.doFilter();
+        $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.actionsSelect);
     };
+
+    function getTag () {
+        return $scope.selected.tag;
+    }
 
     function read () {
         $scope.selected = find($scope.options, {
@@ -47,6 +56,8 @@ function actionsSelectCtrl($scope,
                 MultiButtonService.getState('inventoryWithActions') + ':' +
                 MultiButtonService.getState('inventoryWithoutActions'));
         }
+
+        $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.actionsSelect);
     }
 
     read();
@@ -55,6 +66,14 @@ function actionsSelectCtrl($scope,
         $scope.select(find($scope.options, (option) => {
             return option.id === 'all';
         }));
+    });
+
+    $scope.$on(Events.filters.removeTag, function (event, filter) {
+        if (filter === Events.filters.actionsSelect) {
+            $scope.select(find($scope.options, (option) => {
+                return option.id === 'all';
+            }));
+        }
     });
 }
 

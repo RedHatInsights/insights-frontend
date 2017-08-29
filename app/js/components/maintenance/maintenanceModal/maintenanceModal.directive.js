@@ -34,7 +34,8 @@ function maintenanceModalCtrl($scope,
                               existingPlan,
                               Subset,
                               Rule,
-                              Group) {
+                              Group,
+                              Events) {
     $scope.MODES = MODES;
     $scope.tableEdit = true;
     $scope.selected = {};
@@ -113,7 +114,7 @@ function maintenanceModalCtrl($scope,
             $scope.tableParams = buildTableParams();
         }
 
-        $scope.$broadcast('maintenance:reload-table');
+        $scope.$broadcast(Events.planner.reloadTable);
     }
 
     $scope.$watchGroup(['selected.plan', 'newPlan', 'selected.group', 'selected.system'],

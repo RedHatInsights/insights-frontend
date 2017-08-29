@@ -13,6 +13,7 @@ function Maintenance(
     AccountService,
     $window,
     DataUtils,
+    Events,
     $rootScope) {
 
     var root = InsightsConfig.apiRoot;
@@ -63,7 +64,7 @@ function Maintenance(
     api.updatePlan = function (planId, data) {
         return $http.put(root + 'maintenance/' + planId + AccountService.current(), data)
             .then(function () {
-                $rootScope.$broadcast('maintenance:planChanged', planId);
+                $rootScope.$broadcast(Events.planner.planChanged, planId);
             });
     };
 
@@ -73,7 +74,7 @@ function Maintenance(
             'maintenance/' +
             plan.maintenance_id +
             AccountService.current()).then(function () {
-                $rootScope.$broadcast('maintenance:planDeleted', plan.maintenance_id);
+                $rootScope.$broadcast(Events.planner.planDeleted, plan.maintenance_id);
             });
     };
 

@@ -1,77 +1,59 @@
 /*global require*/
 'use strict';
 
-var componentsModule = require('../');
+const componentsModule = require('../');
+const priv = {};
 
 /**
  * @ngInject
  */
-function CollapsibleFilterCtrl($location,
+function CollapsibleFilterCtrl($element,
+                               $location,
                                $q,
                                $rootScope,
                                $scope,
-                               Events,
-                               Group,
-                               IncidentFilters,
-                               Severities) {
+                               Events) {
 
+    /**
+     * Removes tag from footer and broadcasts the event for reseting the filter
+     */
     $scope.removeFilter = function (tagId) {
-        $location.search(tagId, null);
         delete $scope.tags[tagId];
-        $rootScope.$broadcast(tagId);
+        $rootScope.$broadcast(Events.filters.removeTag, tagId);
     };
 
     $scope.hasTags = function () {
         return Object.keys($scope.tags).length > 0;
     };
 
-    $scope.$on(Events.filters.incident, function () {
-        addIncidentTag();
+    /**
+     * listens for new tags and adds them to the footer as they come in
+     */
+    $scope.$on(Events.filters.tag, function (event, tag, filter) {
+        $scope.tags[filter] = tag;
+
+        if (tag === null) {
+            delete $scope.tags[filter];
+        }
     });
 
-    $scope.$on(Events.filters.totalRisk, function () {
-        addTotalRiskTag();
-    });
+    /**
+     * exposes an 'open' variable which tracks the state of the collapsible filter so that
+     * classes can be applied to the frontend when the filters are open/closed
+     */
+    priv.toggleTray = function () {
+        $scope.open = !$scope.open;
+        $scope.$digest();
+    };
 
-    function addTotalRiskTag () {
-        if ($location.search()[Events.filters.totalRisk] &&
-            $location.search()[Events.filters.totalRisk] !== 'All') {
-            $scope.tags[Events.filters.totalRisk] =
-                Severities.find((severity) => {
-                    return severity.value ===
-                        $location.search()[Events.filters.totalRisk];
-                }).tag;
-        } else {
-            delete $scope.tags[Events.filters.totalRisk];
-        }
-    }
+    $element.bind('show.bs.collapse', priv.toggleTray);
+    $element.bind('hidden.bs.collapse', priv.toggleTray);
 
-    function addIncidentTag () {
-        if ($location.search()[Events.filters.incident] &&
-            $location.search()[Events.filters.incident] !== 'all') {
-            $scope.tags[Events.filters.incident] =
-                IncidentFilters[
-                    $location.search()[Events.filters.incident]].tag;
-        } else {
-            delete $scope.tags[Events.filters.incident];
-        }
-    }
-
-    function initTags () {
+    function init () {
         $scope.tags = {};
-        addTotalRiskTag();
-        addIncidentTag();
     }
 
-    this.api = $scope;
-    initTags();
-}
-
-/**
- * @ngInject
- */
-function CollapsibleFilterContentLink(scope, element, attrs, collapsibleFilter) {
-    scope.collapsibleFilter = collapsibleFilter.api;
+    init();
 }
 
 /**
@@ -83,11 +65,7 @@ function collapsibleFilter() {
         restrict: 'E',
         replace: true,
         transclude: true,
-        controller: CollapsibleFilterCtrl,
-        scope: {
-            searchPlaceholder: '@',
-            search: '='
-        }
+        controller: CollapsibleFilterCtrl
     };
 }
 
@@ -100,7 +78,6 @@ function collapsibleFilterContent() {
         restrict: 'E',
         replace: true,
         transclude: true,
-        link: CollapsibleFilterContentLink,
         require: '^collapsibleFilter'
     };
 }

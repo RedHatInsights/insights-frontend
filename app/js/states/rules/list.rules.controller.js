@@ -141,6 +141,7 @@ function ListRuleCtrl(
     }
 
     function getData() {
+        $scope.loading = true;
         let promises = [];
         let query = FilterService.buildRequestQueryParams();
         query.include = 'article';
@@ -166,6 +167,11 @@ function ListRuleCtrl(
             $scope.loading = false;
         });
     }
+
+    $scope.search = function (model) {
+        FilterService.setSearchTerm(model);
+        FilterService.doFilter();
+    };
 
     if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
         $rootScope.$on('user:loaded', getData);

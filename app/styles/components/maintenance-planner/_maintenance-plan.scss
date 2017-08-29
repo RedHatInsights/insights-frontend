@@ -4,6 +4,17 @@ $maintenance-plan-padding: 20px;
 $maintenance-plan-spacing: 20px;
 $maintenance-button-bg: #0095DB;
 $expand-bar-bg: #f2f5f7;
+$maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
+
+.playbook-settings-table {
+	tbody, tr {
+		background: white !important;
+	}
+	.column-systems{
+		border-right: 1px solid $maintenance-plan-border-color !important;
+		height: 100%;
+	}
+}
 
 .maintenance-page-select {
   input.ui-select-search,
@@ -23,7 +34,6 @@ $expand-bar-bg: #f2f5f7;
 
 	.page-header {
 		position: relative;
-		padding: 0;
 		background: #F9F9F9;
 		@include rem('padding-bottom', $global-padding);
 
@@ -148,7 +158,7 @@ $expand-bar-bg: #f2f5f7;
                 @include rem('margin-left', 10px);
             }
 
-            i.svg.ansible-icon {
+            i.svg.ansible-icon, i.svg.ansible-icon-white {
                 width: auto;
                 display: inline-block;
 
@@ -239,7 +249,7 @@ $expand-bar-bg: #f2f5f7;
 		@include rem('padding', $global-padding $maintenance-plan-padding);
 	}
 
-	.header {
+	> .header {
 		border-bottom: 1px solid $maintenance-plan-border-color;
 
 		h2.title {
@@ -419,7 +429,7 @@ $expand-bar-bg: #f2f5f7;
 
 	}
 
-	.header + .content { border-top: none; }
+	> .header + .content { border-top: none; }
 
 	.plan-summary {
 		@include rem('padding', $global-padding $global-padding $global-padding);
@@ -453,109 +463,6 @@ $expand-bar-bg: #f2f5f7;
 			th.nopad, td.nopad {
 				padding-left: 0;
 				padding-right: 0;
-			}
-		}
-	}
-
-	.content-tabs {
-		padding: 0;
-		display: none;
-
-		&.active {
-			display: block;
-		}
-
-		.content-block { margin: 0;  }
-		.content-block, .add-actions + .content-block { @include rem('margin-top', $global-margin); }
-
-		.nav {
-			padding: 0;
-			background: #f2f5f7;
-
-			> li {
-				width: 1%;
-				display: table-cell;
-				background: #f2f5f7;
-				//border-bottom: 1px solid $maintenance-plan-border-color;
-				border: none;
-				border-left: none;
-				border-bottom: none;
-				border-right: 1px solid #dedede;
-
-				&:not(.active) {
-					background: #fafafa;
-					//border-left: 1px solid #dedede;
-					border-bottom: 1px solid #dedede;
-
-					a { color: #B7B7B7; }
-				}
-
-				&.active a:hover { cursor: default; }
-				&:last-child {
-					border-right: none;
-				}
-
-				&:not(.active):hover {
-					background: #fff;
-					//border-bottom: none;
-
-					a {
-						color: #646464;
-					}
-				}
-
-				//@include media-query(sm) { border-left: 1px solid $maintenance-plan-border-color; }
-
-				&.active {
-					background: #fff;
-					//border-bottom-color: #fff;
-				}
-
-				&:first-child { border-left: none; }
-
-				a {
-					background: none;
-					color: $gray-dark;
-					font-weight: 700;
-					//border-bottom-color: #fff;
-					@include rem('padding', 10px 0 10px $maintenance-plan-padding);
-					text-align: left;
-
-					@include media-query(sm) {
-						text-align: center;
-						@include rem('padding', 12px 0);
-					}
-
-					@include media-query(md) {
-						@include rem('padding', 10px 0 10px $maintenance-plan-padding);
-						text-align: left;
-					}
-
-					&:hover { background: none; }
-				}
-			}
-		}
-
-
-		.tab-content {
-			@include rem('padding', $maintenance-plan-padding);
-			background: #fff;
-
-			.tab-pane {
-				@include clearfix;
-				padding: 0;
-			}
-		}
-
-		table {
-			a {
-				text-decoration: underline;
-				position: relative;
-			}
-			tr {
-				td {
-
-				}
 			}
 		}
 	}
@@ -876,5 +783,50 @@ table.maintenance-table {
     white-space: -o-pre-wrap;
     word-wrap: break-word;
     word-break: break-all;
+  }
+}
+
+.play + .play {
+    margin-top: $global-padding;
+}
+
+.play{
+	padding-bottom: $global-padding;
+}
+
+.playbook-tab{
+	.systems{
+			border: 1px solid black;
+			padding: $global-padding;
+		}
+}
+
+#{$maintenance-tab-namespace} .playbook {
+
+  // global style - this should be updated globally
+  .section-title {
+    @include font-size(14px);
+    font-weight: 700;
+  }
+
+  // playbook card header
+  header.header {
+    border-left: none;
+    border-right: none;
+    @include rem('padding', $global-padding);
+  }
+
+  // adjust content padding for vertical divider
+  .content { @include rem('padding', 0 $global-padding); }
+
+  // fit ULs appropriately
+  ul { margin-bottom: 4px; }
+
+
+  [class^="col-"],
+  [class*=" col-"] { @include rem('padding', 15px); }
+
+  [class^="col-"] + [class^="col-"] {
+    @include media-query(sm) { border-left: 1px solid $maintenance-plan-border-color; }
   }
 }

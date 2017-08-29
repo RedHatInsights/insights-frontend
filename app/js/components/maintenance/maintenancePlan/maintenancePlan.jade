@@ -151,8 +151,8 @@
           role="tablist")
 
           // Actions Tab
-          tab(role="tabpanel", heading="{{'Actions' | translate}}", deselect='addRule.reset()')
-            .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', '-actions.length', 'rule_id'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
+          tab(role="tabpanel", heading="{{'Actions' | translate}}", deselect='addRule.reset()', select='tabSelected()')
+            .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', 'rule_id', '-actions.length'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
               .header.bordered(ng-init='tableEdit = false')
                 .title
                   ansible-icon.inline-right(value='rule.ansible', show-planner-line='false')
@@ -183,7 +183,7 @@
               ng-change="pager.update()")
 
           // Systems Tab
-          tab(role="tabpanel", heading="{{'Systems' | translate}}", deselect='addSystem.reset()')
+          tab(role="tabpanel", heading="{{'Systems' | translate}}", deselect='addSystem.reset()', select='tabSelected("systems")')
             .content-block.system(
               ng-repeat="system in (plan.systems | orderBy:['_name', 'system_id'] | offset:pager.offset | limitTo:pager.perPage) track by system.system_id")
               .header.bordered
@@ -221,37 +221,64 @@
               items-per-page="pager.perPage",
               ng-change="pager.update()")
 
-          tab(
+          tab.tab-blue(
             role="tabpanel",
             disable='!ansibleSupport',
-            ng-init='setupPlaybookTabActivator($parent)',
-            select='prepareAnsibleTab()')
+            ng-init='setupTabActivator($parent)',
+            select='tabSelected("playbook"); prepareAnsibleTab()')
             tab-heading
-              ansible-icon.inline-right(value='ansibleSupport', showTooltip='false')
-              strong(translate) Playbook Settings
-            .row
-              .col-sm-12
-                .group
-                  .group-pretitle
-                    b(translate) Resolutions included in this playbook:
+              ansible-icon.inline-right(value='ansibleSupport', show-tooltip='false', white='true')
+              strong(translate) Playbook
             .spinner(ng-show='playbookTabLoader.loading')
-            .row.row-short(ng-hide='playbookTabLoader.loading')
-              .col-sm-12
-                .group
-                  .group-content
-                    ul
-                      li(ng-repeat="play in plays")
-                        .pull-right(ng-if='play.ansible_resolutions.length > 1')
-                          a(ng-click='resolutionModal(play)')
-                            i.fa.fa-cogs(tooltip='{{"Multiple resolutions available. Click here to select a different one." | translate}}')
-                        i.fa.category-icon.inline-right(ng-class="play.rule.category.toLowerCase()")
-                        b {{ play.rule.category }}
-                        | &nbsp;#{'>'}&nbsp;
-                        a(ui-sref='app.actions-rule({category: play.rule.category.toLowerCase(), rule: play.rule.rule_id})')
-                          strong {{ play.rule.description }}
-                        b &nbsp;/ {{ play.systemType.displayNameShort }}
-                        ul
-                          li {{ play.ansible_resolutions[0].description }}
+            .playbooks(ng-hide='playbookTabLoader.loading')
+              card.playbook(ng-repeat='play in plays')
+                card-header.gray
+                  a(ui-sref='app.actions-rule({category: play.rule.category.toLowerCase(), rule: play.rule.rule_id})')
+                    b {{ play.rule.description }}
+                card-content
+                  .flexgrid.equalheights
+                    .row
+                      .col-sm-5.systems
+                        h4.section-title(translate) Systems:
+                        expandable-system-list(systems='play.systems')
+
+                      .col-sm-7.resolution
+                        h4.section-title(translate) Resolution:
+                        p {{ play.ansible_resolutions[0].description }} &nbsp;
+                          a(ng-if='play.ansible_resolutions.length > 1', ng-click='resolutionModal(play)', tooltip='{{"Multiple resolutions available. Click here to select a different one." | translate}}')
+                            span(translate) - edit ({{play.ansible_resolutions.length}} options)
+                        .icon-inline.push-top-narrow.red(ng-if='play.ansible_resolutions[0].needs_reboot')
+                          i.fa.fa-repeat
+                          strong(translate, tooltip = "{{'System reboot is required to resolve this issue' | translate}}") Reboot Required
+
+              card.playbook.playbook-summary
+                card-header.gray
+                  strong.red(translate) System reboot summary
+
+                card-content.gray(ng-if='!systemsToReboot.length')
+                  .row
+                    .col-sm-12
+                      p(translate) This playbook&nbsp;
+                        b.text-success(translate) does not require a system reboot.
+
+                card-content.gray(ng-if='systemsToReboot.length')
+                  .flexgrid.equalheights
+                    .row
+                      .col-sm-5.systems
+                        h4.section-title(translate) Systems:
+                        expandable-system-list(systems='systemsToReboot')
+
+                      .col-sm-7.resolution
+                        .toggle.push-bottom-narrow(ng-click="plan.allow_reboot = !plan.allow_reboot; allowRebootChanged()")
+                          input(type="checkbox", ng-checked='plan.allow_reboot')
+                          b(translate) Reboot systems automatically
+                          .toggle-slider(ng-class="{active: plan.allow_reboot}")
+
+                        p(translate) Some of the resolutions above require system reboot in order for the changes to take effect. This playbook&nbsp;
+                          b.red(ng-if='plan.allow_reboot') will reboot the systems automatically.
+                          span(ng-if='!plan.allow_reboot')
+                            b will not reboot the systems.&nbsp;
+                            | The systems will need to be rebooted manually.
 
       footer.footer(ng-show='edit.isActive(plan.maintenance_id)')
         a.btn.btn-sm.btn-default(ng-if='isInternal && !plan.hidden', ng-click='hidden(true)')

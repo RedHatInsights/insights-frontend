@@ -1,42 +1,82 @@
 // Control bar styling
 // ------------------------
-.ui-filters__control-bar {
+.data-filters-control-bar {
   position: relative;
-  height: 14px;
+  height: 2px;
   background: #dfdfdf;
   text-align: center;
 
   // toggle button styling
   .toggle {
-    width: 42px;
-    height: 42px;
+    position: relative;
+    top: -11px;
     display: inline-block;
-    @include rem('margin-top', -12px);
+    @include rem('padding', 6px 12px);
     text-align: center;
-    background: rgba(255,255,255,.8);
-    @include box-shadow(0 0 0 8px rgba(0,0,0,.1));
-    @include border-radius(50%);
+    background: $blue;
+    color: #fff;
+    @include box-shadow(0 0 0 4px rgba(0,0,0,.1));
+    @include border-radius(14px);
+    border: none;
+    line-height: 1;
 
     // button hover styling
-    &:hover { @include box-shadow(0 0 0 12px rgba(0,0,0,.1)); }
-
-    // Icon styling
-    i {
-      @include font-size(20px);
-      line-height: 1.6;
-      @include transition(.5s);
+    &:hover,
+    &.active {
+      @include box-shadow(0 0 0 6px rgba(0,0,0,.1));
+      cursor: pointer;
     }
+
+    &.active {
+      background: #a9a9a9;
+      color: #fff;
+      transform: rotate(0deg);
+      @include transition(.2s);
+
+      i { transform: rotate(180deg); }
+    }
+
+    .icon-inline {
+      margin: 0;
+      @include rem('padding-left', 18px);
+      @include rem('padding-right', 18px);
+
+      i + i {
+        left: auto;
+        right: 0;
+      }
+    }
+
+    //i.fa.fa-filter { @include opacity(1); }
+    //
+    //i.fa.fa-close {
+    //  @include opacity(0);
+    //  color: #fff;
+    //}
   }
+
+  //.open & .toggle {
+  //  background: #a9a9a9;
+  //  color: #fff;
+  //
+  //  i.fa.fa-filter {
+  //    @include opacity(0);
+  //  }
+  //
+  //  i.fa.fa-close {
+  //    @include opacity(1);
+  //  }
+  //}
 }
 
 
 // Rotate the button icoin if filters are open
-.ui-filters__control-bar {
+.data-filters-control-bar {
   i {
-    transform: rotate(180deg);
+    //transform: rotate(0deg);
   }
 
-  &.collapsed {
-    i { transform: rotate(0deg); }
+  &.expanded i {
+    //transform: rotate(180deg);
   }
 }

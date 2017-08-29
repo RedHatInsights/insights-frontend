@@ -1,13 +1,17 @@
 section.inventory
-  //platform-filter
+  page-header(title="Inventory", icon="fa-database")
   inventory-filters
   .rha-notifications
   .content-wrap
-    inventory-actions.ng-animate-enabled(ng-hide='reloading')
-    div(infinite-scroll='doScroll()', infinite-scroll-disabled='disableScroll()', infinite-scroll-immediate-check='false', infinite-scroll-distance='.5', ng-hide='reloading')
+    .table-search
+      .row
+        .col-xs-6
+          search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder="{{'Find a system' | translate}}")
 
-      .card-table-header(ng-show='listType() === listTypes.card')
-        .row.row-short
+    inventory-actions
+
+    .card-table-header(ng-show='getListType() === listTypes.card')
+        .row
           .col-sm-4
             input.action-checkbox(
               tooltip="{{'Select All' | translate}}",
@@ -20,110 +24,76 @@ section.inventory
               ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
             label(translate, ng-click="sort('system_type_id')") &nbsp; Type
           .col-sm-4
-            strong(translate, ng-click="sort('toString')") Name &nbsp;
-            span(ng-show='totalSystemsSelected') &nbsp;({{totalSystemsSelected}} Selected)
+            strong(translate, ng-click="sort('toString')") Name
           .col-sm-4.text-right
             strong(translate, ng-click="sort('report_count')") Action Count
 
-      .row.row-short.table-options
-        .col-sm-4.col-lg-2
-          .dropdown
-            button.btn.btn-default.dropdown-toggle(
-              data-toggle='dropdown',
-              aria-haspopup='true',
-              aria-expanded='false',
-              translate,
-              ng-disabled='!checkboxes.totalChecked') Actions
-                span.caret
-              //i.caret.dropdown-caret
-            ul.dropdown-menu
-              li(ng-if='config.isPlannerEnabled')
-                a(ng-click='addToPlan(false)',
-                ng-disabled='!isFixableSelected()',
-                translate) Create a new Plan/Playbook
-                  ansible-icon.inline-left(
-                  value='isFixableSelected()',
-                  show-tooltip='false')
-              li(ng-if='config.isPlannerEnabled')
-                a(ng-click='addToPlan(true)',
-                ng-disabled='!isFixableSelected() || (!plans.future.length && !plans.unscheduled.length)',
-                translate) Add to existing Plan/Playbook
-                  ansible-icon.inline-left(
-                  value='isFixableSelected() && (plans.future.length || plans.unscheduled.length)',
-                  show-tooltip='false')
-              li
-                a(ng-click='groupSystems(systemsToAction())', translate) Group systems
-              li(ng-if='Group.current().id')
-                a(ng-click='removeFromGroup()')
-                  span(translate,
-                    translate-n='systemsToAction().length',
-                    translate-plural='Remove systems from group') Remove system from group
-                  strong &nbsp;{{Group.current().display_name}}
-              li(tooltip='{{unregisterButtonTooltip}}')
-                a.pointer-events-auto(
-                ng-disabled='!isUnregistrableSelected()',
-                ng-click='isUnregistrableSelected() && doUnregisterSelected()',
-                translate) Unregister
-        .col-sm-8.col-lg-10
-          list-type.text-right-sm
+    .row.row-short(ng-show='getListType() === listTypes.card && !loading')
+      .col-sm-12
+        system-card.ng-animate-enabled(
+          ng-repeat='system in systems track by system.system_id',
+          system='system',
+          checkboxes='checkboxes',
+          checkbox-tooltip="canSelectSystem(system) ? defaultTooltip : getDisabledCheckboxTooltip(system)"
+        )
 
-      .row.row-short
-        .col-md-12
-          table.table.ng-table(ng-show='getListType() === listTypes.table')
-            thead
-              tr
-                th
-                  input.selectme(
-                    tooltip='Select All',
-                    tooltip-trigger='mouseenter',
-                    tooltip-append-to-body='true',
-                    tooltip-placement='top',
-                    type="checkbox",
-                    ng-indeterminate="checkboxes.indeterminate",
-                    ng-model='checkboxes.checked',
-                    ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
+    .row.row-short
+      .col-md-12
+        table.table.ng-table(ng-show='getListType() === listTypes.table')
+          thead
+            tr
+              th
+                input.selectme(
+                  tooltip='Select All',
+                  tooltip-trigger='mouseenter',
+                  tooltip-append-to-body='true',
+                  tooltip-placement='top',
+                  type="checkbox",
+                  ng-indeterminate="checkboxes.indeterminate",
+                  ng-model='checkboxes.checked',
+                  ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
 
-                th.sortable.nowrap(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')")
-                  .sort-indicator(translate) System Type
-                th.sortable.nowrap(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')")
-                  .sort-indicator(translate) System Name
-                th.sortable.nowrap(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')")
-                  .sort-indicator(translate) Last Check In
-                th.sortable.nowrap(ng-class="predicate | sortClass:'report_count':reverse", ng-click="sort('report_count')")
-                  .sort-indicator(translate) Status
-            tbody
-              tr(ng-repeat='system in systems track by system.system_id',
-                 ng-class="{'stale': !system.isCheckingIn}",
-                 ng-click='checkboxes.rowClick($event, system.system_id)',
-                 ng-mousedown='checkboxes.rowClick($event, system.system_id)',
-                 data-id="{{system.system_id}}"
-              )
-                td
-                  input.selectme(
-                    type='checkbox',
-                    ng-model='checkboxes.items[system.system_id]',
-                    ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();')
-                td.nowrap
-                  type-icon(type-id='system.system_type_id', include-text='true')
-                td.nowrap.long-name
-                  a(ng-click="showActions(system)") {{system.toString}}
-                td.nowrap {{ system.last_check_in | timeAgo }}
-                td.nowrap
-                  a.action-count(ng-click='showActions(system)')
-                    span.text(translate, translate-n="system.report_count", translate-plural="{{$count}} Actions") {{system.report_count}} Action
-                    span.pull-right.status-icon(ng-class="{'success': !system.report_count, 'fail': system.report_count}")
-                      i.fa(ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count}")
+              th.sortable.nowrap(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')")
+                .sort-indicator(translate) System Type
+              th.sortable.nowrap(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')")
+                .sort-indicator(translate) System Name
+              th.sortable.nowrap(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')")
+                .sort-indicator(translate) Last Check In
+              th.sortable.nowrap(ng-class="predicate | sortClass:'report_count':reverse", ng-click="sort('report_count')")
+                .sort-indicator(translate) Status
+          tbody(ng-show='!loading')
+            tr(ng-repeat='system in systems track by system.system_id',
+               ng-class="{'stale': !system.isCheckingIn}",
+               ng-click='checkboxes.rowClick($event, system.system_id)',
+               ng-mousedown='checkboxes.rowClick($event, system.system_id)',
+               data-id="{{system.system_id}}"
+            )
+              td
+                input.selectme(
+                  type='checkbox',
+                  ng-model='checkboxes.items[system.system_id]',
+                  ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();')
+              td.nowrap
+                type-icon(type-id='system.system_type_id', include-text='true')
+              td.nowrap.long-name
+                a(ng-click="showActions(system)") {{system.toString}}
+              td.nowrap {{ system.last_check_in | timeAgo }}
+              td.nowrap
+                a.action-count(ng-click='showActions(system)')
+                  span.text(translate, translate-n="system.report_count", translate-plural="{{$count}} Actions") {{system.report_count}} Action
+                  span.pull-right.status-icon(ng-class="{'success': !system.report_count, 'fail': system.report_count}")
+                    i.fa(ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count}")
 
-      .row.row-short
-        .col-sm-12
-          system-card.ng-animate-enabled(
-            ng-show='getListType() === listTypes.card',
-            ng-repeat='system in systems track by system.system_id',
-            system='system',
-            checkboxes='checkboxes',
-            checkbox-tooltip="canSelectSystem(system) ? defaultTooltip : getDisabledCheckboxTooltip(system)"
-          )
-  .animate-wrapper
+    .row.row-short(ng-show='!loading')
+      .col-sm-12
+        pagination.pull-right.pagination-blue(
+          ng-if="totalSystems() > pager.perPage",
+          total-items="totalSystems()",
+          ng-model="pager.currentPage",
+          items-per-page="pager.perPage",
+          ng-change="doScroll()")
+
+  .animate-wrapper.margin-top
     .row.row-short.ng-animate-enabled(ng-show='loading')
       .col-xs-12
         .load.text-center

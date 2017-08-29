@@ -2,8 +2,6 @@
 'use strict';
 
 const componentsModule = require('../../');
-const find = require('lodash/find');
-const get = require('lodash/get');
 
 /**
  * @ngInject
@@ -22,6 +20,7 @@ function ActionsRuleCtrl(
         FilterService,
         IncidentsService,
         InsightsConfig,
+        InventoryService,
         ListTypeService,
         MaintenanceService,
         PermalinkService,
@@ -38,43 +37,29 @@ function ActionsRuleCtrl(
         Export,
         Group) {
 
-    //let params = $state.params;
+    const REVERSE_TO_DIRECTION = {
+        false: 'ASC',
+        true: 'DESC'
+    };
+
     let category = $stateParams.category;
-    let priv = {};
-    $scope.allSystems = [];
+
+    $scope.allSelected = false;
+    $scope.config = InsightsConfig;
     $scope.getListType = ListTypeService.getType;
     $scope.listTypes = ListTypeService.types();
+    $scope.loading = true;
     $scope.noSystemsSelected = false;
     $scope.permalink = PermalinkService.make;
+    $scope.predicate = 'toString';
+    $scope.reallyAllSelected = false;
+    $scope.reverse = false;
     $scope.ruleSystems = [];
     $scope.QuickFilters = QuickFilters;
-    $scope.config = InsightsConfig;
-    $scope.predicate = 'toString';
-    $scope.reverse = false;
 
     FilterService.parseBrowserQueryParams();
     FilterService.setShowFilters(false);
     FilterService.setSearchTerm('');
-
-    $scope.doScroll = function () {
-        RhaTelemetryActionsService.nextPage();
-        RhaTelemetryActionsService.setIsScrolling(true);
-        $scope.ruleSystems = $scope.ruleSystems.concat(
-            RhaTelemetryActionsService.getRuleSystemsPage());
-        RhaTelemetryActionsService.setIsScrolling(false);
-    };
-
-    $scope.disableScroll = function () {
-        let disable = false;
-        if (RhaTelemetryActionsService.getIsScrolling() ||
-            !$scope.ruleSystems ||
-            $scope.ruleSystems.length >=
-            RhaTelemetryActionsService.getTotalRuleSystems()) {
-            disable = true;
-        }
-
-        return disable;
-    };
 
     function rejectIfNoSystemSelected (fn) {
         return function () {
@@ -112,98 +97,77 @@ function ActionsRuleCtrl(
     RhaTelemetryActionsService.setCategory(category);
     RhaTelemetryActionsService.setRule($stateParams.rule);
 
-    $scope.getReportDetails = RhaTelemetryActionsService.getReportDetails;
     $scope.loading = true;
     $scope.loadingSystems = true;
-    $scope.ospRuleResolution = '';
 
-    $scope.search = {
-        filters: ['system_id', 'hostname', 'display_name']
-        .map(prop => function (system, query) {
-            return String(get(system, prop)).toUpperCase().includes(query.toUpperCase());
-        }),
-
-        doFilter: function (query) {
-            if (query) {
-                $scope.ruleSystems = $scope.allSystems.filter(function (system) {
-                    return $scope.search.filters.some(f => f(system, query));
-                });
-            } else {
-                $scope.ruleSystems = $scope.allSystems;
-            }
-        }
+    $scope.search = function (model) {
+        FilterService.setSearchTerm(model);
+        FilterService.doFilter();
     };
 
     $scope.checkboxes = new Utils.Checkboxes('system_id');
-    $scope.$watchCollection('checkboxes.items', function () {
+    $scope.$watchCollection('checkboxes.items', updateCheckboxes);
+
+    function updateCheckboxes () {
         $scope.checkboxes.update($scope.ruleSystems);
+
         if ($scope.checkboxes.totalChecked > 0) {
             $scope.noSystemsSelected = false;
         }
-    });
+
+        $scope.allSelected = ($scope.checkboxes.totalChecked > 0 &&
+                             !$scope.checkboxes.indeterminate);
+
+        if (!$scope.allSelected) {
+            $scope.reallyAllSelected = false;
+        }
+    }
 
     $scope.plans = MaintenanceService.plans;
 
     $scope.showSystem = function (system) {
-        let systems;
+        InventoryService.showSystemModal(system);
+    };
 
-        systems = RhaTelemetryActionsService.getClusterAffectedSystems();
-        if (typeof system === 'string' && systems && systems.hasOwnProperty(system)) {
-            system = systems[system];
-        }
+    /*
+     * Sets pager.current_page to ruleSystems
+     *
+     * @param paginate gets all ruleSystems if set to false
+     */
+    function getData(paginate) {
+        $scope.loadingSystems = true;
 
-        if (typeof InsightsConfig.actionsShowSystem === 'function') {
-            return InsightsConfig.actionsShowSystem(system);
-        }
+        return RhaTelemetryActionsService.getActionsRulePage(paginate, $scope.pager)
+        .then(function () {
+            $scope.ruleSystems = RhaTelemetryActionsService.getRuleSystems();
+            $scope.totalRuleSystems = RhaTelemetryActionsService.getTotalRuleSystems();
+            $scope.loadingSystems = false;
+        });
+    }
 
-        $modal.open({
-            templateUrl: 'js/components/system/systemModal/systemModal.html',
-            windowClass: 'system-modal ng-animate-enabled',
-            backdropClass: 'system-backdrop ng-animate-enabled',
-            controller: 'SystemModalCtrl',
-            resolve: {
-                system: function () {
-                    return system;
-                },
-
-                rule: function () {
-                    return false;
-                }
+    $scope.paginate = function () {
+        $scope.pager.update();
+        $location.search('page', $scope.pager.currentPage);
+        $location.search('pageSize', $scope.pager.perPage);
+        getData(true)
+        .then(function () {
+            if ($scope.reallyAllSelected) {
+                $scope.checkboxes.checkboxChecked(true, $scope.ruleSystems);
+            } else {
+                $scope.checkboxes.reset();
             }
         });
     };
 
-    $scope.systemToString = function (system) {
-        return Utils.getSystemDisplayName(system);
-    };
-
-    function getData() {
+    /*
+     * Get first page of systems
+     * If url has a machine_id then open up the systemModal with given machine_id
+     */
+    function initialDisplay () {
         $scope.loading = true;
+        $scope.loadingSystems = true;
 
-        IncidentsService.init();
-
-        let populateDetailsPromise =
-            RhaTelemetryActionsService.populateDetails().then(function () {
-                let ruleDetails = RhaTelemetryActionsService.getRuleDetails();
-                if (ruleDetails) {
-                    $scope.ruleDetails = ruleDetails;
-                    ActionsBreadcrumbs.setCrumb({
-                        label: ruleDetails.description,
-                        params: {
-                            category: $stateParams.category,
-                            rule: ruleDetails.rule_id
-                        }
-                    }, 2);
-                }
-
-                RhaTelemetryActionsService.setIsScrolling(true);
-                RhaTelemetryActionsService.resetPaging();
-                RhaTelemetryActionsService.orderRuleSystems($scope.predicate,
-                    $scope.reverse);
-                $scope.ruleSystems = RhaTelemetryActionsService.getRuleSystemsPage();
-                $scope.allSystems = RhaTelemetryActionsService.getRuleSystems();
-                RhaTelemetryActionsService.setIsScrolling(false);
-            });
+        let incidentsPromise = IncidentsService.init();
 
         let topicBreadCrumbPromise =
             Topic.get($stateParams.category).success(function (topic) {
@@ -218,35 +182,68 @@ function ActionsRuleCtrl(
 
         let productSpecific = System.getProductSpecificData();
 
-        $q.all([populateDetailsPromise, SystemsService.getSystemTypesAsync(),
-            topicBreadCrumbPromise, productSpecific])
+        let systemsPromise =
+            RhaTelemetryActionsService.initActionsRule($scope.pager)
+            .then(function () {
+                let ruleDetails = RhaTelemetryActionsService.getRuleDetails();
+                if (ruleDetails) {
+                    $scope.ruleDetails = ruleDetails;
+                    ActionsBreadcrumbs.setCrumb({
+                        label: ruleDetails.description,
+                        params: {
+                            category: $stateParams.category,
+                            rule: ruleDetails.rule_id
+                        }
+                    }, 2);
+                }
+
+                $scope.ruleSystems = RhaTelemetryActionsService.getRuleSystems();
+                $scope.totalRuleSystems =
+                    RhaTelemetryActionsService.getTotalRuleSystems();
+                $scope.loadingSystems = false;
+
+            });
+
+        $q.all([SystemsService.getSystemTypesAsync(), incidentsPromise,
+            topicBreadCrumbPromise, productSpecific, systemsPromise])
             .finally(function () {
                 $scope.loading = false;
-                priv.initialDisplay();
+                let machine_id = $location.search().machine;
+
+                if (!machine_id) {
+                    return;
+                }
+
+                const system = {
+                    system_id: machine_id
+                };
+
+                InventoryService.showSystemModal(system, true);
             });
     }
 
-    priv.initialDisplay = function () {
-        let search = $location.search();
-        let machine_id = search.machine;
-
-        if (!machine_id) {
-            return;
-        }
-
-        const system = find($scope.allSystems, { system_id: machine_id });
-        if (system) {
-            $scope.showSystem(system);
-        }
-    };
-
-    priv.initCtrl = function () {
+    function initCtrl () {
         User.asyncCurrent(function () {
             $scope.isInternal = User.current.is_internal;
         });
 
-        getData();
-    };
+        $scope.checkboxes.reset();
+        $scope.predicate = 'toString';
+        $scope.reverse = false;
+
+        FilterService.setQueryParam('sort_field', $scope.predicate);
+        FilterService.setQueryParam('sort_direction',
+            REVERSE_TO_DIRECTION[$scope.reverse]);
+
+        //initialize pager and grab paging params from url
+        $scope.pager = new Utils.Pager();
+        $scope.pager.currentPage = $location.search().page ? $location.search().page :
+                                                             $scope.pager.currentPage;
+        $scope.pager.perPage = $location.search().pageSize ? $location.search().pageSize :
+                                                             $scope.pager.perPage;
+
+        initialDisplay();
+    }
 
     $rootScope.$on('productFilter:change', function () {
         if ($state.current.name === 'app.actions-rule') {
@@ -257,13 +254,13 @@ function ActionsRuleCtrl(
     $scope.$on('account:change', getData);
 
     if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
-        $rootScope.$on('user:loaded', priv.initCtrl);
+        $rootScope.$on('user:loaded', initCtrl);
     } else {
-        priv.initCtrl();
+        initCtrl();
     }
 
     $scope.addToPlan = rejectIfNoSystemSelected(function (existingPlan) {
-        var systems = $scope.checkboxes.getSelected($scope.ruleSystems);
+        var systems = systemsToAction();
         if (!systems.length) {
             return;
         }
@@ -272,35 +269,96 @@ function ActionsRuleCtrl(
         MaintenanceService.showMaintenanceModal(systems, rule, existingPlan);
     });
 
-    /**
-     * Sorts tables and cards based on column selected
-     */
     $scope.sort = function (column) {
-        $scope.loading = true;
 
-        $scope.reverse = !$scope.reverse;
-
-        // if sorting by a different column then sort ascending unless it's last_check_in
-        if ($scope.predicate !== column) {
+        // just changing the sort direction
+        if (column === $scope.predicate) {
+            $scope.reverse = !$scope.reverse;
+        }
+        else {
             $scope.reverse = false;
 
-            // last_check_in is different because we are ordering by timestamp but
-            // displaying the timeago format
+            // special case where we are sorting by timestamp but visually
+            // showing timeago
             if (column === 'last_check_in') {
-                $scope.reverse = true;
+                $scope.reverse = !$scope.reverse;
             }
         }
 
         $scope.predicate = column;
 
-        RhaTelemetryActionsService.setIsScrolling(true);
-        RhaTelemetryActionsService.resetPaging();
-        RhaTelemetryActionsService.orderRuleSystems($scope.predicate,
-            $scope.reverse);
-        $scope.ruleSystems = RhaTelemetryActionsService.getRuleSystemsPage();
-        RhaTelemetryActionsService.setIsScrolling(false);
+        // store sort fields in FilterService for systems query
+        FilterService.setQueryParam('sort_field', $scope.predicate);
+        FilterService.setQueryParam('sort_direction',
+            REVERSE_TO_DIRECTION[$scope.reverse]);
 
-        $scope.loading = false;
+        // reset dataset
+        $scope.resetPaging();
+        $scope.loadingSystems = true;
+
+        return RhaTelemetryActionsService.sortActionsRulePage($scope.pager,
+                                                              $scope.predicate,
+                                                              $scope.reverse)
+        .then(function () {
+            $scope.ruleSystems = RhaTelemetryActionsService.getRuleSystems();
+            $scope.totalRuleSystems = RhaTelemetryActionsService.getTotalRuleSystems();
+            $scope.loadingSystems = false;
+        });
+    };
+
+    // reset checkboxes and pager when sorting
+    $scope.resetPaging = function () {
+        $scope.checkboxes.reset();
+        $scope.pager.reset();
+    };
+
+    // really select all
+
+    // keeps track of messages to display to the user
+    $scope.selectAll = function () {
+        // if we previously had all systems selected, we no longer do
+        if ($scope.reallyAllSelected && $scope.pager.perPage < $scope.totalRuleSystems) {
+            $scope.reallyAllSelected = false;
+        }
+    };
+
+    /*
+     * Fetches all systems and assigns them to checkboxes
+     */
+    $scope.reallySelectAll = function () {
+        $scope.allSelected = true;
+        $scope.reallyAllSelected = true;
+        getData(false);
+    };
+
+    /*
+     * Resets checkboxes and selected variables
+     */
+    $scope.deselectAll = function () {
+        $scope.reallyAllSelected = false;
+        $scope.allSelected = false;
+        $scope.checkboxes.reset();
+    };
+
+    function systemsToAction () {
+        // assume true if the system is not shown in the view
+        if ($scope.reallyAllSelected) {
+            return RhaTelemetryActionsService.getAllSystems().filter(system => {
+                return (!$scope.checkboxes.items.hasOwnProperty(system.system_id) ||
+                        ($scope.checkboxes.items.hasOwnProperty(system.system_id) &&
+                            $scope.checkboxes.items[system.system_id] === true));
+            });
+        } else {
+            return $scope.checkboxes.getSelected($scope.ruleSystems);
+        }
+    }
+
+    $scope.numberOfSelected = function () {
+        if ($scope.reallyAllSelected) {
+            return RhaTelemetryActionsService.getAllSystems().length;
+        } else {
+            return $scope.checkboxes.totalChecked;
+        }
     };
 
     $scope.isIncident = IncidentsService.isIncident;

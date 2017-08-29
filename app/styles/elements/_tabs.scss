@@ -1,0 +1,93 @@
+.content-block .content-tabs.content,
+.maintenance-plan.content-block .content-tabs.content {
+	padding: 0;
+
+}
+
+.content-tabs {
+
+	.content-block { margin: 0;  }
+	
+	.content-block, 
+	.add-actions + .content-block { @include rem('margin-top', $global-margin); }
+
+	.nav {	
+		padding: 0;
+		background: #f2f5f7;
+	}
+
+	// nav tabs
+	.nav > li {
+		width: 1%;
+		display: table-cell;
+		background: #f2f5f7;
+		border: none;
+		border-left: none;
+		border-bottom: none;
+		border-right: 1px solid #dedede;
+
+		&:not(.active) {
+			background: #fafafa;
+			border-bottom: 1px solid #dedede;
+
+			a { color: #B7B7B7; }
+		}
+
+		&.active a:hover { cursor: default; }
+		&:last-child { border-right: none; }
+
+		&:not(.active):hover {
+			background: #fff;
+
+			a { color: #646464; }
+		}
+
+		&.active:not(.tab-blue) { background: #fff; }
+		&:first-child { border-left: none; }
+
+		a {
+			background: none;
+			color: $gray-dark;
+			font-weight: 700;
+			@include rem('padding', 10px 0 10px $global-padding);
+			text-align: left;
+
+			@include media-query(sm) {
+				text-align: center;
+				@include rem('padding', 12px 0);
+			}
+
+			@include media-query(md) {
+				@include rem('padding', 10px 0 10px $global-padding);
+				text-align: left;
+			}
+
+			&:hover { background: none; }
+		}
+	}
+
+	.nav > li.tab-blue {
+		background: $blue;
+
+		a { color: #fff; }
+		&:hover{
+			background: $blue_dark;
+			a{color: #fff;}
+		}
+	}
+
+	.tab-content {
+		@include rem('padding', $global-padding);
+		background: #fff;
+
+		.tab-pane {
+			@include clearfix;
+			padding: 0;
+		}
+	}
+
+	table a {
+		text-decoration: underline;
+		position: relative;
+	}
+}

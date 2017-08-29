@@ -5,7 +5,7 @@ $bg-page-header: #F9F9F9;
 	position: relative;
 	padding: 0;
 	background: $bg-page-header;
-	@include rem('padding', $global-margin);
+	@include rem('padding', 18px $global-margin);
   margin: 0;
 
 	&.active { @include rem('padding-bottom', $global-margin); }
@@ -14,8 +14,4 @@ $bg-page-header: #F9F9F9;
 		margin-top: 0;
 		@include rem('padding', $global-padding 30px 0);
 	}
-}
-
-.page-header + .content-wrap {
-  @include rem('margin-top', $global-margin);
 }

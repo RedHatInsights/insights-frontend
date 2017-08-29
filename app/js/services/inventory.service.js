@@ -2,17 +2,13 @@
 
 var servicesModule = require('./');
 
-function InventoryService($location, $modal, FilterService, System, InsightsConfig) {
+function InventoryService($modal, FilterService, System, InsightsConfig) {
     var inventoryService = {};
     var _sort = {
         field: 'toString',
         direction: 'ASC'
     };
-    var _page = 0;
-    var _pageSize = 15;
-    var _isScrolling = false;
     var _total = 0;
-    var _accountProducts = [];
 
     inventoryService.loading = true;
     inventoryService.allExpanded = false;
@@ -37,6 +33,7 @@ function InventoryService($location, $modal, FilterService, System, InsightsConf
 
     inventoryService.toggleSortDirection = function () {
         _sort.direction = (_sort.direction === 'ASC') ? 'DESC' : 'ASC';
+        FilterService.setQueryParam('sort_dir', _sort.direction);
     };
 
     inventoryService.getSort = function () {
@@ -49,56 +46,12 @@ function InventoryService($location, $modal, FilterService, System, InsightsConf
         FilterService.setQueryParam('sort_field', sort.field);
     };
 
-    inventoryService.getPage = function () {
-        return _page;
-    };
-
-    inventoryService.setPage = function (page) {
-        _page = page;
-    };
-
-    inventoryService.setPageSize = function (pageSize) {
-        _pageSize = pageSize;
-    };
-
-    inventoryService.getPageSize = function () {
-        return _pageSize;
-    };
-
-    inventoryService.getIsScrolling = function () {
-        return _isScrolling;
-    };
-
-    inventoryService.setIsScrolling = function (isScrolling) {
-        _isScrolling = isScrolling;
-    };
-
-    inventoryService.nextPage = function () {
-        _page = _page + 1;
-    };
-
-    inventoryService.previousPage = function () {
-        _page = _page - 1;
-    };
-
-    inventoryService.goToPage = function (pageNum) {
-        _page = pageNum;
-    };
-
     inventoryService.setTotal = function (total) {
         _total = total;
     };
 
     inventoryService.getTotal = function () {
         return _total;
-    };
-
-    inventoryService.setAccountProducts = function (accountProducts) {
-        _accountProducts = accountProducts;
-    };
-
-    inventoryService.getAccountProducts = function () {
-        return _accountProducts;
     };
 
     inventoryService._systemModal = null;

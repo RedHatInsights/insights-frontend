@@ -26,10 +26,22 @@ let _EVENT_ROOTS = [{
     events: ['expandAll', 'collapseAll']
 }, {
     name: 'filters',
-    events: ['incident', 'populatedProducts', 'reset', 'totalRisk']
+    events: ['actionsSelect',
+             'categorySelect',
+             'checkInSelect',
+             'incident',
+             'maintenanceCategorySelect',
+             'populatedProducts',
+             'reset',
+             'totalRisk',
+             'tag',
+             'removeTag']
 }, {
     name: 'checkboxes',
     events: ['reset']
+}, {
+    name: 'planner',
+    events: ['planChanged', 'planDeleted', 'reloadTable', 'plansLoaded', 'openPlan']
 }];
 
 constantsModule.constant('Events', buildEvents(_EVENT_ROOTS));

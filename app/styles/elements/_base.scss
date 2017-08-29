@@ -102,12 +102,12 @@ body, .insights body {
 }
 
 .content-wrap, .content-wrapper {
-  padding-left: 15px;
-  padding-right: 15px;
+  //padding-left: 15px;
+  //padding-right: 15px;
+  @include rem('padding', $global-padding $global-padding 0);
 
   @include media-query (sm) {
-    padding-right: 30px;
-    padding-left: 30px;
+    @include rem('padding', $global-margin $global-margin 0);
   }
 }
 
@@ -170,3 +170,5 @@ a.link {
     text-decoration: underline;
   }
 }
+
+.utility-wrap{ z-index: 100; }
