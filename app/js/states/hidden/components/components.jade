@@ -1,7 +1,36 @@
 .components
   .page-header
-    h1.page-title Components Library
+    h1.page-title Material Demo
   .content-wrap(ng-cloak)
-    md-content
-      section(layout='row', layout-sm='column', layout-align='center center', layout-wrap='')
-        button.md-button.md-raised Click
+    md-content(layout='row', flex='')
+      md-tabs(flex='')
+
+        // --- BUTTON DEMO ---
+        md-tab(label='Buttons', flex='')
+          .row
+            .text-center.h3 Flat Buttons
+          section(layout='row', layout-sm='column', layout-align='center center', layout-wrap='')
+            md-button Button
+            md-button.md-primary(md-no-ink='') Primary (md-noink)
+            md-button.md-primary(ng-disabled='true') Disabled
+            md-button.md-warn Button
+          .row
+            .text-center.h3 Raised Buttons
+          section(layout='row', layout-sm='column', layout-align='center center', layout-wrap='')
+            md-button.md-raised Button
+            md-button.md-raised.md-primary Primary
+            md-button.md-raised.md-primary(ng-disabled='true') Disabled
+            md-button.md-raised.md-warn Warn
+
+        // --- DEMO --- 
+        md-tab(label='Section 2')
+          md-content(layout-padding='')
+            md-input-container.md-block
+              label First Name
+              input(ng-model="user.firstName")
+
+        // --- DEMO --- 
+        md-tab(label='Section 3')
+          md-content(layout-padding='')
+            div
+              | Section 3 Content

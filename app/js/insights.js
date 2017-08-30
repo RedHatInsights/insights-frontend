@@ -55,7 +55,8 @@ let requires = [
     'ngSanitize',
     'ui.gravatar',
     'datePicker',
-    'infinite-scroll'
+    'infinite-scroll',
+    'ngMaterial'
 ];
 
 if (isPortal) {
@@ -90,8 +91,6 @@ if (isPortal) {
 } else {
     angular.module('insights').config(require('./base_routes'));
 }
-
-angular.module('insights').run(require('./boot'));
 
 // Common routes
 angular.module('insights').config(require('./routes'));
