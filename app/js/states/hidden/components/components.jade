@@ -1,36 +1,218 @@
 .components
   .page-header
     h1.page-title Material Demo
-  .content-wrap(ng-cloak)
-    md-content(layout='row', flex='')
-      md-tabs(flex='')
+  .content-wrap#popupcontainer(ng-cloak)
+    md-content
+      md-tabs(md-dynamic-height='', md-border-bottom='')
+        md-tab(label='Jade/HTML Only')
+          md-content.md-padding
+            h1.md-display-2 Jade/HTML Only
+            hr
 
-        // --- BUTTON DEMO ---
-        md-tab(label='Buttons', flex='')
-          .row
-            .text-center.h3 Flat Buttons
-          section(layout='row', layout-sm='column', layout-align='center center', layout-wrap='')
-            md-button Button
-            md-button.md-primary(md-no-ink='') Primary (md-noink)
-            md-button.md-primary(ng-disabled='true') Disabled
-            md-button.md-warn Button
-          .row
-            .text-center.h3 Raised Buttons
-          section(layout='row', layout-sm='column', layout-align='center center', layout-wrap='')
-            md-button.md-raised Button
-            md-button.md-raised.md-primary Primary
-            md-button.md-raised.md-primary(ng-disabled='true') Disabled
-            md-button.md-raised.md-warn Warn
+            // --- BUTTONS CARD 
+            md-card.md-padding
+              md-header
+                h3 Buttons
+              .row
+                .col-md-12
+                  h4 Flat Buttons
 
-        // --- DEMO --- 
-        md-tab(label='Section 2')
-          md-content(layout-padding='')
-            md-input-container.md-block
-              label First Name
-              input(ng-model="user.firstName")
+                  .col-md-3
+                    md-button Basic
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button
 
-        // --- DEMO --- 
-        md-tab(label='Section 3')
-          md-content(layout-padding='')
-            div
-              | Section 3 Content
+                  .col-md-3
+                    md-button.md-primary(md-no-ink) Primary (No Ink)
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-primary(md-no-ink)
+
+                  .col-md-3
+                    md-button.md-primary(ng-disabled="true") Disabled
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-primary(ng-disabled="true")
+                  .col-md-3
+                    md-button.md-warn Warning
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-warn
+
+              .row
+                .col-md-12
+                  h4 Raised Buttons
+
+                  .col-md-3
+                    md-button.md-raised Basic
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-raised
+
+                  .col-md-3
+                    md-button.md-raised.md-primary(md-no-ink) Primary (No Ink)
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-raised.md-primary(md-no-ink)
+
+                  .col-md-3
+                    md-button.md-raised.md-primary(ng-disabled="true") Disabled
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-raised.md-primary(ng-disabled="true")
+                  .col-md-3
+                    md-button.md-raised.md-warn Warning
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-raised.md-warn
+           
+            // --- FORMS
+            md-card.md-padding
+              md-header
+                h3 Form Example
+              .row
+                .col-md-12
+                  h4 Checkbox
+              .row
+                .col-md-4
+                  md-checkbox(aria-label='Checkbox 1')
+                    | Checkbox 1: Primary
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox(aria-label='Checkbox 1')
+              .row
+                .col-md-4
+                  md-checkbox.md-warn.md-align-top-left(ng-model='data.cb2', aria-label='Checkbox 2', ng-true-value="'yup'", ng-false-value="'nope'", flex='')
+                      | Checkbox 2 (md-warn)  
+                      br
+                      span This is a warning message!
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox(ng-model='data.cb1', aria-label='Checkbox 2')
+              .row
+                .col-md-4
+                  md-checkbox(ng-disabled='true', aria-label='Disabled checkbox', ng-model='data.cb3')
+                    | Checkbox: Disabled
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox(ng-disabled='true', aria-label='Disabled checkbox')
+
+              .row
+                .col-md-4
+                  md-checkbox(ng-disabled='true', aria-label='Disabled checked checkbox')
+                    | Checkbox: Disabled, Checked
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox(ng-disabled='true', aria-label='Disabled checked checkbox')
+
+              .row
+                .col-md-4
+                  md-checkbox.md-primary(md-no-ink='', aria-label='Checkbox No Ink')
+                    | Checkbox (md-primary): No Ink
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox.md-primary(md-no-ink='', aria-label='Checkbox No Ink')
+
+              .row
+                .col-md-4
+                  md-checkbox.md-primary(md-indeterminate='', aria-label='Checkbox Indeterminate')
+                    | Checkbox: Indeterminate
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox.md-primary(md-indeterminate='', aria-label='Checkbox Indeterminate')
+
+              .row
+                .col-md-4
+                  md-checkbox.md-primary(md-indeterminate='', aria-label='Checkbox Disabled Indeterminate', ng-disabled='true')
+                    | Checkbox: Disabled, Indeterminate
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox.md-primary(md-indeterminate='', aria-label='Checkbox Disabled Indeterminate', ng-disabled='true')
+
+            // --- LOADING ICON CARD 
+            md-card.md-padding
+              md-header
+                h3 Loading Icons
+              .row
+                .col-md-12
+                  h4 Progress Linear
+                  md-progress-linear(md-mode="indeterminate")
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-progress-linear(md-mode="indeterminate")
+              .row
+                .col-md-12
+                  h4 Progress Circular
+                  md-progress-circular(md-mode="indeterminate")
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-progress-circular(md-mode="indeterminate")
+
+
+        // --- Second Tab
+        md-tab(label='Needs Javascript')
+          md-content.md-padding
+            h1.md-display-2 Needs Javascript
+
+            // --- DIALOG CARD 
+            md-card.md-padding
+              md-header
+                h3 Dialog Box
+              .row
+                .col-md-12
+                  md-button.md-primary.md-raised(ng-click="showAlert($event)") Example Dialog
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-button.md-primary.md-raised(ng-click="showAlert($event)") Example Dialog
+                  pre.code-block.code-terminal
+                    .code-type-js
+                    code.code
+                      | function [file-controller]Ctrl(
+                      |   $scope, 
+                      |   $mdDialog) {
+                      |     $scope.status = '  ';
+                      |     $scope.customFullscreen = false;
+                      |     $scope.showAlert = function (ev) {
+                      |       $mdDialog.show(
+                      |           $mdDialog.alert()
+                      |           .parent(angular.element(document.querySelector('#popupContainer')))
+                      |           .clickOutsideToClose(true)
+                      |           .title('This is an alert title')
+                      |           .textContent('Wow!!! Look at this beautiful dialog!!!')
+                      |           .ariaLabel('Alert Dialog Demo')
+                      |           .ok('Got it!')
+                      |           .targetEvent(ev)
+                      |        );
+                      |    };
+                      | }
+        md-tab(label='three')
+          md-content.md-padding
+            h1.md-display-2 Tab Three
+            p
+              | Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.

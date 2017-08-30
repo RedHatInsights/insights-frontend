@@ -1,0 +1,13 @@
+.code-type{
+	font-family: 'OverpassBold';
+	&-jade::before{
+		content: "Jade";
+		color: yellow;
+		text-decoration: underline;
+	}
+	&-js::before{
+		content: "Javascript";
+		color: lightblue;
+		text-decoration: underline;
+	}
+}
