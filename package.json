@@ -8,6 +8,8 @@
   },
   "private": true,
   "dependencies": {
+    "angular-aria": "^1.5.11",
+    "angular-material": "^1.1.4",
     "compression": "~1.6.2",
     "express": "~4.15.2",
     "file-saver": "~1.3.3",
@@ -17,7 +19,7 @@
   },
   "devDependencies": {
     "angular": "~1.5.x",
-    "angular-animate": "~1.5.x",
+    "angular-animate": "^1.5.11",
     "angular-cookies": "~1.5.x",
     "angular-datepicker": "https://github.com/redhataccess/angular-datepicker.git#3c287c4337dab5a059f387cfa0acc6d507e2aeed",
     "angular-gettext": "~2.1.x",
