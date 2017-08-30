@@ -65,4 +65,11 @@ li.system-group {
     @include media-query (md) {
         max-height: 600px;
     }
+
+    input { background-color: transparent; }
+    .table-search {
+      @include rem('padding-left', $global-padding);
+      @include rem('padding-right', $global-padding);
+      @include rem('padding-bottom', 5px);
+    }
 }
