@@ -9,4 +9,5 @@ span
       ng-class="{'search-box form-control': isFullLength}"
     )
     span &nbsp;
-    i.fa.fa-search
+    i.fa.fa-search(ng-hide="searching()")
+    i.fa.fa-times(ng-show="searching()", ng-click="resetSearch()")
