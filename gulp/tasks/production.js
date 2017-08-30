@@ -8,5 +8,5 @@ gulp.task('prod', function (cb) {
     cb = cb || function () {};
     global.isProd = true;
     global.isRelease = true;
-    runSequence('clean-all', 'views', 'translations', ['copy.translations', 'static', 'styles', 'browserify', 'openshift'], 'rev', cb);
+    runSequence('clean-all', 'views', 'translations', ['copy.translations', 'static', 'styles', 'browserify', 'openshift'], cb);
 });
