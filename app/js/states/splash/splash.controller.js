@@ -1,6 +1,8 @@
+/*global require*/
 'use strict';
 
-var statesModule = require('../');
+const statesModule = require('../');
+const jQuery = window.jQuery;
 
 /**
  * @ngInject
@@ -18,14 +20,6 @@ function SplashCtrl($scope, $state) {
     $scope.$on('$destroy', function () {
         jQuery('body').removeClass('landing-page');
     });
-
-    //var video = document.getElementById('landingVid');
-    //video.addEventListener('click',function(){
-    //    if (video.paused)
-    //        video.play();
-    //    else
-    //        video.pause();
-    //},false);
 }
 
 statesModule.controller('SplashCtrl', SplashCtrl);

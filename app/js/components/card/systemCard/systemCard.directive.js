@@ -1,10 +1,12 @@
+/*global require, angular*/
 'use strict';
 
-var componentsModule = require('../../');
-var find = require('lodash/find');
-var findIndex = require('lodash/findIndex');
-var map = require('lodash/map');
-var groupBy = require('lodash/groupBy');
+const componentsModule = require('../../');
+const find = require('lodash/find');
+const findIndex = require('lodash/findIndex');
+const map = require('lodash/map');
+const groupBy = require('lodash/groupBy');
+const jQuery = window.jQuery;
 
 function systemCardCtrl(
     $scope,

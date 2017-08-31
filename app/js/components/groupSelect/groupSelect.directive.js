@@ -1,7 +1,8 @@
+/*global require, angular*/
 'use strict';
 
-var componentsModule = require('../');
-var isEmpty = require('lodash/isEmpty');
+const componentsModule = require('../');
+const isEmpty = require('lodash/isEmpty');
 const _filter = require('lodash/filter');
 
 /**
