@@ -2,11 +2,7 @@
 'use strict';
 
 // check the global var before the InsightsConfig stuff is loaded
-let isPortal = false;
-if (window && window.insightsGlobal && window.insightsGlobal.isSaas) {
-    // ^ this complicated jibba jabba unless tests break
-    isPortal = true;
-}
+const isPortal = window.insightsGlobal.isSaas || false;
 
 if (typeof window.angular === 'undefined') {
     // No angular found on window, pull it in.
