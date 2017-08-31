@@ -1,7 +1,8 @@
 /*global require, angular*/
 'use strict';
 
-var isPortal = (typeof window.chrometwo_ready !== 'undefined');
+// check the global var before the InsightsConfig stuff is loaded
+const isPortal = window.insightsGlobal.isSaas || false;
 
 if (typeof window.angular === 'undefined') {
     // No angular found on window, pull it in.
@@ -68,11 +69,13 @@ function bootstrap() {
     angular.bootstrap(document, ['insights']);
 }
 
-function megaMenuHacks() {
-    var anchors = document.querySelectorAll('.tools-menu .col-sm-4:first-child a');
-    [].forEach.call(anchors, function (anchor) {
-        anchor.target = '_self';
-    });
+function whenDomReady(fn) {
+    if (document.readyState === 'complete') {
+        fn();
+        return;
+    }
+
+    document.addEventListener('DOMContentLoaded', fn, false);
 }
 
 if (isPortal) {
@@ -81,10 +84,7 @@ if (isPortal) {
     angular.module('insights').config(require('./portal/config'));
     angular.module('insights').config(require('./portal/base_routes'));
     angular.module('insights').config(require('./portal/routes'));
-    window.chrometwo_ready(function () {
-        bootstrap();
-        megaMenuHacks();
-    });
+    whenDomReady(bootstrap);
 } else {
     angular.module('insights').config(require('./base_routes'));
 }
@@ -93,6 +93,8 @@ angular.module('insights').run(require('./boot'));
 
 // Common routes
 angular.module('insights').config(require('./routes'));
+
+// Load the Angular config
 angular.module('insights').config(require('./config'));
 
 // workaround for https://github.com/angular-ui/ui-select/issues/1560
