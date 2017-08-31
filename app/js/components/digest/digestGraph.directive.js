@@ -5,14 +5,15 @@ const componentsModule = require('../');
 const Plotly = require('plotly.js/lib/index-basic');
 const d3 = Plotly.d3;
 const priv = {};
+const jQuery = window.jQuery;
 
 priv.initTraces = function initTraces($scope) {
-    const legendElements = window.jQuery('#metrics g.traces');
+    const legendElements = jQuery('#metrics g.traces');
     $scope.traces = [];
     $scope.digest.data.forEach(function (data, index) {
         const traceObject = {
             index: index,
-            legendElement: window.jQuery(legendElements[index]),
+            legendElement: jQuery(legendElements[index]),
             name: data.name,
             enabled: true
         };
@@ -29,8 +30,6 @@ priv.initTraces = function initTraces($scope) {
  * @ngInject
  */
 function digestGraphController($scope) {
-    const jQuery = window.jQuery;
-
     const graphNode = d3.select('[digest-key=' + $scope.digestKey + '] .digest-graph')
         .append('div')
         .style({
