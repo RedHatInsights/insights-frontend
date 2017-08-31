@@ -109,8 +109,8 @@ function OnRun(
         $anchorScroll($location.hash());
     }, 1);
 
+    // JWT init
     Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
-
     Jwt.onInit(() => {
         if (!Jwt.isAuthenticated()) {
             Jwt.login();
