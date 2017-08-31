@@ -96,12 +96,12 @@
                   md-checkbox.md-warn.md-align-top-left(ng-model='data.cb2', aria-label='Checkbox 2', ng-true-value="'yup'", ng-false-value="'nope'", flex='')
                       | Checkbox 2 (md-warn)  
                       br
-                      span This is a warning message!
+                      span 
                 .col-md-8
                   pre.code-block.code-terminal
                     .code-type-jade
                     code.code
-                      | md-checkbox(ng-model='data.cb1', aria-label='Checkbox 2')
+                      | md-checkbox.md-warn(aria-label='Checkbox 2', ng-true-value="'yup'", ng-false-value="'nope'")
               .row
                 .col-md-4
                   md-checkbox(ng-disabled='true', aria-label='Disabled checkbox', ng-model='data.cb3')
