@@ -1,6 +1,5 @@
 table {
     border: 1px solid #ddd;
-    border-collap: inherit;
 
     thead {
         th {
@@ -25,7 +24,6 @@ table {
         }
 
         td {
-            border: none;
             line-height: 1.6;
             &.break { word-break: break-word; }
         }
@@ -64,11 +62,11 @@ td {
     max-width: 120px;
 
     @include media-query(sm) {
-    	max-width: 100px;
+        max-width: 100px;
     }
 
     @include media-query(md) {
-    	max-width: 220px;
+        max-width: 220px;
     }
 
     @include media-query(lg) {

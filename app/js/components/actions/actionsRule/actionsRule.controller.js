@@ -251,6 +251,9 @@ function ActionsRuleCtrl(
         }
     });
 
+    $rootScope.$on('reload:data', getData);
+    $rootScope.$on('group:change', getData);
+
     $scope.$on('account:change', getData);
 
     if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
