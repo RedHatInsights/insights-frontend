@@ -12,6 +12,7 @@ function SystemModalCtrl(
     $location,
     $timeout,
     $modalInstance,
+    $state,
     system,
     rule,
     AnalyticsService,

@@ -1,0 +1,52 @@
+#system-group-viewer {
+  @include rem('padding-top', 10px);
+  @include rem('padding-bottom', 0);
+
+  div [class^="col-"] {
+    @include media-query(sm) {
+      padding-bottom: 0;
+    }
+  }
+
+  [class^=col-] {
+    width: 100%;
+  }
+  i {
+    position: relative;
+  }
+  button{
+    @include rem('margin-right', 10px);
+    @include rem('margin-bottom', 10px);
+  }
+
+}
+
+.groups{
+  display: flex;
+  align-items: center;
+}
+
+.stickyToast {
+  position: fixed;
+  margin: 25px;
+  z-index: 1200;
+
+  &.delete-system-from-group{
+    .md-toast-content {
+      background: $gray;
+      color: white;
+
+      .undo-delete {
+        @include rem('margin-right', $global-padding);
+        @include rem('margin-left', $global-padding);
+        font-weight: 600;
+      }
+
+      .undo-delete, .fa-times {
+        color: black;
+      }
+    }
+
+    span { color: black; }
+  }
+}

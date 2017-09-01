@@ -1,0 +1,10 @@
+div#system-group-viewer(ng-if="inGroup()")
+  h3(translate) Groups:
+  button.btn.btn-accent.btn-sm(
+  ng-repeat="group in groups track by group.id", 
+  ng-show="$index < groupLimit || showAll", 
+  ng-click="groupSelected(group)") 
+    span(translate) {{group.display_name | translate}} &nbsp;&nbsp;
+    i.fa.fa-times(ng-click="showToast('top', 'right', group.display_name); deleteSystemFromGroup(group); $event.stopPropagation();", aria-hidden="true")
+  span(ng-if="groups.length > groupLimit")
+    .fa.fa-ellipsis-h(ng-click="toggleShowAll()")

@@ -52,6 +52,7 @@ $define-fa: true !default;
 // Utilities
 //==================================================================*/
 @import 'components/utilities/toggle-slider';
+@import 'components/utilities/expandable-data-table';
 
 
 // Page Templates
@@ -101,7 +102,6 @@ $define-fa: true !default;
 @import 'components/legend-nav';
 @import 'components/actions-breadcrumbs';
 @import 'components/content-block';
-@import 'components/system-overlay';
 @import 'components/no-actions';
 @import 'components/loader';
 @import 'components/switch';
@@ -145,6 +145,13 @@ $define-fa: true !default;
 @import 'components/global-filters';
 @import 'components/demo-account-switcher';
 @import 'components/evaluation';
+
+
+// System Overlay
+//==================================================================*/
+@import 'components/system-overlay/system-overlay';
+@import 'components/system-overlay/system-metadata';
+@import 'components/system-overlay/view-system-groups';
 
 
 // Maintenance Plan
