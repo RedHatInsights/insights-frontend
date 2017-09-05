@@ -141,10 +141,47 @@
                     code.code
                       | md-checkbox.md-primary(md-indeterminate='', aria-label='Checkbox Disabled Indeterminate', ng-disabled='true')
 
+              .row
+                .col-md-12
+                  h4 Inputs
+              .row
+                .col-md-4
+                  md-input-container.md-block
+                    label First Name
+                    input
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-input-container.md-block
+                      |   label [insert label]
+                      |   input
+
+              .row
+                .col-md-12
+                  h4 Radio Buttons
+              .row
+                .col-md-4
+                  md-radio-group
+                    md-radio-button.md-primary(value="Foo") Foo
+                    md-radio-button.md-accent(value="Bar") Bar
+                    md-radio-button.md-warn(value="Insights") Insights
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-radio-button.md-primary(value="Foo") Foo
+                      | md-radio-button.md-accent(value="Bar") Bar
+                      | md-radio-button.md-warn(value="Insights") Insights
+
             // --- LOADING ICON CARD 
             md-card.md-padding
               md-header
                 h3 Loading Icons
+              .row
+                .col-md-12
+                  p All loading icons can be configured to load based on percentage (determinate)
+
               .row
                 .col-md-12
                   h4 Progress Linear
@@ -183,23 +220,75 @@
                     .code-type-js
                     code.code
                       | function [file-controller]Ctrl(
-                      |   $scope, 
-                      |   $mdDialog) {
+                      |     $scope, 
+                      |     $mdDialog) {
                       |     $scope.status = '  ';
                       |     $scope.customFullscreen = false;
                       |     $scope.showAlert = function (ev) {
-                      |       $mdDialog.show(
-                      |           $mdDialog.alert()
-                      |           .parent(angular.element(document.querySelector('#popupContainer')))
-                      |           .clickOutsideToClose(true)
-                      |           .title('This is an alert title')
-                      |           .textContent('Wow!!! Look at this beautiful dialog!!!')
-                      |           .ariaLabel('Alert Dialog Demo')
-                      |           .ok('Got it!')
-                      |           .targetEvent(ev)
-                      |        );
-                      |    };
+                      |         $mdDialog.show(
+                      |             $mdDialog.alert()
+                      |             .parent(angular.element(document.querySelector('#popupContainer')))
+                      |             .clickOutsideToClose(true)
+                      |             .title('This is an alert title')
+                      |             .textContent('Wow!!! Look at this beautiful dialog!!!')
+                      |             .ariaLabel('Alert Dialog Demo')
+                      |             .ok('Got it!')
+                      |             .targetEvent(ev)
+                      |         );
+                      |     };
                       | }
+              .row
+                .col-md-12
+                  md-button.md-primary.md-raised(ng-click="showConfirm($event)") Confirm Dialog
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-button.md-primary.md-raised(ng-click="showConfirm($event)") Comfirm Dialog
+                  pre.code-block.code-terminal
+                    .code-type-js
+                    code.code
+                      | function [file-controller]Ctrl(
+                      |     $scope, 
+                      |     $mdDialog) {
+                      |     $scope.status = '  ';
+                      |     $scope.customFullscreen = false;
+                      |     $scope.showConfirm = function (ev) {
+                      |         $mdDialog.show(
+                      |             .parent(angular.element(document.querySelector('#popupContainer')))
+                      |             .clickOutsideToClose(true)
+                      |             .title('This is a title')
+                      |             .textContent('This is the content')
+                      |             .ariaLabel('Confirm Dialog Demo')
+                      |             .ok('Confirm')
+                      |             .cancel('Cancel');
+                      |             .targetEvent(ev)
+                      |         );
+                      |     };
+                      | }
+
+            md-card.md-padding
+              md-header
+                h3 Swiping
+              .row
+                .col-md-12
+                  md-card(md-swipe-up="onSwipeUp()").demo-swipe.text-center
+                      h4.no-select Swipe Me Up
+              .row
+                .col-md-6 
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | [.element](md-swipe-up="onSwipeUp()")
+                      |   h4 Swipe Me Up
+                .col-md-6 
+                  pre.code-block.code-terminal
+                    .code-type-js
+                    code.code
+                      | $scope.onSwipeUp = function () {
+                      |   window.alert('You swiped up!!');
+                      | };
+
+
         md-tab(label='three')
           md-content.md-padding
             h1.md-display-2 Tab Three
