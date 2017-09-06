@@ -74,17 +74,24 @@ $marker-height: $marker-width;
 
   .marker {
     position: absolute;
-    left: -18px;
+    left: -2px;
     bottom: -$marker-height/2;
-    width: $marker-width;
-    height: $marker-height;
+    @include rem('width', 21px);
+    @include rem('height', 20px);
     @include rem('padding-top', 5px);
     text-align: center;
     border: 8px solid rgba(255,0,0,0.8);
     transform: rotate(0deg);
     background: rgba(255,255,255,.9);
-    box-shadow: 0 0 0 6px rgba(255,255,255,.9), 0 0 8px 10px rgba(0,0,0,.1);
+    box-shadow: 0 0 0 6px rgba(255,255,255,.9), 0 0 2px 8px rgba(0,0,0,.1);
     border-radius: 50%;
+
+    &.increase,
+    &.decrease {
+      left: -18px;
+      width: $marker-width;
+      height: $marker-height;
+    }
 
     .num {
       @include font-size(16px);

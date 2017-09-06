@@ -15,17 +15,12 @@
       .row
         .col-md-4
           h2.section-title(translate) Overall score
-
           .gauge.gauge-score
             .crop
               .grad
-
-            // rotation is the angle calc
             .pivot(style="transform: rotate({{(latest_score-250)*.3}}deg)")
               .arm
-                // need a conditional notating either a decrease or increase. if no change, show 0 and no caret
-                // rotation is the inverse of angle calc
-                .marker(style="transform: rotate(-30deg)", ng-class="{'decrease': score_difference < 0, 'increase': score_difference > 0}")
+                .marker(style="transform: rotate(-{{(latest_score-250)*.3}}deg)", ng-class="{'decrease': score_difference < 0, 'increase': score_difference > 0}")
                   // I need a  conditional here that controls tooltip content
                   //tooltip='Your score has increased by 15 points',
                   //tooltip-trigger='mouseenter',
@@ -60,15 +55,15 @@
                 .title
                   i.fa(aria-hidden="true" ng-class='cat.icon')
                   strong.uppercase &nbsp;{{cat.label}}
-      .row
-        .col-sm-3
-        .col-sm-9
-          span.large-text(ng-show='!loading', translate)
-            i.fa.fa-check-circle.green(ng-if='resolvedIssues > 0')
-            i.fa.fa-exclamation-circle.red(ng-if='resolvedIssues === 0')
-            | &nbsp;You've resolved&nbsp;
-            strong(ng-class='{"green": resolvedIssues > 0, "red": resolvedIssues === 0}', translate, translate-n='resolvedIssues', translate-plural='{{$count}} issues') {{resolvedIssues}} issue
-            | &nbsp;in the past {{timePeriod()}} days.
+
+            .col-sm-12
+              hr
+              span.large-text(ng-show='!loading', translate)
+                i.fa.fa-check-circle.green(ng-if='resolvedIssues > 0')
+                i.fa.fa-exclamation-circle.red(ng-if='resolvedIssues === 0')
+                | &nbsp;You've resolved&nbsp;
+                strong(ng-class='{"green": resolvedIssues > 0, "red": resolvedIssues === 0}', translate, translate-n='resolvedIssues', translate-plural='{{$count}} issues') {{resolvedIssues}} issue
+                | &nbsp;in the past {{timePeriod()}} days.
 
     section.gray.full-width
       ul.nav.nav-tabs-simple.underline(role='tablist')
