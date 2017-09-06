@@ -10,7 +10,6 @@ if (typeof window.angular === 'undefined') {
 
 // angular modules
 require('angular-resource');
-require('angular-animate');
 require('angular-ui-router');
 require('angular-sanitize');
 require('angular-scroll');
@@ -23,6 +22,7 @@ require('angular-datepicker');
 require('ng-infinite-scroll');
 require('angular-aria');
 require('angular-material');
+require('angular-animate');
 
 require('./components/ui-bootstrap-custom');
 
@@ -46,7 +46,6 @@ let requires = [
     'ui.router',
     'ui.bootstrap',
     'ngResource',
-    'ngAnimate',
     'gettext',
     'ngTable',
     'duScroll',
@@ -56,6 +55,7 @@ let requires = [
     'ui.gravatar',
     'datePicker',
     'infinite-scroll',
+    'ngAnimate',
     'ngMaterial'
 ];
 
