@@ -21,7 +21,6 @@
             .pivot(style="transform: rotate({{(latest_score-250)*.3}}deg)")
               .arm
                 .marker(style="transform: rotate(-{{(latest_score-250)*.3}}deg)", ng-class="{'decrease': score_difference < 0, 'increase': score_difference > 0}")
-                  // I need a  conditional here that controls tooltip content
                   //tooltip='Your score has increased by 15 points',
                   //tooltip-trigger='mouseenter',
                   //tooltip-append-to-body='true',

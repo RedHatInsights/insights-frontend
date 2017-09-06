@@ -133,6 +133,8 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
 
         console.log(res.data.resources);
 
+        console.log(res.data.resources);
+
         function getDigestMetricsLine(category, lineBase, color) {
             // warning this function needs to have access to digestBase.timeseries
             return {
