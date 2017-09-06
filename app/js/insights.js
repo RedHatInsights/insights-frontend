@@ -21,8 +21,8 @@ require('ng-table');
 require('angular-datepicker');
 require('ng-infinite-scroll');
 require('angular-aria');
-require('angular-material');
 require('angular-animate');
+require('angular-material');
 
 require('./components/ui-bootstrap-custom');
 
