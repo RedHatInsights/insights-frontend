@@ -1,6 +1,7 @@
+/*global require*/
 'use strict';
 
-var providersModule = require('./');
+const providersModule = require('./');
 
 /**
  * @ngInject
