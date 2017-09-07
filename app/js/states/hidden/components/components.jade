@@ -205,6 +205,34 @@
           md-content.md-padding
             h1.md-display-2 Needs Javascript
 
+             // --- Toast CARD 
+            md-card.md-padding.toast-container
+              md-header
+                h3 Toasts
+              .row
+                .col-md-12
+                  md-button.md-primary.md-raised(ng-click="showDemoToast()") Here's a toast
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-button.md-primary.md-raised(ng-click="showCustomToast()") Here's a toast
+                  pre.code-block.code-terminal
+                    .code-type-js
+                    code.code
+                      | function [file-controller]Ctrl(
+                      |     $scope, 
+                      |     $mdToast) {
+                      |         $mdToast.show(
+                      |             $mdToast.simple()
+                      |              $mdDialog.alert()
+                      |             .content('Toast Content!')
+                      |             .position('top right')
+                      |             .hideDelay('3000')
+                      |             .toastClass('demo')
+                      |         
+                      |         );
+                      |     }
+
             // --- DIALOG CARD 
             md-card.md-padding
               md-header

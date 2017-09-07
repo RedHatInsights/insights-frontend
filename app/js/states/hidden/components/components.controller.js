@@ -5,11 +5,20 @@ var statesModule = require('../../');
 
 function ComponentsCtrl(
     $scope,
-    $mdDialog) {
+    $mdDialog,
+    $mdToast) {
     $scope.status = '  ';
     $scope.customFullscreen = false;
 
-    $scope.myDate = new Date();
+    $scope.showDemoToast = function () {
+        $mdToast.show(
+            $mdToast.simple()
+            .content('Toast Content!')
+            .position('top right')
+            .hideDelay('3000')
+            .toastClass('demo')
+        );
+    };
 
     $scope.showAlert = function (ev) {
         $mdDialog.show(

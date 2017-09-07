@@ -16,6 +16,13 @@
  	padding: 40px; 
 }
 
+md-toast.demo{
+	.md-toast-content{
+		background: red;
+		color: white;
+	}
+}
+
 .no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
