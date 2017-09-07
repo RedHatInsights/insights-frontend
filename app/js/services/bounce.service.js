@@ -3,7 +3,7 @@
 
 const servicesModule = require('./');
 const URI = require('urijs');
-
+const Jwt = require('jwt-redhat').default;
 /**
  * @ngInject
  */
@@ -11,11 +11,7 @@ function BounceService(InsightsConfig, $injector) {
     return {
         bounce: function () {
             if (InsightsConfig.authenticate) {
-                const bounceUrl = URI(window.location);
-                bounceUrl.duplicateQueryParameters(false);
-                bounceUrl.path('/login');
-                bounceUrl.addQuery('redirectTo', getOriginalDestination());
-                window.location = bounceUrl.toString();
+                Jwt.login();
             }
         }
     };
