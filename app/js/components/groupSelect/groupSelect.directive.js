@@ -12,6 +12,7 @@ function groupSelectCtrl(
     $q,
     $scope,
     $state,
+    $timeout,
     gettextCatalog,
     sweetAlert,
     Events,

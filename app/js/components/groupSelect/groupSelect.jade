@@ -5,8 +5,8 @@
   #global-filter-dropdown.dropdown(ng-click="toggleDropdown()")
     button.btn.dropdown-toggle(
       type='button',
-      ng-click="resetFilter()",
-      data-toggle="dropdown"
+      ng-click="resetFilter();",
+      data-toggle="dropdown",
       aria-haspopup='true',
       aria-expanded='false',
       ng-disabled='disabled')
@@ -22,10 +22,10 @@
           ng-keyup="keypress($event)",
           placeholder="{{'Find A Group' | translate}}")
       li(ng-show="showAllSystems()")
-        a(href="#", ng-click='triggerChange(null)', translate) All Systems
+        a(href="javascript:void(0)", ng-click='triggerChange(null)', translate) All Systems
       li.system-group(ng-repeat='g in groups | filter:hideSelectedGroup | orderBy:"display_name" track by g.id')
-        a(href="#", ng-click='triggerChange(g)')
-          trimmed-text(length="35", text="{{g.display_name}}")
+        a(href="javascript:void(0)", ng-click='triggerChange(g);')
+          trimmed-text(length="20", text="{{g.display_name}}")
           | &nbsp;({{g.systems.length}})
           i.fa.fa-trash-o.pull-right.group-control.inline-left(ng-click='deleteGroup(g); $event.stopPropagation();',
             tooltip="{{'Delete group' | translate}}")

@@ -62,6 +62,7 @@ li.system-group {
     height: auto;
     overflow-x: hidden;
     max-height: 200px;
+    min-width: 250px;
     @include media-query (md) {
         max-height: 600px;
     }
