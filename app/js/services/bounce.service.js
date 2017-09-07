@@ -2,6 +2,7 @@
 'use strict';
 
 const servicesModule = require('./');
+const URI = require('urijs');
 const Jwt = require('jwt-redhat').default;
 
 /**
