@@ -1,7 +1,7 @@
 /*global require, module*/
 'use strict';
 
-const Jwt = require('jwt').default;
+const Jwt = require('jwt-redhat').default;
 
 function scrollTop() {
     window.scrollTo(0, 0);
@@ -110,7 +110,10 @@ function OnRun(
     }, 1);
 
     // JWT init
-    Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
+    // clientId might not really be avalible yet
+    // pending a change from IT
+    Jwt.init({ clientId: 'insights' }, { responseMode: 'query' });
+
     Jwt.onInit(() => {
         if (!Jwt.isAuthenticated()) {
             Jwt.login();
