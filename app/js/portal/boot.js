@@ -110,7 +110,10 @@ function OnRun(
     }, 1);
 
     // JWT init
-    Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
+    // clientId might not really be avalible yet
+    // pending a change from IT
+    Jwt.init({ clientId: 'insights' }, { responseMode: 'query' });
+
     Jwt.onInit(() => {
         if (!Jwt.isAuthenticated()) {
             Jwt.login();
