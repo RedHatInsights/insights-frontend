@@ -12,22 +12,22 @@
       ng-disabled='disabled')
       span.text(ng-show='!disabled && !isGroupSelected() && !groups.length', translate) Group select
       span.text(ng-show='disabled || (!isGroupSelected() && groups.length)', translate) All Systems
-      span.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
+      b.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
       span.caret
     ul.dropdown-menu(role="menu")
-      li.table-search
+      li
         search-box(
           on-search='searchGroups(model)',
           ng-click="$event.stopPropagation();"
           ng-keyup="keypress($event)",
           placeholder="{{'Find A Group' | translate}}")
       li(ng-show="showAllSystems()")
-        a(href="#", ng-click='triggerChange(null)', translate) All Systems
+        a.link(href="#", ng-click='triggerChange(null)', translate) - Show all systems -
       li.system-group(ng-repeat='g in groups | filter:hideSelectedGroup | orderBy:"display_name" track by g.id')
-        a(href="#", ng-click='triggerChange(g)')
+        a.icon-inline-right(href="#", ng-click='triggerChange(g)')
           trimmed-text(length="35", text="{{g.display_name}}")
           | &nbsp;({{g.systems.length}})
-          i.fa.fa-trash-o.pull-right.group-control.inline-left(ng-click='deleteGroup(g); $event.stopPropagation();',
+          i.fa.fa-trash-o.group-control(ng-click='deleteGroup(g); $event.stopPropagation();',
             tooltip="{{'Delete group' | translate}}")
   a.add-group(ng-click='createGroup()', tooltip='{{"Create new system group" | translate}}')
     i.fa.fa-plus-circle.pad-left(aria-hidden="true")

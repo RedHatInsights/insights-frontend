@@ -1,4 +1,7 @@
 .table-search {
+  position: relative;
+  min-width: 200px;
+
   input {
     width: calc(100% - 14px);
     @include rem('padding', 6px 6px 6px 2px);
