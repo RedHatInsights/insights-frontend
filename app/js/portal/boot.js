@@ -110,14 +110,7 @@ function OnRun(
     }, 1);
 
     // JWT init
-<<<<<<< HEAD
-    // clientId might not really be avalible yet
-    // pending a change from IT
-    Jwt.init({ clientId: 'insights' }, { responseMode: 'query' });
-
-=======
     Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
->>>>>>> Get rid of all Portal JS, CSS, and HTML.
     Jwt.onInit(() => {
         if (!Jwt.isAuthenticated()) {
             Jwt.login();
