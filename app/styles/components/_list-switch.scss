@@ -3,7 +3,7 @@
   .link {
     color: $gray;
     @include font-size(24px);
-    line-height: 1;
+    line-height: 1.6;
     @include rem('padding', 2px $global-padding/2);
     @include transition(.2s);
 

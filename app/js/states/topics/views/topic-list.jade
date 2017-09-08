@@ -8,13 +8,12 @@
     section.gray.section-topic-details
       topic-details(ng-hide='loading', topic='topic')
 
-    section.table-search
-      .flexgrid.equalheights
-        .row
-          .col-xs-6
-            search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
-          .col-xs-6.text-right
-            list-type
+    section.table-utilities
+      .row
+        .col-xs-7.col-sm-5
+          search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
+        .col-xs-5.col-sm-7.text-right
+          list-type
 
     section.section-rules-group-content
       topic-rule-list(ng-if='!loading', topic='topic')
