@@ -7,7 +7,7 @@
     .row
       .col-sm-12.col-md-8.col-md-offset-2.text-center
         h1(translate) Executive Reporting requires 10 or more systems to be registered with Insights.
-        h2(translate) Please register 
+        h2(translate) Please register
           span(translate, translate-n='systemsTilTen', translate-plural='{{$count}} more systems') {{systemsTilTen}} more system
           | &nbsp;to enable reporting for your account.
   .content-wrap(ng-show='!loading && systemsTilTen < 1')
@@ -18,24 +18,10 @@
           .gauge.gauge-score
             .crop
               .grad
-            .pivot(style="transform: rotate({{(latest_score-250)*.3}}deg)")
-              .arm
-                .marker(style="transform: rotate(-{{(latest_score-250)*.3}}deg)", ng-class="{'decrease': score_difference < 0, 'increase': score_difference > 0}")
-                  //tooltip='Your score has increased by 15 points',
-                  //tooltip-trigger='mouseenter',
-                  //tooltip-append-to-body='true',
-                  //tooltip-placement='top',
-                  //translate)
-
-                  i.fa.fa-caret-up(aria-hidden="true")
-                  .num {{score_difference}}
-                  i.fa.fa-caret-down(aria-hidden="true")
-
+            gauge-marker(current="latest_score", difference="score_difference")
             .score
               h3 {{latest_score}}
               span Score is excellent
-
-
             footer.footer
               span.num.floor 250
               span.num.ceiling 850

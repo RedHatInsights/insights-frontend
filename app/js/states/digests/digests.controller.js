@@ -149,6 +149,8 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
         }
 
         $scope.latest_score = takeRight(digestBase.scores, 1)[0];
+        window.scope = $scope;
+
         $scope.score_difference = $scope.latest_score -
             digestBase.scores[digestBase.scores.length - 2];
 
