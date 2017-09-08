@@ -131,10 +131,6 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
         var ruleres = responses[2];
         var digestBase = res.data.resources[0].data.data;
 
-        console.log(res.data.resources);
-
-        console.log(res.data.resources);
-
         function getDigestMetricsLine(category, lineBase, color) {
             // warning this function needs to have access to digestBase.timeseries
             return {
