@@ -18,12 +18,12 @@ function gaugeMarkerController($scope, gettextCatalog) {
         if ($scope.difference > 0) {
             $scope.diffClass = 'increase';
             $scope.tooltip =
-                priv.getString(gettextCatalog.getString('Your score has increased by '));
+                priv.getString(gettextCatalog.getString('Your score has increased by'));
             return;
         } else if ($scope.difference < 0) {
             $scope.diffClass = 'decrease';
             $scope.tooltip =
-                priv.getString(gettextCatalog.getString('Your score has decreased by '));
+                priv.getString(gettextCatalog.getString('Your score has decreased by'));
             return;
         } else if ($scope.difference === 0) {
             $scope.diffClass = 'neutral';
