@@ -1,17 +1,15 @@
 .group-select {
-    border: none;
+  border: none;
 	width: 100%;
 
-    select {
-		@include appearance(none);
-    }
+  //select { @include appearance(none); }
 }
 
-.group-select.dropdown-select {
-	select {
-		width: 100%;
-	}
-}
+//.group-select.dropdown-select {
+//	select {
+//		width: 100%;
+//	}
+//}
 
 .group-select.rounded {
 	select {
@@ -62,7 +60,15 @@ li.system-group {
     height: auto;
     overflow-x: hidden;
     max-height: 200px;
+    min-width: 250px;
     @include media-query (md) {
         max-height: 600px;
+    }
+
+    input { background-color: transparent; }
+    .table-search {
+      @include rem('padding-left', $global-padding);
+      @include rem('padding-right', $global-padding);
+      @include rem('padding-bottom', 5px);
     }
 }

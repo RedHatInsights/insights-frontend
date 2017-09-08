@@ -286,6 +286,7 @@ $maintenance-plan-border-color: #dedede;
 
 // Content Block Card
 .content-block.content-block-card {
+	//ul{ @include reset; }
 }
 
 .content-block .content-tabular {

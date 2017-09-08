@@ -54,6 +54,16 @@ function searchBoxCtrl($scope, gettextCatalog, Events) {
         };
     }
 
+    $scope.searching = function () {
+        if ($scope.model && $scope.model.length > 0) {
+            return true;
+        }
+    };
+
+    $scope.resetSearch = function () {
+        $scope.$broadcast(Events.filters.reset);
+    };
+
     $scope.keyPressed = function ($event) {
         if ($event.keyCode === 13) {
             if ($scope.change.cancel) {
@@ -76,6 +86,7 @@ function searchBoxCtrl($scope, gettextCatalog, Events) {
 
     $scope.$on(Events.filters.reset, function () {
         $scope.model = '';
+        doOnSearch();
     });
 }
 

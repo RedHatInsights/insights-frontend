@@ -71,6 +71,7 @@ $define-fa: true !default;
 
 // Utilities
 //==================================================================*/
+@import 'components/utilities/table-utilities';
 @import 'components/utilities/table-search';
 
 
@@ -142,6 +143,7 @@ $define-fa: true !default;
 @import 'components/gauges';
 @import 'components/global-filters';
 @import 'components/demo-account-switcher';
+@import 'components/evaluation';
 
 
 // Maintenance Plan
