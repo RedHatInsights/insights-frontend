@@ -26,7 +26,7 @@ function gaugeMarkerController($scope, gettextCatalog) {
                 priv.getString(gettextCatalog.getString('Your score has decreased by'));
             return;
         } else if ($scope.difference === 0) {
-            $scope.diffClass = 'neutral';
+            $scope.diffClass = null;
             $scope.tooltip =
                 gettextCatalog.getString('Your score has not changed');
             return;

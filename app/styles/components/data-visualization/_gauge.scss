@@ -6,7 +6,9 @@ $gauge-score-inner: $gauge-score-width - $gauge-score-thickness;
 $marker-width: 50px;
 $marker-height: $marker-width;
 
+// Base styling
 .gauge.gauge-score {
+  position: relative;
   position: relative;
   max-width: 310px;
   height: $gauge-score-height/2;
@@ -17,6 +19,7 @@ $marker-height: $marker-width;
     border-radius: 50%;
   }
 
+  // Crop off bottom half of circle
   .crop {
     position: relative;
     height: $gauge-score-height/2;
@@ -35,13 +38,14 @@ $marker-height: $marker-width;
 
   }
 
+  // Render the gradient bg
   .grad {
     width: $gauge-score-width;
     height: $gauge-score-height;
     position: relative;
     display: inline-block;
     background: #ed1c24;
-    background: linear-gradient(to right, #ed1c24 0%,#f7941d 25%,#fff200 50%,#27aae1 75%,#009444 100%);
+    background: linear-gradient(to right, #ed1c24 0%, #f7941d 25%, #fff200 50%, #27aae1 75%, #009444 100%);
 
     &:after {
       content: '';
@@ -54,113 +58,106 @@ $marker-height: $marker-width;
       background: #fff;
     }
   }
+}
 
+// Center point of rotation
+.gauge.gauge-score .pivot {
+  position: absolute;
+  width: 1px;
+  right: 50%;
+  top: 100%;
+  transform: rotate(0deg);
+}
 
-  .pivot {
-    position: absolute;
-    width: 1px;
-    right: 50%;
-    top: 100%;
-    transform: rotate(0deg);
-  }
+// Arm which extends from center point
+.gauge.gauge-score .arm {
+  position: absolute;
+  width: $gauge-score-width/2;
+  right: 0;
+  height: 1px;
+}
 
-  .arm {
-    position: absolute;
-    width: $gauge-score-width/2;
-    right: 0;
-    height: 1px;
+// Marker dot containing the score change and caret
+.gauge.gauge-score .marker {
+  position: absolute;
+  left: -3px;
+  bottom: -$marker-height/2;
+  @include rem('width', 21px);
+  @include rem('height', 20px);
+  @include rem('padding-top', 5px);
+  text-align: center;
+  border: 8px solid rgba(140, 189, 187, .5);
+  transform: rotate(0deg);
+  box-shadow: 0 0 0 6px rgba(255,255,255,.9), 0 0 2px 8px rgba(0,0,0,.1);
+  border-radius: 50%;
 
-  }
-
-  .marker {
-    position: absolute;
-    left: -2px;
-    bottom: -$marker-height/2;
-    @include rem('width', 21px);
-    @include rem('height', 20px);
-    @include rem('padding-top', 5px);
-    text-align: center;
+  // Score change styling
+  &.increase,
+  &.decrease {
+    left: -18px;
+    width: $marker-width;
+    height: $marker-height;
     border: 8px solid rgba(255,0,0,0.8);
-    transform: rotate(0deg);
     background: rgba(255,255,255,.9);
-    box-shadow: 0 0 0 6px rgba(255,255,255,.9), 0 0 2px 8px rgba(0,0,0,.1);
-    border-radius: 50%;
-
-    &.increase,
-    &.decrease {
-      left: -18px;
-      width: $marker-width;
-      height: $marker-height;
-    }
-
-    .num {
-      @include font-size(16px);
-      line-height: 1;
-      font-weight: 700;
-    }
-
-    &.nochange {
-      width: 25px;
-      height: 25px;
-      left: -6px;
-
-      .num { display: none; }
-    }
-
-    &.decrease {
-      color: $red;
-      .fa.fa-caret-down { display: block; }
-    }
-
-    &.increase {
-      color: $green;
-      border-color: $green;
-      .fa.fa-caret-up { display: block; }
-    }
-
-    .fa {
-      display: none;
-      @include font-size(18px);
-      line-height: .5;
-    }
-
   }
 
-
-  .score {
-    position: absolute;
-    width: 50%;
-    left: 25%;
-    top: 46%;
-    text-align: center;
-
-    h3 {
-      @include font-size(46px);
-      line-height: 1;
-      margin: 0;
-    }
-
-    span { font-weight: 700; }
+  // If score decreased
+  &.decrease {
+    color: $red;
+    .fa.fa-caret-down { display: block; }
   }
 
-  footer {
-    $floor-margin: 24px;
+  // If score increased
+  &.increase {
+    color: $green;
+    border-color: $green;
+    .fa.fa-caret-up { display: block; }
+  }
 
-    @include rem('margin-top', 8px);
+  .num {
+    @include font-size(16px);
+    line-height: 1;
+    font-weight: 700;
+  }
 
-    .num {
-      color: #9A9A9A;
-      font-weight: 700;
-    }
+  .fa {
+    display: none;
+    @include font-size(18px);
+    line-height: .5;
+  }
+}
 
 
-    .floor {
-      @include rem('margin-left', $floor-margin);
-    }
+.gauge.gauge-score .score {
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  top: 46%;
+  text-align: center;
 
-    .ceiling {
-      float: right;
-      @include rem('margin-right', $floor-margin);
-    }
+  span { font-weight: 700; }
+
+  h3 {
+    @include font-size(46px);
+    line-height: 1;
+    margin: 0;
+  }
+}
+
+.gauge.gauge-score footer {
+  $floor-margin: 24px;
+
+  @include rem('margin-top', 8px);
+
+  .num {
+    color: #9A9A9A;
+    font-weight: 700;
+  }
+  
+  .floor { @include rem('margin-left', $floor-margin); }
+
+  .ceiling {
+    float: right;
+    @include rem('margin-right', $floor-margin);
   }
 }
