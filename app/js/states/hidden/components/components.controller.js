@@ -10,13 +10,13 @@ function ComponentsCtrl(
     $scope.status = '  ';
     $scope.customFullscreen = false;
 
-    $scope.showDemoToast = function () {
+    $scope.showToast = function (h,v,state) {
         $mdToast.show(
             $mdToast.simple()
             .content('Toast Content!')
-            .position('top right')
             .hideDelay('3000')
-            .toastClass('demo')
+            .position(h + ' ' + v)
+            .toastClass('stickyToast' + ' ' + state)
         );
     };
 

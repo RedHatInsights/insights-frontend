@@ -12,15 +12,31 @@
 	}
 }
 
-.demo-swipe {
- 	padding: 40px; 
+md-button:first-child{
+	font-weight: 700;
 }
 
-md-toast.demo{
-	.md-toast-content{
-		background: red;
-		color: white;
+.stickyToast {
+	position: fixed;
+	margin: 25px;
+	&.fail{
+		.md-toast-content {
+			background: $red;
+			color: white;
+			font-weight: 600;
+		}
 	}
+	&.success{
+		.md-toast-content {
+			background: $green;
+			color: white;
+			font-weight: 600;
+		}
+	}
+}
+
+.demo-swipe {
+ 	padding: 40px; 
 }
 
 .no-select {

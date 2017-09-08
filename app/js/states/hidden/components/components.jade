@@ -205,66 +205,10 @@
           md-content.md-padding
             h1.md-display-2 Needs Javascript
 
-             // --- Toast CARD 
-            md-card.md-padding.toast-container
-              md-header
-                h3 Toasts
-              .row
-                .col-md-12
-                  md-button.md-primary.md-raised(ng-click="showDemoToast()") Here's a toast
-                  pre.code-block.code-terminal
-                    .code-type-jade
-                    code.code
-                      | md-button.md-primary.md-raised(ng-click="showCustomToast()") Here's a toast
-                  pre.code-block.code-terminal
-                    .code-type-js
-                    code.code
-                      | function [file-controller]Ctrl(
-                      |     $scope, 
-                      |     $mdToast) {
-                      |         $mdToast.show(
-                      |             $mdToast.simple()
-                      |              $mdDialog.alert()
-                      |             .content('Toast Content!')
-                      |             .position('top right')
-                      |             .hideDelay('3000')
-                      |             .toastClass('demo')
-                      |         
-                      |         );
-                      |     }
-
             // --- DIALOG CARD 
             md-card.md-padding
               md-header
                 h3 Dialog Box
-              .row
-                .col-md-12
-                  md-button.md-primary.md-raised(ng-click="showAlert($event)") Example Dialog
-                  pre.code-block.code-terminal
-                    .code-type-jade
-                    code.code
-                      | md-button.md-primary.md-raised(ng-click="showAlert($event)") Example Dialog
-                  pre.code-block.code-terminal
-                    .code-type-js
-                    code.code
-                      | function [file-controller]Ctrl(
-                      |     $scope, 
-                      |     $mdDialog) {
-                      |     $scope.status = '  ';
-                      |     $scope.customFullscreen = false;
-                      |     $scope.showAlert = function (ev) {
-                      |         $mdDialog.show(
-                      |             $mdDialog.alert()
-                      |             .parent(angular.element(document.querySelector('#popupContainer')))
-                      |             .clickOutsideToClose(true)
-                      |             .title('This is an alert title')
-                      |             .textContent('Wow!!! Look at this beautiful dialog!!!')
-                      |             .ariaLabel('Alert Dialog Demo')
-                      |             .ok('Got it!')
-                      |             .targetEvent(ev)
-                      |         );
-                      |     };
-                      | }
               .row
                 .col-md-12
                   md-button.md-primary.md-raised(ng-click="showConfirm($event)") Confirm Dialog
@@ -294,6 +238,37 @@
                       |     };
                       | }
 
+            // --- Toast CARD 
+            md-card.md-padding
+              md-header
+                h3 Toasts
+              .row
+                .col-md-12
+                  md-button.md-primary.md-raised(ng-click="showToast('top', 'left', 'fail')") Top Left Fail Toast
+                  md-button.md-primary.md-raised(ng-click="showToast('bottom', 'right', 'success')") Bottom Right Success Toast
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-button.md-primary.md-raised(ng-click="showToast('top', 'left', 'fail')") Top Left Fail Toast
+                      | 
+                      | md-button.md-primary.md-raised(ng-click="showToast('bottom', 'right', 'success')") Bottom Right Success Toast
+                  pre.code-block.code-terminal
+                    .code-type-js
+                    code.code
+                      | function [file-controller]Ctrl(
+                      |     $scope, 
+                      |     $mdToast) {
+                      |     $scope.showToast = function (h,v,state) {
+                      |         $mdToast.show(
+                      |             $mdToast.simple()
+                      |             .content('Toast Content!')
+                      |             .hideDelay('3000')
+                      |             .position(h + ' ' + v)
+                      |             .toastClass('stickyToast' + ' ' + state)
+                      |         );
+                      |     }
+
+            // Swipe Card
             md-card.md-padding
               md-header
                 h3 Swiping
