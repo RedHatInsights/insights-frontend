@@ -32,7 +32,7 @@ function AnalyticsCtrl(Analytic) {
 
         totals.unshift('Totals');
         dates.unshift('x');
-        console.log(data);
+
         chart.load({
             columns: [
                 dates,

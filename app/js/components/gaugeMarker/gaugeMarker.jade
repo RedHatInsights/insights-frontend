@@ -1,0 +1,13 @@
+.pivot(style="transform: rotate({{rotate}}deg)")
+  .arm
+    .marker(
+      style="transform: rotate(-{{rotate}}deg)",
+      class="{{diffClass}}"
+      tooltip="{{tooltip}}",
+      tooltip-trigger='mouseenter',
+      tooltip-append-to-body='true',
+      tooltip-placement='top')
+      div(ng-if="difference != 0")
+        i.fa.fa-caret-up(aria-hidden="true")
+        .num {{difference}}
+        i.fa.fa-caret-down(aria-hidden="true")
