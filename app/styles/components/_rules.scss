@@ -86,3 +86,21 @@
 .rule-margin {
     margin-right: 4px;
 }
+
+
+.rule.content-block.faded {
+  .header,
+  .content,
+  .footer {
+    background-color: #F5f5f5;
+    @include opacity(.7);
+  }
+}
+
+.rule.content-block .footer .flexgrid {
+  [class^="col-"],
+  div[class*=" col-"] {
+    padding-bottom: 0;
+    align-self: center;
+  }
+}

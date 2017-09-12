@@ -108,13 +108,12 @@ function topicRuleListCtrl ($filter,
             });
         }
 
-        // TODO: Waiting on API implementation
         // Filter based on riskOfChange
-        // if ($scope.riskOfChange !== 'all') {
-        //     rules = _filter(rules, (rule) => {
-        //         return rule.resolution_risk === $scope.riskOfChange;
-        //     });
-        // }
+        if ($scope.riskOfChange !== 'all') {
+            rules = _filter(rules, (rule) => {
+                return rule.resolution_risk === parseInt($scope.riskOfChange);
+            });
+        }
 
         return rules;
     }

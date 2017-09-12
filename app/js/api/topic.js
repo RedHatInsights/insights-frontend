@@ -28,10 +28,14 @@ function Topic($http, $q, InsightsConfig, AccountService, Group) {
             return $http.get(root + topicsUri + '/admin');
         },
 
-        get: function (id, product) {
+        get: function (id, product, include) {
             var uri = URI(root + topicsUri + '/' + id + AccountService.current());
             if (product) {
                 uri.addSearch('product', product);
+            }
+
+            if (include) {
+                uri.addSearch('include', include);
             }
 
             uri.addSearch(Group.queryParam());

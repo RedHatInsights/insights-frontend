@@ -242,7 +242,7 @@
                         h4.section-title(translate) Systems:
                         expandable-system-list(systems='play.systems')
 
-                      .col-md-4.resolution
+                      .col-md-7.resolution
                         h4.section-title(translate) Resolution:
                         p {{ play.ansible_resolutions[0].description }} &nbsp;
                           a(ng-if='play.ansible_resolutions.length > 1', ng-click='resolutionModal(play)', tooltip='{{"Multiple resolutions available. Click here to select a different one." | translate}}')
@@ -250,7 +250,6 @@
                         .icon-inline.push-top-narrow.red(ng-if='play.ansible_resolutions[0].needs_reboot')
                           i.fa.fa-repeat
                           strong(translate, tooltip = "{{'System reboot is required to resolve this issue' | translate}}") Reboot Required
-                      .col-md-3
                         risk-of-change(change-risk='play.ansible_resolutions[0].resolution_risk')
 
               card.playbook.playbook-summary

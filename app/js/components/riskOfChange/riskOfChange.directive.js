@@ -3,18 +3,8 @@
 
 const componentsModule = require('../');
 
-function RiskOfChange ($scope) {
-
-    // TODO: remove before merging; temporary until API is merged
-    // $scope.changeRisk = 4;
-    if (!$scope.changeRisk) {
-        $scope.changeRisk = 4;
-    }
-}
-
 function riskOfChange() {
     return {
-        controller: RiskOfChange,
         scope: {
             changeRisk: '<',
             hideLabel: '<'

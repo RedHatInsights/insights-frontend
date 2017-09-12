@@ -17,7 +17,7 @@ section
           .rha-notifications
           .rules-group(ng-hide="loading")
             .rules-group-content
-              .content-block.content-block-outline(
+              .content-block.content-block-outline.rule(
                 ng-repeat="rule in rules | filter:filter | orderBy:'description'",
                 ng-class="{faded: rule.ack_id, hidden: (hideIgnored && rule.ack_id)}")
                 .header(id="{{::rule.rule_id}}")
@@ -44,17 +44,17 @@ section
                       .gray(ng-bind-html='::rule.summary_html | trust_html', target-blank='')
 
                 .footer.footer-short(ng-if="canIgnoreRules")
-                  .row
-                    .col-sm-8
-                      .icon-group.icon-group-severity
-                        severity-icon(severity='rule.rec_impact', type='impact')
-                        severity-icon(severity='rule.rec_likelihood', type='likelihood')
-                        severity-icon(severity='rule.severity', type='severity')
-                      risk-of-change
-                    .col-sm-4.text-right
-
-                      strong(ng-if="rule.impacted_systems !== undefined && !rule.ack_id")
-                        a(ui-sref='app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})', translate, ng-disabled="rule.impacted_systems === 0") View Impacted Systems ({{rule.impacted_systems}})
+                  .flexgrid.equal-heights
+                    .row
+                      .col-sm-8
+                        .icon-group.icon-group-severity
+                          severity-icon(severity='rule.rec_impact', type='impact')
+                          severity-icon(severity='rule.rec_likelihood', type='likelihood')
+                          severity-icon(severity='rule.severity', type='severity')
+                        risk-of-change(change-risk='rule.resolution_risk')
+                      .col-sm-4.text-right
+                        strong(ng-if="rule.impacted_systems !== undefined && !rule.ack_id")
+                          a(ui-sref='app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})', translate, ng-disabled="rule.impacted_systems === 0") View Impacted Systems ({{rule.impacted_systems}})
 
               .row.row-short(ng-show='rules.length === 0')
                 .col-xs-12.text-center

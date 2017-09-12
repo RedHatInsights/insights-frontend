@@ -45,7 +45,7 @@ function riskOfChangeSelectCtrl($location,
         $rootScope.$broadcast(Events.filters.tag,
                               getTag(),
                               Events.filters.riskOfChangeSelect);
-        $rootScope.$broadcast(Events.filters.riskOfChange, $scope.selected.value);
+        $rootScope.$broadcast(Events.filters.riskOfChangeSelect, option);
     };
 
     function getTag () {
@@ -69,6 +69,7 @@ function riskOfChangeSelectCtrl($location,
     $scope.$on(Events.filters.removeTag, function (event, filter) {
         if (filter === Events.filters.riskOfChangeSelect) {
             $scope.select('all');
+            $rootScope.$broadcast(filter, 'all');
         }
     });
 }

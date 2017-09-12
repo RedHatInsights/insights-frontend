@@ -1,4 +1,4 @@
 .toggle(ng-click='ackAction()')
-    .toggle-slider(ng-class='{active: rule.ack_id}')
-    b(translate='translate')
-        span {{text}}
+  .toggle-slider(ng-class='{active: !rule.ack_id}')
+  b(translate='translate')
+    span Enable Rule

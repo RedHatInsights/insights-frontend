@@ -16,7 +16,7 @@
         | {{ruleDetails.description}}
       p(ng-bind-html='ruleDetails.generic_html | trust_html')
       all-severity-icons(rule='ruleDetails', ng-if='!loading')
-      risk-of-change(change-risk='ruleDetails.resolution_risk', ng-if='!loading')
+      risk-of-change(change-risk='ruleDetails.resolution_risk')
 
     section.table-utilities
       .row
