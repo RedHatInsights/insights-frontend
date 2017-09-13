@@ -2,11 +2,11 @@ section
   page-header(title="Rules", icon="fa-institution")
   rule-filter
   .content-wrap
-    section.table-search
+    section.table-utilities
       .row
-        .col-xs-6
+        .col-xs-7.col-sm-5
           search-box(placeholder="{{'Search rules' | translate}}", on-search='search(model)', throttle='1000')
-        .col-xs-6.btn-group
+        .col-xs-5.col-sm-7.btn-group
           a.btn.btn-sm.btn-app.pull-right(ui-sref='app.admin-topic', ng-show='user.is_internal') Topics Admin
         .push-top-narrow.rules-filters(ng-hide="loading")
     section

@@ -2,6 +2,8 @@ $global-filter-dropdown-bg: #545454;
 $global-filter-dropdown-border-color: #767577;
 
 .top-bar .global-filters {
+  ul { @include rem('padding-top', $global-padding/2); }
+
   .dropdown button.btn,
   .dropdown button {
     color: #fff;

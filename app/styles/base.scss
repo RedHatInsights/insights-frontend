@@ -30,6 +30,7 @@ $define-fa: true !default;
 @import '../../node_modules/sweetalert2/dist/sweetalert2';
 @import '../../node_modules/c3/c3';
 @import '../../node_modules/ng-table/dist/ng-table';
+@import '../../node_modules/angular-material/angular-material';
 
 .flexgrid {
   @import '../../node_modules/flexboxgrid/dist/flexboxgrid';
@@ -71,6 +72,7 @@ $define-fa: true !default;
 
 // Utilities
 //==================================================================*/
+@import 'components/utilities/table-utilities';
 @import 'components/utilities/table-search';
 
 
@@ -105,6 +107,7 @@ $define-fa: true !default;
 @import 'components/loader';
 @import 'components/switch';
 @import 'components/dropdown';
+@import 'components/materials';
 
 @import 'components/splash/landing-page';
 @import 'components/prod-filters-link';
@@ -144,7 +147,6 @@ $define-fa: true !default;
 @import 'components/demo-account-switcher';
 @import 'components/evaluation';
 
-
 // Maintenance Plan
 //==================================================================*/
 @import 'components/maintenance-planner/maintenance-plan';
@@ -163,7 +165,7 @@ $define-fa: true !default;
 // Data visualization
 //==================================================================*/
 @import 'components/data-visualization/count-comparison';
-
+@import 'components/data-visualization/gauge';
 
 
 // UI Filters

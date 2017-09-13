@@ -21,6 +21,15 @@
 
   [translate] { display: inline-block; }
 
+  a.link {
+    color: #2097E7;
+    text-decoration: none;
+
+    &:hover {
+      color: darken(#2097E7, 10);
+    }
+  }
+
   button.btn,
   button {
     text-align: left;
@@ -124,3 +133,9 @@
   display: inline-block;
   width: auto;
 } 
+
+.dropdown-menu {
+  .icon-inline-right i {
+    right: $global-padding;;
+  }
+}
