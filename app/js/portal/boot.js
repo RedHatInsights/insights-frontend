@@ -109,10 +109,7 @@ function OnRun(
         $anchorScroll($location.hash());
     }, 1);
 
-    // JWT init
-    // clientId might not really be avalible yet
-    // pending a change from IT
-    Jwt.init({ clientId: 'insights' }, { responseMode: 'query' });
+    Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
 
     Jwt.onInit(() => {
         if (!Jwt.isAuthenticated()) {
