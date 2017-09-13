@@ -13,7 +13,6 @@ function AppCtrl($scope, $rootScope, User, PermissionService) {
 
     $scope.toggleFullScreen = function () {
         if (window && window.jQuery) {
-            console.log('togglingclass');
             window.jQuery('html').toggleClass('fullscreen');
         }
     };
