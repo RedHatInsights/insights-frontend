@@ -17,11 +17,13 @@
   "devDependencies": {
     "angular": "~1.5.x",
     "angular-animate": "~1.5.x",
+    "angular-aria": "~1.5.x",
     "angular-cookies": "~1.5.x",
     "angular-datepicker": "https://github.com/redhataccess/angular-datepicker.git#3c287c4337dab5a059f387cfa0acc6d507e2aeed",
     "angular-gettext": "~2.1.x",
     "angular-gravatar": "~0.4.x",
     "angular-loading-bar": "~0.7.x",
+    "angular-material": "^1.x.x",
     "angular-mocks": "~1.5.x",
     "angular-resource": "~1.5.x",
     "angular-sanitize": "~1.5.x",
