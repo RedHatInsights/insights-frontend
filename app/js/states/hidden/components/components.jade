@@ -1,82 +1,299 @@
 .components
   .page-header
-    h1.page-title Components Library
+    h1.page-title Material Demo
+  .content-wrap#popupcontainer(ng-cloak)
+    md-content
+      md-tabs(md-dynamic-height='', md-border-bottom='')
+        md-tab(label='Jade/HTML Only')
+          md-content.md-padding
+            h1.md-display-2 Jade/HTML Only
+            hr
 
-  section
-    i.severity-icon.low(aria-hidden="true")
-    i.severity-icon.med(aria-hidden="true")
-    i.severity-icon.high(aria-hidden="true")
-    i.severity-icon.critical(aria-hidden="true")
+            // --- BUTTONS CARD 
+            md-card.md-padding
+              md-header
+                h3 Buttons
+              .row
+                .col-md-12
+                  h4 Flat Buttons
 
-  section.section-flex-grid
-    h2 Brand new FLEX BOX MODEL layout with equal height layout
-    h3.section-title.red 2 column grid set on the flex-grid container
-    .flexgrid.equalheights
-      .row
-        .col-sm-2
-          .content.gray
-            p testing the content
-        .col-sm-2
-          .content.gray
-            p testing the content
-            p and again
+                  .col-md-3
+                    md-button Basic
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button
 
-      pre.code-block.code-terminal
-        code.code
-          | .flexgrid.equalheights
-          |   .row
-          |     .col-sm-2
-          |       .content
-          |         p testing the content
-      .row
-        .col-sm-6
-          .content.gray
-            p testing the content
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-            p and again
-            p and again
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-            p and again
-            p and again
-            p and again
-            p and again
-            p and again
-            p and again
-        .col-sm-6
-          .content.gray
-            p testing the content
-            p and again
-            p and again
-            p and again
+                  .col-md-3
+                    md-button.md-primary(md-no-ink) Primary (No Ink)
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-primary(md-no-ink)
 
-  section
-    h2 Regular Card
-    card
-      card-header
-        | Some header HTML
-      card-content
-        | Some content HTML
-      card-footer
+                  .col-md-3
+                    md-button.md-primary(ng-disabled="true") Disabled
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-primary(ng-disabled="true")
+                  .col-md-3
+                    md-button.md-warn Warning
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-warn
 
-  section
-    h2 Expandable Card
-    card(expandable=true)
-      card-header
-        | Some header HTML
-      card-content
-        | Some content HTML
-      card-footer
+              .row
+                .col-md-12
+                  h4 Raised Buttons
+
+                  .col-md-3
+                    md-button.md-raised Basic
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-raised
+
+                  .col-md-3
+                    md-button.md-raised.md-primary(md-no-ink) Primary (No Ink)
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-raised.md-primary(md-no-ink)
+
+                  .col-md-3
+                    md-button.md-raised.md-primary(ng-disabled="true") Disabled
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-raised.md-primary(ng-disabled="true")
+                  .col-md-3
+                    md-button.md-raised.md-warn Warning
+                    pre.code-block.code-terminal
+                      .code-type-jade
+                      code.code
+                        | md-button.md-raised.md-warn
+           
+            // --- FORMS
+            md-card.md-padding
+              md-header
+                h3 Form Example
+              .row
+                .col-md-12
+                  h4 Checkbox
+              .row
+                .col-md-4
+                  md-checkbox(aria-label='Checkbox 1')
+                    | Checkbox 1: Default
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox(aria-label='Checkbox 1')
+              .row
+                .col-md-4
+                  md-checkbox.md-warn.md-align-top-left(ng-model='data.cb2', aria-label='Checkbox 2', ng-true-value="'yup'", ng-false-value="'nope'", flex='')
+                      | Checkbox 2 (md-warn)  
+                      br
+                      span 
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox.md-warn(aria-label='Checkbox 2', ng-true-value="'yup'", ng-false-value="'nope'")
+              .row
+                .col-md-4
+                  md-checkbox(ng-disabled='true', aria-label='Disabled checkbox', ng-model='data.cb3')
+                    | Checkbox: Disabled
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox(ng-disabled='true', aria-label='Disabled checkbox')
+              .row
+                .col-md-4
+                  md-checkbox.md-primary(md-no-ink='', aria-label='Checkbox No Ink')
+                    | Checkbox (md-primary): No Ink
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox.md-primary(md-no-ink='', aria-label='Checkbox No Ink')
+
+              .row
+                .col-md-4
+                  md-checkbox.md-primary(md-indeterminate='', aria-label='Checkbox Indeterminate')
+                    | Checkbox: Indeterminate
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox.md-primary(md-indeterminate='', aria-label='Checkbox Indeterminate')
+
+              .row
+                .col-md-4
+                  md-checkbox.md-primary(md-indeterminate='', aria-label='Checkbox Disabled Indeterminate', ng-disabled='true')
+                    | Checkbox: Disabled, Indeterminate
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-checkbox.md-primary(md-indeterminate='', aria-label='Checkbox Disabled Indeterminate', ng-disabled='true')
+
+              .row
+                .col-md-12
+                  h4 Inputs
+              .row
+                .col-md-4
+                  md-input-container.md-block
+                    label First Name
+                    input
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-input-container.md-block
+                      |   label [insert label]
+                      |   input
+
+              .row
+                .col-md-12
+                  h4 Radio Buttons
+              .row
+                .col-md-4
+                  md-radio-group
+                    md-radio-button.md-primary(value="Foo") Foo
+                    md-radio-button.md-accent(value="Bar") Bar
+                    md-radio-button.md-warn(value="Insights") Insights
+                .col-md-8
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-radio-button.md-primary(value="Foo") Foo
+                      | md-radio-button.md-accent(value="Bar") Bar
+                      | md-radio-button.md-warn(value="Insights") Insights
+
+            // --- LOADING ICON CARD 
+            md-card.md-padding
+              md-header
+                h3 Loading Icons
+              .row
+                .col-md-12
+                  p All loading icons can be configured to load based on percentage (determinate)
+
+              .row
+                .col-md-12
+                  h4 Progress Linear
+                  md-progress-linear(md-mode="indeterminate")
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-progress-linear(md-mode="indeterminate")
+              .row
+                .col-md-12
+                  h4 Progress Circular
+                  md-progress-circular(md-mode="indeterminate")
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-progress-circular(md-mode="indeterminate")
+
+
+        // --- Second Tab
+        md-tab(label='Needs Javascript')
+          md-content.md-padding
+            h1.md-display-2 Needs Javascript
+
+            // --- DIALOG CARD 
+            md-card.md-padding
+              md-header
+                h3 Dialog Box
+              .row
+                .col-md-12
+                  md-button.md-primary.md-raised(ng-click="showConfirm($event)") Confirm Dialog
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-button.md-primary.md-raised(ng-click="showConfirm($event)") Comfirm Dialog
+                  pre.code-block.code-terminal
+                    .code-type-js
+                    code.code
+                      | function [file-controller]Ctrl(
+                      |     $scope, 
+                      |     $mdDialog) {
+                      |     $scope.status = '  ';
+                      |     $scope.customFullscreen = false;
+                      |     $scope.showConfirm = function (ev) {
+                      |         $mdDialog.show(
+                      |             .parent(angular.element(document.querySelector('#popupContainer')))
+                      |             .clickOutsideToClose(true)
+                      |             .title('This is a title')
+                      |             .textContent('This is the content')
+                      |             .ariaLabel('Confirm Dialog Demo')
+                      |             .ok('Confirm')
+                      |             .cancel('Cancel');
+                      |             .targetEvent(ev)
+                      |         );
+                      |     };
+                      | }
+
+            // --- Toast CARD 
+            md-card.md-padding
+              md-header
+                h3 Toasts
+              .row
+                .col-md-12
+                  md-button.md-primary.md-raised(ng-click="showToast('top', 'left', 'fail')") Top Left Fail Toast
+                  md-button.md-primary.md-raised(ng-click="showToast('bottom', 'right', 'success')") Bottom Right Success Toast
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-button.md-primary.md-raised(ng-click="showToast('top', 'left', 'fail')") Top Left Fail Toast
+                      | 
+                      | md-button.md-primary.md-raised(ng-click="showToast('bottom', 'right', 'success')") Bottom Right Success Toast
+                  pre.code-block.code-terminal
+                    .code-type-js
+                    code.code
+                      | function [file-controller]Ctrl(
+                      |     $scope, 
+                      |     $mdToast) {
+                      |     $scope.showToast = function (h,v,state) {
+                      |         $mdToast.show(
+                      |             $mdToast.simple()
+                      |             .content('Toast Content!')
+                      |             .hideDelay('3000')
+                      |             .position(h + ' ' + v)
+                      |             .toastClass('stickyToast' + ' ' + state)
+                      |         );
+                      |     }
+
+            // Swipe Card
+            md-card.md-padding
+              md-header
+                h3 Swiping
+              .row
+                .col-md-12
+                  md-card(md-swipe-up="onSwipeUp()").demo-swipe.text-center
+                      h4.no-select Swipe Me Up
+              .row
+                .col-md-6 
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | [.element](md-swipe-up="onSwipeUp()")
+                      |   h4 Swipe Me Up
+                .col-md-6 
+                  pre.code-block.code-terminal
+                    .code-type-js
+                    code.code
+                      | $scope.onSwipeUp = function () {
+                      |   window.alert('You swiped up!!');
+                      | };
+
+
+        md-tab(label='three')
+          md-content.md-padding
+            h1.md-display-2 Tab Three
+            p
+              | Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.
