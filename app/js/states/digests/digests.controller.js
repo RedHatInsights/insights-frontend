@@ -145,6 +145,10 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
         }
 
         $scope.latest_score = takeRight(digestBase.scores, 1)[0];
+        window.scope = $scope;
+
+        $scope.score_difference = $scope.latest_score -
+            digestBase.scores[digestBase.scores.length - 2];
 
         // max score is 850, min is 250.  Levels calculated by
         //  separating the 600 range into 4 segments and dividing
