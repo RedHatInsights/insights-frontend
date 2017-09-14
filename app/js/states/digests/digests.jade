@@ -21,10 +21,10 @@
             gauge-marker(current="latest_score", difference="score_difference")
             .score
               h3 {{latest_score}}
-              span(ng-if='latest_score < 400') Score needs attention
-              span(ng-if='latest_score >= 400 && latest_score < 550') Score is poor
-              span(ng-if='latest_score >= 550 && latest_score < 700') Score is good
-              span(ng-if='latest_score >= 700') Score is excellent
+              span(translate, ng-if='latest_score < 400') Score needs attention
+              span(translate, ng-if='latest_score >= 400 && latest_score < 550') Score is poor
+              span(translate, ng-if='latest_score >= 550 && latest_score < 700') Score is good
+              span(translate, ng-if='latest_score >= 700') Score is excellent
             footer.footer
               span.num.floor 250
               span.num.ceiling 850
