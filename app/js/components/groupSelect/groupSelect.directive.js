@@ -25,6 +25,14 @@ function groupSelectCtrl(
     $scope.dropdown = false;
     $scope.searching = false;
 
+    $scope.defaultSearchBox = function () {
+        let search_box = document.getElementById('global-filter-searchbox');
+
+        $timeout(function () {
+            search_box.getElementsByTagName('input')[0].focus();
+        }, 0);
+    };
+
     $scope.resetFilter = function () {
         $scope.$broadcast(Events.filters.reset);
     };

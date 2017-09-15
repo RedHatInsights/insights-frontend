@@ -5,7 +5,7 @@
   #global-filter-dropdown.dropdown(ng-click="toggleDropdown()")
     button.btn.dropdown-toggle(
       type='button',
-      ng-click="resetFilter();",
+      ng-click="resetFilter(); defaultSearchBox();",
       data-toggle="dropdown",
       aria-haspopup='true',
       aria-expanded='false',
@@ -16,7 +16,7 @@
       span.caret
     ul.dropdown-menu(role="menu")
       li
-        search-box(
+        search-box#global-filter-searchbox(
           on-search='searchGroups(model)',
           ng-click="$event.stopPropagation();"
           ng-keyup="keypress($event)",
