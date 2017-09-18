@@ -106,7 +106,7 @@ function OnRun(
         $anchorScroll($location.hash());
     }, 1);
 
-    Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
+    Jwt.init({ clientId: 'insights' }, { responseMode: 'query' });
 
     Jwt.onInit(() => {
         if (!Jwt.isAuthenticated()) {
