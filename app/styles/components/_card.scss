@@ -183,7 +183,7 @@
 }
 
 .card-table-header {
-  @include rem('margin', $global-padding auto);
+  @include rem('margin', $global-padding);
   @include rem('padding', $global-padding/2 $global-padding);
   border-bottom: 4px solid $gray;
 

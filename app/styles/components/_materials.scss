@@ -1,21 +1,18 @@
-.code-type{
-	font-family: 'OverpassBold';
-	&-jade::before{
-		content: "Jade";
-		color: yellow;
-		text-decoration: underline;
-	}
-	&-js::before{
-		content: "Javascript";
-		color: lightblue;
-		text-decoration: underline;
-	}
+// Button and Inputs
+.md-button {
+  height: 40px !important;
+  line-height: 0px !important;
+  @include rem(padding, $global-padding);
 }
 
-md-button:first-child{
-	font-weight: 700;
+md-checkbox {
+  .md-icon { transform: scale(.75); }
+  .md-checked{
+  	background-color: #585858;
+  }
 }
 
+// Toast
 .stickyToast {
 	position: fixed;
 	margin: 25px;
@@ -35,9 +32,33 @@ md-button:first-child{
 	}
 }
 
-.demo-swipe {
- 	padding: 40px; 
+// Cards
+.md-titlecard{
+	@include rem('margin-top', 40px);
+	@include rem('margin-bottom', 40px);
 }
+
+.md-card {
+	.md-card-header{
+		font-family: "Ovepass-bold",Helvetica,Arial,sans-serif;	
+		.md-card-content{
+			font-weight: 100;
+			@include rem('font-size', 14px);
+			-webkit-font-smoothing: antialiased;
+		}
+	}
+}
+
+md-menu-content{
+	position: fixed;
+}
+
+md-checkbox.md-checkbox-list { margin: 0px; }
+
+.md-no-margin{ margin: 0px }
+
+// Swiping 
+.demo-swipe { padding: 40px; }
 
 .no-select {
   -webkit-touch-callout: none;
@@ -47,8 +68,24 @@ md-button:first-child{
   -ms-user-select: none;
   user-select: none; }
 
-.md-button {
-  height: 40px !important;
-  line-height: 0px !important;
-  @include rem(padding, $global-padding);
+
+// Code Markup 
+.code-terminal{
+	background-color: black;
+	color: white;
+	@include rem('padding-left', 10px);
+}
+
+.code-type{
+	font-family: 'OverpassBold';
+	&-jade::before{
+		content: "Jade";
+		color: yellow;
+		text-decoration: underline;
+	}
+	&-js::before{
+		content: "Javascript";
+		color: lightblue;
+		text-decoration: underline;
+	}
 }

@@ -44,6 +44,10 @@ function ActionsCtrl(
 
     $scope.getSelectedProduct = FilterService.getSelectedProduct;
 
+    $scope.openMenu = function ($mdMenu, ev) {
+        $mdMenu.open(ev);
+    };
+
     let reload = function () {
         $scope.loading = true;
         RhaTelemetryActionsService.reload();
