@@ -38,7 +38,6 @@ md-checkbox {
 	@include rem('margin-bottom', 40px);
 }
 
-
 .md-side-padding{
 	@include rem('padding-left', 15px);
 	@include rem('padding-right', 15px);
@@ -62,7 +61,6 @@ md-card{
 		}
 	}
 }
-	
 
 .md-card-invert{
 	md-card-header{ background-color: white; }
@@ -77,7 +75,7 @@ md-checkbox.md-checkbox-list { margin: 0px; }
 
 .md-no-margin{ margin: 0px }
 
-// Swiping 
+// Swiping
 .demo-swipe { padding: 40px; }
 
 .no-select {
@@ -89,7 +87,7 @@ md-checkbox.md-checkbox-list { margin: 0px; }
   user-select: none; }
 
 
-// Code Markup 
+// Code Markup
 .code-terminal{
 	background-color: black;
 	color: white;
