@@ -5,18 +5,20 @@
   .content-wrap(ng-hide="loading")
     actions-breadcrumbs.actions-breadcrumbs(ng-hide="loading")
 
-    section.gray.section-topic-details
+    //section.section-topic-details
+    md-card.md-padding.md-titlecard
       topic-details(ng-hide='loading', topic='topic')
 
-    section.table-utilities
-      .row
-        .col-xs-7.col-sm-5
-          search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
-        .col-xs-5.col-sm-7.text-right
-          list-type
+    md-card.md-padding
+      section.table-utilities
+        .row
+          .col-xs-7.col-sm-5
+            search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
+          .col-xs-5.col-sm-7.text-right
+            list-type
 
-    section.section-rules-group-content
-      topic-rule-list(ng-if='!loading', topic='topic')
+      section.section-rules-group-content
+        topic-rule-list(ng-if='!loading', topic='topic')
 
   // Spinner
   .margin-top.text-center(ng-show="loading")

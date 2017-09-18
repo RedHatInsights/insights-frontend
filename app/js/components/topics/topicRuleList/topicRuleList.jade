@@ -21,10 +21,10 @@
                   .col-sm-6
                     all-severity-icons(rule='plugin.rule')
                   .col-sm-6.text-right
-                    strong(ng-hide='plugin.rule.acked')
+                    md-button.md-primary(ng-hide='plugin.rule.acked')
                       a(translate,
-                        ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
-                        ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
+                      ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
+                      ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
 
   .table-view
     .row(ng-show='getListType() === listTypes.table && plugins.length > 0')
@@ -81,7 +81,8 @@
 
   .row.row-short(ng-show='!showRulesWithNoHits && hiddenCount')
     .col-sm-12.text-center
-      button.btn.btn-sm.btn-default(ng-click='showAll()', translate) Show rules without actions ({{hiddenCount}} more)
+      //button.btn.btn-sm.btn-default
+      md-button(ng-click='showAll()', translate) Show rules without actions ({{hiddenCount}} more)
 
   .row.row-short(ng-show='!showCards')
     .col-xs-12
