@@ -132,20 +132,20 @@ angular.module('ngMaterial')
 .config(function ($mdThemingProvider) {
 
     $mdThemingProvider.definePalette('insightsPrimary', {
-        50: '86e0fe',
-        100: '6ddafd',
-        200: '54d3fd',
-        300: '3acdfd',
-        400: '21c6fc',
-        500: '08c0fc',
-        600: '03afe8',
-        700: '039cce',
-        800: '0289b5',
-        900: '02769c',
-        A100: '9fe7fe',
-        A200: 'b8edfe',
-        A400: 'd2f3fe',
-        A700: '026383',
+        50: '64e2ff',
+        100: '4bddff',
+        200: '31d8ff',
+        300: '18d3ff',
+        400: '00cefd',
+        500: '00b9e4',
+        600: '00a4ca',
+        700: '0090b1',
+        800: '007b97',
+        900: '00667e',
+        A100: '7ee7ff',
+        A200: '97ebff',
+        A400: 'b1f0ff',
+        A700: '005264',
         contrastDefaultColor: 'light',
         contrastDarkColors:
         ['50', '100', '200', '300', '400', 'A100'],
@@ -153,23 +153,23 @@ angular.module('ngMaterial')
     });
 
     $mdThemingProvider.definePalette('insightsAccent', {
-        50: '8c8c8c',
-        100: '999999',
-        200: 'a6a6a6',
-        300: 'b3b3b3',
-        400: 'bfbfbf',
-        500: 'cccccc',
-        600: 'e6e6e6',
-        700: 'f2f2f2',
+        50: '4c4c4c',
+        100: '9c9c9c',
+        200: 'a9a9a9',
+        300: 'b6b6b6',
+        400: 'c2c2c2',
+        500: 'cfcfcf',
+        600: 'e9e9e9',
+        700: 'f5f5f5',
         800: 'ffffff',
         900: 'ffffff',
-        A100: 'e6e6e6',
-        A200: 'd9d9d9',
-        A400: 'cccccc',
+        A100: 'e9e9e9',
+        A200: 'dcdcdc',
+        A400: 'cfcfcf',
         A700: 'ffffff',
         contrastDefaultColor: 'light',
         contrastDarkColors:
-        ['50', '100', '200', '300', '400', 'A100'],
+        ['200', '300', '400', 'A100'],
         contrastLightColors: undefined
     });
 
@@ -195,8 +195,22 @@ angular.module('ngMaterial')
     });
 
     $mdThemingProvider.theme('default')
-        .primaryPalette('insightsPrimary')
-        .accentPalette('insightsAccent')
-        .warnPalette('insightsWarn');
-
+        .primaryPalette('insightsPrimary', {
+            default: '500',
+            'hue-1': '100',
+            'hue-2': '800',
+            'hue-3': 'A100'
+        })
+        .accentPalette('insightsAccent', {
+            default: '500',
+            'hue-1': '50',
+            'hue-2': '200',
+            'hue-3': '800'
+        })
+        .warnPalette('insightsWarn', {
+            default: '500',
+            'hue-1': '100',
+            'hue-2': '800',
+            'hue-3': 'A100'
+        });
 });
