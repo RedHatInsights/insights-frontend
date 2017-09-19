@@ -1,27 +1,17 @@
-.dashboard-navigation-container
-  //aside.dashboard-navigation(ng-class="(!isHidden) ? 'profile-image-visible': 'profile-image-hidden'")
-  aside.dashboard-navigation
-    //.header-block.user-profile(ng-if="utils.isBeta()")
-      .profile-image
-        img(gravatar-src="user.email" gravatar-size="200" gravatar-d="blank")
-        a(href="#") Edit Info
-      .profile-info {{user.first_name}} {{user.last_name}}
-        .toggleProfile.hidden-xs(ng-class="(!isHidden) ? 'expanded': 'compressed'", ng-click="toggleNav()")
-          i.fa.fa-compress
-          i.fa.fa-expand
-    account-select
-    menu.nav
-      ul
-        li
-          a(ui-sref='app.overview', ui-sref-active='current', translate) Overview
-        rha-telemetry-actions-side-nav
-        li
-          a(ui-sref='app.inventory', ui-sref-active='current', translate) Inventory
-        li(ng-if='config.isPlannerEnabled')
-          a(ui-sref='app.maintenance', ui-sref-active='current', translate) Planner
-        li
-          a(ui-sref='app.rules', ng-class='{current: includes(states.rules, state.current.name)}', translate) Rules
-        li
-          a(ui-sref='app.digests', ui-sref-active='current', translate) Executive Report
-        li
-          a(ui-sref='app.config', ui-sref-active='current', translate) Configuration
+sidenav.dashboard-navigation
+  account-select
+  menu.nav
+    ul
+      li
+        a(ui-sref='app.overview', ui-sref-active='current', translate) Overview
+      rha-telemetry-actions-side-nav
+      li
+        a(ui-sref='app.inventory', ui-sref-active='current', translate) Inventory
+      li(ng-if='config.isPlannerEnabled')
+        a(ui-sref='app.maintenance', ui-sref-active='current', translate) Planner
+      li
+        a(ui-sref='app.rules', ng-class='{current: includes(states.rules, state.current.name)}', translate) Rules
+      li
+        a(ui-sref='app.digests', ui-sref-active='current', translate) Executive Report
+      li
+        a(ui-sref='app.config', ui-sref-active='current', translate) Configuration

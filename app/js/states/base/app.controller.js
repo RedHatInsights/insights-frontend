@@ -10,12 +10,6 @@ function AppCtrl($scope, $rootScope, User, PermissionService) {
         $rootScope.isContentManager =
             (PermissionService.has(user, PermissionService.PERMS.CONTENT_MANAGER));
     });
-
-    $scope.toggleFullScreen = function () {
-        if (window && window.jQuery) {
-            window.jQuery('html').toggleClass('fullscreen');
-        }
-    };
 }
 
 statesModule.controller('AppCtrl', AppCtrl);
