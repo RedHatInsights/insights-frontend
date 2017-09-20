@@ -12,7 +12,7 @@
                 .count(translate, translate-n='plugin.hitCount', translate-plural="{{$count}} Systems") 1 System
                 .pull-right
                   span.label.label-default.inline-right.rule-inactive(ng-if='plugin.acked', translate) INACTIVE
-                  incident-icon.inline-right(rule-id='plugin.rule.rule_id') &nbsp;
+                  incident-icon.inline-right(rule-id='plugin.rule.rule_id', ng-if='window.insightsGlobal.isBeta') &nbsp;
                   ansible-icon(value='plugin.rule.ansible', ng-if='config.isPlannerEnabled')
               card-content
                 .gray(ng-bind-html='::plugin.rule.summary_html', target-blank='')
@@ -55,11 +55,12 @@
             tr.legend-item(ng-repeat="rule in filteredRules | filter:filterZero | orderBy: sorter.predicate : sorter.reverse track by rule.rule_id", ng-class="{acked: rule.acked}")
               td(ng-click='!rule.acked && viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
                 .icon-inline-right
-                  incident-icon(rule-id='rule.rule_id')
+                  incident-icon(rule-id='rule.rule_id', ng-if='window.insightsGlobal.isBeta')
                 .rule-description(ng-if='rule.acked')
                   | {{rule.description}}
                   span.label.label-default.inline-left.rule-inactive(translate) INACTIVE
 
+                // unsure about hiding incident stable stuff here
                 a(ng-class="{'icon-inline-right' : checkIncident(rule.rule_id)}", ng-if='!rule.acked') {{rule.description}}
 
               // START UBER-SEV

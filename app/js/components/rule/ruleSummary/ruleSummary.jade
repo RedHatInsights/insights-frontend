@@ -4,7 +4,7 @@ card(expandable='true', init-collapsed='initCollapsed', on-toggle='resetShowMore
       .col-sm-12
         h3.title
           ansible-icon.inline-right(value='report.rule.ansible', ng-if='config.isPlannerEnabled')
-          incident-icon.inline-right(rule-id='report.rule_id')
+          incident-icon.inline-right(rule-id='report.rule_id', ng-if='window.insightsGlobal.isBeta')
           | {{ report.rule.category }} #{'>'} {{ report.rule.description }}
     .row.row-short
       .col-sm-12
