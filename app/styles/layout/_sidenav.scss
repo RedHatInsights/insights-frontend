@@ -16,15 +16,15 @@ $aside_anchor_hover_bg: gray;
 }
 
 sidenav {
-  @include transition(.2s);
+  transition: .2s;
   overflow-y: auto;
   background-color: #403b3f; // Old browsers
-  @include box-shadow(inset -3px 0 8px 4px rgba(0, 0, 0, 0.3));
+  box-shadow: inset -3px 0 8px 4px rgba(0, 0, 0, 0.3);
   // box-shadow: inset -16px 0 50px 0px rgba(0,0,0,.5);
 }
 
 sidenav .header-block {
-  @include transition(.2s);
+  transition: .2s;
   position: relative;
   @include rem('margin-bottom', 2px);
   @include rem('padding', $global-padding);
@@ -73,8 +73,8 @@ sidenav .header-block {
       position: absolute;
       right: 0;
       bottom: 0;
-      @include transition-delay(.2s);
-      @include transition-duration(.4s);
+      transition-delay: .2s;
+      transition-duration: .4s;
     }
 
     &.expanded { i.fa-expand { opacity: 0; } }
@@ -105,7 +105,7 @@ sidenav nav.primary-nav {
       color: #fff;
       font-weight: 700;
       border-bottom: 1px solid darken($aside_anchor_bg, 5%);
-      @include transition-duration(.2s);
+      transition-duration: .2s;
 
       .text {
         @include rem('margin-left', 6px);
@@ -120,12 +120,8 @@ sidenav nav.primary-nav {
 }
 
 sidenav nav.primary-nav ul li a > span {
-  // @include transition(2s);
-}
-
-sidenav nav.primary-nav ul li a > span {
   margin-left: 0;
-  @include transition(right .2s, opacity .2s);
+  transition: right .2s, opacity .2s;
 }
 
 sidenav.min {
@@ -133,7 +129,7 @@ sidenav.min {
   nav.primary-nav ul li a > span {
     position: absolute;
     right: 100%;
-    @include opacity(0);
+    opacity: 0;
   }
 }
 

@@ -1,8 +1,5 @@
 .platform-grid > topbar {
   grid-area: topbar;
-  // background-color: #403b3f; // Old browsers
-  // @include filter-gradient(#403b3f, #464c6b, horizontal); // IE6-9 fallback on horizontal gradient
-  // @include background-image(linear-gradient(left bottom, #403b3f 0%,#464c6b 100%));
   background: #fff;
-  @include box-shadow(0 -2px 18px 0px rgba(0,0,0,.25));
+  box-shadow: 0 -2px 18px 0px rgba(0,0,0,.25);
 }
