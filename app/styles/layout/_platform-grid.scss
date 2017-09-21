@@ -12,7 +12,7 @@
   @include media-query(md){ grid-template-rows: minmax(30px, max-content) 1fr;  }
     grid-template-columns: 80px 1fr;
     grid-template-rows: minmax(30px, max-content) 1fr;
-    grid-template-areas: "topbar topbar"
+    grid-template-areas: "logo topbar"
                         "sidenav main";
   }
 
