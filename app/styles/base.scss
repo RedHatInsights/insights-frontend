@@ -24,6 +24,16 @@ $define-fa: true !default;
 @import 'elements/tabs';
 
 
+// Layout
+//==================================================================*/
+@import 'layout/platform';
+@import 'layout/platform-grid';
+@import 'layout/topbar';
+@import 'layout/sidenav';
+@import 'layout/main';
+@import 'layout/footer';
+
+
 // Include CSS from bower components
 //==================================================================*/
 @import '../../node_modules/angular-datepicker/dist/angular-datepicker';
@@ -100,7 +110,6 @@ $define-fa: true !default;
 @import 'components/groups';
 @import 'components/chart-';
 @import 'components/fa-';
-@import 'components/legend-nav';
 @import 'components/actions-breadcrumbs';
 @import 'components/content-block';
 @import 'components/system-overlay';

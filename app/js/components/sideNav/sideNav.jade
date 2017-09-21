@@ -1,10 +1,12 @@
-sidenav.dashboard-navigation
-  account-select
-  menu.nav
+sidenav
+  //- account-select
+  nav.primary-nav(role="navigation", aria-label="Primary")
     ul
       li
         a(ui-sref='app.overview', ui-sref-active='current', translate) Overview
-      rha-telemetry-actions-side-nav
+      li
+        a(ui-sref='app.actions', ui-sref-active='current', translate) Actions
+      //- rha-telemetry-actions-side-nav
       li
         a(ui-sref='app.inventory', ui-sref-active='current', translate) Inventory
       li(ng-if='config.isPlannerEnabled')
