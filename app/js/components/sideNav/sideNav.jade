@@ -1,19 +1,35 @@
-sidenav
+sidenav(ng-class="{'min' : !open}")
   //- account-select
-  nav.primary-nav(role="navigation", aria-label="Primary")
+  nav.primary-nav(role="navigation", aria-label="Primary Navigation")
     ul
       li
-        a(ui-sref='app.overview', ui-sref-active='current', translate) Overview
+        a(ui-sref='app.overview', ui-sref-active='current') 
+          i.fa.fa-tachometer
+          span(translate) Overview
       li
-        a(ui-sref='app.actions', ui-sref-active='current', translate) Actions
+        a(ui-sref='app.actions', ui-sref-active='current') 
+          i.fa.fa-adjust
+          span(translate) Actions
       //- rha-telemetry-actions-side-nav
       li
-        a(ui-sref='app.inventory', ui-sref-active='current', translate) Inventory
+        a(ui-sref='app.inventory', ui-sref-active='current') 
+          i.fa.fa-adjust
+          span(translate) Inventory
       li(ng-if='config.isPlannerEnabled')
-        a(ui-sref='app.maintenance', ui-sref-active='current', translate) Planner
+        a(ui-sref='app.maintenance', ui-sref-active='current') 
+          i.fa.fa-adjust
+          span(translate) Planner
       li
-        a(ui-sref='app.rules', ng-class='{current: includes(states.rules, state.current.name)}', translate) Rules
+        a(ui-sref='app.rules', ng-class='{current: includes(states.rules, state.current.name)}') 
+          i.fa.fa-adjust
+          span(translate) Rules
       li
-        a(ui-sref='app.digests', ui-sref-active='current', translate) Executive Report
+        a(ui-sref='app.digests', ui-sref-active='current') 
+          i.fa.fa-adjust
+          span(translate) Executive Report
       li
-        a(ui-sref='app.config', ui-sref-active='current', translate) Configuration
+        a(ui-sref='app.config', ui-sref-active='current') 
+          i.fa.fa-adjust
+          span(translate) Configuration
+      li
+        a(ng-click="open = !open") test
