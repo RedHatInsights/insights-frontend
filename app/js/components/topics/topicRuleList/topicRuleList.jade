@@ -60,7 +60,6 @@
                   | {{rule.description}}
                   span.label.label-default.inline-left.rule-inactive(translate) INACTIVE
 
-                // unsure about hiding incident stable stuff here
                 a(ng-class="{'icon-inline-right' : checkIncident(rule.rule_id)}", ng-if='!rule.acked') {{rule.description}}
 
               // START UBER-SEV
