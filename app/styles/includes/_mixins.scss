@@ -101,13 +101,7 @@
     // For each property value, if it's in rem or px, derive both rem and
     // px values for it and add those to the end of the appropriate buffer.
     // Ensure all pixel values are rounded to the nearest pixel.
-    @if $value == 0 or $value == 0px {
-
-      // 0 -- use it without a unit
-      $px-values: join($px-values, 0);
-      $rem-values: join($rem-values, 0);
-
-    } @else if type-of($value) == number and not unitless($value) and (unit($value) == px) {
+    @if type-of($value) == number and not unitless($value) and (unit($value) == px) {
 
       // px value given - calculate rem value from font-size
       $new-rem-value: $value / $font-size;
@@ -149,49 +143,48 @@
 
 @mixin media-query($point) {
   @if($point == xs) {
-  @include breakpoint($xs) {
+    @media screen and(min-width: $xs) {
       @content;
     }
   } @elseif($point == sm) {
-    @include breakpoint($sm, $no-query: true) {
+    @media screen and(min-width: $sm) {
       @content;
     }
   } @elseif($point == md) {
-    @include breakpoint($md, $no-query: true) {
+    @media screen and(min-width: $md) {
       @content;
     }
   } @elseif($point == lg) {
-    @include breakpoint($lg, $no-query: true) {
+    @media screen and(min-width: $lg) {
       @content;
     }
   } @elseif($point == xl) {
-    @include breakpoint($xl, $no-query: true) {
+    @media screen and(min-width: $xl) {
       @content;
     }
   } @elseif($point == xs-max) {
-    @include breakpoint(max-width $xs, $no-query: true) {
+    @media screen and(max-width: $xs) {
       @content;
     }
   } @elseif($point == sm-max) {
-    @include breakpoint(max-width $sm, $no-query: true) {
+    @media screen and(max-width: $sm) {
       @content;
     }
   } @elseif($point == md-max) {
-    @include breakpoint(max-width $md, $no-query: true) {
+    @media screen and(max-width: $md) {
       @content;
     }
   } @elseif($point == lg-max) {
-    @include breakpoint(max-width $lg, $no-query: true) {
+    @media screen and(max-width: $lg) {
       @content;
     }
   } @elseif($point == xl-max) {
-    @include breakpoint(max-width $xl, $no-query: true) {
+    @media screen and(max-width: $xl) {
       @content;
     }
   }
 
 }
-
 
 // Inline Retina Display Media Query
 // =================================================================/
