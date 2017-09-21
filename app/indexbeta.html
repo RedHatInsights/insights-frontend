@@ -2,7 +2,7 @@
 <!-- NOTICE: this html file is used only in development!
 	 In production a rewrite of index.html occurs and this file is never used.
 	 You've been warned :D -->
-<html class="legacyfalse chrometwo skiplabs pafoff insights" insights-namespacer="insights-namespacer" ng-class="insightsNamespacer.current">
+<html class="insights" insights-namespacer="insights-namespacer" ng-class="insightsNamespacer.current">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,16 +25,8 @@
       window.LOGGED_IN = /rh_user=./.test(document.cookie);
     </script>
   </head>
-  <body>
-    <!--[if lt IE ]9>
-        <div class="ie-unsupported alert alert-danger">
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-          <span class="sr-only">Error:</span>
-          Using Insights with this browser is unsupported. Please see our
-          <a href="/insights/support/browser" target="_self">Insights browser support policy</a> for more information.
-        </div>
-        <![endif]-->
-    <div ui-view="" class="ng-cloak"></div>
+  <body class="platform">
+    <div ui-view="" class="ng-cloak platform-grid"></div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/insights.js?rev=__COMMIT__"></script>
