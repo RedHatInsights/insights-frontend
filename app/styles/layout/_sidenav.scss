@@ -18,7 +18,11 @@ $aside_anchor_hover_bg: gray;
 sidenav {
   @include transition(.2s);
   overflow-y: auto;
-  background: $sidenav-bg;
+  background-color: #403b3f; // Old browsers
+  @include filter-gradient(#403b3f, #464c6b, horizontal); // IE6-9 fallback on horizontal gradient
+  @include background-image(linear-gradient(left bottom, #403b3f 0%,#464c6b 100%));
+  @include box-shadow(inset -16px 0 50px 0px rgba(0,0,0,.5));
+  // box-shadow: inset -16px 0 50px 0px rgba(0,0,0,.5);
 }
 
 sidenav .header-block {
@@ -26,10 +30,7 @@ sidenav .header-block {
   position: relative;
   @include rem('margin-bottom', 2px);
   @include rem('padding', $global-padding);
-
   color: #fff;
-  background: $dashboard-nav-header-bg;
-  border-bottom: 1px solid $dashboard-nav-border-color;
 
   label { color: #fff; }
 
@@ -91,115 +92,94 @@ sidenav .header-block {
 }
 
 sidenav nav.primary-nav {
-  @include media-query (sm) {
-    @include rem('margin', 2px 0 0);
-  }
-
-  @include media-query (sm) {
-  }
 
   ul {
-    @extend %reset;
-    @extend %clearfix;
-    @include rem('margin-bottom', 1px);
-
-    @include media-query (sm) {
-      @include rem('margin-bottom', 2px);
-    }
+    @include reset();
 
     li {
-      @include transition-duration(.2s);
-      @include transition-timing-function(ease-in-out);
-      overflow: auto;
 
-      a {
-        width: 100%;
-        height: 100%;
-        display: block;
-        @include rem('padding', 12px 20px 12px 14px);
-
-        background: $aside_anchor_bg;
-        color: #fff;
-        font-weight: 700;
-        border-bottom: 1px solid darken($aside_anchor_bg, 5%);
-        -webkit-font-smoothing: antialiased;
-        @include transition-duration(.1s);
-        @include transition-timing-function(ease-in-out);
-        @include box-shadow(none);
-
-        &:hover {
-          text-decoration: none;
-          text-indent: 6px;
-        }
-      }
     }
-  }
 
-  ul ul {
-    margin-bottom: 0;
-    display: none;
-
-    @include media-query (sm) {
+    li a {
       display: block;
+      @include rem('padding', 30px);
+      color: #fff;
+      font-weight: 700;
+      border-bottom: 1px solid darken($aside_anchor_bg, 5%);
+      @include transition-duration(.2s);
+
+      i + span {
+        @include rem('margin-left', 6px);
+      }
     }
 
-
-    li {
-
-      a {
-        @include rem('padding', 12px 20px 12px 24px);
-        background: lighten($aside_anchor_bg, 8%);
-
-        &:hover {
-          text-indent: 6px;
-          background: darken(#fff, 10%);
-        }
-      }
+    li a:hover,
+    li a.current {
+      background: rgba(255,255,255,.1);
     }
   }
 }
 
-menu.account {
-  margin: 0;
+sidenav nav.primary-nav ul li a > span {
+  // @include transition(2s);
+}
 
-  li {
-    position: relative;
-    float: left;
-    @include rem('margin-left', 20px);
+sidenav nav.primary-nav ul li a > span {
+  margin-left: 0;
+  @include transition(right .2s, opacity .2s);
+}
 
-    a {
-      @include rem('padding', 2px 12px 12px 0);
-      display: block;
-      @include font-size(13px);
-      font-weight: bold;
-      color: #9fa0a1;
+sidenav.min {
 
-      @include transition-duration(.1s);
-    }
-
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-
-      width: 22px;
-      height: 0;
-      background: #fff;
-      @include transition-duration(.1s);
-    }
-
-
-    &.current, &:hover {
-
-      &:after { height: 4px; }
-      a { color: #fff; }
-    }
-
-    &:hover {
-      &:after {
-        bottom: 0;
-      }
-    }
+  nav.primary-nav ul li a > span {
+    position: absolute;
+    right: 100%;
+    @include opacity(0);
   }
+}
+
+
+menu.account {
+  // margin: 0;
+
+  // li {
+  //   position: relative;
+  //   float: left;
+  //   @include rem('margin-left', 20px);
+
+  //   a {
+  //     @include rem('padding', 2px 12px 12px 0);
+  //     display: block;
+  //     @include font-size(13px);
+  //     font-weight: bold;
+  //     color: #9fa0a1;
+
+  //     @include transition-duration(.1s);
+  //   }
+
+  //   &:after {
+  //     content: '';
+  //     position: absolute;
+  //     bottom: 0;
+  //     left: 0;
+
+  //     width: 22px;
+  //     height: 0;
+  //     background: #fff;
+  //     @include transition-duration(.1s);
+  //   }
+
+
+  //   &.current, &:hover {
+
+  //     &:after { height: 4px; }
+  //     a { color: #fff; }
+  //   }
+
+  //   &:hover {
+  //     &:after {
+  //       bottom: 0;
+  //     }
+  //   }
+  // }
 }
