@@ -35,7 +35,7 @@
                         span.desc(translate) {{category.id | titlecase}}
                         span.count &nbsp;({{category.count}})
         .col-md-6
-          card.widget.widgetIncidentSummary(id="widgetIncidentSummary")
+          card.widget.widgetIncidentSummary(id="widgetIncidentSummary", ng-if="isBeta")
             card-header.gray
               h4(translate) Incident summary
             card-content.flexgrid.equalheights

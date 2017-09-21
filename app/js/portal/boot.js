@@ -33,6 +33,9 @@ function OnRun(
     TitleService,
     Email) {
 
+    // make sure the view can access the global isBeta
+    $rootScope.isBeta = window.insightsGlobal.isBeta;
+
     // We want to tigger analytics on location changes, not state changes
     // with state changes we miss things
     // like the System Modal click when look at actions :(

@@ -127,7 +127,7 @@ function topicRuleListCtrl ($filter,
     };
 
     $scope.checkIncident = function (rule_id) {
-        return IncidentsService.isIncident(rule_id);
+        return IncidentsService.isIncident(rule_id) && $rootScope.isBeta;
     };
 
     function order() {
