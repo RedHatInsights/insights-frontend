@@ -24,7 +24,7 @@ gulp.task('bro', function () {
     const env = global.isProd ? 'production' : 'development';
     const preludePath = path.resolve(__dirname, '../util/_prelude.js');
 
-    return gulp.src(['./app/js/insights.js', './app/js/static.js'])
+    return gulp.src(['./app/js/insights.js'])
            .pipe(plumber())
            .pipe(bro({
                 debug: (!global.isProd),
