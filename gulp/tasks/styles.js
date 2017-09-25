@@ -10,13 +10,13 @@ const gulpif = require('gulp-if');
 const handleErrors = require('../util/handleErrors');
 const replace = require('gulp-replace');
 
-gulp.task('pre-style', function () {
-    return gulp.src('app/js/components/**/*.scss')
+gulp.task('make-compontents-scss', function () {
+    return gulp.src(config.styles.componentsSrc)
         .pipe(concat('components.scss'))
         .pipe(gulp.dest('app/styles/'));
 });
- 
-gulp.task('styles', ['pre-style'], function () {
+
+gulp.task('styles', ['make-compontents-scss'], function () {
     let styles = global.isRelease ? config.styles.srcRelease : config.styles.src;
     const vendorStyles = config.styles.vendor;
     const outputStyle = global.isProd ? 'compressed' : 'nested';

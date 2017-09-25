@@ -16,6 +16,8 @@ gulp.task('clean', function () {
         toDelete.push(config.dist.release);
     }
 
+    toDelete.push(config.styles.componentsOut);
+
     return del(toDelete);
 });
 
