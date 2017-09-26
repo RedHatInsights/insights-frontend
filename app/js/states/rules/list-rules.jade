@@ -52,3 +52,6 @@ section
                         a(ui-sref='app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})', translate, ng-disabled="rule.impacted_systems === 0") View Impacted Systems ({{rule.impacted_systems}})
                       .sep
                       rule-toggle(rule="rule")
+              .row.row-short(ng-show='rules.length === 0')
+                .col-xs-12.text-center
+                  strong(translate) There are no rules for the selected filters.&nbsp;
