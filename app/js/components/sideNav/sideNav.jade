@@ -5,31 +5,31 @@ sidenav(ng-class="{'min' : !open}")
       li
         a(ui-sref='app.overview', ui-sref-active='current') 
           i.fa.fa-tachometer
-          span(translate) Overview
+          span.text(translate) Overview
       li
         a(ui-sref='app.actions', ui-sref-active='current') 
           i.fa.fa-adjust
-          span(translate) Actions
+          span.text(translate) Actions
       //- rha-telemetry-actions-side-nav
       li
         a(ui-sref='app.inventory', ui-sref-active='current') 
           i.fa.fa-adjust
-          span(translate) Inventory
+          span.text(translate) Inventory
       li(ng-if='config.isPlannerEnabled')
         a(ui-sref='app.maintenance', ui-sref-active='current') 
           i.fa.fa-adjust
-          span(translate) Planner
+          span.text(translate) Planner
       li
         a(ui-sref='app.rules', ng-class='{current: includes(states.rules, state.current.name)}') 
           i.fa.fa-adjust
-          span(translate) Rules
+          span.text(translate) Rules
       li
         a(ui-sref='app.digests', ui-sref-active='current') 
           i.fa.fa-adjust
-          span(translate) Executive Report
+          span.text(translate) Executive Report
       li
         a(ui-sref='app.config', ui-sref-active='current') 
           i.fa.fa-adjust
-          span(translate) Configuration
+          span.text(translate) Configuration
       li
         a(ng-click="open = !open") test

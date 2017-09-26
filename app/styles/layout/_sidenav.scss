@@ -1,4 +1,4 @@
-$sidenav-bg: #403b3f;
+$sidenav-bg: #454853;
 $dashboard-nav-border-color: #403b3f;
 $dashboard-nav-header-bg: #4d464b;
 $dashboard-nav-input-bg: #322e31;
@@ -19,9 +19,7 @@ sidenav {
   @include transition(.2s);
   overflow-y: auto;
   background-color: #403b3f; // Old browsers
-  @include filter-gradient(#403b3f, #464c6b, horizontal); // IE6-9 fallback on horizontal gradient
-  @include background-image(linear-gradient(left bottom, #403b3f 0%,#464c6b 100%));
-  @include box-shadow(inset -16px 0 50px 0px rgba(0,0,0,.5));
+  @include box-shadow(inset -3px 0 8px 4px rgba(0, 0, 0, 0.3));
   // box-shadow: inset -16px 0 50px 0px rgba(0,0,0,.5);
 }
 
@@ -97,7 +95,8 @@ sidenav nav.primary-nav {
     @include reset();
 
     li {
-
+      border-bottom: 1px solid rgba(0,0,0,.2);
+      border-top: 1px solid rgba(255,255,255,.05);
     }
 
     li a {
@@ -108,7 +107,7 @@ sidenav nav.primary-nav {
       border-bottom: 1px solid darken($aside_anchor_bg, 5%);
       @include transition-duration(.2s);
 
-      i + span {
+      .text {
         @include rem('margin-left', 6px);
       }
     }
