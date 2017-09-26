@@ -1,15 +1,22 @@
 /*global require, global*/
 'use strict';
 
+const browserSync = require('browser-sync');
+const compass = require('gulp-compass');
+const concat = require('gulp-concat');
 const config = require('../config');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
 const handleErrors = require('../util/handleErrors');
-const browserSync = require('browser-sync');
-const compass = require('gulp-compass');
 const replace = require('gulp-replace');
 
-gulp.task('styles', function () {
+gulp.task('make-compontents-scss', function () {
+    return gulp.src(config.styles.componentsSrc)
+        .pipe(concat('components.scss'))
+        .pipe(gulp.dest('app/styles/'));
+});
+
+gulp.task('styles', ['make-compontents-scss'], function () {
     let styles = global.isRelease ? config.styles.srcRelease : config.styles.src;
     const vendorStyles = config.styles.vendor;
     const outputStyle = global.isProd ? 'compressed' : 'nested';
@@ -22,8 +29,8 @@ gulp.task('styles', function () {
     styles = styles.concat(vendorStyles);
     return gulp.src(styles)
         .pipe(compass({
-            sass: 'app/styles',
-            css: config.styles.temp,
+            sass:  'app/styles',
+            css:   config.styles.temp,
             style: outputStyle,
             import_path: [
                 './node_modules/flexboxgrid/css/',

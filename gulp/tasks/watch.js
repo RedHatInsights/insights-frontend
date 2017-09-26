@@ -11,7 +11,7 @@ var config  = require('../config'),
 ];
 
 gulp.task('watch', [ 'browserSync', 'server'], function () {
-
+    gulp.watch(config.styles.componentsSrc, ['styles']);
     gulp.watch(config.scripts.src.concat(exclude), ['lint', 'bro']);
     gulp.watch(config.styles.src.concat(exclude),  ['styles']);
     gulp.watch(config.views.watch.concat(exclude), function () {

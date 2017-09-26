@@ -33,6 +33,7 @@ build
 templates.js
 .sass-cache
 app/styles/.css
+app/styles/components.scss
 
 #webstorm
 .idea
