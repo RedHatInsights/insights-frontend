@@ -7,12 +7,14 @@ const last = require('lodash/last');
 const sortBy = require('lodash/sortBy');
 const filter = require('lodash/filter');
 const sum = require('lodash/sum');
+const URI = require('urijs');
 const TIME_PERIOD = 30;
 
 /**
  * @ngInject
  */
-function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Severities) {
+function DigestsCtrl($scope, DigestService, System, Rule,
+                     InventoryService, Severities, InsightsConfig) {
     var digestPromise = DigestService.digestsByType('eval');
     var systemPromise = System.getSystems();
     var rulePromise = Rule.getRulesLatest();
@@ -143,6 +145,17 @@ function DigestsCtrl($scope, DigestService, System, Rule, InventoryService, Seve
                 }
             };
         }
+
+        $scope.downloadPdf = function () {
+            const digestId = res.data.resources[0].digest_id;
+            const uri = URI(InsightsConfig.apiRoot)
+                .segment('digests')
+                .segment(digestId.toString())
+                .segment('pdf')
+                .toString();
+
+            window.open(uri);
+        };
 
         $scope.latest_score = takeRight(digestBase.scores, 1)[0];
         window.scope = $scope;
