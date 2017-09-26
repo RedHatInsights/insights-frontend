@@ -1,4 +1,4 @@
-.top-bar {
+topbar {
 	@include rem('padding', 12px $global-padding);
   @include font-size(20px);
 	background: #646464;
@@ -38,6 +38,9 @@
 
     &:before { content: '|'; }
   }
+}
+
+topbar {
 
   .btn-feedback {
     color: $gray;
