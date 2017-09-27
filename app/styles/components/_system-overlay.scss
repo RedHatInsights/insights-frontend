@@ -136,7 +136,7 @@
     .btn.icon-close {
         border-radius: 0;
         @include rem('padding', 7px);
-        @include transition-duration(.2s);
+        transition-duration: .2s;
         margin-top: 0;
 
         &:hover {

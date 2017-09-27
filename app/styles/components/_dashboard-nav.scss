@@ -80,7 +80,7 @@ $dashboard-nav-input-bg: #322e31;
 			right: 0;
 			bottom: 0;
 			@include transition-delay(.2s);
-			@include transition-duration(.4s);
+			transition-duration: .4s;
 		}
 
 		&.expanded { i.fa-expand { opacity: 0; } }

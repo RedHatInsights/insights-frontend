@@ -546,7 +546,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 		//@include rem('margin-bottom', 20px);
 		//@include rem('padding-bottom', 20px);
 		text-align: right;
-		@include transition-duration(.2s);
+		transition-duration: .2s;
 		overflow: hidden;
 
 		.cancel-update {

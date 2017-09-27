@@ -19,7 +19,7 @@ $aside_anchor_color: #252527;
 	border-left: 4px solid transparent;
 	border-right: 4px solid transparent;
 	border-top: 4px solid #fff;
-	@include transition-duration(.2s);
+	transition-duration: .2s;
 
 
 	&.active {
@@ -47,7 +47,7 @@ menu.nav {
 		}
 
 		li {
-			@include transition-duration(.2s);
+			transition-duration: .2s;
 			@include transition-timing-function(ease-in-out);
 			overflow: auto;
 
@@ -62,7 +62,7 @@ menu.nav {
 				font-weight: 700;
 				border-bottom: 1px solid darken($aside_anchor_bg, 5%);
 				-webkit-font-smoothing: antialiased;
-				@include transition-duration(.1s);
+				transition-duration: .1s;
 				@include transition-timing-function(ease-in-out);
 				box-shadow: none;
 
@@ -120,7 +120,7 @@ menu.account {
 			font-weight: bold;
 			color: #9fa0a1;
 
-			@include transition-duration(.1s);
+			transition-duration: .1s;
 		}
 
 		&:after {
@@ -132,7 +132,7 @@ menu.account {
 			width: 22px;
 			height: 0;
 			background: #fff;
-			@include transition-duration(.1s);
+			transition-duration: .1s;
 		}
 
 

@@ -73,11 +73,11 @@ button.simple,
   button {
     @include font-size(24px);
     @include reset-button(8px);
-    @include transition-duration(.6s);
+    transition-duration: .6s;
 
     span {
       @include rotate(0deg);
-      @include transition-duration(.8s);
+      transition-duration: .8s;
       color: lighten(#252527, 40);
       display: block;
     }
@@ -101,7 +101,7 @@ button.simple,
 .btn-primary {
   background: #646464;
   border-radius: 0;
-  @include transition-duration(.2s);
+  transition-duration: .2s;
   border: 0;
 
   &:hover {

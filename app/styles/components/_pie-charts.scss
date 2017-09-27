@@ -115,7 +115,7 @@ $donut-hole-height: 160px;
   }
 
   tbody tr {
-    @include transition-duration(.2s);
+    transition-duration: .2s;
   }
 
   tbody tr:hover {
