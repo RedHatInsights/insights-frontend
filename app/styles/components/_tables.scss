@@ -112,7 +112,7 @@ $sortable_border_color_active: red;
 			content: '';
 			position: absolute;
 			@include opacity(.4);
-			@include transition(.15s);
+			transition: .15s;
 			border-left: $sortable_border_width solid transparent;
 			border-right: $sortable_border_width solid transparent;
 		}
@@ -247,7 +247,7 @@ $sortable_border_color_active: red;
 			text-align: center;
 			background: #960006;
 			vertical-align: middle;
-			@include transition(.2s);
+			transition: .2s;
 
 			&:hover {
 				cursor: pointer;

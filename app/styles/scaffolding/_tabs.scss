@@ -18,7 +18,7 @@ ul.nav.nav-tabs-simple {
     font-weight: 700;
     color: $gray-dark;
     text-transform: uppercase;
-    @include transition(.2s);
+    transition: .2s;
   }
 
   li.active>a,

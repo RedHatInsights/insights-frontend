@@ -103,7 +103,7 @@ $white: #fff;
 .splash .card {
 	@include font-size(20px);
 	@include rem('padding-bottom', $global-margin);
-	@include transition(.2s);
+	transition: .2s;
 
 	h2, h3, h4 {
 		@include font-size(24px);

@@ -28,7 +28,7 @@
       font-family: "FontAwesome";
       text-align: center;
       @include opacity(0);
-      @include transition(.1s);
+      transition: .1s;
       transition-delay: .2s;
       cursor: pointer;
     }

@@ -37,7 +37,7 @@
   .dataFiltersFooter {
     border-top: 1px solid $gray;
     background: $gray-light;
-    @include transition(.2s);
+    transition: .2s;
   }
 
 

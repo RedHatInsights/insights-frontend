@@ -154,7 +154,7 @@
         .fa {
             color: rgba(0,0,0,.4);
             @include font-size(24px);
-            @include transition(.2s);
+            transition: .2s;
             line-height: 1;
 
             &:hover {

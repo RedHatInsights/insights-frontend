@@ -18,7 +18,7 @@
 
 	a.link:hover { text-decoration: underline; }
 
-	button { @include transition(.4s); }
+	button { transition: .4s; }
 
 	.subheading { @include rem('margin-bottom', $global-padding); }
 

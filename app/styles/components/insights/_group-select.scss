@@ -37,7 +37,7 @@
 
 .group-select .add-group {
   @include opacity(.5);
-  @include transition(.2s);
+  transition: .2s;
 
   &:hover {
     @include opacity(1);

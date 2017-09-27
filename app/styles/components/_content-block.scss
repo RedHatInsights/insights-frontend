@@ -4,7 +4,7 @@ $maintenance-plan-border-color: #dedede;
 
 
 @mixin transition-me() {
-	@include transition(.2s);
+	transition: .2s;
 	@include transition-timing-function(ease-in-out);
 }
 
@@ -259,7 +259,7 @@ $maintenance-plan-border-color: #dedede;
 		top: 0-10px;
 		@include rem('padding', 22px 10px);
 		@include font-size(22px, 22px);
-		@include transition(.2s);
+		transition: .2s;
 
 	}
 
@@ -365,7 +365,7 @@ $maintenance-plan-border-color: #dedede;
 		top: 0;
 		@include rem('padding', $global-padding $global-margin $global-padding $global-padding);
 		@include font-size(22px, 22px);
-		@include transition(.2s);
+		transition: .2s;
 
 	}
 

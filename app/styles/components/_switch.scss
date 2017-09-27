@@ -56,7 +56,7 @@ input.cmn-toggle-round + label:before {
 	right: 1px;
 	background-color: #f1f1f1;
 	border-radius: 60px;
-	@include transition(background $transition-speed);
+	transition: background $transition-speed;
 }
 
 input.cmn-toggle-round + label:after {
@@ -64,7 +64,7 @@ input.cmn-toggle-round + label:after {
 	background-color: #fff;
 	border-radius: 100%;
 	@include box-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
-	@include transition(margin $transition-speed);
+	transition: margin $transition-speed;
 }
 
 
@@ -78,7 +78,7 @@ input.cmn-toggle-square {
 		height: 36px;
 		background-color: #ebeef0;
 		border-radius: 6px;
-		@include transition(background $transition-speed);
+		transition: background $transition-speed;
 
 		&:before,
 		&:after {
@@ -95,7 +95,7 @@ input.cmn-toggle-square {
 		&:before {
 			background-color: #f7fafc;
 			border-radius: 4px;
-			@include transition(background $transition-speed);
+			transition: background $transition-speed;
 		}
 
 		&:after {
@@ -106,7 +106,7 @@ input.cmn-toggle-square {
 			background-color: #fff;
 			border-radius: 4px;
 			@include box-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
-			@include transition(margin $transition-speed);
+			transition: margin $transition-speed;
 		}
 	}
 
