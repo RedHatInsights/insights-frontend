@@ -70,7 +70,7 @@
   font: 12px bold sans-serif;
   border: none;
   line-height: 1;
-  @include box-shadow(none);
+  box-shadow: none;
   @include button-color($text-color, $bg-color);
   //&:hover, &:focus { @include button-color($text-color, lighten($bg-color, 10%)); }
   &:active { background: darken($bg-color, 5%); }

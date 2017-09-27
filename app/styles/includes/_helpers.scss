@@ -123,7 +123,7 @@ x.trunc {
 
         &.active,
         &:hover {
-            @include box-shadow(none);
+            box-shadow: none;
             background: #f2f5f7;
         }
     }

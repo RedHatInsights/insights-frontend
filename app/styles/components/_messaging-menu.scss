@@ -23,7 +23,7 @@ $messaging-menu-border-color: $gray-border-med;
 			width: 100px;
 			height: 100px;
 			border-color: #fff;
-			@include box-shadow(0 2px 12px 0px rgba(0,0,0,.2));
+			box-shadow: 0 2px 12px 0px rgba(0,0,0,.2);
 		}
 	}
 

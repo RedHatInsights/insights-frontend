@@ -46,7 +46,7 @@
             background: #949794;
 		    color: #e4e4e4;
             background-image: none;
-            @include box-shadow(inset 0 0 2px 4px rgba(0, 0, 0, .1));
+            box-shadow: inset 0 0 2px 4px rgba(0, 0, 0, .1);
 
             i {
                 color: #e4e4e4;
