@@ -48,7 +48,7 @@ menu.nav {
 
 		li {
 			transition-duration: .2s;
-			@include transition-timing-function(ease-in-out);
+			transition-timing-function: ease-in-out;
 			overflow: auto;
 
 			a {
@@ -63,7 +63,7 @@ menu.nav {
 				border-bottom: 1px solid darken($aside_anchor_bg, 5%);
 				-webkit-font-smoothing: antialiased;
 				transition-duration: .1s;
-				@include transition-timing-function(ease-in-out);
+				transition-timing-function: ease-in-out;
 				box-shadow: none;
 
 				&:hover {

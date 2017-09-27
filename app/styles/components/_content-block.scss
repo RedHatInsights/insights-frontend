@@ -5,7 +5,7 @@ $maintenance-plan-border-color: #dedede;
 
 @mixin transition-me() {
 	transition: .2s;
-	@include transition-timing-function(ease-in-out);
+	transition-timing-function: ease-in-out;
 }
 
 // Content Block
