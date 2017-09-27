@@ -201,11 +201,11 @@ $brand_red: #cc0000;
 		@include rem('padding',8px);
 		border-radius: 50px;
 		border: 2px solid $gray;
-		@include opacity(1);
+		opacity: 1;
 		transition: .2s;
 
 		span {
-			@include opacity(1);
+			opacity: 1;
 			@include transform(rotate(0deg));
 			transition: .35s;
 		}
@@ -219,7 +219,7 @@ $brand_red: #cc0000;
 			right: 0;
 			width: 100%;
 			height: 100%;
-			@include opacity(0);
+			opacity: 0;
 			@include transform(rotate(0deg));
 			transition: .2s;
 		}
@@ -229,13 +229,13 @@ $brand_red: #cc0000;
 
 
 		&:before {
-			@include opacity(1);
+			opacity: 1;
 			@include transform(rotate(360deg));
 		}
 
 		span {
 			@include transform(rotate(90deg));
-			@include opacity(0);
+			opacity: 0;
 		}
 	}
 }

@@ -73,7 +73,7 @@ $maintenance-plan-border-color: #dedede;
 			margin-top: 0;
 			margin-left: 5px;
 			float: none;
-			@include opacity(.5);
+			opacity: .5;
 		}
 
 		.toggler {
@@ -85,7 +85,7 @@ $maintenance-plan-border-color: #dedede;
 		}
 	}
 
-	.title:hover .permalink { @include opacity(1); }
+	.title:hover .permalink { opacity: 1; }
 
 	// Content
 	//==================================================================*/
@@ -231,11 +231,11 @@ $maintenance-plan-border-color: #dedede;
 
 .content-block.faded {
 	.header { background-color: #F5f5f5; }
-	.header, .footer { @include opacity(.5); }
+	.header, .footer { opacity: .5; }
 
 	&:hover {
 		.footer, .footer a {
-			@include opacity(1);
+			opacity: 1;
 		}
 	}
 }
@@ -313,11 +313,11 @@ $maintenance-plan-border-color: #dedede;
 
 .content-block.faded {
 	.header { background-color: #F5f5f5; }
-	.header, .footer { @include opacity(.5); }
+	.header, .footer { opacity: .5; }
 
 	&:hover {
 		.footer, .footer a {
-			@include opacity(1);
+			opacity: 1;
 		}
 	}
 }
@@ -426,7 +426,7 @@ $maintenance-plan-border-color: #dedede;
 
 	li.sortable {
 		position: relative;
-		@include opacity(.5);
+		opacity: .5;
 		@include rem('padding', $global-padding);
 		border-bottom: 4px solid rgba(0,0,0,.25);
 		background: #fff;
@@ -454,7 +454,7 @@ $maintenance-plan-border-color: #dedede;
 	//}
 
 	li.sort-asc, li.sort-desc {
-		@include opacity(1);
+		opacity: 1;
 		border-bottom: 4px solid #848484;
 		background: rgba(141,192,219,0.25);
 	}

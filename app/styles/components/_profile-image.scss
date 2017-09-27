@@ -42,7 +42,7 @@
 	background-size: cover;
 	background-position: center center;
 
-	@include opacity(1);
+	opacity: 1;
 	transition: .2s;
 
     @include media-query(md) {

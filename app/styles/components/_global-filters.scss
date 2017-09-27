@@ -25,7 +25,7 @@ $global-filter-dropdown-border-color: #767577;
   }
 
   &.disabled {
-    @include opacity(.4);
+    opacity: .4;
 
     label {
       text-decoration: line-through;
