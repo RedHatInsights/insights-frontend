@@ -33,7 +33,7 @@
 
         &:first-child {
             border-top-left-radius: 5px;
-            @include border-bottom-left-radius(5px);
+            border-bottom-left-radius: 5px;
             border-left: none;
         }
 
