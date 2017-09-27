@@ -20,7 +20,7 @@
         background-image: none;
         background: #f7fafc;
         border-left: 5px solid #ebeef0;
-        @include transition(.1s);
+        transition: .1s;
 
 	    @include media-query (xs) { @include rem('padding', 6px 12px); }
 
@@ -65,7 +65,7 @@
         position: relative;
     }
 
-    .lbl, .icon { @include transition(.2s); }
+    .lbl, .icon { transition: .2s; }
 
     .lbl {
         @include font-size(12px);

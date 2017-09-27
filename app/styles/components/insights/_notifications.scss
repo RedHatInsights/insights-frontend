@@ -149,7 +149,7 @@
 
 				@include font-size(16px);
 				@include text-shadow(0 1px 1px #888);
-				@include transition(.2s);
+				transition: .2s;
 				color: $blue;
 				text-shadow: none;
 				line-height: 1;

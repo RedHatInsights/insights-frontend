@@ -38,7 +38,7 @@
 		@include font-size(13px);
 		line-height: 1;
 		font-weight: 700;
-		@include transition(.2s);
+		transition: .2s;
 		text-transform: uppercase;
 
 		&.active {
@@ -53,12 +53,12 @@
 //	background: rgba(250,250,250,.95);
 //	border-bottom-width: 5px;
 //
-//	@include transition(.3s, ease-in-out);
+//	transition: .3s, ease-in-out;
 //
 //	&:hover {
 //		background: rgba(250,250,250,1);
 //		@include opacity(1);
-//		@include transition(.1s, ease-in-out);
+//		transition: .1s, ease-in-out;
 //
 //		a, a.active {
 //			@include rem('padding', 22px 24px 22px 0);
@@ -87,7 +87,7 @@
 //				bottom: 0;
 //				left: 0;
 //				background: #000;
-//				@include transition(.2s);
+//				transition: .2s;
 //			}
 //		}
 //	}

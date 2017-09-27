@@ -38,7 +38,7 @@
 
 
     .caret {
-      @include transition(.2s);
+      transition: .2s;
       @include rem('margin-left', $global-padding/2);
     }
   }

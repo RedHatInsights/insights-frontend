@@ -178,7 +178,7 @@ $brand_red: #cc0000;
 	color: $gray-dark;
 	text-transform: none;
 	padding: 0;
-	@include transition(.2s);
+	transition: .2s;
 
 	.text, .circle-icon {
 		display: inline-block;
@@ -202,12 +202,12 @@ $brand_red: #cc0000;
 		border-radius: 50px;
 		border: 2px solid $gray;
 		@include opacity(1);
-		@include transition(.2s);
+		transition: .2s;
 
 		span {
 			@include opacity(1);
 			@include transform(rotate(0deg));
-			@include transition(.35s);
+			transition: .35s;
 		}
 
 		&:before {
@@ -221,7 +221,7 @@ $brand_red: #cc0000;
 			height: 100%;
 			@include opacity(0);
 			@include transform(rotate(0deg));
-			@include transition(.2s);
+			transition: .2s;
 		}
 	}
 

@@ -31,7 +31,7 @@
       background: #a9a9a9;
       color: #fff;
       transform: rotate(0deg);
-      @include transition(.2s);
+      transition: .2s;
 
       i { transform: rotate(180deg); }
     }

@@ -43,7 +43,7 @@
 	background-position: center center;
 
 	@include opacity(1);
-	@include transition(.2s);
+	transition: .2s;
 
     @include media-query(md) {
       width: 100px;

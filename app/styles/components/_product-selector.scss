@@ -11,7 +11,7 @@ a.product-select-link {
 	background-repeat: no-repeat;
 	background-size: 30px;
 	background-position: 6px center;
-	@include transition(.2s);
+	transition: .2s;
 	
 	&:hover {
 		text-decoration: underline;
@@ -69,7 +69,7 @@ a.product-select-link {
 .modal {
 	.block {
 		cursor: pointer;
-		@include transition(.2s);
+		transition: .2s;
 
 		.header {
 			@include rem('padding', 12px);

@@ -113,7 +113,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 .plan-wrap {
 	box-shadow: 0 0 0 10px #fff;
-	@include transition(.2s);
+	transition: .2s;
 }
 
 .plan-wrap.active {
@@ -141,7 +141,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
                 @include rem('padding', 5px);
                 border: 1px solid #ddd;
                 @include rem('margin-left', 10px);
-                @include transition(.2s);
+                transition: .2s;
 
                 &:hover {
                         background: $gray-dark;
@@ -365,7 +365,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 			menu {
 				@include opacity(0);
-				@include transition(.4s);
+				transition: .4s;
 				@include rem('margin-right', 32px);
 
 				i {
@@ -382,7 +382,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 					@include opacity(0);
 					@include font-size(14px);
 					//font-weight: 400;
-					@include transition(.2s);
+					transition: .2s;
 					text-align: right;
 
 					i { @include font-size(18px); }
@@ -395,7 +395,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 				width: 48px;
 				text-align: right;
 				opacity: 0;
-				@include transition(.2s);
+				transition: .2s;
 				@include transition-delay(.2s);
 			}
 
@@ -551,7 +551,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 		.cancel-update {
 			margin-top: 0;
-			@include transition(.2s);
+			transition: .2s;
 		}
 	}
 
@@ -573,7 +573,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 	//.show-system select.account-select {
 	//	@include rem('margin-bottom', $global-padding);
-	//	@include transition(margin-bottom 2s);
+	//	transition: margin-bottom 2s;
 	//}
 	//
 
@@ -692,7 +692,7 @@ div[class^="col-xs-"], div[class*=" col-xs-"] {
 	}
 }
 
-div[class^="col-"], div[class*=" col-"] { @include transition(.4s); }
+div[class^="col-"], div[class*=" col-"] { transition: .4s; }
 
 .maintenance-plan .editable-form {
 	.title input {

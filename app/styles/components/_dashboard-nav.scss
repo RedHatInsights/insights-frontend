@@ -14,7 +14,7 @@ $dashboard-nav-input-bg: #322e31;
 	background: #252527;
 	display: inline-block;
 	width: 100%;
-	@include transition(.2s);
+	transition: .2s;
 
 	&.fixed {
 		@include media-query (md) {
@@ -27,7 +27,7 @@ $dashboard-nav-input-bg: #322e31;
 }
 
 .dashboard-navigation .header-block {
-	@include transition(.2s);
+	transition: .2s;
 	position: relative;
 	@include rem('margin-bottom', 2px);
 	@include rem('padding', $global-padding);
@@ -104,7 +104,7 @@ $dashboard-nav-input-bg: #322e31;
 		@include media-query(sm) {
 			@include opacity(0);
 			top: -100px;
-			@include transition(.4s);
+			transition: .4s;
 		}
 	}
 }
@@ -126,7 +126,7 @@ $dashboard-nav-input-bg: #322e31;
 
 .dashboard-navigation .user-profile {
 	text-align: center;
-	@include transition(.2s);
+	transition: .2s;
 	@include rem('padding-top', $global-padding);
 	overflow: hidden;
 
