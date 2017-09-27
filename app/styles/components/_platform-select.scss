@@ -105,10 +105,10 @@
 
 
 	a.platform {
-		@include opacity(.8);
+		opacity: .8;
 
 		&:hover {
-			@include opacity(1);
+			opacity: 1;
 		}
 	}
 }

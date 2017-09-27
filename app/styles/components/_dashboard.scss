@@ -12,7 +12,7 @@ $aside_anchor_color: #252527;
 	height: 100px;
 	display: block;
 	background-size: 100% auto;
-	@include opacity(.1);
+	opacity: .1;
 }
 
 .toggle {

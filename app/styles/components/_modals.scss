@@ -160,6 +160,6 @@ ul.ui-select-choices {
         margin-top: -20px;
     }
     > :not(.spinner) {
-        @include opacity(.3);
+        opacity: .3;
     }
 }

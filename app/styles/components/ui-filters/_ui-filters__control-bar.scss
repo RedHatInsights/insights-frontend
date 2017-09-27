@@ -47,10 +47,10 @@
       }
     }
 
-    //i.fa.fa-filter { @include opacity(1); }
+    //i.fa.fa-filter { opacity: 1; }
     //
     //i.fa.fa-close {
-    //  @include opacity(0);
+    //  opacity: 0;
     //  color: #fff;
     //}
   }
@@ -60,11 +60,11 @@
   //  color: #fff;
   //
   //  i.fa.fa-filter {
-  //    @include opacity(0);
+  //    opacity: 0;
   //  }
   //
   //  i.fa.fa-close {
-  //    @include opacity(1);
+  //    opacity: 1;
   //  }
   //}
 }

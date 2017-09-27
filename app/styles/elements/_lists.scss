@@ -12,7 +12,7 @@
 	.item {
         position: relative;
         .item-content.faded {
-            @include opacity(.5);
+            opacity: .5;
         }
     }
 

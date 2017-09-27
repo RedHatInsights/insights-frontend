@@ -39,7 +39,7 @@ input.rounded {
     cursor: not-allowed;
     pointer-events: none;
     color: #8d8d8d;
-    @include opacity(.65);
+    opacity: .65;
   }
 }
 

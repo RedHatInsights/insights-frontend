@@ -111,7 +111,7 @@ $sortable_border_color_active: red;
 		&:before, &:after {
 			content: '';
 			position: absolute;
-			@include opacity(.4);
+			opacity: .4;
 			transition: .15s;
 			border-left: $sortable_border_width solid transparent;
 			border-right: $sortable_border_width solid transparent;
@@ -136,11 +136,11 @@ $sortable_border_color_active: red;
 		.carets {
 
 			&:before {
-				@include opacity(.2);
+				opacity: .2;
 				border-bottom-color: $sortable_border_color_active;
 			}
 			&:after {
-				@include opacity(1);
+				opacity: 1;
 				border-top-color: $sortable_border_color_active;
 			}
 		}
@@ -148,8 +148,8 @@ $sortable_border_color_active: red;
 
 	&.sortable-active.sortable-dsc {
 		.carets {
-			&:before { @include opacity(1); }
-			&:after { @include opacity(.2); }
+			&:before { opacity: 1; }
+			&:after { opacity: .2; }
 		}
 	}
 }
