@@ -206,7 +206,7 @@ $brand_red: #cc0000;
 
 		span {
 			opacity: 1;
-			@include transform(rotate(0deg));
+			transform: rotate(0deg);
 			transition: .35s;
 		}
 
@@ -220,7 +220,7 @@ $brand_red: #cc0000;
 			width: 100%;
 			height: 100%;
 			opacity: 0;
-			@include transform(rotate(0deg));
+			transform: rotate(0deg);
 			transition: .2s;
 		}
 	}
@@ -230,11 +230,11 @@ $brand_red: #cc0000;
 
 		&:before {
 			opacity: 1;
-			@include transform(rotate(360deg));
+			transform: rotate(360deg);
 		}
 
 		span {
-			@include transform(rotate(90deg));
+			transform: rotate(90deg);
 			opacity: 0;
 		}
 	}
