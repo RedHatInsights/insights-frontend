@@ -396,7 +396,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 				text-align: right;
 				opacity: 0;
 				transition: .2s;
-				@include transition-delay(.2s);
+				transition-delay: .2s;
 			}
 
 			&.inactive {
