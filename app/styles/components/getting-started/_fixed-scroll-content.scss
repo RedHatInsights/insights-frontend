@@ -149,7 +149,7 @@ $navvy-header-border-color: #4d5764;
 				outline-style: none;
 				-moz-outline-style: none;
 				@include rem('padding', $global-padding 0 $global-padding 20px);
-				@include transform(translateY(50%));
+				transform: translateY(50%);
 			}
 
 			.arrow {
