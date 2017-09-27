@@ -50,6 +50,7 @@ function configWebhooksCtrl($q, $scope, gettextCatalog, sweetAlert, Utils, Webho
     };
 
     $scope.edit = function (webhook) {
+        // TODO remove
         return alert(
             gettextCatalog.getString('Edit webhook'),
             url => Webhooks.update({id: webhook.id, url}),

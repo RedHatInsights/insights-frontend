@@ -20,8 +20,8 @@ function Webhooks($http, AccountService, InsightsConfig) {
 
     return {
 
-        get: function () {
-            return $http.get(url());
+        get: function (...segments) {
+            return $http.get(url(...segments));
         },
 
         create: function (webhook) {
