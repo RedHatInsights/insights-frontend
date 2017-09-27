@@ -97,7 +97,7 @@
     line-height: 1;
     font-weight: 700;
     @include rem('padding', 6px 12px);
-    @include border-radius(12px);
+    border-radius: 12px;
   }
 }
 

@@ -194,7 +194,7 @@ $sortable_border_color_active: red;
 		@include rem('padding', 4px 8px);
 		background: $gray-dark;
 		color: #fff;
-		@include border-radius(6px);
+		border-radius: 6px;
 		font-weight: 700;
 
 	}

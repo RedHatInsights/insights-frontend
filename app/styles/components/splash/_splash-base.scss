@@ -30,7 +30,7 @@ $white: #fff;
 		color: #fff;
 		@include font-size(74px);
 		line-height: 1;
-		@include border-radius(50%);
+		border-radius: 50%;
 		overflow: hidden;
 
 		&:after {

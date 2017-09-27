@@ -27,7 +27,7 @@ input.rounded {
 	border: 4px solid #ebeef0;
 	@include rem('padding', 6px 8px);
 	line-height: 1.2;
-	@include border-radius(10px);
+	border-radius: 10px;
 }
 
 .insights a {

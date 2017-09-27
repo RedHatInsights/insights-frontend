@@ -134,7 +134,7 @@
     @include media-query (lg) { max-width: 1170px; }
 
     .btn.icon-close {
-        @include border-radius(0);
+        border-radius: 0;
         @include rem('padding', 7px);
         @include transition-duration(.2s);
         margin-top: 0;
@@ -179,7 +179,7 @@
         color: white;
         background-color: #4c4c4c;
         border: none;
-        @include border-radius(0);
+        border-radius: 0;
 
         @include media-query (sm) { margin-bottom: 12px; }
     }
@@ -207,7 +207,7 @@
             height: 42px;
             display: inline-block;
             background: $blue_dark;
-            @include border-radius(50%);
+            border-radius: 50%;
 
             &:after {
                 content: '';
@@ -271,7 +271,7 @@
     .detail-content { @include font-size(13px, 26px); }
 
     .icon {
-        @include border-radius(50%);
+        border-radius: 50%;
         @include box-shadow(0 2px 2px 0 rgba(0, 0, 0, .2));
         left: -40px;
         position: absolute;

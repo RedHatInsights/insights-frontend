@@ -35,7 +35,7 @@
 	overflow: hidden;
 	display: inline-block;
 
-	@include border-radius(50%);
+	border-radius: 50%;
 	border: 6px solid #857e83;
 	@include box-shadow(0 2px 4px 0px #252527);
 	background-image: url("../static/images/i_user-fallback.png");

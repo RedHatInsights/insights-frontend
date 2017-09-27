@@ -63,7 +63,7 @@ button.simple,
     text-align: center;
     font-weight: 700;
     color: #fff;
-    @include border-radius(8px);
+    border-radius: 8px;
 }
 
 // Originally from the chart reset
@@ -100,7 +100,7 @@ button.simple,
 
 .btn-primary {
   background: #646464;
-  @include border-radius(0);
+  border-radius: 0;
   @include transition-duration(.2s);
   border: 0;
 
@@ -199,7 +199,7 @@ $brand_red: #cc0000;
 		@include font-size(42px);
 		line-height: 1;
 		@include rem('padding',8px);
-		@include border-radius(50px);
+		border-radius: 50px;
 		border: 2px solid $gray;
 		@include opacity(1);
 		@include transition(.2s);

@@ -56,7 +56,7 @@ $messaging-menu-border-color: $gray-border-med;
 			margin-top: -4px;
 			background: $gray-dark;
 			color: #fff;
-			@include border-radius(12px);
+			border-radius: 12px;
 
 			&.unread {
 				background: $blue;

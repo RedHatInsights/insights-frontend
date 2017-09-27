@@ -91,7 +91,7 @@
 		height: 42px;
 		display: inline-block;
 		background: $blue_dark;
-		@include border-radius(50%);
+		border-radius: 50%;
 
 		&:after {
 			content: '';

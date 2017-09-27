@@ -26,7 +26,7 @@
 
   .color-block {
     margin: 0 auto;
-    @include border-radius(0);
+    border-radius: 0;
     display: block;
     height: 12px;
     width: 12px;
@@ -61,7 +61,7 @@ $donut-hole-height: 160px;
   height: $donut-hole-height;
   //margin-left: -90px;
   //margin-top: -90px;
-  @include border-radius(50%);
+  border-radius: 50%;
   @include box-shadow(0 2px 5px 3px rgba(0, 0, 0, .2));
   background: #fff;
   text-align: center;

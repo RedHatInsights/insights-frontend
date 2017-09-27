@@ -62,7 +62,7 @@
   margin: 0;
   @include rem('padding', $padding);
   background: none;
-  @include border-radius(0);
+  border-radius: 0;
 }
 
 // Button mixin

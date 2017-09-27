@@ -19,7 +19,7 @@
 
   .btn {
     @include rem('padding', 4px 14px);
-    @include border-radius(24px);
+    border-radius: 24px;
     font-weight: 700;
     font-style: italic;
     color: $blue;

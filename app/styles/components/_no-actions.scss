@@ -52,7 +52,7 @@
 		font-weight: 700;
 		@include font-size(13px);
 		line-height: 1;
-		@include border-radius(12px);
+		border-radius: 12px;
 		letter-spacing: .25em;
 	}
 

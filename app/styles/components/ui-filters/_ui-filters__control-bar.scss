@@ -16,7 +16,7 @@
     background: $blue;
     color: #fff;
     @include box-shadow(0 0 0 4px rgba(0,0,0,.1));
-    @include border-radius(14px);
+    border-radius: 14px;
     border: none;
     line-height: 1;
 
