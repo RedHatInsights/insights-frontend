@@ -13,7 +13,7 @@ const TIME_PERIOD = 30;
 /**
  * @ngInject
  */
-function DigestsCtrl($scope, DigestService, System, Rule,
+function DigestsCtrl($scope, $http, DigestService, System, Rule,
                      InventoryService, Severities, InsightsConfig) {
     var digestPromise = DigestService.digestsByType('eval');
     var systemPromise = System.getSystems();
@@ -146,15 +146,38 @@ function DigestsCtrl($scope, DigestService, System, Rule,
             };
         }
 
+        $scope.downloading = false;
         $scope.downloadPdf = function () {
             const digestId = res.data.resources[0].digest_id;
             const uri = URI(InsightsConfig.apiRoot)
                 .segment('digests')
                 .segment(digestId.toString())
-                .segment('pdf')
                 .toString();
 
-            window.open(uri);
+            $scope.downloading = true;
+            $http.get(uri, {
+                responseType: 'arraybuffer',
+                headers: { Accept: 'application/pdf'}
+            })
+                .success(response => {
+                    const file = new Blob([response], {type: 'application/pdf'});
+                    const url = window.URL || window.webkitURL;
+                    const isChrome = !!window.chrome && !!window.chrome.webstore;
+
+                    if (isChrome) {
+                        const downloadLink = angular.element('<a></a>');
+                        downloadLink.attr('href', url.createObjectURL(file));
+                        downloadLink.attr('target', '_self');
+                        downloadLink.attr('download', 'insights-executive-report.pdf');
+                        downloadLink[0].click();
+                    } else {
+                        const fileURL = URL.createObjectURL(file);
+                        window.open(fileURL);
+                    }
+
+                    $scope.downloading = false;
+
+                });
         };
 
         $scope.latest_score = takeRight(digestBase.scores, 1)[0];
