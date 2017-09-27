@@ -76,7 +76,7 @@ button.simple,
     transition-duration: .6s;
 
     span {
-      @include rotate(0deg);
+      rotate: 0deg;
       transition-duration: .8s;
       color: lighten(#252527, 40);
       display: block;
@@ -92,7 +92,7 @@ button.simple,
 .reset {
     &:hover {
       span {
-        @include rotate(180deg);
+        rotate: 180deg;
         color: #0fbaf2;
       }
     }

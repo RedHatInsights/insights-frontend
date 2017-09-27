@@ -264,7 +264,7 @@ $maintenance-plan-border-color: #dedede;
 	}
 
 	&.active .expandable-toggle  {
-		@include rotate(90deg);
+		rotate: 90deg;
 	}
 }
 
@@ -370,11 +370,11 @@ $maintenance-plan-border-color: #dedede;
 	}
 
 	&.expanded .expandable-toggle {
-		@include rotate(90deg);
+		rotate: 90deg;
 	}
 
 	&.expanded .footer-toggle {
-		@include rotate(180deg);
+		rotate: 180deg;
 	}
 
 	&.expanded .content {

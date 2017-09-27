@@ -23,7 +23,7 @@ $aside_anchor_color: #252527;
 
 
 	&.active {
-		@include rotate(180deg);
+		rotate: 180deg;
 	}
 }
 
