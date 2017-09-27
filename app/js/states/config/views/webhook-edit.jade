@@ -1,0 +1,34 @@
+page-header(title="Edit webhook", icon="fa-wrench")
+
+.content-wrap
+  .rha-notifications
+  .spinner(ng-if='loader.loading')
+  form.form-horizontal(novalidate, name='webhookForm', ng-if='!loader.loading')
+    .form-group(ng-class="{'has-error': topicForm.title.$invalid && topicForm.title.$dirty}")
+      label.control-label.col-sm-2(for='url') Target URL
+      .col-sm-10
+        input.form-control#url(type='text', name='url', ng-model='webhook.url', required)
+    .form-group
+      label.control-label.col-sm-2(for='active') Active
+      .col-sm-10
+        input#active(type='checkbox', name='active', ng-model='webhook.active')
+    .form-group
+      label.control-label.col-sm-2(for='active') Event types
+      .col-sm-10
+        div
+          label.radio-inline
+            input(type='radio', ng-model='webhook.firehose', ng-value="true")
+            | All (no filtering)
+        div
+          label.radio-inline
+            input(type='radio', ng-model='webhook.firehose', ng-value='false')
+            | Only selected
+      .sm-offset-3.col-sm-9(ng-if='!webhook.firehose')
+        ul
+          li(ng-repeat='event in eventTypes track by event.name')
+            label {{event.description}}
+              input#active(type='checkbox', name='active', ng-model='selected.events[event.name]')
+
+    .btn-group.pull-right
+      button.btn.btn-sm.btn-default(ui-sref='app.config({tab: "webhooks"})') Cancel
+      button.btn.btn-sm.btn-primary(ng-click='save()', ng-disabled="topicForm.$invalid") Save

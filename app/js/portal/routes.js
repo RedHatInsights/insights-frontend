@@ -66,6 +66,13 @@ function Routes($stateProvider, $locationProvider, $urlRouterProvider,
 
     // Config routes
     $stateProvider
+        .state('app.config-webhook-edit', {
+            url: '/config/webhooks/:id',
+            templateUrl: 'js/states/config/views/webhook-edit.html',
+            controller: 'WebhookEditCtrl',
+            title: 'Edit Webhook'
+        })
+
         .state('app.config', {
             url: '/config/:tab',
             templateUrl: 'js/states/config/views/config.html',
