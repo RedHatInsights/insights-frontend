@@ -148,7 +148,7 @@
 				display: inline-block;
 
 				@include font-size(16px);
-				@include text-shadow(0 1px 1px #888);
+				text-shadow: 0 1px 1px #888;
 				transition: .2s;
 				color: $blue;
 				text-shadow: none;
