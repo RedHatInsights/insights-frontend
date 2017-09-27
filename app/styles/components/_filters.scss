@@ -39,7 +39,7 @@
 
         &:last-child {
             border-top-right-radius: 5px;
-            @include border-bottom-right-radius(5px);
+            border-bottom-right-radius: 5px;
         }
 
 	    &.filter-on, &.active {
