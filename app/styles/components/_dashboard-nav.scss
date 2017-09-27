@@ -79,7 +79,7 @@ $dashboard-nav-input-bg: #322e31;
 			position: absolute;
 			right: 0;
 			bottom: 0;
-			@include transition-delay(.2s);
+			transition-delay: .2s;
 			transition-duration: .4s;
 		}
 
@@ -98,7 +98,7 @@ $dashboard-nav-input-bg: #322e31;
 
 // When the profile image is hidden
 .dashboard-navigation.profile-image-hidden .user-profile {
-	@include transition-delay(.2s);
+	transition-delay: .2s;
 
 	.profile-image {
 		@include media-query(sm) {
@@ -119,7 +119,7 @@ $dashboard-nav-input-bg: #322e31;
 		@include media-query(sm) {
 			opacity: 1;
 			top: 24px;
-			@include transition-delay(.2s);
+			transition-delay: .2s;
 		}
 	}
 }
