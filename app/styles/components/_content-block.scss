@@ -35,7 +35,7 @@ $maintenance-plan-border-color: #dedede;
     color: #fff;
     font-weight: 700;
     @include font-size(11px, 12px);
-    @include border-radius(8px);
+    border-radius: 8px;
   }
 
 	// Header

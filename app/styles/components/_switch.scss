@@ -39,7 +39,7 @@ input.cmn-toggle-round + label {
 	width: 120px;
 	height: 60px;
 	background-color: #dddddd;
-	@include border-radius(60px);
+	border-radius: 60px;
 }
 
 input.cmn-toggle-round + label:before,
@@ -55,14 +55,14 @@ input.cmn-toggle-round + label:after {
 input.cmn-toggle-round + label:before {
 	right: 1px;
 	background-color: #f1f1f1;
-	@include border-radius(60px);
+	border-radius: 60px;
 	@include transition(background $transition-speed);
 }
 
 input.cmn-toggle-round + label:after {
 	width: 58px;
 	background-color: #fff;
-	@include border-radius(100%);
+	border-radius: 100%;
 	@include box-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
 	@include transition(margin $transition-speed);
 }
@@ -77,7 +77,7 @@ input.cmn-toggle-square {
 		width: 68px;
 		height: 36px;
 		background-color: #ebeef0;
-		@include border-radius(6px);
+		border-radius: 6px;
 		@include transition(background $transition-speed);
 
 		&:before,
@@ -94,7 +94,7 @@ input.cmn-toggle-square {
 		/* switch background ------------------------------------------------------------------------- */
 		&:before {
 			background-color: #f7fafc;
-			@include border-radius(4px);
+			border-radius: 4px;
 			@include transition(background $transition-speed);
 		}
 
@@ -104,7 +104,7 @@ input.cmn-toggle-square {
 			left: 4px;
 			width: 30px;
 			background-color: #fff;
-			@include border-radius(4px);
+			border-radius: 4px;
 			@include box-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
 			@include transition(margin $transition-speed);
 		}
