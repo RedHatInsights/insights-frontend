@@ -38,7 +38,7 @@
         }
 
         &:last-child {
-            @include border-top-right-radius(5px);
+            border-top-right-radius: 5px;
             @include border-bottom-right-radius(5px);
         }
 
