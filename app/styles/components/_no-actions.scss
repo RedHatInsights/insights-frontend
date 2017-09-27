@@ -80,7 +80,7 @@
 		&:before {
 			box-shadow: 0 0 12px 0 rgba(0, 0, 0, .2);
 			@include rem('margin-left', -130px);
-			@include background(linear-gradient(to bottom, #2c96ca, #46b531));
+			background: linear-gradient(to bottom, #2c96ca, #46b531);
 			border-radius: 50%;
 			content: '';
 			display: block;
@@ -141,7 +141,7 @@
 
   .donut {
     &:before {
-      @include background(linear-gradient(to bottom, #3E5257, #6D868D));
+      background: linear-gradient(to bottom, #3E5257, #6D868D);
     }
   }
 }
