@@ -29,7 +29,7 @@
   .btn.btn-blue {
     color: #fff;
     background: $blue;
-    @include animation(.2s);
+    animation: .2s;
     border-left: 4px solid $blue;
     border-right: 4px solid $blue;
 
