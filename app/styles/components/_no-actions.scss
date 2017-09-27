@@ -78,7 +78,7 @@
 		display: block;
 
 		&:before {
-			@include box-shadow(0 0 12px 0 rgba(0, 0, 0, .2));
+			box-shadow: 0 0 12px 0 rgba(0, 0, 0, .2);
 			@include rem('margin-left', -130px);
 			@include background(linear-gradient(to bottom, #2c96ca, #46b531));
 			border-radius: 50%;

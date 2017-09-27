@@ -15,7 +15,7 @@
     text-align: center;
     background: $blue;
     color: #fff;
-    @include box-shadow(0 0 0 4px rgba(0,0,0,.1));
+    box-shadow: 0 0 0 4px rgba(0,0,0,.1);
     border-radius: 14px;
     border: none;
     line-height: 1;
@@ -23,7 +23,7 @@
     // button hover styling
     &:hover,
     &.active {
-      @include box-shadow(0 0 0 6px rgba(0,0,0,.1));
+      box-shadow: 0 0 0 6px rgba(0,0,0,.1);
       cursor: pointer;
     }
 

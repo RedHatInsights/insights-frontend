@@ -88,7 +88,7 @@
     color: $gray-dark;
     box-shadow: none;
     border: 1px solid $gray;
-    @include box-shadow(0 0 8px 0 rgba(0,0,0,.2));
+    box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
 
 		@include media-query(sm) {
 			min-width: 300px;
@@ -100,7 +100,7 @@
       color: $gray-dark;
       box-shadow: none;
       border: 1px solid $gray;
-      @include box-shadow(0 0 8px 0 rgba(0,0,0,.2));
+      box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
     }
     
     @include media-query(md) { min-width: 430px; }

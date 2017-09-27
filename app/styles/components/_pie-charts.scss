@@ -62,7 +62,7 @@ $donut-hole-height: 160px;
   //margin-left: -90px;
   //margin-top: -90px;
   border-radius: 50%;
-  @include box-shadow(0 2px 5px 3px rgba(0, 0, 0, .2));
+  box-shadow: 0 2px 5px 3px rgba(0, 0, 0, .2);
   background: #fff;
   text-align: center;
   z-index: 9;
@@ -138,7 +138,7 @@ $donut-hole-height: 160px;
   display: inline-block;
 
   &:before {
-    @include box-shadow(0 0 12px 0 rgba(0, 0, 0, .2));
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, .2);
     //@include rem('margin-left', -130px);
     background: #fff;
     border-radius: 50%;
