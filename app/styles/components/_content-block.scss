@@ -370,11 +370,11 @@ $maintenance-plan-border-color: #dedede;
 	}
 
 	&.expanded .expandable-toggle {
-		rotate: 90deg;
+		transform: rotate(90deg)
 	}
 
 	&.expanded .footer-toggle {
-		rotate: 180deg;
+		transform: rotate(180deg);
 	}
 
 	&.expanded .content {
