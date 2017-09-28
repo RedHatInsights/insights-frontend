@@ -38,15 +38,35 @@ md-checkbox {
 	@include rem('margin-bottom', 40px);
 }
 
-.md-card {
-	.md-card-header{
-		font-family: "Ovepass-bold",Helvetica,Arial,sans-serif;	
-		.md-card-content{
-			font-weight: 100;
-			@include rem('font-size', 14px);
-			-webkit-font-smoothing: antialiased;
+
+.md-side-padding{
+	@include rem('padding-left', 15px);
+	@include rem('padding-right', 15px);
+}
+
+md-card{
+	font-family: Overpass, Helvetica, Arial, sans-serif;
+	md-card-header{
+		font-family: Overpass-bold, Helvetica, Arial, sans-serif;
+		@include rem('font-size', 20px);
+		-webkit-font-smoothing: antialiased;
+		background-color: $white-soft;
+		border-bottom: 1px solid $gray-border;
+		@include rem('height', 50px);
+		color: #585858;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		md-button{
+			size: 50%;
 		}
 	}
+}
+	
+
+.md-card-invert{
+	md-card-header{ background-color: white; }
+	md-card-content { background-color: $white-soft; }
 }
 
 md-menu-content{

@@ -16,6 +16,8 @@ $yellow: #f0ab00;
 // $gray-dark: #646464;
 // $gray-med: #6e6e6e;
 $gray-light: #f2f5f7;
+$gray-border: #F0F0F0;
+$white-soft: #f9fafb;
 
 
 // CLASSES
@@ -36,4 +38,5 @@ $gray-light: #f2f5f7;
 	&warn { background-color: $warn; }
 	&green { background-color: $green; }
 	&yellow { background-color: $yellow; }
+	&white { background-color: white; }
 }
