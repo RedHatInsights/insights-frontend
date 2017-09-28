@@ -17,9 +17,9 @@
           .row.text-center
             .col-lg-3.col-lg-offset-3
               a(href="https://access.redhat.com/products/red-hat-insights#getstarted") 
-                button.btn.btn-md.btn-accent(translate) Getting started guide
+                md-button.md-raised.md-primary(translate) Getting started guide
             .col-lg-3
-              button.btn.btn-md.btn-accent(ui-sref='app.overview', translate) Go to the application
+              md-button.md-raised.md-primary(ui-sref='app.overview', translate) Go to the application
 
         .status-expired(ng-if="status.expired")
           .row.text-center
@@ -139,7 +139,7 @@
                 |  which governs my use.
           .row.text-center
             .col-sm-12
-              button.btn.btn-md.btn-accent(ng-click="activateNonLegacy()", translate) Agree and Get Started
+              md-button.md-raised.md-primary(ng-click="activateNonLegacy()", translate) Agree and Get Started
           .row.text-center
             .col-sm-12
               p
@@ -161,7 +161,7 @@
 
           .row.text-center
             .col-sm-12
-              button.btn.btn-md.btn-accent(ui-sref='app.overview', translate) Continue to Insights
+              md-button.md-raised.md-primary(ui-sref='app.overview', translate) Continue to Insights
 
               
       .status-error(ng-if='error')
