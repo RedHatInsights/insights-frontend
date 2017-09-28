@@ -4,30 +4,35 @@ page-header(title="Edit webhook", icon="fa-wrench")
   .rha-notifications
   .spinner(ng-if='loader.loading')
   form.form-horizontal(novalidate, name='webhookForm', ng-if='!loader.loading')
-    .form-group(ng-class="{'has-error': topicForm.title.$invalid && topicForm.title.$dirty}")
-      label.control-label.col-sm-2(for='url') Target URL
-      .col-sm-10
-        input.form-control#url(type='text', name='url', ng-model='webhook.url', required)
-    .form-group
-      label.control-label.col-sm-2(for='active') Active
-      .col-sm-10
-        input#active(type='checkbox', name='active', ng-model='webhook.active')
-    .form-group
-      label.control-label.col-sm-2(for='active') Event types
-      .col-sm-10
-        div
-          label.radio-inline
-            input(type='radio', ng-model='webhook.firehose', ng-value="true")
-            | All (no filtering)
-        div
-          label.radio-inline
-            input(type='radio', ng-model='webhook.firehose', ng-value='false')
-            | Only selected
-      .sm-offset-3.col-sm-9(ng-if='!webhook.firehose')
-        ul
-          li(ng-repeat='event in eventTypes track by event.name')
-            label {{event.description}}
-              input#active(type='checkbox', name='active', ng-model='selected.events[event.name]')
+    fieldset
+      .form-group.row(ng-class="{'has-error': topicForm.title.$invalid && topicForm.title.$dirty}")
+        label.control-label.col-sm-2(for='url') Target URL
+        .col-sm-10
+          input.form-control#url(type='text', name='url', ng-model='webhook.url', required)
+      .form-group.row
+        label.control-label.col-sm-2 Active
+        .col-sm-10
+          .checkbox
+            label(for="checkbox_active")
+              input#checkbox_active(type='checkbox', name='active', ng-model='webhook.active')
+      .form-group.row
+        label.control-label.col-sm-2(for='active') Event types
+        .col-sm-10
+          .radio
+            label(for="radio_all")
+              input#radio_all(type='radio', ng-model='webhook.firehose', ng-value="true")
+              | All (no filtering)
+          .radio
+            label.checkbox_active(for="radio_selected")
+              input#radio_selected(type='radio', ng-model='webhook.firehose', ng-value='false')
+              | Only selected
+      .form-group.row(ng-if='!webhook.firehose') 
+        label.control-label.col-sm-2 Event triggers
+        .col-sm-10
+          .checkbox(ng-repeat='event in eventTypes track by event.name')
+            label
+              input(type='checkbox', name='active', ng-model='selected.events[event.name]')
+              | {{event.description}} 
 
     .btn-group.pull-right
       button.btn.btn-sm.btn-default(ui-sref='app.config({tab: "webhooks"})') Cancel
