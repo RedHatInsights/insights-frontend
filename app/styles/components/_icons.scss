@@ -87,6 +87,7 @@ h2 .ansible-icon img, h2 .ansible-icon-white img {
 
 .icon-inline {
   position: relative;
+  display: inline-block;
   @include rem('padding-left', 18px);
 
   i,

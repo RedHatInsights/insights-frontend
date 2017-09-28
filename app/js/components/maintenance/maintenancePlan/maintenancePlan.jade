@@ -235,22 +235,23 @@
                 card-header.gray
                   a(ui-sref='app.actions-rule({category: play.rule.category.toLowerCase(), rule: play.rule.rule_id})')
                     b {{ play.rule.description }}
-                card-content
-                  .flexgrid.equalheights
-                    .row
-                      .col-md-5.systems
-                        h4.section-title(translate) Systems:
-                        expandable-system-list(systems='play.systems')
+                card-content.flex
+                  .systems
+                    h4.section-title(translate) Systems:
+                    expandable-system-list(systems='play.systems')
 
-                      .col-md-7.resolution
-                        h4.section-title(translate) Resolution:
-                        p {{ play.ansible_resolutions[0].description }} &nbsp;
-                          a(ng-if='play.ansible_resolutions.length > 1', ng-click='resolutionModal(play)', tooltip='{{"Multiple resolutions available. Click here to select a different one." | translate}}')
-                            span(translate) - edit ({{play.ansible_resolutions.length}} options)
-                        .icon-inline.push-top-narrow.red(ng-if='play.ansible_resolutions[0].needs_reboot')
+                  .resolution
+                    h4.section-title(translate) Resolution:
+                    p {{ play.ansible_resolutions[0].description }} &nbsp;
+                      a(ng-if='play.ansible_resolutions.length > 1', ng-click='resolutionModal(play)', tooltip='{{"Multiple resolutions available. Click here to select a different one." | translate}}')
+                        span(translate) - edit ({{play.ansible_resolutions.length}} options)
+                    ul.list-plain
+                      li(ng-if='play.ansible_resolutions[0].needs_reboot')
+                        .icon-inline.red
                           i.fa.fa-repeat
                           strong(translate, tooltip = "{{'System reboot is required to resolve this issue' | translate}}") Reboot Required
-                        risk-of-change(change-risk='play.ansible_resolutions[0].resolution_risk')
+                      li(ng-if='play.ansible_resolutions[0].resolution_risk')
+                        risk-of-change(change-risk='play.ansible_resolutions[0].resolution_risk')                      
 
               card.playbook.playbook-summary
                 card-header.gray

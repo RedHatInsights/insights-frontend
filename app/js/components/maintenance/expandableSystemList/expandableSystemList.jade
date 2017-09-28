@@ -1,4 +1,4 @@
-span
+div
   ul
     li(ng-repeat="system in systems | orderBy: 'toString' | limitTo:limit track by system.system_id")
       a(href='#', ng-click='InventoryService.showSystemModal(system, true)') {{system.toString}}

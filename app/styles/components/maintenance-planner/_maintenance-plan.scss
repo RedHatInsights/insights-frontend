@@ -817,16 +817,33 @@ table.maintenance-table {
   }
 
   // adjust content padding for vertical divider
-  .content { @include rem('padding', 0 $global-padding); }
+  .content { 
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+
+    .systems,
+    .resolution {
+      flex: 1 100%;
+      @include rem('padding', $global-padding);
+
+      @include media-query(sm){
+        flex: 1 50%;
+      }
+    }
+
+    .resolution { @include media-query(sm) { border-left: 1px solid $maintenance-plan-border-color; } }
+
+    ul.list-plain {
+      @include reset;
+      @include rem('margin-top', $global-padding);
+      list-style-type: none;
+
+      li { @include reset; }
+    }
+
+  }
 
   // fit ULs appropriately
   ul { margin-bottom: 4px; }
-
-
-  [class^="col-"],
-  [class*=" col-"] { @include rem('padding', 15px); }
-
-  [class^="col-"] + [class^="col-"] {
-    @include media-query(sm) { border-left: 1px solid $maintenance-plan-border-color; }
-  }
 }
