@@ -4,9 +4,7 @@
   display: table; /* 2 */
 }
 
-%clearfix:after {
-  clear: both;
-}
+%clearfix:after { clear: both; }
 
 @mixin clearfix() {
 	*zoom: 1;
@@ -205,4 +203,4 @@
   &:-moz-placeholder { @content; }
   &::-moz-placeholder { @content; }
   &::-webkit-input-placeholder { @content; }
-} 
+}

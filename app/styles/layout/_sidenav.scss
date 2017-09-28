@@ -9,10 +9,6 @@ $aside_anchor_hover_bg: gray;
 
 .app-grid > sidenav {
   grid-area: sidenav;
-
-  @include media-query(sm){
-
-  }
 }
 
 sidenav {
@@ -116,6 +112,8 @@ sidenav nav.primary-nav {
     li a.current {
       background: rgba(255,255,255,.1);
     }
+  }
+}
 
 sidenav nav.primary-nav ul li a > span {
   margin-left: 0;
