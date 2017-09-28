@@ -264,7 +264,7 @@ $maintenance-plan-border-color: #dedede;
 	}
 
 	&.active .expandable-toggle  {
-		rotate: 90deg;
+		transform: rotate(90deg)
 	}
 }
 
