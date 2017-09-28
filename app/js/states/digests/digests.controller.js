@@ -13,8 +13,8 @@ const TIME_PERIOD = 30;
 /**
  * @ngInject
  */
-function DigestsCtrl($scope, $http, DigestService, System, Rule,
-                     InventoryService, Severities, InsightsConfig) {
+function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
+                     InventoryService, Severities, InsightsConfig, User) {
     var digestPromise = DigestService.digestsByType('eval');
     var systemPromise = System.getSystems();
     var rulePromise = Rule.getRulesLatest();
@@ -151,16 +151,19 @@ function DigestsCtrl($scope, $http, DigestService, System, Rule,
             const digestId = res.data.resources[0].digest_id;
             const uri = URI(InsightsConfig.apiRoot)
                 .segment('digests')
-                .segment(digestId.toString())
-                .toString();
+                .segment(digestId.toString());
+
+            if (User.current.account_number !== AccountService.number()) {
+                uri.query(AccountService.current());
+            }
 
             $scope.downloading = true;
-            $http.get(uri, {
+            $http.get(uri.toString(), {
                 responseType: 'arraybuffer',
                 headers: { Accept: 'application/pdf'}
             })
-                .success(response => {
-                    const file = new Blob([response], {type: 'application/pdf'});
+                .then(response => {
+                    const file = new Blob([response.data], {type: 'application/pdf'});
                     const url = window.URL || window.webkitURL;
                     const isChrome = !!window.chrome && !!window.chrome.webstore;
 
@@ -177,6 +180,10 @@ function DigestsCtrl($scope, $http, DigestService, System, Rule,
 
                     $scope.downloading = false;
 
+                }, err => {
+
+                    $scope.downloading = false;
+                    window.alert('PDF Download Failed. ' + err.status);
                 });
         };
 
