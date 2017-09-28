@@ -62,6 +62,12 @@ md-card{
 	}
 }
 
+
+.md-card-invert{
+	md-card-header{ background-color: white; }
+	md-card-content { background-color: $white-soft; }
+}
+
 .md-card-invert{
 	md-card-header{ background-color: white; }
 	md-card-content { background-color: $white-soft; }
