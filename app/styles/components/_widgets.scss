@@ -52,12 +52,12 @@ $bar-height: $grad-height + 4;
 
 .widget.key-issues {
 
-  //.progress-bar .progress { @include background-image(linear-gradient(to right, #006CBE, #FE0002)); }
+  //.progress-bar .progress { background-image: linear-gradient(to right, #006CBE, #FE0002); }
 
   .grad {
     position: relative;
     height: $grad-height;
-    @include background-image(linear-gradient(to right, #006CBE, #FE0002));
+    background-image: linear-gradient(to right, #006CBE, #FE0002);
   }
 
   .grad .bar {

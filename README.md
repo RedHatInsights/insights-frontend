@@ -7,15 +7,14 @@ Development
 ---
 **Requirements**
 
-1. Node.js & npm & ruby (for sass)
+1. Node.js & npm
 2. gulp (Installed via `sudo npm install gulp -g`)
 3. bower (Installed via `sudo npm install bower -g`)
-4. bundle (Installed via `gem install bundle`)
-5. compass (Installed via `gem install compass`)
-6. sass-css-importer (Installed via `gem install --pre sass-css-importer`)
-7. breakpoint (Installed via `gem install breakpoint`)
-8. insights-frontend-assets (https://github.com/RedHatInsights/insights-frontend-assets)
-9. insights-proxy (https://github.com/RedHatInsights/insights-proxy) or accessproxy (https://github.com/redhataccess/accessproxy)
+4. compass (Installed via `gem install compass`)
+5. sass-css-importer (Installed via `gem install --pre sass-css-importer`)
+6. breakpoint (Installed via `gem install breakpoint`)
+7. insights-frontend-assets (https://github.com/RedHatInsights/insights-frontend-assets)
+8. insights-proxy (https://github.com/RedHatInsights/insights-proxy) or accessproxy (https://github.com/redhataccess/accessproxy)
 
 **Getting started**
 1. Init the assets submodule
@@ -23,12 +22,10 @@ Development
 2. Install NPM dependencies
     - `$ npm install`
     - This may print some errors on optional dependencies.  This is okay.
-3. Install compass
-    - `$ bundle install`
-4. Start the development server
+3. Start the development server
     - `$ gulp`
     - Or `$ gulp dev-stable` to do work on the stable mode application
-5. Run the Insights proxy
+4. Run the Insights proxy
     - `# docker run --net=host -e MODE=all/content -p1337:1337 -ti docker.io/iphands/insightsproxy`
     - Or install and use the accessproxy npm cli app
 

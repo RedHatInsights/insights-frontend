@@ -8,7 +8,7 @@
     @include font-size(14px);
     border: none;
     border-bottom: 1px solid $gray;
-    @include transition(.2s);
+    transition: .2s;
     font-weight: 700;
 
     &::placeholder { font-weight: 500; }

@@ -75,7 +75,7 @@
       @include font-size(15px);
       color: #646464;
       font-weight: bold;
-      @include transition(.2s);
+      transition: .2s;
     }
 
     li.active a {
@@ -161,7 +161,7 @@
       border-top: none;
 
       tr {
-        @include transition(.2s);
+        transition: .2s;
 
         &:nth-child(odd) {
           background: #f2f5f7;

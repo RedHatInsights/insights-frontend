@@ -43,7 +43,7 @@ $getting-started-list-padding: 18px;
 
 	.navvy {
 		a {
-			@include transition(.2s);
+			transition: .2s;
 			&.active {
 				font-weight: bold;
 				font-size: 20px;

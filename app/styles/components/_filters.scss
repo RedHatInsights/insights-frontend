@@ -1,6 +1,6 @@
 .filters {
     //display: inline-block;
-    @include border-radius(8px);
+    border-radius: 8px;
     border: 4px solid #ebeef0;
     background: #f7fafc;
 
@@ -10,7 +10,7 @@
     }
 
     button {
-        @include border-radius(0);
+        border-radius: 0;
         margin-left: 0 !important;
 	    @include rem('padding', 6px 8px);
         text-transform: uppercase;
@@ -20,7 +20,7 @@
         background-image: none;
         background: #f7fafc;
         border-left: 5px solid #ebeef0;
-        @include transition(.1s);
+        transition: .1s;
 
 	    @include media-query (xs) { @include rem('padding', 6px 12px); }
 
@@ -32,21 +32,21 @@
         span { display: inline-block; }
 
         &:first-child {
-            @include border-top-left-radius(5px);
-            @include border-bottom-left-radius(5px);
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
             border-left: none;
         }
 
         &:last-child {
-            @include border-top-right-radius(5px);
-            @include border-bottom-right-radius(5px);
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
         }
 
 	    &.filter-on, &.active {
             background: #949794;
 		    color: #e4e4e4;
             background-image: none;
-            @include box-shadow(inset 0 0 2px 4px rgba(0, 0, 0, .1));
+            box-shadow: inset 0 0 2px 4px rgba(0, 0, 0, .1);
 
             i {
                 color: #e4e4e4;
@@ -65,7 +65,7 @@
         position: relative;
     }
 
-    .lbl, .icon { @include transition(.2s); }
+    .lbl, .icon { transition: .2s; }
 
     .lbl {
         @include font-size(12px);

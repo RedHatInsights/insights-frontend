@@ -15,15 +15,15 @@
     text-align: center;
     background: $blue;
     color: #fff;
-    @include box-shadow(0 0 0 4px rgba(0,0,0,.1));
-    @include border-radius(14px);
+    box-shadow: 0 0 0 4px rgba(0,0,0,.1);
+    border-radius: 14px;
     border: none;
     line-height: 1;
 
     // button hover styling
     &:hover,
     &.active {
-      @include box-shadow(0 0 0 6px rgba(0,0,0,.1));
+      box-shadow: 0 0 0 6px rgba(0,0,0,.1);
       cursor: pointer;
     }
 
@@ -31,7 +31,7 @@
       background: #a9a9a9;
       color: #fff;
       transform: rotate(0deg);
-      @include transition(.2s);
+      transition: .2s;
 
       i { transform: rotate(180deg); }
     }
@@ -47,10 +47,10 @@
       }
     }
 
-    //i.fa.fa-filter { @include opacity(1); }
+    //i.fa.fa-filter { opacity: 1; }
     //
     //i.fa.fa-close {
-    //  @include opacity(0);
+    //  opacity: 0;
     //  color: #fff;
     //}
   }
@@ -60,11 +60,11 @@
   //  color: #fff;
   //
   //  i.fa.fa-filter {
-  //    @include opacity(0);
+  //    opacity: 0;
   //  }
   //
   //  i.fa.fa-close {
-  //    @include opacity(1);
+  //    opacity: 1;
   //  }
   //}
 }

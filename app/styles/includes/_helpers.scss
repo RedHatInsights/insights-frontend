@@ -115,15 +115,15 @@ x.trunc {
 
 .btn-group-filter {
     .btn {
-        @include border-radius(0);
-        @include transition(.4s);
+        border-radius: 0;
+        transition: .4s;
         border: 0;
         font-family: 'Open Sans', sans-serif;
         font-weight: 100;
 
         &.active,
         &:hover {
-            @include box-shadow(none);
+            box-shadow: none;
             background: #f2f5f7;
         }
     }

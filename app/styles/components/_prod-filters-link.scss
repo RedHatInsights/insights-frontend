@@ -4,7 +4,7 @@
   background: #009aea;
   color: #fff;
   @include rem('padding', 6px 12px);
-  @include transition(.2s);
+  transition: .2s;
   text-transform: uppercase;
   font-weight: 700;
   @include font-size(12px);
@@ -16,7 +16,7 @@
     right: 12px;
     top: 8px;
     color: #fff;
-    @include transition(.4s);
+    transition: .4s;
   }
 
   &:hover {

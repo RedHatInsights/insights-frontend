@@ -14,7 +14,7 @@
 		@include rem('padding', 5px);
 		border: 1px solid #ddd;
 		@include rem('margin-left', 10px);
-		@include transition(.2s);
+		transition: .2s;
 
 		&:hover {
 			background: $gray-dark;

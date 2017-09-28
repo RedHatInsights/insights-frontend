@@ -99,16 +99,16 @@
 		//	height: 8px;
 		//	left: $global-padding;
 		//	bottom: 0;
-		//	@include transition(.2s);
+		//	transition: .2s;
 		//}
 	}
 
 
 	a.platform {
-		@include opacity(.8);
+		opacity: .8;
 
 		&:hover {
-			@include opacity(1);
+			opacity: 1;
 		}
 	}
 }
