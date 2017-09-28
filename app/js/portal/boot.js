@@ -1,7 +1,7 @@
 /*global require, module*/
 'use strict';
 
-const Jwt = require('jwt').default;
+const Jwt = require('jwt-redhat').default;
 
 function scrollTop() {
     window.scrollTo(0, 0);

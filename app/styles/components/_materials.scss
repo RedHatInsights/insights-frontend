@@ -38,6 +38,7 @@ md-checkbox {
 	@include rem('margin-bottom', 40px);
 }
 
+
 .md-side-padding{
 	@include rem('padding-left', 15px);
 	@include rem('padding-right', 15px);
@@ -62,11 +63,6 @@ md-card{
 	}
 }
 
-
-.md-card-invert{
-	md-card-header{ background-color: white; }
-	md-card-content { background-color: $white-soft; }
-}
 
 .md-card-invert{
 	md-card-header{ background-color: white; }
