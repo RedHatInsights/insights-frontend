@@ -9,7 +9,7 @@ function incidentSummary() {
         scope: {
             incidentCount: '<',
             incidentSystemCount: '<',
-            totalRuleHits: '<'
+            ruleHits: '<'
         }
     };
 }
