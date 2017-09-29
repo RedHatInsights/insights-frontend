@@ -183,7 +183,7 @@ function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
                 }, err => {
 
                     $scope.downloading = false;
-                    window.alert('PDF Download Failed. ' + err.status);
+                    $scope.digestError = 'PDF Download Failed. ' + err.status;
                 });
         };
 
