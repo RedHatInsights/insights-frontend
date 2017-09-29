@@ -43,10 +43,9 @@ function topicRuleListCtrl ($filter,
                 $stateParams[Events.filters.totalRisk]);
         }
 
-        $scope.filterIncidents = $location.search()[Events.filters.incident];
-        $scope.filterIncidents = $scope.filterIncidents ? $scope.filterIncidents : 'all';
-        $scope.totalRisk = $location.search()[Events.filters.totalRisk];
-        $scope.totalRisk = $scope.totalRisk ? $scope.totalRisk : 'All';
+        $scope.filterIncidents = $location.search()[Events.filters.incident] || 'all';
+        $scope.totalRisk = $location.search()[Events.filters.totalRisk] || 'All';
+        $scope.riskOfChange = $location.search().riskOfChange || 'all';
     }
 
     function updateList (topic) {
@@ -76,6 +75,12 @@ function topicRuleListCtrl ($filter,
         updateList($scope.topic);
     });
 
+    // Listens for change in risk of change filter
+    $scope.$on(Events.filters.riskOfChangeSelect, function (event, value) {
+        $scope.riskOfChange = value;
+        updateList($scope.topic);
+    });
+
     // Listens for Reset filters
     $scope.$on(Events.filters.reset, function () {
         $scope.filterIncidents = 'all';
@@ -100,6 +105,13 @@ function topicRuleListCtrl ($filter,
         if ($scope.totalRisk !== 'All') {
             rules = _filter(rules, (rule) => {
                 return rule.severity === $scope.totalRisk;
+            });
+        }
+
+        // Filter based on riskOfChange
+        if ($scope.riskOfChange !== 'all') {
+            rules = _filter(rules, (rule) => {
+                return rule.resolution_risk === parseInt($scope.riskOfChange);
             });
         }
 

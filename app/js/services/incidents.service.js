@@ -9,6 +9,9 @@ function IncidentsService ($q, Topic) {
     let service = {};
     let incidentRules = [];
 
+    service.incidentRulesWithHitsCount = 0;
+    service.affectedSystemCount = 0;
+
     /**
      * Populates incidentRules and returns a promise
      */
@@ -27,6 +30,8 @@ function IncidentsService ($q, Topic) {
     service.loadIncidents = function () {
         return Topic.get('incidents').success(function (topic) {
             incidentRules = topic.rules;
+            setRulesWithHitsCount(topic.rules);
+            service.affectedSystemCount = topic.affectedSystemCount;
         });
     };
 
@@ -40,6 +45,18 @@ function IncidentsService ($q, Topic) {
 
         return isIncident !== undefined;
     };
+
+    function setRulesWithHitsCount (rules) {
+        let rulesWithHits = 0;
+
+        rules.forEach((rule) => {
+            if (rule.hitCount > 0 && !rule.acked) {
+                rulesWithHits++;
+            }
+        });
+
+        service.incidentRulesWithHitsCount = rulesWithHits;
+    }
 
     return service;
 }

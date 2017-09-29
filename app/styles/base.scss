@@ -19,6 +19,7 @@ $define-fa: true !default;
 @import 'elements/section';
 @import 'elements/forms';
 @import 'elements/tabs';
+@import 'elements/alert-text';
 
 
 // Include CSS from bower components
@@ -169,6 +170,11 @@ $define-fa: true !default;
 // UI Filters
 //==================================================================*/
 @import 'components/ui-filters/ui-filters';
+
+
+// Risk of change
+//==================================================================*/
+@import 'components/risk-of-change';
 
 
 // Namespaced

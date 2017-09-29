@@ -22,6 +22,17 @@ i[class^="icon-"], i[class*=" icon-"] {
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  & + strong,
+  & + span {
+    @include rem('margin-left', $global-padding/2);
+  }
+}
+
+i[class^="icon-"], i[class*=" icon-"] {
+  &:before {
+    font-family: 'insights-icons';
+  }
 }
 
 .icon-severity-critical:before {

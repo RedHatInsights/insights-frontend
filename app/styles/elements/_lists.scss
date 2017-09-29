@@ -35,6 +35,13 @@
 	//}
 }
 
+ul.list-plain {
+	@include reset;
+	list-style-type: none;
+
+	li { @include reset; }
+}
+
 .list-unstyled,
 .modal ul.list-unstyled {
   @include reset;
