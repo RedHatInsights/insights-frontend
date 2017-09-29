@@ -1,29 +1,28 @@
 #goals-lite.goals-lite
-  .row
-    .col.sm-6.block-md(ng-if="actionsLoading")
+  .row(ng-if="actionsLoading")
+    .col.sm-12
       .spinner.spinner-lg
-    .col-sm-6.block-md(ng-if="securityErrors && !actionsLoading")
+  .row(ng-if="!actionsLoading")
+    .col-sm-6.block-md(ng-if="securityErrors")
       .count.circle {{securityErrors}}
       h4(translate) Protect yourself!
       p(translate) Fix all of your
         br
         | {{securityErrors}} security issues
-      a.cta-link(translate, ui-sref="app.actions({category:'security', initialSeverity:'ERROR'})") View security issues
-    .col-sm-6.block-md(ng-if="!securityErrors && !actionsLoading")
+      a.cta-link(translate, ui-sref="app.topic({id: 'security'})") View security issues
+    .col-sm-6.block-md(ng-if="!securityErrors")
       .check.circle
         i.fa.fa-check
       h4(translate) You've fixed all of the high severity security errors
 
-    .col.sm-6.block-md(ng-if="actionsLoading")
-      .spinner.spinner-lg
-    .col-sm-6.block-md(ng-if="stabilityErrors && !actionsLoading")
+    .col-sm-6.block-md(ng-if="stabilityErrors")
       .count.circle {{stabilityErrors}}
       h4(translate) Increase your uptime!
       p(translate) Fix all of your
         br
         | {{stabilityErrors}} stability issues
-      a.cta-link(translate, ui-sref="app.actions({category:'stability', initialSeverity:'ERROR'})") View stability issues
-    .col-sm-6.block-md(ng-if="!stabilityErrors && !actionsLoading")
+      a.cta-link(translate, ui-sref="app.topic({id: 'stability'})") View stability issues
+    .col-sm-6.block-md(ng-if="!stabilityErrors")
       .check.circle
         i.fa.fa-check
       h4(translate) You've fixed all of the high severity stability errors

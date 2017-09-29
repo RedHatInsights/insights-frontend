@@ -10,7 +10,8 @@ function GoalsLiteDirectiveCtrl(
     $scope,
     HttpHeaders,
     $q,
-    Report) {
+    Report,
+    Stats) {
 
     var priv = {};
 
@@ -25,26 +26,9 @@ function GoalsLiteDirectiveCtrl(
     priv.getActionsData = function () {
         $scope.actionsLoading = true;
 
-        const promises = [];
-        const securityErrorPromise = Report.headReports({
-            category: 'Security',
-            severity: 'ERROR'
-        }).then(function securityErrorPromiseHandler(response) {
-            $scope.securityErrors = response.headers(HttpHeaders.resourceCount);
-        });
-
-        promises.push(securityErrorPromise);
-
-        const stabilityErrorPromise = Report.headReports({
-            category: 'Stability',
-            severity: 'ERROR'
-        }).then(function stabilityErrorPromiseHandler(response) {
-            $scope.stabilityErrors = response.headers(HttpHeaders.resourceCount);
-        });
-
-        promises.push(stabilityErrorPromise);
-
-        $q.all(promises).finally(function promisesFinally() {
+        Stats.getRules().then(function (stats) {
+            $scope.securityErrors = stats.data.security;
+            $scope.stabilityErrors = stats.data.stability;
             $scope.actionsLoading = false;
         });
     };
