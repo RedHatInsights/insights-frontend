@@ -42,6 +42,7 @@ function Ack($http, $q, $rootScope, AccountService, InsightsConfig) {
             }).success(function (ack) {
                 _acks.push(ack);
                 _ackMap[ack.rule_id] = ack;
+                $rootScope.$broadcast('reload:data');
                 dfd.resolve(ack);
             });
 
@@ -56,6 +57,7 @@ function Ack($http, $q, $rootScope, AccountService, InsightsConfig) {
                         if (_acks[i].id === ack.id) {
                             _acks.splice(i, 1);
                             delete _ackMap[ack.rule_id];
+                            $rootScope.$broadcast('reload:data');
                             return;
                         }
                     }

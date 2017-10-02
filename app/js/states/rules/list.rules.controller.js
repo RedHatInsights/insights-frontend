@@ -31,28 +31,6 @@ function ListRuleCtrl(
     $state.transitionTo(
         'app.rules', FilterService.updateParams(params), { notify: false });
 
-    let filters = {
-        All: function () {
-            $scope.rules = $scope._rules;
-        },
-
-        availability: function () {
-            $scope.rules = categoryRules('Availability');
-        },
-
-        performance: function () {
-            $scope.rules = categoryRules('Performance');
-        },
-
-        stability: function () {
-            $scope.rules = categoryRules('Stability');
-        },
-
-        security: function () {
-            $scope.rules = categoryRules('Security');
-        }
-    };
-
     $scope.canIgnoreRules = true;
     $scope.hideIgnored = false;
 
@@ -80,38 +58,9 @@ function ListRuleCtrl(
         });
     }
 
-    $scope.filter = '';
-    $scope.categoryNames =
-        ['All', 'availability', 'stability', 'performance', 'security'];
-    $scope.tab = 'All';
     $scope.loading = true;
     $scope.errored = false;
-    $scope.$watchCollection('_rules', filter);
     $scope.permalink = PermalinkService.make;
-
-    $scope.activateTab = function (tabName) {
-        $scope.tab = tabName;
-        filter();
-    };
-
-    $scope.buttonGroupClass = function (_tab) {
-        if ($scope.tab === _tab) {
-            return 'btn-default';
-        }
-
-        return 'btn-secondary';
-    };
-
-    $scope.toggle = function (s) {
-        $scope.tab = s;
-        filter();
-    };
-
-    $scope.filterClass = function (categoryName) {
-        if ($scope.tab === categoryName) {
-            return 'filter-on';
-        }
-    };
 
     $scope.persistHideIgnored = function () {
         PreferenceService.set('hide_ignored_rules', $scope.hideIgnored, true);
@@ -126,19 +75,7 @@ function ListRuleCtrl(
     };
 
     $scope.$on('filterService:doFilter', getData);
-
-    function categoryRules(category) {
-        return $filter('filter')($scope._rules, {
-            category: category
-        });
-    }
-
-    function filter() {
-        const filterFn = filters[$scope.tab];
-        if (filterFn) {
-            filterFn();
-        }
-    }
+    $scope.$on('reload:data', getData);
 
     function getData() {
         $scope.loading = true;
@@ -147,7 +84,7 @@ function ListRuleCtrl(
         query.include = 'article';
         let ruleSummaryPromise = Rule.getRulesLatest(query)
             .success(function (ruleResult) {
-                $scope._rules = reject(ruleResult.resources, function (r) {
+                $scope.rules = reject(ruleResult.resources, function (r) {
                     return (r.rule_id === 'insights_heartbeat|INSIGHTS_HEARTBEAT');
                 });
 

@@ -5,17 +5,25 @@ var componentsModule = require('../../');
 /**
  * @ngInject
  */
-function incidentsTriStateCtrl($location, $rootScope, $scope, Events, IncidentFilters) {
+function incidentsTriStateCtrl($location,
+                               $rootScope,
+                               $scope,
+                               Events,
+                               IncidentFilters,
+                               FilterService) {
 
     $scope.incidentFilters = IncidentFilters;
 
     $scope.filterIncidents = function (key) {
         $scope.showIncidents = key;
-        $location.search(Events.filters.incident, $scope.showIncidents);
+        FilterService.setIncidents(key);
+        FilterService.doFilter();
 
         // If 'All' is selected there is no reason to store the filter
         if ($scope.showIncidents === 'all') {
             $location.search(Events.filters.incident, null);
+        } else {
+            $location.search(Events.filters.incident, $scope.showIncidents);
         }
 
         $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.incident);
@@ -34,7 +42,7 @@ function incidentsTriStateCtrl($location, $rootScope, $scope, Events, IncidentFi
     });
 
     function resetFilter () {
-        $scope.showIncidents = 'all';
+        $scope.filterIncidents('all');
         $location.search(Events.filters.incident, null);
     }
 
@@ -49,7 +57,7 @@ function incidentsTriStateCtrl($location, $rootScope, $scope, Events, IncidentFi
 
     function init () {
         $scope.showIncidents = $location.search()[Events.filters.incident] ?
-            $location.search()[Events.filters.incident] : 'all';
+            $location.search()[Events.filters.incident] : FilterService.getIncidents();
 
         $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.incident);
     }

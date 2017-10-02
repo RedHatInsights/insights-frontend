@@ -8,24 +8,37 @@ function FilterService(
     $location,
     $rootScope,
     Severities,
-    Categories) {
+    Categories,
+    Events) {
 
-    var filterService = {};
-    var _category = $location.search().category || 'all';
-    var _selectedProduct = 'all';
-    var _parentNode = null;
-    var _dockerHosts = [];
-    var _ospDeployments = [];
-    var _ocpDeployments = [];
-    var _selectedDockerHost = {};
-    var _selectedOSPDeployment = {};
-    var _selectedOCPDeployment = {};
-    var _searchTerm = null;
-    var _showFilters = false;
-    var _rhelOnly = false;
-    var _offline = true;
-    var _online = true;
-    var _machine = null;
+    const recSeveritiesMap = {
+        1: 'INFO',
+        2: 'WARN',
+        3: 'ERROR',
+        4: 'CRITICAL'
+    };
+
+    let filterService = {};
+    let _category = $location.search().category || 'all';
+    let _incidents = $location.search()[Events.filters.incident] || 'all';
+    let _ansibleSupport = $location.search()[Events.filters.ansibleSupport] || 'all';
+    let _ruleStatus = $location.search()[Events.filters.ruleStatus] || 'all';
+    let _likelihood = $location.search()[Events.filters.likelihood] || 0;
+    let _impact = $location.search()[Events.filters.impact] || 0;
+    let _selectedProduct = 'all';
+    let _parentNode = null;
+    let _dockerHosts = [];
+    let _ospDeployments = [];
+    let _ocpDeployments = [];
+    let _selectedDockerHost = {};
+    let _selectedOSPDeployment = {};
+    let _selectedOCPDeployment = {};
+    let _searchTerm = null;
+    let _showFilters = false;
+    let _rhelOnly = false;
+    let _offline = true;
+    let _online = true;
+    let _machine = null;
 
     filterService.setMachine = function (machine) {
         _machine = machine;
@@ -123,6 +136,46 @@ function FilterService(
 
     filterService.getCategory = function () {
         return _category;
+    };
+
+    filterService.setIncidents = function (incidents) {
+        _incidents = incidents;
+    };
+
+    filterService.getIncidents = function () {
+        return _incidents;
+    };
+
+    filterService.setAnsibleSupport = function (ansibleSupport) {
+        _ansibleSupport = ansibleSupport;
+    };
+
+    filterService.getAnsibleSupport = function () {
+        return _ansibleSupport;
+    };
+
+    filterService.setRuleStatus = function (ruleStatus) {
+        _ruleStatus = ruleStatus;
+    };
+
+    filterService.getRuleStatus = function () {
+        return _ruleStatus;
+    };
+
+    filterService.setLikelihood = function (likelihood) {
+        _likelihood = likelihood;
+    };
+
+    filterService.getLikelihood = function () {
+        return _likelihood;
+    };
+
+    filterService.setImpact = function (impact) {
+        _impact = impact;
+    };
+
+    filterService.getImpact = function () {
+        return _impact;
     };
 
     /**
@@ -561,7 +614,6 @@ function FilterService(
             }).forEach(function (severity) {
                 if (MultiButtonService.getState('severityFilters' + severity) &&
                     severity !== 'All') {
-
                     query.severity = severity;
                 }
             });
@@ -570,6 +622,39 @@ function FilterService(
         //category
         if (includeParam('category') && _category !== 'all') {
             query.category = _category;
+        }
+
+        //impact
+        if (includeParam('rec_impact') && recSeveritiesMap[_impact]) {
+            query.rec_impact = recSeveritiesMap[_impact];
+        }
+
+        //likelihood
+        if (includeParam('rec_likelihood') && recSeveritiesMap[_likelihood]) {
+            query.rec_likelihood = recSeveritiesMap[_likelihood];
+        }
+
+        //ansible support
+        if (includeParam('ansible') && _ansibleSupport !== 'all') {
+            if (_ansibleSupport === 'supported') {
+                query.ansible = true;
+            } else if (_ansibleSupport === 'notSupported') {
+                query.ansible = false;
+            }
+        }
+
+        //ignored/active rule
+        if (includeParam('ignoredRules') && _ruleStatus !== 'all') {
+            query.ignoredRules = _ruleStatus;
+        }
+
+        //incidents
+        if (includeParam('incidents') && _incidents !== 'all') {
+            if (_incidents === 'incidents') {
+                query.hasIncidents = true;
+            } else if (_incidents === 'nonIncidents') {
+                query.hasIncidents = false;
+            }
         }
 
         return query;

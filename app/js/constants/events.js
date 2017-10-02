@@ -36,7 +36,11 @@ let _EVENT_ROOTS = [{
              'riskOfChangeSelect',
              'totalRisk',
              'tag',
-             'removeTag']
+             'removeTag',
+             'ansibleSupport',
+             'ruleStatus',
+             'likelihood',
+             'impact']
 }, {
     name: 'checkboxes',
     events: ['reset']
