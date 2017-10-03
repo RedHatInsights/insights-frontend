@@ -1,0 +1,11 @@
+.risk-of-change {
+  display: inline-block;
+
+  .icon { @include rem('margin-right', $global-padding/2); }
+}
+
+.icon-group-severity + .risk-of-change {
+  @include media-query(sm){
+    @include rem('margin-left', $global-padding/2);
+  }
+}

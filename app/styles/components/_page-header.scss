@@ -15,3 +15,9 @@ $bg-page-header: #F9F9F9;
 		@include rem('padding', $global-padding 30px 0);
 	}
 }
+
+.page-header .page-title {
+	display: inline-block;
+
+	.text { @include rem('margin-left', $global-padding/2); }
+}

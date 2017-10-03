@@ -41,15 +41,15 @@ i[class^="icon-"], i[class*=" icon-"] {
 .icon-severity-high:before {
   content: "\e903";
 }
+.icon-severity-med:before {
+  content: "\e902";
+}
 .icon-severity-low:before {
   content: "\e901";
 }
 .icon-severity-bars:before {
   content: "\e900";
   color: #ccc;
-}
-.icon-severity-med:before {
-  content: "\e902";
 }
 .icon-icon-ansible:before {
   content: "\e90a";

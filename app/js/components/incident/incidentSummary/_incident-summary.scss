@@ -61,3 +61,7 @@
     }
   }
 }
+
+.incident-summary .cell .icon-inline {
+  > * + * { margin-left: $global-padding/2; }
+}
