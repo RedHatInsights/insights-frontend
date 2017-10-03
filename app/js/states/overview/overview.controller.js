@@ -6,14 +6,17 @@ var statesModule = require('../');
  * @ngInject
  */
 function OverviewCtrl(
-    $scope,
-    User,
     $modal,
-    TrialSku,
-    MaintenanceService,
     $rootScope,
-    Stats) {
+    $scope,
+    IncidentsService,
+    MaintenanceService,
+    Stats,
+    TrialSku,
+    User) {
 
+    $scope.incidentCount = undefined;
+    $scope.incidentSystemCount = undefined;
     $scope.stats = {};
 
     User.asyncCurrent(function (user) {
@@ -70,8 +73,25 @@ function OverviewCtrl(
         });
     }
 
+    function loadIncidentNumbers () {
+        $scope.incidentCount = undefined;
+
+        IncidentsService.loadIncidents().then(() => {
+            $scope.incidentSystemCount = IncidentsService.affectedSystemCount;
+            $scope.incidentCount = IncidentsService.incidentRulesWithHitsCount;
+        });
+    }
+
     loadStats();
-    $scope.$on('group:change', loadStats);
+    IncidentsService.init().finally(() => {
+        $scope.incidentSystemCount = IncidentsService.affectedSystemCount;
+        $scope.incidentCount = IncidentsService.incidentRulesWithHitsCount;
+    });
+
+    $scope.$on('group:change', function () {
+        loadStats();
+        loadIncidentNumbers();
+    });
 }
 
 statesModule.controller('OverviewCtrl', OverviewCtrl);
