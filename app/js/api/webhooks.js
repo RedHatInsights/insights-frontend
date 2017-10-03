@@ -4,6 +4,8 @@ const apiModule = require('./');
 const URI = require('urijs');
 const pick = require('lodash/pick');
 
+const WEBHOOK_ATTRS = ['active', 'url', 'firehose', 'event_types'];
+
 /**
  * @ngInject
  */
@@ -25,7 +27,7 @@ function Webhooks($http, AccountService, InsightsConfig) {
         },
 
         create: function (webhook) {
-            return $http.post(url(), webhook);
+            return $http.post(url(), pick(webhook, WEBHOOK_ATTRS));
         },
 
         ping: function () {
@@ -33,7 +35,7 @@ function Webhooks($http, AccountService, InsightsConfig) {
         },
 
         update: function (webhook) {
-            return $http.put(url(webhook.id), pick(webhook, ['active', 'url']));
+            return $http.put(url(webhook.id), pick(webhook, WEBHOOK_ATTRS));
         },
 
         delete: function (webhook) {
