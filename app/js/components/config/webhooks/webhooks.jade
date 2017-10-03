@@ -19,14 +19,13 @@
           td.break
             a(ui-sref='app.config-webhook-edit({id: webhook.id})') {{webhook.url}}
           td {{webhook.event_types.length}}
-          td 
+          td.text-center
             input(type='checkbox' ng-model='webhook.active', ng-change='activeChanged(webhook)')
-          td
+          td.text-center
             span.icon-inline
               a(ui-sref='app.config-webhook-edit({id: webhook.id})')
                 i.fa.fa-pencil-square-o.pointer(tooltip="{{'Edit' | translate}}")
-            span.icon-inline
-              a(ng-click='delete(webhook)')
+              a.icon(ng-click='delete(webhook)')
                 i.fa.fa-remove(tooltip="{{'Remove' | translate}}")
     .pull-right
       .btn-group

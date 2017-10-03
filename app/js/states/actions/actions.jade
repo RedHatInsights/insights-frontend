@@ -21,7 +21,8 @@
           .row
             .col-lg-10.col-lg-offset-1
               table.legend
-                tbody
+
+                  tbody
                   tr
                     td(ng-repeat='category in categoryTopics.slice(0,(categoryTopics.length > 3 ? 2 : categoryTopics.length))')
                       a(ng-class='category.id', ui-sref="app.topic({id: category.id, product: getSelectedProduct()})")

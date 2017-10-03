@@ -42,6 +42,8 @@ ul.list-plain {
 	li { @include reset; }
 }
 
+li.icon-inline { display: flex; }
+
 .list-unstyled,
 .modal ul.list-unstyled {
   @include reset;

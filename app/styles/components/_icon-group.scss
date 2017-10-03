@@ -31,3 +31,14 @@
   .severity-icon + .severity-icon { @include rem('margin-left', $global-padding); }
 }
 
+.actions-rule-details .risk-of-change {
+  display: inline-block;
+
+  .icon-inline {
+    display: inline-block;
+  }
+}
+
+.actions-rule-details .icon-group + .risk-of-change {
+  @include rem('margin-left', $global-padding);
+}
