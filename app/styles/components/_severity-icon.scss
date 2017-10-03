@@ -51,13 +51,9 @@ i.severity-icon {
     color: #f39800;
   }
 
-  &.critical {
-    &:before { display: none; }
-
-    &:after {
-      content: "\e904";
-      color: #CC0000;
-    }
+  &.critical:after {
+    content: "\e904";
+    color: #CC0000;
   }
 
   &.total-risk {

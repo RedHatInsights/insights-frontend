@@ -4,9 +4,8 @@
       h1.page-title Edit Announcement
   .row(ng-if='announcementError')
     .col-xs-12.col-lg-8.alert.alert-danger
-      span.col-xs-9
-        span.icon-inline
-          i.glyphicon.glyphicon-exclamation-sign
+      span.icon-inline
+        i.glyphicon.glyphicon-exclamation-sign
         span(translate) {{announcementError}}
   .row
     .col-xs-12.col-m-8(ng-if='loadingAnnouncement')

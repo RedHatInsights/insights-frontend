@@ -20,10 +20,9 @@
             tooltip="{{'Snooze this plan' | translate}}")
         .details(ng-if="!editBasic.active && (!plan.suggestion || plan.suggestion === 'accepted')")
           .header-title.editable
-            span.icon-inline(ng-if="plan.overdue")
+            span(ng-if="plan.overdue")
               i.fa.fa-calendar-times-o.red
-            span.icon-inline(ng-if='!editBasic.active && plan.hidden && isInternal')
-              i.fa.fa-eye-slash
+              i.fa.fa-eye-slash(ng-if='!editBasic.active && plan.hidden && isInternal')
             h2.title(ng-class="{'red': plan.overdue}", ng-dblclick='editBasic.toggle()')
               span(ng-if="plan.name.length", ng-dblclick='editBasic.toggle()') {{plan.name}} ({{plan.maintenance_id}})
               span(ng-if='!plan.name || !plan.name.length', translate) Unnamed plan ({{plan.maintenance_id}})
@@ -119,17 +118,16 @@
                   translate) Save
         .details-suggested.editable(ng-if="!editBasic.active && (plan.suggestion === 'proposed' || plan.suggestion === 'rejected')")
           p.description
-            span.icon-inline(ng-if='plan.hidden && isInternal')
+            span(ng-if='plan.hidden && isInternal')
               i.fa.fa-eye-slash
-            span.icon-inline(ng-if="plan.suggestion === 'rejected'")
-              i.fa.fa-meh-o.red(tooltip = 'This suggestion was rejected by the customer')
+              i.fa.fa-meh-o.red(ng-if="plan.suggestion === 'rejected'", tooltip = 'This suggestion was rejected by the customer')
             strong(
               ng-show='plan.description',
               ng-dblclick='editBasic.toggle()') {{plan.description}}
             strong(
               ng-hide='plan.description',
               ng-dblclick='editBasic.toggle()',
-              translate) This is a plan suggested by Red Hat
+              translate) &nbsp; This is a plan suggested by Red Hat
             i.fa.fa-pencil-square-o.edit-toggle(
               ng-click='editBasic.toggle()',
               ng-if='!isReadOnly()',
@@ -187,12 +185,11 @@
             .content-block.system(
               ng-repeat="system in (plan.systems | orderBy:['_name', 'system_id'] | offset:pager.offset | limitTo:pager.perPage) track by system.system_id")
               .header.bordered
-                span.icon-inline
-                  type-icon(
-                  type-id='system.system_type_id',
-                  include-text='false')
+                type-icon(
+                type-id='system.system_type_id',
+                include-text='false')
                 a(ng-click='showSystemModal(system)')
-                  strong {{system._name}} &nbsp;&nbsp;
+                  strong &nbsp; {{system._name}} &nbsp;&nbsp;
                 span.item
                   strong(translate) Last check in:
                   span(ng-class='system | checkInStyle') &nbsp;&nbsp;{{system.last_check_in | timeAgo}}
@@ -257,8 +254,8 @@
                 card-header.gray
                   strong.red(translate) System reboot summary
 
-                card-content.gray.flex(ng-if='!systemsToReboot.length')
-                  .md-padding
+                card-content.gray(ng-if='!systemsToReboot.length')
+                  .cell
                     p(translate) This playbook&nbsp;
                       b.text-success(translate) does not require a system reboot.
 

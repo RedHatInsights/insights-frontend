@@ -83,8 +83,7 @@
     hr
 
     .row.available-actions
-      .content-block.maintenance-plan.rule(
-        ng-if='plan && tableParams && mode === MODES.rule && !noActions')
+      .content-block.maintenance-plan.rule(ng-if='plan && tableParams && mode === MODES.rule && !noActions')
         .header.bordered
           .title
             strong {{rule.description}}
@@ -101,9 +100,9 @@
         .header.bordered
           span.icon-inline
             type-icon(type-id='selected.system.system_type_id', include-text='false')
-          a(ng-click='showSystemModal(system)')
-            strong {{selected.system.toString}} &nbsp;&nbsp;
-          span.item
+            a(ng-click='showSystemModal(system)')
+              strong {{selected.system.toString}}  &nbsp;&nbsp;
+          .pull-right.item
             strong(translate) Last check in:
             span(ng-class='selected.system | checkInStyle') &nbsp;&nbsp;{{selected.system.last_check_in | timeAgo}}
         .nopad.table-responsive

@@ -22,8 +22,8 @@
       span(translate, translate-n="incidentCount", translate-plural="&nbsp;are INCIDENTS affecting") &nbsp;is an INCIDENT affecting 
       span(translate, translate-n="incidentSystemCount", translate-plural="&nbsp;{{$count}} systems.") &nbsp;{{incidentSystemCount}} system. 
       span(translate) &nbsp;It is imperative that these incidents be addressed to ensure optimal performance.
-    br
-    a.link.strong(translate, ui-sref="app.topic({id: 'incidents'})") View incidents
+      br
+      a.link.strong(translate, ui-sref="app.topic({id: 'incidents'})") View incidents
 
   .icon-inline(ng-if='incidentCount === 0')
     i.fa.fa-bullseye(aria-hidden="true")
