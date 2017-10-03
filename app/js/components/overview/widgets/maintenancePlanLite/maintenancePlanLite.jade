@@ -5,13 +5,14 @@ section.widget-block
     span.light(translate) Summary
     a.cta-link(ui-sref='app.maintenance', translate) View planner
   .maintenance-plan-lite
-    .row.row-short.padding-top(ng-if='getFirstSuggestion()')
+    //- .row.row-short.padding-top(ng-if='getFirstSuggestion()')
+    .row.row-short.padding-top
       .col-sm-12
         .maintenance-plan-lite
-          a.link.suggestions(ng-click='openPlan(getFirstSuggestion())')
-            span.icon.icon-inline
+          a.suggestions(ng-click='openPlan(getFirstSuggestion())')
+            span.icon-inline
               i.fa.fa-check-square-o(aria-hidden="true")
-            strong.underline(translate, translate-n='plans.suggested[0].actions.length', translate-plural='You have a new plan suggestion ({{$count}} actions)') You have a new plan suggestion (1 action)
+              strong.underline(translate, translate-n='plans.suggested[0].actions.length', translate-plural='You have a new plan suggestion ({{$count}} actions)') You have a new plan suggestion (1 action)
     .row.row-short(ng-if='plans.future.length')
       .col-sm-12
         maintenance-plan-lite-table(plans='plans.future', silence='silence', duration='duration')

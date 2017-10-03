@@ -21,10 +21,25 @@ i.fa.fa-bullseye {
 img.icon {
   @include rem('width', 14px);
 
-  &.icon-small { @include rem('width', 12px); }
-  &.icon-med { @include rem('width', 18px); }
-  &.icon-large { @include rem('width', 24px); }
-  &.icon-xlarge { @include rem('width', 34px); }
+  &.icon-small { 
+    @include rem('width', 12px); 
+    @include rem('height', 12px); 
+  }
+
+  &.icon-med { 
+    @include rem('width', 18px); 
+    @include rem('height', 18px); 
+  }
+
+  &.icon-large { 
+    @include rem('width', 24px); 
+    @include rem('height', 24px); 
+  }
+
+  &.icon-xlarge { 
+    @include rem('width', 34px); 
+    @include rem('height', 34px);
+  }
 }
 
 .icon-circle {
@@ -84,44 +99,3 @@ img.icon {
 h2 .ansible-icon img, h2 .ansible-icon-white img {
     width: 32px;
 }
-
-.icon-inline {
-  position: relative;
-  display: inline-block;
-  @include rem('padding-left', 18px);
-
-  i,
-  img.icon {
-    position: absolute;
-    left: 0;
-  }
-
-  img.icon {
-    transform: translateY(25%);
-  }
-}
-
-.icon-inline-right {
-  position: relative;
-  @include rem('padding-right', 18px);
-  display: block;
-
-  i {
-    position: absolute;
-    right: 0;
-  }
-
-  table & {
-    @include rem('padding-right', 22px);
-    i { top: 2px; }
-  }
-}
-
-
-
-h1, h2, h3, h4, h5, h6 { &.icon-inline, .icon-inline { i { top: 4px; } } }
-h1 { &.icon-inline, .icon-inline { @include rem('padding-left', 30px); } }
-h2 { &.icon-inline, .icon-inline { @include rem('padding-left', 32px); } }
-h3 { &.icon-inline, .icon-inline { @include rem('padding-left', 24px); } }
-h4 { &.icon-inline, .icon-inline { @include rem('padding-left', 22px); } }
-h5, h6 { &.icon-inline, .icon-inline { @include rem('padding-left', 18px); } }

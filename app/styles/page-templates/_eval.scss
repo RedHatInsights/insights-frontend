@@ -24,4 +24,6 @@
       @include rem('margin-left', $global-padding);
     }
   }
+
+  .list-plain { padding: 0; }
 }

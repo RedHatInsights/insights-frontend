@@ -21,12 +21,10 @@
         td.text-center(ng-show='edit')
           input(ng-model='checkboxes.items[action.id]', type="checkbox")
         td.overflow
-          span.icon-inline
-            type-icon(type-id='action.systemTypeIconId', ng-if='action.systemTypeIconId', include-text='false')
-          span.icon-inline(ng-if='action._type === 2')
-            i.fa.fa-exclamation-circle(tooltip="{{'This action is already part of another plan' | translate}}")
-          a.hostname(ng-click='table.showSystemModal(action.system, table.params.item)')
-           trimmed-text(text="{{action.display}}" length=45)
+          type-icon(type-id='action.systemTypeIconId', ng-if='action.systemTypeIconId', include-text='false')
+          i.fa.fa-exclamation-circle(ng-if='action._type === 2', tooltip="{{'This action is already part of another plan' | translate}}") 
+          a.hostname.with-icon(ng-click='table.showSystemModal(action.system, table.params.item)')
+            trimmed-text(text="{{action.display}}" length=45)
         td
           span(ng-show='::action.system.last_check_in') {{::action.system.last_check_in | timeAgo}}
           span(ng-hide='::action.system.last_check_in') --

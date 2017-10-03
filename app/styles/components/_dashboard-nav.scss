@@ -39,8 +39,6 @@ $dashboard-nav-input-bg: #322e31;
 	label { color: #fff; }
 
 	input {
-		width: 100%;
-		@include rem('padding', 2px 8px);
 		border: none;
 		box-shadow: none;
 		background: $dashboard-nav-input-bg;

@@ -845,4 +845,6 @@ table.maintenance-table {
 
   // fit ULs appropriately
   ul { margin-bottom: 4px; }
+
+  .cell { @include rem('padding', $global-padding); }
 }

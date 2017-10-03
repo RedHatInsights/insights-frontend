@@ -45,11 +45,10 @@
           a(ng-show='reallyAllSelected', ng-click='deselectAll()', translate) &nbsp;Deselect All Systems.
         span )
       br
-      a.link(
+      a.icon-inline(
       ng-click="registerSystem()",
       ng-if="isPortal")
-        span.icon.icon-inline
-          i.fa.fa-plus
+        i.fa.fa-plus
         strong(translate) Register More
   .col-sm-2.hidden-xs.text-right-sm
     list-type
