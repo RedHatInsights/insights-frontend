@@ -11,12 +11,14 @@
       thead
         tr
           th(translate) URL
+          th(translate) Event Types
           th(translate) Active
           th(translate) Actions
       tbody
         tr(ng-repeat='webhook in webhooks | orderBy:"id" track by webhook.id')
-          td 
+          td.break
             a(ng-href='{{webhook.url}}') {{webhook.url}}
+          td {{webhook.event_types.length}}
           td 
             input(type='checkbox' ng-model='webhook.active', ng-change='activeChanged(webhook)')
           td

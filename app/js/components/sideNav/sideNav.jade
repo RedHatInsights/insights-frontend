@@ -24,4 +24,4 @@
         li
           a(ui-sref='app.digests', ui-sref-active='current', translate) Executive Report
         li
-          a(ui-sref='app.config', ui-sref-active='current', translate) Configuration TODO
+          a(ui-sref='app.config', ng-class='{current: includes(states.config, state.current.name)}', translate) Configuration
