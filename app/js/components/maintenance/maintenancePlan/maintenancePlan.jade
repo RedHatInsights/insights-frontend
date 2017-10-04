@@ -258,13 +258,13 @@
                   strong.red(translate) System reboot summary
 
                 card-content.gray(ng-if='!systemsToReboot.length')
-                  .row
+                  .row.container.md-padding
                     .col-sm-12
                       p(translate) This playbook&nbsp;
                         b.text-success(translate) does not require a system reboot.
 
                 card-content.gray(ng-if='systemsToReboot.length')
-                  .flexgrid.equalheights
+                  .flexgrid.equalheights.container
                     .row
                       .col-sm-5.systems
                         h4.section-title(translate) Systems:
