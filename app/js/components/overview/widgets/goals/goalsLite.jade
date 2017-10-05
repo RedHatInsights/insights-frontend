@@ -2,7 +2,7 @@
   .row(ng-if="actionsLoading")
     .col.sm-12
       .spinner.spinner-lg
-  .row(ng-if="!actionsLoading")
+  .row(ng-if="!actionsLoading && systemCount > 0")
     .col-sm-6.block-md(ng-if="securityErrors")
       .count.circle {{securityErrors}}
       h4(translate) Protect yourself!
@@ -26,3 +26,8 @@
       .check.circle
         i.fa.fa-check
       h4(translate) You've fixed all of the high severity stability errors
+  .row(ng-if="!actionsLoading && systemCount === 0")
+    .col-sm-12.text-center
+      h3 You have no systems registered. Take full advantage of Red Hat Insights by&nbsp;
+        a.link(translate, href="{{gettingStartedLink}}", target="_blank") registering systems.
+

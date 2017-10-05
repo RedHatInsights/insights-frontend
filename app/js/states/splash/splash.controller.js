@@ -5,7 +5,7 @@ var statesModule = require('../');
 /**
  * @ngInject
  */
-function SplashCtrl($scope, $state) {
+function SplashCtrl($scope, $state, InsightsConfig) {
     $scope.logged_in = window.LOGGED_IN;
     if (window.LOGGED_IN && $state.current && $state.current.bounceLoggedin) {
         $state.go('app.initial', {}, {
@@ -18,6 +18,8 @@ function SplashCtrl($scope, $state) {
     $scope.$on('$destroy', function () {
         jQuery('body').removeClass('landing-page');
     });
+
+    $scope.gettingStartedLink = InsightsConfig.gettingStartedLink;
 
     //var video = document.getElementById('landingVid');
     //video.addEventListener('click',function(){

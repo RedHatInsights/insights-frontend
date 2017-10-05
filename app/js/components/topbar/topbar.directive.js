@@ -8,6 +8,7 @@ var componentsModule = require('../');
  */
 function TopbarCtrl($scope, InsightsConfig) {
     $scope.isPortal = InsightsConfig.isPortal;
+    $scope.gettingStartedLink = InsightsConfig.gettingStartedLink;
 }
 
 /**

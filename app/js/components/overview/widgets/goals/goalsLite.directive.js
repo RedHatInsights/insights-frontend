@@ -9,11 +9,14 @@ var reduce = require('lodash/collection/reduce');
 function GoalsLiteDirectiveCtrl(
     $scope,
     HttpHeaders,
+    InsightsConfig,
     $q,
     Report,
     Stats) {
 
     var priv = {};
+
+    $scope.gettingStartedLink = InsightsConfig.gettingStartedLink;
 
     priv.getSevCount = function (sev, data) {
         return reduce(data, function (sum, obj) {
@@ -24,11 +27,23 @@ function GoalsLiteDirectiveCtrl(
     };
 
     priv.getActionsData = function () {
+        let promises = [];
+
         $scope.actionsLoading = true;
 
-        Stats.getRules().then(function (stats) {
+        const ruleStats = Stats.getRules().then(function (stats) {
             $scope.securityErrors = stats.data.security;
             $scope.stabilityErrors = stats.data.stability;
+        });
+
+        const systemStats = Stats.getSystems().then(function (stats) {
+            $scope.systemCount = stats.data.total;
+        });
+
+        promises.push(ruleStats);
+        promises.push(systemStats);
+
+        $q.all(promises).finally(function promisesFinally() {
             $scope.actionsLoading = false;
         });
     };
