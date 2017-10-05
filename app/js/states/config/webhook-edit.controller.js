@@ -8,6 +8,7 @@ const mapValues = require('lodash/mapValues');
 const get = require('lodash/get');
 const isEmpty = require('lodash/isEmpty');
 const find = require('lodash/find');
+const moment = require('moment-timezone');
 
 const REPORT_NEW = 'report:new';
 const REPORT_RESOLVED = 'report:resolved';
@@ -42,9 +43,11 @@ function WebhookEditCtrl(
     $scope.loader = new Utils.Loader(false);
     $scope.selected = {
         events: {},
-        severityFilters: {}
+        severityFilters: {},
+        certificateExpanded: false
     };
     $scope.errors = {};
+    $scope.certificateExpanded = false;
 
     function isNew () {
         return $stateParams.id === 'new';
@@ -97,13 +100,28 @@ function WebhookEditCtrl(
 
     $scope.save = function () {
         $scope.webhook.event_types = exportEventTypes();
+
+        if ($scope.webhook.certificate && $scope.webhook.certificate.trim().length) {
+            $scope.webhook.certificate = $scope.webhook.certificate.trim();
+        } else {
+            $scope.webhook.certificate = null;
+        }
+
         const fn = (isNew() ? 'create' : 'update');
         return Webhooks[fn]($scope.webhook)
         .success(() => $state.go('app.config', {tab: 'webhooks'}))
         .catch(e => {
-            if (get(e, 'status') === 400 &&
-                get(e, 'data.error.key') === 'INVALID_WEBHOOK_URL') {
-                $scope.errors.url = true;
+            if (get(e, 'status') === 400) {
+                const errorKey = get(e, 'data.error.key');
+
+                switch (errorKey) {
+                    case 'INVALID_WEBHOOK_URL':
+                        $scope.errors.url = true;
+                    break;
+                    case 'INVALID_WEBHOOK_CERT':
+                        $scope.errors.certificate = true;
+                    break;
+                }
             }
         });
     };
@@ -122,14 +140,14 @@ function WebhookEditCtrl(
             .success(webhook => {
                 $scope.webhook = webhook;
                 importEventTypes(webhook);
-
-                if (webhook.firehose === undefined) {
-                    $scope.webhook.firehose = true; // TODO remove!!!
-                }
             })
             .catch(() => $state.go('app.config', {tab: 'webhooks'}));
         }
     })();
+
+    $scope.certDateClass = function (date) {
+        return (moment().diff(date) < 0) ? 'green' : 'red';
+    };
 }
 
 statesModule.controller('WebhookEditCtrl', WebhookEditCtrl);
