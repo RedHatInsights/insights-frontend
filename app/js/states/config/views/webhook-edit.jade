@@ -5,19 +5,58 @@ page-header(title="Edit webhook", icon="fa-wrench")
   .spinner(ng-if='loader.loading')
   form.form-horizontal(novalidate, name='webhookForm', ng-if='!loader.loading')
     fieldset
-      .form-group.row(ng-class="{'has-error': errors.url || (webhookForm.url.$invalid && webhookForm.url.$dirty)}")
-        label.control-label.col-sm-2(for='url', translate) Target URL
-        .col-sm-10
-          input.form-control#url(type='text', name='url', ng-model='webhook.url', ng-pattern='"https:\/\/.+"', required)
-          .error.red(ng-if='(errors.url || (webhookForm.url.$invalid && webhookForm.url.$dirty))')
-            strong(translate) Must be a valid https URL
-
       .form-group.row
         label.control-label.col-sm-2(translate) Active
         .col-sm-10
           .checkbox
             label(for="checkbox_active")
               input#checkbox_active(type='checkbox', name='active', ng-model='webhook.active')
+      .form-group.row.row-short(ng-class="{'has-error': errors.url || (webhookForm.url.$invalid && webhookForm.url.$dirty)}")
+        label.control-label.col-sm-2(for='url', translate) Target URL
+        .col-sm-10
+          input.form-control#url(type='text', name='url', ng-model='webhook.url', ng-pattern='"https:\/\/.+"', required)
+          .error.red(ng-if='(errors.url || (webhookForm.url.$invalid && webhookForm.url.$dirty))')
+            strong(translate) Must be a valid https URL
+      .form-group.row(ng-class="{'has-error': errors.certificate}")
+        label.control-label.col-sm-2(for='certificate', translate) Custom certificate
+        .col-sm-10
+          span(ng-if='!webhook.certificateInfo')
+            p
+              span(translate) Due to sensitive nature of data that Red Hat Insights operates on HTTPS is required. For cases when your server does not use a certificate signed by a&nbsp;
+              a(href='https://www.mozilla.org/en-US/about/governance/policies/security-group/certs/', translate) trusted authority&nbsp;
+              span(translate) a custom certificate can be configured.
+            button.btn.btn-sm.btn-primary(translate, ng-click='selected.certificateExpanded = true', ng-show='!selected.certificateExpanded') Add certificate
+
+          span(ng-if='webhook.certificateInfo && !selected.certificateExpanded')
+            .form-group.certificate
+              label.col-sm-5.control-label(translate) Common Name (CN):
+              .col-sm-7
+                p.form-control-static {{webhook.certificateInfo.subject.cn}}
+            .form-group.certificate
+              label.col-sm-5.control-label(translate) Organization (O)
+              .col-sm-7
+                p.form-control-static {{webhook.certificateInfo.subject.o}}
+            .form-group.certificate
+              label.col-sm-5.control-label(translate) Issuer Common Name (CN):
+              .col-sm-7
+                p.form-control-static {{webhook.certificateInfo.issuer.cn}}
+            .form-group.certificate
+              label.col-sm-5.control-label(translate) Issuing Organization (O)
+              .col-sm-7
+                p.form-control-static {{webhook.certificateInfo.issuer.o}}
+            .form-group.certificate
+              label.col-sm-5.control-label(translate) Valid until
+              .col-sm-7
+                p.form-control-static(ng-class='certDateClass(webhook.certificateInfo.validUntil)') {{webhook.certificateInfo.validUntil | moment:'LLL'}}
+            .col-sm-12.text-right
+              button.btn.btn-sm.btn-primary(translate, ng-click='selected.certificateExpanded = true', ng-show='!selected.certificateExpanded') Edit certificate
+              button.btn.btn-sm.btn-primary(translate, ng-click='webhook.certificate = null; webhook.certificateInfo = null', ng-show='!selected.certificateExpanded') Remove certificate
+
+          .certificate(ng-if='selected.certificateExpanded')
+            textarea.form-control#certificate(placeholder='Paste certificate in PEM format here', ng-model='webhook.certificate', rows='15')
+            .error.red(ng-if='errors.certificate')
+              strong(translate) Invalid certificate
+
       .form-group.row
         label.control-label.col-sm-2(for='active', translate) Webhook triggers
         .col-sm-10

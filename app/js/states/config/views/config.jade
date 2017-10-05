@@ -1,6 +1,7 @@
 page-header(title="Configuration", icon="fa-file-text")
 
 .content-wrap
+  .rha-notifications
   tabset.config-tabs
     tab(heading="{{'Hidden Rules'|translate}}", active="current.hidden", ng-click="tabClick('hidden')")
       config-hidden(ng-if="current.hidden")
