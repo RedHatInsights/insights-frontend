@@ -146,6 +146,7 @@ $define-fa: true !default;
 @import 'components/demo-account-switcher';
 @import 'components/evaluation';
 
+
 // Maintenance Plan
 //==================================================================*/
 @import 'components/maintenance-planner/maintenance-plan';
@@ -155,6 +156,7 @@ $define-fa: true !default;
 @import 'components/card';
 @import 'components/inventory';
 
+
 // Table Filters
 //==================================================================*
 //@import 'components/toolbar/toolbar';
@@ -163,7 +165,6 @@ $define-fa: true !default;
 
 // Data visualization
 //==================================================================*/
-@import 'components/data-visualization/count-comparison';
 @import 'components/data-visualization/gauge';
 
 

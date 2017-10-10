@@ -26,13 +26,8 @@
             severity-summary(stats='stats')
             
         .grid-block
-          section.widget-block
-            h2.title
-              i.fa.fa-bullseye
-              span(translate) Incidents&nbsp;
-              span.light(translate) Summary
-              a.cta-link(translate, ui-sref="app.topic({id: 'incidents'})") View incidents
-            incident-lite(incident-count='incidentCount', incident-system-count='incidentSystemCount')
+          section.widget-block.widget-block-narrow
+            incident-lite
 
         .grid-block(ng-if="!paid()")
           section.widget-block

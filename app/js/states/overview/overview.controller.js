@@ -7,16 +7,14 @@ var statesModule = require('../');
  */
 function OverviewCtrl(
     $modal,
+    $q,
     $rootScope,
     $scope,
-    IncidentsService,
     MaintenanceService,
     Stats,
     TrialSku,
     User) {
 
-    $scope.incidentCount = undefined;
-    $scope.incidentSystemCount = undefined;
     $scope.stats = {};
 
     User.asyncCurrent(function (user) {
@@ -73,24 +71,9 @@ function OverviewCtrl(
         });
     }
 
-    function loadIncidentNumbers () {
-        $scope.incidentCount = undefined;
-
-        IncidentsService.loadIncidents().then(() => {
-            $scope.incidentSystemCount = IncidentsService.affectedSystemCount;
-            $scope.incidentCount = IncidentsService.incidentRulesWithHitsCount;
-        });
-    }
-
-    loadStats();
-    IncidentsService.init().finally(() => {
-        $scope.incidentSystemCount = IncidentsService.affectedSystemCount;
-        $scope.incidentCount = IncidentsService.incidentRulesWithHitsCount;
-    });
-
+    // reload actions summary on group change
     $scope.$on('group:change', function () {
         loadStats();
-        loadIncidentNumbers();
     });
 }
 
