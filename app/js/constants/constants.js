@@ -10,6 +10,9 @@ var constantsModule = require('./');
 constantsModule.constant('GettingStartedUrl',
     'https://access.redhat.com/products/red-hat-insights');
 
+constantsModule.constant('InviteUrl',
+    'https://home.corp.redhat.com/webform/evaluation-request-form');
+
 constantsModule.constant(
     'QuickFilters', {
         summaryTypes: {
