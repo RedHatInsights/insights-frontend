@@ -138,7 +138,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
         .footer {
 
             .action {
-                @include rem('padding', 5px);
                 border: 1px solid #ddd;
                 @include rem('margin-left', 10px);
                 transition: .2s;
