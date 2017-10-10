@@ -15,6 +15,8 @@ const DISABLED_STATES = [
  * @ngInject
  */
 function TopbarCtrl($scope, InsightsConfig, $state) {
+    $scope.gettingStartedLink = InsightsConfig.gettingStartedLink;
+
     $scope.isPortal = InsightsConfig.isPortal;
 
     function checkState () {

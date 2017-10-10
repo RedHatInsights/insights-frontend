@@ -30,6 +30,8 @@ function Config(cfpLoadingBarProvider, InsightsConfigProvider) {
     let anHour = (60 * 60 * 1000);
     InsightsConfigProvider.setAutoRefresh(anHour);
     InsightsConfigProvider.setPortal(true);
+    InsightsConfigProvider.setGettingStartedLink(
+        'https://access.redhat.com/products/red-hat-insights#getstarted');
 }
 
 module.exports = Config;

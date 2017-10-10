@@ -5,8 +5,8 @@ var statesModule = require('../');
 /**
  * @ngInject
  */
-function GettingStartedCtrl() {
-
+function GettingStartedCtrl($scope, InsightsConfig) {
+    $scope.gettingStartedLink = InsightsConfig.gettingStartedLink;
 }
 
 statesModule.controller('SecurityCtrl', GettingStartedCtrl);
