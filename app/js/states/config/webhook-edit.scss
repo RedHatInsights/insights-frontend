@@ -10,14 +10,18 @@
 
     .form-group.certificate {
         margin-bottom: 5px;
+    }
 
-        label, p {
-            padding-top: 0;
-            padding-bottom: 0;
-        }
+    .form-group.certificate:nth-child(even){
+        background: #F0F3F6;
     }
 
     button + button {
-        margin-left: $global-margin;
+        @include rem('margin-left', 10px);
+    }
+
+    .content-block-card {
+        label { text-align: left; }
+        .footer { background: #f9f9f9; }
     }
 }
