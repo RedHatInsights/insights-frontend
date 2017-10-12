@@ -28,29 +28,32 @@ page-header(title="Edit webhook", icon="fa-wrench")
             button.btn.btn-sm.btn-primary(translate, ng-click='selected.certificateExpanded = true', ng-show='!selected.certificateExpanded') Add certificate
 
           span(ng-if='webhook.certificateInfo && !selected.certificateExpanded')
-            .form-group.certificate
-              label.col-sm-5.control-label(translate) Common Name (CN):
-              .col-sm-7
-                p.form-control-static {{webhook.certificateInfo.subject.cn}}
-            .form-group.certificate
-              label.col-sm-5.control-label(translate) Organization (O)
-              .col-sm-7
-                p.form-control-static {{webhook.certificateInfo.subject.o}}
-            .form-group.certificate
-              label.col-sm-5.control-label(translate) Issuer Common Name (CN):
-              .col-sm-7
-                p.form-control-static {{webhook.certificateInfo.issuer.cn}}
-            .form-group.certificate
-              label.col-sm-5.control-label(translate) Issuing Organization (O)
-              .col-sm-7
-                p.form-control-static {{webhook.certificateInfo.issuer.o}}
-            .form-group.certificate
-              label.col-sm-5.control-label(translate) Valid until
-              .col-sm-7
-                p.form-control-static(ng-class='certDateClass(webhook.certificateInfo.validUntil)') {{webhook.certificateInfo.validUntil | moment:'LLL'}}
-            .col-sm-12.text-right
-              button.btn.btn-sm.btn-primary(translate, ng-click='selected.certificateExpanded = true', ng-show='!selected.certificateExpanded') Edit certificate
-              button.btn.btn-sm.btn-primary(translate, ng-click='webhook.certificate = null; webhook.certificateInfo = null', ng-show='!selected.certificateExpanded') Remove certificate
+            .content-block.content-block-card
+              .content
+                .form-group.certificate
+                  label.col-sm-4.control-label(translate) Common Name (CN):
+                  .col-sm-8
+                    p.form-control-static {{webhook.certificateInfo.subject.cn}}
+                .form-group.certificate
+                  label.col-sm-4.control-label(translate) Organization (O)
+                  .col-sm-8
+                    p.form-control-static {{webhook.certificateInfo.subject.o}}
+                .form-group.certificate
+                  label.col-sm-4.control-label(translate) Issuer Common Name (CN):
+                  .col-sm-8
+                    p.form-control-static {{webhook.certificateInfo.issuer.cn}}
+                .form-group.certificate
+                  label.col-sm-4.control-label(translate) Issuing Organization (O)
+                  .col-sm-8
+                    p.form-control-static {{webhook.certificateInfo.issuer.o}}
+                .form-group.certificate
+                  label.col-sm-4.control-label(translate) Valid until
+                  .col-sm-8
+                    p.form-control-static(ng-class='certDateClass(webhook.certificateInfo.validUntil)') {{webhook.certificateInfo.validUntil | moment:'LLL'}}
+              .footer
+                .pull-right
+                  button.action.btn.btn-sm.btn-open(translate, ng-click='webhook.certificate = null; webhook.certificateInfo = null', ng-show='!selected.certificateExpanded') Remove certificate
+                  button.btn.btn-sm.btn-accent(translate, ng-click='selected.certificateExpanded = true', ng-show='!selected.certificateExpanded') Edit certificate
 
           .certificate(ng-if='selected.certificateExpanded')
             textarea.form-control#certificate(placeholder='Paste certificate in PEM format here', ng-model='webhook.certificate', rows='15')
