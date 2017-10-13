@@ -17,7 +17,7 @@
       tbody
         tr(ng-repeat='webhook in webhooks | orderBy:"id" track by webhook.id')
           td.break
-            a(ng-href='{{webhook.url}}') {{webhook.url}}
+            a(ui-sref='app.config-webhook-edit({id: webhook.id})') {{webhook.url}}
           td {{webhook.event_types.length}}
           td 
             input(type='checkbox' ng-model='webhook.active', ng-change='activeChanged(webhook)')
