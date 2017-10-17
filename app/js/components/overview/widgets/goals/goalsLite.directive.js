@@ -86,7 +86,7 @@ function goalsLite() {
         templateUrl: 'js/components/overview/widgets/goals/goalsLite.html',
         restrict: 'E',
         controller: GoalsLiteDirectiveCtrl,
-        replace: true
+        replace: false
     };
 }
 

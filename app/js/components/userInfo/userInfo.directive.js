@@ -23,7 +23,7 @@ function userInfo() {
     return {
         templateUrl: 'js/components/userInfo/userInfo.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: {},
         controller: UserInfoDirectiveCtrl
     };

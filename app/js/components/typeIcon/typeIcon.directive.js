@@ -27,7 +27,7 @@ function typeIcon() {
         },
         templateUrl: 'js/components/typeIcon/typeIcon.html',
         restrict: 'EC',
-        replace: true,
+        replace: false,
         controller: typeIconCtrl
     };
 }

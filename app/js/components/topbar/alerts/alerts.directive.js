@@ -82,7 +82,7 @@ function alerts() {
     return {
         templateUrl: 'js/components/topbar/alerts/alerts.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: {
             icon: '@icon'
         },

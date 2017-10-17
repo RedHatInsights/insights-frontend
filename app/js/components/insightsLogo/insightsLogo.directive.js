@@ -6,7 +6,7 @@ function insightsLogo() {
     return {
         templateUrl: 'js/components/insightsLogo/insightsLogo.html',
         restrict: 'EC',
-        replace: true
+        replace: false
     };
 }
 

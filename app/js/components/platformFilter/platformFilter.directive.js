@@ -344,7 +344,7 @@ function platformFilter() {
     return {
         templateUrl: 'js/components/platformFilter/platformFilter.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: platformFilterCtrl,
         scope: {
             summaryType: '='

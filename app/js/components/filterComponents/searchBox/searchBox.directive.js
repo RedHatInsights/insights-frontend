@@ -94,7 +94,7 @@ function searchBox() {
     return {
         templateUrl: 'js/components/filterComponents/searchBox/searchBox.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: searchBoxCtrl,
         scope: {
             placeholder: '@',

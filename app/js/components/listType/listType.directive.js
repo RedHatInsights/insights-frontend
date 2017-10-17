@@ -19,7 +19,7 @@ function listType() {
     return {
         templateUrl: 'js/components/listType/listType.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         transclude: true,
         controller: ListTypeCtrl
     };

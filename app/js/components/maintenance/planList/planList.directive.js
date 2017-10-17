@@ -57,7 +57,7 @@ function planList () {
         templateUrl: 'js/components/maintenance/planList/planList.html',
         restrict: 'E',
         controller: planListCtrl,
-        replace: true,
+        replace: false,
         scope: {
             plans: '<',
             group: '<?',

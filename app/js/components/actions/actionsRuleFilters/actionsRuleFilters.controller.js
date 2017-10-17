@@ -6,7 +6,7 @@ function actionsRuleFilters() {
     return {
         templateUrl: 'js/components/actions/actionsRuleFilters/actionsRuleFilters.html',
         restrict: 'E',
-        replace: true
+        replace: false
     };
 }
 

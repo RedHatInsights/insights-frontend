@@ -10,7 +10,7 @@ function allSeverityIcon () {
         },
         templateUrl: 'js/components/severityIcon/allSeverityIcons.html',
         restrict: 'E',
-        replace: true
+        replace: false
     };
 }
 

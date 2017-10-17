@@ -146,7 +146,7 @@ function systemCard() {
     return {
         templateUrl: 'js/components/card/systemCard/systemCard.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: systemCardCtrl,
         scope: {
             rule: '=',

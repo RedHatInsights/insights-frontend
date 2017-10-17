@@ -16,7 +16,7 @@ function maintenanceTable(template) {
                 onCancel: '&'
             },
             templateUrl: 'js/components/maintenance/maintenanceTable/' + template,
-            replace: true
+            replace: false
         };
     };
 }

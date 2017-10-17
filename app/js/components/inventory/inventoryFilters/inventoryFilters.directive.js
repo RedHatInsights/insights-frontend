@@ -6,7 +6,7 @@ function inventoryFilters() {
     return {
         templateUrl: 'js/components/inventory/inventoryFilters/inventoryFilters.html',
         restrict: 'E',
-        replace: true
+        replace: false
     };
 }
 

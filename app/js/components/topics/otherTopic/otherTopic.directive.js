@@ -9,7 +9,7 @@ function otherTopic (FilterService) {
     return {
         templateUrl: 'js/components/topics/otherTopic/otherTopic.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: {
             topic: '='
         },

@@ -21,7 +21,7 @@ function statusIcon() {
         },
         templateUrl: 'js/components/statusIcon/statusIcon.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: statusIconCtrl
     };
 }

@@ -20,7 +20,7 @@ function trimmedText() {
     return {
         templateUrl: 'js/components/misc/trimmedText/trimmedText.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         transclude: true,
         controller: TrimmedTextCtrl,
         scope: {

@@ -24,7 +24,7 @@ function expandAllButton() {
     return {
         templateUrl: 'js/components/expandAllButton/expandAllButton.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: expandAllButtonCtrl
     };
 }

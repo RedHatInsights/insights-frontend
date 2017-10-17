@@ -74,7 +74,7 @@ function card() {
     return {
         templateUrl: 'js/components/card/card.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         transclude: true,
         controller: CardCtrl,
         scope: {
@@ -119,7 +119,7 @@ function cardHeader() {
     return {
         templateUrl: 'js/components/card/cardHeader.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         transclude: true,
         link: CardHeaderLink,
         require: '^card'
@@ -133,7 +133,7 @@ function cardContent() {
     return {
         templateUrl: 'js/components/card/cardContent.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         transclude: true,
         link: CardContentLink,
         require: '^card'
@@ -147,7 +147,7 @@ function cardFooter() {
     return {
         templateUrl: 'js/components/card/cardFooter.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         transclude: true,
         link: CardFooterLink,
         require: '^card'

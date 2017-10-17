@@ -11,7 +11,7 @@ function riskOfChange() {
         },
         templateUrl: 'js/components/riskOfChange/riskOfChange.html',
         restrict: 'E',
-        replace: true
+        replace: false
     };
 }
 
