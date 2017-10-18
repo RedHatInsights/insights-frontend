@@ -31,7 +31,7 @@ function mitigationTrend() {
         templateUrl: 'js/components/mitigationTrend/mitigationTrend.html',
         restrict: 'E',
         controller: mitigationTrendController,
-        replace: true
+        replace: false
     };
 }
 

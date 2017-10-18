@@ -79,7 +79,7 @@ function maintenanceCategorySelect() {
             'maintenanceCategorySelect.html',
         restrict: 'E',
         controller: maintenanceCategorySelectCtrl,
-        replace: true,
+        replace: false,
         scope: {
             category: '=',
             onSelect: '&'

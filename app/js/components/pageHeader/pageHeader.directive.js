@@ -20,7 +20,7 @@ function pageHeader() {
         transclude: true,
         templateUrl: 'js/components/pageHeader/pageHeader.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: pageHeaderCtrl,
         scope: {
             title: '@',

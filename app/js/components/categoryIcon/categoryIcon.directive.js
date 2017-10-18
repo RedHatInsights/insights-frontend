@@ -9,7 +9,7 @@ function categoryIcon() {
         },
         templateUrl: 'js/components/categoryIcon/categoryIcon.html',
         restrict: 'E',
-        replace: true
+        replace: false
     };
 }
 

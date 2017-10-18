@@ -10,7 +10,7 @@ function topicAdminHelpBar($document) {
         scope: true,
         templateUrl: 'js/components/topics/topicAdminHelpBar/topicAdminHelpBar.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         link: function ($scope, element, attrs) {
 
             var textArea;

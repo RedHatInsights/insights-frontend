@@ -32,7 +32,7 @@ function feedbackButton() {
         templateUrl: 'js/components/feedback/feedbackButton.html',
         restrict: 'E',
         controller: feedbackButtonCtrl,
-        replace: true
+        replace: false
     };
 }
 

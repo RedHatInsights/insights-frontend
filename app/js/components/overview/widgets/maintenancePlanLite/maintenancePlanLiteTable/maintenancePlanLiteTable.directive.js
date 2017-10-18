@@ -7,7 +7,7 @@ function MaintenancePlanLiteTable() {
         templateUrl: 'js/components/overview/widgets/maintenancePlanLite/' +
             'maintenancePlanLiteTable/maintenancePlanLiteTable.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: true,
         link: function (scope, element, attr) {
             scope.plans = scope.$parent.$eval(attr.plans);

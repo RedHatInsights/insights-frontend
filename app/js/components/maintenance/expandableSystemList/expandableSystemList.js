@@ -20,7 +20,7 @@ function expandableSystemList () {
             'js/components/maintenance/expandableSystemList/expandableSystemList.html',
         restrict: 'E',
         controller: expandableSystemListCtrl,
-        replace: true,
+        replace: false,
         scope: {
             systems: '<'
         }

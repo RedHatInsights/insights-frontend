@@ -17,7 +17,7 @@ function rhaTelemetryActions() {
     return {
         templateUrl: 'js/components/actions/actions.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: {},
         controller: ActionsDirectiveCtrl
     };

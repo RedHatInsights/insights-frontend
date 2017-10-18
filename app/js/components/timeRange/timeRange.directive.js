@@ -55,7 +55,7 @@ function timeRange() {
         templateUrl: 'js/components/timeRange/timeRange.html',
         restrict: 'E',
         controller: timeRangeCtrl,
-        replace: true,
+        replace: false,
         scope: {
             start: '=start',
             end: '=end',

@@ -27,7 +27,7 @@ function newSystems() {
     return {
         templateUrl: 'js/components/overview/widgets/newSystems/newSystems.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: {},
         controller: NewSystemsCtrl
     };

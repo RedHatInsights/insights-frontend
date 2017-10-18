@@ -42,7 +42,7 @@ function gaugeMarker() {
         templateUrl: 'js/components/gaugeMarker/gaugeMarker.html',
         restrict: 'E',
         controller: gaugeMarkerController,
-        replace: true,
+        replace: false,
         scope: {
             current: '<',
             difference: '<'

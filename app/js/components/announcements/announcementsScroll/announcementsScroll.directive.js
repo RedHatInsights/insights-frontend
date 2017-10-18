@@ -62,7 +62,7 @@ function announcementsScroll() {
         templateUrl:
             'js/components/announcements/announcementsScroll/announcementsScroll.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: announcementsScrollCtrl
     };
 }

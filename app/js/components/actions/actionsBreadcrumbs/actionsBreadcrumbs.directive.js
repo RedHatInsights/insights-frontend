@@ -18,7 +18,7 @@ function actionsBreadcrumbs() {
     return {
         templateUrl: 'js/components/actions/actionsBreadcrumbs/actionsBreadcrumbs.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: actionsBreadcrumbsCtrl
     };
 }

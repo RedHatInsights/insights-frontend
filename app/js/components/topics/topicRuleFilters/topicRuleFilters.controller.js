@@ -6,7 +6,7 @@ function topicRuleFilters() {
     return {
         templateUrl: 'js/components/topics/topicRuleFilters/topicRuleFilters.html',
         restrict: 'E',
-        replace: true
+        replace: false
     };
 }
 

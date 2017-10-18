@@ -15,7 +15,7 @@ function handcraftedContent() {
         templateUrl: 'js/components/overview/widgets/' +
             'handcraftedContent/handcraftedContent.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         scope: {},
         controller: HandcraftedContentDirectiveCtrl
     };
