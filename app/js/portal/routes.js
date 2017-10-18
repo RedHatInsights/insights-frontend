@@ -4,7 +4,7 @@
  * @ngInject
  */
 function Routes($stateProvider, $locationProvider, $urlRouterProvider,
-                GettingStartedUrl) {
+                GettingStartedUrl, InviteUrl) {
 
     // App Routes
 
@@ -139,6 +139,10 @@ function Routes($stateProvider, $locationProvider, $urlRouterProvider,
     redirectGetStarted('/getting-started/satellite/5/', '#satellite5');
     redirectGetStarted('/getting-started', '#getstarted');
     redirectGetStarted('/getting-started/', '#getstarted');
+
+    $urlRouterProvider.when('/invite', function () {
+        window.location = InviteUrl;
+    });
 
     $stateProvider
         .state('info.info', {
