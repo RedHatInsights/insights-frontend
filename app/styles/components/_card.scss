@@ -1,3 +1,68 @@
+card {
+  display: block;
+}
+
+card {
+  card-header {
+    position: relative;
+    display: block;
+    @include rem('padding', $global-padding);
+    padding-bottom: 0;
+
+    &.gray { @include rem('padding-bottom', $global-padding); }
+
+    input { display: inline; }
+
+    .title {
+      @include font-size(14px);
+      line-height: 1;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    i.permalink {
+      @include font-size(12px);
+      line-height: 1;
+      margin-top: 0;
+      margin-left: 5px;
+      float: none;
+      opacity: .5;
+    }
+
+    .toggler {
+      position: absolute;
+      top: 11px;
+      right: 5px;
+      font-size: 16px;
+      color: #8C8C8C;
+    } 
+
+    h1, 
+    h2,
+    h3, 
+    h4,
+    h5 {
+      margin: 0;
+    }
+  }
+}
+
+card {
+  card-content {
+
+  }
+}
+
+card {
+  card-footer {
+
+  }
+}
+
+card + card {
+  @include rem('margin-top', $global-padding);
+}
+
 .card-group {
   > header {
     @include rem('padding', $global-padding);
