@@ -5,7 +5,9 @@ var statesModule = require('../');
 /**
  * @ngInject
  */
-function SplashCtrl($scope, $state) {
+function SplashCtrl($scope, $state, InsightsConfig) {
+    $scope.gettingStartedLink = InsightsConfig.gettingStartedLink;
+
     $scope.logged_in = window.LOGGED_IN;
     if (window.LOGGED_IN && $state.current && $state.current.bounceLoggedin) {
         $state.go('app.initial', {}, {

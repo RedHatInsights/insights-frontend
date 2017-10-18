@@ -12,6 +12,7 @@ function GoalsLiteDirectiveCtrl(
     System,
     Evaluation,
     HttpHeaders,
+    InsightsConfig,
     Report,
     Stats) {
 
@@ -19,6 +20,8 @@ function GoalsLiteDirectiveCtrl(
 
     // Gauge requires a function
     $scope.getMaxFreeSystems = function () { return $scope.maxFreeSystems; };
+
+    $scope.gettingStartedLink = InsightsConfig.gettingStartedLink;
 
     priv.getSevCount = function (sev, data) {
         return reduce(data, function (sum, obj) {
