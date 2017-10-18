@@ -6,13 +6,14 @@ var statesModule = require('../');
  * @ngInject
  */
 function OverviewCtrl(
-    $scope,
-    User,
     $modal,
-    TrialSku,
-    MaintenanceService,
+    $q,
     $rootScope,
-    Stats) {
+    $scope,
+    MaintenanceService,
+    Stats,
+    TrialSku,
+    User) {
 
     $scope.stats = {};
 
@@ -70,8 +71,10 @@ function OverviewCtrl(
         });
     }
 
-    loadStats();
-    $scope.$on('group:change', loadStats);
+    // reload actions summary on group change
+    $scope.$on('group:change', function () {
+        loadStats();
+    });
 }
 
 statesModule.controller('OverviewCtrl', OverviewCtrl);

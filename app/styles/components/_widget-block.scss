@@ -1,7 +1,7 @@
 .widget-block {
 	display: block;
 	margin: 0;
-	@include rem('padding', $global-padding);
+	@include rem('padding', $global-margin);
 
 	& + .content-block { margin: 0; }
 
@@ -31,6 +31,8 @@
 	h5 { @include font-size(14px); }
 
 	.cta-link { text-transform: none; }
+}
 
-
+.widget-block.widget-block-narrow {
+	@include rem('padding', $global-padding);
 }

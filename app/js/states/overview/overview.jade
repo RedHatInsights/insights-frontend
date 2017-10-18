@@ -24,6 +24,10 @@
               span.light(translate) Summary
               a.cta-link(translate, ui-sref="app.actions") View actions
             severity-summary(stats='stats')
+            
+        .grid-block
+          section.widget-block.widget-block-narrow
+            incident-lite
 
         .grid-block(ng-if="!paid()")
           section.widget-block
