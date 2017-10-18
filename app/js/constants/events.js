@@ -12,10 +12,24 @@ function buildEventsForRoot(root) {
     return eventObj;
 }
 
+function buildEventsForRootNoName(root) {
+    var eventObj = {};
+    eventObj = {};
+    root.events.forEach(function (event) {
+        eventObj[event] = event;
+    });
+
+    return eventObj;
+}
+
 function buildEvents(eventRoots) {
     var eventsObj = {};
     eventRoots.forEach(function (root) {
-        eventsObj[root.name] = buildEventsForRoot(root);
+        if (root.name === 'filters') {
+            eventsObj[root.name] = buildEventsForRootNoName(root);
+        } else {
+            eventsObj[root.name] = buildEventsForRoot(root);
+        }
     });
 
     return eventsObj;
@@ -36,7 +50,11 @@ let _EVENT_ROOTS = [{
              'riskOfChangeSelect',
              'totalRisk',
              'tag',
-             'removeTag']
+             'removeTag',
+             'ansibleSupport',
+             'ruleStatus',
+             'likelihood',
+             'impact']
 }, {
     name: 'checkboxes',
     events: ['reset']
