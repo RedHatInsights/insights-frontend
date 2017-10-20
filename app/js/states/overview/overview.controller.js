@@ -71,6 +71,8 @@ function OverviewCtrl(
         });
     }
 
+    loadStats();
+
     // reload actions summary on group change
     $scope.$on('group:change', function () {
         loadStats();
