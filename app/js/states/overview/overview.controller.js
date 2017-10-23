@@ -17,6 +17,8 @@ function OverviewCtrl(
 
     $scope.stats = {};
 
+    $scope.isBeta = $rootScope.isBeta;
+
     User.asyncCurrent(function (user) {
         $scope.paid = function () {
             let ents = user.current_entitlements;
