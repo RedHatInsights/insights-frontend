@@ -1,0 +1,49 @@
+.incident-lite {
+  display: flex;
+  flex-flow: row wrap; 
+  align-items: center;
+  margin: 0;
+  background: $gray-light;
+
+  .icon,
+  .supporting-text { @include rem('padding', $global-padding); }
+
+  // Icon layout
+  .icon { 
+    flex: 0; 
+    padding-right: 0;
+  }
+
+  // Count layout
+  .count {
+    flex: 0 1 0;
+    @include rem('padding', 0 $global-padding);
+    white-space: pre;
+
+    @include media-query(xs){ 
+      text-align: left; 
+      border-right: 1px solid $gray;
+    }
+  }
+
+  .supporting-text {
+    line-height: 1.4;
+
+    @include media-query(xs){ flex: 3; }
+  }
+}
+
+
+// Number styling
+.incident-lite {
+
+  .icon i.fa {
+    @include font-size(38px); 
+    line-height: 1;
+  }
+
+  .num a { color: $red; }
+}
+
+
+// Supporting text

@@ -1,0 +1,27 @@
+.webhook-edit {
+    .checkbox.severity {
+        display: inline;
+    }
+
+    textarea#certificate {
+        font-size: 12px;
+        font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    }
+
+    .form-group.certificate {
+        margin-bottom: 5px;
+    }
+
+    .form-group.certificate:nth-child(even){
+        background: #F0F3F6;
+    }
+
+    button + button {
+        @include rem('margin-left', 10px);
+    }
+
+    .content-block-card {
+        label { text-align: left; }
+        .footer { background: #f9f9f9; }
+    }
+}

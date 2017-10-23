@@ -89,21 +89,5 @@ $bar-height: $grad-height + 4;
 }
 
 .widget.widgetIncidentSummary {
-  .flexgrid [class^="col-"],
-  .flexgrid div[class*=" col-"] {
-    padding-bottom: 0;
-  }
-
-  .flexgrid {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  .border-left {
-    border-left: 1px solid $gray;
-  }
-
-  .icon-inline {
-    @include rem('padding', $global-padding);
-  }
+  .content { @include rem('padding', 0 $global-padding); }
 }

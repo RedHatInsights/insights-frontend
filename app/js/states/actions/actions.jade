@@ -38,9 +38,9 @@
           card.widget.widgetIncidentSummary(id="widgetIncidentSummary", ng-if="isBeta")
             card-header.gray
               h4(translate) Incident summary
-            card-content.flexgrid.equalheights
-              incident-summary(incident-count='incidentCount', incident-system-count='incidentSystemCount', rule-hits='stats.rules.total')
-
+            card-content
+              incident-summary.incident-summary(incident-count='incidentCount', incident-system-count='incidentSystemCount', rule-hits='stats.rules.total', ng-show='incidentCount !== undefined')
+              .spinner(ng-show='incidentCount === undefined')
           card
             card-header.gray
               h4(translate) Risk summary

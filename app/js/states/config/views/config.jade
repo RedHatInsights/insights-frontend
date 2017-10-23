@@ -1,6 +1,7 @@
 page-header(title="Configuration", icon="fa-file-text")
 
 .content-wrap
+  .rha-notifications
   tabset.config-tabs
     tab(heading="{{'Hidden Rules'|translate}}", active="current.hidden", ng-click="tabClick('hidden')")
       config-hidden(ng-if="current.hidden")
@@ -10,7 +11,7 @@ page-header(title="Configuration", icon="fa-file-text")
       config-settings(ng-if="current.settings")
 
     // rh only
-    tab(heading="{{'Webhooks'|translate}}", active="current.webhooks", ng-click="tabClick('webhooks')", ng-if='user.is_internal')
+    tab(heading="{{'Webhooks'|translate}}", active="current.webhooks", ng-click="tabClick('webhooks')", ng-if='user.is_internal && isBeta')
       config-webhooks(ng-if="current.webhooks")
     tab(heading='Permissions', active="current.permissions",
       ng-if='user.is_internal && perms.has(user, perms.PERMS.SU)',

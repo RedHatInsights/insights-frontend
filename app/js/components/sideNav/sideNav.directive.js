@@ -30,6 +30,10 @@ function sideNavCtrl($scope, Utils, $state, InsightsConfig) {
             'app.actions',
             'app.actions-rule',
             'app.topic'
+        ],
+        config: [
+            'app.config',
+            'app.config-webhook-edit'
         ]
     };
 }

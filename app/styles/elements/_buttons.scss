@@ -31,7 +31,8 @@
   color: $gray-dark;
 
   &:hover {
-    background: darken($gray-light, 10);
+    background: darken($gray-dark, 10);
+    color: white;
   }
 }
 
@@ -175,77 +176,77 @@ button.simple,
 $brand_red: #cc0000;
 
 .btn-white {
-	border: 1px solid #c5c7c9;
+  border: 1px solid #c5c7c9;
   color: #333;
   background: #fff;
   padding: .4375rem .75rem;
 }
 
 .btn.btn-circle-icon {
-	background: none;
-	color: $gray-dark;
-	text-transform: none;
-	padding: 0;
-	transition: .2s;
+  background: none;
+  color: $gray-dark;
+  text-transform: none;
+  padding: 0;
+  transition: .2s;
 
-	.text, .circle-icon {
-		display: inline-block;
-		vertical-align: middle;
-	}
+  .text, .circle-icon {
+    display: inline-block;
+    vertical-align: middle;
+  }
 
-	.text + .circle-icon { @include rem('margin-left', $global-padding); }
-	.circle-icon + .text { @include rem('margin-left', $global-padding); }
-
-
-	.text {
-		font-weight: 100;
-	}
-
-	.circle-icon {
-		position: relative;
-		display: inline-block;
-		@include font-size(42px);
-		line-height: 1;
-		@include rem('padding',8px);
-		border-radius: 50px;
-		border: 2px solid $gray;
-		opacity: 1;
-		transition: .2s;
-
-		span {
-			opacity: 1;
-			transform: rotate(0deg);
-			transition: .35s;
-		}
-
-		&:before {
-			content: '\f067';
-			color: $gray;
-			font: 20px/3 FontAwesome;
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: 100%;
-			height: 100%;
-			opacity: 0;
-			transform: rotate(0deg);
-			transition: .2s;
-		}
-	}
-
-	&:hover .circle-icon {
+  .text + .circle-icon { @include rem('margin-left', $global-padding); }
+  .circle-icon + .text { @include rem('margin-left', $global-padding); }
 
 
-		&:before {
-			opacity: 1;
-			transform: rotate(360deg);
-		}
+  .text {
+    font-weight: 100;
+  }
 
-		span {
-			transform: rotate(90deg);
-			opacity: 0;
-		}
-	}
+  .circle-icon {
+    position: relative;
+    display: inline-block;
+    @include font-size(42px);
+    line-height: 1;
+    @include rem('padding',8px);
+    border-radius: 50px;
+    border: 2px solid $gray;
+    opacity: 1;
+    transition: .2s;
+
+    span {
+      opacity: 1;
+      transform: rotate(0deg);
+      transition: .35s;
+    }
+
+    &:before {
+      content: '\f067';
+      color: $gray;
+      font: 20px/3 FontAwesome;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: rotate(0deg);
+      transition: .2s;
+    }
+  }
+
+  &:hover .circle-icon {
+
+
+    &:before {
+      opacity: 1;
+      transform: rotate(360deg);
+    }
+
+    span {
+      transform: rotate(90deg);
+      opacity: 0;
+    }
+  }
 }
 
 .btn.btn-square {
