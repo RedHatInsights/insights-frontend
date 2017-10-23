@@ -14,7 +14,7 @@ $dashboard-nav-input-bg: #322e31;
 	background: #252527;
 	display: inline-block;
 	width: 100%;
-	@include transition(.2s);
+	transition: .2s;
 
 	&.fixed {
 		@include media-query (md) {
@@ -27,7 +27,7 @@ $dashboard-nav-input-bg: #322e31;
 }
 
 .dashboard-navigation .header-block {
-	@include transition(.2s);
+	transition: .2s;
 	position: relative;
 	@include rem('margin-bottom', 2px);
 	@include rem('padding', $global-padding);
@@ -79,8 +79,8 @@ $dashboard-nav-input-bg: #322e31;
 			position: absolute;
 			right: 0;
 			bottom: 0;
-			@include transition-delay(.2s);
-			@include transition-duration(.4s);
+			transition-delay: .2s;
+			transition-duration: .4s;
 		}
 
 		&.expanded { i.fa-expand { opacity: 0; } }
@@ -98,13 +98,13 @@ $dashboard-nav-input-bg: #322e31;
 
 // When the profile image is hidden
 .dashboard-navigation.profile-image-hidden .user-profile {
-	@include transition-delay(.2s);
+	transition-delay: .2s;
 
 	.profile-image {
 		@include media-query(sm) {
-			@include opacity(0);
+			opacity: 0;
 			top: -100px;
-			@include transition(.4s);
+			transition: .4s;
 		}
 	}
 }
@@ -117,16 +117,16 @@ $dashboard-nav-input-bg: #322e31;
 
 	.profile-image {
 		@include media-query(sm) {
-			@include opacity(1);
+			opacity: 1;
 			top: 24px;
-			@include transition-delay(.2s);
+			transition-delay: .2s;
 		}
 	}
 }
 
 .dashboard-navigation .user-profile {
 	text-align: center;
-	@include transition(.2s);
+	transition: .2s;
 	@include rem('padding-top', $global-padding);
 	overflow: hidden;
 

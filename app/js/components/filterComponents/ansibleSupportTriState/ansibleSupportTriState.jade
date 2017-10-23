@@ -1,0 +1,8 @@
+.filter-group
+    label(translate)
+        strong Ansible Support
+    .radio-group
+        .radio-inline(ng-repeat='(k, v) in AnsibleSupportFilters')
+            label(translate)
+                input(type="radio", name='ansibleSupportFilterRadio' ng-model="showAnsibleSupport", value='{{k}}', ng-click='filterAnsibleSupport(k)')
+                span {{v.title | translate}}

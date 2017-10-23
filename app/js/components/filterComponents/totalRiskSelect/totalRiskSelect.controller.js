@@ -11,18 +11,24 @@ function totalRiskSelectCtrl($location,
                              $scope,
                              gettextCatalog,
                              Events,
-                             Severities) {
+                             Severities,
+                             FilterService,
+                             MultiButtonService) {
     $scope.options = Severities;
     $scope.label = 'All';
 
     $scope.select = function (option) {
         $scope.selected = option;
         $scope.label = option.label;
-        $location.search(Events.filters.totalRisk, $scope.selected.value);
+
+        setSeverity(option.value);
+        FilterService.doFilter();
 
         // If 'All' is selected there is no reason to store the filter
         if ($scope.selected.value === 'All') {
             delete $location.search()[Events.filters.totalRisk];
+        } else {
+            $location.search(Events.filters.totalRisk, $scope.selected.value);
         }
 
         $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.totalRisk);
@@ -53,18 +59,27 @@ function totalRiskSelectCtrl($location,
             });
 
         $scope.label = $scope.selected.label;
-
+        setSeverity($scope.selected.value);
         $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.totalRisk);
     }
 
+    function setSeverity(risk) {
+        Severities.map(function (s) {
+                return s.value;
+            }).forEach(function (severity) {
+                if (severity === risk) {
+                    MultiButtonService.setState('severityFilters' + severity, true);
+                } else {
+                    MultiButtonService.setState('severityFilters' + severity, false);
+                }
+            });
+    }
+
     function resetFilter () {
-        $scope.selected = find($scope.options, (option) => {
+        let option = find($scope.options, (option) => {
             return option.value === 'All';
         });
-
-        $scope.label = $scope.selected.label;
-
-        $location.search(Events.filters.totalRisk, null);
+        $scope.select(option);
     }
 
     $scope.$on(Events.filters.removeTag, function (event, filter) {

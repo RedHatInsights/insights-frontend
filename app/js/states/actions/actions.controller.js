@@ -6,6 +6,7 @@ const statesModule = require('../');
  * @ngInject
  */
 function ActionsCtrl(
+    $q,
     $rootScope,
     $scope,
     $stateParams,
@@ -15,6 +16,7 @@ function ActionsCtrl(
     Categories,
     Export,
     FilterService,
+    IncidentsService,
     InsightsConfig,
     PreferenceService,
     QuickFilters,
@@ -45,6 +47,8 @@ function ActionsCtrl(
     $scope.getSelectedProduct = FilterService.getSelectedProduct;
 
     let reload = function () {
+        let promises = [];
+
         $scope.loading = true;
         RhaTelemetryActionsService.reload();
 
@@ -61,19 +65,12 @@ function ActionsCtrl(
                 product = FilterService.getSelectedProduct();
             }
 
-            Topic.get('incidents', product).success((topic) => {
-                let rulesWithHits = 0;
+            promises.push(loadStats());
+            promises.push(IncidentsService.loadIncidents());
 
-                if (topic.rules) {
-                    topic.rules.forEach((rule) => {
-                        if (rule.hitCount > 0 && !rule.acked) {
-                            rulesWithHits++;
-                        }
-                    });
-                }
-
-                $scope.incidentCount = rulesWithHits;
-                $scope.incidentSystemCount = topic.affectedSystemCount;
+            $q.all(promises).finally(() => {
+                $scope.incidentCount = IncidentsService.incidentRulesWithHitsCount;
+                $scope.incidentSystemCount = IncidentsService.affectedSystemCount;
                 $scope.loading = false;
             });
         });
@@ -104,23 +101,26 @@ function ActionsCtrl(
 
     function loadStats () {
         let product = FilterService.getSelectedProduct();
+        let promises = [];
         if (product === 'all') {
             product = undefined;
         }
 
-        Stats.getRules({
+        promises.push(Stats.getRules({
             product: product
         }).then(function (res) {
             $scope.stats.rules = res.data;
             setCategoryTopics(res.data);
-        });
+        }));
 
-        Stats.getSystems({
+        promises.push(Stats.getSystems({
             product: product,
             minSeverity: 'CRITICAL'
         }).then(function (res) {
             $scope.stats.systems = res.data;
-        });
+        }));
+
+        return $q.all(promises);
     }
 
     /**
@@ -140,11 +140,6 @@ function ActionsCtrl(
             }
         });
     }
-
-    $scope.$on('filterService:doFilter', loadStats);
-    $scope.$on('group:change', loadStats);
-
-    loadStats();
 
     if (InsightsConfig.allowExport) {
         ActionbarService.addExportAction(function () {

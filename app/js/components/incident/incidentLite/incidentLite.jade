@@ -1,0 +1,29 @@
+.row(ng-if='loading')
+  .col-sm-12.block-lg
+    .spinner.spinner-lg
+
+.incident-lite(ng-if='!loading')
+  .cell.icon
+    i.fa.fa-bullseye(aria-hidden="true")
+
+  // If incidents
+  .cell.count(ng-if='incidentCount > 0')
+    strong(translate) {{incidentCount}} of {{totalHits}}
+    br
+    span(translate) Issues are incidents
+
+  .cell.supporting-text(ng-if='incidentCount > 0', translate) An&nbsp;
+    strong(translate) incident&nbsp;
+    span(translate) is an issue that is currently or has already affected systems.&nbsp;
+    a.link(ui-sref="app.topic({id: 'incidents'})")
+      strong(translate) View incidents
+
+  // If no incidents
+  .cell.count(ng-if='incidentCount === 0')
+    strong 0
+    br
+    span(translate) Incidents
+
+  .cell.supporting-text(ng-if='incidentCount === 0') An&nbsp;
+    strong(translate) incident&nbsp;
+    span(translate) is an issue that is currently or has already affected systems. You currently have no incidents.

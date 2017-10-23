@@ -1,0 +1,96 @@
+page-header(title="Edit webhook", icon="fa-wrench")
+
+.content-wrap.webhook-edit
+  .rha-notifications
+  .spinner(ng-if='loader.loading')
+  form.form-horizontal(novalidate, name='webhookForm', ng-if='!loader.loading')
+    fieldset
+      .form-group.row
+        label.control-label.col-sm-2(translate) Active
+        .col-sm-10
+          .checkbox
+            label(for="checkbox_active")
+              input#checkbox_active(type='checkbox', name='active', ng-model='webhook.active')
+      .form-group.row.row-short(ng-class="{'has-error': errors.url || (webhookForm.url.$invalid && webhookForm.url.$dirty)}")
+        label.control-label.col-sm-2(for='url', translate) Target URL
+        .col-sm-10
+          input.form-control#url(type='text', name='url', ng-model='webhook.url', ng-pattern='"https:\/\/.+"', required)
+          .error.red(ng-if='(errors.url || (webhookForm.url.$invalid && webhookForm.url.$dirty))')
+            strong(translate) Must be a valid https URL
+      .form-group.row(ng-class="{'has-error': errors.certificate}")
+        label.control-label.col-sm-2(for='certificate', translate) Custom certificate
+        .col-sm-10
+          span(ng-if='!webhook.certificateInfo')
+            p
+              span(translate) Due to sensitive nature of data that Red Hat Insights operates on HTTPS is required. For cases when your server does not use a certificate signed by a&nbsp;
+              a(href='https://www.mozilla.org/en-US/about/governance/policies/security-group/certs/', translate) trusted authority&nbsp;
+              span(translate) a custom certificate can be configured.
+            button.btn.btn-sm.btn-primary(translate, ng-click='selected.certificateExpanded = true', ng-show='!selected.certificateExpanded') Add certificate
+
+          span(ng-if='webhook.certificateInfo && !selected.certificateExpanded')
+            .content-block.content-block-card
+              .content
+                .form-group.certificate
+                  label.col-sm-4.control-label(translate) Common Name (CN):
+                  .col-sm-8
+                    p.form-control-static {{webhook.certificateInfo.subject.cn}}
+                .form-group.certificate
+                  label.col-sm-4.control-label(translate) Organization (O)
+                  .col-sm-8
+                    p.form-control-static {{webhook.certificateInfo.subject.o}}
+                .form-group.certificate
+                  label.col-sm-4.control-label(translate) Issuer Common Name (CN):
+                  .col-sm-8
+                    p.form-control-static {{webhook.certificateInfo.issuer.cn}}
+                .form-group.certificate
+                  label.col-sm-4.control-label(translate) Issuing Organization (O)
+                  .col-sm-8
+                    p.form-control-static {{webhook.certificateInfo.issuer.o}}
+                .form-group.certificate
+                  label.col-sm-4.control-label(translate) Valid until
+                  .col-sm-8
+                    p.form-control-static(ng-class='certDateClass(webhook.certificateInfo.validUntil)') {{webhook.certificateInfo.validUntil | moment:'LLL'}}
+              .footer
+                .pull-right
+                  button.action.btn.btn-sm.btn-open(translate, ng-click='webhook.certificate = null; webhook.certificateInfo = null', ng-show='!selected.certificateExpanded') Remove certificate
+                  button.btn.btn-sm.btn-accent(translate, ng-click='selected.certificateExpanded = true', ng-show='!selected.certificateExpanded') Edit certificate
+
+          .certificate(ng-if='selected.certificateExpanded')
+            textarea.form-control#certificate(placeholder='Paste certificate in PEM format here', ng-model='webhook.certificate', rows='15')
+            .error.red(ng-if='errors.certificate')
+              strong(translate) Invalid certificate
+
+      .form-group.row
+        label.control-label.col-sm-2(for='active', translate) Webhook triggers
+        .col-sm-10
+          .radio
+            label(for="radio_all")
+              input#radio_all(type='radio', ng-model='webhook.firehose', ng-value="true")
+              span(translate) Every event (no filtering)
+          .radio
+            label.checkbox_active(for="radio_selected")
+              input#radio_selected(type='radio', ng-model='webhook.firehose', ng-value='false')
+              span(translate) Only selected event types
+      .form-group.row.row-short(ng-if='!webhook.firehose')
+        .col-sm-offset-2.col-sm-10
+          .row
+            .col-sm-5
+              .checkbox(ng-repeat='event in eventTypes | limitTo:2 track by event.name')
+                label
+                  input(type='checkbox', name='active', ng-model='selected.events[event.name]')
+                  | {{event.description}}
+            .col-sm-7
+              span.checkbox.severity(ng-repeat='severity in severities track by severity.value')
+                label
+                  input(type='checkbox', name='active', ng-model='selected.severityFilters[severity.value]', ng-disabled='!selected.events["report:new"] && !selected.events["report:resolved"]')
+                  severity-icon.inline-right(severity='severity.value', type='severity', label='')
+                  | {{severity.label}}
+          .row
+            .checkbox.col-sm-12(ng-repeat='event in eventTypes | limitTo:eventTypes.length:2 track by event.name')
+              label
+                input(type='checkbox', name='active', ng-model='selected.events[event.name]')
+                | {{event.description}}
+
+    .btn-group.pull-right
+      button.btn.btn-sm.btn-default(ui-sref='app.config({tab: "webhooks"})', translate) Cancel
+      button.btn.btn-sm.btn-primary(ng-click='save()', ng-disabled='webhookForm.$invalid', translate) Save

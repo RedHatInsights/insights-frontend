@@ -46,7 +46,8 @@ function TopicRuleListCtrl(
 
         promises.push(initIncidents);
 
-        const initTopic = Topic.get($stateParams.id, product).success(function (topic) {
+        const initTopic = Topic.get($stateParams.id, product, 'resolution_risk')
+        .success(function (topic) {
             if (topic.hidden && !$scope.isInternal) {
                 return notFound();
             }

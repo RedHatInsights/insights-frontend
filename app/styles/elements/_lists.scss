@@ -12,13 +12,13 @@
 	.item {
         position: relative;
         .item-content.faded {
-            @include opacity(.5);
+            opacity: .5;
         }
     }
 
 	a.link:hover { text-decoration: underline; }
 
-	button { @include transition(.4s); }
+	button { transition: .4s; }
 
 	.subheading { @include rem('margin-bottom', $global-padding); }
 
@@ -33,6 +33,13 @@
 	//li + li {
 	//	@include rem('margin-top', $global-padding);
 	//}
+}
+
+ul.list-plain {
+	@include reset;
+	list-style-type: none;
+
+	li { @include reset; }
 }
 
 .list-unstyled,

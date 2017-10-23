@@ -36,11 +36,11 @@
 }
 
 .group-select .add-group {
-  @include opacity(.5);
-  @include transition(.2s);
+  opacity: .5;
+  transition: .2s;
 
   &:hover {
-    @include opacity(1);
+    opacity: 1;
   }
 }
 

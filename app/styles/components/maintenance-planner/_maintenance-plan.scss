@@ -113,7 +113,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 .plan-wrap {
 	box-shadow: 0 0 0 10px #fff;
-	@include transition(.2s);
+	transition: .2s;
 }
 
 .plan-wrap.active {
@@ -138,10 +138,9 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
         .footer {
 
             .action {
-                @include rem('padding', 5px);
                 border: 1px solid #ddd;
                 @include rem('margin-left', 10px);
-                @include transition(.2s);
+                transition: .2s;
 
                 &:hover {
                         background: $gray-dark;
@@ -228,7 +227,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 		////background: $gray-light;
 		////color: $gray-dark;
 		//border-radius: 0;
-		//@include box-shadow(none);
+		//box-shadow: none;
     //
 		//.text-muted {
 		//	color: white;
@@ -364,8 +363,8 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 			}
 
 			menu {
-				@include opacity(0);
-				@include transition(.4s);
+				opacity: 0;
+				transition: .4s;
 				@include rem('margin-right', 32px);
 
 				i {
@@ -379,10 +378,10 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 					right: 0;
 					z-index: 1;
 					display: inline-block;
-					@include opacity(0);
+					opacity: 0;
 					@include font-size(14px);
 					//font-weight: 400;
-					@include transition(.2s);
+					transition: .2s;
 					text-align: right;
 
 					i { @include font-size(18px); }
@@ -395,8 +394,8 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 				width: 48px;
 				text-align: right;
 				opacity: 0;
-				@include transition(.2s);
-				@include transition-delay(.2s);
+				transition: .2s;
+				transition-delay: .2s;
 			}
 
 			&.inactive {
@@ -411,7 +410,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 				}
 
 				menu {
-					@include opacity(1);
+					opacity: 1;
 
 					i {
 						display: inline-block;
@@ -420,7 +419,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 					.quick-edit {
 						top: 34px;
 						right: 0;
-						@include opacity(1);
+						opacity: 1;
 						min-width: 300px;
 					}
 				}
@@ -520,7 +519,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 	.btn-primary {
 		@include rem('padding', 10px 10px);
-		//@include border-radius(4px);
+		//border-radius: 4px;
 		background: $maintenance-button-bg;
 		text-transform: uppercase;
 
@@ -546,12 +545,12 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 		//@include rem('margin-bottom', 20px);
 		//@include rem('padding-bottom', 20px);
 		text-align: right;
-		@include transition-duration(.2s);
+		transition-duration: .2s;
 		overflow: hidden;
 
 		.cancel-update {
 			margin-top: 0;
-			@include transition(.2s);
+			transition: .2s;
 		}
 	}
 
@@ -573,7 +572,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 	//.show-system select.account-select {
 	//	@include rem('margin-bottom', $global-padding);
-	//	@include transition(margin-bottom 2s);
+	//	transition: margin-bottom 2s;
 	//}
 	//
 
@@ -609,7 +608,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 //	width: 100%;
 //	display: block;
 //	transform: scale(1);
-//	@include opacity(1);
+//	opacity: 1;
 //	@include rem('margin-bottom', $global-padding);
 //	animation: animIn .3s ease-in-out;
 //}
@@ -632,7 +631,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
       position: absolute;
       top: 0;
       height: 6px;
-      @include border-radius(8px);
+      border-radius: 8px;
     }
 
     .progress {
@@ -692,7 +691,7 @@ div[class^="col-xs-"], div[class*=" col-xs-"] {
 	}
 }
 
-div[class^="col-"], div[class*=" col-"] { @include transition(.4s); }
+div[class^="col-"], div[class*=" col-"] { transition: .4s; }
 
 .maintenance-plan .editable-form {
 	.title input {
@@ -730,7 +729,7 @@ div[class^="col-"], div[class*=" col-"] { @include transition(.4s); }
     margin-top: -20px;
   }
   > :not(.spinner) {
-    @include opacity(.3);
+    opacity: .3;
   }
 }
 
@@ -817,16 +816,33 @@ table.maintenance-table {
   }
 
   // adjust content padding for vertical divider
-  .content { @include rem('padding', 0 $global-padding); }
+  .content { 
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+
+    .systems,
+    .resolution {
+      flex: 1 100%;
+      @include rem('padding', $global-padding);
+
+      @include media-query(sm){
+        flex: 1 50%;
+      }
+    }
+
+    .resolution { @include media-query(sm) { border-left: 1px solid $maintenance-plan-border-color; } }
+
+    ul.list-plain {
+      @include reset;
+      @include rem('margin-top', $global-padding);
+      list-style-type: none;
+
+      li { @include reset; }
+    }
+
+  }
 
   // fit ULs appropriately
   ul { margin-bottom: 4px; }
-
-
-  [class^="col-"],
-  [class*=" col-"] { @include rem('padding', 15px); }
-
-  [class^="col-"] + [class^="col-"] {
-    @include media-query(sm) { border-left: 1px solid $maintenance-plan-border-color; }
-  }
 }

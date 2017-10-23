@@ -1,7 +1,6 @@
 $define-fa: true !default;
 // Include Settings / Functions
 //==================================================================*/
-@import 'compass';
 @import '../../node_modules/font-awesome/scss/font-awesome';
 @import 'includes/vars';
 @import 'includes/mixins';
@@ -20,6 +19,7 @@ $define-fa: true !default;
 @import 'elements/section';
 @import 'elements/forms';
 @import 'elements/tabs';
+@import 'elements/alert-text';
 
 
 // Include CSS from bower components
@@ -29,7 +29,7 @@ $define-fa: true !default;
 @import '../../node_modules/sweetalert2/dist/sweetalert2';
 @import '../../node_modules/c3/c3';
 @import '../../node_modules/ng-table/dist/ng-table';
-@import '../../node_modules/angular-material/angular-material';
+@import '../../node_modules/angular-material/angular-material.scss';
 
 .flexgrid {
   @import '../../node_modules/flexboxgrid/dist/flexboxgrid';
@@ -146,6 +146,7 @@ $define-fa: true !default;
 @import 'components/demo-account-switcher';
 @import 'components/evaluation';
 
+
 // Maintenance Plan
 //==================================================================*/
 @import 'components/maintenance-planner/maintenance-plan';
@@ -155,6 +156,7 @@ $define-fa: true !default;
 @import 'components/card';
 @import 'components/inventory';
 
+
 // Table Filters
 //==================================================================*
 //@import 'components/toolbar/toolbar';
@@ -163,13 +165,17 @@ $define-fa: true !default;
 
 // Data visualization
 //==================================================================*/
-@import 'components/data-visualization/count-comparison';
 @import 'components/data-visualization/gauge';
 
 
 // UI Filters
 //==================================================================*/
 @import 'components/ui-filters/ui-filters';
+
+
+// Risk of change
+//==================================================================*/
+@import 'components/risk-of-change';
 
 
 // Namespaced

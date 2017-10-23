@@ -1,7 +1,8 @@
 .webhooks
   h2.page-title(translate) Webhooks
-  p(translate) Webhooks allow external services to be notified of updates in Red Hat Insights. An HTTP POST request will be issued for a configured URL every time an event occurs in Red Hat Insights.&nbsp;
-    a(translate) TODO write docs on events, etc.
+  p(translate) Webhooks allow external services to be notified of updates in Red Hat Insights. An HTTP POST request will be issued for a configured URL every time an event occurs in Red Hat Insights.&nbsp; See&nbsp;
+    a(translate, target='_blank', href='https://github.com/RedHatInsights/insights-webhooks/wiki/Documentation') webhook documentation
+    | &nbsp; for more details.
 
   section
     .spinner(ng-show='loader.loading')
@@ -10,17 +11,19 @@
       thead
         tr
           th(translate) URL
+          th(translate) Event Types
           th(translate) Active
           th(translate) Actions
       tbody
         tr(ng-repeat='webhook in webhooks | orderBy:"id" track by webhook.id')
-          td 
-            a(ng-href='{{webhook.url}}') {{webhook.url}}
+          td.break
+            a(ui-sref='app.config-webhook-edit({id: webhook.id})') {{webhook.url}}
+          td {{webhook.event_types.length}}
           td 
             input(type='checkbox' ng-model='webhook.active', ng-change='activeChanged(webhook)')
           td
             span.icon-inline
-              a(ng-click='edit(webhook)')
+              a(ui-sref='app.config-webhook-edit({id: webhook.id})')
                 i.fa.fa-pencil-square-o.pointer(tooltip="{{'Edit' | translate}}")
             span.icon-inline
               a(ng-click='delete(webhook)')
@@ -28,4 +31,4 @@
     .pull-right
       .btn-group
         button.btn.btn-sm.btn-secondary(ng-click='ping()', translate, ng-disabled='!isPingable()') Test event
-        button.btn.btn-sm.btn-accent(ng-click='add()', translate) Add webhook
+        button.btn.btn-sm.btn-accent(ui-sref='app.config-webhook-edit({id: "new"})', translate) Add webhook

@@ -12,18 +12,18 @@ $aside_anchor_color: #252527;
 	height: 100px;
 	display: block;
 	background-size: 100% auto;
-	@include opacity(.1);
+	opacity: .1;
 }
 
 .toggle {
 	border-left: 4px solid transparent;
 	border-right: 4px solid transparent;
 	border-top: 4px solid #fff;
-	@include transition-duration(.2s);
+	transition-duration: .2s;
 
 
 	&.active {
-		@include rotate(180deg);
+		transform: rotate(180deg);
 	}
 }
 
@@ -47,8 +47,8 @@ menu.nav {
 		}
 
 		li {
-			@include transition-duration(.2s);
-			@include transition-timing-function(ease-in-out);
+			transition-duration: .2s;
+			transition-timing-function: ease-in-out;
 			overflow: auto;
 
 			a {
@@ -62,9 +62,9 @@ menu.nav {
 				font-weight: 700;
 				border-bottom: 1px solid darken($aside_anchor_bg, 5%);
 				-webkit-font-smoothing: antialiased;
-				@include transition-duration(.1s);
-				@include transition-timing-function(ease-in-out);
-				@include box-shadow(none);
+				transition-duration: .1s;
+				transition-timing-function: ease-in-out;
+				box-shadow: none;
 
 				&:hover {
 					text-decoration: none;
@@ -75,7 +75,7 @@ menu.nav {
 					color: $aside_anchor_color;
 					background: $aside_anchor_hover_bg;
 					border-color: darken($aside_anchor_hover_bg, 20%);
-					@include box-shadow(0 4px 0 0 #504a4f, inset -8px 0 10px 0px #ddd);
+					box-shadow: 0 4px 0 0 #504a4f, inset -8px 0 10px 0px #ddd;
 				}
 			}
 		}
@@ -120,7 +120,7 @@ menu.account {
 			font-weight: bold;
 			color: #9fa0a1;
 
-			@include transition-duration(.1s);
+			transition-duration: .1s;
 		}
 
 		&:after {
@@ -132,7 +132,7 @@ menu.account {
 			width: 22px;
 			height: 0;
 			background: #fff;
-			@include transition-duration(.1s);
+			transition-duration: .1s;
 		}
 
 

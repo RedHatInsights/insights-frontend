@@ -15,7 +15,16 @@ i.fa.category-icon {
 }
 
 i.fa.fa-bullseye {
-    color: red;
+  color: $red;
+}
+
+img.icon {
+  @include rem('width', 14px);
+
+  &.icon-small { @include rem('width', 12px); }
+  &.icon-med { @include rem('width', 18px); }
+  &.icon-large { @include rem('width', 24px); }
+  &.icon-xlarge { @include rem('width', 34px); }
 }
 
 .icon-circle {
@@ -78,11 +87,17 @@ h2 .ansible-icon img, h2 .ansible-icon-white img {
 
 .icon-inline {
   position: relative;
+  display: inline-block;
   @include rem('padding-left', 18px);
 
-  i {
+  i,
+  img.icon {
     position: absolute;
     left: 0;
+  }
+
+  img.icon {
+    transform: translateY(25%);
   }
 }
 

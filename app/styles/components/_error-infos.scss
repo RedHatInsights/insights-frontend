@@ -26,11 +26,11 @@
 	}
 
 	input.ng-invalid {
-		@include box-shadow(#f00 0 0 15px);
+		box-shadow: #f00 0 0 15px;
 	}
 
 	input.changed.ng-dirty.ng-valid {
-		@include box-shadow(#ff0 0 0 5px);
+		box-shadow: #ff0 0 0 5px;
 	}
 
 	textarea.changed.ng-dirty {

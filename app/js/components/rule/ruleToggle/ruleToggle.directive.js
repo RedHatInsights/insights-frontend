@@ -7,7 +7,7 @@ var componentsModule = require('../../');
  */
 function ruleToggleCtrl($scope, Ack, InsightsConfig, gettextCatalog) {
     function init() {
-        $scope.text = gettextCatalog.getString('Permanently Ignore Rule');
+        $scope.text = gettextCatalog.getString('Ignore Rule');
         if ($scope.rule && $scope.rule.ack_id) {
             $scope.text = gettextCatalog.getString('Unignore Rule');
         }
@@ -23,10 +23,6 @@ function ruleToggleCtrl($scope, Ack, InsightsConfig, gettextCatalog) {
                 $scope.rule.ack_id = ack.id;
             });
         }
-    };
-
-    $scope.isSystemAlert = function (rule_id) {
-        return InsightsConfig.systemAlerts[rule_id];
     };
 
     init();

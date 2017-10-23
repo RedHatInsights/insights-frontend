@@ -9,8 +9,14 @@ module.exports = {
     'syncproxyport': 3000,
 
     'styles': {
-        'src': ['app/styles/**/*.scss', '!app/styles/base.scss', '!app/styles/cloudforms.scss', '!app/styles/sat5.scss', '!app/styles/sat6.scss'],
-        'srcRelease': ['app/styles/**/*.scss', '!app/styles/base.scss'],
+        'componentsSrc': ['app/js/components/**/*.scss',
+                          'app/js/states/**/*.scss'],
+        'componentsOut': 'app/styles/components.scss',
+        'src': ['app/styles/insights.scss'],
+        'srcRelease': ['app/styles/insights.scss',
+                       'app/styles/sat5.scss',
+                       'app/styles/sat6.scss',
+                       'app/styles/cloudforms.scss'],
         'vendor': [],
         'temp': 'app/styles/.css',
         'vendorPath': 'app/styles/vendor',

@@ -5,7 +5,9 @@ var statesModule = require('../');
 /**
  * @ngInject
  */
-function InfoCtrl(PermalinkService) {
+function InfoCtrl($scope, InsightsConfig, PermalinkService) {
+    $scope.gettingStartedLink = InsightsConfig.gettingStartedLink;
+
     PermalinkService.scroll();
 }
 

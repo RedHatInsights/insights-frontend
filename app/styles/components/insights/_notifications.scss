@@ -55,7 +55,7 @@
 		@include font-size(11px);
 		font-weight: 700;
 		line-height: 1;
-		@include border-radius(8px);
+		border-radius: 8px;
 	}
 
 	.dropdown-menu {
@@ -88,7 +88,7 @@
     color: $gray-dark;
     box-shadow: none;
     border: 1px solid $gray;
-    @include box-shadow(0 0 8px 0 rgba(0,0,0,.2));
+    box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
 
 		@include media-query(sm) {
 			min-width: 300px;
@@ -100,7 +100,7 @@
       color: $gray-dark;
       box-shadow: none;
       border: 1px solid $gray;
-      @include box-shadow(0 0 8px 0 rgba(0,0,0,.2));
+      box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
     }
     
     @include media-query(md) { min-width: 430px; }
@@ -148,8 +148,8 @@
 				display: inline-block;
 
 				@include font-size(16px);
-				@include text-shadow(0 1px 1px #888);
-				@include transition(.2s);
+				text-shadow: 0 1px 1px #888;
+				transition: .2s;
 				color: $blue;
 				text-shadow: none;
 				line-height: 1;

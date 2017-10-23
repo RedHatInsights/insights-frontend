@@ -27,8 +27,8 @@
       @include font-size(22px, 58px);
       font-family: "FontAwesome";
       text-align: center;
-      @include opacity(0);
-      @include transition(.1s);
+      opacity: 0;
+      transition: .1s;
       transition-delay: .2s;
       cursor: pointer;
     }
@@ -49,13 +49,13 @@
       .next.disabled {
         background: $gray;
         color: lighten($gray, 10);
-        //@include opacity(.8);
+        //opacity: .8;
         cursor: not-allowed;
       }
 
       .prev,
       .next {
-        @include opacity(1);
+        opacity: 1;
       }
 
       .prev { left: -60px; }
@@ -97,7 +97,7 @@
     line-height: 1;
     font-weight: 700;
     @include rem('padding', 6px 12px);
-    @include border-radius(12px);
+    border-radius: 12px;
   }
 }
 

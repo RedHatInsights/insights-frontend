@@ -77,7 +77,7 @@ $calendar-btn-background: #006CBE;
 
 		th {
 			@include rem('padding', 22px 6px);
-			@include border-radius(0);
+			border-radius: 0;
 			border: none;
 			box-shadow: none;
 			text-align: center;
@@ -123,7 +123,7 @@ $calendar-btn-background: #006CBE;
 			span {
 				width: 30px;
 				height: 30px;
-				@include border-radius(50%);
+				border-radius: 50%;
 
 				&:hover {
 					background: $gray-light;
@@ -158,11 +158,11 @@ $calendar-btn-background: #006CBE;
 				@include rem('padding', 10px 0 0 0);
 				width: 32px;
 				height: 32px;
-				@include border-radius(50%);
+				border-radius: 50%;
 				@include font-size(13px, 13px);
 
 				&:hover {
-					@include box-shadow(inset 0 0 0 4px #C0C0C0);
+					box-shadow: inset 0 0 0 4px #C0C0C0;
 				}
 			}
 
@@ -172,7 +172,7 @@ $calendar-btn-background: #006CBE;
 
 			span {
 				background: rgba(0,0,0,.2);
-				@include box-shadow(inset 0 0 0 4px #C0C0C0);
+				box-shadow: inset 0 0 0 4px #C0C0C0;
 			}
 		}
 	}

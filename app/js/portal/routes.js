@@ -4,7 +4,7 @@
  * @ngInject
  */
 function Routes($stateProvider, $locationProvider, $urlRouterProvider,
-                GettingStartedUrl) {
+                GettingStartedUrl, InviteUrl) {
 
     // App Routes
 
@@ -66,6 +66,13 @@ function Routes($stateProvider, $locationProvider, $urlRouterProvider,
 
     // Config routes
     $stateProvider
+        .state('app.config-webhook-edit', {
+            url: '/config/webhooks/:id',
+            templateUrl: 'js/states/config/views/webhook-edit.html',
+            controller: 'WebhookEditCtrl',
+            title: 'Edit Webhook'
+        })
+
         .state('app.config', {
             url: '/config/:tab',
             templateUrl: 'js/states/config/views/config.html',
@@ -139,6 +146,10 @@ function Routes($stateProvider, $locationProvider, $urlRouterProvider,
     redirectGetStarted('/getting-started/satellite/5/', '#satellite5');
     redirectGetStarted('/getting-started', '#getstarted');
     redirectGetStarted('/getting-started/', '#getstarted');
+
+    $urlRouterProvider.when('/invite', function () {
+        window.location = InviteUrl;
+    });
 
     $stateProvider
         .state('info.info', {

@@ -1,8 +1,17 @@
 .digests-page
   page-header(title="Executive Report", icon="fa-bar-chart", ng-class="{'inactive': !expandBar, 'active': expandBar}")
+    .spinner.spinner-sm.pull-right(ng-if="downloading")
+    button.btn.btn-sm.btn-accent.pull-right(ng-click='downloadPdf()', ng-if="!downloading", translate) Download PDF
   .content-wrap.margin-top(ng-show='loading')
     .text-center
       .spinner.spinner-lg
+  .content-wrap(ng-if='!loading && digestError')
+    .row
+      .col-xs-12.col-lg-8.alert.alert-danger
+        span.col-xs-9
+          span.icon-inline
+            i.glyphicon.glyphicon-exclamation-sign
+          span(translate) {{digestError}}
   .content-wrap.margin-top(ng-show='!loading && systemsTilTen > 0')
     .row
       .col-sm-12.col-md-8.col-md-offset-2.text-center
