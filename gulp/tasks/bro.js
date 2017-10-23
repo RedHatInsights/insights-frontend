@@ -16,6 +16,7 @@ const path = require('path');
 const babel = require('gulp-babel');
 const plumber = require('gulp-plumber');
 const banify = require('banify');
+const rename = require('gulp-rename');
 
 gulp.task('browserify', ['bro']);
 
@@ -46,6 +47,9 @@ gulp.task('bro', function () {
                 console.log('babel error');
                 console.log(e);
             })))
+           .pipe(rename('insights.unmin.js'))
+           .pipe(gulp.dest(config.scripts.dest))
+           .pipe(rename('insights.js'))
            .pipe(gulpif(global.isProd, streamify(
                uglify({ compress: { drop_console: true } })
                .on('error', function (e) {
