@@ -1,51 +1,48 @@
 .flexgrid {
-	.gray {
-		@include rem('padding', $global-padding);
-		background: $gray-light;
-	}
+  
+  .gray {
+    @include rem('padding', $global-padding);
+    background: $gray-light;
+  }
 
-	.row {
-		@include rem('margin-left', -15px);
-		@include rem('margin-right', -15px);
+  .row {
+    @include rem('margin-left', -15px);
+    @include rem('margin-right', -15px);
 
-    &:before, &:after {
-      display: none;
-    }
-	}
+    &:before, 
+    &:after { display: none; }
+  }
 
-	[class^="col-"],
+  [class^="col-"],
   div[class*=" col-"] {
-		margin-top: 0;
-		@include rem('padding-left', $global-padding);
-		@include rem('padding-right', $global-padding);
-		@include rem('padding-bottom', $global-margin);
-		float: none;
+    margin-top: 0;
+    @include rem('padding-left', $global-padding);
+    @include rem('padding-right', $global-padding);
+    @include rem('padding-bottom', $global-margin);
+    float: none;
 
-    @include media-query(sm-max) {
-      width: 100%;
+    @include media-query(sm-max) { width: 100%; }
+
+    @include media-query(xs-max) {
+      flex-basis: 100%;
+      max-width: 100%;
     }
-
-		@include media-query(xs-max) {
-			flex-basis: 100%;
-			max-width: 100%;
-		}
   }
 
   .row.row-short {
 
     [class^="col-"],
-    div[class*=" col-"] {
-      @include rem('padding-bottom', $global-padding);
+    div[class*=" col-"] { @include rem('padding-bottom', $global-padding); }
+  }
+
+  .content,
+  .content-block {
+    @include media-query(sm) {
+      height: 100%;
     }
   }
 
-	.content {
-		@include media-query(sm) {
-			height: 100%;
-			overflow: hidden;
-		}
-	}
-	&.equalheights { .content { height: 100%; } }
+  &.equalheights { .content { height: 100%; } }
   &.equalheights .card { height: 100%; }
   .row + .row { margin-top: 0; }
 }

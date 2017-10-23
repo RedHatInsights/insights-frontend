@@ -1,5 +1,7 @@
 @include media-query(sm) {
+    .pad5 { @include rem('padding', 5px); }
     .pad10 { @include rem('padding', 10px); }
+    .pad15 { @include rem('padding', 15px); }
     .pad20 { @include rem('padding', 20px); }
     .pad30 { @include rem('padding', 30px); }
     .pad40 { @include rem('padding', 40px); }
@@ -91,7 +93,7 @@
 }
 
 .uppercase {
-	text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 x.trunc {
@@ -106,11 +108,11 @@ x.trunc {
 }
 
 .large {
-	@include font-size(36px);
+  @include font-size(36px);
 }
 
 .light {
-	font-weight: 100;
+  font-weight: 100;
 }
 
 .btn-group-filter {
@@ -148,11 +150,11 @@ x.trunc {
 }
 
 .margin-top {
-	@include rem('margin-top', $global-margin);
+  @include rem('margin-top', $global-margin);
 }
 
 .padding-top {
-	@include rem('padding-top', $global-padding);
+  @include rem('padding-top', $global-padding);
 }
 
 .light {
@@ -160,7 +162,7 @@ x.trunc {
 }
 
 .reg {
-	font-weight: 500;
+  font-weight: 500;
 }
 
 .full-width { width: 100%; }
@@ -195,14 +197,14 @@ input.filter {
 }
 
 .with-icon {
-	position: relative;
-	@include rem('padding-left', 20px);
+  position: relative;
+  @include rem('padding-left', 20px);
 
-	i {
-		position: absolute;
-		left: 0;
-		top: 2px;
-	}
+  i {
+    position: absolute;
+    left: 0;
+    top: 2px;
+  }
 }
 
 .sep {
