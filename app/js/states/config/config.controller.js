@@ -1,14 +1,17 @@
+/*global require*/
 'use strict';
 
-var statesModule = require('../');
+const statesModule = require('../');
 
 /**
  * @ngInject
  */
-function ConfigCtrl($scope, $state, $stateParams, User, PermissionService) {
+function ConfigCtrl($scope, $state, $stateParams, User, PermissionService, $rootScope) {
     $scope.current = {
         hidden: true
     };
+
+    $scope.isBeta = $rootScope.isBeta;
 
     User.asyncCurrent(function (user) {
         $scope.user = user;

@@ -9,7 +9,8 @@ module.exports = {
     'syncproxyport': 3000,
 
     'styles': {
-        'componentsSrc': 'app/js/components/**/*.scss',
+        'componentsSrc': ['app/js/components/**/*.scss',
+                          'app/js/states/**/*.scss'],
         'componentsOut': 'app/styles/components.scss',
         'src': ['app/styles/insights.scss'],
         'srcRelease': ['app/styles/insights.scss',

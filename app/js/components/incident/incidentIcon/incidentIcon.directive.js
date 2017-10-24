@@ -1,7 +1,7 @@
 /*global require*/
 'use strict';
 
-var componentsModule = require('../');
+var componentsModule = require('../../');
 
 /**
  * @ngInject
@@ -18,7 +18,7 @@ function incidentIconCtrl($rootScope, $scope, gettextCatalog, IncidentsService) 
 
 function incidentIcon() {
     return {
-        templateUrl: 'js/components/incidentIcon/incidentIcon.html',
+        templateUrl: 'js/components/incident/incidentIcon/incidentIcon.html',
         restrict: 'E',
         replace: true,
         controller: incidentIconCtrl,
