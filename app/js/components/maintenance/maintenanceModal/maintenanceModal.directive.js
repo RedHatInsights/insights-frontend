@@ -77,13 +77,7 @@ function maintenanceModalCtrl($scope,
         $scope.systemSelection = 'preselected';
     } else if (!rule && !systems) {
         $scope.mode = MODES.multi;
-
-        if (Group.groups.length) {
-            $scope.systemSelection = 'group';
-        } else {
-            $scope.systemSelection = 'all';
-        }
-
+        $scope.systemSelection = 'all';
     } else {
         throw new Error(`Invalid parameters ${rule}, ${systems}`);
     }
