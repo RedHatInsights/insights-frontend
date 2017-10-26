@@ -39,12 +39,12 @@ constantsModule.constant('RuleStatusFilters', {
         tag: null
     },
     active: {
-        title: 'Active',
-        tag: 'Rule Status: Active'
+        title: 'Enabled',
+        tag: 'Rule Status: Enabled'
     },
     ignored: {
-        title: 'Ignored',
-        tag: 'Rule Status: Ignored'
+        title: 'Disabled',
+        tag: 'Rule Status: Disabled'
     }
 });
 
