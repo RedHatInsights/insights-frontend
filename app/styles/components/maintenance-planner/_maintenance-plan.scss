@@ -33,9 +33,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
   h3 { line-height: 1; }
 
 	.page-header {
-		position: relative;
-		background: #F9F9F9;
-		@include rem('padding-bottom', $global-padding);
 
 		&.active { @include rem('padding-bottom', $global-margin); }
 

@@ -1,12 +1,11 @@
 .updatable(ng-class='{updating: table.loader.loading}')
   .spinner.spinner-lg(ng-show='table.loader.loading')
-  table.table.nomar.ng-table.maintenance-table
+  table.ng-table.maintenance-table
     thead
       tr
         th.text-center(width="6%", ng-show='edit')
           input.select-all(ng-model="checkboxes.checked", type="checkbox", ng-indeterminate="checkboxes.indeterminate", ng-change='checkboxChecked()')
-        th.sortable(ng-class="table.sorter.getSortClass('display')", ng-click="table.sorter.sort('display')")
-          .sort-indicator(translate) System
+        th.sortable(ng-class="table.sorter.getSortClass('display')", ng-click="table.sorter.sort('display')", translate) System
         th.sortable(width="20%", ng-class="table.sorter.getSortClass('system.last_check_in')", ng-click="table.sorter.sort('system.last_check_in')")
           .sort-indicator(translate) Last check in
         th.sortable.text-center(width="12%", ng-class="table.sorter.getSortClass('done')", ng-click="table.sorter.sort('done')")

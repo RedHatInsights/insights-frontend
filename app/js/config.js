@@ -1,3 +1,4 @@
+/*global require, module, process*/
 'use strict';
 
 var AuthInterceptor = require('./interceptors/auth');
@@ -76,7 +77,6 @@ function Config(
     paginationConfig.maxSize = 5;
     paginationConfig.previousText = '«';
     paginationConfig.nextText = '»';
-
 }
 
 module.exports = Config;

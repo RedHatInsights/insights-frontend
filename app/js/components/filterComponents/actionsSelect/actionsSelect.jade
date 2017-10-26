@@ -1,13 +1,14 @@
-.actions-select
-  label(translate='translate') System Health
-  .dropdown
-    button.btn.btn-default.dropdown-toggle(
+.filter-group.filter-system-health
+  label(translate) System Health
+  md-menu(md-offset="0 38")
+    button.button-filter(
       type='button',
       data-toggle='dropdown',
       aria-haspopup='true',
-      aria-expanded='false')
-      span {{selected.label}}
+      aria-expanded='false',
+      ng-click='$mdMenu.open($event)')
+      span.text.active(ng-model='label', translate) {{selected.label}}
       span.caret
-    ul.dropdown-menu
-      li(ng-repeat='option in options')
-        a(ng-click='select(option)') {{option.label}}
+    md-menu-content
+      md-menu-item(ng-repeat='option in options')
+        a(ui-sref='#', ng-click='select(option)', translate) {{option.label}}

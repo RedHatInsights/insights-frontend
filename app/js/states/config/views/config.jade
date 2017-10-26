@@ -1,21 +1,20 @@
 page-header(title="Configuration", icon="fa-file-text")
-
 .content-wrap
-  .rha-notifications
-  tabset.config-tabs
-    tab(heading="{{'Hidden Rules'|translate}}", active="current.hidden", ng-click="tabClick('hidden')")
-      config-hidden(ng-if="current.hidden")
-    tab(heading="{{'Messaging'|translate}}", active="current.messaging", ng-click="tabClick('messaging')")
-      config-messaging(ng-if="current.messaging")
-    tab(heading="{{'Settings'|translate}}", active="current.settings", ng-click="tabClick('settings')")
-      config-settings(ng-if="current.settings")
-    tab(heading="{{'Webhooks'|translate}}", active="current.webhooks", ng-click="tabClick('webhooks')", ng-if='isBeta')
-      config-webhooks(ng-if="current.webhooks")
-
-    // rh only
-    tab(heading='Permissions', active="current.permissions",
-      ng-if='user.is_internal && perms.has(user, perms.PERMS.SU)',
-      ng-click="tabClick('permissions')")
-      config-permissions(ng-if="current.permissions")
-    tab(heading='Dev', active="current.dev", ng-click="tabClick('dev')", ng-if='user.is_internal || user.demo_mode')
-      config-dev(ng-if="current.dev")
+  md-content
+    md-tabs.md-dynamic-height.md-border-bottom(md-swipe-content="true")
+      md-tab(label="{{'Messaging'|translate}}")
+        md-content.md-padding
+          config-messaging
+      md-tab(label="{{'Settings'|translate}}")
+        md-content.md-padding
+          config-settings
+      //Red Hat Only
+      md-tab(label="{{'Webhooks'|translate}}", ng-if='isBeta')
+        md-content.md-padding
+          config-webhooks
+      md-tab(label='Permissions', ng-if='user.is_internal && perms.has(user, perms.PERMS.SU)')
+        md-content.md-padding
+          config-permissions
+      md-tab(label="{{'Dev'|translate}}", ng-if='user.is_internal || user.demo_mode')
+        md-content.md-padding
+          config-dev

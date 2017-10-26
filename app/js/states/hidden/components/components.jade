@@ -3,7 +3,7 @@
     h1.page-title Material Demo
   .content-wrap#popupcontainer(ng-cloak)
     md-content
-      md-tabs(md-dynamic-height='', md-border-bottom='')
+      md-tabs(md-dynamic-height='', md-border-bottom='', md-swipe-content="true")
         md-tab(label='Jade/HTML Only')
           md-content.md-padding
             h1.md-display-2 Jade/HTML Only
@@ -84,7 +84,7 @@
                   h4 Checkbox
               .row
                 .col-md-4
-                  md-checkbox(aria-label='Checkbox 1')
+                  md-checkbox.md-accent.md-hue-1(aria-label='Checkbox 1')
                     | Checkbox 1: Default
                 .col-md-8
                   pre.code-block.code-terminal
@@ -198,6 +198,16 @@
                     .code-type-jade
                     code.code
                       | md-progress-circular(md-mode="indeterminate")
+
+            md-card.md-padding
+              md-header
+                h3 Add swiping functionality to any tab group
+              .row
+                .col-md-12 
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | md-tabs(md-swipe-content="true")
 
 
         // --- Second Tab

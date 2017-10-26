@@ -1,13 +1,20 @@
-.main-content {
-  color: #646464;
-  position: relative;
-	padding-bottom: 0;
-  @include rem('padding-top', 60px);
+$min_width: 320px;
+$max_width: 1800px;
+$min_font: 14px;
+$max_font: 16px;
+
+html {
+  @include fluid-type($min_width, $max_width, $min_font, $max_font);
 }
 
-.main-content.insights-main-content {
-	@include rem('padding-bottom', 70px);
-	@include rem('margin-bottom', 40px);
+button, 
+select, 
+html, 
+textarea, 
+input, 
+.error-info textarea.changed.ng-dirty, 
+.error-info select.changed.ng-dirty {
+  font-family: "overpass";
 }
 
 .page {
@@ -43,24 +50,13 @@ input.rounded {
   }
 }
 
-body, .insights body {
-	background: url("../static/images/bg_body.jpg") no-repeat #4a5664;
-	background-size: cover;
-	background-attachment: fixed;
-  height: initial;
-}
-
 .band.band-wispy {
 	background: url("../static/images/bg1.jpg");
 	background-size: cover;
 }
 
-.insights body {
-    @include font-size(14px, 19px);
-}
-
 .chart-container p {
-    @include font-size(16px);
+    @include font-size(14px);
 }
 
 .success {
@@ -69,10 +65,6 @@ body, .insights body {
 
 .fail {
   color: red;
-}
-
-.breadcrumbs {
-  display: none;
 }
 
 .portal-content-area, .page-wrap .main-content {
@@ -105,10 +97,10 @@ body, .insights body {
 .content-wrap, .content-wrapper {
   //padding-left: 15px;
   //padding-right: 15px;
-  @include rem('padding', $global-padding $global-padding 0);
+  @include rem('padding', 0 $global-margin $global-margin);
 
   @include media-query (sm) {
-    @include rem('padding', $global-margin $global-margin 0);
+    @include rem('padding', 0 $global-margin $global-margin);
   }
 }
 

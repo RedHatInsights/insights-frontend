@@ -1,11 +1,11 @@
 .actionbar {
 	background-color: #f9f9f9;
-	position: absolute;
-	bottom: 0;
-	left: 0;
+	// position: absolute;
+	// bottom: 0;
+	// left: 0;
 	width: 100%;
 	font-size: 13px;
-	@include rem('padding', 10px);
+	@include rem('padding', $global-padding $global-margin);
 	border-top: 1px solid $gray;
 	text-align: right;
 

@@ -1,35 +1,3 @@
-table {
-    border: 1px solid #ddd;
-
-    thead {
-        th {
-            border-left: 1px solid #ddd;
-            border-bottom-width: 1px !important;
-            text-align: left;
-
-            &:first-child { border-left: none; }
-        }
-    }
-
-
-    tbody {
-        border: 1px solid #ddd;
-        border-top: none;
-
-        tr {
-            transition: .2s;
-            &:nth-child(odd) {
-                background: #f2f5f7;
-            }
-        }
-
-        td {
-            line-height: 1.6;
-            &.break { word-break: break-word; }
-        }
-    }
-}
-
 .legend table {
     border: none;
 
@@ -42,39 +10,4 @@ table {
         border: 1px solid #ddd;
         border-bottom: none;
     }
-}
-
-.tbody-scrollable {
-    max-height: 420px;
-    overflow: auto;
-    border-bottom: 5px solid #ddd;
-}
-
-th, 
-td {
-  &.nowrap {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  &.long-name {
-    max-width: 120px;
-
-    @include media-query(sm) {
-        max-width: 100px;
-    }
-
-    @include media-query(md) {
-        max-width: 220px;
-    }
-
-    @include media-query(lg) {
-      max-width: 380px;
-    }
-  }
-}
-
-td.vertical-align, td.align-vertical {
-  vertical-align: middle;
 }

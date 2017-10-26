@@ -2,69 +2,78 @@
   page-header(title="Actions", icon="fa-file-text")
   new-actions-graph
 
-  .content-wrap(ng-if='loading')
-    .row.ng-animate-enabled
-      .spinner.spinner-lg
+  .text-center(ng-if='loading')
+    .spinner.spinner-lg
 
-  .content-wrap(ng-if='!loading')
-    section.metrics
-      .rha-notifications
-      .row
-        .col-md-6.chart-col.clearfix
-          .chart-container.text-center
-            .donut-container
-              .donut-hole
-                .content
-                  .num {{stats.rules.total}}
-                  .text(translate) Issues
-              .rha-telemetry-donut(stats='stats')
-          .row
-            .col-lg-10.col-lg-offset-1
-              table.legend
+  .rha-notifications
+  section.content.actions-overview(ng-if='!loading')
+    .widget.actions-pie-chart
+      .chart-container.text-center
+        .donut-container
+          .donut-hole
+            .content
+              .num {{stats.rules.total}}
+              .text(translate) Issues
+          .rha-telemetry-donut(stats='stats')
+        table.legend
+          tbody
+            tr
+              td(ng-repeat='category in categoryTopics.slice(0,(categoryTopics.length > 3 ? 2 : categoryTopics.length))')
+                a(ng-class='category.id', ui-sref="app.topic({id: category.id, product: getSelectedProduct()})")
+                  i.fa.fa-square.inline-right(ng-class="category.id + '-color'", aria-hidden="true")
+                  span.desc(translate) {{category.id | titlecase}}
+                  span.count &nbsp;({{category.count}})
+            tr(ng-if='categoryTopics.length > 3')
+              td(ng-repeat='category in categoryTopics.slice(2,categoryTopics.length)')
+                a(ng-class='category.id', ui-sref="app.topic({id: category.id, product: getSelectedProduct()})")
+                  i.fa.fa-square.inline-right(ng-class="category.id + '-color'", aria-hidden="true")
+                  span.desc(translate) {{category.id | titlecase}}
+                  span.count &nbsp;({{category.count}})
 
-                  tbody
-                  tr
-                    td(ng-repeat='category in categoryTopics.slice(0,(categoryTopics.length > 3 ? 2 : categoryTopics.length))')
-                      a(ng-class='category.id', ui-sref="app.topic({id: category.id, product: getSelectedProduct()})")
-                        i.fa.fa-square.inline-right(ng-class="category.id + '-color'", aria-hidden="true")
-                        span.desc(translate) {{category.id | titlecase}}
-                        span.count &nbsp;({{category.count}})
-                  tr(ng-if='categoryTopics.length > 3')
-                    td(ng-repeat='category in categoryTopics.slice(2,categoryTopics.length)')
-                      a(ng-class='category.id', ui-sref="app.topic({id: category.id, product: getSelectedProduct()})")
-                        i.fa.fa-square.inline-right(ng-class="category.id + '-color'", aria-hidden="true")
-                        span.desc(translate) {{category.id | titlecase}}
-                        span.count &nbsp;({{category.count}})
-        .col-md-6
-          card.widget.widgetIncidentSummary(id="widgetIncidentSummary", ng-if="isBeta")
-            card-header.gray
-              h4(translate) Incident summary
-            card-content
-              incident-summary.incident-summary(incident-count='incidentCount', incident-system-count='incidentSystemCount', rule-hits='stats.rules.total', ng-show='incidentCount !== undefined')
-              .spinner(ng-show='incidentCount === undefined')
-          card
-            card-header.gray
-              h4(translate) Risk summary
-            card-content
-              severity-summary(stats='stats')
+    card.widget.actions-incident-summary(id="widgetIncidentSummary", ng-if="isBeta")
+      card-header.gray
+        .card-header-title(translate) Incident summary
+      card-content
+        incident-summary.incident-summary(incident-count='incidentCount', incident-system-count='incidentSystemCount', rule-hits='stats.rules.total')
+    
+    card.widget.actions-risk-summary
+      card-header.gray
+        .md-card-header-title(translate) Risk summary
+      card-content
+        severity-summary(stats='stats')
 
-    section.gray.full-width
-      span.pull-right(ng-show='isContentManager')
-        | [
-        a(ui-sref='app.admin-topic') edit
-        | ]
-      h2.section-title.section-title-red(translate) Featured Topics
-      .flexgrid.equalheights.other-topics
-        .row(ng-if='featuredTopics.length')
-          other-topic(ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id", topic='topic')
-        .row(ng-if='!show.extraTopics && extraTopics.length')
-          .text-center.extra-topics
-            button.btn.btn-sm.btn-default(ng-click='show.extraTopics = true', translate) More topics
-        .row(ng-if='!featuredTopics.length')
-          .col-xs-12.text-center
-            strong No topics currently available.&nbsp;
-              a(ui-sref='info.getting-started.direct', translate) Register more systems.
-    section.full-width(ng-if='show.extraTopics')
-      .flexgrid.equalheights.other-topics
-        .row
-          other-topic(ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id", topic='topic')
+  section.section-featured-topics.content.content-gray
+    h2.section-title.section-title-red(translate) Featured Topics
+    .flex.topics(ng-if='featuredTopics.length')
+      card(md-flex-33 ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id" topic='topic')
+        card-header
+          .card-header-title
+            h4 {{topic.title}}
+          .card-header-supporting-info
+            span.count(translate, translate-n='topic.affectedSystemCount', translate-plural='{{$count}} Systems') 1 System
+        card-content(ng-bind-html='topic.summary_html ? topic.summary_html : Xtopic.content_html | trust_html')
+        card-footer.text-right-sm
+          strong
+            a.pointer(translate, ui-sref="app.topic({id: topic.slug ? topic.slug : topic.id, product: getSelectedProduct()})") View More
+
+      //- other-topic
+
+      
+    .text-center.extra-topics(ng-if='!show.extraTopics && extraTopics.length')
+      md-button(ng-click='show.extraTopics = true', translate) More topics
+
+    strong.text-center(ng-if='!featuredTopics.length') No topics currently available.&nbsp;
+      a(ui-sref='info.getting-started.direct', translate) Register more systems.
+    
+    h2.section-title.section-title-red(ng-if='show.extraTopics' translate) More Featured Topics
+    .flex.topics(ng-if='show.extraTopics')
+      card(md-flex-33 ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id" topic='topic')
+        card-header
+          .card-header-title
+            h4 {{topic.title}}
+          .card-header-supporting-info
+            span.count(translate, translate-n='topic.affectedSystemCount', translate-plural='{{$count}} Systems') 1 System
+        card-content(ng-bind-html='topic.summary_html ? topic.summary_html : Xtopic.content_html | trust_html')
+        card-footer.text-right-sm
+          strong
+            a.pointer(translate, ui-sref="app.topic({id: topic.slug ? topic.slug : topic.id, product: getSelectedProduct()})") View More

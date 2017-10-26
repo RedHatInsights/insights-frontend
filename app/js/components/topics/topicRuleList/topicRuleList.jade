@@ -1,78 +1,69 @@
 .topic-rule-list
-  .cards-view
-    .row(ng-show='getListType() === listTypes.card && plugins.length > 0')
-      .col-sm-12
-        .card-list
-          .card-list-item(ng-repeat="plugin in plugins | orderBy: sorter.predicate : sorter.reverse track by plugin.plugin_id")
-            rule-group-card(ng-if="plugin.type === 'group'", plugin='plugin')
-            card(ng-if="plugin.type === 'rule'", ng-class='{faded: plugin.acked}')
-              card-header
-                i.fa.category-icon.inline-right(ng-class="plugin.rule.category.toLowerCase()")
-                span.title {{ ::plugin.rule.category }} #{'>'} {{ ::plugin.rule.description }}
-                .count(translate, translate-n='plugin.hitCount', translate-plural="{{$count}} Systems") 1 System
-                .pull-right
-                  span.label.label-default.inline-right.rule-inactive(ng-if='plugin.acked', translate) INACTIVE
-                  incident-icon.inline-right(rule-id='plugin.rule.rule_id') &nbsp;
-                  ansible-icon(value='plugin.rule.ansible', ng-if='config.isPlannerEnabled')
-              card-content
-                .gray(ng-bind-html='::plugin.rule.summary_html', target-blank='')
-              .footer
-                .row.severity-wrapper
-                  .col-sm-6
-                    all-severity-icons(rule='plugin.rule')
-                  .col-sm-6.text-right
-                    strong(ng-hide='plugin.rule.acked')
-                      a(translate,
-                        ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
-                        ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
+  .cards-view(ng-show='getListType() === listTypes.card && plugins.length > 0')
+    .card-list
+      .card-list-item(ng-repeat="plugin in plugins | orderBy: sorter.predicate : sorter.reverse track by plugin.plugin_id")
+        rule-group-card(ng-if="plugin.type === 'group'", plugin='plugin')
+        card(ng-if="plugin.type === 'rule'", ng-class='{faded: plugin.acked}')
+          card-header
+            .card-header-title
+              i.fa.category-icon.inline-right(ng-class="plugin.rule.category.toLowerCase()")
+              span {{ ::plugin.rule.category }} #{'>'} {{ ::plugin.rule.description }}
+              .count(translate, translate-n='plugin.hitCount', translate-plural="{{$count}} Systems") 1 System
+            .card-header-supporting-info
+              span.label.rule-inactive(ng-if='plugin.acked', translate) INACTIVE
+              incident-icon.inline-right(rule-id='plugin.rule.rule_id') &nbsp;
+              ansible-icon(value='plugin.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
+          card-content
+            .gray(ng-bind-html='::plugin.rule.summary_html', target-blank='')
+          card-footer
+            .card-footer-title
+              all-severity-icons.inline(rule='plugin.rule')
+            .card-footer-cta
+              strong(ng-hide='plugin.rule.acked')
+                a(translate,
+                ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
+                ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
 
-  .table-view
-    .row(ng-show='getListType() === listTypes.table && plugins.length > 0')
-      .col-sm-12
-        table#rha-rules-table.table.ng-table.break-word
-          thead
-            tr
-              th.sortable(ng-class="sorter.getSortClass('description')", ng-click="sorter.sort('description')")
-                .sort-indicator(translate) Rule
+  .table-view.table-overflow(ng-show='getListType() === listTypes.table && plugins.length > 0')
+    table#rha-rules-table
+      thead
+        tr
+          th.sort-asc.sortable(ng-class="sorter.getSortClass('description')", ng-click="sorter.sort('description')", translate) Rule
 
-              // START UBER-SEV
-              th.text-center.sortable(ng-class="sorter.getSortClass('rec_likelihood')", ng-click="sorter.sort('rec_likelihood')")
-                .sort-indicator(translate) Likelihood
-              th.text-center.sortable(ng-class="sorter.getSortClass('rec_impact')", ng-click="sorter.sort('rec_impact')")
-                .sort-indicator(translate) Impact
-              th.text-center.sortable(ng-class="sorter.getSortClass('severityNum')", ng-click="sorter.sort('severityNum')")
-                .sort-indicator(translate) Total Risk
-              // END UBER-SEV
+          // START UBER-SEV
+          th.fit-content.text-center.sortable(ng-class="sorter.getSortClass('rec_likelihood')", ng-click="sorter.sort('rec_likelihood')", translate) Likelihood
+          th.fit-content.text-center.sortable(ng-class="sorter.getSortClass('rec_impact')", ng-click="sorter.sort('rec_impact')", translate) Impact
+          th.fit-content.text-center.sortable(ng-class="sorter.getSortClass('severityNum')", ng-click="sorter.sort('severityNum')", translate) Total Risk
+          // END UBER-SEV
 
-              th.text-center.sortable(ng-class="sorter.getSortClass('hitCount')", ng-click="sorter.sort('hitCount')")
-                .sort-indicator(translate) Systems
-              th.text-center.sortable(
-                ng-if='config.isPlannerEnabled',
-                ng-class="sorter.getSortClass('ansible')",
-                ng-click="sorter.sort('ansible')")
-                .sort-indicator(translate) Ansible
-          tbody
-            tr.legend-item(ng-repeat="rule in filteredRules | filter:filterZero | orderBy: sorter.predicate : sorter.reverse track by rule.rule_id", ng-class="{acked: rule.acked}")
-              td(ng-click='!rule.acked && viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)', ng-class="{'icon-inline' : checkIncident(rule.rule_id)}")
-                .rule-description(ng-if='rule.acked') {{rule.description}}
-                span.label.label-default.inline-left.rule-inactive(ng-if='rule.acked', translate) INACTIVE
+          th.fit-content.text-center.sortable(ng-class="sorter.getSortClass('hitCount')", ng-click="sorter.sort('hitCount')", translate)  Systems
+          th.fit-content.text-center.sortable(
+            ng-if='config.isPlannerEnabled',
+            ng-class="sorter.getSortClass('ansible')",
+            ng-click="sorter.sort('ansible')", translate) Ansible
+      tbody
+        tr.legend-item(ng-repeat="rule in filteredRules | filter:filterZero | orderBy: sorter.predicate : sorter.reverse track by rule.rule_id", ng-class="{acked: rule.acked}")
+          td(ng-click='!rule.acked && viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
+            .icon-inline-right
+              incident-icon(rule-id='rule.rule_id')
+            .rule-description(ng-if='rule.acked')
+              | {{rule.description}}
+              span.label.label-default.inline-left.rule-inactive(translate) INACTIVE
 
-                a(ng-if='!rule.acked') {{rule.description}}
+            a(ng-class="{'icon-inline-right' : checkIncident(rule.rule_id)}", ng-if='!rule.acked') {{rule.description}}
 
-                incident-icon(rule-id='rule.rule_id')
+          // START UBER-SEV
+          td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
+            severity-icon(severity='rule.rec_likelihood', type='likelihood', label='')
+          td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
+            severity-icon(severity='rule.rec_impact', type='impact', label='')
+          td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
+            severity-icon(severity='rule.severity', type='severity', label='')
+          // END UBER-SEV
 
-              // START UBER-SEV
-              td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
-                severity-icon(severity='rule.rec_likelihood', type='likelihood', label='')
-              td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
-                severity-icon(severity='rule.rec_impact', type='impact', label='')
-              td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
-                severity-icon(severity='rule.severity', type='severity', label='')
-              // END UBER-SEV
-
-              td.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)') {{ rule.hitCount }}
-              td.text-center.align-vertical(ng-if='config.isPlannerEnabled')
-                ansible-icon(value='rule.ansible')
+          td.text-center(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)') {{ rule.hitCount }}
+          td.text-center(ng-if='config.isPlannerEnabled')
+            ansible-icon(value='rule.ansible', hide-label="true")
 
   .row.row-short(ng-show='plugins.length === 0')
     .col-xs-12.text-center
@@ -80,7 +71,8 @@
 
   .row.row-short(ng-show='!showRulesWithNoHits && hiddenCount')
     .col-sm-12.text-center
-      button.btn.btn-sm.btn-default(ng-click='showAll()', translate) Show rules without actions ({{hiddenCount}} more)
+      //button.btn.btn-sm.btn-default
+      md-button(ng-click='showAll()', translate) Show rules without actions ({{hiddenCount}} more)
 
   .row.row-short(ng-show='!showCards')
     .col-xs-12
