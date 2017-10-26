@@ -25,7 +25,6 @@ function SystemModalCtrl(
         $modalInstance.dismiss('close');
     }
 
-    AnalyticsService.triggerEvent('InsightsCompletion');
     $scope.system = system;
     $scope.rule = rule;
     $scope.loading = {

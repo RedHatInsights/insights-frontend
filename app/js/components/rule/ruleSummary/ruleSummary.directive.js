@@ -32,7 +32,7 @@ function ruleSummary() {
     return {
         controller: RuleSummaryCtrl,
         templateUrl: 'js/components/rule/ruleSummary/ruleSummary.html',
-        restrict: 'EC',
+        restrict: 'E',
         scope: {
             report: '=',
             rule: '=',

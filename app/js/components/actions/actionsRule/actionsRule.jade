@@ -1,130 +1,123 @@
 .actions-rule
-  page-header(title="Actions", icon="fa-file-text")
-  actions-rule-filters
+  actions-breadcrumbs(ng-hide='loading')
 
-  .content-wrap(ng-hide='loading')
-    actions-breadcrumbs.actions-breadcrumbs(ng-hide='loading')
-
-    section.actions-rule-details.gray
-      h4(ng-if='isIncident(ruleDetails.rule_id) && isBeta')
-        .icon-inline
-          incident-icon(rule-id='ruleDetails.rule_id') &nbsp;
-          span.red(translate) This issue is an incident, it has already occurred.
-      h2
-        .pull-right(ng-if='config.isPlannerEnabled')
-          ansible-icon(value='ruleDetails.ansible')
-        | {{ruleDetails.description}}
-      p(ng-bind-html='ruleDetails.generic_html | trust_html')
+  section.rule-detail-header
+    page-header(icon="fa-file-text")
+      .page-title
+        h1 {{ruleDetails.description}}
+    .rule-detail-ansible-support
+      ansible-icon(value='ruleDetails.ansible')
+    .rule-detail-risk-list
       all-severity-icons(rule='ruleDetails', ng-if='!loading')
       risk-of-change(change-risk='ruleDetails.resolution_risk')
+    .rule-detail-summary(ng-hide='loading')
+      h4.icon-inline(ng-if='isIncident(ruleDetails.rule_id)')        
+        incident-icon(rule-id='ruleDetails.rule_id') &nbsp;
+        span.red(translate) This issue is an incident, it has already occurred.
+          
+      article(ng-bind-html='ruleDetails.generic_html | trust_html')
 
-    section.table-utilities
-      .row
-        .col-xs-7.col-sm-5
-          search-box(on-search='search(model)', placeholder="{{'Find a system' | translate}}")
+  table-filters
+    search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
+    check-in-select
 
+  section.content
     // Show Create Playbook, Add to Plan if at least one system has been selected
-    .row.row-short
-      .col-xs-4.col-sm-2
-        .dropdown
-          button.btn.btn-default.dropdown-toggle(
-            data-toggle='dropdown',
-            aria-haspopup='true',
-            aria-expanded='false',
-            translate,
-            ng-disabled='!checkboxes.totalChecked || !config.isPlannerEnabled') Actions
-            span.caret
-          ul.dropdown-menu
-            li(ng-if='config.isPlannerEnabled',)
-              a(ng-click='addToPlan(false)', translate) Create a new Plan/Playbook
-                ansible-icon.inline-left(
-                  value='true',
-                  show-tooltip='false')
-            li(ng-if='config.isPlannerEnabled',)
-              a(ng-click='addToPlan(true)',
-                ng-disabled='!plans.future.length && !plans.unscheduled.length',
-                translate) Add to existing Plan/Playbook
-                ansible-icon.inline-left(
-                  value='plans.future.length || plans.unscheduled.length',
-                  show-tooltip='false')
-      .col-xs-8.col-sm-8.text-center
-        span(ng-if='!loadingSystems')
-          h3.system-count(translate, translate-n='{{totalRuleSystems}}', translate-plural='{{$count}} Impacted Systems', ng-if='ruleDetails.type !== "osp"') 1 Impacted System
-          h3.system-count(translate, translate-n='{{totalRuleSystems}}', translate-plural='{{$count}} Impacted Deployments', ng-if='ruleDetails.type === "osp"') 1 Impacted Deployment
-          small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{numberOfSelected()}} Selected
-            span(ng-show='allSelected && pager.perPage < totalRuleSystems') .
-              a(ng-show='!reallyAllSelected', ng-click='reallySelectAll()') &nbsp;Select All Systems.
-              a(ng-show='reallyAllSelected', ng-click='deselectAll()') &nbsp;Deselect All Systems.
-            span )
-      .col-xs-4.col-sm-2.hidden-xs.text-right
-        list-type(ng-hide='hideListSwitch')
+    .table-header
+      .dropdown
+        md-button.button-dropdown(
+          data-toggle='dropdown',
+          aria-haspopup='true',
+          aria-expanded='false',
+          aria-label="checkbox",
+          translate,
+          ng-disabled='!checkboxes.totalChecked || !config.isPlannerEnabled') Actions
+          span.caret
+        .dropdown-menu
+          md-button.full-width.md-no-margin(ng-if='config.isPlannerEnabled', ng-click='addToPlan(false)', translate) Create a new Plan/Playbook
+            ansible-icon.inline-left(
+                value='true',
+                show-tooltip='false')
+          md-button.full-width.md-no-margin(ng-if='config.isPlannerEnabled', ng-click='addToPlan(true)',
+            ng-disabled='!plans.future.length && !plans.unscheduled.length',
+            translate) Add to existing Plan/Playbook
+            ansible-icon.inline-left(
+              value='plans.future.length || plans.unscheduled.length',
+              show-tooltip='false')
+
+      .table-header-title
+        h3.system-count(translate, translate-n='{{totalRuleSystems}}', translate-plural='{{$count}} Impacted Systems', ng-if='ruleDetails.type !== "osp"') 1 Impacted System
+        h3.system-count(translate, translate-n='{{totalRuleSystems}}', translate-plural='{{$count}} Impacted Deployments', ng-if='ruleDetails.type === "osp"') 1 Impacted Deployment
+        small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{numberOfSelected()}} Selected
+          span(ng-show='allSelected && pager.perPage < totalRuleSystems') .
+            a(ng-show='!reallyAllSelected', ng-click='reallySelectAll()') &nbsp;Select All Systems.
+            a(ng-show='reallyAllSelected', ng-click='deselectAll()') &nbsp;Deselect All Systems.
+          span )
+      list-type(ng-hide='hideListSwitch')
 
     .card-table-header(ng-show='getListType() === listTypes.card')
-      .row
-        .col-sm-4
-          input.action-checkbox(
-          tooltip='Select All',
-          type='checkbox',
-          ng-indeterminate='checkboxes.indeterminate',
-          ng-model='checkboxes.checked',
-          ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems);')
-          label(translate, ng-click="sort('system_type_id')") &nbsp; Type
-        .col-sm-4
-          strong(translate, ng-click="sort('toString')") Name &nbsp;
-        .col-sm-4.text-right
-          strong(translate, ng-click="sort('report_count')") Action Count
+      md-checkbox.md-accent.md-hue-1(
+        tooltip="{{'Select All' | translate}}",
+        tooltip-trigger='mouseenter',
+        tooltip-append-to-body='true',
+        tooltip-placement='top',
+        type="checkbox",
+        md-indeterminate="checkboxes.indeterminate",
+        ng-model='checkboxes.checked',
+        ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
+      label.type(translate, ng-click="sort('system_type_id')") &nbsp; Type
+      strong.hostname(translate, ng-click="sort('toString')") Name &nbsp;
+      strong.action-count(translate, ng-click="sort('report_count')") Action Count
 
-    .row.row-short(ng-show='getListType() === listTypes.card && !loadingSystems')
-      .col-sm-12
-        system-card(ng-repeat='system in ruleSystems',
-          system='system',
-          rule='ruleDetails',
-          checkboxes='checkboxes')
+    system-card(ng-repeat='system in ruleSystems',
+      system='system',
+      rule='ruleDetails',
+      checkboxes='checkboxes',
+      ng-show='getListType() === listTypes.card && !loadingSystems')
 
-    .row.row-short(ng-show='getListType() === listTypes.table')
-        .col-sm-12
-          table.table.nomar.ng-table.table-fixed
-            thead
-              tr
-                th(style='width: 30px')
-                  input.action-checkbox(
-                    tooltip='Select All',
-                    type="checkbox",
-                    ng-indeterminate="checkboxes.indeterminate",
-                    ng-model='checkboxes.checked',
-                    ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
-                th.sortable(style='width: 27%;', ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')")
-                  .sort-indicator(translate) Type
-                th.sortable(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')")
-                  .sort-indicator(translate) Name
-                th.sortable(style="width: 27%;", ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')")
-                  .sort-indicator(translate) Reported
-            tbody(ng-show='!loadingSystems')
-              tr(ng-click='checkboxes.rowClick($event, system.system_id)',
-                 ng-mousedown='checkboxes.rowClick($event, system.system_id)',
-                 ng-class="{'stale': !system.isCheckingIn}",
-                 ng-repeat='system in ruleSystems',
-                 data-id="{{system.system_id}}")
-                td(style='width: 30px')
-                  input.selectme(
-                    type='checkbox',
-                    ng-model='checkboxes.items[system.system_id]',
-                    ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();',
-                  )
-                td(style='width: 27%;')
-                  type-icon(type-id='system.system_type_id', include-text='true')
-                td.break
-                  a(ng-click='showSystem(system)') {{ system.toString }}
-                td(style='width: 27%;') {{ ::system.last_check_in | timeAgo}}
+    table(ng-show='getListType() === listTypes.table')
+      thead
+        tr
+          th.min
+            md-checkbox.md-accent.md-hue-1.md-checkbox-list(
+              tooltip='Select All',
+              type="checkbox",
+              aria-label="checkbox",
+              md-indeterminate="checkboxes.indeterminate",
+              ng-model='checkboxes.checked',
+              ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
+          th.min.sortable(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')", translate) Type
+          th.sortable(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')", translate) Name
+          th.min.sortable(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')", translate) Reported
 
-    .row.row-short(ng-hide='loading || loadingSystems')
-      pagination.pull-right.pagination-blue(
-        ng-if="totalRuleSystems > pager.perPage",
-        total-items="totalRuleSystems",
-        ng-model="pager.currentPage",
-        items-per-page="pager.perPage",
-        ng-change="paginate()")
+      tbody
+        tr(ng-click='checkboxes.rowClick($event, system.system_id)',
+           ng-mousedown='checkboxes.rowClick($event, system.system_id)',
+           ng-class="{'stale': !system.isCheckingIn}",
+           ng-repeat='system in ruleSystems',
+           data-id="{{system.system_id}}")
+          td.min
+            md-checkbox.md-accent.md-hue-1.md-checkbox-list(
+              type='checkbox',
+              aria-label="checkbox",
+              ng-model='checkboxes.items[system.system_id]',
+              ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();',
+            )
+          td.fit-content
+            type-icon(type-id='system.system_type_id', include-text='true')
+          td.break
+            a(ng-click='showSystem(system)') {{ system.toString }}
+          td.fit-content {{ ::system.last_check_in | timeAgo}}
 
-  .margin-top(ng-show='loading || loadingSystems')
+    pagination.pull-right.pagination-blue(
+      ng-hide='loading || loadingSystems',
+      ng-if="totalRuleSystems > pager.perPage",
+      total-items="totalRuleSystems",
+      ng-model="pager.currentPage",
+      items-per-page="pager.perPage",
+      ng-change="paginate()")
+
+  .margin-top(ng-show='loading')
     .text-center
       .spinner.spinner-lg
+        

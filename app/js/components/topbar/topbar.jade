@@ -1,33 +1,40 @@
-.top-bar
-  feedback-button.btn-feedback
-  .row
-    .col-sm-7.col-md-8
-      // .global-filters.disabled
-        .disabled class added if the filters are not applicable to view
-      .global-filters(ng-class='{disabled: disabled}')
-        group-select(disabled='disabled', ng-if='isGroupsEnabled')
-    .col-sm-5.col-md-4.text-right-sm
-      menu.notifications
-        bullhorn(icon='fa-bullhorn', type='announcements')
-        alerts(icon='fa-bell', type='alerts')
-      span.sep
-      span.dropdown.help(dropdown='', on-toggle='toggled(open)')
-        a.dropdown-toggle(href='', dropdown-toggle='')
-          strong.small(translate) Help
-          i.inline-left.fa.fa-question-circle
-        ul.dropdown-menu
-          li
-            a(href='{{gettingStartedLink}}', target='_blank', translate) Getting Started
-          li
-            a(href='https://access.redhat.com/documentation/en/red-hat-insights/', target='_blank', translate) Product Documentation
-          li
-            a(ui-sref='info.info', translate) More Info
-          li
-            a(ui-sref='info.security', translate) Security
-            // if this is the Portal hosted Insights... link to the Portal Browser Support Policy page
-          li
-            a(href='/help/browsers', target='_self', translate, ng-if="isPortal") Browser Support
-          li
-            a(href='/r/insights/docs/', translate) Insights API Documentation
-          li
-            demo-account-switcher
+.cell.insights-logo
+  button.toggle-fullscreen(ng-click='sidenavCollapsed = !sidenavCollapsed')
+    md-icon(md-font-icon="fa fa-indent")
+  
+  md-button(ng-click="toggleLeft()", 
+    class="md-primary", 
+    hide-gt-xs)
+    md-icon(md-font-icon="fa fa-navicon")
+
+  a.home-link(ui-sref='app.overview')
+    span.hidden(translate) Red Hat Insights
+    md-icon(md-svg-src="./static/images/l_insights.svg" aria-label="Red Hat Insights ")
+
+.cell.global-filters(ng-class='{disabled: disabled}')
+  group-select(disabled='disabled')
+
+.cell.topbar-utilities
+  menu.notifications
+    bullhorn(icon='fa-bullhorn', type='announcements')
+    alerts(icon='fa-bell', type='alerts')
+  span.sep
+  md-menu(md-offset="0 34", md-position-mode="target-right target")
+    md-button.button-dropdown#help(ng-click='$mdMenu.open()') 
+      strong(translate) Help
+      span.caret.dropdown-caret(aria-hidden="true")
+    md-menu-content(aria-labelledby="help")
+      md-menu-item
+        a(ui-sref='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', translate) Getting Started
+      md-menu-item
+        a(ui-sref='info.info', translate) More Info
+      md-menu-item
+        a(ui-sref='info.security', translate) Security
+      md-menu-item
+        a(href='/help/browsers', target='_self', translate, ng-if="isPortal") Browser Support
+      md-menu-item
+        a(href='/r/insights/docs/', translate) Insights API Documentation
+      md-menu-item
+        demo-account-switcher
+
+  beta-switch-button

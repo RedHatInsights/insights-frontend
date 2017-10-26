@@ -1,37 +1,7 @@
-.system-modal .content-wrap {
-  padding-left: 0;
-  padding-right: 0;
-}
+.system-overlay {
+  display: grid;
+  grid-gap: $global-margin;
 
-.modal {
-
-    &.active {
-
-        &:before {
-            background: rgba(0, 0, 0, .6);
-            content: '';
-            height: 100%;
-            left: 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1;
-        }
-    }
-}
-
-.system-metadata h3 span{
-    @include rem('font-size', 14px);
-}
-
-.system-modal .modal-content {
-
-  p + p { @include rem('margin-top', $global-padding); }
-
-  .detail-part {
-    @include rem('padding', $global-padding);
-    border: 1px solid $gray-light;
-  }
 }
 
 .system-metadata {
@@ -220,82 +190,360 @@
     .system-info { margin-bottom: $global-margin; }
 }
 
+.system-overlay .card-content {
 
-
-.complete-btn {
-    cursor: pointer;
-    text-decoration: underline;
-
-    &:hover { color: #11baf2; }
+  .rule-reason,
+  .rule-resolution {
+    @include rem('padding', $global-margin);
+    border: 1px solid $gray;
+  }
 }
 
-.detail-part {
-    @include rem('margin-bottom', 22px);
-    position: relative;
-
-    .detail-content { @include font-size(13px, 26px); }
-
-    .icon {
-        border-radius: 50%;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .2);
-        left: -40px;
-        position: absolute;
-        top: 0;
-        width: 40px;
-        height: 40px;
-        text-align: center;
-        background: #11baf2;
-        border: 4px solid #fff;
-
-        @include media-query (sm) {
-            left: -60px;
-        }
-    }
-
-    [class^="fa-"], [class*=" fa-"] {
-        @include font-size(24px);
-        left: 1px;
-        line-height: 1;
-    }
-}
-
-    .reason {
-    background: none;
-    @include font-size(16px, 16px);
-
-        .detail-content { }
-    }
-
-.resolution {
-    @include rem('padding-left', 50px);
-
-    @include media-query (sm) { padding-left: 0; }
-
-    .detail-content {
-        @include font-size(16px, 20px);
-    }
-
-    .icon span {
-        color: #FFF;
-        line-height: 1.3;
-    }
+.system-overlay {
+  .rule-summary + .rule-summary {
+    display: block;
+    @include rem('margin-top', $global-margin);
+  }
 }
 
 
-.system-modal, .insights-modal {
-    .modal-dialog {
-        width: auto;
+// .system-modal .content-wrap {
+//   padding-left: 0;
+//   padding-right: 0;
+// }
 
-        @include media-query (md) {
-            max-width: 970px;
-        }
-        @include media-query (lg) {
-            max-width: 1170px;
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-    }
+// .modal {
+
+//     &.active {
+
+//         &:before {
+//             background: rgba(0, 0, 0, .6);
+//             content: '';
+//             height: 100%;
+//             left: 0;
+//             position: fixed;
+//             top: 0;
+//             width: 100%;
+//             z-index: 1;
+//         }
+//     }
+// }
+
+.system-modal .modal-content {
+  @include rem('padding', $global-margin);
 }
+
+// .system-modal .modal-content {
+//   @include rem('padding', $global-margin);
+
+//   p + p { @include rem('margin-top', $global-padding); }
+
+//   .detail-part {
+//     @include rem('padding', $global-padding);
+//     border: 1px solid $gray-light;
+//   }
+// }
+
+
+// .system-metadata {
+//   .metadata-value {
+//     word-wrap: break-word;
+//   }
+
+//   table {
+//     td {
+//       border: 1px solid #ddd;
+//     }
+//   }
+// }
+
+// .system-overlay, .system-modal .modal-content {
+//     color: #585858;
+// 	@include rem('padding', $global-margin);
+
+//     .small-name-info {
+//         @include font-size(12px);
+//         letter-spacing: 0;
+//         // @include rem('margin-bottom', 22px);
+//     }
+
+//     .system-metadata {
+//       padding-bottom: 20px;
+//     }
+
+//     table {
+//         td {
+//             @include rem('padding', 6px 12px);
+//             border: 1px solid #ddd;
+//             @include font-size(12px);
+//             color: #5b5359;
+//             text-align: right;
+
+//         }
+
+//         td:first-child {
+//             background: #F2F5F8;
+//             color: #5b5359;
+//             text-align: right;
+//             width: 30%;
+
+//             @include media-query(md) {
+//             	width: 40%;
+//             }
+//         }
+
+//         td:nth-child(even) {
+//             background: #fff;
+//             font-weight: 700;
+//         }
+//     }
+
+// 	.detail {
+
+// 		&:nth-child(even) {
+// 			background: #eaeaea;
+// 		}
+
+// 		ul {
+// 			@include rem('padding-left', 18px);
+// 		}
+
+// 		.heading {
+// 			font-size: large;
+// 			padding-bottom: 15px;
+// 			padding-top: 15px;
+
+// 			i { padding-right: .3em; }
+
+// 			strong { padding-left: .3em; }
+// 		}
+
+// 		.center {
+// 			text-align: center;
+// 		}
+//     }
+
+//     .content {
+//         position: relative;
+//         width: 100%;
+//         z-index: 9;
+//     }
+
+//     .row {
+//         clear: both;
+//         margin-bottom: 0;
+//     }
+
+//     .row + .row {
+//         margin-bottom: 0;
+//     }
+
+//     @include media-query (md) {
+//         max-width: 970px;
+//         width: auto;
+//         margin: 0 auto;
+//     }
+
+//     @include media-query (lg) { max-width: 1170px; }
+
+//     .btn.icon-close {
+//         border-radius: 0;
+//         @include rem('padding', 7px);
+//         transition-duration: .2s;
+//         margin-top: 0;
+
+//         &:hover {
+//             background: #c00;
+//             color: #fff;
+//         }
+//     }
+
+//     .modal-actions {
+//         position: absolute;
+//         right: 30px;
+//         top: 25px;
+//         z-index: 10; // make sure that content does not overlap controls
+
+//         .fa {
+//             color: rgba(0,0,0,.4);
+//             @include font-size(24px);
+//             transition: .2s;
+//             line-height: 1;
+
+//             &:hover {
+//                 color: rgba(0,0,0,.8);
+//                 cursor: pointer;
+//             }
+//         }
+//     }
+
+//     .view-all {
+//         display: inline-block;
+//         @include font-size(14px);
+//         letter-spacing: normal;
+//         text-decoration: underline;
+//         color: #9a9a9a;
+//     }
+
+//     .breadcrumb {
+//         border: none;
+//         @include rem('padding', 12px);
+//         @include font-size(18px, 22px);
+//         color: white;
+//         background-color: #4c4c4c;
+//         border: none;
+//         border-radius: 0;
+
+//         @include media-query (sm) { margin-bottom: 12px; }
+//     }
+
+//     .modal-title {
+//         @include rem('margin', 0 0 $global-padding);
+//         text-overflow: ellipsis;
+//         width: 100%;
+//         @include font-size(18px);
+//         font-weight: 700;
+//         letter-spacing: .05em;
+//         line-height: 1;
+// 	    text-align: center;
+
+//         h1, h2, h3 {
+//             @include font-size(24px);
+//             @include rem('margin', 22px 0 2px);
+//             text-transform: none;
+//             color: #585858;
+//         }
+
+//         .icon {
+//             position: relative;
+//             width: 42px;
+//             height: 42px;
+//             display: inline-block;
+//             background: $blue_dark;
+//             border-radius: 50%;
+
+//             &:after {
+//                 content: '';
+//                 position: absolute;
+//                 border-left: 14px solid rgba(0, 0, 0, 0);
+//                 border-right: 14px solid rgba(0, 0, 0, 0);
+//                 border-top: 14px solid $blue_dark;
+//                 left: 7px;
+//                 bottom: -8px;
+//             }
+
+//             span {
+//                 padding: 0 0 0 2px;
+//                 color: #fff;
+//                 display: block;
+//                 font-size: 30px;
+//                 line-height: 1.45;
+//             }
+//         }
+//     }
+
+//     .system-overlay-item {
+//         ul {
+//             @include rem('padding-left', 16px);
+//         }
+//     }
+//     .matched-solution {
+//         position: relative;
+//         @include rem('padding-left', $global-margin);
+
+//         .fa-circular {
+//             position: absolute;
+//             top: 0;
+//             left: 0;
+// 		    width: 20px;
+// 		    height: 20px;
+// 		    text-align: center;
+// 		    background-color: #000;
+// 		    color: #FFF;
+// 		    border-radius: 50%;
+// 		    line-height: 1.5;
+//         }
+//     }
+
+//     .system-info { margin-bottom: $global-margin; }
+// }
+
+
+
+// .complete-btn {
+//     cursor: pointer;
+//     text-decoration: underline;
+
+//     &:hover { color: #11baf2; }
+// }
+
+// .detail-part {
+//     @include rem('margin-bottom', 22px);
+//     position: relative;
+
+//     .detail-content { @include font-size(13px, 26px); }
+
+//     .icon {
+//         border-radius: 50%;
+//         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .2);
+//         left: -40px;
+//         position: absolute;
+//         top: 0;
+//         width: 40px;
+//         height: 40px;
+//         text-align: center;
+//         background: #11baf2;
+//         border: 4px solid #fff;
+
+//         @include media-query (sm) {
+//             left: -60px;
+//         }
+//     }
+
+//     [class^="fa-"], [class*=" fa-"] {
+//         @include font-size(24px);
+//         left: 1px;
+//         line-height: 1;
+//     }
+// }
+
+//     .reason {
+//     background: none;
+//     @include font-size(16px, 16px);
+
+//         .detail-content { }
+//     }
+
+// .resolution {
+//     @include rem('padding-left', 50px);
+
+//     @include media-query (sm) { padding-left: 0; }
+
+//     .detail-content {
+//         @include font-size(16px, 20px);
+//     }
+
+//     .icon span {
+//         color: #FFF;
+//         line-height: 1.3;
+//     }
+// }
+
+
+// .system-modal, .insights-modal {
+//     .modal-dialog {
+//         width: auto;
+
+//         @include media-query (md) {
+//             max-width: 970px;
+//         }
+//         @include media-query (lg) {
+//             max-width: 1170px;
+//             padding-top: 0;
+//             padding-bottom: 0;
+//         }
+//     }
+// }
 
 .modal-open .pointer {
     cursor: pointer;
@@ -321,3 +569,11 @@
         }
     }
 }
+
+//.modal-open [ng-click] {
+//    cursor: default;
+//}
+
+// .modal-open .pointer {
+//     cursor: pointer;
+// }

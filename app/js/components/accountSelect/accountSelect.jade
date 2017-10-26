@@ -4,7 +4,7 @@
       label Account Number
       .fa.fa-home.pull-right.pointer(ng-click='reset()')
       .fa.fa-refresh.pull-right.tam-icon.pointer(ng-click='accountChange(account_number)')
-      input.accNumbInput(ng-model='account_number', ng-keyup='$event.keyCode == 13 && accountChange(account_number)')
+      input.accNumbInput.input-ghost(ng-model='account_number', ng-keyup='$event.keyCode == 13 && accountChange(account_number)')
     .internal
       input.action(type='checkbox', ng-model='isInternal', ng-change='changeInternal()', id="is-internal")
       label(for="is-internal") Internal

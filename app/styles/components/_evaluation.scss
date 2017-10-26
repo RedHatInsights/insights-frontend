@@ -8,7 +8,7 @@ $eval-content-font-size: 16px;
 
 	h2.eval-subhead{
 		@include font-size($eval-subheader-font-size);
-		font-family: Overpass;
+		font-family: overpass;
 		text-transform: uppercase;
 
 	}
@@ -33,5 +33,10 @@ $eval-content-font-size: 16px;
 
 	.sales-cards{
 		@include rem(margin-top, $global-margin);
+	}
+
+	.md-button span {
+		//@include rem('line-height', 10px);
+		line-height: 10px;
 	}
 }

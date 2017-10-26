@@ -1,0 +1,45 @@
+// COLORS
+
+// Font Colors
+$font-color: $gray-dark;
+
+// Base Colors
+$primary: #747474;
+$accent: #cfcfcf;
+$warn: #cc0000;
+
+// Secondary Colors
+$green: #3f9c35;
+$yellow: #f0ab00;
+$blue-light: #00B7FF;
+$blue-dark: #1a222f;
+
+// Grays
+$gray-light: #f2f5f7;
+$gray-border: #F0F0F0;
+$gray-lite: #e3e3e3;
+$gray-md: #878787;
+$white-soft: #f9fafb;
+$black-base: #2d2d2d;
+
+
+// CLASSES
+
+// Fonts
+.f- {
+	&primary { color: $primary; }
+	&accent { color: $accent; }
+	&warn { color: $warn; }
+	&green { color: $green; }
+	&yellow { color: $yellow; }
+}
+
+// Backgrounds
+.bg- {
+	&primary { background-color: $primary; }
+	&accent { background-color: $accent; }
+	&warn { background-color: $warn; }
+	&green { background-color: $green; }
+	&yellow { background-color: $yellow; }
+	&white { background-color: #fff; }
+}

@@ -67,7 +67,7 @@ img.icon {
     }
 }
 
-.icon-inline, .inline-right {
+.inline-right {
   margin-right: 4px;
 }
 
@@ -98,4 +98,85 @@ img.icon {
 
 h2 .ansible-icon img, h2 .ansible-icon-white img {
     width: 32px;
+}
+
+// h1, h2, h3, h4, h5, h6 { &.icon-inline, .icon-inline { i { top: 4px; } } }
+// h1 { &.icon-inline, .icon-inline { @include rem('padding-left', 30px); } }
+// h2 { &.icon-inline, .icon-inline { @include rem('padding-left', 32px); } }
+// h3 { &.icon-inline, .icon-inline { @include rem('padding-left', 24px); } }
+// h4 { &.icon-inline, .icon-inline { @include rem('padding-left', 22px); } }
+// h5, h6 { &.icon-inline, .icon-inline { @include rem('padding-left', 18px); } }
+
+
+.yes-action {
+    @extend .fa-exclamation-circle;
+    color: red;
+}
+
+.no-action {
+    @extend .fa-check-circle;
+    color: green;
+}
+
+.all-category-icon {
+    @extend .icon-circle;
+}
+
+.availability-category-icon {
+    @extend .icon-circle;
+    @extend .availability;
+}
+
+.stability-category-icon {
+    @extend .icon-circle;
+    @extend .stability;
+}
+
+.performance-category-icon {
+    @extend .icon-circle;
+    @extend .performance;
+}
+
+.security-category-icon {
+    @extend .icon-circle;
+    @extend .category;
+}
+
+.All-severity-icon {
+}
+.INFO-severity-icon {
+    @extend .i-info;
+    @extend .fa-info-circle;
+}
+.WARN-severity-icon {
+    @extend .i-warning;
+    @extend .fa-warning;
+}
+.ERROR-severity-icon {
+    @extend .i-error;
+    @extend .fa-times-circle;
+}
+
+.all-rule-state-icon {
+    @extend .fa-circle
+}
+
+.active-rule-state-icon {
+    @extend .fa-circle;
+    color: green;
+}
+
+.needs-content-rule-state-icon {
+    @extend .fa-circle;
+    color: orange;
+}
+
+.inactive-rule-state-icon {
+    @extend .fa-circle;
+    color: red;
+}
+
+.retired-rule-state-icon {
+    @extend .fa-circle;
+    color: gray;
 }

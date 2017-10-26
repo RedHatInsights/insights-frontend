@@ -11,4 +11,4 @@
             input(type='checkbox', ng-model='campaign.enrolled')
             | {{campaign.label|translate}}
             .small(ng-if="campaign.description")  {{campaign.description|translate}}
-        button.btn.btn-app(name='submit', ng-disabled='form.$pristine', translate) Update
+        md-button.md-raised.md-primary.pull-right(name='submit', ng-disabled='form.$pristine', translate) Update

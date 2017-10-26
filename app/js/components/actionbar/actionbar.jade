@@ -1,4 +1,4 @@
 .actionbar
-  button.action.btn.btn-sm.btn-open-blue(ng-repeat='action in myActions', ng-click='action.fn()')
+  md-button.action.btn.btn-sm.btn-open-blue(ng-repeat='action in myActions', ng-click='action.fn()')
     i.pointer.fa(ng-class='action.icon')
     | {{action.title | translate}}

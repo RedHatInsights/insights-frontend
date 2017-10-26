@@ -102,7 +102,8 @@ function totalRiskSelect() {
             'js/components/filterComponents/totalRiskSelect/totalRiskSelect.html',
         restrict: 'E',
         controller: totalRiskSelectCtrl,
-        scope: {}
+        scope: {},
+        replace: true
     };
 }
 

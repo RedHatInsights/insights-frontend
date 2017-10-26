@@ -1,219 +1,232 @@
-label { color: #515258; }
-table input[type="checkbox"] + span { margin-left: 10px; }
+table {
+  width: 100%;
+  border: none;
+  overflow-x: auto;
+
+  tr { border: none; }
+
+  tr td,
+  tr th {
+    font-family: 'overpass';
+    @include rem('padding', 12px);
+    
+    @include media-query(sm){ @include rem('padding', $global-padding); }
+  }
+
+  th,
+  td {
+    text-align: left;
+  }
+
+  th.min,
+  td.min {
+    width: 1%;
+  }
+
+  th.fit-content,
+  td.fit-content {
+    white-space: nowrap;
+  }
+
+  tr:nth-child(even) {
+    background: #F7F7F7;
+  }
+
+  thead {
+    border-bottom: 1px solid #ddd;
+
+    td { @include rem('padding', $global-padding); }
+  }
+}
+
+
+table tbody {
+  tr.stale { background: #f2dede; }
+  tr.stale:nth-child(odd) { background: #fbf2f2; }
+}
+
 
 .intro {
-	font-weight: 300;
-	@include font-size(18px, 34px);
+  font-weight: 300;
+  @include font-size(18px, 34px);
 
-	em {
-		font-weight: 700;
-		color: #2c96cb;
-	}
-}
-
-table.table-break {
-  table-layout: fixed;
-  width: 100%;
-
-  td {
-    //word-wrap: break-word;         /* All browsers since IE 5.5+ */
-    //overflow-wrap: break-word;
-  }
-  
-  td.hostname, th.hostname {
-    display: table-cell;
-    width: 50%;
-    text-overflow: ellipsis;
-    overflow: hidden;
+  em {
+    font-weight: 700;
+    color: #2c96cb;
   }
 }
 
-table a, table a:link { @extend %font_blue; }
+table a, 
+table a:link { @extend %font_blue; }
 
 .error-infos {
 
-	td {
-		@include rem('padding', 14px);
-		word-break: break-all;
-		@include font-size(11px);
-	}
+  td {
+    @include rem('padding', 14px);
+    word-break: break-all;
+    @include font-size(11px);
+  }
 
-	.plugin { width: 180px; }
-	.key { max-width: 250px; }
-	.cat { word-break: normal; }
-	.sev { word-break: normal; }
-	.ct { max-width: 56px; }
-	.td-wrap { position: relative; }
+  .plugin { width: 180px; }
+  .key { max-width: 250px; }
+  .cat { word-break: normal; }
+  .sev { word-break: normal; }
+  .ct { max-width: 56px; }
+  .td-wrap { position: relative; }
 
-	.desc {
-		max-width: 170px;
-		word-break: normal;
-	}
+  .desc {
+    max-width: 170px;
+    word-break: normal;
+  }
 
-	.util {
-		padding-top: 0;
-		padding-bottom: 0;
-	}
+  .util {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 
-	.td-wrap {
-		width: 20px;
-		height: 20px;
-		float: right;
-	}
+  .td-wrap {
+    width: 20px;
+    height: 20px;
+    float: right;
+  }
 }
 
-table.scroll {
-	position: relative;
+// .table-overflow {
+//   position: relative;
+//   overflow-x: auto;
+// }
 
-	thead { background: #fff; }
+// .table-overflow::after {
+//   background: linear-gradient(to right, #fff0 0%,#ddd 100%);
+//   width: 30px;
+//   content: '';
+//   position: absolute;
+//   right: 0;
+//   height: 100%;
+//   top: 0;
+//   border-right: 1px solid #ddd;
+// }
 
-	tbody {
-		position: relative;
-		max-height: 200px;
-		display: block;
-		width: 100%;
-		overflow-y: scroll;
-		overflow-x: hidden;
-
-		tr {
-			display: table;
-			width: 100%;
-		}
-	}
-
-	&:after {
-		content: '';
-		position: absolute;
-		width: 100%;
-		height: 34px;
-		background: #646464;
-	}
-}
-
-
-$sortable_border_width: 6px;
-$sortable_border_color: gray;
+$sortable_border_width: 5px;
+$sortable_border_color: #000;
 $sortable_border_color_active: red;
 
-.sortable {
-	padding-right: 12px;
-	position: relative;
+table th.sortable:first-child {
 
-	&:hover {
-		cursor: pointer;
-	}
-
-	.carets {
-		position: absolute;
-		right: 8px;
-		top: 12px;
-
-		&:before, &:after {
-			content: '';
-			position: absolute;
-			opacity: .4;
-			transition: .15s;
-			border-left: $sortable_border_width solid transparent;
-			border-right: $sortable_border_width solid transparent;
-		}
-
-		&:before {
-			top: 2px;
-			border-bottom: $sortable_border_width solid $sortable_border_color;
-		}
-
-		&:after {
-			top: 10px;
-			border-top: $sortable_border_width solid $sortable_border_color;
-
-			.sortable-active & {
-
-			}
-		}
-	}
-
-	&.sortable-active {
-		.carets {
-
-			&:before {
-				opacity: .2;
-				border-bottom-color: $sortable_border_color_active;
-			}
-			&:after {
-				opacity: 1;
-				border-top-color: $sortable_border_color_active;
-			}
-		}
-	}
-
-	&.sortable-active.sortable-dsc {
-		.carets {
-			&:before { opacity: 1; }
-			&:after { opacity: .2; }
-		}
-	}
 }
 
+.sortable {
+  position: relative;
+  @include rem('padding-right', 25px);
+
+  &:hover { cursor: pointer; }
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    right: 8px;
+    opacity: .2;
+    transition: .15s;
+    border-left: $sortable_border_width solid transparent;
+    border-right: $sortable_border_width solid transparent;
+  }
+
+  &::before {
+    top: calc(50% - 6px);
+    border-bottom: $sortable_border_width solid $sortable_border_color;
+  }
+
+  &::after {
+    bottom: calc(50% - 6px);
+    border-top: $sortable_border_width solid $sortable_border_color;
+  }
+
+  &.sortable-active {
+    .carets {
+
+      &:before {
+        opacity: .2;
+        border-bottom-color: $sortable_border_color_active;
+      }
+      
+      &:after {
+        opacity: 1;
+        border-top-color: $sortable_border_color_active;
+      }
+    }
+  }
+
+  &.sortable-active.sortable-dsc {
+    .carets {
+      &:before { opacity: 1; }
+      &:after { opacity: .2; }
+    }
+  }
+}
+
+
+
 .filters-table {
-	@include rem('padding', 8px);
-	color: #9a9b9c;
+  @include rem('padding', 8px);
+  color: #9a9b9c;
 
-	.select-all {
-		@include rem('margin-top', 6px);
-	}
+  .select-all {
+    @include rem('margin-top', 6px);
+  }
 
-	.dropdown-select { margin-left: 5px; }
+  .dropdown-select { margin-left: 5px; }
 }
 
 .table-groups {
-	tbody tr td {
-		padding: 0;
-	}
+  tbody tr td {
+    padding: 0;
+  }
 
-	label {
-		display: block;
-		cursor: pointer;
-		padding: 8px;
-		margin: 0;
-		span {
-			font-weight: 500;
-		}
-	}
+  label {
+    display: block;
+    cursor: pointer;
+    padding: 8px;
+    margin: 0;
+    span {
+      font-weight: 500;
+    }
+  }
 }
 
 .table.no-header tr:first-child td {
-	border-top: 1px solid #ececec;
+  border-top: 1px solid #ececec;
 }
 
 .table.table-separated {
-	margin: 0;
-	border: none;
-	border-collapse: separate;
+  margin: 0;
+  border: none;
+  border-collapse: separate;
 
-	.action-count span {
-		@include rem('padding', 4px 8px);
-		background: $gray-dark;
-		color: #fff;
-		border-radius: 6px;
-		font-weight: 700;
+  .action-count span {
+    @include rem('padding', 4px 8px);
+    background: $gray-dark;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 700;
 
-	}
+  }
 
-	.count {
-		padding-left: 0;
-		padding-right: 0;
-	}
+  .count {
+    padding-left: 0;
+    padding-right: 0;
+  }
 
-	.count span {
-		//@include rem('padding', 6px);
-		width: 20px;
-		height: 20px;
-		display: inline-block;
-		font-weight: 700;
-		text-align: center;
-		background: #85D000;
-		color: #fff;
-	}
+  .count span {
+    //@include rem('padding', 6px);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    font-weight: 700;
+    text-align: center;
+    background: #85D000;
+    color: #fff;
+  }
 
   thead th {
     font-weight: 700;
@@ -224,127 +237,127 @@ $sortable_border_color_active: red;
   }
 
 
-	thead {
+  thead {
         th, td, tr {
           border: none;
         }
-	}
+  }
 
-	tr {
+  tr {
 
-	}
+  }
 
-	a.link {
-		color: #fff;
-		text-decoration: underline;
-	}
+  a.link {
+    color: #fff;
+    text-decoration: underline;
+  }
 
-	&.error {
+  &.error {
 
-		.dismiss {
-			min-width: 30px;
-			color: #fff;
-			text-align: center;
-			background: #960006;
-			vertical-align: middle;
-			transition: .2s;
+    .dismiss {
+      min-width: 30px;
+      color: #fff;
+      text-align: center;
+      background: #960006;
+      vertical-align: middle;
+      transition: .2s;
 
-			&:hover {
-				cursor: pointer;
-				background: lighten(#960006, 5);
-			}
-		}
+      &:hover {
+        cursor: pointer;
+        background: lighten(#960006, 5);
+      }
+    }
 
-		.action-count span {
-			background: #fff;
-			color: $red;
-		}
+    .action-count span {
+      background: #fff;
+      color: $red;
+    }
 
-		.count span {
-			background: $red;
-			color: #fff;
-		}
+    .count span {
+      background: $red;
+      color: #fff;
+    }
 
-		thead {
-			tr {
+    thead {
+      tr {
 
-			}
-		}
+      }
+    }
 
-		tbody {
+    tbody {
 
-			tr {
-				color: #fff;
-				background: $red;
-			}
+      tr {
+        color: #fff;
+        background: $red;
+      }
 
-			td {
+      td {
 
-			}
-		}
+      }
+    }
 
-	}
+  }
 }
 
 .table-separated + .table-separated { @include rem('margin-top', $global-margin); }
 
 table.meta-table {
 
-	.uuid {
-		@include font-size(12px);
-		letter-spacing: 0;
-		@include rem('margin-bottom', 22px);
-	}
+  .uuid {
+    @include font-size(12px);
+    letter-spacing: 0;
+    @include rem('margin-bottom', 22px);
+  }
 
-	tbody{
-		td {
-			@include rem('padding', 6px 12px);
-			border: 1px solid #ddd;
-			@include font-size(12px);
-			color: #5b5359;
-			text-align: right;
+  tbody{
+    td {
+      @include rem('padding', 6px 12px);
+      border: 1px solid #ddd;
+      @include font-size(12px);
+      color: #5b5359;
+      text-align: right;
 
-		}
+    }
 
-		td:first-child {
-			background: #F2F5F8;
-			color: #5b5359;
-			text-align: right;
-			width: 30%;
+    td:first-child {
+      background: #F2F5F8;
+      color: #5b5359;
+      text-align: right;
+      width: 30%;
 
-			@include media-query(md) {
-				width: 40%;
-			}
-		}
+      @include media-query(md) {
+        width: 40%;
+      }
+    }
 
-		td:nth-child(even) {
-			background: #fff;
-			font-weight: 700;
-		}
-	}
+    td:nth-child(even) {
+      background: #fff;
+      font-weight: 700;
+    }
+  }
 
-	.detail {
+  .detail {
 
-		&:nth-child(even) {
-			background: #eaeaea;
-		}
+    &:nth-child(even) {
+      background: #eaeaea;
+    }
 
-		ul {
-			@include rem('padding-left', 18px);
-		}
+    ul {
+      @include rem('padding-left', 18px);
+    }
 
-		.heading {
-			font-size: large;
-			padding-bottom: 15px;
-			padding-top: 15px;
+    .heading {
+      font-size: large;
+      padding-bottom: 15px;
+      padding-top: 15px;
 
-			i { padding-right: .3em; }
+      i { padding-right: .3em; }
 
-			strong { padding-left: .3em; }
-		}
+      strong { padding-left: .3em; }
+    }
 
-		.center {
-			text-align: center;
-		}
-	}
+    .center {
+      text-align: center;
+    }
+  }
 }

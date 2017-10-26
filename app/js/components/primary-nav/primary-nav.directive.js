@@ -4,13 +4,21 @@ var componentsModule = require('../');
 const includes = require('lodash/includes');
 
 /**
- * @ngInject
- */
-function sideNavCtrl($scope, Utils, $state, InsightsConfig) {
-    $scope.isHidden = false;
-    $scope.toggleNav = function () {
-        $scope.isHidden = !$scope.isHidden;
-    };
+* @ngInject
+*/
+
+// function primaryNavCtrl($scope, Utils, $state, InsightsConfig, $timeout, $mdSidenav) {
+function primaryNavCtrl($scope, Utils, $state, InsightsConfig) {
+    // $scope.toggleLeft = buildToggler('left');
+
+    // $scope.toggleLeft = buildToggler('left');
+    // $scope.toggleRight = buildToggler('right');
+
+    // function buildToggler(componentId) {
+    //   return function() {
+    //     $mdSidenav(componentId).toggle();
+    //   };
+    // }
 
     $scope.utils = Utils;
     $scope.state = $state;
@@ -38,13 +46,13 @@ function sideNavCtrl($scope, Utils, $state, InsightsConfig) {
     };
 }
 
-function sideNav() {
+function primaryNav() {
     return {
-        templateUrl: 'js/components/sideNav/sideNav.html',
+        templateUrl: 'js/components/primary-nav/primary-nav.html',
         restrict: 'E',
         replace: true,
-        controller: sideNavCtrl
+        controller: primaryNavCtrl
     };
 }
 
-componentsModule.directive('sideNav', sideNav);
+componentsModule.directive('primaryNav', primaryNav);

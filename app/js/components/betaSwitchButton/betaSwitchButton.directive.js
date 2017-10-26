@@ -15,8 +15,11 @@ function betaSwitchButtonCtrl($scope, BetaRedirectService) {
         }
     };
 
-    $scope.switchStatus = function (status) {
+    $scope.switchStatus = function () {
+        let status = window.localStorage.getItem('betaOptIn');
+        status = status === 'false' ? true : false;
         window.localStorage.setItem('betaOptIn', status);
+        $scope.isOptedIn = status;
     };
 
     $scope.leaveBeta = function () {
@@ -28,9 +31,7 @@ function betaSwitchButtonCtrl($scope, BetaRedirectService) {
         return window.insightsGlobal.isBeta;
     };
 
-    $scope.isOptedIn = function () {
-        return JSON.parse(window.localStorage.getItem('betaOptIn'));
-    };
+    $scope.isOptedIn = JSON.parse(window.localStorage.getItem('betaOptIn'));
 }
 
 function betaSwitchButton() {

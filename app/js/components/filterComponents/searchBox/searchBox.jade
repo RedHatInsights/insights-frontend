@@ -9,4 +9,4 @@
     ng-class="{'search-box form-control': isFullLength}"
   )
   i.fa.fa-search(ng-hide="searching()")
-  i.fa.fa-times(ng-show="searching()", ng-click="resetSearch()")
+  i.fa.fa-times(ng-show="searching()", ng-click="resetSearch();" md-prevent-menu-close)

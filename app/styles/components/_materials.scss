@@ -1,21 +1,110 @@
-.code-type{
-	font-family: 'OverpassBold';
-	&-jade::before{
-		content: "Jade";
-		color: yellow;
-		text-decoration: underline;
+$md-card-header-bg: $gray;
+
+.md-sidenav-backdrop {
+  height: 100%;
+}
+
+// md-backdrop {
+//   @include media-query(sm){
+//     display: none;
+//   }
+// }
+
+md-card.accordion.expanded,
+card.accordion.expanded {
+  margin: 0;
+}
+
+md-menu-item > .md-button,
+md-menu-item > a.md-button,
+md-menu-item > a {
+	width: 100%;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  @include rem('padding', $global-padding);
+  margin: 0;
+  
+  display: flex;
+  text-transform: none;
+  align-items: center;
+  justify-content: space-between;
+
+  color: $base-color;
+  @include font-size(14px, 1);
+  box-shadow: none;
+  border: none;
+}
+
+md-menu-item.selected {
+  background: #f5f5f5;
+}
+
+
+// Handle sibling icon + span
+md-menu-item span + i {
+
+}
+
+md-icon {
+	min-width: 0;
+	min-height: 0;
+  @include rem('width', 20px);
+	height: auto;
+}
+
+.md-card-invert{
+  md-card-header{ background-color: white; }
+  md-card-content { background-color: $white-soft; }
+}
+
+button.md-button.md-button-sm, a.md-button.md-button-sm{
+	// height: 20px !important;
+}
+
+.md-dropdown-plain {
+	.md-button.md-default-theme:not([disabled]).md-focused, 
+	.md-button:not([disabled]).md-focused, 
+	.md-button.md-default-theme:not([disabled]):hover, 
+	.md-button:not([disabled]):hover {
+		background: none;
 	}
-	&-js::before{
-		content: "Javascript";
-		color: lightblue;
-		text-decoration: underline;
+
+	button {
+		margin: 0;
+		@include rem('padding', 4px $global-padding/2);
+		display: inline-flex;
+
+		i,
+		.icon,
+		.caret {
+			flex: 0;
+			@include rem('margin-left', $global-padding/2);
+		}
 	}
 }
 
-md-button:first-child{
-	font-weight: 700;
+
+button.md-button.md-button-ghost-blue{
+	border: 1px solid $blue-light;
 }
 
+button.md-button.md-button-ghost-gray{
+	border: 1px solid $black-base;
+}
+
+md-checkbox {
+  min-width: 0;
+  .md-icon { transform: scale(.75); }
+  .md-checked{
+  	background-color: #585858;
+  }
+}
+
+md-checkbox.md-checkbox-list { margin: 0px; }
+
+
+// Toast
 .stickyToast {
 	position: fixed;
 	margin: 25px;
@@ -35,9 +124,11 @@ md-button:first-child{
 	}
 }
 
-.demo-swipe {
- 	padding: 40px; 
-}
+// Dropdown styling
+//==================================================================*/
+
+// Swiping
+.demo-swipe { padding: 40px; }
 
 .no-select {
   -webkit-touch-callout: none;
@@ -47,8 +138,27 @@ md-button:first-child{
   -ms-user-select: none;
   user-select: none; }
 
-.md-button {
-  height: 40px !important;
-  line-height: 0px !important;
-  @include rem(padding, $global-padding);
+
+// Code Markup
+.code-terminal{
+	background-color: black;
+	color: white;
+	@include rem('padding-left', 10px);
 }
+
+.code-type{
+	font-family: 'overpassBold';
+	&-jade::before{
+		content: "Jade";
+		color: yellow;
+		text-decoration: underline;
+	}
+	&-js::before{
+		content: "Javascript";
+		color: lightblue;
+		text-decoration: underline;
+	}
+}
+
+// Other Includes
+.md-no-margin{ margin: 0px }
