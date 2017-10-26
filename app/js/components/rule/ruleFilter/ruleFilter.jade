@@ -3,7 +3,7 @@ section
     collapsible-filter-content
       .row
         incidents-tri-state.col-xs-6.col-md-5.col-lg-4
-        ansible-support-tri-state.col-xs-6.col-md-5.col-lg-4
+        ansible-support-tri-state.col-xs-6.col-md-5.col-lg-4(ng-if='config.isPlannerEnabled')
         rule-status-tri-state.col-xs-6.col-md-5.col-lg-4
       .row
         total-risk-select.col-xs-6.col-md-4.col-lg-3
