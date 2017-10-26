@@ -19,6 +19,7 @@ function ListRuleCtrl(
         PermalinkService,
         PreferenceService,
         QuickFilters,
+        Utils,
         Rule) {
 
     FilterService.parseBrowserQueryParams();
@@ -77,6 +78,15 @@ function ListRuleCtrl(
     $scope.$on('filterService:doFilter', getData);
     $scope.$on('reload:data', getData);
 
+    $scope.doPage = () => {
+        const itemNumber =
+              ($scope.pager.currentPage * $scope.pager.perPage) - $scope.pager.perPage;
+
+        $scope.pagedRules = $scope.rules.slice(
+            itemNumber,
+            itemNumber + $scope.pager.perPage);
+    };
+
     function getData() {
         $scope.loading = true;
         let promises = [];
@@ -87,6 +97,8 @@ function ListRuleCtrl(
                 $scope.rules = reject(ruleResult.resources, function (r) {
                     return (r.rule_id === 'insights_heartbeat|INSIGHTS_HEARTBEAT');
                 });
+
+                $scope.pagedRules = $scope.rules.slice(0, $scope.pager.perPage);
 
                 PermalinkService.scroll(null, 30);
             })
@@ -103,6 +115,9 @@ function ListRuleCtrl(
         $q.all(promises).then(function listRulesAllPromises() {
             $scope.loading = false;
         });
+
+        $scope.pager = new Utils.Pager(3);
+
     }
 
     $scope.search = function (model) {
