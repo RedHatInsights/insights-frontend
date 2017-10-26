@@ -5,13 +5,11 @@
     @include font-size(18px);
     line-height: 1.5;
   }
-
-  .icon-inline { @include rem('padding-left', 20px); }
 }
 
-.icon-inline + .risk-of-change,
-.risk-of-change + .icon-inline,
-.icon-group + .risk-of-change,
-.risk-of-change + .icon-group {
-  @include rem('margin-left', $global-padding);
-}
+// .icon-inline + .risk-of-change,
+// .risk-of-change + .icon-inline,
+// .icon-group + .risk-of-change,
+// .risk-of-change + .icon-group {
+//   @include rem('margin-left', $global-padding);
+// }

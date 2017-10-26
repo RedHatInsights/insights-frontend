@@ -1,36 +1,36 @@
-table {
-    border: 1px solid #ddd;
-    border-collap: inherit;
+// table {
+//     border: 1px solid #ddd;
+//     border-collap: inherit;
 
-    thead {
-        th {
-            border-left: 1px solid #ddd;
-            border-bottom-width: 1px !important;
-            text-align: left;
+//     thead {
+//         th {
+//             border-left: 1px solid #ddd;
+//             border-bottom-width: 1px !important;
+//             text-align: left;
 
-            &:first-child { border-left: none; }
-        }
-    }
+//             &:first-child { border-left: none; }
+//         }
+//     }
 
 
-    tbody {
-        border: 1px solid #ddd;
-        border-top: none;
+//     tbody {
+//         border: 1px solid #ddd;
+//         border-top: none;
 
-        tr {
-            transition: .2s;
-            &:nth-child(odd) {
-                background: #f2f5f7;
-            }
-        }
+//         tr {
+//             transition: .2s;
+//             &:nth-child(odd) {
+//                 background: #f2f5f7;
+//             }
+//         }
 
-        td {
-            border: none;
-            line-height: 1.6;
-            &.break { word-break: break-word; }
-        }
-    }
-}
+//         td {
+//             border: none;
+//             line-height: 1.6;
+//             &.break { word-break: break-word; }
+//         }
+//     }
+// }
 
 .legend table {
     border: none;
@@ -46,37 +46,37 @@ table {
     }
 }
 
-.tbody-scrollable {
-    max-height: 420px;
-    overflow: auto;
-    border-bottom: 5px solid #ddd;
-}
+// .tbody-scrollable {
+//     max-height: 420px;
+//     overflow: auto;
+//     border-bottom: 5px solid #ddd;
+// }
 
-th, 
-td {
-  &.nowrap {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
+// th, 
+// td {
+//   &.nowrap {
+//     white-space: nowrap;
+//     text-overflow: ellipsis;
+//     overflow: hidden;
+//   }
 
-  &.long-name {
-    max-width: 120px;
+//   &.long-name {
+//     max-width: 120px;
 
-    @include media-query(sm) {
-    	max-width: 100px;
-    }
+//     @include media-query(sm) {
+//     	max-width: 100px;
+//     }
 
-    @include media-query(md) {
-    	max-width: 220px;
-    }
+//     @include media-query(md) {
+//     	max-width: 220px;
+//     }
 
-    @include media-query(lg) {
-      max-width: 380px;
-    }
-  }
-}
+//     @include media-query(lg) {
+//       max-width: 380px;
+//     }
+//   }
+// }
 
-td.vertical-align, td.align-vertical {
-  vertical-align: middle;
-}
+// td.vertical-align, td.align-vertical {
+//   vertical-align: middle;
+// }

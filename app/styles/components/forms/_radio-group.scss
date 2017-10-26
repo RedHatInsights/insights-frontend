@@ -1,0 +1,9 @@
+.radio-group {
+  display: flex;
+
+  * > {
+    label {
+      white-space: nowrap;
+    }
+  }
+}

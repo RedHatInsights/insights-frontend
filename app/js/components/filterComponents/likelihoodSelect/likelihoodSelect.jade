@@ -1,13 +1,14 @@
-.checkin-select
+.filter-group.filter-checkin-select
   label(translate) Likelihood
-  .dropdown
-    button.btn.btn-default.dropdown-toggle(
+  md-menu(md-offset="0 38")
+    md-button.button-filter(
       type='button',
       data-toggle='dropdown',
       aria-haspopup='true',
-      aria-expanded='false')
-      span {{selected.title}}
+      aria-expanded='false',
+      ng-click='$mdMenu.open($event)')
+      span.text.active(ng-model='label') {{selected.title}}
       span.caret
-    ul.dropdown-menu
-      li(ng-repeat='(key, value) in options')
+    md-menu-content
+      md-menu-item(ng-repeat='(key, value) in options')
         a(ng-click='select(key)') {{value.title}}

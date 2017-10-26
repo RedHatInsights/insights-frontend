@@ -23,11 +23,9 @@
       .small-name-info UUID: {{ getUUID() }}
 
   system-metadata(system='system')
-  .separator
 
-  .insights-main-content
-    .message.alert.alert-danger.alert-systems-not-checking(ng-if='!system.isCheckingIn')
-      span.glyphicon.glyphicon-exclamation-sign.rule-margin
-      span(translate) This system is not checking in.
-    .rule-summaries(system='system', machine-id='system.system_id', rule='rule', rule-filter='ruleFilter', loading='loading')
-    .rule-summary.system-overlay-item.content-block(ng-if='system.__fake', report='report', rule='rule', loading='loading')
+  .message.alert.alert-danger.alert-systems-not-checking(ng-if='!system.isCheckingIn')
+    span.glyphicon.glyphicon-exclamation-sign.rule-margin
+    span(translate) This system is not checking in.
+  .rule-summaries(system='system', machine-id='system.system_id', rule='rule', rule-filter='ruleFilter', loading='loading')
+  .rule-summary.system-overlay-item.content-block(ng-if='system.__fake', report='report', rule='rule', loading='loading')

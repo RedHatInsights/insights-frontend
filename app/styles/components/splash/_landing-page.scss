@@ -63,11 +63,6 @@
 
 	h1.headline { color: #fff; }
 
-	.section-header {
-		@extend h1;
-		font-weight: 700;
-	}
-
 	.band-white { background: #fff; }
 	.band-gray-light { background: #f7f7f7; }
 	.uppercase { text-transform: uppercase; }

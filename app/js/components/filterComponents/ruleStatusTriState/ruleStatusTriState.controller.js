@@ -68,6 +68,7 @@ function ruleStatusTriState() {
         templateUrl:
             'js/components/filterComponents/ruleStatusTriState/ruleStatusTriState.html',
         restrict: 'E',
+        replace: true,
         controller: ruleStatusTriStateCtrl
     };
 }

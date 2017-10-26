@@ -1,61 +1,98 @@
-.insights-dropdown {
-  .dropdown-menu {
-    padding-left: 0;
+.md-open-menu-container.md-active > md-menu-content > * {
+  transition: .1s;
+}
 
-    a { font-weight: 600; }
-  }
 
-  .dropdown-toggle {
-    color: #515258;
-    font-size: 1em;
-    font-weight: bold;
-    padding: 0.375rem 10px;
-  }
+md-menu-content {
+  
+  md-menu-item {
 
-  .dropdown-caret {
-    margin-left: 5px;
+    &:hover:not(.no-hover) {
+      background: #f5f5f5;
+    }
   }
 }
 
-.dropdown {
 
-  [translate] { display: inline-block; }
+md-menu-content {
+  max-height: 80vh;
 
-  a.link {
-    color: #2097E7;
-    text-decoration: none;
-
-    &:hover {
-      color: darken(#2097E7, 10);
-    }
-  }
-
-  button.btn,
-  button {
-    text-align: left;
-    border: 1px solid #c5c7c9;
-    text-transform: none;
-
-
-    .caret {
-      transition: .2s;
-      @include rem('margin-left', $global-padding/2);
-    }
-  }
-
-  .dropdown-menu {
+  .icon-inline-right {
+    position: static;
+    display: flex;
     padding: 0;
-    background: #f7fafc;
-    border: 1px solid #c5c7c9;
-    min-width: 100%;
 
-    li > a {
-      display: block;
-      @include rem('padding', 8px $global-padding);
+    i,
+    .icon { 
+      position: static;
+      flex: 0; 
     }
-    li a { @include rem('padding', 8px 22px 8px $global-padding); }
   }
 }
+
+// .insights-dropdown {
+//   .dropdown-menu {
+//     padding-left: 0;
+//     a { font-weight: 600; }
+//   }
+
+//   .dropdown-toggle {
+//     color: #515258;
+//     font-size: 1em;
+//     font-weight: bold;
+//     padding: 0.375rem 10px;
+//   }
+
+//   .dropdown-caret {
+//     margin-left: 5px;
+//   }
+// }
+
+
+// topbar ul.dropdown-menu{
+//   max-height: 75vh;
+//   overflow: scroll;
+// }
+
+// .dropdown {
+
+//   [translate] { display: inline-block; }
+
+//   a.link {
+//     color: #2097E7;
+//     text-decoration: none;
+
+//     &:hover {
+//       color: darken(#2097E7, 10);
+//     }
+//   }
+
+//   button.btn,
+//   button {
+//     text-align: left;
+//     border: 1px solid #c5c7c9;
+//     text-transform: none;
+
+
+//     .caret {
+//       transition: .2s;
+//       @include rem('margin-left', $global-padding/2);
+//     }
+//   }
+
+//   .dropdown-menu {
+//     padding: 0;
+//     background: #FCFCFC;
+//     border: 1px solid #c5c7c9;
+//     min-width: 100%;
+
+//     li > a {
+//       display: block;
+//       @include rem('padding', $global-padding);
+//     }
+//     li a { @include rem('padding', $global-padding); }
+//   }
+// }
 
 .dropdown.gray {
   button {

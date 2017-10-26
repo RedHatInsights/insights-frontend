@@ -1,5 +1,5 @@
 .maintenance-page
-  page-header(title="Planner", icon="fa-wrench", ng-class="{'inactive': !expandBar, 'active': expandBar}")
+  page-header(title="Maintenance Planner", icon="fa-wrench", ng-class="{'inactive': !expandBar, 'active': expandBar}", ng-transclude)
     .create-plan-actions.text-right.pull-right
       a.create-plan(ng-click='MaintenanceService.showMaintenanceModal()')
         span(translate) &nbsp;Create a plan
@@ -8,18 +8,15 @@
         small.red(translate) New suggested plan
           i.fa.fa-plus-circle
 
-  section
-    collapsible-filter
-      collapsible-filter-content
-        .row
-          maintenance-category-select.col-xs-6.col-md-4.col-lg-3(category='category', on-select='setCategory(category)')
+  table-filters
+    maintenance-category-select(category='category', on-select='setCategory(category)')
 
-  .content-wrap
-    section.table-utilities
-      .row
-        .col-xs-7.col-sm-5
-          search-box(ng-model='searchTerm', placeholder="{{'Search plans' | translate}}")
+  section.content
+    .table-header
+      search-box(ng-model='searchTerm', placeholder="{{'Search plans' | translate}}")
     section
+      br
+      br
       .row.row-short(ng-show='loading')
         .col-xs-12
           .load.text-center

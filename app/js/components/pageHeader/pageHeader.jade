@@ -1,6 +1,6 @@
-.page-header
-  div(ng-transclude)
-  h1.page-title.icon-inline
-    i.fa(class="{{icon}}")
-    span(translate) {{titleTranslated}}
+section.page-header(ng-transclude)
+  .page-title
+    h1
+      i.fa(class="{{icon}}", aria-hidden='true')
+      span.text(translate) {{titleTranslated}}
 

@@ -3,6 +3,7 @@ $define-fa: true !default;
 //==================================================================*/
 @import '../../node_modules/font-awesome/scss/font-awesome';
 @import 'includes/vars';
+@import 'includes/colors';
 @import 'includes/mixins';
 @import 'includes/helpers';
 @import 'includes/animations';
@@ -20,6 +21,17 @@ $define-fa: true !default;
 @import 'elements/forms';
 @import 'elements/tabs';
 @import 'elements/alert-text';
+
+
+// Layout
+//==================================================================*/
+@import 'layout/platform';
+@import 'layout/platform-grid';
+@import 'layout/topbar';
+@import 'layout/insightslogo';
+@import 'layout/primary-nav';
+@import 'layout/main';
+@import 'layout/footer';
 
 
 // Include CSS from bower components
@@ -42,6 +54,11 @@ $define-fa: true !default;
 @import 'vendor/ng-table';
 @import 'vendor/_animate';
 @import 'vendor/plotly';
+
+
+// Icons
+//==================================================================*/
+@import 'icons/icon-inline';
 
 
 // Icon fonts
@@ -77,29 +94,26 @@ $define-fa: true !default;
 
 // Include Components
 //==================================================================*/
-@import 'components/actionbar';
-@import 'components/scrollable';
+// @import 'components/actionbar';
+// @import 'components/scrollable';
 @import 'components/pie-charts';
 @import 'components/chart-header';
 @import 'components/breadcrumbs';
 @import 'components/tables';
 @import 'components/filter-search';
 @import 'components/error-infos';
-@import 'components/top-bar';
-@import 'components/tam-panel';
 @import 'components/header';
 @import 'components/utilities-tray';
-@import 'components/filters';
+// @import 'components/filters';
 @import 'components/icons';
 @import 'components/announcements';
 @import 'components/dashboard';
-@import 'components/dashboard-nav';
+// @import 'components/dashboard-nav';
 @import 'components/pagination';
 @import 'components/groups';
 @import 'components/chart-';
 @import 'components/fa-';
-@import 'components/legend-nav';
-@import 'components/actions-breadcrumbs';
+// @import 'components/actions-breadcrumbs';
 @import 'components/content-block';
 @import 'components/system-overlay';
 @import 'components/no-actions';
@@ -107,6 +121,7 @@ $define-fa: true !default;
 @import 'components/switch';
 @import 'components/dropdown';
 @import 'components/materials';
+@import 'components/expandable-card';
 
 @import 'components/splash/landing-page';
 @import 'components/prod-filters-link';
@@ -147,6 +162,12 @@ $define-fa: true !default;
 @import 'components/evaluation';
 
 
+
+// Forms
+//==================================================================*/
+@import 'components/forms/radio-group';
+
+
 // Maintenance Plan
 //==================================================================*/
 @import 'components/maintenance-planner/maintenance-plan';
@@ -178,24 +199,26 @@ $define-fa: true !default;
 @import 'components/risk-of-change';
 
 
-// Namespaced
+// used to be Namespaced
 //==================================================================*/
-.insights-main-content, .modal {
-	@import 'components/insights/table';
-	@import 'components/insights/actions-details';
-	@import 'components/insights/group-select';
-	@import 'components/insights/config-tabs';
-	@import 'components/insights/panel';
-	@import 'components/insights/lists';
-	@import 'components/insights/insights-main-content';
-	@import 'components/insights/alert';
-	@import 'components/insights/notifications';
-	@import 'components/insights/entitlement';
-	@import 'components/insights/rules';
-}
 
-.insights,
-.insights-main-content {
-	@import 'elements/typography';
-	@import 'elements/buttons';
-}
+@import 'components/insights/table';
+@import 'components/insights/actions-details';
+@import 'components/insights/group-select';
+@import 'components/insights/config-tabs';
+@import 'components/insights/panel';
+@import 'components/insights/lists';
+@import 'components/insights/alert';
+@import 'components/insights/notifications';
+@import 'components/insights/entitlement';
+@import 'components/insights/rules';
+@import 'elements/typography';
+@import 'elements/buttons';
+
+
+// Good to go
+//==================================================================*/
+
+@import 'components/table-filters';
+@import 'components/tables/table-header';
+

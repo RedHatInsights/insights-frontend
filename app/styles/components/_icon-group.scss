@@ -3,6 +3,13 @@
 }
 
 .icon-group.icon-group-severity {
+  @include reset();
+  li { list-style: none; }
+
+  // li + li {
+  //   @include rem('margin-top', $global-padding);
+  // }
+  
   display: inline-block;
 
   i + .title,
@@ -19,10 +26,6 @@
   &.gray { background: $gray-light; }
   &.white { background: #fff; }
 
-  // Contextually add gray background
-  .rule-summary &,
-  .actions-rule-details & { @extend .icon-group.gray; }
-
 
   // Contextually add white background
   .actions-rule-details & { @extend .icon-group.white; }
@@ -31,3 +34,8 @@
   .severity-icon + .severity-icon { @include rem('margin-left', $global-padding); }
 }
 
+.icon-group.icon-group-severity.inline {
+  display: inline-flex;
+
+  li { @include rem('margin-right', $global-padding/2); }
+}

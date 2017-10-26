@@ -155,7 +155,7 @@
             .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', 'rule_id', '-actions.length'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
               .header.bordered(ng-init='tableEdit = false')
                 .title
-                  ansible-icon.inline-right(value='rule.ansible', show-planner-line='false')
+                  ansible-icon.inline-right(value='rule.ansible' show-planner-line='false' hide-label="true")
                   strong {{rule.description}}
                   span.pull-right(ng-hide='isReadOnly()')
                     a(ng-hide='tableEdit', ng-click='tableEdit = true')
@@ -221,6 +221,7 @@
               items-per-page="pager.perPage",
               ng-change="pager.update()")
 
+          // Playbook Tab
           tab.tab-blue(
             role="tabpanel",
             disable='!ansibleSupport',
@@ -235,7 +236,7 @@
                 card-header.gray
                   a(ui-sref='app.actions-rule({category: play.rule.category.toLowerCase(), rule: play.rule.rule_id})')
                     b {{ play.rule.description }}
-                card-content.flex
+                card-content.two-columns
                   .systems
                     h4.section-title(translate) Systems:
                     expandable-system-list(systems='play.systems')

@@ -52,7 +52,7 @@ img.icon {
     }
 }
 
-.icon-inline, .inline-right {
+.inline-right {
   margin-right: 4px;
 }
 
@@ -85,43 +85,83 @@ h2 .ansible-icon img, h2 .ansible-icon-white img {
     width: 32px;
 }
 
-.icon-inline {
-  position: relative;
-  display: inline-block;
-  @include rem('padding-left', 18px);
+// h1, h2, h3, h4, h5, h6 { &.icon-inline, .icon-inline { i { top: 4px; } } }
+// h1 { &.icon-inline, .icon-inline { @include rem('padding-left', 30px); } }
+// h2 { &.icon-inline, .icon-inline { @include rem('padding-left', 32px); } }
+// h3 { &.icon-inline, .icon-inline { @include rem('padding-left', 24px); } }
+// h4 { &.icon-inline, .icon-inline { @include rem('padding-left', 22px); } }
+// h5, h6 { &.icon-inline, .icon-inline { @include rem('padding-left', 18px); } }
 
-  i,
-  img.icon {
-    position: absolute;
-    left: 0;
-  }
 
-  img.icon {
-    transform: translateY(25%);
-  }
+.yes-action {
+    @extend .fa-exclamation-circle;
+    color: red;
 }
 
-.icon-inline-right {
-  position: relative;
-  @include rem('padding-right', 18px);
-  display: block;
-
-  i {
-    position: absolute;
-    right: 0;
-  }
-
-  table & {
-    @include rem('padding-right', 22px);
-    i { top: 2px; }
-  }
+.no-action {
+    @extend .fa-check-circle;
+    color: green;
 }
 
+.all-category-icon {
+    @extend .icon-circle;
+}
 
+.availability-category-icon {
+    @extend .icon-circle;
+    @extend .availability;
+}
 
-h1, h2, h3, h4, h5, h6 { &.icon-inline, .icon-inline { i { top: 4px; } } }
-h1 { &.icon-inline, .icon-inline { @include rem('padding-left', 30px); } }
-h2 { &.icon-inline, .icon-inline { @include rem('padding-left', 32px); } }
-h3 { &.icon-inline, .icon-inline { @include rem('padding-left', 24px); } }
-h4 { &.icon-inline, .icon-inline { @include rem('padding-left', 22px); } }
-h5, h6 { &.icon-inline, .icon-inline { @include rem('padding-left', 18px); } }
+.stability-category-icon {
+    @extend .icon-circle;
+    @extend .stability;
+}
+
+.performance-category-icon {
+    @extend .icon-circle;
+    @extend .performance;
+}
+
+.security-category-icon {
+    @extend .icon-circle;
+    @extend .category;
+}
+
+.All-severity-icon {
+}
+.INFO-severity-icon {
+    @extend .i-info;
+    @extend .fa-info-circle;
+}
+.WARN-severity-icon {
+    @extend .i-warning;
+    @extend .fa-warning;
+}
+.ERROR-severity-icon {
+    @extend .i-error;
+    @extend .fa-times-circle;
+}
+
+.all-rule-state-icon {
+    @extend .fa-circle
+}
+
+.active-rule-state-icon {
+    @extend .fa-circle;
+    color: green;
+}
+
+.needs-content-rule-state-icon {
+    @extend .fa-circle;
+    color: orange;
+}
+
+.inactive-rule-state-icon {
+    @extend .fa-circle;
+    color: red;
+}
+
+.retired-rule-state-icon {
+    @extend .fa-circle;
+    color: gray;
+}
