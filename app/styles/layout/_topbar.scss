@@ -1,0 +1,45 @@
+$topbar-bg: #F5F5F5;
+$topbar-text-color: $base-color;
+$topbar-border-color: #ddd;
+
+.platform-grid > topbar {
+  grid-area: topbar;
+  background: $topbar-bg;
+  border-bottom: 4px solid $topbar-border-color;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-gap: $global-margin;
+
+  .grid-cell.filters {
+    
+  }
+
+  .grid-cell.utility {
+    display: flex;
+    align-items: center;
+  }
+
+  .toggle-fullscreen { 
+    margin: 0;
+    background: none;
+  }
+}
+
+.platform-grid > topbar {
+  label, 
+  div a { color: #878787; }
+
+  .toggle-fullscreen {
+    @include rem('padding', $global-margin);
+
+    i {
+      transition: .1s;    
+    }
+  }
+
+  .toggle-fullscreen.collapsed {
+    i.fa { transform: scaleX(-1); }
+  }
+}
+
+topbar div label, topbar div a{ color: $topbar-text-color; }

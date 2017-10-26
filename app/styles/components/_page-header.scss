@@ -1,17 +1,36 @@
-$bg-page-header: #F9F9F9;
+.page-header { 
+  @include rem('margin', 0 0 $global-margin);
+  @include rem ('padding', 0 $global-margin); 
+  border: none;
+} 
 
-.page-header {
-	@include clearfix;
-	position: relative;
-	padding: 0;
-	background: $bg-page-header;
-	@include rem('padding', 18px $global-margin);
-  margin: 0;
+.page-header .page-title { 
+  position: relative;
 
-	&.active { @include rem('padding-bottom', $global-margin); }
+  i, .text { display: inline-block; }
 
-	.content-block {
-		margin-top: 0;
-		@include rem('padding', $global-padding 30px 0);
-	}
+  i { margin-right: $global-padding/2; }
+
+  @include rem ('padding', $global-margin 0);
+}
+
+.page-header .page-title::before,
+.page-header .page-title::after {
+	content:""; 
+	position: absolute; 
+	bottom: 0; 
+	left: 0; 
+}
+
+.page-header .page-title::before {
+	width: 25vw;
+	height: 1px;
+	min-width: 200px;
+	background: $gray-lite;
+}
+
+.page-header .page-title::after {
+  	background: $warn; 
+  	height: 4px; 
+  	width: 40px;
 }

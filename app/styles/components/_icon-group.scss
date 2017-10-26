@@ -3,6 +3,15 @@
 }
 
 .icon-group.icon-group-severity {
+  @include reset();
+  li {
+    list-style: none;
+  }
+
+  li + li {
+    @include rem('margin-top', $global-padding);
+  }
+
   display: inline-block;
 
   i + .title,

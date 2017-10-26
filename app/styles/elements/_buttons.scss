@@ -1,11 +1,32 @@
-.btn, button {
-    outline: none;
-    border: none;
+// .btn, button {
+//     outline: none;
+//     border: none;
 
-    &:active, &:focus, &:visited {
-        outline: none !important;
-        box-shadow: none;
-    }
+//     &:active, &:focus, &:visited {
+//         outline: none !important;
+//         box-shadow: none;
+//     }
+// }
+
+.button-filter {
+  @include rem('padding', $global-padding/2 $global-padding);
+  border-radius: 50px;
+  border: 1px solid #DCDCDC;
+  color: #9B9B9B;
+}
+
+.button-filter {
+  @include rem('padding', $global-padding/2 $global-padding);
+  border-radius: 50px;
+  border: 1px solid #DCDCDC;
+  color: #9B9B9B;
+}
+
+.button-filter {
+  @include rem('padding', $global-padding/2 $global-padding);
+  border-radius: 50px;
+  border: 1px solid #DCDCDC;
+  color: #9B9B9B;
 }
 
 .btn .svg {

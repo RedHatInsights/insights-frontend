@@ -6,8 +6,8 @@ function insightsLogo() {
     return {
         templateUrl: 'js/components/insightsLogo/insightsLogo.html',
         restrict: 'EC',
-        replace: true
+        replace: false
     };
 }
 
-componentsModule.directive('insightsLogo', insightsLogo);
+componentsModule.directive('insightslogo', insightsLogo);

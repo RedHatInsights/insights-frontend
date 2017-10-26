@@ -1,12 +1,12 @@
 .actions-page.actions-back
+  actions-breadcrumbs.breadcrumbs.actions-breadcrumbs(ng-hide="loading")
   page-header(title="Actions", icon="fa-file-text")
   topic-rule-filters(ng-hide='loading')
 
   .content-wrap(ng-hide="loading")
-    actions-breadcrumbs.actions-breadcrumbs(ng-hide="loading")
 
-    section.gray.section-topic-details
-      topic-details(ng-hide='loading', topic='topic')
+    //section.section-topic-details  
+    topic-details(ng-hide='loading', topic='topic')
 
     section.table-utilities
       .row

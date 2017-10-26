@@ -1,21 +1,22 @@
-.grid-block
-  section.widget-block
-    h2.title
+md-card
+  md-card-header
+    .md-card-header-title
       i.fa.fa-database
       span(translate) Newest Systems
+    .md-card-header-cta
       a.cta-link(ui-sref='app.inventory', translate) View inventory
-    .content
-      .spinner(ng-show='loader.loading')
-      table.table.table-separated(ng-show='!loader.loading && systems.length')
-        thead.lite
-          tr
-            th(translate) System
-            th(translate) Registration Date
-        tbody
-          tr(ng-repeat="system in systems | orderBy:'system.created_at' track by system.system_id")
-            td
-              a.strong(ng-click='showSystemModal(system)') {{system.toString}}
-            td
-              span {{system.created_at | timeAgo}}
+  md-card-content
+    .spinner(ng-show='loader.loading')
+    table.table.table-separated(ng-show='!loader.loading && systems.length')
+      thead.lite
+        tr
+          th(translate) System
+          th(translate) Registration Date
+      tbody
+        tr(ng-repeat="system in systems | orderBy:'system.created_at' track by system.system_id")
+          td
+            a.strong(ng-click='showSystemModal(system)') {{system.toString}}
+          td
+            span {{system.created_at | timeAgo}}
 
-      p(ng-show='!loader.loading && !systems.length', translate) No systems registered
+    p(ng-show='!loader.loading && !systems.length', translate) No systems registered

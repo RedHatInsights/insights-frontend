@@ -1,6 +1,6 @@
 .system-card(ng-class="{'stale': !system.isCheckingIn}")
-  card(expandable, on-toggle='toggleContent(ctx)')
-    card-header
+  md-card(expandable, on-toggle='toggleContent(ctx)')
+    md-card-header
       .row
         .col-sm-4
           div(
@@ -34,7 +34,7 @@
             span.text(translate, translate-n="system.report_count", translate-plural="{{$count}} Actions") {{system.report_count}} Action
             span.pull-right.status-icon(ng-class="{'success': !system.report_count, 'fail': system.report_count}")
               i.fa(ng-click='showActions(); $event.stopPropagation();', ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count}")
-    card-content
+    md-card-content
       div(ng-if='!system.isCheckingIn')
         strong Last checkin:&nbsp;
         span(ng-hide='system.last_check_in', translate) never
@@ -64,4 +64,4 @@
         .col-sm-12
           .system-card-actions
             .btn.btn-outline.btn-xs(translate, ng-disabled='!selectable', ng-click='unregister()') Unregister
-    card-footer
+    md-card-footer

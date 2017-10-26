@@ -1,3 +1,4 @@
+/*global module*/
 'use strict';
 
 /**
@@ -16,12 +17,6 @@ function Routes($stateProvider) {
         .state('info', {
             templateUrl: 'js/states/base/info.html',
             abstract: true
-        });
-
-    $stateProvider
-        .state('login', {
-            url: '/login/',
-            controller: 'LoginCtrl'
         });
 }
 

@@ -1,21 +1,36 @@
-.code-type{
-	font-family: 'OverpassBold';
-	&-jade::before{
-		content: "Jade";
-		color: yellow;
-		text-decoration: underline;
-	}
-	&-js::before{
-		content: "Javascript";
-		color: lightblue;
-		text-decoration: underline;
-	}
+// Button and Inputs
+.md-button {
+	width: auto;
+  height: auto;
+  line-height: auto;
+  @include rem(padding, $global-padding);
+  align-items: center;
+  justify-content: center;
 }
 
-md-button:first-child{
-	font-weight: 700;
+button.md-button.md-button-sm, a.md-button.md-button-sm{
+	// height: 20px !important;
 }
 
+button.md-button.md-button-ghost-blue{
+	border: 1px solid $blue-light;
+}
+
+button.md-button.md-button-ghost-gray{
+	border: 1px solid $black-base;
+}
+
+md-checkbox {
+  .md-icon { transform: scale(.75); }
+  .md-checked{
+  	background-color: #585858;
+  }
+}
+
+md-checkbox.md-checkbox-list { margin: 0px; }
+
+
+// Toast
 .stickyToast {
 	position: fixed;
 	margin: 25px;
@@ -35,9 +50,75 @@ md-button:first-child{
 	}
 }
 
-.demo-swipe {
- 	padding: 40px; 
+
+// Cards
+.md-titlecard{
+	@include rem('margin-top', 40px);
+	@include rem('margin-bottom', 40px);
 }
+
+.md-side-padding{
+	@include rem('padding-left', 15px);
+	@include rem('padding-right', 15px);
+}
+
+.md-vertical-padding{
+	@include rem('padding-top', 15px);
+	@include rem('padding-bottom', 15px);
+}
+
+md-card{
+	font-family: Overpass, Helvetica, Arial, sans-serif;
+	&-header{
+		font-family: Overpass-bold, Helvetica, Arial, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		@include rem('font-size', 17px);
+		color: #585858;
+		background-color: $white-soft;
+		border-bottom: 1px solid $gray-border;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		@include rem('padding', 10px 15px);
+		md-button{
+			size: 50%;
+		}
+	}
+
+	.md-card-header-title{
+		i { @include rem ('padding-right', 5px);}
+	}
+
+	.md-card-header-cta{
+		@include rem('font-size', 15px); 
+	}
+
+	md-card-header.two-columns { 
+		display: flex; 
+		div:first-of-type { flex: 0 0 50%; }
+		div:nth-of-type(2) { flex: 1; }
+	}
+
+	md-card-content.two-columns { 
+		display: flex; 
+		div:first-of-type { flex: 0 0 50%; }
+		div:nth-of-type(2) { flex: 1; }
+	}
+}
+	
+
+.md-card-invert{
+	md-card-header{ background-color: white; }
+	md-card-content { background-color: $white-soft; }
+}
+
+md-menu-content{
+	position: fixed;
+}
+
+
+// Swiping
+.demo-swipe { padding: 40px; }
 
 .no-select {
   -webkit-touch-callout: none;
@@ -47,8 +128,27 @@ md-button:first-child{
   -ms-user-select: none;
   user-select: none; }
 
-.md-button {
-  height: 40px !important;
-  line-height: 0px !important;
-  @include rem(padding, $global-padding);
+
+// Code Markup
+.code-terminal{
+	background-color: black;
+	color: white;
+	@include rem('padding-left', 10px);
 }
+
+.code-type{
+	font-family: 'OverpassBold';
+	&-jade::before{
+		content: "Jade";
+		color: yellow;
+		text-decoration: underline;
+	}
+	&-js::before{
+		content: "Javascript";
+		color: lightblue;
+		text-decoration: underline;
+	}
+}
+
+// Other Includes
+.md-no-margin{ margin: 0px }

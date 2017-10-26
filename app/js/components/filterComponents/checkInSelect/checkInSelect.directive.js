@@ -10,7 +10,7 @@ function checkInSelectCtrl($rootScope, $scope, gettextCatalog, Events, FilterSer
     $scope.options = [
         {
             id: 'all',
-            label: gettextCatalog.getString('All'),
+            label: gettextCatalog.getString('System status'),
             online: true,
             offline: true,
             tag: null

@@ -1,7 +1,6 @@
 .insights-dropdown {
   .dropdown-menu {
     padding-left: 0;
-
     a { font-weight: 600; }
   }
 
@@ -15,6 +14,12 @@
   .dropdown-caret {
     margin-left: 5px;
   }
+}
+
+
+topbar ul.dropdown-menu{
+  max-height: 75vh;
+  overflow: scroll;
 }
 
 .dropdown {
@@ -45,15 +50,15 @@
 
   .dropdown-menu {
     padding: 0;
-    background: #f7fafc;
+    background: #FCFCFC;
     border: 1px solid #c5c7c9;
     min-width: 100%;
 
     li > a {
       display: block;
-      @include rem('padding', 8px $global-padding);
+      @include rem('padding', $global-padding);
     }
-    li a { @include rem('padding', 8px 22px 8px $global-padding); }
+    li a { @include rem('padding', $global-padding); }
   }
 }
 

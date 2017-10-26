@@ -3,8 +3,8 @@
     i.fa.fa-globe(aria-hidden="true")
     span(translate) Global filters
   #global-filter-dropdown.dropdown(ng-click="toggleDropdown()")
-    button.btn.dropdown-toggle(
-      type='button',
+    md-button(
+      type='md-button',
       ng-click="resetFilter();",
       data-toggle="dropdown",
       aria-haspopup='true',
@@ -15,7 +15,7 @@
       b.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
       span.caret
     ul.dropdown-menu(role="menu")
-      li
+      li.md-padding
         search-box(
           on-search='searchGroups(model)',
           ng-click="$event.stopPropagation();"

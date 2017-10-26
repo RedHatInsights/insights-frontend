@@ -1,5 +1,10 @@
+$breadcrumbs-bg: #F7F9FC;
+$breadcrumbs-border: #E2E2E2;
+
 .breadcrumb.actions-crumbs {
-    background-color: transparent;
+    background-color: $breadcrumbs-bg;
+    @include rem('padding', 20px $global-margin);
+    border-bottom: 1px solid $breadcrumbs-border;
 
     .ui-select-container {
 
@@ -51,5 +56,5 @@
 }
 
 section + .actions-breadcrumbs, .actions-breadcrumbs + section {
-	@include rem('margin-top', $global-margin);
+  @include rem('margin-top', $global-margin);
 }

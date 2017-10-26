@@ -3,28 +3,31 @@
   .page.flexgrid.equalheights
     .rha-notifications
     .row
-      .col-md-5.col-lg-6.left-col
-        .grid-block
-          section.widget-block
-            span.pull-right(ng-show='isInternal')
-              | [
-              a(ng-click='edit()') edit
-              | ]
-            h2.title
-              i.fa.fa-fire
-              span(translate) Latest
+      .col-md-5.col-lg-6
+        md-card
+          md-card-header
+            .md-card-header-title
+              span.icon-inline
+                i.fa.fa-fire
+                span(translate) Latest
+            .md-card-header-cta
+              a(translate, ng-show='isInternal', ng-click='edit()') Edit
+          md-card-content
             handcrafted-content
         new-systems
-      .col-md-7.col-lg-6.right-col.border-bottom
-        .grid-block
-          section.widget-block
-            h2.title
-              i.fa.fa-file-text
-              span(translate) Actions&nbsp;
-              span.light(translate) Summary
-              a.cta-link(translate, ui-sref="app.actions") View actions
+      .col-md-7.col-lg-6
+        md-card
+          md-card-header
+            .md-card-header-title
+              span.icon-inline
+                i.fa.fa-file-text
+                span(translate)  Actions Summary
+            .md-card-header-cta
+              a(translate, ui-sref="app.actions") View actions
+          md-card-content
             severity-summary(stats='stats')
 
+<<<<<<< HEAD
         .grid-block(ng-if="isBeta")
           section.widget-block.widget-block-narrow
             incident-lite
@@ -33,9 +36,17 @@
           section.widget-block
             h2.title
               i.fa.fa-bullseye &nbsp;
-              span(translate) Optimize&nbsp;
-              span.light(translate) Your Experience
+            span(translate) Optimize&nbsp;
+            span.light(translate) Your Experience
+=======
+        md-card(ng-if="!paid()")         
+          md-card-header
+            .md-card-header-title
+              span.icon-inline
+                i.fa.fa-bullseye
+              span(translate) Optimize Your Experience
+>>>>>>> 75307f99980ec533e91c92eae236eb5b2b9c58e4
+          md-card-content
             goals-lite
 
-        .grid-block(ng-if='config.isPlannerEnabled')
-          maintenance-plan-lite
+        maintenance-plan-lite(ng-if='config.isPlannerEnabled')

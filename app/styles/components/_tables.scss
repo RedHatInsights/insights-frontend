@@ -1,3 +1,33 @@
+table {
+	width: 100%;
+
+	tr {
+		border: none;
+	}
+
+	tr td,
+	tr th {
+		@include rem('padding', 24px $global-padding/2);
+		font-family: 'Overpass';
+	}
+
+	th,
+	td {
+		text-align: left;
+	}
+
+	tr:nth-child(even) {
+		background: #F7F7F7;
+	}
+
+	thead {
+		border-bottom: 1px solid #ddd;
+
+		td { @include rem('padding', $global-padding); }
+	}
+}
+
+
 label { color: #515258; }
 table input[type="checkbox"] + span { margin-left: 10px; }
 

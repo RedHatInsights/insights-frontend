@@ -1,6 +1,19 @@
-.table-utilities .flexgrid {
-  [class^="col-"],
-  div[class*=" col-"] {
-    padding-bottom: 0;
+.table-utilities {
+  display: flex;
+
+  .table-search {
+    flex: 0 1 30%;
+
+    @include media-query(md){
+      flex: 0 1 20%;
+    }
+  }
+
+  filters {
+   flex: 1 1 70%; 
+  }  
+
+  check-in-select {
+    margin-left: $global-padding;
   }
 }

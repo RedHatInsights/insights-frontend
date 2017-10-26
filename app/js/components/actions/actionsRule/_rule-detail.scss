@@ -1,0 +1,16 @@
+.rule-detail {
+  display: flex;
+  @include rem('margin', 0 -$global-padding);
+  @include rem('margin-bottom', $global-margin);
+
+  .detail,
+  .meta { @include rem('padding', 0 $global-padding); }
+
+  .detail {
+    flex: 1 1 66%;
+  }
+
+  .meta {
+    flex: 1 1 33%;
+  }
+}

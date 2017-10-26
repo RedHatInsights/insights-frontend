@@ -3,6 +3,7 @@ $define-fa: true !default;
 //==================================================================*/
 @import '../../node_modules/font-awesome/scss/font-awesome';
 @import 'includes/vars';
+@import 'includes/colors';
 @import 'includes/mixins';
 @import 'includes/helpers';
 @import 'includes/animations';
@@ -20,6 +21,17 @@ $define-fa: true !default;
 @import 'elements/forms';
 @import 'elements/tabs';
 @import 'elements/alert-text';
+
+
+// Layout
+//==================================================================*/
+@import 'layout/platform';
+@import 'layout/platform-grid';
+@import 'layout/topbar';
+@import 'layout/insightslogo';
+@import 'layout/sidenav';
+@import 'layout/main';
+@import 'layout/footer';
 
 
 // Include CSS from bower components
@@ -86,7 +98,6 @@ $define-fa: true !default;
 @import 'components/filter-search';
 @import 'components/error-infos';
 @import 'components/top-bar';
-@import 'components/tam-panel';
 @import 'components/header';
 @import 'components/utilities-tray';
 @import 'components/filters';
@@ -98,7 +109,6 @@ $define-fa: true !default;
 @import 'components/groups';
 @import 'components/chart-';
 @import 'components/fa-';
-@import 'components/legend-nav';
 @import 'components/actions-breadcrumbs';
 @import 'components/content-block';
 @import 'components/system-overlay';

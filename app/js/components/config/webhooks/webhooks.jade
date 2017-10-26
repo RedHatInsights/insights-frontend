@@ -28,7 +28,6 @@
             span.icon-inline
               a(ng-click='delete(webhook)')
                 i.fa.fa-remove(tooltip="{{'Remove' | translate}}")
-    .pull-right
-      .btn-group
-        button.btn.btn-sm.btn-secondary(ng-click='ping()', translate, ng-disabled='!isPingable()') Test event
-        button.btn.btn-sm.btn-accent(ui-sref='app.config-webhook-edit({id: "new"})', translate) Add webhook
+    md-button-group.pull-right
+      md-button.md-primary.md-button-ghost-blue(ng-click='add()', translate) Add webhook
+      md-button.md-raised.md-primary(ng-click='ping()', translate, ng-disabled='!isPingable()') Test event

@@ -1,6 +1,23 @@
+body {
+  @include font-size(14px, 19px);
+  font-family: 'OverpassLight', helvetica;
+  font-weight: 500;
+}
+
 h1, h2, h3, h4, h5, h6 {
   -webkit-font-smoothing: antialiased;
   color: #585858;
+}
+
+h1 {
+  font-family: 'OverpassBold', helvetica;
+}
+
+h2 {
+  @include font-size(24px, 24px);
+  margin: 0;
+  @include rem('margin-bottom', $global-padding);
+  font-weight: 700;
 }
 
 h2.headline {
@@ -29,4 +46,8 @@ h2.headline {
 
 .large-text {
   @include font-size(16px);
+}
+
+p + p {
+  @include rem('margin-bottom', $global-padding);
 }

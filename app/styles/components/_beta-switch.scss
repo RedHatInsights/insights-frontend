@@ -1,41 +1,23 @@
-.beta-switch {
-  //z-index: 100;
+topbar .beta-switch {
+  display: inline-flex;
 
-  @include media-query(sm) {
-  	position: absolute;
-    right: 0;
-    top: -48px;
+  button.md-button {
+    justify-content: center;
+    @include rem('border-radius', 20px);
+
+    span { 
+      @include rem('font-size', 14px);
+    }
+
   }
 
-  a {
-    @include rem('padding-top', 4px);
-    @include rem('padding-bottom', 4px);
-    display: block;
-    color: #fff;
-    font-weight: 100;
+  .beta-dropdown { @include rem('padding', $global-padding); }
+
+  .dropdown .button-content-wrapper { @include rem('padding', $global-padding); }
+
+  md-checkbox {
+    margin-bottom: 0px;
+    @include rem ('margin-left', 5px);
+    span { @include rem('font-size', 14px); }
   }
-
-  span + .btn { @include rem('margin-left', 8px); }
-
-  .btn {
-    @include rem('padding', 4px 14px);
-    border-radius: 24px;
-    font-weight: 700;
-    font-style: italic;
-    color: $blue;
-    background: #fff;
-  }
-
-  .btn.btn-blue {
-    color: #fff;
-    background: $blue;
-    animation: .2s;
-    border-left: 4px solid $blue;
-    border-right: 4px solid $blue;
-
-    //&:hover {
-    //  background: lighten($blue, 10);
-    //}
-  }
-
 }

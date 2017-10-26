@@ -1,10 +1,12 @@
 .digests-page
   page-header(title="Executive Report", icon="fa-bar-chart", ng-class="{'inactive': !expandBar, 'active': expandBar}")
     .spinner.spinner-sm.pull-right(ng-if="downloading")
-    button.btn.btn-sm.btn-accent.pull-right(ng-click='downloadPdf()', ng-if="!downloading", translate) Download PDF
+    md-button.md-primary.pull-right(ng-click='downloadPdf()', ng-if="!downloading", translate) Download PDF
+
   .content-wrap.margin-top(ng-show='loading')
     .text-center
       .spinner.spinner-lg
+
   .content-wrap(ng-if='!loading && digestError')
     .row
       .col-xs-12.col-lg-8.alert.alert-danger
@@ -12,6 +14,7 @@
           span.icon-inline
             i.glyphicon.glyphicon-exclamation-sign
           span(translate) {{digestError}}
+
   .content-wrap.margin-top(ng-show='!loading && systemsTilTen > 0')
     .row
       .col-sm-12.col-md-8.col-md-offset-2.text-center
@@ -19,85 +22,86 @@
         h2(translate) Please register
           span(translate, translate-n='systemsTilTen', translate-plural='{{$count}} more systems') {{systemsTilTen}} more system
           | &nbsp;to enable reporting for your account.
+
   .content-wrap(ng-show='!loading && systemsTilTen < 1')
-    section
-      .row
-        .col-md-4
-          h2.section-title(translate) Overall score
-          .gauge.gauge-score
-            .crop
-              .grad
-            gauge-marker(current="latest_score", difference="score_difference")
-            .score
-              h3 {{latest_score}}
-              span(translate, ng-if='latest_score < 400') Score needs attention
-              span(translate, ng-if='latest_score >= 400 && latest_score < 550') Score is poor
-              span(translate, ng-if='latest_score >= 550 && latest_score < 700') Score is good
-              span(translate, ng-if='latest_score >= 700') Score is excellent
-            footer.footer
-              span.num.floor 250
-              span.num.ceiling 850
+    .row
+      .col-md-4
+        md-card
+          md-card-header
+            md-card-header-title(translate) Overall score
+          md-card-content
+            .gauge.gauge-score.align-center
+              .crop
+                .grad
+              gauge-marker(current="latest_score", difference="score_difference")
+              .score
+                h3 {{latest_score}}
+                span(translate, ng-if='latest_score < 400') Score needs attention
+                span(translate, ng-if='latest_score >= 400 && latest_score < 550') Score is poor
+                span(translate, ng-if='latest_score >= 550 && latest_score < 700') Score is good
+                span(translate, ng-if='latest_score >= 700') Score is excellent
+              footer.footer
+                span.num.floor 250
+                span.num.ceiling 850
 
-        .col-md-8
-          h2.section-title(translate) Weekly action count by category
-          .row.padding-top
-            .col-xs-6.col-md-3(ng-repeat='cat in digest_hits_per_cat')
-              .gauge.gauge-count-and-change
-                .count-and-change
-                  .count.large.bold {{cat.current}}
-                  .change
-                    i.fa.fa-caret-up.increase(ng-if='cat.direction > 0')
-                    i.fa.fa-caret-down.decrease(ng-if='cat.direction < 0')
-                    i.fa.fa-minus.no-change(ng-if='cat.direction === 0')
-                .title
-                  i.fa(aria-hidden="true" ng-class='cat.icon')
-                  strong.uppercase &nbsp;{{cat.label}}
+      .col-md-8
+        md-card
+          md-card-header
+            md-card-header-title(translate) Weekly action count by category
+          md-card-content
+            .row.padding-top
+              .col-xs-6.col-md-3(ng-repeat='cat in digest_hits_per_cat')
+                .gauge.gauge-count-and-change
+                  .count-and-change
+                    .count.large.bold {{cat.current}}
+                    .change
+                      i.fa.fa-caret-up.increase(ng-if='cat.direction > 0')
+                      i.fa.fa-caret-down.decrease(ng-if='cat.direction < 0')
+                      i.fa.fa-minus.no-change(ng-if='cat.direction === 0')
+                  .title
+                    i.fa(aria-hidden="true" ng-class='cat.icon')
+                    strong.uppercase &nbsp;{{cat.label}}
 
-            .col-sm-12
-              hr
-              span.large-text(ng-show='!loading', translate)
-                i.fa.fa-check-circle.green(ng-if='resolvedIssues > 0')
-                i.fa.fa-exclamation-circle.red(ng-if='resolvedIssues === 0')
-                | &nbsp;You've resolved&nbsp;
-                strong(ng-class='{"green": resolvedIssues > 0, "red": resolvedIssues === 0}', translate, translate-n='resolvedIssues', translate-plural='{{$count}} issues') {{resolvedIssues}} issue
-                | &nbsp;in the past {{timePeriod()}} days.
+          md-card-footer
+            hr
+            span.large-text(ng-show='!loading', translate)
+              i.fa.fa-check-circle.green(ng-if='resolvedIssues > 0')
+              i.fa.fa-exclamation-circle.red(ng-if='resolvedIssues === 0')
+              | &nbsp;You've resolved&nbsp;
+              strong(ng-class='{"green": resolvedIssues > 0, "red": resolvedIssues === 0}', translate, translate-n='resolvedIssues', translate-plural='{{$count}} issues') {{resolvedIssues}} issue
+              | &nbsp;in the past {{timePeriod()}} days.
 
-    section.gray.full-width
-      ul.nav.nav-tabs-simple.underline(role='tablist')
-        li.active(role='presentation')
-          a(href='#metrics', aria-controls='metrics', role='tab', data-toggle='tab', translate) Action trends
-        li(role='presentation')
-          a(href='#systemsRegistered', aria-controls='systemsRegistered', role='tab', data-toggle='tab', translate) Active Systems
-        li(role='presentation')
-          a(href='#scoreHistory', aria-controls='messages', role='tab', data-toggle='tab', translate) Score history
-        li(role='presentation')
-          a(href='#allRuleHits', aria-controls='allRules', role='tab' data-toggle='tab', translate) All Rule hits
+    md-card.md-padding
+      md-tabs.md-dynamic-height.md-border-bottom(md-swipe-content="true")
+        md-tab(label="{{'Action Trends'|translate}}")
+          md-content.md-padding
+            digest-graph(drop-down='Category', digest-key='metrics', digest='digest_metrics' height='400' ng-if="!loading")
 
-      // Tab panes
-      .tab-content
-        #metrics.metrics.tab-pane.fade.in.active(role='tabpanel')
-          digest-graph(drop-down='Category', digest-key='metrics', digest='digest_metrics' height='400' ng-if="!loading")
-        #systemsRegistered.tab-pane.fade(role='tabpanel')
-          digest-graph(digest-key='registered', digest='digest_registered' height='400' ng-if="!loading")
-        #scoreHistory.tab-pane.fade(role='tabpanel')
-          digest-graph(digest-key='score', digest='digest_score' height='400' ng-if="!loading")
-        #allRuleHits.tab-pane.fade(role='tabpanel' ng-if="!loading")
-          //- inline style... remove this later
-          table(style='background-color: #fff')
-            thead
-              tr
-                th(translate) Rule
-                th(translate) Impacted Systems
-                th(translate) Total Risk
-            tbody
-              tr(ng-repeat='rule in allRuleHits')
-                td
-                  a(ui-sref="app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})") {{ rule.description }}
-                td {{rule.report_count}}
-                td
-                  severity-icon(severity='rule.severity', type='severity', label='')
+        md-tab(label="{{'Active Systems'|translate}}")
+          md-content.md-padding
+            digest-graph(digest-key='registered', digest='digest_registered' height='400' ng-if="!loading")
 
-    section
+        md-tab(label="{{'Score History'|translate}}")
+          md-content.md-padding
+            digest-graph(digest-key='score', digest='digest_score' height='400' ng-if="!loading")
+
+        md-tab(label="{{'All Rule hits'|translate}}")
+          md-content.md-padding
+            table(style='background-color: #fff')
+              thead
+                tr
+                  th(translate) Rule
+                  th(translate) Impacted Systems
+                  th(translate) Total Risk
+              tbody
+                tr(ng-repeat='rule in allRuleHits')
+                  td
+                    a(ui-sref="app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})") {{ rule.description }}
+                  td {{rule.report_count}}
+                  td
+                    severity-icon(severity='rule.severity', type='severity', label='')
+        
+    md-card.md-padding
       .row
         .col-md-6
           h2.section-title(translate) Ten Most Impacted Systems

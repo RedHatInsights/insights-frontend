@@ -1,3 +1,7 @@
+body {
+  font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+}
+
 .main-content {
   color: #646464;
   position: relative;
@@ -43,24 +47,13 @@ input.rounded {
   }
 }
 
-body, .insights body {
-	background: url("../static/images/bg_body.jpg") no-repeat #4a5664;
-	background-size: cover;
-	background-attachment: fixed;
-  height: initial;
-}
-
 .band.band-wispy {
 	background: url("../static/images/bg1.jpg");
 	background-size: cover;
 }
 
-.insights body {
-    @include font-size(14px, 19px);
-}
-
 .chart-container p {
-    @include font-size(16px);
+    @include font-size(14px);
 }
 
 .success {
@@ -105,10 +98,10 @@ body, .insights body {
 .content-wrap, .content-wrapper {
   //padding-left: 15px;
   //padding-right: 15px;
-  @include rem('padding', $global-padding $global-padding 0);
+  @include rem('padding', 0 $global-margin $global-margin);
 
   @include media-query (sm) {
-    @include rem('padding', $global-margin $global-margin 0);
+    @include rem('padding', 0 $global-margin $global-margin);
   }
 }
 

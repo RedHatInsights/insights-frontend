@@ -1,0 +1,112 @@
+$sidenav-bg: #454853;
+$dashboard-nav-border-color: #403b3f;
+$dashboard-nav-header-bg: #4d464b;
+$dashboard-nav-input-bg: #322e31;
+$aside_anchor_bg: #4d464b;
+$aside_anchor_color: #fff;
+$aside_anchor_hover_bg: gray;
+
+
+.platform-grid > sidenav {
+  grid-area: sidenav;
+}
+
+sidenav {
+  transition: .2s;
+  overflow-y: auto;
+  background-color: $sidenav-bg;
+  box-shadow: inset -14px 0 40px 0 rgba(0, 0, 0, .1);
+}
+
+.platform-grid.collapsed {
+  grid-template-columns: minmax(30px, max-content) 1fr;
+
+  sidenav {
+    .text { 
+      margin: 0;
+      position: absolute;
+      display: none; 
+    }
+
+    .primary-nav {
+      ul li a:hover, 
+      ul li a.current { box-shadow: inset 2px 0 0 #00B7FF; }
+    }
+  }
+
+  account-select { display: none; }
+}
+
+sidenav .header-block {
+  transition: .2s;
+  position: relative;
+  @include rem('padding', $global-padding);
+  color: #fff;
+
+  label { color: #fff; }
+
+  input {
+    width: 100%;
+    @include rem('padding', $global-padding/2);
+    border: none;
+    box-shadow: none;
+    background: #292b31;
+  }
+
+  .internal {
+    margin-top: 5px;
+  }
+
+  .internal input { width: 15px; }
+}
+
+sidenav nav.primary-nav {
+
+  ul {
+    @include reset();
+
+    li {
+      @include reset();
+      line-height: 0;
+      border-top: 1px solid rgba(255,255,255,.1);
+      border-bottom: 1px solid rgba(0,0,0,.4);
+    }
+
+    li:first-child { border-top: none; }
+    li:last-child { border-bottom: none; }
+
+    li a.md-button-nav {
+      // display: flex;
+      @include rem('padding', $global-margin);
+      color: #fff;
+      height: auto;
+      font-weight: 700;
+      transition-duration: .4s;
+      justify-content: flex-start;
+
+      .text {
+        @include rem('margin-left', 12px);
+        text-transform: capitalize;
+      }
+    }
+
+    li a:hover,
+    li a.current {
+      background: rgba(255,255,255,.075);
+      box-shadow: inset 8px 0 0 $blue-light;
+    }
+
+    li a.current .fa {
+      color: $blue-light;
+      text-decoration: none;
+    }
+  }
+}
+
+sidenav a.md-button{
+  margin: 0px;
+}
+
+sidenav nav.primary-nav ul li a {
+  display: flex;
+}

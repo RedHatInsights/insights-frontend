@@ -1,4 +1,8 @@
+/*global require, module*/
 'use strict';
+
+const Jwt = require('jwt-redhat').default;
+
 function scrollTop() {
     window.scrollTo(0, 0);
 }
@@ -104,6 +108,14 @@ function OnRun(
     $timeout(function () {
         $anchorScroll($location.hash());
     }, 1);
+
+    Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
+
+    Jwt.onInit(() => {
+        if (!Jwt.isAuthenticated()) {
+            Jwt.login();
+        }
+    });
 }
 
 module.exports = OnRun;
