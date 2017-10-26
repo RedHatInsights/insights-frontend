@@ -18,7 +18,7 @@ section
           .rules-group(ng-hide="loading")
             .rules-group-content
               .content-block.content-block-outline.rule(
-                ng-repeat="rule in rules | filter:filter | orderBy:'description'",
+                ng-repeat="rule in pagedRules | filter:filter | orderBy:'description'",
                 ng-class="{faded: rule.ack_id, hidden: (hideIgnored && rule.ack_id)}")
                 .header(id="{{::rule.rule_id}}")
                   //TODO: activate new item
@@ -58,3 +58,12 @@ section
               .row.row-short(ng-show='rules.length === 0')
                 .col-xs-12.text-center
                   strong(translate) There are no rules for the selected filters.&nbsp;
+
+      .row.row-short(ng-show='!loading')
+        .col-sm-12
+          pagination.pull-right.pagination-blue(
+            ng-if="rules.length > pager.perPage",
+            total-items="rules.length",
+            ng-model="pager.currentPage",
+            items-per-page="pager.perPage",
+            ng-change="doPage()")
