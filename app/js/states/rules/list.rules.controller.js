@@ -79,7 +79,9 @@ function ListRuleCtrl(
     $scope.$on('reload:data', getData);
 
     $scope.doPage = () => {
-        const itemNumber =  $scope.pager.currentPage * $scope.pager.perPage;
+        const itemNumber =
+              ($scope.pager.currentPage * $scope.pager.perPage) - $scope.pager.perPage;
+
         $scope.pagedRules = $scope.rules.slice(
             itemNumber,
             itemNumber + $scope.pager.perPage);
@@ -115,6 +117,7 @@ function ListRuleCtrl(
         });
 
         $scope.pager = new Utils.Pager(3);
+
     }
 
     $scope.search = function (model) {
