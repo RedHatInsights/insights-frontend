@@ -339,3 +339,24 @@
 .modal-open .pointer {
     cursor: pointer;
 }
+
+.system-modal {
+    .groups {
+        ul {
+            list-style: none;
+            display: inline;
+
+            li {
+                display: inline;
+                background-color: white;
+
+                a {
+                    color: white;
+                    background-color: $blue_dark;
+                    margin: 2px;
+                    padding: 5px;
+                }
+            }
+        }
+    }
+}

@@ -2,6 +2,7 @@
 
 var apiModule = require('./');
 var find = require('lodash/find');
+const URI = require('urijs');
 
 /**
  * @ngInject
@@ -330,6 +331,16 @@ function System(
                 defer.resolve();
                 return defer.promise;
             }
+        },
+
+        getSystemGroups: function (systemId) {
+            const uri = URI(InsightsConfig.apiRoot);
+            uri.segment('systems');
+            uri.segment(systemId);
+            uri.segment('groups');
+            uri.addSearch(AccountService.queryParam());
+
+            return $http.get(uri.toString());
         }
     };
 }
