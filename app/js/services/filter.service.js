@@ -631,7 +631,7 @@ function FilterService(
 
         //age
         if (includeParam('age') && _age !== 0) {
-            query.published_age = _age;
+            query.publish_date = `-${_age}days`;
         }
 
         //category

@@ -24,7 +24,7 @@ function ageSelectCtrl($location,
         }
     };
 
-    for (let len of [7, 30, 90]) {
+    for (let len of [7, 15, 30, 90]) {
         $scope.options[len] = {
             label: gettextCatalog.getString(`Last ${len} Days`),
             tag: gettextCatalog.getString(`Age: ${len} Days`)
