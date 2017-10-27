@@ -38,16 +38,18 @@ function ageSelectCtrl($location,
 
         $rootScope.$broadcast(Events.filters.tag,
                               $scope.selected.tag,
-                              Events.filters.ageSelect);
+                              Events.filters.age);
     };
 
     function read() {
-        let age = FilterService.getAge();
+        let age = $location.search()[Events.filters.age] ?
+            $location.search()[Events.filters.age] : FilterService.getAge();
+
         $scope.selected = $scope.options[age];
 
         $rootScope.$broadcast(Events.filters.tag,
                               $scope.selected.tag,
-                              Events.filters.ageSelect);
+                              Events.filters.age);
     }
 
     read();
@@ -57,7 +59,7 @@ function ageSelectCtrl($location,
     });
 
     $scope.$on(Events.filters.removeTag, function (event, filter) {
-        if (filter === Events.filters.ageSelect) {
+        if (filter === Events.filters.age) {
             $scope.select(0);
         }
     });

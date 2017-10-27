@@ -19,7 +19,7 @@ function FilterService(
     };
 
     let filterService = {};
-    let _age = $location.search().age || 0;
+    let _age = $location.search().age || '0';
     let _category = $location.search().category || 'all';
     let _incidents = $location.search()[Events.filters.incident] || 'all';
     let _ansibleSupport = $location.search()[Events.filters.ansibleSupport] || 'all';
@@ -630,7 +630,7 @@ function FilterService(
         }
 
         //age
-        if (includeParam('age') && _age !== 0) {
+        if (includeParam('age') && _age !== '0') {
             query.publish_date = `-${_age}days`;
         }
 

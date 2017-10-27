@@ -104,7 +104,8 @@ function Routes($stateProvider) {
     $stateProvider
         .state('app.rules', {
             url: '/rules?product&roles&osp_deployment&docker_host&category' +
-            '&ansibleSupport&incident&ruleStatus&impact&likelihood&totalRisk',
+            '&ansibleSupport&incident&ruleStatus&impact&likelihood&totalRisk' +
+            '&age',
             templateUrl: 'js/states/rules/list-rules.html',
             controller: 'ListRuleCtrl',
             title: 'Rules',
