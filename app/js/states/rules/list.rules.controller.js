@@ -116,8 +116,7 @@ function ListRuleCtrl(
             $scope.loading = false;
         });
 
-        $scope.pager = new Utils.Pager(3);
-
+        $scope.pager = new Utils.Pager(10);
     }
 
     $scope.search = function (model) {
