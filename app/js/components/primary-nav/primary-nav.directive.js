@@ -6,12 +6,7 @@ const includes = require('lodash/includes');
 /**
  * @ngInject
  */
-function sideNavCtrl($scope, Utils, $state, InsightsConfig) {
-    $scope.isHidden = false;
-    $scope.toggleNav = function () {
-        $scope.isHidden = !$scope.isHidden;
-    };
-
+function primaryNavCtrl($scope, Utils, $state, InsightsConfig) {
     $scope.utils = Utils;
     $scope.state = $state;
     $scope.includes = includes;
@@ -38,13 +33,13 @@ function sideNavCtrl($scope, Utils, $state, InsightsConfig) {
     };
 }
 
-function sideNav() {
+function primaryNav() {
     return {
-        templateUrl: 'js/components/sideNav/sideNav.html',
+        templateUrl: 'js/components/primary-nav/primary-nav.html',
         restrict: 'E',
-        replace: true,
-        controller: sideNavCtrl
+        replace: false,
+        controller: primaryNavCtrl
     };
 }
 
-componentsModule.directive('sideNav', sideNav);
+componentsModule.directive('primaryNav', primaryNav);

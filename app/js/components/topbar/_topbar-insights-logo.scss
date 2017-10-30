@@ -1,0 +1,16 @@
+topbar .insights-logo {
+  align-self: left;
+
+  @include media-query(sm){ display: inline-flex; }
+
+  img { @include rem('width', 120px); }
+
+  .home-link {
+    align-self: center;
+  }
+
+  button {
+    border: none;
+  }
+}
+

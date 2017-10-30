@@ -8,7 +8,7 @@ table {
 	tr td,
 	tr th {
 		@include rem('padding', 24px $global-padding/2);
-		font-family: 'Overpass';
+		font-family: 'overpass';
 	}
 
 	th,

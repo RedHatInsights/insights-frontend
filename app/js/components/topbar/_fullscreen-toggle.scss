@@ -1,0 +1,10 @@
+.toggle-fullscreen {
+  display: none;
+  background: none;
+  transform: scaleX(-1);
+  @include rem('padding', $global-margin);
+  
+  @include media-query(sm){ display: inline-block; }
+}
+
+.collapsed .toggle-fullscreen { i.fa { transform: scaleX(1); } }

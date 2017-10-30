@@ -2,8 +2,12 @@
 .md-button {
 	width: auto;
   height: auto;
-  line-height: auto;
+  min-width: 0;
+  min-height: 0;
+  color: $base-color;
+  @include font-size(14px, 1);
   @include rem(padding, $global-padding);
+  text-transform: none;
   align-items: center;
   justify-content: center;
 }
@@ -11,6 +15,29 @@
 button.md-button.md-button-sm, a.md-button.md-button-sm{
 	// height: 20px !important;
 }
+
+.md-dropdown-plain {
+	.md-button.md-default-theme:not([disabled]).md-focused, 
+	.md-button:not([disabled]).md-focused, 
+	.md-button.md-default-theme:not([disabled]):hover, 
+	.md-button:not([disabled]):hover {
+		background: none;
+	}
+
+	button {
+		margin: 0;
+		@include rem('padding', 4px $global-padding/2);
+		display: inline-flex;
+
+		i,
+		.icon,
+		.caret {
+			flex: 0;
+			@include rem('margin-left', $global-padding/2);
+		}
+	}
+}
+
 
 button.md-button.md-button-ghost-blue{
 	border: 1px solid $blue-light;
@@ -68,10 +95,8 @@ md-checkbox.md-checkbox-list { margin: 0px; }
 }
 
 md-card{
-	font-family: Overpass, Helvetica, Arial, sans-serif;
+	
 	&-header{
-		font-family: Overpass-bold, Helvetica, Arial, sans-serif;
-		-webkit-font-smoothing: antialiased;
 		@include rem('font-size', 17px);
 		color: #585858;
 		background-color: $white-soft;
@@ -80,6 +105,7 @@ md-card{
 		justify-content: space-between;
 		align-items: center;
 		@include rem('padding', 10px 15px);
+
 		md-button{
 			size: 50%;
 		}
@@ -112,8 +138,14 @@ md-card{
 	md-card-content { background-color: $white-soft; }
 }
 
+// Dropdown styling
+//==================================================================*/
 md-menu-content{
-	position: fixed;
+	max-height: 80vh;
+}
+
+md-open-menu-container {
+
 }
 
 
@@ -137,7 +169,7 @@ md-menu-content{
 }
 
 .code-type{
-	font-family: 'OverpassBold';
+	font-family: 'overpassBold';
 	&-jade::before{
 		content: "Jade";
 		color: yellow;

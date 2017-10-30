@@ -1,6 +1,6 @@
 body {
   @include font-size(14px, 19px);
-  font-family: 'OverpassLight', helvetica;
+  font-family: 'overpass', helvetica;
   font-weight: 500;
 }
 
@@ -10,7 +10,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-family: 'OverpassBold', helvetica;
+  font-family: 'overpass', helvetica;
+  font-weight: 700;
 }
 
 h2 {

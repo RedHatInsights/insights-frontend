@@ -1,12 +1,30 @@
-// .btn, button {
-//     outline: none;
-//     border: none;
+.button-dropdown {
 
-//     &:active, &:focus, &:visited {
-//         outline: none !important;
-//         box-shadow: none;
-//     }
-// }
+}
+
+.dropdown-plain {
+  padding: 0;
+}
+
+
+a,
+.btn, 
+button {
+    outline: none;
+    border: none;
+
+    &:active, &:focus, &:visited {
+        outline: none !important;
+        box-shadow: none;
+    }
+}
+
+button,
+button:active,
+button:focus {
+  // border: none;
+  // outline: 0;
+}
 
 .button-filter {
   @include rem('padding', $global-padding/2 $global-padding);

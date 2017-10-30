@@ -1,10 +1,25 @@
 .platform-grid {
   display: grid;
+  grid-template-rows: max-content auto max-content;
+  grid-template-areas: "topbar"
+                      "main"
+                      "primary-nav";    
   height: 100%;
-  grid-template-columns: max-content 1fr;
-  grid-template-rows: minmax(30px, max-content) 1fr;
-  grid-template-areas: "topbar topbar"
-                      "sidenav main";
 
-  @include media-query(md) { grid-template-rows: minmax(30px, max-content) 1fr; }
+
+  @include media-query(sm){
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: minmax(30px, max-content) 1fr;
+    grid-template-areas: "topbar topbar"
+                        "primary-nav main";    
+  }
+
+  // @include media-query(md) { grid-template-rows: minmax(30px, max-content) 1fr; }
+}
+
+.platform-grid.collapsed {
+  grid-template-columns: minmax(30px, max-content) 1fr;
+
+  .primary-nav .text { @include media-query(sm){ display: none; } }
+  account-select { display: none; }
 }

@@ -135,8 +135,14 @@
 @mixin font-size($size, $line: $size * 1.4) {
   font-size: ($size);
   font-size: ($size / $base-font-size) + rem;
-  line-height: $line;
-  line-height: ($line / $base-font-size) + rem;
+
+  @if $line == 1 { 
+    line-height: 1; 
+
+  } @else if $line != null {
+    line-height: $line;
+    line-height: ($line / $base-font-size) + rem;
+  }
 }
 
 @mixin media-query($point) {

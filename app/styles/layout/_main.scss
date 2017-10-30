@@ -1,5 +1,6 @@
 .platform-grid > main {
-  grid-area: main;
-  overflow-y: auto;
   background: #fff;
+  grid-area: main;
+
+  @include media-query(sm){ overflow-y: auto; }
 }

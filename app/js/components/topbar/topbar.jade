@@ -1,9 +1,14 @@
+.cell.insights-logo
+  button.toggle-fullscreen(ng-click='sidenavCollapsed = !sidenavCollapsed')
+    i.fa.fa-indent
+  a.home-link(ui-sref='app.overview') 
+    span.hidden(translate) Red Hat Insights
+    img(src="../static/images/l_insights.svg")
+
 .cell
-  insights-logo
-.cell
-  feedback-button.btn-feedback
   .global-filters(ng-class='{disabled: disabled}')
     group-select(disabled='disabled')
+
 .cell.topbar-utilities
   menu.notifications
     bullhorn(icon='fa-bullhorn', type='announcements')
