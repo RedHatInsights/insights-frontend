@@ -5,8 +5,7 @@ section.widget-block
     span.light(translate) Summary
     a.cta-link(ui-sref='app.maintenance', translate) View planner
   .maintenance-plan-lite
-    //- .row.row-short.padding-top(ng-if='getFirstSuggestion()')
-    .row.row-short.padding-top
+    .row.row-short.padding-top(ng-if='getFirstSuggestion()')
       .col-sm-12
         .maintenance-plan-lite
           a.suggestions(ng-click='openPlan(getFirstSuggestion())')
