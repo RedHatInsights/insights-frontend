@@ -12,14 +12,24 @@ function SystemModalCtrl(
     $location,
     $timeout,
     $modalInstance,
+    activeTab,
     system,
     rule,
     AnalyticsService,
-    Utils,
-    FilterService) {
+    FilterService,
+    System) {
 
+    // set the default tab for system modal; system if no value is passed in
+    $scope.activeTab = activeTab || 'system';
     $scope.report = {};
     $scope.modal = $modalInstance;
+
+    // if there are no policies, hide the policies tab
+    function init () {
+        System.getSystemPolicies($scope.system.system_id).then((policies) => {
+            $scope.hasPolicies = policies.data.total > 0;
+        });
+    }
 
     function close() {
         $modalInstance.dismiss('close');
@@ -70,6 +80,8 @@ function SystemModalCtrl(
 
         return $scope.system.system_id;
     };
+
+    init();
 }
 
 componentsModule.controller('SystemModalCtrl', SystemModalCtrl);
