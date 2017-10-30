@@ -1,8 +1,4 @@
 .system-metadata {
-  //@include media-query(sm) { @include rem('padding-left', 25px); }
-
   .metadata-value { word-wrap: break-word; }
   .alert-danger { @include rem('margin-top', $global-padding); }
-
-  .basic-information { .icon-inline { @include rem('padding-left', 64px); } }
 }
