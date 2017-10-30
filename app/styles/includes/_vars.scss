@@ -26,6 +26,23 @@ $global-margin: 30px;
 // Color Settings
 //==================================================================*/
 
+// State Colors
+//--------------------------------------------------------------*/
+
+$stateColors: (
+  f-red: #D53E40,
+  bs-red: #D53E40,
+  bg-red: #FFE2E2,
+
+  f-yellow: #EE8C38,
+  bs-yellow: #EE8C38,
+  bg-yellow: #FDF0E1,
+
+  f-green: #399130,
+  bs-green: #399130,
+  bg-green: #E6F2E6
+);
+
 // Brand Specific
 //--------------------------------------------------------------*/
 $blue: #2097e6;
@@ -72,6 +89,11 @@ $button-font-color: #fff;
 $brand-info: #428bca;
 $brand-error: #d9534f;
 $brand-success: #5cb85c;
+
+// Disabled
+//--------------------------------------------------------------*/
+$bg-disabled: #eeeeee;
+$f-disabled: #cbcbcb;
 
 // Text and Links
 //--------------------------------------------------------------*/

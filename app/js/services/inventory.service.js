@@ -56,7 +56,7 @@ function InventoryService($modal, FilterService, System, InsightsConfig) {
 
     inventoryService._systemModal = null;
 
-    inventoryService.showSystemModal = function (system, loadSystem) {
+    inventoryService.showSystemModal = function (system, loadSystem, activeTab) {
 
         function displayModal(system) {
             if (typeof InsightsConfig.systemShowSystem === 'function') {
@@ -87,6 +87,10 @@ function InventoryService($modal, FilterService, System, InsightsConfig) {
 
                     rule: function () {
                         return false;
+                    },
+
+                    activeTab: function () {
+                        return activeTab;
                     }
                 }
             });

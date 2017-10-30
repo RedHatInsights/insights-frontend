@@ -1,0 +1,52 @@
+.policiesID-page
+  .breadcrumbs
+      ol
+        li
+          a(ui-sref='app.list-policies')
+            span(translate) Policies
+        li
+          span {{policyId}}
+  page-header(title="Policies", icon="fa-gavel")
+
+  .content-wrap
+    section.section-topic-details
+      span.description(translate) POLICY ID
+      h2 {{policyName}}
+    section.table-utilities
+      .row
+        .col-xs-7.col-sm-5
+          search-box(placeholder="{{'Search systems' | translate}}", on-search='search(model)', throttle='1000', ng-model='searchText')
+    .row.row-short
+      .col-md-12
+        table.table.ng-table
+          thead
+            tr
+              th.sortable.nowrap(ng-class="sorter.getSortClass('system.toString')", ng-click="sorter.sort('system.toString')", translate) System Name
+              th.nowrap(translate) Summary
+          tbody(ng-show='!loading && policy !== null')
+            tr(ng-repeat="resource in policy.resources | orderBy: sorter.predicate : sorter.reverse")
+              td.nowrap
+                a(ng-click='showSystem(resource.system_id)') {{resource.system.toString}}
+              td.nowrap(ng-class="resource.status", translate) Checks
+                span &nbsp;{{resource.status}}
+
+    .row.row-short(ng-show='policy === null && !loading')
+      .col-xs-12.text-center
+        strong(translate) There are no policies for the selected options.&nbsp;
+
+
+
+    .row.row-short(ng-if='!loading && policy.total > pager.perPage')
+      .col-sm-12
+        pagination.pull-right.pagination-blue(
+          total-items="policy.total",
+          ng-model="pager.currentPage",
+          items-per-page="pager.perPage",
+          ng-change="paginate()")
+
+  .animate-wrapper.margin-top
+    .row.row-short.ng-animate-enabled(ng-show='loading')
+      .col-xs-12
+        .load.text-center
+          .spinner.spinner-lg
+          span(translate) Loading policy information…
