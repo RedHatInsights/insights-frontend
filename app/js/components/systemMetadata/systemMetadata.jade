@@ -1,11 +1,78 @@
-.row(ng-if='loading')
-  .col-sm-12
-    i.fa.spinner-xs.spinner
-    span Loading...
-.row.system-metadata(ng-if='!loading')
-  .col-sm-6(ng-repeat='facts in systemFacts')
-    table.meta-table.table-fixed
-      tbody
-        tr(ng-repeat='data in facts')
-          td(translate) {{data.label}}
-          td.metadata-value(translate) {{data.value}}
+.system-metadata(ng-if='!loading')
+  .flexgrid.equalheights
+    .row
+      // Hostname and UUID
+      .col-sm-7
+        .basic-information
+          .icon-inline
+            i.fa.fa-clone.fa-4x(ng-show="getSystemType() === 'Virtual'", tooltip="{{'Server type: Virtual' | translate}}")
+            i.fa.fa-server.fa-4x(ng-show="getSystemType() !== 'Virtual'", tooltip="{{'Server type: Physical' | translate}}")
+
+            h2.hostname.ellipsis-overflow(translate, ng-if="system.hostname && !system.display_name") {{ system.hostname }}
+
+            // always show the uuid.... it must exist
+            .uuid.ellipsis-overflow
+              b UUID:&nbsp;
+              span(translate) {{ getUUID() }}
+            view-system-groups(system="system")
+            .alert-danger.text-center.pad5(ng-if='!system.isCheckingIn')
+              span(translate) This system is not checking in.
+
+      // Basic system meta-data table
+      .col-sm-5
+        table.meta-table
+          tbody
+            tr(ng-repeat='facts in initialMetadata')
+              td
+                b(translate) {{facts.label}}
+              td(translate) {{facts.value}}
+
+
+#expandableDataTable.expandable-data-table(ng-if='!loading; hasMetadata()', ng-class="{expanded: expanded, hover: hovering}")
+  // Toggle button
+  .toggle(ng-click="toggleExpanded(); toggleActive();")
+    i.fa.fa-plus
+
+  // Nav tabs
+  ul.nav(role='tablist', ng-mouseenter="toggleHovering()", ng-mouseleave="toggleHovering()", ng-click="enableExpanded()")
+    li(role='presentation', ng-if="!disableTab('system')", ng-class="{active: isActive('system')}")
+      a#system-tab(href='#system', aria-controls='system', role='tab', data-toggle='tab', ng-click="getData('system')")
+        i.fa.fa-desktop &nbsp;
+        span(translate).tabname System
+    li(role='presentation', ng-if="!disableTab('network')", ng-class="{active: isActive('network')}")
+      a#network-tab(href='#network', aria-controls='network', role='tab', data-toggle='tab', ng-click="getData('network')")
+        i.fa.fa-sitemap &nbsp;
+        span(translate).tabname Network
+
+  // Tab panes
+  .tab-content(ng-init="setDefaultTab()", ng-class="{expanded: expanded}")
+    #system.tab-pane(role='system', ng-class="{active: isActive('system')}")
+      .flex
+        card.cell(ng-repeat="data in tableData.data", class="{{data.label | lowercase}}")
+          card-header.gray
+            b {{ data.label }}
+          card-content
+            ul.list.list-simple
+              li(ng-repeat="value in data.values", translate)
+                strong {{value.label}}
+                br
+                span {{value.value}}
+                
+    #network.tab-pane(role='network', ng-class="{active: isActive('network')}")
+      .row
+        .col-sm-12
+          .table-responsive(ng-if="!disableTab('network')")
+            table
+              thead
+                tr
+                  th.ellipsis-overflow(translate) Process Name
+                  th.ellipsis-overflow(translate) IP Address
+                  th.ellipsis-overflow(translate) Port
+              tbody
+               tr(ng-repeat="values in tableData.data", ng-if="$index < rowLimit || showAll")
+                  td.ellipsis-overflow(ng-repeat="val in values") {{val}}
+      .row.row-short
+        .col-sm-12.text-center
+          a.link.expandTableButton(ng-if="showExpandTableBtn()", ng-click="toggleExpandTable()")
+            strong(translate, ng-show="showAll") Collapse Table
+            strong(translate, ng-show="!showAll") Expand Table

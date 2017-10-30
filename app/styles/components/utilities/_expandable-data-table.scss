@@ -1,0 +1,141 @@
+// Elements styling::default states
+.expandable-data-table {
+  position: relative;
+
+  @include media-query(sm){ @include rem('padding-left', 25px); }
+
+  .toggle {
+    position: absolute;
+    left: -34px;
+    top: 10px;
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    line-height: 1.8;
+    text-align: center;
+    border: 1px solid $gray !important;
+    border-radius: 50%;
+    outline: none;
+    //@include transition(.2s);
+
+    @include media-query(sm){ left: -6px; }
+
+    &:hover { background: $gray-light; }
+
+    .expanded & {
+      transform: rotate(45deg);
+      background: $gray-dark; 
+      color: #fff;
+    }
+  }
+
+  // Navigational elements
+  ul.nav {
+    display: inline-block;
+    padding: 0;
+  }
+
+  ul.nav li {
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-left: none;
+
+    &:first-child { border-left: 1px solid #ddd; }
+    span { display: none; }
+
+    a { color: $gray-dark; }
+  }
+}
+
+
+// Interactive Elements::Expanded states
+.expandable-data-table.expanded {
+
+  // Rotate toggle when active
+  .toggle {
+    transform: rotate(45deg);
+    background: $gray-dark;
+    color: #fff;
+  }
+
+  // Show tab content container when menu is expanded
+  .tab-content { display: block; }
+}
+
+
+// Layout styling
+.expandable-data-table {
+
+  .tabname { @include rem('padding-left', 5px); }
+ 
+  .tab-content .flexgrid {
+    [class^="col-"],
+    div[class*=" col-"] {
+      @include media-query(sm) {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .tab-content { 
+    @include rem('padding', $global-padding 0);
+    display: none;
+
+    .tab-pane { padding: 0; }
+    
+    .noAvailableData {
+      @include rem('margin-top', $global-padding);
+      @include rem('margin-left', 10px);
+      text-align: center;
+    }
+
+  }
+
+  .flex {
+    margin: 0 -15px;
+    display: flex;
+    flex-flow: row wrap;
+
+    .item { @include rem('margin', $global-padding); }
+
+    .cell {
+      width: 100%;
+      @include rem('margin', 0 $global-padding);
+      flex: 1 1 300px;
+
+      @include media-query(xs){
+        flex: .3 1 100px;
+      }
+
+      ul li + li { @include rem('margin-top', $global-padding/2); }
+    }
+
+    .cell:nth-child(2) {
+      flex-basis: 250px;
+    }
+  }
+}
+
+.expandable-data-table.hover { li.active { background-color: transparent; }}
+
+.expandable-data-table.expanded,
+.expandable-data-table.hover {
+
+  ul.nav>li>a:focus {
+    background-color: transparent;
+    outline: none;
+  }
+
+  ul.nav span {
+    display: inline-block;
+    color: black;
+  }
+
+  ul.nav li.active { background-color: $gray-light; }
+
+  ul.nav li {
+    &:hover {
+      background-color: $gray-light;
+    }
+  }
+}
