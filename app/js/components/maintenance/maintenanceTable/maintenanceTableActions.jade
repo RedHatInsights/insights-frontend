@@ -20,7 +20,7 @@
         ng-mousedown="checkboxRowClick($event, action.id)")
         td.text-center(ng-show='edit')
           input(ng-model='checkboxes.items[action.id]', type="checkbox")
-        td.overflow(ng-class='{icon-inline: action._type === 2}')
+        td.overflow(ng-class='{"icon-inline": action._type === 2}')
           i.icon.fa.fa-exclamation-circle(ng-if='action._type === 2', tooltip="{{'This action is already part of another plan' | translate}}")
           a.text.action(ng-click='table.showSystemModal(table.params.item, action.rule)') {{action.display}}
         td.text-center

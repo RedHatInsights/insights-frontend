@@ -25,7 +25,7 @@
             span.icon-inline
               a(ui-sref='app.config-webhook-edit({id: webhook.id})')
                 i.fa.fa-pencil-square-o.pointer(tooltip="{{'Edit' | translate}}")
-              a.icon(ng-click='delete(webhook)')
+              a(ng-click='delete(webhook)')
                 i.fa.fa-remove(tooltip="{{'Remove' | translate}}")
     .pull-right
       .btn-group
