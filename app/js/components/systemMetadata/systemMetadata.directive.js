@@ -110,22 +110,6 @@ function systemMetadataCtrl($scope, System, SystemsService, $timeout) {
         return $scope.system.system_id;
     };
 
-    $scope.showHostname = function () {
-        if ($scope.system.hostname && $scope.system.display_name) {
-            return $scope.system.hostname !== $scope.system.display_name;
-        } else if ($scope.system.hostname && $scope.system.displayName) {
-            return $scope.system.hostname !== $scope.system.displayName;
-        } else {
-            return false;
-        }
-    };
-
-    $scope.showHostnameHeader = function () {
-        return $scope.system.hostname &&
-               !$scope.system.display_name &&
-               !$scope.system.displayName;
-    };
-
     function expandPopulatedTab () {
         let tab = find(system_metadata, {noData: false, category: 'system'});
 
