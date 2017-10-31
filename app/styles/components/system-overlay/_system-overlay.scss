@@ -24,10 +24,6 @@
     @include rem('font-size', 14px);
 }
 
-.toggle #iconSpin{
-    //@include transition(.2s);
-}
-
 .system-modal .modal-content {
 
   p + p { @include rem('margin-top', $global-padding); }
@@ -300,10 +296,6 @@
         }
     }
 }
-
-//.modal-open [ng-click] {
-//    cursor: default;
-//}
 
 .modal-open .pointer {
     cursor: pointer;

@@ -7,16 +7,20 @@
           .icon-inline
             i.fa.fa-clone.fa-4x(ng-show="getSystemType() === 'Virtual'", tooltip="{{'Server type: Virtual' | translate}}")
             i.fa.fa-server.fa-4x(ng-show="getSystemType() !== 'Virtual'", tooltip="{{'Server type: Physical' | translate}}")
+            .text
+              h2.name.ellipsis-overflow {{ system.displayName || system.display_name || system.hostname }}
 
-            h2.hostname.ellipsis-overflow(translate, ng-if="system.hostname && !system.display_name") {{ system.hostname }}
+              .hostname.ellipsis-overflow
+                b Hostname:&nbsp;
+                span {{ system.hostname }}
 
-            // always show the uuid.... it must exist
-            .uuid.ellipsis-overflow
-              b UUID:&nbsp;
-              span(translate) {{ getUUID() }}
-            view-system-groups(system="system")
-            .alert-danger.text-center.pad5(ng-if='!system.isCheckingIn')
-              span(translate) This system is not checking in.
+              // always show the uuid.... it must exist
+              .uuid.ellipsis-overflow
+                b UUID:&nbsp;
+                span {{ getUUID() }}
+              view-system-groups(system="system")
+              .alert-danger.text-center.pad5(ng-if='!system.isCheckingIn')
+                span(translate) This system is not checking in.
 
       // Basic system meta-data table
       .col-sm-5
