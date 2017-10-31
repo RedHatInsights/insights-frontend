@@ -17,7 +17,7 @@
               card-content
                 .gray(ng-bind-html='::plugin.rule.summary_html', target-blank='')
               .footer
-                .row
+                .row.severity-wrapper
                   .col-sm-6
                     all-severity-icons(rule='plugin.rule')
                   .col-sm-6.text-right
