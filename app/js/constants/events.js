@@ -41,6 +41,7 @@ let _EVENT_ROOTS = [{
 }, {
     name: 'filters',
     events: ['actionsSelect',
+             'age',
              'categorySelect',
              'checkInSelect',
              'incident',
