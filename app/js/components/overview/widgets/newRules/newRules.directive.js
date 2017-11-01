@@ -10,7 +10,7 @@ function newRulesCtrl($scope, Rule, Utils) {
     $scope.loader = new Utils.Loader(false);
 
     const load = $scope.loader.bind(function () {
-        return Rule.getRulesLatest({published_age: 90}).then((res) => {
+        return Rule.getRulesLatest({publish_date: '-15days'}).then((res) => {
             $scope.rules = res.data.resources;
         });
     });
