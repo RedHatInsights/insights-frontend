@@ -1,7 +1,9 @@
+/*global require*/
 'use strict';
 
 const statesModule = require('../');
 const reject = require('lodash/reject');
+const findIndex = require('lodash/findIndex');
 
 /**
  * @ngInject
@@ -12,6 +14,7 @@ function ListRuleCtrl(
         $rootScope,
         $scope,
         $state,
+        $location,
         Cluster,
         FilterService,
         IncidentsService,
@@ -87,6 +90,19 @@ function ListRuleCtrl(
             itemNumber + $scope.pager.perPage);
     };
 
+    function handleAnchorParam(id) {
+        if (id) {
+            const idx = findIndex($scope.rules, {rule_id: id});
+            $scope.pager.currentPage = Math.floor(idx / $scope.pager.perPage) + 1;
+            $scope.doPage();
+
+            // TODO once hash params are fixed elsewhere
+            // stop using ?anchor
+            $location.search('anchor', null);
+            $location.hash(id);
+        }
+    }
+
     function getData() {
         $scope.loading = true;
         let promises = [];
@@ -99,6 +115,10 @@ function ListRuleCtrl(
                 });
 
                 $scope.pagedRules = $scope.rules.slice(0, $scope.pager.perPage);
+
+                // TODO once hash params are fixed elsewhere
+                // stop using ?anchor
+                handleAnchorParam($location.search().anchor);
 
                 PermalinkService.scroll(null, 30);
             })

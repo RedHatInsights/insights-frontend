@@ -1,0 +1,16 @@
+.grid-block.new-rules(ng-show="rules.length")
+  section.widget-block.newRules
+    h2.title
+      i.fa.fa-institution
+      span(translate) Rules Added in the past 15 days
+      a.cta-link.pull-right(ui-sref='app.rules', translate) View rules
+    .content
+      .spinner(ng-show='loader.loading')
+      p(translate) {{rules.length}} new rules
+      .rule-wrapper(ng-repeat="rule in rules | orderBy: 'rule.created_at' | limitTo: 3")
+        .rule-title
+          a(ui-sref='app.rules({"anchor" : rule.rule_id})') {{rule.description}}
+        .rule-date
+          span.light(translate) Published {{rule.publish_date | timeAgo}}
+    .footer.text-center
+      a(ui-sref='app.rules({age: 15})', translate) View all {{rules.length}} new Rules
