@@ -13,4 +13,5 @@
         .rule-date
           span.light(translate) Published {{rule.publish_date | timeAgo}}
     .footer.text-center
-      a(ui-sref='app.rules({age: 15})', translate) View all {{rules.length}} new Rules
+      a(ng-if="rules.length === 1", ui-sref='app.rules({age: 15})', translate) View the new rule
+      a(ng-if="rules.length > 1", ui-sref='app.rules({age: 15})', translate) View all {{rules.length}} new rules
