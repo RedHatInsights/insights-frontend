@@ -93,7 +93,7 @@ function Routes($stateProvider) {
         .state('app.inventory', {
             url: '/inventory?product&roles&osp_deployment' +
                 '&docker_host&search_term&sort_field&sort_dir&' +
-                'offline&online&machine&page&pageSize',
+                'offline&online&machine&page&pageSize&systemHealth',
             templateUrl: 'js/states/inventory/inventory.html',
             controller: 'InventoryCtrl',
             title: 'Inventory',
@@ -119,10 +119,11 @@ function Routes($stateProvider) {
         .state('app.maintenance', {
             // the parameter is optional and allows the maintenance view to be bookmarked
             // with "quick-edit" of a specific plan open
-            url: '/planner/{maintenance_id}?tab',
+            url: '/planner/{maintenance_id}?tab&maintenanceCategory',
             templateUrl: 'js/states/maintenance/maintenance.html',
             controller: 'MaintenanceCtrl',
             title: 'Planner',
+            reloadOnSearch: false,
             params: {
                 newPlan: false
             }

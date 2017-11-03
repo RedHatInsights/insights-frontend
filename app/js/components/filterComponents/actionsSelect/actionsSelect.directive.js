@@ -8,9 +8,9 @@ const find = require('lodash/find');
  */
 function actionsSelectCtrl($rootScope,
                            $scope,
+                           $location,
                            gettextCatalog,
                            Events,
-                           MultiButtonService,
                            FilterService) {
     $scope.options = [
         {
@@ -35,32 +35,18 @@ function actionsSelectCtrl($rootScope,
     ];
 
     $scope.select = function (option) {
+        const urlParam = option.id !== 'all' ? option.id : null;
+
         $scope.selected = option;
-        MultiButtonService.setState('inventoryWithActions', option.withActions);
-        MultiButtonService.setState('inventoryWithoutActions', option.withoutActions);
+        $location.search('systemHealth', urlParam);
         FilterService.doFilter();
         $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.actionsSelect);
+        $rootScope.$broadcast(Events.filters.actionsSelect, option);
     };
 
     function getTag () {
         return $scope.selected.tag;
     }
-
-    function read () {
-        $scope.selected = find($scope.options, {
-            withActions: MultiButtonService.getState('inventoryWithActions'),
-            withoutActions: MultiButtonService.getState('inventoryWithoutActions')
-        });
-        if (!$scope.selected) {
-            throw new Error('Invalid system health selector state: ' +
-                MultiButtonService.getState('inventoryWithActions') + ':' +
-                MultiButtonService.getState('inventoryWithoutActions'));
-        }
-
-        $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.actionsSelect);
-    }
-
-    read();
 
     $scope.$on(Events.filters.reset, function () {
         $scope.select(find($scope.options, (option) => {
@@ -75,6 +61,24 @@ function actionsSelectCtrl($rootScope,
             }));
         }
     });
+
+    function init() {
+        const params = $location.search();
+
+        if (params.systemHealth) {
+            $scope.select(find($scope.options, (option) => {
+                return option.id === params.systemHealth;
+            }));
+        } else {
+            $scope.select(find($scope.options, (option) => {
+                return option.id === 'all';
+            }));
+        }
+
+        $rootScope.$broadcast(Events.filters.tag, getTag(), Events.filters.actionsSelect);
+    }
+
+    init();
 }
 
 function actionsSelect() {
