@@ -55,7 +55,7 @@ function FilterService(
     };
 
     filterService.setAge = function (age) {
-        _age = age;
+        _age = Number.parseInt(age);
         filterService.setQueryParam('age', age);
     };
 
@@ -630,7 +630,7 @@ function FilterService(
         }
 
         //age
-        if (includeParam('age') && _age !== 0) {
+        if (includeParam('age') && (Number.parseInt(_age) !== 0)) {
             query.publish_date = `-${_age}days`;
         }
 
