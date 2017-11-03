@@ -73,6 +73,7 @@ EditToggleHandler.prototype.transition = function (id) {
  * @ngInject
  */
 function MaintenanceCtrl(
+    $location,
     $scope,
     $timeout,
     Maintenance,
@@ -153,7 +154,10 @@ function MaintenanceCtrl(
         $scope.shownPlans = plans;
     };
 
-    $scope.category = PreferenceService.get(CATEGORY_PREFERENCE_KEY) || DEFAULT_CATEGORY;
+    $scope.category = $location.search().maintenanceCategory ||
+                      PreferenceService.get(CATEGORY_PREFERENCE_KEY) ||
+                      DEFAULT_CATEGORY;
+
     if ($stateParams.maintenance_id) {
         let id = parseInt($stateParams.maintenance_id);
         if (!isNaN(id)) {

@@ -6,15 +6,13 @@ const find = require('lodash/find');
 /**
  * @ngInject
  */
-function maintenanceCategorySelectCtrl($rootScope,
+function maintenanceCategorySelectCtrl($location, $timeout,
+                                       $rootScope,
                                        $scope,
                                        gettextCatalog,
                                        Events,
                                        MaintenanceService) {
-
-    const defaultCategory = 'all';
-
-    $scope.plans = MaintenanceService.plans;
+    const DEFAULT_CATEGORY = 'all';
 
     $scope.options = [{
         id: 'all',
@@ -38,38 +36,40 @@ function maintenanceCategorySelectCtrl($rootScope,
         tag: gettextCatalog.getString('Maintenance: Future plans')
     }];
 
+    $scope.plans = MaintenanceService.plans;
+
     $scope.select = function (option) {
-        $scope.selected = option;
-        $scope.onSelect({category: option.id});
-        $rootScope.$broadcast(Events.filters.tag,
-                             getTag(option),
-                             Events.filters.maintenanceCategorySelect);
+        if (option && option.id) {
+            $scope.selected = option;
+
+            if (option.id === DEFAULT_CATEGORY) {
+                $location.search('maintenanceCategory', null);
+            } else {
+                $location.search('maintenanceCategory', option.id);
+            }
+
+            $scope.onSelect({category: option.id});
+            $rootScope.$broadcast(Events.filters.tag,
+                getTag(option),
+                Events.filters.maintenanceCategorySelect);
+        }
     };
 
     function getTag (option) {
         return option.tag;
     }
 
-    $scope.$watch('category', function (category) {
-        $scope.selected = (find($scope.options, {id: category}));
-        $rootScope.$broadcast(Events.filters.tag,
-                             getTag($scope.selected),
-                             Events.filters.maintenanceCategorySelect);
-    });
-
     $scope.$on(Events.filters.reset, function () {
-        $scope.select(find($scope.options, {id: defaultCategory}));
+        $scope.select(find($scope.options, {id: DEFAULT_CATEGORY}));
     });
 
     $scope.$on(Events.filters.removeTag, function (event, filter) {
         if (filter === Events.filters.maintenanceCategorySelect) {
-            $scope.select(find($scope.options, {id: defaultCategory}));
+            $scope.select(find($scope.options, {id: DEFAULT_CATEGORY}));
         }
     });
 
-    $rootScope.$broadcast(Events.filters.tag,
-                          getTag({id: defaultCategory}),
-                          Events.filters.maintenanceCategorySelect);
+    $scope.select(find($scope.options, {id: $scope.category}));
 }
 
 function maintenanceCategorySelect() {

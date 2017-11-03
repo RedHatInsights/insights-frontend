@@ -203,8 +203,6 @@ function FilterService(
         filterService.setSelectedProduct('all');
         filterService.setOnline(true);
         filterService.setOffline(true);
-        MultiButtonService.setState('inventoryWithActions', true);
-        MultiButtonService.setState('inventoryWithoutActions', true);
         filterService.doFilter();
     };
 
@@ -391,19 +389,6 @@ function FilterService(
             filterService.setSelectedProduct(params.product);
         }
 
-        if (params.actions) {
-            if (params.actions === 'all') {
-                MultiButtonService.setState('inventoryWithoutActions', true);
-                MultiButtonService.setState('inventoryWithActions', true);
-            } else if (params.actions === 'with') {
-                MultiButtonService.setState('inventoryWithoutActions', false);
-                MultiButtonService.setState('inventoryWithActions', true);
-            } else if (params.actions === 'without') {
-                MultiButtonService.setState('inventoryWithoutActions', true);
-                MultiButtonService.setState('inventoryWithActions', false);
-            }
-        }
-
         if (params.search_term) {
             filterService.setSearchTerm(params.search_term);
         }
@@ -523,6 +508,7 @@ function FilterService(
      * to the whitelist. If a param is on neither list it will be included.
      */
     filterService.buildRequestQueryParams = function (whitelist, blacklist) {
+        const urlParams = $location.search();
         var query = {};
         var osp_deployment = filterService.getSelectedOSPDeployment().system_id;
         var docker_host = filterService.getSelectedDockerHost().system_id;
@@ -560,11 +546,9 @@ function FilterService(
 
         //with or without actions
         if (includeParam('report_count')) {
-            if (MultiButtonService.getState('inventoryWithActions') &&
-                    !MultiButtonService.getState('inventoryWithoutActions')) {
+            if (urlParams.systemHealth === 'affected') {
                 query.report_count = 'gt0';
-            } else if (!MultiButtonService.getState('inventoryWithActions') &&
-                    MultiButtonService.getState('inventoryWithoutActions')) {
+            } else if (urlParams.systemHealth === 'healthy') {
                 query.report_count = 'lt1';
             }
         }
