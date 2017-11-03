@@ -56,7 +56,8 @@ function FilterService(
 
     filterService.setAge = function (age) {
         _age = Number.parseInt(age);
-        filterService.setQueryParam('age', age);
+        _age = (_age === 0) ? null : _age;
+        filterService.setQueryParam('age', _age);
     };
 
     filterService.setRHELOnly = function (rhelOnly) {
