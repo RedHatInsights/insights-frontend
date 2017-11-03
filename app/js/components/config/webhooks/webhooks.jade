@@ -1,8 +1,11 @@
 .webhooks
   h2.page-title(translate) Webhooks
   p(translate) Webhooks allow external services to be notified of updates in Red Hat Insights. An HTTP POST request will be issued for a configured URL every time an event occurs in Red Hat Insights.&nbsp; See&nbsp;
-    a(translate, target='_blank', href='https://github.com/RedHatInsights/insights-webhooks/wiki/Documentation') webhook documentation
+    a(translate, target='_blank', href='https://access.redhat.com/r/insights/docs/#api-Webhooks') webhook documentation
     | &nbsp; for more details.
+
+  p
+    strong(translate) Webhooks are currently a Tech Preview.
 
   section
     .spinner(ng-show='loader.loading')
