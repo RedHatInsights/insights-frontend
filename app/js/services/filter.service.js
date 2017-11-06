@@ -631,7 +631,7 @@ function FilterService(
         }
 
         //age
-        if (includeParam('age') && (Number.parseInt(_age) !== 0)) {
+        if (includeParam('age') && _age && (Number.parseInt(_age) !== 0)) {
             query.publish_date = `-${_age}days`;
         }
 
