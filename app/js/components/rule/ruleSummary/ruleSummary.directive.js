@@ -16,7 +16,8 @@ function RuleSummaryCtrl(
     };
     $scope.initCollapsed = false;
 
-    if ($scope.ruleFilter && $scope.ruleId && $scope.ruleId !== $scope.report.rule_id) {
+    if (($scope.ruleFilter && $scope.ruleId && $scope.ruleId !== $scope.report.rule_id) ||
+        (!$scope.ruleFilter && !$scope.ruleId)) {
         $scope.initCollapsed = true;
     }
 
