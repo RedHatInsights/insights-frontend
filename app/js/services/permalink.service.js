@@ -6,7 +6,7 @@ var servicesModule = require('./');
  * @ngInject
  */
 function PermalinkService($document, $location, $timeout) {
-    var DEFAULTS = {
+    const DEFAULTS = {
         offset: 10,
         speed: 300
     };
