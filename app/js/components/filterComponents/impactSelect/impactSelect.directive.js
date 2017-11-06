@@ -37,8 +37,7 @@ function impactSelectCtrl($location,
 
     function init() {
         let option = $location.search()[Events.filters.impact] ?
-            $location.search()[Events.filters.impact] :
-            FilterService.getImpact();
+            $location.search()[Events.filters.impact] : FilterService.getImpact();
 
         $scope.selected = $scope.options[option];
         $rootScope.$broadcast(Events.filters.tag,
