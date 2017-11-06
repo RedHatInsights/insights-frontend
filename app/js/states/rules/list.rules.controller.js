@@ -103,11 +103,25 @@ function ListRuleCtrl(
         }
     }
 
+    function handleAgeParam() {
+        // because params dont work unless page refresh
+        // i.e. a ui-sref({age: 15}) did not work because the filter
+        // service already initialized age as 0 from the $location in
+        // the original page load
+        const age = $location.search().age;
+        if (age) {
+            FilterService.setAge(age);
+        }
+    }
+
     function getData() {
         $scope.loading = true;
+        handleAgeParam();
+
         let promises = [];
         let query = FilterService.buildRequestQueryParams();
         query.include = 'article';
+
         let ruleSummaryPromise = Rule.getRulesLatest(query)
             .success(function (ruleResult) {
                 $scope.rules = reject(ruleResult.resources, function (r) {
