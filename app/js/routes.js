@@ -103,9 +103,10 @@ function Routes($stateProvider) {
     // Rule routes
     $stateProvider
         .state('app.rules', {
-            url: '/rules?product&roles&osp_deployment&docker_host&category' +
-            '&ansibleSupport&incident&ruleStatus&impact&likelihood&totalRisk' +
-            '&age',
+            // TODO once hash params are fixed elsewhere
+            // stop using ?anchor
+            url: '/rules?age&product&roles&osp_deployment&docker_host&category' +
+            '&ansibleSupport&incident&ruleStatus&impact&likelihood&totalRisk&anchor',
             templateUrl: 'js/states/rules/list-rules.html',
             controller: 'ListRuleCtrl',
             title: 'Rules',

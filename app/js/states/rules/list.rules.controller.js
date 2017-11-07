@@ -1,7 +1,9 @@
+/*global require*/
 'use strict';
 
 const statesModule = require('../');
 const reject = require('lodash/reject');
+const findIndex = require('lodash/findIndex');
 
 /**
  * @ngInject
@@ -12,6 +14,7 @@ function ListRuleCtrl(
         $rootScope,
         $scope,
         $state,
+        $location,
         Cluster,
         FilterService,
         IncidentsService,
@@ -87,11 +90,38 @@ function ListRuleCtrl(
             itemNumber + $scope.pager.perPage);
     };
 
+    function handleAnchorParam(id) {
+        if (id) {
+            const idx = findIndex($scope.rules, {rule_id: id});
+            $scope.pager.currentPage = Math.floor(idx / $scope.pager.perPage) + 1;
+            $scope.doPage();
+
+            // TODO once hash params are fixed elsewhere
+            // stop using ?anchor
+            $location.search('anchor', null);
+            $location.hash(id);
+        }
+    }
+
+    function handleAgeParam() {
+        // because params dont work unless page refresh
+        // i.e. a ui-sref({age: 15}) did not work because the filter
+        // service already initialized age as 0 from the $location in
+        // the original page load
+        const age = $location.search().age;
+        if (age) {
+            FilterService.setAge(age);
+        }
+    }
+
     function getData() {
         $scope.loading = true;
+        handleAgeParam();
+
         let promises = [];
         let query = FilterService.buildRequestQueryParams();
         query.include = 'article';
+
         let ruleSummaryPromise = Rule.getRulesLatest(query)
             .success(function (ruleResult) {
                 $scope.rules = reject(ruleResult.resources, function (r) {
@@ -99,6 +129,10 @@ function ListRuleCtrl(
                 });
 
                 $scope.pagedRules = $scope.rules.slice(0, $scope.pager.perPage);
+
+                // TODO once hash params are fixed elsewhere
+                // stop using ?anchor
+                handleAnchorParam($location.search().anchor);
 
                 PermalinkService.scroll(null, 30);
             })
