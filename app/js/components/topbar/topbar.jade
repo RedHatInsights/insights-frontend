@@ -1,9 +1,17 @@
 .cell.insights-logo
   button.toggle-fullscreen(ng-click='sidenavCollapsed = !sidenavCollapsed')
-    i.fa.fa-indent
+    //- i.fa.fa-indent
+    md-icon(md-font-icon="fa fa-indent")
+  
+  md-button(ng-click="toggleLeft()", 
+    class="md-primary", 
+    hide-gt-sm)
+
+    md-icon(md-font-icon="fa fa-navicon")
+
   a.home-link(ui-sref='app.overview') 
     span.hidden(translate) Red Hat Insights
-    img(src="../static/images/l_insights.svg")
+    md-icon(md-svg-src="../static/images/l_insights.svg" aria-label="Red Hat Insights ")
 
 .cell
   .global-filters(ng-class='{disabled: disabled}')

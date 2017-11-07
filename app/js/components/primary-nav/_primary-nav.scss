@@ -8,19 +8,19 @@ $aside_anchor_hover_bg: gray;
 
 
 // Container styling
-primary-nav {
-  position: fixed;
-  width: 100%;
-  z-index: 9;
-  bottom: 0;
-  background-color: $primary-nav-bg;
-  overflow-x: auto;
+md-sidenav {
+  display: block;
+  // position: fixed;
+  // width: 100%;
+  // z-index: 9;
+  // bottom: 0;
+  // overflow-x: auto;
 
   @include media-query(sm){
-    position: static;
-    width: auto;
+    // position: static;
+    // width: auto;
     box-shadow: inset -14px 0 40px 0 rgba(0, 0, 0, .1);
-    overflow-y: auto;
+    // overflow-y: auto;
   }
 }
 
@@ -28,29 +28,26 @@ primary-nav {
 // Mobile/base styling
 //==================================================================*/
 .primary-nav {
+  background-color: $primary-nav-bg;
 
   ul {
     @include reset();
     list-style-type: none;
-    display: flex;
+    // display: flex;
   }
 
   ul li { @include reset(); }
 
   ul li a {
     display: flex;
-    flex-direction: column;
     position: relative;
     margin: 0;
     @include rem('padding', 24px);
 
     
     text-align: center;
-    @include font-size(12px, 1);
     color: #fff;
     font-weight: 700;
-
-    @include media-query(sm){ @include rem('padding', $global-padding); }
 
     .text { 
       text-transform: capitalize; 
@@ -67,10 +64,13 @@ primary-nav {
 }
 
 
-// Desktop
+// Small breakpoint
 //==================================================================*/
-.primary-nav { @include media-query(sm){
+md-sidenav.primary-nav { @include media-query(sm){
+  position: relative;
   width: auto;
+  transform: none;
+  display: block;
 
   ul {
     display: block;
@@ -85,6 +85,7 @@ primary-nav {
     justify-content: flex-start;
     @include font-size(14px, 1);
     transition-duration: .4s;
+    @include rem('padding', $global-padding $global-margin $global-padding $global-padding);
 
     .text { @include rem('margin-left', 12px); }
 
@@ -106,12 +107,17 @@ primary-nav {
 .platform-grid.collapsed .primary-nav ul li a.current { box-shadow: inset 2px 0 0 $blue-light; }
 
 
-.primary-nav ul li a { @include media-query(md) { @include rem('padding', $global-margin); } }
+
+// Medium breakpoint
+//==================================================================*/
+md-sidenav.primary-nav ul li a {  @include media-query(md) { 
+  @include rem('padding', $global-margin $global-margin*2 $global-margin $global-margin); }
+}
 
 
 // Header
 //==================================================================*/
-primary-nav .header-block {
+md-sidenav .header-block {
   transition: .2s;
   position: relative;
   @include rem('padding', $global-padding);

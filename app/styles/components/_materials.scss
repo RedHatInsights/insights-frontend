@@ -12,6 +12,12 @@
   justify-content: center;
 }
 
+md-icon {
+	min-width: 0;
+	min-height: 0;
+	height: auto;
+}
+
 button.md-button.md-button-sm, a.md-button.md-button-sm{
 	// height: 20px !important;
 }

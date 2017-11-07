@@ -40,6 +40,17 @@ function groupSelectCtrl(
         return true;
     };
 
+    $scope.showSelectedGroup = function (group) {
+        if ($scope.group &&
+            $scope.group.display_name &&
+            $scope.group.display_name === group.display_name) {
+            return true;
+        }
+
+        return false;
+    };
+
+
     $scope.showAllSystems = function () {
         if ($scope.group && $scope.group.display_name && !$scope.searching) {
             return true;
