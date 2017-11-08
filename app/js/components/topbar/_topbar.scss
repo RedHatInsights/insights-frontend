@@ -16,8 +16,6 @@ topbar {
     @include rem('padding', 0 $global-padding 0 0);
   }
 
-  
-
   a { color: #fff; }
   span,
   strong { + i { @include rem('margin-left', 4px); } }
