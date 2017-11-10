@@ -429,22 +429,10 @@ function ActionsService(
         let systemDeferred;
 
         // if we already have all of the systems affected use vars.allSystems
-        if (vars.allSystems === null) {
-            systemDeferred = pub.buildSystemsDeferred(paginate, pager)
-                .then(function (results) {
-                    return priv.populateAffectedHosts(results);
-                });
-        }
-        else {
-            systemDeferred = $q.resolve(true);
-
-            vars.ruleSystems = vars.allSystems.slice(
-                                        ((pager.currentPage - 1) * pager.perPage),
-                                        priv.getPageEnd(
-                                            vars.allSystems,
-                                            pager.currentPage - 1,
-                                            pager.perPage));
-        }
+        systemDeferred = pub.buildSystemsDeferred(paginate, pager)
+            .then(function (results) {
+                return priv.populateAffectedHosts(results);
+            });
 
         return systemDeferred;
     };
