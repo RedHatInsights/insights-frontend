@@ -26,7 +26,7 @@
               .uuid.ellipsis-overflow
                 b UUID:&nbsp;
                 span {{ getUUID() }}
-              view-system-groups(system="system")
+              view-system-groups(system="system", ng-if='config.isGroupsEnabled')
               .alert-danger.text-center.pad5(ng-if='!system.isCheckingIn')
                 span(translate) This system is not checking in.
 
