@@ -35,7 +35,8 @@ function maintenanceModalCtrl($scope,
                               Subset,
                               Rule,
                               Group,
-                              Events) {
+                              Events,
+                              InsightsConfig) {
     $scope.MODES = MODES;
     $scope.tableEdit = true;
     $scope.selected = {};
@@ -45,6 +46,7 @@ function maintenanceModalCtrl($scope,
     $scope.rule = rule;
     $scope.systems = systems;
     $scope.Group = Group;
+    $scope.config = InsightsConfig;
 
     if (angular.isObject(existingPlan)) {
         $scope.newPlan = false;
@@ -82,7 +84,7 @@ function maintenanceModalCtrl($scope,
         throw new Error(`Invalid parameters ${rule}, ${systems}`);
     }
 
-    if (Group.groups.length) {
+    if (Group.groups.length && InsightsConfig.isGroupsEnabled) {
         if (Group.current().id) {
             $scope.systemSelection = 'group';
             $scope.selected.group = Group.current();
