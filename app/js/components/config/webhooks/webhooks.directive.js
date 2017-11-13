@@ -6,7 +6,14 @@ const some = require('lodash/some');
 /**
  * @ngInject
  */
-function configWebhooksCtrl($q, $scope, gettextCatalog, sweetAlert, Utils, Webhooks) {
+function configWebhooksCtrl(
+    $q,
+    $scope,
+    $timeout,
+    gettextCatalog,
+    sweetAlert,
+    Utils,
+    Webhooks) {
 
     $scope.loader = new Utils.Loader(false);
 
@@ -26,7 +33,12 @@ function configWebhooksCtrl($q, $scope, gettextCatalog, sweetAlert, Utils, Webho
         }).then($scope.init);
     };
 
-    $scope.ping = Webhooks.ping;
+    $scope.ping = function () {
+        Webhooks.ping().then(() => {
+            $timeout($scope.init, 5000);
+        });
+    };
+
     $scope.isPingable = function () {
         return some($scope.webhooks, 'active');
     };

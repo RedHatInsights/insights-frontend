@@ -1,0 +1,10 @@
+.webhook-status-modal {
+
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    code, p, span {
+        @include rem ('font-size', 14px);
+    }
+}

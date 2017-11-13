@@ -14,6 +14,7 @@
       thead
         tr
           th(translate) URL
+          th(translate) Status
           th(translate) Event Types
           th(translate) Active
           th(translate) Actions
@@ -21,7 +22,9 @@
         tr(ng-repeat='webhook in webhooks | orderBy:"id" track by webhook.id')
           td.break
             a(ui-sref='app.config-webhook-edit({id: webhook.id})') {{webhook.url}}
-          td {{webhook.event_types.length}}
+          td.text-center
+            webhook-status-icon(webhook='webhook')
+          td.text-center {{webhook.event_types.length}}
           td.text-center
             input(type='checkbox' ng-model='webhook.active', ng-change='activeChanged(webhook)')
           td.text-center
