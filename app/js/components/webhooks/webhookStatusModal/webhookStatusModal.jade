@@ -1,0 +1,23 @@
+div
+  .row.form-horizontal.webhook-status-modal
+    .form-group
+      label.col-sm-4.control-label(translate) Result
+      .col-sm-8
+        p.form-control-static.success(translate, ng-if='webhook.status.success') Success
+        p.form-control-static.red(ng-if='!webhook.status.success')
+          span(translate) Error:&nbsp;
+          | {{webhook.status.error}}
+    .form-group
+      label.col-sm-4.control-label(translate) Timestamp
+      .col-sm-8
+        p.form-control-static {{webhook.status.timestamp | moment:'lll'}}
+    .form-group
+      label.col-sm-4.control-label(translate) Event Type
+      .col-sm-8
+        p.form-control-static
+          code {{webhook.status.event_type}}
+    .form-group
+      label.col-sm-4.control-label(translate) Event Id
+      .col-sm-8
+        p.form-control-static
+          code {{webhook.status.event_id}}

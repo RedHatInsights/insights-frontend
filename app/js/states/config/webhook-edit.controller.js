@@ -136,7 +136,7 @@ function WebhookEditCtrl(
             $scope.selected.severityFilters = arrayToObject($scope.severities, 'value');
             $scope.selected.events = arrayToObject($scope.eventTypes, 'name');
         } else {
-            return Webhooks.get($stateParams.id)
+            return Webhooks.get($stateParams.id, false)
             .success(webhook => {
                 $scope.webhook = webhook;
                 importEventTypes(webhook);
