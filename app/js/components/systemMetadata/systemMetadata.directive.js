@@ -12,10 +12,13 @@ function systemMetadataCtrl(
     $window,
     gettextCatalog,
     sweetAlert,
+    InsightsConfig,
     ModalUtils,
     System,
     SystemsService,
     $timeout) {
+
+    $scope.config = InsightsConfig;
 
     let system_metadata;
     let active = false;

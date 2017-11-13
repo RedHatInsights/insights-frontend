@@ -62,6 +62,7 @@ function InsightsConfig() {
     }
 
     let isPlannerEnabled = true;
+    let isGroupsEnabled = true;
 
     return {
         setTitle: function (value) {
@@ -142,6 +143,10 @@ function InsightsConfig() {
             isPlannerEnabled = value;
         },
 
+        setGroupsEnabled (value) {
+            isGroupsEnabled = value;
+        },
+
         $get: function (Utils) {
             overviewKey = overviewKey ||
                 (Utils.isBeta() ? 'overview-beta' : 'overview-stable');
@@ -169,7 +174,8 @@ function InsightsConfig() {
                 isPortal: isPortal,
                 routeStateConfig: routeStateConfig,
                 overviewKey: overviewKey,
-                isPlannerEnabled
+                isPlannerEnabled,
+                isGroupsEnabled
             };
         }
     };
