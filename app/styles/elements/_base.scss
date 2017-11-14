@@ -2,17 +2,17 @@ body {
   font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
 
-.main-content {
-  color: #646464;
-  position: relative;
-	padding-bottom: 0;
-  @include rem('padding-top', 60px);
-}
+// .main-content {
+//   color: #646464;
+//   position: relative;
+// 	padding-bottom: 0;
+//   @include rem('padding-top', 60px);
+// }
 
-.main-content.insights-main-content {
-	@include rem('padding-bottom', 70px);
-	@include rem('margin-bottom', 40px);
-}
+// .main-content.insights-main-content {
+// 	@include rem('padding-bottom', 70px);
+// 	@include rem('margin-bottom', 40px);
+// }
 
 .page {
     @include rem('padding-left', $global-padding);

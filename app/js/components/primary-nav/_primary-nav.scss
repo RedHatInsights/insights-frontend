@@ -111,9 +111,13 @@ md-sidenav.primary-nav { @include media-query(sm){
 // Medium breakpoint
 //==================================================================*/
 md-sidenav.primary-nav ul li a {  @include media-query(md) { 
-  @include rem('padding', $global-margin $global-margin*2 $global-margin $global-margin); }
+  @include rem('padding', 24px 34px 24px 24px); }
 }
 
+.platform-grid.collapsed md-sidenav.primary-nav ul li a {
+  @include media-query(sm) { @include rem('padding', $global-padding); }
+  @include media-query(md) { @include rem('padding', $global-margin); }
+}
 
 // Header
 //==================================================================*/

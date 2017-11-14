@@ -1,7 +1,9 @@
-.rule-detail {
-  display: flex;
-  @include rem('margin', 0 -$global-padding);
-  @include rem('margin-bottom', $global-margin);
+.rule-detail-header {
+  display: grid;
+  grid-template-areas: 'page-header ansible-support',
+                      'rule-detail risk-list';
+
+
 
   .detail,
   .meta { @include rem('padding', 0 $global-padding); }
@@ -13,4 +15,20 @@
   .meta {
     flex: 1 1 33%;
   }
+}
+
+.rule-detail .page-header {
+
+}
+
+.rule-detail-ansible-support {
+  
+}
+
+.rule-detail-risk-list {
+
+}
+
+.rule-detail-summary {
+
 }

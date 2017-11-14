@@ -15,8 +15,8 @@
 
     &:focus {
       outline: none;
-      background: #f2f5f7;
-      @include rem('padding', 6px 2px 6px 6px);
+      // background: #f2f5f7;
+      // @include rem('padding', 6px 2px 6px 6px);
     }
   }
 }

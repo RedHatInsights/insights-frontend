@@ -22,6 +22,18 @@
     bullhorn(icon='fa-bullhorn', type='announcements')
     alerts(icon='fa-bell', type='alerts')
   span.sep
+  md-menu
+    md-button.dropdown-toggle(ng-click='$mdMenu.open()') 
+      strong(translate) Help
+      span.caret.dropdown-caret
+    md-menu-content
+      md-menu-item
+        md-button(href='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', translate) Getting Started
+      md-menu-item
+        md-button Link1
+      md-menu-item
+        md-button Link1
+
   span.dropdown.help(dropdown='', on-toggle='toggled(open)')
     md-button.md-button-sm.dropdown-toggle(href='', dropdown-toggle='')
       strong(translate) Help

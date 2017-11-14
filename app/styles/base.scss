@@ -187,24 +187,18 @@ $define-fa: true !default;
 @import 'components/risk-of-change';
 
 
-// Namespaced
+// used to be Namespaced
 //==================================================================*/
-.insights-main-content, .modal {
-	@import 'components/insights/table';
-	@import 'components/insights/actions-details';
-	@import 'components/insights/group-select';
-	@import 'components/insights/config-tabs';
-	@import 'components/insights/panel';
-	@import 'components/insights/lists';
-	@import 'components/insights/insights-main-content';
-	@import 'components/insights/alert';
-	@import 'components/insights/notifications';
-	@import 'components/insights/entitlement';
-	@import 'components/insights/rules';
-}
 
-.insights,
-.insights-main-content {
-	@import 'elements/typography';
-	@import 'elements/buttons';
-}
+@import 'components/insights/table';
+@import 'components/insights/actions-details';
+@import 'components/insights/group-select';
+@import 'components/insights/config-tabs';
+@import 'components/insights/panel';
+@import 'components/insights/lists';
+@import 'components/insights/alert';
+@import 'components/insights/notifications';
+@import 'components/insights/entitlement';
+@import 'components/insights/rules';
+@import 'elements/typography';
+@import 'elements/buttons';

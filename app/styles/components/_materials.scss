@@ -1,7 +1,10 @@
+$md-card-header-bg: $gray;
+
 // Button and Inputs
 .md-button {
 	width: auto;
   height: auto;
+  @include rem('padding', $global-padding);
   min-width: 0;
   min-height: 0;
   color: $base-color;
@@ -12,10 +15,36 @@
   justify-content: center;
 }
 
+md-menu-item {
+	min-height: 0;
+	height: auto;
+}
+
+md-menu-item > a.md-button,
+md-menu-item > .md-button {
+	width: 100%;
+  height: auto;
+  @include rem('padding', $global-padding);
+  min-width: 0;
+  min-height: 0;
+  color: $base-color;
+  @include font-size(14px, 1);
+  text-transform: none;
+  align-items: center;
+  justify-content: center;
+}
+
 md-icon {
 	min-width: 0;
 	min-height: 0;
 	height: auto;
+}
+
+md-card {
+	@include reset;
+	color: $base-color;
+	// box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 2px 1px -1px;
+
 }
 
 button.md-button.md-button-sm, a.md-button.md-button-sm{
@@ -100,29 +129,17 @@ md-checkbox.md-checkbox-list { margin: 0px; }
 	@include rem('padding-bottom', 15px);
 }
 
-md-card{
+md-card.md-default-theme {
 	
-	&-header{
-		@include rem('font-size', 17px);
-		color: #585858;
-		background-color: $white-soft;
-		border-bottom: 1px solid $gray-border;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		@include rem('padding', 10px 15px);
+}
 
-		md-button{
-			size: 50%;
-		}
-	}
+md-card{
 
 	.md-card-header-title{
 		i { @include rem ('padding-right', 5px);}
 	}
 
 	.md-card-header-cta{
-		@include rem('font-size', 15px); 
 	}
 
 	md-card-header.two-columns { 
@@ -138,6 +155,21 @@ md-card{
 	}
 }
 	
+md-card-header {
+	@include font-size(16px);
+	font-weight: 700;	
+	border-bottom: 1px solid $gray-border;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	@include rem('padding', $global-padding);
+
+	// md-button{
+	// 	size: 50%;
+	// }
+}
+
+md-card-header.gray { background: $gray-light; }
 
 .md-card-invert{
 	md-card-header{ background-color: white; }
@@ -146,9 +178,7 @@ md-card{
 
 // Dropdown styling
 //==================================================================*/
-md-menu-content{
-	max-height: 80vh;
-}
+md-menu-content{}
 
 md-open-menu-container {
 

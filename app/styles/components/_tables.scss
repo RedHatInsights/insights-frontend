@@ -7,7 +7,7 @@ table {
 
 	tr td,
 	tr th {
-		@include rem('padding', 24px $global-padding/2);
+		@include rem('padding', 12px $global-padding/2);
 		font-family: 'overpass';
 	}
 
@@ -28,9 +28,6 @@ table {
 }
 
 
-label { color: #515258; }
-table input[type="checkbox"] + span { margin-left: 10px; }
-
 .intro {
 	font-weight: 300;
 	@include font-size(18px, 34px);
@@ -41,24 +38,26 @@ table input[type="checkbox"] + span { margin-left: 10px; }
 	}
 }
 
-table.table-break {
-  table-layout: fixed;
-  width: 100%;
+table a, 
+table a:link { @extend %font_blue; }
 
-  td {
-    //word-wrap: break-word;         /* All browsers since IE 5.5+ */
-    //overflow-wrap: break-word;
-  }
+// table.table-break {
+//   table-layout: fixed;
+//   width: 100%;
+
+//   td {
+//     //word-wrap: break-word;         /* All browsers since IE 5.5+ */
+//     //overflow-wrap: break-word;
+//   }
   
-  td.hostname, th.hostname {
-    display: table-cell;
-    width: 50%;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-}
+//   td.hostname, th.hostname {
+//     display: table-cell;
+//     width: 50%;
+//     text-overflow: ellipsis;
+//     overflow: hidden;
+//   }
+// }
 
-table a, table a:link { @extend %font_blue; }
 
 .error-infos {
 
@@ -92,33 +91,33 @@ table a, table a:link { @extend %font_blue; }
 	}
 }
 
-table.scroll {
-	position: relative;
+// table.scroll {
+// 	position: relative;
 
-	thead { background: #fff; }
+// 	thead { background: #fff; }
 
-	tbody {
-		position: relative;
-		max-height: 200px;
-		display: block;
-		width: 100%;
-		overflow-y: scroll;
-		overflow-x: hidden;
+// 	tbody {
+// 		position: relative;
+// 		max-height: 200px;
+// 		display: block;
+// 		width: 100%;
+// 		overflow-y: scroll;
+// 		overflow-x: hidden;
 
-		tr {
-			display: table;
-			width: 100%;
-		}
-	}
+// 		tr {
+// 			display: table;
+// 			width: 100%;
+// 		}
+// 	}
 
-	&:after {
-		content: '';
-		position: absolute;
-		width: 100%;
-		height: 34px;
-		background: #646464;
-	}
-}
+// 	&:after {
+// 		content: '';
+// 		position: absolute;
+// 		width: 100%;
+// 		height: 34px;
+// 		background: #646464;
+// 	}
+// }
 
 
 $sortable_border_width: 6px;
@@ -129,37 +128,27 @@ $sortable_border_color_active: red;
 	padding-right: 12px;
 	position: relative;
 
-	&:hover {
-		cursor: pointer;
-	}
+	&:hover { cursor: pointer; }
 
-	.carets {
+	&::after {
+		content: '';
 		position: absolute;
 		right: 8px;
 		top: 12px;
+		opacity: .4;
+		transition: .15s;
+		border-left: $sortable_border_width solid transparent;
+		border-right: $sortable_border_width solid transparent;
+	}
 
-		&:before, &:after {
-			content: '';
-			position: absolute;
-			opacity: .4;
-			transition: .15s;
-			border-left: $sortable_border_width solid transparent;
-			border-right: $sortable_border_width solid transparent;
-		}
+	&::before {
+		top: 2px;
+		border-bottom: $sortable_border_width solid $sortable_border_color;
+	}
 
-		&:before {
-			top: 2px;
-			border-bottom: $sortable_border_width solid $sortable_border_color;
-		}
-
-		&:after {
-			top: 10px;
-			border-top: $sortable_border_width solid $sortable_border_color;
-
-			.sortable-active & {
-
-			}
-		}
+	&::after {
+		top: 10px;
+		border-top: $sortable_border_width solid $sortable_border_color;
 	}
 
 	&.sortable-active {
@@ -169,6 +158,7 @@ $sortable_border_color_active: red;
 				opacity: .2;
 				border-bottom-color: $sortable_border_color_active;
 			}
+			
 			&:after {
 				opacity: 1;
 				border-top-color: $sortable_border_color_active;
