@@ -10,18 +10,8 @@ $aside_anchor_hover_bg: gray;
 // Container styling
 md-sidenav {
   display: block;
-  // position: fixed;
-  // width: 100%;
-  // z-index: 9;
-  // bottom: 0;
-  // overflow-x: auto;
 
-  @include media-query(sm){
-    // position: static;
-    // width: auto;
-    box-shadow: inset -14px 0 40px 0 rgba(0, 0, 0, .1);
-    // overflow-y: auto;
-  }
+  @include media-query(sm){ box-shadow: inset -14px 0 40px 0 rgba(0, 0, 0, .1); }
 }
 
 
@@ -33,7 +23,6 @@ md-sidenav {
   ul {
     @include reset();
     list-style-type: none;
-    // display: flex;
   }
 
   ul li { @include reset(); }
@@ -107,17 +96,15 @@ md-sidenav.primary-nav { @include media-query(sm){
 .platform-grid.collapsed .primary-nav ul li a.current { box-shadow: inset 2px 0 0 $blue-light; }
 
 
-
 // Medium breakpoint
 //==================================================================*/
-md-sidenav.primary-nav ul li a {  @include media-query(md) { 
-  @include rem('padding', 24px 34px 24px 24px); }
-}
+md-sidenav.primary-nav ul li a {  @include media-query(md) { @include rem('padding', 24px 34px 24px 24px); } }
 
 .platform-grid.collapsed md-sidenav.primary-nav ul li a {
   @include media-query(sm) { @include rem('padding', $global-padding); }
-  @include media-query(md) { @include rem('padding', $global-margin); }
+  @include media-query(md) { @include rem('padding', 24px); }
 }
+
 
 // Header
 //==================================================================*/

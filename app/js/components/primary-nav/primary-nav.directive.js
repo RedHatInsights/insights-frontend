@@ -8,37 +8,19 @@ const includes = require('lodash/includes');
  */
 function primaryNavCtrl($scope, Utils, $state, InsightsConfig, $timeout, $mdSidenav) {
     $scope.toggleLeft = buildToggler('left');
-    
-    $scope.isOpenLeft = function(){
-      return $mdSidenav('left').isOpen();
+
+    $scope.isOpenLeft = function () {
+        return $mdSidenav('left').isOpen();
     };
 
-    $scope.isCloseLeft = function(){
-      return $mdSidenav('left').isClosed();
+    $scope.isCloseLeft = function () {
+        return $mdSidenav('left').isClosed();
     };
-
-
-    function debounce(func, wait, context) {
-      var timer;
-
-      return function debounced() {
-        var context = $scope,
-            args = Array.prototype.slice.call(arguments);
-        $timeout.cancel(timer);
-        timer = $timeout(function() {
-          timer = undefined;
-          func.apply(context, args);
-        }, wait || 10);
-      };
-    }
-
-
 
     function buildToggler(navID) {
-      return function() {
-        // Component lookup should always be available since we are not using `ng-if`
-        $mdSidenav(navID).toggle();
-      };
+        return function () {
+            $mdSidenav(navID).toggle();
+        };
     }
 
     $scope.utils = Utils;

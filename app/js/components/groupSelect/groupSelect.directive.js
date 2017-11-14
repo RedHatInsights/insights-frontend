@@ -50,7 +50,6 @@ function groupSelectCtrl(
         return false;
     };
 
-
     $scope.showAllSystems = function () {
         if ($scope.group && $scope.group.display_name && !$scope.searching) {
             return true;
