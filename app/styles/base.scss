@@ -156,6 +156,10 @@ $define-fa: true !default;
 @import 'components/evaluation';
 
 
+
+
+
+
 // Maintenance Plan
 //==================================================================*/
 @import 'components/maintenance-planner/maintenance-plan';
@@ -202,3 +206,9 @@ $define-fa: true !default;
 @import 'components/insights/rules';
 @import 'elements/typography';
 @import 'elements/buttons';
+
+
+// Good to go
+//==================================================================*/
+
+@import 'components/table-filters';

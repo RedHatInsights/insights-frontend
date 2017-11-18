@@ -1,5 +1,16 @@
-.button-dropdown {
+button {
 
+}
+
+.dropdown button {
+  &:disabled {
+    opacity: .5;
+    border: 1px solid $gray;
+  }
+
+  &:disabled:hover {
+    cursor: not-allowed;
+  }
 }
 
 .dropdown-plain {

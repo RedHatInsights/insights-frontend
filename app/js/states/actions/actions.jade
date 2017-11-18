@@ -45,9 +45,12 @@
 
   section.content.content-gray
     h2.section-title.section-title-red(translate) Featured Topics
-    other-topic(ng-if='featuredTopics.length', ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id", topic='topic')
-      .text-center.extra-topics(ng-if='!show.extraTopics && extraTopics.length')
-        md-button.btn.btn-sm.btn-default(ng-click='show.extraTopics = true', translate) More topics
+    .flex.flex-stretch
+      other-topic.flex33(ng-if='featuredTopics.length', ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id", topic='topic')
+      
+    .text-center.extra-topics(ng-if='!show.extraTopics && extraTopics.length')
+      md-button.btn.btn-sm.btn-default(ng-click='show.extraTopics = true', translate) More topics
+
     .row(ng-if='!featuredTopics.length')
       .col-xs-12.text-center
         strong No topics currently available.&nbsp;

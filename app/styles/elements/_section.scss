@@ -31,3 +31,7 @@ section.gray {
 }
 
 .section-title-red { color: $brand-primary; }
+
+section.content + section.content {
+  margin-top: 0;
+}
