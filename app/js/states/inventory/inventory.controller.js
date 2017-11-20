@@ -71,8 +71,8 @@ function InventoryCtrl(
     $scope.loading = InventoryService.loading;
     $scope.reloading = false;
 
-    $scope.sorter = new Utils.Sorter(false, order);
-    $scope.sorter.predicate = 'toString';
+    $scope.predicate = $location.search().sort_field || 'toString';
+    $scope.reverse = $location.search().sort_dir === 'DESC';
 
     $scope.allSelected = false;
     $scope.reallyAllSelected = false;
@@ -299,14 +299,13 @@ function InventoryCtrl(
     function order() {
         $scope.systems = $filter('orderBy')($scope.systems,
             ['_type',
-            ($scope.sorter.reverse ?
-                '-' + $scope.sorter.predicate :
-                $scope.sorter.predicate)]);
+            ($scope.reverse ?
+                '-' + $scope.predicate :
+                $scope.predicate)]);
     }
 
     $scope.sort = function (column) {
         $scope.loading = true;
-        $scope.predicate = column;
 
         // just changing the sort direction
         if (column === InventoryService.getSortField()) {
@@ -317,6 +316,7 @@ function InventoryCtrl(
             InventoryService.setSortField(column);
             InventoryService.setSortDirection('ASC');
             $scope.reverse = false;
+            $scope.predicate = column;
 
             // special case where we are sorting by timestamp but visually
             // showing timeago
@@ -327,8 +327,6 @@ function InventoryCtrl(
 
         // if we have the full inventory list then use local sorting
         if ($scope.systems.length === InventoryService.getTotal()) {
-            $scope.sorter.predicate = column;
-            $scope.sorter.reverse = $scope.reverse;
             order();
             $scope.loading = false;
         }

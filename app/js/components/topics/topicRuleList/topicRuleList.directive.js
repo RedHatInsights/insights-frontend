@@ -21,7 +21,7 @@ function topicRuleListCtrl ($filter,
     $scope.listTypes = ListTypeService.types();
     $scope.getListType = ListTypeService.getType;
     $scope.sorter = new Utils.Sorter({
-        predicate:['acked', 'hitCount === 0', '-severityNum', '-hitCount'],
+        predicate: ['acked', 'hitCount === 0', '-severityNum', '-hitCount'],
         reverse: false},
         order);
 

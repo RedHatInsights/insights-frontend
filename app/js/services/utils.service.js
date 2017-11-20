@@ -258,8 +258,8 @@ function Utils($filter, $rootScope, Events) {
     };
 
     utils.Sorter.prototype.sort = function (name) {
+        this.reverse = (this.predicate === name) ? !this.reverse : false;
         this.predicate = name;
-        this.reverse = !this.reverse;
         if (this.cb) {
             this.cb();
         }

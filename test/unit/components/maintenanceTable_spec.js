@@ -92,7 +92,6 @@ describe('MaintenanceTable', function () {
 
     it('sorts items by id', function () {
         ctrl.sorter.sort('id');
-        ctrl.sorter.sort('id');
         ctrl.data[0].id.should.equal(1);
         ctrl.data[0].display.should.equal('delta');
         ctrl.data[1].id.should.equal(2);
@@ -102,8 +101,9 @@ describe('MaintenanceTable', function () {
 
     it('splits data into pages', function () {
         ctrl.pager.perPage = 4;
+        ctrl.sorter.sort('id');
         ctrl.sorter.sort('id'); // descending
-
+        
         // first page: 7, 6, 5, 4
         ctrl.pager.currentPage.should.equal(1);
         ctrl.data.length.should.equal(4);
