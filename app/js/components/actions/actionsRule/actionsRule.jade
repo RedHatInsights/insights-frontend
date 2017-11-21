@@ -1,8 +1,14 @@
 .actions-rule
-  actions-breadcrumbs.actions-breadcrumbs(ng-hide='loading')
+  actions-breadcrumbs(ng-hide='loading')
 
-  .rule-detail-header
+  section.rule-detail-header
     page-header(title="ruleDetails.description", icon="fa-file-text")
+    .rule-detail-ansible-support
+      ansible-icon(value='ruleDetails.ansible')
+    .rule-detail-risk-list
+      all-severity-icons(rule='ruleDetails', ng-if='!loading')
+      hr
+      risk-of-change
     .rule-detail-summary(ng-hide='loading')
       h4(ng-if='isIncident(ruleDetails.rule_id)')
         .icon-inline
@@ -10,22 +16,17 @@
           span.red(translate) This issue is an incident, it has already occurred.
           
       article(ng-bind-html='ruleDetails.generic_html | trust_html')
-    .rule-detail-ansible-support
-      ansible-icon(value='ruleDetails.ansible')
-    .rule-detail-risk-list
-      hr
-      all-severity-icons(rule='ruleDetails', ng-if='!loading')
 
-  .table-utilities
-    search-box(on-search='search(model)', placeholder="{{'Find a system' | translate}}")
-    check-in-select
-          
+  section.content
+    .table-utilities
+      search-box(on-search='search(model)', placeholder="{{'system search...' | translate}}")
+      check-in-select
+            
 
-  // Show Create Playbook, Add to Plan if at least one system has been selected
-  .row.row-short
-    .col-xs-4.col-sm-2.md-menu-container
+    // Show Create Playbook, Add to Plan if at least one system has been selected
+    .table-header
       .dropdown
-        md-button(
+        md-button.button-dropdown(
           data-toggle='dropdown',
           aria-haspopup='true',
           aria-expanded='false',
@@ -45,6 +46,7 @@
               value='plans.future.length || plans.unscheduled.length',
               show-tooltip='false')
 
+      .table-header-title
         h3.system-count(translate, translate-n='{{totalRuleSystems}}', translate-plural='{{$count}} Impacted Systems', ng-if='ruleDetails.type !== "osp"') 1 Impacted System
         h3.system-count(translate, translate-n='{{totalRuleSystems}}', translate-plural='{{$count}} Impacted Deployments', ng-if='ruleDetails.type === "osp"') 1 Impacted Deployment
         small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{numberOfSelected()}} Selected
@@ -52,40 +54,35 @@
             a(ng-show='!reallyAllSelected', ng-click='reallySelectAll()') &nbsp;Select All Systems.
             a(ng-show='reallyAllSelected', ng-click='deselectAll()') &nbsp;Deselect All Systems.
           span )
-    .col-xs-4.col-sm-2.hidden-xs.text-right
       list-type(ng-hide='hideListSwitch')
 
+      .card-table-header(ng-show='getListType() === listTypes.card')
+        .row
+          .col-sm-4
+            md-checkbox.md-accent.md-hue-1.md-checkbox-list(
+            tooltip='Select All',
+            type='checkbox',
+            aria-label="checkbox",
+            md-indeterminate='checkboxes.indeterminate',
+            ng-model='checkboxes.checked',
+            ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems);')
+            label(translate, ng-click="sort('system_type_id')") &nbsp; Type
+          .col-sm-4
+            strong(translate, ng-click="sort('toString')") Name &nbsp;
+          .col-sm-4.text-right
+            strong(translate, ng-click="sort('report_count')") Action Count
 
+      .row.row-short(ng-show='getListType() === listTypes.card && !loadingSystems')
+        .col-sm-12
+          system-card(ng-repeat='system in ruleSystems',
+            system='system',
+            rule='ruleDetails',
+            checkboxes='checkboxes')
 
-    .card-table-header(ng-show='getListType() === listTypes.card')
-      .row
-        .col-sm-4
-          md-checkbox.md-accent.md-hue-1.md-checkbox-list(
-          tooltip='Select All',
-          type='checkbox',
-          aria-label="checkbox",
-          md-indeterminate='checkboxes.indeterminate',
-          ng-model='checkboxes.checked',
-          ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems);')
-          label(translate, ng-click="sort('system_type_id')") &nbsp; Type
-        .col-sm-4
-          strong(translate, ng-click="sort('toString')") Name &nbsp;
-        .col-sm-4.text-right
-          strong(translate, ng-click="sort('report_count')") Action Count
-
-    .row.row-short(ng-show='getListType() === listTypes.card && !loadingSystems')
-      .col-sm-12
-        system-card(ng-repeat='system in ruleSystems',
-          system='system',
-          rule='ruleDetails',
-          checkboxes='checkboxes')
-
-
-  section.content
     table(ng-show='getListType() === listTypes.table')
       thead
         tr
-          th
+          th.min
             md-checkbox.md-accent.md-hue-1.md-checkbox-list(
               tooltip='Select All',
               type="checkbox",
@@ -93,7 +90,7 @@
               md-indeterminate="checkboxes.indeterminate",
               ng-model='checkboxes.checked',
               ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
-          th.sortable(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')", translate) Type
+          th.min.sortable(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')", translate) Type
           th.sortable(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')", translate) Name
           th.sortable(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')", translate) Reported
 
@@ -103,18 +100,18 @@
            ng-class="{'stale': !system.isCheckingIn}",
            ng-repeat='system in ruleSystems',
            data-id="{{system.system_id}}")
-          td(style='width: 30px')
+          td
             md-checkbox.md-accent.md-hue-1.md-checkbox-list(
               type='checkbox',
               aria-label="checkbox",
               ng-model='checkboxes.items[system.system_id]',
               ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();',
             )
-          td(style='width: 27%;')
+          td.fit-content
             type-icon(type-id='system.system_type_id', include-text='true')
           td.break
             a(ng-click='showSystem(system)') {{ system.toString }}
-          td(style='width: 27%;') {{ ::system.last_check_in | timeAgo}}
+          td {{ ::system.last_check_in | timeAgo}}
 
     pagination.pull-right.pagination-blue(
       ng-hide='loading || loadingSystems',

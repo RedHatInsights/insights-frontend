@@ -1,5 +1,5 @@
 .maintenance-page
-  page-header(title="Planner", icon="fa-wrench", ng-class="{'inactive': !expandBar, 'active': expandBar}")
+  page-header(title="Maintenance Planner", icon="fa-wrench", ng-class="{'inactive': !expandBar, 'active': expandBar}", ng-transclude)
     .create-plan-actions.text-right.pull-right
       a.create-plan(ng-click='MaintenanceService.showMaintenanceModal()')
         span(translate) &nbsp;Create a plan

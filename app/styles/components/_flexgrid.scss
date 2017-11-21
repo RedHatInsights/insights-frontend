@@ -1,3 +1,37 @@
+.flex {
+  display: flex;
+  @include rem('margin-left', -$global-padding);
+  @include rem('margin-right', -$global-padding);
+}
+
+.flex.flex-stretch {
+  // align-items: stretch;
+}
+
+.flex.flex-column {
+  flex-direction: column;
+}
+
+.flex25,
+.flex33,
+.flex66 {
+  @include rem('margin', 0 $global-padding);
+}
+
+.flex25 {
+  flex: 1 1 25%;
+}
+
+.flex33 {
+  flex: 1 1 33%;
+}
+
+.flex66 { 
+  flex: 1 1 66%;
+}
+
+
+
 .flexgrid {
 	.gray {
 		@include rem('padding', $global-padding);
