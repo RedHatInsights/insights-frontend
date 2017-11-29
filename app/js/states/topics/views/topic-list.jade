@@ -2,15 +2,10 @@
   actions-breadcrumbs(ng-hide="loading")
 
   section.rule-detail-header
-    page-header(title="::topic.title", icon="fa-file-text")
+    page-header(ng-if='!loading', title="{{topic.title}}", icon="fa-file-text")
     topic-details(ng-hide='loading', topic='topic') 
 
   topic-rule-filters(ng-hide='loading')
-  table-filters
-    incidents-tri-state(ng-if='isBeta')
-    total-risk-select
-    risk-of-change-select
-
 
   section.content
     .table-utilities

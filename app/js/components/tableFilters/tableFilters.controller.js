@@ -7,7 +7,7 @@ const priv = {};
 /**
  * @ngInject
  */
-function tableFiltersCtrl($element,
+function TableFiltersCtrl($element,
                                $location,
                                $q,
                                $rootScope,
@@ -38,7 +38,7 @@ function tableFiltersCtrl($element,
     });
 
     /**
-     * exposes an 'open' variable which tracks the state of the collapsible filter so that
+     * exposes an 'open' variable which tracks the state of the table filter so that
      * classes can be applied to the frontend when the filters are open/closed
      */
     priv.toggleTray = function () {
@@ -61,11 +61,11 @@ function tableFiltersCtrl($element,
  */
 function tableFilters() {
     return {
-        templateUrl: 'js/components/table-filters/table-filters.html',
+        templateUrl: 'js/components/tableFilters/tableFilters.html',
         restrict: 'E',
         replace: true,
         transclude: true,
-        controller: tableFiltersCtrl
+        controller: TableFiltersCtrl
     };
 }
 
@@ -74,7 +74,7 @@ function tableFilters() {
  */
 function tableFiltersContent() {
     return {
-        templateUrl: 'js/components/table-filters/table-filters-content.html',
+        templateUrl: 'js/components/tableFilters/tableFiltersContent.html',
         restrict: 'E',
         replace: true,
         transclude: true,
@@ -82,5 +82,5 @@ function tableFiltersContent() {
     };
 }
 
-componentsModule.directive('table-filters', tableFilters);
-componentsModule.directive('table-filters-content', tableFiltersContent);
+componentsModule.directive('tableFilters', tableFilters);
+componentsModule.directive('tableFiltersContent', tableFiltersContent);
