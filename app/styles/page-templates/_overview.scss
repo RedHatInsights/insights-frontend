@@ -1,60 +1,92 @@
 $overview-bg-header: #fafafa;
 
-.insights-app-overview {
-  .insights-main-content { padding: 0; }
-  .page { padding: 0 $global-padding; }
-  .top-bar { position: relative; }
+// .insights-app-overview {
+//   .insights-main-content { padding: 0; }
+//   .page { padding: 0 $global-padding; }
+//   .top-bar { position: relative; }
 
-  .row.border-bottom { border-bottom: 1px solid $gray-border-med; }
+//   .row.border-bottom { border-bottom: 1px solid $gray-border-med; }
 
-  .border-left {
-    @include media-query(sm) {
-      border-left: 1px solid $gray-border-med;
-      border-collapse: collapse;
-    }
+//   .border-left {
+//     @include media-query(sm) {
+//       border-left: 1px solid $gray-border-med;
+//       border-collapse: collapse;
+//     }
+//   }
+
+//   .border-bottom {
+//     @include media-query(sm) {
+//       border-bottom: 1px solid $gray-border-med;
+//       border-collapse: collapse;
+//     }
+//   }
+
+//   .border-right {
+//     @include media-query(sm) {
+//       border-right: 1px solid $gray-border-med;
+//       border-collapse: collapse;
+//     }
+//   }
+
+//   .action-block {
+//     @include rem('margin-bottom', $global-margin);
+//     border: 1px solid $gray;
+
+//     @include media-query(md) {
+//     	margin-bottom: 0;
+//     }
+
+//     //&.green .num { color: #46B631; }
+//     //&.blue .num { color: #2C96CB; }
+//     //&.blue-dark .num { color: #6D868D; }
+
+//     &.green { background: #46B631; }
+//     &.blue { background: #2C96CB; }
+//     &.blue-dark { background: #6D868D; }
+
+//     .num {
+//       @include rem('padding', 12px 0);
+//       background: $gray-light;
+//     }
+
+//     .text {
+//       @include rem('padding', 6px 2px);
+//       //color: $gray-dark;
+//       color: #fff;
+//     }
+
+//   }
+// }
+
+.grid-overview {
+  display: grid;
+  grid-gap: $global-margin;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'blog'
+                      'new-systems'
+                      'incident-lite'
+                      'optimize'
+                      'maintenance';
+
+
+  @include media-query(sm){
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'blog new-systems'
+                          'incident-lite incident-lite'
+                          'optimize maintenance';
   }
 
-  .border-bottom {
-    @include media-query(sm) {
-      border-bottom: 1px solid $gray-border-med;
-      border-collapse: collapse;
-    }
-  }
-
-  .border-right {
-    @include media-query(sm) {
-      border-right: 1px solid $gray-border-med;
-      border-collapse: collapse;
-    }
-  }
-
-  .action-block {
-    @include rem('margin-bottom', $global-margin);
-    border: 1px solid $gray;
-
-    @include media-query(md) {
-    	margin-bottom: 0;
-    }
-
-    //&.green .num { color: #46B631; }
-    //&.blue .num { color: #2C96CB; }
-    //&.blue-dark .num { color: #6D868D; }
-
-    &.green { background: #46B631; }
-    &.blue { background: #2C96CB; }
-    &.blue-dark { background: #6D868D; }
-
-    .num {
-      @include rem('padding', 12px 0);
-      background: $gray-light;
-    }
-
-    .text {
-      @include rem('padding', 6px 2px);
-      //color: $gray-dark;
-      color: #fff;
-    }
+  @include media-query(md){
+    grid-template-areas: 'blog new-systems'
+                      'blog incident-lite'
+                      'optimize maintenance';
 
   }
 }
+
+.widget-blog { grid-area: blog; }
+.widget-new-systems { grid-area: new-systems;}
+incident-lite { grid-area: incident-lite; }
+.widget-optimize { grid-area: optimize; }
+.widget-maintenance-plan { grid-area: maintenance; }
 

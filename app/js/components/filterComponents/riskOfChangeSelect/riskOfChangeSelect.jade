@@ -1,13 +1,15 @@
-.risk-of-change-select
-  label(translate) Risk of Change
-  .dropdown
-    button.btn.btn-default.dropdown-toggle(
+.risk-of-change-select.filter-group
+  label(translate) 
+    strong Risk of Change
+  md-menu
+    md-button.dropdown-toggle.button-filter(
       type='button',
       data-toggle='dropdown',
       aria-haspopup='true',
-      aria-expanded='false')
+      aria-expanded='false',
+      ng-click='$mdMenu.open()')
       span {{selected.label}}
       span.caret
-    ul.dropdown-menu
-      li(ng-repeat='(key, value) in options')
-        a(ng-click='select(key)') {{value.label}}
+    md-menu-content
+      md-menu-item(ng-repeat='(key, value) in options')
+        a(ui-sref="#", ng-click='select(key)') {{value.label}}

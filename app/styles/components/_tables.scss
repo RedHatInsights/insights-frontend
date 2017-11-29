@@ -103,6 +103,22 @@ table a:link { @extend %font_blue; }
   }
 }
 
+// .table-overflow {
+//   position: relative;
+//   overflow-x: auto;
+// }
+
+// .table-overflow::after {
+//   background: linear-gradient(to right, #fff0 0%,#ddd 100%);
+//   width: 30px;
+//   content: '';
+//   position: absolute;
+//   right: 0;
+//   height: 100%;
+//   top: 0;
+//   border-right: 1px solid #ddd;
+// }
+
 $sortable_border_width: 5px;
 $sortable_border_color: #000;
 $sortable_border_color_active: red;

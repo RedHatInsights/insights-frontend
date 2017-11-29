@@ -8,4 +8,10 @@
     grid-template-columns: auto 1fr auto;
     grid-gap: $global-margin;    
   }
+
+  .cell {
+    @include media-query(sm) {
+      align-items: center;
+    }
+  }
 }

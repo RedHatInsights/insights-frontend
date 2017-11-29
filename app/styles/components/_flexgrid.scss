@@ -4,6 +4,8 @@
   @include rem('margin-right', -$global-padding);
 }
 
+.flex + .flex { @include rem('margin-top', $global-margin); }
+
 .flex.flex-stretch {
   // align-items: stretch;
 }

@@ -1,6 +1,5 @@
 .cell.insights-logo
   button.toggle-fullscreen(ng-click='sidenavCollapsed = !sidenavCollapsed')
-    //- i.fa.fa-indent
     md-icon(md-font-icon="fa fa-indent")
   
   md-button(ng-click="toggleLeft()", 
@@ -9,13 +8,12 @@
 
     md-icon(md-font-icon="fa fa-navicon")
 
-  a.home-link(ui-sref='app.overview') 
+  a.home-link(ui-sref='app.overview')
     span.hidden(translate) Red Hat Insights
     md-icon(md-svg-src="../static/images/l_insights.svg" aria-label="Red Hat Insights ")
 
-.cell
-  .global-filters(ng-class='{disabled: disabled}')
-    group-select(disabled='disabled')
+.cell.global-filters(ng-class='{disabled: disabled}')
+  group-select(disabled='disabled')
 
 .cell.topbar-utilities
   menu.notifications
@@ -28,28 +26,16 @@
       span.caret.dropdown-caret
     md-menu-content
       md-menu-item
-        md-button(href='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', translate) Getting Started
+        a(ui-sref='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', translate) Getting Started
       md-menu-item
-        md-button Link1
-      md-menu-item
-        md-button Link1
-
-  span.dropdown.help(dropdown='', on-toggle='toggled(open)')
-    md-button.md-button-sm.dropdown-toggle(href='', dropdown-toggle='')
-      strong(translate) Help
-      span.caret.dropdown-caret
-    ul.dropdown-menu
-      li
-        a(href='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', translate) Getting Started
-      li
         a(ui-sref='info.info', translate) More Info
-      li
+      md-menu-item
         a(ui-sref='info.security', translate) Security
-        // if this is the Portal hosted Insights... link to the Portal Browser Support Policy page
-      li
+      md-menu-item
         a(href='/help/browsers', target='_self', translate, ng-if="isPortal") Browser Support
-      li
+      md-menu-item
         a(href='/r/insights/docs/', translate) Insights API Documentation
-      li
+      md-menu-item
         demo-account-switcher
+
   beta-switch-button

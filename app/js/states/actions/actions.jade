@@ -51,9 +51,8 @@
     .text-center.extra-topics(ng-if='!show.extraTopics && extraTopics.length')
       md-button.btn.btn-sm.btn-default(ng-click='show.extraTopics = true', translate) More topics
 
-    .row(ng-if='!featuredTopics.length')
-      .col-xs-12.text-center
-        strong No topics currently available.&nbsp;
-          a(ui-sref='info.getting-started.direct', translate) Register more systems.
-  section.full-width(ng-if='show.extraTopics')
-    other-topic(ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id", topic='topic')
+    div(ng-if='!featuredTopics.length')
+      strong.text-center No topics currently available.&nbsp;
+        a(ui-sref='info.getting-started.direct', translate) Register more systems.
+    .flex(ng-if='show.extraTopics')
+      other-topic.flex33(ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id", topic='topic')

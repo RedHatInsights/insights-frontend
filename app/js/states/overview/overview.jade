@@ -1,43 +1,39 @@
 .overview
   page-header(title="Overview", icon="fa-tachometer")
   .rha-notifications
-  section.content
-    .row
-      .col-md-5.col-lg-6
-        md-card
-          md-card-header
-            .md-card-header-title
-              span.icon-inline
-                i.fa.fa-fire
-                span(translate) Latest
-            .md-card-header-cta
-              a(translate, ng-show='isInternal', ng-click='edit()') Edit
-          md-card-content
-            handcrafted-content
-        new-systems
-      .col-md-7.col-lg-6
-        md-card
-          md-card-header
-            .md-card-header-title
-              span.icon-inline
-                i.fa.fa-file-text
-                span(translate)  Actions Summary
-            .md-card-header-cta
-              a(translate, ui-sref="app.actions") View actions
-          md-card-content
-            severity-summary(stats='stats')
+  section.content.grid-overview
+    md-card.widget.widget-blog
+      md-card-header.gray
+        .md-card-header-title
+          span.icon-inline
+            i.fa.fa-fire
+            span(translate) Latest
+        .md-card-header-cta
+          a(translate, ng-show='isInternal', ng-click='edit()') Edit
+      md-card-content
+        handcrafted-content
+    new-systems
+    md-card.widget.widget-actions-summary
+      md-card-header.gray
+        .md-card-header-title
+          span.icon-inline
+            i.fa.fa-file-text
+            span(translate)  Actions Summary
+        .md-card-header-cta
+          a(translate, ui-sref="app.actions") View actions
+      md-card-content
+        severity-summary(stats='stats')
 
-        .grid-block(ng-if="isBeta")
-          section.widget-block.widget-block-narrow
-            incident-lite
+    incident-lite(ng-if="isBeta")
 
-        .grid-block(ng-if="!paid()")
-          section.widget-block
-            h2.title
-              i.fa.fa-bullseye &nbsp;
+    md-card.widget.widget-optimize(ng-if="!paid()")
+      md-card-header.gray
+        .md-card-header-title
+          span.icon-inline
+            i.fa.fa-bullseye &nbsp;
             span(translate) Optimize&nbsp;
             span.light(translate) Your Experience
-          md-card-content
-            goals-lite
+      md-card-content
+        goals-lite
 
-        maintenance-plan-lite(ng-if='config.isPlannerEnabled')
+    maintenance-plan-lite(ng-if='config.isPlannerEnabled')

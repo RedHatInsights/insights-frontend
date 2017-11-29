@@ -2,9 +2,15 @@
   display: none;
   background: none;
   transform: scaleX(-1);
-  @include rem('padding', $global-margin);
+  @include rem('padding', $global-padding);
+
+  @include media-query(sm){
+    display: inline-block;
+  }
   
-  @include media-query(sm){ display: inline-block; }
+  @include media-query(md){ 
+    @include rem('padding', $global-margin);
+  }
 }
 
 .collapsed .toggle-fullscreen { i.fa { transform: scaleX(1); } }

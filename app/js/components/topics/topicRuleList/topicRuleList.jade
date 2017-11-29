@@ -25,7 +25,7 @@
                   ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
                   ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
 
-  .table-view(ng-show='getListType() === listTypes.table && plugins.length > 0')
+  .table-view.table-overflow(ng-show='getListType() === listTypes.table && plugins.length > 0')
     table#rha-rules-table
       thead
         tr

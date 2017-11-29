@@ -3,10 +3,6 @@ topbar .insights-logo {
 
   @include media-query(sm){ display: inline-flex; }
 
-  .home-link {
-    align-self: center;
-  }
-
   .home-link md-icon {
     @include rem('width', 120px);
   }

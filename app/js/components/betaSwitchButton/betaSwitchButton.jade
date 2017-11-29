@@ -5,11 +5,9 @@
 
 	// User is in beta, show Beta Options
 	span.dropdown.beta-dropdown(dropdown='', on-toggle='toggled(open)', ng-show='isOnBeta()')
-		md-button.md-button-sm.md-primary.md-button-ghost-gray.dropdown-toggle(href='', dropdown-toggle='') 
-			span.button-content-wrapper
-				i.fa.fa-cog
-				.strong(translate) Beta Options
-				.caret.dropdown-caret
+		md-button.dropdown-toggle(href='', dropdown-toggle='', translate) 
+			strong Beta Options
+			i.fa.fa-cog
 		ul.dropdown-menu
 			li
 				a(ng-click='switchStatus()', translate) Default to Insights Beta

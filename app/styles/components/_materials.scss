@@ -19,8 +19,9 @@ md-menu-item {
 	height: auto;
 }
 
+md-menu-item > .md-button,
 md-menu-item > a.md-button,
-md-menu-item > .md-button {
+md-menu-item > a {
 	width: 100%;
   height: auto;
   @include rem('padding', $global-padding);
@@ -31,6 +32,12 @@ md-menu-item > .md-button {
   text-transform: none;
   align-items: center;
   justify-content: center;
+}
+
+
+// Handle sibling icon + span
+md-menu-item span + i {
+
 }
 
 md-icon {
@@ -45,6 +52,11 @@ md-card {
 	// box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 2px 1px -1px;
 
 }
+
+.md-card-header-cta {
+  @include font-size(14px, 1);
+}
+
 
 button.md-button.md-button-sm, a.md-button.md-button-sm{
 	// height: 20px !important;
