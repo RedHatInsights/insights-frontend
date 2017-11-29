@@ -6,6 +6,11 @@
     topic-details(ng-hide='loading', topic='topic') 
 
   topic-rule-filters(ng-hide='loading')
+  table-filters
+    incidents-tri-state(ng-if='isBeta')
+    total-risk-select
+    risk-of-change-select
+
 
   section.content
     .table-utilities

@@ -1,0 +1,29 @@
+.table-filters
+  div(ng-transclude)
+  test test
+  
+  .flexgrid(ng-show='hasTags()', ng-model='tags')
+    strong(translate) Active filters:&nbsp;
+    // remove filter on click
+    button.btn.button-active-filter(ng-repeat="(key, value) in tags", ng-click='removeFilter(key)')
+      span(translate) {{value | translate}}
+      i.fa.fa-times-circle-o(aria-hidden="true")
+
+//- #dataFilters.dataFilters(ng-class="{open: open, tags: hasTags()}")
+//-   #dataFiltersBody.data-filters-body.collapse
+//-     div(ng-transclude)
+
+//-   #activeFilter.active-filters(ng-show='hasTags()', ng-model='tags')
+//-     .flexgrid
+//-       strong(translate) Active filters:&nbsp;
+//-       // remove filter on click
+//-       button.btn.button-active-filter(ng-repeat="(key, value) in tags", ng-click='removeFilter(key)')
+//-         span(translate) {{value | translate}}
+//-         i.fa.fa-times-circle-o(aria-hidden="true")
+
+//-   footer#dataFiltersControlBar.data-filters-control-bar
+//-     .toggle(data-toggle='collapse', href='#dataFiltersBody', aria-expanded='false', aria-controls='dataFiltersBody', ng-class="{active: open}")
+//-       .icon-inline
+//-         i.fa.fa-caret-down
+//-         i.fa.fa-caret-down
+//-         strong Page Filters
