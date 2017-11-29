@@ -100,8 +100,14 @@ function card() {
                 $scope.$watch(expression, function (val) {
                     if (val) {
                         element.addClass(cls);
+                        element.removeClass('collapsed');
+                        element.addClass('md-whiteframe-5dp');
+                        element.removeClass('md-whiteframe-1dp');
                     } else {
                         element.removeClass(cls);
+                        element.addClass('collapsed');
+                        element.removeClass('md-whiteframe-5dp');
+                        element.addClass('md-whiteframe-1dp');
                     }
                 });
             }

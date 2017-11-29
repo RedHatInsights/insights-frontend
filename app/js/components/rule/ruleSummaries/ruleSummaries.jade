@@ -17,4 +17,4 @@
   .row(ng-if='!loading.isLoading && !system.__fake && errorMessage')
     .col-xs-12
       div(ng-bind-html='errorMessage | trust_html')
-  .rule-summary.system-overlay-item.content-block(report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports')
+  .rule-summary.system-overlay-item(report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports')
