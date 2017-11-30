@@ -1,4 +1,4 @@
-/*global require*/
+/*global require, angular*/
 'use strict';
 
 var componentsModule = require('../');
@@ -73,19 +73,6 @@ function CardFooterLink(scope, element, attrs, card) {
 function card() {
     return {
         templateUrl: 'js/components/card/card.html',
-        restrict: 'E',
-        replace: true,
-        transclude: true,
-        controller: CardCtrl
-    };
-}
-
-/**
- * @ngInject
- */
-function cardExpandable() {
-    return {
-        templateUrl: 'js/components/card/cardExpandable.html',
         restrict: 'E',
         replace: true,
         transclude: true,
@@ -174,7 +161,6 @@ function cardFooter() {
 }
 
 componentsModule.directive('card', card);
-componentsModule.directive('cardExpandable', cardExpandable);
 componentsModule.directive('cardHeader',  cardHeader);
 componentsModule.directive('cardContent', cardContent);
 componentsModule.directive('cardFooter',  cardFooter);
