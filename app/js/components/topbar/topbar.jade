@@ -5,7 +5,6 @@
   md-button(ng-click="toggleLeft()", 
     class="md-primary", 
     hide-gt-xs)
-
     md-icon(md-font-icon="fa fa-navicon")
 
   a.home-link(ui-sref='app.overview')
@@ -20,11 +19,11 @@
     bullhorn(icon='fa-bullhorn', type='announcements')
     alerts(icon='fa-bell', type='alerts')
   span.sep
-  md-menu
-    md-button.dropdown-toggle(ng-click='$mdMenu.open()') 
+  md-menu(md-offset="0 34", md-position-mode="target-right target")
+    md-button.button-dropdown#help(ng-click='$mdMenu.open()') 
       strong(translate) Help
-      span.caret.dropdown-caret
-    md-menu-content
+      span.caret.dropdown-caret(aria-hidden="true")
+    md-menu-content(aria-labelledby="help")
       md-menu-item
         a(ui-sref='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', translate) Getting Started
       md-menu-item

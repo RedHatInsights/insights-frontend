@@ -63,7 +63,7 @@ function tableFilters() {
     return {
         templateUrl: 'js/components/table-filters/table-filters.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         transclude: true,
         controller: tableFiltersCtrl
     };
@@ -76,7 +76,7 @@ function tableFiltersContent() {
     return {
         templateUrl: 'js/components/table-filters/table-filters-content.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         transclude: true,
         require: '^tableFilters'
     };

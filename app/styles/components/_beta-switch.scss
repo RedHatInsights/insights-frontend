@@ -11,7 +11,7 @@ topbar .beta-switch {
 
   }
 
-  .beta-dropdown { @include rem('padding', $global-padding); }
+  // .beta-dropdown { @include rem('padding', $global-padding); }
 
   .dropdown .button-content-wrapper { @include rem('padding', $global-padding); }
 

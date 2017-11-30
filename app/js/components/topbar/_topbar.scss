@@ -18,6 +18,9 @@ topbar {
   }
 }
 
+topbar .button {
+  box-shadow: none;
+}
 
 topbar .cell {
   @include media-query(sm){
@@ -57,7 +60,10 @@ topbar {
   .beta-switch { display: inline-block; }
 
   menu span + span { padding-left: 15px; }
-  menu.notifications{ margin-right: 15px; }
+  menu.notifications{ 
+    padding: 0;
+    margin-right: 15px; 
+  }
 
   .help, 
   .beta-dropdown {

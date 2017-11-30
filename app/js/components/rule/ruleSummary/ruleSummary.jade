@@ -1,13 +1,12 @@
-card.accordion.rule-card(expandable='true', init-collapsed='initCollapsed', on-toggle='resetShowMore(ctx)')
-  card-header
-    md-card-header-text
-      .md-title
-        ansible-icon(value='report.rule.ansible', ng-if='config.isPlannerEnabled')
-        incident-icon(rule-id='report.rule_id')
-        | {{ report.rule.category }} #{'>'} {{ report.rule.description }}
-      .md-subhead.flexgrid.equal-heights
-        all-severity-icons(rule='report.rule')
-        risk-of-change(change-risk='report.rule.resolution_risk')
+card-expandable
+  card-header.risk-summary
+    .card-header-text
+      ansible-icon(value='report.rule.ansible', ng-if='config.isPlannerEnabled')
+      incident-icon(rule-id='report.rule_id')
+      | {{ report.rule.category }} #{'>'} {{ report.rule.description }}
+    .card-header-risk-summaries
+      all-severity-icons(rule='report.rule')
+      risk-of-change(change-risk='report.rule.resolution_risk')
   card-content.content.ng-animate-enabled
     .row
       .col-sm-12

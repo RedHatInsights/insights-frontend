@@ -1,7 +1,8 @@
 md-card
   md-card-header
-    h4 {{topic.title}}
-    div
+    .card-header-title
+      h4 {{topic.title}}
+    .card-header-supporting-info
       span.count(translate, translate-n='topic.affectedSystemCount', translate-plural='{{$count}} Systems') 1 System
   md-card-content(ng-bind-html='topic.summary_html ? topic.summary_html : Xtopic.content_html | trust_html')
   md-card-footer.text-right-sm

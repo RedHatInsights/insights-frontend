@@ -1,5 +1,21 @@
-button {
+// $button-primary-bg: linear-gradient(to bottom, rgba(55,176,252,1) 0%,rgba(32,151,230,1) 100%);
+$button-primary-bg: $blue;
+$button-primary-color: #fff;
 
+.md-button,
+button {
+  width: auto;
+  height: auto;
+  @include rem('padding', 10px 25px);
+  margin: 0;
+  min-width: 0;
+  min-height: 0;
+  color: $base-color;
+  @include font-size(14px, 1);
+  text-transform: none;
+  font-family: 'overpass';
+  transition: .2s;
+  box-shadow: 0 2px 3px 0px rgba(0,0,0,.2);
 }
 
 .dropdown button {
@@ -15,6 +31,12 @@ button {
 
 .dropdown-plain {
   padding: 0;
+}
+
+// Dropdown buttons
+.button-dropdown {
+  @include rem('padding', $global-padding/2);
+  box-shadow: none;
 }
 
 
@@ -38,24 +60,20 @@ button:focus {
 }
 
 .button-filter {
-  @include rem('padding', $global-padding/2 $global-padding);
+  @include rem('padding', 10px $global-padding);
+  box-shadow: none;
   border-radius: 50px;
   border: 1px solid #DCDCDC;
   color: #9B9B9B;
 }
 
-.button-filter {
-  @include rem('padding', $global-padding/2 $global-padding);
-  border-radius: 50px;
-  border: 1px solid #DCDCDC;
-  color: #9B9B9B;
-}
+.button-primary {
+  background: $button-primary-bg;
+  color: $button-primary-color;
 
-.button-filter {
-  @include rem('padding', $global-padding/2 $global-padding);
-  border-radius: 50px;
-  border: 1px solid #DCDCDC;
-  color: #9B9B9B;
+  &:hover {
+    background-color: darken($button-primary-bg, 10);
+  }
 }
 
 .btn .svg {

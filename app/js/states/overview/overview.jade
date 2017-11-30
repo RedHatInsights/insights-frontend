@@ -1,39 +1,39 @@
-.overview
+.page-overview
   page-header(title="Overview", icon="fa-tachometer")
   .rha-notifications
   section.content.grid-overview
-    md-card.widget.widget-blog
-      md-card-header.gray
-        .md-card-header-title
+    card.widget.widget-blog
+      card-header.gray
+        .card-header-title
           span.icon-inline
             i.fa.fa-fire
             span(translate) Latest
-        .md-card-header-cta
+        .card-header-cta
           a(translate, ng-show='isInternal', ng-click='edit()') Edit
-      md-card-content
+      card-content
         handcrafted-content
     new-systems
-    md-card.widget.widget-actions-summary
-      md-card-header.gray
-        .md-card-header-title
+    card.widget.widget-actions-summary
+      card-header.gray
+        .card-header-title
           span.icon-inline
             i.fa.fa-file-text
             span(translate)  Actions Summary
-        .md-card-header-cta
+        .card-header-cta.card-header-supporting-info
           a(translate, ui-sref="app.actions") View actions
-      md-card-content
+      card-content
         severity-summary(stats='stats')
 
     incident-lite(ng-if="isBeta")
 
-    md-card.widget.widget-optimize(ng-if="!paid()")
-      md-card-header.gray
-        .md-card-header-title
+    card.widget.widget-optimize(ng-if="!paid()")
+      card-header.gray
+        .card-header-title
           span.icon-inline
             i.fa.fa-bullseye &nbsp;
             span(translate) Optimize&nbsp;
             span.light(translate) Your Experience
-      md-card-content
+      card-content
         goals-lite
 
     maintenance-plan-lite(ng-if='config.isPlannerEnabled')

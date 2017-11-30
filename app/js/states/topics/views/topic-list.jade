@@ -5,11 +5,11 @@
     page-header(title="::topic.title", icon="fa-file-text")
     topic-details(ng-hide='loading', topic='topic') 
 
-  topic-rule-filters(ng-hide='loading')
-  table-filters
-    incidents-tri-state(ng-if='isBeta')
-    total-risk-select
-    risk-of-change-select
+  //- topic-rule-filters(ng-hide='loading')
+  .table-filters
+    incidents-tri-state(ng-if='isBeta').filter-group
+    total-risk-select.filter-group
+    risk-of-change-select.filter-group
 
 
   section.content

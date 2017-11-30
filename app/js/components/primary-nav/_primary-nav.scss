@@ -8,7 +8,7 @@ $aside_anchor_hover_bg: gray;
 
 
 // Container styling
-md-sidenav {
+.primary-nav {
   display: block;
 
   @include media-query(sm){ box-shadow: inset -14px 0 40px 0 rgba(0, 0, 0, .1); }
@@ -58,7 +58,8 @@ md-sidenav {
 
 // Small breakpoint
 //==================================================================*/
-md-sidenav.primary-nav { @include media-query(sm){
+md-sidenav.primary-nav,
+.primary-nav { @include media-query(sm) {
   position: relative;
   width: auto;
   transform: none;
@@ -101,9 +102,11 @@ md-sidenav.primary-nav { @include media-query(sm){
 
 // Medium breakpoint
 //==================================================================*/
-md-sidenav.primary-nav ul li a {  @include media-query(md) { @include rem('padding', 24px 34px 24px 24px); } }
+md-sidenav.primary-nav ul li a,
+.primary-nav ul li a { @include media-query(md) { @include rem('padding', 24px 34px 24px 24px); } }
 
-.platform-grid.collapsed md-sidenav.primary-nav ul li a {
+.platform-grid.collapsed md-sidenav.primary-nav ul li a, 
+button.toggle-fullscreen {
   @include media-query(sm) { @include rem('padding', $global-padding); }
   @include media-query(md) { @include rem('padding', 24px); }
 }
@@ -111,7 +114,7 @@ md-sidenav.primary-nav ul li a {  @include media-query(md) { @include rem('paddi
 
 // Header
 //==================================================================*/
-md-sidenav .header-block {
+.primary-nav .header-block {
   transition: .2s;
   position: relative;
   @include rem('padding', $global-padding);

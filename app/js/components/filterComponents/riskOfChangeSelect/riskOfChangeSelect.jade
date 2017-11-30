@@ -1,15 +1,14 @@
-.risk-of-change-select.filter-group
-  label(translate) 
-    strong Risk of Change
-  md-menu
-    md-button.dropdown-toggle.button-filter(
-      type='button',
-      data-toggle='dropdown',
-      aria-haspopup='true',
-      aria-expanded='false',
-      ng-click='$mdMenu.open()')
-      span {{selected.label}}
-      span.caret
-    md-menu-content
-      md-menu-item(ng-repeat='(key, value) in options')
-        a(ui-sref="#", ng-click='select(key)') {{value.label}}
+label(translate) 
+  strong Risk of Change
+md-menu
+  md-button.dropdown-toggle.button-filter(
+    type='button',
+    data-toggle='dropdown',
+    aria-haspopup='true',
+    aria-expanded='false',
+    ng-click='$mdMenu.open()')
+    span {{selected.label}}
+    span.caret
+  md-menu-content
+    md-menu-item(ng-repeat='(key, value) in options')
+      a(ui-sref="#", ng-click='select(key)') {{value.label}}

@@ -2,8 +2,8 @@
   label
     i.fa.fa-globe(aria-hidden="true")
     span(translate) Group filter:
-  md-menu.md-dropdown-plain(md-offset="0 0")
-    md-button(
+  md-menu
+    md-button.button-dropdown#group-select(
       ng-click="$mdMenu.open($scope.$broadcast(Events.filters.reset));",
       aria-haspopup='true',
       aria-expanded='false',
@@ -12,21 +12,21 @@
       span.text(ng-show='disabled || (!isGroupSelected() && groups.length)', translate) All Systems
       b.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
       span.caret
-    md-menu-content(ng-click="$event.stopPropagation();", role="menu")
+    md-menu-content(ng-click="$event.stopPropagation();", role="menu", aria-labelledby="group-select")
       md-menu-item.no-hover
         search-box(
           on-search='searchGroups(model)',
           ng-keyup="keypress($event)",
           placeholder="{{'Find A Group' | translate}}")
       md-menu-item.selected(ng-repeat='g in groups | filter:showSelectedGroup track by g.id')
-        a(ui-sref="#", ng-click='triggerChange(g)')
+        md-button(ng-click='triggerChange(g)')
           trimmed-text(length="30", text="{{g.display_name}}") ({{g.systems.length}})
           i.fa.fa-trash-o.group-control(ng-click='deleteGroup(g); $event.stopPropagation();',
             tooltip="{{'Delete group' | translate}}")
       md-menu-item(ng-show="showAllSystems()")
         a.link(ui-sref="javascript:void(0)", ng-click='triggerChange(null)', translate) - Show all systems -
       md-menu-item(ng-repeat='g in groups | filter:hideSelectedGroup | orderBy:"display_name" track by g.id')
-        a(href-="#", ng-click='triggerChange(g);')
+        md-button(ng-click='triggerChange(g);')
           trimmed-text(length="30", text="{{g.display_name}}") ({{g.systems.length}})
           i.fa.fa-trash-o.group-control(ng-click='deleteGroup(g); $event.stopPropagation();',
             tooltip="{{'Delete group' | translate}}")

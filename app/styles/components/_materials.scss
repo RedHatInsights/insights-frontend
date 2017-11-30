@@ -1,23 +1,10 @@
 $md-card-header-bg: $gray;
 
-// Button and Inputs
-.md-button {
-	width: auto;
-  height: auto;
-  @include rem('padding', $global-padding/2 $global-padding);
-  margin: 0;
-  min-width: 0;
-  min-height: 0;
-  color: $base-color;
-  @include font-size(14px, 1);
-  text-transform: none;
-  font-family: 'overpass';
-}
-
 md-menu-item {
 	min-height: 0;
 	height: auto;
 }
+
 
 md-menu-item > .md-button,
 md-menu-item > a.md-button,
@@ -46,17 +33,72 @@ md-icon {
 	height: auto;
 }
 
-md-card {
+md-card,
+card {
 	@include reset;
 	color: $base-color;
 	// box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 2px 1px -1px;
 
+  h1, 
+  h2, 
+  h3, 
+  h4 {
+    @include font-size(18px, 21px);
+    margin-top: 0;
+  }
 }
 
-.md-card-header-cta {
+
+// Card header typography
+//==================================================================*/
+md-card-header,
+card-header {
+  & h1,
+  & h2,
+  & h3,
+  & h4 {
+    margin: 0;
+    @include font-size(16px);
+    font-weight: 700; 
+  }
+}
+
+
+md-card-header,
+card-header {
+  border-bottom: 1px solid $gray-border;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  @include rem('padding', $global-padding);
+
+  & .card-header-title {
+    flex: 1 1 60%;
+  }
+
+  & .card-header-supporting-info {
+    flex: 0 1 auto;
+    
+  }
+}
+
+
+
+md-card-header.gray,
+card-header.gray { background: $gray-light; }
+
+
+
+.md-card-header-cta,
+.card-header-cta {
   @include font-size(14px, 1);
 }
 
+
+.md-card-invert{
+  md-card-header{ background-color: white; }
+  md-card-content { background-color: $white-soft; }
+}
 
 button.md-button.md-button-sm, a.md-button.md-button-sm{
 	// height: 20px !important;
@@ -124,78 +166,8 @@ md-checkbox.md-checkbox-list { margin: 0px; }
 	}
 }
 
-
-// Cards
-.md-titlecard{
-	@include rem('margin-top', 40px);
-	@include rem('margin-bottom', 40px);
-}
-
-.md-side-padding{
-	@include rem('padding-left', 15px);
-	@include rem('padding-right', 15px);
-}
-
-.md-vertical-padding{
-	@include rem('padding-top', 15px);
-	@include rem('padding-bottom', 15px);
-}
-
-md-card.md-default-theme {
-	
-}
-
-md-card{
-
-	.md-card-header-title{
-		i { @include rem ('padding-right', 5px);}
-	}
-
-	.md-card-header-cta{
-	}
-
-	md-card-header.two-columns { 
-		display: flex; 
-		div:first-of-type { flex: 0 0 50%; }
-		div:nth-of-type(2) { flex: 1; }
-	}
-
-	md-card-content.two-columns { 
-		display: flex; 
-		div:first-of-type { flex: 0 0 50%; }
-		div:nth-of-type(2) { flex: 1; }
-	}
-}
-	
-md-card-header {
-	@include font-size(16px);
-	font-weight: 700;	
-	border-bottom: 1px solid $gray-border;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	@include rem('padding', $global-padding);
-
-	// md-button{
-	// 	size: 50%;
-	// }
-}
-
-md-card-header.gray { background: $gray-light; }
-
-.md-card-invert{
-	md-card-header{ background-color: white; }
-	md-card-content { background-color: $white-soft; }
-}
-
 // Dropdown styling
 //==================================================================*/
-md-menu-content{}
-
-md-open-menu-container {
-
-}
-
 
 // Swiping
 .demo-swipe { padding: 40px; }
