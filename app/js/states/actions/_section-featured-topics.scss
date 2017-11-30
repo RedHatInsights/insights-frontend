@@ -1,0 +1,11 @@
+.section-featured-topics {
+  .flex > * {
+    flex-direction: column;
+    @include rem('margin', 0 $global-padding $global-margin);
+
+    @include media-query(md){
+      flex-direction: row;
+      flex: 1 1 33%;
+    }
+  }
+}
