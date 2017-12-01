@@ -39,28 +39,23 @@ section.inventory
 
     .row.row-short
       .col-md-12
-        table.table.ng-table(ng-show='getListType() === listTypes.table')
+        table(ng-show='getListType() === listTypes.table')
           thead
             tr
-              th
-                md-checkbox.md-accent.md-hue-1(
+              th.min
+                md-checkbox.md-accent.md-hue-1.md-checkbox-list(
                   tooltip='Select All',
-                  tooltip-trigger='mouseenter',
-                  tooltip-append-to-body='true',
-                  tooltip-placement='top',
                   type="checkbox",
+                  aria-label="checkbox",
                   md-indeterminate="checkboxes.indeterminate",
                   ng-model='checkboxes.checked',
                   ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
 
-              th.sortable.nowrap(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')")
-                .sort-indicator(translate) System Type
-              th.sortable.nowrap(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')")
-                .sort-indicator(translate) System Name
-              th.sortable.nowrap(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')")
-                .sort-indicator(translate) Last Check In
-              th.sortable.nowrap(ng-class="predicate | sortClass:'report_count':reverse", ng-click="sort('report_count')")
-                .sort-indicator(translate) Status
+
+              th.fit-content.sortable(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')", translate) System Type
+              th.sortable(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')", translate) System Name
+              th.sortable(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')", translate) Last Check In
+              th.sortable(ng-class="predicate | sortClass:'report_count':reverse", ng-click="sort('report_count')", translate) Status
           tbody(ng-show='!loading')
             tr(ng-repeat='system in systems track by system.system_id',
                ng-class="{'stale': !system.isCheckingIn}",
@@ -68,21 +63,20 @@ section.inventory
                ng-mousedown='checkboxes.rowClick($event, system.system_id)',
                data-id="{{system.system_id}}"
             )
-              td
-                md-checkbox.md-accent.md-hue-1(
+              td.min
+                md-checkbox.md-accent.md-hue-1.md-checkbox-list(
                   type='checkbox',
                   ng-model='checkboxes.items[system.system_id]',
                   ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();')
-              td.nowrap
+              td.fit-content
                 type-icon(type-id='system.system_type_id', include-text='true')
-              td.nowrap.long-name
+              td.fit-content
                 a(ng-click="showActions(system)") {{system.toString}}
-              td.nowrap {{ system.last_check_in | timeAgo }}
-              td.nowrap
-                a.action-count(ng-click='showActions(system)')
+              td.fit-content {{ system.last_check_in | timeAgo }}
+              td
+                a.action-count.icon-inline(ng-click='showActions(system)')
                   span.text(translate, translate-n="system.report_count", translate-plural="{{$count}} Actions") {{system.report_count}} Action
-                  span.pull-right.status-icon(ng-class="{'success': !system.report_count, 'fail': system.report_count}")
-                    i.fa(ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count}")
+                  i.fa(ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count, 'success': !system.report_count, 'fail': system.report_count}")
 
     .row.row-short(ng-show='!loading')
       .col-sm-12
