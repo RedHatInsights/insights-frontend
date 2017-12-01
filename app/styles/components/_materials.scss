@@ -5,6 +5,11 @@ md-menu-item {
 	height: auto;
 }
 
+md-backdrop {
+  @include media-query(sm){
+    display: none;
+  }
+}
 
 md-menu-item > .md-button,
 md-menu-item > a.md-button,

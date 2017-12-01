@@ -1,10 +1,25 @@
 .flex {
   display: flex;
-  @include rem('margin-left', -$global-padding);
-  @include rem('margin-right', -$global-padding);
+
+  @include media-query(sm){
+    @include rem('margin-left', -$global-padding);
+    @include rem('margin-right', -$global-padding);    
+  }
 }
 
-.flex + .flex { @include rem('margin-top', $global-margin); }
+[sm-flex-25],
+[sm-flex-33],
+[sm-flex-66] { 
+  flex: 1 1 100%;
+  @include rem('margin-bottom', $global-margin);
+
+  @include media-query(sm){ @include rem('margin', 0 $global-padding $global-margin); }
+}
+
+[sm-flex-25] { @include media-query(sm) { flex: 0 1 25%; } }
+[sm-flex-33] { @include media-query(sm){ flex: 0 1 33%; } }
+[sm-flex-66] { @include media-query(sm){ flex: 0 1 66%; } }
+
 
 .flex.flex-stretch {
   // align-items: stretch;
@@ -14,23 +29,23 @@
   flex-direction: column;
 }
 
-.flex25,
-.flex33,
-.flex66 {
-  @include rem('margin', 0 $global-padding);
-}
+// .flex25,
+// .flex33,
+// .flex66 {
+//   @include rem('margin', 0 $global-padding);
+// }
 
-.flex25 {
-  flex: 1 1 25%;
-}
+// .flex25 {
+//   flex: 1 1 25%;
+// }
 
-.flex33 {
-  flex: 1 1 33%;
-}
+// .flex33 {
+//   flex: 1 1 33%;
+// }
 
-.flex66 { 
-  flex: 1 1 66%;
-}
+// .flex66 { 
+//   flex: 1 1 66%;
+// }
 
 
 
