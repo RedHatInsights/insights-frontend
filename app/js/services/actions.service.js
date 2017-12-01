@@ -429,10 +429,23 @@ function ActionsService(
         let systemDeferred;
 
         // if we already have all of the systems affected use vars.allSystems
-        systemDeferred = pub.buildSystemsDeferred(paginate, pager)
-            .then(function (results) {
-                return priv.populateAffectedHosts(results);
-            });
+        if (vars.allSystems === null ||
+            vars.allSystems.length === vars.totalRuleSystems) {
+            systemDeferred = pub.buildSystemsDeferred(paginate, pager)
+                .then(function (results) {
+                    return priv.populateAffectedHosts(results);
+                });
+        }
+        else {
+            systemDeferred = $q.resolve(true);
+
+            vars.ruleSystems = vars.allSystems.slice(
+                                        ((pager.currentPage - 1) * pager.perPage),
+                                        priv.getPageEnd(
+                                            vars.allSystems,
+                                            pager.currentPage - 1,
+                                            pager.perPage));
+        }
 
         return systemDeferred;
     };
