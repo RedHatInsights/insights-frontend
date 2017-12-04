@@ -52,7 +52,7 @@ img.icon {
     }
 }
 
-.icon-inline, .inline-right {
+.inline-right {
   margin-right: 4px;
 }
 
@@ -84,40 +84,6 @@ img.icon {
 h2 .ansible-icon img, h2 .ansible-icon-white img {
     width: 32px;
 }
-
-.icon-inline {
-  position: relative;
-  display: inline-block;
-  @include rem('padding-left', 18px);
-
-  i,
-  img.icon {
-    position: absolute;
-    left: 0;
-  }
-
-  img.icon {
-    transform: translateY(25%);
-  }
-}
-
-.icon-inline-right {
-  position: relative;
-  @include rem('padding-right', 18px);
-  display: block;
-
-  i {
-    position: absolute;
-    right: 0;
-  }
-
-  table & {
-    @include rem('padding-right', 22px);
-    i { top: 2px; }
-  }
-}
-
-
 
 h1, h2, h3, h4, h5, h6 { &.icon-inline, .icon-inline { i { top: 4px; } } }
 h1 { &.icon-inline, .icon-inline { @include rem('padding-left', 30px); } }

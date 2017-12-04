@@ -73,7 +73,7 @@ section.inventory
               td.fit-content
                 a(ng-click="showActions(system)") {{system.toString}}
               td.fit-content {{ system.last_check_in | timeAgo }}
-              td
+              td.fit-content
                 a.action-count.icon-inline(ng-click='showActions(system)')
                   span.text(translate, translate-n="system.report_count", translate-plural="{{$count}} Actions") {{system.report_count}} Action
                   i.fa(ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count, 'success': !system.report_count, 'fail': system.report_count}")

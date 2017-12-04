@@ -6,7 +6,7 @@ md-menu
     data-toggle='dropdown',
     aria-haspopup='true',
     aria-expanded='false',
-    ng-click='$mdMenu.open()')
+    ng-click='$mdMenu.open($event)')
     span.text.active(ng-model='label') {{label | translate}}
     span.caret
   md-menu-content
