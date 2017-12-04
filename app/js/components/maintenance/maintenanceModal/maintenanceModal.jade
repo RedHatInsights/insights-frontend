@@ -43,7 +43,7 @@
 
     .form-group(ng-if='systemSelection !=="preselected"')
       hr
-      .row.row-short
+      .row.row-short(ng-show='config.isGroupsEnabled')
         .radio.col-sm-4
           label.control-label
             input(type='radio', ng-model='systemSelection', ng-value='"group"', ng-disabled='!Group.groups.length',

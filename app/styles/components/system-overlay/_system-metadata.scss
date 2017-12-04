@@ -1,4 +1,23 @@
 .system-metadata {
   .metadata-value { word-wrap: break-word; }
   .alert-danger { @include rem('margin-top', $global-padding); }
+
+  .editable {
+
+    .edit-toggle {
+      display: none;
+      @include rem('font-size', 18px);
+      @include rem('margin-left', 8px);
+    }
+
+    &:hover {
+      .edit-toggle {
+        display: inline-block;
+      }
+    }
+  }
+
+  .text .name input {
+    width: 100%;
+  }
 }

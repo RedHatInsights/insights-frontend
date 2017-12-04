@@ -6,7 +6,20 @@ const find = require('lodash/find');
 /**
  * @ngInject
  */
-function systemMetadataCtrl($scope, System, SystemsService, $timeout) {
+function systemMetadataCtrl(
+    $document,
+    $scope,
+    $window,
+    gettextCatalog,
+    sweetAlert,
+    InsightsConfig,
+    ModalUtils,
+    System,
+    SystemsService,
+    $timeout) {
+
+    $scope.config = InsightsConfig;
+
     let system_metadata;
     let active = false;
     $scope.rowLimit = 3;
@@ -124,6 +137,81 @@ function systemMetadataCtrl($scope, System, SystemsService, $timeout) {
                 $scope.expanded = true;
             }
         }, 0);
+    }
+
+    function initSystemName () {
+        $scope.edit.name = $scope.system.display_name || $scope.system.hostname;
+    }
+
+    $scope.edit = {
+        value: false
+    };
+
+    initSystemName();
+
+    $scope.rename = function () {
+        const cancel = bindEvalAsync(function () {
+            initSystemName();
+            close();
+        });
+
+        $scope.submit = bindEvalAsync(function ($event) {
+            if ($event.type === 'click' && (
+                $event.target.id === 'edit-toggle' ||
+                $event.target.id === 'system-name-input' ||
+                $scope.edit.value === 'frozen')) {
+                return;
+            }
+
+            const name = (!$scope.edit.name || !$scope.edit.name.length) ?
+                null : $scope.edit.name;
+
+            if (name === $scope.system.display_name) {
+                return cancel();
+            }
+
+            $scope.edit.value = 'frozen';
+            System.update($scope.system.system_id, {
+                display_name: name
+            }).then(function (res) {
+                $scope.system.display_name = res.data.display_name;
+                initSystemName();
+                close();
+
+                if (!$scope.edit.willReload) {
+                    $scope.$parent.modal.result.finally(function () {
+                        $window.location.reload();
+                    });
+
+                    $scope.edit.willReload = true;
+                }
+            }).catch(function () {
+                initSystemName();
+                close();
+            });
+        });
+
+        $scope.edit.value = true;
+        $document.on('click', $scope.submit);
+        const escHandle = $scope.$on('telemetry:esc', cancel);
+        const modalCloseHandle = ModalUtils.preventModalCloseOnEsc($scope.$parent);
+
+        $timeout(() => $document[0].getElementById('system-name-input').focus());
+
+        function close () {
+            modalCloseHandle();
+            $document.off('click', $scope.submit);
+            escHandle();
+            $scope.edit.value = false;
+        }
+    };
+
+    function bindEvalAsync (fn) {
+        return function (...args) {
+            $scope.$evalAsync(function () {
+                return fn(...args);
+            });
+        };
     }
 }
 

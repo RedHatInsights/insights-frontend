@@ -19,6 +19,7 @@ function FilterService(
     };
 
     let filterService = {};
+    let _age = $location.search().age || 0;
     let _category = $location.search().category || 'all';
     let _incidents = $location.search()[Events.filters.incident] || 'all';
     let _ansibleSupport = $location.search()[Events.filters.ansibleSupport] || 'all';
@@ -47,6 +48,16 @@ function FilterService(
 
     filterService.getMachine = function () {
         return _machine;
+    };
+
+    filterService.getAge = function () {
+        return _age;
+    };
+
+    filterService.setAge = function (age) {
+        _age = Number.parseInt(age);
+        _age = (_age === 0) ? null : _age;
+        filterService.setQueryParam('age', _age);
     };
 
     filterService.setRHELOnly = function (rhelOnly) {
@@ -617,6 +628,11 @@ function FilterService(
                     query.severity = severity;
                 }
             });
+        }
+
+        //age
+        if (includeParam('age') && _age && (Number.parseInt(_age) !== 0)) {
+            query.publish_date = `-${_age}days`;
         }
 
         //category

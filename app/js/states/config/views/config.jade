@@ -9,10 +9,10 @@ page-header(title="Configuration", icon="fa-file-text")
       config-messaging(ng-if="current.messaging")
     tab(heading="{{'Settings'|translate}}", active="current.settings", ng-click="tabClick('settings')")
       config-settings(ng-if="current.settings")
+    tab(heading="{{'Webhooks'|translate}}", active="current.webhooks", ng-click="tabClick('webhooks')", ng-if='isBeta')
+      config-webhooks(ng-if="current.webhooks")
 
     // rh only
-    tab(heading="{{'Webhooks'|translate}}", active="current.webhooks", ng-click="tabClick('webhooks')", ng-if='user.is_internal && isBeta')
-      config-webhooks(ng-if="current.webhooks")
     tab(heading='Permissions', active="current.permissions",
       ng-if='user.is_internal && perms.has(user, perms.PERMS.SU)',
       ng-click="tabClick('permissions')")

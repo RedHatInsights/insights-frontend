@@ -1,0 +1,11 @@
+.newRules{
+	.rule-wrapper { 
+		@include rem ('margin-top', $global-padding);
+		@include rem ('padding-left', $global-padding);
+		border-left: 2px solid $gray;
+		i { @include rem ('margin-right', 5px); }
+	}
+	.footer{
+		@include rem ('margin-top', $global-padding);
+	}
+}

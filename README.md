@@ -10,11 +10,12 @@ Development
 1. Node.js & npm
 2. gulp (Installed via `sudo npm install gulp -g`)
 3. bower (Installed via `sudo npm install bower -g`)
-4. compass (Installed via `gem install compass`)
-5. sass-css-importer (Installed via `gem install --pre sass-css-importer`)
-6. breakpoint (Installed via `gem install breakpoint`)
-7. insights-frontend-assets (https://github.com/RedHatInsights/insights-frontend-assets)
-8. insights-proxy (https://github.com/RedHatInsights/insights-proxy) or accessproxy (https://github.com/redhataccess/accessproxy)
+4. c++ compiler `dnf install redhat-rpm-config gcc-c++`
+5. compass (Installed via `gem install compass`)
+6. sass-css-importer (Installed via `gem install --pre sass-css-importer`)
+7. breakpoint (Installed via `gem install breakpoint`)
+8. insights-frontend-assets (https://github.com/RedHatInsights/insights-frontend-assets)
+9. insights-proxy (https://github.com/RedHatInsights/insights-proxy) or accessproxy (https://github.com/redhataccess/accessproxy)
 
 **Getting started**
 1. Init the assets submodule

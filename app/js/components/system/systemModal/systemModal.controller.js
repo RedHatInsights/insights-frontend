@@ -19,6 +19,7 @@ function SystemModalCtrl(
     FilterService) {
 
     $scope.report = {};
+    $scope.modal = $modalInstance;
 
     function close() {
         $modalInstance.dismiss('close');

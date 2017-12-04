@@ -18,6 +18,7 @@ function TopbarCtrl($scope, InsightsConfig, $state) {
     $scope.gettingStartedLink = InsightsConfig.gettingStartedLink;
 
     $scope.isPortal = InsightsConfig.isPortal;
+    $scope.isGroupsEnabled = InsightsConfig.isGroupsEnabled;
 
     function checkState () {
         $scope.disabled = includes(DISABLED_STATES, $state.current.name);

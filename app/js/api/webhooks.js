@@ -12,34 +12,42 @@ const WEBHOOK_ATTRS = ['active', 'url', 'firehose', 'event_types', 'certificate'
 function Webhooks($http, AccountService, InsightsConfig) {
     const root = InsightsConfig.apiRoot;
 
-    function url (...segments) {
+    function url (id) {
         const url = URI(root);
         url.segment('webhooks');
-        segments.forEach(segment => url.segment(String(segment)));
+        if (id) {
+            url.segment(String(id));
+        }
+
         url.addSearch(AccountService.queryParam());
-        return url.toString();
+        return url;
     }
 
     return {
 
-        get: function (...segments) {
-            return $http.get(url(...segments));
+        get: function (id, includeStatus = true) {
+            const builder = url(id);
+            if (includeStatus) {
+                builder.addSearch('include', 'status');
+            }
+
+            return $http.get(builder.toString());
         },
 
         create: function (webhook) {
-            return $http.post(url(), pick(webhook, WEBHOOK_ATTRS));
+            return $http.post(url().toString(), pick(webhook, WEBHOOK_ATTRS));
         },
 
         ping: function () {
-            return $http.post(url('ping'));
+            return $http.post(url('ping').toString());
         },
 
         update: function (webhook) {
-            return $http.put(url(webhook.id), pick(webhook, WEBHOOK_ATTRS));
+            return $http.put(url(webhook.id).toString(), pick(webhook, WEBHOOK_ATTRS));
         },
 
         delete: function (webhook) {
-            return $http.delete(url(webhook.id));
+            return $http.delete(url(webhook.id).toString());
         }
     };
 }

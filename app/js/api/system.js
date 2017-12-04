@@ -341,6 +341,14 @@ function System(
             uri.addSearch(AccountService.queryParam());
 
             return $http.get(uri.toString());
+        },
+
+        update: function (systemId, data) {
+            const url = URI(root);
+            url.segment('systems');
+            url.segment(systemId);
+            url.addSearch(AccountService.queryParam());
+            return $http.put(url.toString(), data);
         }
     };
 }
