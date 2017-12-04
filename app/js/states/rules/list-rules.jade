@@ -47,7 +47,7 @@ section
                       .gray(ng-bind-html='::rule.summary_html | trust_html', target-blank='')
                 .footer.footer-short(ng-if="canIgnoreRules")
                   .flexgrid.equal-heights
-                    .row
+                    .row.severity-wrapper
                       .col-sm-8
                         .icon-group.icon-group-severity
                           severity-icon(severity='rule.rec_impact', type='impact')
