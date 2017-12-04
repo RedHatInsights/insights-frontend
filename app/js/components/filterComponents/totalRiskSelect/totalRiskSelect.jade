@@ -1,17 +1,17 @@
-label(translate) 
-  strong Total Risk
-md-menu
-  button.dropdown-toggle.button-filter.md-ink-ripple(
-    type='button',
-    data-toggle='dropdown',
-    aria-haspopup='true',
-    aria-expanded='false',
-    ng-click='$mdMenu.open($event)')
-    span.text.active(ng-model='label') {{label | translate}}
-    span.caret
-  md-menu-content
-    md-menu-item(ng-repeat='option in options')
-      a(ui-sref='#', ng-click='select(option)') {{option.label | translate}}
+.filter-group.filter-total-risk
+  label(translate) Total Risk
+  md-menu(md-offset="0 38")
+    md-button.button-filter(
+      type='button',
+      data-toggle='dropdown',
+      aria-haspopup='true',
+      aria-expanded='false',
+      ng-click='$mdMenu.open($event)')
+      span.text.active(ng-model='label') {{label | translate}}
+      span.caret
+    md-menu-content
+      md-menu-item(ng-repeat='option in options')
+        a(ui-sref='#', ng-click='select(option)') {{option.label | translate}}
 
   //- md-menu
   //-   md-button.dropdown-toggle(ng-click='$mdMenu.open()') 

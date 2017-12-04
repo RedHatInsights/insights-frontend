@@ -1,12 +1,27 @@
-.checkin-select
-  .dropdown
-    button.btn.btn-default.dropdown-toggle.button-filter(
+.filter-group.filter-check-in
+  label Check in status
+  md-menu(md-offset="0 38")
+    md-button.button-filter(
       type='button',
       data-toggle='dropdown',
       aria-haspopup='true',
-      aria-expanded='false')
+      aria-expanded='false',
+      ng-click='$mdMenu.open()')
       span {{selected.label}}
       span.caret
-    ul.dropdown-menu
-      li(ng-repeat='option in options')
+    md-menu-content
+      md-menu-item(ng-repeat='option in options')
         a(ng-click='select(option)') {{option.label}}
+        //- a(ui-sref="#", ng-click='select(key)') {{value.label}}
+
+  //- .dropdown
+  //-   button.dropdown-toggle(
+  //-     type='button',
+  //-     data-toggle='dropdown',
+  //-     aria-haspopup='true',
+  //-     aria-expanded='false')
+  //-     span {{selected.label}}
+  //-     span.caret
+  //-   ul.dropdown-menu
+  //-     li(ng-repeat='option in options')
+  //-       a(ng-click='select(option)') {{option.label}}

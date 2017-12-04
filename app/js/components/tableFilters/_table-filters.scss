@@ -1,11 +1,5 @@
 .table-filters {
-  display: flex;
   @include rem('margin', $global-padding);
-
-  > * {
-    @include rem('margin-left', $global-padding);
-    @include rem('margin-right', $global-padding);
-  }
 
   .filter-group {
     label {
@@ -14,7 +8,18 @@
   }  
 }
 
+.table-filters .filters,
+.table-filters .active-filter {
+  display: flex;
+
+    > * {
+    @include rem('margin-left', $global-padding);
+    @include rem('margin-right', $global-padding);
+  }
+}
+
 .table-filters .filter-group {
+
   .button-filter {
     @include rem('min-width', 120px);
   }

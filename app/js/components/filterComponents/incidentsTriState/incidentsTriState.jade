@@ -1,8 +1,7 @@
-.filter-group
-    label(translate)
-        strong Incidents
-    .radio-group
-        .radio-inline(ng-repeat='(k, v) in incidentFilters')
-            label(translate)
-                input(type="radio", name='incidentFilterRadio' ng-model="showIncidents", value='{{k}}', ng-click='filterIncidents(k)')
-                span {{v.title | translate}}
+.filter-group.filter-incidents
+  label(translate) Incidents
+  .radio-group
+    .radio-inline(ng-repeat='(k, v) in incidentFilters')
+      label(translate)
+        input(type="radio", name='incidentFilterRadio' ng-model="showIncidents", value='{{k}}', ng-click='filterIncidents(k)')
+        span {{v.title | translate}}

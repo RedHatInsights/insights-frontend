@@ -1,10 +1,5 @@
 .actions-page.actions-back
   actions-breadcrumbs(ng-hide="loading")
-
-  //- section.rule-detail-header
-  //-   page-header(ng-if='!loading', title="{{topic.title}}", icon="fa-file-text")
-  //-   topic-details(ng-hide='loading', topic='topic') 
-
   section.rule-detail-header
     page-header(icon="fa-file-text") 
       .page-title 
@@ -16,10 +11,10 @@
 
 
   //- topic-rule-filters(ng-hide='loading')
-  .table-filters
-    incidents-tri-state(ng-if='isBeta').filter-group
-    total-risk-select.filter-group
-    risk-of-change-select.filter-group
+  table-filters
+    incidents-tri-state(ng-if='isBeta')
+    total-risk-select
+    risk-of-change-select
 
   section.content
     .table-utilities

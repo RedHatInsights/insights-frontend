@@ -15,6 +15,11 @@ md-menu-item {
 //   }
 // }
 
+md-card.accordion.expanded,
+card.accordion.expanded {
+  margin: 0;
+}
+
 md-menu-item > .md-button,
 md-menu-item > a.md-button,
 md-menu-item > a {
