@@ -4,6 +4,11 @@
 	}
 }
 
+.severity-wrapper{
+  display: flex;
+  align-items: center;
+}
+
 .rules-group-gray {
 	.rules-group-content {
 		background: rgba(0,0,0,.025);
