@@ -20,10 +20,15 @@
     .row
       .col-sm-12.col-md-8.col-md-offset-2.text-center
         h1(translate) Executive Reporting requires 10 or more systems to be registered with Insights.
-        h2(translate) Please register
+        h2(translate) Please register&nbsp;
           span(translate, translate-n='systemsTilTen', translate-plural='{{$count}} more systems') {{systemsTilTen}} more system
           | &nbsp;to enable reporting for your account.
-  .content-wrap(ng-show='!loading && systemsTilTen < 1')
+  .content-wrap.margin-top(ng-show='!loading && noData')
+    .row
+      .col-sm-12.col-md-8.col-md-offset-2.text-center
+        h1(translate) Your initial executive report is currently processing - this may take some time.
+        h2(translate) Please check back later.
+  .content-wrap(ng-if='!loading && systemsTilTen < 1 && !noData')
     section
       .row
         .col-md-4
