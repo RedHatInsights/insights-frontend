@@ -15,9 +15,6 @@ const TIME_PERIOD = 30;
  */
 function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
                      InventoryService, Severities, InsightsConfig, User) {
-    var digestPromise = DigestService.digestsByType('eval');
-    var systemPromise = System.getSystems();
-    var rulePromise = Rule.getRulesLatest();
 
     function getDirection(data) {
         const direction = data[1] - data[0];
@@ -123,136 +120,155 @@ function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
         return date.getMonth() + '-' + date.getDay() + '-' + date.getFullYear();
     };
 
-    $scope.loading = true;
+    function loadData () {
+        let digestPromise = DigestService.digestsByType('eval');
+        let systemPromise = System.getSystems();
+        let rulePromise = Rule.getRulesLatest();
 
-    $scope.showSystem = InventoryService.showSystemModal;
+        $scope.loading = true;
 
-    Promise.all([digestPromise, systemPromise, rulePromise]).then(function (responses) {
-        var res = responses[0];
-        var sysres = responses[1];
-        var ruleres = responses[2];
-        var digestBase = res.data.resources[0].data.data;
+        $scope.showSystem = InventoryService.showSystemModal;
 
-        function getDigestMetricsLine(category, lineBase, color) {
-            // warning this function needs to have access to digestBase.timeseries
-            return {
-                x: takeRight(digestBase.timeseries, TIME_PERIOD),
-                y: takeRight(lineBase, TIME_PERIOD),
-                type: 'scatter',
-                name: category,
-                marker: {
-                    color: color
+        Promise.all([digestPromise, systemPromise, rulePromise])
+        .then(function (responses) {
+            var res = responses[0];
+            var sysres = responses[1];
+            var ruleres = responses[2];
+            var digestBase = res.data.resources[0];
+
+            // account has no digest data
+            if (digestBase === undefined) {
+                $scope.noData = true;
+                $scope.loading = false;
+                return;
+            }
+
+            digestBase = digestBase.data.data;
+
+            function getDigestMetricsLine(category, lineBase, color) {
+                // warning this function needs to have access to digestBase.timeseries
+                return {
+                    x: takeRight(digestBase.timeseries, TIME_PERIOD),
+                    y: takeRight(lineBase, TIME_PERIOD),
+                    type: 'scatter',
+                    name: category,
+                    marker: {
+                        color: color
+                    }
+                };
+            }
+
+            $scope.downloading = false;
+            $scope.downloadPdf = function () {
+                const digestId = res.data.resources[0].digest_id;
+                const uri = URI(InsightsConfig.apiRoot)
+                    .segment('digests')
+                    .segment(digestId.toString());
+
+                if (User.current.account_number !== AccountService.number()) {
+                    uri.query(AccountService.current());
+                }
+
+                $scope.downloading = true;
+                $http.get(uri.toString(), {
+                    responseType: 'arraybuffer',
+                    headers: { Accept: 'application/pdf'}
+                })
+                    .then(response => {
+                        const file = new Blob([response.data], {type: 'application/pdf'});
+                        const url = window.URL || window.webkitURL;
+                        const isChrome = !!window.chrome && !!window.chrome.webstore;
+
+                        if (isChrome) {
+                            const downloadLink = angular.element('<a></a>');
+                            downloadLink.attr('href', url.createObjectURL(file));
+                            downloadLink.attr('target', '_self');
+                            downloadLink.attr('download',
+                                'insights-executive-report.pdf');
+                            downloadLink[0].click();
+                        } else {
+                            const fileURL = URL.createObjectURL(file);
+                            window.open(fileURL);
+                        }
+
+                        $scope.downloading = false;
+
+                    }, err => {
+
+                        $scope.downloading = false;
+                        $scope.digestError = 'PDF Download Failed. ' + err.status;
+                    });
+            };
+
+            $scope.latest_score = takeRight(digestBase.scores, 1)[0];
+            window.scope = $scope;
+
+            $scope.score_difference = $scope.latest_score -
+                digestBase.scores[digestBase.scores.length - 2];
+
+            // max score is 850, min is 250.  Levels calculated by
+            //  separating the 600 range into 4 segments and dividing
+            //  score by segment length (150)
+            const level = Math.ceil(($scope.latest_score - 250) / 150) || 1;
+            const scoreDiv = angular.element(
+                document.querySelector('.gauge.gauge-circle.score'));
+            scoreDiv.addClass('score_lvl' + level);
+
+            // current counts by category
+            $scope.digest_hits_per_cat = [
+                getHitsPerCat('Security', digestBase.security, 'fa-shield'),
+                getHitsPerCat('Availability', digestBase.availability, 'fa-hand-paper-o'),
+                getHitsPerCat('Stability', digestBase.stability, 'fa-cubes'),
+                getHitsPerCat('Performance', digestBase.performance, 'fa-tachometer')
+            ];
+
+            // metrics
+            //   big graphic
+            //   systems not checking in
+            //   total system actions
+            $scope.digest_metrics_data = [
+                {
+                    x: takeRight(digestBase.timeseries, TIME_PERIOD),
+                    y: takeRight(digestBase.distinct_rules, TIME_PERIOD),
+                    type: 'bar',
+                    name: 'Total Actions',
+                    marker: {
+                        color: '#c7e7f6'
+                    }
+                },
+                getDigestMetricsLine('Security', digestBase.security, '#e77baf'),
+                getDigestMetricsLine('Availability', digestBase.availability, '#f3923e'),
+                getDigestMetricsLine('Stability', digestBase.stability, '#3badde'),
+                getDigestMetricsLine('Performance', digestBase.performance, '#a5d786')
+            ];
+
+            $scope.digest_metrics = {
+                data: angular.copy($scope.digest_metrics_data),
+                layout: {
+                    margin: { t: 10, l: 40, r: 10, b: 40 },
+                    showlegend:true,
+                    legend: {orientation: 'h'}
+                },
+                options: {
+                    displayModeBar: false
                 }
             };
-        }
 
-        $scope.downloading = false;
-        $scope.downloadPdf = function () {
-            const digestId = res.data.resources[0].digest_id;
-            const uri = URI(InsightsConfig.apiRoot)
-                .segment('digests')
-                .segment(digestId.toString());
+            $scope.digest_registered = justLineGraph(
+                digestBase, 'checkins_per_day', 'Active Systems', '#97cde6');
+            $scope.digest_score = justLineGraph(
+                digestBase, 'scores', 'Score', '#3083FB');
 
-            if (User.current.account_number !== AccountService.number()) {
-                uri.query(AccountService.current());
-            }
+            $scope.systemsTilTen = 10 - sysres.data.resources.length;
+            $scope.topTenWorstSystems = getTenWorst(sysres.data.resources);
+            $scope.topTenRules = getTenWorst(ruleres.data.resources);
+            $scope.allRuleHits = ruleAppendixSorting(ruleres.data.resources);
+            $scope.resolvedIssues = calculateResolvedIssues(digestBase);
+            $scope.loading = false;
+        });
+    }
 
-            $scope.downloading = true;
-            $http.get(uri.toString(), {
-                responseType: 'arraybuffer',
-                headers: { Accept: 'application/pdf'}
-            })
-                .then(response => {
-                    const file = new Blob([response.data], {type: 'application/pdf'});
-                    const url = window.URL || window.webkitURL;
-                    const isChrome = !!window.chrome && !!window.chrome.webstore;
-
-                    if (isChrome) {
-                        const downloadLink = angular.element('<a></a>');
-                        downloadLink.attr('href', url.createObjectURL(file));
-                        downloadLink.attr('target', '_self');
-                        downloadLink.attr('download', 'insights-executive-report.pdf');
-                        downloadLink[0].click();
-                    } else {
-                        const fileURL = URL.createObjectURL(file);
-                        window.open(fileURL);
-                    }
-
-                    $scope.downloading = false;
-
-                }, err => {
-
-                    $scope.downloading = false;
-                    $scope.digestError = 'PDF Download Failed. ' + err.status;
-                });
-        };
-
-        $scope.latest_score = takeRight(digestBase.scores, 1)[0];
-        window.scope = $scope;
-
-        $scope.score_difference = $scope.latest_score -
-            digestBase.scores[digestBase.scores.length - 2];
-
-        // max score is 850, min is 250.  Levels calculated by
-        //  separating the 600 range into 4 segments and dividing
-        //  score by segment length (150)
-        const level = Math.ceil(($scope.latest_score - 250) / 150) || 1;
-        const scoreDiv = angular.element(
-            document.querySelector('.gauge.gauge-circle.score'));
-        scoreDiv.addClass('score_lvl' + level);
-
-        // current counts by category
-        $scope.digest_hits_per_cat = [
-            getHitsPerCat('Security', digestBase.security, 'fa-shield'),
-            getHitsPerCat('Availability', digestBase.availability, 'fa-hand-paper-o'),
-            getHitsPerCat('Stability', digestBase.stability, 'fa-cubes'),
-            getHitsPerCat('Performance', digestBase.performance, 'fa-tachometer')
-        ];
-
-        // metrics
-        //   big graphic
-        //   systems not checking in
-        //   total system actions
-        $scope.digest_metrics_data = [
-            {
-                x: takeRight(digestBase.timeseries, TIME_PERIOD),
-                y: takeRight(digestBase.distinct_rules, TIME_PERIOD),
-                type: 'bar',
-                name: 'Total Actions',
-                marker: {
-                    color: '#c7e7f6'
-                }
-            },
-            getDigestMetricsLine('Security', digestBase.security, '#e77baf'),
-            getDigestMetricsLine('Availability', digestBase.availability, '#f3923e'),
-            getDigestMetricsLine('Stability', digestBase.stability, '#3badde'),
-            getDigestMetricsLine('Performance', digestBase.performance, '#a5d786')
-        ];
-
-        $scope.digest_metrics = {
-            data: angular.copy($scope.digest_metrics_data),
-            layout: {
-                margin: { t: 10, l: 40, r: 10, b: 40 },
-                showlegend:true,
-                legend: {orientation: 'h'}
-            },
-            options: {
-                displayModeBar: false
-            }
-        };
-
-        $scope.digest_registered = justLineGraph(
-            digestBase, 'checkins_per_day', 'Active Systems', '#97cde6');
-        $scope.digest_score = justLineGraph(
-            digestBase, 'scores', 'Score', '#3083FB');
-
-        $scope.systemsTilTen = 10 - sysres.data.resources.length;
-        $scope.topTenWorstSystems = getTenWorst(sysres.data.resources);
-        $scope.topTenRules = getTenWorst(ruleres.data.resources);
-        $scope.allRuleHits = ruleAppendixSorting(ruleres.data.resources);
-        $scope.resolvedIssues = calculateResolvedIssues(digestBase);
-        $scope.loading = false;
-    });
+    loadData();
 }
 
 statesModule.controller('DigestsCtrl', DigestsCtrl);
