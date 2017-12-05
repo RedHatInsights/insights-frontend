@@ -429,7 +429,8 @@ function ActionsService(
         let systemDeferred;
 
         // if we already have all of the systems affected use vars.allSystems
-        if (vars.allSystems === null) {
+        if (vars.allSystems === null ||
+            vars.allSystems.length === vars.totalRuleSystems) {
             systemDeferred = pub.buildSystemsDeferred(paginate, pager)
                 .then(function (results) {
                     return priv.populateAffectedHosts(results);
