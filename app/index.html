@@ -1,8 +1,6 @@
 <!doctype html>
-<html class="legacyfalse chrometwo skiplabs pafoff insights" insights-namespacer="insights-namespacer" ng-class="insightsNamespacer.current" lang="en">
+<html class="insights" insights-namespacer="insights-namespacer" ng-class="insightsNamespacer.current" lang="en">
   <head>
-    <link href="/chrome_themes/nimbus/css/chrometwo.css" rel="stylesheet" />
-    <script type="text/javascript" src="/webassets/avalon/j/lib/require.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <base href="/insights/">
@@ -11,29 +9,20 @@
     <meta name="commit" content="___COMMIT___">
     <meta name="description" content="Red Hat Insights - Red Hat's first proactive systems management service">
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/insights.css?rev=__COMMIT__">
     <script>
       window.insightsGlobal = {
           tag: '___TAG___',
           commit: '___COMMIT___',
           appName: 'insights',
+          isSaas: true,
           isBeta: false
         }
         window.LOGGED_IN = /rh_user=./.test(document.cookie);
     </script>
-    <link rel="stylesheet" href="css/insights.css?rev=__COMMIT__">
-    <!-- oh hai from demo -->
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	  ga('create', 'UA-77942734-1', 'auto');
-	  // ga('send', 'pageview'); dont send this... our analytics service will handle it
-	</script>
   </head>
-  <body>
-    <div id="chrometwo">
-      <div id="chromed-app-content">
+  <body class="platform">
         <!--[if lt IE ]9>
         <div class="ie-unsupported alert alert-danger">
           <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -42,9 +31,9 @@
           <a href="/insights/support/browser" target="_self">Insights browser support policy</a> for more information.
         </div>
         <![endif]-->
-        <div ui-view="" class="ng-cloak"></div>
-      </div>
-    </div>
+    <div ui-view="" class="platform-grid ng-cloak" ng-class="{'collapsed': sidenavCollapsed}"></div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/insights.js?rev=__COMMIT__"></script>
   </body>
 </html>
