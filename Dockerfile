@@ -4,7 +4,12 @@ RUN mkdir /www && mkdir /www-real && chown nginx:nginx -R /www && chown nginx:ng
 # per the https://docs.openshift.com/enterprise/3.0/creating_images/guidelines.html#use-uid
 RUN chmod 777 -R /var/log/nginx && chmod 777 -R /var/cache/nginx
 
-RUN ln -s /www-real/index.html /www && ln -s /www-real/indexbeta.html /www && ln -s /www-real /www/insights && ln -s /www-real /www/insightsbeta
+RUN ln -s /www-real/index.html /www && \
+    ln -s /www-real/indexbeta.html /www && \
+    ln -s /www-real/indexalpha.html /www && \
+    ln -s /www-real /www/insights && \
+    ln -s /www-real /www/insightsbeta && \
+    ln -s /www-real /www/insightsalpha
 
 COPY insights.conf /etc/nginx/insights.conf
 COPY build /www-real
