@@ -1,7 +1,7 @@
 .digests-page
-  page-header(title="Executive Report", icon="fa-bar-chart", ng-class="{'inactive': !expandBar, 'active': expandBar}")
+  page-header(title="Executive Report", icon="fa-bar-chart", ng-class="{'inactive': !expandBar, 'active': expandBar}", ng-transclude)
+    md-button.md-primary.pull-right(ng-click='downloadPdf()', translate) Download PDF
     .spinner.spinner-sm.pull-right(ng-if="downloading")
-    md-button.md-primary.pull-right(ng-click='downloadPdf()', ng-if="!downloading", translate) Download PDF
 
   .content-wrap.margin-top(ng-show='loading')
     .text-center
