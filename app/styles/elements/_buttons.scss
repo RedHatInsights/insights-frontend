@@ -18,6 +18,10 @@ button {
   box-shadow: 0 2px 3px 0px rgba(0,0,0,.2);
 }
 
+button.tag {
+  border-radius: 50px;
+}
+
 .dropdown button {
   &:disabled {
     opacity: .5;
