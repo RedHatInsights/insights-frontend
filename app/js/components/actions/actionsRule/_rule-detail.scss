@@ -1,7 +1,14 @@
 .rule-detail-header,
 .topic-detail-header {
-  // grid-template-areas: "page-header rule-detail ansible-support risk-list";
   max-width: 1400px;
+  display: grid;
+  grid-gap: $global-padding;
+  grid-template-areas: "page-header" 
+                      "rule-detail"
+                      "ansible-support"
+                      "risk-list";
+  grid-template-columns: 1fr;
+
 
   @include media-query(sm){
     display: grid;
@@ -23,6 +30,16 @@
   .meta {
     flex: 1 1 33%;
   }
+}
+
+.topic-detail-header {
+    display: grid;
+    grid-template-areas: "page-header"
+                          "rule-detail";
+    grid-template-columns: 1fr;
+  
+  @include media-query(sm){
+  }  
 }
 
 .rule-detail-header .page-header,

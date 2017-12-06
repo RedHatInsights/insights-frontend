@@ -1,10 +1,10 @@
 .actions-page.actions-back
   actions-breadcrumbs(ng-hide="loading")
-  section.rule-detail-header
+  section.topic-detail-header
     page-header(icon="fa-file-text") 
       .page-title 
         h1 {{::topic.title}}
-    .rule-detail-summary(ng-hide='loading')
+    .topic-detail-summary(ng-hide='loading')
       h4(ng-if='isIncident(ruleDetails.rule_id)')
       article(ng-bind-html='ruleDetails.generic_html | trust_html')
       .topic-content(ng-if='topic.content_html', ng-bind-html="topic.content_html")

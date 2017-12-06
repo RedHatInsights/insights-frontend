@@ -1,15 +1,16 @@
 topbar .beta-switch {
   display: inline-flex;
+  
 
-  button.md-button {
-    justify-content: center;
-    @include rem('border-radius', 20px);
+  // button.md-button {
+  //   justify-content: center;
+  //   @include rem('border-radius', 20px);
 
-    span { 
-      @include rem('font-size', 14px);
-    }
+  //   span { 
+  //     @include rem('font-size', 14px);
+  //   }
 
-  }
+  // }
 
   // .beta-dropdown { @include rem('padding', $global-padding); }
 

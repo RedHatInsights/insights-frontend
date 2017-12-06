@@ -65,6 +65,8 @@ button:focus {
   border-radius: 50px;
   border: 1px solid #DCDCDC;
   color: #9B9B9B;
+  display: inline-flex;
+  justify-content: space-between;
 }
 
 .button-primary {

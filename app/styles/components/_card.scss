@@ -54,11 +54,6 @@ $card-footer: "md-card-footer";
 
 // Card content base
 //==================================================================*/
-#{$card} #{$card-content} {
-  @include rem('padding', $global-margin);
-}
-
-
 #{$card-header}.gray { background: $gray-light; }
 #{$card-header} .card-header-cta { @include font-size(14px, 1);}
 
@@ -116,7 +111,13 @@ $card-footer: "md-card-footer";
     @include font-size(14px, 1);
     font-weight: 500;
   }
+
+  #{$card-content} {
+    @include rem('padding', $global-margin);
+  }
 }
+
+
 
 .card-header-expandable .card-header-content {
 

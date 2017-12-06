@@ -2,7 +2,7 @@
   label
     i.fa.fa-globe(aria-hidden="true")
     span(translate) Group filter:
-  md-menu
+  md-menu(md-offset="0 34")
     md-button.button-dropdown#group-select(
       ng-click="$mdMenu.open($scope.$broadcast(Events.filters.reset));",
       aria-haspopup='true',

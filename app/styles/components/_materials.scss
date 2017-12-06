@@ -1,10 +1,5 @@
 $md-card-header-bg: $gray;
 
-md-menu-item {
-	min-height: 0;
-	height: auto;
-}
-
 .md-sidenav-backdrop {
   height: 100%;
 }
@@ -25,14 +20,24 @@ md-menu-item > a.md-button,
 md-menu-item > a {
 	width: 100%;
   height: auto;
-  @include rem('padding', $global-padding);
   min-width: 0;
   min-height: 0;
-  color: $base-color;
-  @include font-size(14px, 1);
+  @include rem('padding', $global-padding);
+  margin: 0;
+  
+  display: flex;
   text-transform: none;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+
+  color: $base-color;
+  @include font-size(14px, 1);
+  box-shadow: none;
+  border: none;
+}
+
+md-menu-item.selected {
+  background: #f5f5f5;
 }
 
 

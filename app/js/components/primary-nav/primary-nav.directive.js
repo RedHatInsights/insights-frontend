@@ -7,21 +7,16 @@ const includes = require('lodash/includes');
  * @ngInject
  */
 function primaryNavCtrl($scope, Utils, $state, InsightsConfig, $timeout, $mdSidenav) {
-    $scope.toggleLeft = buildToggler('left');
+    // $scope.toggleLeft = buildToggler('left');
 
-    $scope.isOpenLeft = function () {
-        return $mdSidenav('left').isOpen();
-    };
+    // $scope.toggleLeft = buildToggler('left');
+    // $scope.toggleRight = buildToggler('right');
 
-    $scope.isCloseLeft = function () {
-        return $mdSidenav('left').isClosed();
-    };
-
-    function buildToggler(navID) {
-        return function () {
-            $mdSidenav(navID).toggle();
-        };
-    }
+    // function buildToggler(componentId) {
+    //   return function() {
+    //     $mdSidenav(componentId).toggle();
+    //   };
+    // }
 
     $scope.utils = Utils;
     $scope.state = $state;

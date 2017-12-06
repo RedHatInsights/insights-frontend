@@ -4,7 +4,7 @@
   section.rule-detail-header
     page-header(icon="fa-file-text")
       .page-title
-        h1 {{ruleDetails.description}}
+        h1 {{ruleDetails.description}} testing
     .rule-detail-ansible-support
       ansible-icon(value='ruleDetails.ansible')
     .rule-detail-risk-list
@@ -12,10 +12,9 @@
       hr
       risk-of-change(change-risk='ruleDetails.resolution_risk')
     .rule-detail-summary(ng-hide='loading')
-      h4(ng-if='isIncident(ruleDetails.rule_id)')
-        .icon-inline
-          incident-icon(rule-id='ruleDetails.rule_id') &nbsp;
-          span.red(translate) This issue is an incident, it has already occurred.
+      h4.icon-inline(ng-if='isIncident(ruleDetails.rule_id)')        
+        incident-icon(rule-id='ruleDetails.rule_id') &nbsp;
+        span.red(translate) This issue is an incident, it has already occurred.
           
       article(ng-bind-html='ruleDetails.generic_html | trust_html')
 
@@ -95,7 +94,7 @@
               md-indeterminate="checkboxes.indeterminate",
               ng-model='checkboxes.checked',
               ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
-          th.min.sortable(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')", translate) Type
+          th.fit-content.sortable(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')", translate) Type
           th.sortable(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')", translate) Name
           th.sortable(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')", translate) Reported
 
@@ -105,7 +104,7 @@
            ng-class="{'stale': !system.isCheckingIn}",
            ng-repeat='system in ruleSystems',
            data-id="{{system.system_id}}")
-          td
+          td.min
             md-checkbox.md-accent.md-hue-1.md-checkbox-list(
               type='checkbox',
               aria-label="checkbox",

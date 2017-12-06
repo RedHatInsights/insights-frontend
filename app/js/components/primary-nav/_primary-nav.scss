@@ -111,6 +111,11 @@ button.toggle-fullscreen {
   @include media-query(md) { @include rem('padding', 24px); }
 }
 
+topbar .toggle-fullscreen {
+  border: none;
+  box-shadow: none;
+}
+
 
 // Header
 //==================================================================*/
