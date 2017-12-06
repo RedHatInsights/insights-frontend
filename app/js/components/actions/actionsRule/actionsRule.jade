@@ -10,7 +10,7 @@
     .rule-detail-risk-list
       all-severity-icons(rule='ruleDetails', ng-if='!loading')
       hr
-      risk-of-change
+      risk-of-change(change-risk='ruleDetails.resolution_risk')
     .rule-detail-summary(ng-hide='loading')
       h4(ng-if='isIncident(ruleDetails.rule_id)')
         .icon-inline
