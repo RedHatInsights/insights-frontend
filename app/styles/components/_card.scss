@@ -1,6 +1,9 @@
 // Vars
 $card: "md-card";
 $card-header: "md-card-header";
+$card-content: "md-card-content";
+$card-footer: "md-card-footer";
+
 
 #{$card} {
   @include reset;
@@ -19,7 +22,7 @@ $card-header: "md-card-header";
 
 // Card header typography
 //==================================================================*/
-#{$card-header} {
+#{$card} #{$card-header} {
   &,
   & h1,
   & h2,
@@ -31,8 +34,9 @@ $card-header: "md-card-header";
   }
 }
 
-
-#{$card-header} {
+// Card header base
+//==================================================================*/
+#{$card} #{$card-header} {
   border-bottom: 1px solid $gray-border;
   display: flex;
   justify-content: space-between;
@@ -48,16 +52,34 @@ $card-header: "md-card-header";
 }
 
 
-#{$card-header}.gray { background: $gray-light; }
+// Card content base
+//==================================================================*/
+#{$card} #{$card-content} {
+  @include rem('padding', $global-margin);
+}
 
+
+#{$card-header}.gray { background: $gray-light; }
 #{$card-header} .card-header-cta { @include font-size(14px, 1);}
+
 
 #{$card-header}.card-header-expandable-card {
   display: flex;
 
   .expandable-toggle { flex: 0 0 auto; }
-  .card-header-content { 
-    flex: 1; 
+  .card-header-content { flex: 1; }
+}
+
+
+#{$card-header}.card-header-expandable-card .card-header-title {
+  display: flex;
+  justify-content: space-between;
+
+  .title { flex: 1 60%; }
+  
+  i { 
+    flex: 0 auto; 
+    justify-self: center;
   }
 }
 
@@ -74,19 +96,31 @@ $card-header: "md-card-header";
   }
 }
 
-#{$card}.expanded .expandable-toggle {
-  i { transform: rotate(90deg); }
+
+#{$card}.expanded .expandable-toggle { i { transform: rotate(90deg); } }
+
+
+// Rule card
+#{$card}.card-rule-summary {
+  .card-header-title { 
+    @include font-size(14px, 1); 
+    font-weight: 300;
+  }
+
+  .card-header-title .title {
+    @include font-size(16px, 1);
+    font-weight: 700;
+  }
+
+  .card-header-risk-summaries .title {
+    @include font-size(14px, 1);
+    font-weight: 500;
+  }
 }
 
 .card-header-expandable .card-header-content {
 
 }
-
-// .card-header-expandable.expanded { 
-//   .content {
-//     display: block;
-//   }
-// } 
 
 .card-group {
   > header {

@@ -4,9 +4,7 @@
 
 .icon-group.icon-group-severity {
   @include reset();
-  li {
-    list-style: none;
-  }
+  li { list-style: none; }
 
   // li + li {
   //   @include rem('margin-top', $global-padding);
@@ -40,3 +38,8 @@
   .severity-icon + .severity-icon { @include rem('margin-left', $global-padding); }
 }
 
+.icon-group.icon-group-severity.inline {
+  display: inline-flex;
+
+  li { @include rem('margin-right', $global-padding/2); }
+}

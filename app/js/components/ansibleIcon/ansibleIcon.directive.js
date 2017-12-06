@@ -7,8 +7,7 @@ var componentsModule = require('../');
  * @ngInject
  */
 function ansibleIconCtrl($scope, gettextCatalog) {
-    const plannerLine = gettextCatalog.getString(
-        'Use the Planner to generate an Ansible Playbook.');
+    const plannerLine = gettextCatalog.getString('Use the Planner to generate an Ansible Playbook.');
     const positive = gettextCatalog.getString('This rule has Ansible support.');
     const negative = gettextCatalog.getString('This rules does not have Ansible support');
 
@@ -35,6 +34,7 @@ function ansibleIconCtrl($scope, gettextCatalog) {
         }
     });
 
+    $scope.supportText = ($scope.positive) ? 'Ansible unsupported' : 'Ansible supported';
     $scope.svgClass = ($scope.white) ? 'ansible-icon-white' : 'ansible-icon';
 }
 
@@ -44,7 +44,8 @@ function ansibleIcon() {
             value: '=',
             showTooltip: '=',
             showPlannerLine: '=',
-            white: '<'
+            white: '<',
+            hideLabel: '<'
         },
         templateUrl: 'js/components/ansibleIcon/ansibleIcon.html',
         restrict: 'E',

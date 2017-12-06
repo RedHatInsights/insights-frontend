@@ -5,8 +5,6 @@
     @include font-size(18px);
     line-height: 1.5;
   }
-
-  .icon-inline { @include rem('padding-left', 20px); }
 }
 
 .icon-inline + .risk-of-change,
