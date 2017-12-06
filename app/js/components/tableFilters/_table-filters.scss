@@ -9,7 +9,7 @@
 }
 
 .table-filters .filters,
-.table-filters .active-filter {
+.table-filters .active-filters {
   display: flex;
 
     > * {
@@ -18,9 +18,16 @@
   }
 }
 
-.table-filters .filter-group {
-
-  .button-filter {
-    @include rem('min-width', 120px);
-  }
+.table-filters .active-filters {
+  align-items: baseline;
 }
+
+.table-filters.tags .active-filters {
+  @include rem('margin-top', $global-margin);
+}
+
+.table-filters .filter-group {
+  .button-filter { @include rem('min-width', 120px); }
+}
+
+.table-search { align-self: flex-end; }

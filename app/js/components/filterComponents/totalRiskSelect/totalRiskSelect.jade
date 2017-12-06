@@ -12,21 +12,3 @@
     md-menu-content
       md-menu-item(ng-repeat='option in options')
         a(ui-sref='#', ng-click='select(option)') {{option.label | translate}}
-
-  //- md-menu
-  //-   md-button.dropdown-toggle(ng-click='$mdMenu.open()') 
-  //-     strong(translate) Help
-  //-     span.caret.dropdown-caret
-  //-   md-menu-content
-  //-     md-menu-item
-  //-       a(ui-sref='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', translate) Getting Started
-  //-     md-menu-item
-  //-       a(ui-sref='info.info', translate) More Info
-  //-     md-menu-item
-  //-       a(ui-sref='info.security', translate) Security
-  //-     md-menu-item
-  //-       a(href='/help/browsers', target='_self', translate, ng-if="isPortal") Browser Support
-  //-     md-menu-item
-  //-       a(href='/r/insights/docs/', translate) Insights API Documentation
-  //-     md-menu-item
-  //-       demo-account-switcher

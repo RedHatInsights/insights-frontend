@@ -56,6 +56,13 @@ function CardHeaderLink(scope, element, attrs, card) {
 /**
  * @ngInject
  */
+function CardHeaderExpandableLink(scope, element, attrs, card) {
+    scope.card = card.api;
+}
+
+/**
+ * @ngInject
+ */
 function CardContentLink(scope, element, attrs, card) {
     scope.card = card.api;
 }
@@ -75,7 +82,7 @@ function card() {
         templateUrl: 'js/components/card/card.html',
         restrict: 'E',
         replace: true,
-        transclude: 'replace',
+        transclude: true,
         controller: CardCtrl,
         scope: {
             expandable: '@',
@@ -100,34 +107,49 @@ function card() {
                 $scope.$watch(expression, function (val) {
                     if (val) {
                         element.addClass(cls);
-                        element.removeClass('collapsed');
-                        element.addClass('md-whiteframe-5dp');
-                        element.removeClass('md-whiteframe-1dp');
+
+                        // element.removeClass('collapsed');
+                        // element.addClass('md-whiteframe-5dp');
+                        // element.removeClass('md-whiteframe-1dp');
                     } else {
                         element.removeClass(cls);
-                        element.addClass('collapsed');
-                        element.removeClass('md-whiteframe-5dp');
-                        element.addClass('md-whiteframe-1dp');
+
+                        // element.addClass('collapsed');
+                        // element.removeClass('md-whiteframe-5dp');
+                        // element.addClass('md-whiteframe-1dp');
                     }
                 });
             }
 
             bindCssClass(scope, element, '!collapsed', 'expanded');
-            bindCssClass(scope, element, 'expandable', 'content-block-expandable');
         }
+    };
+}
+
+/**
+* @ngInject
+*/
+function cardHeader() {
+    return {
+        templateUrl: 'js/components/card/cardHeader.html',
+        restrict: 'E',
+        replace: true,
+        transclude: true,
+        link: CardHeaderLink,
+        require: '^card'
     };
 }
 
 /**
  * @ngInject
  */
-function cardHeader() {
+function cardHeaderExpandable() {
     return {
-        templateUrl: 'js/components/card/cardHeader.html',
+        templateUrl: 'js/components/card/cardHeaderExpandable.html',
         restrict: 'E',
         replace: true,
-        transclude: 'replace',
-        link: CardHeaderLink,
+        transclude: true,
+        link: CardHeaderExpandableLink,
         require: '^card'
     };
 }
@@ -140,7 +162,7 @@ function cardContent() {
         templateUrl: 'js/components/card/cardContent.html',
         restrict: 'E',
         replace: true,
-        transclude: 'replace',
+        transclude: true,
         link: CardContentLink,
         require: '^card'
     };
@@ -154,7 +176,7 @@ function cardFooter() {
         templateUrl: 'js/components/card/cardFooter.html',
         restrict: 'E',
         replace: true,
-        transclude: 'replace',
+        transclude: true,
         link: CardFooterLink,
         require: '^card'
     };
@@ -162,5 +184,6 @@ function cardFooter() {
 
 componentsModule.directive('card', card);
 componentsModule.directive('cardHeader',  cardHeader);
+componentsModule.directive('cardHeaderExpandable',  cardHeaderExpandable);
 componentsModule.directive('cardContent', cardContent);
 componentsModule.directive('cardFooter',  cardFooter);

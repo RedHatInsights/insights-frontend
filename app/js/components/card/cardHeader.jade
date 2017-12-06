@@ -1,6 +1,1 @@
-md-card-header
-  // we do this click wrap junk because angular adds clickable styles to
-  // an ng-click (hand pointer), and we cant remove the ng-click itself conditionally
-  .click-wrap(ng-click='card.toggleContent()' ng-if='$parent.expandable')
-    div(ng-transclude)
-  div(ng-transclude, ng-if='!$parent.expandable')
+md-card-header(ng-transclude)

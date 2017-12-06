@@ -12,13 +12,13 @@
 
   //- topic-rule-filters(ng-hide='loading')
   table-filters
+    search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
     incidents-tri-state(ng-if='isBeta')
     total-risk-select
     risk-of-change-select
 
   section.content
     .table-utilities
-      search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
       list-type
 
     topic-rule-list(ng-if='!loading', topic='topic')

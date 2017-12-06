@@ -19,12 +19,15 @@
           
       article(ng-bind-html='ruleDetails.generic_html | trust_html')
 
-  section.content
-    .table-utilities
-      search-box(on-search='search(model)', placeholder="{{'system search...' | translate}}")
-      check-in-select
-            
+  //- .table-utilities
+  //-   search-box(on-search='search(model)', placeholder="{{'system search...' | translate}}")
+    
 
+  table-filters
+    search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
+    check-in-select
+
+  section.content
     // Show Create Playbook, Add to Plan if at least one system has been selected
     .table-header
       .dropdown

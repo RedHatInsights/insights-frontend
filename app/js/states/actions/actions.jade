@@ -30,7 +30,7 @@
                   i.fa.fa-square.inline-right(ng-class="category.id + '-color'", aria-hidden="true")
                   span.desc(translate) {{category.id | titlecase}}
                   span.count &nbsp;({{category.count}})
-    
+
     card.widget.actions-incident-summary(id="widgetIncidentSummary", ng-if="isBeta")
       card-header.gray
         .card-header-title(translate) Incident summary
@@ -45,14 +45,38 @@
 
   section.section-featured-topics.content.content-gray
     h2.section-title.section-title-red(translate) Featured Topics
-    .flex(ng-if='featuredTopics.length')
-      other-topic(sm-flex-33 ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id", topic='topic')
+    .flex.topics(ng-if='featuredTopics.length')
+      card(ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id" topic='topic')
+        card-header
+          .card-header-title
+            h4 {{topic.title}}
+          .card-header-supporting-info
+            span.count(translate, translate-n='topic.affectedSystemCount', translate-plural='{{$count}} Systems') 1 System
+        card-content(ng-bind-html='topic.summary_html ? topic.summary_html : Xtopic.content_html | trust_html')
+        card-footer.text-right-sm
+          strong
+            a.pointer(translate, ui-sref="app.topic({id: topic.slug ? topic.slug : topic.id, product: getSelectedProduct()})") View More
+
+      //- other-topic
+
       
     .text-center.extra-topics(ng-if='!show.extraTopics && extraTopics.length')
       md-button(ng-click='show.extraTopics = true', translate) More topics
 
-    div(ng-if='!featuredTopics.length')
-      strong.text-center No topics currently available.&nbsp;
-        a(ui-sref='info.getting-started.direct', translate) Register more systems.
-    .flex(ng-if='show.extraTopics')
-      other-topic(sm-flex-33 ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id", topic='topic')
+    strong.text-center(ng-if='!featuredTopics.length') No topics currently available.&nbsp;
+      a(ui-sref='info.getting-started.direct', translate) Register more systems.
+    
+    h2.section-title.section-title-red(ng-if='show.extraTopics' translate) More Featured Topics
+    .flex.topics(ng-if='show.extraTopics')
+      card(ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id" topic='topic')
+        card-header
+          .card-header-title
+            h4 {{topic.title}}
+          .card-header-supporting-info
+            span.count(translate, translate-n='topic.affectedSystemCount', translate-plural='{{$count}} Systems') 1 System
+        card-content(ng-bind-html='topic.summary_html ? topic.summary_html : Xtopic.content_html | trust_html')
+        card-footer.text-right-sm
+          strong
+            a.pointer(translate, ui-sref="app.topic({id: topic.slug ? topic.slug : topic.id, product: getSelectedProduct()})") View More
+
+

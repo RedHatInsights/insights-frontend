@@ -1,3 +1,93 @@
+// Vars
+$card: "md-card";
+$card-header: "md-card-header";
+
+#{$card} {
+  @include reset;
+  color: $base-color;
+  // box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 2px 1px -1px;
+
+  h1, 
+  h2, 
+  h3, 
+  h4 {
+    @include font-size(18px, 21px);
+    margin-top: 0;
+  }
+}
+
+
+// Card header typography
+//==================================================================*/
+#{$card-header} {
+  &,
+  & h1,
+  & h2,
+  & h3,
+  & h4 {
+    margin: 0;
+    @include font-size(16px);
+    font-weight: 700; 
+  }
+}
+
+
+#{$card-header} {
+  border-bottom: 1px solid $gray-border;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  @include rem('padding', $global-padding);
+
+  & .card-header-title { flex: 1 1 60%; }
+  & .card-header-supporting-info { 
+    flex: 0 1 auto; 
+    @include font-size(14px, 1);
+    font-weight: 100;
+  }
+}
+
+
+#{$card-header}.gray { background: $gray-light; }
+
+#{$card-header} .card-header-cta { @include font-size(14px, 1);}
+
+#{$card-header}.card-header-expandable-card {
+  display: flex;
+
+  .expandable-toggle { flex: 0 0 auto; }
+  .card-header-content { 
+    flex: 1; 
+  }
+}
+
+
+#{$card} .expandable-toggle {
+  @include rem('padding-right', $global-padding);
+  border: none;
+  box-shadow: none;
+  background: none;
+
+  i { 
+    transition: .2s; 
+    @include font-size(22px, 22px);
+  }
+}
+
+#{$card}.expanded .expandable-toggle {
+  i { transform: rotate(90deg); }
+}
+
+.card-header-expandable .card-header-content {
+
+}
+
+// .card-header-expandable.expanded { 
+//   .content {
+//     display: block;
+//   }
+// } 
+
 .card-group {
   > header {
     @include rem('padding', $global-padding);

@@ -1,15 +1,13 @@
 .page-inventory
   page-header(title="Inventory", icon="fa-database")
-  tableFilters
+  table-filters
+    search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder="{{'Find a system' | translate}}")
     check-in-select
     actions-select
 
   .rha-notifications
   section.content
     .table-utilities
-      .row
-        .col-xs-7.col-sm-5
-          search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder="{{'Find a system' | translate}}")
 
     inventory-actions
 

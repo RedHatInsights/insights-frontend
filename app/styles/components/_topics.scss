@@ -1,28 +1,35 @@
+.flex.topics {
+  > * {
+    @include rem('margin', $global-padding $global-padding $global-margin);
+    flex: 0 1 33%;
+  }
+}
+
 .insights-app-edit-topic {
-    .form-control#tag {
-        padding: 0;
+  .form-control#tag {
+    padding: 0;
 
-        .host {
-            margin: 0;
-        }
+    .host {
+      margin: 0;
     }
+  }
 
-    .form-control.ui-select-match,
-    ul.ui-select-choices {
-        padding: 0;
-    }
+  .form-control.ui-select-match,
+  ul.ui-select-choices {
+    padding: 0;
+  }
 
-    .ui-select-toggle {
-        height: 34px;
-    }
+  .ui-select-toggle {
+    height: 34px;
+  }
 
-    .form-group:not(.selected) .rule-list {
-        opacity: 0.2;
-    }
+  .form-group:not(.selected) .rule-list {
+    opacity: 0.2;
+  }
 
-    form.form-horizontal input {
-        width: inherit;
-    }
+  form.form-horizontal input {
+    width: inherit;
+  }
 }
 
 .featured-topic .topic-card {
@@ -32,30 +39,30 @@
 }
 
 .topic-card.content-block {
-	background: #fff;
+  background: #fff;
 
-	header {
-		// @include rem('padding', $global-padding);
+  header {
+    // @include rem('padding', $global-padding);
 
-		h4 {
-			margin-bottom: 0;
+    h4 {
+      margin-bottom: 0;
             // color: $blue_dark;
-		}
-	}
+    }
+  }
 
-	.affected-systems {
-		color: $gray-dark;
-	}
+  .affected-systems {
+    color: $gray-dark;
+  }
 
-	footer {
-		ul {
-			display: inline;
-			@include rem('margin-left', 6px);
-			padding: 0;
-		}
-		ul li:after { content: ", "; }
-		ul li:last-child:after { content: ""; }
-	}
+  footer {
+    ul {
+      display: inline;
+      @include rem('margin-left', 6px);
+      padding: 0;
+    }
+    ul li:after { content: ", "; }
+    ul li:last-child:after { content: ""; }
+  }
 }
 
 .other-topics {
@@ -78,24 +85,24 @@
 }
 
 .topic-preview-modal {
-    .modal-dialog {
-        @include media-query (md) {
-            width: 795px; // to match action pages
-        }
-        @include media-query (lg) {
-            width: 959px; // to match action pages
-        }
+  .modal-dialog {
+    @include media-query (md) {
+      width: 795px; // to match action pages
     }
-
-    .modal-content {
-        @include rem('padding', $global-margin);
+    @include media-query (lg) {
+      width: 959px; // to match action pages
     }
+  }
 
-    table.sample-data-table {
-        table-layout:fixed;
+  .modal-content {
+    @include rem('padding', $global-margin);
+  }
 
-        td.rule-id {
-            word-wrap: break-word;
-        }
+  table.sample-data-table {
+    table-layout:fixed;
+
+    td.rule-id {
+      word-wrap: break-word;
     }
+  }
 }

@@ -1,9 +1,9 @@
 section#table-filters.table-filters(ng-class="{tags: hasTags()}")
   .filters(ng-transclude)
 
-  .active-filters(ng-show='hasTags()', ng-model='tags')
+  .active-filters(ng-if='hasTags()', ng-model='tags')
     strong(translate) Active filters:&nbsp;
     // remove filter on click
-    button.btn.button-active-filter(ng-repeat="(key, value) in tags", ng-click='removeFilter(key)')
+    button.button-active-filter(ng-repeat="(key, value) in tags", ng-click='removeFilter(key)')
       span(translate) {{value | translate}}
       i.fa.fa-times-circle-o(aria-hidden="true")
