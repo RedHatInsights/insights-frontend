@@ -7,7 +7,8 @@ var componentsModule = require('../');
  * @ngInject
  */
 function ansibleIconCtrl($scope, gettextCatalog) {
-    const plannerLine = gettextCatalog.getString('Use the Planner to generate an Ansible Playbook.');
+    const plannerLine = gettextCatalog.getString(
+        'Use the Planner to generate an Ansible Playbook.');
     const positive = gettextCatalog.getString('This rule has Ansible support.');
     const negative = gettextCatalog.getString('This rules does not have Ansible support');
 
