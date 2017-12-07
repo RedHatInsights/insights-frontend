@@ -18,10 +18,6 @@
           
       article(ng-bind-html='ruleDetails.generic_html | trust_html')
 
-  //- .table-utilities
-  //-   search-box(on-search='search(model)', placeholder="{{'system search...' | translate}}")
-    
-
   table-filters
     search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
     check-in-select
@@ -94,9 +90,9 @@
               md-indeterminate="checkboxes.indeterminate",
               ng-model='checkboxes.checked',
               ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
-          th.fit-content.sortable(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')", translate) Type
+          th.min.sortable(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')", translate) Type
           th.sortable(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')", translate) Name
-          th.sortable(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')", translate) Reported
+          th.min.sortable(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')", translate) Reported
 
       tbody
         tr(ng-click='checkboxes.rowClick($event, system.system_id)',
@@ -115,7 +111,7 @@
             type-icon(type-id='system.system_type_id', include-text='true')
           td.break
             a(ng-click='showSystem(system)') {{ system.toString }}
-          td {{ ::system.last_check_in | timeAgo}}
+          td.fit-content {{ ::system.last_check_in | timeAgo}}
 
     pagination.pull-right.pagination-blue(
       ng-hide='loading || loadingSystems',

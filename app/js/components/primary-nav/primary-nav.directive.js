@@ -6,7 +6,9 @@ const includes = require('lodash/includes');
 /**
  * @ngInject
  */
-function primaryNavCtrl($scope, Utils, $state, InsightsConfig, $timeout, $mdSidenav) {
+
+// function primaryNavCtrl($scope, Utils, $state, InsightsConfig, $timeout, $mdSidenav) {
+function primaryNavCtrl($scope, Utils, $state, InsightsConfig) {
     // $scope.toggleLeft = buildToggler('left');
 
     // $scope.toggleLeft = buildToggler('left');
