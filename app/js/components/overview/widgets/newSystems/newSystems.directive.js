@@ -26,8 +26,9 @@ function NewSystemsCtrl($scope, SystemsService, Utils, InventoryService) {
 function newSystems() {
     return {
         templateUrl: 'js/components/overview/widgets/newSystems/newSystems.html',
-        restrict: 'E',
-        replace: true,
+        restrict: 'EC',
+        transclude: true,
+        replace: false,
         scope: {},
         controller: NewSystemsCtrl
     };

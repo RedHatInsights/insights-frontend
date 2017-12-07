@@ -1,21 +1,3 @@
-.table-header {
-  display: flex;
-  align-items: center;
-
-  > * {
-    flex: 0 1 auto;
-  }
-
-  h1,
-  h2, 
-  h3 { @include font-size(18px, 1); }
-
-  .table-header-title {
-    flex: 1 auto;
-    text-align: center;
-  }
-}
-
 table {
   width: 100%;
   border: none;

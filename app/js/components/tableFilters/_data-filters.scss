@@ -1,4 +1,4 @@
-.table-filters {
+.data-filters {
   @include rem('margin', $global-padding);
 
   .filter-group {
@@ -12,8 +12,8 @@
   }
 }
 
-.table-filters .filters,
-.table-filters .active-filters {
+.data-filters .filters,
+.data-filters .active-filters {
   display: flex;
   flex-wrap: wrap;
 
@@ -24,23 +24,23 @@
   }
 }
 
-.table-filters .active-filters {
+.data-filters .active-filters {
   align-items: baseline;
 }
 
 
-.table-filters.tags .active-filters {
+.data-filters.tags .active-filters {
   @include rem('margin-top', $global-margin);
 }
 
 
-.table-filters .filter-group {
+.data-filters .filter-group {
   flex: 0 1 auto;
 
   .button-filter { @include rem('min-width', 120px); }
 }
 
-.table-filters .table-search { 
+.data-filters .table-search { 
   flex: 1 1 100%;
 
   @include media-query(sm){ 
@@ -50,7 +50,7 @@
 }
 
 
-.table-filters .filter-group.filter-group-radios { 
+.data-filters .filter-group.filter-group-radios { 
   flex: 1 1 100%;
 
   @include media-query(sm){ flex: 0 1 0%; }

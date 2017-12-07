@@ -1,11 +1,11 @@
-md-card.widget.widget-new-systems
-  md-card-header.gray
-    .md-card-header-title
+card.widget.widget-new-systems
+  card-header.gray
+    .card-header-title.icon-inline
       i.fa.fa-database
       span(translate) Newest Systems
-    .md-card-header-cta
+    .card-header-cta
       a.cta-link(ui-sref='app.inventory', translate) View inventory
-  md-card-content
+  card-content
     .spinner(ng-show='loader.loading')
     table.table.table-separated(ng-show='!loader.loading && systems.length')
       thead.lite

@@ -1,5 +1,10 @@
+$flex-gutter: $global-margin;
+
 .flex {
   display: flex;
+  flex-flow: row wrap;
+  // justify-content: space-between;
+  // align-items: center;
 
   @include media-query(sm){
     @include rem('margin-left', -$global-padding);
@@ -7,19 +12,45 @@
   }
 }
 
+.flex.flex-columns { flex-flow: column wrap; }
+
 [sm-flex-25],
 [sm-flex-33],
-[sm-flex-66] { 
+[sm-flex-66],
+[md-flex-25],
+[md-flex-33],
+[md-flex-66],
+[lg-flex-25],
+[lg-flex-33],
+[lg-flex-66],
+[xl-flex-25],
+[xl-flex-33],
+[xl-flex-66] {
   flex: 1 1 100%;
   @include rem('margin-bottom', $global-margin);
 
   @include media-query(sm){ @include rem('margin', 0 $global-padding $global-margin); }
 }
 
-[sm-flex-25] { @include media-query(sm) { flex: 0 1 25%; } }
-[sm-flex-33] { @include media-query(sm){ flex: 0 1 33%; } }
-[sm-flex-66] { @include media-query(sm){ flex: 0 1 66%; } }
+[sm-flex-25] { @include media-query(sm) { flex: 1 1 calc(25% - #{$flex-gutter); } } }
+[sm-flex-33] { @include media-query(sm) { flex: 1 1 calc(33.33% - #{$flex-gutter); } } }
+[sm-flex-66] { @include media-query(sm) { flex: 1 1 calc(66.66% - #{$flex-gutter); } } }
 
+[md-flex-25] { @include media-query(md) { flex: 0 1 calc(25% - #{$flex-gutter); } } }
+[md-flex-33] { @include media-query(md) { flex: 0 1 calc(33.33% - #{$flex-gutter); } } }
+[md-flex-66] { @include media-query(md) { flex: 0 1 calc(66.66% - #{$flex-gutter); } } }
+
+[lg-flex-25] { @include media-query(lg) { flex: 0 1 calc(25% - #{$flex-gutter); } } }
+[lg-flex-33] { @include media-query(lg) { flex: 0 1 calc(33.33% - #{$flex-gutter); } } }
+[lg-flex-66] { @include media-query(lg) { flex: 0 1 calc(66.66% - #{$flex-gutter); } } }
+
+[xl-flex-25] { @include media-query(xl) { flex: 0 1 calc(25% - #{$flex-gutter); } } }
+[xl-flex-33] { @include media-query(xl) { flex: 0 1 calc(33.33% - #{$flex-gutter); } } }
+[xl-flex-66] { @include media-query(xl) { flex: 0 1 calc(66.66% - #{$flex-gutter); } } }
+
+[align-center] {
+  align-self: center;
+}
 
 .flex.flex-stretch {
   // align-items: stretch;

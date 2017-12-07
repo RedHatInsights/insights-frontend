@@ -40,21 +40,18 @@
     card.widget.widget-weekly-actions
       card-header.gray
         .card-header-title(translate) Weekly action count by category
-      card-content
-        .row.padding-top
-          .col-xs-6.col-md-3(ng-repeat='cat in digest_hits_per_cat')
-            .gauge.gauge-count-and-change
-              .count-and-change
-                .count.large.bold {{cat.current}}
-                .change
-                  i.fa.fa-caret-up.increase(ng-if='cat.direction > 0')
-                  i.fa.fa-caret-down.decrease(ng-if='cat.direction < 0')
-                  i.fa.fa-minus.no-change(ng-if='cat.direction === 0')
-              .title
-                i.fa(aria-hidden="true" ng-class='cat.icon')
-                strong.uppercase &nbsp;{{cat.label}}
+      card-content.flex
+        .gauge.gauge-count-and-change(sm-flex-50 md-flex-25 ng-repeat='cat in digest_hits_per_cat')
+          .count-and-change
+            .count.large.bold {{cat.current}}
+            .change
+              i.fa.fa-caret-up.increase(ng-if='cat.direction > 0')
+              i.fa.fa-caret-down.decrease(ng-if='cat.direction < 0')
+              i.fa.fa-minus.no-change(ng-if='cat.direction === 0')
+          .title
+            i.fa(aria-hidden="true" ng-class='cat.icon')
+            strong.uppercase &nbsp;{{cat.label}}
       card-footer
-        hr
         span.large-text(ng-show='!loading', translate)
           i.fa.fa-check-circle.green(ng-if='resolvedIssues > 0')
           i.fa.fa-exclamation-circle.red(ng-if='resolvedIssues === 0')

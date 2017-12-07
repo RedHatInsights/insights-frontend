@@ -1,5 +1,12 @@
 $overview-bg-header: #fafafa;
 
+.page-overview maintenance-plan-lite,
+.page-overview new-systems {
+  .card {
+    height: 100%;
+  }
+}
+
 // .insights-app-overview {
 //   .insights-main-content { padding: 0; }
 //   .page { padding: 0 $global-padding; }

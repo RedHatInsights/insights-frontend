@@ -46,7 +46,7 @@
   section.section-featured-topics.content.content-gray
     h2.section-title.section-title-red(translate) Featured Topics
     .flex.topics(ng-if='featuredTopics.length')
-      card(ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id" topic='topic')
+      card(md-flex-33 ng-repeat = "topic in featuredTopics | orderBy:'topic.order' track by topic.id" topic='topic')
         card-header
           .card-header-title
             h4 {{topic.title}}
@@ -68,7 +68,7 @@
     
     h2.section-title.section-title-red(ng-if='show.extraTopics' translate) More Featured Topics
     .flex.topics(ng-if='show.extraTopics')
-      card(ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id" topic='topic')
+      card(md-flex-33 ng-repeat = "topic in extraTopics | orderBy:'topic.order' track by topic.id" topic='topic')
         card-header
           .card-header-title
             h4 {{topic.title}}

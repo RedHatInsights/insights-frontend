@@ -1,11 +1,11 @@
-md-card.widget.widget-maintenance-plan
-  md-card-header.gray
-    .md-card-header-title
+card.widget.widget-maintenance-plan
+  card-header.gray
+    .card-header-title.icon-inline
       i.fa.fa-wrench
       span(translate) Plan Summary
-    .md-card-header-cta
+    .card-header-cta
       a(ui-sref='app.maintenance', translate) View planner
-  md-card-content.maintenance-plan-lite
+  card-content.maintenance-plan-lite
     a.link.suggestions(ng-if='getFirstSuggestion()', ng-click='openPlan(getFirstSuggestion())')
       span.icon.icon-inline
         i.fa.fa-check-square-o(aria-hidden="true")
