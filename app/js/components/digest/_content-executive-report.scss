@@ -1,0 +1,42 @@
+.content-executive-reports {
+  display: grid;
+  grid-gap: $global-margin;
+  // grid-template-areas: "score weekly-actions"
+  //                     "weekly-trends weekly-trends"
+  //                     "most-impacted most-frequent";
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, auto);
+}
+
+.content-executive-reports {
+  
+  .widget.widget-score {
+    grid-column: span 2;
+    grid-row: 1;
+    // grid-area: score;
+  }
+
+  .widget.widget-weekly-actions {
+    grid-column: span 4;
+    grid-row: 1 / 2;
+    // grid-area: weekly-actions;
+  }
+
+  .widget.widget-trends {
+    grid-column: 1/7;
+    grid-row: 2;
+    // grid-area: weekly-trends;
+  }
+
+  .widget.widget-most-impacted {
+    grid-column: span 3;
+    grid-row: 3;
+    // grid-area: most-impacted;
+  }
+
+  .widget.widget-most-frequent {
+    grid-column: span 3;
+    grid-row: 3;
+    // grid-area: most-frequent;
+  }
+}

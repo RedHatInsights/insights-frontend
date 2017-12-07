@@ -6,6 +6,10 @@
       // display: block;
     }
   }  
+
+  & + section.content {
+    @include rem('padding-top', $global-padding);
+  }
 }
 
 .table-filters .filters,

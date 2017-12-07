@@ -3,75 +3,66 @@
     md-button.md-primary.pull-right(ng-click='downloadPdf()', translate) Download PDF
     .spinner.spinner-sm.pull-right(ng-if="downloading")
 
-  .content-wrap.margin-top(ng-show='loading')
+  section.content(ng-show='loading')
     .text-center
       .spinner.spinner-lg
 
-  .content-wrap(ng-if='!loading && digestError')
-    .row
-      .col-xs-12.col-lg-8.alert.alert-danger
-        span.col-xs-9
-          span.icon-inline
-            i.glyphicon.glyphicon-exclamation-sign
-          span(translate) {{digestError}}
+  section.content(ng-if='!loading && digestError')
+    span.icon-inline
+      i.glyphicon.glyphicon-exclamation-sign
+    span(translate) {{digestError}}
 
-  .content-wrap.margin-top(ng-show='!loading && systemsTilTen > 0')
-    .row
-      .col-sm-12.col-md-8.col-md-offset-2.text-center
-        h1(translate) Executive Reporting requires 10 or more systems to be registered with Insights.
-        h2(translate) Please register
-          span(translate, translate-n='systemsTilTen', translate-plural='{{$count}} more systems') {{systemsTilTen}} more system
-          | &nbsp;to enable reporting for your account.
+  section.content(ng-show='!loading && systemsTilTen > 0')
+    h1(translate) Executive Reporting requires 10 or more systems to be registered with Insights.
+    h2(translate) Please register
+      span(translate, translate-n='systemsTilTen', translate-plural='{{$count}} more systems') {{systemsTilTen}} more system
+      | &nbsp;to enable reporting for your account.
 
-  .content-wrap(ng-show='!loading && systemsTilTen < 1')
-    .row
-      .col-md-4
-        md-card
-          md-card-header
-            md-card-header-title(translate) Overall score
-          md-card-content
-            .gauge.gauge-score.align-center
-              .crop
-                .grad
-              gauge-marker(current="latest_score", difference="score_difference")
-              .score
-                h3 {{latest_score}}
-                span(translate, ng-if='latest_score < 400') Score needs attention
-                span(translate, ng-if='latest_score >= 400 && latest_score < 550') Score is poor
-                span(translate, ng-if='latest_score >= 550 && latest_score < 700') Score is good
-                span(translate, ng-if='latest_score >= 700') Score is excellent
-              footer.footer
-                span.num.floor 250
-                span.num.ceiling 850
+  section.content.content-executive-reports(ng-show='!loading && systemsTilTen < 1')
+    card.widget.widget-score
+      card-header.gray
+        .card-header-title(translate) Overall score
+      card-content
+        .gauge.gauge-score.align-center
+          .crop
+            .grad
+          gauge-marker(current="latest_score", difference="score_difference")
+          .score
+            h3 {{latest_score}}
+            span(translate, ng-if='latest_score < 400') Score needs attention
+            span(translate, ng-if='latest_score >= 400 && latest_score < 550') Score is poor
+            span(translate, ng-if='latest_score >= 550 && latest_score < 700') Score is good
+            span(translate, ng-if='latest_score >= 700') Score is excellent
+          footer.footer
+            span.num.floor 250
+            span.num.ceiling 850
 
-      .col-md-8
-        md-card
-          md-card-header
-            md-card-header-title(translate) Weekly action count by category
-          md-card-content
-            .row.padding-top
-              .col-xs-6.col-md-3(ng-repeat='cat in digest_hits_per_cat')
-                .gauge.gauge-count-and-change
-                  .count-and-change
-                    .count.large.bold {{cat.current}}
-                    .change
-                      i.fa.fa-caret-up.increase(ng-if='cat.direction > 0')
-                      i.fa.fa-caret-down.decrease(ng-if='cat.direction < 0')
-                      i.fa.fa-minus.no-change(ng-if='cat.direction === 0')
-                  .title
-                    i.fa(aria-hidden="true" ng-class='cat.icon')
-                    strong.uppercase &nbsp;{{cat.label}}
+    card.widget.widget-weekly-actions
+      card-header.gray
+        .card-header-title(translate) Weekly action count by category
+      card-content
+        .row.padding-top
+          .col-xs-6.col-md-3(ng-repeat='cat in digest_hits_per_cat')
+            .gauge.gauge-count-and-change
+              .count-and-change
+                .count.large.bold {{cat.current}}
+                .change
+                  i.fa.fa-caret-up.increase(ng-if='cat.direction > 0')
+                  i.fa.fa-caret-down.decrease(ng-if='cat.direction < 0')
+                  i.fa.fa-minus.no-change(ng-if='cat.direction === 0')
+              .title
+                i.fa(aria-hidden="true" ng-class='cat.icon')
+                strong.uppercase &nbsp;{{cat.label}}
+      card-footer
+        hr
+        span.large-text(ng-show='!loading', translate)
+          i.fa.fa-check-circle.green(ng-if='resolvedIssues > 0')
+          i.fa.fa-exclamation-circle.red(ng-if='resolvedIssues === 0')
+          | &nbsp;You've resolved&nbsp;
+          strong(ng-class='{"green": resolvedIssues > 0, "red": resolvedIssues === 0}', translate, translate-n='resolvedIssues', translate-plural='{{$count}} issues') {{resolvedIssues}} issue
+          | &nbsp;in the past {{timePeriod()}} days.
 
-          md-card-footer
-            hr
-            span.large-text(ng-show='!loading', translate)
-              i.fa.fa-check-circle.green(ng-if='resolvedIssues > 0')
-              i.fa.fa-exclamation-circle.red(ng-if='resolvedIssues === 0')
-              | &nbsp;You've resolved&nbsp;
-              strong(ng-class='{"green": resolvedIssues > 0, "red": resolvedIssues === 0}', translate, translate-n='resolvedIssues', translate-plural='{{$count}} issues') {{resolvedIssues}} issue
-              | &nbsp;in the past {{timePeriod()}} days.
-
-    md-card.md-padding
+    card.widget.widget-trends
       md-tabs.md-dynamic-height.md-border-bottom(md-swipe-content="true")
         md-tab(label="{{'Action Trends'|translate}}")
           md-content.md-padding
@@ -101,35 +92,36 @@
                   td
                     severity-icon(severity='rule.severity', type='severity', label='')
         
-    md-card.md-padding
-      .row
-        .col-md-6
-          h2.section-title(translate) Ten Most Impacted Systems
-          //with hostname, registered date, and score
-          table.table-break
-            thead
-              tr
-                th.hostname(translate) Hostname
-                th(translate) Hits
-            tbody
-              tr(ng-repeat='system in topTenWorstSystems')
-                td.hostname
-                  a(ng-click='showSystem(system)') {{ system | getSystemDisplayName }}
-                td {{ system.report_count }}
+    card.widget.widget-most-impacted
+      card-header.gray
+        .card-header-title(translate) Ten Most Impacted Systems
+      card-content
+        table.table-break
+          thead
+            tr
+              th.hostname(translate) Hostname
+              th(translate) Hits
+          tbody
+            tr(ng-repeat='system in topTenWorstSystems')
+              td.hostname
+                a(ng-click='showSystem(system)') {{ system | getSystemDisplayName }}
+              td {{ system.report_count }}
 
-        .col-md-6
-          h2.section-title Ten Most Frequently Hit Rules
-          // grouped by criticality, sub grouped by count
-          table
-            thead
-              tr
-                th(translate) Rule
-                th(translate) Impacted Systems
-                th(translate) Total Risk
-            tbody
-              tr(ng-repeat='rule in topTenRules')
-                td
-                  a(ui-sref="app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})") {{ rule.description }}
-                td {{rule.impacted_systems}}
-                td
-                  severity-icon(severity='rule.severity', type='severity', label='')
+    card.widget.widget-most-frequent
+      card-header.gray
+        .card-header-title Ten Most Frequently Hit Rules
+      // grouped by criticality, sub grouped by count
+      card-content
+        table
+          thead
+            tr
+              th(translate) Rule
+              th(translate) Impacted Systems
+              th(translate) Total Risk
+          tbody
+            tr(ng-repeat='rule in topTenRules')
+              td
+                a(ui-sref="app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})") {{ rule.description }}
+              td {{rule.impacted_systems}}
+              td
+                severity-icon(severity='rule.severity', type='severity', label='')
