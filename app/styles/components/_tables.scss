@@ -40,6 +40,12 @@ table {
 }
 
 
+table tbody {
+  tr.stale { background: #f2dede; }
+  tr.stale:nth-child(odd) { background: #fbf2f2; }
+}
+
+
 .intro {
   font-weight: 300;
   @include font-size(18px, 34px);
