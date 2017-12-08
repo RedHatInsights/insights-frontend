@@ -4,8 +4,8 @@ var componentsModule = require('../');
 const includes = require('lodash/includes');
 
 /**
- * @ngInject
- */
+* @ngInject
+*/
 
 // function primaryNavCtrl($scope, Utils, $state, InsightsConfig, $timeout, $mdSidenav) {
 function primaryNavCtrl($scope, Utils, $state, InsightsConfig) {

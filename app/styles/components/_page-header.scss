@@ -29,8 +29,9 @@
 .page-header .page-title h1 { 
   display: flex;
   margin: 0;
-  @include font-size(24px, 1);
+  @include font-size(18px, 23px);
+
+  @include media-query(md){ @include font-size(24px, 1); }
 
   i { margin-right: $global-padding/2; }
 }
-

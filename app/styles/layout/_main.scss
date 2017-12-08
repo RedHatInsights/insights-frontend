@@ -3,4 +3,7 @@
   grid-area: main;
 
   @include media-query(sm){ overflow-y: auto; }
+
+  display: flex;
+  flex-flow: column;
 }

@@ -58,6 +58,9 @@
 
 .rule-detail-risk-list {
   grid-area: risk-list;
+
+  display: flex;
+  flex-flow: column wrap;
 }
 
 .rule-detail-summary {

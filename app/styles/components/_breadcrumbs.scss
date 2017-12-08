@@ -5,16 +5,22 @@ $breadcrumbs-border: #E2E2E2;
   background-color: $breadcrumbs-bg;
   @include rem('padding', 20px $global-margin);
   border-bottom: 1px solid $breadcrumbs-border;
+  overflow-x: auto;
 
   ol {
     list-style: none;
     border-radius: 0;
     padding: 0;
     margin: 0;
+    white-space: nowrap;
+
+    @include media-query(sm){
+      white-space: normal;
+    }
   }
 
   li {
-    display: inline-block;
+    display: inline;
   }
 
   ol > li + li:before {

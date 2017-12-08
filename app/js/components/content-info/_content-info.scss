@@ -1,0 +1,35 @@
+footer[role="content-info"] {
+  margin-top: auto;
+  @include rem('padding', 25px $global-margin);
+
+  display: flex;
+  background: #F5F5F5;
+  @include font-size(12px, 1);
+
+  nav {
+    ul {
+      list-style-type: none;
+      display: flex;
+      flex-flow: row;
+      margin: 0;
+    }
+
+    ul li {
+      position: relative;
+      @include rem('padding-left', 0);
+    }
+
+    ul li + li {
+      @include rem('margin-left', $global-padding);
+      @include rem('padding-left', $global-padding);
+
+      &::before {
+        content: '|';
+        position: absolute;
+        left: 0;
+        color: $gray;
+      }
+    }
+  }
+}
+
