@@ -20,12 +20,12 @@ function ansibleIconCtrl($scope, gettextCatalog) {
             } else {
                 $scope.icon = 'static/images/l_ansible-blue.svg';
                 $scope.svgClass = 'supported';
-                $scope.supportText = "Ansible supported";
+                $scope.supportText = 'Ansible supported';
             }
         } else {
             $scope.icon = 'static/images/l_ansible-unsupported.svg';
             $scope.svgClass = 'unsupported';
-            $scope.supportText = "Ansible unsupported";
+            $scope.supportText = 'Ansible unsupported';
         }
 
         if ($scope.showTooltip || $scope.showTooltip === undefined) {
