@@ -1,7 +1,5 @@
 .rules-group {
-	& + .rules-group {
-		@include rem('margin-top', $global-margin);
-	}
+	@include rem('margin-top', $global-margin);
 }
 
 .rules-group-gray {
@@ -16,3 +14,12 @@
 	}
 }
 
+.rules-group .card-rule + .card-rule {
+	@include rem('margin-top', $global-margin);
+}
+
+.rules-group .card-rule {
+	.header {
+
+	}
+}

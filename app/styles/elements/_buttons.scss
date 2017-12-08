@@ -2,6 +2,19 @@
 $button-primary-bg: $blue;
 $button-primary-color: #fff;
 
+.button-tag {
+  display: inline-flex;
+  @include rem('padding', 8px 15px);
+  border-radius: 50px;
+  background: $gray-light;
+  align-items: center;
+
+  i { 
+    @include font-size(20px, 1);
+    @include rem('margin-left', 6px); 
+  }
+}
+
 .md-button,
 button {
   width: auto;

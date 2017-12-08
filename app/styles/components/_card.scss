@@ -14,7 +14,7 @@ $card-footer: "md-card-footer";
   h2, 
   h3, 
   h4 {
-    @include font-size(18px, 21px);
+    @include font-size(16px, 21px);
     margin-top: 0;
   }
 }
@@ -235,26 +235,65 @@ $card-footer: "md-card-footer";
 }
 
 .system-card {
-	& + .system-card { @include rem('margin-top', $global-padding); }
+  [type="checkbox"] {
+    margin: 0;
+    min-height: 0;
+  }
+	// & + .system-card { @include rem('margin-top', $global-padding); }
 
-  .metadata-separator { @include rem('margin-top', $global-padding); }
+ //  .metadata-separator { @include rem('margin-top', $global-padding); }
 
-  .header-table {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
+ //  .header-table {
+ //    display: table;
+ //    table-layout: fixed;
+ //    width: 100%;
+ //  }
+
+ //  .ellipsis-wrapper {
+ //    overflow: hidden;
+ //    white-space: nowrap;
+ //    text-overflow: ellipsis;
+ //    word-break: break-all;
+ //    word-wrap: break-word;
+ //  }
+
+ //  .status-icon { @include rem('margin-left', 5px); }
+
+  .checkbox { 
+    @include media-query(sm) { flex: 0 1 auto; }  
   }
 
-  .ellipsis-wrapper {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    word-break: break-all;
-    word-wrap: break-word;
+  &.stale #{$card-header},
+  &.stale #{$card-content},
+  &.stale #{$card-footer} {
+    color: #a94442;
+    font-style: italic;
+    background: #fbf2f2;
   }
-
-  .status-icon { @include rem('margin-left', 5px); }
 }
+
+
+.card-header-risk-summaries {
+  display: flex;
+  align-items: baseline;
+}
+
+.system-card #{$card-header},
+.card-table-header {
+  display: flex;
+  @include rem('padding', $global-padding);
+
+  [type="checkbox"] { flex: 0 1 auto; }
+  .type { flex: 0 20%; }
+  .hostname { flex: 1 1 50%; }
+
+  .action-count {
+    flex: 0 1 auto;
+    margin-left: 0;
+  }
+}
+
+.system-card + .system-card { @include rem('margin-top', $global-margin); }
 
 .system-card.stale, .content-block-card.stale {
   color: #a94442;
@@ -308,11 +347,8 @@ $card-footer: "md-card-footer";
 }
 
 .card-table-header {
-  @include rem('margin', $global-padding);
-  @include rem('padding', $global-padding/2 $global-padding);
+  @include rem('margin-top', $global-margin);
   border-bottom: 4px solid $gray;
-
-  &.offset { @include rem('margin-left', 25px); }
 }
 
 .card-list-item + .card-list-item {

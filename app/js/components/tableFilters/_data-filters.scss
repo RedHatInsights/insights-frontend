@@ -10,6 +10,10 @@
   & + section.content {
     @include rem('padding-top', $global-padding);
   }
+
+  .radio-inline label {
+    font-weight: 100;
+  }
 }
 
 .data-filters .filters,

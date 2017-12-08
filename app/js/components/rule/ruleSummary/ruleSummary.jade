@@ -7,15 +7,16 @@ card.card-rule-summary(expandable='true' init-collapsed='initCollapsed' on-toggl
     .card-header-risk-summaries
       all-severity-icons.inline(rule='report.rule')
       risk-of-change(change-risk='report.rule.resolution_risk')
-  card-content.content.ng-animate-enabled(collapse="card.collapsed")
-    .rule-reason
-    .rule-resolution
-    .recommended-kbase(ng-if='report.rule.node_id', node='report.rule.node_id')
-    .text-center.border-top(ng-show='report.rule.more_info')
-      .nomar.push-top-narrow.pointer(ng-click='show.moreInfo = !show.moreInfo')
-        a.link
-          strong {{show.moreInfo ? 'Hide' : 'Show'}}  more info &nbsp;
-          i.fa(ng-class="{'fa-caret-up': show.moreInfo, 'fa-caret-down': !show.moreInfo}")
+  card-content.card-content.ng-animate-enabled(collapse="card.collapsed")
+    .flex
+      .rule-reason(md-flex-50)
+      .rule-resolution(md-flex-50)
+      .recommended-kbase(ng-if='report.rule.node_id' node='report.rule.node_id')
+      .text-center.border-top(ng-show='report.rule.more_info')
+        .nomar.push-top-narrow.pointer(ng-click='show.moreInfo = !show.moreInfo')
+          a.link
+            strong {{show.moreInfo ? 'Hide' : 'Show'}}  more info &nbsp;
+            i.fa(ng-class="{'fa-caret-up': show.moreInfo, 'fa-caret-down': !show.moreInfo}")
   card-footer.footer.more-info.ng-animate-enabled(collapse="!show.moreInfo")
     div(ng-bind-html='report.rule.more_info_html | trust_html',
       ng-show='report.rule.more_info',

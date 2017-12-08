@@ -23,13 +23,8 @@
   .detail,
   .meta { @include rem('padding', 0 $global-padding); }
 
-  .detail {
-    flex: 1 1 66%;
-  }
-
-  .meta {
-    flex: 1 1 33%;
-  }
+  .detail { flex: 1 1 66%; }
+  .meta { flex: 1 1 33%; }
 }
 
 .topic-detail-header {
@@ -38,8 +33,7 @@
                           "rule-detail";
     grid-template-columns: 1fr;
   
-  @include media-query(sm){
-  }  
+  @include media-query(sm){  }  
 }
 
 .rule-detail-header .page-header,
@@ -56,11 +50,24 @@
   align-items: center;
 }
 
+
 .rule-detail-risk-list {
   grid-area: risk-list;
 
   display: flex;
   flex-flow: column wrap;
+}
+
+.rule-detail-header .rule-detail-risk-list {
+  .icon-group-severity {
+    @include rem('padding-bottom', $global-margin);
+    @include rem('margin-bottom', $global-margin);
+    border-bottom: 1px solid #ddd;
+  }
+
+  .icon-group-severity li {
+    @include rem('margin-bottom', $global-padding/2);
+  }
 }
 
 .rule-detail-summary {

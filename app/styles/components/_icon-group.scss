@@ -26,10 +26,6 @@
   &.gray { background: $gray-light; }
   &.white { background: #fff; }
 
-  // Contextually add gray background
-  .rule-summary &,
-  .actions-rule-details & { @extend .icon-group.gray; }
-
 
   // Contextually add white background
   .actions-rule-details & { @extend .icon-group.white; }

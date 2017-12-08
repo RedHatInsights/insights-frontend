@@ -55,28 +55,26 @@
           span )
       list-type(ng-hide='hideListSwitch')
 
-      .card-table-header(ng-show='getListType() === listTypes.card')
-        .row
-          .col-sm-4
-            md-checkbox.md-accent.md-hue-1.md-checkbox-list(
-            tooltip='Select All',
-            type='checkbox',
-            aria-label="checkbox",
-            md-indeterminate='checkboxes.indeterminate',
-            ng-model='checkboxes.checked',
-            ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems);')
-            label(translate, ng-click="sort('system_type_id')") &nbsp; Type
-          .col-sm-4
-            strong(translate, ng-click="sort('toString')") Name &nbsp;
-          .col-sm-4.text-right
-            strong(translate, ng-click="sort('report_count')") Action Count
+    .card-table-header(ng-show='getListType() === listTypes.card')
+      md-checkbox.md-accent.md-hue-1(
+        tooltip="{{'Select All' | translate}}",
+        tooltip-trigger='mouseenter',
+        tooltip-append-to-body='true',
+        tooltip-placement='top',
+        type="checkbox",
+        md-indeterminate="checkboxes.indeterminate",
+        ng-model='checkboxes.checked',
+        ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
+      label.type(translate, ng-click="sort('system_type_id')") &nbsp; Type
+      strong.hostname(translate, ng-click="sort('toString')") Name &nbsp;
+      strong.action-count(translate, ng-click="sort('report_count')") Action Count
 
-      .row.row-short(ng-show='getListType() === listTypes.card && !loadingSystems')
-        .col-sm-12
-          system-card(ng-repeat='system in ruleSystems',
-            system='system',
-            rule='ruleDetails',
-            checkboxes='checkboxes')
+    .row.row-short(ng-show='getListType() === listTypes.card && !loadingSystems')
+      .col-sm-12
+        system-card(ng-repeat='system in ruleSystems',
+          system='system',
+          rule='ruleDetails',
+          checkboxes='checkboxes')
 
     table(ng-show='getListType() === listTypes.table')
       thead

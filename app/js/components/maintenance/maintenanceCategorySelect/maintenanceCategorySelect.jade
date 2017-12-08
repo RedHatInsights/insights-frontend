@@ -1,17 +1,14 @@
-.category-select
-  .dropdown
-    button.btn.btn-default.dropdown-toggle(
+.filter-group.filter-total-risk
+  label(translate) Plan type
+  md-menu(md-offset="0 38")
+    md-button.button-filter(
       type='button',
       data-toggle='dropdown',
       aria-haspopup='true',
-      aria-expanded='false')
-      span {{selected.label}} ({{plans[selected.id].length}})
-      span.caret.dropdown-caret
-    ul.dropdown-menu
-      li(
-        ng-repeat='option in options',
-        ng-if='plans[option.id].length || option.id !== "suggested"')
-        a(
-          ng-click='select(option)',
-          ng-disabled='!plans[option.id].length && option.id !== "unscheduled"')
-          | {{option.label}} ({{plans[option.id].length}})
+      aria-expanded='false',
+      ng-click='$mdMenu.open($event)')
+      span.text.active(ng-model='label') {{selected.label}} ({{plans[selected.id].length}})
+      span.caret
+    md-menu-content
+      md-menu-item(ng-repeat='option in options' ng-if='plans[option.id].length || option.id !== "suggested"')
+        a(ng-click='select(option)' ng-disabled='!plans[option.id].length && option.id !== "unscheduled"') {{option.label}} ({{plans[option.id].length}})

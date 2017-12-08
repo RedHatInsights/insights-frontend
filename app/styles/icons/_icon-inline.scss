@@ -1,16 +1,25 @@
-div.icon-inline {
+.icon-inline {
   display: flex;
 }
 
 .icon-inline {
   display: inline-flex;
-  align-items: flex-start;
+  align-items: baseline;
+  @include font-size(14px);
 
   > * + * { margin-left: $global-padding/2; }
 
-  .alert-text { @include rem('margin-top', -4px); }
+  .alert-text { 
+    @include font-size(14px);
+    @include rem('margin-top', -4px); 
+  }
   
   i.fa { line-height: 1.4; }
+
+  .icon-risk-of-change { 
+    align-self: center; 
+    margin-bottom: 4px;
+  }
 
   .icon,
   .text {

@@ -16,11 +16,16 @@ function ansibleIconCtrl($scope, gettextCatalog) {
         if (value) {
             if ($scope.white) {
                 $scope.icon = 'static/images/l_ansible-white.svg';
+                $scope.svgClass = 'white';
             } else {
                 $scope.icon = 'static/images/l_ansible-blue.svg';
+                $scope.svgClass = 'supported';
+                $scope.supportText = "Ansible supported";
             }
         } else {
             $scope.icon = 'static/images/l_ansible-unsupported.svg';
+            $scope.svgClass = 'unsupported';
+            $scope.supportText = "Ansible unsupported";
         }
 
         if ($scope.showTooltip || $scope.showTooltip === undefined) {
@@ -36,7 +41,6 @@ function ansibleIconCtrl($scope, gettextCatalog) {
     });
 
     $scope.supportText = ($scope.positive) ? 'Ansible unsupported' : 'Ansible supported';
-    $scope.svgClass = ($scope.white) ? 'ansible-icon-white' : 'ansible-icon';
 }
 
 function ansibleIcon() {
