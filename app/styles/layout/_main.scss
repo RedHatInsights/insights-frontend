@@ -1,7 +1,8 @@
-.platform-grid > main {
+.platform-grid main {
   background: #fff;
-  display: flex;
-  flex-flow: column;
+  flex: 1 1 100vh;
+  // display: flex;
+  // flex-flow: column;
 
   .actionbar {
     margin-top: auto;
