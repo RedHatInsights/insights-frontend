@@ -12,7 +12,10 @@ function AppCtrl($scope, $rootScope, User, PermissionService) {
     });
 
     $scope.stateCheck = function () {
-        if ($scope.state.is("app.actions") || $scope.state.is("app.inventory") || $scope.state.is("app.actions-rule") || $scope.state.is("app.topic")) {
+        if ($scope.state.is('app.actions') ||
+        $scope.state.is('app.inventory') ||
+        $scope.state.is('app.actions-rule') ||
+        $scope.state.is('app.topic')) {
             return true;
         } else {
             return false;
