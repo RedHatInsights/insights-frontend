@@ -44,17 +44,24 @@ section
                       span and&nbsp; 
                       strong 4 groups
                     .silence-button
-                      button.btn.btn-sm.btn-primary 
-                        i.fa.fa-microphone-slash
-                        span Silence rule
-                        i.fa.fa-caret-down
-
-                  // This is the broken, example dropdown
-                  md-menu(md-offset="0 34")
-                    md-button.md-raised.button-dropdown#dropdownLabel(ng-click='$mdMenu.open()') 
-                      strong(translate) Dropdown label
-                      span.caret.dropdown-caret(aria-hidden="true")
-                    md-menu-content(aria-labelledby="dropdownLabel")
+                      md-menu(md-offset="0 34")
+                        button.btn.btn-sm.btn-primary.button-dropdown#dropdownLabel(ng-click='$mdMenu.open()') 
+                          i.fa.fa-microphone-slash
+                          span Silence rule
+                          i.fa.fa-caret-down
+                        md-menu-content(aria-labelledby="dropdownLabel")
+                          .group1
+                            md-menu-item 
+                              md-button Globally
+                            md-menu-item 
+                              md-button(ng-click="show2 = true") for current group&nbsp;
+                                strong Ansible
+                          .group2(ng-show="show2")
+                            md-menu-item 
+                              md-button Globally
+                            md-menu-item 
+                              md-button(ng-click="showtest = true") for current group&nbsp;
+                                strong Ansible
 
                   .row
                     .col-sm-6
