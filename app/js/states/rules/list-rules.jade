@@ -36,10 +36,29 @@ section
                     // i.fa.fa-link.permalink
 
                 .content.ng-animate-enabled
+                  .silencing-wrapper
+                    .silence-info
+                      span This rule is silenced on 
+                      .pipe | 
+                      strong 250 Systems&nbsp;
+                      span and&nbsp; 
+                      strong 4 groups
+                    .silence-button
+                      button.btn.btn-sm.btn-primary 
+                        i.fa.fa-microphone-slash
+                        span Silence rule
+                        i.fa.fa-caret-down
+
+                  // This is the broken, example dropdown
+                  md-menu(md-offset="0 34", md-position-mode="target-right target")
+                    md-button.md-raised.button-dropdown#dropdownLabel(ng-click='$mdMenu.open()') 
+                      strong(translate) Dropdown label
+                      span.caret.dropdown-caret(aria-hidden="true")
+                    md-menu-content(aria-labelledby="dropdownLabel")
+
                   .row
                     .col-sm-6
                       rule-toggle(rule="rule")
-
                     .col-sm-6.text-right
                       a(ng-if='rule.article', href='{{rule.article}}', translate, target='_blank') Knowledgebase
                   .row.row-short

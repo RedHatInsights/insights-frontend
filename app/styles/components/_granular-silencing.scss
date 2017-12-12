@@ -1,0 +1,21 @@
+.silencing-wrapper{
+  display: flex;
+  justify-content: space-between;
+  @include rem('margin-bottom', $global-padding);
+}
+
+.silence-info{
+  display: inline-flex;
+  background: $gray-light;
+  @include rem('padding', 6px 15px);
+
+  .pipe{ 
+    display: inline;
+    @include rem('margin', 0px 5px);
+  }
+}
+
+.silence-button{
+  display: inline-flex;
+  span {@include rem('padding', 0px 5px);}
+}
