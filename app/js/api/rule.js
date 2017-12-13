@@ -114,6 +114,30 @@ function Rule(
             return $http.get(uri.toString()).success(function (result) {
                 result.resources.forEach(DataUtils.readRule);
             });
+        },
+
+        silenceSystems (rule_id, systems) {
+            let uri = URI(root);
+            let body = {
+                system_acks: systems
+            };
+
+            uri.segment('rules');
+            uri.segment(rule_id);
+            uri.addSearch(AccountService.queryParam());
+            return $http.put(uri.toString(), body);
+        },
+
+        silenceGroups (rule_id, groups) {
+            let uri = URI(root);
+            let body = {
+                group_acks: groups
+            };
+
+            uri.segment('rules');
+            uri.segment(rule_id);
+            uri.addSearch(AccountService.queryParam());
+            return $http.put(uri.toString(), body);
         }
     };
 }

@@ -17,7 +17,10 @@ function ActionsRuleCtrl(
         $stateParams,
         $timeout,
         ActionsBreadcrumbs,
+        ActionbarService,
+        Export,
         FilterService,
+        Group,
         IncidentsService,
         InsightsConfig,
         InventoryService,
@@ -27,15 +30,13 @@ function ActionsRuleCtrl(
         PreferenceService,
         QuickFilters,
         Report,
+        Rule,
         RhaTelemetryActionsService,
         System,
         SystemsService,
         Topic,
         User,
-        Utils,
-        ActionbarService,
-        Export,
-        Group) {
+        Utils) {
 
     const REVERSE_TO_DIRECTION = {
         false: 'ASC',
@@ -362,6 +363,15 @@ function ActionsRuleCtrl(
         } else {
             return $scope.checkboxes.totalChecked;
         }
+    };
+
+    $scope.silenceRules = function () {
+        let systems = systemsToAction();
+        if (!systems.length) {
+            return;
+        }
+
+        Rule.silenceSystems($stateParams.rule, systems.map(system => system.system_id));
     };
 
     $scope.isIncident = IncidentsService.isIncident;

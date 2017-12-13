@@ -47,6 +47,9 @@
                 ansible-icon.inline-left(
                   value='plans.future.length || plans.unscheduled.length',
                   show-tooltip='false')
+            li
+              a(ng-click='silenceRules()', translate) Ignore these systems
+
       .col-xs-8.col-sm-8.text-center
         span(ng-if='!loadingSystems')
           h3.system-count(translate, translate-n='{{totalRuleSystems}}', translate-plural='{{$count}} Impacted Systems', ng-if='ruleDetails.type !== "osp"') 1 Impacted System
