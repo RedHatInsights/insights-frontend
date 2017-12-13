@@ -1,0 +1,3 @@
+npm install --save-dev chromedriver nightwatch
+./node_modules/chromedriver/bin/chromedriver
+./node_modules/nightwatch/bin/nightwatch smoketest/insightsTest.js

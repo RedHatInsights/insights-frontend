@@ -57,3 +57,7 @@ Session.vim
 .bundle
 
 .browserify-cache.json
+
+# smoketest stuff
+smoketest/env.sh
+reports/
