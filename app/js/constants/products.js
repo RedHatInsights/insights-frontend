@@ -18,26 +18,26 @@ constantsModule.constant('Products', {
         }
     },
     rhev: {
-        shortName: 'RHEV',
-        fullName: 'Red Hat Enterprise Virtualization',
+        shortName: 'RHV',
+        fullName: 'Red Hat Virtualization',
         code: 'rhev',
         icon: '',
         roles: {
             cluster: {
                 code: 'cluster',
-                fullName: 'Red Hat Enterprise Virtualization Deployment',
+                fullName: 'Red Hat Virtualization Deployment',
                 shortName: 'Deployment',
                 icon: 'fa-object-group'
             },
             manager: {
                 code: 'manager',
-                fullName: 'Red Hat Enterprise Virtualization Manager',
+                fullName: 'Red Hat Virtualization Manager',
                 shortName: 'Manager',
                 icon: 'fa-building'
             },
             hypervisor: {
                 code: 'hypervisor',
-                fullName: 'Red Hat Enterprise Virtualization Hypervisor',
+                fullName: 'Red Hat Virtualization Hypervisor',
                 shortName: 'Hypervisor',
                 icon: 'fa-server'
             }
