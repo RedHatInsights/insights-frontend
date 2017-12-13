@@ -69,12 +69,11 @@
       strong.hostname(translate, ng-click="sort('toString')") Name &nbsp;
       strong.action-count(translate, ng-click="sort('report_count')") Action Count
 
-    .row.row-short(ng-show='getListType() === listTypes.card && !loadingSystems')
-      .col-sm-12
-        system-card(ng-repeat='system in ruleSystems',
-          system='system',
-          rule='ruleDetails',
-          checkboxes='checkboxes')
+    system-card(ng-repeat='system in ruleSystems',
+      system='system',
+      rule='ruleDetails',
+      checkboxes='checkboxes',
+      ng-show='getListType() === listTypes.card && !loadingSystems')
 
     table(ng-show='getListType() === listTypes.table')
       thead

@@ -3,27 +3,26 @@
     .card-list
       .card-list-item(ng-repeat="plugin in plugins | orderBy: sorter.predicate : sorter.reverse track by plugin.plugin_id")
         rule-group-card(ng-if="plugin.type === 'group'", plugin='plugin')
-        md-card(ng-if="plugin.type === 'rule'", ng-class='{faded: plugin.acked}')
-          md-card-header
-            .md-card-header-title
+        card(ng-if="plugin.type === 'rule'", ng-class='{faded: plugin.acked}')
+          card-header
+            .card-header-title
               i.fa.category-icon.inline-right(ng-class="plugin.rule.category.toLowerCase()")
               span {{ ::plugin.rule.category }} #{'>'} {{ ::plugin.rule.description }}
               .count(translate, translate-n='plugin.hitCount', translate-plural="{{$count}} Systems") 1 System
-            .md-card-header-cta
-              span.label.label-default.inline-right.rule-inactive(ng-if='plugin.acked', translate) INACTIVE
+            .card-header-supporting-info
+              span.label.rule-inactive(ng-if='plugin.acked', translate) INACTIVE
               incident-icon.inline-right(rule-id='plugin.rule.rule_id') &nbsp;
-              ansible-icon(value='plugin.rule.ansible', ng-if='config.isPlannerEnabled')
-          md-card-content
+              ansible-icon(value='plugin.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
+          card-content
             .gray(ng-bind-html='::plugin.rule.summary_html', target-blank='')
-          md-card-footer
-            .row
-              .col-sm-6
-                all-severity-icons(rule='plugin.rule')
-              .col-sm-6.text-right-sm
-                strong(ng-hide='plugin.rule.acked')
-                  a(translate,
-                  ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
-                  ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
+          card-footer
+            .card-footer-title
+              all-severity-icons.inline(rule='plugin.rule')
+            .card-footer-cta
+              strong(ng-hide='plugin.rule.acked')
+                a(translate,
+                ui-sref='app.actions-rule({category: topic.slug ? topic.slug : topic.id, rule: plugin.rule.rule_id})',
+                ng-disabled="plugin.rule.hitCount === 0") View Impacted Systems
 
   .table-view.table-overflow(ng-show='getListType() === listTypes.table && plugins.length > 0')
     table#rha-rules-table

@@ -14,7 +14,7 @@ $card-footer: "md-card-footer";
   h2, 
   h3, 
   h4 {
-    @include font-size(16px, 21px);
+    @include font-size(14px, 17px);
     margin-top: 0;
   }
 }
@@ -29,7 +29,7 @@ $card-footer: "md-card-footer";
   & h3,
   & h4 {
     margin: 0;
-    @include font-size(16px);
+    @include font-size(14px, 1);
     font-weight: 700; 
   }
 }
@@ -37,13 +37,15 @@ $card-footer: "md-card-footer";
 // Card header base
 //==================================================================*/
 #{$card} #{$card-header} {
-  border-bottom: 1px solid $gray-border;
+  position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
   @include rem('padding', $global-padding);
+  border-bottom: 1px solid $gray-border;
+  align-items: center;
 
   & .card-header-title { flex: 1 1 60%; }
+
   & .card-header-supporting-info { 
     flex: 0 1 auto; 
     @include font-size(14px, 1);
@@ -52,17 +54,36 @@ $card-footer: "md-card-footer";
 }
 
 
-// Card content base
+// Expandable card header
 //==================================================================*/
-#{$card-header}.gray { background: $gray-light; }
-#{$card-header} .card-header-cta { @include font-size(14px, 1);}
-
-
 #{$card-header}.card-header-expandable-card {
   display: flex;
+  align-items: normal;
 
   .expandable-toggle { flex: 0 0 auto; }
-  .card-header-content { flex: 1; }
+  .card-header-content { 
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+  }
+}
+
+#{$card} #{$card-header} .card-header-title .ansible-icon { align-self: flex-start; }
+
+
+// Card header components
+//==================================================================*/
+#{$card} #{$card-header} .count {
+  background: $blue;
+  position: absolute;
+  top: -$global-padding;
+  right: $global-padding;
+  color: #fff;
+  @include font-size(12px);
+  line-height: 1;
+  font-weight: 700;
+  @include rem('padding', 6px 12px);
+  border-radius: 12px;
 }
 
 
@@ -87,12 +108,38 @@ $card-footer: "md-card-footer";
 
   i { 
     transition: .2s; 
-    @include font-size(22px, 22px);
+    @include font-size(22px);
+    line-height: .7;
   }
 }
 
 
 #{$card}.expanded .expandable-toggle { i { transform: rotate(90deg); } }
+
+
+// Card content base
+//==================================================================*/
+#{$card-header}.gray { background: $gray-light; }
+#{$card-header} .card-header-cta { @include font-size(14px, 1);}
+
+
+
+// Card footer components
+//==================================================================*/
+#{$card-footer} {
+  & .card-footer-title { flex: 1 1 60%; }
+  & .card-footer-supporting-info { 
+    flex: 0 1 auto; 
+    @include font-size(14px, 1);
+    font-weight: 100;
+  }  
+}
+
+
+.card-list {
+  @include rem('margin-top', $global-margin);
+}
+
 
 
 // Rule card
@@ -117,11 +164,6 @@ $card-footer: "md-card-footer";
   }
 }
 
-
-
-.card-header-expandable .card-header-content {
-
-}
 
 .card-group {
   > header {
@@ -283,7 +325,11 @@ $card-footer: "md-card-footer";
   display: flex;
   @include rem('padding', $global-padding);
 
-  [type="checkbox"] { flex: 0 1 auto; }
+  [type="checkbox"] { 
+    flex: 0 1 auto; 
+    align-self: flex-start;
+  }
+
   .type { flex: 0 20%; }
   .hostname { flex: 1 1 50%; }
 

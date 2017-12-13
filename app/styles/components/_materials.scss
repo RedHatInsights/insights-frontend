@@ -49,6 +49,7 @@ md-menu-item span + i {
 md-icon {
 	min-width: 0;
 	min-height: 0;
+  @include rem('width', 20px);
 	height: auto;
 }
 

@@ -5,7 +5,7 @@
 .icon-inline {
   display: inline-flex;
   align-items: baseline;
-  @include font-size(14px);
+  @include font-size(14px, 1);
 
   > * + * { margin-left: $global-padding/2; }
 
@@ -14,7 +14,7 @@
     @include rem('margin-top', -4px); 
   }
   
-  i.fa { line-height: 1.4; }
+  i.fa { line-height: 1; }
 
   .icon-risk-of-change { 
     align-self: center; 
