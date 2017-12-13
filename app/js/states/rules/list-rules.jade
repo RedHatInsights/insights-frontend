@@ -50,18 +50,35 @@ section
                           span Silence rule
                           i.fa.fa-caret-down
                         md-menu-content(aria-labelledby="dropdownLabel")
-                          .group1
+
+                          // Main Silence Menu
+                          .silence-main(ng-hide="globalSilence || groupSilence")
                             md-menu-item 
-                              md-button Globally
+                              md-button(ng-click="globalSilence = true"  md-prevent-menu-close="md-prevent-menu-close") Globally
                             md-menu-item 
-                              md-button(ng-click="show2 = true") for current group&nbsp;
+                              md-button(ng-click="groupSilence = true"  md-prevent-menu-close="md-prevent-menu-close") for current group&nbsp;
                                 strong Ansible
-                          .group2(ng-show="show2")
+
+                          // Global Silence Menu
+                          .global-silence(ng-show="globalSilence")
+                            md-menu-item
+                              .global-silence-description
+                                | This rule will be silenced globally.
+                                p To re-enable, go to&nbsp;
+                                  b Rules&nbsp;
+                                  | and die
+                            md-divider
+                            md-menu-item
+                              .global-silence-buttons
+                                md-button.btn-sm(ng-click="globalSilence = false") Cancel
+                                md-button.md-primary.btn-sm(ng-click="globalSilence = false") Silence Globally
+
+                          // Group Silence Menu
+                          .group-silence(ng-show="groupSilence")
                             md-menu-item 
-                              md-button Globally
+                              md-button Group 2, 1
                             md-menu-item 
-                              md-button(ng-click="showtest = true") for current group&nbsp;
-                                strong Ansible
+                              md-button Group 2, 2
 
                   .row
                     .col-sm-6
