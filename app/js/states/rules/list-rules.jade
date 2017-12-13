@@ -56,8 +56,7 @@ section
                             md-menu-item 
                               md-button(ng-click="globalSilence = true"  md-prevent-menu-close="md-prevent-menu-close") Globally
                             md-menu-item 
-                              md-button(ng-click="groupSilence = true"  md-prevent-menu-close="md-prevent-menu-close") for current group&nbsp;
-                                strong Ansible
+                              md-button(ng-click="groupSilence = true"  md-prevent-menu-close="md-prevent-menu-close") for group
 
                           // Global Silence Menu
                           .global-silence(ng-show="globalSilence")
@@ -75,10 +74,8 @@ section
 
                           // Group Silence Menu
                           .group-silence(ng-show="groupSilence")
-                            md-menu-item 
-                              md-button Group 2, 1
-                            md-menu-item 
-                              md-button Group 2, 2
+                            md-menu-item(ng-repeat='group in groups | orderBy:"display_name" track by group.id')
+                              md-button(ng-click='silenceGroup(group.id)') {{group.display_name}}
 
                   .row
                     .col-sm-6

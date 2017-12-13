@@ -10,24 +10,28 @@ const findIndex = require('lodash/findIndex');
  */
 function ListRuleCtrl(
         $filter,
+        $location,
         $q,
         $rootScope,
         $scope,
         $state,
-        $location,
         Cluster,
         FilterService,
+        Group,
         IncidentsService,
         InsightsConfig,
         PermalinkService,
         PreferenceService,
         QuickFilters,
-        Utils,
-        Rule) {
+        Rule,
+        Utils) {
 
     FilterService.parseBrowserQueryParams();
     FilterService.setShowFilters(false);
     FilterService.setSearchTerm('');
+
+    Group.init();
+    $scope.groups = Group.groups;
 
     $scope.QuickFilters = QuickFilters;
 
@@ -156,6 +160,10 @@ function ListRuleCtrl(
     $scope.search = function (model) {
         FilterService.setSearchTerm(model);
         FilterService.doFilter();
+    };
+
+    $scope.silenceGroup = function (groupId) {
+        Rule.silenceGroups([groupId]);
     };
 
     if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
