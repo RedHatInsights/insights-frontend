@@ -1,34 +1,34 @@
-//- account-select
 //- md-sidenav(md-component-id="sidenav")
 //- md-sidenav.md-sidenav-left(md-component-id="left", md-disable-backdrop md-whiteframe="4")
 md-sidenav.primary-nav(md-component-id="left")
   nav(role="navigation", aria-label="Primary Navigation", a="true")
+    account-select
     ul
       li
-        a(ui-sref='app.overview', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()") 
+        a(ui-sref='app.overview', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
           i.fa.fa-tachometer
           span.text(translate) Overview
       li
-        a(ui-sref='app.actions', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()") 
+        a(ui-sref='app.actions', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
           i.fa.fa-file-text
           span.text(translate) Actions
       li
-        a(ui-sref='app.inventory', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()") 
+        a(ui-sref='app.inventory', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
           i.fa.fa-database
           span.text(translate) Inventory
       li(ng-if='config.isPlannerEnabled')
-        a(ui-sref='app.maintenance', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()") 
+        a(ui-sref='app.maintenance', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
           i.fa.fa-wrench
           span.text(translate) Planner
       li
-        a(ui-sref='app.rules', ng-class='{current: includes(states.rules, state.current.name)}', md-ink-ripple, ng-click="toggleLeft()") 
+        a(ui-sref='app.rules', ng-class='{current: includes(states.rules, state.current.name)}', md-ink-ripple, ng-click="toggleLeft()")
           i.fa.fa-institution
           span.text(translate) Rules
       li
-        a(ui-sref='app.digests', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()") 
+        a(ui-sref='app.digests', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
           i.fa.fa-bar-chart
           span.text(translate) Executive Report
       li
-        a(ui-sref='app.config', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()") 
+        a(ui-sref='app.config', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
           i.fa.fa-file-text
           span.text(translate) Configuration
