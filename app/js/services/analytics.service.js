@@ -35,41 +35,43 @@ priv.doGoogleAnalytics = function doGoogleAnalytics ($location, User, IgnoreAcco
     });
 };
 
+// jshint ignore: start
+// jscs:disable
+priv.pendoBlob = function () { (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=[];v=['initialize','identify','updateOptions','pageLoad'];for(w=0,x=v.length;w<x;++w)(function(m){o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/f210c485-387f-43ad-4eee-f55bab22507f/pendo.js';z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo') };
+// jscs:enable
+// jshint ignore: end
+
 /**
  * @ngInject
  */
 function AnalyticsService(InsightsConfig, $location, IgnoreAccountList, User) {
+    pub.initPendo = function () {
+        priv.pendoBlob();
+        User.asyncCurrent((user) => {
+            if (typeof window.pendo !== 'undefined') {
+                const pendoConf = {
+                    apiKey: 'f210c485-387f-43ad-4eee-f55bab22507f',
+                    visitor: {
+                        id: user.sso_username,
+                        internal: user.is_internal,
+                        lang: user.locale
+                    },
+                    account: {
+                        id: user.org_id,
+                        account_number: user.account_number
+                    }
+                };
+                window.pendo.initialize(pendoConf);
+            }
+        });
+    };
 
     pub.pageLoad = function pageLoad () {
-        if (InsightsConfig.doPaf && window.chrometwo_require) {
+        if (InsightsConfig.doPaf) {
             // Send location updates to Google Analytics
             priv.doGoogleAnalytics($location, User, IgnoreAccountList);
-
-            window.chrometwo_require(['analytics/main', 'analytics/attributes'],
-                function (paf, attrs) {
-                    paf.init(['omniture']);
-                    attrs.harvest();
-
-                    // if we dont call wipe manually we will
-                    // re-send e33 and e34s in some cases
-                    paf.wipe('LabsBegin');
-                    paf.wipe('InsightsBegin');
-                    paf.wipe('LabsCompletion');
-                    paf.wipe('InsightsCompletion');
-                    paf.report();
-                });
         }
     };
-
-    pub.triggerEvent = function triggerEvent (eventName) {
-        if (InsightsConfig.doPaf && window.chrometwo_require) {
-            window.chrometwo_require(['analytics/main'], function (analytics) {
-                analytics.trigger(eventName);
-            });
-        }
-    };
-
-    // if test set pub.priv = priv
 
     return pub;
 }

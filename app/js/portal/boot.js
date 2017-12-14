@@ -48,15 +48,10 @@ function OnRun(
     });
 
     $rootScope.$on('$stateChangeSuccess', function (event, next, nextParams, from) {
-        if (next && next.triggerComplete) {
-            AnalyticsService.triggerEvent('InsightsCompletion');
-        }
-
         TitleService.set(next.title);
         stateScroll(from, next);
     });
 
-    AnalyticsService.triggerEvent('InsightsBegin');
     if (!InsightsConfig.authenticate) {
         return;
     }
@@ -114,6 +109,8 @@ function OnRun(
     Jwt.onInit(() => {
         if (!Jwt.isAuthenticated()) {
             Jwt.login();
+        } else {
+            AnalyticsService.initPendo();
         }
     });
 }
