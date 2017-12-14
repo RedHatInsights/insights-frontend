@@ -1,9 +1,9 @@
 .cell.insights-logo
   button.toggle-fullscreen(ng-click='sidenavCollapsed = !sidenavCollapsed')
     md-icon(md-font-icon="fa fa-indent")
-  
-  md-button(ng-click="toggleLeft()", 
-    class="md-primary", 
+
+  md-button(ng-click="toggleLeft()",
+    class="md-primary",
     hide-gt-xs)
     md-icon(md-font-icon="fa fa-navicon")
 
@@ -14,13 +14,16 @@
 .cell.global-filters(ng-class='{disabled: disabled}', ng-if='isGroupsEnabled')
   group-select(disabled='disabled')
 
+.cell.leave-feedback
+  feedback-button.btn-feedback
+
 .cell.topbar-utilities
   menu.notifications
     bullhorn(icon='fa-bullhorn', type='announcements')
     alerts(icon='fa-bell', type='alerts')
   span.sep
   md-menu(md-offset="0 34", md-position-mode="target-right target")
-    md-button.button-dropdown#help(ng-click='$mdMenu.open()') 
+    md-button.button-dropdown#help(ng-click='$mdMenu.open()')
       strong(translate) Help
       span.caret.dropdown-caret(aria-hidden="true")
     md-menu-content(aria-labelledby="help")
@@ -38,4 +41,3 @@
         demo-account-switcher
 
   beta-switch-button
-
