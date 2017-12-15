@@ -1,16 +1,13 @@
 .updatable(ng-class='{updating: table.loader.loading}')
   .spinner.spinner-lg(ng-show='table.loader.loading')
-  table.table.nomar.ng-table.maintenance-table
+  table
     thead
       tr
         th.text-center(ng-show='edit')
           input.select-all(ng-model="checkboxes.checked", type="checkbox", ng-indeterminate="checkboxes.indeterminate", ng-change='checkboxChecked()')
-        th.sortable(ng-class="table.sorter.getSortClass('display')", ng-click="table.sorter.sort('display')")
-          .sort-indicator(translate) Action
-        th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.severityNum')", ng-click="table.sorter.sort('rule.severityNum')")
-          .sort-indicator(translate) Total Risk
-        th.sortable.text-center(ng-class="table.sorter.getSortClass('done')", ng-click="table.sorter.sort('done')")
-          .sort-indicator(translate) Status
+        th.sortable(ng-class="table.sorter.getSortClass('display')", ng-click="table.sorter.sort('display')", translate) Action
+        th.sortable.fit-content.min(ng-class="table.sorter.getSortClass('rule.severityNum')", ng-click="table.sorter.sort('rule.severityNum')", translate) Total Risk
+        th.sortable.min(ng-class="table.sorter.getSortClass('done')", ng-click="table.sorter.sort('done')", translate) Status
       tr(ng-show='edit')
         th.filter(colspan='4')
           input.form-control.nomar-left.input-sm(type='text', placeholder='Filter by rule name', ng-model="table.filter.display", ng-change='table.doFilter()')
@@ -20,7 +17,7 @@
         ng-mousedown="checkboxRowClick($event, action.id)")
         td.text-center(ng-show='edit')
           input(ng-model='checkboxes.items[action.id]', type="checkbox")
-        td.overflow(ng-class='{"icon-inline": action._type === 2}')
+        td(ng-class='{"icon-inline": action._type === 2}')
           i.icon.fa.fa-exclamation-circle(ng-if='action._type === 2', tooltip="{{'This action is already part of another plan' | translate}}")
           a.text.action(ng-click='table.showSystemModal(table.params.item, action.rule)') {{action.display}}
         td.text-center

@@ -18,6 +18,8 @@
             ng-click='silence()',
             ng-if='plan.overdue && !plan.silenced',
             tooltip="{{'Snooze this plan' | translate}}")
+
+        // Overdue plans
         .details(ng-if="!editBasic.active && (!plan.suggestion || plan.suggestion === 'accepted')")
           .header-title.editable
             span(ng-if="plan.overdue")
@@ -52,6 +54,8 @@
                 end='plan.end',
                 timezone="'UTC'"
                 ng-dblclick='editBasic.toggle()')
+        
+        // Overdue, actively editing 
         .details-edit.pull-left(ng-if='editBasic.active')
           form.editable-form(novalidate, name="editBasicForm", ng-submit="editBasic.save()")
             .form-group(ng-if="plan.suggestion === 'proposed' && isInternal")
@@ -116,6 +120,7 @@
                   type='submit',
                   ng-disabled="editBasicForm.$invalid",
                   translate) Save
+        
         .details-suggested.editable(ng-if="!editBasic.active && (plan.suggestion === 'proposed' || plan.suggestion === 'rejected')")
           p.description
             span(ng-if='plan.hidden && isInternal')
@@ -142,7 +147,7 @@
 
       // Edit mode
       .content.content-tabs.nobordertop.active(ng-if='edit.isActive(plan.maintenance_id)')
-        tabset.nav.nav-justified(
+        tabset(
           type="noformat",
           vertical="false",
           justified="true",
@@ -150,24 +155,25 @@
 
           // Actions Tab
           tab(role="tabpanel", heading="{{'Actions' | translate}}", deselect='addRule.reset()', select='tabSelected()')
-            .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', 'rule_id', '-actions.length'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
-              .header.bordered(ng-init='tableEdit = false')
-                .title
-                  ansible-icon.inline-right(value='rule.ansible' show-planner-line='false' hide-label="true")
-                  strong {{rule.description}}
-                  span.pull-right(ng-hide='isReadOnly()')
-                    a(ng-hide='tableEdit', ng-click='tableEdit = true')
-                      strong(
-                        translate,
-                        tooltip="{{'Click to add/remove affected systems' | translate}}") Edit
-                    i.fa.fa-trash-o(
-                      ng-if='tableEdit',
-                      ng-click='removeActions(rule.actions)',
-                      tooltip="{{'Remove this action' | translate}}")
-                .row.row-short
-                  .col-sm-12
-                    all-severity-icons(rule='rule', ng-if='!loading')
-              .content.nopad.table-responsive
+            .rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', 'rule_id', '-actions.length'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
+              .maintenance-table
+                .header.gray(ng-init='tableEdit = false')
+                  .title.icon-inline  
+                    ansible-icon(value='rule.ansible' show-planner-line='false' hide-label="true")
+                    strong {{rule.description}}
+                    span.pull-right(ng-hide='isReadOnly()')
+                      a(ng-hide='tableEdit', ng-click='tableEdit = true')
+                        strong(
+                          translate,
+                          tooltip="{{'Click to add/remove affected systems' | translate}}") Edit
+                      i.fa.fa-trash-o(
+                        ng-if='tableEdit',
+                        ng-click='removeActions(rule.actions)',
+                        tooltip="{{'Remove this action' | translate}}")
+                  .row.row-short
+                    .col-sm-12
+                      all-severity-icons.inline(rule='rule', ng-if='!loading')
+                
                 maintenance-table-systems(
                   params='tableParams(rule, true, false)',
                   edit='tableEdit',
@@ -182,30 +188,30 @@
 
           // Systems Tab
           tab(role="tabpanel", heading="{{'Systems' | translate}}", deselect='addSystem.reset()', select='tabSelected("systems")')
-            .content-block.system(
+            .system(
               ng-repeat="system in (plan.systems | orderBy:['_name', 'system_id'] | offset:pager.offset | limitTo:pager.perPage) track by system.system_id")
-              .header.bordered
-                type-icon(
-                type-id='system.system_type_id',
-                include-text='false')
-                a(ng-click='showSystemModal(system)')
-                  strong &nbsp; {{system._name}} &nbsp;&nbsp;
-                span.item
-                  strong(translate) Last check in:
-                  span(ng-class='system | checkInStyle') &nbsp;&nbsp;{{system.last_check_in | timeAgo}}
-                span.pull-right(ng-hide='isReadOnly()')
-                  a(ng-hide='tableEdit', ng-click='tableEdit = true')
-                    strong(
-                      translate,
-                      tooltip="{{'Click to add/remove actions for this system' | translate}}") Edit
-                  i.fa.fa-trash-o(
-                    ng-if='tableEdit',
-                    ng-click='removeActions(system.actions)',
-                    tooltip="{{'Remove this system' | translate}}")
-                .text-center.red.hidden
-                  strong System restart required&nbsp;&nbsp;
-                  i.fa.fa-refresh
-              .content.nopad.table-responsive
+             .maintenance-table
+                .header.gray
+                  type-icon(
+                  type-id='system.system_type_id',
+                  include-text='false')
+                  a(ng-click='showSystemModal(system)')
+                    strong &nbsp; {{system._name}} &nbsp;&nbsp;
+                  span.item
+                    strong(translate) Last check in:
+                    span(ng-class='system | checkInStyle') &nbsp;&nbsp;{{system.last_check_in | timeAgo}}
+                  span.pull-right(ng-hide='isReadOnly()')
+                    a(ng-hide='tableEdit', ng-click='tableEdit = true')
+                      strong(
+                        translate,
+                        tooltip="{{'Click to add/remove actions for this system' | translate}}") Edit
+                    i.fa.fa-trash-o(
+                      ng-if='tableEdit',
+                      ng-click='removeActions(system.actions)',
+                      tooltip="{{'Remove this system' | translate}}")
+                  .text-center.red.hidden
+                    strong System restart required&nbsp;&nbsp;
+                    i.fa.fa-refresh
                 maintenance-table-actions(
                   params='tableParams(system, false, false)',
                   edit='tableEdit',
@@ -225,24 +231,26 @@
             ng-init='setupTabActivator($parent)',
             select='tabSelected("playbook"); prepareAnsibleTab()')
             tab-heading
-              ansible-icon.inline-right(value='ansibleSupport', show-tooltip='false', white='true')
-              strong(translate) Playbook
+              .icon-inline
+                ansible-icon(value='ansibleSupport', hide-label='true', show-tooltip='false', white='true')
+                strong(translate) Playbook
             .spinner(ng-show='playbookTabLoader.loading')
             .playbooks(ng-hide='playbookTabLoader.loading')
               card.playbook(ng-repeat='play in plays')
                 card-header.gray
                   a(ui-sref='app.actions-rule({category: play.rule.category.toLowerCase(), rule: play.rule.rule_id})')
                     b {{ play.rule.description }}
-                card-content.two-columns
-                  .systems
+                card-content.flex
+                  .systems(sm-flex-50)
                     h4.section-title(translate) Systems:
                     expandable-system-list(systems='play.systems')
 
-                  .resolution
+                  .resolution(sm-flex-50)
                     h4.section-title(translate) Resolution:
                     p {{ play.ansible_resolutions[0].description }} &nbsp;
                       a(ng-if='play.ansible_resolutions.length > 1', ng-click='resolutionModal(play)', tooltip='{{"Multiple resolutions available. Click here to select a different one." | translate}}')
                         span(translate) - edit ({{play.ansible_resolutions.length}} options)
+                    br 
                     ul.list-plain
                       li(ng-if='play.ansible_resolutions[0].needs_reboot')
                         .icon-inline.red
@@ -251,21 +259,22 @@
                       li(ng-if='play.ansible_resolutions[0].resolution_risk')
                         risk-of-change(change-risk='play.ansible_resolutions[0].resolution_risk')                      
 
-              card.playbook.playbook-summary
-                card-header.gray
-                  strong.red(translate) System reboot summary
+              card.playbook.playbook-summary.flex
 
                 card-content.gray(ng-if='!systemsToReboot.length')
-                  .cell
-                    p(translate) This playbook&nbsp;
-                      b.text-success(translate) does not require a system reboot.
+                  strong.red(translate) System reboot summary
+                  br
+                  p(translate) This playbook&nbsp;
+                    b.text-success(translate) does not require a system reboot.
 
                 card-content.gray.flex(ng-if='systemsToReboot.length')
-                  .systems
+                  strong.red(translate) System reboot summary
+
+                  .systems(sm-flex-50)
                     h4.section-title(translate) Systems:
                     expandable-system-list(systems='systemsToReboot')
 
-                  .resolution
+                  .resolution(sm-flex-50)
                     .toggle.push-bottom-narrow(ng-click="plan.allow_reboot = !plan.allow_reboot; allowRebootChanged()")
                       input(type="checkbox", ng-checked='plan.allow_reboot')
                       b(translate) Reboot systems automatically
@@ -278,26 +287,26 @@
                         | The systems will need to be rebooted manually.
 
       footer.footer(ng-show='edit.isActive(plan.maintenance_id)')
-        a.btn.btn-sm.btn-default(ng-if='isInternal && !plan.hidden', ng-click='hidden(true)')
+        a.btn.btn-default(ng-if='isInternal && !plan.hidden', ng-click='hidden(true)')
           i.fa.fa-eye-slash.inline-right
           span(translate) Hide
-        a.btn.btn-sm.btn-default(ng-if='isInternal && plan.hidden', ng-click='hidden(false)')
+        a.btn.btn-default(ng-if='isInternal && plan.hidden', ng-click='hidden(false)')
           i.fa.fa-eye.inline-right
           span(translate) Publish
-        a.btn.btn-sm.btn-accent(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='accept()')
+        a.btn.btn-accent(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='accept()')
           i.fa.fa-check.inline-right
           span(translate) Accept
-        a.btn.btn-sm.btn-default(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='reject()')
+        a.btn.btn-default(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='reject()')
           i.fa.fa-close.inline-right
           span(translate) Ignore
-        a.btn.btn-sm.btn-accent.pull-right(
+        a.btn.btn-accent.pull-right(
           ng-click='addActions()',
           ng-if='!isReadOnly()')
           span(translate) Add actions
-        a.btn.btn-sm.btn-open-blue.action.pull-right(translate, ng-click='exportPlan(plan.maintenance_id)')
+        a.btn.btn-open-blue.action.pull-right(translate, ng-click='exportPlan(plan.maintenance_id)')
           i.fa.fa-download.inline-right
           span(translate) Export CSV
-        a.btn.btn-sm.btn-open-blue.action.pull-right(
+        a.btn.btn-open-blue.action.pull-right(
             translate,
             ng-click='downloadPlaybook()',
             ng-disabled='!ansibleSupport')

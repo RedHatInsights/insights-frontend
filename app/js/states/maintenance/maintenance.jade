@@ -1,4 +1,4 @@
-.maintenance-page
+.page-maintenance
   page-header(title="Maintenance Planner", icon="fa-wrench", ng-class="{'inactive': !expandBar, 'active': expandBar}", ng-transclude)
     .create-plan-actions.text-right.pull-right
       a.create-plan(ng-click='MaintenanceService.showMaintenanceModal()')
@@ -26,7 +26,7 @@
       div(ng-if='!loading')
         .row(ng-if="!plans[category].length")
           .text-center
-            h4(translate) No plans
+            h4.section-title(translate) No plans
 
         plan-list(ng-if="category === 'unscheduled'", plans='plans.unscheduled | searchMaintenancePlans: searchTerm', page-size='8')
         plan-list(ng-if="category === 'suggested'", plans='plans.suggested | searchMaintenancePlans: searchTerm', page-size='8')
@@ -34,11 +34,11 @@
         plan-list(ng-if="category === 'future'", plans='plans.future | searchMaintenancePlans: searchTerm', group='true', page-size='6')
 
         span(ng-if="category === 'all'")
-          h2(translate, ng-if='plans.suggested.length') Suggested Plans
+          h2.section-title(translate, ng-if='plans.suggested.length') Suggested Plans
           plan-list(plans='plans.suggested | searchMaintenancePlans: searchTerm', page-size='2')
 
-          h2(translate, ng-if='plans.unscheduled.length') Plans
+          h2.section-title(translate, ng-if='plans.unscheduled.length') Plans
           plan-list(plans='plans.unscheduled | searchMaintenancePlans: searchTerm', page-size='6')
 
-          h2(translate, ng-if='plans.scheduled.length') Scheduled Plans
+          h2.section-title(translate, ng-if='plans.scheduled.length') Scheduled Plans
           plan-list(plans='plans.scheduled | searchMaintenancePlans: searchTerm', group='true', page-size='4')

@@ -6,6 +6,14 @@ $maintenance-button-bg: #0095DB;
 $expand-bar-bg: #f2f5f7;
 $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
+.system + .system {
+  @include rem('margin-top', $global-margin);
+}
+
+.playbooks .card + .card {
+  @include rem('margin-top', $global-margin);
+}
+
 .playbook-settings-table {
 	tbody, tr {
 		background: white !important;
@@ -241,12 +249,8 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 	@include media-query(sm) { @include rem('margin', 0 0 $global-margin); }
 
-	.header, .content {
-		@include rem('padding', $global-padding $maintenance-plan-padding);
-	}
-
 	> .header {
-		border-bottom: 1px solid $maintenance-plan-border-color;
+		
 
 		h2.title {
 			display: inline-block;

@@ -1,4 +1,4 @@
-.digests-page
+.page-executive-reports
   page-header(title="Executive Report", icon="fa-bar-chart", ng-class="{'inactive': !expandBar, 'active': expandBar}", ng-transclude)
     md-button.md-primary.pull-right(
       ng-click='downloadPdf()',
@@ -26,8 +26,8 @@
     h1(translate) Your initial executive report is currently processing - this may take some time.
     h2(translate) Please check back later.
 
-  section.content.content-executive-reports(ng-show='!loading && systemsTilTen < 1')
-    card.widget.widget-score
+  section.content.content-report(ng-show='!loading && systemsTilTen < 1')
+    card.card-accent.widget.widget-score
       card-header.gray
         .card-header-title(translate) Overall score
       card-content
@@ -45,7 +45,7 @@
             span.num.floor 250
             span.num.ceiling 850
 
-    card.widget.widget-weekly-actions
+    card.card-accent.widget.widget-weekly-actions
       card-header.gray
         .card-header-title(translate) Weekly action count by category
       card-content.flex

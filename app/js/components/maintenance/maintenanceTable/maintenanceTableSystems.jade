@@ -1,15 +1,13 @@
 .updatable(ng-class='{updating: table.loader.loading}')
   .spinner.spinner-lg(ng-show='table.loader.loading')
-  table.ng-table.maintenance-table
+  table
     thead
       tr
-        th.text-center(width="6%", ng-show='edit')
+        th.text-center.min(ng-show='edit')
           input.select-all(ng-model="checkboxes.checked", type="checkbox", ng-indeterminate="checkboxes.indeterminate", ng-change='checkboxChecked()')
         th.sortable(ng-class="table.sorter.getSortClass('display')", ng-click="table.sorter.sort('display')", translate) System
-        th.sortable(width="20%", ng-class="table.sorter.getSortClass('system.last_check_in')", ng-click="table.sorter.sort('system.last_check_in')")
-          .sort-indicator(translate) Last check in
-        th.sortable.text-center(width="12%", ng-class="table.sorter.getSortClass('done')", ng-click="table.sorter.sort('done')")
-          .sort-indicator.overflow(translate) Status
+        th.sortable(ng-class="table.sorter.getSortClass('system.last_check_in')", ng-click="table.sorter.sort('system.last_check_in')", translate) Last check in
+        th.sortable(ng-class="table.sorter.getSortClass('done')", ng-click="table.sorter.sort('done')", translate)  Status
       tr(ng-show='edit')
         th.filter(colspan='4')
           input.form-control.nomar-left.input-sm(type='text', placeholder='Filter by system name', ng-model="table.filter.display", ng-change='table.doFilter()')
@@ -19,7 +17,7 @@
         ng-mousedown="checkboxRowClick($event, action.id)")
         td.text-center(ng-show='edit')
           input(ng-model='checkboxes.items[action.id]', type="checkbox")
-        td.overflow
+        td
           type-icon(type-id='action.systemTypeIconId', ng-if='action.systemTypeIconId', include-text='false')
           i.fa.fa-exclamation-circle(ng-if='action._type === 2', tooltip="{{'This action is already part of another plan' | translate}}") 
           a.hostname.with-icon(ng-click='table.showSystemModal(action.system, table.params.item)')

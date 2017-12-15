@@ -40,7 +40,7 @@ $maintenance-plan-border-color: #dedede;
 
 	// Header
 	//==================================================================*/
-	.tab-content .header {
+	.tab-content > .header {
 		border: 1px solid $maintenance-plan-border-color;
 	}
 
@@ -48,8 +48,6 @@ $maintenance-plan-border-color: #dedede;
 	.header {
 		position: relative;
 		@include rem('padding', $global-padding);
-		@include rem('padding-top', 20px);
-		padding-bottom: 0;
 
 		&.gray { @include rem('padding-bottom', $global-padding); }
 

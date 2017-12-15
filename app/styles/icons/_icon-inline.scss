@@ -12,6 +12,7 @@ div.icon-inline {
   .alert-text { 
     @include font-size(14px);
     @include rem('margin-top', -4px);
+    white-space: pre;
   }
   
   i.fa { line-height: 1.4; }

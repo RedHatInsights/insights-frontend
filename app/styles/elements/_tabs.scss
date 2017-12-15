@@ -13,18 +13,23 @@
 
 	.nav {	
 		padding: 0;
-		background: #f2f5f7;
+		display: flex;
+		align-items: center;
 	}
+
+	.nav .icon-inline { align-items: center; }
 
 	// nav tabs
 	.nav > li {
-		width: 1%;
-		display: table-cell;
-		background: #f2f5f7;
+		display: flex;
+		flex: 1;
+		width: auto;
+		background: #fff;
 		border: none;
 		border-left: none;
 		border-bottom: none;
 		border-right: 1px solid #dedede;
+		border-top: 1px solid #dedede;
 
 		&:not(.active) {
 			background: #fafafa;
@@ -46,20 +51,20 @@
 		&:first-child { border-left: none; }
 
 		a {
+			width: 100%;
 			background: none;
 			color: $gray-dark;
 			font-weight: 700;
-			@include rem('padding', 10px 0 10px $global-padding);
+			@include rem('padding', $global-padding);
 			text-align: left;
 
 			@include media-query(sm) {
 				text-align: center;
-				@include rem('padding', 12px 0);
+				@include rem('padding', $global-padding);
 			}
 
 			@include media-query(md) {
-				@include rem('padding', 10px 0 10px $global-padding);
-				text-align: left;
+					text-align: left;
 			}
 
 			&:hover { background: none; }

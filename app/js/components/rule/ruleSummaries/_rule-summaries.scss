@@ -1,3 +1,4 @@
 .rule-summary + .rule-summary {
+  display: block;
   @include rem('margin-top', $global-margin);
 }

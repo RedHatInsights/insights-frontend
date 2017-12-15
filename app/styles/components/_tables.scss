@@ -1,3 +1,5 @@
+$maintenance-plan-border-color: #dedede;
+
 table {
   width: 100%;
   border: none;
@@ -45,6 +47,22 @@ table tbody {
   tr.stale:nth-child(odd) { background: #fbf2f2; }
 }
 
+
+.maintenance-table {
+  border: 1px solid $maintenance-plan-border-color;
+
+  .header, 
+  .content {
+    @include rem('padding', $global-padding);
+  }
+
+  .header {
+    @include rem('padding', 15px);
+    border-bottom: 1px solid #dedede;
+    border-bottom: 1px solid $maintenance-plan-border-color;
+  }
+
+}
 
 .intro {
   font-weight: 300;
