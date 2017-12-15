@@ -22,8 +22,9 @@ function newRulesCtrl($scope, Rule, Utils) {
 function newRules() {
     return {
         templateUrl: 'js/components/overview/widgets/newRules/newRules.html',
-        restrict: 'E',
-        replace: true,
+        restrict: 'EC',
+        transclude: true,
+        replace: false,
         scope: {},
         controller: newRulesCtrl
     };
