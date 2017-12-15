@@ -45,7 +45,7 @@ section
                       strong 4 groups
                     .silence-button
                       md-menu(md-offset="0 34")
-                        button.btn.btn-sm.btn-primary.button-dropdown#dropdownLabel(ng-click='$mdMenu.open(); silenceRule = true; globalSilence = false; groupSilence = false') 
+                        button.btn.btn-sm.btn-primary.button-dropdown#dropdownLabel(ng-click='$mdMenu.open($event); silenceRule = true; globalSilence = false; groupSilence = false') 
                           i.fa.fa-microphone-slash
                           span Silence rule
                           i.fa.fa-caret-down
@@ -73,9 +73,10 @@ section
                                 md-button.md-primary.btn-sm Silence Globally
 
                           // Group Silence Menu
-                          .group-silence(ng-show="groupSilence")
-                            md-menu-item(ng-repeat='group in groups | orderBy:"display_name" track by group.id')
-                              md-button(ng-click='silenceGroup(group.id)') {{group.display_name}}
+                          .group-silence(ng-show="groupSilence", md-prevent-menu-close='md-prevent-menu-close')
+                            group-select
+                            //- md-menu-item(ng-repeat='group in groups | orderBy:"display_name" track by group.id')
+                            //-   md-button(ng-click='silenceGroup(group.id)') {{group.display_name}}
 
                   .row
                     .col-sm-6

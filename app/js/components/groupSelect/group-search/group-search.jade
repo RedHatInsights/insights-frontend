@@ -1,0 +1,15 @@
+ul.dropdown-menu(role="menu")
+  li
+    search-box(
+      on-search='searchGroups(model)',
+      ng-click="$event.stopPropagation();"
+      ng-keyup="keypress($event)",
+      placeholder="{{'Find A Group' | translate}}")
+  li(ng-show="showAllSystems()")
+    a.link(href="javascript:void(0)", ng-click='triggerChange(null)', translate) - Show all systems -
+  li.system-group(ng-repeat='g in groups | filter:hideSelectedGroup | orderBy:"display_name" track by g.id')
+    a.icon-inline-right(href="javascript:void(0)", ng-click='triggerChange(g);')
+      trimmed-text(length="20", text="{{g.display_name}}")
+      | &nbsp;({{g.systems.length}})
+      i.fa.fa-trash-o.group-control(ng-click='deleteGroup(g); $event.stopPropagation();',
+        tooltip="{{'Delete group' | translate}}")

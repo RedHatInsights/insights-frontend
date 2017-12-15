@@ -2,7 +2,6 @@
 
 var componentsModule = require('../');
 var isEmpty = require('lodash/isEmpty');
-const _filter = require('lodash/filter');
 
 /**
  * @ngInject
@@ -18,68 +17,20 @@ function groupSelectCtrl(
     Events,
     Group,
     GroupService) {
+
     Group.init();
     $scope._groups = Group.groups;
     $scope.groups = $scope._groups;
-    $scope.group   = Group.current();
+    $scope.group = Group.current();
     $scope.dropdown = false;
-    $scope.searching = false;
 
     $scope.resetFilter = function () {
         $scope.$broadcast(Events.filters.reset);
     };
 
-    $scope.hideSelectedGroup = function (group) {
-        if ($scope.group &&
-            $scope.group.display_name &&
-            $scope.group.display_name === group.display_name) {
-            return false;
-        }
-
-        return true;
-    };
-
-    $scope.showAllSystems = function () {
-        if ($scope.group && $scope.group.display_name && !$scope.searching) {
-            return true;
-        }
-
-        return false;
-    };
-
-    $scope.searchGroups = function (search) {
-        $scope.searching = true;
-        if (search) {
-            const filter = search.toLowerCase();
-            $scope.groups = _filter($scope._groups, function (group) {
-                return group.display_name.toLowerCase().indexOf(filter) > -1;
-            });
-        } else {
-            $scope.groups = $scope._groups;
-            $scope.searching = false;
-        }
-    };
-
-    $scope.triggerChange = function (group) {
-        Group.setCurrent(group);
-    };
-
-    $rootScope.$on('group:change', function (event, group) {
-        $scope.group = group;
-    });
-
-    $scope.$on('account:change', function () {
-        $scope.triggerChange(null);
-    });
-
     $scope.isGroupSelected = function () {
         return !isEmpty($scope.group);
     };
-
-    $scope.$on(Events.filters.reset, function () {
-        $scope.group = Group.current();
-        $scope.groups = $scope._groups;
-    });
 
     $scope.createGroup = function () {
         GroupService.createGroup().then(function (group) {
@@ -108,19 +59,14 @@ function groupSelectCtrl(
         $scope.dropdown = !$scope.dropdown;
     };
 
-    $scope.keypress = function (event) {
-        if (event.which === 27) {
-            $scope.$broadcast(Events.filters.reset);
+    $scope.$on(Events.filters.reset, function () {
+        $scope.group = Group.current();
+        $scope.groups = $scope._groups;
+    });
 
-            if ($scope.dropdown) {
-                $scope.dropdown = false;
-                angular.element(document.getElementById('global-filter-dropdown'))
-                    .removeClass('open');
-            }
-        }
-    };
-
-    $scope.deleteGroup = GroupService.deleteGroup;
+    $rootScope.$on('group:change', function (event, group) {
+        $scope.group = group;
+    });
 }
 
 function groupSelect() {
@@ -130,7 +76,6 @@ function groupSelect() {
         replace: true,
         controller: groupSelectCtrl,
         scope: {
-            round: '=',
             disabled: '<'
         }
     };
