@@ -1,31 +1,39 @@
-.icon-inline {
+div.icon-inline {
   display: flex;
 }
 
 .icon-inline {
   display: inline-flex;
-  align-items: baseline;
+  align-items: first baseline;
   @include font-size(14px, 1);
 
   > * + * { margin-left: $global-padding/2; }
 
   .alert-text { 
     @include font-size(14px);
-    @include rem('margin-top', -4px); 
+    @include rem('margin-top', -4px);
   }
   
-  i.fa { line-height: 1; }
+  i.fa { line-height: 1.4; }
 
   .icon-risk-of-change { 
     align-self: center; 
     margin-bottom: 4px;
   }
+}
 
-  .icon,
-  .text {
 
+.icon-inline-right {
+  display: flex;
+
+  i { margin-left: auto; }
+
+  table & {
+    @include rem('padding-right', 22px);
+    i { top: 2px; }
   }
 }
+
 
 table .icon-inline {
   display: flex;
@@ -38,8 +46,10 @@ table .icon-inline {
   > .label { flex: 0; }
 }
 
+
 // Set td icon-inline line-height to parent
 td.icon-inline i.fa { line-height: inheret; }
+
 
 a.link.icon-inline-anchor { 
   text-decoration: none;
@@ -50,20 +60,4 @@ a.link.icon-inline-anchor {
   display: inline;
   a.icon i { position: static; }
   a.icon + a.icon { @include rem('padding-left', $global-padding); }
-}
-
-.icon-inline-right {
-  position: relative;
-  @include rem('padding-right', 18px);
-  display: block;
-
-  i {
-    position: absolute;
-    right: 0;
-  }
-
-  table & {
-    @include rem('padding-right', 22px);
-    i { top: 2px; }
-  }
 }

@@ -4,17 +4,15 @@ $topbar-border-color: #ddd;
 
 
 topbar {
-  display: flex;
-  flex-direction: column;
   @include rem('padding', $global-margin);
-  align-items: flex-start;
   background: $topbar-bg;
   border-bottom: 4px solid $topbar-border-color;
 
   @include media-query(sm){
-    // flex-direction: row;
     @include rem('padding', 0 $global-padding 0 0);
-    // justify-content: space-between;
+    display: grid;
+    grid-template-columns: max-content auto max-content max-content;
+    grid-gap: $global-margin;
   }
 }
 

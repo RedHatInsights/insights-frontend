@@ -30,13 +30,13 @@
                   span.desc(translate) {{category.id | titlecase}}
                   span.count &nbsp;({{category.count}})
 
-    card.widget.actions-incident-summary(id="widgetIncidentSummary", ng-if="isBeta")
+    card.card-accent.widget.actions-incident-summary(id="widgetIncidentSummary", ng-if="isBeta")
       card-header.gray
         .card-header-title(translate) Incident summary
       card-content
         incident-summary.incident-summary(incident-count='incidentCount', incident-system-count='incidentSystemCount', rule-hits='stats.rules.total')
     
-    card.widget.actions-risk-summary
+    card.card-accent.widget.actions-risk-summary
       card-header.gray
         .md-card-header-title(translate) Risk summary
       card-content

@@ -142,6 +142,9 @@ table th.sortable:first-child {
     border-top: $sortable_border_width solid $sortable_border_color;
   }
 
+  &.sort-asc::before { display: none; }
+  &.sort-desc::after { display: none; }
+
   &.sortable-active {
     .carets {
 
@@ -162,6 +165,12 @@ table th.sortable:first-child {
       &:before { opacity: 1; }
       &:after { opacity: .2; }
     }
+  }
+
+  &.sort-asc::after,
+  &.sort-desc::before { 
+    opacity: .8;
+    border-top-color: #000; 
   }
 }
 

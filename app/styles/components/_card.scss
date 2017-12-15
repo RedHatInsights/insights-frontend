@@ -34,6 +34,7 @@ $card-footer: "md-card-footer";
   }
 }
 
+
 // Card header base
 //==================================================================*/
 #{$card} #{$card-header} {
@@ -54,6 +55,13 @@ $card-footer: "md-card-footer";
 }
 
 
+// Accented card
+//==================================================================*/
+#{$card}.card-accent {
+  border-top: 2px solid #39a5dc;
+}
+
+
 // Expandable card header
 //==================================================================*/
 #{$card-header}.card-header-expandable-card {
@@ -61,11 +69,14 @@ $card-footer: "md-card-footer";
   align-items: normal;
 
   .expandable-toggle { flex: 0 0 auto; }
+  
   .card-header-content { 
     display: flex;
     flex: 1;
     align-items: stretch;
   }
+
+  .checkbox { @include rem('margin-top', 2px); }
 }
 
 #{$card} #{$card-header} .card-header-title .ansible-icon { align-self: flex-start; }
@@ -90,6 +101,7 @@ $card-footer: "md-card-footer";
 #{$card-header}.card-header-expandable-card .card-header-title {
   display: flex;
   justify-content: space-between;
+  align-items: first baseline;
 
   .title { flex: 1 60%; }
   
@@ -102,14 +114,15 @@ $card-footer: "md-card-footer";
 
 #{$card} .expandable-toggle {
   @include rem('padding-right', $global-padding);
+  @include rem('margin-top', 4px);
   border: none;
   box-shadow: none;
   background: none;
 
   i { 
     transition: .2s; 
-    @include font-size(22px);
-    line-height: .7;
+    @include font-size(14px);
+    line-height: 1;
   }
 }
 

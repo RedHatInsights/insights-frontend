@@ -14,10 +14,9 @@
 .cell.global-filters(ng-class='{disabled: disabled}', ng-if='isGroupsEnabled')
   group-select(disabled='disabled')
 
-.cell.leave-feedback
-  feedback-button.btn-feedback
-
 .cell.topbar-utilities
+  feedback-button.btn-feedback
+  span.sep
   menu.notifications
     bullhorn(icon='fa-bullhorn', type='announcements')
     alerts(icon='fa-bell', type='alerts')
