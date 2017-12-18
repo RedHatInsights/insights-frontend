@@ -34,6 +34,7 @@ function InventoryCtrl(
         Group) {
 
     const DEFAULT_PAGE_SIZE = 15;
+    const DEFAULT_PREDICATE = 'toString';
 
     $scope.Group = Group;
     $scope.filter = FilterService;
@@ -41,11 +42,11 @@ function InventoryCtrl(
     function updateParams(params) {
         params = FilterService.updateParams(params);
         if (!params.sort_field) {
-            params.sort_field = InventoryService.getSortField();
+            params.sort_field = $scope.sorter.predicate;
         }
 
         if (!params.sort_dir) {
-            params.sort_dir = InventoryService.getSortDirection();
+            params.sort_dir = $scope.sorter.getSortDirection();
         }
 
         return params;
@@ -59,9 +60,6 @@ function InventoryCtrl(
 
     FilterService.setShowFilters(false);
 
-    let params = $state.params;
-    $state.transitionTo('app.inventory', updateParams(params), { notify: false });
-
     $scope.QuickFilters = QuickFilters;
     $scope.systems = [];
     $scope.allSystems = null;
@@ -70,8 +68,18 @@ function InventoryCtrl(
     $scope.loading = InventoryService.loading;
     $scope.reloading = false;
 
-    $scope.predicate = $location.search().sort_field || 'toString';
-    $scope.reverse = $location.search().sort_dir === 'DESC';
+    let reverse = false;
+    if ($location.search().sort_dir) {
+        reverse = $location.search().sort_dir === 'ASC' ? false : true;
+    }
+
+    $scope.sorter = new Utils.Sorter({
+        predicate: $location.search().sort_field || DEFAULT_PREDICATE,
+        reverse: reverse
+    }, order);
+
+    let params = $state.params;
+    $state.transitionTo('app.inventory', updateParams(params), { notify: false });
 
     $scope.allSelected = false;
     $scope.reallyAllSelected = false;
@@ -134,15 +142,9 @@ function InventoryCtrl(
             query.search_term = FilterService.getSearchTerm();
         }
 
-        //sort field
-        if (InventoryService.getSortField()) {
-            query.sort_by = InventoryService.getSortField();
-        }
-
-        //sort direction
-        if (InventoryService.getSortDirection()) {
-            query.sort_dir = InventoryService.getSortDirection();
-        }
+        //sort field/direction
+        query.sort_by = $scope.sorter.predicate;
+        query.sort_dir = $scope.sorter.getSortDirection();
 
         //pagination
         if (paginate) {
@@ -298,40 +300,40 @@ function InventoryCtrl(
     function order() {
         $scope.systems = $filter('orderBy')($scope.systems,
             ['_type',
-            ($scope.reverse ?
-                '-' + $scope.predicate :
-                $scope.predicate)]);
+            ($scope.sorter.reverse ?
+                '-' + $scope.sorter.predicate :
+                $scope.sorter.predicate)]);
     }
 
     $scope.sort = function (column) {
         $scope.loading = true;
 
-        // just changing the sort direction
-        if (column === InventoryService.getSortField()) {
-            InventoryService.toggleSortDirection();
-            $scope.reverse = !$scope.reverse;
-        }
-        else {
-            InventoryService.setSortField(column);
-            InventoryService.setSortDirection('ASC');
-            $scope.reverse = false;
-            $scope.predicate = column;
-
-            // special case where we are sorting by timestamp but visually
-            // showing timeago
-            if (column === 'last_check_in') {
-                InventoryService.setSortDirection('DESC');
-            }
+        // special case where we are sorting by timestamp but visually
+        // showing timeago
+        if (column === 'last_check_in' &&
+                !$scope.sorter.changeReverse) {
+            $scope.sorter.changeReverse = true;
+        } else if ($scope.sorter.changeReverse) {
+            $scope.sorter.changeReverse = false;
         }
 
         // if we have the full inventory list then use local sorting
         if ($scope.systems.length === InventoryService.getTotal()) {
-            order();
+            if ($scope.sorter.disableCallback) {
+                $scope.sorter.disableCallback = false;
+            }
+
+            $scope.sorter.sort(column);
             $scope.loading = false;
-        }
-        else {
+        } else {
             // reset dataset
             cleanTheScope();
+
+            if (!$scope.sorter.disableCallback) {
+                $scope.sorter.disableCallback = true;
+            }
+
+            $scope.sorter.sort(column);
             getData(false);
         }
     };
