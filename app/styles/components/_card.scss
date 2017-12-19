@@ -4,6 +4,7 @@ $card-header: "md-card-header";
 $card-content: "md-card-content";
 $card-footer: "md-card-footer";
 
+//#{$card}+#{$card}{@include rem('margin-top', $global-margin);}
 
 #{$card} {
   @include reset;
