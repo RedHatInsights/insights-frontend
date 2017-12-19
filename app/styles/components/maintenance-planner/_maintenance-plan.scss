@@ -767,7 +767,7 @@ div[class^="col-"], div[class*=" col-"] { transition: .4s; }
 
 table.maintenance-table {
   text-align: left;
-  @include rem('margin-top', $global-margin);
+  @include rem('margin', 10px 0px);
 
   thead tr th {
     background: #fff;

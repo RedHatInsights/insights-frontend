@@ -70,6 +70,8 @@
   }
 }
 
+.two-row .icon-group.icon-group-severity {  @include rem('margin-top', $global-margin); }
+
 .rule-detail-summary {
   grid-area: rule-detail;
 }
