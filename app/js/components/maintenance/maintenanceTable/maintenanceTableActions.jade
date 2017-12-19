@@ -5,12 +5,9 @@
       tr
         th.text-center(ng-show='edit')
           input.select-all(ng-model="checkboxes.checked", type="checkbox", ng-indeterminate="checkboxes.indeterminate", ng-change='checkboxChecked()')
-        th.sortable(ng-class="table.sorter.getSortClass('display')", ng-click="table.sorter.sort('display')")
-          .sort-indicator(translate) Action
-        th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.severityNum')", ng-click="table.sorter.sort('rule.severityNum')")
-          .sort-indicator(translate) Total Risk
-        th.sortable.text-center(ng-class="table.sorter.getSortClass('done')", ng-click="table.sorter.sort('done')")
-          .sort-indicator(translate) Status
+        th.sortable(ng-class="table.sorter.getSortClass('display')", ng-click="table.sorter.sort('display')", translate) Action
+        th.sortable.text-center(ng-class="table.sorter.getSortClass('rule.severityNum')", ng-click="table.sorter.sort('rule.severityNum')", translate) Total Risk
+        th.sortable.text-center(ng-class="table.sorter.getSortClass('done')", ng-click="table.sorter.sort('done')", translate) Status
       tr(ng-show='edit')
         th.filter(colspan='4')
           input.form-control.nomar-left.input-sm(type='text', placeholder='Filter by rule name', ng-model="table.filter.display", ng-change='table.doFilter()')
