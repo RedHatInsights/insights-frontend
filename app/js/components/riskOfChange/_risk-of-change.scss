@@ -10,4 +10,5 @@
   @include media-query(sm){
     @include rem('margin-left', $global-padding/2);
   }
+  @include rem('margin-top', 10px);
 }
