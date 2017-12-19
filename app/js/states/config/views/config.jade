@@ -2,19 +2,19 @@ page-header(title="Configuration", icon="fa-file-text")
 .content-wrap
   md-content
     md-tabs.md-dynamic-height.md-border-bottom(md-swipe-content="true")
-      md-tab(label="{{'Messaging'|translate}}")
+      md-tab(label="{{'Messaging'|translate}}", md-active='current.messaging', md-on-select='tabSelected("messaging")')
         md-content.md-padding
           config-messaging
-      md-tab(label="{{'Settings'|translate}}")
+      md-tab(label="{{'Settings'|translate}}", md-active='current.settings', md-on-select='tabSelected("settings")')
         md-content.md-padding
           config-settings
       //Red Hat Only
-      md-tab(label="{{'Webhooks'|translate}}", ng-if='isBeta')
+      md-tab(label="{{'Webhooks'|translate}}", ng-if='isBeta', md-active='current.webhooks', md-on-select='tabSelected("webhooks")')
         md-content.md-padding
           config-webhooks
-      md-tab(label='Permissions', ng-if='user.is_internal && perms.has(user, perms.PERMS.SU)')
+      md-tab(label='Permissions', ng-if='user.is_internal && perms.has(user, perms.PERMS.SU)', md-active='current.permissions', md-on-select='tabSelected("permissions")')
         md-content.md-padding
           config-permissions
-      md-tab(label="{{'Dev'|translate}}", ng-if='user.is_internal || user.demo_mode')
+      md-tab(label="{{'Dev'|translate}}", ng-if='user.is_internal || user.demo_mode', md-active='current.dev', md-on-select='tabSelected("dev")')
         md-content.md-padding
           config-dev
