@@ -24,6 +24,8 @@ function OverviewCtrl(
             let ents = user.current_entitlements;
             let isPaid = false;
 
+            $scope.isInternal = user.is_internal;
+
             if (ents) {
 
                 if (ents.whitelist && (ents.whitelist.rhel || ents.whitelist.osp)) {
