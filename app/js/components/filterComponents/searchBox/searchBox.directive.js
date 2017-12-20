@@ -18,9 +18,10 @@ const defaultThrottle = 500;
  *
  * @ngInject
  */
-function searchBoxCtrl($scope, gettextCatalog, Events) {
+function searchBoxCtrl($scope, gettextCatalog, Events, FilterService) {
 
     $scope.placeholder = $scope.placeholder || gettextCatalog.getString('Search…');
+    $scope.model = FilterService.getSearchTerm() || null;
 
     function doOnSearch () {
         if ($scope.onSearch) {
