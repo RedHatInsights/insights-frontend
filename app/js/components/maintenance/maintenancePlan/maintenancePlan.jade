@@ -166,7 +166,7 @@
                       tooltip="{{'Remove this action' | translate}}")
                 .row.row-short
                   .col-sm-12
-                    all-severity-icons(rule='rule', ng-if='!loading')
+                    all-severity-icons.inline(rule='rule', ng-if='!loading')
               .content.nopad.table-responsive
                 maintenance-table-systems(
                   params='tableParams(rule, true, false)',
