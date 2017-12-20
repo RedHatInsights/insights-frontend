@@ -85,10 +85,14 @@ function searchBoxCtrl($scope, gettextCatalog, Events, FilterService) {
         });
     }
 
-    $scope.$on(Events.filters.reset, function () {
+    function resetSearchBar() {
         $scope.model = '';
         doOnSearch();
-    });
+    }
+
+    $scope.$on('group:change', resetSearchBar);
+
+    $scope.$on(Events.filters.reset, resetSearchBar);
 }
 
 function searchBox() {
