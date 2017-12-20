@@ -9,8 +9,8 @@ card.card-rule-summary(expandable='true' init-collapsed='initCollapsed' on-toggl
       ansible-icon(value='report.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
   card-content.card-content.ng-animate-enabled(collapse="card.collapsed")
     .flex
-      .rule-reason(md-flex-50)
-      .rule-resolution(md-flex-50)
+      .rule-reason(md-flex-100)
+      .rule-resolution(md-flex-100)
       .recommended-kbase(ng-if='report.rule.node_id' node='report.rule.node_id')
       .text-center.border-top(ng-show='report.rule.more_info')
         .nomar.push-top-narrow.pointer(ng-click='show.moreInfo = !show.moreInfo')
