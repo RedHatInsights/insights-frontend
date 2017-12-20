@@ -1,4 +1,4 @@
-.system-card(ng-class="{'stale': !system.isCheckingIn}", ng-if='!loading',)
+.system-card(ng-class="{'stale': !system.isCheckingIn}")
   card.card-rule-summary(expandable init-collapsed='initCollapsed' on-toggle='toggleContent(ctx)')
     card-header-expandable.gray
       i.fa.spinner-xs.spinner(ng-if='loading')
