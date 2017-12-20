@@ -14,6 +14,7 @@
     .card-table-header(ng-if='getListType() === listTypes.card')
       md-checkbox.md-accent.md-hue-1.md-checkbox-list.checkbox(
         tooltip="{{'Select All' | translate}}",
+        aria-label='Select All Systems Checkbox',
         tooltip-trigger='mouseenter',
         tooltip-append-to-body='true',
         tooltip-placement='top',
@@ -42,7 +43,7 @@
                 md-checkbox.md-accent.md-hue-1.md-checkbox-list(
                   tooltip='Select All',
                   type="checkbox",
-                  aria-label="checkbox",
+                  aria-label='Select All Systems Checkbox',
                   md-indeterminate="checkboxes.indeterminate",
                   ng-model='checkboxes.checked',
                   ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
@@ -62,6 +63,7 @@
               td.min
                 md-checkbox.md-accent.md-hue-1.md-checkbox-list(
                   type='checkbox',
+                  aria-label='Select System Checkbox',
                   ng-model='checkboxes.items[system.system_id]',
                   ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();')
               td.fit-content

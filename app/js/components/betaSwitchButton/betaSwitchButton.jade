@@ -10,7 +10,7 @@
     md-menu-content(aria-labelledby="help")
       md-menu-item
         a(ng-click='switchStatus()', translate) Default to Insights Beta
-          md-checkbox.md-accent.md-hue-1(ng-show='isOnBeta()', ng-model='isOptedIn') 
+          md-checkbox.md-accent.md-hue-1(ng-show='isOnBeta()', ng-model='isOptedIn', aria-label='Beta Button') 
 
       md-menu-item
         a(ng-click='leaveBeta()', translate) Leave Beta
