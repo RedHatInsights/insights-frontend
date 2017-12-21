@@ -18,9 +18,10 @@ const defaultThrottle = 500;
  *
  * @ngInject
  */
-function searchBoxCtrl($scope, gettextCatalog, Events) {
+function searchBoxCtrl($scope, gettextCatalog, Events, FilterService) {
 
     $scope.placeholder = $scope.placeholder || gettextCatalog.getString('Search…');
+    $scope.model = FilterService.getSearchTerm() || null;
 
     function doOnSearch () {
         if ($scope.onSearch) {
@@ -84,10 +85,14 @@ function searchBoxCtrl($scope, gettextCatalog, Events) {
         });
     }
 
-    $scope.$on(Events.filters.reset, function () {
+    function resetSearchBar() {
         $scope.model = '';
         doOnSearch();
-    });
+    }
+
+    $scope.$on('group:change', resetSearchBar);
+
+    $scope.$on(Events.filters.reset, resetSearchBar);
 }
 
 function searchBox() {
