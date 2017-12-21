@@ -1,6 +1,8 @@
 .risk-of-change {
   display: inline-block;
 
+  .alert-text { white-space: nowrap; }
+
   .icon { @include rem('margin-right', $global-padding/2); }
 }
 
