@@ -57,7 +57,6 @@ function InventoryCtrl(
 
     $scope.listTypes = ListTypeService.types();
 
-    FilterService.setSearchTerm('');
     FilterService.setShowFilters(false);
 
     let params = $state.params;
