@@ -29,7 +29,7 @@
           data-toggle='dropdown',
           aria-haspopup='true',
           aria-expanded='false',
-          aria-label="checkbox",
+          aria-label='Actions Dropdown',
           translate,
           ng-disabled='!checkboxes.totalChecked || !config.isPlannerEnabled') Actions
           span.caret
@@ -57,6 +57,7 @@
 
     .card-table-header(ng-show='getListType() === listTypes.card')
       md-checkbox.md-accent.md-hue-1(
+        aria-label="Select All Systems Checkbox",
         tooltip="{{'Select All' | translate}}",
         tooltip-trigger='mouseenter',
         tooltip-append-to-body='true',
@@ -82,7 +83,7 @@
             md-checkbox.md-accent.md-hue-1.md-checkbox-list(
               tooltip='Select All',
               type="checkbox",
-              aria-label="checkbox",
+              aria-label='Select All Systems Checkbox',
               md-indeterminate="checkboxes.indeterminate",
               ng-model='checkboxes.checked',
               ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
@@ -99,7 +100,7 @@
           td.min
             md-checkbox.md-accent.md-hue-1.md-checkbox-list(
               type='checkbox',
-              aria-label="checkbox",
+              aria-label='Select System Checkbox',
               ng-model='checkboxes.items[system.system_id]',
               ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();',
             )

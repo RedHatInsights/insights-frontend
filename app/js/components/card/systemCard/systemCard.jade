@@ -8,6 +8,7 @@
         tooltip-append-to-body='true',
         tooltip-placement='top',
         type="checkbox",
+        aria-label='Select All Systems Checkbox',
         md-indeterminate="checkboxes.indeterminate",
         ng-model='checkboxes.checked',
         ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
