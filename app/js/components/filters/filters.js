@@ -53,11 +53,11 @@ function sortClass() {
         }
 
         if (predicate === match && !reverse) {
-            return 'sort-asc';
+            return 'sort-desc';
         }
 
         if (predicate === match && reverse) {
-            return 'sort-desc';
+            return 'sort-asc';
         }
 
         return '';
