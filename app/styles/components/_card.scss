@@ -158,6 +158,9 @@ $card-footer: "md-card-footer";
 
 // Rule card
 #{$card}.card-rule-summary {
+
+  @include rem('margin', $global-padding);
+
   .card-header-title { 
     @include font-size(14px, 1); 
     font-weight: 300;
