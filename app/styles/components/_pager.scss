@@ -38,3 +38,7 @@
     @extend .btn-open;
   }
 }
+
+.card-group{
+  .prev, .next{ height: 50%; }
+}

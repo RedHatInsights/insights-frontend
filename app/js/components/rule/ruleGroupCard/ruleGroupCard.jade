@@ -16,24 +16,23 @@
       ng-class='{swapping: swapping}',
       ng-mouseenter='setActive(true)',
       ng-mouseleave='setActive(false)')
-    .prev(ng-click='previous()', ng-class='{disabled: !hasPrevious()}')
+    .prev.md-whiteframe-5dp(ng-click='previous()', ng-class='{disabled: !hasPrevious()}')
       i.fa.fa-arrow-left
-    .next(ng-click='next()', ng-class='{disabled: !hasNext()}')
+    .next.md-whiteframe-5dp(ng-click='next()', ng-class='{disabled: !hasNext()}')
       i.fa.fa-arrow-right
-    md-card
-      md-card-header
+    card
+      card-header
         .md-card-header-title(translate) {{index + 1}} of {{plugin.rules.length}}: {{rule.description}}
         span.label.label-default.pull-right.text-uppercase(translate, ng-show='rule.acked') inactive
         .md-card-header-cta(ng-if='config.isPlannerEnabled')
           incident-icon(rule-id='rule.rule_id')
           ansible-icon(value='rule.ansible')
-      md-card-content
+      card-content
         .gray(ng-bind-html='rule.summary_html', target-blank='')
-      md-card-footer
-        .row
-          .col-sm-6
-            all-severity-icons(rule='rule', ng-if='!swapping')
-          .col-sm-6.text-right-sm
+      card-footer
+        .card-footer-title
+          all-severity-icons.inline(rule='rule', ng-if='!swapping')
+        .card-footer-cta
             strong
               a(
                 ui-sref='app.actions-rule({category: rule.category, rule: rule.rule_id})',
