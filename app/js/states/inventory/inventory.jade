@@ -19,7 +19,7 @@
         tooltip-append-to-body='true',
         tooltip-placement='top',
         type="checkbox",
-        md-indeterminate="checkboxes.indeterminate",
+        md-indeterminate="{{ checkboxes.indeterminate || false }}",
         ng-model='checkboxes.checked',
         ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
       label.type(translate, ng-click="sort('system_type_id')") &nbsp; Type
@@ -41,10 +41,10 @@
             tr
               th.min
                 md-checkbox.md-accent.md-hue-1.md-checkbox-list(
-                  tooltip='Select All',
+                  tooltip="{{'Select All' | translate}}",
                   type="checkbox",
                   aria-label='Select All Systems Checkbox',
-                  md-indeterminate="checkboxes.indeterminate",
+                  md-indeterminate="{{ checkboxes.indeterminate || false }}",
                   ng-model='checkboxes.checked',
                   ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
 

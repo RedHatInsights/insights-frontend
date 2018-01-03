@@ -3,15 +3,14 @@
     card-header-expandable.gray
       i.fa.spinner-xs.spinner(ng-if='loading')
       md-checkbox.md-accent.md-hue-1.md-checkbox-list.checkbox(
-        tooltip="{{'Select All' | translate}}",
+        tooltip="{{'Select' | translate}}",
         tooltip-trigger='mouseenter',
         tooltip-append-to-body='true',
         tooltip-placement='top',
         type="checkbox",
-        aria-label='Select All Systems Checkbox',
-        md-indeterminate="checkboxes.indeterminate",
-        ng-model='checkboxes.checked',
-        ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
+        aria-label='Select System Checkbox',
+        ng-model='checkboxes.items[system.system_id]',
+        ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();')
 
       .card-header-title
 
