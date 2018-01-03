@@ -426,28 +426,10 @@ function ActionsService(
      * @param pager contains the current page and page size of the page being pulled
      */
     pub.getActionsRulePage = function (paginate, pager) {
-        let systemDeferred;
 
-        // if we already have all of the systems affected use vars.allSystems
-        if (vars.allSystems === null ||
-            vars.allSystems.length === vars.totalRuleSystems) {
-            systemDeferred = pub.buildSystemsDeferred(paginate, pager)
-                .then(function (results) {
-                    return priv.populateAffectedHosts(results);
-                });
-        }
-        else {
-            systemDeferred = $q.resolve(true);
-
-            vars.ruleSystems = vars.allSystems.slice(
-                                        ((pager.currentPage - 1) * pager.perPage),
-                                        priv.getPageEnd(
-                                            vars.allSystems,
-                                            pager.currentPage - 1,
-                                            pager.perPage));
-        }
-
-        return systemDeferred;
+        // TODO: this may be cached if we have all results fetched
+        return pub.buildSystemsDeferred(paginate, pager)
+        .then(priv.populateAffectedHosts);
     };
 
     /**
