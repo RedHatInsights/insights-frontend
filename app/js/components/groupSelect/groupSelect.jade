@@ -24,7 +24,7 @@
           i.fa.fa-trash-o.group-control.pull-right(ng-click='deleteGroup(g); $event.stopPropagation();',
             tooltip="{{'Delete group' | translate}}")
       md-menu-item(ng-show="showAllSystems()")
-        a.link(ui-sref="javascript:void(0)", ng-click='triggerChange(null)', translate) - Show all systems -
+        a.link(ng-click='triggerChange(null)', translate) - Show all systems -
       md-menu-item(ng-repeat='g in groups | filter:hideSelectedGroup | orderBy:"display_name" track by g.id')
         div(ng-click='triggerChange(g)')
           trimmed-text(length="30", text="{{g.display_name}}") ({{g.systems.length}})
