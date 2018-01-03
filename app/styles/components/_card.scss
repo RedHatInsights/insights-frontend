@@ -200,18 +200,23 @@ $card-footer: "md-card-footer";
 
     .prev, .next {
       position: absolute;
-      top: 0;
-      width: 60px;
-      height: 60px;
+      top: 10px;
+      width: 30px;
+      height: 30px;
       background: $blue;
+      border-radius: 25px;
+        -moz-border-radius: 25px;
+        -webkit-border-radius: 25px;
       color: #fff;
-      @include font-size(22px, 58px);
+      @include font-size(11px, 29px);
       font-family: "FontAwesome";
-      text-align: center;
       opacity: 0;
       transition: .1s;
       transition-delay: .2s;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .prev {
@@ -239,8 +244,8 @@ $card-footer: "md-card-footer";
         opacity: 1;
       }
 
-      .prev { left: -60px; }
-      .next { right: -60px; }
+      .prev { left: -20px; }
+      .next { right: -20px; }
     }
   }
 
@@ -413,6 +418,11 @@ $card-footer: "md-card-footer";
 
 .card-list-item + .card-list-item {
     @include rem('margin-top', $global-margin);
+}
+
+.card-list-item md-card-footer{
+  display: flex;
+  justify-content: space-between;
 }
 
 .card-table-bulk-actions {
