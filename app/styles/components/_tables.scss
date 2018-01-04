@@ -132,12 +132,12 @@ table th.sortable:first-child {
     border-right: $sortable_border_width solid transparent;
   }
 
-  &::before {
+  &::after {
     top: calc(50% - 6px);
     border-bottom: $sortable_border_width solid $sortable_border_color;
   }
 
-  &::after {
+  &::before {
     bottom: calc(50% - 6px);
     border-top: $sortable_border_width solid $sortable_border_color;
   }
