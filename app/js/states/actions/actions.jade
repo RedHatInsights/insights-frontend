@@ -60,7 +60,7 @@
 
       
     .text-center.extra-topics(ng-if='!show.extraTopics && extraTopics.length')
-      md-button(ng-click='show.extraTopics = true', translate) More topics
+      md-button.md-raised(ng-click='show.extraTopics = true', translate) More topics
 
     strong.text-center(ng-if='!featuredTopics.length') No topics currently available.&nbsp;
       a(ui-sref='info.getting-started.direct', translate) Register more systems.
