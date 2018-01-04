@@ -92,6 +92,8 @@ aside.content-block {
     input.filter {
     @include rem('margin-bottom', $global-padding);
     }
+
+    .rule-groups { overflow: hidden; }
 }
 
 section.metrics {
