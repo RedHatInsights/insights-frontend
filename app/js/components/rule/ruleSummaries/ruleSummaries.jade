@@ -5,8 +5,6 @@
       | {{getLoadingMessage()}}
   .text-right
     expand-all-button(ng-hide='!system.reports || !system.reports.length || loading.isLoading')
-  br
-  br
   p.text-center(ng-if='(!system.reports || !system.reports.length) && !loading.isLoading && !system.__fake && !errorMessage')
     span.icon.icon-inline.success
       i.fa.fa-check-circle
