@@ -17,6 +17,8 @@
   }
 }
 
-.policiesModal md-card{
-  @include rem('margin', 15px);
+.policiesModal {
+  md-card { @include rem('margin', 15px); }
 }
+
+.system-information h2 { @include rem('line-height', 18px); }

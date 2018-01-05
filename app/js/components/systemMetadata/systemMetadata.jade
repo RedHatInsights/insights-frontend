@@ -1,57 +1,49 @@
 .system-metadata(ng-if='!loading')
-  .flexgrid.equalheights
-    .row
-      // Hostname and UUID
-      .col-sm-7
-        .basic-information
-          .icon-inline
-            i.fa.fa-clone.fa-4x(ng-show="getSystemType() === 'Virtual'", tooltip="{{'Server type: Virtual' | translate}}")
-            i.fa.fa-server.fa-4x(ng-show="getSystemType() !== 'Virtual'", tooltip="{{'Server type: Physical' | translate}}")
-            .text
-              h2
-                renameable-property(value='system.display_name || system.hostname', update-function='rename(newValue)', allow-null='true')
+  card.system-information
+    card-content.with-tile
+      .system-type.tile
+        i.fa.fa-clone.fa-2x.md-whiteframe-3dp(ng-show="getSystemType() === 'Virtual'", tooltip="{{'Server type: Virtual' | translate}}")
+        i.fa.fa-server.fa-2x.md-whiteframe-3dp(ng-show="getSystemType() !== 'Virtual'", tooltip="{{'Server type: Physical' | translate}}")
 
-              .hostname.ellipsis-overflow
-                b Hostname:&nbsp;
-                span {{ system.hostname }}
+      .text
+        h2.name.ellipsis-overflow.editable(ng-if='!edit.value', ng-dblclick='rename()') {{ edit.name }}
+          renameable-property(value='system.display_name || system.hostname', update-function='rename(newValue)', allow-null='true')
 
-              // always show the uuid.... it must exist
-              .uuid.ellipsis-overflow
-                b UUID:&nbsp;
-                span {{ getUUID() }}
-              view-system-groups(system="system", ng-if='config.isGroupsEnabled')
-              .alert-danger.text-center.pad5(ng-if='!system.isCheckingIn')
-                span(translate) This system is not checking in.
+        .hostname.ellipsis-overflow
+          b Hostname:&nbsp;
+          span {{ system.hostname }}
 
-      // Basic system meta-data table
-      .col-sm-5
-        table.meta-table
-          tbody
-            tr(ng-repeat='facts in initialMetadata')
-              td
-                b(translate) {{facts.label}}
-              td(translate) {{facts.value}}
+        // always show the uuid.... it must exist
+        .uuid.ellipsis-overflow
+          b UUID:&nbsp;
+          span {{ getUUID() }}
+        view-system-groups(system="system", ng-if='config.isGroupsEnabled')
+  .alert-warn(ng-if='!system.isCheckingIn')
+    span(translate) This system is not checking in.
+        
 
-
-#expandableDataTable.expandable-data-table(ng-if='!loading; hasMetadata()', ng-class="{expanded: expanded, hover: hovering}")
-  // Toggle button
-  .toggle(ng-click="toggleExpanded(); toggleActive();")
-    i.fa.fa-plus
+  // Basic system meta-data table
+  table.metadata-information
+    tbody
+      tr(ng-repeat='facts in initialMetadata')
+        td
+          b(translate) {{facts.label}}
+        td(translate) {{facts.value}}
 
   // Nav tabs
   ul.nav(role='tablist', ng-mouseenter="toggleHovering()", ng-mouseleave="toggleHovering()", ng-click="enableExpanded()")
-    li(role='presentation', ng-if="!disableTab('system')", ng-class="{active: isActive('system')}")
-      a#system-tab(href='#system', aria-controls='system', role='tab', data-toggle='tab', ng-click="getData('system')")
+    li#system-tab(role='presentation', ng-if="!disableTab('system')", ng-click="getData('system', $event)")
+      a(href='#system', aria-controls='system', role='tab', data-toggle='tab')
         i.fa.fa-desktop &nbsp;
         span(translate).tabname System
-    li(role='presentation', ng-if="!disableTab('network')", ng-class="{active: isActive('network')}")
-      a#network-tab(href='#network', aria-controls='network', role='tab', data-toggle='tab', ng-click="getData('network')")
+    li#network-tab(role='presentation', ng-if="!disableTab('network')", ng-click="getData('network', $event)")
+      a(href='#network', aria-controls='network', role='tab', data-toggle='tab')
         i.fa.fa-sitemap &nbsp;
         span(translate).tabname Network
 
   // Tab panes
   .tab-content(ng-init="setDefaultTab()", ng-class="{expanded: expanded}")
-    #system.tab-pane(role='system', ng-class="{active: isActive('system')}")
+    #system.tab-pane(role='system')
       .flex
         card.cell(ng-repeat="data in tableData.data", class="{{data.label | lowercase}}")
           card-header.gray
@@ -63,7 +55,7 @@
                 br
                 span {{value.value}}
                 
-    #network.tab-pane(role='network', ng-class="{active: isActive('network')}")
+    #network.tab-pane(role='network')
       .row
         .col-sm-12
           .table-responsive(ng-if="!disableTab('network')")

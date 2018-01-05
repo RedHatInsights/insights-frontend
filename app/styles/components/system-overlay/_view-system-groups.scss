@@ -15,8 +15,10 @@
     position: relative;
   }
   button{
+    font-weight: 700;
     @include rem('margin-right', 10px);
     @include rem('margin-bottom', 10px);
+    i { @include rem('font-size', 15px); }
   }
 
 }
@@ -33,8 +35,9 @@
 
   &.delete-system-from-group{
     .md-toast-content {
-      background: $gray;
+      background: white;
       color: white;
+      border-radius: 5px;
 
       .undo-delete {
         @include rem('margin-right', $global-padding);
@@ -43,10 +46,10 @@
       }
 
       .undo-delete, .fa-times {
-        color: black;
+        color: $black-base;
       }
     }
 
-    span { color: black; }
+    span { color: $black-base; }
   }
 }
