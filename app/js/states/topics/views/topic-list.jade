@@ -1,22 +1,26 @@
 .actions-page.actions-back
-  page-header(title="Actions", icon="fa-file-text")
-  topic-rule-filters(ng-hide='loading')
+  actions-breadcrumbs(ng-hide="loading")
+  section.topic-detail-header
+    page-header(icon="fa-file-text")
+      .page-title
+        h1 {{::topic.title}}
+    .topic-detail-summary(ng-hide='loading')
+      h4(ng-if='isIncident(ruleDetails.rule_id)')
+      article(ng-bind-html='ruleDetails.generic_html | trust_html')
+      .topic-content(ng-if='topic.content_html', ng-bind-html="topic.content_html")
 
-  .content-wrap(ng-hide="loading")
-    actions-breadcrumbs.actions-breadcrumbs(ng-hide="loading")
 
-    section.gray.section-topic-details
-      topic-details(ng-hide='loading', topic='topic')
+  table-filters
+    search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
+    incidents-tri-state(ng-if='isBeta')
+    total-risk-select
+    risk-of-change-select
 
-    section.table-utilities
-      .row
-        .col-xs-7.col-sm-5
-          search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
-        .col-xs-5.col-sm-7.text-right
-          list-type
+  section.content.rule-groups
+    .table-header
+      list-type
 
-    section.section-rules-group-content
-      topic-rule-list(ng-if='!loading', topic='topic')
+    topic-rule-list(ng-if='!loading', topic='topic')
 
   // Spinner
   .margin-top.text-center(ng-show="loading")

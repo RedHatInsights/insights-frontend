@@ -4,9 +4,7 @@
   display: table; /* 2 */
 }
 
-%clearfix:after {
-  clear: both;
-}
+%clearfix:after { clear: both; }
 
 @mixin clearfix() {
 	*zoom: 1;
@@ -29,6 +27,30 @@
   transform: translateY(-50%);
 }
 
+@mixin policyState($state) {
+  @if $state == failed {
+    @include policyState-Styles('red', '\f057');
+  }
+  @if $state == passed {
+    @include policyState-Styles('green', '\f058');
+  }
+  @if $state == errored {
+    @include policyState-Styles('yellow', '\f071');
+  }
+}
+
+@mixin policyState-Styles($color, $icon){
+  background: map-get($stateColors, 'bg-' + $color);
+  color: $base-color;
+  box-shadow: inset 3px 0 0 0 map-get($stateColors, 'bs-' + $color);
+  &:before { 
+    font-family: FontAwesome;
+    content: $icon; 
+    color: map-get($stateColors, 'f-' + $color);
+    @include rem ('padding-left', 5px);
+    @include rem ('margin-right', 5px);
+  }
+}
 
 @mixin v-align {
   position: relative;
@@ -137,8 +159,14 @@
 @mixin font-size($size, $line: $size * 1.4) {
   font-size: ($size);
   font-size: ($size / $base-font-size) + rem;
-  line-height: $line;
-  line-height: ($line / $base-font-size) + rem;
+
+  @if $line == 1 { 
+    line-height: 1; 
+
+  } @else if $line != null {
+    line-height: $line;
+    line-height: ($line / $base-font-size) + rem;
+  }
 }
 
 @mixin media-query($point) {
@@ -205,4 +233,30 @@
   &:-moz-placeholder { @content; }
   &::-moz-placeholder { @content; }
   &::-webkit-input-placeholder { @content; }
-} 
+}
+
+// Fluid type
+// =================================================================/
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+      }
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}

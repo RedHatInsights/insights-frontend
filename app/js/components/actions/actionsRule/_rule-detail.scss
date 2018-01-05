@@ -1,0 +1,77 @@
+.rule-detail-header,
+.topic-detail-header {
+  max-width: 1400px;
+  display: grid;
+  grid-gap: $global-padding;
+  grid-template-areas: "page-header" 
+                      "rule-detail"
+                      "ansible-support"
+                      "risk-list";
+  grid-template-columns: 1fr;
+
+
+  @include media-query(sm){
+    display: grid;
+    grid-template-areas: "page-header ansible-support"
+                          "rule-detail risk-list";
+    grid-template-columns: 2fr 1fr;
+  }
+
+  grid-gap: $global-margin;
+  @include rem('margin', 0 $global-margin);
+
+  .detail,
+  .meta { @include rem('padding', 0 $global-padding); }
+
+  .detail { flex: 1 1 66%; }
+  .meta { flex: 1 1 33%; }
+}
+
+.topic-detail-header {
+    display: grid;
+    grid-template-areas: "page-header"
+                          "rule-detail";
+    grid-template-columns: 1fr;
+  
+  @include media-query(sm){  }  
+}
+
+.rule-detail-header .page-header,
+.topic-detail-header .page-header {
+  grid-area: page-header;
+  margin: 0;
+}
+
+.rule-detail-ansible-support {
+  grid-area: ansible-support; 
+  border-bottom: 1px solid #e3e3e3;
+  align-content: center;
+  display: flex;
+  align-items: center;
+}
+
+
+.rule-detail-risk-list {
+  grid-area: risk-list;
+
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.rule-detail-header .rule-detail-risk-list {
+  .icon-group-severity {
+    @include rem('padding-bottom', $global-margin);
+    @include rem('margin-bottom', $global-margin);
+    border-bottom: 1px solid #ddd;
+  }
+
+  .icon-group-severity li {
+    @include rem('margin-bottom', $global-padding/2);
+  }
+}
+
+.two-row .icon-group.icon-group-severity {  @include rem('margin-top', $global-margin); }
+
+.rule-detail-summary {
+  grid-area: rule-detail;
+}

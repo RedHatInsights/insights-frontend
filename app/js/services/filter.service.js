@@ -34,7 +34,7 @@ function FilterService(
     let _selectedDockerHost = {};
     let _selectedOSPDeployment = {};
     let _selectedOCPDeployment = {};
-    let _searchTerm = null;
+    let _searchTerm = $location.search().search_term || null;
     let _showFilters = false;
     let _rhelOnly = false;
     let _offline = true;

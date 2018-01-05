@@ -1,4 +1,8 @@
+/*global require, module*/
 'use strict';
+
+const Jwt = require('jwt-redhat').default;
+
 function scrollTop() {
     window.scrollTo(0, 0);
 }
@@ -44,15 +48,10 @@ function OnRun(
     });
 
     $rootScope.$on('$stateChangeSuccess', function (event, next, nextParams, from) {
-        if (next && next.triggerComplete) {
-            AnalyticsService.triggerEvent('InsightsCompletion');
-        }
-
         TitleService.set(next.title);
         stateScroll(from, next);
     });
 
-    AnalyticsService.triggerEvent('InsightsBegin');
     if (!InsightsConfig.authenticate) {
         return;
     }
@@ -104,6 +103,16 @@ function OnRun(
     $timeout(function () {
         $anchorScroll($location.hash());
     }, 1);
+
+    Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
+
+    Jwt.onInit(() => {
+        if (!Jwt.isAuthenticated()) {
+            Jwt.login();
+        } else {
+            AnalyticsService.initPendo();
+        }
+    });
 }
 
 module.exports = OnRun;

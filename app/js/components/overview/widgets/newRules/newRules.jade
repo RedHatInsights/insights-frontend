@@ -1,17 +1,18 @@
-.grid-block.new-rules(ng-show="rules.length")
-  section.widget-block.newRules
-    h2.title
+card.card-accent.widget.widget-new-systems
+  card-header.gray
+    .card-header-title.icon-inline
       i.fa.fa-institution
       span(translate) Rules Added in the past 15 days
-      a.cta-link.pull-right(ui-sref='app.rules', translate) View rules
-    .content
-      .spinner(ng-show='loader.loading')
-      p(translate) {{rules.length}} new rules
-      .rule-wrapper(ng-repeat="rule in rules | orderBy: 'rule.created_at' | limitTo: 3")
-        .rule-title
-          a(ui-sref='app.rules({"anchor" : rule.rule_id})') {{rule.description}}
-        .rule-date
-          span.light(translate) Published {{rule.publish_date | timeAgo}}
+    .card-header-cta
+      a.cta-link(ui-sref='app.rules', translate) View rules
+  card-content
+    .spinner(ng-show='loader.loading')
+    p(translate) {{rules.length}} new rules
+    .rule-wrapper(ng-repeat="rule in rules | orderBy: 'rule.created_at' | limitTo: 3")
+      .rule-title
+        a(ui-sref='app.rules({"anchor" : rule.rule_id})') {{rule.description}}
+      .rule-date
+        span.light(translate) Published {{rule.publish_date | timeAgo}}
     .footer.text-center
       a(ng-if="rules.length === 1", ui-sref='app.rules({age: 15})', translate) View the new rule
       a(ng-if="rules.length > 1", ui-sref='app.rules({age: 15})', translate) View all {{rules.length}} new rules

@@ -1,7 +1,6 @@
 section
-  collapsible-filter
-    collapsible-filter-content
-        .row
-            incidents-tri-state.col-xs-6.col-md-5.col-lg-4(ng-if='isBeta')
-            total-risk-select.col-xs-6.col-md-4.col-lg-3
-            risk-of-change-select.col-xs-6.col-md-4.col-lg-4
+    table-filters
+        table-filters-content
+            incidents-tri-state(ng-if='isBeta')
+            total-risk-select
+            risk-of-change-select

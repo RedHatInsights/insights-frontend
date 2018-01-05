@@ -1,12 +1,10 @@
 .hidden-in-product.group-select
   label
     i.fa.fa-globe(aria-hidden="true")
-    span(translate) Global filters
-  #global-filter-dropdown.dropdown(ng-click="toggleDropdown()")
-    button.btn.dropdown-toggle(
-      type='button',
-      ng-click="resetFilter();",
-      data-toggle="dropdown",
+    span(translate) Group filter:
+  md-menu(md-offset="0 34")
+    md-button.button-dropdown#group-select(
+      ng-click="$mdMenu.open($scope.$broadcast(Events.filters.reset));",
       aria-haspopup='true',
       aria-expanded='false',
       ng-disabled='disabled')
@@ -14,20 +12,22 @@
       span.text(ng-show='disabled || (!isGroupSelected() && groups.length)', translate) All Systems
       b.text.active(ng-show='isGroupSelected() && !disabled') {{group.display_name}}
       span.caret
-    ul.dropdown-menu(role="menu")
-      li
+    md-menu-content(ng-click="$event.stopPropagation();", role="menu", aria-labelledby="group-select")
+      md-menu-item.no-hover
         search-box(
           on-search='searchGroups(model)',
-          ng-click="$event.stopPropagation();"
           ng-keyup="keypress($event)",
           placeholder="{{'Find A Group' | translate}}")
-      li(ng-show="showAllSystems()")
-        a.link(href="javascript:void(0)", ng-click='triggerChange(null)', translate) - Show all systems -
-      li.system-group(ng-repeat='g in groups | filter:hideSelectedGroup | orderBy:"display_name" track by g.id')
-        a.icon-inline-right(href="javascript:void(0)", ng-click='triggerChange(g);')
-          trimmed-text(length="20", text="{{g.display_name}}")
-          | &nbsp;({{g.systems.length}})
-          i.fa.fa-trash-o.group-control(ng-click='deleteGroup(g); $event.stopPropagation();',
+      md-menu-item.selected(ng-repeat='g in groups | filter:showSelectedGroup track by g.id')
+        div(ng-click='triggerChange(g)')
+          trimmed-text(length="30", text="{{g.display_name}}") ({{g.systems.length}})
+          i.fa.fa-trash-o.group-control.pull-right(ng-click='deleteGroup(g); $event.stopPropagation();',
             tooltip="{{'Delete group' | translate}}")
-  a.add-group(ng-click='createGroup()', tooltip='{{"Create new system group" | translate}}')
-    i.fa.fa-plus-circle.pad-left(aria-hidden="true")
+      md-menu-item(ng-show="showAllSystems()")
+        a.link(ui-sref="javascript:void(0)", ng-click='triggerChange(null)', translate) - Show all systems -
+      md-menu-item(ng-repeat='g in groups | filter:hideSelectedGroup | orderBy:"display_name" track by g.id')
+        div(ng-click='triggerChange(g)')
+          trimmed-text(length="30", text="{{g.display_name}}") ({{g.systems.length}})
+          i.fa.fa-trash-o.group-control.pull-right(ng-click='deleteGroup(g); $event.stopPropagation();',
+            tooltip="{{'Delete group' | translate}}")
+  a.link.add-group(ui-sref="#", ng-click='createGroup()', tooltip='{{"Create new system group" | translate}}') + Add group

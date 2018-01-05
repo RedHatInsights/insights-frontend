@@ -8,11 +8,12 @@ $xs: 480px;
 $sm: 768px;
 $md: 992px;
 $lg: 1200px;
+$xl: 1440px;
 
 
 $base-font-size: 16px;
 $base-color: #4c4c4c;
-$base-font-family: 'Overpass', Arial, Helvetica, sans-serif;
+$base-font-family: 'overpass', Arial, Helvetica, sans-serif;
 $brand-gray: $base-color;
 
 
@@ -24,6 +25,23 @@ $global-margin: 30px;
 
 // Color Settings
 //==================================================================*/
+
+// State Colors
+//--------------------------------------------------------------*/
+
+$stateColors: (
+  f-red: #D53E40,
+  bs-red: #D53E40,
+  bg-red: #FFE2E2,
+
+  f-yellow: #EE8C38,
+  bs-yellow: #EE8C38,
+  bg-yellow: #FDF0E1,
+
+  f-green: #399130,
+  bs-green: #399130,
+  bg-green: #E6F2E6
+);
 
 // Brand Specific
 //--------------------------------------------------------------*/
@@ -49,6 +67,8 @@ $performance-color: #2c96cb;
 $security-color: #6d868d;
 $stability-color: #46b631;
 
+$logo-background: #303d50;
+
 
 // Buttons
 //==================================================================*/
@@ -69,6 +89,11 @@ $button-font-color: #fff;
 $brand-info: #428bca;
 $brand-error: #d9534f;
 $brand-success: #5cb85c;
+
+// Disabled
+//--------------------------------------------------------------*/
+$bg-disabled: #eeeeee;
+$f-disabled: #cbcbcb;
 
 // Text and Links
 //--------------------------------------------------------------*/
@@ -139,7 +164,7 @@ $form-margin: 0 0 16px;
 $button-padding: 11px;
 $button-background: $brand-primary;
 $button-text-color: #fff;
-$button-font-family: 'Overpass', 'Liberation Sans', Arimo, 'Trebuchet MS', 'Bitstream Vera Sans', Helvetica, Arial;
+$button-font-family: 'overpass', 'Liberation Sans', Arimo, 'Trebuchet MS', 'Bitstream Vera Sans', Helvetica, Arial;
 
 // Table Settings
 //==================================================================*/

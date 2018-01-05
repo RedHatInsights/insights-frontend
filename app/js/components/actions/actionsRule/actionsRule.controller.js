@@ -134,8 +134,12 @@ function ActionsRuleCtrl(
      *
      * @param paginate gets all ruleSystems if set to false
      */
-    function getData(paginate) {
+    function getData(paginate = true, resetPager = true) {
         $scope.loadingSystems = true;
+
+        if (resetPager) {
+            $scope.pager.reset();
+        }
 
         return RhaTelemetryActionsService.getActionsRulePage(paginate, $scope.pager)
         .then(function () {
@@ -149,7 +153,7 @@ function ActionsRuleCtrl(
         $scope.pager.update();
         $location.search('page', $scope.pager.currentPage);
         $location.search('pageSize', $scope.pager.perPage);
-        getData(true)
+        getData(true, false)
         .then(function () {
             if ($scope.reallyAllSelected) {
                 $scope.checkboxes.checkboxChecked(true, $scope.ruleSystems);
@@ -331,7 +335,7 @@ function ActionsRuleCtrl(
     $scope.reallySelectAll = function () {
         $scope.allSelected = true;
         $scope.reallyAllSelected = true;
-        getData(false);
+        getData(false, false);
     };
 
     /*

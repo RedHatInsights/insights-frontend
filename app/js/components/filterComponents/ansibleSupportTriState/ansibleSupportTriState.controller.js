@@ -72,6 +72,7 @@ function ansibleSupportTriState() {
             'js/components/filterComponents/ansibleSupportTriState' +
             '/ansibleSupportTriState.html',
         restrict: 'E',
+        replace: true,
         controller: ansibleSupportTriStateCtrl
     };
 }

@@ -2,7 +2,7 @@
   .detail-content.answer
     h4.section-heading(translate)
       i.fa.fa-thumbs-up(aria-hidden="true") &nbsp;
-      | Steps to resolve
+      strong Steps to resolve
     span(ng-if="report.rule.resolution !== 'INSIGHTS-ERROR-INTERPOLATION'",
       ng-bind-html='report.rule.resolution | trust_html',
       target-blank='')

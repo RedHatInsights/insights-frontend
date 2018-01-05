@@ -1,14 +1,10 @@
-section
-  collapsible-filter
-    collapsible-filter-content
-      .row
-        incidents-tri-state.col-xs-6.col-md-5.col-lg-4
-        ansible-support-tri-state.col-xs-6.col-md-5.col-lg-4(ng-if='config.isPlannerEnabled')
-        rule-status-tri-state.col-xs-6.col-md-5.col-lg-4
-      .row
-        age-select.col-xs-6.col-md-4.col-lg-3
-        total-risk-select.col-xs-6.col-md-4.col-lg-3
-        category-select.col-xs-6.col-md-4.col-lg-3
-        likelihood-select.col-xs-6.col-md-4.col-lg-3
-        impact-select.col-xs-6.col-md-4.col-lg-3
+table-filters
+  incidents-tri-state
+  ansible-support-tri-state(ng-if='config.isPlannerEnabled')
+  rule-status-tri-state
+  age-select
+  total-risk-select
+  category-select
+  likelihood-select
+  impact-select
 

@@ -1,4 +1,70 @@
-.btn, button {
+// $button-primary-bg: linear-gradient(to bottom, rgba(55,176,252,1) 0%,rgba(32,151,230,1) 100%);
+$button-primary-bg: $blue;
+$button-primary-color: #fff;
+
+.button-group{
+  display: inline;
+  a + a { @include rem('margin', 5px); }
+}
+
+.button-tag {
+  display: inline-flex;
+  @include rem('padding', 8px 15px);
+  border-radius: 50px;
+  background: $gray-light;
+  align-items: center;
+
+  i { 
+    @include font-size(20px, 1);
+    @include rem('margin-left', 6px); 
+  }
+}
+
+.md-button,
+button {
+  width: auto;
+  height: auto;
+  @include rem('padding', 10px 25px);
+  margin: 0;
+  min-width: 0;
+  min-height: 0;
+  color: $base-color;
+  @include font-size(14px, 1);
+  text-transform: none;
+  font-family: 'overpass';
+  transition: .2s;
+  //box-shadow: 0 2px 3px 0px rgba(0,0,0,.2);
+}
+
+button.tag {
+  border-radius: 50px;
+}
+
+.dropdown button {
+  &:disabled {
+    opacity: .5;
+    border: 1px solid $gray;
+  }
+
+  &:disabled:hover {
+    cursor: not-allowed;
+  }
+}
+
+.dropdown-plain {
+  padding: 0;
+}
+
+// Dropdown buttons
+.button-dropdown {
+  @include rem('padding', $global-padding/2);
+  box-shadow: none;
+}
+
+
+a,
+.btn, 
+button {
     outline: none;
     border: none;
 
@@ -6,6 +72,32 @@
         outline: none !important;
         box-shadow: none;
     }
+}
+
+button,
+button:active,
+button:focus {
+  // border: none;
+  // outline: 0;
+}
+
+.button-filter {
+  @include rem('padding', 10px $global-padding);
+  box-shadow: none;
+  border-radius: 50px;
+  border: 1px solid #DCDCDC;
+  color: #9B9B9B;
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+.button-primary {
+  background: $button-primary-bg;
+  color: $button-primary-color;
+
+  &:hover {
+    background-color: darken($button-primary-bg, 10);
+  }
 }
 
 .btn .svg {

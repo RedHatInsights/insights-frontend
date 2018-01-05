@@ -1,0 +1,6 @@
+body.platform {
+  
+  @include media-query(sm){
+    height: 1vh;
+  }
+}

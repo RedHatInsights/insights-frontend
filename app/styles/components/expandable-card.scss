@@ -1,0 +1,29 @@
+// GLOBAL Expandable Card Styles
+
+.accordion.collapsed{
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2), 
+  0px 1px 1px 0px rgba(0, 0, 0, 0.14), 
+  0px 1px 1px -1px rgba(0, 0, 0, 0.12);
+  @include rem('margin', 0px 0px);
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+
+.accordion.expanded{
+   @include rem('margin', 10px 0px);
+   transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+
+// Rule Summaries
+
+.rule-card {
+  .md-subhead{ @include rem ('margin-top', 15px); }
+  .icon-group.icon-group-severity {
+    background: none;
+    @include rem('border-radius', 10px);
+
+    li { float: left; }
+    li + li { @include rem ('margin', 0px 0px 0px 15px); }
+  }
+}

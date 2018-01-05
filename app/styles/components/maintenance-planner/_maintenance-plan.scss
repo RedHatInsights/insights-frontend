@@ -33,9 +33,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
   h3 { line-height: 1; }
 
 	.page-header {
-		position: relative;
-		background: #F9F9F9;
-		@include rem('padding-bottom', $global-padding);
 
 		&.active { @include rem('padding-bottom', $global-margin); }
 
@@ -109,6 +106,9 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
         .search {
             @include rem('margin-bottom', $global-margin);
         }
+
+  md-card + md-card {@include rem('margin-top', $global-margin);}
+
 }
 
 .plan-wrap {
@@ -137,6 +137,9 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
         .footer {
 
+            display: flex;
+            justify-content: space-between;
+
             .action {
                 border: 1px solid #ddd;
                 @include rem('margin-left', 10px);
@@ -156,6 +159,8 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
             .btn + .btn {
                 @include rem('margin-left', 10px);
             }
+
+            .button-group:first-of-type{flex: 1}
 
             i.svg.ansible-icon, i.svg.ansible-icon-white {
                 width: auto;
@@ -762,6 +767,7 @@ div[class^="col-"], div[class*=" col-"] { transition: .4s; }
 
 table.maintenance-table {
   text-align: left;
+  @include rem('margin', 10px 0px);
 
   thead tr th {
     background: #fff;

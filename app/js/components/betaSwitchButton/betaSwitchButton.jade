@@ -1,14 +1,16 @@
 .beta-switch
-  a.btn.btn-default(ng-click='switchVersion(true)', ng-show='!isOnBeta()')
-    // The default "take me to the Beta page" option
-    span(translate) Try Insights Beta
+  // The default "take me to the Beta page" option
+  md-button.md-button-sm.md-primary(ng-click='switchVersion(true)', ng-show='!isOnBeta()', translate) Try Insights Beta
 
-  a(ng-show='isOnBeta() && !isOptedIn()', ng-click='switchStatus(true)')
-    // in this case we are on Beta, but it is not our default
-    span(translate) Default to
-    span.btn.btn-blue(translate) Beta
+  // User is in beta, show Beta Options
+  md-menu(md-offset="0 34", md-position-mode="target-right target")
+    md-button.md-raised.md-primary#help(ng-click='$mdMenu.open()') 
+      strong(translate) Beta options
+      i.fa.fa-cog
+    md-menu-content(aria-labelledby="help")
+      md-menu-item
+        a(ng-click='switchStatus()', translate) Default to Insights Beta
+          md-checkbox.md-accent.md-hue-1(ng-show='isOnBeta()', ng-model='isOptedIn', aria-label='Beta Button') 
 
-  a(ng-click='leaveBeta()', ng-show='isOnBeta() && isOptedIn()')
-    // in this case the user is on Beta and Opted in... if they click they want to leave the Beta experience
-    span(translate) Leave
-    span.btn(translate) Beta
+      md-menu-item
+        a(ng-click='leaveBeta()', translate) Leave Beta

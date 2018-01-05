@@ -1,23 +1,37 @@
-$bg-page-header: #F9F9F9;
-
 .page-header {
-	@include clearfix;
-	position: relative;
-	padding: 0;
-	background: $bg-page-header;
-	@include rem('padding', 18px $global-margin);
-  margin: 0;
+  position: relative;
+  @include rem ('margin', 0 $global-margin);
+  @include rem ('padding', $global-margin 0);
+  border: none;
 
-	&.active { @include rem('padding-bottom', $global-margin); }
+  &::before,
+  &::after {
+    content:"";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
 
-	.content-block {
-		margin-top: 0;
-		@include rem('padding', $global-padding 30px 0);
-	}
+  &::before {
+    width: 25vw;
+    height: 1px;
+    min-width: 200px;
+    background: $gray-lite;
+  }
+
+  &::after {
+      background: $warn;
+      height: 4px;
+      width: 40px;
+  }
 }
 
-.page-header .page-title {
-	display: inline-block;
+.page-header .page-title h1 {
+  display: flex;
+  margin: 0;
+  @include font-size(18px, 23px);
 
-	.text { @include rem('margin-left', $global-padding/2); }
+  @include media-query(md){ @include font-size(24px, 1); }
+
+  i { margin-right: $global-padding/2; }
 }

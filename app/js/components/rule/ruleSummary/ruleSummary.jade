@@ -1,31 +1,23 @@
-card(expandable='true', init-collapsed='initCollapsed', on-toggle='resetShowMore(ctx)')
-  card-header
-    .row
-      .col-sm-12
-        h3.title
-          ansible-icon.inline-right(value='report.rule.ansible', ng-if='config.isPlannerEnabled')
-          incident-icon.inline-right(rule-id='report.rule_id')
-          | {{ report.rule.category }} #{'>'} {{ report.rule.description }}
-    .row.row-short
-      .col-sm-12
-        all-severity-icons(rule='report.rule')
-        risk-of-change(change-risk='report.rule.resolution_risk')
-  card-content.content.ng-animate-enabled
-    .row
-      .col-sm-12
-        .rule-reason
-    .row.row-short
-      .col-sm-12
-        .rule-resolution
-        .recommended-kbase(ng-if='report.rule.node_id', node='report.rule.node_id')
-    .row.row-short(ng-show='report.rule.more_info')
-      .col-xs-12
-        .text-center.border-top
-          .nomar.push-top-narrow.pointer(ng-click='show.moreInfo = !show.moreInfo')
-            a.link
-              strong {{show.moreInfo ? 'Hide' : 'Show'}}  more info &nbsp;
-              i.fa(ng-class="{'fa-caret-up': show.moreInfo, 'fa-caret-down': !show.moreInfo}")
-    .footer.more-info.ng-animate-enabled(collapse="!show.moreInfo")
-      div(ng-bind-html='report.rule.more_info_html | trust_html',
-        ng-show='report.rule.more_info',
-        target-blank='')
+card.card-rule-summary(expandable='true' init-collapsed='initCollapsed' on-toggle='resetShowMore(ctx)')
+  card-header-expandable.risk-summary.gray
+    .card-header-title
+      incident-icon(rule-id='report.rule_id')
+      .title {{ report.rule.category }} #{'>'} {{ report.rule.description }}
+        .card-header-risk-summaries
+          all-severity-icons.inline(rule='report.rule')
+          risk-of-change(change-risk='report.rule.resolution_risk')
+      ansible-icon(value='report.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
+  card-content.card-content.ng-animate-enabled(collapse="card.collapsed")
+    .flex
+      .rule-reason(md-flex-100)
+      .rule-resolution(md-flex-100)
+      .recommended-kbase(ng-if='report.rule.node_id' node='report.rule.node_id')
+      .text-center.border-top(ng-show='report.rule.more_info')
+        .nomar.push-top-narrow.pointer(ng-click='show.moreInfo = !show.moreInfo')
+          a.link
+            strong {{show.moreInfo ? 'Hide' : 'Show'}}  more info &nbsp;
+            i.fa(ng-class="{'fa-caret-up': show.moreInfo, 'fa-caret-down': !show.moreInfo}")
+  card-footer.footer.more-info.ng-animate-enabled(collapse="!show.moreInfo")
+    div(ng-bind-html='report.rule.more_info_html | trust_html',
+      ng-show='report.rule.more_info',
+      target-blank='')

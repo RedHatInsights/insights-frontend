@@ -5,17 +5,14 @@ span.dropdown.dropdown-notification(dropdown='', on-toggle='toggled(open)')
     span.count(ng-if="service.unackedCount !== 0") {{service.unackedCount}}
   ul.dropdown-menu.preview(ng-if="!loading")
     li.announcement(ng-repeat="item in service.items", ng-class="{ acked: (item.acked) }")
-      .row
-        .col-sm-12
-          div
-            i.fa.inline-right(ng-if='item.icon', ng-class='item.icon')
-            b(ng-bind-html='item.msg | trust_html', ng-click="item.onSelect(item)")
-          .message-status-toggle(
-            ng-if='item.onAck',
-            style='position:absolute; right:12px; top:0; padding:20px; height:100%; width:40px',
-            ng-click="!item.ack && item.onAck(item)"
-            tooltip="{{'Dismiss' | translate}}")
-            i.fa.fa-circle-o(ng-if="!item.acked")
-            i.fa.fa-check-circle-o.acked(ng-if="item.acked")
+      div
+        i.fa.inline-right(ng-if='item.icon', ng-class='item.icon')
+        b(ng-bind-html='item.msg | trust_html', ng-click="item.onSelect(item)")
+      .message-status-toggle(
+        ng-if='item.onAck',
+        ng-click="!item.ack && item.onAck(item)"
+        tooltip="{{'Dismiss' | translate}}")
+        i.fa.fa-circle-o(ng-if="!item.acked")
+        i.fa.fa-check-circle-o.acked(ng-if="item.acked")
     li(ng-if="service.items.length === 0")
       strong(translate) You have no alerts

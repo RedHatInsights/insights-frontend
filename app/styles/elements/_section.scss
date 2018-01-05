@@ -1,21 +1,40 @@
-section.full-width {
-	width: auto;
-	@include rem('padding', $global-margin);
+$bg-gray: $gray-light;
 
+// section.content { @include rem('padding', $global-margin); }
+.page-header + section.content { @include rem('padding', 0 $global-margin); }
 
-  .content-wrap & {
-    @include media-query(sm) {
-      @include rem('margin-left', -30px);
-      @include rem('margin-right', -30px);
-    }
-  }
+section.content { 
+  width: 100%;
+  @include rem('padding', $global-margin); 
 }
+section.content.content-gray { background: $gray-light; }
 
-section + section {
-	@include rem('margin-top', $global-margin);
-}
+// section.full-width {
+// 	width: auto;
+// 	@include rem('padding', $global-margin);
+
+
+//   .content-wrap & {
+//     @include media-query(sm) {
+//       @include rem('margin-left', -30px);
+//       @include rem('margin-right', -30px);
+//     }
+//   }
+// }
 
 section.gray {
 	background: $gray-light;
   @include rem('padding', $global-margin);
+}
+
+.section-title,
+.section-title-red { 
+  @include font-size(16px, 21px);
+  text-transform: uppercase;
+}
+
+.section-title-red { color: $brand-primary; }
+
+section.content + section.content {
+  margin-top: 0;
 }

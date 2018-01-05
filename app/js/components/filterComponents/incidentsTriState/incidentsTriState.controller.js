@@ -70,7 +70,8 @@ function incidentsTriState() {
         templateUrl:
             'js/components/filterComponents/incidentsTriState/incidentsTriState.html',
         restrict: 'E',
-        controller: incidentsTriStateCtrl
+        controller: incidentsTriStateCtrl,
+        replace: true
     };
 }
 

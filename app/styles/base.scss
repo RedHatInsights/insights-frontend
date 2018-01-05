@@ -3,6 +3,7 @@ $define-fa: true !default;
 //==================================================================*/
 @import '../../node_modules/font-awesome/scss/font-awesome';
 @import 'includes/vars';
+@import 'includes/colors';
 @import 'includes/mixins';
 @import 'includes/helpers';
 @import 'includes/animations';
@@ -20,6 +21,17 @@ $define-fa: true !default;
 @import 'elements/forms';
 @import 'elements/tabs';
 @import 'elements/alert-text';
+
+
+// Layout
+//==================================================================*/
+@import 'layout/platform';
+@import 'layout/platform-grid';
+@import 'layout/topbar';
+@import 'layout/insightslogo';
+@import 'layout/primary-nav';
+@import 'layout/main';
+@import 'layout/footer';
 
 
 // Include CSS from bower components
@@ -46,6 +58,11 @@ $define-fa: true !default;
 
 // Icons
 //==================================================================*/
+@import 'icons/icon-inline';
+
+
+// Icon fonts
+//==================================================================*/
 @import 'icons/icons-insights';
 @import 'icons/icons-inline';
 
@@ -64,6 +81,7 @@ $define-fa: true !default;
 @import 'page-templates/goals-lite';
 @import 'page-templates/actions';
 @import 'page-templates/eval';
+@import 'page-templates/policies';
 
 
 // Scaffolding extensions
@@ -79,29 +97,26 @@ $define-fa: true !default;
 
 // Include Components
 //==================================================================*/
-@import 'components/actionbar';
-@import 'components/scrollable';
+// @import 'components/actionbar';
+// @import 'components/scrollable';
 @import 'components/pie-charts';
 @import 'components/chart-header';
 @import 'components/breadcrumbs';
 @import 'components/tables';
 @import 'components/filter-search';
 @import 'components/error-infos';
-@import 'components/top-bar';
-@import 'components/tam-panel';
 @import 'components/header';
 @import 'components/utilities-tray';
-@import 'components/filters';
+// @import 'components/filters';
 @import 'components/icons';
 @import 'components/announcements';
 @import 'components/dashboard';
-@import 'components/dashboard-nav';
+// @import 'components/dashboard-nav';
 @import 'components/pagination';
 @import 'components/groups';
 @import 'components/chart-';
 @import 'components/fa-';
-@import 'components/legend-nav';
-@import 'components/actions-breadcrumbs';
+// @import 'components/actions-breadcrumbs';
 @import 'components/content-block';
 @import 'components/no-actions';
 @import 'components/loader';
@@ -110,7 +125,8 @@ $define-fa: true !default;
 @import 'components/materials';
 @import 'components/newRules';
 @import 'components/webhooks';
-
+@import 'components/policies-modal';
+@import 'components/expand-all-button';
 @import 'components/splash/landing-page';
 @import 'components/prod-filters-link';
 @import 'components/prod-filters-modal';
@@ -146,8 +162,8 @@ $define-fa: true !default;
 @import 'components/severity-icon';
 @import 'components/gauges';
 @import 'components/global-filters';
-@import 'components/demo-account-switcher';
 @import 'components/evaluation';
+@import 'components/renameable-property';
 
 
 // System Overlay
@@ -156,6 +172,9 @@ $define-fa: true !default;
 @import 'components/system-overlay/system-metadata';
 @import 'components/system-overlay/view-system-groups';
 
+// Forms
+//==================================================================*/
+@import 'components/forms/radio-group';
 
 // Maintenance Plan
 //==================================================================*/
@@ -182,25 +201,25 @@ $define-fa: true !default;
 //==================================================================*/
 @import 'components/ui-filters/ui-filters';
 
-
-// Namespaced
+// used to be Namespaced
 //==================================================================*/
-.insights-main-content, .modal {
-	@import 'components/insights/table';
-	@import 'components/insights/actions-details';
-	@import 'components/insights/group-select';
-	@import 'components/insights/config-tabs';
-	@import 'components/insights/panel';
-	@import 'components/insights/lists';
-	@import 'components/insights/insights-main-content';
-	@import 'components/insights/alert';
-	@import 'components/insights/notifications';
-	@import 'components/insights/entitlement';
-	@import 'components/insights/rules';
-}
 
-.insights,
-.insights-main-content {
-	@import 'elements/typography';
-	@import 'elements/buttons';
-}
+@import 'components/insights/table';
+@import 'components/insights/actions-details';
+@import 'components/insights/group-select';
+@import 'components/insights/config-tabs';
+@import 'components/insights/panel';
+@import 'components/insights/lists';
+@import 'components/insights/alert';
+@import 'components/insights/notifications';
+@import 'components/insights/entitlement';
+@import 'components/insights/rules';
+@import 'elements/typography';
+@import 'elements/buttons';
+
+
+// Good to go
+//==================================================================*/
+
+@import 'components/table-filters';
+@import 'components/tables/table-header';
