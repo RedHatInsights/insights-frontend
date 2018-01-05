@@ -68,3 +68,13 @@ $bg-dark-header: #4c4c4c;
 		@include rem('margin-top', $global-margin);
 	}
 }
+
+.alert-warn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $alert-warn;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+}

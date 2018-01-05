@@ -2,21 +2,9 @@
 .expandable-data-table {
   position: relative;
 
-  @include media-query(sm){ @include rem('padding-left', 25px); }
+  //@include media-query(sm){ @include rem('padding-left', 25px); }
 
   .toggle {
-    position: absolute;
-    left: -34px;
-    top: 10px;
-    width: 26px;
-    height: 26px;
-    display: inline-block;
-    line-height: 1.8;
-    text-align: center;
-    border: 1px solid $gray !important;
-    border-radius: 50%;
-    outline: none;
-    //@include transition(.2s);
 
     @include media-query(sm){ left: -6px; }
 
@@ -33,17 +21,17 @@
   ul.nav {
     display: inline-block;
     padding: 0;
+    background: #f7f7f7;
+    border-radius: 5px;
   }
 
   ul.nav li {
     display: inline-block;
-    border: 1px solid #ddd;
     border-left: none;
-
-    &:first-child { border-left: 1px solid #ddd; }
+    margin: 5px;
     span { display: none; }
 
-    a { color: $gray-dark; }
+    a { color: $black-base; }
   }
 }
 
@@ -128,14 +116,23 @@
 
   ul.nav span {
     display: inline-block;
-    color: black;
+    color: $black-base;
   }
 
-  ul.nav li.active { background-color: $gray-light; }
+  ul.nav li { 
+    background-color: #f9f9f9;
+  }
+
+  ul.nav li.active { 
+    background-color: white;
+    border-radius: 5px;
+    a, span { color: $black-base; } 
+  }
 
   ul.nav li {
     &:hover {
-      background-color: $gray-light;
+      background-color: white;
+      border-radius: 5px;
     }
   }
 }

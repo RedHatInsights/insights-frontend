@@ -1,12 +1,75 @@
+// Reset
+system-metadata { display: block; }
+
+
+// Setting initial grid
+//==================================================================*/
+
 .system-metadata {
+
+ @media only screen and (max-width: 768px) { > * { @include rem('margin-top', $global-margin); } }
+
+  @include media-query(sm) {
+    display: grid;
+    grid-template-areas: 'system-information metadata-information'
+                        'warning blank'
+                        'expandable-table expandable-table';
+
+    grid-template-columns: auto max-content;
+    grid-gap: 15px 30px;
+  }
+}
+
+
+// Top left (system info) card grid
+//==================================================================*/
+
+.system-metadata .system-information { 
+
+  grid-area: system-information;
+}
+
+
+// Warning
+//==================================================================*/
+
+.system-metadata .alert-warn { 
+
+  grid-area: warning;
+}
+
+
+// Top right (system info) card grid
+//==================================================================*/
+
+.system-metadata .metadata-information { 
+
+  grid-area: metadata-information;
+}
+
+
+// Expandable table grid position
+//==================================================================*/
+
+.system-metadata .expandable-data-table { 
+
+  grid-area: expandable-table;
+}
+
+
+// Setting System Info styles
+//==================================================================*/
+
+.system-metadata {
+  h2 { @include rem('font-size', 18px); }
+
   .metadata-value { word-wrap: break-word; }
-  .alert-danger { @include rem('margin-top', $global-padding); }
 
   .editable {
 
     .edit-toggle {
       display: none;
-      @include rem('font-size', 18px);
+      //@include rem('font-size', 18px);
       @include rem('margin-left', 8px);
     }
 
@@ -17,7 +80,34 @@
     }
   }
 
-  .text .name input {
-    width: 100%;
+  .text {
+    @include rem('margin-left', $global-margin);
+
+    input {
+      width: 100%;
+    }
   }
+}
+
+
+// Metadata Info styles
+//==================================================================*/
+
+.system-metadata {
+
+  .system-information { @include rem('margin-left', $global-margin); }
+}
+
+
+// Alert/Warning styles
+//==================================================================*/
+
+.system-metadata .alert-warn { @include rem('margin-left', $global-margin); }
+
+
+// System Info Table styles
+//==================================================================*/
+.metadata-information {
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
 }
