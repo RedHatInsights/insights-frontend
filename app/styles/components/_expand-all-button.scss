@@ -1,0 +1,5 @@
+.toggle-expand-right{
+  display: flex;
+  justify-content: flex-end;
+  @include rem ('margin-top', 10px);
+}

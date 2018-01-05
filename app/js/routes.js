@@ -72,6 +72,22 @@ function Routes($stateProvider) {
         });
 
     $stateProvider
+        .state('app.list-policies', {
+            url: '/policies/',
+            templateUrl: 'js/states/policies/views/list-policies.html',
+            controller: 'ListPoliciesCtrl',
+            title: 'Policies'
+        });
+
+    $stateProvider
+        .state('app.view-policy', {
+            url: '/policies/:id',
+            templateUrl: 'js/states/policies/views/view-policy.html',
+            controller: 'ViewPolicyCtrl',
+            title: 'Policies'
+        });
+
+    $stateProvider
         .state('app.components', {
             url: '/hidden/components/',
             templateUrl: 'js/states/hidden/components/components.html',

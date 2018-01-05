@@ -130,6 +130,10 @@ md-checkbox.md-checkbox-list { margin: 0px; }
 // Swiping
 .demo-swipe { padding: 40px; }
 
+md-content{
+  background: none;
+}
+
 .no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -162,3 +166,9 @@ md-checkbox.md-checkbox-list { margin: 0px; }
 
 // Other Includes
 .md-no-margin{ margin: 0px }
+
+.md-disabled{
+  background: $bg-disabled !important;
+  color: $f-disabled !important;
+  i { color: $f-disabled !important; }
+}

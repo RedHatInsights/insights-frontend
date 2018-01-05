@@ -16,6 +16,7 @@ $breadcrumbs-border: #E2E2E2;
 
     @include media-query(sm){
       white-space: normal;
+
     }
   }
 
@@ -81,4 +82,17 @@ $breadcrumbs-border: #E2E2E2;
 
 section + .actions-breadcrumbs, .actions-breadcrumbs + section {
   @include rem('margin-top', $global-margin);
+}
+
+section + .policies-breadcrumbs, .policies-breadcrumbs + section {
+  @include rem('margin-top', $global-margin);
+}
+
+.policies-breadcrumbs {
+  ol {
+    padding: 0;
+    margin: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 }

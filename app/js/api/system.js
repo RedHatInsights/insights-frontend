@@ -349,6 +349,15 @@ function System(
             url.segment(systemId);
             url.addSearch(AccountService.queryParam());
             return $http.put(url.toString(), data);
+        },
+
+        getSystemPolicies (systemId) {
+            const url = URI(root);
+            url.segment('systems');
+            url.segment(systemId);
+            url.segment('policies');
+            url.addSearch(AccountService.queryParam());
+            return $http.get(url.toString());
         }
     };
 }
