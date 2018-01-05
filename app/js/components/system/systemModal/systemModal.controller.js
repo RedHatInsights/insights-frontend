@@ -17,7 +17,8 @@ function SystemModalCtrl(
     rule,
     AnalyticsService,
     FilterService,
-    System) {
+    System,
+    ModalUtils) {
 
     // set the default tab for system modal; system if no value is passed in
     $scope.activeTab = activeTab || 'system';
@@ -52,6 +53,10 @@ function SystemModalCtrl(
     $scope.close = close;
 
     FilterService.setMachine($scope.system.system_id);
+
+    // Used to suppress escape keypress event from being handled
+    // by parent scope.
+    ModalUtils.suppressEscNavigation($modalInstance);
 
     const stateChangeUnreg = $rootScope.$on('$stateChangeStart', close);
 
