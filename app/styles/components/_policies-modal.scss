@@ -1,0 +1,22 @@
+.checks-wrapper{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  @include rem('padding', 0 $global-padding);
+  .title{
+    @include rem('padding', 10px 0);
+  }
+  .checks-state{
+    display: flex;
+    & > * {
+      display: flex;
+      align-items: center;
+      @include rem('margin-left', $global-padding);
+      @include rem('padding', 0 $global-padding);
+    }
+  }
+}
+
+.policiesModal md-card{
+  @include rem('margin', 15px);
+}

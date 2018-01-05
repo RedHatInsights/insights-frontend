@@ -1,0 +1,43 @@
+.policies-page
+  page-header(title="Policies", icon="fa-gavel")
+
+  .content-wrap
+    section.table-utilities
+      .row
+        .col-xs-7.col-sm-5
+          search-box(placeholder="{{'Search policies' | translate}}", on-search='search(model)', throttle='1000', ng-model='searchText')
+    .row.row-short
+      .col-md-12
+        table.table.ng-table
+          thead
+            tr
+              th.sortable(ng-class="sorter.getSortClass('policy_name')", ng-click="sorter.sort('policy_name')", translate) Policy
+              th.nowrap.sortable(ng-class="sorter.getSortClass('systems_pass')", ng-click="sorter.sort('systems_pass')", translate) Systems Passing
+              th.nowrap.sortable(ng-class="sorter.getSortClass('systems_fail')", ng-click="sorter.sort('systems_fail')", translate) Systems Failing
+              th.nowrap.sortable(ng-class="sorter.getSortClass('systems_error')", ng-click="sorter.sort('systems_error')", translate) Systems Erroring
+          tbody(ng-show='!loading')
+            tr(ng-repeat="policy in policies | orderBy: sorter.predicate : sorter.reverse track by policy.policy_id")
+              td.nowrap
+                a(ui-sref="app.view-policy({id: policy.policy_id})") {{policy.policy_name}}
+                i.fa.fa-exclamation-circle.red.pull-right(
+                  ng-if="policy.systems_fail || policy.systems_error",
+                  tooltip='{{failedChecksTooltip}}'
+                  aria-label="Policy error icon")
+              td.nowrap.text-center(ng-class="policy.passed") {{policy.systems_pass}}
+              td.nowrap.text-center(ng-class="policy.failed") {{policy.systems_fail}}
+              td.nowrap.text-center(ng-class="policy.errored") {{policy.systems_error}}
+
+    .row.row-short(ng-if='!loading && allPolicies.total > pager.perPage')
+      .col-sm-12
+        pagination.pull-right.pagination-blue(
+          total-items="allPolicies.total",
+          ng-model="pager.currentPage",
+          items-per-page="pager.perPage",
+          ng-change="paginate()")
+
+  .animate-wrapper.margin-top
+    .row.row-short.ng-animate-enabled(ng-show='loading')
+      .col-xs-12
+        .load.text-center
+          .spinner.spinner-lg
+          span(translate) Loading policy information…
