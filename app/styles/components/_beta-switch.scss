@@ -15,10 +15,10 @@ topbar .beta-switch {
   // .beta-dropdown { @include rem('padding', $global-padding); }
 
   .dropdown .button-content-wrapper { @include rem('padding', $global-padding); }
+}
 
-  md-checkbox {
-    margin-bottom: 0px;
-    @include rem ('margin-left', 5px);
-    span { @include rem('font-size', 14px); }
-  }
+.beta-checkbox {
+  margin-bottom: 0px;
+  @include rem ('margin-left', 5px);
+  span { @include rem('font-size', 14px); }
 }
