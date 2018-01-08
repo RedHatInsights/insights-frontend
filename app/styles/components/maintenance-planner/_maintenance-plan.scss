@@ -854,3 +854,7 @@ table.maintenance-table {
 
   .cell { @include rem('padding', $global-padding); }
 }
+
+.maintenance-plan-modal .form-group input {
+  -webkit-box-sizing: border-box; 
+}
