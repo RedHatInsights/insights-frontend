@@ -5,12 +5,15 @@
   system-metadata(system='system')
 
   md-tabs(md-dynamic-height='', md-border-bottom='')
-    md-tab(md-on-select="setActive('system')", label='Rules', md-active='activeTab === "system"')
-    md-tab(md-on-select="setActive('policy')", label='Policies', md-active='activeTab === "policy"', ng-if='hasPolicies')
+    md-tab(label='Rules', md-active="activeTab === 'system'")
+      md-content
+        .rule-summaries(system='system', machine-id='system.system_id', rule='rule', rule-filter='ruleFilter', loading='loading')
+        .rule-summary.system-overlay-item.content-block(ng-if='system.__fake', report='report', rule='rule', loading='loading')
+    
+    md-tab(label='Policies', md-active="activeTab === 'policy'", ng-if='hasPolicies')
+      md-content
+        policies-modal(system-id='system.system_id')
 
-  // hack to kill the 200MB tab usage
-  .tabs-hack(ng-if="activeTab === 'system'")
-    .rule-summaries(system='system', machine-id='system.system_id', rule='rule', rule-filter='ruleFilter', loading='loading')
-    .rule-summary.system-overlay-item.content-block(ng-if='system.__fake', report='report', rule='rule', loading='loading')
-  .tabs-hack(ng-if="activeTab === 'policy'")
-    policies-modal(system-id='system.system_id')
+    md-tab(label='Vulnerabilities', md-active="activeTab === 'Vulnerabilities'")
+      md-content
+        vulnerabilities-modal
