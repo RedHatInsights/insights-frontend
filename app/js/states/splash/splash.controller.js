@@ -2,26 +2,18 @@
 'use strict';
 
 const statesModule = require('../');
-const jQuery = window.jQuery;
 
 /**
  * @ngInject
  */
-function SplashCtrl($scope, $state, InsightsConfig) {
-    $scope.gettingStartedLink = InsightsConfig.gettingStartedLink;
-
-    $scope.logged_in = window.LOGGED_IN;
-    if (window.LOGGED_IN && $state.current && $state.current.bounceLoggedin) {
-        $state.go('app.initial', {}, {
-            location: 'replace'
-        });
+function SplashCtrl() {
+    if (window.location.pathname.match(/\/insights.*?\/info.*/)) {
+        if (window.insightsGlobal.isBeta) {
+            window.location = '/insightsbeta/splash';
+        } else {
+            window.location = '/insights/splash';
+        }
     }
-
-    jQuery('body').addClass('landing-page');
-
-    $scope.$on('$destroy', function () {
-        jQuery('body').removeClass('landing-page');
-    });
 }
 
 statesModule.controller('SplashCtrl', SplashCtrl);
