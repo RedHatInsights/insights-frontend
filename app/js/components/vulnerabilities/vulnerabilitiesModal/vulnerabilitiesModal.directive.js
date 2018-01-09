@@ -11,7 +11,7 @@ function vulnerabilitiesModalCtrl() {
 
 function vulnerabilitiesModal() {
     return {
-        templateUrl: 
+        templateUrl:
           'js/components/vulnerabilities/vulnerabilitiesModal/vulnerabilitiesModal.html',
         restrict: 'E',
         controller: vulnerabilitiesModalCtrl,
