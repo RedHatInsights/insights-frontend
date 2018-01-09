@@ -9,7 +9,7 @@ page-header(title="Configuration", icon="fa-file-text")
         md-content.md-padding
           config-settings
       //Red Hat Only
-      md-tab(label="{{'Webhooks'|translate}}", ng-if='isBeta', md-active='current.webhooks', md-on-select='tabSelected("webhooks")')
+      md-tab(label="{{'Webhooks'|translate}}", md-active='current.webhooks', md-on-select='tabSelected("webhooks")')
         md-content.md-padding
           config-webhooks
       md-tab(label='Permissions', ng-if='user.is_internal && perms.has(user, perms.PERMS.SU)', md-active='current.permissions', md-on-select='tabSelected("permissions")')
