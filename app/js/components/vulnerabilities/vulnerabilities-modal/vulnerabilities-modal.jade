@@ -1,0 +1,4 @@
+.vulnerabilities-modal
+  .content-wrap
+    expand-all-button.toggle-expand-right
+    erratum-card(ng-repeat='rhsa in ::rhsas track by rhsa.erratum_id', erratum='rhsa')

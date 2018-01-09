@@ -126,7 +126,7 @@ $card-footer: "md-card-footer";
   }
 }
 
-
+// Nested card arrow control
 #{$card}.expanded { 
   > #{$card-header} > .expandable-toggle {
     i { transform: rotate(90deg); } 
@@ -182,6 +182,10 @@ $card-footer: "md-card-footer";
   #{$card-content} {
     @include rem('padding', $global-margin);
   }
+}
+
+.card-content .data-filters {
+  margin: 0;
 }
 
 

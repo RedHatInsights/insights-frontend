@@ -140,3 +140,7 @@ h3.system-count {
 i.sort-dir {
     font-size: 18px;
 }
+
+.action-count-with-icon {
+  i { @include rem('margin-left', 10px); }
+}

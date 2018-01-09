@@ -1,0 +1,10 @@
+.rhsa-severities i.fa.fa-shield {
+  &.Critical { color: $vul-critical; }
+  &.Important { color: $vul-important; }
+  &.Moderate { color: $vul-moderate; }
+  &.Low { color: $vul-low; }
+}
+
+.rhsa-severities md-menu-item:first-child{
+  border-bottom: 1px solid $gray-lite;
+}

@@ -18,10 +18,12 @@ function TopicRuleListCtrl(
         IncidentsService,
         QuickFilters,
         PermalinkService,
-        ActionsBreadcrumbs,
+        BreadcrumbsService,
         InsightsConfig,
         ActionbarService,
         Export) {
+
+    const ActionsBreadcrumbs = BreadcrumbsService;
 
     FilterService.parseBrowserQueryParams();
     FilterService.setShowFilters(false);

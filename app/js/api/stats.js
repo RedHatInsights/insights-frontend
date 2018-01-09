@@ -36,6 +36,10 @@ function Stats($http, InsightsConfig, AccountService, Group) {
 
         getRules: function (params) {
             return $http.get(buildUri('rules', params));
+        },
+
+        getErrata: function (params) {
+            return $http.get(buildUri('errata', params));
         }
     };
 }

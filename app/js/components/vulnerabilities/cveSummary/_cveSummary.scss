@@ -1,0 +1,90 @@
+.cve-summary > .card-cve-summary > .card-content {
+  display: grid;
+  grid-gap: $global-padding;
+  grid-template-row: auto;
+  grid-template-areas: 'cve-id'
+                      'rule-hit'
+                      'description'
+                      'cve-information';
+
+
+  @include media-query(sm) {
+    grid-template-columns: auto 3fr 1fr;
+    grid-template-row: auto;
+    grid-template-areas: 'cve-id rule-hit rule-hit'
+                        'cve-id description cve-information';
+    grid-gap: $global-margin;
+  }
+}
+
+.cve-summary > .card-cve-summary > .card-content {
+
+  .cve-id {
+    grid-area: cve-id;
+    .active { text-decoration: underline; }
+  }
+
+  .description {
+    grid-area: description;
+    grid-row: auto;
+    h2.section-title.section-title-red { @include font-size(14px); }
+
+    .cve-page-redirect {
+      display: block;
+      @include rem('padding-top', $global-padding);
+    }
+  }
+
+  .rule-hit { grid-area: rule-hit; }
+
+  .cve-information {
+    grid-area: cve-information;
+    grid-row: auto;
+    .cwe a + a:before { content: ", "; }
+  }
+}
+
+.cve-summary {
+  // Rule Hit Expandable Card
+  //==================================================================*/
+  .rule-hit {
+    // Reset md-card box-shadow
+    box-shadow: none;
+
+    background: $gray-light;
+    border-left: 5px solid $blue-light;
+
+    md-card-header {
+      align-items: center;
+      color: $blue-light;
+      display: flex;
+      @include rem('padding', 5px);
+
+      .title { @include rem('margin-top', 5px); }
+      .expandable-toggle { @include rem('padding-left', 5px); }
+    }
+
+    .title {
+      font-weight: 600;
+    }
+
+    .card-header-risk-summaries { @include rem('margin-top', 5px); }
+
+    .title ul {
+      list-style-type: none;
+    }
+  }
+
+  .description .cve-link, .description i { @include rem('padding-left', 5px); }
+
+  // Styling CVE IDs
+  //==================================================================*/
+  .cve-id li i { @include rem('padding-left', 5px); }
+
+  .cve-id li a.active {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .cve-information .impact { text-transform: capitalize; }
+}

@@ -1,0 +1,17 @@
+.vulnerabilities-widget {
+  ul {
+    @include reset;
+    list-style-type: none;
+
+    li {
+      @include rem('margin-bottom', $global-padding/2);
+    }
+  }
+
+  .progress {
+    &.critical { background-color: $vul-critical; }
+    &.important { background-color: $vul-important; }
+    &.moderate { background-color: $vul-moderate; }
+    &.low { background-color: $vul-low; }
+  }
+}
