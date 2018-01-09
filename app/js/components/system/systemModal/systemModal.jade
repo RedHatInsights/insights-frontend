@@ -13,3 +13,7 @@
     md-tab(label='Policies', md-active="activeTab === 'policy'", ng-if='hasPolicies')
       md-content
         policies-modal(system-id='system.system_id')
+
+    md-tab(label='Vulnerabilities', md-active="activeTab === 'Vulnerabilities'")
+      md-content
+        vulnerabilities-modal
