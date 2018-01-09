@@ -145,6 +145,15 @@ function Routes($stateProvider) {
             }
         });
 
+    // Vulnerabilities routes
+    $stateProvider
+        .state('app.vulnerabilities', {
+            url: '/vulnerabilities/',
+            templateUrl: 'js/states/vulnerabilities/vulnerabilities.html',
+            controller: 'VulnerabilitiesCtrl',
+            title: 'Vulnerabilities'
+        });
+
     // Common announcements routes
     $stateProvider
         .state('app.announcements', {

@@ -11,6 +11,10 @@
           i.fa.fa-file-text
           span.text(translate) Actions
       li
+        a(ui-sref='app.vulnerabilities', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
+          i.fa.fa-stethoscope
+          span.text(translate) Vulnerabilities
+      li
         a(ui-sref='app.inventory', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
           i.fa.fa-database
           span.text(translate) Inventory
