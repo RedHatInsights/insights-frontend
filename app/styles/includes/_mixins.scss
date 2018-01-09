@@ -264,8 +264,10 @@
   }
 }
 
+
 // Generate Tile Gradient
 // =================================================================/
+
 @mixin tile($tile-color-base) {
   i {
     $tile-secondary-color: darken($tile-color-base, 7%);
@@ -279,4 +281,29 @@
     @include rem('padding', 20px);
     border-radius: 5px;
   }
+}
+
+
+// Generate Hue Map
+// INPUTS --
+//    $current-hue: an arbitrary numerical value
+//    $highest-hue: The highest hue value that can occur
+//        0: red, 120: green, 240: blue
+//    $hue-stops: Number of stops
+// =================================================================/
+
+@mixin hue-map($current-hue, $highest-hue, $hue-stops) {
+  $hue-base: hsl($highest-hue,100,50);
+
+  @if $current-hue > $highest-hue {
+    $current-hue: $highest-hue;
+  }
+
+  @if $current-hue <= 0 {
+    $current-hue: 0;
+  }
+
+  $final-hue: adjust-hue($hue-base, -($current-hue * ($highest-hue/$hue-stops)));
+
+  background: $final-hue;
 }

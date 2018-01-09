@@ -3,3 +3,9 @@ section.page-header(ng-transclude)
     h1
       i.fa(class="{{:: icon}}", aria-hidden='true')
       span.text(translate) {{:: titleTranslated}}
+    a(ng-if="link.length > 0", href="{{:: link}}", target="_blank")
+      i.fa.fa-external-link
+  //- subtitle is an array
+  .page-subtitle
+    dl
+      dd.text(ng-repeat="subtitle_part in subtitle") {{:: subtitle_part }}
