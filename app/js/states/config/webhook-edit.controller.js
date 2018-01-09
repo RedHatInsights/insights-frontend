@@ -38,6 +38,18 @@ function WebhookEditCtrl(
     }, {
         name: 'system:unregistered',
         description: gettextCatalog.getString('System unregistered')
+    }, {
+        name: 'policy:new',
+        description: gettextCatalog.getString('New policy')
+    }, {
+        name: 'policy:removed',
+        description: gettextCatalog.getString('Policy removed')
+    }, {
+        name: 'policy:result:new',
+        description: gettextCatalog.getString('New policy result')
+    }, {
+        name: 'policy:result:removed',
+        description: gettextCatalog.getString('Policy result removed')
     }];
 
     $scope.loader = new Utils.Loader(false);
