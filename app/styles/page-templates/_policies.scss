@@ -1,6 +1,7 @@
 .passed { @include policyState('passed'); }
 .errored { @include policyState('errored'); }
 .failed { @include policyState('failed'); }
+.unknown { @include policyState('unknown'); }
 
 .t-col-sm{
   width: 20%;
