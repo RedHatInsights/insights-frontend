@@ -17,6 +17,7 @@ function ViewPolicyCtrl($filter,
     const PASSED = gettextCatalog.getString('passed');
     const FAILED = gettextCatalog.getString('failed');
     const ERRORED = gettextCatalog.getString('errored');
+    const UNKNOWN = gettextCatalog.getString('unknown');
 
     $scope.loading = true;
     $scope.pager = new Utils.Pager();
@@ -114,6 +115,8 @@ function ViewPolicyCtrl($filter,
             return FAILED;
         } else if (resource.checks_error > 0) {
             return ERRORED;
+        } else {
+            return UNKNOWN;
         }
     }
 

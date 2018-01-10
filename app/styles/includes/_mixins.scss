@@ -37,6 +37,9 @@
   @if $state == errored {
     @include policyState-Styles('yellow', '\f071');
   }
+  @if $state == unknown {
+    @include policyState-Styles('unknown', '\f059');
+  }
 }
 
 @mixin policyState-Styles($color, $icon){
