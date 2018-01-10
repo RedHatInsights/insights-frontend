@@ -91,7 +91,16 @@ if (isPortal) {
     angular.module('insights').config(require('./portal/config'));
     angular.module('insights').config(require('./portal/base_routes'));
     angular.module('insights').config(require('./portal/routes'));
-    whenDomReady(bootstrap);
+
+    const Jwt = require('jwt-redhat').default;
+    Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
+    Jwt.onInit(() => {
+        if (!Jwt.isAuthenticated()) {
+            Jwt.login();
+        } else {
+            whenDomReady(bootstrap);
+        }
+    });
 } else {
     angular.module('insights').config(require('./base_routes'));
 }
