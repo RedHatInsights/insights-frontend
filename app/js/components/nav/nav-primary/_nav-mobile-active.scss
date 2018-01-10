@@ -1,0 +1,36 @@
+/* ==================================================================
+/* Nab mobile active
+/* ================================================================== */
+/**
+ * This document defines the styling for the mobile navigation
+**/
+
+
+html.nav-mobile-active { overflow: hidden; }
+
+@keyframes backdrop-animation-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes backdrop-animation-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: rgba(0,0,0,.4);
+  opacity: 0;
+  animation: backdrop-animation-out forwards .4s;
+}
+
+.nav-mobile-active .backdrop { animation: backdrop-animation-in forwards .3s; }
+
+.nav-mobile-active ins-nav-primary { @include media-query(sm-max) { transform: translateX(0); } }

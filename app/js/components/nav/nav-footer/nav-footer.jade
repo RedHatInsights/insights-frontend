@@ -1,0 +1,15 @@
+ins-nav-footer(ng-if="isPortal")
+  footer
+    nav.footer-nav(role="navigation", aria-label="Secondary Navigation")
+      ul
+        li
+          md-button.button.button-back(href="/", title='Back to Customer Portal', ng-click='toggleLeft()')
+            i.fa.fa-caret-left(aria-hidden="true")
+            span.text(translate) Customer Portal
+
+        li
+          md-button.button.button-logout(ng-click="doLogout(); toggleLeft()", title='Log out of Customer Portal')
+            i.fa.fa-sign-out(aria-hidden="true")
+            span.text(translate) Logout
+
+    

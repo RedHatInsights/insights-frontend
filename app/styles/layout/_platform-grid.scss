@@ -1,10 +1,20 @@
+/* ==================================================================
+/* Platform grid
+/* ================================================================== */
+/**
+ * This document defines the styling for the app.jade grid and is
+ * currently nested within body. It controls primary component layout.
+**/
+
+
 .platform-grid {
+  height: 100vh;
+
   @include media-query(sm){
     display: grid;
     grid-template-areas: "topbar"
                       "main"
                       "primary-nav";    
-    height: 100vh;
   }
 
 
@@ -13,8 +23,6 @@
     grid-template-areas: "topbar topbar"
                         "primary-nav main";    
   }
-
-  // @include media-query(md) { grid-template-rows: minmax(30px, max-content) 1fr; }
 }
 
 .view-content {
@@ -25,9 +33,7 @@
   @include media-query(sm){ overflow-y: auto; }
 }
 
+
 .platform-grid.collapsed {
   grid-template-columns: minmax(30px, max-content) 1fr;
-
-  .primary-nav .text { @include media-query(sm){ display: none; } }
-  account-select { display: none; }
 }

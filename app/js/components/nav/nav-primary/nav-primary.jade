@@ -1,0 +1,38 @@
+ins-nav-primary
+  account-select
+  nav(role="navigation", aria-label="Primary Navigation", a="true")
+    ul
+      li
+        a(ng-click="toggleMobile()", ui-sref='app.overview', ui-sref-active='current', md-ink-ripple)
+          i.fa.fa-tachometer
+          span.text(translate) Overview
+      li
+        a(ng-click="toggleMobile()", ui-sref='app.actions', ng-class='isActive(states.actions)', md-ink-ripple)
+          i.fa.fa-file-text
+          span.text(translate) Actions
+      li
+        a(ng-click="toggleMobile()", ui-sref='app.inventory', ui-sref-active='current', md-ink-ripple)
+          i.fa.fa-database
+          span.text(translate) Inventory
+      li(ng-if='config.isPlannerEnabled')
+        a(ng-click="toggleMobile()", ui-sref='app.maintenance', ui-sref-active='current', md-ink-ripple)
+          i.fa.fa-wrench
+          span.text(translate) Planner
+      li(ng-if='canSeePolicies')
+        a(ng-click="toggleMobile()", ui-sref='app.list-policies', ng-class='isActive(states.policies)', md-ink-ripple)
+          i.fa.fa-gavel
+          span.text(translate) Policies
+      li
+        a(ng-click="toggleMobile()", ui-sref='app.rules', ng-class='isActive(states.rules)', md-ink-ripple)
+          i.fa.fa-institution
+          span.text(translate) Rules
+      li
+        a(ng-click="toggleMobile()", ui-sref='app.digests', ui-sref-active='current', md-ink-ripple)
+          i.fa.fa-bar-chart
+          span.text(translate) Executive Report
+      li
+        a(ng-click="toggleMobile()", ui-sref='app.config', ng-class='isActive(states.config)', md-ink-ripple)
+          i.fa.fa-file-text
+          span.text(translate) Configuration
+
+  nav-footer

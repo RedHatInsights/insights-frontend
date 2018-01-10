@@ -1,100 +1,123 @@
+/* ==================================================================
+/* Insights topbar
+/* ================================================================== */
+/**
+ * This document defines the styling for the account select feature
+ * currently nested within primary and mobile nav.
+**/
+
+
+// Vars
 $topbar-bg: #F5F5F5;
 $topbar-text-color: $base-color;
 $topbar-border-color: #ddd;
 
 
-topbar {
-  display: block;
+/* ins-topbar - fallback 
+/* ================================================================== */
+
+@supports not (display: grid) {
+
+  ins-topbar {
+    display: flex;
+
+    // add margin-left for each additional element 
+    > * + * { @include rem('margin-left', $global-padding); }
+  }
+}
+
+
+/* ins-topbar
+/* ================================================================== */
+
+ins-topbar {
+  display: grid;
+  grid-area: topbar;
+  grid-gap: $global-padding;
+  grid-template-columns: 1fr max-content max-content;
+  grid-auto-rows: auto;
+  grid-template-areas: "logo button-feedback beta-switch"
+                    "global-filters global-filters global-filters";
+
   @include rem('padding', $global-margin);
+  align-items: center;
   background: $topbar-bg;
   border-bottom: 4px solid $topbar-border-color;
 
-  @include media-query(sm){
-    @include rem('padding', 0 $global-padding 0 0);
-    display: grid;
-    grid-template-columns: max-content auto max-content max-content;
-    grid-gap: $global-margin;
+  // small breakpoint
+  @include media-query(sm) {
+    grid-template-columns: max-content auto repeat(4, max-content);
+    grid-template-rows: auto;
+    grid-template-areas: "logo global-filters button-feedback notifications menu-help beta-switch";
+    @include rem('padding', $global-padding $global-margin $global-padding 0);
+  }
+
+  @include media-query(md) { grid-template-areas: "logo global-filters button-feedback notifications menu-help beta-switch"; }
+}
+
+// Immediate children
+ins-topbar > * { align-items: center; }
+
+
+/* ins-topbar - notifications
+/* ================================================================== */
+
+ins-notifications {
+
+  // Add borders left and right
+  @include media-query(sm) {
+    border-left: 2px solid $topbar-border-color;
+    border-right: 2px solid $topbar-border-color;
   }
 }
 
-topbar .button {
-  box-shadow: none;
-}
 
-topbar .cell {
-  @include media-query(sm){
-    align-self: center;
-  }
-}
+/* ins-topbar - elements
+/* ================================================================== */
 
-
-topbar .cell.insights-logo {
-
-}
-
-
-topbar .cell.global-filters {
-
-}
-
-
-topbar .cell.topbar-utilities {
-
-}
-
-
-topbar {
-
-  a { color: #fff; }
-
-  span,
-  strong { + i { @include rem('margin-left', 4px); } }
-
-  i {
-    & + span,
-    & + strong { @include rem('margin-left', 4px); }
-  }
-
-  .notifications,
-  .beta-switch { display: inline-block; }
-
-  menu span + span { padding-left: 15px; }
-  menu.notifications{ 
-    padding: 0;
-  }
+ins-topbar {
 
   .help, 
   .beta-dropdown {
+
     &.open>.dropdown-toggle.dropdown-toggle { background: rgba(0,0,0,.2); color: $gray-md; }
 
-    .dropdown-toggle {
-      background-color: transparent;
-      @include rem('padding', 6px 8px);
+    a { color: $topbar-text-color; }
+    .md-button { @include rem('padding', 8px); }
+
+    .button { box-shadow: none; }
+
+    .sep {
+      color: $gray-md;
+
+      &:before { content: '|'; }
     }
-
-    .dropdown-menu {
-      min-width: auto;
-      left: auto;
-      right: 0;
-      padding-left: 0;
-      top: auto;
-
-      a { font-weight: 600; }
-    }
-  }
-
-  .sep {
-    color: $gray-md;
-
-    &:before { content: '|'; }
   }
 }
 
-topbar .global-filters { 
 
 
-  label { margin: 0; } 
+/* ins-topbar - misc
+/* ================================================================== */
+
+ins-topbar div label, 
+ins-topbar div a { color: $topbar-text-color; }
+
+
+// Temp settings for buttons
+ins-topbar button[class*="text-show"] {
+  @include rem('padding', $global-padding);
+
+  @include media-query(md) { @include rem('padding', 12px 24px); }
 }
 
-topbar div label, 
-topbar div a{ color: $topbar-text-color; }
+
+/* Responsive 
+/* ================================================================== */
+
+ins-topbar .menu-help,
+ins-topbar ins-notifications {
+  display: none;
+
+  @include media-query(sm) { display: inline-block; } 
+}

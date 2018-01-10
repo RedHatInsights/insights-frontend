@@ -1,3 +1,12 @@
+/* ==================================================================
+/* Insights topbar
+/* ================================================================== */
+/**
+ * This document defines the styling for the account select feature
+ * currently nested within primary and mobile nav.
+**/
+
+
 // Vars
 $count-padding: 6px;
 
@@ -5,20 +14,20 @@ $count-padding: 6px;
 // Notifications
 //==================================================================*/
 
-.notifications {
+ins-notifications {
   position: relative; 
   margin: 0;
   padding: 0;
-
-  @include media-query(sm) { @include rem('padding', 0 $global-padding); }
+  @include rem('padding', 0 $global-padding/2);
 }
 
-.notifications a.dropdown-toggle {
+ins-notifications a.dropdown-toggle {
   position: relative;
   @include rem('padding', 6px);
+  @include rem('margin', 0 $global-padding/2);
 }
 
-.notifications .count {
+ins-notifications .count {
   position: absolute;
   top: -4px;
   right: -8px;
@@ -30,7 +39,7 @@ $count-padding: 6px;
   border-radius: 8px;
 }
 
-.notifications .dropdown-menu {
+ins-notifications .dropdown-menu {
   right: 0;
 
   &:after {
@@ -52,7 +61,7 @@ $count-padding: 6px;
   }
 }
 
-.notifications ul {
+ins-notifications ul {
   left: 0;
   padding: 0;
   background: none;
@@ -76,11 +85,11 @@ $count-padding: 6px;
   
   @include media-query(md) { min-width: 430px; }
 
-	li {
-		@include rem('padding', $global-padding);
-		background: $gray-light;
-		color: $gray-dark;
-		@include font-size(13px);
+  li {
+    @include rem('padding', $global-padding);
+    background: $gray-light;
+    color: $gray-dark;
+    @include font-size(13px);
 
     b, strong, p {
       -ms-word-break: break-all;
@@ -88,39 +97,39 @@ $count-padding: 6px;
     }
 
     &.acked  {
-			background: #fff;
-			color: rgba(100,100,100,.7);
-		}
+      background: #fff;
+      color: rgba(100,100,100,.7);
+    }
 
-		& + li { border-top: 1px solid $gray; }
+    & + li { border-top: 1px solid $gray; }
   }
 }
 
 
-.notifications .message {
+ins-notifications .message {
   position: relative;
   @include rem('padding-right', 12px);
 }
 
-.notifications .status {
-	position: absolute;
-	right: 10px;
-	top: 0;
-	display: inline-block;
+ins-notifications .status {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  display: inline-block;
 
-	@include font-size(16px);
-	text-shadow: 0 1px 1px #888;
-	transition: .2s;
-	color: $blue;
-	text-shadow: none;
-	line-height: 1;
+  @include font-size(16px);
+  text-shadow: 0 1px 1px #888;
+  transition: .2s;
+  color: $blue;
+  text-shadow: none;
+  line-height: 1;
 
-	.open {
-		color: $gray;
-	}
+  .open {
+    color: $gray;
+  }
 }
 
-.notifications.view-all {
+ins-notifications.view-all {
   padding: 0;
   border-top: 1px solid $gray;
 

@@ -1,27 +1,21 @@
-.cell.insights-logo
-  button.toggle-fullscreen(ng-click='sidenavCollapsed = !sidenavCollapsed')
-    md-icon(md-font-icon="fa fa-indent")
+ins-topbar
+  .logo-insights
+    //- nav toggle button
+    md-button.md-icon-button.button-toggle.button-toggle-nav(ng-click="navPrimary()")
+      md-icon(md-font-icon="fa fa-navicon")
 
-  md-button(ng-click="toggleLeft()",
-    class="md-primary",
-    hide-gt-xs)
-    md-icon(md-font-icon="fa fa-navicon")
+    a.home-link(ui-sref='app.overview')
+      span.hidden(translate) Red Hat Insights
+      md-icon(md-svg-src="./static/images/l_insights.svg" aria-label="Red Hat Insights ")
 
-  a.home-link(ui-sref='app.overview')
-    span.hidden(translate) Red Hat Insights
-    md-icon(md-svg-src="./static/images/l_insights.svg" aria-label="Red Hat Insights ")
+  global-filters
+  button-feedback
 
-.cell.global-filters(ng-class='{disabled: disabled}', ng-if='isGroupsEnabled')
-  group-select(disabled='disabled')
-
-.cell.topbar-utilities
-  feedback-button.btn-feedback
-  span.sep
-  menu.notifications
+  ins-notifications
     bullhorn(icon='fa-bullhorn', type='announcements')
     alerts(icon='fa-bell', type='alerts')
-  span.sep
-  md-menu(md-offset="0 34", md-position-mode="target-right target")
+
+  md-menu.menu-help(md-offset="0 34", md-position-mode="target-right target")
     md-button.button-dropdown#help(ng-click='$mdMenu.open()')
       strong(translate) Help
       span.caret.dropdown-caret(aria-hidden="true")
@@ -40,4 +34,4 @@
         a(href='/r/insights/docs/', translate) Insights API Documentation
       demo-account-switcher
 
-  beta-switch-button
+  button-beta-switch

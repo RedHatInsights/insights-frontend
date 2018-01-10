@@ -1,0 +1,285 @@
+/* ==================================================================
+/* Primary nav
+/* ================================================================== */
+/**
+ * This document defines the styling for the primary navigation
+ * currently nested within platform-grid
+**/
+
+// Vars
+$primary-nav-bg: #454853;
+$dashboard-nav-border-color: #403b3f;
+$dashboard-nav-header-bg: #4d464b;
+$dashboard-nav-input-bg: #322e31;
+$aside_anchor_bg: #4d464b;
+$aside_anchor_color: #fff;
+$aside_anchor_hover_bg: gray;
+$text-max-width: 200px;
+
+
+/* Primary nav
+/* ================================================================== */
+
+// Mobile styling only
+@media screen and (max-width: 767px) {
+  ins-nav-primary { 
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    width: calc(80% - 30px);  
+    height: 100vh;
+    transform: translateX(-100%);
+    transition-duration: .4s;
+  } 
+}
+
+@media screen and (max-width: 767px) { 
+  ins-nav-primary nav a { @include rem('padding', 24px); } 
+}
+
+ins-nav-primary {
+  grid-area: primary-nav;
+  flex-flow: column nowrap;
+  overflow-y: auto;
+  background-color: $primary-nav-bg;
+  box-shadow: inset -14px 0 40px 0 rgba(0, 0, 0, .1);
+
+  // small breakpoint - show it
+  @include media-query(sm) { 
+    display: flex; 
+    position: relative;
+  }
+}
+
+
+/* List styling
+/* ================================================================== */
+
+ins-nav-primary ul {
+  @include reset();
+  overflow: auto;
+  list-style-type: none;
+}
+
+
+  /* List item styling
+  /* ================================================================== */
+
+  ins-nav-primary li {
+    @include reset(); 
+    display: flex;
+
+    // Borders between the buttons
+    &:not(:first-child) { border-top: 1px solid rgba(255,255,255,.1); }
+    &:not(:last-child) { border-bottom: 1px solid rgba(0,0,0,.4); }
+  }
+
+
+/* Anchors and buttons
+/* ================================================================== */
+
+ins-nav-primary a,
+ins-nav-primary .button {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 0%;
+  margin: 0;
+  @include rem('padding', $global-padding);
+
+  color: #fff;
+  @include font-size(14px, 1);
+  font-weight: 700;
+  text-align: center;
+  box-shadow: inset 0 0 0 $blue-light;
+  transition-property: background box-shadow;
+  transition-duration: .4s;
+
+  // Medium breakoint
+  @include media-query(md) { @include rem('padding', 24px); }
+}
+
+
+/* States
+/* ================================================================== */
+
+ins-nav-primary {
+
+  // States: anchors
+  a:hover,
+  a.current {
+    color: #fff;
+    background: rgba(255,255,255,.075);
+    box-shadow: inset 3px 0 0 $blue-light;
+    text-decoration: none;
+  }
+
+  // Icon active state
+  a:hover i,
+  a.current i {
+    color: $blue-light;
+    text-decoration: none;
+  }
+
+  a:focus,
+  a:active {
+    text-decoration: none;
+  }
+}
+
+
+/* Icons and text
+/* ================================================================== */
+
+ins-nav-primary {
+
+  // Icon inline icon
+  i { 
+    margin-bottom: 0; 
+    transition: .4s;
+  }
+
+  // Icon inline text
+  .text {
+    display: inline-block;
+    @include rem('padding-right', $global-padding);
+    @include rem('margin-left', 12px);
+    max-width: $text-max-width;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: slide-in .4s forwards linear;
+  }  
+}
+
+
+/* ==================================================================
+/* Sidebar animation
+/* ================================================================== */
+
+// .text slide in animation
+@keyframes slide-in {
+  0% {
+    max-width: 0;
+    opacity: 0;
+    margin-left: 0;
+    padding: 0;      
+  }
+
+  10% { 
+    @include rem('max-width', $text-max-width); 
+    @include rem('margin-left', 12px); 
+    opacity: 0;
+  }
+
+  50% { 
+    opacity: 0; 
+  }
+
+  100% {
+    @include rem('max-width', $text-max-width);
+    @include rem('margin-left', 12px); 
+    opacity: 1;
+  }
+}
+
+
+// .text slide out animation
+@keyframes slide-out {
+  0% { 
+    opacity: 1; 
+    max-width: $text-max-width;
+    @include rem('margin-left', 12px); 
+  }
+
+  30% {
+    opacity: 0;
+    max-width: 0;
+  }
+
+  100% {
+    max-width: 0;
+    opacity: 0;
+    margin-left: 0;
+    padding: 0;
+  }
+}
+
+
+// account select slide out animation
+@keyframes account-select-slide-out {
+  0% { 
+    @include rem('padding', $global-padding);
+    opacity: 1;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  30% {
+    max-width: 0;
+    max-height: 100%;
+  }
+
+  60% {
+    max-width: 0;
+    max-height: 0;
+    opacity: 0;
+  }
+
+  100% {
+    max-width: 0;
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+
+// account select slide in animation
+@keyframes account-select-slide-in {
+
+  0% {
+    max-width: 0;
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+  }
+
+  30% {
+    max-width: 0;
+    max-height: 0;
+    opacity: 0;
+  }
+
+  60% {
+    max-width: 0;
+    max-height: 100%;
+  }
+
+  100% { 
+    @include rem('padding', $global-padding);
+    opacity: 1;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+/* ==================================================================
+/* Desktop collapsed state
+/* ================================================================== */
+
+.nav-desktop-collapse ins-nav-primary li:hover a,
+.nav-desktop-collapse ins-nav-primary a.current { box-shadow: inset 2px 0 0 $blue-light; }
+.nav-desktop-collapse ins-nav-primary .text { animation: slide-out .4s forwards; }
+
+// Add default animation properties
+ins-nav-primary ins-account-select { animation: account-select-slide-in .2s forwards linear; }
+
+// Animate the account select 
+.nav-desktop-collapse ins-nav-primary ins-account-select { animation: account-select-slide-out .2s forwards linear; }
+
+
+/* ==================================================================
+/* Respsonsive
+/* ================================================================== */
