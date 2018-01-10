@@ -36,7 +36,7 @@ function topbar() {
         templateUrl: 'js/components/topbar/topbar.html',
         restrict: 'E',
         controller: TopbarCtrl,
-        replace: false
+        replace: true
     };
 }
 

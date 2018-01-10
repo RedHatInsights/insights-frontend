@@ -1,10 +1,8 @@
-.platform-grid main {
+main {
+  grid-area: main;
+  display: grid;
+  grid-template-rows: auto min-content min-content;
   background: #fff;
-  flex: 1 1 100vh;
-  // display: flex;
-  // flex-flow: column;
 
-  .actionbar {
-    margin-top: auto;
-  }
+  @include media-query(sm){ overflow-y: auto; }
 }

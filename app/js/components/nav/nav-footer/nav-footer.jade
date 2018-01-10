@@ -1,0 +1,15 @@
+ins-nav-footer(ng-if="isPortal")
+  footer
+    nav(role="navigation", aria-label="Secondary Navigation")
+      ul
+        li
+          md-button.button.button-back(ng-click='toggleMobile()', ng-mouseenter="navCollapsedPopover()", href="/")
+            i.fa.fa-caret-left(aria-hidden="true")
+            span.text(translate) Customer Portal
+
+        li
+          md-button.button.button-logout(ng-click="doLogout(); toggleMobile()", ng-mouseenter="navCollapsedPopover()")
+            i.fa.fa-sign-out(aria-hidden="true")
+            span.text(translate) Logout
+
+    

@@ -1,7 +1,6 @@
-topbar.top-bar(role=header)
-primary-nav
-//- .mobile-nav
-.view-content
-  main(role="main" data-esc-key="" ui-view="")
+topbar.topbar(role=header)
+nav-primary
+main(role="main" data-esc-key="")
+  ui-view
   actionbar(ng-if="stateCheck();")
   content-info

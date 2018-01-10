@@ -1,0 +1,35 @@
+$global-filter-dropdown-bg: #545454;
+$global-filter-dropdown-border-color: #767577;
+
+ins-group-filters {
+
+  ul { @include rem('padding-top', $global-padding/2); }
+
+  .dropdown button.btn,
+  .dropdown button {
+    color: #fff;
+    background: $global-filter-dropdown-bg;
+    border-color: $global-filter-dropdown-border-color;
+
+    span { color: #fff; }
+  }
+
+  &:not(.disabled) {
+    .dropdown:hover .dropdown-toggle ,
+    .open>.dropdown-toggle.dropdown-toggle {
+      background: lighten($global-filter-dropdown-bg, 10);
+    }
+  }
+
+  .dropdown-toggle.btn {
+    line-height: 1;
+  }
+
+  &.disabled {
+    opacity: .4;
+
+    label {
+      text-decoration: line-through;
+    }
+  }
+}  

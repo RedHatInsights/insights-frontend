@@ -27,11 +27,8 @@ $define-fa: true !default;
 //==================================================================*/
 @import 'layout/platform';
 @import 'layout/platform-grid';
-@import 'layout/topbar';
 @import 'layout/insightslogo';
-@import 'layout/primary-nav';
 @import 'layout/main';
-@import 'layout/footer';
 
 
 // Include CSS from bower components
@@ -152,7 +149,6 @@ $define-fa: true !default;
 @import 'components/platform-select';
 @import 'components/flexgrid';
 @import 'components/modal-wizard';
-@import 'components/beta-switch';
 @import 'components/action-rule-filters';
 @import 'components/widgets';
 @import 'components/list-switch';
@@ -161,7 +157,6 @@ $define-fa: true !default;
 @import 'components/icon-group';
 @import 'components/severity-icon';
 @import 'components/gauges';
-@import 'components/global-filters';
 @import 'components/evaluation';
 @import 'components/renameable-property';
 @import 'components/with-tile';
@@ -223,3 +218,5 @@ $define-fa: true !default;
 
 @import 'components/table-filters';
 @import 'components/tables/table-header';
+
+@import 'extensions/text-show';

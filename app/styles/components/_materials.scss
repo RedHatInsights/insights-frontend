@@ -1,15 +1,5 @@
 $md-card-header-bg: $gray;
 
-.md-sidenav-backdrop {
-  height: 100%;
-}
-
-// md-backdrop {
-//   @include media-query(sm){
-//     display: none;
-//   }
-// }
-
 md-card.accordion.expanded,
 card.accordion.expanded {
   margin: 0;
@@ -101,7 +91,7 @@ md-checkbox {
   }
 }
 
-md-checkbox.md-checkbox-list { margin: 0px; }
+// md-checkbox.md-checkbox-list { margin: 0px; }
 
 
 // Toast
