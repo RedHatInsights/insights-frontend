@@ -1,0 +1,21 @@
+/* ==================================================================
+/* Global filters
+/* ================================================================== */
+/**
+ * This document defines the styling for global filters
+ * currently nested within topbar
+**/
+
+
+/* Global filters base
+/* ================================================================== */
+
+ins-global-filters {
+  grid-area: global-filters;
+}
+
+
+/* Global filters elements
+/* ================================================================== */
+
+ins-global-filters label { margin: 0; }

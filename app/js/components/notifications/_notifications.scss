@@ -1,0 +1,163 @@
+/* ==================================================================
+/* Notifications
+/* ================================================================== */
+/**
+ * This document defines the styling for the notifications & dropdowns within
+ * currently nested within topbar
+**/
+
+
+// Vars
+$count-padding: 6px;
+
+
+// Notifications base
+//==================================================================*/
+
+ins-notifications {
+  position: relative; 
+  margin: 0;
+  padding: 0;
+  @include rem('padding', 0 $global-padding/2);
+}
+
+
+/* Comment
+/* ================================================================== */
+
+ins-notifications a.dropdown-toggle {
+  position: relative;
+  @include rem('padding', 6px);
+  @include rem('margin', 0 $global-padding/2);
+}
+
+
+/* Comment
+/* ================================================================== */
+
+ins-notifications .count {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  @include rem('padding', $count-padding);
+  background: $red;
+  color: #fff;
+  @include font-size(11px, 1);
+  font-weight: 700;
+  border-radius: 8px;
+}
+
+
+// Top caret
+ins-notifications .dropdown-menu:after {
+  display: none;
+  content: " ";
+  bottom: 100%;
+  right: 10px;
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border: solid transparent;
+  border-color: rgba(242, 245, 247, 0);
+  border-bottom-color: #f2f5f7;
+  border-width: 8px;
+  margin-left: -8px;
+
+  @include media-query(sm) { display: block; }
+}
+
+
+/* Dropdown list styling
+/* ================================================================== */
+
+ins-notifications ul.dropdown-menu {
+  padding: 0;
+  background: none;
+  color: $gray-dark;
+  box-shadow: none;
+  border: 1px solid $gray;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
+
+  @include media-query(sm) {
+    min-width: 300px;
+    left: auto;
+    right: 0;
+    @include rem('margin-top', 4px);
+    padding: 0;
+    background: none;
+    color: $gray-dark;
+    box-shadow: none;
+    border: 1px solid $gray;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
+  }
+  
+  @include media-query(md) { min-width: 430px; }
+}
+
+
+  // List item
+  ins-notifications li {
+
+    @include rem('padding', $global-padding);
+    background: $gray-light;
+    color: $gray-dark;
+    @include font-size(13px);
+
+    b, strong, p {
+      -ms-word-break: break-all;
+      word-break: break-all;
+    }
+
+    &.acked  {
+      background: #fff;
+      color: rgba(100,100,100,.7);
+    }
+
+    & + li { border-top: 1px solid $gray; }
+  }
+
+
+/* Comment
+/* ================================================================== */
+
+ins-notifications .message {
+  position: relative;
+  @include rem('padding-right', 12px);
+}
+
+
+/* Comment
+/* ================================================================== */
+
+ins-notifications .status {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  display: inline-block;
+
+  @include font-size(16px);
+  text-shadow: 0 1px 1px #888;
+  transition: .2s;
+  color: $blue;
+  text-shadow: none;
+  line-height: 1;
+
+  .open {
+    color: $gray;
+  }
+}
+
+
+/* Comment
+/* ================================================================== */
+
+ins-notifications.view-all {
+  padding: 0;
+  border-top: 1px solid $gray;
+
+  .btn {
+    text-transform: none;
+    @include rem('padding', 14px 6px);
+  }
+}

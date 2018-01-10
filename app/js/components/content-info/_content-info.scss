@@ -3,6 +3,7 @@ footer[role="content-info"] {
   @include rem('padding', 25px $global-margin);
 
   display: flex;
+  flex-flow: row wrap;
   background: #F5F5F5;
   @include font-size(12px, 1);
 

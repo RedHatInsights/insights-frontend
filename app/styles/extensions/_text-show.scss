@@ -1,0 +1,35 @@
+.text-show-sm,
+.text-show-md,
+.text-show-lg,
+.text-show-xl {
+  
+  &.text,
+  .text {
+    display: none;
+  }
+
+  > * + * { margin-left: 0; }
+
+  i,
+  i.fa { line-height: 1; }
+}
+
+.text-show-sm { @include media-query(sm) { 
+  .text { display: initial; }
+  > * + * { margin-left: $global-padding/2; }
+} }
+
+.text-show-md { @include media-query(md) { 
+  .text { display: initial; }
+  > * + * { margin-left: $global-padding/2; }
+} }
+
+.text-show-lg { @include media-query(lg) { 
+  .text { display: initial; }
+  > * + * { margin-left: $global-padding/2; }
+} }
+
+.text-show-xl { @include media-query(xl) { 
+  .text { display: initial; }
+  > * + * { margin-left: $global-padding/2; }
+} }

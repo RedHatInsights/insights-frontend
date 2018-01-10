@@ -1,0 +1,42 @@
+/* ==================================================================
+/* Insights logo
+/* ================================================================== */
+/**
+ * This document defines the styling for the insights logo
+ * currently nested within topbar
+**/
+
+
+/* Logo insights
+/* ================================================================== */
+
+.logo-insights {
+  display: inline-flex;
+  align-self: left;
+  @include rem('margin-left', -$global-margin);
+
+  @include media-query(sm) {
+    margin-left: 0;
+  }
+}
+
+
+/* Button toggle base
+/* ================================================================== */
+
+.logo-insights .button-toggle { 
+  @include rem('margin', 0 12px); 
+  @include rem('padding', 4px);
+  @include font-size(24px, 1);
+}
+
+
+// Logo insights elements
+//==================================================================*/
+
+.logo-insights .home-link md-icon { 
+  @include rem('width', 120px); 
+  vertical-align: initial;
+}
+
+.logo-insights button { border: none; }

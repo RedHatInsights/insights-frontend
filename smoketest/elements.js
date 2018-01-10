@@ -64,10 +64,10 @@ const obj =  {
     },
     nav: {
         // main nav links are added below
-        goToPortal: '.primary-nav footer li:nth-of-type(1)',
-        logout: '.primary-nav footer li:nth-of-type(2)'
+        goToPortal: 'ins-nav-primary footer li:nth-of-type(1)',
+        logout: 'ins-nav-primary footer li:nth-of-type(2)'
     },
-    betaSwitch: '.beta-switch',
+    betaSwitch: 'ins-beta-switch',
     goToApp: '#launchApp',
     login: {
         form: '#kc-form-login',
@@ -90,7 +90,7 @@ var i = 1;
  'rules',
  'executiveReport',
  'configuration'].forEach(function (item) {
-    obj.nav[item] = `.primary-nav > nav li:nth-of-type(${i}) a`;
+    obj.nav[item] = `ins-nav-primary > nav li:nth-of-type(${i}) a`;
     i += 1;
 });
 

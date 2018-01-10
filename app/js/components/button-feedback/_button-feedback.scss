@@ -1,0 +1,28 @@
+/* ==================================================================
+/* Button feedback
+/* ================================================================== */
+/**
+ * This document defines the styling for the feedback button
+ * currently nested within topbar
+**/
+
+
+/* Button feedback base
+/* ================================================================== */
+
+ins-button-feedback {
+  grid-area: button-feedback;
+
+}
+
+
+/* Hide button text until md
+/* ================================================================== */
+
+ins-button-feedback .text {
+  display: none;
+
+  @include media-query(md) {
+    display: initial;
+  }
+}

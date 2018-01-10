@@ -1,0 +1,328 @@
+/* ==================================================================
+/* Primary nav
+/* ================================================================== */
+/**
+ * This document defines the styling for the primary navigation
+ * currently nested within platform-grid
+**/
+
+// Vars
+$primary-nav-bg: #454853;
+$dashboard-nav-border-color: #403b3f;
+$dashboard-nav-header-bg: #4d464b;
+$dashboard-nav-input-bg: #322e31;
+$aside_anchor_bg: #4d464b;
+$aside_anchor_color: #fff;
+$aside_anchor_hover_bg: gray;
+$text-max-width: 200px;
+
+
+/* Primary nav
+/* ================================================================== */
+
+// Mobile styling only
+@media screen and (max-width: 767px) {
+  ins-nav-primary { 
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    width: calc(80% - 30px);  
+    height: 100vh;
+    transform: translateX(-100%);
+    transition-duration: .4s;
+  } 
+}
+
+// Base
+ins-nav-primary {
+  grid-area: primary-nav;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: auto;
+  background-color: $primary-nav-bg;
+  box-shadow: inset -14px 0 40px 0 rgba(0, 0, 0, .1);
+}
+
+
+/* List styling
+/* ================================================================== */
+
+ins-nav-primary ul {
+  @include reset();
+  list-style-type: none;
+}
+
+
+  /* List item styling
+  /* ================================================================== */
+
+  ins-nav-primary li {
+    display: flex;
+
+    // Borders between the buttons
+    &:not(:first-child) { border-top: 1px solid rgba(255,255,255,.1); }
+    &:not(:last-child) { border-bottom: 1px solid rgba(0,0,0,.4); }
+  }
+
+
+/* Anchors and buttons
+/* ================================================================== */
+
+ins-nav-primary a,
+ins-nav-primary .button {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 0%;
+  margin: 0;
+  @include rem('padding', 24px);
+  color: #fff;
+  @include font-size(14px, 1);
+  font-weight: 700;
+  text-align: center;
+  transition: 1s;
+}
+
+
+/* Icons and text
+/* ================================================================== */
+
+ins-nav-primary i {
+  width: 18px;
+  transition: .3s;
+}
+
+// Icon inline text
+ins-nav-primary .text {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+
+/* States
+/* ================================================================== */
+
+ins-nav-primary a {
+
+  // States: anchors
+  &:hover,
+  &.current {
+    color: #fff;
+    background: rgba(255,255,255,.075);
+
+    i { color: $blue-light; }
+  }
+
+  &:focus,
+  &:active,
+  &:hover,
+  &.current { text-decoration: none; }
+}
+
+
+ins-nav-primary a.current { box-shadow: inset 3px 0 0 $blue-light; }
+
+
+.nav-desktop-collapsed ins-nav-primary a { transition: .1s; }
+html:not(.nav-desktop-collapsed) ins-nav-primary a { transition: .3s; }
+html:not(.nav-desktop-collapsed) ins-nav-primary a:hover { box-shadow: inset 3px 0 0 $blue-light; }
+
+
+// Ignore blue detail when collapsed
+.nav-desktop-collapsed ins-nav-primary a:hover:not(.current) { box-shadow: none; }
+
+
+/* ==================================================================
+/* Sidebar animation
+/* ================================================================== */
+
+/* Mixins
+/* ================================================================== */
+
+// Hide nav text
+@mixin navHide {
+  max-width: 0;
+  margin-left: 0;
+  padding: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+// Show nav text
+@mixin navShow {
+  max-width: $text-max-width;
+  @include rem('margin-left', 12px); 
+  @include rem('padding-right', $global-padding);
+  opacity: 1;
+}
+
+@mixin accountSelectHide {
+  max-width: 0;
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+@mixin accountSelectShow {
+  max-width: 300px;
+  max-height: 200px;
+  opacity: 1;
+  @include rem('padding', $global-padding);
+  overflow: visible;
+}
+
+/* ================================================================== */
+
+
+
+// .text slide out animation
+@keyframes nav-text-slide-out {
+  
+  0% { @include navShow; }
+  30% { opacity: 0; }
+  50% { @include rem('margin-left', 12px); }
+  70% { max-width: 0; }
+  100% { @include navHide; }
+}
+
+
+// .text slide in animation
+@keyframes nav-text-slide-in {
+
+  0% { @include navHide; }
+
+  10% { 
+    @include rem('margin-left', 12px); 
+    opacity: 0;
+  }
+
+  80% { 
+    opacity: 1; 
+    max-width: $text-max-width; 
+  }
+
+  100% {
+    @include navShow;
+  }
+}
+
+
+// Account select slide out animation
+@keyframes account-select-slide-out {
+  from { @include accountSelectShow; }
+  to { @include accountSelectHide; }
+}
+
+
+// Account select slide in animation
+@keyframes account-select-slide-in {
+  from { 
+    @include accountSelectHide; 
+    overflow: visible;
+  }
+  to { @include accountSelectShow; }
+}
+
+
+
+/* ==================================================================
+/* Desktop collapsed state
+/* ================================================================== */
+
+$animation-speed: .3s;
+
+// Set default states
+ins-nav-primary .text { @include navShow; }
+ins-nav-primary ins-account-select { @include accountSelectShow; }
+
+
+// Animate the collapse
+.nav-collapsing ins-nav-primary .text { animation: nav-text-slide-out $animation-speed forwards; }
+.nav-collapsing ins-nav-primary ins-account-select { animation: account-select-slide-out .1s forwards linear; }
+
+
+// Persist the animation after animation is complete
+.nav-desktop-collapsed ins-nav-primary .text { @include navHide; }
+.nav-desktop-collapsed ins-nav-primary ins-account-select { @include accountSelectHide; }
+
+
+// Animate the nav collapse
+.nav-expanding ins-nav-primary .text { animation: nav-text-slide-in $animation-speed forwards; }
+.nav-expanding ins-nav-primary ins-account-select { animation: account-select-slide-in .1s forwards; }
+
+
+// account select slide in animation
+@keyframes nav-collapsed-hover-in {
+
+  from {
+    left: 64px;
+    opacity: 0;
+    max-width: 0;
+    z-index: 11;
+  }
+
+  to {
+    left: 72px;
+    opacity: 1;
+    max-width: $text-max-width;
+    z-index: 11;
+  }
+}
+
+@keyframes nav-collapsed-hover-after-in {
+  0% {
+    right: 0;
+    width: 120%;
+    opacity: 1;
+  }
+
+  100% {
+    width: 0;
+    opacity: .75;
+    opacity: 0;
+  }
+}
+
+
+/* ==================================================================
+/* Respsonsive
+/* ================================================================== */
+
+.nav-desktop-collapsed:not(.nav-expanding) ins-nav-primary a .text,
+.nav-desktop-collapsed:not(.nav-expanding) ins-nav-primary .button .text {
+  position: absolute;
+  max-width: 0;
+  opacity: 0;
+  animation: none;
+}
+
+.nav-desktop-collapsed:not(.nav-expanding) ins-nav-primary a:hover .text,
+.nav-desktop-collapsed:not(.nav-expanding) ins-nav-primary .button:hover .text {
+  margin-left: 0;
+  @include rem('padding', 6px $global-padding);
+  background: rgba(0,0,0,.8);
+  border-radius: 4px;
+  animation: nav-collapsed-hover-in .2s forwards linear;
+  animation-delay: .3s;
+  overflow: visible;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 6px;
+    width: 0; 
+    height: 0; 
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent; 
+    border-right: 6px solid rgba(0,0,0,.75);
+    color: #02b7ff;
+  }
+}
+
+// .nav-desktop-collapsed ins-nav-primary a .text span {
+//   position: relative;
+//   z-index: 5;
+// }

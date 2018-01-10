@@ -1,0 +1,26 @@
+/* ==================================================================
+/* Primary nav footer
+/* ================================================================== */
+/**
+ * This document defines the styling for the primary navigations
+ * currently nested within platform-grid
+**/
+
+
+/* Nav footer base
+/* ================================================================== */
+
+ins-nav-footer {
+  margin-top: auto;
+  display: block;
+  background: rgba(0,0,0,.2);
+}
+
+
+/* Buttons and icon
+/* ================================================================== */
+
+ins-nav-footer footer a:hover,
+ins-nav-footer footer .button:hover, {
+  box-shadow: none;
+}
