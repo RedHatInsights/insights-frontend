@@ -21,7 +21,7 @@ md-sidenav.primary-nav(md-component-id="left")
           i.fa.fa-wrench
           span.text(translate) Planner
       li(ng-if='canSeePolicies')
-        a(ui-sref='app.list-policies', ng-class='{current: includes(states.policies, state.current.name)}')
+        a(ui-sref='app.list-policies', ui-sref-active='current', md-ink-ripple, ng-class='{current: includes(states.policies, state.current.name)}')
           i.fa.fa-gavel
           span.text(translate) Policies
       li
