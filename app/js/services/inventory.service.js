@@ -4,47 +4,10 @@ var servicesModule = require('./');
 
 function InventoryService($modal, FilterService, System, InsightsConfig) {
     var inventoryService = {};
-    var _sort = {
-        field: 'toString',
-        direction: 'ASC'
-    };
     var _total = 0;
 
     inventoryService.loading = true;
     inventoryService.allExpanded = false;
-
-    inventoryService.getSortField = function () {
-        return _sort.field;
-    };
-
-    inventoryService.setSortField = function (field) {
-        _sort.field = field;
-        FilterService.setQueryParam('sort_field', field);
-    };
-
-    inventoryService.getSortDirection = function () {
-        return _sort.direction;
-    };
-
-    inventoryService.setSortDirection = function (direction) {
-        _sort.direction = direction;
-        FilterService.setQueryParam('sort_dir', direction);
-    };
-
-    inventoryService.toggleSortDirection = function () {
-        _sort.direction = (_sort.direction === 'ASC') ? 'DESC' : 'ASC';
-        FilterService.setQueryParam('sort_dir', _sort.direction);
-    };
-
-    inventoryService.getSort = function () {
-        return _sort;
-    };
-
-    inventoryService.setSort = function (sort) {
-        _sort = sort;
-        FilterService.setQueryParam('sort_dir', sort.direction);
-        FilterService.setQueryParam('sort_field', sort.field);
-    };
 
     inventoryService.setTotal = function (total) {
         _total = total;

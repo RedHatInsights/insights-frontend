@@ -249,28 +249,18 @@ function Utils($filter, $rootScope, Events) {
         if (implicitOrder) {
             this.predicate = implicitOrder.predicate;
             this.reverse = implicitOrder.reverse;
-
-            // changes the default for this.reverse
-            this.changeReverse =
-                implicitOrder.changeReverse || false;
-
-            // disables calling of callback function.
-            this.disableCallback =
-                implicitOrder.disableCallback || false;
         } else {
             this.predicate = '';
             this.reverse = false;
-            this.changeReverse = false;
-            this.disableCallback = false;
         }
 
         this.cb = cb;
     };
 
     utils.Sorter.prototype.sort = function (name) {
-        this.reverse = (this.predicate === name) ? !this.reverse : this.changeReverse;
+        this.reverse = (this.predicate === name) ? !this.reverse : false;
         this.predicate = name;
-        if (this.cb && !this.disableCallback) {
+        if (this.cb) {
             this.cb();
         }
     };
