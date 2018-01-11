@@ -1,58 +1,25 @@
-.passed { @include policyState('passed'); }
-.errored { @include policyState('errored'); }
-.failed { @include policyState('failed'); }
-.unknown { @include policyState('unknown'); }
+// Vars
+// Card variables are assigned to the values set in _vars.scss. The purpose for including them is to add the ability to change their values within this file. This will be replaced by css variables upon better browser support.
+$card: $card;
+$card-header: $card-header;
 
-.t-col-sm{
+
+.t-col-sm {
   width: 20%;
 }
 
-.policiesID-page {
-  .description {
-    @include rem('font-size', 10px);
-    opacity: .5;
-  }
-  .section-topic-details { @include rem('margin', $global-margin); }
 
-  tr:nth-of-type(even) {
-    .passed { @include policyState-alt('passed'); }
-    .errored { @include policyState-alt('errored'); }
-    .failed { @include policyState-alt('failed'); }
-    .unknown { @include policyState-alt('unknown'); }
-  }
+// Policies id page
+//==================================================================*/
 
+.policies-id-page {
+  // nothing yet
 }
 
-.policies-page, .policiesID-page {
-  .content-wrap{ @include rem('margin-top', $global-margin); }
-}
 
-.policiesModal{
-  md-card-header{ 
-    border-bottom: 1px solid #ddd; 
-    i { @include rem ('padding-right', 10px); }
-  }
+// Policies modal
+//==================================================================*/
 
-  .tri-card-container{
-    display: flex;
-    md-card { width: 100%; }
-  }
-}
-
-.state-passed {
-  i { color: #399130 }
-}
-
-.state-failed {
-  i { color: #D53E40 }
-}
-
-.state-warn {
-  i { color: #EE8C38 }
-}
-
-.policies-page, .policiesID-page{
-  table{
-    table-layout: fixed;
-  }
+.card-list.policies-modal { 
+  // nothing yet
 }
