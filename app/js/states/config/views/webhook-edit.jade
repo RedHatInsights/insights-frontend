@@ -90,6 +90,17 @@ page-header(title="Edit webhook", icon="fa-wrench")
               label
                 input(type='checkbox', name='active', ng-model='selected.events[event.name]')
                 | {{event.description}}
+      .form-group.row(ng-if='user.is_internal')
+        label.control-label.col-sm-2(for='group', translate) Group filter
+          i.fa.fa-question-circle.inline-left(tooltip='{{"A webhook can be configured to only receive events relevant to the given group of systems" | translate}}')
+        .col-sm-10
+          ui-select#group(ng-model='group.selected', append-to-body='false')
+            ui-select-match.form-control.ui-select-match
+              | {{$select.selected.display_name}}
+            ui-select-choices.ui-select-choices(repeat='group in group.groups | filter: {display_name: $select.search}')
+              strong(ng-if='group.id === null') {{group.display_name}}
+              span(ng-if='group.id !== null') {{group.display_name}}
+
 
     .btn-group.pull-right
       button.btn.btn-sm.btn-default(ui-sref='app.config({tab: "webhooks"})', translate) Cancel
