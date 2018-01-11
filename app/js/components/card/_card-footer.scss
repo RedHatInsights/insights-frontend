@@ -1,24 +1,18 @@
 // Vars
 // Card variables are assigned to the values set in _vars.scss. The purpose for including them is to add the ability to change their values within this file. This will be replaced by css variables upon better browser support.
-$card: $card;
-$card-header: $card-header;
-
-.t-col-sm {
-  width: 20%;
-}
+$card-footer: $card-footer;
 
 
-// Policies id page
+// Card footer components
 //==================================================================*/
 
-.policies-id-page {
-  // nothing yet
-}
+#{$card-footer} {
 
+  & .card-footer-title { flex: 1 1 60%; }
 
-// Policies modal
-//==================================================================*/
-
-.card-list.policies-modal { 
-  // nothing yet
+  & .card-footer-supporting-info { 
+    flex: 0 1 auto; 
+    @include font-size(14px, 1);
+    font-weight: 100;
+  }  
 }

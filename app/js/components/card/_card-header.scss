@@ -1,0 +1,89 @@
+// Vars
+// Card variables are assigned to the values set in _vars.scss. The purpose for including them is to add the ability to change their values within this file. This will be replaced by css variables upon better browser support.
+$card: $card;
+$card-header: $card-header;
+
+
+// Card header typography
+//==================================================================*/
+
+#{$card} #{$card-header} {
+  &,
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5 {
+    margin: 0;
+    @include font-size(14px, 1);
+    font-weight: 700;
+  }
+}
+
+
+// Card header base
+//==================================================================*/
+
+#{$card} #{$card-header} {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  @include rem('padding', $global-padding);
+  border-bottom: 1px solid $gray-border;
+  align-items: center;
+
+  & .card-header-title { flex: 1 1 60%; }
+
+  & .card-header-supporting-info { 
+    flex: 0 1 auto; 
+    @include font-size(14px, 1);
+    font-weight: 100;
+  }
+}
+
+
+// Card header - alternate styles
+//==================================================================*/
+
+#{$card} #{$card-header}.gray { background: $gray-light; }
+
+
+// Card header title - with divider
+//==================================================================*/
+
+#{$card} #{$card-header} .title.title-divider {  
+    @include rem('margin-bottom', $global-padding);
+    @include rem('padding-bottom', $global-padding);
+    border-bottom: 1px solid $gray;
+    box-shadow: 0px 2px 0 0px rgba(255,255,255,.4);
+}
+
+
+// Card header components
+//==================================================================*/
+
+// System count //
+#{$card} #{$card-header} .count {
+  background: $blue;
+  position: absolute;
+  top: -$global-padding;
+  right: $global-padding;
+  color: #fff;
+  @include font-size(12px);
+  line-height: 1;
+  font-weight: 700;
+  @include rem('padding', 6px 12px);
+  border-radius: 12px;
+}
+
+
+// Header call to action //
+#{$card} #{$card-header} .card-header-cta { @include font-size(14px, 1); }
+
+
+// Ansible icon //
+#{$card} #{$card-header} .ansible-icon,
+#{$card} #{$card-header} .icon-inline .ansible-icon:not(.ng-hide) { 
+  justify-self: flex-end; 
+  margin-left: auto;
+}

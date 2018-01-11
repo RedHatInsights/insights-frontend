@@ -26,26 +26,15 @@ $global-margin: 30px;
 // Color Settings
 //==================================================================*/
 
-// State Colors
-//--------------------------------------------------------------*/
 
-$stateColors: (
-  f-red: #D53E40,
-  bs-red: #D53E40,
-  bg-red: #FFE2E2,
+// Card variables
+//==================================================================*/
+$card: "md-card";
+$card-header: "md-card-header";
+$card-content: "md-card-content";
+$card-footer: "md-card-footer";
 
-  f-yellow: #EE8C38,
-  bs-yellow: #EE8C38,
-  bg-yellow: #FDF0E1,
 
-  f-green: #399130,
-  bs-green: #399130,
-  bg-green: #E6F2E6,
-
-  f-unknown: #4c4c4c,
-  bs-unknown: #4c4c4c,
-  bg-unknown: #f9f9f9
-);
 
 // Brand Specific
 //--------------------------------------------------------------*/

@@ -1,13 +1,77 @@
-.content-wrap
+.card-list.rule-summaries-modal
   .loading-block.text-center(ng-if='loading.isLoading')
     .detail-part
       .spinner.spinner-lg
       | {{:: getLoadingMessage()}}
-  .text-right
-    expand-all-button(ng-hide='!system.reports || !system.reports.length || loading.isLoading')
-  p.text-center(ng-if='(!system.reports || !system.reports.length) && !loading.isLoading && !system.__fake && !errorMessage')
+  expand-all-button(ng-hide='!system.reports || !system.reports.length || loading.isLoading')
+
+  .text-center(ng-if='(!system.reports || !system.reports.length) && !loading.isLoading && !system.__fake && !errorMessage')
     span.icon.icon-inline.success
       i.fa.fa-check-circle
       span(translate) No actions
-  div(ng-if='!loading.isLoading && !system.__fake && errorMessage', ng-bind-html=':: errorMessage | trust_html')
-  rule-summary.rule-summary.system-overlay-item.content-block(report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports track by report.rule_id')
+  div(ng-if='!loading.isLoading && !system.__fake && errorMessage', ng-bind-html='errorMessage | trust_html')
+  //- start the card-list
+
+  card.card-rule-summary(report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports track by report.id', expandable='true', init-collapsed='initCollapsed', on-toggle='resetShowMore(ctx)')
+
+    // Card header - expandable
+    card-header-expandable.gray 
+      h5.title.title-divider.icon-inline
+        incident-icon(rule-id='report.rule_id')
+        span {{:: report.rule.category }} #{'>'} {{:: report.rule.description }}
+        ansible-icon(value='report.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
+
+      all-severity-icons.inline(rule='report.rule')
+      risk-of-change(change-risk='report.rule.resolution_risk')
+
+    // Card content
+    card-content(collapse="card.collapsed")
+      .flex
+        card
+          card-content.detail-part
+            h4.section-heading(translate)
+              i.fa.fa-crosshairs(aria-hidden="true") &nbsp;
+              strong Detected issues
+            .detail-content(ng-if="report.rule.reason !== 'INSIGHTS-ERROR-INTERPOLATION'",
+              ng-bind-html=':: report.rule.reason | trust_html',
+              target-blank='')
+            .detail-content(ng-if="report.rule.reason === 'INSIGHTS-ERROR-INTERPOLATION'")
+              p
+                i.fa.fa-exclamation-circle.i-error.inline-right
+                strong(translate) There was a problem obtaining action details. Please try again later.
+
+        card
+          card-content.detail-part
+            .detail-content
+              h4.section-heading(translate)
+                i.fa.fa-thumbs-up(aria-hidden="true") &nbsp;
+                strong Steps to resolve
+              span(ng-if="report.rule.resolution !== 'INSIGHTS-ERROR-INTERPOLATION'",
+                ng-bind-html=':: report.rule.resolution | trust_html',
+                target-blank='')
+              span(ng-if="report.rule.resolution === 'INSIGHTS-ERROR-INTERPOLATION'")
+                p
+                  i.fa.fa-exclamation-circle.i-error.inline-right
+                  strong(translate) There was a problem obtaining action details. Please try again later.
+            .osp-affected-hosts(ng-if='report.details.affected_hosts && (report.rule.type === "osp" || report.rule.type === "rhev")')
+              table.table.table-fixed
+                thead
+                  tr
+                    th
+                      div Affected Hosts
+                tbody
+                  tr(ng-repeat='affected_host in report.details.affected_hosts')
+                    td
+                      div {{:: getSystemNameFromId(affected_host)}}
+
+        .recommended-kbase(ng-if='report.rule.node_id' node='report.rule.node_id')
+            
+        .text-center.border-top(ng-if='report.rule.more_info')
+          a.link(ng-click='show.moreInfo = !show.moreInfo')
+            strong {{show.moreInfo ? 'Hide' : 'Show'}}  more info &nbsp;
+            i.fa(ng-class="{'fa-caret-up': show.moreInfo, 'fa-caret-down': !show.moreInfo}")
+
+        .more-info(collapse="!show.moreInfo")
+          div(ng-bind-html=':: report.rule.more_info_html | trust_html',
+            ng-if='report.rule.more_info',
+            target-blank='')

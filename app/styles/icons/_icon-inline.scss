@@ -1,13 +1,18 @@
+// div consideration
 div.icon-inline {
   display: flex;
 }
+
+
+// Icon inline
+//==================================================================*/
 
 .icon-inline {
   display: inline-flex;
   align-items: first baseline;
   @include font-size(14px, 1);
 
-  > * + * { margin-left: $global-padding/2; }
+  *:not(.ng-hide) + *:not(.ng-hide) { margin-left: $global-padding/2; }
 
   .alert-text { 
     @include font-size(14px);
