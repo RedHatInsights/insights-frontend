@@ -12,6 +12,7 @@
     @include rem('font-size', 10px);
     opacity: .5;
   }
+  .section-topic-details { @include rem('margin', $global-margin); }
 }
 
 .policies-page, .policiesID-page {
