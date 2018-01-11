@@ -150,26 +150,28 @@
 
           // Actions Tab
           tab(role="tabpanel", heading="{{'Actions' | translate}}", deselect='addRule.reset()', select='tabSelected()')
-            card.content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', 'rule_id', '-actions.length'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
-              card-header.gray.two-row(ng-init='tableEdit = false', layout-wrap)
+            card.content-block.rule(
+              ng-repeat="rule in (plan.rules | orderBy:['-severityNum', 'rule_id', '-actions.length'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id",
+              ng-init='tableCtx = {}')
+              card-header.gray.two-row(layout-wrap)
                 .title(md-flex-80)
                   ansible-icon.inline-right(value='rule.ansible' show-planner-line='false' hide-label="true")
                   strong {{rule.description}}
                 .edit-button(md-flex-20)
                   span.pull-right(ng-hide='isReadOnly()')
-                    a(ng-hide='tableEdit', ng-click='tableEdit = true')
+                    a(ng-hide='tableCtx.edit', ng-click='tableCtx.edit = true')
                       strong(
                         translate,
                         tooltip="{{'Click to add/remove affected systems' | translate}}") Edit
                     i.fa.fa-trash-o(
-                      ng-if='tableEdit',
+                      ng-if='tableCtx.edit',
                       ng-click='removeActions(rule.actions)',
                       tooltip="{{'Remove this action' | translate}}")
                 all-severity-icons.inline(rule='rule', ng-if='!loading', md-flex-100)
               .content.nopad.table-responsive
                 maintenance-table-systems(
                   params='tableParams(rule, true, false)',
-                  edit='tableEdit',
+                  edit='tableCtx.edit',
                   item='rule')
             div(translate, ng-if='!plan.rules.length') This plan is empty
             pagination.pull-right.pagination-blue(
@@ -182,7 +184,8 @@
           // Systems Tab
           tab(role="tabpanel", heading="{{'Systems' | translate}}", deselect='addSystem.reset()', select='tabSelected("systems")')
             card.content-block.system(
-              ng-repeat="system in (plan.systems | orderBy:['_name', 'system_id'] | offset:pager.offset | limitTo:pager.perPage) track by system.system_id")
+              ng-repeat="system in (plan.systems | orderBy:['_name', 'system_id'] | offset:pager.offset | limitTo:pager.perPage) track by system.system_id",
+              ng-init='tableCtx = {}')
               card-header.gray
                 .system-info
                   type-icon(
@@ -195,12 +198,12 @@
                     span(ng-class='system | checkInStyle') &nbsp;&nbsp;{{system.last_check_in | timeAgo}}
                 .edit-button
                   span.pull-right(ng-hide='isReadOnly()')
-                    a(ng-hide='tableEdit', ng-click='tableEdit = true')
+                    a(ng-hide='tableCtx.edit', ng-click='tableCtx.edit = true')
                       strong(
                         translate,
                         tooltip="{{'Click to add/remove actions for this system' | translate}}") Edit
                     i.fa.fa-trash-o(
-                      ng-if='tableEdit',
+                      ng-if='tableCtx.edit',
                       ng-click='removeActions(system.actions)',
                       tooltip="{{'Remove this system' | translate}}")
                 .text-center.red.hidden
@@ -209,7 +212,7 @@
               .content.nopad.table-responsive
                 maintenance-table-actions(
                   params='tableParams(system, false, false)',
-                  edit='tableEdit',
+                  edit='tableCtx.edit',
                   item='system')
             div(translate, ng-if='!plan.systems.length') This plan is empty
             pagination.pull-right.pagination-blue(
