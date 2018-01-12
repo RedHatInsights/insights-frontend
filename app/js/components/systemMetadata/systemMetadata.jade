@@ -29,7 +29,8 @@
         td
           b(translate) {{facts.label}}
         td(translate) {{facts.value}}
-
+        
+#expandableDataTable.expandable-data-table.expanded(ng-if='!loading; hasMetadata()')
   // Nav tabs
   ul.nav(role='tablist', ng-mouseenter="toggleHovering()", ng-mouseleave="toggleHovering()", ng-click="enableExpanded()")
     li#system-tab(role='presentation', ng-if="!disableTab('system')", ng-click="getData('system', $event)")
