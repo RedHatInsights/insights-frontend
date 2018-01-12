@@ -324,3 +324,7 @@
         }
     }
 }
+
+md-tabs{
+  @include rem ('margin-top', $global-padding*2);
+}

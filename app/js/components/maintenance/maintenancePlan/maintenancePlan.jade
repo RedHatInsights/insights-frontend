@@ -108,11 +108,11 @@
               | {{editBasic.start | moment:'LLL':'UTC'}}
             .form-group
               .pull-right.btn-group(role='group')
-                button.btn.btn-sm.btn-blank.action(
+                md-button.btn-sm.md-button-ghost-blue.md-primary(
                   type='button',
                   ng-click="editBasic.toggle()",
                   translate) Cancel
-                button.btn.btn-sm.btn-accent.action(
+                md-button.btn-sm.md-raised.md-primary(
                   type='submit',
                   ng-disabled="editBasicForm.$invalid",
                   translate) Save
@@ -150,27 +150,28 @@
 
           // Actions Tab
           tab(role="tabpanel", heading="{{'Actions' | translate}}", deselect='addRule.reset()', select='tabSelected()')
-            .content-block.rule(ng-repeat="rule in (plan.rules | orderBy:['-severityNum', 'rule_id', '-actions.length'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id")
-              .header.bordered(ng-init='tableEdit = false')
-                .title
+            card.content-block.rule(
+              ng-repeat="rule in (plan.rules | orderBy:['-severityNum', 'rule_id', '-actions.length'] | offset:pager.offset | limitTo:pager.perPage) track by rule.id",
+              ng-init='tableCtx = {}')
+              card-header.gray.two-row(layout-wrap)
+                .title(md-flex-80)
                   ansible-icon.inline-right(value='rule.ansible' show-planner-line='false' hide-label="true")
                   strong {{rule.description}}
+                .edit-button(md-flex-20)
                   span.pull-right(ng-hide='isReadOnly()')
-                    a(ng-hide='tableEdit', ng-click='tableEdit = true')
+                    a(ng-hide='tableCtx.edit', ng-click='tableCtx.edit = true')
                       strong(
                         translate,
                         tooltip="{{'Click to add/remove affected systems' | translate}}") Edit
                     i.fa.fa-trash-o(
-                      ng-if='tableEdit',
+                      ng-if='tableCtx.edit',
                       ng-click='removeActions(rule.actions)',
                       tooltip="{{'Remove this action' | translate}}")
-                .row.row-short
-                  .col-sm-12
-                    all-severity-icons(rule='rule', ng-if='!loading')
+                all-severity-icons.inline(rule='rule', ng-if='!loading', md-flex-100)
               .content.nopad.table-responsive
                 maintenance-table-systems(
                   params='tableParams(rule, true, false)',
-                  edit='tableEdit',
+                  edit='tableCtx.edit',
                   item='rule')
             div(translate, ng-if='!plan.rules.length') This plan is empty
             pagination.pull-right.pagination-blue(
@@ -182,33 +183,36 @@
 
           // Systems Tab
           tab(role="tabpanel", heading="{{'Systems' | translate}}", deselect='addSystem.reset()', select='tabSelected("systems")')
-            .content-block.system(
-              ng-repeat="system in (plan.systems | orderBy:['_name', 'system_id'] | offset:pager.offset | limitTo:pager.perPage) track by system.system_id")
-              .header.bordered
-                type-icon(
-                type-id='system.system_type_id',
-                include-text='false')
-                a(ng-click='showSystemModal(system)')
-                  strong &nbsp; {{system._name}} &nbsp;&nbsp;
-                span.item
-                  strong(translate) Last check in:
-                  span(ng-class='system | checkInStyle') &nbsp;&nbsp;{{system.last_check_in | timeAgo}}
-                span.pull-right(ng-hide='isReadOnly()')
-                  a(ng-hide='tableEdit', ng-click='tableEdit = true')
-                    strong(
-                      translate,
-                      tooltip="{{'Click to add/remove actions for this system' | translate}}") Edit
-                  i.fa.fa-trash-o(
-                    ng-if='tableEdit',
-                    ng-click='removeActions(system.actions)',
-                    tooltip="{{'Remove this system' | translate}}")
+            card.content-block.system(
+              ng-repeat="system in (plan.systems | orderBy:['_name', 'system_id'] | offset:pager.offset | limitTo:pager.perPage) track by system.system_id",
+              ng-init='tableCtx = {}')
+              card-header.gray
+                .system-info
+                  type-icon(
+                  type-id='system.system_type_id',
+                  include-text='false')
+                  a(ng-click='showSystemModal(system)')
+                    strong &nbsp; {{system._name}} &nbsp;&nbsp;
+                  span.item
+                    strong(translate) Last check in:
+                    span(ng-class='system | checkInStyle') &nbsp;&nbsp;{{system.last_check_in | timeAgo}}
+                .edit-button
+                  span.pull-right(ng-hide='isReadOnly()')
+                    a(ng-hide='tableCtx.edit', ng-click='tableCtx.edit = true')
+                      strong(
+                        translate,
+                        tooltip="{{'Click to add/remove actions for this system' | translate}}") Edit
+                    i.fa.fa-trash-o(
+                      ng-if='tableCtx.edit',
+                      ng-click='removeActions(system.actions)',
+                      tooltip="{{'Remove this system' | translate}}")
                 .text-center.red.hidden
                   strong System restart required&nbsp;&nbsp;
                   i.fa.fa-refresh
               .content.nopad.table-responsive
                 maintenance-table-actions(
                   params='tableParams(system, false, false)',
-                  edit='tableEdit',
+                  edit='tableCtx.edit',
                   item='system')
             div(translate, ng-if='!plan.systems.length') This plan is empty
             pagination.pull-right.pagination-blue(
@@ -233,12 +237,12 @@
                 card-header.gray
                   a(ui-sref='app.actions-rule({category: play.rule.category.toLowerCase(), rule: play.rule.rule_id})')
                     b {{ play.rule.description }}
-                card-content.two-columns
-                  .systems
+                card-content.two-columns.flex
+                  .systems(md-flex-50)
                     h4.section-title(translate) Systems:
                     expandable-system-list(systems='play.systems')
 
-                  .resolution
+                  .resolution(md-flex-50)
                     h4.section-title(translate) Resolution:
                     p {{ play.ansible_resolutions[0].description }} &nbsp;
                       a(ng-if='play.ansible_resolutions.length > 1', ng-click='resolutionModal(play)', tooltip='{{"Multiple resolutions available. Click here to select a different one." | translate}}')
@@ -256,11 +260,10 @@
                   strong.red(translate) System reboot summary
 
                 card-content.gray(ng-if='!systemsToReboot.length')
-                  .cell
-                    p(translate) This playbook&nbsp;
-                      b.text-success(translate) does not require a system reboot.
+                  p(translate) This playbook&nbsp;
+                    b.text-success(translate) does not require a system reboot.
 
-                card-content.gray.flex(ng-if='systemsToReboot.length')
+                card-content.gray(ng-if='systemsToReboot.length')
                   .systems
                     h4.section-title(translate) Systems:
                     expandable-system-list(systems='systemsToReboot')
@@ -278,29 +281,36 @@
                         | The systems will need to be rebooted manually.
 
       footer.footer(ng-show='edit.isActive(plan.maintenance_id)')
-        a.btn.btn-sm.btn-default(ng-if='isInternal && !plan.hidden', ng-click='hidden(true)')
-          i.fa.fa-eye-slash.inline-right
-          span(translate) Hide
-        a.btn.btn-sm.btn-default(ng-if='isInternal && plan.hidden', ng-click='hidden(false)')
-          i.fa.fa-eye.inline-right
-          span(translate) Publish
-        a.btn.btn-sm.btn-accent(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='accept()')
-          i.fa.fa-check.inline-right
-          span(translate) Accept
-        a.btn.btn-sm.btn-default(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='reject()')
-          i.fa.fa-close.inline-right
-          span(translate) Ignore
-        a.btn.btn-sm.btn-accent.pull-right(
-          ng-click='addActions()',
-          ng-if='!isReadOnly()')
-          span(translate) Add actions
-        a.btn.btn-sm.btn-open-blue.action.pull-right(translate, ng-click='exportPlan(plan.maintenance_id)')
-          i.fa.fa-download.inline-right
-          span(translate) Export CSV
-        a.btn.btn-sm.btn-open-blue.action.pull-right(
-            translate,
-            ng-click='downloadPlaybook()',
-            ng-disabled='!ansibleSupport')
-          i.svg.ansible-icon.inline-right
-            img(src='static/images/l_ansible-blue.svg')
-          span(translate) Download Playbook
+        .button-group
+          a(ng-if='isInternal && !plan.hidden', ng-click='hidden(true)')
+            md-button.btn-sm
+              i.fa.fa-eye-slash.inline-right
+              span(translate) Hide
+          a(ng-if='isInternal && plan.hidden', ng-click='hidden(false)')
+            md-button.btn-sm
+              i.fa.fa-eye.inline-right
+              span(translate) Publish
+          a(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='accept()')
+            md-button.btn-sm
+              i.fa.fa-check.inline-right
+              span(translate) Accept
+          a(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='reject()')
+            md-button.btn-sm
+              i.fa.fa-close.inline-right
+              span(translate) Ignore
+
+        .button-group
+          a(translate, ng-click='downloadPlaybook()')
+            md-button.btn-sm.md-button-ghost-blue.md-primary(ng-disabled='!ansibleSupport')
+              i.svg.ansible-icon.inline-right
+                img(src='static/images/l_ansible-blue.svg')
+              span(translate) Download Playbook
+          a(translate, ng-click='exportPlan(plan.maintenance_id)')
+            md-button.btn-sm.md-button-ghost-blue.md-primary
+              i.fa.fa-download.inline-right
+              span(translate) Export CSV
+          a
+            md-button.btn-sm.md-raised.md-primary(
+              ng-click='addActions()',
+              ng-if='!isReadOnly()')
+              span(translate) Add actions

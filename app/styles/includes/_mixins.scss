@@ -27,6 +27,33 @@
   transform: translateY(-50%);
 }
 
+@mixin policyState($state) {
+  @if $state == failed {
+    @include policyState-Styles('red', '\f057');
+  }
+  @if $state == passed {
+    @include policyState-Styles('green', '\f058');
+  }
+  @if $state == errored {
+    @include policyState-Styles('yellow', '\f071');
+  }
+  @if $state == unknown {
+    @include policyState-Styles('unknown', '\f059');
+  }
+}
+
+@mixin policyState-Styles($color, $icon){
+  background: map-get($stateColors, 'bg-' + $color);
+  color: $base-color;
+  box-shadow: inset 3px 0 0 0 map-get($stateColors, 'bs-' + $color);
+  &:before { 
+    font-family: FontAwesome;
+    content: $icon; 
+    color: map-get($stateColors, 'f-' + $color);
+    @include rem ('padding-left', 5px);
+    @include rem ('margin-right', 5px);
+  }
+}
 
 @mixin v-align {
   position: relative;

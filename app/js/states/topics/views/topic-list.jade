@@ -1,8 +1,8 @@
 .actions-page.actions-back
   actions-breadcrumbs(ng-hide="loading")
   section.topic-detail-header
-    page-header(icon="fa-file-text") 
-      .page-title 
+    page-header(icon="fa-file-text")
+      .page-title
         h1 {{::topic.title}}
     .topic-detail-summary(ng-hide='loading')
       h4(ng-if='isIncident(ruleDetails.rule_id)')
@@ -16,7 +16,7 @@
     total-risk-select
     risk-of-change-select
 
-  section.content
+  section.content.rule-groups
     .table-header
       list-type
 

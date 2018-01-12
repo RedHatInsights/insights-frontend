@@ -1,0 +1,49 @@
+.passed { @include policyState('passed'); }
+.errored { @include policyState('errored'); }
+.failed { @include policyState('failed'); }
+.unknown { @include policyState('unknown'); }
+
+.t-col-sm{
+  width: 20%;
+}
+
+.policiesID-page {
+  .description {
+    @include rem('font-size', 10px);
+    opacity: .5;
+  }
+}
+
+.policies-page, .policiesID-page {
+  .content-wrap{ @include rem('margin-top', $global-margin); }
+}
+
+.policiesModal{
+  md-card-header{ 
+    border-bottom: 1px solid #ddd; 
+    i { @include rem ('padding-right', 10px); }
+  }
+
+  .tri-card-container{
+    display: flex;
+    md-card { width: 100%; }
+  }
+}
+
+.state-passed {
+  i { color: #399130 }
+}
+
+.state-failed {
+  i { color: #D53E40 }
+}
+
+.state-warn {
+  i { color: #EE8C38 }
+}
+
+.policies-page, .policiesID-page{
+  table{
+    table-layout: fixed;
+  }
+}

@@ -22,9 +22,9 @@ function ConfigCtrl($scope, $state, $stateParams, User, PermissionService, $root
         $scope.current[$stateParams.tab] = true;
     }
 
-    $scope.tabClick = function (tab) {
+    $scope.tabSelected = function (tab) {
         $state.go('app.config', {
-            tab: tab
+            tab
         }, {
             notify: false
         });

@@ -89,6 +89,11 @@
 	}
 }
 
+li.announcement{ 
+  display: flex;
+  justify-content: space-between;
+}
+
 .message-status-toggle {
   i {
     //position: absolute;

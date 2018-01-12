@@ -3,14 +3,14 @@
   md-button.md-button-sm.md-primary(ng-click='switchVersion(true)', ng-show='!isOnBeta()', translate) Try Insights Beta
 
   // User is in beta, show Beta Options
-  md-menu(md-offset="0 34", md-position-mode="target-right target")
+  md-menu(md-offset="0 34", md-position-mode="target-right target", ng-show='isOnBeta()')
     md-button.md-raised.md-primary#help(ng-click='$mdMenu.open()') 
       strong(translate) Beta options
       i.fa.fa-cog
     md-menu-content(aria-labelledby="help")
       md-menu-item
         a(ng-click='switchStatus()', translate) Default to Insights Beta
-          md-checkbox.md-accent.md-hue-1(ng-show='isOnBeta()', ng-model='isOptedIn') 
+          md-checkbox.md-accent.md-hue-1.beta-checkbox(ng-show='isOnBeta()', ng-model='isOptedIn', aria-label='Beta Button') 
 
       md-menu-item
         a(ng-click='leaveBeta()', translate) Leave Beta

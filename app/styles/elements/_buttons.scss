@@ -2,6 +2,11 @@
 $button-primary-bg: $blue;
 $button-primary-color: #fff;
 
+.button-group{
+  display: inline;
+  a + a { @include rem('margin', 5px); }
+}
+
 .button-tag {
   display: inline-flex;
   @include rem('padding', 8px 15px);
@@ -28,7 +33,7 @@ button {
   text-transform: none;
   font-family: 'overpass';
   transition: .2s;
-  box-shadow: 0 2px 3px 0px rgba(0,0,0,.2);
+  //box-shadow: 0 2px 3px 0px rgba(0,0,0,.2);
 }
 
 button.tag {

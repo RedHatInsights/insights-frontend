@@ -1,4 +1,5 @@
 .actions-rule
+  actions-back
   actions-breadcrumbs(ng-hide='loading')
 
   section.rule-detail-header
@@ -18,7 +19,7 @@
       article(ng-bind-html='ruleDetails.generic_html | trust_html')
 
   table-filters
-    search-box(placeholder="{{'Search rules' | translate}}", on-search='search.doFilter(model)')
+    search-box(placeholder="{{'Find a system' | translate}}", on-search='search(model)')
     check-in-select
 
   section.content
@@ -29,7 +30,7 @@
           data-toggle='dropdown',
           aria-haspopup='true',
           aria-expanded='false',
-          aria-label="checkbox",
+          aria-label='Actions Dropdown',
           translate,
           ng-disabled='!checkboxes.totalChecked || !config.isPlannerEnabled') Actions
           span.caret
@@ -46,8 +47,8 @@
               show-tooltip='false')
 
       .table-header-title
-        h3.system-count(translate, translate-n='{{totalRuleSystems}}', translate-plural='{{$count}} Impacted Systems', ng-if='ruleDetails.type !== "osp"') 1 Impacted System
-        h3.system-count(translate, translate-n='{{totalRuleSystems}}', translate-plural='{{$count}} Impacted Deployments', ng-if='ruleDetails.type === "osp"') 1 Impacted Deployment
+        h3.system-count(translate, translate-n='totalRuleSystems', translate-plural='{{$count}} Impacted Systems', ng-if='ruleDetails.type !== "osp"') 1 Impacted System
+        h3.system-count(translate, translate-n='totalRuleSystems', translate-plural='{{$count}} Impacted Deployments', ng-if='ruleDetails.type === "osp"') 1 Impacted Deployment
         small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{numberOfSelected()}} Selected
           span(ng-show='allSelected && pager.perPage < totalRuleSystems') .
             a(ng-show='!reallyAllSelected', ng-click='reallySelectAll()') &nbsp;Select All Systems.
@@ -55,25 +56,27 @@
           span )
       list-type(ng-hide='hideListSwitch')
 
-    .card-table-header(ng-show='getListType() === listTypes.card')
-      md-checkbox.md-accent.md-hue-1(
-        tooltip="{{'Select All' | translate}}",
-        tooltip-trigger='mouseenter',
-        tooltip-append-to-body='true',
-        tooltip-placement='top',
-        type="checkbox",
-        md-indeterminate="checkboxes.indeterminate",
-        ng-model='checkboxes.checked',
-        ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
-      label.type(translate, ng-click="sort('system_type_id')") &nbsp; Type
-      strong.hostname(translate, ng-click="sort('toString')") Name &nbsp;
-      strong.action-count(translate, ng-click="sort('report_count')") Action Count
+    span(ng-show='getListType() === listTypes.card')
+      .card-table-header
+        md-checkbox.md-accent.md-hue-1(
+          aria-label="Select All Systems Checkbox",
+          tooltip="{{'Select All' | translate}}",
+          tooltip-trigger='mouseenter',
+          tooltip-append-to-body='true',
+          tooltip-placement='top',
+          type="checkbox",
+          md-indeterminate="checkboxes.indeterminate",
+          ng-model='checkboxes.checked',
+          ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
+        label.type(translate, ng-click="sort('system_type_id')") &nbsp; Type
+        strong.hostname(translate, ng-click="sort('toString')") Name &nbsp;
+        strong.action-count(translate, ng-click="sort('report_count')") Action Count
 
-    system-card(ng-repeat='system in ruleSystems',
-      system='system',
-      rule='ruleDetails',
-      checkboxes='checkboxes',
-      ng-show='getListType() === listTypes.card && !loadingSystems')
+    .system-cards.card-list(ng-show='getListType() === listTypes.card && !loadingSystems')
+      system-card.ng-animate-enabled(ng-repeat='system in ruleSystems track by system.system_id',
+        system='system',
+        rule='ruleDetails',
+        checkboxes='checkboxes')
 
     table(ng-show='getListType() === listTypes.table')
       thead
@@ -82,7 +85,7 @@
             md-checkbox.md-accent.md-hue-1.md-checkbox-list(
               tooltip='Select All',
               type="checkbox",
-              aria-label="checkbox",
+              aria-label='Select All Systems Checkbox',
               md-indeterminate="checkboxes.indeterminate",
               ng-model='checkboxes.checked',
               ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
@@ -90,16 +93,16 @@
           th.sortable(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')", translate) Name
           th.min.sortable(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')", translate) Reported
 
-      tbody
+      tbody(ng-hide='loadingSystems')
         tr(ng-click='checkboxes.rowClick($event, system.system_id)',
            ng-mousedown='checkboxes.rowClick($event, system.system_id)',
            ng-class="{'stale': !system.isCheckingIn}",
-           ng-repeat='system in ruleSystems',
+           ng-repeat='system in ruleSystems track by system.system_id',
            data-id="{{system.system_id}}")
           td.min
             md-checkbox.md-accent.md-hue-1.md-checkbox-list(
               type='checkbox',
-              aria-label="checkbox",
+              aria-label='Select System Checkbox',
               ng-model='checkboxes.items[system.system_id]',
               ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();',
             )
@@ -117,7 +120,6 @@
       items-per-page="pager.perPage",
       ng-change="paginate()")
 
-  .margin-top(ng-show='loading')
+  .margin-top(ng-show='loading || loadingSystems')
     .text-center
       .spinner.spinner-lg
-        

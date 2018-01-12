@@ -19,16 +19,15 @@
           ng-keyup="keypress($event)",
           placeholder="{{'Find A Group' | translate}}")
       md-menu-item.selected(ng-repeat='g in groups | filter:showSelectedGroup track by g.id')
-        md-button(ng-click='triggerChange(g)')
+        div(ng-click='triggerChange(g)')
           trimmed-text(length="30", text="{{g.display_name}}") ({{g.systems.length}})
-          i.fa.fa-trash-o.group-control(ng-click='deleteGroup(g); $event.stopPropagation();',
+          i.fa.fa-trash-o.group-control.pull-right(ng-click='deleteGroup(g); $event.stopPropagation();',
             tooltip="{{'Delete group' | translate}}")
       md-menu-item(ng-show="showAllSystems()")
-        a.link(ui-sref="javascript:void(0)", ng-click='triggerChange(null)', translate) - Show all systems -
+        a.link(ng-click='triggerChange(null)', translate) - Show all systems -
       md-menu-item(ng-repeat='g in groups | filter:hideSelectedGroup | orderBy:"display_name" track by g.id')
-        md-button(ng-click='triggerChange(g);')
+        div(ng-click='triggerChange(g)')
           trimmed-text(length="30", text="{{g.display_name}}") ({{g.systems.length}})
-          i.fa.fa-trash-o.group-control(ng-click='deleteGroup(g); $event.stopPropagation();',
+          i.fa.fa-trash-o.group-control.pull-right(ng-click='deleteGroup(g); $event.stopPropagation();',
             tooltip="{{'Delete group' | translate}}")
   a.link.add-group(ui-sref="#", ng-click='createGroup()', tooltip='{{"Create new system group" | translate}}') + Add group
-  

@@ -27,7 +27,9 @@
       span.caret.dropdown-caret(aria-hidden="true")
     md-menu-content(aria-labelledby="help")
       md-menu-item
-        a(ui-sref='https://access.redhat.com/products/red-hat-insights#getstarted', target='_blank', translate) Getting Started
+        a(href='{{gettingStartedLink}}', target='_blank', translate) Getting Started
+      md-menu-item
+        a(href='https://access.redhat.com/documentation/en/red-hat-insights/', target='_blank', translate) Product Documentation
       md-menu-item
         a(ui-sref='info.info', translate) More Info
       md-menu-item
@@ -36,7 +38,6 @@
         a(href='/help/browsers', target='_self', translate, ng-if="isPortal") Browser Support
       md-menu-item
         a(href='/r/insights/docs/', translate) Insights API Documentation
-      md-menu-item
-        demo-account-switcher
+      demo-account-switcher
 
   beta-switch-button

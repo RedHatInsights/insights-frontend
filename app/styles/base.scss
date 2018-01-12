@@ -81,6 +81,7 @@ $define-fa: true !default;
 @import 'page-templates/goals-lite';
 @import 'page-templates/actions';
 @import 'page-templates/eval';
+@import 'page-templates/policies';
 
 
 // Scaffolding extensions
@@ -124,8 +125,8 @@ $define-fa: true !default;
 @import 'components/materials';
 @import 'components/newRules';
 @import 'components/webhooks';
-@import 'components/expandable-card';
-
+@import 'components/policies-modal';
+@import 'components/expand-all-button';
 @import 'components/splash/landing-page';
 @import 'components/prod-filters-link';
 @import 'components/prod-filters-modal';
@@ -161,8 +162,8 @@ $define-fa: true !default;
 @import 'components/severity-icon';
 @import 'components/gauges';
 @import 'components/global-filters';
-@import 'components/demo-account-switcher';
 @import 'components/evaluation';
+@import 'components/renameable-property';
 
 
 // System Overlay

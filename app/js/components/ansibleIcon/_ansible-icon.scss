@@ -1,29 +1,12 @@
-.ansible-icon.supported {
-  md-icon {
-    svg {
-      .st0 {
-        fill: #5bbdbf;
-      }
-    }
-  }
-}
+.ansible-icon.supported md-icon svg .st0 { fill: #5bbdbf; }
 
-.ansible-icon.unsupported {
-  md-icon {
-    svg {
-      .st0 {
-        fill: $gray;
-      }
-    }
-  }
-}
+.ansible-icon.unsupported md-icon svg .st0 { fill: $gray; }
 
 .ansible-icon {
-  display: inline-flex;
-  align-items: center;
+  // display: inline-flex;
+  // align-items: center;
 
   .text {
-    @include rem('margin-left', $global-padding/2);
-    font-weight: 700;
+    display: none;
   }
 }

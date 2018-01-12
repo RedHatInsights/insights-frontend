@@ -1,0 +1,6 @@
+.renameableProperty{
+  .edit-toggle{ 
+    cursor: pointer;
+    @include rem('padding-left', 10px);
+  }
+}

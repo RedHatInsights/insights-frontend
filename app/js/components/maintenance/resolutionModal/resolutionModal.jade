@@ -1,81 +1,82 @@
-.modal-actions
-  i.fa.fa-close(ng-click="cancel()")
+.resolution-modal  
+  .modal-actions
+    i.fa.fa-close(ng-click="cancel()")
 
-.modal-header
-  .text-center
-    i.svg
-      img(src= "static/images/l_ansible-black.svg")
-    h2(translate) Choose Resolution
+  .modal-header
+    .text-center
+      i.svg
+        img(src= "static/images/l_ansible-black.svg")
+      h2(translate) Choose Resolution
 
-.modal-body
-  .row
-    .col-sm-12
-      .group
-        .group-title.group-title-table
-          table
-            tbody
-              tr
-                td
-                  b {{ params.play.rule.description }}
-  .row
-    .col-sm-12
-      .group
-        .group-title
-          i.fa.fa-times-circle(ng-class='systemType.imageClass')
-          b &nbsp; {{systemType.displayName}}
-        .group-content
-          ul
-            li(ng-repeat="system in systems | limitTo:listLimit | orderBy:'toString'")
-              | {{system.toString}}
-          a(ng-show="listLimit !== undefined && listLimit < systems.length",
-            ng-click="listLimit = undefined",
-            translate) View More ({{systems.length - listLimit}})
-          a(ng-show="listLimit === undefined",
-            ng-click="listLimit = MINIMUM_NUMBER_OF_ITEMS",
-            translate) View Less
+  .modal-body
+    .row
+      .col-sm-12
+        .group
+          .group-title.group-title-table
+            table
+              tbody
+                tr
+                  td
+                    b {{ params.play.rule.description }}
+    .row
+      .col-sm-12
+        .group
+          .group-title
+            i.fa.fa-times-circle(ng-class='systemType.imageClass')
+            b &nbsp; {{systemType.displayName}}
+          .group-content
+            ul
+              li(ng-repeat="system in systems | limitTo:listLimit | orderBy:'toString'")
+                | {{system.toString}}
+            a(ng-show="listLimit !== undefined && listLimit < systems.length",
+              ng-click="listLimit = undefined",
+              translate) View More ({{systems.length - listLimit}})
+            a(ng-show="listLimit === undefined",
+              ng-click="listLimit = MINIMUM_NUMBER_OF_ITEMS",
+              translate) View Less
 
-  .row
-    .col-sm-12
-      .group
-        .group-title
-          b(translate) Would you like to:
-        .group-content
-          .radio(ng-repeat='resolution in resolutions track by resolution.resolution_type')
-            label(for='resolution-type-{{$index}}')
-              input(type='radio',
-                    ng-model='selected.resolutionType',
-                    name='resolution-type',
-                    id='resolution-type-{{$index}}',
-                    ng-value='resolution.resolution_type')
-              risk-of-change(change-risk='resolution.resolution_risk', hide-label='true')
-              span {{resolution.description}}
-              br
-              i.fa.fa-repeat.red.inline-left(
-                ng-if='resolution.needs_reboot',
-                tooltip = "{{'This resolution requires a system reboot' | translate}}")
-              strong.red(ng-if='resolution.needs_reboot') &nbsp;Reboot Required
+    .row
+      .col-sm-12
+        .group
+          .group-title
+            b(translate) Would you like to:
+          .group-content
+            .radio(ng-repeat='resolution in resolutions track by resolution.resolution_type')
+              label(for='resolution-type-{{$index}}')
+                input(type='radio',
+                      ng-model='selected.resolutionType',
+                      name='resolution-type',
+                      id='resolution-type-{{$index}}',
+                      ng-value='resolution.resolution_type')
+                risk-of-change(change-risk='resolution.resolution_risk', hide-label='true')
+                span {{resolution.description}}
+                br
+                i.fa.fa-repeat.red.inline-left(
+                  ng-if='resolution.needs_reboot',
+                  tooltip = "{{'This resolution requires a system reboot' | translate}}")
+                strong.red(ng-if='resolution.needs_reboot') &nbsp;Reboot Required
 
-  .row
-    .col-sm-12
-      p(translate) This setting can be changed anytime in the&nbsp;
-        strong(translate) Playbook Settings&nbsp;
-        | tab
+    .row
+      .col-sm-12
+        p(translate) This setting can be changed anytime in the&nbsp;
+          strong(translate) Playbook Settings&nbsp;
+          | tab
 
-  .row(ng-if='params.steps > 1')
-    .col-sm-12
-        ul.pagination.pagination-dots
-          li(ng-repeat='i in range(params.index) track by $index')
-            a.sr-only
-          li.active
-            a.sr-only
-          li(ng-repeat='i in range(params.steps - params.index - 1) track by $index')
-            a.sr-only
+    .row(ng-if='params.steps > 1')
+      .col-sm-12
+          ul.pagination.pagination-dots
+            li(ng-repeat='i in range(params.index) track by $index')
+              a.sr-only
+            li.active
+              a.sr-only
+            li(ng-repeat='i in range(params.steps - params.index - 1) track by $index')
+              a.sr-only
 
-.modal-footer
-  ul.row.pager.pager-steps
-    li.previous.col-sm-6
-      a.btn.cancel(ng-click='cancel()')
-        span(translate, ng-if='params.steps') Skip and use defaults
-        span(translate, ng-if='!params.steps') Cancel
-    li.next.col-sm-6
-      a.btn.save(ng-click='save()', translate) Save
+  .modal-footer
+    ul.row.pager.pager-steps
+      li.previous.col-sm-6
+        a.btn.cancel(ng-click='cancel()')
+          span(translate, ng-if='params.steps') Skip and use defaults
+          span(translate, ng-if='!params.steps') Cancel
+      li.next.col-sm-6
+        a.btn.save(ng-click='save()', translate) Save

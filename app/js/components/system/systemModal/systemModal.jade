@@ -3,9 +3,13 @@
   .modal-actions
     .fa.fa-close.pull-right(ng-click='close()')
   system-metadata(system='system')
-  .message.alert.alert-danger.alert-systems-not-checking(ng-if='!system.isCheckingIn')
-    span.glyphicon.glyphicon-exclamation-sign.rule-margin
-    span(translate) This system is not checking in.
-  .rule-summaries(system='system', machine-id='system.system_id', rule='rule', rule-filter='ruleFilter', loading='loading')
-  .rule-summary.system-overlay-item.content-block(ng-if='system.__fake', report='report', rule='rule', loading='loading')
 
+  md-tabs(md-dynamic-height='', md-border-bottom='')
+    md-tab(label='Rules', md-active="activeTab === 'system'")
+      md-content
+        .rule-summaries(system='system', machine-id='system.system_id', rule='rule', rule-filter='ruleFilter', loading='loading')
+        .rule-summary.system-overlay-item.content-block(ng-if='system.__fake', report='report', rule='rule', loading='loading')
+    
+    md-tab(label='Policies', md-active="activeTab === 'policy'", ng-if='hasPolicies')
+      md-content
+        policies-modal(system-id='system.system_id')
