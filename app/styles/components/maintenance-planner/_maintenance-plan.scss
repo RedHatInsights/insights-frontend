@@ -858,3 +858,9 @@ table.maintenance-table {
 .maintenance-plan-modal .form-group input {
   -webkit-box-sizing: border-box; 
 }
+
+.resolution-modal .btn {
+
+  font-weight: 700;
+  &.save{ color: #fff; }
+}
