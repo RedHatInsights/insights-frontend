@@ -11,6 +11,7 @@ const some = require('lodash/some');
 const assign = require('lodash/assign');
 const pick = require('lodash/pick');
 const diffWith = require('lodash/differenceWith');
+const constant = require('lodash/constant');
 
 /**
  * @ngInject
@@ -78,7 +79,9 @@ function MaintenanceService(
 
                     rule: function () {
                         return rule;
-                    }
+                    },
+
+                    activeTab: constant('system')
                 }
             });
         });
