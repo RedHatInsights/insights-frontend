@@ -68,15 +68,16 @@ function InventoryCtrl(
     $scope.loading = InventoryService.loading;
     $scope.reloading = false;
 
-    let reverse = false;
-    if ($location.search().sort_dir) {
-        reverse = $location.search().sort_dir === 'ASC' ? false : true;
-    }
+    FilterService.parseBrowserQueryParams();
+    System.getProductSpecificData();
 
-    $scope.sorter = new Utils.Sorter({
-        predicate: $location.search().sort_field || DEFAULT_PREDICATE,
-        reverse: reverse
-    }, getData);
+    if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
+        $rootScope.$on('user:loaded', function () {
+            initInventory();
+        });
+    } else {
+        initInventory();
+    }
 
     let params = $state.params;
     $state.transitionTo('app.inventory', updateParams(params), { notify: false });
@@ -108,13 +109,24 @@ function InventoryCtrl(
 
     $scope.isPortal = InsightsConfig.isPortal;
 
+    function initSorter() {
+        $scope.sorter = new Utils.Sorter({
+            predicate: $location.search().sort_field || DEFAULT_PREDICATE,
+            reverse: $location.search().sort_dir === 'ASC' ? false : true
+        }, getData);
+    }
+
     function cleanTheScope() {
         $scope.pager = new Utils.Pager(DEFAULT_PAGE_SIZE);
+        initSorter();
         $scope.checkboxes.reset();
     }
 
     function initInventory() {
         $scope.loading = true;
+
+        //initialize the sorter
+        initSorter();
 
         //initialize pager and grab paging params from url
         $scope.pager = new Utils.Pager(DEFAULT_PAGE_SIZE);
@@ -144,7 +156,7 @@ function InventoryCtrl(
 
         //sort field/direction
         query.sort_by = $scope.sorter.predicate;
-        FilterService.setQueryParam('sort_by', $scope.sorter.predicate);
+        FilterService.setQueryParam('sort_field', $scope.sorter.predicate);
         FilterService.setQueryParam('sort_dir', $scope.sorter.getSortDirection());
 
         // special case where we are sorting by timestamp but visually
@@ -217,21 +229,6 @@ function InventoryCtrl(
         $scope.pager.update();
         $scope.checkboxes.reset();
     };
-
-    function parseBrowserQueryParams() {
-        FilterService.parseBrowserQueryParams();
-    }
-
-    parseBrowserQueryParams();
-    System.getProductSpecificData();
-
-    if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
-        $rootScope.$on('user:loaded', function () {
-            initInventory();
-        });
-    } else {
-        initInventory();
-    }
 
     $scope.getSelectableSystems = function () {
         return $scope.systems;

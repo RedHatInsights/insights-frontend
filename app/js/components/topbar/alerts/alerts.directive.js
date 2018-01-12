@@ -8,13 +8,13 @@ var componentsModule = require('../../');
 function alertsCtrl($rootScope,
                     $scope,
                     $state,
+                    $location,
                     gettextCatalog,
                     RhaTelemetryActionsService,
                     System,
                     TopbarAlertsService,
                     MaintenanceService,
-                    FilterService,
-                    InventoryService) {
+                    FilterService) {
 
     $scope.service = TopbarAlertsService;
 
@@ -56,14 +56,10 @@ function alertsCtrl($rootScope,
     function goToInventory () {
         FilterService.setOnline(false);
         FilterService.setOffline(true);
-        InventoryService.setSort({
-            field: 'last_check_in',
-            direction: 'DESC'
-        });
+        FilterService.setQueryParam('sort_field', 'last_check_in');
+        FilterService.setQueryParam('sort_dir', 'ASC');
 
-        $state.go('app.inventory', {
-            offline: true
-        });
+        $state.go('app.inventory', $location.search());
     }
 
     function select (item) {
@@ -73,6 +69,8 @@ function alertsCtrl($rootScope,
             goToInventory();
         }
     }
+
+    $scope.goToInventory = goToInventory;
 
     loadSystemAlerts();
     MaintenanceService.plans.load();
