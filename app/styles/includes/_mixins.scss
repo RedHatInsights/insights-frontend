@@ -27,22 +27,40 @@
   transform: translateY(-50%);
 }
 
+// policyState takes a class and determines styles
+// Sends to policyState-Styles(color, icon, does this row need to be darker?)
 @mixin policyState($state) {
   @if $state == failed {
-    @include policyState-Styles('red', '\f057');
+    @include policyState-Styles('red', '\f057', false);
   }
   @if $state == passed {
-    @include policyState-Styles('green', '\f058');
+    @include policyState-Styles('green', '\f058', false);
   }
   @if $state == errored {
-    @include policyState-Styles('yellow', '\f071');
+    @include policyState-Styles('yellow', '\f071', false);
   }
   @if $state == unknown {
-    @include policyState-Styles('unknown', '\f059');
+    @include policyState-Styles('unknown', '\f059', false);
   }
 }
 
-@mixin policyState-Styles($color, $icon){
+@mixin policyState-alt($state) {
+  @if $state == failed {
+    @include policyState-Styles('red', '\f057', true);
+  }
+  @if $state == passed {
+    @include policyState-Styles('green', '\f058', true);
+  }
+  @if $state == errored {
+    @include policyState-Styles('yellow', '\f071', true);
+  }
+  @if $state == unknown {
+    @include policyState-Styles('unknown', '\f059', true);
+  } 
+}
+
+// Detemining colors from $stateColors in _vars.scss
+@mixin policyState-Styles($color, $icon, $isDark){
   background: map-get($stateColors, 'bg-' + $color);
   color: $base-color;
   box-shadow: inset 3px 0 0 0 map-get($stateColors, 'bs-' + $color);
@@ -52,6 +70,10 @@
     color: map-get($stateColors, 'f-' + $color);
     @include rem ('padding-left', 5px);
     @include rem ('margin-right', 5px);
+  }
+  // Darken if the row is even
+  @if $isDark {
+    background: darken(map-get($stateColors, 'bg-' + $color), 2% );
   }
 }
 
