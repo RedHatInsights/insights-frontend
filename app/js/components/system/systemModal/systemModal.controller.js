@@ -24,6 +24,25 @@ function SystemModalCtrl(
     $scope.activeTab = 'system';
     $scope.report = {};
     $scope.modal = $modalInstance;
+    $scope.tabs = {
+        Rules: 0,
+        Policies: 1,
+        Vulnerabilities: 2
+    };
+
+    // set the default tab for system modal; system if no value is passed in
+    $scope.activeTab = $scope.tabs[activeTab || 'Rules'];
+
+    $scope.isActive = function (tab) {
+        console.log(tab);
+        console.log($scope.tabs[tab]);
+        console.log('--------------------');
+        return $scope.tabs[tab];
+    };
+
+    $scope.activateTab = function (activatingTab) {
+        $scope.activeTab = $scope.tabs[activatingTab];
+    };
 
     // enables tab hack
     $scope.setActive = function (name) {

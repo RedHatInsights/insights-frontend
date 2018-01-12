@@ -31,8 +31,8 @@ function InventoryCtrl(
         ListTypeService,
         ActionbarService,
         Export,
-        Group) {
-
+        Group,
+        VMAAS_SYSTEMS) {
     const DEFAULT_PAGE_SIZE = 15;
     const DEFAULT_PREDICATE = 'toString';
 
@@ -203,6 +203,8 @@ function InventoryCtrl(
 
             $scope.systems = response.resources;
             InventoryService.setTotal(response.total);
+
+            getSystemRhsaCounts();
 
             SystemsService.systems = $scope.systems;
         }
@@ -451,6 +453,40 @@ function InventoryCtrl(
     $scope.reloadInventory = function () {
         cleanTheScope();
         getData(false);
+    };
+
+    // VMAAS
+    // This function counts all the rhsas in the mock data
+    // TODO: Switch this to whatever api will be necessary to get
+    //       get the rhsa severity counts
+    function getSystemRhsaCounts() {
+        $scope.systems.forEach(function (system) {
+            system.critical_rhsa_count = 0;
+            system.important_rhsa_count = 0;
+            system.moderate_rhsa_count = 0;
+            system.low_rhsa_count = 0;
+
+            const sys = find(VMAAS_SYSTEMS, function (vmaas) {
+                return vmaas.hasOwnProperty(system.toString);
+            });
+
+            if (sys) {
+                system.packages = sys[system.toString].packages;
+                sys[system.toString].packages.forEach(function (pkg) {
+                    system.critical_rhsa_count += pkg.critical_count;
+                    system.important_rhsa_count += pkg.important_count;
+                    system.moderate_rhsa_count += pkg.moderate_count;
+                    system.low_rhsa_count += pkg.low_count;
+                });
+            }
+        });
+    }
+
+    $scope.hasRhsas = function (system) {
+        return system.critical_rhsa_count > 0 ||
+               system.important_rhsa_count > 0 ||
+               system.moderate_rhsa_count > 0 ||
+               system.low_rhsa_count > 0;
     };
 }
 

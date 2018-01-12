@@ -4,16 +4,16 @@
     .fa.fa-close.pull-right(ng-click='close()')
   system-metadata(system='system')
 
-  md-tabs(md-dynamic-height='', md-border-bottom='')
-    md-tab(label='Rules', md-active="activeTab === 'system'")
+  md-tabs(md-dynamic-height='', md-border-bottom='', md-selected="activeTab")
+    md-tab(label='Rules', ng-click="activateTab('Rules')")
       md-content
         .rule-summaries(system='system', machine-id='system.system_id', rule='rule', rule-filter='ruleFilter', loading='loading')
         .rule-summary.system-overlay-item.content-block(ng-if='system.__fake', report='report', rule='rule', loading='loading')
-    
-    md-tab(label='Policies', md-active="activeTab === 'policy'", ng-if='hasPolicies')
+
+    md-tab(label='Policies', ng-if='hasPolicies', ng-click="activateTab('Policies')")
       md-content
         policies-modal(system-id='system.system_id')
 
-    md-tab(label='Vulnerabilities', md-active="activeTab === 'Vulnerabilities'")
+    md-tab(label='Vulnerabilities', ng-click="activateTab('Vulnerabilities')")
       md-content
         vulnerabilities-modal

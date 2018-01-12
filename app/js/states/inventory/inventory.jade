@@ -52,7 +52,15 @@
               th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'last_check_in':sorter.reverse", ng-click="sorter.sort('last_check_in')", translate) Last Check In
               th.min.sortable(ng-class="sorter.predicate | sortClass:'report_count':sorter.reverse", ng-click="sorter.sort('report_count')", translate) Status
           tbody(ng-if='!loading')
-
+              th.fit-content.min.sortable(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')", translate) System Type
+              th.sortable(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')", translate) System Name
+              th.sortable(translate) Critical
+              th.sortable(translate) Important
+              th.sortable(translate) Moderate
+              th.sortable(translate) Low
+              th.fit-content.min.sortable(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')", translate) Last Check In
+              th.min.sortable(ng-class="predicate | sortClass:'report_count':reverse", ng-click="sort('report_count')", translate) Status
+          tbody(ng-show='!loading')
             tr(ng-repeat='system in systems track by system.system_id',
                ng-class="{'stale': !system.isCheckingIn}",
                ng-click='checkboxes.rowClick($event, system.system_id)',
@@ -68,8 +76,16 @@
               td.fit-content
                 type-icon(type-id='system.system_type_id', include-text='true')
               td.fit-content
-                a(ng-click="showActions(system)") {{:: system.toString}}
-              td.fit-content {{:: system.last_check_in | timeAgo }}
+                a(ng-click="showActions(system)") {{system.toString}}
+              td.fit-content
+                a(ng-click="showActions(system,false, 'Vulnerabilities')") {{hasRhsas(system) ? system.critical_rhsa_count : '-'}}
+              td.fit-content
+                a(ng-click="showActions(system, false, 'Vulnerabilities')") {{hasRhsas(system) ? system.important_rhsa_count : '-'}}
+              td.fit-content
+                a(ng-click="showActions(system, false, 'Vulnerabilities')") {{hasRhsas(system) ? system.moderate_rhsa_count : '-'}}
+              td.fit-content
+                a(ng-click="showActions(system, false, 'Vulnerabilities')") {{hasRhsas(system) ? system.low_rhsa_count : '-'}}
+              td.fit-content {{ system.last_check_in | timeAgo }}
               td.fit-content
                 a.action-count.icon-inline(ng-click='showActions(system)')
                   span.text(translate, translate-n="system.report_count", translate-plural="{{:: $count}} Actions") {{:: system.report_count}} Action
