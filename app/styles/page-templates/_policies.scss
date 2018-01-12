@@ -13,6 +13,14 @@
     opacity: .5;
   }
   .section-topic-details { @include rem('margin', $global-margin); }
+
+  tr:nth-of-type(even) {
+    .passed { @include policyState-alt('passed'); }
+    .errored { @include policyState-alt('errored'); }
+    .failed { @include policyState-alt('failed'); }
+    .unknown { @include policyState-alt('unknown'); }
+  }
+
 }
 
 .policies-page, .policiesID-page {
