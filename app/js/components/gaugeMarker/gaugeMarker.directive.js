@@ -8,12 +8,31 @@ const priv = {};
  * @ngInject
  */
 function gaugeMarkerController($scope, gettextCatalog) {
+
+    const MAX_SCORE = 850;
+    const MIN_SCORE = 250;
+
     priv.getString = (str) => {
         return str + ' ' + $scope.difference + ' ' + gettextCatalog.getString('points');
     };
 
     priv.init = () => {
-        $scope.rotate = (($scope.current - 250) * 0.3);
+
+        // protects against invalid data; current should never be below MIN_SCORE
+        if ($scope.current < MIN_SCORE) {
+            $scope.current = MIN_SCORE;
+        }
+
+        // current should never be above MAX_SCORE
+        if ($scope.current > MAX_SCORE) {
+            $scope.current = MAX_SCORE;
+        }
+
+        if ($scope.difference > 600 || $scope.difference < -600) {
+            $scope.difference = 0;
+        }
+
+        $scope.rotate = (($scope.current - MIN_SCORE) * 0.3);
 
         if ($scope.difference > 0) {
             $scope.diffClass = 'increase';
