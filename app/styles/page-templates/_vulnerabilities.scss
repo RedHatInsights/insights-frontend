@@ -15,16 +15,27 @@ $vul-low: #eaeaea;
 
 
 .page-vulnerabilities{
-  .outer-card .card-header-title {
-    align-items: center;
+
+  .outer-card {
+    .card-header-title { align-items: center; }
+
     .package-date { 
       color: $gray-subhead; 
       @include rem('margin-top', 5px);
       font-weight: 500;
     }
+
     .vul-state { 
       & >:not(:first-child) { @include rem('margin-left', 15px); }
       display: flex;
     }
+
+    .embedded-card{
+      box-shadow: none;
+      border: 1px solid #efefef;
+      border-radius: 5px;
+      .card-content { padding: 0px; }
+    }
+
   }
 }
