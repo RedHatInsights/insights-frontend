@@ -13,11 +13,13 @@
     .card-header-title { align-items: center; }
 
     .package-info {
-      .date { 
+      .date, .version { 
+        display: inline-block;
         color: $gray-subhead; 
         @include rem('margin-top', 5px);
         font-weight: 500;
       }
+      .version { @include rem('margin-left', $global-margin); }
     }
 
     .vul-state { 
