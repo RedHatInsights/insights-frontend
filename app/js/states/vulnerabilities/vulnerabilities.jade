@@ -1,2 +1,10 @@
 .page-vulnerabilities
-  page-header(title="Vulnerabilities", icon="fa-stethoscope")
+  section
+    page-header(title="Vulnerabilities", icon="fa-stethoscope")
+
+  table-filters
+    search-box(placeholder="{{'Find a system' | translate}}", on-search='search(model)')
+    check-in-select
+    rhsa-severity-select
+    days-known-select
+

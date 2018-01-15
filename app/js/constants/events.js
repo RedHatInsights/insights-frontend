@@ -44,6 +44,8 @@ let _EVENT_ROOTS = [{
              'age',
              'categorySelect',
              'checkInSelect',
+             'daysKnownSelect',
+             'rhsaSeveritySelect',
              'incident',
              'maintenanceCategorySelect',
              'populatedProducts',
