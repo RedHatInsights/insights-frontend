@@ -7,7 +7,8 @@ span.dropdown.dropdown-notification(dropdown='', on-toggle='toggled(open)')
       .announcement-message
         .title
           b {{item.title}}
-        .message {{item.body.length > 140 ? item.body.substring(0, 140) + '...' : item.body.substring(0, item.body.length)}}
+        .message 
+          trimmed-text(length="140", text="{{item.body.substring}}") ({{item.body.length}})
       .message-status-toggle
         i.fa.fa-check-circle-o.acked(ng-if="item.acked")
         i.fa.fa-circle-o(ng-if="!item.acked")
