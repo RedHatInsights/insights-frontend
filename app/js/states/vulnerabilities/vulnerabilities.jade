@@ -8,3 +8,52 @@
     rhsa-severity-select
     days-known-select
 
+  .content-wrap
+    expand-all-button.toggle-expand-right
+    card.outer-card(expandable='true')
+      card-header-expandable
+        .card-header-title
+          .title
+            .package-name ntp
+            .package-date Release Date: 2017-1-1
+          .vul-state 
+            .critical(translate) 1 Critical
+            .important(translate) 1 Important
+            .moderate(translate) 1 Moderate 
+            .low(translate) 1 Low
+      card-content.card-content.ng-animate-enabled(collapse="card.collapsed")
+        card(expandable='true').embed-card
+          card-header-expandable
+            .card-header-title
+              .title RHSA-2018:0000
+              .systems-affected 4 Systems Affected
+          card-content.card-content.ng-animate-enabled(collapse="card.collapsed")
+            table
+              thead
+                tr
+                  th.sortable.nowrap(translate) System Name
+                  th.sortable.nowrap(translate) System Type
+                  th.sortable.nowrap(translate) Last Check In
+                  th.sortable.nowrap(translate) Status
+              tbody
+                tr
+                  td.nowrap
+                    a System Name
+                  td.nowrap
+                    span RHEL Server
+                  td.nowrap
+                    span 9 Days Ago
+                  td.nowrap
+                    span 0 Actions
+                tr
+                  td.nowrap
+                    a System Name 2
+                  td.nowrap
+                    span RHEL Server
+                  td.nowrap
+                    span 10 Days Ago
+                  td.nowrap
+                    span 5 Actions
+
+              
+
