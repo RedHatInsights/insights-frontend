@@ -91,6 +91,7 @@ if (isPortal) {
     angular.module('insights').config(require('./portal/config'));
     angular.module('insights').config(require('./portal/base_routes'));
     angular.module('insights').config(require('./portal/routes'));
+    angular.module('insights').config(require('./portal/redirects'));
 
     const Jwt = require('jwt-redhat').default;
     Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
