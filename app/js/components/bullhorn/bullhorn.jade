@@ -1,14 +1,14 @@
 span.dropdown.dropdown-notification(dropdown='', on-toggle='toggled(open)')
   a.dropdown-toggle(href='', dropdown-toggle='')
-    i.fa(class='{{icon}}')
-    span.count(ng-if="unackedCount !== 0") {{unackedCount}}
+    i.fa(class='{{:: icon}}')
+    span.count(ng-if="unackedCount !== 0") {{:: unackedCount}}
   ul.dropdown-menu.preview
     li.announcement(ng-repeat="item in items", ng-class="{ acked: (item.acked) }", ng-click="item.acked ? selectAnnouncement(item) : ack(item)")
       .announcement-message
         .title
-          b {{item.title}}
-        .message 
-          trimmed-text(length="140", text="{{item.body.substring}}") ({{item.body.length}})
+          b {{:: item.title}}
+        .message
+          trimmed-text(length="140", text="{{:: item.body.substring}}") ({{:: item.body.length}})
       .message-status-toggle
         i.fa.fa-check-circle-o.acked(ng-if="item.acked")
         i.fa.fa-circle-o(ng-if="!item.acked")

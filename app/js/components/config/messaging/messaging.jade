@@ -1,7 +1,7 @@
 .acks.row.active
   .col-md-12
     h2.page-title(translate) Messaging Preferences
-    p(translate) Manage Red Hat Insights email subscriptions for your personal login. All emails will be sent to the email address associated with your login. To update your address see 
+    p(translate) Manage Red Hat Insights email subscriptions for your personal login. All emails will be sent to the email address associated with your login. To update your address see&nbsp;
       a(href="https://www.redhat.com/wapps/ugc/protected/personalInfo.html", target="_blank") Personal Info
       | .
     form(ng-submit='save(form)', name='form')
@@ -9,6 +9,6 @@
         .checkbox.push-bottom-narrow(ng-repeat="campaign in campaigns | orderBy:'id' track by campaign.id")
           label
             input(type='checkbox', ng-model='campaign.enrolled')
-            | {{campaign.label|translate}}
-            .small(ng-if="campaign.description")  {{campaign.description|translate}}
+            | {{:: campaign.label|translate}}
+            .small(ng-if="campaign.description")  {{:: campaign.description|translate}}
         md-button.md-raised.md-primary.pull-right(name='submit', ng-disabled='form.$pristine', translate) Update

@@ -6,13 +6,13 @@ card.card-accent.widget.widget-new-systems
     .card-header-cta
       a.cta-link(ui-sref='app.rules', translate) View rules
   card-content
-    .spinner(ng-show='loader.loading')
-    p(translate) {{rules.length}} new rules
-    .rule-wrapper(ng-repeat="rule in rules | orderBy: 'rule.created_at' | limitTo: 3")
+    .spinner(ng-if='loader.loading')
+    p(translate) {{:: rules.length}} new rules
+    .rule-wrapper(ng-repeat="rule in rules | orderBy: 'rule.created_at' | limitTo: 3  track by rule.id")
       .rule-title
-        a(ui-sref='app.rules({"anchor" : rule.rule_id})') {{rule.description}}
+        a(ui-sref='app.rules({"anchor" : rule.rule_id})') {{:: rule.description}}
       .rule-date
-        span.light(translate) Published {{rule.publish_date | timeAgo}}
+        span.light(translate) Published {{:: rule.publish_date | timeAgo}}
     .footer.text-center
       a(ng-if="rules.length === 1", ui-sref='app.rules({age: 15})', translate) View the new rule
-      a(ng-if="rules.length > 1", ui-sref='app.rules({age: 15})', translate) View all {{rules.length}} new rules
+      a(ng-if="rules.length > 1", ui-sref='app.rules({age: 15})', translate) View all {{:: rules.length}} new rules

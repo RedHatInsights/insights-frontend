@@ -14,6 +14,7 @@ function RuleSummaryCtrl(
     $scope.show = {
         moreInfo: false
     };
+
     $scope.initCollapsed = false;
 
     if (($scope.ruleFilter && $scope.ruleId && $scope.ruleId !== $scope.report.rule_id) ||

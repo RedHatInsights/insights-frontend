@@ -7,7 +7,7 @@
       strong(translate) Active filters:&nbsp;
       // remove filter on click
       button.btn.btn-accent(ng-repeat="(key, value) in tags", ng-click='removeFilter(key)')
-        span(translate) {{value | translate}}
+        span(translate) {{:: value | translate}}
         i.fa.fa-times-circle-o(aria-hidden="true")
 
   footer#dataFiltersControlBar.data-filters-control-bar

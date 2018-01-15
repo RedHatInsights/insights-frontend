@@ -9,7 +9,7 @@ card.card-accent.widget.widget-maintenance-plan
     a.link.suggestions(ng-if='getFirstSuggestion()', ng-click='openPlan(getFirstSuggestion())')
       span.icon.icon-inline
         i.fa.fa-check-square-o(aria-hidden="true")
-      strong.underline(translate, translate-n='plans.suggested[0].actions.length', translate-plural='You have a new plan suggestion ({{$count}} actions)') You have a new plan suggestion (1 action)
+      strong.underline(translate, translate-n='plans.suggested[0].actions.length', translate-plural='You have a new plan suggestion ({{:: $count}} actions)') You have a new plan suggestion (1 action)
     maintenance-plan-lite-table(plans='plans.future', silence='silence', duration='duration', ng-if='plans.future.length')
 
     table.table.table-separated(ng-if='!plans.future.length && plans.unscheduled.length')
@@ -22,12 +22,12 @@ card.card-accent.widget.widget-maintenance-plan
       tbody
         tr(ng-repeat="plan in (plans.unscheduled | limitTo:3 | orderBy:'-maintenance_id') track by plan.maintenance_id")
           td.start(ng-click='openPlan(plan)')
-            a {{MaintenanceService.getPlanName(plan)}}
+            a {{:: MaintenanceService.getPlanName(plan)}}
           td.action-count(ng-click="openPlan(plan)")
-            span {{plan.actionsDone}}/{{plan.actions.length}}
+            span {{:: plan.actionsDone}}/{{:: plan.actions.length}}
 
     .text-center(ng-if='stats.rules.ansible')
-      strong(translate, translate-n='stats.rules.ansible', translate-plural='{{$count}} issues can be resolved automatically') 1 issue can be resolved automatically
+      strong(translate, translate-n='stats.rules.ansible', translate-plural='{{:: $count}} issues can be resolved automatically') 1 issue can be resolved automatically
       span(translate) &nbsp;using&nbsp;
       ansible-icon.inline-right(value = 'true', show-tooltip='true', hide-label="true")
       span(translate) Ansible

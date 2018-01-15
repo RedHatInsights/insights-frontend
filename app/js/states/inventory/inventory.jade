@@ -1,7 +1,7 @@
 .page-inventory
   page-header(title="Inventory", icon="fa-database")
   table-filters
-    search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder="{{'Find a system' | translate}}")
+    search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder="{{:: 'Find a system' | translate}}")
     check-in-select
     actions-select
 
@@ -13,7 +13,7 @@
 
     .card-table-header(ng-if='getListType() === listTypes.card')
       md-checkbox.md-accent.md-hue-1.md-checkbox-list.checkbox(
-        tooltip="{{'Select All' | translate}}",
+        tooltip="{{:: 'Select All' | translate}}",
         aria-label='Select All Systems Checkbox',
         tooltip-trigger='mouseenter',
         tooltip-append-to-body='true',
@@ -26,7 +26,7 @@
       strong.hostname(translate, ng-click="sort('toString')") Name &nbsp;
       strong.action-count(translate, ng-click="sort('report_count')") Action Count
 
-    .system-cards.card-list(ng-show='getListType() === listTypes.card && !loading')
+    .system-cards.card-list(ng-if='getListType() === listTypes.card && !loading')
       system-card.ng-animate-enabled(
         ng-repeat='system in systems track by system.system_id',
         system='system',
@@ -36,29 +36,28 @@
 
     .row.row-short
       .col-md-12
-        table(ng-show='getListType() === listTypes.table')
+        table(ng-if='getListType() === listTypes.table')
           thead
             tr
               th.min
                 md-checkbox.md-accent.md-hue-1.md-checkbox-list(
-                  tooltip="{{'Select All' | translate}}",
+                  tooltip="{{:: 'Select All' | translate}}",
                   type="checkbox",
                   aria-label='Select All Systems Checkbox',
                   md-indeterminate="{{ checkboxes.indeterminate || false }}",
                   ng-model='checkboxes.checked',
                   ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
-
-
               th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'system_type_id':sorter.reverse", ng-click="sorter.sort('system_type_id')", translate) System Type
               th.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse", ng-click="sorter.sort('toString')", translate) System Name
               th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'last_check_in':sorter.reverse", ng-click="sorter.sort('last_check_in')", translate) Last Check In
               th.min.sortable(ng-class="sorter.predicate | sortClass:'report_count':sorter.reverse", ng-click="sorter.sort('report_count')", translate) Status
-          tbody(ng-show='!loading')
+          tbody(ng-if='!loading')
+
             tr(ng-repeat='system in systems track by system.system_id',
                ng-class="{'stale': !system.isCheckingIn}",
                ng-click='checkboxes.rowClick($event, system.system_id)',
                ng-mousedown='checkboxes.rowClick($event, system.system_id)',
-               data-id="{{system.system_id}}"
+               data-id="{{:: system.system_id}}"
             )
               td.min
                 md-checkbox.md-accent.md-hue-1.md-checkbox-list(
@@ -69,16 +68,16 @@
               td.fit-content
                 type-icon(type-id='system.system_type_id', include-text='true')
               td.fit-content
-                a(ng-click="showActions(system)") {{system.toString}}
-              td.fit-content {{ system.last_check_in | timeAgo }}
+                a(ng-click="showActions(system)") {{:: system.toString}}
+              td.fit-content {{:: system.last_check_in | timeAgo }}
               td.fit-content
                 a.action-count.icon-inline(ng-click='showActions(system)')
-                  span.text(translate, translate-n="system.report_count", translate-plural="{{$count}} Actions") {{system.report_count}} Action
+                  span.text(translate, translate-n="system.report_count", translate-plural="{{:: $count}} Actions") {{:: system.report_count}} Action
                   i.fa(ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count, 'success': !system.report_count, 'fail': system.report_count}")
                   span.sr-only Time to destination by car:
 
 
-    .row.row-short(ng-show='!loading')
+    .row.row-short(ng-if='!loading')
       .col-sm-12
         pagination.pull-right.pagination-blue(
           ng-if="totalSystems() > pager.perPage",
@@ -88,7 +87,7 @@
           ng-change="doScroll()")
 
   .animate-wrapper.margin-top
-    .row.row-short.ng-animate-enabled(ng-show='loading')
+    .row.row-short.ng-animate-enabled(ng-if='loading')
       .col-xs-12
         .load.text-center
           .spinner.spinner-lg

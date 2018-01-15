@@ -1,6 +1,6 @@
 time
-  span.from {{startTime | lowercase}}
-  span(ng-if='startDate') &nbsp;({{startDate}})
+  span.from {{:: startTime | lowercase}}
+  span(ng-if='startDate') &nbsp;({{:: startDate}})
   span &nbsp;-&nbsp;
-  span.to {{endTime | lowercase}}
-  span(ng-if='endDate') &nbsp;({{endDate}})
+  span.to {{:: endTime | lowercase}}
+  span(ng-if='endDate') &nbsp;({{:: endDate}})

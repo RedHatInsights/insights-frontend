@@ -9,7 +9,7 @@
         img(gravatar-src="user.email" gravatar-size="100" gravatar-d="blank")
       .info
         .name
-          strong {{user.first_name}} {{user.last_name}}
+          strong {{:: user.first_name}} {{:: user.last_name}}
         .last-login
           strong Last login:
           date 07/22/15
@@ -20,7 +20,7 @@
         a(ui-sref="app.announcements")
           i.fa.fa-bullhorn
           span(translate) Announcements
-          span.count {{ alerts.unseen.length }}
+          span.count {{:: alerts.unseen.length }}
       li(ng-if="false")
         a
           i.fa.fa-bell
