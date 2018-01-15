@@ -3,8 +3,8 @@
     h2 Demo Mode
       div
         button.btn.btn-small(
-          ng-show='user.demo_mode || user.is_internal', 
-          ng-click='demoModeButtonOnClick()') {{getDemoModeButtonText()}}
+          ng-show='user.demo_mode || user.is_internal',
+          ng-click='demoModeButtonOnClick()') {{:: getDemoModeButtonText()}}
     h2 API Prefix
     table
       tbody

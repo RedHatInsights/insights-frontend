@@ -6,7 +6,7 @@ card.card-accent.widget.widget-new-systems
     .card-header-cta
       a.cta-link(ui-sref='app.inventory', translate) View inventory
   card-content
-    .spinner(ng-show='loader.loading')
+    .spinner(ng-if='loader.loading')
     table.table.table-separated(ng-show='!loader.loading && systems.length')
       thead.lite
         tr
@@ -15,8 +15,8 @@ card.card-accent.widget.widget-new-systems
       tbody
         tr(ng-repeat="system in systems | orderBy:'system.created_at' track by system.system_id")
           td
-            a.strong(ng-click='showSystemModal(system)') {{system.toString}}
+            a.strong(ng-click='showSystemModal(system)') {{:: system.toString}}
           td
-            span {{system.created_at | timeAgo}}
+            span {{:: system.created_at | timeAgo}}
 
-    p(ng-show='!loader.loading && !systems.length', translate) No systems registered
+    p(ng-if='!loader.loading && !systems.length', translate) No systems registered

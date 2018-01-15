@@ -51,9 +51,9 @@
                     h4.nomar
                       span.icon-check-alt.green(aria-hidden="true") &nbsp;
                       span.light You have successfully invited&nbsp;
-                      | {{successfulInvite.email}}&nbsp;
+                      | {{:: successfulInvite.email}}&nbsp;
                       span.light with account number&nbsp;
-                      | {{successfulInvite.account_number}}.
+                      | {{:: successfulInvite.account_number}}.
                 .row
                   .col-sm-12.text-center
                     button.btn.btn-lg.btn-accent(ng-click="reset()") Reload form
@@ -65,15 +65,14 @@
                   .col-sm-12
                     h4.nomar
                       i.fa.fa-times-circle.red(aria-hidden="true") &nbsp;
-                      | Invitation to {{failedInvite.email}} with account number {{failedInvite.account_number}} failed. &nbsp;
+                      | Invitation to {{:: failedInvite.email}} with account number {{:: failedInvite.account_number}} failed. &nbsp;
                       //If its a duplicate error.  We have a specific message.
                       span(ng-if='error.status == 409') This account has previously activated a sales invited evaluation. &nbsp;
-                        | Please contact 
+                        | Please contact&nbsp;
                         a(href='mailto:insights@redhat.com') insights@redhat.com
                         | &nbsp; to grant additional invitations.
                       //otherwise, just show the raw error from the api.
-                      span(ng-if='error.status != 409') {{error.data}}
+                      span(ng-if='error.status != 409') {{:: error.data}}
                 .row
                   .col-sm-12.text-center
                     button.btn.btn-lg.btn-accent(ng-click="reset()") Try again
-                    

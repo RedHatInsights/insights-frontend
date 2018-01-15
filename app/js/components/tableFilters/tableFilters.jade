@@ -1,6 +1,5 @@
 section#data-filters.data-filters(ng-class="{tags: hasTags()}")
   .filters(ng-transclude)
-
   .active-filters(ng-if='hasTags()', ng-model='tags')
     strong(translate) Active filters:&nbsp;
     // remove filter on click

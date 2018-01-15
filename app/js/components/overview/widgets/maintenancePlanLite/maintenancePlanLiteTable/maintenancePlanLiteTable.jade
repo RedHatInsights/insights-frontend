@@ -2,7 +2,7 @@ table.table.table-separated
   thead.lite
     tr
       th.count(width="5%")
-        span {{plans.length}}
+        span {{:: plans.length}}
       th(width="30%", translate) Scheduled Plans
       th.start(translate) Start
       th.duration(translate) Duration
@@ -10,11 +10,11 @@ table.table.table-separated
   tbody
     tr(ng-repeat="plan in (plans | limitTo:3 | orderBy:'start') track by plan.maintenance_id")
       td(
-        colspan="2", 
+        colspan="2",
         ng-click="openPlan(plan)",
-        tooltip='{{MaintenanceService.getPlanName(plan)}}')
-        strong {{plan.start | moment:'LL'}}
-      td.start(ng-click="openPlan(plan)") {{plan.start | moment:'LT' | lowercase}}
-      td.duration(ng-click="openPlan(plan)", translate, translate-n='duration(plan.start, plan.end)', translate-plural='{{$count}} minutes') 1 minute
+        tooltip='{{:: MaintenanceService.getPlanName(plan)}}')
+        strong {{:: plan.start | moment:'LL'}}
+      td.start(ng-click="openPlan(plan)") {{:: plan.start | moment:'LT' | lowercase}}
+      td.duration(ng-click="openPlan(plan)", translate, translate-n='duration(plan.start, plan.end)', translate-plural='{{:: $count}} minutes') 1 minute
       td.action-count(ng-click="openPlan(plan)")
-        span {{plan.actionsDone}}/{{plan.actions.length}}
+        span {{:: plan.actionsDone}}/{{:: plan.actions.length}}

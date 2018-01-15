@@ -6,10 +6,10 @@
         form(name='form')
           .form-group
             label.control-label(translate) Page Reported
-            p.form-control-static {{ feedbackInfo.fromPage }}
+            p.form-control-static {{:: feedbackInfo.fromPage }}
           .form-group
             label.control-label(translate) Email
-            p(translate) {{ feedbackInfo.user.email }}&nbsp;
+            p(translate) {{:: feedbackInfo.user.email }}&nbsp;
               small(translate) (to change your Red Hat email address&nbsp;
                 a(translate, href="https://www.redhat.com/wapps/ugc/protected/emailChange.html") click here
                 | )
@@ -18,7 +18,7 @@
             label.control-label(translate) Comment
             textarea.form-control(type='text', rows='5', ng-model='comment')
           .pull-right
-            small.text-danger(ng-show='isError', translate) An error occurred. Please try again later.&nbsp;
+            small.text-danger(ng-if='isError', translate) An error occurred. Please try again later.&nbsp;
             .btn-group
               button.btn.btn-accent(name='cancel' ng-click='close()', translate) Cancel
               button.btn.btn-accent(name='submit' ng-click='submitForm()' ng-disabled='!form.$valid || !isCommentPopulated()', translate) Submit

@@ -19,6 +19,7 @@ priv.initTraces = function initTraces($scope) {
         };
 
         $scope.traces.push(traceObject);
+
         traceObject.legendElement.click(function () {
             traceObject.enabled = !traceObject.enabled;
             $scope.$apply();

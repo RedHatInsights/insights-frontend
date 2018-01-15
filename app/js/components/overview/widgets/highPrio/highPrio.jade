@@ -1,4 +1,4 @@
-.grid-block(ng-show="items.staleSystems")
+.grid-block(ng-if="items.staleSystems")
   section.widget-block
     h2.title
       i.fa.fa-wrench
@@ -9,7 +9,7 @@
         tbody
           tr
             td(width="50%")
-              strong {{items.staleSystems}}&nbsp;
+              strong {{:: items.staleSystems}}&nbsp;
               | Systems not checking in
             td.text-right
               a.link(ui-sref="app.inventory({offline:true})") View Offline Systems
