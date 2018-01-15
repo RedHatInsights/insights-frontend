@@ -4,5 +4,5 @@
     .radio-group
         .radio-inline(ng-repeat='(k, v) in RuleStatusFilters')
             label(translate)
-                input(type="radio", name='ruleStatusFilterRadio' ng-model="showRuleStatus", value='{{k}}', ng-click='filterRuleStatus(k)')
-                span {{v.title | translate}}
+                input(type="radio", name='ruleStatusFilterRadio' ng-model="showRuleStatus", value='{{:: k}}', ng-click='filterRuleStatus(k)')
+                span {{:: v.title | translate}}

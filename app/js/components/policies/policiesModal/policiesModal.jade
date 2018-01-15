@@ -5,11 +5,11 @@
       card-header-expandable.gray
         .card-header-title
           .checks-wrapper
-            .title {{ policy.policy_id }}
-            .checks-state 
-              .passed(translate, translate-n='{{policy.checks_pass}}', translate-plural='{{$count}} Checks passed', ng-if="policy.checks_pass !== 0") {{policy.checks_pass}} Check passed
-              .failed(translate, translate-n='{{policy.checks_fail}}', translate-plural='{{$count}} Checks failed', ng-if="policy.checks_fail !== 0") {{policy.checks_fail}} Check failed
-              .errored(translate, translate-n='{{policy.checks_error}}', translate-plural='{{$count}} Checks errored', ng-if="policy.checks_error !== 0") {{policy.checks_error}} Check errored
+            .title {{:: policy.policy_id }}
+            .checks-state
+              .passed(translate, translate-n='{{:: policy.checks_pass}}', translate-plural='{{:: $count}} Checks passed', ng-if="policy.checks_pass !== 0") {{:: policy.checks_pass}} Check passed
+              .failed(translate, translate-n='{{:: policy.checks_fail}}', translate-plural='{{:: $count}} Checks failed', ng-if="policy.checks_fail !== 0") {{:: policy.checks_fail}} Check failed
+              .errored(translate, translate-n='{{:: policy.checks_error}}', translate-plural='{{:: $count}} Checks errored', ng-if="policy.checks_error !== 0") {{:: policy.checks_error}} Check errored
       card-content.card-content.ng-animate-enabled(collapse="card.collapsed")
         .tri-card-container
           // Passed
@@ -21,7 +21,7 @@
                   | Passed
             card-content
               ul
-                li(ng-repeat="check in policy.check_results | orderBy: 'check.name'", ng-if="check.result === 'pass'") {{check.name}}
+                li(ng-repeat="check in policy.check_results | orderBy: 'check.name'", ng-if="check.result === 'pass'") {{:: check.name}}
 
           // Failed
           card.state-failed(ng-class="(policy.checks_fail === 0) ? 'md-disabled' : ''")
@@ -32,7 +32,7 @@
                   | Failed
             card-content
               ul
-                li(ng-repeat="check in policy.check_results | orderBy: 'check.name'", ng-if="check.result === 'fail'") {{check.name}}
+                li(ng-repeat="check in policy.check_results | orderBy: 'check.name'", ng-if="check.result === 'fail'") {{:: check.name}}
 
           // Errored
           card.state-warn(ng-if="policy.checks_error !== 0")
@@ -43,4 +43,4 @@
                   | Errored
             card-content
               ul
-                li(ng-repeat="check in policy.check_results | orderBy: 'check.name'", ng-if="check.result === 'error'") {{check.name}}
+                li(ng-repeat="check in policy.check_results | orderBy: 'check.name'", ng-if="check.result === 'error'") {{:: check.name}}

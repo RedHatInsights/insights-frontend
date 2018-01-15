@@ -104,7 +104,8 @@ function rhaTelemetryDonut(
             };
 
             $scope.$on('filterService:doFilter', refreshDonut);
-            $scope.$watch('stats.rules', refreshDonut, true);
+
+            $scope.$watchCollection('stats.rules', refreshDonut);
         }
     };
 }

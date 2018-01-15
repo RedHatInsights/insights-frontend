@@ -1,10 +1,10 @@
 span
   span.title(
-    tooltip='{{systemTypeDisplayName}}',
+    tooltip='{{:: systemTypeDisplayName}}',
     tooltip-trigger='mouseenter',
     tooltip-append-to-body='true',
     tooltip-placement='top')
     i.fa.spinner-xs.system-type-icon(
       ng-class='systemTypeIcon')
-  strong(ng-if='includeText') &nbsp;&nbsp;{{systemTypeDisplayNameShort}}
+  strong(ng-if='includeText') &nbsp;&nbsp;{{:: systemTypeDisplayNameShort}}
 

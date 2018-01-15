@@ -54,6 +54,7 @@ function TopicRuleListCtrl(
 
             $scope._topic = topic;
             topic.rules.forEach(DataUtils.readRule);
+
             ActionsBreadcrumbs.init($stateParams);
             ActionsBreadcrumbs.add({
                 label: topic.title,
@@ -62,6 +63,7 @@ function TopicRuleListCtrl(
                     id: $stateParams.id
                 }
             });
+
             PermalinkService.scroll(null, 30);
 
             $scope.topic = Object.create($scope._topic);

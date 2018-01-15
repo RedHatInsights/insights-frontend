@@ -2,8 +2,8 @@
   .unregister-conflict
     p(translate) The following systems types cannot be unregistered on their own:
     ul
-      li(ng-repeat='role in roles') {{role.name}} ({{role.count}}x)
+      li(ng-repeat='role in roles') {{:: role.name}} ({{:: role.count}}x)
     p(translate) Unregister their entire deployment to remove them.
     p
-      strong(translate, translate-n='validCount', translate-plural='Do you want to proceed with the remaining {{$count}} systems?') 
+      strong(translate, translate-n='validCount', translate-plural='Do you want to proceed with the remaining {{:: $count}} systems?') 
         | Do you want to proceed with the remaining 1 system?

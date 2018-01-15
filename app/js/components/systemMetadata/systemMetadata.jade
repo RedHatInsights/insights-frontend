@@ -2,8 +2,8 @@
   card.system-information
     card-content.with-tile
       .system-type.tile
-        i.fa.fa-clone.fa-2x.md-whiteframe-3dp(ng-show="getSystemType() === 'Virtual'", tooltip="{{'Server type: Virtual' | translate}}")
-        i.fa.fa-server.fa-2x.md-whiteframe-3dp(ng-show="getSystemType() !== 'Virtual'", tooltip="{{'Server type: Physical' | translate}}")
+        i.fa.fa-clone.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() === 'Virtual'", tooltip="{{:: 'Server type: Virtual' | translate}}")
+        i.fa.fa-server.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() !== 'Virtual'", tooltip="{{:: 'Server type: Physical' | translate}}")
 
       .text
         h2.name.ellipsis-overflow.editable(ng-if='!edit.value', ng-dblclick='rename()') {{ edit.name }}
@@ -11,25 +11,25 @@
 
         .hostname.ellipsis-overflow
           b Hostname:&nbsp;
-          span {{ system.hostname }}
+          span {{:: system.hostname }}
 
         // always show the uuid.... it must exist
         .uuid.ellipsis-overflow
           b UUID:&nbsp;
-          span {{ getUUID() }}
+          span {{:: getUUID() }}
         view-system-groups(system="system", ng-if='config.isGroupsEnabled')
   .alert-warn(ng-if='!system.isCheckingIn')
     span(translate) This system is not checking in.
-        
+
 
   // Basic system meta-data table
   table.metadata-information
     tbody
-      tr(ng-repeat='facts in initialMetadata')
+      tr(ng-repeat='facts in initialMetadata track by facts.label')
         td
-          b(translate) {{facts.label}}
-        td(translate) {{facts.value}}
-        
+          b(translate) {{:: facts.label}}
+        td(translate) {{:: facts.value}}
+
 #expandableDataTable.expandable-data-table.expanded(ng-if='!loading; hasMetadata()')
   // Nav tabs
   ul.nav(role='tablist', ng-mouseenter="toggleHovering()", ng-mouseleave="toggleHovering()", ng-click="enableExpanded()")
@@ -46,16 +46,16 @@
   .tab-content(ng-init="setDefaultTab()", ng-class="{expanded: expanded}")
     #system.tab-pane(role='system')
       .flex
-        card.cell(ng-repeat="data in tableData.data", class="{{data.label | lowercase}}")
+        card.cell(ng-if="tableData.data", ng-repeat="data in tableData.data track by data.label", class="{{:: data.label | lowercase}}")
           card-header.gray
-            b {{ data.label }}
+            b {{:: data.label }}
           card-content
             ul.list.list-simple
-              li(ng-repeat="value in data.values", translate)
-                strong {{value.label}}
+              li(ng-repeat="value in data.values track by value.label", translate)
+                strong {{:: value.label}}
                 br
-                span {{value.value}}
-                
+                span {{:: value.value}}
+
     #network.tab-pane(role='network')
       .row
         .col-sm-12
@@ -67,10 +67,12 @@
                   th.ellipsis-overflow(translate) IP Address
                   th.ellipsis-overflow(translate) Port
               tbody
-               tr(ng-repeat="values in tableData.data", ng-if="$index < rowLimit || showAll")
-                  td.ellipsis-overflow(ng-repeat="val in values") {{val}}
+                tr(ng-repeat="values in tableData.data track by values.name", ng-if="$index < rowLimit || showAll")
+                  td.ellipsis-overflow {{:: values.name }}
+                  td.ellipsis-overflow {{:: values.ip_addr }}
+                  td.ellipsis-overflow {{:: values.port }}
       .row.row-short
         .col-sm-12.text-center
           a.link.expandTableButton(ng-if="showExpandTableBtn()", ng-click="toggleExpandTable()")
-            strong(translate, ng-show="showAll") Collapse Table
-            strong(translate, ng-show="!showAll") Expand Table
+            strong(translate, ng-if="showAll") Collapse Table
+            strong(translate, ng-if="!showAll") Expand Table

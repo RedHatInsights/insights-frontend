@@ -2,11 +2,16 @@
 
 const componentsModule = require('../../');
 
+function fakeAsync(fn) {
+    window.setTimeout(fn, 1);
+}
+
 /**
  * @ngInject
  */
 function SeveritySummaryCtrl($scope) {
     $scope.loaded = false;
+
     $scope.ruleCount = {
         total: 0,
         info: 0,
@@ -14,17 +19,23 @@ function SeveritySummaryCtrl($scope) {
         error: 0,
         critical: 0
     };
+
     $scope.max = 0;
 
-    $scope.$watch('stats.rules', function (value) {
+    window.test = $scope;
+
+    $scope.$watchCollection('stats.rules', function (value) {
         if (!value) {
             return;
         }
 
-        $scope.ruleCount = value;
-        $scope.max = Math.max(value.info, value.warn, value.error, value.critical);
-        $scope.loaded = true;
-    }, true);
+        $scope.loaded = false;
+        fakeAsync(() => {
+            $scope.ruleCount = value;
+            $scope.max = Math.max(value.info, value.warn, value.error, value.critical);
+            $scope.loaded = true;
+        });
+    });
 }
 
 function severitySummary() {
