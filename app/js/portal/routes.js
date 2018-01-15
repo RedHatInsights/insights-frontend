@@ -37,20 +37,7 @@ function Routes($stateProvider, $locationProvider, $urlRouterProvider,
             controller: 'ShowRuleCtrl',
             scrollTop: true,
             hideGroup: true
-        })
-        /*
-        .state('app.edit-rule', {
-            url: '/rules/:id/edit/',
-            templateUrl: 'js/states/rules/views/edit-rules.html',
-            controller: 'EditRuleCtrl',
-            scrollTop: true,
-            hideGroup: true,
-            params: {
-                newRule: false
-            }
-        })
-        */
-        ;
+        });
 
     // Page routes
     $stateProvider
@@ -107,60 +94,11 @@ function Routes($stateProvider, $locationProvider, $urlRouterProvider,
             controller: 'AnalyticsCtrl'
         });
 
-    // Info routes
-    $stateProvider
-        .state('info.root', {
-            url: '/',
-            templateUrl: 'js/states/splash/splash.html',
-            controller: 'SplashCtrl',
-            bounceLoggedin: true,
-            scrollTop: true,
-            unauthenticated: true
-        });
-
-    $stateProvider
-        .state('info.splash', {
-            url: '/splash/',
-            templateUrl: 'js/states/splash/splash.html',
-            controller: 'SplashCtrl',
-            scrollTop: true,
-            unauthenticated: true
-        });
-
-    function redirectGetStarted (from, to) {
-        $urlRouterProvider.when(from,
-            function () {
-                window.location = (GettingStartedUrl + to);
-            }
-        );
-    }
-
-    redirectGetStarted('/getting-started/cloudforms/', '#cloudforms');
-    redirectGetStarted('/getting-started/containers/', '#containers');
-    redirectGetStarted('/getting-started/direct/', '#direct');
-    redirectGetStarted('/getting-started/openshift/', '#openshift');
-    redirectGetStarted('/getting-started/osp/', '#osp');
-    redirectGetStarted('/getting-started/rhev/', '#rhv');
-    redirectGetStarted('/getting-started/rhv/', '#rhv');
-    redirectGetStarted('/getting-started/satellite/6/', '#satellite6');
-    redirectGetStarted('/getting-started/satellite/5/', '#satellite5');
-    redirectGetStarted('/getting-started', '#getstarted');
-    redirectGetStarted('/getting-started/', '#getstarted');
-
     $urlRouterProvider.when('/invite', function () {
         window.location = InviteUrl;
     });
 
-    $stateProvider
-        .state('info.info', {
-            url: '/info/',
-            templateUrl: 'js/states/splash/splash.html',
-            controller: 'SplashCtrl',
-            title: 'Learn More',
-            scrollTop: true,
-            unauthenticated: true
-        })
-        .state('info.security', {
+    $stateProvider.state('info.security', {
             url: '/security/',
             templateUrl: 'js/states/security/security.html',
             controller: 'SecurityCtrl',
