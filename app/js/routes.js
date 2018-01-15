@@ -148,7 +148,7 @@ function Routes($stateProvider) {
     // Vulnerabilities routes
     $stateProvider
         .state('app.vulnerabilities', {
-            url: '/vulnerabilities/',
+            url: '/vulnerabilities?offline&online&rhsaSeverity&daysKnown',
             templateUrl: 'js/states/vulnerabilities/vulnerabilities.html',
             controller: 'VulnerabilitiesCtrl',
             title: 'Vulnerabilities'

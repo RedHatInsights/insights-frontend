@@ -10,45 +10,50 @@ function rhsaSeveritySelectCtrl($rootScope,
                                 $location,
                                 gettextCatalog,
                                 Events,
-                                RhsaSeverityFilters) {
+                                RhsaSeverityFilters,
+                                FilterService) {
     $scope.options = RhsaSeverityFilters;
 
     // default option is showing all rhsas
     // index for $scope.options
     const DEFAULT_OPTION = 0;
+    const URL_QUERY_NAME = 'rhsaSeverity';
 
     /**
      * Initializes rhsa filter by checking for the url for
      * the previous filter or defaults to showing all rhsas/pacakges/cves.
      */
     (function init() {
-        let option = $location.search()[Events.filters.rhsaSeveritySelect] ?
-            $location.search()[Events.filters.rhsaSeveritySelect] :
-            DEFAULT_OPTION;
+        if (!$scope.selected) {
+            let option = $location.search()[URL_QUERY_NAME] ?
+            $location.search()[URL_QUERY_NAME] : DEFAULT_OPTION;
 
-        setOption(option);
+            $scope.selected = $scope.options[option];
+            $rootScope.$broadcast(Events.filters.tag,
+                                  $scope.selected.tag,
+                                  Events.filters.rhsaSeveritySelect);
+        }
     })();
-
-    /**
-     * Sets the selected option and broadcasts the selected option's
-     * tag.
-     *
-     * @param {Integer} option
-     *                    The index of the option to be selected.
-     */
-    function setOption(option) {
-        $scope.selected = $scope.options[option];
-        $rootScope.$broadcast(Events.filters.tag,
-                              $scope.selected.tag,
-                              Events.filters.rhsaSeveritySelect);
-    }
 
     $scope.select = function (option) {
         // don't do anything if user selects selected option
         if ($scope.selected.title === $scope.options[option].title) {
             return;
         } else {
-            setOption(option);
+            $scope.selected = $scope.options[option];
+
+            // no need to set url if default filter
+            if (option !== DEFAULT_OPTION) {
+                FilterService.setQueryParam(URL_QUERY_NAME, option);
+            } else {
+                FilterService.setQueryParam(URL_QUERY_NAME, null);
+            }
+
+            FilterService.doFilter();
+            $rootScope.$broadcast(Events.filters.tag,
+                                  $scope.selected.tag,
+                                  Events.filters.rhsaSeveritySelect);
+            $rootScope.$broadcast(Events.filters.rhsaSeveritySelect, $scope.selected);
         }
     };
 
@@ -57,7 +62,7 @@ function rhsaSeveritySelectCtrl($rootScope,
     });
 
     $scope.$on(Events.filters.removeTag, function (event, filter) {
-        if (filter === Events.filters.likelihood) {
+        if (filter === Events.filters.rhsaSeveritySelect) {
             $scope.select(DEFAULT_OPTION);
         }
     });
