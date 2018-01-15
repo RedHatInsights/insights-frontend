@@ -85,3 +85,38 @@ constantsModule.constant('ImpactFilters', [
         tag: 'Impact: Critical'
     }
 ]);
+
+constantsModule.constant('RhsaSeverityFilters', [
+    {
+        title: 'All',
+        tag: null
+    }, {
+        title: 'Critical',
+        tag: 'RHSA Severity: Critical'
+    }, {
+        title: 'Important',
+        tag: 'RHSA Severity: Important'
+    }, {
+        title: 'Moderate',
+        tag: 'RHSA Severity: Moderate'
+    }, {
+        title: 'Low',
+        tag: 'RHSA Severity: Low'
+    }
+]);
+
+constantsModule.constant('DaysKnownFilters', [
+    {
+        title: 'All',
+        tag: null
+    }, {
+        title: '0',
+        tag: 'Days Known: 0'
+    }, {
+        title: '45',
+        tag: 'Days Known: 45'
+    }, {
+        title: '90',
+        tag: 'Days Known: 90'
+    }
+]);

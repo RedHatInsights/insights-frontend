@@ -1,5 +1,5 @@
 .filter-group.filter-rhsa-severity
-  label RHSA Severity
+  label(translate) RHSA Severity
   md-menu(md-offset="0 38")
     md-button.button-filter(
       type='button',
@@ -7,8 +7,8 @@
       aria-haspopup='true',
       aria-expanded='false',
       ng-click='$mdMenu.open()')
-      span {{selected.label}}
+      span {{selected.title | translate}}
       span.caret
     md-menu-content
-      md-menu-item(ng-repeat='option in options')
-        a(ng-click='select(option)') {{option.label}}
+      md-menu-item(ng-repeat='(key, option) in options')
+        a(ng-click='select(key)') {{option.title | translate}}

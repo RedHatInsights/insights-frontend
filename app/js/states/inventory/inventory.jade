@@ -54,10 +54,7 @@
           tbody(ng-if='!loading')
               th.fit-content.min.sortable(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')", translate) System Type
               th.sortable(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')", translate) System Name
-              th.sortable(translate) Critical
-              th.sortable(translate) Important
-              th.sortable(translate) Moderate
-              th.sortable(translate) Low
+              th.sortable(translate) Vulnerabilities
               th.fit-content.min.sortable(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')", translate) Last Check In
               th.min.sortable(ng-class="predicate | sortClass:'report_count':reverse", ng-click="sort('report_count')", translate) Status
           tbody(ng-show='!loading')
@@ -77,14 +74,8 @@
                 type-icon(type-id='system.system_type_id', include-text='true')
               td.fit-content
                 a(ng-click="showActions(system)") {{system.toString}}
-              td.fit-content
-                a(ng-click="showActions(system,false, 'Vulnerabilities')") {{hasRhsas(system) ? system.critical_rhsa_count : '-'}}
-              td.fit-content
-                a(ng-click="showActions(system, false, 'Vulnerabilities')") {{hasRhsas(system) ? system.important_rhsa_count : '-'}}
-              td.fit-content
-                a(ng-click="showActions(system, false, 'Vulnerabilities')") {{hasRhsas(system) ? system.moderate_rhsa_count : '-'}}
-              td.fit-content
-                a(ng-click="showActions(system, false, 'Vulnerabilities')") {{hasRhsas(system) ? system.low_rhsa_count : '-'}}
+              td.fit-content.text-center
+                a(ng-click="showActions(system, alse, 'Vulnerabilities')") {{system.rhsa_count}}
               td.fit-content {{ system.last_check_in | timeAgo }}
               td.fit-content
                 a.action-count.icon-inline(ng-click='showActions(system)')

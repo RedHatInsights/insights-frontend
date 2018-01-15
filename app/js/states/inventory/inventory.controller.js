@@ -461,10 +461,7 @@ function InventoryCtrl(
     //       get the rhsa severity counts
     function getSystemRhsaCounts() {
         $scope.systems.forEach(function (system) {
-            system.critical_rhsa_count = 0;
-            system.important_rhsa_count = 0;
-            system.moderate_rhsa_count = 0;
-            system.low_rhsa_count = 0;
+            system.rhsa_count = 0;
 
             const sys = find(VMAAS_SYSTEMS, function (vmaas) {
                 return vmaas.hasOwnProperty(system.toString);
@@ -473,21 +470,14 @@ function InventoryCtrl(
             if (sys) {
                 system.packages = sys[system.toString].packages;
                 sys[system.toString].packages.forEach(function (pkg) {
-                    system.critical_rhsa_count += pkg.critical_count;
-                    system.important_rhsa_count += pkg.important_count;
-                    system.moderate_rhsa_count += pkg.moderate_count;
-                    system.low_rhsa_count += pkg.low_count;
+                    system.rhsa_count += pkg.critical_count;
+                    system.rhsa_count += pkg.important_count;
+                    system.rhsa_count += pkg.moderate_count;
+                    system.rhsa_count += pkg.low_count;
                 });
             }
         });
     }
-
-    $scope.hasRhsas = function (system) {
-        return system.critical_rhsa_count > 0 ||
-               system.important_rhsa_count > 0 ||
-               system.moderate_rhsa_count > 0 ||
-               system.low_rhsa_count > 0;
-    };
 }
 
 statesModule.controller('InventoryCtrl', InventoryCtrl);
