@@ -17,7 +17,6 @@ function rhsaSeveritySelectCtrl($rootScope,
     // default option is showing all rhsas
     // index for $scope.options
     const DEFAULT_OPTION = 0;
-    const URL_QUERY_NAME = 'rhsaSeverity';
 
     /**
      * Initializes rhsa filter by checking for the url for
@@ -25,13 +24,14 @@ function rhsaSeveritySelectCtrl($rootScope,
      */
     (function init() {
         if (!$scope.selected) {
-            let option = $location.search()[URL_QUERY_NAME] ?
-            $location.search()[URL_QUERY_NAME] : DEFAULT_OPTION;
+            let option = $location.search()[Events.filters.rhsaSeverity] ?
+                         $location.search()[Events.filters.rhsaSeverity] :
+                         FilterService.getRhsaSeverity();
 
             $scope.selected = $scope.options[option];
             $rootScope.$broadcast(Events.filters.tag,
                                   $scope.selected.tag,
-                                  Events.filters.rhsaSeveritySelect);
+                                  Events.filters.rhsaSeverity);
         }
     })();
 
@@ -44,16 +44,17 @@ function rhsaSeveritySelectCtrl($rootScope,
 
             // no need to set url if default filter
             if (option !== DEFAULT_OPTION) {
-                FilterService.setQueryParam(URL_QUERY_NAME, option);
+                FilterService.setRhsaSeverity(option);
             } else {
-                FilterService.setQueryParam(URL_QUERY_NAME, null);
+                FilterService.setRhsaSeverity(DEFAULT_OPTION);
+                FilterService.deleteQueryParam(Events.filters.rhsaSeverity);
             }
 
             FilterService.doFilter();
             $rootScope.$broadcast(Events.filters.tag,
                                   $scope.selected.tag,
-                                  Events.filters.rhsaSeveritySelect);
-            $rootScope.$broadcast(Events.filters.rhsaSeveritySelect, $scope.selected);
+                                  Events.filters.rhsaSeverity);
+            $rootScope.$broadcast(Events.filters.rhsaSeverity, $scope.selected);
         }
     };
 
@@ -62,7 +63,7 @@ function rhsaSeveritySelectCtrl($rootScope,
     });
 
     $scope.$on(Events.filters.removeTag, function (event, filter) {
-        if (filter === Events.filters.rhsaSeveritySelect) {
+        if (filter === Events.filters.rhsaSeverity) {
             $scope.select(DEFAULT_OPTION);
         }
     });

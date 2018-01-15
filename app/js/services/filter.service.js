@@ -26,6 +26,8 @@ function FilterService(
     let _ruleStatus = $location.search()[Events.filters.ruleStatus] || 'all';
     let _likelihood = $location.search()[Events.filters.likelihood] || 0;
     let _impact = $location.search()[Events.filters.impact] || 0;
+    let _rhsaSeverity = $location.search()[Events.filters.rhsaSeverity] || 0;
+    let _daysKnown = $location.search()[Events.filters.daysKnown] || 0;
     let _selectedProduct = 'all';
     let _parentNode = null;
     let _dockerHosts = [];
@@ -117,6 +119,24 @@ function FilterService(
 
     filterService.getOnline = function () {
         return _online;
+    };
+
+    filterService.getRhsaSeverity = function () {
+        return _rhsaSeverity;
+    };
+
+    filterService.setRhsaSeverity = function (rhsaSeverity) {
+        _rhsaSeverity = rhsaSeverity;
+        filterService.setQueryParam(Events.filters.rhsaSeverity, rhsaSeverity);
+    };
+
+    filterService.getDaysKnown = function () {
+        return _daysKnown;
+    };
+
+    filterService.setDaysKnown = function (daysKnown) {
+        _daysKnown = daysKnown;
+        filterService.setQueryParam(Events.filters.daysKnown, daysKnown);
     };
 
     filterService.deleteQueryParam = function (name) {

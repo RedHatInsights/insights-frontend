@@ -17,20 +17,20 @@ function daysKnownSelectCtrl($rootScope,
     // default option is showing all rhsas
     // index for $scope.options
     const DEFAULT_OPTION = 0;
-    const URL_QUERY_NAME = 'daysKnown';
 
     /**
      * Initializes days known filter by checking for the url for
      * the previous filter or defaults to showing all rhsas/pacakges/cves.
      */
     (function init() {
-        let option = $location.search()[URL_QUERY_NAME] ?
-            $location.search()[URL_QUERY_NAME] : DEFAULT_OPTION;
+        let option = $location.search()[Events.filters.daysKnown] ?
+                     $location.search()[Events.filters.daysKnown] :
+                     FilterService.getDaysKnown();
 
         $scope.selected = $scope.options[option];
         $rootScope.$broadcast(Events.filters.tag,
                               $scope.selected.tag,
-                              Events.filters.daysKnownSelect);
+                              Events.filters.daysKnown);
     })();
 
     $scope.select = function (option) {
@@ -42,16 +42,17 @@ function daysKnownSelectCtrl($rootScope,
 
             // no need to set url if selected option is default filter
             if (option !== DEFAULT_OPTION) {
-                FilterService.setQueryParam(URL_QUERY_NAME, option);
+                FilterService.setDaysKnown(option);
             } else {
-                FilterService.setQueryParam(URL_QUERY_NAME, null);
+                FilterService.setDaysKnown(DEFAULT_OPTION);
+                FilterService.deleteQueryParam(Events.filters.daysKnown);
             }
 
             FilterService.doFilter();
             $rootScope.$broadcast(Events.filters.tag,
                                   $scope.selected.tag,
-                                  Events.filters.daysKnownSelect);
-            $rootScope.$broadcast(Events.filters.daysKnownSelect, $scope.selected);
+                                  Events.filters.daysKnown);
+            $rootScope.$broadcast(Events.filters.daysKnown, $scope.selected);
         }
     };
 
@@ -60,7 +61,7 @@ function daysKnownSelectCtrl($rootScope,
     });
 
     $scope.$on(Events.filters.removeTag, function (event, filter) {
-        if (filter === Events.filters.daysKnownSelect) {
+        if (filter === Events.filters.daysKnown) {
             $scope.select(DEFAULT_OPTION);
         }
     });
