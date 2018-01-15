@@ -44,3 +44,11 @@ $black-base: #2d2d2d;
 	&yellow { background-color: $yellow; }
 	&white { background-color: #fff; }
 }
+
+// Vulnerabilities
+$gray-subhead: #cccccc;
+
+$vul-critical: #D53E40;
+$vul-important: #efbc56;
+$vul-moderate: #cccccc;
+$vul-low: #eaeaea;
