@@ -20,9 +20,9 @@
               ng-if="policy.systems_fail || policy.systems_error",
               tooltip='{{failedChecksTooltip}}'
               aria-label="Policy error icon")
-          td.nowrap.text-center(ng-class="policy.passed") {{policy.systems_pass}}
-          td.nowrap.text-center(ng-class="policy.failed") {{policy.systems_fail}}
-          td.nowrap.text-center(ng-class="policy.errored") {{policy.systems_error}}
+          td.nowrap.text-center(ng-class="policy.pass") {{policy.systems_pass}}
+          td.nowrap.text-center(ng-class="policy.fail") {{policy.systems_fail}}
+          td.nowrap.text-center(ng-class="policy.error") {{policy.systems_error}}
 
     pagination.pull-right.pagination-blue(
       ng-if='!loading && allPolicies.total > pager.perPage',

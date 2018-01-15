@@ -1,0 +1,26 @@
+$state-padding: $global-padding/2;
+
+.state {
+  @include rem('padding', $state-padding);
+  @include policy-state('pass');
+
+  &.pass { @include policy-state('pass'); }
+  &.error { @include policy-state('error'); }
+  &.fail { @include policy-state('fail'); }
+  &.unknown { @include policy-state('unknown'); }
+}
+
+.state-group {
+  display: inline-flex;
+}
+
+.state.pass { i { color: #399130 } }
+.state.fail { i { color: #D53E40 } }
+.state-warn { i { color: #EE8C38 } }
+
+tr:nth-of-type(even) {
+  .pass { @include policy-state-alt('pass'); }
+  .error { @include policy-state-alt('error'); }
+  .fail { @include policy-state-alt('fail'); }
+  .unknown { @include policy-state-alt('unknown'); }
+}

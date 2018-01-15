@@ -1,4 +1,4 @@
-.policiesID-page
+.policies-id-page
   .breadcrumbs
       ol
         li
@@ -6,9 +6,10 @@
             span(translate) Policies
         li
           span {{policyId}}
-  page-header(title="Policies", icon="fa-gavel")
+
+  page-header(title="{{policyName}}", icon="fa-gavel")
     
-  .section-topic-details
+  section.section-topic-details
     span.description(translate) POLICY ID
     h2 {{policyName}}
   table-filters
@@ -18,16 +19,16 @@
     table
       thead
         tr
-          th.sortable.nowrap(ng-class="sorter.getSortClass('system.toString')", ng-click="sorter.sort('system.toString')", translate) System Name
-          th.nowrap(translate) Summary
+          th.sortable(ng-class="sorter.getSortClass('system.toString')", ng-click="sorter.sort('system.toString')", translate) System Name
+          th.fit-content.min(translate) Summary
       tbody(ng-show='!loading && policy !== null')
         tr(ng-repeat="resource in policy.resources | orderBy: sorter.predicate : sorter.reverse")
-          td.nowrap
+          td
             a(ng-click='showSystem(resource.system_id)') {{resource.system.toString}}
-          td.nowrap(ng-class="resource.status", translate, translate-n='{{resource.checks_pass}}', translate-plural='{{$count}} Checks', ng-if="resource.checks_pass !== 0") {{resource.checks_pass}} Check
-            span &nbsp;{{resource.status}}
-          td.nowrap(ng-class="resource.status", translate, ng-if="resource.checks_pass === 0") Checks
-            span &nbsp;{{resource.status}}
+          td.fit-content.min(translate-n='{{resource.checks_pass}}', translate-plural='{{$count}} Checks', ng-if="resource.checks_pass !== 0") 
+            span.state(ng-class="resource.status", translate) {{resource.checks_pass}} Check {{resource.status}}
+          td.fit-content.min(ng-if="resource.checks_pass === 0") 
+            span.state(ng-class="resource.status", translate) Checks {{resource.status}}
 
     .text-center(ng-show='policy === null && !loading')
       strong(translate) There are no policies for the selected options.&nbsp;

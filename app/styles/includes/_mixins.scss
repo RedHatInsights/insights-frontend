@@ -29,38 +29,38 @@
 
 // policyState takes a class and determines styles
 // Sends to policyState-Styles(color, icon, does this row need to be darker?)
-@mixin policyState($state) {
-  @if $state == failed {
-    @include policyState-Styles('red', '\f057', false);
+@mixin policy-state($state) {
+  @if $state == fail {
+    @include policy-state-styles('red', '\f057', false);
   }
-  @if $state == passed {
-    @include policyState-Styles('green', '\f058', false);
+  @if $state == pass {
+    @include policy-state-styles('green', '\f058', false);
   }
-  @if $state == errored {
-    @include policyState-Styles('yellow', '\f071', false);
+  @if $state == error {
+    @include policy-state-styles('yellow', '\f071', false);
   }
   @if $state == unknown {
-    @include policyState-Styles('unknown', '\f059', false);
+    @include policy-state-styles('unknown', '\f059', false);
   }
 }
 
-@mixin policyState-alt($state) {
-  @if $state == failed {
-    @include policyState-Styles('red', '\f057', true);
+@mixin policy-state-alt($state) {
+  @if $state == fail {
+    @include policy-state-styles('red', '\f057', true);
   }
-  @if $state == passed {
-    @include policyState-Styles('green', '\f058', true);
+  @if $state == pass {
+    @include policy-state-styles('green', '\f058', true);
   }
-  @if $state == errored {
-    @include policyState-Styles('yellow', '\f071', true);
+  @if $state == error {
+    @include policy-state-styles('yellow', '\f071', true);
   }
   @if $state == unknown {
-    @include policyState-Styles('unknown', '\f059', true);
+    @include policy-state-styles('unknown', '\f059', true);
   } 
 }
 
 // Detemining colors from $stateColors in _vars.scss
-@mixin policyState-Styles($color, $icon, $isDark){
+@mixin policy-state-styles($color, $icon, $isDark){
   background: map-get($stateColors, 'bg-' + $color);
   color: $base-color;
   box-shadow: inset 3px 0 0 0 map-get($stateColors, 'bs-' + $color);
