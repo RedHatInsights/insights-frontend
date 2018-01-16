@@ -1,6 +1,7 @@
 div#system-group-viewer(ng-if="inGroup()")
   h3(translate) Groups:
-  button.btn.btn-accent.btn-sm(
+  //button.btn.btn-accent.btn-sm
+  button.button-active-filter.button-tag.btn-sm(
   ng-repeat="group in groups track by group.id", 
   ng-show="$index < groupLimit || showAll", 
   ng-click="groupSelected(group)") 

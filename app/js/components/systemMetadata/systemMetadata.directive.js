@@ -17,12 +17,15 @@ function systemMetadataCtrl(
     $scope.config = InsightsConfig;
 
     let system_metadata;
-    let active = false;
     $scope.rowLimit = 3;
     $scope.expanded = false;
     $scope.loading = false;
     $scope.hovering = false;
     $scope.showAll = false;
+    $scope.tabs = {
+        system: false,
+        network:false
+    };
 
     if ($scope.system && $scope.system.system_id) {
         $scope.loading = true;
@@ -82,32 +85,38 @@ function systemMetadataCtrl(
         $scope.showAll = !$scope.showAll;
     };
 
-    $scope.toggleActive = function () {
-        active = !active;
-    };
-
     $scope.toggleHovering = function () {
         $scope.hovering = !$scope.hovering;
     };
 
-    $scope.isActive = function (category) {
-        if ($scope.tableData) {
-            return $scope.tableData.category === category && active;
+    $scope.getData = function (category, $event) {
+        if ($scope.tableData &&
+                $scope.tableData.category === category) {
+            $scope.tabs[category] = false;
+            $scope.tableData = null;
+
+            // removes the active class from bootstrat/angular
+            // tabs that are using data-toggle
+            angular.element(document.getElementById(`${category}-tab`))
+                .removeClass('active');
+            angular.element(document.getElementById(`${category}`))
+                .removeClass('active');
+
+            // prevents the event from propagating to data-toggle
+            // so it cannot add the "active" class back to the tabs
+            $event.stopPropagation();
+            $event.preventDefault();
         } else {
-            return false;
-        }
-    };
+            const data = find(system_metadata, {category: category});
 
-    $scope.enableExpanded = function () {
-        $scope.expanded = true;
-        active = true;
-    };
+            if (data && !data.noData) {
+                if ($scope.tableData) {
+                    $scope.tabs[$scope.tableData.category] = false;
+                }
 
-    $scope.getData = function (category) {
-        const data = find(system_metadata, {category: category});
-
-        if (data && !data.noData) {
-            $scope.tableData = data;
+                $scope.tabs[category] = true;
+                $scope.tableData = data;
+            }
         }
     };
 
