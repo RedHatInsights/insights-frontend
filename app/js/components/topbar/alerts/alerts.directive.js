@@ -70,8 +70,6 @@ function alertsCtrl($rootScope,
         }
     }
 
-    $scope.goToInventory = goToInventory;
-
     loadSystemAlerts();
     MaintenanceService.plans.load();
 }

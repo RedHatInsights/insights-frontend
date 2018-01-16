@@ -71,16 +71,17 @@ function InventoryCtrl(
     FilterService.parseBrowserQueryParams();
     System.getProductSpecificData();
 
+    let params = $state.params;
+
     if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
         $rootScope.$on('user:loaded', function () {
             initInventory();
+            $state.transitionTo('app.inventory', updateParams(params), { notify: false });
         });
     } else {
         initInventory();
+        $state.transitionTo('app.inventory', updateParams(params), { notify: false });
     }
-
-    let params = $state.params;
-    $state.transitionTo('app.inventory', updateParams(params), { notify: false });
 
     $scope.allSelected = false;
     $scope.reallyAllSelected = false;
@@ -110,9 +111,15 @@ function InventoryCtrl(
     $scope.isPortal = InsightsConfig.isPortal;
 
     function initSorter() {
+        let reverse = false;
+
+        if ($location.search().sort_dir) {
+            reverse = $location.search().sort_dir === 'ASC' ? false : true;
+        }
+
         $scope.sorter = new Utils.Sorter({
             predicate: $location.search().sort_field || DEFAULT_PREDICATE,
-            reverse: $location.search().sort_dir === 'ASC' ? false : true
+            reverse: reverse
         }, getData);
     }
 
