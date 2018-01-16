@@ -16,7 +16,6 @@ function inventoryActionsCtrl(
     $scope,
     $rootScope,
     sweetAlert,
-    InventoryService,
     FilterService,
     SystemsService,
     MaintenanceService,
@@ -29,7 +28,6 @@ function inventoryActionsCtrl(
     Group,
     GroupService) {
 
-    $scope.getTotal = InventoryService.getTotal;
     $scope.listTypes = ListTypeService.types();
     $scope.listType =  ListTypeService.getType;
     $scope.config = InsightsConfig;
@@ -125,71 +123,7 @@ function inventoryActionsCtrl(
         }
     ];
 
-    $scope.getSortDirection = InventoryService.getSortDirection;
-    $scope.getSortField = InventoryService.getSortField;
-
     $scope.sortLabel = 'Hostname';
-
-    $scope.getSortType = function () {
-        var sortField = InventoryService.getSortField();
-        if (sortField === 'created_at' || sortField === 'last_check_in') {
-            return 'num';
-        } else if (sortField === 'report_count') {
-            return 'amount';
-        } else {
-            return 'alpha';
-        }
-    };
-
-    $scope.doSort = function (item) {
-        InventoryService.setSortField(item.field);
-        $scope.sortLabel = item.label;
-
-        //default hostname to ascending
-        //default registration date, last check in, # actions to DESC
-        //because that's what I would want most often when
-        //selecting to sort by each
-        if (item.field === 'hostname') {
-            InventoryService.setSortDirection('ASC');
-        } else {
-            InventoryService.setSortDirection('DESC');
-        }
-
-        FilterService.doFilter();
-    };
-
-    $scope.toggleSortDirection = function () {
-        if (InventoryService.getSortDirection() === 'ASC') {
-            InventoryService.setSortDirection('DESC');
-        } else {
-            InventoryService.setSortDirection('ASC');
-        }
-
-        FilterService.doFilter();
-    };
-
-    $scope.getSortIconClasses = function () {
-        return {
-                'fa-sort-alpha-asc':
-                    $scope.getSortDirection() === 'ASC' &&
-                    $scope.getSortType() === 'alpha',
-                'fa-sort-alpha-desc':
-                    $scope.getSortDirection() === 'DESC' &&
-                    $scope.getSortType() === 'alpha',
-                'fa-sort-numeric-asc':
-                    $scope.getSortDirection() === 'ASC' &&
-                    $scope.getSortType() === 'num',
-                'fa-sort-numeric-desc':
-                    $scope.getSortDirection() === 'DESC' &&
-                    $scope.getSortType() === 'num',
-                'fa-sort-amount-asc':
-                    $scope.getSortDirection() === 'ASC' &&
-                    $scope.getSortType() === 'amount',
-                'fa-sort-amount-desc':
-                    $scope.getSortDirection() === 'DESC' &&
-                    $scope.getSortType() === 'amount'
-            };
-    };
 
     $scope.addToPlan = function (existingPlan) {
         let systems = $scope.systemsToAction();
