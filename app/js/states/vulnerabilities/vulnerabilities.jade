@@ -11,31 +11,31 @@
   // TODO make embedded card a component
   .content-wrap
     expand-all-button.toggle-expand-right
-    card.outer-card(expandable='true')
+    card.outer-card(expandable='true', ng-repeat='vulnerability in vulnerabilities')
       card-header-expandable
         .card-header-title
           .title.package-info
-            .name ntp
-            .date Release Date: 2017-1-1
+            .name {{vulnerability.name}}
+            .date Release Date: {{vulnerability.release_date}}
           .vul-state 
             .critical.icon-inline
               i.fa.fa-shield 
-              span(translate) 1 Critical
+              span(translate) {{vulnerability.critical_count}} Critical
             .important.icon-inline
               i.fa.fa-shield 
-              span(translate) 1 Important
+              span(translate) {{vulnerability.important_count}} Important
             .moderate.icon-inline
               i.fa.fa-shield 
-              span(translate) 1 Moderate 
+              span(translate) {{vulnerability.moderate_count}} Moderate 
             .low.icon-inline
               i.fa.fa-shield 
-              span(translate) 1 Low
+              span(translate) {{vulnerability.low_count}} Low
       card-content.card-content(collapse="card.collapsed")
-        card(expandable='true').embedded-card
+        card(expandable='true', ng-repeat='rhsa in vulnerability.rhsas').embedded-card
           card-header-expandable
             .card-header-title
-              .title RHSA-2018:0000
-              .systems-affected 4 Systems Affected
+              .title {{rhsa.id}}
+              .systems-affected {{rhsa.systems_affected}} Systems Affected
           card-content.card-content(collapse="card.collapsed")
             table
               thead
@@ -44,25 +44,16 @@
                   th.sortable.nowrap(translate) System Type
                   th.sortable.nowrap(translate) Last Check In
                   th.sortable.nowrap(translate) Status
-              tbody
+              tbody(ng-repeat='system in rhsa.systems')
                 tr
                   td.nowrap
-                    a System Name
+                    a(ng-click='showSystem(system.system_id)') {{system.toString}}
                   td.nowrap
-                    span RHEL Server
+                    span {{system.system_type}}
                   td.nowrap
-                    span 9 Days Ago
+                    span {{system.last_check_in | timeAgo}}
                   td.nowrap
-                    span 0 Actions
-                tr
-                  td.nowrap
-                    a System Name 2
-                  td.nowrap
-                    span RHEL Server
-                  td.nowrap
-                    span 10 Days Ago
-                  td.nowrap
-                    span 5 Actions
+                    span {{system.report_count}}
 
               
 
