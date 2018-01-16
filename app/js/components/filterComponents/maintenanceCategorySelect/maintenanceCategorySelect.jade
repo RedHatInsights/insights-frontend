@@ -10,5 +10,6 @@
       span.text.active(ng-model='label') {{selected.label}} ({{plans[selected.id].length}})
       span.caret
     md-menu-content
-      md-menu-item(ng-repeat='option in options' ng-if='plans[option.id].length || option.id !== "suggested"')
-        a(ng-click='select(option)' ng-disabled='!plans[option.id].length && option.id !== "unscheduled"') {{option.label}} ({{plans[option.id].length}})
+      md-checkbox(ng-repeat='option in options' ng-if='plans[option.id].length || option.id !== "suggested"', ng-click='select(option)',
+                  ng-disabled='!plans[option.id].length && option.id !== "unscheduled"', ng-checked='selected === option')
+        span {{option.label}} ({{plans[option.id].length}})

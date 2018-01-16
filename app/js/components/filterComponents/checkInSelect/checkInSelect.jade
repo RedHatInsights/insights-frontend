@@ -10,5 +10,10 @@
       span {{selected.label}}
       span.caret
     md-menu-content
+<<<<<<< 9986ee81fdf60c31f58ba209ad2eb07ec30ad3b3
       md-menu-item(ng-repeat='option in options track by option.id')
         a(ng-click='select(option)') {{:: option.label}}
+=======
+      md-checkbox(ng-repeat='option in options', ng-click='select(option)', ng-checked='selected === option')
+        span {{option.label}}
+>>>>>>> Added checkboxes to all filters

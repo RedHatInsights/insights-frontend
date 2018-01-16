@@ -23,16 +23,14 @@ function rhsaSeveritySelectCtrl($rootScope,
      * the previous filter or defaults to showing all rhsas/pacakges/cves.
      */
     (function init() {
-        if (!$scope.selected) {
-            let option = $location.search()[Events.filters.rhsaSeverity] ?
-                         $location.search()[Events.filters.rhsaSeverity] :
-                         FilterService.getRhsaSeverity();
+        let option = $location.search()[Events.filters.rhsaSeverity] ?
+                     $location.search()[Events.filters.rhsaSeverity] :
+                     FilterService.getRhsaSeverity();
 
-            $scope.selected = $scope.options[option];
-            $rootScope.$broadcast(Events.filters.tag,
-                                  $scope.selected.tag,
-                                  Events.filters.rhsaSeverity);
-        }
+        $scope.selected = $scope.options[option];
+        $rootScope.$broadcast(Events.filters.tag,
+                              $scope.selected.tag,
+                              Events.filters.rhsaSeverity);
     })();
 
     $scope.select = function (option) {
@@ -56,6 +54,11 @@ function rhsaSeveritySelectCtrl($rootScope,
                                   Events.filters.rhsaSeverity);
             $rootScope.$broadcast(Events.filters.rhsaSeverity, $scope.selected);
         }
+    };
+
+    $scope.isSelected = function (option) {
+        console.log(option);
+        return true;
     };
 
     $scope.$on(Events.filters.reset, function () {

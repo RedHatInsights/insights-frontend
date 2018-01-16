@@ -10,5 +10,5 @@
       span.text.active(ng-model='label') {{selected.label}}
       span.caret
     md-menu-content
-      md-menu-item(ng-repeat='(key, value) in options')
-        a(href='#', ng-click='select(key)') {{:: value.label}}
+      md-checkbox(ng-repeat='(key, option) in options', ng-click='select(key)', ng-checked='selected === option')
+        span {{option.label}}
