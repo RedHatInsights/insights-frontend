@@ -29,10 +29,6 @@
   }
 }
 
-.system-metadata h3 span{
-  @include rem('font-size', 14px);
-}
-
 .system-modal .modal-content {
 
   p + p { @include rem('margin-top', $global-padding); }
@@ -46,7 +42,6 @@
 .system-metadata {
   .metadata-value { word-wrap: break-word; }
 
-  table td { border: 1px solid #ddd; }
 }
 
 .system-overlay .modal-content,

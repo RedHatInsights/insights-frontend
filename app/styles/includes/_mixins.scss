@@ -285,3 +285,20 @@
     }
   }
 }
+
+// Generate Tile Gradient
+// =================================================================/
+@mixin tile($tile-color-base) {
+  i {
+    $tile-secondary-color: darken($tile-color-base, 7%);
+
+    background: $tile-color-base; 
+    background: linear-gradient(to bottom, $tile-color-base 0%, $tile-secondary-color 100%);
+
+    @if (lightness($tile-color-base) > 50) { color: $black-base; }
+    @else { color: #fff; }
+
+    @include rem('padding', 20px);
+    border-radius: 5px;
+  }
+}

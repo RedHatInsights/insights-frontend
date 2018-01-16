@@ -25,6 +25,11 @@ function SystemModalCtrl(
     $scope.report = {};
     $scope.modal = $modalInstance;
 
+    // enables tab hack
+    $scope.setActive = function (name) {
+        $scope.activeTab = name;
+    };
+
     // if there are no policies, hide the policies tab
     function init () {
         System.getSystemPolicies($scope.system.system_id).then((policies) => {

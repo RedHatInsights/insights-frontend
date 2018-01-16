@@ -34,6 +34,7 @@ function InventoryCtrl(
         Group) {
 
     const DEFAULT_PAGE_SIZE = 15;
+    const DEFAULT_PREDICATE = 'toString';
 
     $scope.Group = Group;
     $scope.filter = FilterService;
@@ -41,11 +42,11 @@ function InventoryCtrl(
     function updateParams(params) {
         params = FilterService.updateParams(params);
         if (!params.sort_field) {
-            params.sort_field = InventoryService.getSortField();
+            params.sort_field = $scope.sorter.predicate;
         }
 
         if (!params.sort_dir) {
-            params.sort_dir = InventoryService.getSortDirection();
+            params.sort_dir = $scope.sorter.getSortDirection();
         }
 
         return params;
@@ -59,9 +60,6 @@ function InventoryCtrl(
 
     FilterService.setShowFilters(false);
 
-    let params = $state.params;
-    $state.transitionTo('app.inventory', updateParams(params), { notify: false });
-
     $scope.QuickFilters = QuickFilters;
     $scope.systems = [];
     $scope.allSystems = null;
@@ -70,8 +68,20 @@ function InventoryCtrl(
     $scope.loading = InventoryService.loading;
     $scope.reloading = false;
 
-    $scope.predicate = $location.search().sort_field || 'toString';
-    $scope.reverse = $location.search().sort_dir === 'DESC';
+    FilterService.parseBrowserQueryParams();
+    System.getProductSpecificData();
+
+    let params = $state.params;
+
+    if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
+        $rootScope.$on('user:loaded', function () {
+            initInventory();
+            $state.transitionTo('app.inventory', updateParams(params), { notify: false });
+        });
+    } else {
+        initInventory();
+        $state.transitionTo('app.inventory', updateParams(params), { notify: false });
+    }
 
     $scope.allSelected = false;
     $scope.reallyAllSelected = false;
@@ -100,13 +110,30 @@ function InventoryCtrl(
 
     $scope.isPortal = InsightsConfig.isPortal;
 
+    function initSorter() {
+        let reverse = false;
+
+        if ($location.search().sort_dir) {
+            reverse = $location.search().sort_dir === 'ASC' ? false : true;
+        }
+
+        $scope.sorter = new Utils.Sorter({
+            predicate: $location.search().sort_field || DEFAULT_PREDICATE,
+            reverse: reverse
+        }, getData);
+    }
+
     function cleanTheScope() {
         $scope.pager = new Utils.Pager(DEFAULT_PAGE_SIZE);
+        initSorter();
         $scope.checkboxes.reset();
     }
 
     function initInventory() {
         $scope.loading = true;
+
+        //initialize the sorter
+        initSorter();
 
         //initialize pager and grab paging params from url
         $scope.pager = new Utils.Pager(DEFAULT_PAGE_SIZE);
@@ -134,14 +161,17 @@ function InventoryCtrl(
             query.search_term = FilterService.getSearchTerm();
         }
 
-        //sort field
-        if (InventoryService.getSortField()) {
-            query.sort_by = InventoryService.getSortField();
-        }
+        //sort field/direction
+        query.sort_by = $scope.sorter.predicate;
+        FilterService.setQueryParam('sort_field', $scope.sorter.predicate);
+        FilterService.setQueryParam('sort_dir', $scope.sorter.getSortDirection());
 
-        //sort direction
-        if (InventoryService.getSortDirection()) {
-            query.sort_dir = InventoryService.getSortDirection();
+        // special case where we are sorting by timestamp but visually
+        // showing timeago
+        if ($scope.sorter.predicate === 'last_check_in') {
+            query.sort_dir = $scope.sorter.getSortDirection() === 'ASC' ? 'DESC' : 'ASC';
+        } else {
+            query.sort_dir = $scope.sorter.getSortDirection();
         }
 
         //pagination
@@ -206,27 +236,6 @@ function InventoryCtrl(
         $scope.pager.update();
         $scope.checkboxes.reset();
     };
-
-    function parseBrowserQueryParams() {
-        FilterService.parseBrowserQueryParams();
-        if (params.sort_field) {
-            InventoryService.setSortField(params.sort_field);
-            if (params.sort_dir) {
-                InventoryService.setSortDirection(params.sort_dir);
-            }
-        }
-    }
-
-    parseBrowserQueryParams();
-    System.getProductSpecificData();
-
-    if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
-        $rootScope.$on('user:loaded', function () {
-            initInventory();
-        });
-    } else {
-        initInventory();
-    }
 
     $scope.getSelectableSystems = function () {
         return $scope.systems;
@@ -293,47 +302,6 @@ function InventoryCtrl(
         }
 
         return canSelect;
-    };
-
-    function order() {
-        $scope.systems = $filter('orderBy')($scope.systems,
-            ['_type',
-            ($scope.reverse ?
-                '-' + $scope.predicate :
-                $scope.predicate)]);
-    }
-
-    $scope.sort = function (column) {
-        $scope.loading = true;
-
-        // just changing the sort direction
-        if (column === InventoryService.getSortField()) {
-            InventoryService.toggleSortDirection();
-            $scope.reverse = !$scope.reverse;
-        }
-        else {
-            InventoryService.setSortField(column);
-            InventoryService.setSortDirection('ASC');
-            $scope.reverse = false;
-            $scope.predicate = column;
-
-            // special case where we are sorting by timestamp but visually
-            // showing timeago
-            if (column === 'last_check_in') {
-                InventoryService.setSortDirection('DESC');
-            }
-        }
-
-        // if we have the full inventory list then use local sorting
-        if ($scope.systems.length === InventoryService.getTotal()) {
-            order();
-            $scope.loading = false;
-        }
-        else {
-            // reset dataset
-            cleanTheScope();
-            getData(false);
-        }
     };
 
     $scope.selectAll = function () {

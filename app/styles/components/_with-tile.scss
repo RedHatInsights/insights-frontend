@@ -1,0 +1,16 @@
+$tile-left-position: 30px;
+
+.tile { 
+  @include tile(#00AEFF);
+}
+
+.with-tile { 
+
+  position: relative;
+  @include rem('padding-left', $global-margin);
+
+  .tile {
+    position: absolute;
+    left: -$tile-left-position;
+  }
+}
