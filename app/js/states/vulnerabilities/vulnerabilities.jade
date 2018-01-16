@@ -18,17 +18,25 @@
             .name ntp
             .date Release Date: 2017-1-1
           .vul-state 
-            .critical(translate) 1 Critical
-            .important(translate) 1 Important
-            .moderate(translate) 1 Moderate 
-            .low(translate) 1 Low
-      card-content.card-content.ng-animate-enabled(collapse="card.collapsed")
+            .critical.icon-inline
+              i.fa.fa-shield 
+              span(translate) 1 Critical
+            .important.icon-inline
+              i.fa.fa-shield 
+              span(translate) 1 Important
+            .moderate.icon-inline
+              i.fa.fa-shield 
+              span(translate) 1 Moderate 
+            .low.icon-inline
+              i.fa.fa-shield 
+              span(translate) 1 Low
+      card-content.card-content(collapse="card.collapsed")
         card(expandable='true').embedded-card
           card-header-expandable
             .card-header-title
               .title RHSA-2018:0000
               .systems-affected 4 Systems Affected
-          card-content.card-content.ng-animate-enabled(collapse="card.collapsed")
+          card-content.card-content(collapse="card.collapsed")
             table
               thead
                 tr
