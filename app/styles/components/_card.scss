@@ -126,7 +126,7 @@ $card-footer: "md-card-footer";
   }
 }
 
-
+// Nested card arrow control
 #{$card}.expanded { 
   > #{$card-header} > .expandable-toggle {
     i { transform: rotate(90deg); } 
