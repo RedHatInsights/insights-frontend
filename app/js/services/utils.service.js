@@ -265,6 +265,10 @@ function Utils($filter, $rootScope, Events) {
         }
     };
 
+    utils.Sorter.prototype.getSortDirection = function () {
+        return this.reverse ? 'DESC' : 'ASC';
+    };
+
     utils.Sorter.prototype.getSortClass = function (name) {
         return $filter('sortClass')(this.predicate, name, this.reverse);
     };
