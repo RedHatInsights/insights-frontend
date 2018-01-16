@@ -26,4 +26,14 @@
           search-box(placeholder="{{'Search RHSA or CVE' | translate}}", on-search='search(model)')
           rhsa-severity-select
         // TODO make Summary Card a component
-        .card-summary
+        .card-summaries
+          card
+            card-content.card-content
+              .icon
+                i.fa.fa-shield.critical 
+              h2.text RHSA-2018:0000
+              .subhead
+                span 3 CVEs
+                .pipe |
+                span.hits 1 Hit
+                  i.fa.fa-book

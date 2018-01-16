@@ -448,3 +448,32 @@ $card-footer: "md-card-footer";
     margin-left: 15px;
   }
 }
+
+
+// Card Summary
+//==================================================================*/
+.card-summaries{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  text-align: center;
+  @include rem('margin', 15px);
+
+  md-card { @include rem('margin-bottom', 15px); }
+
+  md-card-content { @include rem('padding', 25px 35px); }
+
+  .icon { 
+    @include rem('margin-bottom', 15px); 
+    @include rem('font-size', 25px);
+  }
+
+  h2.text { @include rem('font-size', 18px); }
+
+  .subhead { 
+    display: flex; 
+    justify-content: space-between;
+  }
+
+  .hits i { @include rem('padding-left', 5px); }
+}
