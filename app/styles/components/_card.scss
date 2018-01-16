@@ -459,7 +459,7 @@ $card-footer: "md-card-footer";
   text-align: center;
   @include rem('margin', 15px);
 
-  md-card { @include rem('margin-bottom', 15px); }
+  md-card { @include rem('margin-top', 15px); }
 
   md-card-content { @include rem('padding', 25px 35px); }
 
