@@ -362,7 +362,6 @@ function System(
         },
 
         getVulnerabilities (systemId) {
-            console.log(VMAAS_SYSTEMS);
             return $q.resolve(VMAAS_SYSTEMS[systemId]);
         }
     };

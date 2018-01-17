@@ -49,7 +49,7 @@
                   td.nowrap
                     a(ng-click='showSystem(system.system_id)') {{system.toString}}
                   td.nowrap
-                    span {{system.system_type}}
+                    type-icon(type-id='system.system_type_id', include-text='true')
                   td.nowrap
                     span {{system.last_check_in | timeAgo}}
                   td.nowrap
