@@ -3,7 +3,7 @@ var constantsModule = require('./');
 
 const SYSTEMS = {
     'kinlaw-rhel-vm': {
-        system_id: 'kinlaw-rhel-vm',
+        system_id: 'f7473238-1953-415f-8de6-a8da92975a64',
         system_type_id: 105,
         toString: 'kinlaw-rhel-vm',
         account_number: '540155',
@@ -11,7 +11,7 @@ const SYSTEMS = {
         last_check_in: '2018-01-17T13:16:31.000Z'
     },
     'kinlaw-rhel-vm4': {
-        system_id: 'kinlaw-rhel-vm4',
+        system_id: '66a6d090-e1dc-4036-b29f-c0b8cfde433d',
         system_type_id: 105,
         toString: 'kinlaw-rhel-vm4',
         account_number: '540155',
@@ -47,6 +47,8 @@ const CVES = {
         systems: []
     }
 };
+
+constantsModule.constant('VMAAS_CVES', [CVES['CVE-2017-6462'],CVES['CVE-2017-6463']]);
 
 constantsModule.constant('VMAAS_PACKAGES_NOCVE', [{
     id: 0,

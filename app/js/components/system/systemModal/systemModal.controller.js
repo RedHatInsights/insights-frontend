@@ -24,24 +24,16 @@ function SystemModalCtrl(
     $scope.activeTab = 'system';
     $scope.report = {};
     $scope.modal = $modalInstance;
-    $scope.tabs = {
-        Rules: 0,
-        Policies: 1,
-        Vulnerabilities: 2
-    };
+
+    $scope.RULE_TAB = 'rule';
+    $scope.POLICY_TAB = 'policy';
+    $scope.VULNERABILITY_TAB = 'vulnerability';
 
     // set the default tab for system modal; system if no value is passed in
-    $scope.activeTab = $scope.tabs[activeTab || 'Rules'];
-
-    $scope.isActive = function (tab) {
-        console.log(tab);
-        console.log($scope.tabs[tab]);
-        console.log('--------------------');
-        return $scope.tabs[tab];
-    };
+    $scope.activeTab = activeTab || $scope.RULE_TAB;
 
     $scope.activateTab = function (activatingTab) {
-        $scope.activeTab = $scope.tabs[activatingTab];
+        $scope.activeTab = activatingTab;
     };
 
     // enables tab hack
