@@ -7,8 +7,9 @@
       aria-haspopup='true',
       aria-expanded='false',
       ng-click='$mdMenu.open()')
-      span {{selected.title | translate}}
+      span {{getSelectedString() | translate}}
       span.caret
-    md-menu-content
-      md-checkbox(ng-repeat='(key, option) in options', ng-click='select(key)', ng-checked='selected === option')
-        span {{option.title | translate}}
+    md-menu-content()
+      md-menu-item(ng-repeat='(key, option) in options')
+        md-button(md-prevent-menu-close="md-prevent-menu-close") {{option.title | translate}}
+          md-checkbox(ng-model="option.selected", aria-label="RHSA Filter Checkbox")

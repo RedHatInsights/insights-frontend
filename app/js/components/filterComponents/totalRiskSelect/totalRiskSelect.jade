@@ -10,5 +10,5 @@
       span.text.active(ng-model='label') {{label | translate}}
       span.caret
     md-menu-content
-      md-checkbox(ng-repeat='option in options', ng-click='select(option)', ng-checked='selected === option')
-        span {{option.label | translate}}
+      md-menu-item(ng-repeat='option in options')
+        a(ui-sref='#', ng-click='select(option)') {{option.label | translate}}
