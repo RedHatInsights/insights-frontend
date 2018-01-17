@@ -11,14 +11,15 @@ function System(
     $http,
     $q,
     $rootScope,
-    InsightsConfig,
     AccountService,
-    Group,
-    Utils,
+    DataUtils,
     FilterService,
-    Products,
+    Group,
+    InsightsConfig,
     PreferenceService,
-    DataUtils) {
+    Products,
+    Utils,
+    VMAAS_SYSTEMS) {
 
     var root = InsightsConfig.apiRoot;
     var _systemDfd;
@@ -358,6 +359,11 @@ function System(
             url.segment('policies');
             url.addSearch(AccountService.queryParam());
             return $http.get(url.toString());
+        },
+
+        getVulnerabilities (systemId) {
+            console.log(VMAAS_SYSTEMS);
+            return $q.resolve(VMAAS_SYSTEMS[systemId]);
         }
     };
 }
