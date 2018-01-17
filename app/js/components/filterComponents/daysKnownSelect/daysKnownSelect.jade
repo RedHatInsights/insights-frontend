@@ -1,4 +1,4 @@
-.filter-group.filter-rhsa-severity
+.filter-group.filter-days-known
   label(translate) Days Known
   md-menu(md-offset="0 38")
     md-button.button-filter(
@@ -10,5 +10,5 @@
       span {{selected.title | translate}}
       span.caret
     md-menu-content
-      md-checkbox(ng-repeat='(key, option) in options', ng-click='select(key)', ng-checked='selected === option')
-        span {{option.title | translate}}
+      md-menu-item(ng-repeat='(key, option) in options', ng-click='select(key)', ng-checked='selected === option')
+        a {{option.title | translate}}

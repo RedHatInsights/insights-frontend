@@ -3,6 +3,6 @@ section#data-filters.data-filters(ng-class="{tags: hasTags()}")
   .active-filters(ng-if='hasTags()', ng-model='tags')
     strong(translate) Active filters:&nbsp;
     // remove filter on click
-    button.button-active-filter.button-tag(ng-repeat="(key, value) in tags", ng-click='removeFilter(key)')
-      span(translate) {{value | translate}}
+    button.button-active-filter.button-tag(ng-repeat="tag in tags", ng-click='removeFilter(tag)')
+      span(translate) {{tag.tag | translate}}
       i.fa.fa-times-circle-o(aria-hidden="true")

@@ -1,6 +1,8 @@
 'use strict';
 
 const componentsModule = require('../../');
+const find = require('lodash/find');
+const filter = require('lodash/filter');
 
 /**
  * @ngInject
@@ -44,59 +46,50 @@ function rhsaSeveritySelectCtrl($rootScope,
                 $scope.options[optionsMap[option]].selected = true;
             });
         } else {
-            setDefaultOption($scope.options);
+            setDefaultOption();
         }
 
-        $rootScope.$broadcast(Events.filters.tag,
-                              getTag(),
-                              Events.filters.rhsaSeverity);
+        broadcastTabs();
     })();
+
+    /**
+     * Returns the string representation for one or more selected options.
+     *
+     * @return {String} representation showing there are one or
+     *                  more options selected
+     */
+    $scope.getSelectedString = function () {
+        let options = filter($scope.options, {selected: true});
+
+        return options.length === 1 ? options[0].title : 'multiple';
+    };
 
     /**
      * Concatenates the tabs if multiple severities are chosen.
      *
      * @return {String} tag for filters
      */
-    function getTag() {
-        let tag = '';
+    function broadcastTabs() {
         $scope.options.forEach(function (option) {
-            if (option.selected && tag === '') {
-                tag = option.tag;
-            } else if (option.selected) {
-                tag += `, ${option.title}`;
+            if (option.selected) {
+                $rootScope.$broadcast(Events.filters.tag,
+                              option.tag,
+                              Events.filters.rhsaSeverity);
             }
         });
-
-        return tag;
     }
 
     /**
-     * Returns the string representation when there are multiple choices.
-     *
-     * @return {String} representation showing there are one or
-     *                  more options selected
+     * Sets url query and broadcasts events to execute the query.
      */
-    $scope.getSelectedString = function () {
-        let str = '';
-        $scope.options.forEach(function (option) {
-            if (option.selected) {
-                if (str.length > 0) {
-                    return `${str}...`;
-                }
-
-                str = option.title;
-            }
-        });
-
-        return str;
+    $scope.doFilter = function () {
+        setURL();
+        broadcastTabs();
     };
 
-    /**
-     * Sets url param and broadcast all options
-     */
-    function setFilterParams(options) {
+    function setURL() {
         let str = '';
-        options.forEach(function (option, index) {
+        $scope.options.forEach(function (option, index) {
             if (option.selected && str === '' &&
                 index !== DEFAULT_OPTION) {
                 str = option.title;
@@ -109,15 +102,13 @@ function rhsaSeveritySelectCtrl($rootScope,
             FilterService.setRhsaSeverity(DEFAULT_OPTION);
             FilterService.deleteQueryParam(Events.filters.rhsaSeverity);
         } else {
-            console.log(str);
             FilterService.setRhsaSeverity(str);
         }
 
         FilterService.doFilter();
-        $rootScope.$broadcast(Events.filters.tag,
-                              getTag(),
-                              Events.filters.rhsaSeverity);
         $rootScope.$broadcast(Events.filters.rhsaSeverity, str);
+
+        return str;
     }
 
     /**
@@ -125,50 +116,49 @@ function rhsaSeveritySelectCtrl($rootScope,
      * checkboxes.
      */
     $scope.$watch('options', function (newVal, old) {
-
         // deselect all other checkboxes if "All" is selected
         if (!old[DEFAULT_OPTION].selected && newVal[DEFAULT_OPTION].selected) {
-            setDefaultOption(newVal);
+            setDefaultOption();
         } else {
-            let isOptionSelected = false;
-            newVal.forEach(function (option, index) {
-                // if something other than all is selected than All is deselected
-                if (option.selected && index !== DEFAULT_OPTION) {
-                    isOptionSelected = true;
-                    newVal[DEFAULT_OPTION].selected = false;
-                }
-            });
-
-            if (!isOptionSelected) {
-                newVal[DEFAULT_OPTION].selected = true;
-            }
+            setSelectedOptions();
         }
-
-        setFilterParams(newVal);
     }, true);
+
+    function setSelectedOptions() {
+        let isOptionSelected = false;
+        $scope.options.forEach(function (option, index) {
+            // if something other than all is selected than All is deselected
+            if (option.selected && index !== DEFAULT_OPTION) {
+                isOptionSelected = true;
+                $scope.options[DEFAULT_OPTION].selected = false;
+            }
+        });
+
+        if (!isOptionSelected) {
+            $scope.options[DEFAULT_OPTION].selected = true;
+        }
+    }
 
     /**
      * sets selected option to the default
      */
-    function setDefaultOption(options) {
-        options.forEach(function (option, index) {
+    function setDefaultOption() {
+        $scope.options.forEach(function (option, index) {
             if (index === DEFAULT_OPTION) {
                 option.selected = true;
             } else {
                 option.selected = false;
             }
         });
-
-        setFilterParams(options);
     }
 
-    $scope.$on(Events.filters.reset, function () {
-        setDefaultOption($scope.options);
-    });
+    $scope.$on(Events.filters.reset, setDefaultOption);
 
-    $scope.$on(Events.filters.removeTag, function (event, filter) {
+    $scope.$on(Events.filters.removeTag, function (event, filter, tag) {
         if (filter === Events.filters.rhsaSeverity) {
-            setDefaultOption($scope.options);
+            find($scope.options, {tag: tag}).selected = false;
+            setSelectedOptions();
+            setURL();
         }
     });
 }

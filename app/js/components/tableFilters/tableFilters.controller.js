@@ -2,6 +2,7 @@
 'use strict';
 
 const componentsModule = require('../');
+const removeFromArray = require('lodash/remove');
 const priv = {};
 
 /**
@@ -17,23 +18,24 @@ function TableFiltersCtrl($element,
     /**
      * Removes tag from footer and broadcasts the event for reseting the filter
      */
-    $scope.removeFilter = function (tagId) {
-        delete $scope.tags[tagId];
-        $rootScope.$broadcast(Events.filters.removeTag, tagId);
+    $scope.removeFilter = function (tag) {
+        removeFromArray($scope.tags, tag);
+        $rootScope.$broadcast(Events.filters.removeTag, tag.filter, tag.tag);
     };
 
     $scope.hasTags = function () {
-        return Object.keys($scope.tags).length > 0;
+        return $scope.tags.length > 0;
     };
 
     /**
      * listens for new tags and adds them to the footer as they come in
      */
     $scope.$on(Events.filters.tag, function (event, tag, filter) {
-        $scope.tags[filter] = tag;
-
-        if (tag === null) {
-            delete $scope.tags[filter];
+        if (tag) {
+            $scope.tags.push({
+                tag: tag,
+                filter: filter
+            });
         }
     });
 
@@ -50,7 +52,7 @@ function TableFiltersCtrl($element,
     $element.bind('hidden.bs.collapse', priv.toggleTray);
 
     function init () {
-        $scope.tags = {};
+        $scope.tags = [];
     }
 
     init();
