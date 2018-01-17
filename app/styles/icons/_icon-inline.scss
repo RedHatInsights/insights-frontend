@@ -7,7 +7,7 @@ div.icon-inline {
   align-items: first baseline;
   @include font-size(14px, 1);
 
-  > * + * { margin-left: $global-padding/2; }
+  > *:visible + * { margin-left: $global-padding/2; }
 
   .alert-text { 
     @include font-size(14px);

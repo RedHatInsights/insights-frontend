@@ -1,3 +1,8 @@
-.rule-summary + .rule-summary {
-  @include rem('margin-top', $global-margin);
+
+
+// Rule summary card header content - layout
+//==================================================================*/
+
+.card-rule-summary .card-header-expandable-card .card-header-content {
+  
 }

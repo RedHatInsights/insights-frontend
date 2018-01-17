@@ -1,8 +1,9 @@
 // Vars
-$card: "md-card";
-$card-header: "md-card-header";
-$card-content: "md-card-content";
-$card-footer: "md-card-footer";
+// Card variables are assigned to the values set in _vars.scss. The purpose for including them is to add the ability to change their values within this file. This will be replaced by css variables upon better browser support.
+$card: $card;
+$card-header: $card-header;
+$card-content: $card-header;
+$card-footer: $card-header;
 
 //#{$card}+#{$card}{@include rem('margin-top', $global-margin);}
 
@@ -14,7 +15,9 @@ $card-footer: "md-card-footer";
   h1, 
   h2, 
   h3, 
-  h4 {
+  h4,
+  h5,
+  h6 {
     @include font-size(14px, 17px);
     margin-top: 0;
   }
@@ -74,7 +77,8 @@ $card-footer: "md-card-footer";
   .card-header-content { 
     display: flex;
     flex: 1;
-    align-items: stretch;
+    align-items: first baseline;
+    justify-content: space-between;
   }
 
   .checkbox { @include rem('margin-top', 2px); }
@@ -150,34 +154,19 @@ $card-footer: "md-card-footer";
 }
 
 
+// Card list
+//==================================================================*/
+
 .card-list {
   @include rem('margin-top', $global-margin);
-}
+  display: flex;
+  flex-flow: column nowrap;
 
-
-
-// Rule card
-#{$card}.card-rule-summary {
-
-  @include rem('margin', $global-padding);
-
-  .card-header-title { 
-    @include font-size(14px, 1); 
-    font-weight: 300;
-  }
-
-  .card-header-title .title {
-    @include font-size(16px, 1);
-    font-weight: 700;
-  }
-
-  .card-header-risk-summaries .title {
-    @include font-size(14px, 1);
-    font-weight: 500;
-  }
-
-  #{$card-content} {
-    @include rem('padding', $global-margin);
+  > #{$card} + #{$card} { @include rem('margin-top', $global-margin); }
+  
+  .expand-all { 
+    align-self: flex-end;
+    @include rem('margin-bottom', $global-margin); 
   }
 }
 

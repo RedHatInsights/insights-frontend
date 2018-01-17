@@ -26,6 +26,13 @@
   }
 }
 
+.page-header .page-title .sub-title {
+  @include rem('margin-bottom', $global-padding/2);
+  display: block;
+  color: #8b8d8f;
+  text-transform: uppercase;
+}
+
 .page-header .page-title h1 {
   display: flex;
   margin: 0;

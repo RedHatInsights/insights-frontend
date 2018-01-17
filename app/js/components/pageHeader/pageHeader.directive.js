@@ -24,7 +24,8 @@ function pageHeader() {
         controller: pageHeaderCtrl,
         scope: {
             title: '@',
-            icon: '@'
+            icon: '@',
+            subtitle: '@'
         }
     };
 }
