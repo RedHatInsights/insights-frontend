@@ -128,7 +128,11 @@ $card-footer: "md-card-footer";
 }
 
 
-#{$card}.expanded .expandable-toggle { i { transform: rotate(90deg); } }
+#{$card}.expanded { 
+  > #{$card-header} > .expandable-toggle {
+    i { transform: rotate(90deg); } 
+  }
+}
 
 
 // Card content base
