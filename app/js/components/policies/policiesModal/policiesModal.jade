@@ -2,15 +2,14 @@
   expand-all-button.toggle-expand-right
   card(expandable='true', ng-repeat="policy in policies.resources | orderBy: 'policy.policy_id'", ng-show='!loading', init-collapsed='policy.policy_id != policyId')
     card-header-expandable.gray
-      .card-header-title
-        .checks-wrapper
-          .title {{ policy.policy_id }}
-          .checks-state 
-            .passed(translate, translate-n='{{policy.checks_pass}}', translate-plural='{{$count}} Checks passed', ng-if="policy.checks_pass !== 0") {{policy.checks_pass}} Check passed
-            .failed(translate, translate-n='{{policy.checks_fail}}', translate-plural='{{$count}} Checks failed', ng-if="policy.checks_fail !== 0") {{policy.checks_fail}} Check failed
-            .errored(translate, translate-n='{{policy.checks_error}}', translate-plural='{{$count}} Checks errored', ng-if="policy.checks_error !== 0") {{policy.checks_error}} Check errored
-    card-content.card-content.ng-animate-enabled(collapse="card.collapsed")
-      .tri-card-container
+      .title {{ policy.policy_id }}
+      .state-group
+        span.state.pass(translate, translate-n='{{policy.checks_pass}}', translate-plural='{{$count}} Checks passed', ng-if="policy.checks_pass !== 0") {{policy.checks_pass}} Check passed
+        span.state.fail(translate, translate-n='{{policy.checks_fail}}', translate-plural='{{$count}} Checks failed', ng-if="policy.checks_fail !== 0") {{policy.checks_fail}} Check failed
+        span.state.error(translate, translate-n='{{policy.checks_error}}', translate-plural='{{$count}} Checks errored', ng-if="policy.checks_error !== 0") {{policy.checks_error}} Check errored
+
+    card-content(collapse="card.collapsed")
+      .flex
         // Passed
         card.state-passed(ng-class="(policy.checks_pass === 0) ? 'md-disabled' : ''")
           card-header

@@ -1,0 +1,20 @@
+// Vars
+// Card variables are assigned to the values set in _vars.scss. The purpose for including them is to add the ability to change their values within this file. This will be replaced by css variables upon better browser support.
+$card-footer: $card-footer;
+
+
+// Card footer components
+//==================================================================*/
+
+#{$card-footer} {
+
+  & .card-footer-title { flex: 1 1 60%; }
+
+  & .card-footer-supporting-info { 
+    flex: 0 1 auto; 
+    @include font-size(14px, 1);
+    font-weight: 100;
+  }  
+}
+
+
