@@ -19,7 +19,7 @@
       h5.title.title-divider.icon-inline
         incident-icon(rule-id='report.rule_id')
         span {{ report.rule.category }} #{'>'} {{ report.rule.description }}
-        ansible-icon(value='report.rule.ansible')
+        ansible-icon(value='report.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
 
       all-severity-icons.inline(rule='report.rule')
       risk-of-change(change-risk='report.rule.resolution_risk')

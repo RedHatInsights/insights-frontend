@@ -23,7 +23,7 @@ $state-padding: $global-padding/2;
 .state-group {
   display: inline-flex;
 
-  .state + .state { @include rem('margin', 0 $global-padding/2); }
+  .state + .state { @include rem('margin-left', $global-padding); }
 }
 
 

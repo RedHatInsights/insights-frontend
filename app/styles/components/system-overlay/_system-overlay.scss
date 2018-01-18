@@ -29,15 +29,6 @@
   }
 }
 
-.system-modal .modal-content {
-
-  p + p { @include rem('margin-top', $global-padding); }
-
-  .detail-part {
-    @include rem('padding', $global-padding);
-    border: 1px solid $gray-light;
-  }
-}
 
 .system-metadata {
   .metadata-value { word-wrap: break-word; }

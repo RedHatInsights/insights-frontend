@@ -35,7 +35,7 @@
               li(ng-repeat="check in policy.check_results | orderBy: 'check.name'", ng-if="check.result === 'fail'") {{check.name}}
 
         // Errored
-        card.card-state-warn(sm-flex-100)
+        card.card-state-warn(sm-flex-100, ng-if="policy.checks_error !== 0")
           card-header
             .title.icon-inline
               i.fa.fa-warning(aria-label="Policy Errored icon",  aria-hidden="true", translate)

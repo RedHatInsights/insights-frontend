@@ -4,6 +4,7 @@ $card: $card;
 $card-content: $card-content;
 
 #{$card} #{$card-content} {
+  @include rem('padding', $global-padding);
   
   .flex {
     margin-left: 0;
