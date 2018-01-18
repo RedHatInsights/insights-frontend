@@ -92,8 +92,6 @@ function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
             return [Severities.map(function (severity) {
                 return severity.value;
             }).indexOf(r.severity), paddedcount];
-        }).filter(function (r) {
-            return r.report_count > 0;
         });
 
         rules.reverse();
@@ -122,8 +120,14 @@ function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
 
     function loadData () {
         let digestPromise = DigestService.digestsByType('eval');
-        let systemPromise = System.getSystems();
-        let rulePromise = Rule.getRulesLatest();
+        let systemPromise = System.getSystemsLatest({
+            report_count: 'gt0',
+            sort_by: 'report_count',
+            sort_dir: 'DESC',
+            page_size: 10,
+            page: 0
+        });
+        let rulePromise = Rule.getRulesWithHits();
 
         $scope.loading = true;
 
