@@ -9,17 +9,19 @@ function RuleSummariesCtrl(
     $scope,
     $stateParams,
     $location,
+    gettextCatalog,
     System,
     Report,
     InsightsConfig) {
 
     $scope.getLoadingMessage = function () {
-        var response = 'Loading report(s)';
-        if ($scope.system.hostname) {
-            response = response + ' for ' + $scope.system.hostname;
+        if ($scope.system.toString) {
+            return gettextCatalog.getString('Loading report(s) for {{name}}…', {
+                name: $scope.system.toString
+            });
         }
 
-        return response + '…';
+        return gettextCatalog.getString('Loading report(s)…');
     };
 
     function getSystemReports() {
