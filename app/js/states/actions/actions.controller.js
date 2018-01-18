@@ -117,13 +117,6 @@ function ActionsCtrl(
             setCategoryTopics(res.data);
         }));
 
-        promises.push(Stats.getSystems({
-            product: product,
-            minSeverity: 'CRITICAL'
-        }).then(function (res) {
-            $scope.stats.systems = res.data;
-        }));
-
         return $q.all(promises);
     }
 
