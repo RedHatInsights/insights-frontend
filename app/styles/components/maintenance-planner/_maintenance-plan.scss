@@ -822,7 +822,7 @@ table.maintenance-table {
   }
 
   // adjust content padding for vertical divider
-  .content { 
+  .content {
     padding: 0;
     display: flex;
     flex-flow: row wrap;
@@ -856,11 +856,15 @@ table.maintenance-table {
 }
 
 .maintenance-plan-modal .form-group input {
-  -webkit-box-sizing: border-box; 
+  -webkit-box-sizing: border-box;
 }
 
 .resolution-modal .btn {
 
   font-weight: 700;
   &.save{ color: #fff; }
+}
+
+table.maintenance-table a.text.action {
+  flex: inherit;
 }
