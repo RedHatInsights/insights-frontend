@@ -13,15 +13,17 @@ function ruleGroupCardCtrl ($scope, $timeout, $document, InsightsConfig) {
     };
 
     function keydownHandler ($event) {
-        if (active) {
-            if ($event.keyCode === LEFT_ARROW_KEY) {
-                $scope.previous();
-            }
+        $scope.$evalAsync(function () {
+            if (active) {
+                if ($event.keyCode === LEFT_ARROW_KEY) {
+                    $scope.previous();
+                }
 
-            if ($event.keyCode === RIGHT_ARROW_KEY) {
-                $scope.next();
+                if ($event.keyCode === RIGHT_ARROW_KEY) {
+                    $scope.next();
+                }
             }
-        }
+        });
     }
 
     $document.on('keydown', keydownHandler);
