@@ -80,8 +80,13 @@ function ActionsCtrl(
         });
     };
 
-    $scope.$on('filterService:doFilter', reload);
-    $scope.$on('group:change', reload);
+    const listeners = [
+        $scope.$on('filterService:doFilter', reload),
+        $scope.$on('group:change', reload),
+        $rootScope.$on('$stateChangeStart', function () {
+            listeners.forEach(listener => listener());
+        })
+    ];
 
     RhaTelemetryActionsService.setInitialSeverity($stateParams.initialSeverity);
     RhaTelemetryActionsService.setCategory($stateParams.category);
