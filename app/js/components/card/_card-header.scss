@@ -42,7 +42,13 @@ $card-header: $card-header;
 }
 
 
-// Card header title with divider
+// Card header - alternate styles
+//==================================================================*/
+
+#{$card} #{$card-header}.gray { background: $gray-light; }
+
+
+// Card header title - with divider
 //==================================================================*/
 
 #{$card} #{$card-header} .title.title-divider {  
@@ -56,6 +62,7 @@ $card-header: $card-header;
 // Card header components
 //==================================================================*/
 
+// System count //
 #{$card} #{$card-header} .count {
   background: $blue;
   position: absolute;
@@ -70,8 +77,13 @@ $card-header: $card-header;
 }
 
 
-// Card content base
-//==================================================================*/
+// Header call to action //
+#{$card} #{$card-header} .card-header-cta { @include font-size(14px, 1); }
 
-#{$card-header}.gray { background: $gray-light; }
-#{$card-header} .card-header-cta { @include font-size(14px, 1);}
+
+// Ansible icon //
+#{$card} #{$card-header} .ansible-icon,
+#{$card} #{$card-header} .icon-inline .ansible-icon:not(.ng-hide) { 
+  justify-self: flex-end; 
+  margin-left: auto;
+}

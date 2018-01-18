@@ -1,45 +1,60 @@
-.content-wrap
+.card-list.rule-summaries-modal
   .loading-block.text-center(ng-if='loading.isLoading')
     .detail-part
       .spinner.spinner-lg
       | {{getLoadingMessage()}}
-  .text-right
-    expand-all-button(ng-hide='!system.reports || !system.reports.length || loading.isLoading')
-  p.text-center(ng-if='(!system.reports || !system.reports.length) && !loading.isLoading && !system.__fake && !errorMessage')
+  expand-all-button(ng-hide='!system.reports || !system.reports.length || loading.isLoading')
+
+  .text-center(ng-if='(!system.reports || !system.reports.length) && !loading.isLoading && !system.__fake && !errorMessage')
     span.icon.icon-inline.success
       i.fa.fa-check-circle
       span(translate) No actions
   div(ng-if='!loading.isLoading && !system.__fake && errorMessage', ng-bind-html='errorMessage | trust_html')
+<<<<<<< HEAD
+=======
+
+>>>>>>> 24316fbff506639e440595f696523bd068770d51
   //- start the card-list
 
   card.card-rule-summary(report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports', expandable='true', init-collapsed='initCollapsed', on-toggle='resetShowMore(ctx)')
 
     // Card header - expandable
+<<<<<<< HEAD
     card-header-expandable.gray 
       h5.title.title-divider.icon-inline
         incident-icon(rule-id='report.rule_id')
         span {{ report.rule.category }} #{'>'} {{ report.rule.description }}
-        ansible-icon(value='report.rule.ansible', ng-if='config.isPlannerEnabled', hide-label="true")
+        ansible-icon(value='report.rule.ansible')
 
       all-severity-icons.inline(rule='report.rule')
       risk-of-change(change-risk='report.rule.resolution_risk')
+=======
+    card-header-expandable.gray
+      h5.title.icon-inline
+        incident-icon(rule-id='report.rule_id')
+        span {{ report.rule.category }} #{'>'} {{ report.rule.description }}
+
+      all-severity-icons.inline(rule='report.rule')
+      risk-of-change(change-risk='report.rule.resolution_risk')
+      ansible-icon(value='report.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
+>>>>>>> 24316fbff506639e440595f696523bd068770d51
 
     // Card content
     card-content(collapse="card.collapsed")
       .flex
+<<<<<<< HEAD
         card
           card-content.detail-part
             h4.section-heading(translate)
               i.fa.fa-crosshairs(aria-hidden="true") &nbsp;
               strong Detected issues
-            .reason
-              .detail-content(ng-if="report.rule.reason !== 'INSIGHTS-ERROR-INTERPOLATION'",
-                ng-bind-html='report.rule.reason | trust_html',
-                target-blank='')
-              .detail-content(ng-if="report.rule.reason === 'INSIGHTS-ERROR-INTERPOLATION'")
-                p
-                  i.fa.fa-exclamation-circle.i-error.inline-right
-                  strong(translate) There was a problem obtaining action details. Please try again later.
+            .detail-content(ng-if="report.rule.reason !== 'INSIGHTS-ERROR-INTERPOLATION'",
+              ng-bind-html='report.rule.reason | trust_html',
+              target-blank='')
+            .detail-content(ng-if="report.rule.reason === 'INSIGHTS-ERROR-INTERPOLATION'")
+              p
+                i.fa.fa-exclamation-circle.i-error.inline-right
+                strong(translate) There was a problem obtaining action details. Please try again later.
 
         card
           card-content.detail-part
@@ -76,3 +91,19 @@
           div(ng-bind-html='report.rule.more_info_html | trust_html',
             ng-show='report.rule.more_info',
             target-blank='')
+=======
+        .rule-reason(md-flex-100)
+        .rule-resolution(md-flex-100)
+        .recommended-kbase(ng-if='report.rule.node_id' node='report.rule.node_id')
+        .text-center.border-top(ng-show='report.rule.more_info')
+          .nomar.push-top-narrow.pointer(ng-click='show.moreInfo = !show.moreInfo')
+            a.link
+              strong {{show.moreInfo ? 'Hide' : 'Show'}}  more info &nbsp;
+              i.fa(ng-class="{'fa-caret-up': show.moreInfo, 'fa-caret-down': !show.moreInfo}")
+
+    // Card footer
+    card-footer.footer.more-info(collapse="!show.moreInfo")
+      div(ng-bind-html='report.rule.more_info_html | trust_html',
+        ng-show='report.rule.more_info',
+        target-blank='')
+>>>>>>> 24316fbff506639e440595f696523bd068770d51

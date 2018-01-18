@@ -39,7 +39,7 @@ $flex-gutter: $global-margin;
   flex: 1 1 100%;
   @include rem('margin-bottom', $global-margin);
 
-  @include media-query(sm){ @include rem('margin', 0 $global-padding $global-margin); }
+  @include media-query(sm){ @include rem('margin', $global-padding); }
 }
 
 [sm-flex-25] { @include media-query(sm) { flex: 0 1 calc(25% - #{$flex-gutter); } } }

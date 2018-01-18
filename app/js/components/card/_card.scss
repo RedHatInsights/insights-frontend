@@ -2,9 +2,6 @@
 // Card variables are assigned to the values set in _vars.scss. The purpose for including them is to add the ability to change their values within this file. This will be replaced by css variables upon better browser support.
 $card: $card;
 $card-header: $card-header;
-$card-content: $card-content;
-$card-footer: $card-footer;
-
 
 #{$card} {
   @include reset;
@@ -27,6 +24,15 @@ $card-footer: $card-footer;
 //==================================================================*/
 
 #{$card}.card-accent { border-top: 2px solid #39a5dc; }
+
+  .expandable-toggle { flex: 0 0 auto; }
+  
+  .card-header-content { 
+    display: flex;
+    flex: 1;
+    align-items: first baseline;
+    justify-content: space-between;
+  }
 
 
 // Card list

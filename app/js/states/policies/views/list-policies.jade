@@ -9,9 +9,9 @@
       thead
         tr
           th.sortable(ng-class="sorter.getSortClass('policy_name')", ng-click="sorter.sort('policy_name')", translate) Policy
-          th.nowrap.sortable.text-center(ng-class="sorter.getSortClass('systems_pass')", ng-click="sorter.sort('systems_pass')", translate) Systems Passing
-          th.nowrap.sortable.text-center(ng-class="sorter.getSortClass('systems_fail')", ng-click="sorter.sort('systems_fail')", translate) Systems Failing
-          th.nowrap.sortable.text-center(ng-class="sorter.getSortClass('systems_error')", ng-click="sorter.sort('systems_error')", translate) Systems Erroring
+          th.min.fit-content.nowrap.sortable.text-center(ng-class="sorter.getSortClass('systems_pass')", ng-click="sorter.sort('systems_pass')", translate) Systems Passing
+          th.min.fit-content.nowrap.sortable.text-center(ng-class="sorter.getSortClass('systems_fail')", ng-click="sorter.sort('systems_fail')", translate) Systems Failing
+          th.min.fit-content.sortable.text-center(ng-class="sorter.getSortClass('systems_error')", ng-click="sorter.sort('systems_error')", translate) Systems Erroring
       tbody(ng-show='!loading')
         tr(ng-repeat="policy in policies | orderBy: sorter.predicate : sorter.reverse track by policy.policy_id")
           td.nowrap
@@ -20,9 +20,9 @@
               ng-if="policy.systems_fail || policy.systems_error",
               tooltip='{{failedChecksTooltip}}'
               aria-label="Policy error icon")
-          td.nowrap.text-center(ng-class="policy.pass") {{policy.systems_pass}}
-          td.nowrap.text-center(ng-class="policy.fail") {{policy.systems_fail}}
-          td.nowrap.text-center(ng-class="policy.error") {{policy.systems_error}}
+          td.min.text-center(ng-class="policy.pass") {{policy.systems_pass}}
+          td.min.text-center(ng-class="policy.fail") {{policy.systems_fail}}
+          td.min.text-center(ng-class="policy.error") {{policy.systems_error}}
 
     pagination.pull-right.pagination-blue(
       ng-if='!loading && allPolicies.total > pager.perPage',
