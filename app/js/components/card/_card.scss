@@ -3,6 +3,7 @@
 $card: $card;
 $card-header: $card-header;
 
+
 #{$card} {
   @include reset;
   color: $base-color;
@@ -34,6 +35,9 @@ $card-header: $card-header;
     justify-content: space-between;
   }
 
+
+// Card list
+//==================================================================*/
 
 // Card list
 //==================================================================*/
