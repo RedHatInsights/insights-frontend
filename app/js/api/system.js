@@ -363,6 +363,10 @@ function System(
 
         getVulnerabilities (systemId) {
             return $q.resolve(VMAAS_SYSTEMS[systemId]);
+        },
+
+        getAllVulnerabilities () {
+            return $q.resolve(VMAAS_SYSTEMS);
         }
     };
 }

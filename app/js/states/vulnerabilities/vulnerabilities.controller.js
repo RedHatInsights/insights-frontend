@@ -2,6 +2,7 @@
 'use strict';
 
 var statesModule = require('../');
+const find = require('lodash/find');
 
 /**
  * @ngInject
@@ -13,11 +14,14 @@ function VulnerabilitiesCtrl($filter,
                              $scope,
                              InventoryService,
                              Utils,
-                             Vulnerability) {
+                             Vulnerability,
+                             VulnerabilitiesService) {
 
     $scope.pager = new Utils.Pager();
     $scope.searchText = $location.search().searchText;
     $scope.vulnerabilities = [];
+    $scope.getCurrentView = VulnerabilitiesService.getCurrentView;
+    $scope.views = VulnerabilitiesService.getViews();
 
     $scope.sorter = new Utils.Sorter({
         predicate: 'name',
@@ -35,6 +39,27 @@ function VulnerabilitiesCtrl($filter,
         Vulnerability.getAll(params).then((vulnerabilities) => {
             $scope.allVulnerabilities = vulnerabilities;
             order();
+            console.log($scope.getCurrentView());
+            $scope.rhsas = [];
+
+            vulnerabilities.forEach((vulnerability) => {
+                vulnerability.rhsas.forEach((rhsa) => {
+                    const newRhsa = find($scope.rhsas, {id: rhsa.id});
+                    if (!newRhsa) {
+                        $scope.rhsas.push(rhsa);
+                    } else {
+                        rhsa.systems.forEach((system) => {
+                            if (newRhsa.systems.indexOf(system) === -1) {
+                                newRhsa.systems.push(system);
+                                newRhsa.systems_affected++;
+                            }
+                        });
+                    }
+                });
+            });
+
+            console.log($scope.rhsas);
+
             $scope.loading = false;
         });
     }
