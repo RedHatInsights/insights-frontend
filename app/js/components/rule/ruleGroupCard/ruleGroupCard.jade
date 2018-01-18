@@ -22,7 +22,7 @@
       i.fa.fa-arrow-right
     card
       card-header
-        .md-card-header-title(translate) {{index + 1}} of {{:: plugin.rules.length}}: {{rule.description}}
+        .md-card-header-title(translate) {{index + 1}} of {{plugin.rules.length}}: {{rule.description}}
         span.label.label-default.pull-right.text-uppercase(translate, ng-show='rule.acked') inactive
         .md-card-header-cta(ng-if='config.isPlannerEnabled')
           incident-icon(rule-id='rule.rule_id')
