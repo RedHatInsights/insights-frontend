@@ -15,7 +15,8 @@ function VulnerabilitiesCtrl($filter,
                              InventoryService,
                              Utils,
                              Vulnerability,
-                             VulnerabilitiesService) {
+                             VulnerabilitiesService,
+                             SystemModalTabs) {
 
     $scope.pager = new Utils.Pager();
     $scope.searchText = $location.search().searchText;
@@ -90,7 +91,8 @@ function VulnerabilitiesCtrl($filter,
     }
 
     $scope.showSystem = function (system_id) {
-        InventoryService.showSystemModal({system_id: system_id}, true, 'vulnerability');
+        InventoryService.showSystemModal({system_id: system_id}, true,
+                                         SystemModalTabs.vulnerabilities);
     };
 
     getData();

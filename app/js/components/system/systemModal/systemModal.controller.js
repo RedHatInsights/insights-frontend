@@ -18,23 +18,14 @@ function SystemModalCtrl(
     AnalyticsService,
     FilterService,
     System,
-    ModalUtils) {
+    ModalUtils,
+    SystemModalTabs) {
 
     // set the default tab for system modal; system if no value is passed in
     $scope.activeTab = 'system';
     $scope.report = {};
     $scope.modal = $modalInstance;
-
-    $scope.RULE_TAB = 'rule';
-    $scope.POLICY_TAB = 'policy';
-    $scope.VULNERABILITY_TAB = 'vulnerability';
-
-    // set the default tab for system modal; system if no value is passed in
-    $scope.activeTab = activeTab || $scope.RULE_TAB;
-
-    $scope.activateTab = function (activatingTab) {
-        $scope.activeTab = activatingTab;
-    };
+    $scope.tabs = SystemModalTabs;
 
     // enables tab hack
     $scope.setActive = function (name) {
@@ -45,7 +36,9 @@ function SystemModalCtrl(
     function init () {
         System.getSystemPolicies($scope.system.system_id).then((policies) => {
             $scope.hasPolicies = policies.data.total > 0;
-            $scope.activeTab = activeTab || $scope.activeTab;
+
+            // set the default tab for system modal; system if no value is passed in
+            $scope.activeTab = activeTab || $scope.tabs.rules;
         });
     }
 
