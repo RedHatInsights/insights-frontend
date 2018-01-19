@@ -2,9 +2,9 @@
   .detail-content.answer
     h4.section-heading(translate)
       i.fa.fa-thumbs-up(aria-hidden="true") &nbsp;
-      strong Steps to resolve
+      strong(translate) Steps to resolve
     span(ng-if="report.rule.resolution !== 'INSIGHTS-ERROR-INTERPOLATION'",
-      ng-bind-html='report.rule.resolution | trust_html',
+      ng-bind-html=':: report.rule.resolution | trust_html',
       target-blank='')
     span(ng-if="report.rule.resolution === 'INSIGHTS-ERROR-INTERPOLATION'")
       p
@@ -15,8 +15,8 @@
       thead
         tr
           th
-            div Affected Hosts
+            div(translate) Affected Hosts
       tbody
         tr(ng-repeat='affected_host in report.details.affected_hosts')
           td
-            div {{getSystemNameFromId(affected_host)}}
+            div {{:: getSystemNameFromId(affected_host)}}

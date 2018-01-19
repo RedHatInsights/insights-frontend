@@ -2,11 +2,11 @@
   input(
     type='text',
     autofocus,
-    placeholder='{{placeholder}}',
+    placeholder='{{:: placeholder}}',
     ng-keypress='keyPressed($event)',
     ng-model='model',
     ng-change='change()',
     ng-class="{'search-box form-control': isFullLength}"
   )
-  i.fa.fa-search(ng-hide="searching()")
-  i.fa.fa-times(ng-show="searching()", ng-click="resetSearch();" md-prevent-menu-close)
+  i.fa.fa-search(ng-if="searching()")
+  i.fa.fa-times(ng-if="!searching()", ng-click="resetSearch();" md-prevent-menu-close)

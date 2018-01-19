@@ -8,7 +8,7 @@
     strong(translate) Webhooks are currently a Tech Preview.
 
   section
-    .spinner(ng-show='loader.loading')
+    .spinner(ng-if='loader.loading')
     p(translate, ng-if='!webhooks.length && !loader.loading') No webhooks configured
     table.table.table-striped(ng-if='webhooks.length')
       thead
@@ -21,18 +21,18 @@
       tbody
         tr(ng-repeat='webhook in webhooks | orderBy:"id" track by webhook.id')
           td.break
-            a(ui-sref='app.config-webhook-edit({id: webhook.id})') {{webhook.url}}
+            a(ui-sref='app.config-webhook-edit({id: webhook.id})') {{:: webhook.url}}
           td.text-center
             webhook-status-icon(webhook='webhook')
-          td.text-center {{webhook.event_types.length}}
+          td.text-center {{:: webhook.event_types.length}}
           td.text-center
             input(type='checkbox' ng-model='webhook.active', ng-change='activeChanged(webhook)')
           td.text-center
             span.icon-inline
               a(ui-sref='app.config-webhook-edit({id: webhook.id})')
-                i.fa.fa-pencil-square-o.pointer(tooltip="{{'Edit' | translate}}")
+                i.fa.fa-pencil-square-o.pointer(tooltip="{{:: 'Edit' | translate}}")
               a(ng-click='delete(webhook)')
-                i.fa.fa-remove(tooltip="{{'Remove' | translate}}")
+                i.fa.fa-remove(tooltip="{{:: 'Remove' | translate}}")
     md-button-group.pull-right
       md-button.md-primary.md-button-ghost-blue(ui-sref='app.config-webhook-edit({id: "new"})', translate) Add webhook
       md-button.md-raised.md-primary(ng-click='ping()', translate, ng-disabled='!isPingable()') Test event

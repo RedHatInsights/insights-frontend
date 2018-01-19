@@ -1,6 +1,6 @@
-.matched-solution(ng-show='solution && !loading')
+.matched-solution(ng-if='solution && !loading')
   span.icon-inline(ng-if='showLabel')
     i.fa.fa-circular.fa-lightbulb-o
-    strong(translate)  Related Knowledgebase articles:
-  a(target='_blank', href='{{solution.viewUri}}')  {{solution.title}}
-.spinner.spinner-sm.spinner-inline(ng-show='loading')
+    strong(translate) Related Knowledgebase articles:
+  a(target='_blank', href='{{:: solution.viewUri}}')  {{:: solution.title}}
+.spinner.spinner-sm.spinner-inline(ng-if='loading')

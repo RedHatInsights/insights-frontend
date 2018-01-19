@@ -3,7 +3,7 @@
     .col-sm-12
       .pointer(ng-if="stats.systems.affected > 0 || !loaded", ui-sref="app.topic({id: 'critical'})")
         .metrics
-          strong(translate) {{stats.systems.affected}} of {{stats.systems.total}} systems have critical issues
+          strong(translate) {{:: stats.systems.affected}} of {{:: stats.systems.total}} systems have critical issues
         .progress-bar
           .progress.red(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='stats.systems.affected / stats.systems.total | toWidth')
           .bar

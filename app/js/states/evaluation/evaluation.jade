@@ -5,10 +5,10 @@ section.content(ng-if='!loading && !error')
   .status-current(ng-if='status.current')
     .row.text-center
       .col-sm-12.col-md-8.col-md-offset-2
-        h1.eval-header(translate) You are currently on a {{status.current.systems}} system evaluation of Red Hat Insights
+        h1.eval-header(translate) You are currently on a {{:: status.current.systems}} system evaluation of Red Hat Insights
         hr.eval-hr
         h2.eval-subhead(translate) Your evaluation will expire on
-          strong {{getExpiration()}}.
+          strong {{:: getExpiration()}}.
 
     .row.text-center
       .col-lg-3.col-lg-offset-3
@@ -108,7 +108,7 @@ section.content(ng-if='!loading && !error')
     .row.text-center
       .col-sm-12.col-md-10.col-md-offset-1
         h1.eval-header(translate)
-          span Your {{getNonLegacyEval().systems}} system {{getNonLegacyEval().duration}} day evaluation is ready.
+          span Your {{:: getNonLegacyEval().systems}} system {{:: getNonLegacyEval().duration}} day evaluation is ready.
         hr.eval-hr
     .row.text-center
       .col-sm-12
@@ -165,7 +165,7 @@ section.content(ng-if='!loading && !error')
       h1.eval-header(translate) Oops!
       h2.eval-subhead(translate) There was an error
       hr.eval-hr
-      h3.eval-content(translate) {{error}}
+      h3.eval-content(translate) {{:: error}}
   .row.text-center
     .col-sm-12
       button.btn.btn-md.btn-accent(ui-sref='app.overview', translate) Try Again

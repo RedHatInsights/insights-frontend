@@ -1,6 +1,6 @@
 .card-group(ng-keypress='keyPressed($event)')
   header.header
-    .count(translate, translate-n='plugin.hitCount', translate-plural="{{$count}} Systems") 1 System
+    .count(translate, translate-n='plugin.hitCount', translate-plural="{{:: $count}} Systems") 1 System
     .row
       .col-sm-9
         i.fa.fa-users(aria-hidden="true")
@@ -8,10 +8,10 @@
           span.text-uppercase(translate) Group: &nbsp;
           span(ng-if='plugin.categories.length === 1')
             i.fa.category-icon.inline-right(ng-class="plugin.categories[0].toLowerCase()")
-            | {{plugin.categories[0]}} 
-          span &nbsp; {{plugin.display_name}}
+            | {{:: plugin.categories[0]}}
+          span &nbsp; {{:: plugin.display_name}}
       .col-sm-3.text-right-sm
-        span(translate, translate-n='plugin.rules.length', translate-plural='{{$count}} Rules in this group') 1 Rule in this group
+        span(translate, translate-n='plugin.rules.length', translate-plural='{{:: $count}} Rules in this group') 1 Rule in this group
   .content.disabled-start(
       ng-class='{swapping: swapping}',
       ng-mouseenter='setActive(true)',
@@ -39,5 +39,5 @@
                 ng-disabled="rule.hitCount === 0",
                 translate,
                 translate-n='rule.hitCount',
-                translate-plural='View Impacted Systems ({{$count}})')
+                translate-plural='View Impacted Systems ({{:: $count}})')
                 | View Impacted System (1)

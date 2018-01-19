@@ -4,11 +4,11 @@
       .col-sm-3.col-sm-offset-9
         .dropdown.full-width.show
           button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-            div(translate) {{dropDown}}
+            div(translate) {{:: dropDown}}
             span.caret
           ul.dropdown-menu
-            li(ng-repeat='trace in traces', ng-click='$event.stopPropagation()')
+            li(ng-repeat='trace in traces track by trace.name', ng-click='$event.stopPropagation()')
               label.checkbox-inline
                 input(type="checkbox", name="availability", ng-model='trace.enabled', ng-click='toggleTrace(trace)')
-                div(translate) {{trace.name}}
+                div(translate) {{:: trace.name}}
   .digest-graph

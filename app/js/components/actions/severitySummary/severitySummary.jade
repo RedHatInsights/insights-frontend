@@ -1,48 +1,49 @@
 .widget.severity-summary
-  ul
+  ul(ng-if="loaded")
+    // TODO make these data driven with an object in the directive and an ng-repeat??
+    // or componentize the Label + Bar??
     li
-      .pointer(ng-if="ruleCount.info || !loaded", ui-sref="app.topic({id: 'low-risk', 'filters:totalRisk': 'INFO'})")
+      .pointer(ng-if="percentages.low", ui-sref="app.topic({id: 'low-risk', 'filters:totalRisk': 'INFO'})")
         .metrics
-          strong {{'Low' | translate}}
-          span.num(ng-if="(ruleCount.info / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.info / ruleCount.total || 0 | number:1}}%)
+          strong {{:: 'Low' | translate}}
+          span.num &nbsp;({{:: percentages.low | number:1 }}%)
         .progress-bar
-          .progress.green(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.info / ruleCount.total | toWidth')
+          .progress.green(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='percentages.low / 100 | toWidth')
           .bar
-      .no-errors(ng-if="!ruleCount.info && loaded")
+      .no-errors(ng-if="!percentages.low")
         i.fa.fa-check-circle.inline-right.green(aria-hidden="true")
         span(translate) You have no issues of low severity
-
     li
-      .pointer(ng-if="ruleCount.warn || !loaded", ui-sref="app.topic({id: 'medium-risk', 'filters:totalRisk': 'WARN'})")
+      .pointer(ng-if="percentages.medium", ui-sref="app.topic({id: 'medium-risk', 'filters:totalRisk': 'WARN'})")
         .metrics
-          strong {{'Medium' | translate}}
-          span.num(ng-if="(ruleCount.warn / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.warn / ruleCount.total || 0 | number:1}}%)
+          strong {{:: 'Medium' | translate}}
+          span.num &nbsp;({{:: percentages.medium | number:1 }}%)
         .progress-bar
-          .progress.yellow(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.warn / ruleCount.total | toWidth')
+          .progress.yellow(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='percentages.medium / 100 | toWidth')
           .bar
-      .no-errors(ng-if="!ruleCount.warn && loaded")
+      .no-errors(ng-if="!percentages.medium")
         i.fa.fa-check-circle.inline-right.green(aria-hidden="true")
         span(translate) You have no issues of medium severity
-
     li
-      .pointer(ng-if="ruleCount.error || !loaded", ui-sref="app.topic({id: 'high-risk', 'filters:totalRisk': 'ERROR'})")
+      .pointer(ng-if="percentages.high", ui-sref="app.topic({id: 'high-risk', 'filters:totalRisk': 'ERROR'})")
         .metrics
-          strong {{'High' | translate}}
-          span.num(ng-if="(ruleCount.error / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.error / ruleCount.total || 0 | number:1}}%)
+          strong {{:: 'High' | translate}}
+          span.num &nbsp;({{:: percentages.high | number:1 }}%)
+          span.num(ng-if="(ruleCount.error / ruleCount.total) < 80") &nbsp;({{:: 100 * ruleCount.error / ruleCount.total || 0 | number:1}}%)
         .progress-bar
-          .progress.orange(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.error / ruleCount.total | toWidth')
+          .progress.orange(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='percentages.high / 100 | toWidth')
           .bar
-      .no-errors(ng-if="!ruleCount.error && loaded")
+      .no-errors(ng-if="!percentages.high")
         i.fa.fa-check-circle.inline-right.green(aria-hidden="true")
         span(translate) You have no issues of high severity
     li
-      .pointer(ng-if="ruleCount.critical || !loaded", ui-sref="app.topic({id: 'critical-risk', 'filters:totalRisk': 'CRITICAL'})")
+      .pointer(ng-if="percentages.critical", ui-sref="app.topic({id: 'critical-risk', 'filters:totalRisk': 'CRITICAL'})")
         .metrics
-          strong {{'Critical' | translate}}
-          span.num(ng-if="(ruleCount.critical / ruleCount.total) < 80") &nbsp;({{100 * ruleCount.critical / ruleCount.total || 0 | number:1}}%)
+          strong {{:: 'Critical' | translate}}
+          span.num &nbsp;({{:: percentages.critical | number:1 }}%)
         .progress-bar
-          .progress.red(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='ruleCount.critical / ruleCount.total | toWidth')
+          .progress.red(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='percentages.critical / 100 | toWidth')
           .bar
-      .no-errors(ng-if="!ruleCount.critical && loaded")
+      .no-errors(ng-if="!percentages.critical")
         i.fa.fa-check-circle.inline-right.green(aria-hidden="true")
         span(translate) You have no issues of critical severity
