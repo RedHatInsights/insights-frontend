@@ -27,31 +27,76 @@
   transform: translateY(-50%);
 }
 
-@mixin policyState($state) {
-  @if $state == failed {
-    @include policyState-Styles('red', '\f057');
+$state-colors: (
+  f-red: #D53E40,
+  bs-red: #D53E40,
+  bg-red: #FFE2E2,
+
+  f-yellow: #EE8C38,
+  bs-yellow: #EE8C38,
+  bg-yellow: #FDF0E1,
+
+  f-green: #399130,
+  bs-green: #399130,
+  bg-green: #E6F2E6,
+
+  f-unknown: #4c4c4c,
+  bs-unknown: #4c4c4c,
+  bg-unknown: #f9f9f9
+);
+
+
+// policyState takes a class and determines styles
+// Sends to policy-state-styles(color, icon, does this row need to be darker?)
+@mixin policy-state($state) {
+  @if $state == fail {
+    @include policy-state-styles('red', '\f057', false);
   }
-  @if $state == passed {
-    @include policyState-Styles('green', '\f058');
+  @if $state == pass {
+    @include policy-state-styles('green', '\f058', false);
   }
-  @if $state == errored {
-    @include policyState-Styles('yellow', '\f071');
+  @if $state == error {
+    @include policy-state-styles('yellow', '\f071', false);
   }
   @if $state == unknown {
-    @include policyState-Styles('unknown', '\f059');
+    @include policy-state-styles('unknown', '\f059', false);
   }
 }
 
-@mixin policyState-Styles($color, $icon){
-  background: map-get($stateColors, 'bg-' + $color);
-  color: $base-color;
-  box-shadow: inset 3px 0 0 0 map-get($stateColors, 'bs-' + $color);
+
+
+@mixin policy-state-alt($state) {
+  @if $state == fail {
+    @include policy-state-styles('red', '\f057', true);
+  }
+  @if $state == pass {
+    @include policy-state-styles('green', '\f058', true);
+  }
+  @if $state == error {
+    @include policy-state-styles('yellow', '\f071', true);
+  }
+  @if $state == unknown {
+    @include policy-state-styles('unknown', '\f059', true);
+  } 
+}
+
+// Detemining colors from $state-colors in _vars.scss
+@mixin policy-state-styles($color, $icon, $isDark){
+  background: map-get($state-colors, 'bg-' + $color);
+  color: map-get($state-colors, 'f-' + $color);
+  box-shadow: inset 3px 0 0 0 map-get($state-colors, 'bs-' + $color);
+
   &:before { 
     font-family: FontAwesome;
     content: $icon; 
-    color: map-get($stateColors, 'f-' + $color);
+    color: map-get($state-colors, 'f-' + $color);
     @include rem ('padding-left', 5px);
     @include rem ('margin-right', 5px);
+  }
+
+  // Darken if the row is even
+  @if $isDark {
+    background: darken(map-get($state-colors, 'bg-' + $color), 2% );
   }
 }
 

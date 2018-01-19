@@ -1,0 +1,22 @@
+// Vars
+// Card variables are assigned to the values set in _vars.scss. The purpose for including them is to add the ability to change their values within this file. This will be replaced by css variables upon better browser support.
+$card: $card;
+$card-content: $card-content;
+
+#{$card} #{$card-content} {
+  @include rem('padding', $global-padding);
+  
+  .flex {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  p,
+  pre,
+  ul {
+    margin: 0;
+    @include rem('margin-top', $global-padding);
+
+    &:first-child { margin: 0; }
+  }
+}

@@ -14,9 +14,9 @@ function ViewPolicyCtrl($filter,
                         Policy,
                         Utils) {
 
-    const PASSED = gettextCatalog.getString('passed');
-    const FAILED = gettextCatalog.getString('failed');
-    const ERRORED = gettextCatalog.getString('errored');
+    const PASS = gettextCatalog.getString('pass');
+    const FAIL = gettextCatalog.getString('fail');
+    const ERROR = gettextCatalog.getString('error');
     const UNKNOWN = gettextCatalog.getString('unknown');
 
     $scope.loading = true;
@@ -110,11 +110,11 @@ function ViewPolicyCtrl($filter,
         if (resource.checks_fail === 0 &&
             resource.checks_error === 0 &&
             resource.checks_pass > 0) {
-            return PASSED;
+            return PASS;
         } else if (resource.checks_fail > 0) {
-            return FAILED;
+            return FAIL;
         } else if (resource.checks_error > 0) {
-            return ERRORED;
+            return ERROR;
         } else {
             return UNKNOWN;
         }

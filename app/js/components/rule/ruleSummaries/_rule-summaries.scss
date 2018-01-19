@@ -1,3 +1,17 @@
-.rule-summary + .rule-summary {
-  @include rem('margin-top', $global-margin);
+
+// Rule summary card header content - layout
+//==================================================================*/
+
+.card-rule-summary .card-header-expandable-card .card-header-content {
+  justify-content: flex-start;
+
+  > .title.title-divider {
+    flex: 1 0 100%;
+    @include rem('margin-bottom', $global-padding);
+  }
+  
+  > .icon-group,
+  > .risk-of-change {
+    
+  }
 }
