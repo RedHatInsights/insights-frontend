@@ -5,9 +5,8 @@ var componentsModule = require('../../');
 /**
  * @ngInject
  */
-function vulnerabilitiesModalCtrl($scope, VulnerabilitiesService) {
-    $scope.getCurrentView = VulnerabilitiesService.getCurrentView;
-    $scope.views = VulnerabilitiesService.getViews();
+function vulnerabilitiesModalCtrl() {
+
 }
 
 function vulnerabilitiesModal() {

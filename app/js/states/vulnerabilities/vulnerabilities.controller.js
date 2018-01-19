@@ -14,14 +14,11 @@ function VulnerabilitiesCtrl($filter,
                              InventoryService,
                              Utils,
                              Vulnerability,
-                             VulnerabilitiesService,
                              SystemModalTabs) {
 
     $scope.pager = new Utils.Pager();
     $scope.searchText = $location.search().searchText;
     $scope.vulnerabilities = [];
-    $scope.getCurrentView = VulnerabilitiesService.getCurrentView;
-    $scope.views = VulnerabilitiesService.getViews();
 
     $scope.sorter = new Utils.Sorter({
         predicate: 'name',
@@ -33,23 +30,14 @@ function VulnerabilitiesCtrl($filter,
      */
     function getData () {
         $scope.loading = true;
-        $scope.allVulnerabilities = null;
-        $scope.rhsas = null;
         let params = [];
         params.search_term = $scope.searchText;
 
-        if ($scope.getCurrentView() === $scope.views.packages) {
-            Vulnerability.getAll(params).then((vulnerabilities) => {
-                $scope.allVulnerabilities = vulnerabilities;
-                order();
-                $scope.loading = false;
-            });
-        } else if ($scope.getCurrentView() === $scope.views.rhsas) {
-            Vulnerability.getRHSAs().then((rhsas) => {
-                $scope.rhsas = rhsas;
-                $scope.loading = false;
-            });
-        }
+        Vulnerability.getAll(params).then((vulnerabilities) => {
+            $scope.allVulnerabilities = vulnerabilities;
+            order();
+            $scope.loading = false;
+        });
     }
 
     function setVulnerabilities() {

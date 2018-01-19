@@ -1,78 +1,39 @@
 .vulnerabilitiesModal
   .content-wrap
-    vulnerabilities-switch-view-button
     expand-all-button.toggle-expand-right
-    .rhsas(ng-if='getCurrentView() === views.rhsas')
-      card.outer-card.vulnerabilitiesCard(expandable='true')
-        card-header-expandable
-          .card-header-title
-            .title.rhsa-info
-              .name ntp
-              .date Release Date: 2017-1-1
-              .version Version 4.0
-            .vul-state 
-              .critical.icon-inline
-                i.fa.fa-shield 
-                span(translate) 1 Critical
-              .important.icon-inline
-                i.fa.fa-shield 
-                span(translate) 1 Important
-              .moderate.icon-inline
-                i.fa.fa-shield 
-                span(translate) 1 Moderate 
-              .low.icon-inline
-                i.fa.fa-shield 
-                span(translate) 1 Low
-        card-content.card-content(collapse="card.collapsed")
-          table-filters
-            search-box(placeholder="{{'Search RHSA or CVE' | translate}}", on-search='search(model)')
-            rhsa-severity-select
-          // TODO make Summary Card a component
-          .card-summaries
-            card
-              card-content.card-content
-                .icon
-                  i.fa.fa-shield.critical 
-                h2.text RHSA-2018:0000
-                .subhead
-                  span 3 CVEs
-                  .pipe |
-                  span.hits 1 Hit
-                    i.fa.fa-book
-    .packages(ng-if='getCurrentView() === views.pacakges')
-      card.outer-card.vulnerabilitiesCard(expandable='true')
-        card-header-expandable
-          .card-header-title
-            .title.package-info
-              .name ntp
-              .date Release Date: 2017-1-1
-              .version Version 4.0
-            .vul-state 
-              .critical.icon-inline
-                i.fa.fa-shield 
-                span(translate) 1 Critical
-              .important.icon-inline
-                i.fa.fa-shield 
-                span(translate) 1 Important
-              .moderate.icon-inline
-                i.fa.fa-shield 
-                span(translate) 1 Moderate 
-              .low.icon-inline
-                i.fa.fa-shield 
-                span(translate) 1 Low
-        card-content.card-content(collapse="card.collapsed")
-          table-filters
-            search-box(placeholder="{{'Search RHSA or CVE' | translate}}", on-search='search(model)')
-            rhsa-severity-select
-          // TODO make Summary Card a component
-          .card-summaries
-            card
-              card-content.card-content
-                .icon
-                  i.fa.fa-shield.critical 
-                h2.text RHSA-2018:0000
-                .subhead
-                  span 3 CVEs
-                  .pipe |
-                  span.hits 1 Hit
-                    i.fa.fa-book
+    card.outer-card.vulnerabilitiesCard(expandable='true')
+      card-header-expandable
+        .card-header-title
+          .title.package-info
+            .name ntp
+            .date Release Date: 2017-1-1
+            .version Version 4.0
+          .vul-state 
+            .critical.icon-inline
+              i.fa.fa-shield 
+              span(translate) 1 Critical
+            .important.icon-inline
+              i.fa.fa-shield 
+              span(translate) 1 Important
+            .moderate.icon-inline
+              i.fa.fa-shield 
+              span(translate) 1 Moderate 
+            .low.icon-inline
+              i.fa.fa-shield 
+              span(translate) 1 Low
+      card-content.card-content(collapse="card.collapsed")
+        table-filters
+          search-box(placeholder="{{'Search RHSA or CVE' | translate}}", on-search='search(model)')
+          rhsa-severity-select
+        // TODO make Summary Card a component
+        .card-summaries
+          card
+            card-content.card-content
+              .icon
+                i.fa.fa-shield.critical 
+              h2.text RHSA-2018:0000
+              .subhead
+                span 3 CVEs
+                .pipe |
+                span.hits 1 Hit
+                  i.fa.fa-book
