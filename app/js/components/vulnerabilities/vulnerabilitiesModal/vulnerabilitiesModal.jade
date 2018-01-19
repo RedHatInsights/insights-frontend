@@ -1,39 +1,54 @@
 .vulnerabilitiesModal
   .content-wrap
     expand-all-button.toggle-expand-right
-    card.outer-card.vulnerabilitiesCard(expandable='true')
+    card.outer-card.vulnerabilitiesCard(expandable='true', ng-repeat='package in packages')
       card-header-expandable
         .card-header-title
           .title.package-info
-            .name ntp
-            .date Release Date: 2017-1-1
-            .version Version 4.0
+            .name {{ package.name }}
+            .date Release Date: {{ package.release_date }}
+            .version Version {{ package.version }}
           .vul-state 
             .critical.icon-inline
               i.fa.fa-shield 
-              span(translate) 1 Critical
+              span(translate) {{ package.critical_count }} Critical
             .important.icon-inline
               i.fa.fa-shield 
-              span(translate) 1 Important
+              span(translate) {{ package.important_count }} Important
             .moderate.icon-inline
               i.fa.fa-shield 
-              span(translate) 1 Moderate 
+              span(translate) {{ package.moderate_count }} Moderate 
             .low.icon-inline
               i.fa.fa-shield 
-              span(translate) 1 Low
+              span(translate) {{ package.low_count }} Low
       card-content.card-content(collapse="card.collapsed")
         table-filters
           search-box(placeholder="{{'Search RHSA or CVE' | translate}}", on-search='search(model)')
           rhsa-severity-select
         // TODO make Summary Card a component
         .card-summaries
-          card
+          card(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)')
             card-content.card-content
               .icon
                 i.fa.fa-shield.critical 
-              h2.text RHSA-2018:0000
+              h2.text {{ rhsa.id }}
               .subhead
-                span 3 CVEs
+                span {{ rhsa.cves.length }} CVEs
                 .pipe |
                 span.hits 1 Hit
                   i.fa.fa-book
+        .cve-summaries(ng-show='showCVEs')
+          card
+            card-content.card-content
+              ul
+                li(ng-repeat='cve in cves', ng-click='selectCVE(cve)') {{ cve.id }}
+          card
+            card-content.card-content
+              .description
+                {{ selectedCVE.description }}
+          card
+            card-content.card-content
+              .impact Impact: {{ selectedCVE.impact }}
+              .public-date Public-Date: {{ selectedCVE.public_date}}
+              .iava IAVA: {{ selectedCVE.iava }}
+              .cwe CWE: {{ selectedCVE.cwe }}
