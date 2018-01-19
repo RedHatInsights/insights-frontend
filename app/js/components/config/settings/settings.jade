@@ -2,7 +2,7 @@
   .col-md-8
     h2.page-title(translate) Settings
     p(translate)
-      strong Note: 
+      strong Note:
       | These are account wide. You must be an Org Admin to make these changes.
   .col-md-12
     section(ng-show='loading')
@@ -17,7 +17,7 @@
             th(translate) Value
         tbody
           tr(ng-repeat='setting in settings')
-            td {{setting.name}}
-            td 
-              input(type='checkbox' ng-model='setting.value') 
+            td {{:: setting.name}}
+            td
+              input(type='checkbox' ng-model='setting.value')
       md-button.md-raised.md-primary.pull-right(ng-click='save()', translate) Save

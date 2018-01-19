@@ -5,7 +5,7 @@ section
     a.btn.btn-sm.btn-app.pull-right(ui-sref='app.admin-topic', ng-show='user.is_internal') Topics Admin
 
     .table-header
-      search-box(placeholder="{{'Search rules' | translate}}", on-search='search(model)', throttle='1000')
+      search-box(placeholder="{{:: 'Search rules' | translate}}", on-search='search(model)', throttle='1000')
 
     section
       .row
@@ -17,12 +17,12 @@ section
             card.card-rule(
               ng-repeat="rule in pagedRules | filter:filter | orderBy:'description'",
               ng-class="{faded: rule.ack_id, hidden: (hideIgnored && rule.ack_id)}")
-              card-header.gray.header(id="{{::rule.rule_id}}")
+              card-header.gray.header(id="{{:: rule.rule_id}}")
                 //TODO: activate new item
                 //.new-item NEW!
                 .card-header-title.title.pointer
                   i.fa.category-icon.inline-right(ng-class="rule.category.toLowerCase()")
-                  span {{ ::rule.category }} #{'>'} {{ ::rule.description }}
+                  span {{:: rule.category }} > {{:: rule.description }}
                 .card-header-supporting-info
                   span.label.label-default.inline-right(translate, ng-class="{'rule-inactive': rule.ack_id, 'rule-active': !rule.ack_id}") INACTIVE
                   incident-icon.inline-right(rule-id='rule.rule_id') &nbsp;
@@ -33,7 +33,7 @@ section
                   .col-sm-6
                     rule-toggle(rule="rule")
                   .col-sm-6.text-right
-                    a(ng-if='rule.article', href='{{rule.article}}', translate, target='_blank') Knowledgebase
+                    a(ng-if='rule.article', href='{{:: rule.article}}', translate, target='_blank') Knowledgebase
                 .row.row-short
                   .col-sm-12
                     .gray(ng-bind-html='::rule.summary_html | trust_html', target-blank='')
@@ -48,7 +48,7 @@ section
                       risk-of-change(change-risk='rule.resolution_risk')
                     .col-sm-4.text-right
                       strong(ng-if="rule.impacted_systems !== undefined && !rule.ack_id")
-                        a(ui-sref='app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})', translate, ng-disabled="rule.impacted_systems === 0") View Impacted Systems ({{rule.impacted_systems}})
+                        a(ui-sref='app.actions-rule({category: rule.category.toLowerCase(), rule: rule.rule_id})', translate, ng-disabled="rule.impacted_systems === 0") View Impacted Systems ({{:: rule.impacted_systems}})
 
             .row.row-short(ng-show='rules.length === 0')
               .col-xs-12.text-center

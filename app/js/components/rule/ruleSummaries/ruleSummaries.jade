@@ -2,7 +2,7 @@
   .loading-block.text-center(ng-if='loading.isLoading')
     .detail-part
       .spinner.spinner-lg
-      | {{getLoadingMessage()}}
+      | {{:: getLoadingMessage()}}
   expand-all-button(ng-hide='!system.reports || !system.reports.length || loading.isLoading')
 
   .text-center(ng-if='(!system.reports || !system.reports.length) && !loading.isLoading && !system.__fake && !errorMessage')
@@ -66,12 +66,12 @@
 
         .recommended-kbase(ng-if='report.rule.node_id' node='report.rule.node_id')
             
-        .text-center.border-top(ng-show='report.rule.more_info')            
+        .text-center.border-top(ng-if='report.rule.more_info')            
           a.link(ng-click='show.moreInfo = !show.moreInfo')
             strong {{show.moreInfo ? 'Hide' : 'Show'}}  more info &nbsp;
             i.fa(ng-class="{'fa-caret-up': show.moreInfo, 'fa-caret-down': !show.moreInfo}")
 
         .more-info(collapse="!show.moreInfo")
-          div(ng-bind-html='report.rule.more_info_html | trust_html',
-            ng-show='report.rule.more_info',
+          div(ng-bind-html=':: report.rule.more_info_html | trust_html',
+            ng-if='report.rule.more_info',
             target-blank='')

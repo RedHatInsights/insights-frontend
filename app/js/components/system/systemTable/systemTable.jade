@@ -15,18 +15,18 @@
   div(ng-class="{'scrollable scrollable-table': _filteredSystems.length > 10}")
     table.table.no-header.table-groups
       tbody
-        tr.ng-animate-disabled(ng-repeat="system in _filteredSystems = (filteredSystems | offset:((currentPage-1)*itemsPerPage) | limitTo:itemsPerPage)", data-id="{{system.system_id}}", ng-click="rowClick($event)", ng-mousedown="rowClick($event)")
+        tr.ng-animate-disabled(ng-repeat="system in _filteredSystems = (filteredSystems | offset:((currentPage-1)*itemsPerPage) | limitTo:itemsPerPage)", data-id="{{:: system.system_id}}", ng-click="rowClick($event)", ng-mousedown="rowClick($event)")
           td
             label
               input(type="checkbox", ng-model="checkboxes.items[system.system_id]")
-              span.hostname {{::system.toString}}
+              span.hostname {{:: system.toString}}
   .row.groups-footer
     .col-xs-12.col-md-5
-      a.link(ng-show="type === 'in'", ng-disabled="!totalChecked", ng-click="removeSystems()")
-        i.fa.fa-minus 
+      a.link(ng-if="type === 'in'", ng-disabled="!totalChecked", ng-click="removeSystems()")
+        i.fa.fa-minus
         span(translate)  Remove Systems
-      a.link(ng-hide="type === 'in'", ng-disabled="!totalChecked", ng-click="addSystems()")
-        i.fa.fa-plus 
+      a.link(ng-if="type !== 'in'", ng-disabled="!totalChecked", ng-click="addSystems()")
+        i.fa.fa-plus
         span(translate)  Add Systems
     .col-xs-12.col-md-7
       pagination.pull-right.pagination-gray(ng-hide="total <= itemsPerPage", total-items="total", ng-model="currentPage", previous-text="«", next-text="»", max-size="3", rotate="false", items-per-page="itemsPerPage", ng-change="pageChanged()")

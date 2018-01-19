@@ -1,30 +1,45 @@
+/*global require*/
 'use strict';
 
 const componentsModule = require('../../');
+
+function fakeAsync(fn) {
+    window.setTimeout(fn, 1);
+}
+
+function getPercentage(count, total) {
+    return 100 * (count / total);
+}
+
+function getPercentages(ruleCounts) {
+    return {
+        low:      getPercentage(ruleCounts.info,     ruleCounts.total),
+        medium:   getPercentage(ruleCounts.warn,     ruleCounts.total),
+        high:     getPercentage(ruleCounts.error,    ruleCounts.total),
+        critical: getPercentage(ruleCounts.critical, ruleCounts.total)
+    };
+}
 
 /**
  * @ngInject
  */
 function SeveritySummaryCtrl($scope) {
     $scope.loaded = false;
-    $scope.ruleCount = {
-        total: 0,
-        info: 0,
-        warn: 0,
-        error: 0,
-        critical: 0
-    };
     $scope.max = 0;
 
-    $scope.$watch('stats.rules', function (value) {
+    $scope.$watchCollection('stats.rules', function (value) {
         if (!value) {
             return;
         }
 
-        $scope.ruleCount = value;
-        $scope.max = Math.max(value.info, value.warn, value.error, value.critical);
-        $scope.loaded = true;
-    }, true);
+        $scope.loaded = false;
+        fakeAsync(() => {
+            $scope.percentages = getPercentages(value);
+            console.log($scope.percentages);
+
+            $scope.loaded = true;
+        });
+    });
 }
 
 function severitySummary() {

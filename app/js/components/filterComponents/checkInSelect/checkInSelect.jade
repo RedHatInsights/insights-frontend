@@ -10,5 +10,5 @@
       span {{selected.label}}
       span.caret
     md-menu-content
-      md-menu-item(ng-repeat='option in options')
-        a(ng-click='select(option)') {{option.label}}
+      md-menu-item(ng-repeat='option in options track by option.id')
+        a(ng-click='select(option)') {{:: option.label}}

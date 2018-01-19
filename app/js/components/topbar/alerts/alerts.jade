@@ -1,17 +1,17 @@
 span.dropdown.dropdown-notification(dropdown='', on-toggle='toggled(open)')
   .spinner.spinner-sm(ng-if="loading")
   a.dropdown-toggle(href='', dropdown-toggle='', ng-if="!loading")
-    i.fa(class='{{icon}}')
-    span.count(ng-if="service.unackedCount !== 0") {{service.unackedCount}}
+    i.fa(class='{{:: icon}}')
+    span.count(ng-if="service.unackedCount !== 0") {{:: service.unackedCount}}
   ul.dropdown-menu.preview(ng-if="!loading")
     li.announcement(ng-repeat="item in service.items", ng-class="{ acked: (item.acked) }")
       div
         i.fa.inline-right(ng-if='item.icon', ng-class='item.icon')
-        b(ng-bind-html='item.msg | trust_html', ng-click="item.onSelect(item)")
+        b(ng-bind-html=':: item.msg | trust_html', ng-click="item.onSelect(item)")
       .message-status-toggle(
         ng-if='item.onAck',
         ng-click="!item.ack && item.onAck(item)"
-        tooltip="{{'Dismiss' | translate}}")
+        tooltip="{{:: 'Dismiss' | translate}}")
         i.fa.fa-circle-o(ng-if="!item.acked")
         i.fa.fa-check-circle-o.acked(ng-if="item.acked")
     li(ng-if="service.items.length === 0")

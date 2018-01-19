@@ -1,10 +1,10 @@
 card
   card-header
     .card-header-title
-      h4 {{topic.title}}
+      h4 {{:: topic.title}}
     .card-header-supporting-info
-      span.count(translate, translate-n='topic.affectedSystemCount', translate-plural='{{$count}} Systems') 1 System
-  card-content(ng-bind-html='topic.summary_html ? topic.summary_html : Xtopic.content_html | trust_html')
+      span.count(translate, translate-n='topic.affectedSystemCount', translate-plural='{{:: $count}} Systems') 1 System
+  card-content(ng-bind-html=':: topic.summary_html ? topic.summary_html : Xtopic.content_html | trust_html')
   card-footer.text-right-sm
     strong
       a.pointer(translate, ui-sref="app.topic({id: topic.slug ? topic.slug : topic.id, product: getSelectedProduct()})") View More

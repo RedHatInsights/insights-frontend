@@ -9,11 +9,11 @@
     .col-sm-4(ng-repeat='user in users | filter:newPermission.sso_username')
       .group.user-permission
         .name.header
-          a(ng-click='newPermission.sso_username = user') {{user}}
+          a(ng-click='newPermission.sso_username = user') {{:: user}}
         .content
           .permissions
-            .perm(ng-repeat='p in userMap[user]')
-              | {{p.permission.label}}
+            .perm(ng-repeat='p in userMap[user] track by p.id')
+              | {{:: p.permission.label}}
               .remove.fa.fa-times(ng-click='removeSingle(p)')
           .remove.pull-right
             a.fa.fa-times(ng-click='removeAll(userMap[user])') Remove all!
