@@ -1,0 +1,40 @@
+// Vars
+//==================================================================*/
+$button-split-button: '.md-button';
+$button-split-menu:   '.md-menu';
+
+
+// Button split
+//==================================================================*/
+
+.button-split {
+  display: inline-flex;
+
+  > * {
+    align-items: stretch;
+  }
+}
+
+
+// Button split - first button
+//==================================================================*/
+
+.button-split {
+
+  > #{$button-split-button} {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  > #{$button-split-menu} button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 100%;
+    @include rem('padding-left', 14px);
+    @include rem('padding-right', 14px);
+
+    .caret {
+      margin: 0;
+    }
+  }
+}
