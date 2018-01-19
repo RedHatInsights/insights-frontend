@@ -7,8 +7,8 @@ const controllerName = 'vulnerabilitiesSwitchViewButton';
  * @ngInject
  */
 function vulnerabilitiesSwitchViewButtonCtrl($scope, VulnerabilitiesService) {
-    $scope.getCurrentView = VulnerabilitiesService.getCurrentView;
     $scope.setCurrentView = VulnerabilitiesService.setCurrentView;
+    $scope.getCurrentView = VulnerabilitiesService.getCurrentView;
     $scope.views = VulnerabilitiesService.getViews();
 }
 

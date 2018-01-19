@@ -5,9 +5,9 @@ var componentsModule = require('../../');
 /**
  * @ngInject
  */
-function vulnerabilitiesModalCtrl($scope) {
-    console.log('asdfasdf');
-    $scope.tabs = ['asdfasdf', 'lkkdldk', 'asdqwerq'];
+function vulnerabilitiesModalCtrl($scope, VulnerabilitiesService) {
+    $scope.getCurrentView = VulnerabilitiesService.getCurrentView;
+    $scope.views = VulnerabilitiesService.getViews();
 }
 
 function vulnerabilitiesModal() {

@@ -6,22 +6,32 @@ var servicesModule = require('./');
 /**
  * @ngInject
  */
-function VulnerabilitiesService(Utils) {
+function VulnerabilitiesService($rootScope) {
     const service = {};
     const views = Object.freeze({
-        packages: 'packages',
-        rhsas: 'RHSAs',
-        cves: 'CVEs'
+        packages: 'Packages',
+        rhsas: 'RHSAs'
     });
+
+    // Default view for the vulnerabilites page
+    // and vulnerabilities tab in system modal
     const DEFAULT_VIEW = views.packages;
 
-    // used only for variables that need basic getter/setter
-    const vars = {
-        currentView: DEFAULT_VIEW,
-        views: views
+    // The selected view
+    let currentView = DEFAULT_VIEW;
+
+    service.setCurrentView = function (view) {
+        currentView = view;
+        $rootScope.$broadcast('reload:data');
     };
 
-    Utils.generateAccessors(service, vars);
+    service.getCurrentView = function () {
+        return currentView;
+    };
+
+    service.getViews = function () {
+        return views;
+    };
 
     return service;
 }

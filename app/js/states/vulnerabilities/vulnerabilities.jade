@@ -12,13 +12,14 @@
   .content-wrap
     vulnerabilities-switch-view-button
     .rhsa-view(ng-if="getCurrentView() === views.rhsas")
+      expand-all-button.toggle-expand-right
       card.outer-card(expandable='true', ng-repeat='rhsa in rhsas')
         card-header-expandable
           .card-header-title
             .title.rhsa-id
               .id {{ rhsa.id }}
               .systems-affected {{ rhsa.systems_affected }} Systems Affected
-        card-content.card-content(collapse="card.collapse")
+        card-content.card-content(collapse="card.collapsed")
           .type Type: {{ rhsa.type }}
           .synopsis Synopsis: {{ rhsa.synopsis }}
           .severity Severity: {{ rhsa.severity }}
@@ -26,6 +27,33 @@
             a  {{ rhsa.solution }}
           .summary Summary: {{ rhsa.summary }}
           .description Description: {{ rhsa.description }}
+          card(expandable='true', ng-repeat='cve in rhsa.cves').embedded-card
+            card-header-expandable
+              .card-header-title
+                .id {{ cve.id }}
+                .date {{ cve.public_date }}
+            card-content.card-content(collapse="card.collapsed")
+              .impact Impact: {{ cve.impact }}
+              .iava Iava: {{ cve.iava }}
+              .cwe CWE: {{ cve.cwe }}
+              .description Description: {{ cve.description }}
+              table(ng-if='cve.systems.length > 0')
+                thead
+                  tr
+                    th.sortable.nowrap(translate) System Name
+                    th.sortable.nowrap(translate) System Type
+                    th.sortable.nowrap(translate) Last Check In
+                    th.sortable.nowrap(translate) Status
+                tbody(ng-repeat='system in cve.systems')
+                  tr
+                    td.nowrap
+                      a(ng-click='showSystem(system.system_id)') {{system.toString}}
+                    td.nowrap
+                      type-icon(type-id='system.system_type_id', include-text='true')
+                    td.nowrap
+                      span {{system.last_check_in | timeAgo}}
+                    td.nowrap
+                      span {{system.report_count}}
     .package-view(ng-if="getCurrentView() === views.packages")
       expand-all-button.toggle-expand-right
       card.outer-card(expandable='true', ng-repeat='vulnerability in vulnerabilities')

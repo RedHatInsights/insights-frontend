@@ -1,4 +1,3 @@
-
 'use strict';
 var constantsModule = require('./');
 
@@ -48,6 +47,32 @@ const CVES = {
         systems: []
     }
 };
+
+const RHSAS = {
+    'RHSA-2017:3071': {
+        id: 'RHSA-2017:3071',
+        type: 'Security Advisory',
+        synopsis: 'ntp security update',
+        severity: 'moderate',
+        systems_affected: 2,
+        summary: 'An update for ntp is now available for Red Hat Enterprise Linux ' +
+                 '6.<br/>Red Hat Product Security has rated this update as having ' +
+                 'a security impact of Moderate. A Common Vulnerability Scoring ' +
+                 'System (CVSS) base score, which gives a detailed severity ' +
+                 'rating, is available for each vulnerability from the CVE ' +
+                 'link(s) in the References section.',
+        description: 'An update for ntp is now available for Red Hat Enterprise ' +
+                 'Linux 6.<br/>Red Hat Product Security has rated this update as ' +
+                 'Scoring having a security impact of Moderate. A Common ' +
+                 'Vulnerability System (CVSS) base score, which gives a detailed ' +
+                 'severity rating, is available for each vulnerability from the ' +
+                 'CVE link(s) in the References section.',
+        solution: 'https://access.redhat.com/articles/11258',
+        cves: [CVES['CVE-2017-6462'], CVES['CVE-2017-6463']]
+    }
+};
+
+constantsModule.constant('VMAAS_RHSAS', [RHSAS['RHSA-2017:3071']]);
 
 constantsModule.constant('VMAAS_CVES', [CVES['CVE-2017-6462'],CVES['CVE-2017-6463']]);
 
