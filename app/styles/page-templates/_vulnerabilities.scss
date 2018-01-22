@@ -36,3 +36,14 @@
 
   }
 }
+
+.cve-summaries { @include rem('margin', $global-padding); }
+
+.cve-summaries .card-content {
+  display: grid;
+  grid-template-columns: max-content auto max-content;
+  grid-gap: 20px;
+  .cve-id { grid-column: 1; }
+  .description{ grid-column: 2; }
+  .cve-information { grid-column: 3; }
+}

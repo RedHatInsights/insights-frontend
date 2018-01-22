@@ -9,6 +9,8 @@ function vulnerabilitiesModalCtrl($scope, System) {
     $scope.showCVEs = false;
 
     $scope.toggleShowCVEs = function (rhsa) {
+        $scope.selectedRHSA = rhsa; 
+
         if (!$scope.showCVEs) {
             $scope.cves = rhsa.cves;
 

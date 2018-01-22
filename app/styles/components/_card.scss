@@ -455,11 +455,12 @@ $card-footer: "md-card-footer";
 .card-summaries{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   text-align: center;
   @include rem('margin', 15px);
 
   md-card { @include rem('margin-top', 15px); }
+
+  md-card + md-card { @include rem ('margin-left', $global-margin); }
 
   md-card-content { @include rem('padding', 25px 35px); }
 

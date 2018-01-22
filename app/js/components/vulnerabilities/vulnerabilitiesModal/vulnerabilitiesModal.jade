@@ -27,7 +27,7 @@
           rhsa-severity-select
         // TODO make Summary Card a component
         .card-summaries
-          card(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)')
+          card(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)', ng-class='{"md-whiteframe-7dp": rhsa.id === selectedRHSA.id}')
             card-content.card-content
               .icon
                 i.fa.fa-shield.critical
@@ -40,14 +40,19 @@
         .cve-summaries(ng-show='showCVEs')
           card
             card-content.card-content
-              ul
+              ul.cve-id
                 li(ng-repeat='cve in cves', ng-click='selectCVE(cve)') {{ cve.id }}
-          card
-            card-content.card-content
               .description {{ selectedCVE.description }}
-          card
-            card-content.card-content
-              .impact Impact: {{ selectedCVE.impact }}
-              .public-date Public-Date: {{ selectedCVE.public_date}}
-              .iava IAVA: {{ selectedCVE.iava }}
-              .cwe CWE: {{ selectedCVE.cwe }}
+              .cve-information
+                .impact 
+                  b Impact: 
+                  | {{ selectedCVE.impact }}
+                .public-date 
+                  b Public-Date: 
+                  | {{ selectedCVE.public_date}}
+                .iava 
+                  b IAVA: 
+                  | {{ selectedCVE.iava }}
+                .cwe 
+                  b CWE: 
+                  | {{ selectedCVE.cwe }}
