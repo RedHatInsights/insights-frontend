@@ -3,6 +3,7 @@
 
 const componentsModule = require('../');
 const removeFromArray = require('lodash/remove');
+const find = require('lodash/find');
 const priv = {};
 
 /**
@@ -31,11 +32,15 @@ function TableFiltersCtrl($element,
      * listens for new tags and adds them to the footer as they come in
      */
     $scope.$on(Events.filters.tag, function (event, tag, filter) {
-        if (tag) {
-            $scope.tags.push({
-                tag: tag,
-                filter: filter
-            });
+        const arrayTag = {
+            tag: tag,
+            filter: filter
+        };
+
+        if (tag && !find($scope.tags, arrayTag)) {
+            $scope.tags.push(arrayTag);
+        } else if (!tag) {
+            removeFromArray($scope.tags, {filter: filter});
         }
     });
 

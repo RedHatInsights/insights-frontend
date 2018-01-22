@@ -30,7 +30,7 @@
           card(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)')
             card-content.card-content
               .icon
-                i.fa.fa-shield.critical 
+                i.fa.fa-shield.critical
               h2.text {{ rhsa.id }}
               .subhead
                 span {{ rhsa.cves.length }} CVEs
@@ -44,8 +44,7 @@
                 li(ng-repeat='cve in cves', ng-click='selectCVE(cve)') {{ cve.id }}
           card
             card-content.card-content
-              .description
-                {{ selectedCVE.description }}
+              .description {{ selectedCVE.description }}
           card
             card-content.card-content
               .impact Impact: {{ selectedCVE.impact }}

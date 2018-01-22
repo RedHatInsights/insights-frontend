@@ -68,7 +68,13 @@ function SystemModalCtrl(
     // by parent scope.
     ModalUtils.suppressEscNavigation($modalInstance);
 
-    const stateChangeUnreg = $rootScope.$on('$stateChangeStart', close);
+    const stateChangeUnreg = $rootScope.$on('$stateChangeStart',
+        function (event, toState, toParams, fromState, fromParams) {
+        if (toParams.rhsaSeverity === fromParams.rhsaSeverity &&
+            toParams.daysKnown === fromParams.daysKnow) {
+            close();
+        }
+    });
 
     const escUnreg = $rootScope.$on('telemetry:esc', function ($event) {
         $event.preventDefault();

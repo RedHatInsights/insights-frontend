@@ -45,11 +45,11 @@ function rhsaSeveritySelectCtrl($rootScope,
             option.forEach(function (option) {
                 $scope.options[optionsMap[option]].selected = true;
             });
+
+            broadcastTabs();
         } else {
             setDefaultOption();
         }
-
-        broadcastTabs();
     })();
 
     /**
@@ -70,12 +70,10 @@ function rhsaSeveritySelectCtrl($rootScope,
      * @return {String} tag for filters
      */
     function broadcastTabs() {
-        $scope.options.forEach(function (option) {
-            if (option.selected) {
-                $rootScope.$broadcast(Events.filters.tag,
+        filter($scope.options, {selected: true}).forEach((option) => {
+            $rootScope.$broadcast(Events.filters.tag,
                               option.tag,
                               Events.filters.rhsaSeverity);
-            }
         });
     }
 
@@ -115,16 +113,18 @@ function rhsaSeveritySelectCtrl($rootScope,
      * Watches for changes in the object that keeps track of selected
      * checkboxes.
      */
-    $scope.$watch('options', function (newVal, old) {
-        // deselect all other checkboxes if "All" is selected
-        if (!old[DEFAULT_OPTION].selected && newVal[DEFAULT_OPTION].selected) {
-            setDefaultOption();
-        } else {
-            setSelectedOptions();
-        }
-    }, true);
+    $scope.$watch('options', setSelectedOptions, true);
 
-    function setSelectedOptions() {
+    function setSelectedOptions(newVal, old) {
+        if (newVal === old) {
+            return;
+        }
+
+        if (newVal[DEFAULT_OPTION].selected && !old[DEFAULT_OPTION].selected) {
+            setDefaultOption();
+            return;
+        }
+
         let isOptionSelected = false;
         $scope.options.forEach(function (option, index) {
             // if something other than all is selected than All is deselected
@@ -143,22 +143,25 @@ function rhsaSeveritySelectCtrl($rootScope,
      * sets selected option to the default
      */
     function setDefaultOption() {
-        $scope.options.forEach(function (option, index) {
-            if (index === DEFAULT_OPTION) {
-                option.selected = true;
-            } else {
-                option.selected = false;
-            }
+        filter($scope.options, {selected: true}).forEach((option) => {
+            option.selected = false;
         });
+
+        $scope.options[DEFAULT_OPTION].selected = true;
     }
 
-    $scope.$on(Events.filters.reset, setDefaultOption);
+    $scope.$on(Events.filters.reset, function () {
+        setDefaultOption();
+        setURL();
+        broadcastTabs();
+    });
 
     $scope.$on(Events.filters.removeTag, function (event, filter, tag) {
         if (filter === Events.filters.rhsaSeverity) {
             find($scope.options, {tag: tag}).selected = false;
             setSelectedOptions();
             setURL();
+            broadcastTabs();
         }
     });
 }

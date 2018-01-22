@@ -9,7 +9,7 @@
       ng-click='$mdMenu.open()')
       span {{getSelectedString() | translate}}
       span.caret
-    md-menu-content(ng-mouseleave="doFilter(); $mdMenu.close();")
+    md-menu-content(ng-mouseleave="doFilter(); $mdMenu.close(); $event.stopPropagation(); $event.preventDefault();")
       md-menu-item(ng-repeat='(key, option) in options')
         md-button(md-prevent-menu-close="md-prevent-menu-close")
           md-checkbox(ng-model="option.selected", aria-label="RHSA Filter Checkbox") {{option.title | translate}}

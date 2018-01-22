@@ -151,6 +151,27 @@ constantsModule.constant('VMAAS_SYSTEMS', [{
             solution: 'https://access.redhat.com/articles/11258',
             hit_count: 1,
             cves: [CVES['CVE-2017-6462'], CVES['CVE-2017-6463']]
+        }, {
+            id: 'RHSA-2017:3071',
+            type: 'Security Advisory',
+            synopsis: 'ntp security update',
+            severity: 'moderate',
+            summary: 'An update for ntp is now available for Red Hat Enterprise ' +
+                     'Linux 6.<br/>Red Hat Product Security has rated this update ' +
+                     'as having a security impact of Moderate. A Common ' +
+                     'Vulnerability Scoring System (CVSS) base score, which gives ' +
+                     'a detailed severity rating, is available for each ' +
+                     'vulnerability from the CVE link(s) in the References section.',
+            description: 'An update for ntp is now available for Red Hat ' +
+                     'Enterprise Linux 6.<br/>Red Hat Product Security has rated ' +
+                     'this update as Scoring having a security impact of ' +
+                     'Moderate. A Common Vulnerability System (CVSS) base score, ' +
+                     'which gives a detailed severity rating, is available for ' +
+                     'each vulnerability from the CVE link(s) in the References ' +
+                     'section.',
+            solution: 'https://access.redhat.com/articles/11258',
+            hit_count: 1,
+            cves: [CVES['CVE-2017-6463'], CVES['CVE-2017-6462']]
         }]
     }]
 }]);
