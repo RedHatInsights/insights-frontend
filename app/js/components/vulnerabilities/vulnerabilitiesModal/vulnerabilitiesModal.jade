@@ -27,7 +27,7 @@
           rhsa-severity-select
         // TODO make Summary Card a component
         .card-summaries
-          card(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)', ng-class='{"md-whiteframe-7dp": rhsa.id === selectedRHSA.id}')
+          card(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)', ng-class='{active: rhsa.id === selectedRHSA.id}')
             card-content.card-content
               .icon
                 i.fa.fa-shield.critical
