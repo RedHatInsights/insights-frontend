@@ -40,6 +40,7 @@
         .cve-summaries(ng-show='showCVEs')
           card
             card-content.card-content
+              //.rule-hit Rule hit info goes in this class
               ul.cve-id
                 li(ng-repeat='cve in cves', ng-click='selectCVE(cve)') {{ cve.id }}
               .description {{ selectedCVE.description }}
