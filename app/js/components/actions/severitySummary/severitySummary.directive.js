@@ -35,8 +35,6 @@ function SeveritySummaryCtrl($scope) {
         $scope.loaded = false;
         fakeAsync(() => {
             $scope.percentages = getPercentages(value);
-            console.log($scope.percentages);
-
             $scope.loaded = true;
         });
     });
