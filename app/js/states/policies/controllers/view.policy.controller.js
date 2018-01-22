@@ -7,6 +7,7 @@ const statesModule = require('../../');
  */
 function ViewPolicyCtrl($filter,
                         $location,
+                        $state,
                         $stateParams,
                         $scope,
                         gettextCatalog,
@@ -131,6 +132,16 @@ function ViewPolicyCtrl($filter,
 
     $scope.$on('reload:data', function () {
         getData();
+    });
+
+    $scope.$on('telemetry:esc', function ($event) {
+        if ($event.defaultPrevented) {
+            return;
+        }
+
+        if ($state.current.name === 'app.view-policy') {
+            $state.go('app.list-policies');
+        }
     });
 
     getData();
