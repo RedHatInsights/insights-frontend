@@ -1,12 +1,7 @@
 /*global require*/
 'use strict';
 
-var componentsModule = require('../../');
-
-/**
- * @ngInject
- */
-function buttonSplitController() {  }
+const componentsModule = require('../../');
 
 /**
  * @ngInject
@@ -15,10 +10,21 @@ function buttonSplit() {
     return {
         templateUrl: 'js/components/buttons/button-split/button-split.html',
         restrict: 'E',
-        replace: false,
-        controller: buttonSplitController,
+        replace: true,
+        controller: angular.noop,
+        controllerAs: 'ctrl',
         scope: {
-            dropDown: '@'
+            disabled: '=?ngDisabled'
+        },
+        transclude: {
+            main: 'buttonSplitMain',
+            items: 'buttonSplitItem'
+        },
+        link: function ($scope, $element, $attr, ctrl) {
+            ctrl.classes = $attr.class;
+            $scope.$watch('disabled', function (value) {
+                ctrl.disabled = value;
+            });
         }
     };
 }
@@ -26,22 +32,25 @@ function buttonSplit() {
 /**
  * @ngInject
  */
-function buttonSplitButton() {
+function buttonSplitMain() {
     return {
-        templateUrl: 'js/components/buttons/button-split/button-split-button.html',
+        templateUrl: 'js/components/buttons/button-split/button-split-main.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         transclude: true,
-        require: '^buttonSplit'
+        require: '^buttonSplit',
+        link: function ($scope, element, attr, ctrl) {
+            $scope.ctrl = ctrl;
+        }
     };
 }
 
 /**
  * @ngInject
  */
-function buttonSplitDropdown() {
+function buttonSplitItem() {
     return {
-        templateUrl: 'js/components/buttons/button-split/button-split-dropdown.html',
+        templateUrl: 'js/components/buttons/button-split/button-split-item.html',
         restrict: 'E',
         replace: true,
         transclude: true,
@@ -50,5 +59,5 @@ function buttonSplitDropdown() {
 }
 
 componentsModule.directive('buttonSplit', buttonSplit);
-componentsModule.directive('buttonSplitDropdown', buttonSplitDropdown);
-componentsModule.directive('buttonSplitButton',  buttonSplitButton);
+componentsModule.directive('buttonSplitItem', buttonSplitItem);
+componentsModule.directive('buttonSplitMain',  buttonSplitMain);
