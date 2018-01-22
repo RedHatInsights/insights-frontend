@@ -160,6 +160,14 @@ function WebhookEditCtrl(
     $scope.certDateClass = function (date) {
         return (moment().diff(date) < 0) ? 'green' : 'red';
     };
+
+    $scope.$on('telemetry:esc', function ($event) {
+        if ($event.defaultPrevented) {
+            return;
+        }
+
+        $state.go('app.config', {tab: 'webhooks'});
+    });
 }
 
 statesModule.controller('WebhookEditCtrl', WebhookEditCtrl);
