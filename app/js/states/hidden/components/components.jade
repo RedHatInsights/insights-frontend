@@ -17,37 +17,25 @@
               .flex
                 div(sm-flex-50)
                   h4 Split Buttons
-                  //- button-split
 
-                  .button-split
-                    md-button.md-raised.md-primary text
+                  button-split.md-raised.md-primary
+                    button-split-main Primary
+                    button-split-item
+                      md-button(translate) item 1
+                    button-split-item
+                      md-button(translate) item 2
 
-                    md-menu(md-offset="0 34", md-position-mode="target-right target")
-                      md-button.md-primary.md-raised.button-dropdown#dropdownExample(ng-click='$mdMenu.open()')
-                        strong.hidden(translate, aria-hidden="false") Dropdown text
-                        span.caret.dropdown-caret(aria-hidden="true")
-                      md-menu-content(aria-labelledby="dropdownExample")
-                        md-menu-item 
-                          md-button(translate) item 1
-                        md-menu-item
-                          a(ng-click='$mdMenu.close()', translate) item 2
-                        
                   br
                   br
                   pre.code-block.code-terminal
                     .code-type-jade
                     code.code
-                      | .button-split
-                      |   md-button.md-raised.md-primary text
-                      |   md-menu(md-offset="0 34", md-position-mode="target-right target")
-                      |     md-button.md-primary.md-raised.button-dropdown#dropdownExample(ng-click='$mdMenu.open()')
-                      |       strong.hidden(translate, aria-hidden="false") Dropdown text
-                      |       span.caret.dropdown-caret(aria-hidden="true")
-                      |     md-menu-content(aria-labelledby="dropdownExample")
-                      |       md-menu-item 
-                      |         md-button(translate) item 1
-                      |       md-menu-item 
-                      |         a(ng-click='$mdMenu.close()', translate) item 2
+                      | button-split.md-raised.md-primary
+                      |   button-split-main Primary
+                      |   button-split-item
+                      |     md-button(translate) item 1
+                      |   button-split-item
+                      |     md-button(translate) item 2
 
                     
 
