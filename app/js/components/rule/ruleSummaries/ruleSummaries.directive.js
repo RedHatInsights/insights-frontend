@@ -1,6 +1,7 @@
 'use strict';
 
 var componentsModule = require('../../');
+const orderBy = require('lodash/orderBy');
 
 /**
  * @ngInject
@@ -9,17 +10,19 @@ function RuleSummariesCtrl(
     $scope,
     $stateParams,
     $location,
+    gettextCatalog,
     System,
     Report,
     InsightsConfig) {
 
     $scope.getLoadingMessage = function () {
-        var response = 'Loading report(s)';
-        if ($scope.system.hostname) {
-            response = response + ' for ' + $scope.system.hostname;
+        if ($scope.system.toString) {
+            return gettextCatalog.getString('Loading report(s) for {{name}}…', {
+                name: $scope.system.toString
+            });
         }
 
-        return response + '…';
+        return gettextCatalog.getString('Loading report(s)…');
     };
 
     function getSystemReports() {
@@ -27,17 +30,16 @@ function RuleSummariesCtrl(
         System.getSystemReports($scope.machineId)
             .success(function (system) {
                 angular.extend($scope.system, system);
-                if ($scope.rule_id) {
-                    $scope.system.reports.sort(function (a, b) {
-                        if (a.rule_id === $scope.rule_id) {
-                            return -1;
-                        } else if (b.rule_id === $scope.rule_id) {
-                            return 1;
-                        }
 
+                // order by severity desc, resolution_risk asc except for cases where
+                // rule_id is selected - in that case the given report goes first
+                $scope.system.reports = orderBy($scope.system.reports, [report => {
+                    if ($scope.rule_id && $scope.rule_id === report.rule_id) {
                         return 0;
-                    });
-                }
+                    }
+
+                    return 1;
+                }, 'rule.severityNum', 'rule.resolution_risk'], ['asc', 'desc', 'asc']);
 
                 $scope.loading.isLoading = false;
             })

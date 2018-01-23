@@ -80,8 +80,13 @@ function ActionsCtrl(
         });
     };
 
-    $scope.$on('filterService:doFilter', reload);
-    $scope.$on('group:change', reload);
+    const listeners = [
+        $scope.$on('filterService:doFilter', reload),
+        $scope.$on('group:change', reload),
+        $rootScope.$on('$stateChangeStart', function () {
+            listeners.forEach(listener => listener());
+        })
+    ];
 
     RhaTelemetryActionsService.setInitialSeverity($stateParams.initialSeverity);
     RhaTelemetryActionsService.setCategory($stateParams.category);
@@ -115,13 +120,6 @@ function ActionsCtrl(
         }).then(function (res) {
             $scope.stats.rules = res.data;
             setCategoryTopics(res.data);
-        }));
-
-        promises.push(Stats.getSystems({
-            product: product,
-            minSeverity: 'CRITICAL'
-        }).then(function (res) {
-            $scope.stats.systems = res.data;
         }));
 
         return $q.all(promises);
