@@ -5,6 +5,7 @@ const map = require('lodash/map');
 const sortBy = require('lodash/sortBy');
 const pick = require('lodash/pick');
 const some = require('lodash/some');
+const escape = require('lodash/escape');
 
 /**
 * @ngInject
@@ -86,7 +87,7 @@ function GroupService($q, gettextCatalog, sweetAlert, Group) {
         const html = gettextCatalog.getString(
             'You will not be able to recover <code>{{name}}</code>',
             {
-                name: group.display_name
+                name: escape(group.display_name)
             });
         sweetAlert({
             html
