@@ -64,6 +64,7 @@ function InsightsConfig() {
 
     let isPlannerEnabled = true;
     let isGroupsEnabled = true;
+    let ansibleRunner = false;
 
     return {
         setTitle: function (value) {
@@ -148,6 +149,10 @@ function InsightsConfig() {
             isGroupsEnabled = value;
         },
 
+        setAnsibleRunner (value) {
+            ansibleRunner = value;
+        },
+
         $get: function (Utils) {
             overviewKey = overviewKey ||
                 (Utils.isBeta() ? 'overview-beta' : 'overview-stable');
@@ -176,7 +181,8 @@ function InsightsConfig() {
                 routeStateConfig: routeStateConfig,
                 overviewKey: overviewKey,
                 isPlannerEnabled,
-                isGroupsEnabled
+                isGroupsEnabled,
+                ansibleRunner
             };
         }
     };

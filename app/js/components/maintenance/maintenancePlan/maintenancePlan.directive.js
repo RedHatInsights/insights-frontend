@@ -111,6 +111,7 @@ BasicEditHandler.prototype.save = function () {
  * @ngInject
  */
 function maintenancePlanCtrl(
+    $location,
     $modal,
     $rootScope,
     $scope,
@@ -123,6 +124,7 @@ function maintenancePlanCtrl(
     DataUtils,
     Events,
     Group,
+    InsightsConfig,
     Maintenance,
     MaintenanceService,
     SystemsService,
@@ -133,6 +135,7 @@ function maintenancePlanCtrl(
     $scope.exportPlan = Maintenance.exportPlan;
     $scope.error = null;
     $scope.MaintenanceService = MaintenanceService;
+    $scope.ansibleRunner = InsightsConfig.ansibleRunner;
 
     $scope.editDateTooltip = gettextCatalog.getString(
         'Date, time and duration of a maintenance window can be defined here. ' +
@@ -242,6 +245,10 @@ function maintenancePlanCtrl(
     };
 
     $scope.downloadPlaybook = function () {
+        if (!$scope.ansibleSupport) {
+            return;
+        }
+
         if ($scope.selectTab) {
             $scope.selectTab('playbook');
         }
@@ -256,6 +263,14 @@ function maintenancePlanCtrl(
                 FileSaver.saveAs(blob, filename);
             }
         });
+    };
+
+    $scope.runPlaybook = function (button) {
+        if (!$scope.ansibleRunner) {
+            return;
+        }
+
+        return $scope.ansibleRunner($location, $scope.plan.maintenance_id, button);
     };
 
     $scope.dateChanged = function (unused, value, explicit) {
