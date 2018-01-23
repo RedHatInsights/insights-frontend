@@ -140,7 +140,7 @@ topbar .toggle-fullscreen {
   button,
   a {
     color: #fff;
-    @include rem('padding', 18px 14px);
+    @include rem('padding', 18px 24px);
   }
 
   .button-back { flex: 1; }
@@ -149,6 +149,15 @@ topbar .toggle-fullscreen {
     @include rem('padding', 18px 20px);
     border-left: 1px solid rgba(255,255,255,.1);
     box-shadow: -1px 0 0 rgba(0, 0, 0, 0.5);
+  }
+}
+
+.platform-grid.collapsed .primary-nav .nav-footer {
+  flex-flow: column wrap;
+
+  .button-back { 
+    margin: 0 auto;
+    text-align: center; 
   }
 }
 
