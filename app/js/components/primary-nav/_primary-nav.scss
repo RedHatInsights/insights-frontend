@@ -67,6 +67,12 @@ $sidenav-namespace: 'md-sidenav';
   transform: none;
   display: block;
 
+  nav {
+    min-height: 100%;
+    display: flex;
+    flex-flow: column wrap;
+  }
+
   ul {
     display: block;
     overflow: auto;
@@ -123,41 +129,34 @@ topbar .toggle-fullscreen {
 // Primary nav footer buttons
 //==================================================================*/
 
-.primary-nav nav {
-  min-height: 100%;
-  display: flex;
-  flex-flow: column wrap;
+.primary-nav .nav-footer {
+  margin-top: auto;
+  background: rgba(0,0,0,.2);
+  justify-self: flex-end;
 
-  .nav-footer {
-    display: flex;
-    margin-top: auto;
-    background: rgba(0,0,0,.2);
-    justify-self: flex-end;
-    border-top: 1px solid rgba(255,255,255,.1);
-    box-shadow: -1px 0 0 1px rgba(0,0,0,.5);
-  }
-
-  button,
-  a {
-    color: #fff;
-    @include rem('padding', 18px 24px);
-  }
-
-  .button-back { flex: 1; }
-
-  .button-logout {
+  li a {
     @include rem('padding', 18px 20px);
-    border-left: 1px solid rgba(255,255,255,.1);
-    box-shadow: -1px 0 0 rgba(0, 0, 0, 0.5);
+
+    &:hover { box-shadow: none; }    
+  }
+
+  i {
+    width: 14px;
+    text-align: center;
   }
 }
 
+
+// Hover 
 .platform-grid.collapsed .primary-nav .nav-footer {
   flex-flow: column wrap;
 
-  .button-back { 
+  .button { 
     margin: 0 auto;
     text-align: center; 
+    @include rem('padding', 18px 20px);
+
+    &:hover { box-shadow: none; }
   }
 }
 

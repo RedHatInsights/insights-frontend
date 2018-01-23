@@ -35,9 +35,13 @@ md-sidenav.primary-nav(md-component-id="left")
           i.fa.fa-file-text
           span.text(translate) Configuration
 
-    .nav-footer
-      md-button.button-back.icon-inline(href="#", tooltip='Back to Customer Portal')
-        i.fa.fa-caret-left
-        span.text Back to Customer Portal
-      md-button.button-logout(tooltip='Log out of Customer Portal')
-        i.fa.fa-sign-out(aria-hidden="true")
+    ul.nav-footer
+      li
+        md-button.button.button-back(href="#", tooltip='Back to Customer Portal')
+          i.fa.fa-caret-left(aria-hidden="true")
+          span.text Customer Portal
+
+      li
+        md-button.button.button-logout(href="#", tooltip='Log out of Customer Portal')
+          i.fa.fa-sign-out(aria-hidden="true")
+          span.text Logout
