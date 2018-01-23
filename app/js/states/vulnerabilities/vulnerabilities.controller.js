@@ -29,6 +29,8 @@ function VulnerabilitiesCtrl($filter,
      * Queries GET:/vulnerabilities and populates table data
      */
     function getData () {
+        let machine_id = $location.search().machine;
+
         $scope.loading = true;
         let params = [];
         params.search_term = $scope.searchText;
@@ -38,6 +40,10 @@ function VulnerabilitiesCtrl($filter,
             order();
             $scope.loading = false;
         });
+
+        if (machine_id) {
+            $scope.showSystem(machine_id);
+        }
     }
 
     function setVulnerabilities() {

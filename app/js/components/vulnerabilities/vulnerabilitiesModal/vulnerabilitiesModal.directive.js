@@ -9,16 +9,12 @@ function vulnerabilitiesModalCtrl($scope, System) {
     $scope.showCVEs = false;
 
     $scope.toggleShowCVEs = function (rhsa) {
-        $scope.selectedRHSA = rhsa;
-
-        if (!$scope.showCVEs) {
-            $scope.cves = rhsa.cves;
-
-            // default to showing first cve in list
+        if ($scope.selectedRHSA === rhsa || rhsa === undefined) {
+            $scope.selectedRHSA = undefined;
+        } else {
+            $scope.selectedRHSA = rhsa;
             $scope.selectedCVE = rhsa.cves[0];
         }
-
-        $scope.showCVEs = !$scope.showCVEs;
     };
 
     $scope.selectCVE = function (cve) {

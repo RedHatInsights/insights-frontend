@@ -37,7 +37,7 @@
                 .pipe |
                 span.hits 1 Hit
                   i.fa.fa-book(tooltip="{{'This RHSA has an insights rule hit' | translate}}")
-        .cve-summaries(ng-show='showCVEs')
+        .cve-summaries(ng-show='selectedRHSA')
           card
             card-content.card-content
 
@@ -49,7 +49,7 @@
               //-   // Rule component? 
 
               ul.cve-id
-                li(ng-repeat='cve in cves', ng-click='selectCVE(cve)') 
+                li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)') 
                   a {{ cve.id }}
               .description {{ selectedCVE.description }}
               .cve-information
