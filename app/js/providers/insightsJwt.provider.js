@@ -16,7 +16,6 @@ const providersModule = require('./');
  */
 function InsightsJwt() {
     const Jwt = require('jwt-redhat').default;
-    Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
 
     // Add a little helper function
     Jwt.standardLogout = () => {
@@ -27,6 +26,8 @@ function InsightsJwt() {
 
     return {
         $get: function () {
+            // this only get got once
+            Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
             return Jwt;
         }
     };
