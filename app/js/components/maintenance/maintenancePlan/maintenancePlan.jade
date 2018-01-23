@@ -299,7 +299,18 @@
               span(translate) Ignore
 
         .button-group
-          a(translate, ng-click='downloadPlaybook()')
+          button-split.md-button-ghost-blue.md-primary(
+            ng-disabled='!ansibleSupport',
+            ng-if='ansibleRunner')
+            button-split-main(ng-click="runPlaybook('run')")
+              i.svg.ansible-icon.inline-right
+                img(src='static/images/l_ansible-blue.svg')
+              span(translate) Run Playbook
+            button-split-item
+              md-button.action(translate, ng-click="runPlaybook('customize')") Customize Playbook Run
+            button-split-item
+              md-button.action(translate, ng-click='downloadPlaybook()') Download Playbook
+          a(translate, ng-click='downloadPlaybook()', ng-if='!ansibleRunner')
             md-button.btn-sm.md-button-ghost-blue.md-primary(ng-disabled='!ansibleSupport')
               i.svg.ansible-icon.inline-right
                 img(src='static/images/l_ansible-blue.svg')
