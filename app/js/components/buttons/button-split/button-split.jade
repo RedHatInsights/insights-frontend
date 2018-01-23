@@ -1,0 +1,9 @@
+.button-split
+
+  .main(ng-transclude='main')
+
+  md-menu(md-offset="0 34", md-position-mode="target-right target")
+    md-button.button-dropdown#splitButtonDropdown(ng-click='$mdMenu.open()', ng-class='ctrl.classes', ng-disabled='disabled')
+      strong.hidden(translate, aria-hidden="false") Dropdown text
+      span.caret.dropdown-caret(aria-hidden="true")
+    md-menu-content(aria-labelledby="splitButtonDropdown", ng-transclude='items')

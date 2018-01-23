@@ -7,7 +7,7 @@
 
   // If incidents
   .cell.count(ng-if='incidentCount > 0')
-    strong(translate) {{:: incidentCount}} of {{:: totalHits}}
+    strong(translate) {{incidentCount}} of {{stats.rules.total}}
     br
     span(translate) Issues are incidents
 
