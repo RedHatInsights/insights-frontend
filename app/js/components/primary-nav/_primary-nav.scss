@@ -19,6 +19,7 @@ $sidenav-namespace: 'md-sidenav';
 
 // Mobile/base styling
 //==================================================================*/
+
 .primary-nav {
   background-color: $primary-nav-bg;
 
@@ -55,12 +56,10 @@ $sidenav-namespace: 'md-sidenav';
   }
 }
 
-@media screen and(min-width: $xs) {
-  
-}
 
 // Small breakpoint
 //==================================================================*/
+
 #{$sidenav-namespace}.primary-nav,
 .primary-nav { @include media-query(sm) {
   position: relative;
@@ -105,6 +104,7 @@ $sidenav-namespace: 'md-sidenav';
 
 // Medium breakpoint
 //==================================================================*/
+
 #{$sidenav-namespace}.primary-nav ul li a,
 .primary-nav ul li a { @include media-query(md) { @include rem('padding', 24px 34px 24px 24px); } }
 
@@ -120,8 +120,9 @@ topbar .toggle-fullscreen {
 }
 
 
-// Primary nav 
+// Primary nav footer buttons
 //==================================================================*/
+
 .primary-nav nav {
   min-height: 100%;
   display: flex;
@@ -142,9 +143,7 @@ topbar .toggle-fullscreen {
     @include rem('padding', 18px 14px);
   }
 
-  .button-back {
-    flex: 1;
-  }
+  .button-back { flex: 1; }
 
   .button-logout {
     @include rem('padding', 18px 20px);
@@ -156,6 +155,7 @@ topbar .toggle-fullscreen {
 
 // Header
 //==================================================================*/
+
 .primary-nav .header-block {
   transition: .2s;
   position: relative;
