@@ -35,7 +35,7 @@ md-sidenav.primary-nav(md-component-id="left")
           i.fa.fa-file-text
           span.text(translate) Configuration
 
-    ul.nav-footer
+    ul.nav-footer(ng-if="isPortal")
       li
         md-button.button.button-back(href="/", tooltip='Back to Customer Portal')
           i.fa.fa-caret-left(aria-hidden="true")

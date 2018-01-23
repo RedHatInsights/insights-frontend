@@ -19,6 +19,7 @@ function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User, InsightsJwt
     $scope.includes = includes;
     $scope.config = InsightsConfig;
     $scope.doLogout = InsightsJwt.standardLogout;
+    $scope.isPortal = InsightsConfig.isPortal;
 
     $scope.toggleNav = function () {
         $scope.isHidden = !$scope.isHidden;
