@@ -148,16 +148,10 @@ topbar .toggle-fullscreen {
 
 
 // Hover 
-.platform-grid.collapsed .primary-nav .nav-footer {
-  flex-flow: column wrap;
-
-  .button { 
-    margin: 0 auto;
-    text-align: center; 
+.platform-grid.collapsed .primary-nav .nav-footer .button {
     @include rem('padding', 18px 20px);
 
     &:hover { box-shadow: none; }
-  }
 }
 
 
