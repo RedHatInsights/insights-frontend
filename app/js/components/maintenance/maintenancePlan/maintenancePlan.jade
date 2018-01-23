@@ -299,7 +299,26 @@
         a.btn.btn-sm.btn-open-blue.action.pull-right(
             translate,
             ng-click='downloadPlaybook()',
+            ng-if='!ansibleRunner',
             ng-disabled='!ansibleSupport')
           i.svg.ansible-icon.inline-right
             img(src='static/images/l_ansible-blue.svg')
           span(translate) Download Playbook
+        .btn-group.pull-right(ng-if='ansibleRunner')
+          button.btn.btn-sm.btn-open-blue.action(
+            ng-disabled='!ansibleSupport',
+            aria-haspopup='true',
+            aria-expanded='false')
+            i.svg.ansible-icon.inline-right
+              img(src='static/images/l_ansible-blue.svg')
+            span(translate, ng-click="runPlaybook('run')") Run Playbook
+          button.btn.btn-sm.btn-open-blue.action.dropdown-toggle(
+            data-toggle='dropdown',
+            ng-if='ansibleSupport')
+            span.caret
+            span.sr-only(translate) Toggle Dropdown
+          ul.dropdown-menu
+            li
+              a(translate, ng-click="runPlaybook('customize')") Customize Playbook Run
+            li
+              a(translate, ng-click='downloadPlaybook()') Download Playbook
