@@ -44,8 +44,8 @@
                   th.sortable.nowrap(translate) System Type
                   th.sortable.nowrap(translate) Last Check In
                   th.sortable.nowrap(translate) Status
-              tbody(ng-repeat='system in rhsa.systems')
-                tr
+              tbody
+                tr(ng-repeat='system in rhsa.systems')
                   td.nowrap
                     a(ng-click='showSystem(system.system_id)') {{system.toString}}
                   td.nowrap
