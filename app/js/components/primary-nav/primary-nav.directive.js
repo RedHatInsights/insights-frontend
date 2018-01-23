@@ -1,3 +1,4 @@
+/*global require*/
 'use strict';
 
 var componentsModule = require('../');
@@ -8,18 +9,7 @@ const includes = require('lodash/includes');
 */
 
 // function primaryNavCtrl($scope, Utils, $state, InsightsConfig, $timeout, $mdSidenav) {
-function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User) {
-    // $scope.toggleLeft = buildToggler('left');
-
-    // $scope.toggleLeft = buildToggler('left');
-    // $scope.toggleRight = buildToggler('right');
-
-    // function buildToggler(componentId) {
-    //   return function() {
-    //     $mdSidenav(componentId).toggle();
-    //   };
-    // }
-
+function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User, InsightsJwt) {
     const policyAccounts = {540155: true};
 
     $scope.canSeePolicies = false;
@@ -28,6 +18,7 @@ function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User) {
     $scope.state = $state;
     $scope.includes = includes;
     $scope.config = InsightsConfig;
+    $scope.doLogout = InsightsJwt.standardLogout;
 
     $scope.toggleNav = function () {
         $scope.isHidden = !$scope.isHidden;

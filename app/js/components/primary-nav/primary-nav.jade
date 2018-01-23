@@ -37,11 +37,11 @@ md-sidenav.primary-nav(md-component-id="left")
 
     ul.nav-footer
       li
-        md-button.button.button-back(href="#", tooltip='Back to Customer Portal')
+        md-button.button.button-back(href="/", tooltip='Back to Customer Portal')
           i.fa.fa-caret-left(aria-hidden="true")
-          span.text Customer Portal
+          span.text(translate) Customer Portal
 
       li
-        md-button.button.button-logout(href="#", tooltip='Log out of Customer Portal')
+        md-button.button.button-logout(ng-click="doLogout()", tooltip='Log out of Customer Portal')
           i.fa.fa-sign-out(aria-hidden="true")
-          span.text Logout
+          span.text(translate) Logout
