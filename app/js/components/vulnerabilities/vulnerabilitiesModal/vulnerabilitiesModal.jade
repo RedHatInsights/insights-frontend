@@ -35,22 +35,19 @@
               .cve-count
                 span {{ rhsa.cves.length }} CVEs
                 .pipe |
-                span.hits 1 Hit
+                span.hits  {{ getRuleHits(rhsa) }}
                   i.fa.fa-book(tooltip="{{'This RHSA has an insights rule hit' | translate}}")
         .cve-summaries(ng-show='selectedRHSA')
           card
             card-content.card-content
-
-              //- // Insights Rule Hit
-              //- .rule-hit(expandable='true')
-              //-   .title.icon-inline
-              //-     i.fa.fa-book(aria-hidden='true')
-              //-     span Insights Rule Hit
-              //-   // Rule component? 
-
+              .rule-hit(expandable='true', ng-if="selectedCVE.insights_rule")
+                .title.icon-inline
+                  i.fa.fa-book(aria-hidden='true')
+                  span Insights Rule Hit
               ul.cve-id
                 li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)') 
                   a(ng-class='{active: cve.id === selectedCVE.id}') {{ cve.id }}
+                  i.fa.fa-book(ng-if='selectedCVE.insights_rule')
               .description {{ selectedCVE.description }}
               .cve-information
                 .impact 
@@ -58,10 +55,10 @@
                   | {{ selectedCVE.impact }}
                 .public-date 
                   b Public-Date: 
-                  | {{ selectedCVE.public_date}}
-                .iava 
+                  | {{ selectedCVE.public_date }}
+                .iava(ng-if='selectedCVE.iava')
                   b IAVA: 
                   | {{ selectedCVE.iava }}
-                .cwe 
+                .cwe(ng-if='selectedCVE.cwe')
                   b CWE: 
                   | {{ selectedCVE.cwe }}

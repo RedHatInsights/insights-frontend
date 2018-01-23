@@ -31,29 +31,23 @@
               i.fa.fa-shield 
               span(translate) {{vulnerability.low_count}} Low
       card-content.card-content(collapse="card.collapsed")
-        card(expandable='true', ng-repeat='rhsa in vulnerability.rhsas').embedded-card
-          card-header-expandable
-            .card-header-title
-              .title {{rhsa.id}}
-              .systems-affected {{rhsa.systems_affected}} Systems Affected
-          card-content.card-content(collapse="card.collapsed")
-            table
-              thead
-                tr
-                  th.sortable.nowrap(translate) System Name
-                  th.sortable.nowrap(translate) System Type
-                  th.sortable.nowrap(translate) Last Check In
-                  th.sortable.nowrap(translate) Status
-              tbody
-                tr(ng-repeat='system in rhsa.systems')
-                  td.nowrap
-                    a(ng-click='showSystem(system.system_id)') {{system.toString}}
-                  td.nowrap
-                    type-icon(type-id='system.system_type_id', include-text='true')
-                  td.nowrap
-                    span {{system.last_check_in | timeAgo}}
-                  td.nowrap
-                    span {{system.report_count}}
+        table
+          thead
+            tr
+              th.sortable.nowrap(translate) System Name
+              th.sortable.nowrap(translate) System Type
+              th.sortable.nowrap(translate) Last Check In
+              th.sortable.nowrap(translate) Status
+          tbody(ng-repeat='system in vulnerability.systems')
+            tr
+              td.nowrap
+                a(ng-click='showSystem(system.system_id)') {{system.toString}}
+              td.nowrap
+                type-icon(type-id='system.system_type_id', include-text='true')
+              td.nowrap
+                span {{system.last_check_in | timeAgo}}
+              td.nowrap
+                span {{system.report_count}}
 
               
 

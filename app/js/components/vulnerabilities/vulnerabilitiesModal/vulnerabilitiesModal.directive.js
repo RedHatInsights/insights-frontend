@@ -17,6 +17,10 @@ function vulnerabilitiesModalCtrl($scope, System) {
         }
     };
 
+    $scope.getRuleHits = function (rhsa) {
+        return rhsa.rule_hits === 1 ? '1 Hit' : `${rhsa.rule_hits} Hits`;
+    };
+
     $scope.selectCVE = function (cve) {
         if ($scope.selectedCVE !== cve) {
             $scope.selectedCVE = cve;
