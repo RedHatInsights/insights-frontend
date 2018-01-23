@@ -139,7 +139,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
             .action {
                 border: 1px solid #ddd;
-                @include rem('margin-left', 10px);
                 transition: .2s;
 
                 &:hover {
@@ -153,7 +152,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
                 }
             }
 
-            .btn + .btn {
+            & > .btn + .btn {
                 @include rem('margin-left', 10px);
             }
 
@@ -164,6 +163,10 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
                 & + span {
                     margin: 0;
                 }
+            }
+
+            ul.dropdown-menu {
+                padding-left: 0;
             }
         }
 
@@ -816,7 +819,7 @@ table.maintenance-table {
   }
 
   // adjust content padding for vertical divider
-  .content { 
+  .content {
     padding: 0;
     display: flex;
     flex-flow: row wrap;
