@@ -41,13 +41,13 @@
           card
             card-content.card-content
 
-              // Insights Rule Hit
+              //- // Insights Rule Hit
               //- .rule-hit(expandable='true')
               //-   .title.icon-inline
               //-     i.fa.fa-book(aria-hidden='true')
               //-     span Insights Rule Hit
-              //-   .rule-summaries(rule='rule', loading='loading')
-              
+              //-   // Rule component? 
+
               ul.cve-id
                 li(ng-repeat='cve in cves', ng-click='selectCVE(cve)') 
                   a {{ cve.id }}
