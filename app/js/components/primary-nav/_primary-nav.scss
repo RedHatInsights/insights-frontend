@@ -130,14 +130,18 @@ topbar .toggle-fullscreen {
 //==================================================================*/
 
 .primary-nav .nav-footer {
+  display: flex;
+  flex-flow: column nowrap;
   margin-top: auto;
   background: rgba(0,0,0,.2);
   justify-self: flex-end;
 
-  li a {
+  .button { 
+    flex: 0 1 50%;
     @include rem('padding', 18px 20px);
+    text-align: left;
 
-    &:hover { box-shadow: none; }    
+    &:hover { box-shadow: none; }
   }
 
   i {
@@ -146,12 +150,17 @@ topbar .toggle-fullscreen {
   }
 }
 
-
 // Hover 
-.platform-grid.collapsed .primary-nav .nav-footer .button {
+.platform-grid.collapsed .primary-nav .nav-footer {
+  flex-flow: column wrap;
+
+  .button { 
+    margin: 0 auto;
+    text-align: center; 
     @include rem('padding', 18px 20px);
 
     &:hover { box-shadow: none; }
+  }
 }
 
 
