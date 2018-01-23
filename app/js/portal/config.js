@@ -32,6 +32,12 @@ function Config(cfpLoadingBarProvider, InsightsConfigProvider) {
     InsightsConfigProvider.setPortal(true);
     InsightsConfigProvider.setGettingStartedLink(
         'https://access.redhat.com/products/red-hat-insights#getstarted');
+
+    /* Used for Satellite integration
+    InsightsConfigProvider.setAnsibleRunner(function ($location, planId, button) {
+        $location.url(`/runPlaybook?planId=${planId}&customize=${customize}`);
+    });
+    */
 }
 
 module.exports = Config;
