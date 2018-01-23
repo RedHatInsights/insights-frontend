@@ -6,6 +6,7 @@ $dashboard-nav-input-bg: #322e31;
 $aside_anchor_bg: #4d464b;
 $aside_anchor_color: #fff;
 $aside_anchor_hover_bg: gray;
+$sidenav-namespace: 'md-sidenav';
 
 
 // Container styling
@@ -21,6 +22,11 @@ $aside_anchor_hover_bg: gray;
 .primary-nav {
   background-color: $primary-nav-bg;
 
+  a {
+    color: #fff;
+    font-weight: 700;
+  }
+
   ul {
     @include reset();
     list-style-type: none;
@@ -33,11 +39,7 @@ $aside_anchor_hover_bg: gray;
     position: relative;
     margin: 0;
     @include rem('padding', 24px);
-
-    
     text-align: center;
-    color: #fff;
-    font-weight: 700;
 
     .text { 
       text-transform: capitalize; 
@@ -59,7 +61,7 @@ $aside_anchor_hover_bg: gray;
 
 // Small breakpoint
 //==================================================================*/
-md-sidenav.primary-nav,
+#{$sidenav-namespace}.primary-nav,
 .primary-nav { @include media-query(sm) {
   position: relative;
   width: auto;
@@ -103,7 +105,7 @@ md-sidenav.primary-nav,
 
 // Medium breakpoint
 //==================================================================*/
-md-sidenav.primary-nav ul li a,
+#{$sidenav-namespace}.primary-nav ul li a,
 .primary-nav ul li a { @include media-query(md) { @include rem('padding', 24px 34px 24px 24px); } }
 
 .platform-grid.collapsed md-sidenav.primary-nav ul li a, 
@@ -115,6 +117,40 @@ button.toggle-fullscreen {
 topbar .toggle-fullscreen {
   border: none;
   box-shadow: none;
+}
+
+
+// Primary nav 
+//==================================================================*/
+.primary-nav nav {
+  min-height: 100%;
+  display: flex;
+  flex-flow: column wrap;
+
+  .nav-footer {
+    display: flex;
+    margin-top: auto;
+    background: rgba(0,0,0,.2);
+    justify-self: flex-end;
+    border-top: 1px solid rgba(255,255,255,.1);
+    box-shadow: -1px 0 0 1px rgba(0,0,0,.5);
+  }
+
+  button,
+  a {
+    color: #fff;
+    @include rem('padding', 18px 14px);
+  }
+
+  .button-back {
+    flex: 1;
+  }
+
+  .button-logout {
+    @include rem('padding', 18px 20px);
+    border-left: 1px solid rgba(255,255,255,.1);
+    box-shadow: -1px 0 0 rgba(0, 0, 0, 0.5);
+  }
 }
 
 
