@@ -23,6 +23,7 @@
     position: relative;
     width: 0px;
     height: 0px;
+    @include rem('bottom', -5px);
     @include rem('left', 47%);
     @include font-size(20px, 1);
   }
