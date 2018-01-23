@@ -13,6 +13,32 @@
             md-card.md-padding
               md-header
                 h3 Buttons
+
+              .flex
+                div(sm-flex-50)
+                  h4 Split Buttons
+
+                  button-split.md-raised.md-primary
+                    button-split-main Primary
+                    button-split-item
+                      md-button(translate) item 1
+                    button-split-item
+                      md-button(translate) item 2
+
+                  br
+                  br
+                  pre.code-block.code-terminal
+                    .code-type-jade
+                    code.code
+                      | button-split.md-raised.md-primary
+                      |   button-split-main Primary
+                      |   button-split-item
+                      |     md-button(translate) item 1
+                      |   button-split-item
+                      |     md-button(translate) item 2
+
+                    
+
               .row
                 .col-md-12
                   h4 Flat Buttons
