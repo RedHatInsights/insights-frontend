@@ -1,5 +1,10 @@
 .vulnerabilitiesModal {
   .vulnerabilitiesCard { @include rem('margin', 15px); }
+
+  .cve-count { 
+    display: flex;
+    justify-content: space-around;
+  }
 }
 
 .md-open-menu-container { z-index: 9999; }
@@ -35,7 +40,7 @@
 
 .cve-id li a.active { 
   text-decoration: underline;
-  font-weight: 500; 
+  font-weight: 600; 
 }
 
 .cve-summaries { @include rem('margin', $global-padding); }

@@ -32,7 +32,7 @@
               .icon
                 i.fa.fa-shield.critical
               h2.text {{ rhsa.id }}
-              .subhead
+              .cve-count
                 span {{ rhsa.cves.length }} CVEs
                 .pipe |
                 span.hits 1 Hit
@@ -50,7 +50,7 @@
 
               ul.cve-id
                 li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)') 
-                  a {{ cve.id }}
+                  a(ng-class='{active: cve.id === selectedCVE.id}') {{ cve.id }}
               .description {{ selectedCVE.description }}
               .cve-information
                 .impact 
