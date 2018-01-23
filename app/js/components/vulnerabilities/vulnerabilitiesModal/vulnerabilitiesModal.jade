@@ -40,9 +40,17 @@
         .cve-summaries(ng-show='showCVEs')
           card
             card-content.card-content
-              //.rule-hit Rule hit info goes in this class
+
+              // Insights Rule Hit
+              //- .rule-hit(expandable='true')
+              //-   .title.icon-inline
+              //-     i.fa.fa-book(aria-hidden='true')
+              //-     span Insights Rule Hit
+              //-   .rule-summaries(rule='rule', loading='loading')
+              
               ul.cve-id
-                li(ng-repeat='cve in cves', ng-click='selectCVE(cve)') {{ cve.id }}
+                li(ng-repeat='cve in cves', ng-click='selectCVE(cve)') 
+                  a {{ cve.id }}
               .description {{ selectedCVE.description }}
               .cve-information
                 .impact 

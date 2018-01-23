@@ -1,4 +1,6 @@
-// Vars
+// Variables
+//==================================================================*/
+
 .page-vulnerabilities, .vulnerabilitiesModal {
   .critical { color: $vul-critical; }
   .important { color: $vul-important; }
@@ -6,6 +8,10 @@
   .low { color: $vul-low; }
 }
 
+
+// Vulnerabiltiies Embedded Card
+// TODO: Update to global component
+//==================================================================*/
 
 .page-vulnerabilities, .vulnerabilitiesModal{
 
@@ -34,38 +40,5 @@
       .card-content { padding: 0px; }
     }
 
-  }
-}
-
-.cve-summaries { @include rem('margin', $global-padding); }
-
-.cve-summaries .card-content {
-  display: grid;
-  grid-template-columns: max-content 1fr max-content;
-  grid-template-row: auto;
-  grid-template-areas: 'cve-id rule-hit rule-hit'
-                      'cve-id description cve-information';
-  grid-gap: 30px;
-}
-
-.cve-summaries .card-content {
-  //align-items: stretch;
-
-  .cve-id {
-    grid-area: cve-id;
-  }
-
-  .description { 
-    grid-area: description;
-    grid-row: auto;
-  }
-
-  .rule-hit{
-    grid-area: rule-hit; 
-  }
-
-  .cve-information{
-    grid-area: cve-information;
-    grid-row: auto;
   }
 }
