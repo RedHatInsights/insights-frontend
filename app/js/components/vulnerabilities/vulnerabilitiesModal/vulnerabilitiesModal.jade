@@ -36,7 +36,7 @@
                 span {{ rhsa.cves.length }} CVEs
                 .pipe |
                 span.hits 1 Hit
-                  i.fa.fa-book
+                  i.fa.fa-book(tooltip="{{'This RHSA has an insights rule hit' | translate}}")
         .cve-summaries(ng-show='showCVEs')
           card
             card-content.card-content

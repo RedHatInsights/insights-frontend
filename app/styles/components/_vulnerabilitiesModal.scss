@@ -8,6 +8,13 @@
 // Add the caret under the summary card when active
 //==================================================================*/
 
+.card-summaries .card {
+  position: relative;
+  top: 0px;
+  transition: all .1s ease;
+  transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
 .card-summaries .card.active { 
   &:after { 
     color: #c4c4c4;
@@ -19,7 +26,11 @@
     @include rem('left', 47%);
     @include font-size(20px, 1);
   }
+  top: -5px;
+  box-shadow: 0 1px 8px 0 rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12);
 }
+
+    
 
 .cve-id li a.active { 
   text-decoration: underline;
