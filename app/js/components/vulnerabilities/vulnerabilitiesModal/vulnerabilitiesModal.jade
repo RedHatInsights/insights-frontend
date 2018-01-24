@@ -39,19 +39,20 @@
                   i.fa.fa-book(tooltip="{{'This RHSA has an insights rule hit' | translate}}")
         .cve-summaries(ng-show='selectedRHSA')
           card(ng-if='inPackage(package)')
-            card-content.card-content
+            card-content.card-content.cve-summary-expanded
               card.rule-hit(expandable='true', ng-if="selectedCVE.insights_rule")
                 card-header-expandable
                   .title.icon-inline
                     i.fa.fa-book(aria-hidden='true')
                     span Insights Rule Hit
                 card-content.card-content(collapse="card.collapsed")
-                  // Rule hit info
                   incident-icon(rule-id='report.rule_id', ng-if='selectedRule')
-                  .title(ng-if='selectedRule') {{ selectedRule.category }} #{'>'} {{ selectedRule.description }}
+                  .title(ng-if='selectedRule')
+                    span(ng-bind-html='::selectedRule.summary_html | trust_html', target-blank='')
                     .card-header-risk-summaries
                       all-severity-icons.inline(rule='selectedRule')
                       risk-of-change(change-risk='selectedRule.resolution_risk')
+                      a.impacted-systems(ui-sref='app.actions-rule({category: selectedRule.category.toLowerCase(), rule: selectedRule.rule_id})', translate, ng-disabled="selectedRule.impacted_systems === 0") View Impacted Systems ({{selectedRule.impacted_systems}})
               ul.cve-id
                 li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)') 
                   a(ng-class='{active: cve.id === selectedCVE.id}') {{ cve.id }}

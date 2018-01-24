@@ -103,7 +103,7 @@
       color: $blue-light;
       display: flex;
       @include rem('padding', 5px);
-      
+
       .title { @include rem('margin-top', 5px); }
       .expandable-toggle { @include rem('padding-left', 5px); }
     }
@@ -116,7 +116,7 @@
   // Grid for summaries card
   //==================================================================*/
 
-  .cve-summaries .card-content {
+  .cve-summaries .cve-summary-expanded.card-content {
     display: grid;
     grid-template-columns: max-content 1fr max-content;
     grid-template-row: auto;
@@ -126,7 +126,7 @@
     grid-row-gap: 10px;
   }
 
-  .cve-summaries .card-content {
+  .cve-summaries .cve-summary-expanded.card-content {
 
     .cve-id {
       grid-area: cve-id;
