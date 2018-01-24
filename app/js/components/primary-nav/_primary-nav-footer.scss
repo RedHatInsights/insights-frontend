@@ -10,6 +10,7 @@
     a,
     .button { 
       @include rem('padding', 18px 20px);
+      width: 100%;
 
       &:hover { box-shadow: none; }
     }
