@@ -8,11 +8,8 @@
   },
   "private": true,
   "dependencies": {
-    "compression": "~1.6.2",
     "express": "~4.15.2",
-    "file-saver": "~1.3.3",
-    "morgan": "~1.8.1",
-    "parse-http-header": "~1.0.0"
+    "morgan": "~1.8.1"
   },
   "devDependencies": {
     "angular": "~1.5.x",
@@ -24,6 +21,7 @@
     "angular-gravatar": "~0.4.x",
     "angular-loading-bar": "~0.7.x",
     "angular-material": "^1.x.x",
+    "angular-messages": "~1.5.x",
     "angular-mocks": "~1.5.x",
     "angular-resource": "~1.5.x",
     "angular-sanitize": "~1.5.x",
@@ -48,6 +46,7 @@
     "del": "~2.2.x",
     "envify": "~4.0.0",
     "express-http-proxy": "~1.0.x",
+    "file-saver": "~1.3.3",
     "flexboxgrid": "~6.3.x",
     "font-awesome": "~4.5.x",
     "git-guppy": "~2.1.x",
@@ -101,6 +100,7 @@
     "ng-table": "~0.8.x",
     "ngclipboard": "~1.1.x",
     "nightwatch": "^0.9.19",
+    "parse-http-header": "~1.0.0",
     "phantomjs": "~2.1.x",
     "plotly.js": "~1.27.x",
     "pretty-hrtime": "~1.0.x",
@@ -114,6 +114,7 @@
     "urijs": "~1.17.1",
     "vinyl-buffer": "~1.0.x",
     "vinyl-source-stream": "~1.1.x",
+    "watchify": "^3.9.0",
     "xvfb": "^0.2.3"
   },
   "scripts": {
