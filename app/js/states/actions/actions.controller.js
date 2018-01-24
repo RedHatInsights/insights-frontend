@@ -70,7 +70,7 @@ function ActionsCtrl(
             }
 
             promises.push(loadStats());
-            promises.push(IncidentsService.loadIncidents());
+            promises.push(IncidentsService.init());
 
             $q.all(promises).finally(() => {
                 $scope.incidentCount = IncidentsService.incidentRulesWithHitsCount;
