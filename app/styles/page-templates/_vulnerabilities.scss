@@ -13,6 +13,9 @@
 // TODO: Update to global component
 //==================================================================*/
 
+
+.page-vulnerabilities { md-card { @include rem('margin-top', $global-padding); } }
+
 .page-vulnerabilities, .vulnerabilitiesModal{
 
   .outer-card {
@@ -35,9 +38,8 @@
 
     .embedded-card{
       box-shadow: none;
-      border: 1px solid #efefef;
       border-radius: 5px;
-      .card-content { padding: 0px; }
+      &.card-content { padding: 0px; }
     }
 
   }

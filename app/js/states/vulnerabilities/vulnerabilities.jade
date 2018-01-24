@@ -30,7 +30,7 @@
             .low.icon-inline
               i.fa.fa-shield
               span(translate) {{vulnerability.low_count}} Low
-      card-content.card-content(collapse="card.collapsed")
+      card-content.card-content.embedded-card(collapse="card.collapsed")
         table
           thead
             tr
@@ -38,8 +38,8 @@
               th.sortable.nowrap(translate) System Type
               th.sortable.nowrap(translate) Last Check In
               th.sortable.nowrap(translate) Status
-          tbody(ng-repeat='system in vulnerability.systems')
-            tr
+          tbody
+            tr(ng-repeat='system in vulnerability.systems')
               td.nowrap
                 a(ng-click='showSystem(system.system_id)') {{system.toString}}
               td.nowrap
