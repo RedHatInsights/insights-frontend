@@ -42,8 +42,6 @@ function ActionsRuleCtrl(
         true: 'DESC'
     };
 
-    let category = $stateParams.category;
-
     $scope.allSelected = false;
     $scope.config = InsightsConfig;
     $scope.getListType = ListTypeService.getType;
@@ -94,7 +92,6 @@ function ActionsRuleCtrl(
     });
 
     ActionsBreadcrumbs.init($stateParams);
-    RhaTelemetryActionsService.setCategory(category);
     RhaTelemetryActionsService.setRule($stateParams.rule);
 
     $scope.loading = true;
