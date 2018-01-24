@@ -2,8 +2,14 @@
 
 const lodash = require('lodash');
 const el     = require('./elements');
+const priv   = {};
+let stash    = {};
+let counter  = 0;
 
-let stash = {};
+priv.getFileName = function () {
+    counter += 1;
+    return `/tmp/images/${counter}.png`;
+};
 
 module.exports.addExtensions = (client) => {
 
@@ -34,7 +40,10 @@ module.exports.addExtensions = (client) => {
     };
 
     client.waitAndClick = (element) => {
-        return client.pause(100).waitForElementVisible(element).click(element);
+        return client.pause(100)
+            .saveScreenshot(priv.getFileName())
+            .waitForElementVisible(element)
+            .click(element);
     };
 
     client.waitAll = (base) => {
