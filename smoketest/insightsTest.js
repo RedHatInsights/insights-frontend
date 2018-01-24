@@ -21,6 +21,7 @@ module.exports = {
             .waitForElementVisible(el.login.form)
             .setValue(el.login.username, conf.username)
             .setValue(el.login.password, conf.password)
+            .saveScreenshot('/tmp/images/login.png')
             .click(el.login.submit);
     },
 
