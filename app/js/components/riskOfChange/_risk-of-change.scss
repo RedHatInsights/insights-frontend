@@ -2,13 +2,10 @@
   display: inline-block;
 
   .alert-text { white-space: nowrap; }
-
-  .icon { @include rem('margin-right', $global-padding/2); }
 }
 
 .icon-group-severity + .risk-of-change {
   @include media-query(sm){
     @include rem('margin-left', $global-padding/2);
   }
-  @include rem('margin-top', 10px);
 }
