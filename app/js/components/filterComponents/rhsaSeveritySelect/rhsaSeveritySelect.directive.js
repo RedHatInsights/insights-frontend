@@ -10,16 +10,20 @@ const filter = require('lodash/filter');
 function rhsaSeveritySelectCtrl($rootScope,
                                 $scope,
                                 $location,
+                                $timeout,
+                                $document,
                                 gettextCatalog,
                                 Events,
                                 RhsaSeverityFilters,
                                 FilterService) {
     const optionsMap = {};
+    let menu = null;
     $scope.options = [];
     angular.extend($scope.options, RhsaSeverityFilters);
 
     // Add selected to each option to be used as the checkbox
-    // ng-model
+    // ng-model. makes options map in both directions
+    // (index: string && string: index).
     $scope.options.forEach(function (option, index) {
         option.selected = false;
         optionsMap[index] = option.title;
@@ -51,6 +55,16 @@ function rhsaSeveritySelectCtrl($rootScope,
             setDefaultOption();
         }
     })();
+
+    $scope.openMenu = function ($mdMenu, event) {
+        if (!menu) {
+            menu = $mdMenu;
+            $mdMenu.open(event);
+        } else {
+            $mdMenu.close();
+            menu = null;
+        }
+    };
 
     /**
      * Returns the string representation for one or more selected options.
@@ -150,19 +164,52 @@ function rhsaSeveritySelectCtrl($rootScope,
         $scope.options[DEFAULT_OPTION].selected = true;
     }
 
-    $scope.$on(Events.filters.reset, function () {
+    const resetFilterListener = $scope.$on(Events.filters.reset, function () {
         setDefaultOption();
-        setURL();
-        broadcastTabs();
+        $scope.doFilter();
     });
 
-    $scope.$on(Events.filters.removeTag, function (event, filter, tag) {
-        if (filter === Events.filters.rhsaSeverity) {
-            find($scope.options, {tag: tag}).selected = false;
-            setSelectedOptions();
-            setURL();
-            broadcastTabs();
+    const removeTagListener =
+        $scope.$on(Events.filters.removeTag, function (event, filter, tag) {
+            if (filter === Events.filters.rhsaSeverity) {
+                find($scope.options, {tag: tag}).selected = false;
+                setSelectedOptions();
+                $scope.doFilter();
+            }
+        });
+
+    // applies filter when the menu closes
+    const menuCloseListener = $scope.$on('$mdMenuClose', $scope.doFilter);
+
+    // fixes the menus not closing by clicking the dropdown button or
+    // clicking outsid the dropdown menu when in the system modal
+    $document.on('click', onClickEvent);
+    function onClickEvent (event) {
+        let clickedInsideMenu = false;
+
+        if (menu) {
+            const elements = $document[0]
+                .querySelectorAll('.md-open-menu-container.md-active');
+
+            angular.forEach(elements, (element) => {
+                if (element.contains(event.target)) {
+                    clickedInsideMenu = true;
+                }
+            });
+
+            if (!clickedInsideMenu) {
+                menu.close();
+                menu = null;
+            }
         }
+    }
+
+    // removes all listeners when $scope is destroyed
+    $scope.$on('$destroy', function () {
+        removeTagListener();
+        resetFilterListener();
+        menuCloseListener();
+        $document.off('click', onClickEvent);
     });
 }
 

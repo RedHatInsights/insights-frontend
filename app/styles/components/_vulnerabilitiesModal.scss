@@ -1,3 +1,5 @@
+.md-open-menu-container { z-index: 9999; }
+
 .vulnerabilitiesModal {
   .vulnerabilitiesCard { @include rem('margin', 15px); }
 
@@ -5,9 +7,6 @@
     display: flex;
     justify-content: space-around;
   }
-
-
-  .md-open-menu-container { z-index: 9999; }
 
   // Card Summary
   //==================================================================*/
