@@ -4,6 +4,7 @@
 const componentsModule = require('../');
 const isEmpty = require('lodash/isEmpty');
 const _filter = require('lodash/filter');
+const escape  = require('lodash/escape');
 
 /**
  * @ngInject
@@ -98,7 +99,7 @@ function groupSelectCtrl(
                 'Use <strong>Actions</strong> dropdown in the inventory to add systems ' +
                 'to the <code>{{name}}</code> group',
                 {
-                    name: group.display_name
+                    name: escape(group.display_name)
                 });
 
             return sweetAlert({
