@@ -46,9 +46,9 @@ function ansibleIconCtrl($scope, gettextCatalog) {
 function ansibleIcon() {
     return {
         scope: {
-            value: '=',
-            showTooltip: '=',
-            showPlannerLine: '=',
+            value: '<',
+            showTooltip: '<',
+            showPlannerLine: '<',
             white: '<',
             hideLabel: '<'
         },
