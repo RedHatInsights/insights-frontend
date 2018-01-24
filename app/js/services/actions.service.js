@@ -1,14 +1,7 @@
-/*global require, angular, window*/
+/*global require, window*/
 'use strict';
 
 var servicesModule = require('./');
-var reject = require('lodash/reject');
-var filter = require('lodash/filter');
-var map = require('lodash/map');
-var reduce = require('lodash/reduce');
-var indexOf = require('lodash/indexOf');
-var groupBy = require('lodash/groupBy');
-var indexBy = require('lodash/keyBy');
 
 /**
  * @ngInject
@@ -22,9 +15,7 @@ function ActionsService(
     Report,
     Rule,
     System,
-    Ack,
     InsightsConfig,
-    Severities,
     ReloadService,
     FilterService,
     Utils) {
@@ -38,55 +29,19 @@ function ActionsService(
     // window.pub = pub; // just for debugging, commentme
 
     vars.allSystems = null;
-    vars.category = null;
-    vars.counts = {};
     vars.data = {};
-    vars.dataLoaded = false;
     vars.donutChart = null;
-    vars.initialSeverity = null;
-    vars.loading = false;
-    vars.oldCols = [];
     vars.page = 0;
     vars.pageSize = 10;
     vars.ruleSystems = null;
-    vars.rules = [];
     vars.rule = null;
     vars.ruleDetails = null;
 
-    vars.severities = {};
-    vars.severityNames = Severities.map(function (severity) {return severity.value;});
-
     vars.systemNames = null;
-    vars.total = 0;
     vars.totalRuleSystems = 0;
 
     // do this as soon as all the accessibles are defined (aka define vars, run dis)
     Utils.generateAccessors(pub, vars);
-
-    angular.forEach(vars.severityNames, function (s) {
-        vars.severities[s] = {
-            selected: true,
-            count: 0
-        };
-    });
-
-    priv.severityFilter = function (report) {
-        return vars.severities[report.severity].selected;
-    };
-
-    pub.isActions = function () {
-        if (pub.getCategory()) {
-            return false;
-        }
-
-        return true;
-    };
-
-    priv.ackFilter = function (report) {
-        try {
-            return Ack.ackMap[report.rule_id];
-        } catch (ignore) {}
-    };
 
     pub.mapName = function (rule_id) {
         if (vars.data[rule_id] && vars.data[rule_id].name) {
@@ -94,156 +49,6 @@ function ActionsService(
         }
 
         return rule_id;
-    };
-
-    priv.processRules = function () {
-        var filteredRules = reject(vars.rules, priv.ackFilter); //TODO: this won't wor;
-        var tmpData = null;
-        var total = 0;
-
-        priv.updateCounts(filteredRules);
-        priv.updateSeverityCounts(filteredRules);
-        filteredRules = filter(filteredRules, priv.severityFilter);
-
-        if (pub.isActions()) {
-            tmpData = groupBy(filteredRules, function (r) {
-                return r.category;
-            });
-
-            tmpData = map(tmpData, function (g, category) {
-                var groupTotal = reduce(g, function (sum, n) {
-                    return sum + n.report_count;
-                }, 0);
-
-                return {
-                    id: category,
-                    name: category,
-                    value: groupTotal,
-                    category: true
-                };
-            });
-
-            tmpData = indexBy(tmpData, 'id');
-        } else {
-            tmpData = filter(filteredRules, function (r) {
-                return (r.category.toLowerCase() === vars.category.toLowerCase());
-            });
-
-            tmpData = map(tmpData, function (r) {
-                return {
-                    id: r.rule_id,
-                    name: r.description,
-                    severityNum: indexOf(vars.severityNames, r.severity),
-                    severity: r.severity,
-                    category: r.category,
-                    value: r.report_count,
-                    color: ''
-                };
-            });
-
-            tmpData = indexBy(tmpData, 'id');
-        }
-
-        total = reduce(tmpData, function (sum, n) {
-            return sum + n.value;
-        }, 0);
-
-        pub.setData(tmpData);
-        pub.setTotal(total);
-        $rootScope.$broadcast('rha-telemetry-refreshdonut');
-    };
-
-    pub.populateData = function () {
-        var rulesQuery;
-        var rulesDeferred;
-        var ackDeferred;
-        var deferred;
-
-        if (!vars.dataLoaded) {
-            //pub.setLoading(true);
-
-            rulesQuery = FilterService.buildRequestQueryParams([], ['role']);
-            rulesQuery.report_count = 'gt0';
-
-            rulesDeferred = Rule.getRulesLatest(rulesQuery);
-            ackDeferred = Ack.reload();
-
-            ackDeferred.then(rulesDeferred);
-
-            rulesDeferred.success(function (response) {
-                pub.setRules(response.resources);
-                priv.processRules();
-            });
-
-            rulesDeferred.finally(function () {
-                pub.setLoading(false);
-                vars.dataLoaded = true;
-            });
-
-            return rulesDeferred;
-        }
-
-        //dataLoaded already
-        deferred = $q(function (resolve) {
-            resolve('norefresh');
-        });
-
-        deferred.then(function () {
-            priv.processRules();
-        });
-
-        return deferred;
-    };
-
-    priv.updateCounts = function (rules) {
-        var _count     = 0;
-        var tempCounts = {
-            security:    0,
-            stability:   0,
-            performance: 0
-        };
-
-        rules = groupBy(rules, function (r) {
-            return r.category;
-        });
-
-        reduce(rules, function (result, n, key) {
-            var k = key.toLowerCase();
-            result[k] = reduce(n, function (sum, n) {
-                return sum + n.report_count;
-            }, 0);
-
-            _count += result[k];
-            return result;
-        }, tempCounts);
-
-        pub.setCounts(tempCounts);
-    };
-
-    priv.updateSeverityCounts = function (rules) {
-        var rulesBySeverity;
-        var total = 0;
-
-        if (!pub.isActions()) {
-            rules = filter(rules, function (r) {
-                return (r.category.toLowerCase() === vars.category.toLowerCase());
-            });
-        }
-
-        rulesBySeverity = groupBy(rules, 'severity');
-        angular.forEach(vars.severityNames, function (s) {
-            if (angular.isDefined(rulesBySeverity[s])) {
-                vars.severities[s].count = reduce(rulesBySeverity[s], function (sum, n) {
-                    return sum + n.report_count;
-                }, 0);
-
-                total += vars.severities[s].count;
-            } else {
-                vars.severities[s].count = 0;
-            }
-        });
-
-        vars.severities.All.count = total;
     };
 
     pub.arcClick = function (arc) {
@@ -257,10 +62,6 @@ function ActionsService(
             category: arc.category.toLowerCase(),
             rule: arc.id
         });
-    };
-
-    pub.ackAction = function (rule) {
-        Ack.createAck(rule).then(priv.processRules);
     };
 
     /**
@@ -447,31 +248,6 @@ function ActionsService(
         }
 
         return pub.getActionsRulePage(true, pager);
-    };
-
-    pub.reload = function () {
-        if (!vars.dataLoaded) {
-            // we don't even have data yet - no need to reload
-            return;
-        }
-
-        pub.setDataLoaded(false);
-
-        pub.populateData().then(function () {
-            pub.setLoading(false);
-        });
-    };
-
-    pub.setInitialSeverity = function (sev) {
-        if (sev) {
-            angular.forEach(vars.severityNames, function (s) {
-                if (sev === s || sev.toLowerCase() === 'all') {
-                    vars.severities[s].selected = true;
-                } else {
-                    vars.severities[s].selected = false;
-                }
-            });
-        }
     };
 
     if (InsightsConfig.autoRefresh && !isNaN(InsightsConfig.autoRefresh)) {
