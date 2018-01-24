@@ -6,7 +6,7 @@ const find = require('lodash/find');
 /**
  * @ngInject
  */
-function vulnerabilitiesModalCtrl($scope, System) {
+function vulnerabilitiesModalCtrl($scope, Rule, System) {
     $scope.showCVEs = false;
 
     $scope.toggleShowCVEs = function (rhsa) {
@@ -14,7 +14,7 @@ function vulnerabilitiesModalCtrl($scope, System) {
             delete $scope.selectedRHSA;
         } else {
             $scope.selectedRHSA = rhsa;
-            $scope.selectedCVE = rhsa.cves[0];
+            $scope.selectCVE(rhsa.cves[0]);
         }
     };
 
@@ -37,8 +37,19 @@ function vulnerabilitiesModalCtrl($scope, System) {
     $scope.selectCVE = function (cve) {
         if ($scope.selectedCVE !== cve) {
             $scope.selectedCVE = cve;
+            fetchRule($scope.selectedCVE.insights_rule);
         }
     };
+
+    function fetchRule (rule_id) {
+        $scope.selectedRule = null;
+
+        if (rule_id) {
+            Rule.byId(rule_id).then((rule) => {
+                $scope.selectedRule = rule.data;
+            });
+        }
+    }
 
     function getData() {
         System.getVulnerabilities($scope.systemId)

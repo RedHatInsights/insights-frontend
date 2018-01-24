@@ -47,6 +47,11 @@
                     span Insights Rule Hit
                 card-content.card-content(collapse="card.collapsed")
                   // Rule hit info
+                  incident-icon(rule-id='report.rule_id', ng-if='selectedRule')
+                  .title(ng-if='selectedRule') {{ selectedRule.category }} #{'>'} {{ selectedRule.description }}
+                    .card-header-risk-summaries
+                      all-severity-icons.inline(rule='selectedRule')
+                      risk-of-change(change-risk='selectedRule.resolution_risk')
               ul.cve-id
                 li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)') 
                   a(ng-class='{active: cve.id === selectedCVE.id}') {{ cve.id }}
