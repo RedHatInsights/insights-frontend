@@ -30,7 +30,7 @@ $card-footer: "md-card-footer";
   & h3,
   & h4 {
     margin: 0;
-    @include font-size(14px, 1);
+    @include font-size(14px, 19px);
     font-weight: 700; 
   }
 }
@@ -67,7 +67,7 @@ $card-footer: "md-card-footer";
 //==================================================================*/
 #{$card-header}.card-header-expandable-card {
   display: flex;
-  align-items: normal;
+  align-items: first baseline;
 
   .expandable-toggle { flex: 0 0 auto; }
   
@@ -115,7 +115,6 @@ $card-footer: "md-card-footer";
 
 #{$card} .expandable-toggle {
   @include rem('padding-right', $global-padding);
-  @include rem('margin-top', 4px);
   border: none;
   box-shadow: none;
   background: none;
