@@ -42,11 +42,13 @@ function vulnerabilitiesModalCtrl($scope, Rule, System) {
     };
 
     function fetchRule (rule_id) {
+        $scope.loadingRule = true;
         $scope.selectedRule = null;
 
         if (rule_id) {
-            Rule.byId(rule_id).then((rule) => {
+            Rule.byId(rule_id, true).then((rule) => {
                 $scope.selectedRule = rule.data;
+                $scope.loadingRule = false;
             });
         }
     }
