@@ -27,7 +27,7 @@
           rhsa-severity-select
         // TODO make Summary Card a component
         .card-summaries
-          card(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)', ng-class='{active: rhsa.id === selectedRHSA.id}')
+          card(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)', ng-class='{active: isSelected(rhsa)}')
             card-content.card-content
               .icon
                 i.fa.fa-shield.critical
@@ -38,7 +38,7 @@
                 span.hits  {{ getRuleHits(rhsa) }}
                   i.fa.fa-book(tooltip="{{'This RHSA has an insights rule hit' | translate}}")
         .cve-summaries(ng-show='selectedRHSA')
-          card
+          card(ng-if='inPackage(package)')
             card-content.card-content
               .rule-hit(expandable='true', ng-if="selectedCVE.insights_rule")
                 .title.icon-inline

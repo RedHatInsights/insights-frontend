@@ -1,6 +1,7 @@
 'use strict';
 
 var componentsModule = require('../../');
+const find = require('lodash/find');
 
 /**
  * @ngInject
@@ -9,12 +10,24 @@ function vulnerabilitiesModalCtrl($scope, System) {
     $scope.showCVEs = false;
 
     $scope.toggleShowCVEs = function (rhsa) {
-        if ($scope.selectedRHSA === rhsa || rhsa === undefined) {
-            $scope.selectedRHSA = undefined;
+        if ($scope.selectedRHSA === rhsa || !rhsa) {
+            delete $scope.selectedRHSA;
         } else {
             $scope.selectedRHSA = rhsa;
             $scope.selectedCVE = rhsa.cves[0];
         }
+    };
+
+    $scope.inPackage = function (pkg) {
+        return find(pkg.rhsas, $scope.selectedRHSA) ? true : false;
+    };
+
+    $scope.isSelected = function (rhsa) {
+        if (rhsa && $scope.selectedRHSA) {
+            return rhsa.id === $scope.selectedRHSA.id;
+        }
+
+        return false;
     };
 
     $scope.getRuleHits = function (rhsa) {
