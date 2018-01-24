@@ -30,7 +30,7 @@
           card(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)', ng-class='{active: isSelected(rhsa)}')
             card-content.card-content
               .icon
-                i.fa.fa-shield.critical
+                i.fa.fa-shield(ng-class="{{'rhsa.severity'}}")
               h2.text {{ rhsa.id }}
               .cve-count
                 span {{ rhsa.cves.length }} CVEs
@@ -40,14 +40,17 @@
         .cve-summaries(ng-show='selectedRHSA')
           card(ng-if='inPackage(package)')
             card-content.card-content
-              .rule-hit(expandable='true', ng-if="selectedCVE.insights_rule")
-                .title.icon-inline
-                  i.fa.fa-book(aria-hidden='true')
-                  span Insights Rule Hit
+              card.rule-hit(expandable='true', ng-if="selectedCVE.insights_rule")
+                card-header-expandable
+                  .title.icon-inline
+                    i.fa.fa-book(aria-hidden='true')
+                    span Insights Rule Hit
+                card-content.card-content(collapse="card.collapsed")
+                  // Rule hit info
               ul.cve-id
                 li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)') 
                   a(ng-class='{active: cve.id === selectedCVE.id}') {{ cve.id }}
-                  i.fa.fa-book(ng-if='selectedCVE.insights_rule')
+                  i.fa.fa-book(ng-if='selectedCVE.insights_rule', tooltip="{{'This RHSA has an insights rule hit' | translate}}")
               .description {{ selectedCVE.description }}
               .cve-information
                 .impact 

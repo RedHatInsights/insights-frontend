@@ -9,6 +9,35 @@
 
   .md-open-menu-container { z-index: 9999; }
 
+  // Card Summary
+  //==================================================================*/
+  .card-summaries{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    @include rem('margin', 15px);
+
+    md-card { @include rem('margin-top', 15px); }
+
+    md-card + md-card { @include rem ('margin-left', $global-margin); }
+
+    md-card-content { @include rem('padding', 25px 35px); }
+
+    .icon { 
+      @include rem('margin-bottom', 15px); 
+      @include rem('font-size', 25px);
+    }
+
+    h2.text { @include rem('font-size', 18px); }
+
+    .subhead { 
+      display: flex; 
+      justify-content: space-between;
+    }
+
+    .hits i { @include rem('padding-left', 5px); }
+  }
+
 
   // Add the caret under the summary card when active
   //==================================================================*/
@@ -23,7 +52,6 @@
 
   // 'Raise' the card that is active
   //==================================================================*/
-
   .card-summaries .card.active { 
     &:after { 
       color: #c4c4c4;
@@ -43,6 +71,10 @@
       
   // Styling CVE IDs 
   //==================================================================*/
+  .cve-id li i { 
+    @include rem('padding-left', 5px);
+    color: $blue-light;
+  }
 
   .cve-id li a { 
     color: $blue-light;
@@ -60,15 +92,24 @@
   //==================================================================*/
 
   .rule-hit {
+    // Reset md-card box-shadow
+    box-shadow: none;
 
-    border-bottom: 2px solid $gray-light;
-    
-    .title { 
-      background: $gray-light;
-      border-left: 5px solid $blue-light;
+    background: $gray-light;
+    border-left: 5px solid $blue-light;
+
+    md-card-header {
+      align-items: center; 
       color: $blue-light;
+      display: flex;
+      @include rem('padding', 5px);
+      
+      .title { @include rem('margin-top', 5px); }
+      .expandable-toggle { @include rem('padding-left', 5px); }
+    }
+
+    .title {
       font-weight: 600;
-      @include rem('padding', 5px $global-padding); 
     }
   }
 
