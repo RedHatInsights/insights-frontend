@@ -172,3 +172,9 @@ h2 .ansible-icon img, h2 .ansible-icon-white img {
     @extend .fa-circle;
     color: gray;
 }
+
+.vulnerability-icon{
+  color: $blue-light;
+  @include font-size(20px);
+  @include rem('padding', 0px 10px);
+}

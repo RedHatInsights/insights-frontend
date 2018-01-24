@@ -71,18 +71,11 @@
       
   // Styling CVE IDs 
   //==================================================================*/
-  .cve-id li i { 
-    @include rem('padding-left', 5px);
-    color: $blue-light;
-  }
+  .cve-id li i { @include rem('padding-left', 5px); }
 
-  .cve-id li a { 
-    color: $blue-light;
-    &:hover{ color: #337ab7;}
-    &.active { 
-      text-decoration: underline;
-      font-weight: 600; 
-    }
+  .cve-id li a.active { 
+    text-decoration: underline;
+    font-weight: 600; 
   }
 
   .cve-summaries { @include rem('margin', $global-padding); }
@@ -111,6 +104,8 @@
     .title {
       font-weight: 600;
     }
+
+    .card-header-risk-summaries { @include rem('margin-top', 5px); }
   }
 
   // Grid for summaries card

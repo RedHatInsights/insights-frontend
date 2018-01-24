@@ -49,11 +49,8 @@
                   .spinner.spinner-sm(ng-if='loadingRule')
                   incident-icon(rule-id='report.rule_id', ng-if='selectedRule && !loadingRule')
                   .title(ng-if='selectedRule && !loadingRule')
-                    span(ng-bind-html='::selectedRule.summary_html | trust_html', target-blank='')
-                    .card-header-risk-summaries
-                      all-severity-icons.inline(rule='selectedRule')
-                      risk-of-change(change-risk='selectedRule.resolution_risk')
-                      a.impacted-systems(ui-sref='app.actions-rule({category: selectedRule.category.toLowerCase(), rule: selectedRule.rule_id})', translate, ng-disabled="selectedRule.impacted_systems === 0") View Impacted Systems ({{selectedRule.impacted_systems}})
+                    a {{ selectedRule.category }} #{'>'} {{ selectedRule.description }}
+
               ul.cve-id
                 li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)') 
                   a(ng-class='{active: cve.id === selectedCVE.id}') {{ cve.id }}

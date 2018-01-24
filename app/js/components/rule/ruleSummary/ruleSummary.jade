@@ -1,11 +1,14 @@
 card.card-rule-summary(expandable='true' init-collapsed='initCollapsed' on-toggle='resetShowMore(ctx)')
   card-header-expandable.risk-summary.gray
-    incident-icon(rule-id='report.rule_id')
-    h3.title {{:: report.rule.category }} > {{:: report.rule.description }}
-    ansible-icon(value='report.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
-    .risk-summaries.card-header-risk-summaries
-      all-severity-icons.inline(rule='report.rule')
-      risk-of-change(change-risk='report.rule.resolution_risk')
+    .card-header-title
+      incident-icon(rule-id='report.rule_id')
+      .title {{ :: report.rule.category }} #{'>'} {{ :: report.rule.description }}
+        .card-header-risk-summaries
+          all-severity-icons.inline(rule='report.rule')
+          risk-of-change(change-risk='report.rule.resolution_risk')
+      .test
+        vulnerability-icon
+        ansible-icon(value='report.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
   card-content.card-content.ng-animate-enabled(collapse="card.collapsed")
     .flex
       .rule-reason(md-flex-100)
