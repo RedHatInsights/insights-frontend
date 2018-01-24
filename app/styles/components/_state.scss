@@ -37,10 +37,10 @@ td.state-group {
 
 
 tr:nth-of-type(even) {
-  .pass { @include policy-state-alt('pass'); }
-  .error { @include policy-state-alt('error'); }
-  .fail { @include policy-state-alt('fail'); }
-  .unknown { @include policy-state-alt('unknown'); }
+  td.pass { @include policy-state-alt('pass'); }
+  td.error { @include policy-state-alt('error'); }
+  td.fail { @include policy-state-alt('fail'); }
+  td.unknown { @include policy-state-alt('unknown'); }
 }
 
 

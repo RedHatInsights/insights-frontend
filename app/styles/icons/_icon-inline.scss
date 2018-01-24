@@ -53,7 +53,7 @@ table .icon-inline {
 
 
 // Set td icon-inline line-height to parent
-td.icon-inline i.fa { line-height: inheret; }
+td.icon-inline { @include font-size(14px, 19px); }
 
 
 a.link.icon-inline-anchor { 
