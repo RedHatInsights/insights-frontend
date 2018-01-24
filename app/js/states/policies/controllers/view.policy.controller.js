@@ -18,7 +18,7 @@ function ViewPolicyCtrl($filter,
     const PASSED = gettextCatalog.getString('passed');
     const FAILED = gettextCatalog.getString('failed');
     const ERRORED = gettextCatalog.getString('errored');
-    const UNKNOWN = gettextCatalog.getString('unknown');
+    $scope.UNKNOWN = gettextCatalog.getString('unknown');
 
     $scope.loading = true;
     $scope.pager = new Utils.Pager();
@@ -108,18 +108,23 @@ function ViewPolicyCtrl($filter,
      * determines status of the current resource
      */
     function resourceSummary (resource) {
-        if (resource.checks_fail === 0 &&
-            resource.checks_error === 0 &&
-            resource.checks_pass > 0) {
-            return PASSED;
+        if (resource.checks_error > 0) {
+            return ERRORED;
         } else if (resource.checks_fail > 0) {
             return FAILED;
-        } else if (resource.checks_error > 0) {
-            return ERRORED;
+        } else if (resource.checks_pass > 0) {
+            return PASSED;
         } else {
-            return UNKNOWN;
+            return $scope.UNKNOWN;
         }
     }
+
+    /*
+     * gets number of checks based on the resource status
+     */
+    $scope.getCheckCount = function (resource) {
+        return resource.checks_error || resource.checks_fail || resource.checks_pass;
+    };
 
     /**
      * searches systems in policy

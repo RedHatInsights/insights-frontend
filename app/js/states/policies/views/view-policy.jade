@@ -27,9 +27,9 @@
             tr(ng-repeat="resource in policy.resources | orderBy: sorter.predicate : sorter.reverse")
               td.nowrap
                 a(ng-click='showSystem(resource.system_id)') {{resource.system.toString}}
-              td.nowrap(ng-class="resource.status", translate, translate-n='{{resource.checks_pass}}', translate-plural='{{$count}} Checks', ng-if="resource.checks_pass !== 0") {{resource.checks_pass}} Check
-                span &nbsp;{{resource.status}}
-              td.nowrap(ng-class="resource.status", translate, ng-if="resource.checks_pass === 0") Checks
+              td.nowrap(ng-class="resource.status", translate, translate-n='{{getCheckCount(resource)}}', translate-plural='{{$count}} Checks {{resource.status}}', ng-if="resource.status !== UNKNOWN") {{getCheckCount(resource)}} Check
+                | {{resource.status}}
+              td.nowrap(ng-class="resource.status", translate, ng-if="resource.status === UNKNOWN") Checks
                 span &nbsp;{{resource.status}}
 
     .row.row-short(ng-show='policy === null && !loading')
