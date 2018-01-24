@@ -43,14 +43,10 @@
             ng-click="sorter.sort('ansible')", translate) Ansible
       tbody
         tr.legend-item(ng-repeat="rule in filteredRules | filter:filterZero | orderBy: sorter.predicate : sorter.reverse track by rule.rule_id", ng-class="{acked: rule.acked}")
-          td(ng-click='!rule.acked && viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
-            .icon-inline-right
-              incident-icon(rule-id='rule.rule_id')
-            .rule-description(ng-if='rule.acked')
-              | {{rule.description}}
-              span.label.label-default.inline-left.rule-inactive(translate) INACTIVE
-
-            a(ng-class="{'icon-inline-right' : checkIncident(rule.rule_id)}", ng-if='!rule.acked') {{rule.description}}
+          td(ng-class="{'icon-inline' : checkIncident(rule.rule_id)}", ng-click='!rule.acked && viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')
+            a(ng-if='!rule.acked') {{rule.description}}
+            incident-icon(rule-id='rule.rule_id')
+            span.label.label-default.rule-inactive(translate, ng-if='rule.acked') INACTIVE
 
           // START UBER-SEV
           td.filter-on.text-center.align-vertical(ng-click='viewImpactedSystems(topic.slug ? topic.slug : topic.id, rule.rule_id)')

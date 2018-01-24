@@ -1,13 +1,18 @@
+// div consideration
 div.icon-inline {
   display: flex;
 }
+
+
+// Icon inline
+//==================================================================*/
 
 .icon-inline {
   display: inline-flex;
   align-items: first baseline;
   @include font-size(14px, 1);
 
-  > * + * { margin-left: $global-padding/2; }
+  *:not(.ng-hide) + *:not(.ng-hide) { margin-left: $global-padding/2; }
 
   .alert-text { 
     @include font-size(14px);
@@ -48,7 +53,7 @@ table .icon-inline {
 
 
 // Set td icon-inline line-height to parent
-td.icon-inline i.fa { line-height: inheret; }
+td.icon-inline { @include font-size(14px, 19px); }
 
 
 a.link.icon-inline-anchor { 

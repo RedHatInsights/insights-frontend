@@ -1,0 +1,53 @@
+// Vars
+//==================================================================*/
+$state-padding: $global-padding/2;
+
+
+// State
+//==================================================================*/
+
+.state {
+  @include rem('padding', $state-padding);
+  @include policy-state('pass');
+
+  &.pass { @include policy-state('pass'); }
+  &.error { @include policy-state('error'); }
+  &.fail { @include policy-state('fail'); }
+  &.unknown { @include policy-state('unknown'); }
+}
+
+
+// State group
+//==================================================================*/
+
+.state-group {
+  display: inline-flex;
+
+  .state + .state { @include rem('margin-left', $global-padding); }
+}
+
+
+// State styling for table cells
+//==================================================================*/
+
+td.state-group {
+  display: table-cell;
+  @include rem('padding', 0 $global-padding);
+}
+
+
+tr:nth-of-type(even) {
+  td.pass { @include policy-state-alt('pass'); }
+  td.error { @include policy-state-alt('error'); }
+  td.fail { @include policy-state-alt('fail'); }
+  td.unknown { @include policy-state-alt('unknown'); }
+}
+
+
+
+// State styling for cards
+//==================================================================*/
+
+.card-state-pass { i { color: #399130; } }
+.card-state-fail { i { color: #D53E40; } }
+.card-state-warn { i { color: #EE8C38; } }

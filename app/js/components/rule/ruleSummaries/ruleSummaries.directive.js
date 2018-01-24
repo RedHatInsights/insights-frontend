@@ -25,6 +25,14 @@ function RuleSummariesCtrl(
         return gettextCatalog.getString('Loading report(s)…');
     };
 
+    $scope.resetShowMore = function (ctx) {
+        if (ctx.collapsing) {
+            for (const report of $scope.system.reports) {
+                report.showMoreInfo = false;
+            }
+        }
+    };
+
     function getSystemReports() {
         $scope.loading.isLoading = true;
         System.getSystemReports($scope.machineId)
@@ -35,6 +43,7 @@ function RuleSummariesCtrl(
                 // rule_id is selected - in that case the given report goes first
                 $scope.system.reports = orderBy($scope.system.reports, [report => {
                     if ($scope.rule_id && $scope.rule_id === report.rule_id) {
+                        report.collapsed = false;
                         return 0;
                     }
 

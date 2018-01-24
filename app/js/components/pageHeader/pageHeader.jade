@@ -1,5 +1,7 @@
 section.page-header(ng-transclude)
   .page-title
+    span.sub-title(ng-if='subtitle', translate) {{subtitle}}
     h1
-      i.fa(class="{{:: icon}}", aria-hidden='true')
+      i.fa(ng-if='icon', class="{{:: icon}}", aria-hidden='true')
       span.text(translate) {{:: titleTranslated}}
+

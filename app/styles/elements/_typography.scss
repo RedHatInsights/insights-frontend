@@ -46,4 +46,3 @@ h2.headline {
 p + p {
   @include rem('margin-bottom', $global-padding);
 }
-

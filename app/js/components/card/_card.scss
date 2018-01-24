@@ -1,10 +1,7 @@
 // Vars
-$card: "md-card";
-$card-header: "md-card-header";
-$card-content: "md-card-content";
-$card-footer: "md-card-footer";
-
-//#{$card}+#{$card}{@include rem('margin-top', $global-margin);}
+// Card variables are assigned to the values set in _vars.scss. The purpose for including them is to add the ability to change their values within this file. This will be replaced by css variables upon better browser support.
+$card: $card;
+$card-header: $card-header;
 
 #{$card} {
   @include reset;
@@ -14,174 +11,43 @@ $card-footer: "md-card-footer";
   h1, 
   h2, 
   h3, 
-  h4 {
+  h4,
+  h5,
+  h6 {
     @include font-size(14px, 17px);
     margin-top: 0;
   }
 }
 
 
-// Card header typography
-//==================================================================*/
-#{$card} #{$card-header} {
-  &,
-  & h1,
-  & h2,
-  & h3,
-  & h4 {
-    margin: 0;
-    @include font-size(14px, 1);
-    font-weight: 700; 
-  }
-}
-
-
-// Card header base
-//==================================================================*/
-#{$card} #{$card-header} {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  @include rem('padding', $global-padding);
-  border-bottom: 1px solid $gray-border;
-  align-items: center;
-
-  & .card-header-title { flex: 1 1 60%; }
-
-  & .card-header-supporting-info { 
-    flex: 0 1 auto; 
-    @include font-size(14px, 1);
-    font-weight: 100;
-  }
-}
-
-
 // Accented card
 //==================================================================*/
-#{$card}.card-accent {
-  border-top: 2px solid #39a5dc;
-}
 
-
-// Expandable card header
-//==================================================================*/
-#{$card-header}.card-header-expandable-card {
-  display: flex;
-  align-items: normal;
+#{$card}.card-accent { border-top: 2px solid #39a5dc; }
 
   .expandable-toggle { flex: 0 0 auto; }
   
   .card-header-content { 
     display: flex;
     flex: 1;
-    align-items: stretch;
+    align-items: first baseline;
+    justify-content: space-between;
   }
 
-  .checkbox { @include rem('margin-top', 2px); }
-}
 
-#{$card} #{$card-header} .card-header-title .ansible-icon { align-self: flex-start; }
-
-
-// Card header components
+// Card list
 //==================================================================*/
-#{$card} #{$card-header} .count {
-  background: $blue;
-  position: absolute;
-  top: -$global-padding;
-  right: $global-padding;
-  color: #fff;
-  @include font-size(12px);
-  line-height: 1;
-  font-weight: 700;
-  @include rem('padding', 6px 12px);
-  border-radius: 12px;
-}
-
-
-#{$card-header}.card-header-expandable-card .card-header-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: first baseline;
-
-  .title { flex: 1 60%; }
-  
-  i { 
-    flex: 0 auto; 
-    justify-self: center;
-  }
-}
-
-
-#{$card} .expandable-toggle {
-  @include rem('padding-right', $global-padding);
-  @include rem('margin-top', 4px);
-  border: none;
-  box-shadow: none;
-  background: none;
-
-  i { 
-    transition: .2s; 
-    @include font-size(14px);
-    line-height: 1;
-  }
-}
-
-
-#{$card}.expanded { 
-  > #{$card-header} > .expandable-toggle {
-    i { transform: rotate(90deg); } 
-  }
-}
-
-
-// Card content base
-//==================================================================*/
-#{$card-header}.gray { background: $gray-light; }
-#{$card-header} .card-header-cta { @include font-size(14px, 1);}
-
-
-
-// Card footer components
-//==================================================================*/
-#{$card-footer} {
-  & .card-footer-title { flex: 1 1 60%; }
-  & .card-footer-supporting-info { 
-    flex: 0 1 auto; 
-    @include font-size(14px, 1);
-    font-weight: 100;
-  }  
-}
-
 
 .card-list {
   @include rem('margin-top', $global-margin);
-}
+  display: flex;
+  flex-flow: column nowrap;
 
-
-
-// Rule card
-#{$card}.card-rule-summary {
-
-  @include rem('margin', $global-padding);
-
-  .card-header-title { 
-    @include font-size(14px, 1); 
-    font-weight: 300;
-  }
-
-  .card-header-title .title {
-    @include font-size(16px, 1);
-    font-weight: 700;
-  }
-
-  .card-header-risk-summaries .title {
-    @include font-size(14px, 1);
-    font-weight: 500;
-  }
-
-  #{$card-content} {
-    @include rem('padding', $global-margin);
+  > #{$card} + #{$card} { @include rem('margin-top', $global-margin); }
+  
+  .expand-all { 
+    align-self: flex-end;
+    @include rem('margin-bottom', $global-margin); 
   }
 }
 
@@ -345,6 +211,7 @@ $card-footer: "md-card-footer";
   display: flex;
   align-items: baseline;
 }
+
 
 .system-card #{$card-header},
 .card-table-header {
