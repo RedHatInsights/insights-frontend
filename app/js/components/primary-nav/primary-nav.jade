@@ -1,6 +1,6 @@
-md-sidenav.primary-nav(md-component-id="left")
+.primary-nav
+  account-select
   nav(role="navigation", aria-label="Primary Navigation", a="true")
-    account-select
     ul
       li
         a(ui-sref='app.overview', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
@@ -35,7 +35,8 @@ md-sidenav.primary-nav(md-component-id="left")
           i.fa.fa-file-text
           span.text(translate) Configuration
 
-    footer.nav-footer
+  footer(ng-if="isPortal")
+    nav.footer-nav(role="navigation", aria-label="Secondary Navigation")
       ul
         li
           md-button.button.button-back(href="/", tooltip='Back to Customer Portal')
