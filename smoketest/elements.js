@@ -55,7 +55,7 @@ const obj =  {
     systemModal: {
         exButton:  '.modal-dialog .fa.fa-close',
         hostname:  'system-metadata md-card h2 .name',
-        firstRule: 'rule-summary:nth-of-type(1) .card-header-title div.title'
+        firstRule: 'rule-summary:nth-of-type(1) .title'
     },
     nav: {
     },
