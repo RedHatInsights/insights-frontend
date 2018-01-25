@@ -5,8 +5,29 @@ $card-content: "md-card-content";
 $card-footer: "md-card-footer";
 
 
+// Card vulnerability header content
+//==================================================================*/
+
+.card-vulnerabilities .card-header-content {
+  flex-flow: column wrap;
+
+  @include media-query(sm){ flex-flow: row wrap; }
+
+  > .package-info {
+    flex: 1;
+  }
+
+  > .vul-state {
+    @include rem('margin-top', $global-padding);
+    
+    @include media-query(sm){ margin-top: 0; }
+  }
+}
+
+
 .page-vulnerabilities, 
 .vulnerabilities-modal {
+
   .critical { color: $vul-critical; }
   .important { color: $vul-important; }
   .moderate { color: $vul-moderate; }
@@ -41,7 +62,7 @@ $card-footer: "md-card-footer";
   }
 
   .vul-state { 
-    & >:not(:first-child) { @include rem('margin-left', 15px); }
+    margin-left: auto;
     display: flex;
     flex-wrap: wrap;
   }

@@ -1,3 +1,4 @@
+//==================================================================*/
 // Temporarily placing here
 //==================================================================*/
 
@@ -25,12 +26,122 @@ $card-list-tiles-gutter: $global-margin;
   }  
 }
 
+//==================================================================*/
+//==================================================================*/
+
+
+
+// Vars
+$card: "md-card";
+$card-header: "md-card-header";
+$card-content: "md-card-content";
+$card-footer: "md-card-footer";
+
+
+// Card - base styling
+//==================================================================*/
+
+.card.card-rhsa {
+  position: relative;
+  top: 0px;
+  text-align: center;
+  transition: all .1s ease;
+  transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.card.card-rhsa.active {
+
+  &:after { 
+    color: #c4c4c4;
+    font-family: FontAwesome;
+    content: "\f0d8";
+    position: relative;
+    width: 0px;
+    height: 0px;
+    @include rem('bottom', -21px);
+    @include rem('left', 47%);
+    @include font-size(20px, 1);
+  }
+
+  top: -5px;
+  box-shadow: 0 1px 8px 0 rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12);
+}
+
+
+
+// Card list RSHAS
+//==================================================================*/
+
+.card-list-rhsa {
+
+  > .card-cve-summary { flex: 0 1 calc(100% - #{$card-list-tiles-gutter); } }
+
+
+  .icon { 
+    @include rem('margin-bottom', 15px); 
+    @include rem('font-size', 25px);
+  }
+
+  h2.text { @include rem('font-size', 18px); }
+
+  .subhead { 
+    display: flex; 
+    justify-content: space-between;
+  }
+
+  .hits i { @include rem('padding-left', 5px); }
+}
+
+
+// CVE summaries
+//==================================================================*/
+
+.card-cve-summary > .card-content {
+  display: grid;
+  grid-gap: $global-padding;
+  grid-template-row: auto;
+  grid-template-areas: 'cve-id'
+                      'rule-hit'
+                      'description'
+                      'cve-information';
+
+
+  
+  @include media-query(sm) {  
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-row: auto;
+    grid-template-areas: 'cve-id rule-hit rule-hit'
+                        'cve-id description cve-information';
+    grid-gap: $global-margin;
+  }
+}
+
+.card-cve-summary > .card-content {
+
+  .cve-id { grid-area: cve-id; }
+
+  .description { 
+    grid-area: description;
+    grid-row: auto;
+  }
+
+  .rule-hit { grid-area: rule-hit; }
+
+  .cve-information {
+    grid-area: cve-information;
+    grid-row: auto;
+  }
+}
+
+
 
 
 // this looks scary
 .md-open-menu-container { z-index: 9999; }
 
+
 .vulnerabilities-modal {
+
   .card-vulnerabilities { @include rem('margin', 15px); }
 
   .cve-count { 
@@ -38,56 +149,7 @@ $card-list-tiles-gutter: $global-margin;
     justify-content: space-around;
   }
 
-  // Card Summary
-  //==================================================================*/
-  .card-summaries{
-    text-align: center;
-
-    .icon { 
-      @include rem('margin-bottom', 15px); 
-      @include rem('font-size', 25px);
-    }
-
-    h2.text { @include rem('font-size', 18px); }
-
-    .subhead { 
-      display: flex; 
-      justify-content: space-between;
-    }
-
-    .hits i { @include rem('padding-left', 5px); }
-  }
-
-
-  // Add the caret under the summary card when active
-  .card-summaries .card {
-    position: relative;
-    top: 0px;
-    transition: all .1s ease;
-    transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
-  }
-
-
-  // 'Raise' the card that is active
-  .card-summaries .card.active { 
-
-    &:after { 
-      color: #c4c4c4;
-      font-family: FontAwesome;
-      content: "\f0d8";
-      position: relative;
-      width: 0px;
-      height: 0px;
-      @include rem('bottom', -5px);
-      @include rem('left', 47%);
-      @include font-size(20px, 1);
-    }
-
-    top: -5px;
-    box-shadow: 0 1px 8px 0 rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12);
-  }
-
-      
+     
   // Styling CVE IDs 
   //==================================================================*/
   .cve-id li i { @include rem('padding-left', 5px); }
@@ -97,7 +159,6 @@ $card-list-tiles-gutter: $global-margin;
     font-weight: 600; 
   }
 
-  .cve-summaries { @include rem('margin', $global-padding); }
 
   .cve-summary-expanded .impact { text-transform: capitalize; }
 
@@ -127,39 +188,5 @@ $card-list-tiles-gutter: $global-margin;
     }
 
     .card-header-risk-summaries { @include rem('margin-top', 5px); }
-  }
-
-  // Grid for summaries card
-  //==================================================================*/
-
-  .cve-summaries .cve-summary-expanded.card-content {
-    display: grid;
-    grid-template-columns: max-content 1fr max-content;
-    grid-template-row: auto;
-    grid-template-areas: 'cve-id rule-hit rule-hit'
-                        'cve-id description cve-information';
-    grid-column-gap: 30px;
-    grid-row-gap: 10px;
-  }
-
-  .cve-summaries .cve-summary-expanded.card-content {
-
-    .cve-id {
-      grid-area: cve-id;
-    }
-
-    .description { 
-      grid-area: description;
-      grid-row: auto;
-    }
-
-    .rule-hit{
-      grid-area: rule-hit; 
-    }
-
-    .cve-information{
-      grid-area: cve-information;
-      grid-row: auto;
-    }
   }
 }

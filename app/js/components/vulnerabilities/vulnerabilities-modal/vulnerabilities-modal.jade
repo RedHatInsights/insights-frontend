@@ -2,8 +2,8 @@
   .content-wrap
     expand-all-button.toggle-expand-right
     card.card-vulnerabilities(expandable='true', ng-repeat='package in packages')
-      card-header-expandable
-          
+
+      card-header-expandable          
         .package-info
           h3.title {{ package.name }}
           date.date Release Date: {{ package.release_date }}
@@ -22,15 +22,16 @@
           .low.icon-inline
             i.fa.fa-shield 
             span(translate) {{ package.low_count }} Low
-      card-content.card-content(collapse="card.collapsed")
+
+      card-content(collapse="card.collapsed")
         table-filters
           search-box(placeholder="{{'Search RHSA or CVE' | translate}}", on-search='search(model)')
           rhsa-severity-select
 
         // TODO make Summary Card a component
-        .card-list-tiles.card-summaries
-          card(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)', ng-class='{active: isSelected(rhsa)}')
-            card-content.card-content
+        .card-list-tiles.card-list-rhsa
+          card.card-rhsa(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)', ng-class='{active: isSelected(rhsa)}', order='{{$index}}')
+            card-content
               .icon
                 i.fa.fa-shield(ng-class="{{'rhsa.severity'}}")
               h2.text {{ rhsa.id }}
@@ -40,9 +41,8 @@
                 span.hits  {{ getRuleHits(rhsa) }}
                   i.fa.fa-book(tooltip="{{'This RHSA has an insights rule hit' | translate}}")
         
-        .cve-summaries(ng-show='selectedRHSA')
-          card(ng-if='inPackage(package)')
-            card-content.card-content.cve-summary-expanded
+          card.card-cve-summary(ng-show='selectedRHSA')
+            card-content(ng-if='inPackage(package)')
               card.rule-hit(expandable='true', ng-if="selectedCVE.insights_rule")
                 card-header-expandable
                   .title.icon-inline
@@ -58,6 +58,7 @@
                 li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)') 
                   a(ng-class='{active: cve.id === selectedCVE.id}') {{ cve.id }}
                   i.fa.fa-book(ng-if='selectedCVE.insights_rule', tooltip="{{'This RHSA has an insights rule hit' | translate}}")
+
               .description {{ selectedCVE.description }}
               .cve-information
                 .impact 
