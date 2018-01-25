@@ -134,6 +134,23 @@ $card-footer: "md-card-footer";
 }
 
 
+attr(data-count) {
+  background: red;
+}
+
+@mixin order-assigner($order) {
+  @if $order / 4 = 1 {
+    order: 4;
+  }
+}
+
+
+.card-cve-summary {
+  &:[data-order] {
+
+  }
+}
+
 
 
 // this looks scary
