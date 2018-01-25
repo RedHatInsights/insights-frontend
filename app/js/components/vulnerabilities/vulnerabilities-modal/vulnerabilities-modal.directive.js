@@ -14,26 +14,22 @@ function vulnerabilitiesModalCtrl($scope,
 
     $scope.showCVEs = false;
 
+    function round (x, to) {
+        return Math.ceil(x / to) * to;
+    };
+
     $scope.indexMe = function (index) {
-        var windowWidth = document.documentElement.clientWidth;
+        var windowWidth = document.documentElement.clientWidth,
+            windowSm = 768,
+            windowMd = 992;
 
-        if (windowWidth > 0 && windowWidth < 768) {
+        if (windowWidth < windowSm) {
             $scope.cveOrder = index;
-        } else if (windowWidth >= 768 && windowWidth < 992) {
-            if (index % 2 === 1) {
-                $scope.cveOrder = index + 1;
-            } else if (index % 2 === 0) {
-                $scope.cveOrder = index;
-            }
-        } else if (windowWidth >= 992) {
-            if (index % 4 === 0) {
-                $scope.cveOrder = index;
-            } else {
-                $scope.cveOrder = index + 4;
-            }
+        } else if (windowWidth >= windowSm && windowWidth < windowMd) {
+            $scope.cveOrder = round(index, 2);
+        } else if (windowWidth >= windowMd) {
+            $scope.cveOrder = round(index, 4);
         }
-
-        console.log(index, $scope.cveOrder);
     };
 
     $scope.toggleShowCVEs = function (rhsa) {
