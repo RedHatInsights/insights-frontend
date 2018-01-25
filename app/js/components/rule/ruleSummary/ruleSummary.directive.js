@@ -7,6 +7,7 @@ var componentsModule = require('../../');
  */
 function RuleSummaryCtrl(
     $scope,
+    $location,
     InsightsConfig) {
     $scope.config = InsightsConfig;
 
@@ -18,9 +19,29 @@ function RuleSummaryCtrl(
     $scope.initCollapsed = false;
 
     if (($scope.ruleFilter && $scope.ruleId && $scope.ruleId !== $scope.report.rule_id) ||
-        (!$scope.ruleFilter && !$scope.ruleId)) {
+        (!$scope.ruleFilter && !$scope.ruleId) ||
+        ($scope.report.rule_id !== $location.search().selectedRule)) {
         $scope.initCollapsed = true;
     }
+
+    $scope.getExpanded = function () {
+        return $scope.expanded;
+    };
+
+    $scope.$watch(function () {
+        return $location.search();
+    }, function () {
+        // console.log('url changed');
+        // console.log($scope.report);
+        // console.log($location.search());
+        if ($scope.report.rule_id === $location.search().selectedRule) {
+            $scope.expanded = true;
+        }
+    });
+
+    $scope.toggleExpanded = function () {
+        $scope.expanded = !$scope.expanded;
+    };
 
     $scope.resetShowMore = function (ctx) {
         if (ctx.collapsing) {

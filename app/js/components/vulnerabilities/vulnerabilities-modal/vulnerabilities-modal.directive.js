@@ -6,7 +6,12 @@ const find = require('lodash/find');
 /**
  * @ngInject
  */
-function vulnerabilitiesModalCtrl($scope, Rule, System) {
+function vulnerabilitiesModalCtrl($scope,
+                                  $location,
+                                  Rule,
+                                  System,
+                                  SystemModalTabs) {
+
     $scope.showCVEs = false;
 
     $scope.toggleShowCVEs = function (rhsa) {
@@ -39,6 +44,15 @@ function vulnerabilitiesModalCtrl($scope, Rule, System) {
             $scope.selectedCVE = cve;
             fetchRule($scope.selectedCVE.insights_rule);
         }
+    };
+
+    $scope.goToRule = function () {
+        const params = $location.search();
+        params.selectedRule = $scope.selectedRule.rule_id;
+        $location.search(params);
+
+        // The system modal controller/switches tab rules tab
+        $scope.$parent.tabs.activeTab = SystemModalTabs.rules;
     };
 
     function fetchRule (rule_id) {

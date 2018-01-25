@@ -4,7 +4,7 @@
     .fa.fa-close.pull-right(ng-click='close()')
   system-metadata(system='system')
 
-  md-tabs(md-dynamic-height='', md-border-bottom='', md-selected="activeTab")
+  md-tabs(md-dynamic-height='', md-border-bottom='', md-selected='tabs.activeTab')
     md-tab(label='Rules')
       md-content
         .rule-summaries(system='system', machine-id='system.system_id', rule='rule', rule-filter='ruleFilter', loading='loading')

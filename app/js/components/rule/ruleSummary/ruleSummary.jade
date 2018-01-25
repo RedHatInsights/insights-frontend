@@ -1,4 +1,5 @@
-card.card-rule-summary(expandable='true' init-collapsed='initCollapsed' on-toggle='resetShowMore(ctx)')
+card.card-rule-summary(expandable='true', init-collapsed='initCollapsed', on-toggle='resetShowMore(ctx)',
+  ng-class='{expanded: getExpanded()}', ng-click='toggleExpanded()')
   card-header-expandable.risk-summary.gray
     .card-header-title
       incident-icon(rule-id='report.rule_id')

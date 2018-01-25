@@ -52,7 +52,7 @@
                   .spinner.spinner-sm(ng-if='loadingRule')
                   incident-icon(rule-id='report.rule_id', ng-if='selectedRule && !loadingRule')
                   .title(ng-if='selectedRule && !loadingRule')
-                    a {{ selectedRule.category }} #{'>'} {{ selectedRule.description }}
+                    a(ng-click='goToRule()') {{ selectedRule.category }} #{'>'} {{ selectedRule.description }}
 
               ul.cve-id
                 li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)') 

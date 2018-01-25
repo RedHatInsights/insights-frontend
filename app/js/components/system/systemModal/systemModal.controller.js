@@ -25,7 +25,8 @@ function SystemModalCtrl(
     $scope.activeTab = 'system';
     $scope.report = {};
     $scope.modal = $modalInstance;
-    $scope.tabs = SystemModalTabs;
+    $scope.tabs = {};
+    angular.extend($scope.tabs, SystemModalTabs);
 
     // enables tab hack
     $scope.setActive = function (name) {
@@ -38,7 +39,7 @@ function SystemModalCtrl(
             $scope.hasPolicies = policies.data.total > 0;
 
             // set the default tab for system modal; system if no value is passed in
-            $scope.activeTab = activeTab || $scope.tabs.rules;
+            $scope.tabs.activeTab = activeTab || $scope.tabs.rules;
         });
     }
 
