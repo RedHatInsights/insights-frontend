@@ -1,56 +1,66 @@
 /*global module, require*/
 
 const lodash = require('lodash');
-const el     = require('./elements');
+const el     = require('./elements').obj;
 const priv   = {};
 let stash    = {};
 let counter  = 0;
 
-priv.getFileName = function () {
+priv.getFileName = function (element) {
     counter += 1;
-    return `/tmp/images/${counter}.png`;
+    return `/tmp/images/${counter}-${element.path}.png`;
 };
 
 module.exports.addExtensions = (client) => {
 
-    client.performWithStash = (func) => {
+    client.custom = {};
+
+    client.custom.performWithStash = (func) => {
         return client.perform(function (client, done) {
             func(stash, done);
         });
     };
 
-    client.createStash = () => {
+    client.custom.createStash = () => {
         stash = {};
         return client;
     };
 
-    client.addToStash = (name, value) => {
+    client.custom.addToStash = (name, value) => {
         stash[name] = value;
     };
 
 
-    client.getStash = () => {
+    client.custom.getStash = () => {
         return stash;
     };
 
-    client.getTextAndAddToStash = (selector, name) => {
+    client.custom.getTextAndAddToStash = (selector, name) => {
         return client.getText(selector, function (result) {
-            client.addToStash(name, result.value);
+            client.custom.addToStash(name, result.value);
         });
     };
 
-    client.waitAndClick = (element) => {
-        return client.pause(100)
-            .saveScreenshot(priv.getFileName())
-            .waitForElementVisible(element)
-            .click(element);
+    client.custom.waitAndClick = (element) => {
+        return client.custom.say(`Waiting to click ${element.path}`)
+            .pause(100)
+            .saveScreenshot(priv.getFileName(element))
+            .waitForElementVisible(element.selector)
+            .click(element.selector);
     };
 
-    client.waitAll = (base) => {
+    client.custom.say = (msg) => {
+        return client.perform(() => {
+            console.log(`\n-- ${msg} --`);
+        });
+    };
+
+    client.custom.waitAll = (base) => {
         const o = lodash.get(el, base);
         if (o) {
+            client.custom.say(`Waiting for all elements on ${base}`);
             lodash.forOwn(o, function (value) {
-                client.waitForElementVisible(value);
+                client.waitForElementVisible(value.selector);
             });
             return client;
         } else {
