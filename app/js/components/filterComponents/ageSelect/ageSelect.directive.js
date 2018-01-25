@@ -42,9 +42,8 @@ function ageSelectCtrl($location,
     };
 
     function read() {
-        let age = $location.search()[Events.filters.age] ?
-            $location.search()[Events.filters.age] : FilterService.getAge();
-        $scope.selected = $scope.options[age];
+        const age = $location.search()[Events.filters.age] || FilterService.getAge();
+        $scope.selected = $scope.options[age] || $scope.options[0];
         $rootScope.$broadcast(Events.filters.tag,
                               $scope.selected.tag,
                               Events.filters.age);
