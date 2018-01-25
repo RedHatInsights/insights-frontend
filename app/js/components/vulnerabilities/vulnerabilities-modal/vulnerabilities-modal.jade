@@ -62,6 +62,8 @@
               .description {{ selectedCVE.description }}
                 a.cve-link(href="{{selectedCVE.link}}", target="_blank") More
                   i.fa.fa-external-link
+              //- .description 
+                trimmed-text(length="300", text="{{selectedCVE.description}}") (Test)
               .cve-information
                 .impact 
                   b Impact: 

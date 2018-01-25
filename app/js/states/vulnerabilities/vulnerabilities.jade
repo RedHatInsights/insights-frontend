@@ -30,24 +30,7 @@
             .low.icon-inline
               i.fa.fa-shield
               span(translate) {{vulnerability.low_count}} Low
-      //- card-content.card-content.embedded-card(collapse="card.collapsed")
-        table
-          thead
-            tr
-              th.sortable.nowrap(translate) System Name
-              th.sortable.nowrap(translate) System Type
-              th.sortable.nowrap(translate) Last Check In
-              th.sortable.nowrap(translate) Status
-          tbody
-            tr(ng-repeat='system in vulnerability.systems')
-              td.nowrap
-                a(ng-click='showSystem(system.system_id)') {{system.toString}}
-              td.nowrap
-                type-icon(type-id='system.system_type_id', include-text='true')
-              td.nowrap
-                span {{system.last_check_in | timeAgo}}
-              td.nowrap
-                span {{system.report_count}}
+              
       card-content.card-content.embedded-card(collapse="card.collapsed")
         table
           thead
