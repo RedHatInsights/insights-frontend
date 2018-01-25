@@ -41,8 +41,7 @@
                 span.hits  {{ getRuleHits(rhsa) }}
                   i.fa.fa-book(tooltip="{{'This RHSA has an insights rule hit' | translate}}")
 
-          //- card.card-cve-summary#dataTarget(ng-show='selectedRHSA')
-          card.card-cve-summary#data-target(data-order-target, style="order: {{cveOrder}}")
+          card.card-cve-summary(ng-show='selectedRHSA', style="order: {{cveOrder}}")
             card-content(ng-if='inPackage(package)')
               card.rule-hit(expandable='true', ng-if="selectedCVE.insights_rule")
                 card-header-expandable
