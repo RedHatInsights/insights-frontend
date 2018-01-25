@@ -99,6 +99,8 @@ $card-list-tiles-gutter: $global-margin;
 
   .cve-summaries { @include rem('margin', $global-padding); }
 
+  .cve-summary-expanded .impact { text-transform: capitalize; }
+
 
   // Rule Hit Expandable Card
   //==================================================================*/

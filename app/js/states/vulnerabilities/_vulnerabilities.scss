@@ -24,7 +24,11 @@ $card-footer: "md-card-footer";
 .page-vulnerabilities, 
 .vulnerabilities-modal{
 
-  .card-header-title { align-items: center; }
+  .card-header-title { 
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+  }
 
   .package-info {
     .date, .version { 
@@ -39,6 +43,7 @@ $card-footer: "md-card-footer";
   .vul-state { 
     & >:not(:first-child) { @include rem('margin-left', 15px); }
     display: flex;
+    flex-wrap: wrap;
   }
 
   .embedded-card{

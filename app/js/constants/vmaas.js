@@ -23,20 +23,20 @@ const SYSTEMS = {
 const CVES = {
     'CVE-2017-6462': {
         id: 'CVE-2017-6462',
-        impact: 'Moderate',
-        public_date: '2017-02-01',
+        impact: 'low',
+        public_date: '2017-03-21',
         iava: '2017-A-0084',
         cwe: 'CWE-20',
         description: 'A vulnerability was found in NTP, in the parsing of ' +
              'packets from the /dev/datum device. A malicious device could send ' +
-             'crafted messages, causing ntpd to crash.<br/>Find out more about ' +
+             'crafted messages, causing ntpd to crash. Find out more about ' +
              'CVE-2017-6462 from the MITRE CVE dictionary dictionary and NIST NVD.',
         systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']]
     },
     'CVE-2017-6463': {
         id: 'CVE-2017-6463',
-        impact: 'Moderate',
-        public_date: '2017-02-01',
+        impact: 'moderate',
+        public_date: '2017-03-21',
         iava: '2017-A-0084',
         cwe: 'CWE-20',
         description: 'A vulnerability was discovered in the NTP server\'s ' +
