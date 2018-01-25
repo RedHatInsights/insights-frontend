@@ -17,14 +17,17 @@ function RuleSummaryCtrl(
     };
 
     $scope.initCollapsed = false;
+    $scope.expanded = true;
 
     if (($scope.ruleFilter && $scope.ruleId && $scope.ruleId !== $scope.report.rule_id) ||
         (!$scope.ruleFilter && !$scope.ruleId) ||
         ($scope.report.rule_id !== $location.search().selectedRule)) {
         $scope.initCollapsed = true;
+        $scope.expanded = false;
     }
 
     $scope.getExpanded = function () {
+        console.log($scope);
         return $scope.expanded;
     };
 
@@ -35,6 +38,7 @@ function RuleSummaryCtrl(
         // console.log($scope.report);
         // console.log($location.search());
         if ($scope.report.rule_id === $location.search().selectedRule) {
+            console.log('expand === true');
             $scope.expanded = true;
         }
     });
