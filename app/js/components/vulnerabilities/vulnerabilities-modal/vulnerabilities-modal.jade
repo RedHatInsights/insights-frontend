@@ -1,30 +1,32 @@
-.vulnerabilitiesModal
+.vulnerabilities-modal
   .content-wrap
     expand-all-button.toggle-expand-right
-    card.outer-card.vulnerabilitiesCard(expandable='true', ng-repeat='package in packages')
+    card.card-vulnerabilities(expandable='true', ng-repeat='package in packages')
       card-header-expandable
-        .card-header-title
-          .title.package-info
-            .name {{ package.name }}
-            .date Release Date: {{ package.release_date }}
-            .version Version {{ package.version }}
-          .vul-state 
-            .critical.icon-inline
-              i.fa.fa-shield 
-              span(translate) {{ package.critical_count }} Critical
-            .important.icon-inline
-              i.fa.fa-shield 
-              span(translate) {{ package.important_count }} Important
-            .moderate.icon-inline
-              i.fa.fa-shield 
-              span(translate) {{ package.moderate_count }} Moderate 
-            .low.icon-inline
-              i.fa.fa-shield 
-              span(translate) {{ package.low_count }} Low
+          
+        .package-info
+          h3.title {{ package.name }}
+          date.date Release Date: {{ package.release_date }}
+          span.version Version {{ package.version }}
+        
+        .vul-state 
+          .critical.icon-inline
+            i.fa.fa-shield 
+            span(translate) {{ package.critical_count }} Critical
+          .important.icon-inline
+            i.fa.fa-shield 
+            span(translate) {{ package.important_count }} Important
+          .moderate.icon-inline
+            i.fa.fa-shield 
+            span(translate) {{ package.moderate_count }} Moderate 
+          .low.icon-inline
+            i.fa.fa-shield 
+            span(translate) {{ package.low_count }} Low
       card-content.card-content(collapse="card.collapsed")
         table-filters
           search-box(placeholder="{{'Search RHSA or CVE' | translate}}", on-search='search(model)')
           rhsa-severity-select
+
         // TODO make Summary Card a component
         .card-summaries
           card(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)', ng-class='{active: isSelected(rhsa)}')
@@ -37,6 +39,7 @@
                 .pipe |
                 span.hits  {{ getRuleHits(rhsa) }}
                   i.fa.fa-book(tooltip="{{'This RHSA has an insights rule hit' | translate}}")
+        
         .cve-summaries(ng-show='selectedRHSA')
           card(ng-if='inPackage(package)')
             card-content.card-content.cve-summary-expanded

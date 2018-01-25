@@ -82,7 +82,6 @@ $define-fa: true !default;
 @import 'page-templates/actions';
 @import 'page-templates/eval';
 @import 'page-templates/policies';
-@import 'page-templates/vulnerabilities';
 
 
 // Scaffolding extensions
@@ -166,7 +165,7 @@ $define-fa: true !default;
 @import 'components/evaluation';
 @import 'components/renameable-property';
 @import 'components/with-tile';
-@import 'components/vulnerabilitiesModal';
+
 
 // System Overlay
 //==================================================================*/
@@ -174,9 +173,11 @@ $define-fa: true !default;
 @import 'components/system-overlay/system-metadata';
 @import 'components/system-overlay/view-system-groups';
 
+
 // Forms
 //==================================================================*/
 @import 'components/forms/radio-group';
+
 
 // Maintenance Plan
 //==================================================================*/
@@ -202,6 +203,7 @@ $define-fa: true !default;
 // UI Filters
 //==================================================================*/
 @import 'components/ui-filters/ui-filters';
+
 
 // used to be Namespaced
 //==================================================================*/

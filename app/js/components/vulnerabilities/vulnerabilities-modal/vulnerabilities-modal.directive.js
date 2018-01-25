@@ -68,7 +68,7 @@ function vulnerabilitiesModalCtrl($scope, Rule, System) {
 function vulnerabilitiesModal() {
     return {
         templateUrl:
-          'js/components/vulnerabilities/vulnerabilitiesModal/vulnerabilitiesModal.html',
+          'js/components/vulnerabilities/vulnerabilities-modal/vulnerabilities-modal.html',
         restrict: 'E',
         controller: vulnerabilitiesModalCtrl,
         replace: true,
