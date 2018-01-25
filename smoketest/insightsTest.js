@@ -12,7 +12,7 @@ const conf  = {
 
 module.exports = {
     before: function (client) {
-        client.globals.waitForConditionTimeout = 2.5 * 1000;
+        client.globals.waitForConditionTimeout = 10 * 1000;
         utils.addExtensions(client);
     },
 
