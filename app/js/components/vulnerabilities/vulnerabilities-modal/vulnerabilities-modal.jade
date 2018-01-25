@@ -60,6 +60,8 @@
                   i.fa.fa-book(ng-if='selectedCVE.insights_rule', tooltip="{{'This RHSA has an insights rule hit' | translate}}")
 
               .description {{ selectedCVE.description }}
+                a.cve-link(href="{{selectedCVE.link}}", target="_blank") More
+                  i.fa.fa-external-link
               .cve-information
                 .impact 
                   b Impact: 

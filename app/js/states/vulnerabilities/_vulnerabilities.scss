@@ -19,11 +19,17 @@ $card-footer: "md-card-footer";
 
   > .vul-state {
     @include rem('margin-top', $global-padding);
-    
     @include media-query(sm){ margin-top: 0; }
   }
 }
 
+.vul-state { 
+  > * {
+    &:first-child { margin-left: 0px; }
+    @include rem('margin-left', 5px);
+    @include media-query(sm){ @include rem('margin-left', $global-padding); }
+  }
+}
 
 .page-vulnerabilities, 
 .vulnerabilities-modal {
@@ -62,7 +68,7 @@ $card-footer: "md-card-footer";
   }
 
   .vul-state { 
-    margin-left: auto;
+    //margin-left: auto;
     display: flex;
     flex-wrap: wrap;
   }

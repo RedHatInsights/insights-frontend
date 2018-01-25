@@ -149,6 +149,8 @@ $card-footer: "md-card-footer";
     justify-content: space-around;
   }
 
+  .description .cve-link, .description i { @include rem('padding-left', 5px); }
+
      
   // Styling CVE IDs 
   //==================================================================*/
@@ -160,7 +162,7 @@ $card-footer: "md-card-footer";
   }
 
 
-  .cve-summary-expanded .impact { text-transform: capitalize; }
+  .cve-information .impact { text-transform: capitalize; }
 
 
   // Rule Hit Expandable Card

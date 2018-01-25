@@ -31,7 +31,8 @@ const CVES = {
              'packets from the /dev/datum device. A malicious device could send ' +
              'crafted messages, causing ntpd to crash. Find out more about ' +
              'CVE-2017-6462 from the MITRE CVE dictionary dictionary and NIST NVD.',
-        systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']]
+        systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
+        link: 'https://access.redhat.com/security/cve/cve-2017-6462'
     },
     'CVE-2017-6463': {
         id: 'CVE-2017-6463',
@@ -44,7 +45,8 @@ const CVES = {
              'attacker could cause ntpd to crash by sending a crafted message.' +
              '<br/>Find out more about CVE-2017-6463 from the MITRE CVE dictionary' +
              ' and NIST NVD.',
-        systems: []
+        systems: [],
+        link: 'https://access.redhat.com/security/cve/CVE-2017-6463'
     },
     'CVE-2017-5754': {
         id: 'CVE-2017-5754',
@@ -69,6 +71,7 @@ const CVES = {
             Note: CVE-2017-5754 affects Intel x86-64 microprocessors.
             AMD x86-64 microprocessors are not affected by this issue.`,
         systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
+        link: 'https://access.redhat.com/security/cve/CVE-2017-5754',
         insights_rule: 'CVE_2017_5754_kernel|KERNEL_CVE_2017_5754_INTEL'
     },
     'CVE-2017-1000251': {
@@ -91,6 +94,7 @@ const CVES = {
         system via Bluetooth could use this flaw to remotely execute arbitrary code
         on the system with ring 0 (kernel) privileges.`,
         systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
+        link: 'https://access.redhat.com/security/cve/CVE-2017-1000251',
         insights_rule: 'CVE_2017_1000251_kernel_blueborne|' +
                        'KERNEL_CVE_2017_1000251_POSSIBLE_DOS'
     },
@@ -110,6 +114,7 @@ const CVES = {
         size from one page to 1 MiB to make successful exploitation of this issue
         more difficult.`,
         systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
+        link: 'https://access.redhat.com/security/cve/CVE-2017-1000364',
         insights_rule: 'CVE_2017_1000366_glibc|' +
                        'CVE_2017_1000364_KERNEL_CVE_2017_1000366_GLIBC_EXPLOITABLE'
     },
@@ -125,6 +130,7 @@ const CVES = {
         netlink messages from an unprivileged user leads to arbitrary read/write
         and privilege escalation.`,
         systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
+        link: 'https://access.redhat.com/security/cve/CVE-2017-7184',
         insights_rule: 'CVE_2017_7184_kernel|KERNEL_CVE_2017_7184_EXPLOITABLE_2'
     }
 };
@@ -269,7 +275,7 @@ const PACKAGES_NO_CVES = [{
     release_date: '2017-01-01',
     critical_count: 0,
     important_count: 0,
-    moderate_count: 2,
+    moderate_count: 1,
     low_count: 0,
     version: '4.0',
     systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
