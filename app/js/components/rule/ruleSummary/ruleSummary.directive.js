@@ -8,7 +8,10 @@ var componentsModule = require('../../');
 function RuleSummaryCtrl(
     $scope,
     $location,
-    InsightsConfig) {
+    Events,
+    InsightsConfig,
+    SystemModalTabs) {
+
     $scope.config = InsightsConfig;
 
     // this needs to be an object so that it can be accessed from the transcluded scope
@@ -17,34 +20,34 @@ function RuleSummaryCtrl(
     };
 
     $scope.initCollapsed = false;
-    $scope.expanded = true;
 
     if (($scope.ruleFilter && $scope.ruleId && $scope.ruleId !== $scope.report.rule_id) ||
         (!$scope.ruleFilter && !$scope.ruleId) ||
         ($scope.report.rule_id !== $location.search().selectedRule)) {
         $scope.initCollapsed = true;
-        $scope.expanded = false;
     }
-
-    $scope.getExpanded = function () {
-        console.log($scope);
-        return $scope.expanded;
-    };
 
     $scope.$watch(function () {
         return $location.search();
-    }, function () {
-        // console.log('url changed');
-        // console.log($scope.report);
-        // console.log($location.search());
-        if ($scope.report.rule_id === $location.search().selectedRule) {
-            console.log('expand === true');
-            $scope.expanded = true;
+    }, function (newVal, oldVal) {
+        // don't do anything if it hasn't changed
+        if (newVal === oldVal) {
+            return;
+        }
+
+        let params = $location.search();
+        if ($scope.report.rule_id === params.selectedRule &&
+            params.activeTab === SystemModalTabs.rules) {
+            $scope.$broadcast(Events.cards.toggleCard);
         }
     });
 
-    $scope.toggleExpanded = function () {
-        $scope.expanded = !$scope.expanded;
+    $scope.goToVulnerabilities = function ($event) {
+        const params = $location.search();
+        params.activeTab = SystemModalTabs.vulnerabilities;
+        $location.search(params);
+        $event.stopPropagation();
+        $event.preventDefault();
     };
 
     $scope.resetShowMore = function (ctx) {

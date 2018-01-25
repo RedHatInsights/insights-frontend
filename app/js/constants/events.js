@@ -37,7 +37,7 @@ function buildEvents(eventRoots) {
 
 let _EVENT_ROOTS = [{
     name: 'cards',
-    events: ['expandAll', 'collapseAll']
+    events: ['expandAll', 'collapseAll', 'toggleCard']
 }, {
     name: 'filters',
     events: ['actionsSelect',

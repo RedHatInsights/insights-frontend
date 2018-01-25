@@ -30,7 +30,7 @@
 
         // TODO make Summary Card a component
         .card-list-tiles.card-list-rhsa
-          card.card-rhsa(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)', ng-class='{active: isSelected(rhsa)}', order='{{$index}}')
+          card.card-rhsa(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa, package)', ng-class='{active: isSelected(rhsa)}', order='{{$index}}')
             card-content
               .icon
                 i.fa.fa-shield(ng-class="{{'rhsa.severity'}}")

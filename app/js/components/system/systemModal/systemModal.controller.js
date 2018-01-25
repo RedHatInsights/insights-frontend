@@ -95,6 +95,17 @@ function SystemModalCtrl(
         escUnreg();
     });
 
+    function getUrl() {
+        return $location.search();
+    }
+
+    $scope.$watch(getUrl, function () {
+        let params = $location.search();
+        if (params.activeTab !== $scope.tabs.activeTab) {
+            $scope.tabs.activeTab = params.activeTab;
+        }
+    });
+
     $scope.getUUID = function () {
         if ($scope.system.machine_id) {
             return $scope.system.machine_id; // for legacy

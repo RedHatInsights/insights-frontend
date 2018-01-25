@@ -14,11 +14,12 @@ function vulnerabilitiesModalCtrl($scope,
 
     $scope.showCVEs = false;
 
-    $scope.toggleShowCVEs = function (rhsa) {
+    $scope.toggleShowCVEs = function (rhsa, pkg) {
         if ($scope.selectedRHSA === rhsa || !rhsa) {
             delete $scope.selectedRHSA;
         } else {
             $scope.selectedRHSA = rhsa;
+            $scope.selectedRHSA.package = pkg;
             $scope.selectCVE(rhsa.cves[0]);
         }
     };
@@ -49,10 +50,10 @@ function vulnerabilitiesModalCtrl($scope,
     $scope.goToRule = function () {
         const params = $location.search();
         params.selectedRule = $scope.selectedRule.rule_id;
+        params.activeTab = SystemModalTabs.rules;
+        params.selectedPackage = $scope.selectedRHSA.package.id;
+        params.selectedRHSA = $scope.selectedRHSA.id;
         $location.search(params);
-
-        // The system modal controller/switches tab rules tab
-        $scope.$parent.tabs.activeTab = SystemModalTabs.rules;
     };
 
     function fetchRule (rule_id) {
@@ -73,6 +74,20 @@ function vulnerabilitiesModalCtrl($scope,
                 $scope.packages = system.packages;
             });
     }
+
+    // $scope.$watch(function () {
+    //     return $location.search();
+    // }, function (newVal, oldVal) {
+    //     // don't do anything if it hasn't changed
+    //     if (newVal === oldVal) {
+    //         return;
+    //     }
+
+    //     let params = $location.search();
+    //     if (params.activeTab === SystemModalTabs.vulnerabilities) {
+    //         console.log('worked!!!');
+    //     }
+    // });
 
     $scope.$on('reload:data', getData);
 
