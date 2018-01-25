@@ -28,7 +28,7 @@
           rhsa-severity-select
 
         // TODO make Summary Card a component
-        .card-summaries
+        .card-list-tiles.card-summaries
           card(ng-repeat='rhsa in package.rhsas', ng-click='toggleShowCVEs(rhsa)', ng-class='{active: isSelected(rhsa)}')
             card-content.card-content
               .icon

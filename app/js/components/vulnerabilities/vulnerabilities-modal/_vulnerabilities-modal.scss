@@ -1,3 +1,32 @@
+// Temporarily placing here
+//==================================================================*/
+
+// Vars
+$card-list-tiles-gutter: $global-margin;
+
+
+// Card list tiles
+//==================================================================*/
+
+.card-list-tiles {
+  display: flex;
+  margin-left: -$card-list-tiles-gutter/2;
+  margin-right: -$card-list-tiles-gutter/2;
+  flex-flow: column wrap;
+
+  @include media-query(sm) { flex-direction: row; }
+
+  > * {
+    margin: $global-padding;
+    flex: 1 0 100%;
+
+    @include media-query(sm) { flex: 0 1 calc(50% - #{$card-list-tiles-gutter); } }
+    @include media-query(md) { flex: 0 1 calc(25% - #{$card-list-tiles-gutter); } }
+  }  
+}
+
+
+
 // this looks scary
 .md-open-menu-container { z-index: 9999; }
 
@@ -12,16 +41,7 @@
   // Card Summary
   //==================================================================*/
   .card-summaries{
-    display: flex;
-    flex-wrap: wrap;
     text-align: center;
-    @include rem('margin', 15px);
-
-    md-card { @include rem('margin-top', 15px); }
-
-    md-card + md-card { @include rem ('margin-left', $global-margin); }
-
-    md-card-content { @include rem('padding', 25px 35px); }
 
     .icon { 
       @include rem('margin-bottom', 15px); 
