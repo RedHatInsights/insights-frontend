@@ -11,4 +11,4 @@
       span.caret
     md-menu-content
       md-menu-item(ng-repeat='option in options track by option.label')
-        a(ui-sref='#', ng-click='select(option)') {{:: option.label | translate}}
+        a(ng-click='select(option)') {{:: option.label | translate}}
