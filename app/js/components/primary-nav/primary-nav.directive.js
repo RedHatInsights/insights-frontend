@@ -1,3 +1,4 @@
+/*global require*/
 'use strict';
 
 var componentsModule = require('../');
@@ -6,20 +7,9 @@ var componentsModule = require('../');
 * @ngInject
 */
 
-// function primaryNavCtrl($scope, Utils, $state, InsightsConfig, $timeout, $mdSidenav) {
 function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User) {
-    // $scope.toggleLeft = buildToggler('left');
 
-    // $scope.toggleLeft = buildToggler('left');
-    // $scope.toggleRight = buildToggler('right');
-
-    // function buildToggler(componentId) {
-    //   return function() {
-    //     $mdSidenav(componentId).toggle();
-    //   };
-    // }
-
-    const policyAccounts = {
+  const policyAccounts = {
         540155: true,
         540694: true
     };
@@ -29,6 +19,8 @@ function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User) {
     $scope.utils = Utils;
     $scope.state = $state;
     $scope.config = InsightsConfig;
+    $scope.doLogout = InsightsJwt.standardLogout;
+    $scope.isPortal = InsightsConfig.isPortal;
 
     $scope.toggleNav = function () {
         $scope.isHidden = !$scope.isHidden;
