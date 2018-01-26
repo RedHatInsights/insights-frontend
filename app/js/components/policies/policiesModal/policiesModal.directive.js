@@ -1,6 +1,7 @@
 'use strict';
 
-var componentsModule = require('../../');
+const componentsModule = require('../../');
+const sortBy = require('lodash/sortBy');
 
 /**
  * @ngInject
@@ -13,7 +14,14 @@ function policiesModalCtrl($location, $scope, System) {
     $scope.policyId = $location.path().split('/').pop();
 
     System.getSystemPolicies($scope.systemId).then((system) => {
-        $scope.policies = system.data;
+        $scope.policies = sortBy(system.data.resources, [policy => {
+            if ($scope.policyId && $scope.policyId === policy.policy_id) {
+                return 0;
+            }
+
+            return 1;
+        }, 'policy_id']);
+
         $scope.loading = false;
     });
 }
