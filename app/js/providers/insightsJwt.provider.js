@@ -20,14 +20,20 @@ function InsightsJwt() {
     // Add a little helper function
     Jwt.standardLogout = () => {
         Jwt.onInit(() => {
+            if (Jwt.hack && Jwt.hack.cookies) {
+                Jwt.hack.cookies.remove('rh_sso_sesssion');
+            }
+
             Jwt.logout({ redirectUri: `${window.location.origin}/logout` });
         });
     };
 
     return {
-        $get: function () {
+        $get: function ($cookies) {
             // this only get got once
             Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
+            Jwt.hack = {};
+            Jwt.hack.cookies = $cookies;
             return Jwt;
         }
     };
