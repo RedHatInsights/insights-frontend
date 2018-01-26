@@ -77,7 +77,7 @@ const obj =  {
 
 var i = 1;
 ['overview', 'actions', 'inventory', 'planner', 'rules', 'configuration'].forEach(function (item) {
-    obj.nav[item] = 'md-sidenav nav li:nth-of-type(' + i + ') a';
+    obj.nav[item] = `.primary-nav li:nth-of-type(${i}) a`;
     i += 1;
 });
 
