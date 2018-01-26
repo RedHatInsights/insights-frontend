@@ -74,6 +74,12 @@ module.exports = {
             });
     },
 
+    'Logout': function (client) {
+        client.custom.waitAll('nav')
+            .custom.waitAndClick(el.nav.logout)
+            .custom.waitAndClick(el.loggedOutPage.logBackIn);
+    },
+
     after: function (client) {
         client.end();
     }

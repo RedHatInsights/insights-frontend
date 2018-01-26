@@ -3,6 +3,9 @@
 const lodash = require('lodash');
 
 const obj =  {
+    loggedOutPage: {
+        logBackIn: '#logoutPageLogin'
+    },
     overview: {
         severitySummary: '.overview .widget.severity-summary'
     },
@@ -60,6 +63,9 @@ const obj =  {
         firstRule: 'rule-summary:nth-of-type(1) .title'
     },
     nav: {
+        // main nav links are added below
+        goToPortal: '.primary-nav footer li:nth-of-type(1)',
+        logout: '.primary-nav footer li:nth-of-type(2)'
     },
     betaSwitch: '.beta-switch',
     goToApp: '#launchApp',
@@ -76,7 +82,14 @@ const obj =  {
 });
 
 var i = 1;
-['overview', 'actions', 'inventory', 'planner', 'rules', 'configuration'].forEach(function (item) {
+['overview',
+ 'actions',
+ 'inventory',
+ 'planner',
+ 'policies',
+ 'rules',
+ 'executiveReport',
+ 'configuration'].forEach(function (item) {
     obj.nav[item] = `.primary-nav li:nth-of-type(${i}) a`;
     i += 1;
 });
