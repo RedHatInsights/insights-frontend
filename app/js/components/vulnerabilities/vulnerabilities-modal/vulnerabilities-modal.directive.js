@@ -16,12 +16,12 @@ function vulnerabilitiesModalCtrl($scope,
 
     function round (x, to) {
         return Math.ceil(x / to) * to;
-    };
+    }
 
     $scope.indexMe = function (index) {
-        var windowWidth = document.documentElement.clientWidth,
-            windowSm = 768,
-            windowMd = 992;
+        var windowWidth = document.documentElement.clientWidth;
+        var windowSm    = 768;
+        var windowMd    = 992;
 
         if (windowWidth < windowSm) {
             $scope.cveOrder = index;
