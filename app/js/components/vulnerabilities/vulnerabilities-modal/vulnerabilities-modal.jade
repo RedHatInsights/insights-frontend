@@ -1,5 +1,7 @@
 .vulnerabilities-modal
   .content-wrap
+    table-filters
+      search-box(placeholder="{{'Search RHSA or CVE' | translate}}", on-search='search(model)')
     expand-all-button.toggle-expand-right
     card.card-vulnerabilities(expandable='true', ng-repeat='package in packages')
 
@@ -24,10 +26,6 @@
             span(translate) {{ package.low_count }} Low
 
       card-content(collapse="card.collapsed")
-        table-filters
-          search-box(placeholder="{{'Search RHSA or CVE' | translate}}", on-search='search(model)')
-          rhsa-severity-select
-
         // TODO make Summary Card a component
         .card-list-tiles.card-list-rhsa
           card.card-rhsa(ng-repeat='rhsa in package.rhsas', ng-click='indexMe($index + 1); toggleShowCVEs(rhsa)', ng-class='{active: isSelected(rhsa)}', style="order: {{$index + 1}}")
@@ -59,21 +57,23 @@
                   a(ng-class='{active: cve.id === selectedCVE.id}') {{ cve.id }}
                   i.fa.fa-book(ng-if='selectedCVE.insights_rule', tooltip="{{'This RHSA has an insights rule hit' | translate}}")
 
-              .description {{ selectedCVE.description }}
+              //- .description {{ selectedCVE.description }}
+              //-   a.cve-link(href="{{selectedCVE.link}}", target="_blank") More
+              //-     i.fa.fa-external-link
+              .description
+                trimmed-text(length="300", text="{{selectedCVE.description}}")
                 a.cve-link(href="{{selectedCVE.link}}", target="_blank") More
                   i.fa.fa-external-link
-              //- .description 
-                trimmed-text(length="300", text="{{selectedCVE.description}}") (Test)
               .cve-information
-                .impact 
-                  b Impact: 
-                  | {{ selectedCVE.impact }}
-                .public-date 
-                  b Public-Date: 
-                  | {{ selectedCVE.public_date }}
+                .impact
+                  b Impact:
+                  |  {{ selectedCVE.impact }}
+                .public-date
+                  b Public-Date:
+                  |  {{ selectedCVE.public_date }}
                 .iava(ng-if='selectedCVE.iava')
-                  b IAVA: 
-                  | {{ selectedCVE.iava }}
+                  b IAVA:
+                  |  {{ selectedCVE.iava }}
                 .cwe(ng-if='selectedCVE.cwe')
-                  b CWE: 
-                  | {{ selectedCVE.cwe }}
+                  b CWE:
+                  |  {{ selectedCVE.cwe }}

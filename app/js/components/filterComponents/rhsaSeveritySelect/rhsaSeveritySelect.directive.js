@@ -181,35 +181,11 @@ function rhsaSeveritySelectCtrl($rootScope,
     // applies filter when the menu closes
     const menuCloseListener = $scope.$on('$mdMenuClose', $scope.doFilter);
 
-    // fixes the menus not closing by clicking the dropdown button or
-    // clicking outsid the dropdown menu when in the system modal
-    $document.on('click', onClickEvent);
-    function onClickEvent (event) {
-        let clickedInsideMenu = false;
-
-        if (menu) {
-            const elements = $document[0]
-                .querySelectorAll('.md-open-menu-container.md-active');
-
-            angular.forEach(elements, (element) => {
-                if (element.contains(event.target)) {
-                    clickedInsideMenu = true;
-                }
-            });
-
-            if (!clickedInsideMenu) {
-                menu.close();
-                menu = null;
-            }
-        }
-    }
-
     // removes all listeners when $scope is destroyed
     $scope.$on('$destroy', function () {
         removeTagListener();
         resetFilterListener();
         menuCloseListener();
-        $document.off('click', onClickEvent);
     });
 }
 
