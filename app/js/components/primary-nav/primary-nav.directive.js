@@ -19,7 +19,10 @@ function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User) {
     //   };
     // }
 
-    const policyAccounts = {540155: true};
+    const policyAccounts = {
+        540155: true,
+        540694: true
+    };
 
     $scope.canSeePolicies = false;
     $scope.isHidden = false;

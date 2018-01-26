@@ -1,4 +1,6 @@
-/*global module*/
+/*global module, require*/
+
+const lodash = require('lodash');
 
 const obj =  {
     overview: {
@@ -79,6 +81,25 @@ var i = 1;
     i += 1;
 });
 
-// console.log(JSON.stringify(obj, false, 2));
+function unwrap(o, pre) {
+    for (const [k, v] of new Map(Object.entries(o))) {
+        pre = pre || '';
+        if (typeof v === 'object' && !lodash.isString(v)) {
+            unwrap(v, `${pre}${k}.`);
+        } else {
+            const path = pre + k;
+            lodash.set(obj, path, {
+                path: path,
+                s: v,
+                selector: v
+            });
+        }
+    }
+}
 
-module.exports = obj;
+unwrap(obj);
+
+module.exports.obj = obj;
+module.exports.get = (o) => {
+    return o.selector;
+};
