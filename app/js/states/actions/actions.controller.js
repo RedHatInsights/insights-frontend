@@ -51,12 +51,12 @@ function ActionsCtrl(
     };
 
     let reload = function () {
-        let promises = [];
+        const promises = [];
 
         $scope.loading = true;
         RhaTelemetryActionsService.reload();
 
-        TopicService.reload(FilterService.getSelectedProduct()).then(function () {
+        promises.push(TopicService.reload(FilterService.getSelectedProduct()).then(() => {
             const topics = TopicService.topics.filter(topic => {
                 return topic.ruleBinding !== 'implicit';
             });
@@ -68,16 +68,16 @@ function ActionsCtrl(
             if (FilterService.getSelectedProduct() !== 'all') {
                 product = FilterService.getSelectedProduct();
             }
+        }));
 
-            promises.push(loadStats());
-            promises.push(IncidentsService.loadIncidents());
+        promises.push(loadStats().then(() => {
+            $scope.incidentCount = IncidentsService.incidentRulesWithHitsCount;
+            $scope.incidentSystemCount = IncidentsService.affectedSystemCount;
+        }));
 
-            $q.all(promises).finally(() => {
-                $scope.incidentCount = IncidentsService.incidentRulesWithHitsCount;
-                $scope.incidentSystemCount = IncidentsService.affectedSystemCount;
-                $scope.loading = false;
-            });
-        });
+        promises.push(IncidentsService.init());
+
+        $q.all(promises).finally(() => $scope.loading = false);
     };
 
     const listeners = [

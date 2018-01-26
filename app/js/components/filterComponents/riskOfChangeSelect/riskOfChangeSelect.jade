@@ -11,4 +11,4 @@
       span.caret
     md-menu-content
       md-menu-item(ng-repeat='(key, value) in options')
-        a(ui-sref="#", ng-click='select(key)') {{:: value.label}}
+        a(ng-click='select(key)') {{:: value.label}}

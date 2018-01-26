@@ -1,0 +1,34 @@
+.card-rule-summary .card-header-expandable-card .card-header-content {
+  display: flex;
+  flex-flow: row wrap;    
+
+  >   .ansible-icon { margin-left: auto; }
+
+  > .title {
+    flex: 1;
+  }
+
+  .card-header-risk-summaries {
+    flex-flow: column wrap;
+    flex: 1 0 100%;
+    @include rem('padding-top', $global-padding);
+
+    @include media-query(sm){ flex-flow: row wrap; }
+
+    .severity {
+      text-align: center;
+
+      @include media-query(sm){
+        text-align: left;
+      }
+    }
+
+    .risk-of-change {
+      @include rem('margin-top', $global-padding);
+
+      @include media-query(sm) { margin-top: 0; }
+    }
+  }
+}
+
+md-card.card-rule-summary .card-header-risk-summaries .title {  }

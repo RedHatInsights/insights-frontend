@@ -1,4 +1,6 @@
-/*global module*/
+/*global module, require*/
+
+const lodash = require('lodash');
 
 const obj =  {
     overview: {
@@ -10,13 +12,13 @@ const obj =  {
         },
         page2: {
             firstRuleInTable: '.topic-rule-list .legend-item:nth-of-type(1) td:nth-of-type(1)',
-            categoryTitle:   '.topic-summary .page-title span span'
+            categoryTitle:    '.page-title h1'
         },
         page3: {
-            severityIcon:       '.main-content .severity-icon i',
-            ruleTitle:          '.main-content .wrapper section.gray h2',
-            impactedSystems:    '.main-content .wrapper section h3 span',
-            firstSystemInTable: '.main-content .wrapper div table.table.nomar tbody tr:nth-of-type(1) td:nth-of-type(3) a'
+            severityIcon:       'i.severity-icon.total-risk',
+            ruleTitle:          '.page-title h1',
+            impactedSystems:    'h3.system-count span',
+            firstSystemInTable: 'section.content table tbody tr:nth-of-type(1) td:nth-of-type(3) a'
         }
     },
     planner: {
@@ -41,11 +43,9 @@ const obj =  {
         }
     },
     inventory: {
-        firstSystemInTable: '.inventory table.ng-table tbody tr:nth-of-type(1) td.long-name a',
-        searchBox:          '.inventory .input-group',
-        checkinSelect:      '.inventory .checkin-select',
-        actionsSelect:      '.inventory .actions-select',
-        systemCount:        '.inventory h3.system-count span'
+        firstSystemInTable: '.page-inventory table tbody tr:nth-of-type(1) td:nth-of-type(3) a',
+        searchBox:          '.page-inventory .table-search input',
+        systemCount:        '.page-inventory .system-count span'
     },
     jQuery: {
         inventory: {
@@ -56,13 +56,13 @@ const obj =  {
     },
     systemModal: {
         exButton:  '.modal-dialog .fa.fa-close',
-        hostname:  '.modal-dialog .modal-title h2 .ellipsis-overflow span',
-        firstRule: '.modal-dialog .rule-summaries .header h3.title'
+        hostname:  'system-metadata md-card h2 .name',
+        firstRule: 'rule-summary:nth-of-type(1) .title'
     },
     nav: {
     },
     betaSwitch: '.beta-switch',
-    goToApp: '.landing-page-top .container .row a.btn-app:nth-of-type(2)',
+    goToApp: '#launchApp',
     login: {
         form: '#kc-form-login',
         username: '#username',
@@ -77,10 +77,29 @@ const obj =  {
 
 var i = 1;
 ['overview', 'actions', 'inventory', 'planner', 'rules', 'configuration'].forEach(function (item) {
-    obj.nav[item] = '.dashboard-navigation-container .nav li:nth-of-type(' + i + ') a';
+    obj.nav[item] = 'md-sidenav nav li:nth-of-type(' + i + ') a';
     i += 1;
 });
 
-// console.log(JSON.stringify(obj, false, 2));
+function unwrap(o, pre) {
+    for (const [k, v] of new Map(Object.entries(o))) {
+        pre = pre || '';
+        if (typeof v === 'object' && !lodash.isString(v)) {
+            unwrap(v, `${pre}${k}.`);
+        } else {
+            const path = pre + k;
+            lodash.set(obj, path, {
+                path: path,
+                s: v,
+                selector: v
+            });
+        }
+    }
+}
 
-module.exports = obj;
+unwrap(obj);
+
+module.exports.obj = obj;
+module.exports.get = (o) => {
+    return o.selector;
+};

@@ -6,10 +6,7 @@
 
 .system-overlay .modal-content .system-overlay-item,
 .system-modal .modal-content .system-overlay-item {
-  .icon-group-severity {
-    @include rem('margin-top', $global-padding);
-    padding: 0;
-  }
+  .icon-group-severity { padding: 0; }
 }
 
 .modal {

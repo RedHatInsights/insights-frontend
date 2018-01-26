@@ -13,7 +13,7 @@ function IncidentLiteController ($q, $scope, IncidentsService) {
 
     // loads the total number of rule hits that are incidents
     function loadIncidentNumbers () {
-        return IncidentsService.loadIncidents().then(() => {
+        return IncidentsService.init().then(() => {
             $scope.incidentCount = IncidentsService.incidentRulesWithHitsCount;
         });
     }

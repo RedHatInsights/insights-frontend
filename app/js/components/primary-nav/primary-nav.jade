@@ -7,7 +7,7 @@
           i.fa.fa-tachometer
           span.text(translate) Overview
       li
-        a(ui-sref='app.actions', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
+        a(ui-sref='app.actions', md-ink-ripple, ng-click="toggleLeft()", ng-class='isActive(states.actions)')
           i.fa.fa-file-text
           span.text(translate) Actions
       li
@@ -19,11 +19,11 @@
           i.fa.fa-wrench
           span.text(translate) Planner
       li(ng-if='canSeePolicies')
-        a(ui-sref='app.list-policies', ui-sref-active='current', md-ink-ripple, ng-class='{current: includes(states.policies, state.current.name)}')
+        a(ui-sref='app.list-policies', md-ink-ripple, ng-class='isActive(states.policies)')
           i.fa.fa-gavel
           span.text(translate) Policies
       li
-        a(ui-sref='app.rules', ng-class='{current: includes(states.rules, state.current.name)}', md-ink-ripple, ng-click="toggleLeft()")
+        a(ui-sref='app.rules', ng-class='isActive(states.rules)', md-ink-ripple, ng-click="toggleLeft()")
           i.fa.fa-institution
           span.text(translate) Rules
       li
@@ -31,7 +31,7 @@
           i.fa.fa-bar-chart
           span.text(translate) Executive Report
       li
-        a(ui-sref='app.config', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
+        a(ui-sref='app.config', md-ink-ripple, ng-click="toggleLeft()", ng-class='isActive(states.config)')
           i.fa.fa-file-text
           span.text(translate) Configuration
 
