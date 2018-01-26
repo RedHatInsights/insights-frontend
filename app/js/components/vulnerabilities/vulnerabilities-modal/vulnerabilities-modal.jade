@@ -28,7 +28,7 @@
       card-content(collapse="card.collapsed")
         // TODO make Summary Card a component
         .card-list-tiles.card-list-rhsa
-          card.card-rhsa(ng-repeat='rhsa in package.rhsas', ng-click='indexMe($index + 1); toggleShowCVEs(rhsa)', ng-class='{active: isSelected(rhsa)}', style="order: {{$index + 1}}")
+          card.card-rhsa(ng-repeat='rhsa in package.rhsas', ng-click='indexMe($index + 1); toggleShowCVEs(rhsa, package)', ng-class='{active: isSelected(rhsa)}', style="order: {{$index + 1}}")
             card-content
               .icon
                 i.fa.fa-shield(ng-class="{{'rhsa.severity'}}")
@@ -57,9 +57,6 @@
                   a(ng-class='{active: cve.id === selectedCVE.id}') {{ cve.id }}
                   i.fa.fa-book(ng-if='selectedCVE.insights_rule', tooltip="{{'This RHSA has an insights rule hit' | translate}}")
 
-              //- .description {{ selectedCVE.description }}
-              //-   a.cve-link(href="{{selectedCVE.link}}", target="_blank") More
-              //-     i.fa.fa-external-link
               .description
                 trimmed-text(length="300", text="{{selectedCVE.description}}")
                 a.cve-link(href="{{selectedCVE.link}}", target="_blank") More

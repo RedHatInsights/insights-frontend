@@ -32,7 +32,7 @@ function vulnerabilitiesModalCtrl($scope,
         }
     };
 
-    $scope.toggleShowCVEs = function (rhsa) {
+    $scope.toggleShowCVEs = function (rhsa, pkg) {
         if ($scope.selectedRHSA === rhsa || !rhsa) {
             delete $scope.selectedRHSA;
         } else {
