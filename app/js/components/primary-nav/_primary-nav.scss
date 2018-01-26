@@ -8,43 +8,55 @@ $aside_anchor_color: #fff;
 $aside_anchor_hover_bg: gray;
 
 
-// Container styling
-.primary-nav {
-  display: block;
-
-  @include media-query(sm){ box-shadow: inset -14px 0 40px 0 rgba(0, 0, 0, .1); }
-}
-
-
 // Mobile/base styling
 //==================================================================*/
+
 .primary-nav {
   background-color: $primary-nav-bg;
+  display: none;
+  flex-flow: column wrap;
+  box-shadow: inset -14px 0 40px 0 rgba(0, 0, 0, .1);
+
+  @include media-query(sm){ display: flex; }
+
+  a,
+  button {
+    color: #fff;
+    font-weight: 700;
+    position: relative;
+  }
 
   ul {
     @include reset();
     list-style-type: none;
+    overflow: auto;
   }
 
   ul li { @include reset(); }
+  ul li:not(:first-child) { border-top: 1px solid rgba(255,255,255,.1); }
+  ul li:not(:last-child) { border-bottom: 1px solid rgba(0,0,0,.4); }
 
-  ul li a {
+  ul li a,
+  ul li button {
     display: flex;
-    position: relative;
+    flex-direction: row;
     margin: 0;
-    @include rem('padding', 24px);
+    @include rem('padding', $global-padding $global-margin $global-padding $global-padding);
 
-    
     text-align: center;
-    color: #fff;
-    font-weight: 700;
+    @include font-size(14px, 1);
+    transition: .4s;
 
-    .text { 
-      text-transform: capitalize; 
-      white-space: pre;
-    }
+    .text {  @include rem('margin-left', 12px); }
+    i { margin-bottom: 0; }
+  }
 
-    i { @include rem('margin-bottom', $global-padding/2); }
+  ul li a:hover,
+  ul li a.current,
+  ul li button:hover {
+    background: rgba(255,255,255,.075);
+    box-shadow: inset 6px 0 0 $blue-light;
+    text-decoration: none;    
   }
 
   ul li a.current .fa {
@@ -53,60 +65,18 @@ $aside_anchor_hover_bg: gray;
   }
 }
 
-@media screen and(min-width: $xs) {
-  
-}
-
-// Small breakpoint
-//==================================================================*/
-md-sidenav.primary-nav,
-.primary-nav { @include media-query(sm) {
-  position: relative;
-  width: auto;
-  transform: none;
-  display: block;
-
-  ul {
-    display: block;
-    overflow: auto;
-  }
-
-  ul li:not(:first-child) { border-top: 1px solid rgba(255,255,255,.1); }
-  ul li:not(:last-child) { border-bottom: 1px solid rgba(0,0,0,.4); }
-  
-  ul li a {
-    flex-direction: row;
-    justify-content: flex-start;
-    @include font-size(14px, 1);
-    transition-duration: .4s;
-    @include rem('padding', $global-padding $global-margin $global-padding $global-padding);
-
-    .text { @include rem('margin-left', 12px); }
-
-    i { margin-bottom: 0; }
-  }
-
-
-  ul li a:hover,
-  ul li a.current {
-    background: rgba(255,255,255,.075);
-    box-shadow: inset 6px 0 0 $blue-light;
-    text-decoration: none;    
-  }
-
-  li a.current .fa { }
-}}
-
+// Collapsed state
 .platform-grid.collapsed .primary-nav ul li a:hover,
 .platform-grid.collapsed .primary-nav ul li a.current { box-shadow: inset 2px 0 0 $blue-light; }
 
 
 // Medium breakpoint
 //==================================================================*/
-md-sidenav.primary-nav ul li a,
-.primary-nav ul li a { @include media-query(md) { @include rem('padding', 24px 34px 24px 24px); } }
 
-.platform-grid.collapsed md-sidenav.primary-nav ul li a, 
+.primary-nav ul li a,
+.primary-nav ul li button { @include media-query(md) { @include rem('padding', 24px 34px 24px 24px); } }
+
+.platform-grid.collapsed .primary-nav ul li a, 
 button.toggle-fullscreen {
   @include media-query(sm) { @include rem('padding', $global-padding); }
   @include media-query(md) { @include rem('padding', 24px); }
@@ -120,9 +90,8 @@ topbar .toggle-fullscreen {
 
 // Header
 //==================================================================*/
+
 .primary-nav .header-block {
-  transition: .2s;
-  position: relative;
   @include rem('padding', $global-padding);
   color: #fff;
 

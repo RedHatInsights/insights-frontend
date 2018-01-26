@@ -1,0 +1,30 @@
+// Primary nav footer buttons
+//==================================================================*/
+
+.primary-nav footer {
+  margin-top: auto;
+  background: rgba(0,0,0,.2);
+
+  .footer-nav {
+
+    a,
+    .button { 
+      @include rem('padding', 18px 20px);
+      width: 100%;
+
+      &:hover { box-shadow: none; }
+    }
+
+    i { width: 14px; }
+  }
+}
+
+// Hover state
+.platform-grid.collapsed .primary-nav footer {
+
+  .footer-nav {
+    a,
+    .button { @include rem('padding', 18px 20px); }
+  }
+}
+
