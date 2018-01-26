@@ -30,4 +30,4 @@
           trimmed-text(length="30", text="{{:: g.display_name}}") ({{:: g.systems.length}})
           i.fa.fa-trash-o.group-control.pull-right(ng-click='deleteGroup(g); $event.stopPropagation();',
             tooltip="{{:: 'Delete group' | translate}}")
-  a.link.add-group(ui-sref="#", ng-click='createGroup()', tooltip='{{:: "Create new system group" | translate}}') + Add group
+  a.link.add-group(ng-click='createGroup()', tooltip='{{:: "Create new system group" | translate}}') + Add group

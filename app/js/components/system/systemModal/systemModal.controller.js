@@ -21,7 +21,7 @@ function SystemModalCtrl(
     ModalUtils) {
 
     // set the default tab for system modal; system if no value is passed in
-    $scope.activeTab = activeTab || 'system';
+    $scope.activeTab = 'system';
     $scope.report = {};
     $scope.modal = $modalInstance;
 
@@ -34,6 +34,7 @@ function SystemModalCtrl(
     function init () {
         System.getSystemPolicies($scope.system.system_id).then((policies) => {
             $scope.hasPolicies = policies.data.total > 0;
+            $scope.activeTab = activeTab || $scope.activeTab;
         });
     }
 

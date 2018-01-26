@@ -1,7 +1,7 @@
 .policiesModal
   .content-wrap
     expand-all-button.toggle-expand-right
-    card(expandable='true', ng-repeat="policy in policies.resources | orderBy: 'policy.policy_id'", ng-show='!loading', init-collapsed='policy.policy_id != policyId')
+    card(expandable='true', ng-repeat="policy in policies track by policy.policy_id", ng-show='!loading', init-collapsed='policy.policy_id != policyId')
       card-header-expandable.gray
         .card-header-title
           .checks-wrapper

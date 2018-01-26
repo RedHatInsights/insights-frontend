@@ -20,9 +20,8 @@
             tooltip="{{'Snooze this plan' | translate}}")
         .details(ng-if="!editBasic.active && (!plan.suggestion || plan.suggestion === 'accepted')")
           .header-title.editable
-            span(ng-if="plan.overdue")
-              i.fa.fa-calendar-times-o.red
-              i.fa.fa-eye-slash(ng-if='!editBasic.active && plan.hidden && isInternal')
+            i.fa.fa-calendar-times-o.red.inline-right(ng-if='plan.overdue')
+            i.fa.fa-eye-slash.inline-right(ng-if='!editBasic.active && plan.hidden && isInternal')
             h2.title(ng-class="{'red': plan.overdue}", ng-dblclick='editBasic.toggle()')
               span(ng-if="plan.name.length", ng-dblclick='editBasic.toggle()') {{plan.name}} ({{plan.maintenance_id}})
               span(ng-if='!plan.name || !plan.name.length', translate) Unnamed plan ({{plan.maintenance_id}})
@@ -283,19 +282,19 @@
       footer.footer(ng-show='edit.isActive(plan.maintenance_id)')
         .button-group
           a(ng-if='isInternal && !plan.hidden', ng-click='hidden(true)')
-            md-button.btn-sm
+            md-button.md-raised
               i.fa.fa-eye-slash.inline-right
               span(translate) Hide
           a(ng-if='isInternal && plan.hidden', ng-click='hidden(false)')
-            md-button.btn-sm
+            md-button.md-raised
               i.fa.fa-eye.inline-right
               span(translate) Publish
           a(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='accept()')
-            md-button.btn-sm
+            md-button.md-raised
               i.fa.fa-check.inline-right
               span(translate) Accept
           a(ng-if="plan.suggestion === 'proposed' && !plan.hidden", ng-click='reject()')
-            md-button.btn-sm
+            md-button.md-raised
               i.fa.fa-close.inline-right
               span(translate) Ignore
 
