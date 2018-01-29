@@ -8,37 +8,6 @@ function Routes($stateProvider, $locationProvider, $urlRouterProvider,
 
     // App Routes
 
-    // Rule routes
-    $stateProvider
-        .state('app.admin-rules', {
-            url: '/rules/admin/?tags',
-            templateUrl: 'js/states/rules/views/admin-rules.html',
-            controller: 'AdminRuleCtrl',
-            title: 'Rules Admin',
-            hideGroup: true
-        })
-        .state('app.admin-rule-tags', {
-            url: '/rules/admin/tags',
-            templateUrl: 'js/states/rules/views/admin-rule-tags.html',
-            controller: 'AdminRuleTagCtrl',
-            title: 'Rule Tag Admin',
-            hideGroup: true
-        })
-        .state('app.create-rule', {
-            url: '/rules/new/',
-            templateUrl: 'js/states/rules/views/create-rules.html',
-            controller: 'NewRuleCtrl',
-            scrollTop: true,
-            hideGroup: true
-        })
-        .state('app.show-rule', {
-            url: '/rules/:id/',
-            templateUrl: 'js/states/rules/views/show-rules.html',
-            controller: 'ShowRuleCtrl',
-            scrollTop: true,
-            hideGroup: true
-        });
-
     // Page routes
     $stateProvider
         .state('app.forbidden', {
