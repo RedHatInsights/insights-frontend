@@ -20,7 +20,6 @@ function ActionsCtrl(
     InsightsConfig,
     PreferenceService,
     QuickFilters,
-    RhaTelemetryActionsService,
     Stats,
     System,
     SystemsService,
@@ -37,7 +36,6 @@ function ActionsCtrl(
     FilterService.parseBrowserQueryParams();
     FilterService.setShowFilters(false);
     FilterService.setSearchTerm('');
-    RhaTelemetryActionsService.setDataLoaded(false);
 
     $state.transitionTo(
         'app.actions', FilterService.updateParams(params), { notify: false });
@@ -54,7 +52,6 @@ function ActionsCtrl(
         const promises = [];
 
         $scope.loading = true;
-        RhaTelemetryActionsService.reload();
 
         promises.push(TopicService.reload(FilterService.getSelectedProduct()).then(() => {
             const topics = TopicService.topics.filter(topic => {
@@ -70,12 +67,12 @@ function ActionsCtrl(
             }
         }));
 
-        promises.push(loadStats().then(() => {
+        promises.push(loadStats());
+
+        promises.push(IncidentsService.init().then(() => {
             $scope.incidentCount = IncidentsService.incidentRulesWithHitsCount;
             $scope.incidentSystemCount = IncidentsService.affectedSystemCount;
         }));
-
-        promises.push(IncidentsService.init());
 
         $q.all(promises).finally(() => $scope.loading = false);
     };
@@ -88,17 +85,10 @@ function ActionsCtrl(
         })
     ];
 
-    RhaTelemetryActionsService.setInitialSeverity($stateParams.initialSeverity);
-    RhaTelemetryActionsService.setCategory($stateParams.category);
-    RhaTelemetryActionsService.setRule(null);
-
     ActionsBreadcrumbs.init($stateParams);
 
     const getData = function () {
-        System.getProductSpecificData().then(function () {
-            RhaTelemetryActionsService.populateData();
-        });
-
+        System.getProductSpecificData();
         reload();
     };
 
