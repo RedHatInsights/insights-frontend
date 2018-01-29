@@ -74,6 +74,15 @@ module.exports = {
             });
     },
 
+    'Logout': function (client) {
+        client.url(`${conf.baseUrl}/`) // go to the portal before testing this logout thing (to pick up a complete Portal session)
+            .pause(100)
+            .url(`${conf.baseUrl}/overview/`)
+            .custom.waitAll('nav')
+            .custom.waitAndClick(el.nav.logout)
+            .custom.waitAndClick(el.loggedOutPage.logBackIn);
+    },
+
     after: function (client) {
         client.end();
     }
