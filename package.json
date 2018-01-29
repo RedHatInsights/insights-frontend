@@ -1,6 +1,6 @@
 {
   "name": "insights-frontend",
-  "version": "4.16.6",
+  "version": "4.16.7",
   "description": "Front-end for Red Hat Insights",
   "repository": {
     "type": "git",
