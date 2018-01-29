@@ -5,15 +5,13 @@ var componentsModule = require('../');
 /**
  * @ngInject
  */
-function rhaNotificationsCtrl($scope, $state, AlertService, RhaTelemetryActionsService) {
+function rhaNotificationsCtrl($scope, $state, AlertService) {
     $scope.alerts = AlertService.alerts;
 
     $scope.dismiss = function (index, type) {
         $scope.alerts.splice(index, 1);
 
-        if (type === 'http' && $state.current.actions) {
-            RhaTelemetryActionsService.reload();
-        } else if (type === 'http') {
+        if (type === 'http') {
             $state.reload();
         }
     };
