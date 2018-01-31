@@ -359,7 +359,8 @@ function ActionsRuleCtrl(
 
     $scope.numberOfSelected = function () {
         if ($scope.reallyAllSelected) {
-            return RhaTelemetryActionsService.getAllSystems().length;
+            const systems = RhaTelemetryActionsService.getAllSystems();
+            return systems ? systems.length : 0;
         } else {
             return $scope.checkboxes.totalChecked;
         }
