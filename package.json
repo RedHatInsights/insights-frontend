@@ -38,7 +38,7 @@
     "browserify-istanbul": "~2.0.x",
     "bulk-require": "~1.0.x",
     "bulkify": "~1.4.x",
-    "c3": "https://github.com/Kinlaw/c3.git#9405c62cdb8a22b4f3d1fa5f59509b4d0a154cd4",
+    "c3": "https://github.com/Kinlaw/c3.git#9f0a58669d843214094a94459133da6629fd7080",
     "casperjs": "~1.1.x",
     "chromedriver": "^2.35.0",
     "d3": "~3.5.x",
