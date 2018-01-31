@@ -2,10 +2,8 @@ git:
   submodules: false
 language: node_js
 node_js:
-  - "6"
+  - "8"
 install:
   - npm install
   - gulp views
   - gulp styles
-
-
