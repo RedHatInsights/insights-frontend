@@ -142,6 +142,10 @@ function systemMetadataCtrl(
             $rootScope.$broadcast('reload:data');
         });
     };
+
+    $scope.networkSorter = function (value) {
+        return parseInt(value.port);
+    };
 }
 
 function systemMetadata() {
