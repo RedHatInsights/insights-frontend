@@ -46,7 +46,7 @@
   .tab-content(ng-init="setDefaultTab()", ng-class="{expanded: expanded}")
     #system.tab-pane(role='system')
       .flex
-        card.cell(ng-if="tableData.data", ng-repeat="data in tableData.data track by data.label", class="{{:: data.label | lowercase}}")
+        card.cell(ng-if="!tabsContent.system.noData", ng-repeat="data in tabsContent.system.data", class="{{:: data.label | lowercase}}")
           card-header.gray
             b {{:: data.label }}
           card-content
@@ -67,7 +67,7 @@
                   th.ellipsis-overflow(translate) IP Address
                   th.ellipsis-overflow(translate) Port
               tbody
-                tr(ng-repeat="values in tableData.data track by values.name", ng-if="$index < rowLimit || showAll")
+                tr(ng-repeat="values in tabsContent.network.data | orderBy:[networkSorter, 'name', 'ip_addr']", ng-if="$index < rowLimit || showAll")
                   td.ellipsis-overflow {{:: values.name }}
                   td.ellipsis-overflow {{:: values.ip_addr }}
                   td.ellipsis-overflow {{:: values.port }}
