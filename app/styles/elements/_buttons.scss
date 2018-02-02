@@ -85,8 +85,8 @@ button:focus {
   @include rem('padding', 10px $global-padding);
   box-shadow: none;
   border-radius: 50px;
-  border: 1px solid #DCDCDC;
-  color: #9B9B9B;
+  border: 1px solid $gray-md;
+  color: $black-base; 
   display: inline-flex;
   justify-content: space-between;
 }
