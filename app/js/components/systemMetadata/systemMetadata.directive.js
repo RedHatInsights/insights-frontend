@@ -14,17 +14,18 @@ function systemMetadataCtrl(
     SystemsService,
     $timeout) {
 
-    $scope.config = InsightsConfig;
-
+    let currentTab = null;
     let system_metadata;
+
+    $scope.config = InsightsConfig;
     $scope.rowLimit = 3;
     $scope.expanded = false;
     $scope.loading = false;
     $scope.hovering = false;
     $scope.showAll = false;
-    $scope.tabs = {
-        system: false,
-        network:false
+    $scope.tabsContent = {
+        system: null,
+        network: null
     };
 
     if ($scope.system && $scope.system.system_id) {
@@ -64,21 +65,14 @@ function systemMetadataCtrl(
 
     $scope.disableTab = function (category) {
         const tab = find(system_metadata, {category: category});
-
-        if (tab) {
-            return find(system_metadata, {category: category}).noData;
-        } else {
-            return false;
-        }
-
+        return tab ? tab.noData : false;
     };
 
     $scope.showExpandTableBtn = function () {
-        if ($scope.tableData && $scope.tableData.data) {
-            return $scope.tableData.data.length > $scope.rowLimit;
-        } else {
-            return false;
-        }
+        const tabContent = $scope.tabsContent[currentTab];
+        return (tabContent && !tabContent.noData) ?
+               tabContent.data.length > $scope.rowLimit :
+               false;
     };
 
     $scope.toggleExpandTable = function () {
@@ -90,10 +84,8 @@ function systemMetadataCtrl(
     };
 
     $scope.getData = function (category, $event) {
-        if ($scope.tableData &&
-                $scope.tableData.category === category) {
-            $scope.tabs[category] = false;
-            $scope.tableData = null;
+        if (currentTab === category) {
+            currentTab = null;
 
             // removes the active class from bootstrat/angular
             // tabs that are using data-toggle
@@ -107,15 +99,13 @@ function systemMetadataCtrl(
             $event.stopPropagation();
             $event.preventDefault();
         } else {
-            const data = find(system_metadata, {category: category});
+            currentTab = category;
+            if (!$scope.tabsContent[category]) {
+                const data = find(system_metadata, {category: category});
 
-            if (data && !data.noData) {
-                if ($scope.tableData) {
-                    $scope.tabs[$scope.tableData.category] = false;
+                if (data && !data.noData) {
+                    $scope.tabsContent[category] = data;
                 }
-
-                $scope.tabs[category] = true;
-                $scope.tableData = data;
             }
         }
     };
@@ -151,6 +141,10 @@ function systemMetadataCtrl(
             $scope.system.display_name = res.data.display_name;
             $rootScope.$broadcast('reload:data');
         });
+    };
+
+    $scope.networkSorter = function (value) {
+        return parseInt(value.port);
     };
 }
 
