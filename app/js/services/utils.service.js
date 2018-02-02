@@ -367,6 +367,32 @@ function Utils($filter, $rootScope, Events) {
         return new Date(d1).getTime() === new Date(d2).getTime();
     };
 
+    utils.localStorage = {};
+
+    utils.localStorage.getItem = (key, unstringify) => {
+        if (window.localStorage) {
+            if (unstringify) {
+                return JSON.parse(window.localStorage.getItem(key));
+            }
+
+            return window.localStorage.getItem(key);
+        }
+
+        return false;
+    };
+
+    utils.localStorage.setItem = (key, value, stringify) => {
+        if (window.localStorage) {
+            if (stringify) {
+                value = JSON.stringify(value);
+            }
+
+            window.localStorage.setItem(key, value);
+        }
+
+        return false;
+    };
+
     return utils;
 }
 
