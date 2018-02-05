@@ -108,7 +108,7 @@ function Routes($stateProvider) {
     $stateProvider
         .state('app.inventory', {
             url: '/inventory?product&roles&osp_deployment' +
-                '&docker_host&search_term&sort_field&sort_dir&' +
+                '&docker_host&sort_field&sort_dir&' +
                 'offline&online&machine&page&pageSize&systemHealth',
             templateUrl: 'js/states/inventory/inventory.html',
             controller: 'InventoryCtrl',
