@@ -5,6 +5,7 @@ const componentsModule = require('../');
 const isEmpty = require('lodash/isEmpty');
 const _filter = require('lodash/filter');
 const escape  = require('lodash/escape');
+const storageKey = 'insights:groupStash';
 
 /**
  * @ngInject
@@ -17,9 +18,11 @@ function groupSelectCtrl(
     $timeout,
     gettextCatalog,
     sweetAlert,
+    Utils,
     Events,
     Group,
     GroupService) {
+
     Group.init();
     $scope._groups = Group.groups;
     $scope.groups = $scope._groups;
@@ -73,6 +76,7 @@ function groupSelectCtrl(
     };
 
     $scope.triggerChange = function (group) {
+        Utils.localStorage.setItem(storageKey, group, true);
         Group.setCurrent(group);
     };
 
@@ -133,6 +137,16 @@ function groupSelectCtrl(
     };
 
     $scope.deleteGroup = GroupService.deleteGroup;
+
+    function restoreGroupSelection() {
+        const storedGroup = Utils.localStorage.getItem(storageKey, true);
+        if (storedGroup && storedGroup.id) {
+            $scope.triggerChange(storedGroup);
+        }
+    }
+
+    restoreGroupSelection();
+
 }
 
 function groupSelect() {
