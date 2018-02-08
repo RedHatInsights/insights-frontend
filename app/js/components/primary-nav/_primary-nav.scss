@@ -1,3 +1,4 @@
+// Vars
 $primary-nav-bg: #292e34;
 $primary-nav-bg: #454853;
 $dashboard-nav-border-color: #403b3f;
@@ -8,16 +9,18 @@ $aside_anchor_color: #fff;
 $aside_anchor_hover_bg: gray;
 
 
-// Mobile/base styling
+// Base styling
 //==================================================================*/
 
 .primary-nav {
-  background-color: $primary-nav-bg;
+  grid-area: primary-nav;
   display: none;
-  flex-flow: column wrap;
+  background-color: $primary-nav-bg;
+  flex-flow: column nowrap;
+  overflow-y: auto;
   box-shadow: inset -14px 0 40px 0 rgba(0, 0, 0, .1);
 
-  @include media-query(sm){ display: flex; }
+  @include media-query(sm) { display: flex; }
 
   a,
   button {
@@ -68,6 +71,7 @@ $aside_anchor_hover_bg: gray;
 // Collapsed state
 .platform-grid.collapsed .primary-nav ul li a:hover,
 .platform-grid.collapsed .primary-nav ul li a.current { box-shadow: inset 2px 0 0 $blue-light; }
+.platform-grid.collapsed .primary-nav .account-select { display: none; }
 
 
 // Medium breakpoint
@@ -85,29 +89,4 @@ button.toggle-fullscreen {
 topbar .toggle-fullscreen {
   border: none;
   box-shadow: none;
-}
-
-
-// Header
-//==================================================================*/
-
-.primary-nav .header-block {
-  @include rem('padding', $global-padding);
-  color: #fff;
-
-  label { color: #fff; }
-
-  input {
-    width: 100%;
-    @include rem('padding', $global-padding/2);
-    border: none;
-    box-shadow: none;
-    background: #292b31;
-  }
-
-  .internal {
-    margin-top: 5px;
-  }
-
-  .internal input { width: 15px; }
 }

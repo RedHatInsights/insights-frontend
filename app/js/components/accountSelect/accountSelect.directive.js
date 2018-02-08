@@ -86,6 +86,7 @@ function accountSelect() {
     return {
         templateUrl: 'js/components/accountSelect/accountSelect.html',
         restrict: 'E',
+        replace: 'true',
         controller: accountSelectCtrl
     };
 }
