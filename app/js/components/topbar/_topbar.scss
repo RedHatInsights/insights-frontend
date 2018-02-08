@@ -1,7 +1,11 @@
+// Vars
 $topbar-bg: #F5F5F5;
 $topbar-text-color: $base-color;
 $topbar-border-color: #ddd;
 
+
+// Topbar base styling
+//==================================================================*/
 
 topbar {
   @include rem('padding', $global-margin);
@@ -9,38 +13,29 @@ topbar {
   border-bottom: 4px solid $topbar-border-color;
 
   @include media-query(sm){
-    @include rem('padding', 0 $global-padding 0 0);
+    @include rem('padding', 0 $global-margin 0 0);
     display: grid;
-    grid-template-columns: max-content auto max-content max-content;
+    grid-area: topbar;  
+    grid-template-columns: max-content auto max-content;
     grid-gap: $global-margin;
-  }
-}
-
-topbar .button {
-  box-shadow: none;
-}
-
-topbar .cell {
-  @include media-query(sm){
-    align-self: center;
+    align-items: center;
   }
 }
 
 
-topbar .cell.insights-logo {
+// Topbar layout
+//==================================================================*/
 
+topbar > * {
+  @include media-query(sm) {
+    align-items: center;
+  }
 }
 
 
-topbar .cell.global-filters {
 
-}
-
-
-topbar .cell.topbar-utilities {
-
-}
-
+// Topbar elements
+//==================================================================*/
 
 topbar {
 
@@ -82,6 +77,8 @@ topbar {
     }
   }
 
+  .button { box-shadow: none; }
+
   .sep {
     color: $gray-md;
 
@@ -90,8 +87,6 @@ topbar {
 }
 
 topbar .global-filters { 
-
-
   label { margin: 0; } 
 }
 
