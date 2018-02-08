@@ -1,17 +1,15 @@
 .platform-grid {
   @include media-query(sm){
     display: grid;
-    grid-template-rows: max-content auto max-content;
     grid-template-areas: "topbar"
                       "main"
                       "primary-nav";    
-    height: 100%;
+    height: 100vh;
   }
 
 
   @include media-query(sm){
     grid-template-columns: max-content 1fr;
-    grid-template-rows: minmax(30px, max-content) 1fr;
     grid-template-areas: "topbar topbar"
                         "primary-nav main";    
   }
