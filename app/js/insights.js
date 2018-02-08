@@ -77,7 +77,7 @@ function bootstrap() {
 }
 
 function whenDomReady(fn) {
-    if (document.readyState === 'complete') {
+    if (document.readyState !== 'loading') {
         fn();
         return;
     }
