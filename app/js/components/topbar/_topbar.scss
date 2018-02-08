@@ -4,6 +4,7 @@ $topbar-border-color: #ddd;
 
 
 topbar {
+  display: block;
   @include rem('padding', $global-margin);
   background: $topbar-bg;
   border-bottom: 4px solid $topbar-border-color;
