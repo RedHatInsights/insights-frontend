@@ -1,22 +1,13 @@
+/*global require, module*/
 'use strict';
 
-var componentsModule = require('../../');
+const componentsModule = require('../../');
+const pub = {};
 
-/**
- * @ngInject
- */
-function ruleToggleCtrl($scope, Ack, InsightsConfig, gettextCatalog) {
-    function init() {
-        $scope.text = gettextCatalog.getString('Ignore Rule');
+pub.ackAction = ($scope, Ack) => {
+    return () => {
         if ($scope.rule && $scope.rule.ack_id) {
-            $scope.text = gettextCatalog.getString('Unignore Rule');
-        }
-    }
-
-    $scope.ackAction = function () {
-        if ($scope.rule && $scope.rule.ack_id) {
-
-            Ack.deleteAck({id:$scope.rule.ack_id});
+            Ack.deleteAck({id: $scope.rule.ack_id});
             $scope.rule.ack_id = null;
         } else {
             Ack.createAck($scope.rule).then(function (ack) {
@@ -24,9 +15,25 @@ function ruleToggleCtrl($scope, Ack, InsightsConfig, gettextCatalog) {
             });
         }
     };
+};
 
-    init();
-    $scope.$watch('rule.ack_id', init);
+pub.init = ($scope, gettextCatalog) => {
+    $scope.text = gettextCatalog.getString('Ignore Rule');
+    if ($scope.rule && $scope.rule.ack_id) {
+        $scope.text = gettextCatalog.getString('Unignore Rule');
+    }
+
+};
+
+/**
+ * @ngInject
+ */
+function ruleToggleCtrl($scope, Ack, InsightsConfig, gettextCatalog) {
+    $scope.ackAction = pub.ackAction($scope, Ack);
+
+    pub.init($scope, gettextCatalog)();
+
+    $scope.$watch('rule.ack_id', pub.init($scope, gettextCatalog));
 }
 
 function ruleToggle() {
@@ -41,3 +48,7 @@ function ruleToggle() {
 }
 
 componentsModule.directive('ruleToggle', ruleToggle);
+
+if (componentsModule.testMode) {
+    module.exports.pub = pub;
+}
