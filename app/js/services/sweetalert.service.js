@@ -20,7 +20,13 @@ function sweetAlert($rootScope, $q, gettextCatalog) {
     return function (options) {
         const opts = angular.extend({}, DEFAULTS, options);
         const defer = $q.defer();
-        swal(opts).then(defer.resolve).catch(defer.reject);
+        swal(opts).then(result => {
+            if (result.dismiss) {
+                return defer.reject();
+            }
+
+            defer.resolve(result.value);
+        }).catch(defer.reject);
         return defer.promise;
     };
 }

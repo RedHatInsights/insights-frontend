@@ -30,76 +30,12 @@ md-menu-content {
   }
 }
 
-// .insights-dropdown {
-//   .dropdown-menu {
-//     padding-left: 0;
-//     a { font-weight: 600; }
-//   }
-
-//   .dropdown-toggle {
-//     color: #515258;
-//     font-size: 1em;
-//     font-weight: bold;
-//     padding: 0.375rem 10px;
-//   }
-
-//   .dropdown-caret {
-//     margin-left: 5px;
-//   }
-// }
-
-
-// topbar ul.dropdown-menu{
-//   max-height: 75vh;
-//   overflow: scroll;
-// }
-
-// .dropdown {
-
-//   [translate] { display: inline-block; }
-
-//   a.link {
-//     color: #2097E7;
-//     text-decoration: none;
-
-//     &:hover {
-//       color: darken(#2097E7, 10);
-//     }
-//   }
-
-//   button.btn,
-//   button {
-//     text-align: left;
-//     border: 1px solid #c5c7c9;
-//     text-transform: none;
-
-
-//     .caret {
-//       transition: .2s;
-//       @include rem('margin-left', $global-padding/2);
-//     }
-//   }
-
-//   .dropdown-menu {
-//     padding: 0;
-//     background: #FCFCFC;
-//     border: 1px solid #c5c7c9;
-//     min-width: 100%;
-
-//     li > a {
-//       display: block;
-//       @include rem('padding', $global-padding);
-//     }
-//     li a { @include rem('padding', $global-padding); }
-//   }
-// }
-
 .dropdown.gray {
   button {
     background: #f7fafc;
-    border: 1px solid #c5c7c9;
   }
 }
+
 
 .dropdown.dropdown-blue,
 .ui-select-bootstrap.dropdown.dropdown-blue {
@@ -111,10 +47,8 @@ md-menu-content {
     line-height: $dropdown-blue-line-height;
   }
 
-  .btn span { color: #fff; }
-
   input[type="search"] {
-    @include rem('padding', 12px 30px 12px 12px);
+    // @include rem('padding', 12px 30px 12px 12px);
     @include font-size(14px);
     line-height: $dropdown-blue-line-height;
   }
@@ -124,55 +58,20 @@ md-menu-content {
 }
 
 .ui-select-bootstrap.dropdown {
-  .form-control {
-    height: auto;
-    width: auto;
-  }
 
   .btn {
     color: #333;
     background: none;
-    @include rem('padding', 7px $global-margin 7px 12px);
+    box-shadow: none;
     text-transform: none;
-  }
-
-  .ui-select-toggle,
-  input[type="search"] {
-    @include rem('padding', 12px 30px 12px 12px);
   }
 
   input:placeholder-shown {  }
 }
 
 
-.dropdown.full-width {
-  button { width: 100%; }
-
-  .caret {
-    float: right;
-    margin-top: 6px;
-  }
-}
-
-.ui-filters .dropdown {
-  button { width: 100%; }
-  .caret {
-    float: right;
-    margin-top: 6px;
-  }
-}
-
-.dropdown.open .caret {
-  transform: rotate(180deg);
-}
-
 .dropdown.inline {
   display: inline-block;
   width: auto;
 } 
 
-.dropdown-menu {
-  .icon-inline-right i {
-    right: $global-padding;;
-  }
-}
