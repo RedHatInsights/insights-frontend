@@ -69,6 +69,7 @@
     "gulp-jscs": "~4.1.x",
     "gulp-jscs-stylish": "~1.4.x",
     "gulp-jshint": "^2.0.4",
+    "gulp-mocha": "^5.0.0",
     "gulp-notify": "~3.2.x",
     "gulp-plumber": "~1.2.x",
     "gulp-protractor": "~4.1.x",

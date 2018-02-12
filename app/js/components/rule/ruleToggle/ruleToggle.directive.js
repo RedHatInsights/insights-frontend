@@ -3,6 +3,12 @@
 
 const componentsModule = require('../../');
 const pub = {};
+const priv = {
+    text: {
+        UNIGNORE_RULE: 'Unignore Rule',
+        IGNORE_RULE: 'Ignore Rule'
+    }
+};
 
 pub.ackAction = ($scope, Ack) => {
     return () => {
@@ -18,11 +24,10 @@ pub.ackAction = ($scope, Ack) => {
 };
 
 pub.init = ($scope, gettextCatalog) => {
-    $scope.text = gettextCatalog.getString('Ignore Rule');
+    $scope.text = gettextCatalog.getString(priv.text.IGNORE_RULE);
     if ($scope.rule && $scope.rule.ack_id) {
-        $scope.text = gettextCatalog.getString('Unignore Rule');
+        $scope.text = gettextCatalog.getString(priv.text.UNIGNORE_RULE);
     }
-
 };
 
 /**
@@ -48,7 +53,7 @@ function ruleToggle() {
 }
 
 componentsModule.directive('ruleToggle', ruleToggle);
-
 if (componentsModule.testMode) {
     module.exports.pub = pub;
+    module.exports.priv = priv;
 }
