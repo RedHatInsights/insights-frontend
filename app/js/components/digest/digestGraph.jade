@@ -16,5 +16,5 @@
         i.fa.fa-cog
       md-menu-content.exec-dropdown(aria-labelledby="#exec-dropdown")
         md-menu-item(ng-repeat='trace in traces track by trace.name', ng-click='$event.stopPropagation()')
-          md-checkbox.md-accent.md-hue-1.category-checkbox(ng-model='trace.enabled', ng-click='toggleTrace(trace)') {{:: trace.name}}
+          md-checkbox.md-accent.md-hue-1.category-checkbox(ng-model='trace.enabled') {{:: trace.name}}
   .digest-graph
