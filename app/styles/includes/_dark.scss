@@ -1,0 +1,137 @@
+// Vars
+// $d-body: #1e2021;
+// $d-accent: #262626;
+// $d-highlight: #434343;
+//$d-font: #dcdcdc;
+
+
+
+$step: .13;
+$d-main: #141414;
+$d-1: lighten($d-main, 5%); // Normal Color
+$d-2: lighten($d-main, 15%); // Highlight Color
+$d-3: lighten($d-main, 25%);
+$d-4: lighten($d-main, 52%);
+$d-5: lighten($d-main, 65%);
+$d-6: lighten($d-main, 78%);
+$d-font: #d5d6d5;
+$d-link: #00b7ff;
+$d-red: #502d2d;
+
+
+// Layout and Scaffolding
+
+.platform-grid.dark{
+  color: $d-font !important;
+  a { color: $d-link; }
+  strong { color: $d-font; }
+
+  // Main
+  main {
+    background: $d-main !important;
+  }
+
+  // Topbar
+  topbar.top-bar{
+    background: $d-1;
+    border-bottom: 4px solid $d-2;
+    md-icon, i, .sep, span { color: $d-font; }
+    a.link.add-group {
+      color: $d-link;
+      opacity: .75;
+    }
+  }
+
+  // Primary Navigation
+  .primary-nav {
+    input.accNumbInput { background: $d-2; }
+    background: $d-1;
+    span { color: $d-font; }
+  }
+
+  // Page Header
+  .page-header{
+    background: $d-main;
+    span, i { color: $d-font; }
+  }
+
+
+  .actionbar{
+    background: $d-main !important;
+    button { background: $d-font; }
+  }
+
+  footer {
+    background: $d-1 !important;
+  }
+}
+
+
+// Global Components
+.dark {
+
+  // Cards
+  md-card {
+    color: $d-font;
+    background: $d-2;
+    h1, h2, h3, h4, h5, h6 { color: $d-font; }
+    &-header{
+      background: $d-1 !important;
+      border-bottom: 1px solid $d-2;
+    }
+    &-content, &-footer{ color: $d-font; }
+  }
+
+  // Tables
+  .table-header {
+    span, i { color: $d-font; }
+    a.link.active i { color: $d-link; }
+    .dropdown button {
+      background: $d-2;
+      &.open { color: $d-1; }
+    }
+  }
+
+  table {
+    thead tr { border-bottom: 2px solid $d-3 !important; }
+    td { border: none !important; }
+    tr:nth-child(even) { background: $d-1; }
+    md-checkbox .md-icon { border-color: $d-font !important; }
+    tbody tr.stale:nth-child(2n+1) { background: $d-red; }
+  }
+
+  // Inputs and Filters
+  input { background: $d-1; }
+  .button-filter { color: $d-font; }
+
+  .breadcrumbs { background: $d-1; }
+
+  code {
+    background: $d-4;
+    color: $d-main;
+  }
+
+  md-tab-item { color: $d-font;}
+
+}
+
+
+// Individual Pages for specificity
+.dark {
+
+  .page-overview {
+    .progress-bar .bar { background: $d-1; }
+    .incident-lite { background: $d-2; }
+    table thead th { border-bottom: 2px solid $d-3; }
+  }
+
+  .actions-page {
+    .section-featured-topics {
+      background: $d-main !important;
+    }
+  }
+
+  .page-inventory{
+    
+    }
+}

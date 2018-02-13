@@ -1,6 +1,7 @@
 .cell.insights-logo
   button.toggle-fullscreen(ng-click='sidenavCollapsed = !sidenavCollapsed')
     md-icon(md-font-icon="fa fa-indent")
+  //md-button(ng-click='dark = !dark') Active dark mode
 
   md-button(ng-click="toggleLeft()",
     class="md-primary",
@@ -16,6 +17,8 @@
 
 .cell.topbar-utilities
   feedback-button.btn-feedback
+  span.sep
+  i.fa.fa-moon-o(ng-click='dark = !dark')
   span.sep
   menu.notifications
     bullhorn(icon='fa-bullhorn', type='announcements')
