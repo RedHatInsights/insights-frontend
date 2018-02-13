@@ -9,6 +9,7 @@ function insButton() {
             type: '@',
             size: '@'
         },
+        transclude: true,
         templateUrl: 'js/components/buttons/ins-button/ins-button.html',
         restrict: 'E',
         replace: true
