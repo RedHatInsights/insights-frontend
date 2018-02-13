@@ -62,7 +62,7 @@ $d-red: #502d2d;
   }
 
   footer {
-    background: $d-1 !important;
+    background: $d-1;
   }
 }
 
@@ -80,6 +80,10 @@ $d-red: #502d2d;
       border-bottom: 1px solid $d-2;
     }
     &-content, &-footer{ color: $d-font; }
+  }
+
+  .card-group header{
+    background: $d-1;
   }
 
   // Tables
@@ -100,18 +104,31 @@ $d-red: #502d2d;
     tbody tr.stale:nth-child(2n+1) { background: $d-red; }
   }
 
+
+  // Spinner
+  .spinner {
+    border-bottom: 4px solid rgba($d-4, 0.25);
+    border-left: 4px solid rgba($d-4, 0.25);
+    border-right: 4px solid rgba($d-4, 0.25);
+    border-top: 4px solid rgba($d-4, 0.75);
+  }
+
   // Inputs and Filters
   input { background: $d-1; }
+
   .button-filter { color: $d-font; }
 
   .breadcrumbs { background: $d-1; }
 
+  // Code blocks
   code {
     background: $d-4;
     color: $d-main;
   }
 
   md-tab-item { color: $d-font;}
+
+  .widget .progress-bar .bar { background: $d-1; }
 
 }
 
@@ -120,7 +137,6 @@ $d-red: #502d2d;
 .dark {
 
   .page-overview {
-    .progress-bar .bar { background: $d-1; }
     .incident-lite { background: $d-2; }
     table thead th { border-bottom: 2px solid $d-3; }
   }
@@ -129,9 +145,21 @@ $d-red: #502d2d;
     .section-featured-topics {
       background: $d-main !important;
     }
+
+    .donut-container {
+      .rha-telemetry-donut::before { background: $d-main; }
+      .donut-hole {
+        .num, span { color: $d-font;}
+        background: $d-main;
+      }
+      path { stroke: $d-main; }
+    }
   }
 
-  .page-inventory{
-    
+  .digests-page{
+    .gauge {
+      .grad::after { background: $d-2; }
+      .footer { background: $d-2; }
     }
+  }
 }
