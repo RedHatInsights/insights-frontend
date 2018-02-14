@@ -18,7 +18,9 @@
 .cell.topbar-utilities
   feedback-button.btn-feedback
   span.sep
-  i.fa.fa-moon-o.dark-mode-button(ng-click='dark = !dark')
+  md-button.dark-mode-button(ng-click='dark = !dark')
+    i.fa.fa-moon-o(ng-if='!dark')
+    i.fa.fa-sun-o(ng-if='dark')
   span.sep
   menu.notifications
     bullhorn(icon='fa-bullhorn', type='announcements')

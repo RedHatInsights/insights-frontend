@@ -19,12 +19,18 @@ $d-link: #00b7ff;
 $d-red: #502d2d;
 
 
+button.dark-mode-button {
+  @include rem('padding', 5px);
+  border-radius: 20px;
+}
+
 // Layout and Scaffolding
 
 .platform-grid.dark{
   color: $d-font !important;
   a { color: $d-link; }
   strong { color: $d-font; }
+  span { text-shadow: none !important; }
 
   // Main
   main {
