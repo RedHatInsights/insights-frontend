@@ -1,0 +1,4 @@
+.ins-button
+  md-button(class="md-{{::color}} md-{{::type}} {{::size}}", ng-disabled="{{::disabled}}")
+    span(ng-transclude)
+    i.fa(class="{{::icon}}", ng-if="icon")

@@ -1,0 +1,34 @@
+// MIXINS
+//==================================================================*/
+@mixin ghost-button($color) {
+  background: #fff;
+  border: 1px solid $color;
+}
+
+// Regular Button
+// TODO: Make .small + .large styles
+//==================================================================*/
+.ins-button {
+  i { @include rem('padding-left', 5px); }
+}
+
+
+// Floating Action Button (Fab) - only icon
+//==================================================================*/
+.ins-button-fab {
+  button {
+    border-radius: 50px;
+    @include rem('padding', 10px);
+  }
+
+  .small { @include rem('padding', 5px); }
+  .large { @include rem('padding', 15px); }
+}
+
+// More Styles
+//==================================================================*/
+button.md-ghost{
+  @include ghost-button($black-base);
+  &.md-primary{ @include ghost-button($blue-light); }
+  &.md-warn{ @include ghost-button($warn); }
+}
