@@ -2,10 +2,17 @@
 
 var componentsModule = require('../../');
 
+function insButtonCtrl ($scope) {
+    $scope.styles = {
+        primary: "md-primary md-raised",
+        secondary: "md-accent md-raised",
+        ghost: "md-primary md-ghost"
+    };
+}
+
 function insButton() {
     return {
         scope: {
-            color: '@',
             type: '@',
             size: '@',
             disabled: '@',
@@ -14,14 +21,14 @@ function insButton() {
         transclude: true,
         templateUrl: 'js/components/buttons/ins-buttons/ins-button.html',
         restrict: 'E',
-        replace: true
+        replace: true,
+        controller: insButtonCtrl
     };
 }
 
 function insButtonFab() {
     return {
         scope: {
-            color: '@',
             type: '@',
             size: '@',
             disabled: '@',
@@ -30,7 +37,8 @@ function insButtonFab() {
         transclude: true,
         templateUrl: 'js/components/buttons/ins-buttons/ins-button-fab.html',
         restrict: 'E',
-        replace: true
+        replace: true,
+        controller: insButtonCtrl
     };
 }
 
