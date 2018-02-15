@@ -6,7 +6,8 @@ function insButtonCtrl ($scope) {
     $scope.styles = {
         primary: 'md-primary md-raised',
         secondary: 'md-accent md-raised',
-        ghost: 'md-primary md-ghost'
+        ghost: 'md-primary md-ghost',
+        clear: 'clear'
     };
 }
 

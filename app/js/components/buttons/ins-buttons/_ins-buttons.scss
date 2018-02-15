@@ -16,10 +16,16 @@
   i { @include rem('padding-left', 5px); }
 }
 
+.ins-button button.clear {
+  background: transparent;
+}
 
 // Disabled Button
 //==================================================================*/
-.ins-button button[disabled="disabled"] { cursor: not-allowed; }
+.ins-button button[disabled="disabled"] {
+  cursor: not-allowed;
+  border: 1px solid $gray-lite;
+}
 
 
 // Floating Action Button (Fab) - only icon
