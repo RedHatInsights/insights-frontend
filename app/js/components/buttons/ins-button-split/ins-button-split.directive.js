@@ -6,9 +6,9 @@ const componentsModule = require('../../');
 /**
  * @ngInject
  */
-function buttonSplit() {
+function insButtonSplit() {
     return {
-        templateUrl: 'js/components/buttons/button-split/button-split.html',
+        templateUrl: 'js/components/buttons/ins-button-split/ins-button-split.html',
         restrict: 'E',
         replace: true,
         controller: angular.noop,
@@ -17,8 +17,8 @@ function buttonSplit() {
             disabled: '=?ngDisabled'
         },
         transclude: {
-            main: 'buttonSplitMain',
-            items: 'buttonSplitItem'
+            main: 'insButtonSplitMain',
+            items: 'insButtonSplitItem'
         },
         link: function ($scope, $element, $attr, ctrl) {
             ctrl.classes = $attr.class;
@@ -32,13 +32,13 @@ function buttonSplit() {
 /**
  * @ngInject
  */
-function buttonSplitMain() {
+function insButtonSplitMain() {
     return {
-        templateUrl: 'js/components/buttons/button-split/button-split-main.html',
+        templateUrl: 'js/components/buttons/ins-button-split/ins-button-split-main.html',
         restrict: 'E',
         replace: false,
         transclude: true,
-        require: '^buttonSplit',
+        require: '^insButtonSplit',
         link: function ($scope, element, attr, ctrl) {
             $scope.ctrl = ctrl;
         }
@@ -48,16 +48,16 @@ function buttonSplitMain() {
 /**
  * @ngInject
  */
-function buttonSplitItem() {
+function insButtonSplitItem() {
     return {
-        templateUrl: 'js/components/buttons/button-split/button-split-item.html',
+        templateUrl: 'js/components/buttons/ins-button-split/ins-button-split-item.html',
         restrict: 'E',
         replace: true,
         transclude: true,
-        require: '^buttonSplit'
+        require: '^insButtonSplit'
     };
 }
 
-componentsModule.directive('buttonSplit', buttonSplit);
-componentsModule.directive('buttonSplitItem', buttonSplitItem);
-componentsModule.directive('buttonSplitMain',  buttonSplitMain);
+componentsModule.directive('insButtonSplit', insButtonSplit);
+componentsModule.directive('insButtonSplitItem', insButtonSplitItem);
+componentsModule.directive('insButtonSplitMain',  insButtonSplitMain);

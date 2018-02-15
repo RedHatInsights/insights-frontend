@@ -1,13 +1,13 @@
 // Vars
 //==================================================================*/
-$button-split-button: '.md-button';
-$button-split-menu:   '.md-menu';
+$ins-button-split-button: '.md-button';
+$ins-button-split-menu:   '.md-menu';
 
 
 // Button split
 //==================================================================*/
 
-.button-split {
+.ins-button-split {
   display: inline-flex;
 
   > * {
@@ -19,14 +19,14 @@ $button-split-menu:   '.md-menu';
 // Button split - first button
 //==================================================================*/
 
-.button-split {
+.ins-button-split {
 
-  > #{$button-split-button} {
+  > #{$ins-button-split-button} {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  > #{$button-split-menu} button {
+  > #{$ins-button-split-menu} button {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     height: 100%;
