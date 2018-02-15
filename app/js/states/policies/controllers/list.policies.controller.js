@@ -84,6 +84,10 @@ function ListPoliciesCtrl($filter, $location, $scope, gettextCatalog, Policy, Ut
         reloadTable();
     }
 
+    $scope.$on('group:change', function () {
+        getData(false);
+    });
+
     getData();
 
 }

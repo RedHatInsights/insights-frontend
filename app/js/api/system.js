@@ -357,6 +357,7 @@ function System(
             url.segment(systemId);
             url.segment('policies');
             url.addSearch(AccountService.queryParam());
+            url.addSearch(Group.queryParam());
             return $http.get(url.toString());
         }
     };

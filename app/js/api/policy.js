@@ -7,7 +7,7 @@ const URI = require('urijs');
 /**
  * @ngInject
  */
-function Policy($http, AccountService, InsightsConfig) {
+function Policy($http, AccountService, Group, InsightsConfig) {
 
     const policiesUri = 'policies';
     const policyResults = 'results';
@@ -19,6 +19,7 @@ function Policy($http, AccountService, InsightsConfig) {
             let url = URI(root);
             url.segment(policiesUri);
             url.addSearch(AccountService.queryParam());
+            url.addSearch(Group.queryParam());
 
             if (params) {
                 url.addSearch(params);
@@ -32,6 +33,7 @@ function Policy($http, AccountService, InsightsConfig) {
             url.segment(policiesUri);
             url.segment(id);
             url.addSearch(AccountService.queryParam());
+            url.addSearch(Group.queryParam());
 
             return $http.get(url.toString());
         },
@@ -42,6 +44,7 @@ function Policy($http, AccountService, InsightsConfig) {
             url.segment(id);
             url.segment(policyResults);
             url.addSearch(AccountService.queryParam());
+            url.addSearch(Group.queryParam());
 
             if (params) {
                 url.addSearch(params);
