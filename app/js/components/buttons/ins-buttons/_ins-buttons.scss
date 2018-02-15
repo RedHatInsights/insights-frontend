@@ -5,13 +5,21 @@
   border: 1px solid $color;
 }
 
+
 // Regular Button
 //==================================================================*/
 .ins-button button{
+  color: $black-base;
+  background: $gray-light;
   &.small { @include rem('padding', 7px 12px); }
   &.large { @include rem('padding', 15px 25px); }
   i { @include rem('padding-left', 5px); }
 }
+
+
+// Disabled Button
+//==================================================================*/
+.ins-button button[disabled="disabled"] { cursor: not-allowed; }
 
 
 // Floating Action Button (Fab) - only icon
