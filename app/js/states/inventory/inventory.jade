@@ -86,6 +86,8 @@
           items-per-page="pager.perPage",
           ng-change="doScroll()")
 
+    system-table(ng-if='getListType() === listTypes.table', get-systems="getData2", default-predicate="{{:: defaultPredicate}}")
+
   .animate-wrapper.margin-top
     .row.row-short.ng-animate-enabled(ng-if='loading')
       .col-xs-12

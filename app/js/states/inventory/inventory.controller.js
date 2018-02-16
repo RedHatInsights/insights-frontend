@@ -38,6 +38,7 @@ function InventoryCtrl(
 
     $scope.Group = Group;
     $scope.filter = FilterService;
+    $scope.defaultPredicate = $location.search().sort_field || DEFAULT_PREDICATE;
 
     function updateParams(params) {
         params = FilterService.updateParams(params);
@@ -137,10 +138,6 @@ function InventoryCtrl(
 
         //initialize pager and grab paging params from url
         $scope.pager = new Utils.Pager(DEFAULT_PAGE_SIZE);
-        $scope.pager.currentPage = $location.search().page ? $location.search().page :
-                                                             $scope.pager.currentPage;
-        $scope.pager.perPage = $location.search().pageSize ? $location.search().pageSize :
-                                                             $scope.pager.perPage;
 
         //get system types
         SystemsService.getSystemTypesAsync().then(function () {
@@ -205,6 +202,8 @@ function InventoryCtrl(
             InventoryService.setTotal(response.total);
 
             SystemsService.systems = $scope.systems;
+
+            return $scope.systems;
         }
 
         let query = buildRequestQueryParams(true);
@@ -224,6 +223,64 @@ function InventoryCtrl(
                 InventoryService.loading = $scope.loading = $scope.reloading = false;
             });
     }
+
+    function buildRequestQueryParams2 (paginate, sorter, pager) {
+        const query = FilterService.buildRequestQueryParams();
+
+        // offline / systems not checking in
+        if (FilterService.getOffline() !== FilterService.getOnline()) {
+            query.offline = FilterService.getOffline().toString();
+        }
+
+        //search term
+        if (FilterService.getSearchTerm()) {
+            query.search_term = FilterService.getSearchTerm();
+        }
+
+        //sort field/direction
+        query.sort_by = sorter.predicate;
+        FilterService.setQueryParam('sort_field', sorter.predicate);
+        FilterService.setQueryParam('sort_dir', sorter.getSortDirection());
+
+        // special case where we are sorting by timestamp but visually
+        // showing timeago
+        if ($scope.sorter.predicate === 'last_check_in') {
+            query.sort_dir = sorter.getSortDirection() === 'ASC' ? 'DESC' : 'ASC';
+        } else {
+            query.sort_dir = sorter.getSortDirection();
+        }
+
+        //pagination
+        if (paginate) {
+            query.page_size = pager.perPage;
+
+            // programmatic page starts at 0 while ui page starts at 1
+            query.page = (pager.currentPage - 1);
+        }
+
+        return query;
+    }
+
+    $scope.getData2 = function (paginate, sorter, pager) {
+        function getSystemsResponseHandler(response) {
+            InventoryService.setTotal(response.data.total);
+            SystemsService.systems = response.data.resources;
+
+            return response;
+        }
+
+        let query = buildRequestQueryParams2(true, sorter, pager);
+
+        let promise = null;
+        if (FilterService.getParentNode() !== null) {
+            query.includeSelf = true;
+            promise = System.getSystemLinks(FilterService.getParentNode(), query);
+        } else {
+            promise = System.getSystemsLatest(query);
+        }
+
+        return promise.then(getSystemsResponseHandler);
+    };
 
     $scope.applyActionFilter = function (filter) {
         $scope.actionFilter = filter;
@@ -317,6 +374,22 @@ function InventoryCtrl(
         $scope.reallyAllSelected = false;
         $scope.allSelected = false;
         $scope.checkboxes.reset();
+    };
+
+    $scope.getAllSystems = function () {
+        // For when ALL are selected, not just all visible
+        // condensed version of 'getData()'
+        let query = buildRequestQueryParams(false);
+        let promise = null;
+
+        if (FilterService.getParentNode() !== null) {
+            query.includeSelf = true;
+            promise = System.getSystemLinks(FilterService.getParentNode(), query);
+        } else {
+            promise = System.getSystemsLatest(query);
+        }
+
+        return promise;
     };
 
     $scope.reallySelectAll = function () {
@@ -447,11 +520,6 @@ function InventoryCtrl(
         };
         $scope.showActions(system, true);
     }
-
-    $scope.reloadInventory = function () {
-        cleanTheScope();
-        getData(false);
-    };
 }
 
 statesModule.controller('InventoryCtrl', InventoryCtrl);

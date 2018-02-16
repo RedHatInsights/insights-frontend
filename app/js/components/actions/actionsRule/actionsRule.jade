@@ -90,7 +90,7 @@
               ng-model='checkboxes.checked',
               ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, ruleSystems)')
           th.min.sortable(ng-class="predicate | sortClass:'system_type_id':reverse", ng-click="sort('system_type_id')", translate) Type
-          th.sortable(ng-class="predicate | sortClass:'toString':reverse", ng-click="sort('toString')", translate) Name
+          th.sortable(ng-class="sorter.getSortClass('system_type_id')", ng-click="sorter.sort('system_type_id')", translate) Name
           th.min.sortable(ng-class="predicate | sortClass:'last_check_in':!reverse", ng-click="sort('last_check_in')", translate) Reported
 
       tbody(ng-hide='loadingSystems')

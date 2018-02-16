@@ -1,32 +1,91 @@
-.col-md-6.group-list
-  label.full-width {{::title | translate}}
-  input.filter.full-width(placeholder="{{'Filter' | translate}}", type="text", ng-model='systemsFilter', ng-model-options="{ debounce: 100 }", ng-change='filterSystems()')
-  .filters-table
-    .row
-      .col-xs-6
-        label.select-all
-          input(type="checkbox", ng-model="checkboxes.checked", ng-indeterminate="indeterminate")
-          span(translate) Select Visible
-      .col-xs-6
-        .pull-right.flush-right
-          span(translate) Items
-          .dropdown-select.dropdown-select-horizontal
-            select(ng-model="itemsPerPage", ng-options="i for i in items track by i")
-  div(ng-class="{'scrollable scrollable-table': _filteredSystems.length > 10}")
-    table.table.no-header.table-groups
-      tbody
-        tr.ng-animate-disabled(ng-repeat="system in _filteredSystems = (filteredSystems | offset:((currentPage-1)*itemsPerPage) | limitTo:itemsPerPage)", data-id="{{:: system.system_id}}", ng-click="rowClick($event)", ng-mousedown="rowClick($event)")
-          td
-            label
-              input(type="checkbox", ng-model="checkboxes.items[system.system_id]")
-              span.hostname {{:: system.toString}}
-  .row.groups-footer
-    .col-xs-12.col-md-5
-      a.link(ng-if="type === 'in'", ng-disabled="!totalChecked", ng-click="removeSystems()")
-        i.fa.fa-minus
-        span(translate)  Remove Systems
-      a.link(ng-if="type !== 'in'", ng-disabled="!totalChecked", ng-click="addSystems()")
-        i.fa.fa-plus
-        span(translate)  Add Systems
-    .col-xs-12.col-md-7
-      pagination.pull-right.pagination-gray(ng-hide="total <= itemsPerPage", total-items="total", ng-model="currentPage", previous-text="«", next-text="»", max-size="3", rotate="false", items-per-page="itemsPerPage", ng-change="pageChanged()")
+.system-table
+  //- Actions button
+  button.btn.btn-default.dropdown-toggle(
+        data-toggle='dropdown',
+        aria-haspopup='true',
+        aria-expanded='false',
+        translate,
+        ng-disabled='!checkboxes.totalChecked && !loading') Actions
+          span.caret
+  ul.dropdown-menu(ng-if="!loading")
+    li(ng-if='config.isPlannerEnabled')
+      a(ng-click='addToPlan(false)',
+      ng-disabled='!isFixableSelected()',
+      translate) Create a new Plan/Playbook
+        ansible-icon.inline-left(
+        value='isFixableSelected()',
+        show-tooltip='false')
+    li(ng-if='config.isPlannerEnabled')
+      a(ng-click='addToPlan(true)',
+      ng-disabled='!isFixableSelected() || (!plans.future.length && !plans.unscheduled.length)',
+      translate) Add to existing Plan/Playbook
+        ansible-icon.inline-left(
+        value='isFixableSelected() && (plans.future.length || plans.unscheduled.length)',
+        show-tooltip='false')
+    li
+      a(ng-click='groupSystems(systemsToAction())', translate) Group systems
+    li(ng-if='Group.current().id')
+      a(ng-click='removeFromGroup()')
+        span(translate,
+          translate-n='systemsToAction().length',
+          translate-plural='Remove systems from group') Remove system from group
+        strong &nbsp;{{Group.current().display_name}}
+    li(tooltip='{{:: unregisterButtonTooltip}}')
+      a.pointer-events-auto(
+      ng-disabled='!isUnregistrableSelected()',
+      ng-click='isUnregistrableSelected() && doUnregisterSelected()',
+      translate) Unregister
+
+  //- Impacted Systems Header
+  span(ng-if='!loading')
+    h3.system-count(translate, translate-n='totalSystems', translate-plural='{{:: $count}} Systems') 1 System
+    small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected
+      span(ng-if='allSelected && pager.perPage < systems.length') .
+        a(ng-if='!reallyAllSelected', ng-click='reallySelectAll()', translate) &nbsp;Select All Systems.
+        a(ng-if='reallyAllSelected', ng-click='deselectAll()', translate) &nbsp;Deselect All Systems.
+      span )
+
+  table
+    thead
+      tr
+        th.min
+          md-checkbox.md-accent.md-hue-1.md-checkbox-list(
+            tooltip="{{:: 'Select All' | translate}}",
+            type="checkbox",
+            aria-label='Select All Systems Checkbox',
+            md-indeterminate="{{ checkboxes.indeterminate || false }}",
+            ng-model='checkboxes.checked',
+            ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, systems)')
+        th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'system_type_id':sorter.reverse", ng-click="sorter.sort('system_type_id')", translate) System Type
+        th.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse", ng-click="sorter.sort('toString')", translate) System Name
+        th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'last_check_in':sorter.reverse", ng-click="sorter.sort('last_check_in')", translate) Last Check In
+        th.min.sortable(ng-class="sorter.predicate | sortClass:'report_count':sorter.reverse", ng-click="sorter.sort('report_count')", translate) Status
+    tbody(ng-if='!loading')
+      tr(ng-repeat='system in ::systems track by system.system_id',
+         ng-class="{'stale': !system.isCheckingIn}",
+         ng-click='checkboxes.rowClick($event, system.system_id)',
+         ng-mousedown='checkboxes.rowClick($event, system.system_id)',
+         data-id="{{:: system.system_id}}")
+        td.min
+          md-checkbox.md-accent.md-hue-1.md-checkbox-list(
+            type='checkbox',
+            aria-label='Select System Checkbox',
+            ng-model='checkboxes.items[system.system_id]',
+            ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();')
+        td.fit-content
+          type-icon(type-id='system.system_type_id', include-text='true')
+        td.fit-content
+          a(ng-click="showActions(system)") {{:: system.toString}}
+        td.fit-content {{:: system.last_check_in | timeAgo }}
+        td.fit-content
+          a.action-count.icon-inline(ng-click='showActions(system)')
+            span.text(translate, translate-n="system.report_count", translate-plural="{{:: $count}} Actions") {{:: system.report_count}} Action
+            i.fa(ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count, 'success': !system.report_count, 'fail': system.report_count}")
+            span.sr-only Time to destination by car:
+
+  pagination.pull-right.pagination-blue(
+    ng-if="totalSystems > pager.perPage",
+    total-items="totalSystems",
+    ng-model="pager.currentPage",
+    items-per-page="pager.perPage",
+    ng-change="doScroll()")

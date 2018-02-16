@@ -8,21 +8,7 @@ const groupBy = require('lodash/groupBy');
 const values = require('lodash/values');
 const get = require('lodash/get');
 
-function Pager (perPage) {
-    this.perPage = perPage || 15;
-    this.reset();
-}
-
-Pager.prototype.update = function () {
-    this.offset = (this.currentPage - 1) * this.perPage;
-};
-
-Pager.prototype.reset = function () {
-    this.currentPage = 1;
-    this.update();
-};
-
-function Utils($filter, $rootScope, Events) {
+function Utils($filter, $rootScope, $location, Events) {
     var utils = {};
 
     utils.generateAccessors = function (pub, vars) {
@@ -208,7 +194,23 @@ function Utils($filter, $rootScope, Events) {
         });
     };
 
-    utils.Pager = Pager;
+    utils.Pager = function (perPage) {
+        this.perPage = perPage || 15;
+        this.reset();
+        this.currentPage = $location.search().page ? $location.search().page :
+                           this.currentPage;
+        this.perPage = $location.search().pageSize ? $location.search().pageSize :
+                       this.perPage;
+    };
+
+    utils.Pager.prototype.update = function () {
+        this.offset = (this.currentPage - 1) * this.perPage;
+    };
+
+    utils.Pager.prototype.reset = function () {
+        this.currentPage = 1;
+        this.update();
+    };
 
     utils.Checkboxes = function (idProperty) {
         var self = this;
