@@ -1,49 +1,50 @@
 .system-table
-  //- Actions button
-  button.btn.btn-default.dropdown-toggle(
-        data-toggle='dropdown',
-        aria-haspopup='true',
-        aria-expanded='false',
-        translate,
-        ng-disabled='!checkboxes.totalChecked && !loading') Actions
-          span.caret
-  ul.dropdown-menu(ng-if="!loading")
-    li(ng-if='config.isPlannerEnabled')
-      a(ng-click='addToPlan(false)',
-      ng-disabled='!isFixableSelected()',
-      translate) Create a new Plan/Playbook
-        ansible-icon.inline-left(
-        value='isFixableSelected()',
-        show-tooltip='false')
-    li(ng-if='config.isPlannerEnabled')
-      a(ng-click='addToPlan(true)',
-      ng-disabled='!isFixableSelected() || (!plans.future.length && !plans.unscheduled.length)',
-      translate) Add to existing Plan/Playbook
-        ansible-icon.inline-left(
-        value='isFixableSelected() && (plans.future.length || plans.unscheduled.length)',
-        show-tooltip='false')
-    li
-      a(ng-click='groupSystems(systemsToAction())', translate) Group systems
-    li(ng-if='Group.current().id')
-      a(ng-click='removeFromGroup()')
-        span(translate,
-          translate-n='systemsToAction().length',
-          translate-plural='Remove systems from group') Remove system from group
-        strong &nbsp;{{Group.current().display_name}}
-    li(tooltip='{{:: unregisterButtonTooltip}}')
-      a.pointer-events-auto(
-      ng-disabled='!isUnregistrableSelected()',
-      ng-click='isUnregistrableSelected() && doUnregisterSelected()',
-      translate) Unregister
+  .table-header
+    //- Actions button
+    button.btn.btn-default.dropdown-toggle(
+          data-toggle='dropdown',
+          aria-haspopup='true',
+          aria-expanded='false',
+          translate,
+          ng-disabled='!checkboxes.totalChecked && !loading') Actions
+            span.caret
+    ul.dropdown-menu(ng-if="!loading")
+      li(ng-if='config.isPlannerEnabled')
+        a(ng-click='addToPlan(false)',
+        ng-disabled='!isFixableSelected()',
+        translate) Create a new Plan/Playbook
+          ansible-icon.inline-left(
+          value='isFixableSelected()',
+          show-tooltip='false')
+      li(ng-if='config.isPlannerEnabled')
+        a(ng-click='addToPlan(true)',
+        ng-disabled='!isFixableSelected() || (!plans.future.length && !plans.unscheduled.length)',
+        translate) Add to existing Plan/Playbook
+          ansible-icon.inline-left(
+          value='isFixableSelected() && (plans.future.length || plans.unscheduled.length)',
+          show-tooltip='false')
+      li
+        a(ng-click='groupSystems(systemsToAction())', translate) Group systems
+      li(ng-if='Group.current().id')
+        a(ng-click='removeFromGroup()')
+          span(translate,
+            translate-n='systemsToAction().length',
+            translate-plural='Remove systems from group') Remove system from group
+          strong &nbsp;{{Group.current().display_name}}
+      li(tooltip='{{:: unregisterButtonTooltip}}')
+        a.pointer-events-auto(
+        ng-disabled='!isUnregistrableSelected()',
+        ng-click='isUnregistrableSelected() && doUnregisterSelected()',
+        translate) Unregister
 
-  //- Impacted Systems Header
-  span(ng-if='!loading')
-    h3.system-count(translate, translate-n='totalSystems', translate-plural='{{:: $count}} Systems') 1 System
-    small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected
-      span(ng-if='allSelected && pager.perPage < systems.length') .
-        a(ng-if='!reallyAllSelected', ng-click='reallySelectAll()', translate) &nbsp;Select All Systems.
-        a(ng-if='reallyAllSelected', ng-click='deselectAll()', translate) &nbsp;Deselect All Systems.
-      span )
+    //- Impacted Systems Header
+    .table-header-title(ng-if='!loading')
+      h3.system-count(translate, translate-n='totalSystems', translate-plural='{{:: $count}} Systems') 1 System
+      small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected
+        span(ng-if='allSelected && pager.perPage < systems.length') .
+          a(ng-if='!reallyAllSelected', ng-click='reallySelectAll()', translate) &nbsp;Select All Systems.
+          a(ng-if='reallyAllSelected', ng-click='deselectAll()', translate) &nbsp;Deselect All Systems.
+        span )
 
   table
     thead
