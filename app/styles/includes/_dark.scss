@@ -76,6 +76,11 @@ button.dark-mode-button {
 // Global Components
 .dark {
 
+  // Page Layout
+  .rule-detail-header {
+    .page-title h1 { color: $d-font; }
+  }
+
   // Cards
   md-card {
     color: $d-font;
@@ -108,6 +113,22 @@ button.dark-mode-button {
     tr:nth-child(even) { background: $d-1; }
     md-checkbox .md-icon { border-color: $d-font !important; }
     tbody tr.stale:nth-child(2n+1) { background: $d-red; }
+  }
+
+
+  // Pagination
+  .pagination {
+    li {
+      &.active a {
+        background: $d-4;
+        border: 1px solid #fff;
+      }
+      &:focus { background: red; }
+      a {
+        color: $d-font;
+        background: $d-1;
+      }
+    }
   }
 
 
