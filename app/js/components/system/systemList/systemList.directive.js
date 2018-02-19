@@ -14,8 +14,11 @@ const UNREGISTER_TYPE_CONFICT =
 /**
  * @ngInject
  */
-function systemTableCtrl($scope,
+function systemListCtrl($scope,
+                         $rootScope,
                          $location,
+                         $modal,
+                         $state,
                          Utils,
                          SystemsService,
                          InventoryService,
@@ -26,18 +29,25 @@ function systemTableCtrl($scope,
                          gettextCatalog,
                          TemplateService,
                          sweetAlert,
-                         Products) {
-
-    // used for debugging
-    // (function () {
-    //     console.log('pred', $scope.defaultPredicate);
-    // })();
+                         ListTypeService,
+                         FilterService,
+                         ActionbarService,
+                         Export,
+                         Products,
+                         User) {
 
     const DEFAULT_PAGE_SIZE = 15;
+    const DEFAULT_PREDICATE = 'toString';
+    const params = $state.params;
+    let systemModal = null;
 
+    $scope.state = $state.current.name;
     $scope.showSystemModal = InventoryService.showSystemModal;
     $scope.groupSystems = GroupService.groupSystems;
+    $scope.getListType = ListTypeService.getType;
+    $scope.listTypes = ListTypeService.types();
     $scope.plans = MaintenanceService.plans;
+    $scope.isPortal = InsightsConfig.isPortal;
     $scope.config = InsightsConfig;
     $scope.loading = true;
     $scope.allSelected = false;
@@ -90,6 +100,7 @@ function systemTableCtrl($scope,
     };
 
     priv.initSorter = function () {
+        const predicate = $scope.defaultPredicate || DEFAULT_PREDICATE;
         let reverse = false;
 
         if ($location.search().sort_dir) {
@@ -97,19 +108,19 @@ function systemTableCtrl($scope,
         }
 
         $scope.sorter = new Utils.Sorter({
-            predicate: $scope.defaultPredicate,
+            predicate: predicate,
             reverse: reverse
         }, priv.getData);
     };
 
     priv.getData = function (paginate) {
-        paginate = paginate || $scope.paginate;
+        paginate = paginate || $scope.paginate || true;
         $scope.loading = true;
 
         $scope.getSystems(paginate, $scope.sorter, $scope.pager)
-            .then(response => {
-                $scope.systems = response.data.resources;
-                $scope.totalSystems = response.data.total;
+            .then(res => {
+                $scope.systems = res.data.resources;
+                $scope.totalSystems = res.data.total;
                 $scope.loading = false;
             });
     };
@@ -128,7 +139,7 @@ function systemTableCtrl($scope,
 
         //get system types
         SystemsService.getSystemTypesAsync().then(() => {
-            priv.getData(false);
+            priv.getData(true);
         });
     };
 
@@ -153,20 +164,27 @@ function systemTableCtrl($scope,
 
     $scope.reallySelectAll = function () {
         // select ALL, not just all visible
-        if ($scope.allSystems === null) {
+        if (!$scope.allSystems) {
             // first load of all systems
             $scope.loading = true;
-            $scope.getAllSystems().then(res => {
-                $scope.allSystems = res.data.resources;
-                $scope.reallyAllSelected = true;
-                $scope.totalSystemsSelected = $scope.allSystems.length;
-                $scope.loading = false;
-            });
+            $scope.getAllSystems($scope.sorter, $scope.pager)
+                .then(res => {
+                    $scope.allSystems = res.data.resources;
+                    $scope.reallyAllSelected = true;
+                    $scope.totalSystemsSelected = $scope.allSystems.length;
+                    $scope.loading = false;
+                });
         } else {
             // already loaded, just set the flag
             $scope.reallyAllSelected = true;
             $scope.totalSystemsSelected = $scope.allSystems.length;
         }
+    };
+
+    $scope.deselectAll = function () {
+        $scope.reallyAllSelected = false;
+        $scope.allSelected = false;
+        $scope.checkboxes.reset();
     };
 
     $scope.systemsToAction = function () {
@@ -275,19 +293,77 @@ function systemTableCtrl($scope,
         }
     };
 
+    /**
+     * calls register new system modal
+     */
+    $scope.registerSystem = function () {
+        var systemLimitReached = false;
+        User.asyncCurrent(function (user) {
+            systemLimitReached = user.current_entitlements ?
+                user.current_entitlements.systemLimitReached :
+                !user.is_internal;
+
+            if (user.current_entitlements && user.current_entitlements.unlimitedRHEL) {
+                systemLimitReached = false;
+            }
+        });
+
+        openModal({
+            templateUrl: 'js/components/system/addSystemModal/' +
+                (systemLimitReached ? 'upgradeSubscription.html' : 'addSystemModal.html'),
+            windowClass: 'system-modal ng-animate-enabled',
+            backdropClass: 'system-backdrop ng-animate-enabled',
+            controller: 'AddSystemModalCtrl'
+        });
+    };
+
+    /**
+     * opens modal if a modal isn't currently opened
+     */
+    function openModal(opts) {
+        if (systemModal) {
+            return; // Only one modal at a time please
+        }
+
+        systemModal = $modal.open(opts);
+        systemModal.result.finally(function () {
+            systemModal = null;
+        });
+    }
+
+    if (InsightsConfig.allowExport) {
+        ActionbarService.addExportAction(function () {
+            let stale;
+
+            if (FilterService.getOnline() && !FilterService.getOffline()) {
+                stale = false;
+            }
+
+            if (!FilterService.getOnline() && FilterService.getOffline()) {
+                stale = true;
+            }
+
+            Export.getSystems(Group.current().id, stale, FilterService.getSearchTerm());
+        });
+    }
+
     $scope.addToPlan = function (existingPlan) {
         let systems = $scope.systemsToAction();
         if (!systems.length) {
             return;
         }
 
-        MaintenanceService.showMaintenanceModal(systems, null, existingPlan);
+        MaintenanceService.showMaintenanceModal(systems,
+                                                $scope.ruleDetails || null,
+                                                existingPlan);
     };
 
     function cleanAndGetData() {
         priv.cleanTheScope();
         priv.getData();
     }
+
+    $rootScope.$on('productFilter:change', priv.getData());
 
     $scope.$on('group:change', cleanAndGetData);
     $scope.$on('filterService:doFilter', cleanAndGetData);
@@ -296,22 +372,33 @@ function systemTableCtrl($scope,
 
     $scope.$watchCollection('checkboxes.items', priv.updateCheckboxes);
     $scope.$watchCollection('systems', priv.addSystems);
+
+    if (params.machine) {
+        const system = {
+            system_id: params.machine
+        };
+
+        $scope.showSystemModal(system, true);
+    }
 }
 
-function systemTable() {
+function systemList() {
     return {
-        templateUrl: 'js/components/system/systemTable/systemTable.html',
+        templateUrl: 'js/components/system/systemList/systemList.html',
         restrict: 'E',
         scope: {
-            getAllSystems: '=',
             getSystems: '=',
-            paginate: '=',
-            defaultPredicate: '@',
-            pageSize: '@'
-
+            getAllSystems: '=',
+            paginate: '=?',
+            ruleDetails: '=?',
+            defaultPredicate: '@?',
+            pageSize: '@?',
+            noListTypes: '@?',
+            noActions: '@?',
+            noRegisterMore:'@?'
         },
-        controller: systemTableCtrl
+        controller: systemListCtrl
     };
 }
 
-componentsModule.directive('systemTable', systemTable);
+componentsModule.directive('systemList', systemList);

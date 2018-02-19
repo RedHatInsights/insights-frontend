@@ -6,7 +6,8 @@
           aria-haspopup='true',
           aria-expanded='false',
           translate,
-          ng-disabled='!checkboxes.totalChecked && !loading') Actions
+          ng-disabled='!checkboxes.totalChecked && !loading',
+          ng-if="!noActions") Actions
             span.caret
     ul.dropdown-menu(ng-if="!loading")
       li(ng-if='config.isPlannerEnabled')
@@ -24,14 +25,14 @@
           value='isFixableSelected() && (plans.future.length || plans.unscheduled.length)',
           show-tooltip='false')
       li
-        a(ng-click='groupSystems(systemsToAction())', translate) Group systems
+        a(ng-if="state === 'app.inventory'", ng-click='groupSystems(systemsToAction())', translate) Group systems
       li(ng-if='Group.current().id')
         a(ng-click='removeFromGroup()')
           span(translate,
             translate-n='systemsToAction().length',
             translate-plural='Remove systems from group') Remove system from group
           strong &nbsp;{{Group.current().display_name}}
-      li(tooltip='{{:: unregisterButtonTooltip}}')
+      li(ng-if="state === 'app.inventory'", tooltip='{{:: unregisterButtonTooltip | translate}}')
         a.pointer-events-auto(
         ng-disabled='!isUnregistrableSelected()',
         ng-click='isUnregistrableSelected() && doUnregisterSelected()',
@@ -39,14 +40,46 @@
 
     //- Impacted Systems Header
     .table-header-title(ng-if='!loading')
-      h3.system-count(translate, translate-n='totalSystems', translate-plural='{{:: $count}} Systems') 1 System
+      h3.system-count(translate, translate-n='totalSystems', translate-plural='{{:: $count}} Systems', ng-if='!ruleDetails') 1 System
+      h3.system-count(translate, translate-n='totalSystems', translate-plural='{{:: $count}} Impacted Systems', ng-if='ruleDetails && ruleDetails.type !== "osp"') 1 Impacted System
+      h3.system-count(translate, translate-n='totalSystems', translate-plural='{{:: $count}} Impacted Deployments', ng-if='ruleDetails && ruleDetails.type === "osp"') 1 Impacted Deployment
       small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected
-        span(ng-if='allSelected && pager.perPage < systems.length') .
+        span(ng-if='allSelected && pager.perPage < totalSystems') .
           a(ng-if='!reallyAllSelected', ng-click='reallySelectAll()', translate) &nbsp;Select All Systems.
           a(ng-if='reallyAllSelected', ng-click='deselectAll()', translate) &nbsp;Deselect All Systems.
         span )
+      br
+      a.icon-inline(
+      ng-click="registerSystem()",
+      ng-if="isPortal && !noRegisterMore")
+        i.fa.fa-plus
+        strong(translate) Register More
 
-  table
+    //- List type button
+    list-type(ng-if="!noListTypes")
+
+  .card-table-header(ng-if='getListType() === listTypes.card || noListTypes')
+    md-checkbox.md-accent.md-hue-1.md-checkbox-list.checkbox(
+      tooltip="{{:: 'Select All' | translate}}",
+      aria-label='Select All Systems Checkbox',
+      tooltip-trigger='mouseenter',
+      tooltip-append-to-body='true',
+      tooltip-placement='top',
+      type="checkbox",
+      md-indeterminate="{{ checkboxes.indeterminate || false }}",
+      ng-model='checkboxes.checked',
+      ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, systems)')
+    label.type(translate, ng-class="sorter.getSortClass('system_type_id')", ng-click="sorter.sort('system_type_id')") &nbsp; Type
+    strong.hostname(translate, ng-class="sorter.getSortClass('toString')", ng-click="sorter.sort('toString')") Name &nbsp;
+    strong.action-count(translate, ng-class="sorter.getSortClass('report_count')", ng-click="sorter.sort('report_count')") Action Count
+
+  .system-cards.card-list(ng-if='getListType() === listTypes.card && !loading')
+    system-card.ng-animate-enabled(
+      ng-repeat='system in systems track by system.system_id',
+      system='system',
+      checkboxes='checkboxes')
+
+  table(ng-if='getListType() === listTypes.table')
     thead
       tr
         th.min
@@ -57,10 +90,10 @@
             md-indeterminate="{{ checkboxes.indeterminate || false }}",
             ng-model='checkboxes.checked',
             ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, systems)')
-        th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'system_type_id':sorter.reverse", ng-click="sorter.sort('system_type_id')", translate) System Type
-        th.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse", ng-click="sorter.sort('toString')", translate) System Name
-        th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'last_check_in':sorter.reverse", ng-click="sorter.sort('last_check_in')", translate) Last Check In
-        th.min.sortable(ng-class="sorter.predicate | sortClass:'report_count':sorter.reverse", ng-click="sorter.sort('report_count')", translate) Status
+        th.fit-content.min.sortable(ng-class="sorter.getSortClass('system_type_id')", ng-click="sorter.sort('system_type_id')", translate) System Type
+        th.sortable(ng-class="sorter.getSortClass('toString')", ng-click="sorter.sort('toString')", translate) System Name
+        th.fit-content.min.sortable(ng-class="sorter.getSortClass('last_check_in')", ng-click="sorter.sort('last_check_in')", translate) Last Check In
+        th.min.sortable(ng-class="sorter.getSortClass('report_count')", ng-click="sorter.sort('report_count')", translate) Status
     tbody(ng-if='!loading')
       tr(ng-repeat='system in ::systems track by system.system_id',
          ng-class="{'stale': !system.isCheckingIn}",

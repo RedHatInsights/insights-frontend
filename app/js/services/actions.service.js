@@ -88,7 +88,15 @@ function ActionsService(
         }
 
         systemsQuery.sort_by = $location.search().sort_field;
-        systemsQuery.sort_dir = $location.search().sort_direction;
+
+        // special case where we are sorting by timestamp but visually
+        // showing timeago
+        if (systemsQuery.sort_by === 'last_check_in') {
+            systemsQuery.sort_dir =
+                $location.search().sort_dir === 'ASC' ? 'DESC' : 'ASC';
+        } else {
+            systemsQuery.sort_dir = $location.search().sort_dir;
+        }
 
         return systemsQuery;
     };

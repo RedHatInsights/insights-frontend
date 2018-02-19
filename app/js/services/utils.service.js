@@ -256,12 +256,19 @@ function Utils($filter, $rootScope, $location, Events) {
             this.reverse = false;
         }
 
+        $location.search('sort_dir', this.getSortDirection());
+        $location.search('sort_field', this.predicate);
+
         this.cb = cb;
     };
 
     utils.Sorter.prototype.sort = function (name) {
         this.reverse = (this.predicate === name) ? !this.reverse : false;
         this.predicate = name;
+
+        $location.search('sort_dir', this.getSortDirection());
+        $location.search('sort_field', this.predicate);
+
         if (this.cb) {
             this.cb();
         }
