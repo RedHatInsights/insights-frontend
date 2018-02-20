@@ -122,7 +122,8 @@ function Routes($stateProvider) {
             // TODO once hash params are fixed elsewhere
             // stop using ?anchor
             url: '/rules?age&product&osp_deployment&docker_host&category' +
-            '&ansibleSupport&incident&ruleStatus&impact&likelihood&totalRisk&anchor',
+            '&ansibleSupport&incident&ruleStatus&impact&likelihood&totalRisk' +
+            '&anchor&search_term',
             templateUrl: 'js/states/rules/list-rules.html',
             controller: 'ListRuleCtrl',
             title: 'Rules',
