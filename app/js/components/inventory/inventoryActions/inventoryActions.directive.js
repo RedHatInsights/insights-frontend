@@ -16,7 +16,6 @@ function inventoryActionsCtrl(
     $scope,
     $rootScope,
     sweetAlert,
-    FilterService,
     SystemsService,
     MaintenanceService,
     $timeout,

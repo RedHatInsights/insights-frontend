@@ -19,13 +19,13 @@
           tbody
             tr
               td(ng-repeat='category in categoryTopics.slice(0,(categoryTopics.length > 3 ? 2 : categoryTopics.length))')
-                a(ng-class='category.id', ui-sref="app.topic({id: category.id, product: getSelectedProduct()})")
+                a(ng-class='category.id', ui-sref="app.topic({id: category.id})")
                   i.fa.fa-square.inline-right(ng-class="category.id + '-color'", aria-hidden="true")
                   span.desc(translate) {{:: category.id | titlecase}}
                   span.count &nbsp;({{:: category.count}})
             tr(ng-if='categoryTopics.length > 3')
               td(ng-repeat='category in categoryTopics.slice(2,categoryTopics.length)')
-                a(ng-class='category.id', ui-sref="app.topic({id: category.id, product: getSelectedProduct()})")
+                a(ng-class='category.id', ui-sref="app.topic({id: category.id})")
                   i.fa.fa-square.inline-right(ng-class="category.id + '-color'", aria-hidden="true")
                   span.desc(translate) {{:: category.id | titlecase}}
                   span.count &nbsp;({{:: category.count}})
@@ -54,9 +54,7 @@
         card-content(ng-bind-html=':: topic.summary_html ? topic.summary_html : Xtopic.content_html | trust_html')
         card-footer.text-right-sm
           strong
-            a.pointer(translate, ui-sref="app.topic({id: topic.slug ? topic.slug : topic.id, product: getSelectedProduct()})") View More
-
-      //- other-topic
+            a.pointer(translate, ui-sref="app.topic({id: topic.slug ? topic.slug : topic.id})") View More
 
 
     .text-center.extra-topics(ng-if='!show.extraTopics && extraTopics.length')
@@ -76,4 +74,4 @@
         card-content(ng-bind-html=':: topic.summary_html ? topic.summary_html : Xtopic.content_html | trust_html')
         card-footer.text-right-sm
           strong
-            a.pointer(translate, ui-sref="app.topic({id: topic.slug ? topic.slug : topic.id, product: getSelectedProduct()})") View More
+            a.pointer(translate, ui-sref="app.topic({id: topic.slug ? topic.slug : topic.id})") View More
