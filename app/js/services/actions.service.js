@@ -71,7 +71,7 @@ function ActionsService(
      * @param pager contains the current page and page size values
      */
     priv.buildSystemsQuery = function (paginate, pager) {
-        let systemsQuery = FilterService.buildRequestQueryParams(null, ['role']);
+        let systemsQuery = FilterService.buildRequestQueryParams(null);
 
         systemsQuery.rule = encodeURIComponent(pub.getRule());
 
@@ -179,25 +179,12 @@ function ActionsService(
      * @param pager contains the current page and page size of the page being pulled
      */
     pub.buildSystemsDeferred = function (paginate, pager) {
-        let systemDeferred;
         let systemsQuery = priv.buildSystemsQuery(paginate, pager);
 
-        if (FilterService.getParentNode()) {
-            systemsQuery.includeSelf = true;
-            systemDeferred =
-                System.getSystemLinks(
-                    FilterService.getParentNode(),
-                    systemsQuery).success(function (systems) {
-                        priv.setRuleSystems(pager, paginate, systems);
-                    });
-        } else {
-            systemDeferred = System.getSystemsLatest(systemsQuery)
+        return System.getSystemsLatest(systemsQuery)
                 .success(function (response) {
                     priv.setRuleSystems(pager, paginate, response);
                 });
-        }
-
-        return systemDeferred;
     };
 
     /**
