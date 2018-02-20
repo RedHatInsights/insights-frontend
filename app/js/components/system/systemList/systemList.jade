@@ -58,7 +58,7 @@
     //- List type button
     list-type(ng-if="!noListTypes")
 
-  .card-table-header(ng-if='getListType() === listTypes.card || noListTypes')
+  .card-table-header(ng-if='getListType() === listTypes.card')
     md-checkbox.md-accent.md-hue-1.md-checkbox-list.checkbox(
       tooltip="{{:: 'Select All' | translate}}",
       aria-label='Select All Systems Checkbox',
@@ -79,7 +79,7 @@
       system='system',
       checkboxes='checkboxes')
 
-  table(ng-if='getListType() === listTypes.table')
+  table(ng-if='getListType() === listTypes.table || noListTypes')
     thead
       tr
         th.min
@@ -109,10 +109,10 @@
         td.fit-content
           type-icon(type-id='system.system_type_id', include-text='true')
         td.fit-content
-          a(ng-click="showActions(system)") {{:: system.toString}}
+          a(ng-click="showSystemModal(system)") {{:: system.toString}}
         td.fit-content {{:: system.last_check_in | timeAgo }}
         td.fit-content
-          a.action-count.icon-inline(ng-click='showActions(system)')
+          a.action-count.icon-inline(ng-click='showSystemModal(system)')
             span.text(translate, translate-n="system.report_count", translate-plural="{{:: $count}} Actions") {{:: system.report_count}} Action
             i.fa(ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count, 'success': !system.report_count, 'fail': system.report_count}")
             span.sr-only Time to destination by car:
