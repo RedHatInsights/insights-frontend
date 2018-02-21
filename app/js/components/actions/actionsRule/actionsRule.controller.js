@@ -181,8 +181,6 @@ function ActionsRuleCtrl(
                 }, 1);
             });
 
-        let productSpecific = System.getProductSpecificData();
-
         let systemsPromise =
             RhaTelemetryActionsService.initActionsRule($scope.pager)
             .then(function () {
@@ -206,7 +204,7 @@ function ActionsRuleCtrl(
             });
 
         $q.all([SystemsService.getSystemTypesAsync(), incidentsPromise,
-            topicBreadCrumbPromise, productSpecific, systemsPromise])
+            topicBreadCrumbPromise, systemsPromise])
             .finally(function () {
                 $scope.loading = false;
                 let machine_id = $location.search().machine;

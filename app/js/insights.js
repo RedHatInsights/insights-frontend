@@ -77,7 +77,7 @@ function bootstrap() {
 }
 
 function whenDomReady(fn) {
-    if (document.readyState === 'complete') {
+    if (document.readyState !== 'loading') {
         fn();
         return;
     }
@@ -94,7 +94,7 @@ if (isPortal) {
     angular.module('insights').config(require('./portal/redirects'));
 
     const Jwt = require('jwt-redhat').default;
-    Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
+
     Jwt.onInit(() => {
         if (!Jwt.isAuthenticated()) {
             Jwt.login();
@@ -102,6 +102,8 @@ if (isPortal) {
             whenDomReady(bootstrap);
         }
     });
+
+    Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
 } else {
     angular.module('insights').config(require('./base_routes'));
 }

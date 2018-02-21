@@ -90,7 +90,7 @@ var i = 1;
  'rules',
  'executiveReport',
  'configuration'].forEach(function (item) {
-    obj.nav[item] = `.primary-nav li:nth-of-type(${i}) a`;
+    obj.nav[item] = `.primary-nav > nav li:nth-of-type(${i}) a`;
     i += 1;
 });
 

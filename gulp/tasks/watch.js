@@ -18,3 +18,9 @@ gulp.task('watch', [ 'browserSync', 'server'], function () {
         runSequence ('views', 'bro');
     });
 });
+
+gulp.task('smoke:watch', [], function () {
+    gulp.watch(config.views.watch.concat(exclude), ['smoke:run']);
+    gulp.watch('./smoketest/*js', ['smoke:run']);
+});
+

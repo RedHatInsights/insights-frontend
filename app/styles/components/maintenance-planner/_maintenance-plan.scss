@@ -17,15 +17,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 }
 
 .maintenance-page-select {
-  input.ui-select-search,
-    ul.ui-select-choices {
-      @include media-query(xs) { min-width: 582px; }
-      @include media-query(sm) { min-width: 483px; }
-      @include media-query(md) { min-width: 663px; }
-      @include media-query(lg) { min-width: 827px; }
-    }
-
-    ul.ui-select-choices { padding-left: 0; }
 }
 
 .maintenance-page {
@@ -759,9 +750,6 @@ div[class^="col-"], div[class*=" col-"] { transition: .4s; }
   }
 
   .ui-select-container {
-    input, span {
-      width: 100% !important;
-    }
   }
 }
 

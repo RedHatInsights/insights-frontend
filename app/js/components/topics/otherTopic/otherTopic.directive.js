@@ -5,7 +5,7 @@ var componentsModule = require('../../');
 /**
  * @ngInject
  */
-function otherTopic (FilterService) {
+function otherTopic () {
     return {
         templateUrl: 'js/components/topics/otherTopic/otherTopic.html',
         restrict: 'E',
@@ -13,9 +13,6 @@ function otherTopic (FilterService) {
         transclude: false,
         scope: {
             topic: '='
-        },
-        link: function (scope) {
-            scope.getSelectedProduct = FilterService.getSelectedProduct;
         }
     };
 }

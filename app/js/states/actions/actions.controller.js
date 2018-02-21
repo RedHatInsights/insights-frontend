@@ -42,8 +42,6 @@ function ActionsCtrl(
 
     $scope.QuickFilters = QuickFilters;
 
-    $scope.getSelectedProduct = FilterService.getSelectedProduct;
-
     $scope.openMenu = function ($mdMenu, ev) {
         $mdMenu.open(ev);
     };
@@ -53,18 +51,13 @@ function ActionsCtrl(
 
         $scope.loading = true;
 
-        promises.push(TopicService.reload(FilterService.getSelectedProduct()).then(() => {
+        promises.push(TopicService.reload().then(() => {
             const topics = TopicService.topics.filter(topic => {
                 return topic.ruleBinding !== 'implicit';
             });
 
             $scope.featuredTopics = topics.slice(0, 3);
             $scope.extraTopics = topics.slice(3);
-
-            let product;
-            if (FilterService.getSelectedProduct() !== 'all') {
-                product = FilterService.getSelectedProduct();
-            }
         }));
 
         promises.push(loadStats());
@@ -87,27 +80,16 @@ function ActionsCtrl(
 
     ActionsBreadcrumbs.init($stateParams);
 
-    const getData = function () {
-        System.getProductSpecificData();
-        reload();
-    };
-
     if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
-        $rootScope.$on('user:loaded', getData);
+        $rootScope.$on('user:loaded', reload());
     } else {
-        getData();
+        reload();
     }
 
     function loadStats () {
-        let product = FilterService.getSelectedProduct();
         let promises = [];
-        if (product === 'all') {
-            product = undefined;
-        }
 
-        promises.push(Stats.getRules({
-            product: product
-        }).then(function (res) {
+        promises.push(Stats.getRules().then(function (res) {
             $scope.stats.rules = res.data;
             setCategoryTopics(res.data);
         }));
