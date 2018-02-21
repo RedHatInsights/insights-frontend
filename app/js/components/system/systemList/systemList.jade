@@ -1,10 +1,13 @@
-.system-list
+.system-list(ng-if="!loading")
   .table-header
     //- Actions button
-    md-menu(md-offset="0 34", md-position-mode="target-right target")
+    md-menu(md-offset="0 38", ng-if="!noActions")
       md-button.md-raised.md-primary(
+          type='button',
+          data-toggle='dropdown',
+          aria-haspopup='true',
+          aria-expanded='false',
           ng-disabled='!checkboxes.totalChecked && !loading',
-          ng-if="!noActions",
           ng-click='$mdMenu.open($event)')
         .icon-inline
           strong(translate) Actions
@@ -12,8 +15,7 @@
       md-menu-content
         md-menu-item(ng-if='config.isPlannerEnabled')
           md-button(ng-click='addToPlan(false)',
-            ng-disabled='!isFixableSelected()',
-            translate)
+            ng-disabled='!isFixableSelected()')
             .icon-inline
               strong(translate) Create a new Plan/Playbook
               ansible-icon.inline-left(
@@ -21,8 +23,7 @@
                 show-tooltip='false')
         md-menu-item(ng-if='config.isPlannerEnabled')
           md-button(ng-click='addToPlan(true)',
-            ng-disabled='!isFixableSelected() || (!plans.future.length && !plans.unscheduled.length)',
-            translate)
+            ng-disabled='!isFixableSelected() || (!plans.future.length && !plans.unscheduled.length)')
             .icon-inline
               strong(translate) Add to existing Plan/Playbook
               ansible-icon.inline-left(
