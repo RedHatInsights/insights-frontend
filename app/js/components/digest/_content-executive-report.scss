@@ -55,7 +55,3 @@
   display: flex;
   justify-content: flex-end;
 }
-
-.exec-dropdown md-checkbox .md-container {
-  @include rem('margin-left', $global-padding);
-}
