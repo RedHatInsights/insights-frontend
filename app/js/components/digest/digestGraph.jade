@@ -1,20 +1,11 @@
 .graph-container
   .graph.graph-filters(ng-if='dropDown')
-    //- .dropdown.full-width.show
-    //-   button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-    //-     div(translate) {{:: dropDown}}
-    //-     span.caret
-    //-   ul.dropdown-menu
-    //-     li(ng-repeat='trace in traces track by trace.name', ng-click='$event.stopPropagation()')
-    //-       label.checkbox-inline
-    //-         input(type="checkbox", name="availability", ng-model='trace.enabled', ng-click='toggleTrace(trace)')
-    //-         div(translate) {{:: trace.name}}
-
     md-menu(md-offset="0 34", md-position-mode="target-right target")
       md-button.md-raised.md-primary#exec-dropdown(ng-click='$mdMenu.open()')
         strong(translate) Category
         i.fa.fa-cog
       md-menu-content.exec-dropdown(aria-labelledby="#exec-dropdown")
         md-menu-item(ng-repeat='trace in traces track by trace.name', ng-click='$event.stopPropagation()')
-          md-checkbox.md-accent.md-hue-1.category-checkbox(ng-model='trace.enabled') {{:: trace.name}}
+          md-checkbox.md-accent.md-hue-1.category-checkbox(ng-model='trace.enabled')
+            span {{:: trace.name}}
   .digest-graph
