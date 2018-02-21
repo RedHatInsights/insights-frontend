@@ -51,7 +51,11 @@
   }
 }
 
-.exec-dropdown {
-  md-menu-item md-checkbox{ margin-left: 15px; }
-  .md-label { margin-left: 15px; }
+.graph-filters {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.exec-dropdown md-checkbox .md-container {
+  @include rem('margin-left', $global-padding);
 }
