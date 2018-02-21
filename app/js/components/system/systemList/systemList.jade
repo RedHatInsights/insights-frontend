@@ -1,42 +1,47 @@
-.system-table
+.system-list
   .table-header
     //- Actions button
-    button.btn.btn-default.dropdown-toggle(
-          data-toggle='dropdown',
-          aria-haspopup='true',
-          aria-expanded='false',
-          translate,
+    md-menu(md-offset="0 34", md-position-mode="target-right target")
+      md-button.md-raised.md-primary(
           ng-disabled='!checkboxes.totalChecked && !loading',
-          ng-if="!noActions") Actions
-            span.caret
-    ul.dropdown-menu(ng-if="!loading")
-      li(ng-if='config.isPlannerEnabled')
-        a(ng-click='addToPlan(false)',
-        ng-disabled='!isFixableSelected()',
-        translate) Create a new Plan/Playbook
-          ansible-icon.inline-left(
-          value='isFixableSelected()',
-          show-tooltip='false')
-      li(ng-if='config.isPlannerEnabled')
-        a(ng-click='addToPlan(true)',
-        ng-disabled='!isFixableSelected() || (!plans.future.length && !plans.unscheduled.length)',
-        translate) Add to existing Plan/Playbook
-          ansible-icon.inline-left(
-          value='isFixableSelected() && (plans.future.length || plans.unscheduled.length)',
-          show-tooltip='false')
-      li
-        a(ng-if="state === 'app.inventory'", ng-click='groupSystems(systemsToAction())', translate) Group systems
-      li(ng-if='Group.current().id')
-        a(ng-click='removeFromGroup()')
-          span(translate,
-            translate-n='systemsToAction().length',
-            translate-plural='Remove systems from group') Remove system from group
-          strong &nbsp;{{Group.current().display_name}}
-      li(ng-if="state === 'app.inventory'", tooltip='{{:: unregisterButtonTooltip | translate}}')
-        a.pointer-events-auto(
-        ng-disabled='!isUnregistrableSelected()',
-        ng-click='isUnregistrableSelected() && doUnregisterSelected()',
-        translate) Unregister
+          ng-if="!noActions",
+          ng-click='$mdMenu.open($event)')
+        .icon-inline
+          strong(translate) Actions
+          i.fa.fa-caret-down
+      md-menu-content
+        md-menu-item(ng-if='config.isPlannerEnabled')
+          md-button(ng-click='addToPlan(false)',
+            ng-disabled='!isFixableSelected()',
+            translate)
+            .icon-inline
+              strong(translate) Create a new Plan/Playbook
+              ansible-icon.inline-left(
+                value='isFixableSelected() && (plans.future.length || plans.unscheduled.length)',
+                show-tooltip='false')
+        md-menu-item(ng-if='config.isPlannerEnabled')
+          md-button(ng-click='addToPlan(true)',
+            ng-disabled='!isFixableSelected() || (!plans.future.length && !plans.unscheduled.length)',
+            translate)
+            .icon-inline
+              strong(translate) Add to existing Plan/Playbook
+              ansible-icon.inline-left(
+                value='isFixableSelected() && (plans.future.length || plans.unscheduled.length)',
+                show-tooltip='false')
+        md-menu-item(ng-if="state === 'app.inventory'")
+          md-button(ng-click='groupSystems(systemsToAction())')
+            strong(translate) Group systems
+        md-menu-item(ng-if="state === 'app.inventory'")
+          md-button(ng-click='removeFromGroup()')
+            span(translate,
+              translate-n='systemsToAction().length',
+              translate-plural='Remove systems from group') Remove system from group
+            strong &nbsp;{{Group.current().display_name}}
+        md-menu-item(ng-if="state === 'app.inventory'", tooltip='{{:: unregisterButtonTooltip | translate}}')
+          md-button(ng-disabled='!isUnregistrableSelected()',
+            ng-click='isUnregistrableSelected() && doUnregisterSelected()',
+            translate)
+            strong(translate) Unregister
 
     //- Impacted Systems Header
     .table-header-title(ng-if='!loading')
