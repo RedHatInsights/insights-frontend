@@ -7,9 +7,8 @@ page-header(title="Edit webhook", icon="fa-wrench")
     fieldset
       .form-row
         label.control-label(translate) Active
-        .checkbox
-          label(for="checkbox_active")
-            input#checkbox_active(type='checkbox', name='active', ng-model='webhook.active')
+        label(for="checkbox_active")
+          input#checkbox_active(type='checkbox', name='active', ng-model='webhook.active')
 
       .form-row(ng-class="{'has-error': errors.url || (webhookForm.url.$invalid && webhookForm.url.$dirty)}")
         label.control-label(for='url', translate) Target URL
