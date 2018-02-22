@@ -20,19 +20,11 @@
 
   @include media-query(sm){
     grid-template-columns: max-content 1fr;
+    grid-template-rows: min-content auto;
     grid-template-areas: "topbar topbar"
-                        "primary-nav main";    
+                        "primary-nav main";
   }
 }
-
-.view-content {
-  grid-area: main;
-  display: flex;
-  flex-direction: column;
-
-  @include media-query(sm){ overflow-y: auto; }
-}
-
 
 .platform-grid.collapsed {
   grid-template-columns: minmax(30px, max-content) 1fr;
