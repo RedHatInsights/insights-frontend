@@ -10,7 +10,7 @@ card.card-accent.widget.widget-new-systems
     p(translate) {{:: rules.length}} new rules
     .rule-wrapper(ng-repeat="rule in rules | orderBy: 'rule.created_at' | limitTo: 3  track by rule.rule_id")
       .rule-title
-        a(ui-sref='app.rules({"anchor" : rule.rule_id})') {{:: rule.description}}
+        a(ui-sref='app.rules({"anchor" : rule.rule_id, "age" : 15})') {{:: rule.description}}
       .rule-date
         span.light(translate) Published {{:: rule.publish_date | timeAgo}}
     .footer.text-center

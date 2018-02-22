@@ -9,6 +9,7 @@ const findIndex = require('lodash/findIndex');
  * @ngInject
  */
 function ListRuleCtrl(
+        $anchorScroll,
         $filter,
         $q,
         $rootScope,
@@ -92,14 +93,19 @@ function ListRuleCtrl(
 
     function handleAnchorParam(id) {
         if (id) {
+            console.log(id);
             const idx = findIndex($scope.rules, {rule_id: id});
+            console.log(idx);
             $scope.pager.currentPage = Math.floor(idx / $scope.pager.perPage) + 1;
             $scope.doPage();
 
             // TODO once hash params are fixed elsewhere
             // stop using ?anchor
+
             $location.search('anchor', null);
-            $location.hash(id);
+
+            // $location.hash(id);
+            $anchorScroll(id);
         }
     }
 
