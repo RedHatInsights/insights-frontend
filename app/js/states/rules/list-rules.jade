@@ -17,7 +17,7 @@ section
             card.card-rule(
               ng-repeat="rule in pagedRules | filter:filter | orderBy:'description'",
               ng-class="{faded: rule.ack_id, hidden: (hideIgnored && rule.ack_id)}")
-              card-header.gray.header(id="{{:: rule.rule_id}}", href="{{:: rule.rule_id}}")
+              card-header.gray.header(id="{{:: rule.rule_id}}")
                 //TODO: activate new item
                 //.new-item NEW!
                 .card-header-title.title.pointer

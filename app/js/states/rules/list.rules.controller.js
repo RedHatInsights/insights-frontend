@@ -16,6 +16,7 @@ function ListRuleCtrl(
         $scope,
         $state,
         $location,
+        $timeout,
         Cluster,
         FilterService,
         IncidentsService,
@@ -93,9 +94,7 @@ function ListRuleCtrl(
 
     function handleAnchorParam(id) {
         if (id) {
-            console.log(id);
             const idx = findIndex($scope.rules, {rule_id: id});
-            console.log(idx);
             $scope.pager.currentPage = Math.floor(idx / $scope.pager.perPage) + 1;
             $scope.doPage();
 
@@ -104,8 +103,11 @@ function ListRuleCtrl(
 
             $location.search('anchor', null);
 
-            // $location.hash(id);
-            $anchorScroll(id);
+            // $anchorScroll, which gets called when the hash changes, will not work
+            // without setting a $timeout
+            $timeout(function () {
+                $location.hash(id);
+            }, 0);
         }
     }
 
@@ -139,8 +141,6 @@ function ListRuleCtrl(
                 // TODO once hash params are fixed elsewhere
                 // stop using ?anchor
                 handleAnchorParam($location.search().anchor);
-
-                PermalinkService.scroll(null, 30);
             })
             .error(function () {
                 $scope.errored = true;
