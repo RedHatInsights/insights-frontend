@@ -32,6 +32,10 @@ constantsModule.constant(
         resourceCount: 'X-Resource-Count'
     });
 
+// digests min and max scores
+constantsModule.constant('MAX_SCORE', 850);
+constantsModule.constant('MIN_SCORE', 250);
+
 // These are avalible via a service, but the service is not a production service.
 // For speed and reliability storing them here for now
 // We can move them to InsightsAPI if we want,
