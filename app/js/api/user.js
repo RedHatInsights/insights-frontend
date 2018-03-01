@@ -36,19 +36,6 @@ function User($rootScope, $http, $q, $location, InsightsConfig, PreferenceServic
         return $location.absUrl().indexOf('insightsbeta') > -1;
     }
 
-    //function setPreferences() {
-    //PreferenceService.set(
-    //    'hide_ignored_rules', _user.settings.hide_ignored_rules, false);
-    //if (_user.settings.dashboard_mode && isBeta()) {
-    //PreferenceService.set(
-    //    'dashboard_mode', _user.settings.dashboard_mode, false);
-    //if (_user.settings.dashboard_mode === 'osp') {
-    //PreferenceService.set(
-    //    'osp_deployment', _user.settings.osp_deployment, false);
-    //}
-    //}
-    //}
-
     function init() {
         $http.get(InsightsConfig.apiRoot + 'me').success(function (user) {
             angular.extend(_user, user);

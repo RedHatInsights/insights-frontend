@@ -7,4 +7,4 @@ card
   card-content(ng-bind-html=':: topic.summary_html ? topic.summary_html : Xtopic.content_html | trust_html')
   card-footer.text-right-sm
     strong
-      a.pointer(translate, ui-sref="app.topic({id: topic.slug ? topic.slug : topic.id, product: getSelectedProduct()})") View More
+      a.pointer(translate, ui-sref="app.topic({id: topic.slug ? topic.slug : topic.id})") View More

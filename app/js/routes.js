@@ -107,7 +107,7 @@ function Routes($stateProvider) {
     // System routes
     $stateProvider
         .state('app.inventory', {
-            url: '/inventory?product&roles&osp_deployment' +
+            url: '/inventory?product' +
                 '&docker_host&sort_field&sort_dir&' +
                 'offline&online&machine&page&pageSize&systemHealth',
             templateUrl: 'js/states/inventory/inventory.html',
@@ -121,8 +121,9 @@ function Routes($stateProvider) {
         .state('app.rules', {
             // TODO once hash params are fixed elsewhere
             // stop using ?anchor
-            url: '/rules?age&product&roles&osp_deployment&docker_host&category' +
-            '&ansibleSupport&incident&ruleStatus&impact&likelihood&totalRisk&anchor',
+            url: '/rules?age&product&osp_deployment&docker_host&category' +
+            '&ansibleSupport&incident&ruleStatus&impact&likelihood&totalRisk' +
+            '&anchor&search_term',
             templateUrl: 'js/states/rules/list-rules.html',
             controller: 'ListRuleCtrl',
             title: 'Rules',
