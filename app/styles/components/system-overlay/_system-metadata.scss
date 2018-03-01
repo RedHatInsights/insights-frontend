@@ -7,7 +7,7 @@ system-metadata { display: block; }
 
 .system-metadata {
 
- @media only screen and (max-width: 768px) { > * { @include rem('margin-top', $global-margin); } }
+ @media only screen and (max-width: 768px) { > * { @include rem('margin', $global-margin 0); } }
 
   @include media-query(sm) {
     display: grid;
