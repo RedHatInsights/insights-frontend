@@ -14,7 +14,7 @@ const TIME_PERIOD = 30;
  * @ngInject
  */
 function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
-                     InventoryService, Severities, InsightsConfig, User) {
+                     InventoryService, Severities, InsightsConfig, User, MIN_SCORE) {
 
     function getDirection(data) {
         const direction = data[1] - data[0];
@@ -128,6 +128,7 @@ function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
             page: 0
         });
         let rulePromise = Rule.getRulesWithHits();
+        let prevScore = MIN_SCORE;
 
         $scope.loading = true;
 
@@ -207,13 +208,14 @@ function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
             $scope.latest_score = takeRight(digestBase.scores, 1)[0];
             window.scope = $scope;
 
-            $scope.score_difference = $scope.latest_score -
-                digestBase.scores[digestBase.scores.length - 2];
+            // if last digest score was 0 then change to minimum score
+            prevScore = digestBase.scores[digestBase.scores.length - 2] || MIN_SCORE;
+            $scope.score_difference = $scope.latest_score - prevScore;
 
             // max score is 850, min is 250.  Levels calculated by
             //  separating the 600 range into 4 segments and dividing
             //  score by segment length (150)
-            const level = Math.ceil(($scope.latest_score - 250) / 150) || 1;
+            const level = Math.ceil(($scope.latest_score - MIN_SCORE) / 150) || 1;
             const scoreDiv = angular.element(
                 document.querySelector('.gauge.gauge-circle.score'));
             scoreDiv.addClass('score_lvl' + level);

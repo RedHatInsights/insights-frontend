@@ -7,10 +7,7 @@ const priv = {};
 /**
  * @ngInject
  */
-function gaugeMarkerController($scope, gettextCatalog) {
-
-    const MAX_SCORE = 850;
-    const MIN_SCORE = 250;
+function gaugeMarkerController($scope, gettextCatalog, MAX_SCORE, MIN_SCORE) {
 
     priv.getString = (str) => {
         return str + ' ' + $scope.difference + ' ' + gettextCatalog.getString('points');
