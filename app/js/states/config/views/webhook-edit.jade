@@ -3,23 +3,22 @@ page-header(title="Edit webhook", icon="fa-wrench")
 .content-wrap.webhook-edit
   .rha-notifications
   .spinner(ng-if='loader.loading')
-  form.form-horizontal(novalidate, name='webhookForm', ng-if='!loader.loading')
+  form.form-split(novalidate, name='webhookForm', ng-if='!loader.loading')
     fieldset
-      .form-group.row
-        label.control-label.col-sm-2(translate) Active
-        .col-sm-10
-          .checkbox
-            label(for="checkbox_active")
-              input#checkbox_active(type='checkbox', name='active', ng-model='webhook.active')
-      .form-group.row.row-short(ng-class="{'has-error': errors.url || (webhookForm.url.$invalid && webhookForm.url.$dirty)}")
-        label.control-label.col-sm-2(for='url', translate) Target URL
-        .col-sm-10
-          input.form-control#url(type='text', name='url', ng-model='webhook.url', ng-pattern='"https:\/\/.+"', required)
-          .error.red(ng-if='(errors.url || (webhookForm.url.$invalid && webhookForm.url.$dirty))')
-            strong(translate) Must be a valid https URL
-      .form-group.row(ng-class="{'has-error': errors.certificate}")
-        label.control-label.col-sm-2(for='certificate', translate) Custom certificate
-        .col-sm-10
+      .form-row
+        label.control-label(translate) Active
+        label(for="checkbox_active")
+          input#checkbox_active(type='checkbox', name='active', ng-model='webhook.active')
+
+      .form-row(ng-class="{'has-error': errors.url || (webhookForm.url.$invalid && webhookForm.url.$dirty)}")
+        label.control-label(for='url', translate) Target URL
+        input.form-control#url(type='text', name='url', ng-model='webhook.url', ng-pattern='"https:\/\/.+"', required)
+        .error.red(ng-if='(errors.url || (webhookForm.url.$invalid && webhookForm.url.$dirty))')
+          strong(translate) Must be a valid https URL
+
+      .form-row(ng-class="{'has-error': errors.certificate}")
+        label.control-label(for='certificate', translate) Custom certificate
+        .certificate
           span(ng-if='!webhook.certificateInfo')
             p
               span(translate) Due to sensitive nature of data that Red Hat Insights operates on HTTPS is required. For cases when your server does not use a certificate signed by a&nbsp;
@@ -28,69 +27,62 @@ page-header(title="Edit webhook", icon="fa-wrench")
             button.btn.btn-sm.btn-primary(translate, ng-click='selected.certificateExpanded = true', ng-show='!selected.certificateExpanded') Add certificate
 
           span(ng-if='webhook.certificateInfo && !selected.certificateExpanded')
-            .content-block.content-block-card
-              .content
-                .form-group.certificate
-                  label.col-sm-4.control-label(translate) Common Name (CN):
-                  .col-sm-8
-                    p.form-control-static {{webhook.certificateInfo.subject.cn}}
-                .form-group.certificate
-                  label.col-sm-4.control-label(translate) Organization (O)
-                  .col-sm-8
-                    p.form-control-static {{webhook.certificateInfo.subject.o}}
-                .form-group.certificate
-                  label.col-sm-4.control-label(translate) Issuer Common Name (CN):
-                  .col-sm-8
-                    p.form-control-static {{webhook.certificateInfo.issuer.cn}}
-                .form-group.certificate
-                  label.col-sm-4.control-label(translate) Issuing Organization (O)
-                  .col-sm-8
-                    p.form-control-static {{webhook.certificateInfo.issuer.o}}
-                .form-group.certificate
-                  label.col-sm-4.control-label(translate) Valid until
-                  .col-sm-8
-                    p.form-control-static(ng-class='certDateClass(webhook.certificateInfo.validUntil)') {{webhook.certificateInfo.validUntil | moment:'LLL'}}
-              .footer
-                .pull-right
-                  button.action.btn.btn-sm.btn-open(translate, ng-click='webhook.certificate = null; webhook.certificateInfo = null', ng-show='!selected.certificateExpanded') Remove certificate
-                  button.btn.btn-sm.btn-accent(translate, ng-click='selected.certificateExpanded = true', ng-show='!selected.certificateExpanded') Edit certificate
+            md-card.split-card
+              md-card-content
+                label(translate) Common Name (CN):
+                p {{webhook.certificateInfo.subject.cn}}
+                label(translate) Organization (O)
+                p {{webhook.certificateInfo.subject.o}}
+                label(translate) Issuer Common Name (CN):
+                p {{webhook.certificateInfo.issuer.cn}}
+                label(translate) Issuing Organization (O)
+                p {{webhook.certificateInfo.issuer.o}}
+                label(translate) Valid until
+                p(ng-class='certDateClass(webhook.certificateInfo.validUntil)') {{webhook.certificateInfo.validUntil | moment:'LLL'}}
+              md-card-footer
+                md-button(translate, ng-click='webhook.certificate = null; webhook.certificateInfo = null', ng-show='!selected.certificateExpanded') Remove certificate
+                md-button.md-raised.md-primary(translate, ng-click='selected.certificateExpanded = true', ng-show='!selected.certificateExpanded') Edit certificate
 
           .certificate(ng-if='selected.certificateExpanded')
             textarea.form-control#certificate(placeholder='Paste certificate in PEM format here', ng-model='webhook.certificate', rows='15')
             .error.red(ng-if='errors.certificate')
               strong(translate) Invalid certificate
 
-      .form-group.row
-        label.control-label.col-sm-2(for='active', translate) Webhook triggers
-        .col-sm-10
+      .form-row
+        label.control-label(for='active', translate) Webhook triggers
+        .inputs
           .radio
             label(for="radio_all")
               input#radio_all(type='radio', ng-model='webhook.firehose', ng-value="true")
               span(translate) Every event (no filtering)
-          .radio
             label.checkbox_active(for="radio_selected")
               input#radio_selected(type='radio', ng-model='webhook.firehose', ng-value='false')
               span(translate) Only selected event types
-      .form-group.row.row-short(ng-if='!webhook.firehose')
-        .col-sm-offset-2.col-sm-10
-          .row
-            .col-sm-5
-              .checkbox(ng-repeat='event in eventTypes | limitTo:2 track by event.name')
-                label
-                  input(type='checkbox', name='active', ng-model='selected.events[event.name]')
-                  | {{event.description}}
-            .col-sm-7
-              span.checkbox.severity(ng-repeat='severity in severities track by severity.value')
-                label
-                  input(type='checkbox', name='active', ng-model='selected.severityFilters[severity.value]', ng-disabled='!selected.events["report:new"] && !selected.events["report:resolved"]')
-                  severity-icon.inline-right(severity='severity.value', type='severity', label='')
-                  | {{severity.label}}
-          .row
-            .checkbox.col-sm-12(ng-repeat='event in eventTypes | limitTo:eventTypes.length:2 track by event.name')
-              label
+          .checkbox-group(ng-if='!webhook.firehose')
+            .event-types.checkbox
+              label(ng-repeat='event in eventTypes | limitTo:2 track by event.name')
                 input(type='checkbox', name='active', ng-model='selected.events[event.name]')
-                | {{event.description}}
+                span {{event.description}}
+              label(ng-repeat='event in eventTypes | limitTo:eventTypes.length:2 track by event.name')
+                input(type='checkbox', name='active', ng-model='selected.events[event.name]')
+                span {{event.description}}
+            .severity
+              label(ng-repeat='severity in severities track by severity.value')
+                input(type='checkbox', name='active', ng-model='selected.severityFilters[severity.value]', ng-disabled='!selected.events["report:new"] && !selected.events["report:resolved"]')
+                severity-icon.inline-right(severity='severity.value', type='severity', label='')
+                | {{severity.label}}
 
-    .btn-group.pull-right
-      button.btn.btn-sm.btn-default(ui-sref='app.config({tab: "webhooks"})', translate) Cancel
-      button.btn.btn-sm.btn-primary(ng-click='save()', ng-disabled='webhookForm.$invalid', translate) Save
+      .form-row(ng-if='user.is_internal')
+        label.control-label(for='group', translate) Group filter
+          i.fa.fa-question-circle.inline-left(tooltip='{{"A webhook can be configured to only receive events relevant to the given group of systems" | translate}}')
+        ui-select#group(ng-model='group.selected', append-to-body='false')
+          ui-select-match.form-control.ui-select-match
+            | {{$select.selected.display_name}}
+          ui-select-choices.ui-select-choices(repeat='group in group.groups | filter: {display_name: $select.search}')
+            strong(ng-if='group.id === null') {{group.display_name}}
+            span(ng-if='group.id !== null') {{group.display_name}}
+
+
+    .btn-group
+      md-button(ui-sref='app.config({tab: "webhooks"})', translate) Cancel
+      md-button.md-raised.md-primary(ng-click='save()', ng-disabled='webhookForm.$invalid', translate) Save
