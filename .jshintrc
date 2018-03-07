@@ -21,6 +21,7 @@
   "globals": {
     "jQuery": true,
     "angular": true,
+    "afterEach": true,
     "window": true,
     "console": true,
     "moment": true,

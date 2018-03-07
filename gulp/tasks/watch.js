@@ -1,3 +1,4 @@
+
 /*global require*/
 'use strict';
 
@@ -19,8 +20,11 @@ gulp.task('watch', [ 'browserSync', 'server'], function () {
     });
 });
 
+gulp.task('unit:watch', [], function () {
+    gulp.watch('app/js/**/*js', ['unit']);
+});
+
 gulp.task('smoke:watch', [], function () {
     gulp.watch(config.views.watch.concat(exclude), ['smoke:run']);
     gulp.watch('./smoketest/*js', ['smoke:run']);
 });
-
