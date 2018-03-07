@@ -61,7 +61,6 @@ describe('likelihoodSelectCtrl', () => {
     afterEach(() => {
         rootScopeBroadCastSpy.restore();
         locationSearchSpy.restore();
-        console.log('adsf');
     });
 
     it('should create controller with initial state', () => {
