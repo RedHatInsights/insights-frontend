@@ -1,43 +1,31 @@
-.cell.insights-logo
-  button.toggle-fullscreen(ng-click='sidenavCollapsed = !sidenavCollapsed')
-    md-icon(md-font-icon="fa fa-indent")
-
-  md-button(ng-click="toggleLeft()",
-    class="md-primary",
-    hide-gt-xs)
-    md-icon(md-font-icon="fa fa-navicon")
-
-  a.home-link(ui-sref='app.overview')
-    span.hidden(translate) Red Hat Insights
-    md-icon(md-svg-src="./static/images/l_insights.svg" aria-label="Red Hat Insights ")
-
-.cell.global-filters(ng-class='{disabled: disabled}', ng-if='isGroupsEnabled')
-  group-select(disabled='disabled')
-
-.cell.topbar-utilities
-  feedback-button.btn-feedback
-  span.sep
-  menu.notifications
-    bullhorn(icon='fa-bullhorn', type='announcements')
-    alerts(icon='fa-bell', type='alerts')
-  span.sep
-  md-menu(md-offset="0 34", md-position-mode="target-right target")
-    md-button.button-dropdown#help(ng-click='$mdMenu.open()')
-      strong(translate) Help
-      span.caret.dropdown-caret(aria-hidden="true")
-    md-menu-content(aria-labelledby="help")
-      md-menu-item
-        a(href='{{:: gettingStartedLink}}', target='_blank', translate) Getting Started
-      md-menu-item
-        a(href='https://access.redhat.com/documentation/en/red-hat-insights/', target='_blank', translate) Product Documentation
-      md-menu-item
-        a(ui-sref='info.info', translate) More Info
-      md-menu-item
-        a(ui-sref='info.security', translate) Security
-      md-menu-item
-        a(href='/help/browsers', target='_self', translate, ng-if="isPortal") Browser Support
-      md-menu-item
-        a(href='/r/insights/docs/', translate) Insights API Documentation
-      demo-account-switcher
-
-  beta-switch-button
+nav.navbar.navbar-pf-vertical
+  .navbar-header
+    button.navbar-toggle(type="button", ng-click='sidenavCollapsed = !sidenavCollapsed')
+      span.sr-only Toggle navigation
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+    a.navbar-brand(href="/")
+      img.navbar-brand-icon(src="/assets/img/logo-alt.svg" alt="")
+      img.navbar-brand-name(src="/assets/img/brand-alt.svg" alt="PatternFly Enterprise Application")
+  nav.collapse.navbar-collapse
+    ul.nav.navbar-nav.navbar-right.navbar-iconic.navbar-utility
+      li.dropdown
+        a#dropdownMenu1.dropdown-toggle.nav-item-iconic(href="#0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true")
+          span.fa.pficon-help(title="Help")
+          span.caret
+        ul.dropdown-menu(aria-labelledby="dropdownMenu1")
+          li
+            a(href="#0") Help
+          li
+            a(href="#0") About
+      li.dropdown
+        a#dropdownMenu2.dropdown-toggle.nav-item-iconic(href="#0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true")
+          span.fa.pficon-user(title="Username")
+          |           Brian Johnson 
+          span.caret
+        ul.dropdown-menu(aria-labelledby="dropdownMenu2")
+          li
+            a(href="#0") Preferences
+          li
+            a(href="#0") Logout

@@ -2,6 +2,7 @@
 //==================================================================*/
 html { font-size: 100%; }
 
+
 // Media Queries
 //--------------------------------------------------------------*/
 $xs: 480px;
@@ -174,3 +175,9 @@ $button-font-family: 'overpass', 'Liberation Sans', Arimo, 'Trebuchet MS', 'Bits
 //==================================================================*/
 $table-cell-padding: 8px;
 $table-cell-border: 1px solid $brand-primary;
+
+
+/* Patterfly overrides
+/* ================================================================== */
+
+$bootstrap-sass-asset-helper: false;
