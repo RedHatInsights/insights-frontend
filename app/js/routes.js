@@ -162,6 +162,13 @@ function Routes($stateProvider) {
             templateUrl: 'js/states/announcements/view-announcement.html',
             controller: 'ViewAnnouncementCtrl'
         });
+
+    $stateProvider
+        .state('app.d3', {
+            url: '/d3',
+            templateUrl: 'js/states/d3/d3.html',
+            controller: 'D3Ctrl'
+        });
 }
 
 module.exports = Routes;
