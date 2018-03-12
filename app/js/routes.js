@@ -72,6 +72,14 @@ function Routes($stateProvider) {
         });
 
     $stateProvider
+        .state('app.pmaas', {
+            url: '/pmaas/',
+            templateUrl: 'js/states/pmaas/pmaas.html',
+            controller: 'PmaasCtrl',
+            title: 'Pmaas'
+        });
+
+    $stateProvider
         .state('app.list-policies', {
             url: '/policies/',
             templateUrl: 'js/states/policies/views/list-policies.html',
