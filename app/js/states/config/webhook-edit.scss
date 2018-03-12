@@ -1,27 +1,107 @@
+/* ==================================================================
+/* Give the fieldset some breathing room
+/* ================================================================== */
+
+.webhook-edit fieldset > * { @include rem('margin-top', $global-margin); }
+
+
+/* ==================================================================
+/* Highest Grid Layout
+/* ================================================================== */
+
+.webhook-edit .form-row{
+  max-width: 1400px;
+  display: grid;
+  grid-gap: $global-margin;
+  grid-template-columns: 15% 85%;
+  align-items: baseline;
+}
+
 .webhook-edit {
-    .checkbox.severity {
-        display: inline;
+
+  /* Right align the labels */
+  label.control-label { text-align: right; }
+
+  /* Cancel + Submit Buttons */
+  .btn-group{
+    display: flex;
+    justify-content: flex-end;
+    @include rem('margin', $global-margin);
+    button { @include rem('margin-left', $global-padding); }
+  }
+}
+
+/* Subgrid for checkboxes + severity
+/* ================================================================== */
+
+.form-row {
+
+  /* Labels for inputs */
+  > label {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    &[for="checkbox_active"] { justify-content: flex-start; }
+  }
+
+  /* Actual Inputs */
+  .checkbox-group {
+    display: grid;
+    grid-template-columns: 40% 60%;
+
+    .severity {
+      label { display: inline; }
+      label + label { @include rem('margin-left', $global-margin); }
+      input[type="checkbox"] { @include rem('margin-right', 10px); }
+    }
+  }
+  .radio, .event-types{
+    & > * {
+      display: block;
+      text-align: left;
+    }
+  }
+}
+
+
+/* Split Card styling
+/* ================================================================== */
+
+md-card.split-card {
+  md-card-content {
+    & > * {
+      @include rem('padding', 10px $global-padding);
+      margin: 0;
     }
 
-    textarea#certificate {
-        font-size: 12px;
-        font-family: Consolas, Monaco, 'Andale Mono', monospace;
-    }
+    label:nth-of-type(even), p:nth-of-type(even) { background: #f0f3f6; }
+    display: grid;
+    padding: 0;
+    grid-template-columns: repeat(1, 30% 70%);
+    border-bottom: 1px solid $gray-lite;
+  }
 
-    .form-group.certificate {
-        margin-bottom: 5px;
-    }
+  md-card-footer {
+    margin-left: auto;
+  }
+}
 
-    .form-group.certificate:nth-child(even){
-        background: #F0F3F6;
-    }
+/**
+  * Textarea inside the split card
+  */
 
-    button + button {
-        @include rem('margin-left', 10px);
-    }
+.webhook-edit textarea#certificate {
+  font-size: 12px;
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+}
 
-    .content-block-card {
-        label { text-align: left; }
-        .footer { background: #f9f9f9; }
-    }
+
+/* ==================================================================
+/* UI select resets
+/* ================================================================== */
+
+.webhook-edit{
+  ul.ui-select-choices { width: auto; }
+  .ui-select-container { display: flex; }
+  .ui-select-search { @include rem('padding', 0 0 0 15px); }
 }
