@@ -2,9 +2,7 @@
   text-align: left;
 
   thead tr,
-  thead tr:nth-child(odd) {
-    border: 0;
-  }
+  thead tr:nth-child(odd) { border: 0; }
 
   .legend-item.active {
     color: #4c4c4c;
@@ -19,9 +17,7 @@
   tr {
     border: 0;
 
-    td {
-      @include rem('padding', 4px 14px);
-    }
+    td { @include rem('padding', 4px 14px); }
   }
 
   .color-block {
@@ -32,9 +28,7 @@
     width: 12px;
   }
 
-  .view-all-toggle {
-      cursor: pointer;
-  }
+  .view-all-toggle { cursor: pointer; }
 
   .view-all-toggle:hover .fa-eye,
   .view-toggle:hover .fa-eye,
@@ -59,8 +53,6 @@ $donut-hole-height: 160px;
   margin-top: -$donut-hole-height/2;
   width: $donut-hole-width;
   height: $donut-hole-height;
-  //margin-left: -90px;
-  //margin-top: -90px;
   border-radius: 50%;
   box-shadow: 0 2px 5px 3px rgba(0, 0, 0, .2);
   background: #fff;
@@ -90,33 +82,9 @@ $donut-hole-height: 160px;
   }
 }
 
-//.gauge .donut-hole {
-//  height: 63px;
-//  width: 63px;
-//  position: relative;
-//  margin-left: 0px;
-//
-//  .num {
-//    @include font-size(26px);
-//    padding-left: 10px;
-//    font-weight: 600;
-//
-//    .denominator {
-//      @include font-size(10px);
-//      vertical-align: top;
-//    }
-//  }
-//}
-
 .chart-details {
-  td:nth-child(2),
-  th:nth-child(2) {
-//    text-align: right;
-  }
 
-  tbody tr {
-    transition-duration: .2s;
-  }
+  tbody tr { transition-duration: .2s; }
 
   tbody tr:hover {
     background-color: darken(#f2f5f7, 5);
@@ -139,7 +107,6 @@ $donut-hole-height: 160px;
 
   &:before {
     box-shadow: 0 0 12px 0 rgba(0, 0, 0, .2);
-    //@include rem('margin-left', -130px);
     background: #fff;
     border-radius: 50%;
     content: '';
@@ -152,9 +119,7 @@ $donut-hole-height: 160px;
     width: 320px;
     z-index: 1;
 
-    @include media-query (xs-max) {
-      display: none;
-    }
+    @include media-query (xs-max) { display: none; }
   }
 
   svg {

@@ -1,48 +1,10 @@
 topbar .notifications {
-	// @include rem('margin-top', 4px);
-	// margin-top: 0;
-	// display: inline-block;
-	// color: #fff;
-  // position: static;
-  
+
   @include media-query(sm) { position: relative; }
-
-	.dropdown {
-  //   position: static;
-		// padding: 0;
-		// display: inline-block;
-
-  //   @include media-query(sm) {
-  //   	position: relative;
-  //   }
-	}
-
-  .dropdown-toggle {
-    // color: #fff;
-    // background-color: transparent;
-    // padding: 0;
-  }
-
-	.open>.dropdown-toggle.dropdown-toggle {
-		// background: none;
-		// color: #fff;
-	}
 
 	a.dropdown-toggle {
 		position: relative;
 		@include rem('padding', 6px);
-
-		// &:hover,
-		// &:focus,
-		// &.focus,
-		// &:active,
-		// &.active {
-		// 	background: none;
-
-		// 	i {
-		// 		color: #fff;
-		// 	}
-		// }
 	}
 
 	.count {
@@ -102,7 +64,7 @@ topbar .notifications {
       border: 1px solid $gray;
       box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
     }
-    
+
     @include media-query(md) { min-width: 430px; }
 
 		li {
@@ -116,14 +78,6 @@ topbar .notifications {
         word-break: break-all;
       }
 
-      .message-status-toggle i {
-        // position: absolute;
-        // right: $global-padding;
-        // top: 0;
-        // margin: 0;
-      }
-
-
       &.acked  {
 				background: #fff;
 				color: rgba(100,100,100,.7);
@@ -131,9 +85,6 @@ topbar .notifications {
 
 			& + li {
 				border-top: 1px solid $gray;
-			}
-
-			&.unread {
 			}
 
 			.message {
@@ -154,9 +105,7 @@ topbar .notifications {
 				text-shadow: none;
 				line-height: 1;
 
-				.open {
-					color: $gray;
-				}
+				.open { color: $gray; }
 			}
 
 			&.view-all {
@@ -171,9 +120,7 @@ topbar .notifications {
 		}
 	}
 
-	.row + .row {
-		@include rem('margin-top', 4px);
-	}
+	.row + .row { @include rem('margin-top', 4px); }
 }
 
 .top-bar {

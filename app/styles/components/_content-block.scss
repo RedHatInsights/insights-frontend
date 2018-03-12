@@ -40,9 +40,7 @@ $maintenance-plan-border-color: #dedede;
 
 	// Header
 	//==================================================================*/
-	.tab-content .header {
-		border: 1px solid $maintenance-plan-border-color;
-	}
+	.tab-content .header { border: 1px solid $maintenance-plan-border-color; }
 
 
 	.header {
@@ -61,11 +59,6 @@ $maintenance-plan-border-color: #dedede;
 			font-weight: 700;
 			margin: 0;
 		}
-
-		//i {
-		//	@include font-size(22px);
-		//	line-height: 1;
-		//}
 
 		i.permalink {
 			@include font-size(12px);
@@ -132,11 +125,8 @@ $maintenance-plan-border-color: #dedede;
 		@include rem('padding', 10px 20px);
 		@include clearfix();
 		height: auto;
-		//background: #f5f5f5;
 
-		&.footer-short {
-			@include rem('padding', 10px 20px);
-		}
+		&.footer-short { @include rem('padding', 10px 20px); }
 	}
 }
 
@@ -182,11 +172,6 @@ $maintenance-plan-border-color: #dedede;
 //==================================================================*/
 .content-block.content-block-outline, .content-block.content-block-card {
 	border: 1px solid #DDD;
-	//border-bottom-width: 6px;
-
-	.header + .content {
-		//padding-top: 0;
-	}
 
 	.content.content-collapsed {
 		padding-top: 0;
@@ -210,8 +195,6 @@ $maintenance-plan-border-color: #dedede;
 .content-block .content-tabular {
 	ul {
 		@include reset;
-		//display: table;
-		//width: 100%;
 		margin-bottom: 0;
 		list-style-type: none;
 
@@ -234,9 +217,7 @@ $maintenance-plan-border-color: #dedede;
 	.header, .footer { opacity: .5; }
 
 	&:hover {
-		.footer, .footer a {
-			opacity: 1;
-		}
+		.footer, .footer a { opacity: 1; }
 	}
 }
 
@@ -247,11 +228,7 @@ $maintenance-plan-border-color: #dedede;
 
 	.content { display: none; }
 
-	&.expanded {
-		.content {
-			display: block;
-		}
-	}
+	&.expanded .content { display: block; }
 
 	.expandable-toggle {
 		position:absolute;
@@ -260,12 +237,9 @@ $maintenance-plan-border-color: #dedede;
 		@include rem('padding', 22px 10px);
 		@include font-size(22px, 22px);
 		transition: .2s;
-
 	}
 
-	&.active .expandable-toggle  {
-		transform: rotate(90deg)
-	}
+	&.active .expandable-toggle  { transform: rotate(90deg); }
 }
 
 // Content Block Outline
@@ -274,10 +248,6 @@ $maintenance-plan-border-color: #dedede;
 	border: 1px solid #DDD;
 	border-bottom-width: 6px;
 
-	.header + .content {
-		//padding-top: 0;
-	}
-
 	.content.content-collapsed {
 		padding-top: 0;
 		padding-bottom: 0;
@@ -285,15 +255,10 @@ $maintenance-plan-border-color: #dedede;
 }
 
 // Content Block Card
-.content-block.content-block-card {
-	//ul{ @include reset; }
-}
 
 .content-block .content-tabular {
 	ul {
 		@include reset;
-		//display: table;
-		//width: 100%;
 		margin-bottom: 0;
 		list-style-type: none;
 
@@ -316,22 +281,18 @@ $maintenance-plan-border-color: #dedede;
 	.header, .footer { opacity: .5; }
 
 	&:hover {
-		.footer, .footer a {
-			opacity: 1;
-		}
+		.footer, .footer a { opacity: 1; }
 	}
 }
 
 .content-block-expandable {
 	position: relative;
 
-	@include media-query(sm) {
-		margin-left: 25px;
-	}
+	@include media-query(sm) { margin-left: 25px; }
 
 	.header {
     @include rem('padding', $global-padding);
-    
+
 		.action-count {
 			display: block;
 
@@ -342,16 +303,7 @@ $maintenance-plan-border-color: #dedede;
 		}
 	}
 
-	.content {
-		@include rem('padding', $global-padding);
-		//display: none;
-	}
-
-	&.active {
-		.content {
-			//display: block;
-		}
-	}
+	.content { @include rem('padding', $global-padding); }
 
 	.bulk-actions-dropdown {
 		@include media-query(sm) {
@@ -368,30 +320,18 @@ $maintenance-plan-border-color: #dedede;
 
 	}
 
-	&.expanded .expandable-toggle {
-		transform: rotate(90deg)
-	}
+	&.expanded .expandable-toggle { transform: rotate(90deg); }
 
-	&.expanded .footer-toggle {
-		transform: rotate(180deg);
-	}
+	&.expanded .footer-toggle { transform: rotate(180deg); }
 
-	&.expanded .content {
-		@include rem('padding', $global-padding);
-	}
+	&.expanded .content { @include rem('padding', $global-padding); }
 
 	.btn.footer-with-toggle {
 		display: block;
 		width: 100%;
 	}
 
-	.footer-toggle {
-		display: inline-block;
-	}
-
-	&.expanded .footer-toggle {
-
-	}
+	.footer-toggle { display: inline-block; }
 }
 
 .content-block-with-checkbox {
@@ -413,15 +353,9 @@ $maintenance-plan-border-color: #dedede;
 	border: 1px solid $maintenance-plan-border-color;
 	border-bottom: none;
 
-	.header, .content {
-		padding: 0;
-	}
+	.header, .content { padding: 0; }
 
-	ul {
-		padding: 0;
-		//border: 1px solid rgba(0,0,0,.25);
-		//border-bottom: none;
-	}
+	ul { padding: 0; }
 
 	li.sortable {
 		position: relative;
@@ -441,17 +375,6 @@ $maintenance-plan-border-color: #dedede;
 		}
 	}
 
-	//li:after {
-	//	content: '';
-	//	position: absolute;
-	//	bottom: -4px;
-	//	display: block;
-	//	width: 100%;
-	//	height: 4px;
-	//	background: #646464;
-	//	z-index: 5;
-	//}
-
 	li.sort-asc, li.sort-desc {
 		opacity: 1;
 		border-bottom: 4px solid #848484;
@@ -466,9 +389,7 @@ $maintenance-plan-border-color: #dedede;
 			float: right;
 		}
 
-		i.fa.fa-sort {
-			color: rgba(0,0,0,.15);
-		}
+		i.fa.fa-sort { color: rgba(0,0,0,.15); }
 	}
 }
 
@@ -478,24 +399,12 @@ $maintenance-plan-border-color: #dedede;
   }
 }
 
-.content-block-card {
-	.subcontext-menu {
-		button {
-			@include rem('padding', 2px 4px);
-		}
-		i {
-			@include font-size(14px);
-		}
-	}
+.content-block-card .subcontext-menu {
+	button { @include rem('padding', 2px 4px); }
+	i { @include font-size(14px); }
 }
 
-.content-block-card {
-	.subcontext-menu {
-		button {
-			@include rem('padding', 2px 4px);
-		}
-		i {
-			@include font-size(14px);
-		}
-	}
+.content-block-card .subcontext-menu {
+	button { @include rem('padding', 2px 4px); }
+	i { @include font-size(14px); }
 }

@@ -1,19 +1,7 @@
 .chart-col {
   position: relative;
-	//@media screen and (min-width: 992px) {
-	//	margin-top: -24px;
-	//}
-	//@media screen and (min-width: 992px) and (max-width: 1199px) {
-	//	width: 46%;
-	//}
+
   table {
-    //width: 80%;
-    //@include rem('margin', $global-margin 10%);
-
-    tr td {
-      //width: 50%;
-    }
-
     tr:nth-child(odd) {
       td:nth-child(odd) { background: $gray-light; }
       td:nth-child(even) { background: #fff; }
@@ -26,24 +14,7 @@
 
   }
 
-  .legend {
-    //width: auto;
-
-    a {
-      text-decoration: underline;
-    }
-  }
-
-  //.legend {
-  //  @include reset;
-  //  list-style-type: none;
-  //  display: inline-block;
-  //  float: right;
-  //
-  //  @include media-query(sm) {
-  //    @include rem('margin-top', -$global-padding);
-  //  }
-  //}
+  .legend a { text-decoration: underline; }
 }
 
 .chart-icon {
@@ -88,22 +59,14 @@
 		@include media-query (sm) { left: 30px; }
 	}
 
-	p {
-		font-weight: 500;
-	}
+	p { font-weight: 500; }
 
-	p.light {
-		font-weight: 100;
-	}
+	p.light { font-weight: 100; }
 }
 
-.rha-telemetry-donut {
-	text-align: center;
-}
+.rha-telemetry-donut { text-align: center; }
 
-div .gauge {
-	height: 100px;
-}
+div .gauge { height: 100px; }
 
 .gauge .donut-container {
 	height: 63px;

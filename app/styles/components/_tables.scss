@@ -9,28 +9,20 @@ table {
   tr th {
     font-family: 'overpass';
     @include rem('padding', 12px);
-    
+
     @include media-query(sm){ @include rem('padding', $global-padding); }
   }
 
   th,
-  td {
-    text-align: left;
-  }
+  td { text-align: left; }
 
   th.min,
-  td.min {
-    width: 1%;
-  }
+  td.min { width: 1%; }
 
   th.fit-content,
-  td.fit-content {
-    white-space: nowrap;
-  }
+  td.fit-content { white-space: nowrap; }
 
-  tr:nth-child(even) {
-    background: #F7F7F7;
-  }
+  tr:nth-child(even) { background: #F7F7F7; }
 
   thead {
     border-bottom: 1px solid #ddd;
@@ -56,7 +48,7 @@ table tbody {
   }
 }
 
-table a, 
+table a,
 table a:link { @extend %font_blue; }
 
 .error-infos {
@@ -91,29 +83,9 @@ table a:link { @extend %font_blue; }
   }
 }
 
-// .table-overflow {
-//   position: relative;
-//   overflow-x: auto;
-// }
-
-// .table-overflow::after {
-//   background: linear-gradient(to right, #fff0 0%,#ddd 100%);
-//   width: 30px;
-//   content: '';
-//   position: absolute;
-//   right: 0;
-//   height: 100%;
-//   top: 0;
-//   border-right: 1px solid #ddd;
-// }
-
 $sortable_border_width: 5px;
 $sortable_border_color: #000;
 $sortable_border_color_active: red;
-
-table th.sortable:first-child {
-
-}
 
 .sortable {
   position: relative;
@@ -152,7 +124,7 @@ table th.sortable:first-child {
         opacity: .2;
         border-bottom-color: $sortable_border_color_active;
       }
-      
+
       &:after {
         opacity: 1;
         border-top-color: $sortable_border_color_active;
@@ -168,9 +140,9 @@ table th.sortable:first-child {
   }
 
   &.sort-asc::after,
-  &.sort-desc::before { 
+  &.sort-desc::before {
     opacity: .8;
-    border-top-color: #000; 
+    border-top-color: #000;
   }
 }
 
@@ -188,18 +160,14 @@ table th.sortable:first-child {
 }
 
 .table-groups {
-  tbody tr td {
-    padding: 0;
-  }
+  tbody tr td { padding: 0; }
 
   label {
     display: block;
     cursor: pointer;
     padding: 8px;
     margin: 0;
-    span {
-      font-weight: 500;
-    }
+    span { font-weight: 500; }
   }
 }
 
@@ -227,7 +195,6 @@ table th.sortable:first-child {
   }
 
   .count span {
-    //@include rem('padding', 6px);
     width: 20px;
     height: 20px;
     display: inline-block;
@@ -237,23 +204,13 @@ table th.sortable:first-child {
     color: #fff;
   }
 
-  thead th {
-    font-weight: 700;
-  }
+  thead th { font-weight: 700; }
 
-  thead.lite th {
-    font-weight: 100;
-  }
+  thead.lite th { font-weight: 100; }
 
 
   thead {
-        th, td, tr {
-          border: none;
-        }
-  }
-
-  tr {
-
+    th, td, tr { border: none; }
   }
 
   a.link {
@@ -287,24 +244,10 @@ table th.sortable:first-child {
       color: #fff;
     }
 
-    thead {
-      tr {
-
-      }
+    tbody tr {
+      color: #fff;
+      background: $red;
     }
-
-    tbody {
-
-      tr {
-        color: #fff;
-        background: $red;
-      }
-
-      td {
-
-      }
-    }
-
   }
 }
 
@@ -334,9 +277,7 @@ table.meta-table {
       text-align: right;
       width: 30%;
 
-      @include media-query(md) {
-        width: 40%;
-      }
+      @include media-query(md) { width: 40%; }
     }
 
     td:nth-child(even) {
@@ -351,9 +292,7 @@ table.meta-table {
       background: #eaeaea;
     }
 
-    ul {
-      @include rem('padding-left', 18px);
-    }
+    ul { @include rem('padding-left', 18px); }
 
     .heading {
       font-size: large;
@@ -365,8 +304,6 @@ table.meta-table {
       strong { padding-left: .3em; }
     }
 
-    .center {
-      text-align: center;
-    }
+    .center { text-align: center; }
   }
 }

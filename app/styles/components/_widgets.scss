@@ -13,37 +13,7 @@
     @include reset;
     list-style-type: none;
 
-    li {
-      @include rem('margin-bottom', $global-padding/2);
-
-      //&:nth-child(2) .bar .grad,
-      //&:nth-child(2) .progress .progress-bar {
-      //  background: #FF6600;
-      //}
-      //
-      //&:nth-child(3) .bar .grad,
-      //&:nth-child(3) .progress .progress-bar {
-      //  background: #CC0000;
-      //}
-    }
-
-    //.progress {
-    //  @include rem('margin-bottom', 4px);
-    //  box-shadow: none;
-    //  text-align: left;
-    //}
-    //
-    //.progress .progress-bar { text-align: left; }
-    //.progress + span {
-    //  line-height: 1;
-    //  display: inline-block;
-    //  font-weight: 700;
-    //}
-    //
-    //.progress .progress-bar .num {
-    //  float: right;
-    //  @include rem('margin', 3px 8px 0 0);
-    //}
+    li { @include rem('margin-bottom', $global-padding/2); }
   }
 }
 
@@ -51,8 +21,6 @@ $grad-height: 20px;
 $bar-height: $grad-height + 4;
 
 .widget.key-issues {
-
-  //.progress-bar .progress { background-image: linear-gradient(to right, #006CBE, #FE0002); }
 
   .grad {
     position: relative;
@@ -82,10 +50,6 @@ $bar-height: $grad-height + 4;
     right: auto;
     left: 8px;
   }
-}
-
-.widget.migration-trend {
-
 }
 
 .widget.widgetIncidentSummary {

@@ -3,9 +3,7 @@ ul.nav.nav-tabs-simple {
   border: none;
   padding: 0;
 
-  li {
-    display: inline-block;
-  }
+  li { display: inline-block; }
 
   li a {
     // Reset
@@ -45,13 +43,9 @@ ul.nav.nav-tabs-simple {
     }
   }
 
-  .tab-pane {
-    padding: 0;
-  }
+  .tab-pane { padding: 0; }
 
-  &.underline {
-    border-bottom: 1px solid $gray;
-  }
+  &.underline { border-bottom: 1px solid $gray; }
 
   + .tab-content {
     .tab-pane {
@@ -64,12 +58,6 @@ ul.nav.nav-tabs-simple {
   position: relative;
 
   .graph-filters {
-    //position: absolute;
-    //z-index: 99;
-    //right: 0;
-    //top: 0;
-    //@include rem('padding', 8px);
-    //background: rgba(255,255,255,.5);
 
     .dropdown {
 
@@ -93,10 +81,4 @@ table {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
-  //.hostname {
-  //  display: block;
-  //  width: 50%;
-  //}
-
 }
