@@ -56,20 +56,7 @@ function OnRun(
         return;
     }
 
-    let firstStateChange = true;
     $rootScope.$on('$stateChangeStart', function (event, next, nextParams) {
-        const nextState = next.name;
-        if (nextState === 'evaluation') {
-            firstStateChange = false;
-        }
-
-        if (firstStateChange && nextState.startsWith('app.')) {
-            firstStateChange = false;
-            event.preventDefault();
-            $state.go('evaluation', {
-                originalPath: window.location.toString()
-            });
-        }
 
         let hash = $location.hash();
         if (hash) {
