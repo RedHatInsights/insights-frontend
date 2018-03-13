@@ -1,6 +1,6 @@
 .button-split
 
-  .button-main(ng-transclude='main')
+  .main(ng-transclude='main')
 
   md-menu(md-offset="0 34", md-position-mode="target-right target")
     md-button.button-dropdown#splitButtonDropdown(ng-click='$mdMenu.open()', ng-class='ctrl.classes', ng-disabled='disabled')

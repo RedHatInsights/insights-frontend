@@ -2,15 +2,16 @@
 
 var statesModule = require('../');
 var c3 = require('c3');
-
-// var d3 = require('d3');
+var d3 = require('d3');
+const donutSize = 180;
+const donutThickness = 10;
 
 const donutVals     = {
     size: {
-        width: 240,
-        height: 240
+        width: donutSize,
+        height: donutSize
     },
-    donut: { width: 12 },
+    donut: { width: donutThickness },
     color: {
         pattern: ['#0088CE', '#d1d1d1', 'red']
     },
@@ -40,6 +41,9 @@ function PmaasCtrl() {
             ],
             type: 'donut',
             labels: false
+        },
+        legend: {
+            position: 'bottom'
         }
     }));
 
@@ -83,6 +87,28 @@ function PmaasCtrl() {
             labels: false
         }
     }));
+    
+    function toggle(id) {
+        chart.toggle(id);
+    }
+
+    d3.select('.container').insert('div', '.chart').attr('class', 'legend').selectAll('span')
+        .data(['data1', 'data2', 'data3'])
+      .enter().append('span')
+        .attr('data-id', function (id) { return id; })
+        .html(function (id) { return id; })
+        .each(function (id) {
+            d3.select(this).style('background-color', chart.color(id));
+        })
+        .on('mouseover', function (id) {
+            chart.focus(id);
+        })
+        .on('mouseout', function (id) {
+            chart.revert();
+        })
+        .on('click', function (id) {
+            chart.toggle(id);
+        });
 }
 
 statesModule.controller('PmaasCtrl', PmaasCtrl);
