@@ -1,13 +1,17 @@
 .nav-pf-vertical.primary-nav
   ul.list-group
-    li.list-group-item.current
-      a(href="#0")
-        span.fa.fa-dashboard(data-toggle="tooltip" title="Dashboard", ui-sref-active='current')
-        span.list-group-item-value Dashboard
+    li.list-group-item(ui-sref-active='active' ng-class='isActive(states.pmaas)')
+      a(ui-sref='app.pmaas', ui-sref-active='active', ng-click="toggleLeft()")
+        span.fa.fa-dashboard
+        span.list-group-item-value PMAAS
+    li.list-group-item()
+      a(ui-sref='app.pmaas', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
+        span.fa.fa-dashboard(data-toggle="tooltip" title="Pmaas" ng-class='isActive(states.pmaas)' ui-sref='app.pmaas' ui-sref-active='active' ng-click="toggleLeft()")
+        span.list-group-item-value PMAAS
     li.list-group-item
-      a(href="#0")
-        span.fa.fa-shield(data-toggle="tooltip" title="Dolor")
-        span.list-group-item-value Dolor
+      a(ui-sref='app.overview')
+        span.fa.fa-shield(data-toggle="tooltip" title="Overview", ng-click="toggleLeft()")
+        span.list-group-item-value Overview
 
 //- .primary-nav
 //-   account-select

@@ -1,0 +1,47 @@
+/* ==================================================================
+/* Primary nav
+/* ================================================================== */
+/**
+ * This document defines the styling for the pmaas layout
+**/
+
+
+// pmaas content layout
+section.grid-pmaas {
+  // display: flex;
+  // flex-flow: row wrap;
+
+  @include media-query(sm) {  
+    display: grid;
+    grid-gap: $global-margin;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-query(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+section.grid-pmaas .card-pf {
+  flex: 1 1 calc(50% - #{$global-margin});
+  @include rem('margin', $global-padding);
+}
+
+// page-header + content override
+.page-header + section.grid-pmaas {
+  @include rem('padding', $global-margin);
+}
+
+section.grid-pmaas .c3-legend-item-tile {
+  width: 12px;
+  height: 12px;
+  background: gray;
+}
+
+section.grid-pmaas .c3-legend-item {
+  display: grid;
+  grid-template-columns: max-content max-content auto;
+  grid-gap: $global-padding/2;
+  align-items: center;
+}
+

@@ -36,7 +36,7 @@ $define-fa: true !default;
 
 // Include CSS from bower components
 //==================================================================*/
-@import '../../node_modules/angular-datepicker/dist/angular-datepicker';
+// @import '../../node_modules/angular-datepicker/dist/angular-datepicker';
 @import '../../node_modules/ui-select/dist/select';
 @import '../../node_modules/sweetalert2/dist/sweetalert2';
 @import '../../node_modules/c3/c3';
@@ -82,6 +82,7 @@ $define-fa: true !default;
 @import 'page-templates/actions';
 @import 'page-templates/eval';
 @import 'page-templates/policies';
+@import 'page-templates/pmaas';
 
 
 // Scaffolding extensions
@@ -121,7 +122,7 @@ $define-fa: true !default;
 @import 'components/no-actions';
 @import 'components/loader';
 @import 'components/switch';
-@import 'components/dropdown';
+// @import 'components/dropdown';
 @import 'components/materials';
 @import 'components/newRules';
 @import 'components/webhooks';
@@ -157,7 +158,7 @@ $define-fa: true !default;
 @import 'components/widgets';
 @import 'components/list-switch';
 @import 'components/progress-bar';
-@import 'components/pager';
+// @import 'components/pager';
 @import 'components/icon-group';
 @import 'components/severity-icon';
 @import 'components/gauges';
@@ -165,6 +166,7 @@ $define-fa: true !default;
 @import 'components/evaluation';
 @import 'components/renameable-property';
 @import 'components/with-tile';
+
 
 // System Overlay
 //==================================================================*/
@@ -230,55 +232,6 @@ $define-fa: true !default;
 // Bootstrap Core variables and mixins
 @import "vendor/bootstrap/variables";
 @import "vendor/bootstrap/mixins";
-
-// // Bootstrap Reset and dependencies
-// @import "bootstrap/normalize";
-// @import "bootstrap/print";
-// @import "bootstrap/glyphicons";
-
-// // Bootstrap Core CSS
-// @import "bootstrap/scaffolding";
-// @import "bootstrap/type";
-// @import "bootstrap/code";
-// @import "bootstrap/grid";
-// @import "bootstrap/tables";
-// @import "bootstrap/forms";
-// @import "bootstrap/buttons";
-
-// // Bootstrap Components
-// @import "bootstrap/component-animations";
-// @import "bootstrap/dropdowns";
-// @import "bootstrap/button-groups";
-// @import "bootstrap/input-groups";
-// @import "bootstrap/navs";
-// @import "bootstrap/navbar";
-// @import "bootstrap/breadcrumbs";
-// @import "bootstrap/pagination";
-// @import "bootstrap/pager";
-// @import "bootstrap/labels";
-// @import "bootstrap/badges";
-// @import "bootstrap/jumbotron";
-// @import "bootstrap/thumbnails";
-// @import "bootstrap/alerts";
-// @import "bootstrap/progress-bars";
-// @import "bootstrap/media";
-// @import "bootstrap/list-group";
-// @import "bootstrap/panels";
-// @import "bootstrap/responsive-embed";
-// @import "bootstrap/wells";
-// @import "bootstrap/close";
-
-// // Bootstrap Components w/ JavaScript
-// @import "bootstrap/modals";
-// @import "bootstrap/tooltip";
-// @import "bootstrap/popovers";
-// @import "bootstrap/carousel";
-
-// // Bootstrap Utility classes
-// @import "bootstrap/utilities";
-// @import "bootstrap/responsive-utilities";
-
-
 
 
 /* PatternFly */
@@ -357,3 +310,6 @@ $define-fa: true !default;
 @import '../patternfly/src/sass/converted/patternfly/vertical-nav';
 @import '../patternfly/src/sass/converted/patternfly/wizard';
 
+
+// PF overrides
+@import 'components/pf-card';

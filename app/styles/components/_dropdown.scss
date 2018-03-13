@@ -1,77 +1,91 @@
-.md-open-menu-container.md-active > md-menu-content > * {
-  transition: .1s;
+.dropdown .caret {
+  border: none;
+  &::before {
+    bottom: 0;
+    content: "\f107";
+    left: 0;
+    line-height: 12px;
+    position: absolute;
+    text-align: center;
+    top: -1px;
+    right: 0;
+  }
 }
 
+// .md-open-menu-container.md-active > md-menu-content > * {
+//   transition: .1s;
+// }
 
-md-menu-content {
+
+// md-menu-content {
   
-  md-menu-item {
+//   md-menu-item {
 
-    &:hover:not(.no-hover) {
-      background: #f5f5f5;
-    }
-  }
-}
-
-
-md-menu-content {
-  max-height: 80vh;
-
-  .icon-inline-right {
-    position: static;
-    display: flex;
-    padding: 0;
-
-    i,
-    .icon { 
-      position: static;
-      flex: 0; 
-    }
-  }
-}
-
-.dropdown.gray {
-  button {
-    background: #f7fafc;
-  }
-}
+//     &:hover:not(.no-hover) {
+//       background: #f5f5f5;
+//     }
+//   }
+// }
 
 
-.dropdown.dropdown-blue,
-.ui-select-bootstrap.dropdown.dropdown-blue {
-  $dropdown-blue-line-height: 1;
+// md-menu-content {
+//   max-height: 80vh;
 
-  .btn {
-    background: $blue;
-    color: #fff;
-    line-height: $dropdown-blue-line-height;
-  }
+//   .icon-inline-right {
+//     position: static;
+//     display: flex;
+//     padding: 0;
 
-  input[type="search"] {
-    // @include rem('padding', 12px 30px 12px 12px);
-    @include font-size(14px);
-    line-height: $dropdown-blue-line-height;
-  }
-}
+//     i,
+//     .icon { 
+//       position: static;
+//       flex: 0; 
+//     }
+//   }
+// }
 
-.open>.dropdown-menu {
-}
-
-.ui-select-bootstrap.dropdown {
-
-  .btn {
-    color: #333;
-    background: none;
-    box-shadow: none;
-    text-transform: none;
-  }
-
-  input:placeholder-shown {  }
-}
+// .dropdown.gray {
+//   button {
+//     background: #f7fafc;
+//   }
+// }
 
 
-.dropdown.inline {
-  display: inline-block;
-  width: auto;
-} 
+// .dropdown.dropdown-blue,
+// .ui-select-bootstrap.dropdown.dropdown-blue {
+//   $dropdown-blue-line-height: 1;
+
+//   .btn {
+//     background: $blue;
+//     color: #fff;
+//     line-height: $dropdown-blue-line-height;
+//   }
+
+//   input[type="search"] {
+//     // @include rem('padding', 12px 30px 12px 12px);
+//     @include font-size(14px);
+//     line-height: $dropdown-blue-line-height;
+//   }
+// }
+
+// .open>.dropdown-menu {
+// }
+
+// .ui-select-bootstrap.dropdown {
+
+//   .btn {
+//     color: #333;
+//     background: none;
+//     box-shadow: none;
+//     text-transform: none;
+//   }
+
+//   input:placeholder-shown {  }
+// }
+
+
+// .dropdown.inline {
+//   display: inline-block;
+//   width: auto;
+// } 
 

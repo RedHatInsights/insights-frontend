@@ -21,7 +21,8 @@ $button-split-menu:   '.md-menu';
 
 .button-split {
 
-  > #{$button-split-button} {
+  > #{$button-split-button},
+  .button-main button {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -37,4 +38,12 @@ $button-split-menu:   '.md-menu';
       margin: 0;
     }
   }
+}
+
+
+/* Caret overrides
+/* ================================================================== */
+
+.button-split .caret {
+  border: none;
 }

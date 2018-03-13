@@ -3,98 +3,110 @@ $topbar-text-color: $base-color;
 $topbar-border-color: #ddd;
 
 
-topbar {
-  display: block;
-  @include rem('padding', $global-margin);
-  background: $topbar-bg;
-  border-bottom: 4px solid $topbar-border-color;
+topbar .navbar {
+  // display: block;
+  // @include rem('padding', $global-margin);
+  // background: $topbar-bg;
 
   @include media-query(sm){
-    @include rem('padding', 0 $global-padding 0 0);
-    display: grid;
-    grid-template-columns: max-content auto max-content max-content;
-    grid-gap: $global-margin;
-  }
-}
+    display: flex;
 
-topbar .button {
-  box-shadow: none;
-}
-
-topbar .cell {
-  @include media-query(sm){
-    align-self: center;
-  }
-}
-
-
-topbar .cell.insights-logo {
-
-}
-
-
-topbar .cell.global-filters {
-
-}
-
-
-topbar .cell.topbar-utilities {
-
-}
-
-
-topbar {
-
-  a { color: #fff; }
-
-  span,
-  strong { + i { @include rem('margin-left', 4px); } }
-
-  i {
-    & + span,
-    & + strong { @include rem('margin-left', 4px); }
-  }
-
-  .notifications,
-  .beta-switch { display: inline-block; }
-
-  menu span + span { padding-left: 15px; }
-  menu.notifications{ 
-    padding: 0;
-  }
-
-  .help, 
-  .beta-dropdown {
-    &.open>.dropdown-toggle.dropdown-toggle { background: rgba(0,0,0,.2); color: $gray-md; }
-
-    .dropdown-toggle {
-      background-color: transparent;
-      @include rem('padding', 6px 8px);
-    }
-
-    .dropdown-menu {
-      min-width: auto;
-      left: auto;
-      right: 0;
-      padding-left: 0;
-      top: auto;
-
-      a { font-weight: 600; }
+    > *:nth-child(2) {
+      @include media-query(sm) {
+        margin-left: auto; 
+      }      
     }
   }
-
-  .sep {
-    color: $gray-md;
-
-    &:before { content: '|'; }
-  }
 }
 
-topbar .global-filters { 
-
-
-  label { margin: 0; } 
+topbar .navbar-header,
+topbar .navbar-pf-vertical .nav .nav-item-iconic {
+  display: flex;
+  align-items: center;
 }
 
-topbar div label, 
-topbar div a{ color: $topbar-text-color; }
+topbar .navbar-pf-vertical .nav .nav-item-iconic {
+  @include rem('padding', 12px);
+}
+
+// topbar .button {
+//   box-shadow: none;
+// }
+
+// topbar .cell {
+//   @include media-query(sm){
+//     align-self: center;
+//   }
+// }
+
+
+// topbar .cell.insights-logo {
+
+// }
+
+
+// topbar .cell.global-filters {
+
+// }
+
+
+// topbar .cell.topbar-utilities {
+
+// }
+
+
+// topbar {
+
+//   a { color: #fff; }
+
+//   span,
+//   strong { + i { @include rem('margin-left', 4px); } }
+
+//   i {
+//     & + span,
+//     & + strong { @include rem('margin-left', 4px); }
+//   }
+
+//   .notifications,
+//   .beta-switch { display: inline-block; }
+
+//   menu span + span { padding-left: 15px; }
+//   menu.notifications{ 
+//     padding: 0;
+//   }
+
+//   .help, 
+//   .beta-dropdown {
+//     &.open>.dropdown-toggle.dropdown-toggle { background: rgba(0,0,0,.2); color: $gray-md; }
+
+//     .dropdown-toggle {
+//       background-color: transparent;
+//       @include rem('padding', 6px 8px);
+//     }
+
+//     .dropdown-menu {
+//       min-width: auto;
+//       left: auto;
+//       right: 0;
+//       padding-left: 0;
+//       top: auto;
+
+//       a { font-weight: 600; }
+//     }
+//   }
+
+//   .sep {
+//     color: $gray-md;
+
+//     &:before { content: '|'; }
+//   }
+// }
+
+// topbar .global-filters { 
+
+
+//   label { margin: 0; } 
+// }
+
+// topbar div label, 
+// topbar div a{ color: $topbar-text-color; }
