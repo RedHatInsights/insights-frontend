@@ -9,7 +9,8 @@
   "private": true,
   "dependencies": {
     "express": "~4.16.x",
-    "morgan": "~1.9.x"
+    "morgan": "~1.9.x",
+    "patternfly": "^3.41.6"
   },
   "devDependencies": {
     "angular": "~1.5.x",
