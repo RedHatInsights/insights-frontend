@@ -100,6 +100,15 @@ h2 .ansible-icon img, h2 .ansible-icon-white img {
     width: 32px;
 }
 
+.yes-action {
+    color: red;
+
+}
+
+.no-action {
+    color: green;
+}
+
 .all-category-icon {
     @extend .icon-circle;
 }

@@ -73,7 +73,7 @@
               td.fit-content
                 a.action-count.icon-inline(ng-click='showActions(system)')
                   span.text(translate, translate-n="system.report_count", translate-plural="{{:: $count}} Actions") {{:: system.report_count}} Action
-                  i.fa(ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count, 'success': !system.report_count, 'fail': system.report_count}")
+                  i.fa(ng-class="{'no-action fa-check-circle': !system.report_count, 'yes-action fa-exclamation-circle': system.report_count, 'success': !system.report_count, 'fail': system.report_count}")
                   span.sr-only Time to destination by car:
 
 

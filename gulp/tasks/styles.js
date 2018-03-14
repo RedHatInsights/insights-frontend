@@ -39,8 +39,6 @@ gulp.task('vendor-css', function () {
         './node_modules/c3/c3.min.css',
         './node_modules/ng-table/bundles/ng-table.min.css',
         './node_modules/angular-material/angular-material.min.css',
-        './node_modules/patternfly/dist/css/patternfly.min.css',
-        './node_modules/patternfly/dist/css/patternfly-additions.min.css'
     ]).pipe(concat('vendor.css'))
         .pipe(replace('../fonts', '../static/fonts'))
         .pipe(gulp.dest('./build/css/'));

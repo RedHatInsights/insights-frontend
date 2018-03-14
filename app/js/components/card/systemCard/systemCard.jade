@@ -23,7 +23,7 @@
         a.action-count.icon-inline(ng-click='showActions(); $event.stopPropagation();')
           span.text(translate, translate-n="system.report_count", translate-plural="{{:: $count}} Actions") {{:: system.report_count}} Action
           span(ng-class="{'success': !system.report_count, 'fail': system.report_count}")
-            i.fa(ng-click='showActions(); $event.stopPropagation();', ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count}")
+            i.fa(ng-click='showActions(); $event.stopPropagation();', ng-class="{'no-action fa-check-circle': !system.report_count, 'yes-action fa-exclamation-circle': system.report_count}")
     card-content
       div(ng-if='!system.isCheckingIn')
         strong Last checkin:&nbsp;
