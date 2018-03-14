@@ -21,7 +21,7 @@ const rename = require('gulp-rename');
 gulp.task('browserify', ['bro']);
 
 gulp.task('bro', function () {
-    // const createSourcemap = global.isProd && config.browserify.sourcemap;
+    const createSourcemap = global.isProd && config.browserify.sourcemap;
     const env = global.isProd ? 'production' : 'development';
     const preludePath = path.resolve(__dirname, '../util/_prelude.js');
 
@@ -37,8 +37,8 @@ gulp.task('bro', function () {
                 plugin: [banify(config.bannedPackages)],
                 transform: [ 'brfs', 'bulkify', envify({ _: 'purge', NODE_ENV: env })]
             }))
-           // .pipe(gulpif(createSourcemap, buffer()))
-           // .pipe(gulpif(createSourcemap, sourcemaps.init({ loadMaps: true })))
+           .pipe(gulpif(createSourcemap, buffer()))
+           .pipe(gulpif(createSourcemap, sourcemaps.init({ loadMaps: true })))
            .pipe(gulpif(global.isProd, babel({
                 presets: ['es2015-without-strict'],
                 compact: true,
@@ -50,12 +50,12 @@ gulp.task('bro', function () {
            .pipe(rename('insights.unmin.js'))
            .pipe(gulp.dest(config.scripts.dest))
            .pipe(rename('insights.js'))
-           // .pipe(gulpif(global.isProd, streamify(
-           //     uglify({ compress: { drop_console: true } })
-           //     .on('error', function (e) {
-           //          console.log(e);
-           //      }))))
-           // .pipe(gulpif(createSourcemap, sourcemaps.write('./')))
+           .pipe(gulpif(global.isProd, streamify(
+               uglify({ compress: { drop_console: true } })
+               .on('error', function (e) {
+                    console.log(e);
+                }))))
+           .pipe(gulpif(createSourcemap, sourcemaps.write('./')))
            .pipe(gulp.dest(config.scripts.dest))
            .pipe(gulpif(browserSync.active,
                browserSync.reload({ stream: true, once: true })));

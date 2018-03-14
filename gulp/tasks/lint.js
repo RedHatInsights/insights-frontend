@@ -15,18 +15,17 @@ gulp.task('lint-fix', function () {
 });
 
 gulp.task('lint', function () {
-    return true;
-    // return gulp.src(config.scripts.src.concat(['!app/js/templates.js', '!app/js/components/ui-bootstrap-custom.js']))
-    //     .pipe(jshint())
-    //     .pipe(jscs())
-    //     .pipe(stylish.combineWithHintResults())
-    //     .pipe(jshint.reporter('jshint-stylish'))
-    //     .pipe(map(function (file, cb) {
-    //         if (file.jshint && !file.jshint.success) {
-    //             // this captures both jshint and jscs because combineWithHintResults()
-    //             cb('Lint validation failed!');
-    //         } else {
-    //             cb();
-    //         }
-    //     }));
+    return gulp.src(config.scripts.src.concat(['!app/js/templates.js', '!app/js/components/ui-bootstrap-custom.js']))
+        .pipe(jshint())
+        .pipe(jscs())
+        .pipe(stylish.combineWithHintResults())
+        .pipe(jshint.reporter('jshint-stylish'))
+        .pipe(map(function (file, cb) {
+            if (file.jshint && !file.jshint.success) {
+                // this captures both jshint and jscs because combineWithHintResults()
+                cb('Lint validation failed!');
+            } else {
+                cb();
+            }
+        }));
 });
