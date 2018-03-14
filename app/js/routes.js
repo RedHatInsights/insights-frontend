@@ -135,7 +135,6 @@ function Routes($stateProvider) {
             reloadOnSearch: false
         });
 
-
     // Rule routes
     $stateProvider
         .state('app.rules', {
