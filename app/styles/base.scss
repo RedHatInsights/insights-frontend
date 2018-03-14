@@ -1,7 +1,6 @@
 $define-fa: true !default;
 // Include Settings / Functions
 //==================================================================*/
-@import '../../node_modules/font-awesome/scss/font-awesome';
 @import 'includes/vars';
 @import 'includes/colors';
 @import 'includes/mixins';
@@ -34,22 +33,8 @@ $define-fa: true !default;
 @import 'layout/footer';
 
 
-// Include CSS from bower components
-//==================================================================*/
-// @import '../../node_modules/angular-datepicker/dist/angular-datepicker';
-@import '../../node_modules/ui-select/dist/select';
-@import '../../node_modules/sweetalert2/dist/sweetalert2';
-@import '../../node_modules/c3/c3';
-@import '../../node_modules/ng-table/bundles/ng-table';
-@import '../../node_modules/angular-material/angular-material.scss';
-
-.flexgrid {
-  @import '../../node_modules/flexboxgrid/dist/flexboxgrid';
-}
-
 // Include Vendors (used to override bower imports)
 //==================================================================*/
-// @import 'vendor/';
 @import 'vendor/c3';
 @import 'vendor/ng-table';
 @import 'vendor/_animate';
@@ -232,83 +217,6 @@ $define-fa: true !default;
 // Bootstrap Core variables and mixins
 @import "vendor/bootstrap/variables";
 @import "vendor/bootstrap/mixins";
-
-
-/* PatternFly */
-
-// Variables
-@import '../../node_modules/patternfly/dist/sass/patternfly/variables';
-
-// Bootstrap mixin overrides
-@import '../../node_modules/patternfly/dist/sass/patternfly/bootstrap-mixin-overrides';
-
-// OpenSans
-@import '../../node_modules/patternfly/dist/sass/patternfly/fonts';
-
-// PatternFly
-@import '../../node_modules/patternfly/dist/sass/patternfly/mixins';
-// @import "../../node_modules/patternfly/dist/sass/patternfly/alerts";
-@import "../../node_modules/patternfly/dist/sass/patternfly/badges";
-@import "../../node_modules/patternfly/dist/sass/patternfly/breadcrumbs";
-@import "../../node_modules/patternfly/dist/sass/patternfly/buttons";
-@import "../../node_modules/patternfly/dist/sass/patternfly/dropdowns";
-@import "../../node_modules/patternfly/dist/sass/patternfly/forms";
-@import "../../node_modules/patternfly/dist/sass/patternfly/labels";
-@import "../../node_modules/patternfly/dist/sass/patternfly/list-group";
-@import "../../node_modules/patternfly/dist/sass/patternfly/modals";
-@import "../../node_modules/patternfly/dist/sass/patternfly/pager";
-@import "../../node_modules/patternfly/dist/sass/patternfly/pagination";
-@import "../../node_modules/patternfly/dist/sass/patternfly/panels";
-@import "../../node_modules/patternfly/dist/sass/patternfly/popovers";
-@import "../../node_modules/patternfly/dist/sass/patternfly/progress-bars";
-@import "../../node_modules/patternfly/dist/sass/patternfly/tables";
-@import "../../node_modules/patternfly/dist/sass/patternfly/tabs";
-@import "../../node_modules/patternfly/dist/sass/patternfly/tooltip";
-@import "../../node_modules/patternfly/dist/sass/patternfly/type";
-
-// PatternFly Additions
-@import '../../node_modules/patternfly/dist/sass/patternfly/about-modal';
-// @import '../../node_modules/patternfly/dist/sass/static/patternfly/application-launcher';
-@import '../../node_modules/patternfly/dist/sass/patternfly/blank-slate';
-@import '../../node_modules/patternfly/dist/sass/patternfly/bootstrap-combobox';
-@import '../../node_modules/patternfly/dist/sass/patternfly/bootstrap-datepicker';
-@import '../../node_modules/patternfly/dist/sass/patternfly/bootstrap-select';
-@import '../../node_modules/patternfly/dist/sass/patternfly/bootstrap-slider';
-// @import '../../node_modules/patternfly/dist/sass/patternfly/bootstrap-switch';
-@import '../../node_modules/patternfly/dist/sass/patternfly/bootstrap-touchspin';
-@import '../../node_modules/patternfly/dist/sass/patternfly/bootstrap-treeview';
-@import '../../node_modules/patternfly/dist/sass/patternfly/card-view';
-@import '../../node_modules/patternfly/dist/sass/patternfly/cards';
-@import '../../node_modules/patternfly/dist/sass/patternfly/charts';
-@import '../../node_modules/patternfly/dist/sass/patternfly/close';
-@import '../../node_modules/patternfly/dist/sass/patternfly/datatables';
-@import '../../node_modules/patternfly/dist/sass/patternfly/experimental-features';
-@import '../../node_modules/patternfly/dist/sass/patternfly/filter';
-@import '../../node_modules/patternfly/dist/sass/patternfly/footer';
-@import '../../node_modules/patternfly/dist/sass/patternfly/icons';
-@import '../../node_modules/patternfly/dist/sass/patternfly/infotip';
-@import '../../node_modules/patternfly/dist/sass/patternfly/layouts';
-@import '../../node_modules/patternfly/dist/sass/patternfly/links';
-@import '../../node_modules/patternfly/dist/sass/patternfly/list-pf';
-@import '../../node_modules/patternfly/dist/sass/patternfly/list-view-dnd';
-@import '../../node_modules/patternfly/dist/sass/patternfly/list-view';
-@import '../../node_modules/patternfly/dist/sass/patternfly/login';
-@import '../../node_modules/patternfly/dist/sass/patternfly/nav-vertical-alt';
-@import '../../node_modules/patternfly/dist/sass/patternfly/navbar-alt';
-@import '../../node_modules/patternfly/dist/sass/patternfly/navbar-vertical';
-@import '../../node_modules/patternfly/dist/sass/patternfly/navbar';
-@import '../../node_modules/patternfly/dist/sass/patternfly/notifications-drawer';
-@import '../../node_modules/patternfly/dist/sass/patternfly/search';
-@import '../../node_modules/patternfly/dist/sass/patternfly/sidebar';
-@import '../../node_modules/patternfly/dist/sass/patternfly/skip-to-content';
-@import '../../node_modules/patternfly/dist/sass/patternfly/spinner';
-@import '../../node_modules/patternfly/dist/sass/patternfly/syntax-highlighting';
-@import '../../node_modules/patternfly/dist/sass/patternfly/table-view';
-@import '../../node_modules/patternfly/dist/sass/patternfly/time-picker';
-@import '../../node_modules/patternfly/dist/sass/patternfly/toast';
-@import '../../node_modules/patternfly/dist/sass/patternfly/toolbar';
-@import '../../node_modules/patternfly/dist/sass/patternfly/vertical-nav';
-@import '../../node_modules/patternfly/dist/sass/patternfly/wizard';
 
 
 // PF overrides
