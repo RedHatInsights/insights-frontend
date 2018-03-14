@@ -6,7 +6,6 @@ var servicesModule = require('./');
  * @ngInject
  */
 function AccountService($rootScope, $q, User, InsightsConfig) {
-    var user = User.current;
     var account = 6;
     var storage_account = window.sessionStorage.getItem(InsightsConfig.acctKey);
 
