@@ -1,7 +1,6 @@
 $define-fa: true !default;
 // Include Settings / Functions
 //==================================================================*/
-@import '../../node_modules/font-awesome/scss/font-awesome';
 @import 'includes/vars';
 @import 'includes/colors';
 @import 'includes/mixins';
@@ -34,22 +33,8 @@ $define-fa: true !default;
 @import 'layout/footer';
 
 
-// Include CSS from bower components
-//==================================================================*/
-@import '../../node_modules/angular-datepicker/dist/angular-datepicker';
-@import '../../node_modules/ui-select/dist/select';
-@import '../../node_modules/sweetalert2/dist/sweetalert2';
-@import '../../node_modules/c3/c3';
-@import '../../node_modules/ng-table/bundles/ng-table';
-@import '../../node_modules/angular-material/angular-material.scss';
-
-.flexgrid {
-  @import '../../node_modules/flexboxgrid/dist/flexboxgrid';
-}
-
 // Include Vendors (used to override bower imports)
 //==================================================================*/
-// @import 'vendor/';
 @import 'vendor/c3';
 @import 'vendor/ng-table';
 @import 'vendor/_animate';

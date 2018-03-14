@@ -100,16 +100,6 @@ h2 .ansible-icon img, h2 .ansible-icon-white img {
     width: 32px;
 }
 
-.yes-action {
-    @extend .fa-exclamation-circle;
-    color: red;
-}
-
-.no-action {
-    @extend .fa-check-circle;
-    color: green;
-}
-
 .all-category-icon {
     @extend .icon-circle;
 }
@@ -132,43 +122,4 @@ h2 .ansible-icon img, h2 .ansible-icon-white img {
 .security-category-icon {
     @extend .icon-circle;
     @extend .category;
-}
-
-.All-severity-icon {
-}
-.INFO-severity-icon {
-    @extend .i-info;
-    @extend .fa-info-circle;
-}
-.WARN-severity-icon {
-    @extend .i-warning;
-    @extend .fa-warning;
-}
-.ERROR-severity-icon {
-    @extend .i-error;
-    @extend .fa-times-circle;
-}
-
-.all-rule-state-icon {
-    @extend .fa-circle
-}
-
-.active-rule-state-icon {
-    @extend .fa-circle;
-    color: green;
-}
-
-.needs-content-rule-state-icon {
-    @extend .fa-circle;
-    color: orange;
-}
-
-.inactive-rule-state-icon {
-    @extend .fa-circle;
-    color: red;
-}
-
-.retired-rule-state-icon {
-    @extend .fa-circle;
-    color: gray;
 }
