@@ -82,7 +82,7 @@ function listGroup() {
         templateUrl: 'js/components/list/list-group.html',
         restrict: 'E',
         replace: true,
-        transclude: true,
+        transclude: true
     };
 }
 
@@ -139,7 +139,7 @@ function listItemHeader() {
         restrict: 'E',
         replace: true,
         transclude: true,
-        link: ListItemHeaderExpandableLink,
+        link: ListItemHeaderLink,
         require: '^listItem'
     };
 }
@@ -167,11 +167,10 @@ function listItemContent() {
         restrict: 'E',
         replace: true,
         transclude: true,
-        link: ListItemHeaderExpandableLink,
+        link: ListItemContentLink,
         require: '^listItem'
     };
 }
-
 
 componentsModule.directive('listGroup', listGroup);
 componentsModule.directive('listItem', listItem);

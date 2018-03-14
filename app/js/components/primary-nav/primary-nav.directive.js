@@ -67,7 +67,7 @@ function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User, InsightsJwt
 
     checkPolicies();
 
-// This is the navigation js
+    // This is the navigation js
     const htmlElem              = document.querySelector('html');
     const backdrop              = document.createElement('div');
     backdrop.className          = 'backdrop';
@@ -194,7 +194,7 @@ function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User, InsightsJwt
                 target.children[1].setAttribute('style', 'top: ' + top + 'px');
             }, 200);
         }
-    };    
+    };
 }
 
 function primaryNav() {
