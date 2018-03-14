@@ -6,115 +6,260 @@ $dashboard-nav-input-bg: #322e31;
 $aside_anchor_bg: #4d464b;
 $aside_anchor_color: #fff;
 $aside_anchor_hover_bg: gray;
+$text-max-width: 200px;
 
 
 // Mobile/base styling
 //==================================================================*/
 
 .primary-nav {
-  // background-color: $primary-nav-bg;
-//   display: none;
-//   flex-flow: column wrap;
-//   box-shadow: inset -14px 0 40px 0 rgba(0, 0, 0, .1);
+  display: none;
+  flex-flow: column wrap;
 
-//   @include media-query(sm){ display: flex; }
+  @include media-query(sm){ display: flex; }
 
-//   a,
-//   button {
-//     color: #fff;
-//     font-weight: 700;
-//     position: relative;
-//   }
-
-//   ul {
-//     @include reset();
-//     list-style-type: none;
-//     overflow: auto;
-//   }
-
-//   ul li { @include reset(); }
-//   ul li:not(:first-child) { border-top: 1px solid rgba(255,255,255,.1); }
-//   ul li:not(:last-child) { border-bottom: 1px solid rgba(0,0,0,.4); }
-
-//   ul li a,
-//   ul li button {
-//     display: flex;
-//     flex-direction: row;
-//     margin: 0;
-//     @include rem('padding', $global-padding $global-margin $global-padding $global-padding);
-
-//     text-align: center;
-//     @include font-size(14px, 1);
-//     transition: .4s;
-
-//     .text {  @include rem('margin-left', 12px); }
-//     i { margin-bottom: 0; }
-//   }
-
-//   ul li a:hover,
-//   ul li a.current,
-//   ul li button:hover {
-//     background: rgba(255,255,255,.075);
-//     box-shadow: inset 6px 0 0 $blue-light;
-//     text-decoration: none;    
-//   }
-
-//   ul li a.current .fa {
-//     color: $blue-light;
-//     text-decoration: none;
-//   }
-}
-
-// Collapsed state
-// .platform-grid.collapsed .primary-nav ul li a:hover,
-// .platform-grid.collapsed .primary-nav ul li a.current { box-shadow: inset 2px 0 0 $blue-light; }
-
-
-// Medium breakpoint
-//==================================================================*/
-
-// .primary-nav ul li a,
-// .primary-nav ul li button { @include media-query(md) { @include rem('padding', 24px 34px 24px 24px); } }
-
-// .platform-grid.collapsed .primary-nav ul li a, 
-// button.toggle-fullscreen {
-//   @include media-query(sm) { @include rem('padding', $global-padding); }
-//   @include media-query(md) { @include rem('padding', 24px); }
-// }
-
-topbar .toggle-fullscreen {
-  border: none;
-  box-shadow: none;
-}
-
-
-// Header
-//==================================================================*/
-
-.primary-nav .header-block {
-  @include rem('padding', $global-padding);
-  color: #fff;
-
-  label { color: #fff; }
-
-  input {
-    width: 100%;
-    @include rem('padding', $global-padding/2);
-    border: none;
-    box-shadow: none;
-    background: #292b31;
+  ul {
+    @include reset();
+    list-style-type: none;
+    // overflow: auto;
   }
 
-  .internal {
-    margin-top: 5px;
+  ul li a,
+  ul li button {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    width: auto;
+    transition: .4s;
   }
-
-  .internal input { width: 15px; }
 }
 
+.nav-pf-vertical .list-group-item > a {
+  width: auto;
+  @include rem('padding', 17px 25px 17px 25px);
 
+  &:hover {
+    font-weight: 500;
+  }
+}
+
+/* Nav-pf-vertical overrides
+/* ================================================================== */
 .nav-pf-vertical {
   top: auto;
   width: auto;
   position: static;
+  overflow-x: initial;
+  overflow-y: initial;
+}
+
+.nav-pf-vertical .list-group-item.active > a, 
+.nav-pf-vertical .list-group-item:hover > a {
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.nav-pf-vertical .list-group-item > a .fa {
+  margin-right: 0;
+}
+
+.nav-desktop-collapsed ins-nav-primary a { transition: .1s; }
+html:not(.nav-desktop-collapsed) ins-nav-primary a { transition: .3s; }
+html:not(.nav-desktop-collapsed) ins-nav-primary a:hover { box-shadow: inset 3px 0 0 $blue-light; }
+
+
+// Ignore blue detail when collapsed
+.nav-desktop-collapsed ins-nav-primary a:hover:not(.current) { box-shadow: none; }
+
+
+/* ==================================================================
+/* Sidebar animation
+/* ================================================================== */
+
+/* Mixins
+/* ================================================================== */
+
+// Hide nav text
+@mixin navHide {
+  max-width: 0;
+  margin-left: 0;
+  padding: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+// Show nav text
+@mixin navShow {
+  max-width: $text-max-width;
+  @include rem('margin-left', 12px); 
+  @include rem('padding-right', $global-padding);
+  opacity: 1;
+}
+
+@mixin accountSelectHide {
+  max-width: 0;
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+@mixin accountSelectShow {
+  max-width: 300px;
+  max-height: 200px;
+  opacity: 1;
+  @include rem('padding', $global-padding);
+  overflow: visible;
+}
+
+/* ================================================================== */
+
+
+
+// .text slide out animation
+@keyframes nav-text-slide-out {
+  
+  0% { @include navShow; }
+  30% { opacity: 0; }
+  50% { @include rem('margin-left', 12px); }
+  70% { max-width: 0; }
+  100% { @include navHide; }
+}
+
+
+// .text slide in animation
+@keyframes nav-text-slide-in {
+
+  0% { @include navHide; }
+
+  10% { 
+    @include rem('margin-left', 12px); 
+    opacity: 0;
+  }
+
+  80% { 
+    opacity: 1; 
+    max-width: $text-max-width; 
+  }
+
+  100% {
+    @include navShow;
+  }
+}
+
+
+// Account select slide out animation
+@keyframes account-select-slide-out {
+  from { @include accountSelectShow; }
+  to { @include accountSelectHide; }
+}
+
+
+// Account select slide in animation
+@keyframes account-select-slide-in {
+  from { 
+    @include accountSelectHide; 
+    overflow: visible;
+  }
+  to { @include accountSelectShow; }
+}
+
+
+
+/* ==================================================================
+/* Desktop collapsed state
+/* ================================================================== */
+
+$animation-speed: .3s;
+
+// Set default states
+ins-nav-primary .text, 
+.primary-nav .text { @include navShow; }
+
+// ins-nav-primary ins-account-select { @include accountSelectShow; }
+
+
+// Animate the collapse
+.nav-collapsing .primary-nav .text { animation: nav-text-slide-out $animation-speed forwards; }
+
+// .nav-collapsing ins-nav-primary ins-account-select { animation: account-select-slide-out .1s forwards linear; }
+
+
+// Persist the animation after animation is complete
+.nav-desktop-collapsed .primary-nav .text { @include navHide; }
+// .nav-desktop-collapsed ins-nav-primary ins-account-select { @include accountSelectHide; }
+
+
+// Animate the nav collapse
+.nav-expanding .primary-nav .text { animation: nav-text-slide-in $animation-speed forwards; }
+// .nav-expanding ins-nav-primary ins-account-select { animation: account-select-slide-in .1s forwards; }
+
+
+// account select slide in animation
+@keyframes nav-collapsed-hover-in {
+
+  from {
+    left: 64px;
+    opacity: 0;
+    max-width: 0;
+    z-index: 11;
+  }
+
+  to {
+    left: 72px;
+    opacity: 1;
+    max-width: $text-max-width;
+    z-index: 11;
+  }
+}
+
+@keyframes nav-collapsed-hover-after-in {
+  0% {
+    right: 0;
+    width: 120%;
+    opacity: 1;
+  }
+
+  100% {
+    width: 0;
+    opacity: .75;
+    opacity: 0;
+  }
+}
+
+
+/* ==================================================================
+/* Respsonsive
+/* ================================================================== */
+
+.nav-desktop-collapsed:not(.nav-expanding) .primary-nav a .text,
+.nav-desktop-collapsed:not(.nav-expanding) .primary-nav .button .text {
+  position: absolute;
+  max-width: 0;
+  opacity: 0;
+  animation: none;
+}
+
+.nav-desktop-collapsed:not(.nav-expanding) .primary-nav a:hover .text,
+.nav-desktop-collapsed:not(.nav-expanding) .primary-nav .button:hover .text {
+  margin-left: 0;
+  @include rem('padding', 6px $global-padding);
+  background: rgba(0,0,0,.8);
+  border-radius: 4px;
+  animation: nav-collapsed-hover-in .2s forwards linear;
+  animation-delay: .3s;
+  overflow: visible;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 6px;
+    width: 0; 
+    height: 0; 
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent; 
+    border-right: 6px solid rgba(0,0,0,.75);
+    color: #02b7ff;
+  }
 }

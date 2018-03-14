@@ -3,8 +3,6 @@
   padding: 0;
   display: flex;
   flex-flow: column nowrap;
-  box-shadow: 0 2px 6px rgba(204,204,204,.5);
-  border: 1px solid #E3E1E1;
 }
 
 .card-pf.text-center {
@@ -13,6 +11,10 @@
 
 .card-pf.text-left {
   text-align: left;
+}
+
+.card-pf .card-pf-item {
+  @include font-size(14px, 1);
 }
 
 .card-pf-heading,

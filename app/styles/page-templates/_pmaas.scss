@@ -23,8 +23,7 @@ section.grid-pmaas {
 }
 
 section.grid-pmaas .card-pf {
-  flex: 1 1 calc(50% - #{$global-margin});
-  @include rem('margin', $global-padding);
+
 }
 
 // page-header + content override

@@ -124,6 +124,18 @@ function Routes($stateProvider) {
             reloadOnSearch: false
         });
 
+    $stateProvider
+        .state('app.inventory-deployment', {
+            url: '/inventory-deployment?product' +
+                '&docker_host&sort_field&sort_dir&' +
+                'offline&online&machine&page&pageSize&systemHealth',
+            templateUrl: 'js/states/inventory-deployment/inventory-deployment.html',
+            controller: 'InventoryDeploymentCtrl',
+            title: 'Inventory Deployment',
+            reloadOnSearch: false
+        });
+
+
     // Rule routes
     $stateProvider
         .state('app.rules', {

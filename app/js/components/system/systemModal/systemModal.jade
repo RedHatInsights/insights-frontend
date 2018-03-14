@@ -11,6 +11,6 @@
   // hack to kill the 200MB tab usage
   .tabs-hack(ng-if="activeTab === 'system'")
     .rule-summaries(system='system', machine-id='system.system_id', rule='rule', rule-filter='ruleFilter', loading='loading')
-    .rule-summary.system-overlay-item.content-block(ng-if='system.__fake', report='report', rule='rule', loading='loading')
+    .rule-summary.system-overlay-item(ng-if='system.__fake', report='report', rule='rule', loading='loading')
   .tabs-hack(ng-if="activeTab === 'policy'")
     policies-modal(system-id='system.system_id')

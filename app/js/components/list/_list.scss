@@ -1,0 +1,60 @@
+/* ==================================================================
+/* List component
+/* ================================================================== */
+/**
+ * This document defines the styling for the list component
+**/
+
+
+/* Vars
+/* ================================================================== */
+:root {
+  --list-group-item-header-padding: $global-padding;
+}
+
+/* List group
+/* ================================================================== */
+.list-group {
+  @include rem('padding', $global-margin);
+  background: #f5f5f5;
+}
+
+
+/* List item base
+/* ================================================================== */
+
+
+/* List item header
+/* ================================================================== */
+
+
+/* List item header expandable
+/* ================================================================== */
+.list-group-item-header.list-group-item-header--Expandable {
+  display: flex;
+  align-items: first baseline;
+  padding: var(--list-group-item-header-padding) calc(#{var(--list-group-item-header-padding)}/2);
+
+  > * {
+    margin: 0 calc(calc(#{var(--list-group-item-header-padding)}/2);
+  }
+}
+
+.list-view-pf-expand {
+  @include reset;
+}
+
+.list-group-item-header .list-view-pf-main-info {
+  padding: 0;
+}
+
+// caret
+.list-group-item-header .caret {
+  @include font-size(18px, 1);
+  transform: rotate(-90deg);
+  transition: .4s;
+}
+
+.expanded .list-group-item-header .caret {
+  transform: rotate(0deg);
+}

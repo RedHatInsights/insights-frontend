@@ -1,16 +1,13 @@
 nav.navbar.navbar-pf-vertical
   .navbar-header
-    button.navbar-toggle(type="button", ng-click='sidenavCollapsed = !sidenavCollapsed')
+    button.navbar-toggle(type="button", ng-click="navPrimary()")
       span.sr-only Toggle navigation
       span.icon-bar
       span.icon-bar
       span.icon-bar
-    a.nav-brand(ui-sref='app.overview')
+    a.home-link(ui-sref='app.overview')
       span.hidden(translate) Red Hat Insights
-      img(src="./static/images/l_insights-inline.svg" aria-label="Red Hat Insights" alt="Red Hat Insights")
-    a.navbar-brand(href="/")
-      img.navbar-brand-icon(src="/assets/img/logo-alt.svg" alt="")
-      img.navbar-brand-name(src="/assets/img/brand-alt.svg" alt="PatternFly Enterprise Application")
+      md-icon(md-svg-src="./static/images/l_insights-inline.svg" aria-label="Red Hat Insights" alt="Red Hat Insights")
   nav.collapse.navbar-collapse
     //- ul.nav.navbar-nav.navbar-right.navbar-iconic.navbar-utility
     //-   li.dropdown

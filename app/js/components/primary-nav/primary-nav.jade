@@ -1,17 +1,19 @@
 .nav-pf-vertical.primary-nav
   ul.list-group
-    li.list-group-item(ui-sref-active='active' ng-class='isActive(states.pmaas)')
+    li.list-group-item(ui-sref='app.pmaas' ui-sref-active='active')
       a(ui-sref='app.pmaas', ui-sref-active='active', ng-click="toggleLeft()")
         span.fa.fa-dashboard
-        span.list-group-item-value PMAAS
-    li.list-group-item()
-      a(ui-sref='app.pmaas', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
-        span.fa.fa-dashboard(data-toggle="tooltip" title="Pmaas" ng-class='isActive(states.pmaas)' ui-sref='app.pmaas' ui-sref-active='active' ng-click="toggleLeft()")
-        span.list-group-item-value PMAAS
-    li.list-group-item
-      a(ui-sref='app.overview')
-        span.fa.fa-shield(data-toggle="tooltip" title="Overview", ng-click="toggleLeft()")
-        span.list-group-item-value Overview
+        span.text PMAAS
+    
+    li.list-group-item(ui-sref='app.inventory-deployment' ui-sref-active='active')
+      a(ui-sref='app.inventory-deployment', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
+        i.fa.fa-database
+        span.text(translate) Deployment Inventory
+
+    li.list-group-item(ui-sref='app.digests' ui-sref-active='active')
+      a(ui-sref='app.digests', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
+        i.fa.fa-bar-chart
+        span.text(translate) Executive Report
 
 //- .primary-nav
 //-   account-select

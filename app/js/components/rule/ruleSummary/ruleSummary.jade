@@ -1,15 +1,17 @@
-card.card-rule-summary(expandable='true' init-collapsed='initCollapsed' on-toggle='resetShowMore(ctx)')
-  card-header-expandable.risk-summary.gray
+list-item(expandable)
+  list-item-header-expandable
     incident-icon(rule-id='report.rule_id')
-    h3.title {{:: report.rule.category }} > {{:: report.rule.description }}
+    strong.title {{:: report.rule.category }} > {{:: report.rule.description }}
     ansible-icon(value='report.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
     .risk-summaries.card-header-risk-summaries
       all-severity-icons.inline(rule='report.rule')
       risk-of-change(change-risk='report.rule.resolution_risk')
-  card-content.card-content.ng-animate-enabled(collapse="card.collapsed")
+
+  list-item-content
     .flex
       .rule-reason(md-flex-100)
       .rule-resolution(md-flex-100)
       .recommended-kbase(ng-if='report.rule.node_id' node='report.rule.node_id')
       .text-center.border-top(ng-show='report.rule.more_info')
-  card-footer.footer.more-info.ng-animate-enabled(collapse="!show.moreInfo")
+
+  list-item-footer.more-info(collapse="!show.moreInfo")

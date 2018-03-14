@@ -1,3 +1,10 @@
-.rule-summary + .rule-summary {
-  @include rem('margin-top', $global-margin);
+.rule-summaries {
+  .list-view-pf-main-info {
+    display: flex;
+  }
+}
+
+.rule-summaries .risk-summaries {
+  display: flex;
+  flex: auto;
 }

@@ -88,10 +88,14 @@ button:focus {
   @include rem('padding', 10px $global-padding);
   box-shadow: none;
   border-radius: 50px;
-  border: 1px solid $gray-md;
+  border: 2px solid #c5c5c5;
   color: $black-base; 
   display: inline-flex;
   justify-content: space-between;
+
+  .caret {
+    border: none;
+  }
 }
 
 .button-primary {
@@ -99,7 +103,7 @@ button:focus {
   color: $button-primary-color;
 
   &:hover {
-    background-color: darken($button-primary-bg, 10);
+    background-color: lighten($button-primary-bg, 10);
   }
 }
 
