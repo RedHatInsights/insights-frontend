@@ -14,7 +14,7 @@
 
 /* List group
 /* ================================================================== */
-.list-group {
+.list-group.list-view-pf {
   @include rem('padding', $global-margin);
   background: #f5f5f5;
 }
