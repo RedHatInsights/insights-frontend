@@ -7,7 +7,7 @@ var servicesModule = require('./');
  */
 function AccountService($rootScope, $q, User, InsightsConfig) {
     var user = User.current;
-    var account = user.account_number;
+    var account = 6;
     var storage_account = window.sessionStorage.getItem(InsightsConfig.acctKey);
 
     if (storage_account) {
@@ -25,13 +25,9 @@ function AccountService($rootScope, $q, User, InsightsConfig) {
     return {
         current: function (separator) {
             var accountStr;
-            if (account) {
-                accountStr = ((separator) ? separator : '?');
-                accountStr += ('account_number=' + account);
-                return accountStr;
-            }
-
-            return '';
+            accountStr = ((separator) ? separator : '?');
+            accountStr += ('account_number=6');
+            return accountStr;
         },
 
         number: function () {
