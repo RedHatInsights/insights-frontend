@@ -1,8 +1,9 @@
+/*global require*/
 'use strict';
 
-var statesModule = require('../');
-var c3 = require('c3');
-var d3 = require('d3');
+const statesModule = require('../');
+const c3 = require('c3');
+const d3 = require('d3');
 const donutSize = 180;
 const donutThickness = 10;
 
@@ -32,71 +33,72 @@ function donutSettings(obj) {
  */
 function PmaasCtrl() {
     c3.generate(donutSettings(
-    {
-        bindto: '.chart-vulnerability',
-        data: {
-            columns: [
-                ['data1', 10],
-                ['data2', 10]
-            ],
-            type: 'donut',
-            labels: false
-        },
-        legend: {
-            position: 'bottom'
-        }
-    }));
+        {
+            bindto: '.chart-vulnerability',
+            data: {
+                columns: [
+                    ['data1', 10],
+                    ['data2', 10]
+                ],
+                type: 'donut',
+                labels: false
+            },
+            legend: {
+                position: 'bottom'
+            }
+        }));
 
     c3.generate(donutSettings(
-    {
-        bindto: '.chart-compliance',
-        data: {
-            columns: [
-                ['data1', 20],
-                ['data2', 10]
-            ],
-            type: 'donut',
-            labels: false
-        }
-    }));
+        {
+            bindto: '.chart-compliance',
+            data: {
+                columns: [
+                    ['data1', 20],
+                    ['data2', 10]
+                ],
+                type: 'donut',
+                labels: false
+            }
+        }));
 
     c3.generate(donutSettings(
-    {
-        bindto: '.chart-advisor',
-        data: {
-            columns: [
-                ['data1', 10],
-                ['data2', 100]
-            ],
-            type: 'donut',
-            labels: false
-        }
-    }));
+        {
+            bindto: '.chart-advisor',
+            data: {
+                columns: [
+                    ['data1', 10],
+                    ['data2', 100]
+                ],
+                type: 'donut',
+                labels: false
+            }
+        }));
 
     c3.generate(donutSettings(
-    {
-        bindto: '.chart-subscription',
+        {
+            bindto: '.chart-subscription',
 
-        data: {
-            columns: [
-                ['data1', 30],
-                ['data2', 20],
-                ['data3', 220]
-            ],
-            type: 'donut',
-            labels: false
-        }
-    }));
-    
-    function toggle(id) {
-        chart.toggle(id);
-    }
+            data: {
+                columns: [
+                    ['data1', 30],
+                    ['data2', 20],
+                    ['data3', 220]
+                ],
+                type: 'donut',
+                labels: false
+            }
+        }));
 
-    d3.select('.container').insert('div', '.chart').attr('class', 'legend').selectAll('span')
+    d3.select('.container')
+        .insert('div', '.chart')
+        .attr('class', 'legend')
+        .selectAll('span')
         .data(['data1', 'data2', 'data3'])
-      .enter().append('span')
+        .enter().append('span')
         .attr('data-id', function (id) { return id; })
-        .html(function (id) { return id; })
+        .html(function (id) { return id; });
+
+    /*
         .each(function (id) {
             d3.select(this).style('background-color', chart.color(id));
         })
@@ -109,6 +111,7 @@ function PmaasCtrl() {
         .on('click', function (id) {
             chart.toggle(id);
         });
+        */
 }
 
 statesModule.controller('PmaasCtrl', PmaasCtrl);

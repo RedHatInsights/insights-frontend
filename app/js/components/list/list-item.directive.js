@@ -6,7 +6,7 @@ var componentsModule = require('../');
 /**
  * @ngInject
  */
-function listItemCtrl($scope, Utils, Events, $q) {
+function ListItemCtrl($scope, Utils, Events, $q) {
     var priv = {};
     var vars = {};
 
@@ -70,13 +70,6 @@ function ListItemContentLink(scope, element, attrs, listItem) {
 /**
  * @ngInject
  */
-function ListItemFooterLink(scope, element, attrs, listItem) {
-    scope.listItem = listItem.api;
-}
-
-/**
- * @ngInject
- */
 function listGroup() {
     return {
         templateUrl: 'js/components/list/list-group.html',
@@ -95,7 +88,7 @@ function listItem() {
         restrict: 'E',
         replace: true,
         transclude: true,
-        controller: listItemCtrl,
+        controller: ListItemCtrl,
         scope: {
             expandable: '@',
             initCollapsed: '=',

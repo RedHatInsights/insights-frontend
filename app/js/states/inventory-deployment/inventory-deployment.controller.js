@@ -75,11 +75,17 @@ function InventoryDeploymentCtrl(
     if (InsightsConfig.authenticate && !PreferenceService.get('loaded')) {
         $rootScope.$on('user:loaded', function () {
             initInventory();
-            $state.transitionTo('app.inventory-deployment', updateParams(params), { notify: false });
+            $state.transitionTo(
+                'app.inventory-deployment',
+                updateParams(params),
+                { notify: false });
         });
     } else {
         initInventory();
-        $state.transitionTo('app.inventory-deployment', updateParams(params), { notify: false });
+        $state.transitionTo(
+            'app.inventory-deployment',
+            updateParams(params),
+            { notify: false });
     }
 
     $scope.allSelected = false;
