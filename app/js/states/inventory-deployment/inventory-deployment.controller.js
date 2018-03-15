@@ -206,10 +206,13 @@ function InventoryDeploymentCtrl(
 
         let query = buildRequestQueryParams(true);
 
-        System.getSystemsLatest(query).success(getSystemsResponseHandler)
-            .error(function () {
+        System.getSystemsLatest(query).then(
+            getSystemsResponseHandler,
+            function () {
                 $scope.errored = true;
-            }).finally(function () {
+            },
+
+            function () {
                 InventoryService.loading = $scope.loading = $scope.reloading = false;
             });
     }

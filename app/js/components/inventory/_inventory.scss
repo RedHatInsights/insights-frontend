@@ -3,5 +3,6 @@
   grid-gap: $global-margin;
 
   @include media-query(sm) { grid-template-columns: repeat(2, 1fr); }
-  @include media-query(lg) { grid-template-columns: repeat(4, 1fr); }
+  @include media-query(lg) { grid-template-columns: repeat(3, 1fr); }
 }
+
