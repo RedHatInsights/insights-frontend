@@ -17,7 +17,8 @@ function System(
     FilterService,
     Products,
     PreferenceService,
-    DataUtils) {
+    DataUtils,
+    DemoData) {
 
     var root = InsightsConfig.apiRoot;
     var _systemDfd;
@@ -166,11 +167,13 @@ function System(
             return $http.head(url);
         },
 
-        getSystemsLatest: function (query) {
-            var url = root + 'systems';
-            url += AccountService.current('?');
-            url = Utils.addQueryToUrl(url, query);
-            return $http.get(url);
+        getSystemsLatest: function () {
+            return $q.resolve(DemoData.systems);
+
+            // var url = root + 'systems';
+            // url += AccountService.current('?');
+            // url = Utils.addQueryToUrl(url, query);
+            // return $http.get(url);
         },
 
         getSystemStatus: function (refresh) {

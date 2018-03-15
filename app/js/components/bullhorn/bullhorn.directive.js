@@ -36,7 +36,7 @@ function bullhornCtrl($rootScope, $scope, $state, Announcement, AnnouncementServ
     switch ($scope.type) {
         case 'announcements':
             _getAnnouncements();
-        break;
+            break;
     }
 
     $rootScope.$on('announcement:changed', function () {_getAnnouncements();});

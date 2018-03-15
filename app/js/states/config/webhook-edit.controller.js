@@ -156,10 +156,10 @@ function WebhookEditCtrl(
                 switch (errorKey) {
                     case 'INVALID_WEBHOOK_URL':
                         $scope.errors.url = true;
-                    break;
+                        break;
                     case 'INVALID_WEBHOOK_CERT':
                         $scope.errors.certificate = true;
-                    break;
+                        break;
                 }
             }
         });

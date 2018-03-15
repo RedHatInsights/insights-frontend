@@ -35,29 +35,38 @@
         card-content
           .card-pf-top-element
             type-icon.type.card-pf-icon-circle(type-id='system.system_type_id' include-text='false')
-            h2.card-pf-title.text-center {{system.product_code}}
+            h2.card-pf-title.text-center {{system.product_name}}
+            
+          .ellipsis-wrapper.hostname.text-center
+            strong.hostname {{:: system.toString }}
 
           .card-pf-items.text-center
             .card-pf-item
               .icon-inline
-                i.fa.fa-times-circle-o.i-error
+                pf-status-icon(status='system.system_status')
                 a(href="#") System
             .card-pf-item
               .icon-inline
-                i.fa.fa-check
+                pf-status-icon(status='system.infra_status')
                 a(href="#") Infra
+                
+          .card-pf-items.text-center
+            .card-pf-item
+              .icon-inline
+                bar-status-icon(status='system.reliability')
+                a(href="#") Reliability
+            .card-pf-item
+              .icon-inline
+                bar-status-icon(status='system.improvement')
+                a(href="#") Improvement
+                                
+          .card-pf-items.text-center
+            .card-pf-item
+              .icon-inline
+                a(href="#") More Details
 
-          .ellipsis-wrapper.hostname
-            strong.hostname {{:: system.toString }}
-            span(ng-if='!system.isCheckingIn') &nbsp;(stale system)
-
-          a.action-count.icon-inline(ng-click='showActions(); $event.stopPropagation();')
-            span.text(translate, translate-n="system.report_count", translate-plural="{{:: $count}} Actions") {{:: system.report_count}} Action
-            span(ng-class="{'success': !system.report_count, 'fail': system.report_count}")
-              i.fa(ng-click='showActions(); $event.stopPropagation();', ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count}")          
-
-        card-footer
-          span test footer
+        //card-footer
+        //  span test footer
 
     //- .row.row-short
     //-   .col-md-12
