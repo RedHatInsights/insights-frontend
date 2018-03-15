@@ -1,5 +1,5 @@
 .digests-page
-  page-header(title="Executive Report", icon="fa-bar-chart", ng-class="{'inactive': !expandBar, 'active': expandBar}", ng-transclude)
+  page-header(title="Executive Report", ng-class="{'inactive': !expandBar, 'active': expandBar}", ng-transclude)
     md-button.md-primary.pull-right(
       ng-click='downloadPdf()',
       ng-if="!downloading",
