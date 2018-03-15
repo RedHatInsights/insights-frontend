@@ -25,6 +25,35 @@ gulp.task('bro', function () {
     const env = global.isProd ? 'production' : 'development';
     const preludePath = path.resolve(__dirname, '../util/_prelude.js');
 
+
+    const broSize = function (inst) {
+        const fs = require('fs');
+        const lodash = require('lodash');
+        const list = {};
+
+        inst.on('time', function () {
+            console.log(JSON.stringify(lodash.sortBy(lodash.toArray(list), 'size'), false, 2));
+        });
+
+        inst.on('file', function (file, id) {
+            const shortname = file.replace('/home/iphands/prog/insights/frontend/', '');
+            const bytes = parseFloat((fs.statSync(file).size / 1024.0 / 1024.0).toFixed(2));
+
+            if (!list[id]) {
+                list[id] = {
+                    package: id,
+                    files: {},
+                    size: 0
+                };
+            }
+
+            if (!list[id].files[shortname]) {
+                list[id].files[shortname] = true;
+                list[id].size += bytes;
+            }
+        });
+    };
+
     return gulp.src(['./app/js/insights.js'])
            .pipe(plumber())
            .pipe(bro({
@@ -34,9 +63,12 @@ gulp.task('bro', function () {
                 cacheFile: config.browserify.cacheFile,
                 prelude: fs.readFileSync(preludePath, 'utf8'),
                 preludePath: preludePath,
-                plugin: [banify(config.bannedPackages)],
+                plugin: [
+                    // broSize,
+                    banify(config.bannedPackages)
+                ],
                 transform: [ 'brfs', 'bulkify', envify({ _: 'purge', NODE_ENV: env })]
-            }))
+           }))
            .pipe(gulpif(createSourcemap, buffer()))
            .pipe(gulpif(createSourcemap, sourcemaps.init({ loadMaps: true })))
            .pipe(gulpif(global.isProd, babel({
