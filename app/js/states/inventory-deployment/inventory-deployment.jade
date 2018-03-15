@@ -1,5 +1,5 @@
 .page-inventory
-  page-header(title="Inventory")
+  page-header(icon="fa-database", title="Inventory")
   table-filters
     search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder="{{:: 'Find a system' | translate}}")
     check-in-select
@@ -8,8 +8,6 @@
   .rha-notifications
   section.content
     .table-utilities
-
-    inventory-actions
 
     .card-table-header(ng-if='getListType() === listTypes.card')
       md-checkbox.md-accent.md-hue-1.md-checkbox-list.checkbox(
@@ -40,7 +38,7 @@
           .ellipsis-wrapper.hostname.text-center
             strong.hostname {{:: system.toString }}
 
-          .card-pf-items.text-center
+          .card-pf-items.status-list
             .card-pf-item
               .icon-inline
                 pf-status-icon(status='system.system_status')
@@ -49,8 +47,6 @@
               .icon-inline
                 pf-status-icon(status='system.infra_status')
                 a(href="#") Infra
-                
-          .card-pf-items.text-center
             .card-pf-item
               .icon-inline
                 bar-status-icon(status='system.reliability')
@@ -59,14 +55,6 @@
               .icon-inline
                 bar-status-icon(status='system.improvement')
                 a(href="#") Improvement
-                                
-          .card-pf-items.text-center
-            .card-pf-item
-              .icon-inline
-                a(href="#") More Details
-
-        //card-footer
-        //  span test footer
 
     //- .row.row-short
     //-   .col-md-12

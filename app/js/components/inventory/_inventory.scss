@@ -4,5 +4,26 @@
 
   @include media-query(sm) { grid-template-columns: repeat(2, 1fr); }
   @include media-query(lg) { grid-template-columns: repeat(3, 1fr); }
+  @include media-query(xl) { grid-template-columns: repeat(4, 1fr); }
 }
 
+.card-pf-items.status-list {
+	display: grid;
+
+	@include media-query(sm) { grid-template-columns: repeat(1, 1fr); }
+	@include media-query(lg) { grid-template-columns: repeat(2, 1fr); }
+
+	.card-pf-item {
+		border-left: none;
+		padding: 8px 0 5px 10px;
+		a {
+			color: #363636;
+		}
+
+		a:hover {
+			color: #0088ce;
+			text-decoration: underline;
+		}
+
+	}
+}
