@@ -51,7 +51,7 @@
           md-content
             .g(ng-repeat="data in systemMetadata[0].data")
                 h2.card-pf-title {{:: data.label}}
-                ul.list.list-simple.data-list
+                ul.list.list-simple
                   li(ng-repeat="value in data.values track by value.label", translate)
                     strong {{:: value.label}}:
                     span {{:: value.value}}

@@ -107,6 +107,12 @@ system-metadata { display: block; }
   }
 }
 
+// Tabbed info (system/network)
+.data-tables ul.list.list-simple{
+  li { @include rem('margin-top', 5px); }
+  strong + span { @include rem('margin-left', 5px); }
+}
+
 // Alert/Warning styles
 //==================================================================*/
 
