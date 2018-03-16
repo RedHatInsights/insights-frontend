@@ -79,7 +79,7 @@
     "gulp-shell": "^0.6.5",
     "gulp-sourcemaps": "~2.6.x",
     "gulp-streamify": "~1.0.x",
-    "gulp-uglify": "~3.0.x",
+    "gulp-uglify": "~2.1.x",
     "gulp-util": "~3.0.x",
     "guppy-pre-commit": "~0.4.x",
     "guppy-pre-push": "~0.2.x",
