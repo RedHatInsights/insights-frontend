@@ -4,12 +4,6 @@ $md-card-header-bg: $gray;
   height: 100%;
 }
 
-// md-backdrop {
-//   @include media-query(sm){
-//     display: none;
-//   }
-// }
-
 md-card.accordion.expanded,
 card.accordion.expanded {
   margin: 0;

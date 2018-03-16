@@ -8,3 +8,18 @@
   display: flex;
   flex: auto;
 }
+
+.rule-summaries .list-view-pf-main-info {
+  display: grid;
+  @include rem('grid-gap', $global-padding);
+  .main-info {
+    display: grid;
+    grid-template-areas: "bulleye title ansible-icon";
+    grid-template-columns: min-content auto min-content;
+    .fa-bullseye {
+      @include rem('margin-right', 5px);
+      grid-area: bulleye; }
+    .title {grid-area: title; }
+    .ansible-icon { grid-area: ansible-icon; }
+  }
+}

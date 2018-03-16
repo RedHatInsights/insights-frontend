@@ -45,12 +45,18 @@ function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User, InsightsJwt
         policies: [
             'app.view-policy',
             'app.list-policies'
+        ],
+        inventoryDeployment: [
+            'app.inventory-deployment',
+            'app.system-overview'
         ]
     };
 
     $scope.isActive = function (states) {
         return {
-            current: states.some(state => $state.is(state))
+            current: states.some(state => {
+                $state.is(state);
+            })
         };
     };
 

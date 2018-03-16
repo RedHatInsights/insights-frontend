@@ -1,0 +1,18 @@
+.page-system-overview{
+  md-tabs { margin: 0; }
+  .list-group {
+    padding: 0;
+    margin-top: 0;
+  }
+  .list-group-item {
+    &:first-of-type{ border-top: none; }
+  }
+}
+
+.summary-tabs {
+  @include rem ('margin-top', 15px);
+}
+
+.card-pf-view-tabs{
+  .card-pf-body { @include rem('padding', 15px 30px 30px 30px); }
+}

@@ -5,8 +5,8 @@
       a(ui-sref='app.pmaas', ui-sref-active='active', ng-click="toggleLeft()")
         span.fa.fa-dashboard
         span.text PMAAS
-    
-    li.list-group-item(ui-sref='app.inventory-deployment' ui-sref-active='active')
+
+    li.list-group-item(ui-sref='app.inventory-deployment', ng-class='isActive(states.inventoryDeployment)', ui-sref-active='active')
       a(ui-sref='app.inventory-deployment', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
         i.fa.fa-database
         span.text(translate) Deployment Inventory

@@ -30,13 +30,13 @@
       card.card-pf-view.card-pf-view-select.card-pf-view-single-select(
         ng-repeat='system in systems track by system.system_id',
         system='system',
-        ng-click='showActions(system)'
+        ui-sref="app.system-overview({id: system.system_id})"
         )
         card-content
           .card-pf-top-element
             type-icon.type.card-pf-icon-circle(type-id='system.system_type_id' include-text='false')
             h2.card-pf-title.text-center {{system.product_name}}
-            
+
           .ellipsis-wrapper.hostname.text-center
             strong.hostname {{:: system.toString }}
 
@@ -49,7 +49,7 @@
               .icon-inline
                 pf-status-icon(status='system.infra_status')
                 a(href="#") Infra
-                
+
           .card-pf-items.text-center
             .card-pf-item
               .icon-inline
@@ -59,7 +59,7 @@
               .icon-inline
                 bar-status-icon(status='system.improvement')
                 a(href="#") Improvement
-                                
+
           .card-pf-items.text-center
             .card-pf-item
               .icon-inline

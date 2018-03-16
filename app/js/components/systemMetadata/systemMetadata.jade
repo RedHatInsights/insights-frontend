@@ -1,78 +1,74 @@
 .system-metadata(ng-if='!loading')
-  card.system-information
-    card-content.with-tile
-      .system-type.tile
-        i.fa.fa-clone.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() === 'Virtual'", tooltip="{{:: 'Server type: Virtual' | translate}}")
-        i.fa.fa-server.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() !== 'Virtual'", tooltip="{{:: 'Server type: Physical' | translate}}")
 
-      .text
-        h2.name.ellipsis-overflow.editable(ng-if='!edit.value', ng-dblclick='rename()') {{ edit.name }}
-          renameable-property(value='system.display_name || system.hostname', update-function='rename(newValue)', allow-null='true')
+  .card-pf-view.system-information
+    card.card-pf-view
+      card-content
+        .card-pf-top-element
+          .ellipsis-wrapper.hostname.text-center
+            strong.hostname {{:: system.toString }}
 
-        .hostname.ellipsis-overflow
-          b Hostname:&nbsp;
-          span {{:: system.hostname }}
+          .image-age.text-center
+            span Image Age:
+            // TODO Add imageAge
+            span {{:: system.imageAge}} ago
 
-        // always show the uuid.... it must exist
-        .uuid.ellipsis-overflow
-          b UUID:&nbsp;
-          span {{:: getUUID() }}
-        view-system-groups(system="system", ng-if='config.isGroupsEnabled')
-  .alert-warn(ng-if='!system.isCheckingIn')
-    span(translate) This system is not checking in.
+          .system-type.tile.tile-center
+            i.fa.fa-clone.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() === 'Virtual'", tooltip="{{:: 'Server type: Virtual' | translate}}")
+            i.fa.fa-server.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() !== 'Virtual'", tooltip="{{:: 'Server type: Physical' | translate}}")
 
+        .card-pf-items.text-center
+          .card-pf-item
+            .icon-inline
+              bar-status-icon(status='system.improvement')
+              a(href="#") Improvement
+          .card-pf-item
+            .icon-inline
+              bar-status-icon(status='system.reliability')
+              a(href="#") Reliability
+          .card-pf-info
+            type-icon.type(type-id='system.system_type_id' include-text='false')
+          .card-pf-info
+            .hostname.ellipsis-overflow
+              b Hostname:&nbsp;
+              span {{:: system.hostname }}
 
-  // Basic system meta-data table
-  table.metadata-information
-    tbody
-      tr(ng-repeat='facts in initialMetadata track by facts.label')
-        td
-          b(translate) {{:: facts.label}}
-        td(translate) {{:: facts.value}}
+            // always show the uuid.... it must exist
+            .uuid.ellipsis-overflow
+              b UUID:&nbsp;
+              span {{:: getUUID() }}
 
-#expandableDataTable.expandable-data-table.expanded(ng-if='!loading; hasMetadata()')
-  // Nav tabs
-  ul.nav(role='tablist', ng-mouseenter="toggleHovering()", ng-mouseleave="toggleHovering()", ng-click="enableExpanded()")
-    li#system-tab(role='presentation', ng-if="!disableTab('system')", ng-click="getData('system', $event)")
-      a(href='#system', aria-controls='system', role='tab', data-toggle='tab')
-        i.fa.fa-desktop &nbsp;
-        span(translate).tabname System
-    li#network-tab(role='presentation', ng-if="!disableTab('network')", ng-click="getData('network', $event)")
-      a(href='#network', aria-controls='network', role='tab', data-toggle='tab')
-        i.fa.fa-sitemap &nbsp;
-        span(translate).tabname Network
+  .card-pf-view.graphs.card-pf-view-tabs
+    card.card-pf-view
+      card-content
+        system-overview-graphs
 
-  // Tab panes
-  .tab-content(ng-init="setDefaultTab()", ng-class="{expanded: expanded}")
-    #system.tab-pane(role='system')
-      .flex
-        card.cell(ng-if="!tabsContent.system.noData", ng-repeat="data in tabsContent.system.data", class="{{:: data.label | lowercase}}")
-          card-header.gray
-            b {{:: data.label }}
-          card-content
-            ul.list.list-simple
-              li(ng-repeat="value in data.values track by value.label", translate)
-                strong {{:: value.label}}
-                br
-                span {{:: value.value}}
-
-    #network.tab-pane(role='network')
-      .row
-        .col-sm-12
-          .table-responsive(ng-if="!disableTab('network')")
-            table
-              thead
-                tr
-                  th.ellipsis-overflow(translate) Process Name
-                  th.ellipsis-overflow(translate) IP Address
-                  th.ellipsis-overflow(translate) Port
-              tbody
-                tr(ng-repeat="values in tabsContent.network.data | orderBy:[networkSorter, 'name', 'ip_addr']", ng-if="$index < rowLimit || showAll")
-                  td.ellipsis-overflow {{:: values.name }}
-                  td.ellipsis-overflow {{:: values.ip_addr }}
-                  td.ellipsis-overflow {{:: values.port }}
-      .row.row-short
-        .col-sm-12.text-center
-          a.link.expandTableButton(ng-if="showExpandTableBtn()", ng-click="toggleExpandTable()")
-            strong(translate, ng-if="showAll") Collapse Table
-            strong(translate, ng-if="!showAll") Expand Table
+// System Metadata Tabbed info
+.card-pf-view.data-tables.card-pf-view-tabs
+  card.card-pf-view
+    card-content
+      md-tabs(md-dynamic-height='', md-border-bottom='', ng-if='!loading && hasMetadata()')
+        md-tab(label="system")
+          md-content
+            .g(ng-repeat="data in systemMetadata[0].data")
+                h2.card-pf-title {{:: data.label}}
+                ul.list.list-simple.data-list
+                  li(ng-repeat="value in data.values track by value.label", translate)
+                    strong {{:: value.label}}:
+                    span {{:: value.value}}
+        md-tab(label="network")
+          table
+            thead
+              tr
+                th.ellipsis-overflow(translate) Process Name
+                th.ellipsis-overflow(translate) IP Address
+                th.ellipsis-overflow(translate) Port
+            tbody
+              tr(ng-repeat="values in systemMetadata[1].data | orderBy:[networkSorter, 'name', 'ip_addr']")
+                td.ellipsis-overflow {{:: values.name }}
+                td.ellipsis-overflow {{:: values.ip_addr }}
+                td.ellipsis-overflow {{:: values.port }}
+            //- .row.row-short
+              .col-sm-12.text-center
+                a.link.expandTableButton(ng-if="showExpandTableBtn()", ng-click="toggleExpandTable()")
+                  strong(translate, ng-if="showAll") Collapse Table
+                  strong(translate, ng-if="!showAll") Expand Table

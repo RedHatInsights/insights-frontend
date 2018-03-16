@@ -135,6 +135,14 @@ function Routes($stateProvider) {
             reloadOnSearch: false
         });
 
+    $stateProvider
+        .state('app.system-overview', {
+            url: '/inventory-deployment/:id',
+            templateUrl: 'js/states/system-overview/system-overview.html',
+            controller: 'SystemOverviewCtrl',
+            title: 'System Overview'
+        });
+
     // Rule routes
     $stateProvider
         .state('app.rules', {

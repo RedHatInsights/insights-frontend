@@ -11,50 +11,51 @@ system-metadata { display: block; }
 
   @include media-query(sm) {
     display: grid;
-    grid-template-areas: 'system-information metadata-information'
-                        'warning blank'
+    grid-template-areas:
+    //'warning warning'
+                        'system-information system-information-aside'
                         'expandable-table expandable-table';
 
-    grid-template-columns: auto max-content;
+    grid-template-columns: max-content auto;
     grid-gap: 15px 30px;
   }
 }
 
+.scores {
+  display: flex;
+  justify-content: space-between;
+  > * {
+    display: inline;
+  }
+}
 
 // Top left (system info) card grid
 //==================================================================*/
 
-.system-metadata .system-information { 
-
-  grid-area: system-information;
-}
+.system-metadata .system-information { grid-area: system-information; }
 
 
 // Warning
 //==================================================================*/
 
-.system-metadata .alert-warn { 
-
-  grid-area: warning;
-}
+.system-metadata .alert-warn { grid-area: warning; }
 
 
 // Top right (system info) card grid
 //==================================================================*/
 
-.system-metadata .metadata-information { 
+.system-metadata .metadata-information { grid-area: system-information-aside; }
 
-  grid-area: metadata-information;
+.system-metadata .graphs {
+  grid-area: system-information-aside;
+  .card { height: 100%; }
 }
 
 
 // Expandable table grid position
 //==================================================================*/
 
-.system-metadata .expandable-data-table { 
-
-  grid-area: expandable-table;
-}
+.system-metadata .expandable-data-table { grid-area: expandable-table; }
 
 
 // Setting System Info styles
@@ -95,9 +96,16 @@ system-metadata { display: block; }
 
 .system-metadata {
 
-  .system-information { @include rem('margin-left', $global-margin); }
+  //.system-information { @include rem('margin-left', $global-margin); }
 }
 
+.system-metadata {
+  i.system-type-icon { @include font-size(30px); }
+  .image-age {
+    @include rem('margin-top', 15px);
+    font-style: italic;
+  }
+}
 
 // Alert/Warning styles
 //==================================================================*/

@@ -48,7 +48,7 @@ function SystemModalCtrl(
         isLoading: true
     };
 
-    if (system === false) {
+    if (!$scope.system) {
         $scope.system = {
             hostname: 'this.is.a.fake.system',
             machine_id: 'fakemachineidfakemachineidfakemachineid',

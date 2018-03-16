@@ -53,7 +53,7 @@ function RuleSummariesCtrl(
                             config);
                 }
 
-                $scope.loading.isLoading = false;
+                $scope.loading.reportsLoading = false;
             });
     }
 

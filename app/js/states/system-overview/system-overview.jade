@@ -1,0 +1,32 @@
+.page-system-overview
+  // TODO Make breadcrumbs from any state
+  .breadcrumbs
+      ol
+        li
+          a(ui-sref='app.inventory-deployment')
+            span(translate) Inventory
+        li
+          span {{system.hostname}}
+  page-header(title="System Overview")
+
+  .text-center(ng-if='loading.pageLoading')
+    .spinner.spinner-lg
+
+  section.content(ng-if="!loading.pageLoading")
+    system-metadata(system='system')
+
+    .card-pf-view.summary-tabs.card-pf-view-tabs
+      card.card-pf-view
+        card-content
+          md-tabs(md-dynamic-height='', md-border-bottom='')
+            md-tab(md-on-select="setActive('system')", label='Rules', md-active='activeTab === "system"')
+            md-tab(md-on-select="setActive('aiml')", label='AI / ML', md-active='activeTab === "aiml"')
+            md-tab(md-on-select="setActive('fmaas')", label='FMAAS', md-active='activeTab === "fmaas"')
+
+          // hack to kill the 200MB tab usage
+          .tabs-hack(ng-if="activeTab === 'system'")
+            .rule-summaries(system='system', machine-id='system.system_id', rule='rule', rule-filter='ruleFilter', loading='loading')
+            .rule-summary.system-overlay-item(ng-if='system.__fake', report='report', rule='rule', loading='loading')
+          .tabs-hack(ng-if="activeTab === 'aiml'")
+            //- policies-modal(system-id='system.system_id')
+          .tabs-hack(ng-if="activeTab === 'fmaas'")

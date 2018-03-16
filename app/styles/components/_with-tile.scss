@@ -1,10 +1,15 @@
 $tile-left-position: 30px;
 
-.tile { 
+.tile {
   @include tile(#00AEFF);
+  @include rem('padding', $global-padding 0);
+  &-center {
+    display: flex;
+    justify-content: center;
+  }
 }
 
-.with-tile { 
+.with-tile {
 
   position: relative;
   @include rem('padding-left', $global-margin);

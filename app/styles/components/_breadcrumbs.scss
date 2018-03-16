@@ -25,9 +25,10 @@ $breadcrumbs-border: #E2E2E2;
   }
 
   ol > li + li:before {
-    content: "/ ";
+    font-family: "FontAwesome";
+    content: "\F101 ";
     padding: 0 5px;
-    color: #ccc;
+    color: #9c9c9c;
   }
 
   .ui-select-container {
