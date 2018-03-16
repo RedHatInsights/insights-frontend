@@ -36,7 +36,7 @@
     "banify": "~0.0.x",
     "brfs": "~1.4.x",
     "browser-sync": "~2.23.x",
-    "browserify": "~15.2.x",
+    "browserify": "~16.1.x",
     "browserify-istanbul": "~3.0.x",
     "bulk-require": "~1.0.x",
     "bulkify": "~1.4.x",
