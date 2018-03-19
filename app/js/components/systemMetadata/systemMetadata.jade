@@ -5,37 +5,29 @@
       card-content
         .card-pf-top-element
           .ellipsis-wrapper.hostname.text-center
-            strong.hostname {{:: system.toString }}
+            strong.hostname {{:: system.display_name || system.hostname }}
 
-          .image-age.text-center
-            span Image Age:
-            // TODO Add imageAge
-            span {{:: system.imageAge}} ago
+          .ellipsis-wrapper.sub-info
+            .icon-inline
+              i.pficon-screen
+              span {{::system.hostname}}
+            .icon-inline
+              i.pficon-info
+              span Last check in: {{::system.last_check_in | timeAgo }}
 
-          .system-type.tile.tile-center
-            i.fa.fa-clone.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() === 'Virtual'", tooltip="{{:: 'Server type: Virtual' | translate}}")
-            i.fa.fa-server.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() !== 'Virtual'", tooltip="{{:: 'Server type: Physical' | translate}}")
+          .system-type.tile.tile-ghost.tile-center
+            i.pficon-virtual-machine.fa-2x(ng-if="getSystemType() === 'Virtual'", tooltip="{{:: 'Server type: Virtual' | translate}}")
+            i.pficon-screen.fa-2x(ng-if="getSystemType() !== 'Virtual'", tooltip="{{:: 'Server type: Physical' | translate}}")
 
         .card-pf-items.text-center
-          .card-pf-item
-            .icon-inline
-              bar-status-icon(status='system.improvement')
-              a(href="#") Improvement
-          .card-pf-item
-            .icon-inline
-              bar-status-icon(status='system.reliability')
-              a(href="#") Reliability
-          .card-pf-info
-            type-icon.type(type-id='system.system_type_id' include-text='false')
-          .card-pf-info
-            .hostname.ellipsis-overflow
-              b Hostname:&nbsp;
-              span {{:: system.hostname }}
-
-            // always show the uuid.... it must exist
-            .uuid.ellipsis-overflow
-              b UUID:&nbsp;
-              span {{:: getUUID() }}
+          .card-pf-item.text-center
+            p optpot placeholder
+            a(href="#") Optimization Potential
+          .card-pf-info.text-center
+            bar-status-icon(status='system.reliability')
+            a(href="#") Reliability
+          .card-pf-info.text-center
+            span placeholder for tags
 
   .card-pf-view.graphs.card-pf-view-tabs
     card.card-pf-view
