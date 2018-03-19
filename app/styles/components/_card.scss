@@ -493,6 +493,15 @@ $card-footer: "md-card-footer";
     padding: 8px 15px 8px 15px;
     border-left: none;
     text-align: center;
+
+    a {
+      color: #363636;
+    }
+
+    a:hover {
+      color: #0088ce;
+      text-decoration: underline;
+    }
   }
 
   .system-tags {
