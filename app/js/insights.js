@@ -103,7 +103,10 @@ if (isPortal) {
         }
     });
 
-    Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
+    Jwt.init({
+        keycloakOptions: { clientId: 'customer-portal' },
+        keycloakInitOptions: { responseMode: 'query' }
+    });
 } else {
     angular.module('insights').config(require('./base_routes'));
 }
