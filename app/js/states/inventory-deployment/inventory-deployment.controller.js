@@ -202,6 +202,7 @@ function InventoryDeploymentCtrl(
             InventoryService.setTotal(response.total);
 
             SystemsService.systems = $scope.systems;
+            InventoryService.loading = $scope.loading = $scope.reloading = false;
         }
 
         let query = buildRequestQueryParams(true);
@@ -210,9 +211,6 @@ function InventoryDeploymentCtrl(
             getSystemsResponseHandler,
             function () {
                 $scope.errored = true;
-            },
-
-            function () {
                 InventoryService.loading = $scope.loading = $scope.reloading = false;
             });
     }

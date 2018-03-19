@@ -448,3 +448,54 @@ $card-footer: "md-card-footer";
     margin-left: 15px;
   }
 }
+
+.card-pf-top-element .card-pf-icon {
+  color: #9b9b9b;
+  display: block;
+  font-size: 46px;
+  height: 106px;
+  line-height: 102px;
+  margin: 0 auto;
+  text-align: center;
+  width: 106px;
+  padding-top: 10px;
+}
+
+.display-name {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.status-icon {
+  margin-right: 12px;
+}
+
+.host-info {
+  font-size: 12px;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.card-pf-items.status-list {
+  text-align: center;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+
+  .card-pf-item.optimization-label {
+    margin-bottom: 5px;
+  }
+
+  .card-pf-item {
+    display: block;
+    margin: 0 auto;
+    padding: 8px 15px 8px 15px;
+    border-left: none;
+    text-align: center;
+  }
+
+  .system-tags {
+    color: #9b9b9b;
+  }
+}
