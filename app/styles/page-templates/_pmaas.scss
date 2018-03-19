@@ -8,18 +8,17 @@
 
 // pmaas content layout
 section.grid-pmaas {
-  // display: flex;
-  // flex-flow: row wrap;
+  @include grid-builder(sm-cols repeat 2, lg-cols repeat 4);
 
-  @include media-query(sm) {  
-    display: grid;
-    grid-gap: $global-margin;
-    grid-template-columns: repeat(2, 1fr);
-  }
+  // @include media-query(sm) {  
+  //   display: grid;
+  //   grid-gap: $global-margin;
+  //   grid-template-columns: repeat(2, 1fr);
+  // }
 
-  @include media-query(lg) {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  // @include media-query(lg) {
+  //   grid-template-columns: repeat(4, 1fr);
+  // }
 }
 
 section.grid-pmaas .card-pf {

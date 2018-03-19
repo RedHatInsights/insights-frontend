@@ -175,22 +175,22 @@ $animation-speed: .3s;
 // Set default states
 .primary-nav .text { @include navShow; }
 
-.primary-nav account-select { @include accountSelectShow; }
+.primary-nav ins-account-select { @include accountSelectShow; }
 
 
 // Animate the collapse
 .nav-collapsing .primary-nav .text { animation: nav-text-slide-out $animation-speed forwards; }
-.nav-collapsing .primary-nav account-select { animation: account-select-slide-out .1s forwards linear; }
+.nav-collapsing .primary-nav ins-account-select { animation: account-select-slide-out .1s forwards linear; }
 
 
 // Persist the animation after animation is complete
 .nav-desktop-collapsed .primary-nav .text { @include navHide; }
-.nav-desktop-collapsed .primary-nav account-select { @include accountSelectHide; }
+.nav-desktop-collapsed .primary-nav ins-account-select { @include accountSelectHide; }
 
 
 // Animate the nav collapse
 .nav-expanding .primary-nav .text { animation: nav-text-slide-in $animation-speed forwards; }
-.nav-expanding .primary-nav account-select { animation: account-select-slide-in .1s forwards; }
+.nav-expanding .primary-nav ins-account-select { animation: account-select-slide-in .1s forwards; }
 
 
 // account select slide in animation
