@@ -39,7 +39,7 @@
               span {{ system.hostname }}
             .status-check
               span.fa.fa-clock-o.status-icon
-              span.hostname Last Check: 2 days ago
+              span.hostname Last Check: {{::system.last_check_in | timeAgo }}
 
           .card-pf-top-element
             type-icon.type.card-pf-icon(type-id='system.system_type_id' include-text='false')          
