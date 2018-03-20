@@ -1,15 +1,15 @@
 .nav-pf-vertical.primary-nav
   account-select
   ul.list-group
-    li.list-group-item(ui-sref='app.pmaas-list' ui-sref-active='active')
-      a(ui-sref='app.pmaas-map', ui-sref-active='active', ng-click="toggleLeft()")
+    li.list-group-item(ui-sref='app.dashboard' ui-sref-active='active')
+      a(ui-sref='app.dashboard', ui-sref-active='active', ng-click="toggleLeft()")
         span.fa.fa-dashboard
-        span.text Overview
+        span.text Dashboard
 
     li.list-group-item(ui-sref='app.inventory-deployment', ng-class='isActive(states.inventoryDeployment)', ui-sref-active='active')
       a(ui-sref='app.inventory-deployment', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
         i.fa.fa-database
-        span.text(translate) Deployment Inventory
+        span.text(translate) Inventory
 
     li.list-group-item(ui-sref='app.digests' ui-sref-active='active')
       a(ui-sref='app.digests', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")

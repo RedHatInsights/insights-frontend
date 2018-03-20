@@ -64,22 +64,20 @@ function Routes($stateProvider) {
         });
 
     $stateProvider
-        .state('app.overview', {
-            url: '/overview/',
-            templateUrl: 'js/states/overview/overview.html',
-            controller: 'OverviewCtrl',
-            title: 'Overview'
-        });
+        .state('app.dashboard', {
+            url: '/dashboard/',
+            templateUrl: 'js/states/pmaas/pmaas.html',
+            controller: 'PmaasCtrl',
+            title: 'Dashboard'
+        })
 
-    $stateProvider
         .state('app.pmaas-list', {
             url: '/pmaas-list/',
             templateUrl: 'js/states/pmaas/pmaas-list-view.html',
             controller: 'PmaasCtrl',
             title: 'Pmaas List View'
-        });
+        })
 
-    $stateProvider
         .state('app.pmaas-map', {
             url: '/pmaas-map/',
             templateUrl: 'js/states/pmaas/pmaas-map-view.html',
