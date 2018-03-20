@@ -21,12 +21,9 @@
           md-tabs(md-dynamic-height='', md-border-bottom='')
             md-tab(md-on-select="setActive('system')", label='Rules', md-active='activeTab === "system"')
             md-tab(md-on-select="setActive('aiml')", label='AI / ML', md-active='activeTab === "aiml"')
-            md-tab(md-on-select="setActive('fmaas')", label='FMAAS', md-active='activeTab === "fmaas"')
 
           // hack to kill the 200MB tab usage
           .tabs-hack(ng-if="activeTab === 'system'")
             .rule-summaries(system='system', machine-id='system.system_id', rule='rule', rule-filter='ruleFilter', loading='loading')
             .rule-summary.system-overlay-item(ng-if='system.__fake', report='report', rule='rule', loading='loading')
           .tabs-hack(ng-if="activeTab === 'aiml'")
-            //- policies-modal(system-id='system.system_id')
-          .tabs-hack(ng-if="activeTab === 'fmaas'")
