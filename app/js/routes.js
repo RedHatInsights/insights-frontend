@@ -15,6 +15,14 @@ function Routes($stateProvider) {
         });
 
     $stateProvider
+        .state('app.dashboard.deployment', {
+            url: '/dashboard/deployment/:group_id',
+            templateUrl: 'js/states/pmaas/deployment/deployment.html',
+            controller: 'DeploymentCtrl',
+            title: 'Deployment'
+        });
+
+    $stateProvider
         .state('app.dashboard', {
             url: '/dashboard/',
             templateUrl: 'js/states/pmaas/pmaas.html',
@@ -29,7 +37,7 @@ function Routes($stateProvider) {
                 'offline&online&machine&page&pageSize&systemHealth',
             templateUrl: 'js/states/inventory-deployment/inventory-deployment.html',
             controller: 'InventoryDeploymentCtrl',
-            title: 'Inventory Deployment',
+            title: 'Inventory',
             reloadOnSearch: false
         });
 
@@ -78,6 +86,29 @@ function Routes($stateProvider) {
             params: {
                 'filters:totalRisk': 'All'
             }
+        });
+
+    $stateProvider
+        .state('app.dashboard', {
+            url: '/dashboard/',
+            templateUrl: 'js/states/pmaas/pmaas.html',
+            controller: 'PmaasCtrl',
+            title: 'Dashboard'
+        });
+
+    $stateProvider
+        .state('app.pmaas-list', {
+            url: '/pmaas-list/',
+            templateUrl: 'js/states/pmaas/pmaas-list-view.html',
+            controller: 'PmaasCtrl',
+            title: 'Pmaas List View'
+        })
+
+        .state('app.pmaas-map', {
+            url: '/pmaas-map/',
+            templateUrl: 'js/states/pmaas/pmaas-map-view.html',
+            controller: 'PmaasCtrl',
+            title: 'Pmaas Map View'
         });
 
     $stateProvider

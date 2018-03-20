@@ -1,13 +1,42 @@
 // $button-primary-bg: linear-gradient(to bottom, rgba(55,176,252,1) 0%,rgba(32,151,230,1) 100%);
 $button-primary-bg: $blue;
 $button-primary-color: #fff;
+$button-secondary-bg: #f5f5f5;
+$button-secondary-bg-hover: darken($button-secondary-bg, 5);
+$button-secondary-border-color: darken($button-secondary-bg, 15);
+
+
+$button-padding-sm: .5rem 1rem;
+$button-padding: .75rem 1.5rem;
 
 .button-group {
-  display: inline;
+  display: inline-flex;
+
+  > *:not(:first-child) {
+    border-left: none;
+  }
 
   > a, > .button-split {
     & + a, & + .button-split {@include rem('margin-left', 5px);}
   }
+
+}
+
+.button-group button {
+    &:focus {
+    color: #fff;
+    border-color: darken($button-secondary-bg, 80);
+    background: darken($button-secondary-bg, 60);
+  }
+}
+
+.button-group-vertical {
+  display: flex;
+  flex-flow: vertical nowrap;
+}
+
+.button-group-vertical button {
+  text-align: left;
 }
 
 .button-tag {
@@ -27,16 +56,33 @@ $button-primary-color: #fff;
 button {
   width: auto;
   height: auto;
-  @include rem('padding', 10px 25px);
+  padding: $button-padding;
   margin: 0;
   min-width: 0;
   min-height: 0;
   color: $base-color;
-  @include font-size(14px, 1);
+  background: $button-secondary-bg;
+  border: 1px solid $button-secondary-border-color;
   text-transform: none;
-  font-family: 'overpass';
-  transition: .2s;
-  //box-shadow: 0 2px 3px 0px rgba(0,0,0,.2);
+  transition: .3s;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: darken($button-secondary-bg, 5);
+  }
+}
+
+button.button-strong {
+  font-weight: 700;
+}
+
+button.button-lg {
+  padding: var(--global-padding) var(--global-margin);
+}
+
+button.button-sm {
+ padding: var(--global-padding) var(--global-margin); 
 }
 
 button.tag {
@@ -65,17 +111,17 @@ button.tag {
 }
 
 
-a,
-.btn,
-button {
-    outline: none;
-    border: none;
+// a,
+// .btn,
+// button {
+//     outline: none;
+//     border: none;
 
-    &:active, &:focus, &:visited {
-        outline: none !important;
-        box-shadow: none;
-    }
-}
+//     &:active, &:focus, &:visited {
+//         outline: none !important;
+//         box-shadow: none;
+//     }
+// }
 
 button,
 button:active,

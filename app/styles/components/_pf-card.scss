@@ -1,9 +1,48 @@
-.card-pf {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-flow: column nowrap;
+.card-pf,
+.card-pf-heading,
+.card-pf-body,
+.card-pf-footer {
+  @include reset;
 }
+
+.card-pf-heading,
+.card-pf-body,
+.card-pf-footer {
+  background: none;
+  border: none;
+}
+
+.card-pf {
+  display: grid;
+  grid-gap: var(--global-margin);
+  padding: var(--global-margin);
+  margin: 0;
+}
+
+/* Card heading
+/* ================================================================== */
+.card-pf .card-pf-heading {
+  @include reset;
+}
+
+.card-pf .card-pf-heading .card-pf-title {
+  margin: 0;
+  margin-top: 0;
+  @include font-size(20px);  
+}
+
+.card-pf-heading.no-border {
+  border: none;
+  @include reset;
+}
+
+
+/* Card body
+/* ================================================================== */
+.card-pf-body {
+  @include build-grid(grid-gap var(--global-margin));
+}
+
 
 .card-pf.text-center {
   text-align: center;
@@ -17,33 +56,6 @@
   @include font-size(14px, 1);
 }
 
-.card-pf-heading,
-.card-pf-body,
-.card-pf-footer {
-  @include rem('padding', $global-margin);
-  margin: 0 !important;
-  background: none;
-  border: none;
-
-}
-
-.card-pf-heading.no-border { @include rem('padding', $global-margin $global-margin $global-padding); }
-
-.card-pf-heading.no-border + .card-pf-body { @include rem('padding', $global-padding $global-margin); }
-
-.card-pf-heading.no-border + .card-pf-body + .card-pf-footer { @include rem('padding', $global-padding $global-margin $global-margin); }
-
-.card-pf-title {
-  margin: 0;
-}
-
-.card-pf-title {
-  @include font-size(20px);
-}
-
-.card-pf-heading.no-border {
-  border: none;
-}
 
 .card-pf-footer {
   margin-top: auto !important;
