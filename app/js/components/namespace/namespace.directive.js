@@ -8,7 +8,7 @@ var componentsModule = require('../');
 function insightsNamespacerCtrl($scope, $state) {
     var routeClass = this; //jshint ignore:line
     $scope.$on('$stateChangeSuccess', function () {
-        routeClass.current = 'insights-' + ($state.current.name).replace(/\./g, '-');
+        routeClass.current = ($state.current.name).replace(/\./g, '-');
     });
 }
 

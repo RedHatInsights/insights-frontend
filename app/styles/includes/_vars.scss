@@ -1,3 +1,14 @@
+:root {
+  // Global Settings
+  $global-padding: 15px;
+  $global-margin: 30px;
+
+  --global-padding: $global-padding;
+  --global-margin: $global-margin;
+}
+
+
+
 // Layout Settings
 //==================================================================*/
 html { font-size: 100%; }
