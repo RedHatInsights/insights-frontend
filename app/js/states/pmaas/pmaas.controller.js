@@ -15,8 +15,8 @@ const donutVals     = {
     donut: { width: donutThickness },
     color: {
         pattern: [
-            '#0088CE', 
-            '#d1d1d1', 
+            '#0088CE',
+            '#d1d1d1',
             'red'
         ]
     },
@@ -32,35 +32,6 @@ function donutSettings(obj) {
  * @ngInject
  */
 function PmaasCtrl($scope) {
-    var priv = {};
-    var vars = {};
-
-    priv.toggleContent = function () {
-        $scope.collapsed = !$scope.collapsed;
-    };
-
-    // collapsed by default unless overriden with init-collapsed
-    $scope.collapsed = !angular.isDefined($scope.initCollapsed) ||
-        Boolean($scope.initCollapsed);
-
-    // do this as soon as all the accessibles are defined (aka define vars, run dis)
-    Utils.generateAccessors($scope, vars);
-
-    $scope.toggleContent = function () {
-        if ($scope.expandable) {
-            $q.when($scope.onToggle({
-                ctx: {
-                    collapsing: !$scope.collapsed
-                }
-            })).then(priv.toggleContent);
-        }
-    };
-
-    priv.toggleMapNav = function() {
-        $scope.collapsed = !$scope.collapsed;
-    },
-
-
     c3.generate(donutSettings(
         {
             bindto: '.chart-vulnerability',
