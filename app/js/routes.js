@@ -6,6 +6,20 @@
 function Routes($stateProvider) {
     // PMaaS
 
+    $stateProvider.state('app.dashboard.map', {
+        url: '/dashboard/map/',
+        templateUrl: 'js/states/pmaas/map/map.html',
+        controller: 'DashboardMapCtrl',
+        title: 'Dashboard Map'
+    });
+
+    $stateProvider.state('app.dashboard', {
+        url: '/dashboard/',
+        templateUrl: 'js/states/pmaas/map/dashboardMap.html',
+        controller: 'DashboardMapCtrl',
+        title: 'Dashboard Test'
+    });
+
     $stateProvider.state('app.pmaas-list', {
         url: '/pmaas-list/',
         templateUrl: 'js/states/pmaas/pmaas-list-view.html',
@@ -20,25 +34,11 @@ function Routes($stateProvider) {
         title: 'Pmaas Map View'
     });
 
-    $stateProvider.state('app.dashboard.map', {
-        url: '/dashboard/map/',
-        templateUrl: 'js/states/pmaas/map/map.html',
-        controller: 'DashboardMapCtrl',
-        title: 'Dashboard Map'
-    });
-
     $stateProvider.state('app.dashboard.deployment', {
         url: '/dashboard/deployment/:group_id',
         templateUrl: 'js/states/pmaas/deployment/deployment.html',
         controller: 'DeploymentCtrl',
         title: 'Deployment'
-    });
-
-    $stateProvider.state('app.dashboard', {
-        url: '/dashboard/',
-        templateUrl: 'js/states/pmaas/pmaas.html',
-        controller: 'PmaasCtrl',
-        title: 'Dashboard'
     });
 
     $stateProvider.state('app.inventory-deployment', {

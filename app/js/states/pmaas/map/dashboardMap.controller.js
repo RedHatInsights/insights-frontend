@@ -1,46 +1,69 @@
+/*global require*/
 'use strict';
 
 const statesModule = require('../../');
 const d3 = require('d3');
 
+const priv = {};
+
 // returns the angle in degrees between two points on the map
 // used for the x tranlation for infinite scroll
 // const getAngle = (p1, p2) => (Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180) / Math.PI;
 
-function DashboardMapCtrl() {
-    const div = window.jQuery('#map').get()[0];
+priv.redraw = () => {
+};
 
-    let width = div.scrollWidth;
-    let height = div.scrollHeight;
-    let rotate = 0;        // so that [-60, 0] becomes initial center of projection
-    let maxlat = 79;       // clip northern and southern poles (infinite in mercator)
+priv.mercatorBounds = (projection, maxlat) => {
+    // find the top left and bottom right of current projection
+    const yaw = projection.rotate()[0];
+    const xymax = projection([-yaw + 180 - 1e-6,-maxlat]);
+    const xymin = projection([-yaw - 180 + 1e-6, maxlat]);
+    return [xymin, xymax];
+};
+
+priv.getConf = () => {
+    const div = document.querySelector('#map');
+    const ret = {
+        width: div.scrollWidth,
+        height: div.scrollHeight,
+        rotate: 0,
+        maxLatitude: 79
+    };
+
+    console.log(`getConf: ${JSON.stringify(ret, false, 2)}`);
+    return ret;
+};
+
+priv.getScale = (projection, maxLatitude, width) => {
+    // set up the scale extent and initial scale for the projection
+    const bounds = priv.mercatorBounds(projection, maxLatitude);
+    const scale  = width / (bounds[1][0] - bounds[0][0]);
+    return [scale, 15 * scale];
+};
+
+function DashboardMapCtrl() {
+    const conf = priv.getConf();
+
+    window.priv = priv;
+
+    window.addEventListener('keypress', () => {
+        // console.log(projection.scale());
+        // console.log(projection.translate());
+    });
 
     let projection = d3.geo.mercator()
-        .rotate([rotate, 0])
+        .rotate([conf.rotate, 0])
         .scale(1)
-        .translate([width / 2, height / 2]);
+        .translate([conf.width / 2, conf.height / 2]);
 
-    // set up the scale extent and initial scale for the projection
-    let b = mercatorBounds(projection, maxlat);
-    let s = width / (b[1][0] - b[0][0]);
-    let scaleExtent = [s, 15 * s];
+    let scaleExtent = priv.getScale(projection, conf.maxLatitude, conf.width);
 
-    // find the top left and bottom right of current projection
-    function mercatorBounds(projection, maxlat) {
-        let yaw = projection.rotate()[0];
-        let xymax = projection([-yaw + 180 - 1e-6,-maxlat]);
-        let xymin = projection([-yaw - 180 + 1e-6, maxlat]);
-
-        return [xymin,xymax];
-    }
-
-    projection
-        .scale(scaleExtent[0]);
+    projection.scale(scaleExtent[0]);
 
     let zoom = d3.behavior.zoom()
         .scaleExtent(scaleExtent)
         .scale(projection.scale())
-        .translate([0,0])               // not linked directly to projection
+        .translate([0, 0]) // not linked directly to projection
         .on('zoom', redraw);
 
     let path = d3.geo.path()
@@ -48,9 +71,9 @@ function DashboardMapCtrl() {
 
     let svg = d3.select('.map')
         .append('svg')
-            .attr('width', width)
-            .attr('height', height)
-            .call(zoom);
+        .attr('width', conf.width)
+        .attr('height', conf.height)
+        .call(zoom);
 
     // track last translation and scale event we processed
     let tlast = [0,0];
@@ -71,19 +94,18 @@ function DashboardMapCtrl() {
                 projection.scale(scale);
                 projection.translate(tp);
             } else {
-                const angle = (((360.0 * dx) / width) * scaleExtent[0]) / scale;
-                console.log((((360.0 * dx) / width) * scaleExtent[0]) / scale);
+                const angle = (((360.0 * dx) / conf.width) * scaleExtent[0]) / scale;
 
                 // use x translation to rotate based on current scale
                 projection.rotate([yaw + angle, 0, 0]);
 
                 // use y translation to translate projection, clamped by min/max
-                let b = mercatorBounds(projection, maxlat);
+                let b = priv.mercatorBounds(projection, conf.maxlat);
 
                 if (b[0][1] + dy > 0) {
                     dy = -b[0][1];
-                } else if (b[1][1] + dy < height) {
-                    dy = height - b[1][1];
+                } else if (b[1][1] + dy < conf.height) {
+                    dy = conf.height - b[1][1];
                 }
 
                 projection.translate([tp[0], tp[1] + dy]);
@@ -95,14 +117,10 @@ function DashboardMapCtrl() {
             tlast = t;
         }
 
-        svg.selectAll('path')
-            .attr('d', path);
+        svg.selectAll('path').attr('d', path);
     }
 
-    window.addEventListener('keypress', () => {
-        // console.log(projection.scale());
-        // console.log(projection.translate());
-    });
+    svg.selectAll('path').attr('d', path);
 }
 
 statesModule.controller('DashboardMapCtrl', DashboardMapCtrl);
