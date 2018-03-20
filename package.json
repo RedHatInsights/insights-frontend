@@ -120,6 +120,7 @@
     "vinyl-buffer": "~1.0.x",
     "vinyl-source-stream": "~2.0.x",
     "watchify": "~3.9.x",
+    "world-atlas": "^1.1.4",
     "xvfb": "^0.x.x"
   },
   "scripts": {
