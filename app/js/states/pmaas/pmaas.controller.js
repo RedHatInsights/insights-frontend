@@ -31,7 +31,7 @@ function donutSettings(obj) {
 /**
  * @ngInject
  */
-function PmaasCtrl($scope) {
+function PmaasCtrl() {
     c3.generate(donutSettings(
         {
             bindto: '.chart-vulnerability',
