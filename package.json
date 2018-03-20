@@ -8,9 +8,11 @@
   },
   "private": true,
   "dependencies": {
+    "d3": "^3.5.17",
     "express": "~4.16.x",
     "morgan": "~1.9.x",
-    "patternfly": "^3.41.6"
+    "patternfly": "^3.41.6",
+    "topojson": "^3.0.2"
   },
   "devDependencies": {
     "angular": "~1.5.x",
