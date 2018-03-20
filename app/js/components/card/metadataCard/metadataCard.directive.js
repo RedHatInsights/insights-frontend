@@ -7,7 +7,7 @@ const componentsModule = require('../../');
  * @ngInject
  */
 
-function metadataCardCtrl($scope) {
+function metadataCardCtrl() {
 
 }
 
