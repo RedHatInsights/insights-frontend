@@ -42,7 +42,7 @@ function Redirects($stateProvider, $locationProvider, $urlRouterProvider,
     function devRedirectSplash(from) {
         $urlRouterProvider.when(from,
             function () {
-                window.location = `/${window.insightsGlobal.appName}/dashboard/`;
+                window.location = `/${window.insightsGlobal.appName}/dashboard/map/`;
             }
         );
     }

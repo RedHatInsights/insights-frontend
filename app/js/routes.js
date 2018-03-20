@@ -6,45 +6,23 @@
 function Routes($stateProvider) {
     // PMaaS
 
-    $stateProvider.state('app.dashboard.map', {
+    $stateProvider.state('app.dashboard-map', {
         url: '/dashboard/map/',
-        templateUrl: 'js/states/pmaas/map/map.html',
+        templateUrl: 'js/states/pmaas/map/dashboardMap.html',
         controller: 'DashboardMapCtrl',
         title: 'Dashboard Map'
     });
 
-    $stateProvider.state('app.dashboard', {
-        url: '/dashboard/',
-        templateUrl: 'js/states/pmaas/map/dashboardMap.html',
-        controller: 'DashboardMapCtrl',
-        title: 'Dashboard Test'
-    });
-
-    $stateProvider.state('app.pmaas-list', {
-        url: '/pmaas-list/',
-        templateUrl: 'js/states/pmaas/pmaas-list-view.html',
-        controller: 'PmaasCtrl',
-        title: 'Pmaas List View'
-    });
-
-    $stateProvider.state('app.pmaas-map', {
-        url: '/pmaas-map/',
-        templateUrl: 'js/states/pmaas/pmaas-map-view.html',
-        controller: 'PmaasCtrl',
-        title: 'Pmaas Map View'
-    });
-
-    $stateProvider.state('app.dashboard.deployment', {
-        url: '/dashboard/deployment/:group_id',
-        templateUrl: 'js/states/pmaas/deployment/deployment.html',
-        controller: 'DeploymentCtrl',
+    // Show a single Deployment
+    $stateProvider.state('app.dashboard-deployment', {
+        url: '/dashboard/deployments/:deployment_id',
+        templateUrl: 'js/states/pmaas/deployments/deployments.html',
+        controller: 'DeploymentsCtrl',
         title: 'Deployment'
     });
 
     $stateProvider.state('app.inventory-deployment', {
-        url: '/inventory-deployment?product' +
-            '&docker_host&sort_field&sort_dir&' +
-            'offline&online&machine&page&pageSize&systemHealth',
+        url: '/inventory/deployments/:deployment_id',
         templateUrl: 'js/states/inventory-deployment/inventory-deployment.html',
         controller: 'InventoryDeploymentCtrl',
         title: 'Inventory',
@@ -52,7 +30,7 @@ function Routes($stateProvider) {
     });
 
     $stateProvider.state('app.system-overview', {
-        url: '/inventory-deployment/:id',
+        url: '/inventory/deployments/:deployment_id/systems/:id',
         templateUrl: 'js/states/system-overview/system-overview.html',
         controller: 'SystemOverviewCtrl',
         title: 'System Overview'
@@ -128,18 +106,6 @@ function Routes($stateProvider) {
             templateUrl: 'js/states/digests/digests.html',
             controller: 'DigestsCtrl',
             title: 'Executive Reports'
-        });
-
-    // System routes
-    $stateProvider
-        .state('app.inventory', {
-            url: '/inventory?product' +
-                '&docker_host&sort_field&sort_dir&' +
-                'offline&online&machine&page&pageSize&systemHealth',
-            templateUrl: 'js/states/inventory/inventory.html',
-            controller: 'InventoryCtrl',
-            title: 'Inventory',
-            reloadOnSearch: false
         });
 
     // Rule routes

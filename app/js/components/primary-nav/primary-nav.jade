@@ -1,10 +1,25 @@
 .nav-pf-vertical.primary-nav
   account-select
   ul.list-group
-    li.list-group-item(ui-sref='app.dashboard' ui-sref-active='active')
-      a(ui-sref='app.dashboard', ui-sref-active='active', ng-click="toggleLeft()")
+    li.list-group-item(ui-sref='app.dashboard-map' ui-sref-active='active')
+      a(ui-sref='app.dashboard-map', ui-sref-active='active', ng-click="toggleLeft()")
         span.fa.fa-dashboard
         span.text Dashboard
+
+    li.list-group-item(ui-sref='app.dashboard-deployment' ui-sref-active='active')
+      a(ui-sref='app.dashboard-deployment', ui-sref-active='active', ng-click="toggleLeft()")
+        span.fa.fa-dashboard
+        span.text Demo Step2
+
+    li.list-group-item(ui-sref='app.inventory-deployment' ui-sref-active='active')
+      a(ui-sref='app.inventory-deployment', ui-sref-active='active', ng-click="toggleLeft()")
+        span.fa.fa-dashboard
+        span.text Demo Step3
+
+    li.list-group-item(ui-sref='app.system-overview' ui-sref-active='active')
+      a(ui-sref='app.system-overview', ui-sref-active='active', ng-click="toggleLeft()")
+        span.fa.fa-dashboard
+        span.text Demo Step4
 
     li.list-group-item(ui-sref='app.inventory-deployment', ng-class='isActive(states.inventoryDeployment)', ui-sref-active='active')
       a(ui-sref='app.inventory-deployment', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")

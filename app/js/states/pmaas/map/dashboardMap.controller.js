@@ -11,9 +11,6 @@ const priv = {};
 // used for the x tranlation for infinite scroll
 // const getAngle = (p1, p2) => (Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180) / Math.PI;
 
-priv.redraw = () => {
-};
-
 priv.mercatorBounds = (projection, maxlat) => {
     // find the top left and bottom right of current projection
     const yaw = projection.rotate()[0];
@@ -43,7 +40,7 @@ priv.getScale = (projection, maxLatitude, width) => {
 };
 
 function DashboardMapCtrl() {
-    const conf = priv.getConf();
+    let conf = priv.getConf();
 
     window.priv = priv;
 
@@ -124,6 +121,13 @@ function DashboardMapCtrl() {
 
         svg.selectAll('path').attr('d', path);
     }
+
+    window.onresize = () => {
+        conf = priv.getConf();
+        svg.attr('width', conf.width);
+        svg.attr('height', conf.height);
+        redraw();
+    };
 
     redraw();
 }

@@ -1,7 +1,7 @@
 /*global require*/
 'use strict';
 
-const statesModule = require('../');
+const statesModule = require('../../');
 const c3 = require('c3');
 const d3 = require('d3');
 const donutSize = 180;
@@ -31,7 +31,7 @@ function donutSettings(obj) {
 /**
  * @ngInject
  */
-function PmaasCtrl() {
+function DeploymentsCtrl() {
     c3.generate(donutSettings(
         {
             bindto: '.chart-vulnerability',
@@ -100,4 +100,4 @@ function PmaasCtrl() {
 
 }
 
-statesModule.controller('PmaasCtrl', PmaasCtrl);
+statesModule.controller('DeploymentsCtrl', DeploymentsCtrl);
