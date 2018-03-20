@@ -6,40 +6,57 @@
 function Routes($stateProvider) {
     // PMaaS
 
-    $stateProvider
-        .state('app.dashboard.map', {
-            url: '/dashboard/map',
-            templateUrl: 'js/states/pmaas/map/map.html',
-            controller: 'DashboardMapCtrl',
-            title: 'Dashboard Map'
-        });
+    $stateProvider.state('app.pmaas-list', {
+        url: '/pmaas-list/',
+        templateUrl: 'js/states/pmaas/pmaas-list-view.html',
+        controller: 'PmaasCtrl',
+        title: 'Pmaas List View'
+    });
 
-    $stateProvider
-        .state('app.dashboard', {
-            url: '/dashboard/',
-            templateUrl: 'js/states/pmaas/pmaas.html',
-            controller: 'PmaasCtrl',
-            title: 'Dashboard'
-        });
+    $stateProvider.state('app.pmaas-map', {
+        url: '/pmaas-map/',
+        templateUrl: 'js/states/pmaas/pmaas-map-view.html',
+        controller: 'PmaasCtrl',
+        title: 'Pmaas Map View'
+    });
 
-    $stateProvider
-        .state('app.inventory-deployment', {
-            url: '/inventory-deployment?product' +
-                '&docker_host&sort_field&sort_dir&' +
-                'offline&online&machine&page&pageSize&systemHealth',
-            templateUrl: 'js/states/inventory-deployment/inventory-deployment.html',
-            controller: 'InventoryDeploymentCtrl',
-            title: 'Inventory Deployment',
-            reloadOnSearch: false
-        });
+    $stateProvider.state('app.dashboard.map', {
+        url: '/dashboard/map/',
+        templateUrl: 'js/states/pmaas/map/map.html',
+        controller: 'DashboardMapCtrl',
+        title: 'Dashboard Map'
+    });
 
-    $stateProvider
-        .state('app.system-overview', {
-            url: '/inventory-deployment/:id',
-            templateUrl: 'js/states/system-overview/system-overview.html',
-            controller: 'SystemOverviewCtrl',
-            title: 'System Overview'
-        });
+    $stateProvider.state('app.dashboard.deployment', {
+        url: '/dashboard/deployment/:group_id',
+        templateUrl: 'js/states/pmaas/deployment/deployment.html',
+        controller: 'DeploymentCtrl',
+        title: 'Deployment'
+    });
+
+    $stateProvider.state('app.dashboard', {
+        url: '/dashboard/',
+        templateUrl: 'js/states/pmaas/pmaas.html',
+        controller: 'PmaasCtrl',
+        title: 'Dashboard'
+    });
+
+    $stateProvider.state('app.inventory-deployment', {
+        url: '/inventory-deployment?product' +
+            '&docker_host&sort_field&sort_dir&' +
+            'offline&online&machine&page&pageSize&systemHealth',
+        templateUrl: 'js/states/inventory-deployment/inventory-deployment.html',
+        controller: 'InventoryDeploymentCtrl',
+        title: 'Inventory',
+        reloadOnSearch: false
+    });
+
+    $stateProvider.state('app.system-overview', {
+        url: '/inventory-deployment/:id',
+        templateUrl: 'js/states/system-overview/system-overview.html',
+        controller: 'SystemOverviewCtrl',
+        title: 'System Overview'
+    });
 
     // PMaaS
 

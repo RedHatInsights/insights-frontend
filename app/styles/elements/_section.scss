@@ -1,7 +1,6 @@
 $bg-gray: $gray-light;
 
-// section.content { @include rem('padding', $global-margin); }
-.page-header + section.content { @include rem('padding', $global-margin); }
+.page-header + section.content { padding: var(--global-margin); }
 
 section.content { 
   width: 100%;
@@ -9,22 +8,9 @@ section.content {
 }
 section.content.content-gray { background: $gray-light; }
 
-// section.full-width {
-// 	width: auto;
-// 	@include rem('padding', $global-margin);
-
-
-//   .content-wrap & {
-//     @include media-query(sm) {
-//       @include rem('margin-left', -30px);
-//       @include rem('margin-right', -30px);
-//     }
-//   }
-// }
-
 section.gray {
 	background: $gray-light;
-  @include rem('padding', $global-margin);
+  padding: var(--global-margin);
 }
 
 .section-title,

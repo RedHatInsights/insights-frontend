@@ -14,14 +14,14 @@ const donutVals     = {
     },
     donut: { width: donutThickness },
     color: {
-        pattern: ['#0088CE', '#d1d1d1', 'red']
+        pattern: [
+            '#0088CE',
+            '#d1d1d1',
+            'red'
+        ]
     },
-    data: {
-        type: 'donut'
-    },
-    legend: {
-        show: false
-    }
+    data: { type: 'donut' },
+    legend: { show: false }
 };
 
 function donutSettings(obj) {
@@ -31,7 +31,7 @@ function donutSettings(obj) {
 /**
  * @ngInject
  */
-function PmaasCtrl() {
+function PmaasCtrl($scope) {
     c3.generate(donutSettings(
         {
             bindto: '.chart-vulnerability',
@@ -98,20 +98,6 @@ function PmaasCtrl() {
         .attr('data-id', function (id) { return id; })
         .html(function (id) { return id; });
 
-    /*
-        .each(function (id) {
-            d3.select(this).style('background-color', chart.color(id));
-        })
-        .on('mouseover', function (id) {
-            chart.focus(id);
-        })
-        .on('mouseout', function (id) {
-            chart.revert();
-        })
-        .on('click', function (id) {
-            chart.toggle(id);
-        });
-        */
 }
 
 statesModule.controller('PmaasCtrl', PmaasCtrl);
