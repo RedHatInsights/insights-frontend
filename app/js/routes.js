@@ -64,19 +64,11 @@ function Routes($stateProvider) {
         });
 
     $stateProvider
-        .state('app.overview', {
-            url: '/overview/',
-            templateUrl: 'js/states/overview/overview.html',
-            controller: 'OverviewCtrl',
-            title: 'Overview'
-        });
-
-    $stateProvider
-        .state('app.pmaas', {
-            url: '/pmaas/',
+        .state('app.dashboard', {
+            url: '/dashboard/',
             templateUrl: 'js/states/pmaas/pmaas.html',
             controller: 'PmaasCtrl',
-            title: 'Pmaas'
+            title: 'Dashboard'
         });
 
     $stateProvider
