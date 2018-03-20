@@ -1,0 +1,29 @@
+.metadata-card
+  .inventory
+    card
+      card-content
+        .display-name.text-center
+          strong {{:: system.toString }}
+        .host-info
+          .hostname
+            span.pficon-screen.status-icon
+            span {{ system.hostname }}
+          .status-check
+            span.fa.fa-clock-o.status-icon
+            span.hostname Last Check: {{::system.last_check_in | timeAgo }}
+
+        .card-pf-top-element
+          type-icon.type.card-pf-icon(type-id='system.system_type_id' include-text='false')
+
+        .card-pf-items.status-list
+          .card-pf-item.optimization-label.text-center
+              optimization-label(level='system.optimization')
+          .card-pf-item.text-center
+            span Optimization Potential
+          .card-pf-item.reliability-status.text-center
+              bar-status-icon.status-icon(status='system.reliability')
+              a(href="#") Reliability
+          .card-pf-item.system-tags.text-center
+              .fa.fa-database.status-icon
+              .pficon-network.status-icon
+              .pficon-cluster.status-icon
