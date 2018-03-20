@@ -72,11 +72,19 @@ function Routes($stateProvider) {
         });
 
     $stateProvider
-        .state('app.pmaas', {
-            url: '/pmaas/',
-            templateUrl: 'js/states/pmaas/pmaas.html',
+        .state('app.pmaas-list', {
+            url: '/pmaas-list/',
+            templateUrl: 'js/states/pmaas/pmaas-list-view.html',
             controller: 'PmaasCtrl',
-            title: 'Pmaas'
+            title: 'Pmaas List View'
+        });
+
+    $stateProvider
+        .state('app.pmaas-map', {
+            url: '/pmaas-map/',
+            templateUrl: 'js/states/pmaas/pmaas-map-view.html',
+            controller: 'PmaasCtrl',
+            title: 'Pmaas Map View'
         });
 
     $stateProvider

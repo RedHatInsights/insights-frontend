@@ -1,0 +1,25 @@
+.page-pmaas-map
+
+  // Page Header
+  section.page-header
+    .button-group.filter-group
+      button.button-default.button-lg.button-strong All
+      button.button-default.button-lg.button-strong Public Cloud
+      button.button-default.button-lg.button-strong Private Cloud
+      button.button-default.button-lg.button-strong Virtual
+      button.button-default.button-lg.button-strong Physical
+
+  // Content
+  section.content.pmaas-map
+
+    nan.map-nav(ng-click='toggleMapNav()', ng-class={'collapsed': sidenavCollapsed})
+      .view-toggle
+        button.button-sm
+          i.fa.fa-list
+        button.button-sm
+          i.fa.fa-globe
+      button.button-default.button-lg.button-strong All
+      button.button-default.button-lg.button-strong Public Cloud
+      button.button-default.button-lg.button-strong Private Cloud
+      button.button-default.button-lg.button-strong Virtual
+      button.button-default.button-lg.button-strong Physical

@@ -3,19 +3,20 @@
   // Page Header
   section.page-header
     .page-title
-      h1
-        span.text(translate) Overview
-    .list
+      h1.text(translate) Overview
 
 
   // Content
-  section.content.grid-pmaas
-    .card-pf.text-center
+  section.content.grid-pmaas-map
+    .card-pf.card-pf-view-select.card.card-pf-view-single-select.text-center(
+      ui-sref="app.data-center"
+      )
 
-      .card-pf-heading.no-border
-        h2.card-pf-title Vulnerability
+      .card-pf-heading.no-border.text-center
+        h2.card-pf-title Vulnerability        
 
       .card-pf-body
+        // Chart
         .chart-vulnerability
         .legend.text-left
           .c3-legend-item
@@ -26,17 +27,6 @@
           .c3-legend-item
             .c3-legend-item-tile
             b 982
-            span Secure systems
-
-      .card-pf-footer
-        button-split.md-raised.md-primary
-          button-split-main Fix it now
-          button-split-item
-            md-button(translate) Fix it now
-          button-split-item
-            md-button(translate) Customize & fix
-          button-split-item
-            md-button(translate) Generate report
 
 
     .card-pf.text-center
@@ -57,16 +47,6 @@
             b 982
             span Secure systems
 
-      .card-pf-footer
-        button-split.md-raised.md-primary
-          button-split-main Fix it now
-          button-split-item
-            md-button(translate) Fix it now
-          button-split-item
-            md-button(translate) Customize & fix
-          button-split-item
-            md-button(translate) Generate report
-
     .card-pf.text-center
       .card-pf-heading.no-border
         h2.card-pf-title Advisor
@@ -86,16 +66,6 @@
             .c3-legend-item-tile
             b 982
             span Secure systems
-
-      .card-pf-footer
-        button-split.md-raised.md-primary
-          button-split-main Fix it now
-          button-split-item
-            md-button(translate) Fix it now
-          button-split-item
-            md-button(translate) Customize & fix
-          button-split-item
-            md-button(translate) Generate report
 
     .card-pf.text-center
       .card-pf-heading.no-border
@@ -121,15 +91,4 @@
             .c3-legend-item-tile
             b 982
             span Secure systems
-
-
-      .card-pf-footer
-        button-split.md-raised.md-primary
-          button-split-main Fix it now
-          button-split-item
-            md-button(translate) Fix it now
-          button-split-item
-            md-button(translate) Customize & fix
-          button-split-item
-            md-button(translate) Generate report
 

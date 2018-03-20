@@ -14,14 +14,14 @@ const donutVals     = {
     },
     donut: { width: donutThickness },
     color: {
-        pattern: ['#0088CE', '#d1d1d1', 'red']
+        pattern: [
+            '#0088CE', 
+            '#d1d1d1', 
+            'red'
+        ]
     },
-    data: {
-        type: 'donut'
-    },
-    legend: {
-        show: false
-    }
+    data: { type: 'donut' },
+    legend: { show: false }
 };
 
 function donutSettings(obj) {
@@ -31,7 +31,36 @@ function donutSettings(obj) {
 /**
  * @ngInject
  */
-function PmaasCtrl() {
+function PmaasCtrl($scope) {
+    var priv = {};
+    var vars = {};
+
+    priv.toggleContent = function () {
+        $scope.collapsed = !$scope.collapsed;
+    };
+
+    // collapsed by default unless overriden with init-collapsed
+    $scope.collapsed = !angular.isDefined($scope.initCollapsed) ||
+        Boolean($scope.initCollapsed);
+
+    // do this as soon as all the accessibles are defined (aka define vars, run dis)
+    Utils.generateAccessors($scope, vars);
+
+    $scope.toggleContent = function () {
+        if ($scope.expandable) {
+            $q.when($scope.onToggle({
+                ctx: {
+                    collapsing: !$scope.collapsed
+                }
+            })).then(priv.toggleContent);
+        }
+    };
+
+    priv.toggleMapNav = function() {
+        $scope.collapsed = !$scope.collapsed;
+    },
+
+
     c3.generate(donutSettings(
         {
             bindto: '.chart-vulnerability',
@@ -42,9 +71,6 @@ function PmaasCtrl() {
                 ],
                 type: 'donut',
                 labels: false
-            },
-            legend: {
-                position: 'bottom'
             }
         }));
 
@@ -112,6 +138,7 @@ function PmaasCtrl() {
             chart.toggle(id);
         });
         */
+    this.api = $scope;
 }
 
 statesModule.controller('PmaasCtrl', PmaasCtrl);

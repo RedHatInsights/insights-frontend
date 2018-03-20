@@ -5,7 +5,7 @@ var statesModule = require('../');
 var priv = {};
 
 priv.doOverview = function ($state) {
-    $state.go('app.overview', {}, { location: 'replace' });
+    $state.go('app.pmaas-list-view', {}, { location: 'replace' });
 };
 
 //DEPRECATED
