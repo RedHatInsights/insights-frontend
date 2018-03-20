@@ -3,7 +3,8 @@
 
 const statesModule = require('../../');
 const d3 = require('d3');
-
+const topojson = require('topojson');
+const world = require('../../../../../node_modules/world-atlas/world/110m.json');
 const priv = {};
 
 // returns the angle in degrees between two points on the map
@@ -75,6 +76,10 @@ function DashboardMapCtrl() {
         .attr('height', conf.height)
         .call(zoom);
 
+    svg.selectAll('path')
+            .data(topojson.feature(world, world.objects.countries).features)
+            .enter().append('path');
+
     // track last translation and scale event we processed
     let tlast = [0,0];
     let slast = null;
@@ -120,7 +125,7 @@ function DashboardMapCtrl() {
         svg.selectAll('path').attr('d', path);
     }
 
-    svg.selectAll('path').attr('d', path);
+    redraw();
 }
 
 statesModule.controller('DashboardMapCtrl', DashboardMapCtrl);
