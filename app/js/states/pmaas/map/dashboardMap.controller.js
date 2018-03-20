@@ -2,14 +2,13 @@
 
 const statesModule = require('../../');
 const d3 = require('d3');
-const $ = require('jquery');
 
 // returns the angle in degrees between two points on the map
 // used for the x tranlation for infinite scroll
 // const getAngle = (p1, p2) => (Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180) / Math.PI;
 
 function DashboardMapCtrl() {
-    const div = $('#map').get()[0];
+    const div = window.jQuery('#map').get()[0];
 
     let width = div.scrollWidth;
     let height = div.scrollHeight;
