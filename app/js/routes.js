@@ -4,9 +4,8 @@
  * @ngInject
  */
 function Routes($stateProvider) {
-
-    ///////////////////////////////////////////////////
     // PMaaS
+
     $stateProvider
         .state('app.dashboard.map', {
             url: '/dashboard/map',
@@ -22,7 +21,6 @@ function Routes($stateProvider) {
             controller: 'PmaasCtrl',
             title: 'Dashboard'
         });
-
 
     $stateProvider
         .state('app.inventory-deployment', {
@@ -42,9 +40,8 @@ function Routes($stateProvider) {
             controller: 'SystemOverviewCtrl',
             title: 'System Overview'
         });
-    // PMaaS
-    ///////////////////////////////////////////////////
 
+    // PMaaS
 
     // Shared Routes
     // Actions routes
