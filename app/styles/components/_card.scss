@@ -11,9 +11,9 @@ $card-footer: "md-card-footer";
   color: $base-color;
   // box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 2px 1px -1px;
 
-  h1, 
-  h2, 
-  h3, 
+  h1,
+  h2,
+  h3,
   h4 {
     @include font-size(14px, 17px);
     margin-top: 0;
@@ -31,7 +31,7 @@ $card-footer: "md-card-footer";
   & h4 {
     margin: 0;
     @include font-size(14px, 19px);
-    font-weight: 700; 
+    font-weight: 700;
   }
 }
 
@@ -48,8 +48,8 @@ $card-footer: "md-card-footer";
 
   & .card-header-title { flex: 1 1 60%; }
 
-  & .card-header-supporting-info { 
-    flex: 0 1 auto; 
+  & .card-header-supporting-info {
+    flex: 0 1 auto;
     @include font-size(14px, 1);
     font-weight: 100;
   }
@@ -70,8 +70,8 @@ $card-footer: "md-card-footer";
   align-items: first baseline;
 
   .expandable-toggle { flex: 0 0 auto; }
-  
-  .card-header-content { 
+
+  .card-header-content {
     display: flex;
     flex: 1;
     align-items: stretch;
@@ -105,9 +105,9 @@ $card-footer: "md-card-footer";
   align-items: first baseline;
 
   .title { flex: 1 60%; }
-  
-  i { 
-    flex: 0 auto; 
+
+  i {
+    flex: 0 auto;
     justify-self: center;
   }
 }
@@ -119,17 +119,17 @@ $card-footer: "md-card-footer";
   box-shadow: none;
   background: none;
 
-  i { 
-    transition: .2s; 
+  i {
+    transition: .2s;
     @include font-size(14px);
     line-height: 1;
   }
 }
 
 
-#{$card}.expanded { 
+#{$card}.expanded {
   > #{$card-header} > .expandable-toggle {
-    i { transform: rotate(90deg); } 
+    i { transform: rotate(90deg); }
   }
 }
 
@@ -145,11 +145,11 @@ $card-footer: "md-card-footer";
 //==================================================================*/
 #{$card-footer} {
   & .card-footer-title { flex: 1 1 60%; }
-  & .card-footer-supporting-info { 
-    flex: 0 1 auto; 
+  & .card-footer-supporting-info {
+    flex: 0 1 auto;
     @include font-size(14px, 1);
     font-weight: 100;
-  }  
+  }
 }
 
 
@@ -164,8 +164,8 @@ $card-footer: "md-card-footer";
 
   @include rem('margin', $global-padding);
 
-  .card-header-title { 
-    @include font-size(14px, 1); 
+  .card-header-title {
+    @include font-size(14px, 1);
     font-weight: 300;
   }
 
@@ -326,8 +326,8 @@ $card-footer: "md-card-footer";
 
  //  .status-icon { @include rem('margin-left', 5px); }
 
-  .checkbox { 
-    @include media-query(sm) { flex: 0 1 auto; }  
+  .checkbox {
+    @include media-query(sm) { flex: 0 1 auto; }
   }
 
   &.stale #{$card-header},
@@ -350,8 +350,8 @@ $card-footer: "md-card-footer";
   display: flex;
   @include rem('padding', $global-padding);
 
-  [type="checkbox"] { 
-    flex: 0 1 auto; 
+  [type="checkbox"] {
+    flex: 0 1 auto;
     align-self: flex-start;
   }
 
@@ -449,57 +449,64 @@ $card-footer: "md-card-footer";
   }
 }
 
+.metadata-card {
+	.card.card-pf {
+		min-height: 420px;
+	}
+}
+
 .card-pf-top-element .card-pf-icon {
-  color: #9b9b9b;
-  display: block;
-  font-size: 46px;
-  height: 106px;
-  line-height: 102px;
-  margin: 0 auto;
-  text-align: center;
-  width: 106px;
-  padding-top: 10px;
+	color: #9b9b9b;
+	display: block;
+	font-size: 46px;
+	height: 106px;
+	line-height: 102px;
+	margin: 0 auto;
+	text-align: center;
+	width: 106px;
+	padding-top: 10px;
 }
 
 .status-icon {
-  margin-right: 12px;
+	margin-right: 12px;
 }
 
 .host-info {
-  font-size: 12px;
-  margin: 0 auto;
-  width: fit-content;
+	font-size: 12px;
+	margin: 0 auto;
+	width: fit-content;
 }
 
 .card-pf-items.status-list {
-  text-align: center;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  margin-top: 0;
+	text-align: center;
+	display: block;
+	align-items: center;
+	justify-content: center;
+	margin-top: 0;
 
-  .card-pf-item.optimization-label {
-    margin-bottom: 5px;
-  }
+	.card-pf-item.optimization-label {
+		margin-bottom: 5px;
+	}
 
-  .card-pf-item {
-    display: block;
-    margin: 0 auto;
-    padding: 8px 15px 8px 15px;
-    border-left: none;
-    text-align: center;
+	.card-pf-item {
+		display: block;
+		margin: 0 auto;
+		padding: 8px 15px 8px 15px;
+		border-left: none;
+		text-align: center;
 
-    a {
-      color: #363636;
-    }
+		a {
+			color: #363636;
+		}
 
-    a:hover {
-      color: #0088ce;
-      text-decoration: underline;
-    }
-  }
+		a:hover {
+			color: #0088ce;
+			text-decoration: underline;
+		}
+	}
 
-  .system-tags {
-    color: #9b9b9b;
-  }
+	.system-tags {
+		color: #9b9b9b;
+	}
 }
+

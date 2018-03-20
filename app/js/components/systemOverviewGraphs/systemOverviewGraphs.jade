@@ -1,13 +1,15 @@
 .system-overview-graphs
   md-tabs(md-dynamic-height='', md-border-bottom='')
     md-tab(md-on-select="setActive('scoring')", label='Scoring', md-active='activeTab === "scoring"')
+    md-tab(md-on-select="setActive('peerRanking')", label='Peer Ranking', md-active='activeTab === "peerRanking"')
     md-tab(md-on-select="setActive('machineLearning')", label='Machine Learning', md-active='activeTab === "machineLearning"')
     md-tab(md-on-select="setActive('anomalyDetection')", label='Anomaly Detection', md-active='activeTab === "anomalyDetection"')
-    md-tab(md-on-select="setActive('peerRanking')", label='Peer Ranking', md-active='activeTab === "peerRanking"')
 
   // hack to kill the 200MB tab usage
   .tabs-hack(ng-if="activeTab === 'scoring'")
+  .tabs-hack(ng-if="activeTab === 'peerRanking'")
+    peer-ranking
   .tabs-hack(ng-if="activeTab === 'machineLearning'")
     machine-learning
   .tabs-hack(ng-if="activeTab === 'anomalyDetection'")
-  .tabs-hack(ng-if="activeTab === 'peerRanking'")
+

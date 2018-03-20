@@ -61,7 +61,7 @@ const latencyData = [latencyTrace];
 
 const latencyLayout = {
     autosize: false,
-    width: 300,
+    width: 260,
     height: 240,
     title: 'Network Latency',
     xaxis: {

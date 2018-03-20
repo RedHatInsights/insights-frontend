@@ -44,7 +44,7 @@ const storageMtuData = [storageMtuTrace];
 
 const mtuLayout = {
     autosize: false,
-    width: 300,
+    width: 260,
     height: 240,
     title: 'Network Storage MTU',
     xaxis: {

@@ -45,7 +45,7 @@ const tenantMtuData = [tenantMtuTrace];
 
 const mtuLayout = {
     autosize: false,
-    width: 300,
+    width: 260,
     height: 240,
     title: 'Network Tenant MTU',
     xaxis: {
