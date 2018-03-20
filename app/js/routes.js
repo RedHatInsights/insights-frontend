@@ -4,27 +4,44 @@
  * @ngInject
  */
 function Routes($stateProvider) {
+    // PMaaS
 
-    /*
-     * This is the very first state into which the app gets when loaded.
-     * It's not a real state (has no view).
-     * Its controller decides whether to load the Actions or the System view
-     * and changes the state accordingly. See INSIGHTS-1005 for details.
-     */
     $stateProvider
-        .state('app.initial', {
-            template: '',
-            controller: 'InitialCtrl'
-        })
-        .state('evaluation', {
-            url:'/evaluation',
-            templateUrl: 'js/states/evaluation/evaluation.html',
-            controller: 'EvaluationCtrl',
-            title: 'evaluation',
-            params: {
-                originalPath: null
-            }
+        .state('app.dashboard.map', {
+            url: '/dashboard/map',
+            templateUrl: 'js/states/pmaas/map/map.html',
+            controller: 'DashboardMapCtrl',
+            title: 'Dashboard Map'
         });
+
+    $stateProvider
+        .state('app.dashboard', {
+            url: '/dashboard/',
+            templateUrl: 'js/states/pmaas/pmaas.html',
+            controller: 'PmaasCtrl',
+            title: 'Dashboard'
+        });
+
+    $stateProvider
+        .state('app.inventory-deployment', {
+            url: '/inventory-deployment?product' +
+                '&docker_host&sort_field&sort_dir&' +
+                'offline&online&machine&page&pageSize&systemHealth',
+            templateUrl: 'js/states/inventory-deployment/inventory-deployment.html',
+            controller: 'InventoryDeploymentCtrl',
+            title: 'Inventory Deployment',
+            reloadOnSearch: false
+        });
+
+    $stateProvider
+        .state('app.system-overview', {
+            url: '/inventory-deployment/:id',
+            templateUrl: 'js/states/system-overview/system-overview.html',
+            controller: 'SystemOverviewCtrl',
+            title: 'System Overview'
+        });
+
+    // PMaaS
 
     // Shared Routes
     // Actions routes
@@ -69,8 +86,9 @@ function Routes($stateProvider) {
             templateUrl: 'js/states/pmaas/pmaas.html',
             controller: 'PmaasCtrl',
             title: 'Dashboard'
-        })
+        });
 
+    $stateProvider
         .state('app.pmaas-list', {
             url: '/pmaas-list/',
             templateUrl: 'js/states/pmaas/pmaas-list-view.html',
@@ -130,33 +148,14 @@ function Routes($stateProvider) {
             reloadOnSearch: false
         });
 
-    $stateProvider
-        .state('app.inventory-deployment', {
-            url: '/inventory-deployment?product' +
-                '&docker_host&sort_field&sort_dir&' +
-                'offline&online&machine&page&pageSize&systemHealth',
-            templateUrl: 'js/states/inventory-deployment/inventory-deployment.html',
-            controller: 'InventoryDeploymentCtrl',
-            title: 'Inventory Deployment',
-            reloadOnSearch: false
-        });
-
-    $stateProvider
-        .state('app.system-overview', {
-            url: '/inventory-deployment/:id',
-            templateUrl: 'js/states/system-overview/system-overview.html',
-            controller: 'SystemOverviewCtrl',
-            title: 'System Overview'
-        });
-
     // Rule routes
     $stateProvider
         .state('app.rules', {
             // TODO once hash params are fixed elsewhere
             // stop using ?anchor
             url: '/rules?age&product&osp_deployment&docker_host&category' +
-            '&ansibleSupport&incident&ruleStatus&impact&likelihood&totalRisk' +
-            '&anchor&search_term',
+                '&ansibleSupport&incident&ruleStatus&impact&likelihood&totalRisk' +
+                '&anchor&search_term',
             templateUrl: 'js/states/rules/list-rules.html',
             controller: 'ListRuleCtrl',
             title: 'Rules',
