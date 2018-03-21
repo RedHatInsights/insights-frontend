@@ -1,7 +1,7 @@
 /*global require*/
 'use strict';
 
-var apiModule = require('./');
+const apiModule = require('./');
 
 const demoUser = {
     loaded: true,
@@ -100,10 +100,7 @@ function User($rootScope, $http, $q, $location) {
     return {
         init: function () {
             return {
-                then: () => {
-                    console.log('test');
-                    console.log(arguments);
-                }
+                then: () => {}
             };
         },
 

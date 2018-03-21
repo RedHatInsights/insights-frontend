@@ -1,7 +1,116 @@
+/*global require*/
+
 'use strict';
 
 var apiModule = require('./');
 const URI = require('urijs');
+
+const getDemoPolicies = (systemId) => {
+    return {
+        total: 1,
+        resources: [
+            {
+                created_at: '2018-02-02T16:49:38.000Z',
+                updated_at: '2018-02-02T16:49:38.000Z',
+                account_number: '6',
+                system_id: systemId,
+                policy_id: 'fips-mode-check',
+                policy_name: 'fips-mode-check',
+                raw_output: '',
+                checks_pass: 0,
+                checks_fail: 1,
+                checks_error: 0,
+                check_results: [
+                    {
+                        name: 'fips mode must be enabled',
+                        result: 'fail'
+                    }
+                ]
+            }
+        ],
+        policies_pass: 0,
+        policies_fail: 1,
+        policies_error: 0
+    };
+};
+
+const demoSystemTypes = [
+    {
+        id: 325,
+        role: 'cluster',
+        product_code: 'ocp'
+    },
+    {
+        id: 69,
+        role: 'cluster',
+        product_code: 'osp'
+    },
+    {
+        id: 315,
+        role: 'cluster',
+        product_code: 'rhev'
+    },
+    {
+        id: 49,
+        role: 'compute',
+        product_code: 'osp'
+    },
+    {
+        id: 19,
+        role: 'container',
+        product_code: 'docker'
+    },
+    {
+        id: 39,
+        role: 'controller',
+        product_code: 'osp'
+    },
+    {
+        id: 59,
+        role: 'director',
+        product_code: 'osp'
+    },
+    {
+        id: 79,
+        role: 'host',
+        product_code: 'aep'
+    },
+    {
+        id: 9,
+        role: 'host',
+        product_code: 'docker'
+    },
+    {
+        id: 105,
+        role: 'host',
+        product_code: 'rhel'
+    },
+    {
+        id: 99,
+        role: 'hypervisor',
+        product_code: 'rhev'
+    },
+    {
+        id: 29,
+        role: 'image',
+        product_code: 'docker'
+    },
+    {
+        id: 89,
+        role: 'manager',
+        product_code: 'rhev'
+    },
+    {
+        id: 335,
+        role: 'master',
+        product_code: 'ocp'
+    },
+    {
+        id: 345,
+        role: 'node',
+        product_code: 'ocp'
+    }
+];
 
 /**
  * @ngInject
@@ -23,84 +132,6 @@ function System(
     var root = InsightsConfig.apiRoot;
     var _systemDfd;
     var _systemStatusDfd;
-
-    const demoSystemTypes = [
-        {
-            id: 325,
-            role: 'cluster',
-            product_code: 'ocp'
-        },
-        {
-            id: 69,
-            role: 'cluster',
-            product_code: 'osp'
-        },
-        {
-            id: 315,
-            role: 'cluster',
-            product_code: 'rhev'
-        },
-        {
-            id: 49,
-            role: 'compute',
-            product_code: 'osp'
-        },
-        {
-            id: 19,
-            role: 'container',
-            product_code: 'docker'
-        },
-        {
-            id: 39,
-            role: 'controller',
-            product_code: 'osp'
-        },
-        {
-            id: 59,
-            role: 'director',
-            product_code: 'osp'
-        },
-        {
-            id: 79,
-            role: 'host',
-            product_code: 'aep'
-        },
-        {
-            id: 9,
-            role: 'host',
-            product_code: 'docker'
-        },
-        {
-            id: 105,
-            role: 'host',
-            product_code: 'rhel'
-        },
-        {
-            id: 99,
-            role: 'hypervisor',
-            product_code: 'rhev'
-        },
-        {
-            id: 29,
-            role: 'image',
-            product_code: 'docker'
-        },
-        {
-            id: 89,
-            role: 'manager',
-            product_code: 'rhev'
-        },
-        {
-            id: 335,
-            role: 'master',
-            product_code: 'ocp'
-        },
-        {
-            id: 345,
-            role: 'node',
-            product_code: 'ocp'
-        }
-    ];
 
     //XXX: this needs to be refactored/simplified
     function decorateSystemType(systemType) {
@@ -331,12 +362,14 @@ function System(
         },
 
         getSystemPolicies (systemId) {
-            const url = URI(root);
-            url.segment('systems');
-            url.segment(systemId);
-            url.segment('policies');
-            url.addSearch(AccountService.queryParam());
-            return $http.get(url.toString());
+            return {
+                then: () => {
+                    return {
+                        data: getDemoPolicies(systemId)
+                    };
+                }
+            };
+
         }
     };
 }
