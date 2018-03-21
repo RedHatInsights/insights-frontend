@@ -1,4 +1,4 @@
-/*global angular, require, window*/
+/*global require*/
 'use strict';
 
 var apiModule = require('./');
