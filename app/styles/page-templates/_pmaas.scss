@@ -11,13 +11,6 @@
 }
 
 
-// pmaas content layout
-.pmaas-map {
-  // @include build-grid(sm repeat 2, lg repeat 4);
-  display: grid;
-  grid-template-columns: auto max-content;
-}
-
 section.pmaas-map .page-header{};
 
 section.grid-pmaas .card-pf {
@@ -52,6 +45,8 @@ section.grid-pmaas .c3-legend-item {
 **/
 .page-pmaas-map {
   background: linear-gradient(to bottom, #0088ce 0%,#07a5f4 100%);
+  display: grid;
+  grid-template-rows: max-content auto;
   height: 100%;
 }
 
@@ -65,16 +60,16 @@ section.grid-pmaas .c3-legend-item {
 /* pmaas Map content
 /* ================================================================== */
 .page-pmaas-map section.content {
-  @include build-grid(auto max-content, padding 0);
+  display: grid;
+  grid-template-columns: 1fr max-content;
   position:relative;
   height: 100%;
-  padding: 0;
+  // padding: 0;
 }
 
 
 /* View toggle
 /* ================================================================== */
-
 .view-toggle {
   position: absolute;
   right: calc(100% + var(--global-padding));
@@ -101,6 +96,19 @@ section.grid-pmaas .c3-legend-item {
   padding: var(--global-padding, 8px);
   background: none;
 }
+
+
+/* Map
+/* ================================================================== */
+.page-pmaas-map .map {
+  overflow: hidden;
+
+  > svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 
 /* Map nav
 /* ================================================================== */
