@@ -3,8 +3,8 @@
   $global-padding: 15px;
   $global-margin: 30px;
 
-  --global-padding: $global-padding;
-  --global-margin: $global-margin;
+  --global-padding: #{$global-padding};
+  --global-margin: #{$global-margin};
 }
 
 
