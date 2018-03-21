@@ -5,6 +5,22 @@
  * This document defines the styling for the pmaas layout
 **/
 
-body {
-  background: red !important;
+
+.ins-c-card {
+  background: #fff;
+  padding: var(--global-margin);
+  box-shadow: 0 1px 1px rgba(3,3,3,.175);
+
+
+  &__header {
+    background: red;
+  }
+
+  &__body {
+
+  }
+
+  &__footer {
+
+  }
 }

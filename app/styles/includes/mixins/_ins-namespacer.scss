@@ -6,10 +6,10 @@
 **/
 
 
-$insights-namespace: 'ins-';
+$insights-namespace: '.ins-';
 
 @mixin ins($var, $namespace: null) {
-  .#{$insights-namespace}- {
+  #{$insights-namespace} {
     @content;
   }
 }

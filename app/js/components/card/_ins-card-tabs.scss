@@ -5,4 +5,10 @@
  * This document defines the styling for the pmaas layout
 **/
 
+.ins-c-card-tabbed {
 
+  md-tabs,
+  .tabs {
+    margin: 0;
+  }
+}
