@@ -41,7 +41,6 @@
 .data-filters .filter-group {
   flex: 0 1 auto;
 
-  .button-filter { @include rem('min-width', 120px); }
 }
 
 .data-filters .table-search { 
