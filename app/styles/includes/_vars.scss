@@ -1,11 +1,15 @@
+// Global Settings
+$global-padding: 15px;
+$global-margin: 30px;
+$insights-namespace: 'ins-';
+
 :root {
-  // Global Settings
-  $global-padding: 15px;
-  $global-margin: 30px;
 
   --global-padding: #{$global-padding};
   --global-margin: #{$global-margin};
   --global-grid-gap: #{$global-margin};
+
+  --insights-namespace: #{$insights-namespace};
 }
 
 

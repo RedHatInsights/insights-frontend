@@ -1,3 +1,15 @@
+/* ==================================================================
+/* Tabbed graphs
+/* ================================================================== */
+/**
+ * This document defines the styling for the pmaas layout
+**/
+
+@include ins(l-peer-ranking) {
+  background: blue;
+  @include build-grid(1fr 4fr);
+}
+
 .system-overview-graphs {
 
   .tabs-hack {
@@ -10,34 +22,40 @@
     height: 100%
   }
 
-  .peer-ranking {
-    display: flex;
-    .peer-ranking-overview {
-      text-align: center;
-      width: 300px;
-      height: 100%;
-      padding-top: 120px;
-      font-size: 20px;
 
-      .percentile-title {
-        font-size: 46px;
-        line-height: 46px;
-      }
+}
+
+.peer-ranking {
+  display: flex;
+}
+
+.l-peer-ranking {}
+
+.peer-ranking-overview {
+    text-align: center;
+    width: 300px;
+    height: 100%;
+    padding-top: 120px;
+    font-size: 20px;
+}
+
+.percentile-title {
+  font-size: 46px;
+  line-height: 46px;
+}
 
 
-      .scan-info {
-        font-size: 14px;
-        margin: 0 auto;
-        p {
-          margin-bottom: 2px;
-        }
-      }
-    }
-    .peer-ranking-detail {
-      width: 100%;
-      height: 100%;
-      padding-top: 50px;
-      padding-left: 20px;
-    }
+.scan-info {
+  font-size: 14px;
+  margin: 0 auto;
+  p {
+    margin-bottom: 2px;
   }
+}
+
+.peer-ranking-detail {
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  padding-left: 20px;
 }

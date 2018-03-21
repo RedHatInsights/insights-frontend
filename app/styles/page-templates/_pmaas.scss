@@ -72,7 +72,7 @@ section.grid-pmaas .c3-legend-item {
 /* ================================================================== */
 .view-toggle {
   position: absolute;
-  right: calc(100% + var(--global-padding));
+  right: var(--global-margin);
   top: var(--global-padding);
   display: inline-flex;
 }
