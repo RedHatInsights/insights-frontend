@@ -26,79 +26,79 @@ function System(
 
     const demoSystemTypes = [
         {
-            "id": 325,
-            "role": "cluster",
-            "product_code": "ocp"
+            id: 325,
+            role: 'cluster',
+            product_code: 'ocp'
         },
         {
-            "id": 69,
-            "role": "cluster",
-            "product_code": "osp"
+            id: 69,
+            role: 'cluster',
+            product_code: 'osp'
         },
         {
-            "id": 315,
-            "role": "cluster",
-            "product_code": "rhev"
+            id: 315,
+            role: 'cluster',
+            product_code: 'rhev'
         },
         {
-            "id": 49,
-            "role": "compute",
-            "product_code": "osp"
+            id: 49,
+            role: 'compute',
+            product_code: 'osp'
         },
         {
-            "id": 19,
-            "role": "container",
-            "product_code": "docker"
+            id: 19,
+            role: 'container',
+            product_code: 'docker'
         },
         {
-            "id": 39,
-            "role": "controller",
-            "product_code": "osp"
+            id: 39,
+            role: 'controller',
+            product_code: 'osp'
         },
         {
-            "id": 59,
-            "role": "director",
-            "product_code": "osp"
+            id: 59,
+            role: 'director',
+            product_code: 'osp'
         },
         {
-            "id": 79,
-            "role": "host",
-            "product_code": "aep"
+            id: 79,
+            role: 'host',
+            product_code: 'aep'
         },
         {
-            "id": 9,
-            "role": "host",
-            "product_code": "docker"
+            id: 9,
+            role: 'host',
+            product_code: 'docker'
         },
         {
-            "id": 105,
-            "role": "host",
-            "product_code": "rhel"
+            id: 105,
+            role: 'host',
+            product_code: 'rhel'
         },
         {
-            "id": 99,
-            "role": "hypervisor",
-            "product_code": "rhev"
+            id: 99,
+            role: 'hypervisor',
+            product_code: 'rhev'
         },
         {
-            "id": 29,
-            "role": "image",
-            "product_code": "docker"
+            id: 29,
+            role: 'image',
+            product_code: 'docker'
         },
         {
-            "id": 89,
-            "role": "manager",
-            "product_code": "rhev"
+            id: 89,
+            role: 'manager',
+            product_code: 'rhev'
         },
         {
-            "id": 335,
-            "role": "master",
-            "product_code": "ocp"
+            id: 335,
+            role: 'master',
+            product_code: 'ocp'
         },
         {
-            "id": 345,
-            "role": "node",
-            "product_code": "ocp"
+            id: 345,
+            role: 'node',
+            product_code: 'ocp'
         }
     ];
 
@@ -216,7 +216,7 @@ function System(
                 then: () => {
                     return {
                         data: demoSystemTypes
-                    }
+                    };
                 }
             };
         },
@@ -284,10 +284,10 @@ function System(
         getSystemReports: function (machine_id) {
             return $http.get(
                 root +
-                'systems/' +
-                encodeURIComponent(machine_id) +
-                '/reports' +
-                AccountService.current())
+                    'systems/' +
+                    encodeURIComponent(machine_id) +
+                    '/reports' +
+                    AccountService.current())
                 .success(function (system) {
                     system.reports.forEach(r => DataUtils.readRule(r.rule));
                 });
@@ -296,10 +296,10 @@ function System(
         getSystemMetadata: function (machine_id) {
             return $http.get(
                 root +
-                'systems/' +
-                encodeURIComponent(machine_id) +
-                '/metadata' +
-                AccountService.current());
+                    'systems/' +
+                    encodeURIComponent(machine_id) +
+                    '/metadata' +
+                    AccountService.current());
         },
 
         deleteSystem: function (machine_id) {
