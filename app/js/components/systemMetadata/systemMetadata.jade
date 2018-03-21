@@ -1,34 +1,7 @@
-.system-metadata(ng-if='!loading')
+.system-metadata
 
   .card-pf-view.system-information
     metadata-card(system="system")
-    //- card.card-pf-view
-      card-content
-        .card-pf-top-element
-          .ellipsis-wrapper.hostname.text-center
-            strong.hostname {{:: system.display_name || system.hostname }}
-
-          .ellipsis-wrapper.sub-info
-            .icon-inline
-              i.pficon-screen
-              span {{::system.hostname}}
-            .icon-inline
-              i.pficon-info
-              span Last check in: {{::system.last_check_in | timeAgo }}
-
-          .system-type.tile.tile-ghost.tile-center
-            i.pficon-virtual-machine.fa-2x(ng-if="getSystemType() === 'Virtual'", tooltip="{{:: 'Server type: Virtual' | translate}}")
-            i.pficon-screen.fa-2x(ng-if="getSystemType() !== 'Virtual'", tooltip="{{:: 'Server type: Physical' | translate}}")
-
-        .card-pf-items.text-center
-          .card-pf-item.text-center
-            p optpot placeholder
-            a(href="#") Optimization Potential
-          .card-pf-info.text-center
-            bar-status-icon(status='system.reliability')
-            a(href="#") Reliability
-          .card-pf-info.text-center
-            span placeholder for tags
 
   system-overview-graphs
 
@@ -36,7 +9,15 @@
 .card-pf-view.data-tables.card-pf-view-tabs
   card.card-pf-view
     card-content
-      md-tabs(md-dynamic-height='', md-border-bottom='', ng-if='!loading && hasMetadata()')
+      md-tabs(md-dynamic-height='', md-border-bottom='', ng-if='!loading.pageLoading && hasMetadata()')
+        md-tab(label='Rules')
+          md-content
+            .rule-summaries(system='system', machine-id='system.system_id', rule='rule', rule-filter='ruleFilter', loading='loading')
+
+        md-tab(label='Recommendations')
+          md-content
+            p Recommendations
+
         md-tab(label="system")
           md-content
             .g(ng-repeat="data in systemMetadata[0].data")
@@ -45,6 +26,7 @@
                   li(ng-repeat="value in data.values track by value.label", translate)
                     strong {{:: value.label}}:
                     span {{:: value.value}}
+
         md-tab(label="network")
           table
             thead
@@ -57,8 +39,7 @@
                 td.ellipsis-overflow {{:: values.name }}
                 td.ellipsis-overflow {{:: values.ip_addr }}
                 td.ellipsis-overflow {{:: values.port }}
-            //- .row.row-short
-              .col-sm-12.text-center
-                a.link.expandTableButton(ng-if="showExpandTableBtn()", ng-click="toggleExpandTable()")
-                  strong(translate, ng-if="showAll") Collapse Table
-                  strong(translate, ng-if="!showAll") Expand Table
+
+        md-tab(label='Infrastructure')
+          md-content
+            p Infrastructure

@@ -13,15 +13,20 @@ function systemMetadataCtrl(
     System,
     SystemsService) {
 
+    $scope.loading = {
+        pageLoading: true,
+        reportsLoading: true
+    };
+
     if ($scope.system && $scope.system.system_id) {
-        $scope.loading = true;
+        $scope.loading.pageLoading = true;
         System.getSystemMetadata($scope.system.system_id)
         .then(function (metadata) {
             $scope.initialMetadata =
                 SystemsService.getInitialSystemMetadata($scope.system, metadata.data);
             $scope.systemMetadata =
                 SystemsService.getSystemMetadata($scope.system, metadata.data);
-            $scope.loading = false;
+            $scope.loading.pageLoading = false;
         });
     }
 

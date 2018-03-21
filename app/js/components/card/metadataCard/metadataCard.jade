@@ -13,7 +13,10 @@
             span.hostname Last Check: {{::system.last_check_in | timeAgo }}
 
         .card-pf-top-element
-          type-icon.type.card-pf-icon(type-id='system.system_type_id' include-text='false')
+          //type-icon.type.card-pf-icon.tile(type-id='system.system_type_id' include-text='false')
+          .system-type.tile.tile-center
+            i.fa.fa-clone.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() === 'Virtual'", tooltip="{{:: 'Server type: Virtual' | translate}}")
+            i.fa.fa-server.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() !== 'Virtual'", tooltip="{{:: 'Server type: Physical' | translate}}")
 
         .card-pf-items.status-list
           .card-pf-item.optimization-label.text-center
@@ -24,6 +27,8 @@
               bar-status-icon.status-icon(status='system.reliability')
               a(href="#") Reliability
           .card-pf-item.system-tags.text-center
-              .fa.fa-database.status-icon
-              .pficon-network.status-icon
-              .pficon-cluster.status-icon
+            //type-icon.status-icon(type-id='system.system_type_id' include-text='false')
+            .fa.fa-linux.status-icon
+            .fa.fa-database.status-icon
+            .pficon-network.status-icon
+            .pficon-cluster.status-icon
