@@ -10,8 +10,6 @@
   @include build-grid(1fr 4fr);
 }
 
-
-
 .system-overview-graphs {
 
   .tabs-hack {
@@ -23,40 +21,6 @@
     align-items: center;
     height: 100%;
   }
-}
-
-.peer-ranking {
-  display: flex;
-}
-
-
-.peer-ranking-overview {
-    text-align: center;
-    width: 300px;
-    height: 100%;
-    padding-top: 120px;
-    font-size: 20px;
-}
-
-.percentile-title {
-  font-size: 46px;
-  line-height: 46px;
-}
-
-
-.scan-info {
-  font-size: 14px;
-  margin: 0 auto;
-  p {
-    margin-bottom: 2px;
-  }
-}
-
-.peer-ranking-detail {
-  width: 100%;
-  height: 100%;
-  padding-top: 50px;
-  padding-left: 20px;
 }
 
 // .page-system-overview{
@@ -79,3 +43,108 @@
 // .card-pf-view-tabs{
 //   .card-pf-body { @include rem('padding', 15px 30px 30px 30px); }
 // }
+
+.peer-ranking {
+  display: flex;
+  padding-top: 40px;
+
+  .percentile-container {
+    vertical-align: top;
+
+    .percentile {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .percentile-label {
+      padding-top: 45px;
+    }
+
+    .percentile-trend {
+      .pficon-trend-down {
+        color: #C80000;
+      }
+
+      .pficon-trend-up {
+        color: #5cb85c;
+      }
+    }
+  }
+
+  .peer-ranking-overview,
+  .peer-ranking-detail {
+    &.good-rank {
+      border-top: solid 3px #5cb85c;
+    }
+    &.warning-rank {
+      border-top: solid 3px #f0ad4e;
+    }
+    &.danger-rank {
+      border-top: solid 3px #C80000;
+    }
+  }
+
+  .peer-ranking-overview {
+    text-align: left;
+    width: 500px;
+    height: 220px;
+    font-size: 20px;
+    padding: 15px;
+    border: solid 1px lightgrey;
+    box-shadow: 0 1px 1px rgba(3, 3, 3, .175);
+    display: inline-block;
+
+    .percentile {
+      padding: 10px;
+    }
+
+    h1.percentile-title {
+      font-size: 46px;
+    }
+
+    .percentile-container .percentile-trend {
+      padding-top: 45px;
+    }
+
+    .scan-info {
+      font-size: 14px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+  }
+
+  .peer-ranking-detail-container {
+    margin-bottom: 20px;
+  }
+
+  .peer-ranking-detail {
+    display: inline-block;
+    height: 100px;
+    width: 150px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: solid 1px lightgrey;
+    box-shadow: 0 1px 1px rgba(3, 3, 3, .175);
+    .percentile {
+      padding: 5px;
+    }
+
+    .percentile-label {
+      h2 {
+        margin-bottom: 0;
+      }
+    }
+
+    h1.percentile-title {
+      margin: 4px 0 0 0;
+    }
+
+    .percentile-trend {
+      padding-top: 0;
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

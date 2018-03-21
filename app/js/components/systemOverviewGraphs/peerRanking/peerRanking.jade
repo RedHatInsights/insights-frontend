@@ -1,32 +1,82 @@
 .peer-ranking
-  .peer-ranking-overview
+  .peer-ranking-overview.warning-rank
     .percentile-container
-      .percentile-title
-        span 45th
-      p percentile
-    .trend-container
+      .percentile.percentile-text
+        h1.percentile-title 45th
+        p Percentile
+      .percentile.percentile-trend
+        p
+          span.pficon-trend-down
+        p 17%
     .scan-info
       p.number-systems
-        strong 2.5 M
-      p Similar Systems Profiled
-  .peer-ranking-detail
-    .ranking-charts
-      .progress-description CPU
-      .progress.progress-label-top-right
-        .progress-bar.progress-bar-success(style="width: 75%;")
-          span 75th
-      .progress-description Disk
-      .progress.progress-label-top-right
-        .progress-bar.progress-bar-success(style="width: 83%;")
-          span 83rd
-      .progress-description Memory
-      .progress.progress-label-top-right
-        .progress-bar.progress-bar-warning(style="width: 58%;")
-          span 58th
-      .progress-description Network
-      .progress.progress-label-top-right
-        .progress-bar.progress-bar-danger(style="width: 15%;")
-          span 15th
+        span of
+        strong  2.5 M
+        span  Similar Systems
+  .peer-ranking-detail-container
+    .peer-ranking-detail.good-rank
+      .percentile-label.text-center
+        h2
+          span.pficon-cpu
+          span  CPU
+      .percentile-container
+        .percentile.percentile-text
+          h1.percentile-title 85th
+        .percentile.percentile-trend
+    .peer-ranking-detail.good-rank
+      .percentile-label.text-center
+        h2
+          span.pficon-memory
+          span  Memory
+      .percentile-container
+        .percentile.percentile-text
+          h1.percentile-title 72th
+        .percentile.percentile-trend
+    .peer-ranking-detail.good-rank
+      .percentile-label.text-center
+        h2
+          span.pficon-volume
+          span  Disk
+      .percentile-container
+        .percentile.percentile-text
+          h1.percentile-title 68th
+        .percentile.percentile-trend
+    .peer-ranking-detail.danger-rank
+      .percentile-label.text-center
+        h2
+          span.pficon-network
+          span  Network
+      .percentile-container
+        .percentile.percentile-text
+          h1.percentile-title 15th
+        .percentile.percentile-trend
+          p
+            span.pficon-trend-down
+          p 40%
+    .peer-ranking-detail.good-rank
+      .percentile-label.text-center
+        h2
+          span.fa.fa-linux
+          span  Kernel
+      .percentile-container
+        .percentile.percentile-text
+          h1.percentile-title 79th
+        .percentile.percentile-trend
+          p
+            span.pficon-trend-up
+          p 6%
+    .peer-ranking-detail.good-rank
+      .percentile-label.text-center
+        h2
+          span.pficon-bundle
+          span  Packages
+      .percentile-container
+        .percentile.percentile-text
+          h1.percentile-title 81st
+        .percentile.percentile-trend
+          p
+            span.pficon-trend-up
+          p 5%
 
 
 

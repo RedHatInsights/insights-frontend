@@ -5,8 +5,9 @@ const componentsModule = require('../../');
 /**
  * @ngInject
  */
-function peerRankingCtrl() {
-}
+function peerRankingCtrl() {}
+
+//TODO Use responsive card layout.
 
 function peerRanking() {
     return {

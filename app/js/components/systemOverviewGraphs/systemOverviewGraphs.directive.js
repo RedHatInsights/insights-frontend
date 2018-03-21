@@ -3,7 +3,7 @@
 var componentsModule = require('../');
 
 function systemOverviewGraphsCtrl($scope) {
-    $scope.activeTab = 'machineLearning';
+    $scope.activeTab = 'peerRanking';
 
     // enables tab hack
     $scope.setActive = function (name) {
