@@ -1,0 +1,15 @@
+/* ==================================================================
+/* Insights namespacer
+/* ================================================================== */
+/**
+ * Mixin: Namespces components
+**/
+
+
+$insights-namespace: 'ins-';
+
+@mixin ins($var, $namespace: null) {
+  .#{$insights-namespace}- {
+    @content;
+  }
+}
