@@ -2,33 +2,94 @@
 'use strict';
 
 var apiModule = require('./');
-var indexBy = require('lodash/keyBy');
-var priv = {};
 
-priv.tryFakeUser = function (_user) {
-    var entitlements;
-
-    // just for test, does not affect what comes back from the API
-    // i.e. nothing "leaks" here
-    try {
-        entitlements =
-            JSON.parse(window.localStorage.getItem('insights:fake:entitlements'));
-        if (entitlements !== undefined && entitlements !== null) {
-            _user.current_entitlements = entitlements;
-        }
-    } catch (ignore) {}
-
-    // } catch (e) { console.log(e); }
+const demoUser = {
+    "loaded": true,
+    "account_number": "6",
+    "org_id": "1979710",
+    "email": "burr@redhat.com",
+    "locale": "en_US",
+    "is_active": true,
+    "is_org_admin": true,
+    "is_internal": true,
+    "sso_username": "demo-burr",
+    "cachehit": false,
+    "mechanism": "KeycloakJwtAuth",
+    "user_key": "demo-burr",
+    "autoOptedIn": true,
+    "settings": {
+        "dashboard_mode": "rhel",
+        "hide_ignored_rules": "0",
+        "maintenance_plan_category": "unscheduled",
+        "osp_deployment": "18ff8199-a84f-463d-99e4-043bd8edd37e"
+    },
+    "permissions": {},
+    "current_entitlements": {
+        "unlimitedRHEL": true,
+        "whitelist": {
+            "rhel": true,
+            "osp": true,
+            "rhev": true,
+            "docker": true,
+            "ocp": true
+        },
+        "totalRHEL": 0,
+        "skus": [
+            {
+                "skuName": "SER0232",
+                "quantity": 3000,
+                "unlimited": true,
+                "system_count": 0
+            },
+            {
+                "skuName": "SER0409",
+                "quantity": 70,
+                "unlimited": true,
+                "system_count": 0
+            },
+            {
+                "skuName": "SER0422",
+                "quantity": 100,
+                "unlimited": true,
+                "system_count": 0
+            },
+            {
+                "skuName": "SER0421",
+                "quantity": 100,
+                "unlimited": true,
+                "system_count": 0
+            },
+            {
+                "skuName": "ES01139",
+                "quantity": 1000,
+                "unlimited": true,
+                "system_count": 0
+            },
+            {
+                "skuName": "SER0412",
+                "quantity": 101,
+                "unlimited": true,
+                "system_count": 0
+            },
+            {
+                "skuName": "RH00763",
+                "quantity": 2,
+                "unlimited": false,
+                "system_count": 1
+            }
+        ],
+        "activeSystemCount": 323,
+        "systemLimitReached": false
+    },
+    "has_osp": true,
+    "is_super": false
 };
 
 /**
  * @ngInject
  */
-function User($rootScope, $http, $q, $location, InsightsConfig, PreferenceService) {
-    var _user = {
-        loaded: false
-    };
-    var _userDfd;
+function User($rootScope, $http, $q, $location) {
+    const _user = demoUser;
 
     function isBeta() {
         // Temporary work around to only allow OSP in beta.
@@ -36,58 +97,19 @@ function User($rootScope, $http, $q, $location, InsightsConfig, PreferenceServic
         return $location.absUrl().indexOf('insightsbeta') > -1;
     }
 
-    function init() {
-        $http.get(InsightsConfig.apiRoot + 'me').success(function (user) {
-            angular.extend(_user, user);
-            _user.permissions = indexBy(_user.permissions, 'code');
-
-            // used to keep up with is_internal in cases where is_internal is modified by
-            // an internal user
-            _user.is_super = _user.is_internal;
-
-            //setPreferences();
-
-            if (_user.current_entitlements && _user.current_entitlements.unlimitedRHEL) {
-                _user.current_entitlements.systemLimitReached = false;
-            }
-
-            if (window.localStorage.getItem('insights:user:isInternal') !== null &&
-                    _user.is_super === true) {
-                _user.is_internal = window.localStorage.getItem(
-                    'insights:user:isInternal') === 'true';
-            }
-
-            _user.loaded = true;
-            PreferenceService.set('loaded', true, false);
-            priv.tryFakeUser(_user);
-
-            $rootScope.$broadcast('user:loaded');
-            if (window.localStorage.getItem('tapi:demo') === 'true') {
-                _user.is_internal = false;
-                _user.demo_mode = true;
-            }
-
-            _userDfd.resolve(_user);
-        });
-    }
-
     return {
         init: function () {
-            if (!angular.isDefined(_userDfd)) {
-                _userDfd = $q.defer();
-                init();
-            }
-
-            return _userDfd.promise;
+            return {
+                then: () => {
+                    console.log('test');
+                    console.log(arguments);
+                }
+            };
         },
 
-        current: _user,
+        current: demoUser,
         asyncCurrent: function (cb) {
-            if (_user && _user.loaded) {
-                return cb(_user);
-            } else if (_userDfd && _userDfd.promise) {
-                _userDfd.promise.then(cb);
-            }
+            return cb(_user);
         },
 
         isOnOSPWhitelist: function () {

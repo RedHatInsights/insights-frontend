@@ -24,6 +24,84 @@ function System(
     var _systemDfd;
     var _systemStatusDfd;
 
+    const demoSystemTypes = [
+        {
+            "id": 325,
+            "role": "cluster",
+            "product_code": "ocp"
+        },
+        {
+            "id": 69,
+            "role": "cluster",
+            "product_code": "osp"
+        },
+        {
+            "id": 315,
+            "role": "cluster",
+            "product_code": "rhev"
+        },
+        {
+            "id": 49,
+            "role": "compute",
+            "product_code": "osp"
+        },
+        {
+            "id": 19,
+            "role": "container",
+            "product_code": "docker"
+        },
+        {
+            "id": 39,
+            "role": "controller",
+            "product_code": "osp"
+        },
+        {
+            "id": 59,
+            "role": "director",
+            "product_code": "osp"
+        },
+        {
+            "id": 79,
+            "role": "host",
+            "product_code": "aep"
+        },
+        {
+            "id": 9,
+            "role": "host",
+            "product_code": "docker"
+        },
+        {
+            "id": 105,
+            "role": "host",
+            "product_code": "rhel"
+        },
+        {
+            "id": 99,
+            "role": "hypervisor",
+            "product_code": "rhev"
+        },
+        {
+            "id": 29,
+            "role": "image",
+            "product_code": "docker"
+        },
+        {
+            "id": 89,
+            "role": "manager",
+            "product_code": "rhev"
+        },
+        {
+            "id": 335,
+            "role": "master",
+            "product_code": "ocp"
+        },
+        {
+            "id": 345,
+            "role": "node",
+            "product_code": "ocp"
+        }
+    ];
+
     //XXX: this needs to be refactored/simplified
     function decorateSystemType(systemType) {
         if (systemType.product_code === Products.docker.code) {
@@ -133,12 +211,14 @@ function System(
         },
 
         getSystemTypes: function () {
-            const url = root + 'system_types';
-
-            return $http.get(url).then(function (response) {
-                decorateSystemTypes(response.data);
-                return response;
-            });
+            decorateSystemTypes(demoSystemTypes);
+            return {
+                then: () => {
+                    return {
+                        data: demoSystemTypes
+                    }
+                }
+            };
         },
 
         getSystems: function () {
