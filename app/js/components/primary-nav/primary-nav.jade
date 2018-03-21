@@ -2,22 +2,22 @@
   account-select
   ul.list-group
     li.list-group-item(ui-sref='app.dashboard-map' ui-sref-active='active')
-      a(ui-sref='app.dashboard-map', ui-sref-active='active', ng-click="toggleLeft()")
+      a(ui-sref='app.dashboard-map', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
         span.fa.fa-dashboard
         span.text Dashboard
 
     li.list-group-item(ui-sref='app.dashboard-deployment({ deployment_id: "abcdef" })' ui-sref-active='active')
-      a(ui-sref='app.dashboard-deployment', ui-sref-active='active', ng-click="toggleLeft()")
+      a(ui-sref='app.dashboard-deployment', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
         span.fa.fa-dashboard
         span.text Demo Step2
 
     li.list-group-item(ui-sref='app.inventory-deployment({ deployment_id: "abcdef" })' ui-sref-active='active')
-      a(ui-sref='app.inventory-deployment', ui-sref-active='active', ng-click="toggleLeft()")
+      a(ui-sref='app.inventory-deployment', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
         span.fa.fa-dashboard
         span.text Demo Step3
 
     li.list-group-item(ui-sref='app.system-overview({ deployment_id: "abcdef", id: "d18df352-7ac6-5754-a211-593f23f02ad3" })' ui-sref-active='active')
-      a(ui-sref='app.system-overview', ui-sref-active='active', ng-click="toggleLeft()")
+      a(ui-sref='app.system-overview', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
         span.fa.fa-dashboard
         span.text Demo Step4
 
