@@ -31,11 +31,11 @@
   }
 
 
-  &.--is-tabbed {
+  &.--tabbed {
     display: grid;
     grid-template-columns: 1;
     grid-gap: var(--global-margin);
-
+    grid-template-rows: max-content 1fr;
   }
 
   &__tab-content {
@@ -44,7 +44,7 @@
 }
 
 
-  .ins-c-card.ins-c-card--has-tabs {
+  .ins-c-card.ins-c-card--tabbed {
 
     > * {
       margin: 0;

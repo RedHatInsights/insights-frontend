@@ -44,7 +44,10 @@ system-metadata { display: block; }
 }
 
 .ins-l-system-metadata-summary {
-  grid-column: span 2;
+
+  @include media-query(md) {
+    grid-column: span 2;
+  }
 }
 
 
