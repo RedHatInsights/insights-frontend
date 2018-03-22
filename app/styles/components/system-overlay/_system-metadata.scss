@@ -39,7 +39,7 @@ system-metadata { display: block; }
 
 
 .ins-l-system-metadata {
-    @include build-grid(md 1fr 4fr);
+    @include build-grid(md max-content 4fr);
     grid-template-rows: auto;
 }
 
