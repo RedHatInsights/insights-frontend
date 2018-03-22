@@ -9,7 +9,6 @@ const priv = {
     demoSystemId: 'd18df352-7ac6-5754-a211-593f23f02ad3'
 };
 
-
 pub.user = {
     loaded: true,
     account_number: priv.accountNumber,
