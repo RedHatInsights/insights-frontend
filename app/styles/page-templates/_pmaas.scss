@@ -131,6 +131,6 @@ section.grid-pmaas .c3-legend-item {
   border-bottom: 1px solid darken(#f5f5f5, 10);
 }
 
-section.ins-l-pmaas {
-
+section.ins-l-pmaas-deployments {
+  @include build-grid(sm 1fr 1fr, md 1fr 1fr 1fr 1fr);
 }
