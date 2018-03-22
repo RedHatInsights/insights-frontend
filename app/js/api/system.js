@@ -130,9 +130,13 @@ function System(
         },
 
         getSingleSystem: function (systemid) {
-            var url = root + 'systems/' + systemid;
-            url += AccountService.current('?');
-            return $http.get(url);
+            return {
+                then: (cb) => {
+                    cb({
+                        data: demoData.getDemoSystem(systemid)
+                    });
+                }
+            };
         },
 
         getSystemTypes: function () {

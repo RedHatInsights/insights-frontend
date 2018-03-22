@@ -34,6 +34,7 @@ function SystemOverviewCtrl(
         });
 
         const system = System.getSingleSystem($scope.system_id).then((res) => {
+            window.test = $scope;
             $scope.system = res.data;
         });
 

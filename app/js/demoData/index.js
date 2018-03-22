@@ -1,13 +1,44 @@
-/*global module*/
+/*global module, require*/
 'use strict';
+
+const reports = require('./reports');
 
 const pub  = {
     vars: {
         accountNumber: '6',
 
         // Use this as the system id for the demo??
-        demoSystemId: 'd18df352-7ac6-5754-a211-593f23f02ad3'
+        demoSystemId: 'd18df352-7ac6-5754-a211-593f23f02ad3',
+        demoSystemName: 'apache0.us-east.insights.redhat.com'
     }
+};
+
+pub.getDemoSystem = (systemId) => {
+    return {
+        toString: pub.vars.demoSystemName,
+        isCheckingIn: false,
+        system_id: systemId,
+        display_name: null,
+        remote_branch: null,
+        remote_leaf: null,
+        account_number: '6',
+        hostname: pub.vars.demoSystemName,
+        last_check_in: '2018-03-20T13:17:48.000Z',
+        created_at: '2016-09-30T19:19:40.000Z',
+        updated_at: '2018-03-20T13:17:48.000Z',
+        unregistered_at: null,
+        system_type_id: 105,
+        role: 'host',
+        product_code: 'rhel',
+        report_count: 11,
+        reports: reports,
+        acks: [],
+        parent_id: null,
+        stale_ack: false,
+        type: 'machine',
+        product: 'rhel'
+
+    };
 };
 
 pub.user = {

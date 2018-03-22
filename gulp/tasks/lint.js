@@ -9,13 +9,13 @@ var stylish = require('gulp-jscs-stylish');
 var map = require('map-stream');
 
 gulp.task('lint-fix', function () {
-    return gulp.src(config.scripts.src.concat(['!app/js/templates.js', '!app/js/components/ui-bootstrap-custom.js']))
+    return gulp.src(config.scripts.src.concat(['!app/js/templates.js', '!app/js/components/ui-bootstrap-custom.js', '!app/js/demoData/**/*js']))
         .pipe(jscs({fix: true}))
         .pipe(gulp.dest('app/js'));
 });
 
 gulp.task('lint', function () {
-    return gulp.src(config.scripts.src.concat(['!app/js/templates.js', '!app/js/components/ui-bootstrap-custom.js']))
+    return gulp.src(config.scripts.src.concat(['!app/js/templates.js', '!app/js/components/ui-bootstrap-custom.js', '!app/js/demoData/**/*js']))
         .pipe(jshint())
         .pipe(jscs())
         .pipe(stylish.combineWithHintResults())
