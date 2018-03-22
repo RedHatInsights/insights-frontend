@@ -29,7 +29,6 @@ function RuleSummariesCtrl(
         $scope.loading.isLoading = true;
         System.getSystemReports($scope.machineId)
             .success(function (system) {
-                console.log(system);
                 angular.extend($scope.system, system);
 
                 // order by severity desc, resolution_risk asc except for cases where

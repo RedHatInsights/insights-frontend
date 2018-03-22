@@ -13,6 +13,29 @@ const pub  = {
     }
 };
 
+pub.getIncidents = () => {
+    return {
+        "content_html": "<p>Rule hits that have incident<\/p>\n",
+        "summary_html": "<p>Rule hits that are incidents. An incident means that it has already occurred.<\/p>\n",
+        "rules": [],
+        "ruleBinding": "tagged",
+        "hitCount": 246,
+        "affectedSystemCount": 245,
+        "alwaysShow": false,
+        "id": 495,
+        "title": "Incidents",
+        "summary": "Rule hits that are incidents. An incident means that it has already occurred.",
+        "content": "Rule hits that have incident",
+        "priority": 31,
+        "listed": "never",
+        "tag": "incident",
+        "category": null,
+        "severity": null,
+        "hidden": false,
+        "slug": "incidents"
+    };
+};
+
 pub.getSystemMetadata = (systemId) => {
     return {
         "bios_information.bios_revision": "4.2",

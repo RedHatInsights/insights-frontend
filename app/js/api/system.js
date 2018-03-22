@@ -213,7 +213,6 @@ function System(
         getSystemReports: function (systemid) {
             const promise = {
                 error: () => {
-                    console.log('whoops');
                     return promise;
                 },
 

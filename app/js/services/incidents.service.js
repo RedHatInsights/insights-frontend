@@ -1,11 +1,12 @@
+/*global require*/
 'use strict';
 
-var servicesModule = require('./');
+const servicesModule = require('./');
 
 /**
  * @ngInject
  */
-function IncidentsService ($q, Topic) {
+function IncidentsService ($q) {
     let service = {};
     let incidentRules = [];
 
@@ -28,11 +29,15 @@ function IncidentsService ($q, Topic) {
      * Allows user to force reload incidentRules
      */
     service.loadIncidents = function () {
-        return Topic.get('incidents').success(function (topic) {
-            incidentRules = topic.rules;
-            setRulesWithHitsCount(topic.rules);
-            service.affectedSystemCount = topic.affectedSystemCount;
-        });
+        const promise = {
+            success: {
+            },
+
+            error: {
+            }
+        };
+
+        return promise;
     };
 
     /**
@@ -45,18 +50,6 @@ function IncidentsService ($q, Topic) {
 
         return isIncident !== undefined;
     };
-
-    function setRulesWithHitsCount (rules) {
-        let rulesWithHits = 0;
-
-        rules.forEach((rule) => {
-            if (rule.hitCount > 0 && !rule.acked) {
-                rulesWithHits++;
-            }
-        });
-
-        service.incidentRulesWithHitsCount = rulesWithHits;
-    }
 
     return service;
 }
