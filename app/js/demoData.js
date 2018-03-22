@@ -1,17 +1,18 @@
 /*global module*/
 'use strict';
 
-const pub  = {};
-const priv = {
-    accountNumber: '6',
+const pub  = {
+    vars: {
+        accountNumber: '6',
 
-    // Use this as the system id for the demo??
-    demoSystemId: 'd18df352-7ac6-5754-a211-593f23f02ad3'
+        // Use this as the system id for the demo??
+        demoSystemId: 'd18df352-7ac6-5754-a211-593f23f02ad3'
+    }
 };
 
 pub.user = {
     loaded: true,
-    account_number: priv.accountNumber,
+    account_number: pub.vars.accountNumber,
     org_id: '1979710',
     email: 'burr@redhat.com',
     locale: 'en_US',
@@ -99,7 +100,7 @@ pub.getPolicies = (systemId) => {
                 {
                     created_at: '2018-02-02T16:49:38.000Z',
                     updated_at: '2018-02-02T16:49:38.000Z',
-                    account_number: priv.accountNumber,
+                    account_number: pub.vars.accountNumber,
                     system_id: systemId,
                     policy_id: 'fips-mode-check',
                     policy_name: 'fips-mode-check',
