@@ -99,3 +99,27 @@
     }
   }
 }
+
+
+
+.ins-l-peer-ranking {
+   @include build-grid(lg max-content 1fr);
+   padding: 0;
+
+ .ins-l-peer-ranking-overview {
+   width: auto;
+   height: fit-content;
+ }
+
+
+  .ins-l-peer-ranking-detail {
+
+    > * {
+      flex: 0 0 calc(100% - #{$flex-gutter)});
+    
+      @include media-query(sm) {
+        flex: 0 0 calc(50% - #{$flex-gutter)});
+      }
+    }
+  }
+}
