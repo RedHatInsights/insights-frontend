@@ -1,0 +1,8 @@
+.ins-l--flex {
+  margin: 0 -$global-padding;
+
+  > * {
+    flex: 0 0 calc(100% - #{$flex-gutter)});
+    margin: $global-padding;
+  }
+}
