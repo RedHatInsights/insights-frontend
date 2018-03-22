@@ -11,6 +11,7 @@
 
 .ins-c-card {
   display: grid;
+  grid-template-rows: max-content auto;
   @include rem('grid-gap', $global-margin);
   @include rem('padding', $global-margin);
   background: #fff;
