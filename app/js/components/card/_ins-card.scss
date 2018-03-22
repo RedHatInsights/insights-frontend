@@ -5,6 +5,9 @@
  * This document defines the styling for the pmaas layout
 **/
 
+/*------------------------------------*\
+  #SECTION-TITLE
+\*------------------------------------*/
 
 .ins-c-card {
   background: #fff;
@@ -22,5 +25,23 @@
 
   &__footer {
 
+  }
+
+
+  &.is-expandable {
+    
+
+
+    &__header {
+      background: red;
+    }
+
+    &__body {
+
+    }
+
+    &__footer {
+
+    }  
   }
 }
