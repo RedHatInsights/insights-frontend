@@ -12,5 +12,4 @@
   .text-center(ng-if='loading.pageLoading')
     .spinner.spinner-lg
 
-  section.content(ng-if="!loading.pageLoading")
-    system-metadata(system='system')
+  system-metadata.ins-l-system-metadata(system='system', ng-if="!loading.pageLoading")

@@ -1,12 +1,10 @@
-.system-metadata
+.card-pf-view.system-information
+  metadata-card(system="system")
 
-  .card-pf-view.system-information
-    metadata-card(system="system")
-
-  system-overview-graphs
+system-overview-graphs
 
 // System Metadata Tabbed info
-.card-pf-view.data-tables.card-pf-view-tabs
+.card-pf-view.data-tables.card-pf-view-tabs.ins-l-system-metadata-summary
   card.card-pf-view
     card-content
       md-tabs(md-dynamic-height='', md-border-bottom='', ng-if='!loading.pageLoading && hasMetadata()')

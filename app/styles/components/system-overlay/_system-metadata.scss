@@ -1,3 +1,11 @@
+/* ==================================================================
+/* System metadata
+/* ================================================================== */
+/**
+ * This document defines the styling for the pmaas layout
+**/
+
+
 // Reset
 system-metadata { display: block; }
 
@@ -28,6 +36,16 @@ system-metadata { display: block; }
     display: inline;
   }
 }
+
+
+.ins-l-system-metadata {
+    @include build-grid(md 1fr 4fr);
+}
+
+.ins-l-system-metadata-summary {
+  grid-column: span 2;
+}
+
 
 // Top left (system info) card grid
 //==================================================================*/

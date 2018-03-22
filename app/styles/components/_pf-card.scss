@@ -41,6 +41,7 @@
 /* ================================================================== */
 .card-pf-body {
   @include build-grid(grid-gap var(--global-margin));
+  padding: 0;
 }
 
 

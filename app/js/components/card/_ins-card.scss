@@ -10,8 +10,10 @@
 \*------------------------------------*/
 
 .ins-c-card {
+  display: grid;
+  @include rem('grid-gap', $global-margin);
+  @include rem('padding', $global-margin);
   background: #fff;
-  padding: var(--global-margin);
   box-shadow: 0 1px 1px rgba(3,3,3,.175);
 
 
@@ -28,19 +30,26 @@
   }
 
 
-  &.has-tabs {
+  &.--is-tabbed {
+    display: grid;
+    grid-template-columns: 1;
+    grid-gap: var(--global-margin);
 
+  }
 
-    &__header {
-      background: red;
-    }
-
-    &__body {
-
-    }
-
-    &__footer {
-
-    }  
+  &__tab-content {
+    overflow-x: auto;
   }
 }
+
+
+  .ins-c-card.ins-c-card--is-tabbed {
+
+    > * {
+      margin: 0;
+    }
+
+    md-tabs {
+      margin: 0;
+    } 
+  }

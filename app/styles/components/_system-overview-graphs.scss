@@ -148,3 +148,34 @@
     }
   }
 }
+
+.ins-l-peer-ranking {
+  @include build-grid(sm max-content 1fr);
+  padding: 0;
+
+  .ins-l-peer-ranking-overview {
+    width: auto;
+    height: fit-content;
+  }
+
+
+  .ins-l-peer-ranking-detail {
+    @include reset;
+    @include build-grid(grid-gap $global-margin);
+    padding: 0;
+
+    @include media-query(sm) {
+      grid-template-columns: repeat(2, auto);
+    }
+
+    @include media-query(lg) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    margin: 0;
+
+    > * {
+      margin: 0;
+      // padding: 0;
+    }
+  }  
+}
