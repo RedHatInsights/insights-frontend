@@ -127,9 +127,9 @@
     > * {
       flex-basis: calc(100% - #{$flex-gutter)});
 
-      @include media-query(sm) { flex-basis: calc(33.33% - #{$flex-gutter)}); }
-      @include media-query(md) { flex-basis: calc(25% - #{$flex-gutter)}); }
-      @include media-query(lg) { flex-basis: calc(20% - #{$flex-gutter)}); }
+      @include media-query(sm) { flex-basis: calc(50% - #{$flex-gutter)}); }
+      @include media-query(xl) { flex-basis: calc(33.33% - #{$flex-gutter)}); }
+      @media screen and (min-width: 1550px) { flex-basis: calc(25% - #{$flex-gutter)}); }
     }
   }
 }
