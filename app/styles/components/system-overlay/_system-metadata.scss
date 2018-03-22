@@ -38,19 +38,6 @@ system-metadata { display: block; }
 }
 
 
-.ins-l-system-metadata {
-    @include build-grid(md max-content 4fr);
-    grid-template-rows: auto;
-}
-
-.ins-l-system-metadata-summary {
-
-  @include media-query(md) {
-    grid-column: span 2;
-  }
-}
-
-
 // Top left (system info) card grid
 //==================================================================*/
 
@@ -146,4 +133,18 @@ system-metadata { display: block; }
 .metadata-information {
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   border-radius: 2px;
+}
+
+
+
+.ins-l-system-metadata {
+    @include build-grid(md max-content 1fr);
+    grid-template-rows: auto;
+}
+
+.ins-l-system-metadata-summary {
+
+  @include media-query(md) {
+    grid-column: span 2;
+  }
 }

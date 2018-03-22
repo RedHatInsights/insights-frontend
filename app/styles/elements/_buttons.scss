@@ -31,7 +31,7 @@ $button-padding: .75rem 1.5rem;
     &:focus {
     color: #fff;
     border-color: darken($button-secondary-bg, 80);
-    background: darken($button-secondary-bg, 60);
+    // background: darken($button-secondary-bg, 60);
   }
 }
 
