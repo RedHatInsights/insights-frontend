@@ -43,23 +43,23 @@ section.grid-pmaas .c3-legend-item {
 /**
  * This document defines the styling for the pmaas layout
 **/
-.page-pmaas-map {
+.ins-l-pmaas-map {
   background: linear-gradient(135deg, #2D9E8C, #348092);
   display: grid;
   grid-template-rows: max-content auto;
   height: 100%;
 }
 
-.page-pmaas-map .page-header {
+.ins-l-pmaas-map .page-header {
   padding: var(--global-padding);
   padding: $global-padding;
 }
 
-.page-pmaas-map .page-header + section.content { padding: 0; }
+.ins-l-pmaas-map .page-header + section.content { padding: 0; }
 
 /* pmaas Map content
 /* ================================================================== */
-.page-pmaas-map section.content {
+.ins-l-pmaas-map section.content {
   display: grid;
   grid-template-columns: 1fr max-content;
   position:relative;
@@ -100,7 +100,7 @@ section.grid-pmaas .c3-legend-item {
 
 /* Map
 /* ================================================================== */
-.page-pmaas-map .map {
+.ins-l-pmaas-map .map {
   overflow: hidden;
 
   > svg {
@@ -132,5 +132,5 @@ section.grid-pmaas .c3-legend-item {
 }
 
 section.ins-l-pmaas-deployments {
-  @include build-grid(sm 1fr 1fr, md 1fr 1fr 1fr 1fr);
+  @include build-grid(sm 1fr 1fr, md 1fr 1fr 1fr);
 }
