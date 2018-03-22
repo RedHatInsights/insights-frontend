@@ -1,3 +1,5 @@
+/*global module*/
+
 const pub = {};
 
 pub.getReports = (accountNumber, systemId) => {
@@ -951,3 +953,4 @@ pub.getReports = (accountNumber, systemId) => {
     ];
 };
 
+module.exports = pub;

@@ -13,6 +13,31 @@ const pub  = {
     }
 };
 
+pub.getSystemMetadata = (systemId) => {
+    return {
+        "bios_information.bios_revision": "4.2",
+        "bios_information.release_date": "02/16/2017",
+        "bios_information.vendor": "Xen",
+        "bios_information.version": "4.2.amazon",
+        "host_system_id": systemId,
+        "listening_processes.0.ip_addr": "",
+        "listening_processes.0.port": ":1:25",
+        "listening_processes.0.process_name": "master",
+        "listening_processes.1.ip_addr": "",
+        "listening_processes.1.port": "::22",
+        "listening_processes.1.process_name": "sshd",
+        "release": "Red Hat Enterprise Linux Server release 7.3 (Maipo)",
+        "rhel_version": "7.3",
+        "system_information.family": "Unknown",
+        "system_information.manufacturer": "Xen",
+        "system_information.product_name": "HVM domU",
+        "system_information.virtual_machine": "1",
+        "timezone_information.timezone": "EDT",
+        "timezone_information.utcoffset": "-14400",
+        "system_information.machine_type": "Virtual"
+    };
+};
+
 pub.getDemoSystem = (systemId) => {
     return {
         toString: pub.vars.demoSystemName,
@@ -31,7 +56,7 @@ pub.getDemoSystem = (systemId) => {
         role: 'host',
         product_code: 'rhel',
         report_count: 11,
-        reports: reports,
+        reports: reports.getReports(),
         acks: [],
         parent_id: null,
         stale_ack: false,

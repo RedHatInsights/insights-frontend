@@ -210,25 +210,30 @@ function System(
             return $http.get(url);
         },
 
-        getSystemReports: function (machine_id) {
-            return $http.get(
-                root +
-                    'systems/' +
-                    encodeURIComponent(machine_id) +
-                    '/reports' +
-                    AccountService.current())
-                .success(function (system) {
-                    system.reports.forEach(r => DataUtils.readRule(r.rule));
-                });
+        getSystemReports: function (systemid) {
+            const promise = {
+                error: () => {
+                    console.log('whoops');
+                    return promise;
+                },
+
+                success: (cb) => {
+                    cb(demoData.getDemoSystem(systemid));
+                    return promise;
+                }
+            };
+
+            return promise;
         },
 
-        getSystemMetadata: function (machine_id) {
-            return $http.get(
-                root +
-                    'systems/' +
-                    encodeURIComponent(machine_id) +
-                    '/metadata' +
-                    AccountService.current());
+        getSystemMetadata: function (systemid) {
+            return {
+                then: (cb) => {
+                    cb({
+                        data: demoData.getSystemMetadata(systemid)
+                    });
+                }
+            };
         },
 
         deleteSystem: function (machine_id) {
