@@ -6,7 +6,7 @@ const keyBy = require('lodash/keyBy');
 const c3 = require('c3');
 const d3 = require('d3');
 const donutSize = 180;
-const donutThickness = 10;
+const donutThickness = 13;
 
 const donutVals     = {
     size: {
@@ -33,31 +33,34 @@ const charts = [
     {
         name: 'vulnerability',
         columns: [
-            ['data1', 10],
-            ['data2', 10]
-        ]
+            ['Secure systems', 982],
+            ['Vulnerable systems', 218]
+        ],
+        title: '82%'
     },
 
     {
         name: 'compliance',
         columns: [
-            ['data1', 20],
-            ['data2', 10]
-        ]
+            ['Compliant systems', 816],
+            ['Noncompliant systems', 384]
+        ],
+        title: '68%'
     },
 
     {
         name: 'advisor',
         columns: [
-            ['data1', 10],
-            ['data2', 100]
-        ]
+            ['Rules evaluated', 90],
+            ['Rules passed', 65]
+        ],
+        title: '58%'
     },
 
     {
         name: 'subscriptions',
         columns: [
-            ['data1', 30],
+            ['RHEL', 30],
             ['data2', 20],
             ['data3', 220]
         ]
@@ -73,8 +76,9 @@ function generateCharts(chartData) {
                 type: 'donut',
                 labels: false
             },
-            legend: {
-                position: 'bottom'
+            donut: {
+                title: data.title,
+                width: donutThickness
             }
         }));
     }

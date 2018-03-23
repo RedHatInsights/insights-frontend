@@ -132,5 +132,16 @@ section.grid-pmaas .c3-legend-item {
 }
 
 section.ins-l-pmaas-deployments {
-  @include build-grid(sm 1fr 1fr, md 1fr 1fr 1fr);
+  @include build-grid(md 1fr 1fr, lg 1fr 1fr 1fr 1fr);
+  .c3-chart-arc text { display: none; }
+
+  .c3-legend-item {
+    @include font-size(14px);
+    display: grid;
+    grid-template-columns: 1fr 1fr 5fr;
+  }
+
+  text.c3-chart-arcs-title {
+    font-size: 30px;
+  }
 }

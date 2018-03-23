@@ -16,15 +16,18 @@ section.content.ins-l-pmaas-deployments
     .card-pf-body
       // Chart
       .chart-vulnerability
+        .center-text
+          h1 {{charts.vulnerability.columns[0][1]}}
       .legend.text-left
         .c3-legend-item
           .c3-legend-item-tile
-          b 982
-          span Secure systems
+          b {{charts.vulnerability.columns[0][1]}}
+          span {{charts.vulnerability.columns[0][0]}}
 
         .c3-legend-item
           .c3-legend-item-tile
-          b 982
+          b {{charts.vulnerability.columns[1][1]}}
+          span {{charts.vulnerability.columns[1][0]}}
 
 
   .card-pf.text-center
@@ -37,13 +40,13 @@ section.content.ins-l-pmaas-deployments
       .legend.text-left
         .c3-legend-item
           .c3-legend-item-tile
-          b 982
-          span Secure systems
+          b {{charts.compliance.columns[0][1]}}
+          span {{charts.compliance.columns[0][0]}}
 
         .c3-legend-item
           .c3-legend-item-tile
-          b 982
-          span Secure systems
+          b {{charts.compliance.columns[1][1]}}
+          span {{charts.compliance.columns[1][0]}}
 
   .card-pf.text-center
     .card-pf-heading.no-border
@@ -57,13 +60,13 @@ section.content.ins-l-pmaas-deployments
       .legend.text-left
         .c3-legend-item
           .c3-legend-item-tile
-          b 982
-          span Secure systems
+          b {{charts.advisor.columns[0][1]}}
+          span {{charts.advisor.columns[0][0]}}
 
         .c3-legend-item
           .c3-legend-item-tile
-          b 982
-          span Secure systems
+          b {{charts.advisor.columns[1][1]}}
+          span {{charts.advisor.columns[1][0]}}
 
   .card-pf.text-center
     .card-pf-heading.no-border
