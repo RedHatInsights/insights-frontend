@@ -70,26 +70,19 @@ section.content.ins-l-pmaas-deployments
 
   .card-pf.text-center
     .card-pf-heading.no-border
-      h2.card-pf-title Subscriptions
+      h2.card-pf-title Subscription
 
     .card-pf-body
       // Donut chart
       .chart-subscription
-
       .legend.text-left
         .c3-legend-item
           .c3-legend-item-tile
-          b 982
-          span Secure systems
+          b {{charts.subscription.columns[0][1]}}
+          span {{charts.subscription.columns[0][0]}}
 
         .c3-legend-item
           .c3-legend-item-tile
-          b 982
-          span Secure systems
-
-
-        .c3-legend-item
-          .c3-legend-item-tile
-          b 982
-          span Secure systems
+          b {{charts.subscription.columns[1][1]}}
+          span {{charts.subscription.columns[1][0]}}
 

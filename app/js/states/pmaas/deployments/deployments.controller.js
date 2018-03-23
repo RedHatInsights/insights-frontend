@@ -58,12 +58,12 @@ const charts = [
     },
 
     {
-        name: 'subscriptions',
+        name: 'subscription',
         columns: [
-            ['RHEL', 30],
-            ['data2', 20],
-            ['data3', 220]
-        ]
+            ['Secure systems', 982],
+            ['Vulnerable systems', 218]
+        ],
+        title: '82%'
     }
 ];
 
