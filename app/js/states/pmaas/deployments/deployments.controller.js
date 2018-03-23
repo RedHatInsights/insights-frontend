@@ -2,6 +2,7 @@
 'use strict';
 
 const statesModule = require('../../');
+const keyBy = require('lodash/keyBy');
 const c3 = require('c3');
 const d3 = require('d3');
 const donutSize = 180;
@@ -28,18 +29,52 @@ function donutSettings(obj) {
     return Object.assign({}, donutVals, obj);
 }
 
+const charts = [
+    {
+        name: 'vulnerability',
+        columns: [
+            ['data1', 10],
+            ['data2', 10]
+        ]
+    },
+
+    {
+        name: 'compliance',
+        columns: [
+            ['data1', 20],
+            ['data2', 10]
+        ]
+    },
+
+    {
+        name: 'advisor',
+        columns: [
+            ['data1', 10],
+            ['data2', 100]
+        ]
+    },
+
+    {
+        name: 'subscriptions',
+        columns: [
+            ['data1', 30],
+            ['data2', 20],
+            ['data3', 220]
+        ]
+    }
+];
+
 /**
  * @ngInject
  */
-function DeploymentsCtrl() {
-    c3.generate(donutSettings(
-        {
-            bindto: '.chart-vulnerability',
+function DeploymentsCtrl($scope) {
+    $scope.charts = keyBy(charts, 'name');
+
+    for (const chart of charts) {
+        c3.generate(donutSettings({
+            bindto: `.chart-${chart.name}`,
             data: {
-                columns: [
-                    ['data1', 10],
-                    ['data2', 10]
-                ],
+                columns: chart.columns,
                 type: 'donut',
                 labels: false
             },
@@ -47,47 +82,7 @@ function DeploymentsCtrl() {
                 position: 'bottom'
             }
         }));
-
-    c3.generate(donutSettings(
-        {
-            bindto: '.chart-compliance',
-            data: {
-                columns: [
-                    ['data1', 20],
-                    ['data2', 10]
-                ],
-                type: 'donut',
-                labels: false
-            }
-        }));
-
-    c3.generate(donutSettings(
-        {
-            bindto: '.chart-advisor',
-            data: {
-                columns: [
-                    ['data1', 10],
-                    ['data2', 100]
-                ],
-                type: 'donut',
-                labels: false
-            }
-        }));
-
-    c3.generate(donutSettings(
-        {
-            bindto: '.chart-subscription',
-
-            data: {
-                columns: [
-                    ['data1', 30],
-                    ['data2', 20],
-                    ['data3', 220]
-                ],
-                type: 'donut',
-                labels: false
-            }
-        }));
+    }
 
     d3.select('.container')
         .insert('div', '.chart')
