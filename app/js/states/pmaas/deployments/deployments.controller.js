@@ -64,17 +64,12 @@ const charts = [
     }
 ];
 
-/**
- * @ngInject
- */
-function DeploymentsCtrl($scope) {
-    $scope.charts = keyBy(charts, 'name');
-
-    for (const chart of charts) {
+function generateCharts(chartData) {
+    for (const data of chartData) {
         c3.generate(donutSettings({
-            bindto: `.chart-${chart.name}`,
+            bindto: `.chart-${data.name}`,
             data: {
-                columns: chart.columns,
+                columns: data.columns,
                 type: 'donut',
                 labels: false
             },
@@ -83,6 +78,14 @@ function DeploymentsCtrl($scope) {
             }
         }));
     }
+}
+
+/**
+ * @ngInject
+ */
+function DeploymentsCtrl($scope) {
+    $scope.charts = keyBy(charts, 'name');
+    generateCharts(charts);
 
     d3.select('.container')
         .insert('div', '.chart')
