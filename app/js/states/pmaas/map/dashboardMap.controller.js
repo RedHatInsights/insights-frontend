@@ -96,10 +96,9 @@ priv.init = (conf) => {
                       .attr('data-toggle-target', d.id)
                       .attr('r', '8px')
                       .attr('fill', 'red')
-                      .style('display', 'inline')
-                      .attr('transform', () => {
-                        return 'translate(' + priv.path.centroid(d) + ')';
-                    });
+                      .style('display', 'inline');
+
+                priv.updatePin(pin, d);
 
                 priv.pins.push({
                     parent: d,
@@ -109,6 +108,12 @@ priv.init = (conf) => {
         });
 
     priv.redraw();
+};
+
+priv.updatePin = (drawable, parent) => {
+    drawable.attr('transform', () => {
+        return `translate(${priv.path.centroid(parent)})`;
+    });
 };
 
 priv.redraw = () => {
@@ -149,10 +154,7 @@ priv.redraw = () => {
         priv.tlast = t;
 
         for (const pin of priv.pins) {
-            pin.drawable.attr('transform', () => {
-                return `translate(${priv.path.centroid(pin.parent)})`;
-            });
-
+            priv.updatePin(pin.drawable, pin.parent);
         }
     }
 
