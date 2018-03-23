@@ -11,8 +11,6 @@ const priv = {
     pins: []
 };
 
-console.log(world);
-
 // returns the angle in degrees between two points on the map
 // used for the x tranlation for infinite scroll
 // const getAngle = (p1, p2) => (Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180) / Math.PI;
@@ -34,14 +32,12 @@ priv.getConf = () => {
         maxLatitude: 86
     };
 
-    console.log(`getConf: ${JSON.stringify(ret, false, 2)}`);
     return ret;
 };
 
 priv.getScale = (projection, maxLatitude, width) => {
     // set up the scale extent and initial scale for the projection
     const bounds = priv.mercatorBounds(priv.projection, maxLatitude);
-    console.log(bounds);
     const scale  = width / (bounds[1][0] - bounds[0][0]);
     return [scale, 15 * scale];
 };
@@ -97,15 +93,17 @@ priv.init = (conf) => {
         .attr('d', (d) => {
             if (d.id === 'USA' || d.id === 'CAN') {
                 const pin = priv.centroids.append('circle')
-                    .attr('data-toggle-target', d.id)
-                    .attr('r', '8px')
-                    .attr('fill', 'red')
-                    .style('display', 'inline')
-                    .attr('transform', 'translate(' + priv.path.centroid(d) + ')');
+                      .attr('data-toggle-target', d.id)
+                      .attr('r', '8px')
+                      .attr('fill', 'red')
+                      .style('display', 'inline')
+                      .attr('transform', () => {
+                        return 'translate(' + priv.path.centroid(d) + ')';
+                    });
 
                 priv.pins.push({
-                    pin: pin,
-                    pinID: d.id
+                    parent: d,
+                    drawable: pin
                 });
             }
         });
@@ -149,6 +147,13 @@ priv.redraw = () => {
         // seem equivalent but doesn't seem to work reliably?
         priv.slast = scale;
         priv.tlast = t;
+
+        for (const pin of priv.pins) {
+            pin.drawable.attr('transform', () => {
+                return `translate(${priv.path.centroid(pin.parent)})`;
+            });
+
+        }
     }
 
     priv.svg.selectAll('path').attr('d', priv.path);
