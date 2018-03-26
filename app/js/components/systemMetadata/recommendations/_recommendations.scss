@@ -30,7 +30,7 @@
 }
 
 .recommendations .list-group-item-container {
-  @include rem('margin-left', 30px);
+  margin-left: 0;
 }
 
 .recommendations .recommendation-expanded-content {

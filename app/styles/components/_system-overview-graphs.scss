@@ -15,41 +15,37 @@
   .tabs-hack { height: 100%; }
 
   .machine-learning-graphs-container {
-    // this should be a grid, but the plotly graphs aren't resizing smaller when
+    // this should be a flex grid, but the plotly graphs aren't resizing smaller when
     // resizing the screen smaller, only bigger. This will have to do for now
 
+    .ml-graph {
+      height: 240px;
+      display: inline-block;
+    }
+
     @include media-query(sm) {
-      .ml-graph {
-        height: 240px;
-        width: 100%;
-        display: inline-block;
-      }
+      .ml-graph { width: 100%; }
     }
 
     @include media-query(lg) {
-      .ml-graph {
-        height: 240px;
-        width: 50%;
-        display: inline-block;
-
-      }
+      .ml-graph { width: 50%; }
     }
 
     @include media-query(xl) {
-      .ml-graph {
-        height: 240px;
-        width: 33%;
-        display: inline-block;
-      }
+      .ml-graph { width: 33%; }
     }
   }
 }
 
 .peer-ranking {
-  display: flex;
+  display: block;
+
+  .percentile-title {
+    @include rem('padding', $global-padding)
+  }
 
   .percentile-container {
-    display: flex;
+    display: block;
 
     .percentile { display: inline-block; }
 
@@ -58,27 +54,24 @@
     .pficon-trend-up { color: #5cb85c; }
   }
 
-  .peer-ranking-overview,
-  .peer-ranking-detail {
-    &.good-rank { border-top: solid 3px #5cb85c; }
-    &.warning-rank { border-top: solid 3px #f0ad4e; }
-    &.danger-rank { border-top: solid 3px #C80000; }
-  }
-
   .peer-ranking-overview {
-    width: 350px;
-    // max-height: 230px;
+    @include rem('width', 240px);
+    @include rem('height', 240px);
     @include font-size(20px);
     @include rem('padding', $global-padding);
+    @include rem('margin-right', $global-padding);
+    @include rem('margin-bottom', $global-padding);
     border: solid 1px lightgrey;
     box-shadow: 0 1px 1px rgba(3, 3, 3, .175);
     display: inline-block;
+    vertical-align: top;
 
     .percentile { @include rem('padding', $global-padding); }
 
-    h1.percentile-title {
+    h1.percentile-number {
       @include font-size(46px);
       margin-bottom: 0;
+      margin-top: 0;
     }
 
     .percentile-container .percentile-trend {
@@ -93,67 +86,45 @@
     }
   }
 
-  .peer-ranking-detail-container {
-    display: flex;
-    flex-wrap: wrap;
+  @include media-query(sm) {
+    .peer-ranking-graph {
+      width: 100%;
+      display: block;
+    }
   }
 
-  .peer-ranking-detail {
-    // display: grid;
-    // grid-rows: 1fr 1fr;
-    // @include rem('grid-gap', 5px);
-    // @include rem('margin', 0 0 $global-margin $global-margin);
-    // @include rem('padding', $global-padding);
-    // max-height: 100px;
-    // width: 190px;
-    // border: solid 1px lightgrey;
-    // box-shadow: 0 1px 1px rgba(3, 3, 3, .175);
+  @include media-query(xl) {
+    .peer-ranking-overview {
+      display: inline-block;
+    }
 
-    // display: grid;
-    // grid-rows: 1fr 1fr;
-    // @include rem('grid-gap', 5px);
-    // @include rem('margin', 0 0 $global-margin $global-margin);
-    @include rem('padding', $global-padding);
-    // max-height: 100px;
-    // width: 190px;
-    border: solid 1px lightgrey;
-    box-shadow: 0 1px 1px rgba(3, 3, 3, .175);
-
-    .percentile { @include rem('padding', 5px); }
-
-    .percentile-label h2 { margin-bottom: 0; }
-
-    h1.percentile-title { @include rem('margin-top', 5px); }
-
-    .percentile-container { justify-content: center; }
-
-    .percentile-trend {
-      padding-top: 0;
-      p { margin-bottom: 0; }
+    .peer-ranking-graph {
+      width: calc(100% - 600px);
+      display: inline-block;
     }
   }
 }
 
 
 
-.ins-l-peer-ranking {
-   @include build-grid(lg max-content 1fr);
-   padding: 0;
+//.ins-l-peer-ranking {
+//   @include build-grid(lg max-content 1fr 1fr);
+//   padding: 0;
+//
+// .ins-l-peer-ranking-overview {
+//   width: max-content;
+//   // height: fit-content;
+// }
+//
 
- .ins-l-peer-ranking-overview {
-   width: max-content;
-   // height: fit-content;
- }
-
-
-  .ins-l-peer-ranking-detail {
-
-    > * {
-      flex-basis: calc(100% - #{$flex-gutter)});
-
-      @include media-query(sm) { flex-basis: calc(50% - #{$flex-gutter)}); }
-      @include media-query(xl) { flex-basis: calc(33.33% - #{$flex-gutter)}); }
-      @media screen and (min-width: 1550px) { flex-basis: calc(25% - #{$flex-gutter)}); }
-    }
-  }
-}
+  //.ins-l-peer-ranking-detail {
+  //
+  //  > * {
+  //    flex-basis: calc(100% - #{$flex-gutter)});
+  //
+  //    @include media-query(sm) { flex-basis: calc(50% - #{$flex-gutter)}); }
+  //    @include media-query(xl) { flex-basis: calc(33.33% - #{$flex-gutter)}); }
+  //    @media screen and (min-width: 1550px) { flex-basis: calc(25% - #{$flex-gutter)}); }
+  //  }
+  //}
+//}
