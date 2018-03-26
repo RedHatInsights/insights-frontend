@@ -113,6 +113,30 @@ function DeploymentsCtrl($scope) {
     $scope.charts = keyBy(charts, 'name');
     generateCharts(charts);
 
+    d3.select(".chart-vulnerability").select('.c3-chart-arcs-title')
+        .append("tspan")
+        .attr("dy", 25)
+        .attr("x", 0)
+        .text("Secure");
+
+    d3.select(".chart-compliance").select('.c3-chart-arcs-title')
+        .append("tspan")
+        .attr("dy", 25)
+        .attr("x", 0)
+        .text("Compliant");
+
+    d3.select(".chart-advisor").select('.c3-chart-arcs-title')
+        .append("tspan")
+        .attr("dy", 25)
+        .attr("x", 0)
+        .text("Optimized");
+
+    d3.select(".chart-subscription").select('.c3-chart-arcs-title')
+        .append("tspan")
+        .attr("dy", 25)
+        .attr("x", 0)
+        .text("Utilized");
+
     d3.select('.container')
         .insert('div', '.chart')
         .attr('class', 'legend')
