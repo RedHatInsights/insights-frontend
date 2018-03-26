@@ -461,6 +461,10 @@ $card-footer: "md-card-footer";
     @include rem('margin', 0 5px);
     background: #FFE2E2;
   }
+  .status-check .pficon-info {
+    @include rem('margin-left', 5px);
+    color: $blue-light;
+  }
 }
 
 .card-pf-top-element .card-pf-icon {

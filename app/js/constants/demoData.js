@@ -42,7 +42,7 @@ constantsModule.constant('DemoData', {
             },
             {
                 "toString": "openshift0.us-west.redhat.com",
-                "isCheckingIn": true,
+                "isCheckingIn": false,
                 "system_id": "c7ee0976-c397-5157-859b-325c2447dfe0",
                 "display_name": null,
                 "remote_branch": null,
@@ -240,7 +240,7 @@ constantsModule.constant('DemoData', {
             },
             {
                 "toString": "openshift11.us-west.redhat.com",
-                "isCheckingIn": true,
+                "isCheckingIn": false,
                 "system_id": "6668ffea-b94a-53df-a9bd-59a1cf37aac3",
                 "display_name": null,
                 "remote_branch": null,
@@ -339,7 +339,7 @@ constantsModule.constant('DemoData', {
             },
             {
                 "toString": "openshift14.us-east.redhat.com",
-                "isCheckingIn": true,
+                "isCheckingIn": false,
                 "system_id": "703d7ac1-452c-53a2-b248-cb0453a5a6d5",
                 "display_name": null,
                 "remote_branch": null,

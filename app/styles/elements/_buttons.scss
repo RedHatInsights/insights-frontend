@@ -139,6 +139,7 @@ button:focus {
 
 .button-filter {
   @include rem('padding', 10px $global-padding);
+  @include rem('margin-left', 5px);
   box-shadow: none;
   border-radius: 4px;
   border: 2px solid #c5c5c5;

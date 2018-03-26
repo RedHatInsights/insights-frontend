@@ -6,10 +6,11 @@
       .host-info
         .hostname
           i.pficon-screen
-          span {{ system.hostname }}
+          span openshift0.us-west.redhat.com
         .status-check
           i.fa.fa-clock-o
           span.hostname Last Check: {{::system.last_check_in | timeAgo }}
+          i.pficon-info(ng-if='!system.isCheckingIn', tooltip="New Image Available")
 
       .card-pf-top-element
         .text-center.optimization-label
