@@ -79,7 +79,7 @@ priv.init = (conf) => {
         .scaleExtent(priv.scaleExtent)
         .scale(priv.projection.scale())
         .translate([0, 0]); // not linked directly to projection
-        // .on('zoom', priv.redraw);
+    // .on('zoom', priv.redraw);
 
     priv.path = d3.geo.path()
         .projection(priv.projection);
