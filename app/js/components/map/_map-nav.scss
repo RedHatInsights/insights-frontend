@@ -1,0 +1,61 @@
+/* ==================================================================
+/* Map navigation
+/* ================================================================== */
+/**
+ * This document defines the styling for the pmaas layout
+**/
+
+/*------------------------------------*\
+  #SECTION-TITLE
+\*------------------------------------*/
+
+/* Map nav
+/* ================================================================== */
+.ins-c-map-nav {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  grid-column-start: col-start 2;
+  background: var(--map-nav-bg);
+  
+
+  &--is-expanded {
+
+  }
+
+  button {
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid darken(#f5f5f5, 10);
+  }
+}
+
+
+/* View toggle
+/* ================================================================== */
+.view-toggle {
+  position: absolute;
+  right: var(--global-margin);
+  top: var(--global-padding);
+  display: inline-flex;
+}
+
+.view-toggle button,
+.view-toggle .button-default,
+.view-toggle .button-sm,
+.view-toggle .button-lg {
+  padding: 0;
+  background: none;
+  border: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: none;
+  }
+}
+
+.view-toggle i {
+  padding: var(--global-padding, 8px);
+  background: none;
+}
