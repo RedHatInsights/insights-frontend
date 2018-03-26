@@ -24,8 +24,8 @@ pub.getRecommendations = (accountNumber, systemId) => {
                 confidence: 4,
                 likelihood: 3,
                 reliability: 3,
-                reason: '<p>This system network performance is degraded because:</p>\n<ul>\n<li>It is running a non-standard MTU setting on an access network <strong>ifcfg-eth0 MTU="800"</strong>.</li>\n\n\n\n\n</ul>\n',
-                resolution: '<p>Red Hat recommends that you change the MTU setting <code>MTU="1545"</code></p>'
+                reason: '<p>This system is running on OpenStack Platform 10. and Neutron network service. Red Hat analysed that <strong>93%</strong> of our customers running a similar deployment, have configured the MTU of the tenant network to 1450.</p><p>This systems configuration of the MTU of the tenant network is currently configured to be 950</p><p>Parameter Value is used in 0.75% of the similar deployments \nParameter Value is in the 2σ interval\n</p><p>Predictive accuracy of a model is <strong>very high.</strong></p>',
+                resolution: '<p>Red Hat recommends that you change <code>global_physnet_mtu</code> setting in <code>/etc/neutron/neutron.conf</code>  file to fix this issue.</p>'
             }
         },
         {
