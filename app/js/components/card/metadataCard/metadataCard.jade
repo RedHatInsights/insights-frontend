@@ -1,34 +1,33 @@
 .metadata-card
   .inventory
-    card
-      card-content
-        .display-name.text-center
-          strong {{:: system.toString }}
-        .host-info
-          .hostname
-            span.pficon-screen.status-icon
-            span {{ system.hostname }}
-          .status-check
-            span.fa.fa-clock-o.status-icon
-            span.hostname Last Check: {{::system.last_check_in | timeAgo }}
+    card-content
+      .display-name.text-center
+        strong {{:: system.toString }}
+      .host-info
+        .hostname
+          span.pficon-screen.status-icon
+          span {{ system.hostname }}
+        .status-check
+          span.fa.fa-clock-o.status-icon
+          span.hostname Last Check: {{::system.last_check_in | timeAgo }}
 
-        .card-pf-top-element
-          //type-icon.type.card-pf-icon.tile(type-id='system.system_type_id' include-text='false')
-          .system-type.tile.tile-center
-            i.fa.fa-clone.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() === 'Virtual'", tooltip="{{:: 'Server type: Virtual' | translate}}")
-            i.fa.fa-server.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() !== 'Virtual'", tooltip="{{:: 'Server type: Physical' | translate}}")
+      .card-pf-top-element
+        .text-center.optimization-label
+          optimization-label(level='system.optimization')
+        .text-center
+          span Optimization Potential
 
-        .card-pf-items.status-list
-          .card-pf-item.optimization-label.text-center
-              optimization-label(level='system.optimization')
-          .card-pf-item.text-center
-            span Optimization Potential
-          .card-pf-item.reliability-status.text-center
-              bar-status-icon.status-icon(status='system.reliability')
-              a(href="#") Reliability
-          .card-pf-item.system-tags.text-center
-            //type-icon.status-icon(type-id='system.system_type_id' include-text='false')
-            .fa.fa-linux.status-icon
-            .fa.fa-database.status-icon
-            .pficon-network.status-icon
-            .pficon-cluster.status-icon
+      .card-pf-items.status-list
+        .card-pf-item.reliability-status.text-center
+            bar-status-icon.status-icon(status='system.reliability')
+            a(href="#") Reliability
+      .card-pf-bottom-element.text-center
+        .card-pf-item.system-tags.text-center
+          //type-icon.status-icon(type-id='system.system_type_id' include-text='false')
+          .fa.fa-linux.status-icon
+          .fa.fa-database.status-icon
+          .pficon-network.status-icon
+          .pficon-cluster.status-icon
+        .card-pf-items.type-tags.text-center
+          span Prod
+          span DMZ

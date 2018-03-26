@@ -453,6 +453,14 @@ $card-footer: "md-card-footer";
 	.card.card-pf {
 		min-height: 420px;
 	}
+  .optimization-label { @include rem('margin', $global-padding); }
+  .system-tags { padding: 0; }
+  .system-tags > * { color: $gray-md; }
+  .type-tags span {
+    @include rem('padding', 5px 15px);
+    @include rem('margin', 0 5px);
+    background: #FFE2E2;
+  }
 }
 
 .card-pf-top-element .card-pf-icon {
