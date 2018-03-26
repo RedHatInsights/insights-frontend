@@ -14,13 +14,6 @@ const donutVals     = {
         height: donutSize
     },
     donut: { width: donutThickness },
-    color: {
-        pattern: [
-            '#0088CE',
-            '#d1d1d1',
-            'red'
-        ]
-    },
     data: { type: 'donut' },
     legend: { show: false }
 };
@@ -36,7 +29,13 @@ const charts = [
             ['Secure systems', 982],
             ['Vulnerable systems', 218]
         ],
-        title: '82%'
+        title: '82%',
+        color: {
+            pattern: [
+                '#0088CE',
+                '#d1d1d1'
+            ]
+        }
     },
 
     {
@@ -45,7 +44,13 @@ const charts = [
             ['Compliant systems', 816],
             ['Noncompliant systems', 384]
         ],
-        title: '68%'
+        title: '68%',
+        color: {
+            pattern: [
+                '#0088CE',
+                '#d1d1d1'
+            ]
+        }
     },
 
     {
@@ -54,16 +59,32 @@ const charts = [
             ['Rules evaluated', 90],
             ['Rules passed', 65]
         ],
-        title: '58%'
+        title: '58%',
+        color: {
+            pattern: [
+                '#0088CE',
+                '#d1d1d1'
+            ]
+        }
     },
 
     {
         name: 'subscription',
         columns: [
-            ['Secure systems', 982],
-            ['Vulnerable systems', 218]
+            ['RHEL', 1050],
+            ['Openshift', 100],
+            ['Openstack', 50],
+            ['Available', 25],
         ],
-        title: '82%'
+        title: '98%',
+        color: {
+            pattern: [
+                '#cc0000',
+                '#0088CE',
+                '#2d7623',
+                '#d1d1d1'
+            ]
+        }
     }
 ];
 
@@ -79,7 +100,8 @@ function generateCharts(chartData) {
             donut: {
                 title: data.title,
                 width: donutThickness
-            }
+            },
+            color: data.color
         }));
     }
 }

@@ -6,83 +6,99 @@ section.page-header
 
 // Content
 section.content.ins-l-pmaas-deployments
-  .card-pf.card-pf-view-select.card.card-pf-view-single-select.text-center(
-    ui-sref="app.data-center"
-    )
+  .ins-l-pmaas-deployments_cards
+    .card-pf.card-pf-view.card-pf-view-select.card-pf-view-single-select.text-center(ui-sref='app.inventory-deployment({ deployment_id: "abcdef" })')
 
-    .card-pf-heading.no-border.text-center
-      h2.card-pf-title Vulnerability        
+      .card-pf-heading.no-border.text-center
+        h2.card-pf-title Vulnerability
 
-    .card-pf-body
-      // Chart
-      .chart-vulnerability
-        .center-text
-          h1 {{charts.vulnerability.columns[0][1]}}
-      .legend.text-left
-        .c3-legend-item
-          .c3-legend-item-tile
-          b {{charts.vulnerability.columns[0][1]}}
-          span {{charts.vulnerability.columns[0][0]}}
+      .card-pf-body
+        // Chart
+        .chart-vulnerability
+          .center-text
+            h1 {{charts.vulnerability.columns[0][1]}}
+        .legend.text-left
+          .c3-legend-item
+            .c3-legend-item-tile
+              i.fa.fa-square.blue
+            b {{charts.vulnerability.columns[0][1]}}
+            span {{charts.vulnerability.columns[0][0]}}
 
-        .c3-legend-item
-          .c3-legend-item-tile
-          b {{charts.vulnerability.columns[1][1]}}
-          span {{charts.vulnerability.columns[1][0]}}
+          .c3-legend-item
+            .c3-legend-item-tile
+              i.fa.fa-square.gray
+            b {{charts.vulnerability.columns[1][1]}}
+            span {{charts.vulnerability.columns[1][0]}}
 
 
-  .card-pf.text-center
-    .card-pf-heading.no-border
-      h2.card-pf-title Compliance
+    .card-pf.card-pf-view.card-pf-view-select.card-pf-view-single-select.text-center(ui-sref='app.inventory-deployment({ deployment_id: "abcdef" })')
+      .card-pf-heading.no-border
+        h2.card-pf-title Compliance
 
-    .card-pf-body
-      // Donut chart
-      .chart-compliance
-      .legend.text-left
-        .c3-legend-item
-          .c3-legend-item-tile
-          b {{charts.compliance.columns[0][1]}}
-          span {{charts.compliance.columns[0][0]}}
+      .card-pf-body
+        // Donut chart
+        .chart-compliance
+        .legend.text-left
+          .c3-legend-item
+            .c3-legend-item-tile
+              i.fa.fa-square.blue
+            b {{charts.compliance.columns[0][1]}}
+            span {{charts.compliance.columns[0][0]}}
 
-        .c3-legend-item
-          .c3-legend-item-tile
-          b {{charts.compliance.columns[1][1]}}
-          span {{charts.compliance.columns[1][0]}}
+          .c3-legend-item
+            .c3-legend-item-tile
+              i.fa.fa-square.gray
+            b {{charts.compliance.columns[1][1]}}
+            span {{charts.compliance.columns[1][0]}}
 
-  .card-pf.text-center
-    .card-pf-heading.no-border
-      h2.card-pf-title Advisor
+    .card-pf.card-pf-view.card-pf-view-select.card-pf-view-single-select.text-center(ui-sref='app.inventory-deployment({ deployment_id: "abcdef" })')
+      .card-pf-heading.no-border
+        h2.card-pf-title Advisor
 
-    .card-pf-body
+      .card-pf-body
 
-      // Donut chart
-      .chart-advisor
+        // Donut chart
+        .chart-advisor
 
-      .legend.text-left
-        .c3-legend-item
-          .c3-legend-item-tile
-          b {{charts.advisor.columns[0][1]}}
-          span {{charts.advisor.columns[0][0]}}
+        .legend.text-left
+          .c3-legend-item
+            .c3-legend-item-tile
+              i.fa.fa-square.blue
+            b {{charts.advisor.columns[0][1]}}
+            span {{charts.advisor.columns[0][0]}}
 
-        .c3-legend-item
-          .c3-legend-item-tile
-          b {{charts.advisor.columns[1][1]}}
-          span {{charts.advisor.columns[1][0]}}
+          .c3-legend-item
+            .c3-legend-item-tile
+              i.fa.fa-square.gray
+            b {{charts.advisor.columns[1][1]}}
+            span {{charts.advisor.columns[1][0]}}
 
-  .card-pf.text-center
-    .card-pf-heading.no-border
-      h2.card-pf-title Subscription
+    .card-pf.card-pf-view.card-pf-view-select.card-pf-view-single-select.text-center(ui-sref='app.inventory-deployment({ deployment_id: "abcdef" })')
+      .card-pf-heading.no-border
+        h2.card-pf-title Subscription
 
-    .card-pf-body
-      // Donut chart
-      .chart-subscription
-      .legend.text-left
-        .c3-legend-item
-          .c3-legend-item-tile
-          b {{charts.subscription.columns[0][1]}}
-          span {{charts.subscription.columns[0][0]}}
+      .card-pf-body
+        // Donut chart
+        .chart-subscription
+        .legend.text-left
+          .c3-legend-item
+            .c3-legend-item-tile
+              i.fa.fa-square.red
+            b {{charts.subscription.columns[0][1]}}
+            span {{charts.subscription.columns[0][0]}}
 
-        .c3-legend-item
-          .c3-legend-item-tile
-          b {{charts.subscription.columns[1][1]}}
-          span {{charts.subscription.columns[1][0]}}
+          .c3-legend-item
+            .c3-legend-item-tile
+              i.fa.fa-square.blue
+            b {{charts.subscription.columns[1][1]}}
+            span {{charts.subscription.columns[1][0]}}
 
+          .c3-legend-item
+            .c3-legend-item-tile
+              i.fa.fa-square.green
+            b {{charts.subscription.columns[2][1]}}
+            span {{charts.subscription.columns[2][0]}}
+
+  .ins-l-pmaas-deployments_logs
+    logs-graph
+    logs-patch-info

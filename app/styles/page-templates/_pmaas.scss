@@ -131,17 +131,39 @@ section.grid-pmaas .c3-legend-item {
   border-bottom: 1px solid darken(#f5f5f5, 10);
 }
 
+/* Deployments
+/* ================================================================== */
 section.ins-l-pmaas-deployments {
-  @include build-grid(md 1fr 1fr, lg 1fr 1fr 1fr 1fr);
-  .c3-chart-arc text { display: none; }
+  display: grid;
+  grid-rows: 2;
+  .ins-l-pmaas-deployments_cards {
+    @include build-grid(md 1fr 1fr, lg 1fr 1fr 1fr 1fr);
+    .c3-chart-arc text { display: none; }
 
-  .c3-legend-item {
-    @include font-size(14px);
-    display: grid;
-    grid-template-columns: 1fr 1fr 5fr;
+    // This isn't right yet
+    .c3-legend-item {
+      @include font-size(14px);
+      display: grid;
+      grid-template-columns: min-content 1fr 5fr;
+      i { @include rem('margin-right', 15px); }
+    }
+
+    text.c3-chart-arcs-title {
+      font-size: 30px;
+    }
   }
 
-  text.c3-chart-arcs-title {
-    font-size: 30px;
+  .ins-l-pmaas-deployments_logs{
+    @include build-grid(sm 1fr, md 1fr 1fr);
+    @include rem('margin', 0 -30px);
+    @include rem('padding', $global-margin $global-margin*2);
+    background: #fff;
   }
+}
+
+section.ins-l-pmaas-deployments .c3-legend-item-tile {
+  .blue { color: #0088CE; }
+  .gray { color: #d1d1d1; }
+  .red { color: #cc0000; }
+  .green { color: #2d7623; }
 }
