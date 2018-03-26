@@ -6,8 +6,9 @@ const d3 = require('d3');
 const topojson = require('topojson');
 const world = require('./dashboardMap.json');
 const pinLocations = {
-    USA: 2,
-    CAN: 1
+    USA: { issues: true,  offset: [  30, -30 ] },
+    CAN: { issues: false, offset: [ -50, -190 ] },
+    DEU: { issues: false, offset: [  25,  45 ] }
 };
 
 const priv = {
@@ -104,7 +105,7 @@ priv.init = (conf) => {
                       .attr('height', 50)
                       .style('display', 'inline');
 
-                if (pinLocations[d.id] === 1) {
+                if (pinLocations[d.id].issues) {
                     pin.attr('xlink:href', 'static/images/i_pin-has-error.svg');
                 }
 
@@ -122,7 +123,12 @@ priv.init = (conf) => {
 
 priv.updatePin = (drawable, parent) => {
     drawable.attr('transform', () => {
-        return `translate(${priv.path.centroid(parent)})`;
+        const centroid = priv.path.centroid(parent);
+        window.p = parent;
+        window.test = priv.path;
+        centroid[0] = centroid[0] - pinLocations[parent.id].offset[0];
+        centroid[1] = centroid[1] - pinLocations[parent.id].offset[1];
+        return `translate(${centroid})`;
     });
 };
 
