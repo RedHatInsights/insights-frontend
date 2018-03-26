@@ -5,6 +5,11 @@ const statesModule = require('../../');
 const d3 = require('d3');
 const topojson = require('topojson');
 const world = require('./dashboardMap.json');
+const pinLocations = {
+    USA: 2,
+    CAN: 1
+};
+
 const priv = {
     tlast: [0, 0],
     slast: null,
@@ -91,7 +96,7 @@ priv.init = (conf) => {
         .data(topojson.feature(world, world.objects.countries).features)
         .enter().append('path')
         .attr('d', (d) => {
-            if (d.id === 'USA' || d.id === 'CAN') {
+            if (pinLocations[d.id]) {
                 const pin = priv.centroids.append('svg:image')
                       .attr('data-toggle-target', d.id)
                       .attr('xlink:href', 'static/images/i_pin-good.svg')
@@ -99,7 +104,7 @@ priv.init = (conf) => {
                       .attr('height', 50)
                       .style('display', 'inline');
 
-                if (d.id === 'CAN') {
+                if (pinLocations[d.id] === 1) {
                     pin.attr('xlink:href', 'static/images/i_pin-has-error.svg');
                 }
 
