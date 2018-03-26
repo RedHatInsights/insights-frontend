@@ -54,9 +54,9 @@ priv.reInit = (conf) => {
         .scale(1)
         .translate([conf.width / 2, conf.height / 2]);
 
-    priv.zoom
-        .scale(priv.projection.scale())
-        .translate([0, 0]);
+    // priv.zoom
+    //     .scale(priv.projection.scale())
+    //     .translate([0, 0]);
 
     priv.svg
         .attr('width', conf.width)
@@ -139,18 +139,20 @@ priv.redraw = () => {
         let scale = d3.event.scale;
         let t = d3.event.translate;
 
-        let dx = t[0] - priv.tlast[0];
+        // let dx = t[0] - priv.tlast[0];
+
         let dy = t[1] - priv.tlast[1];
-        let yaw = priv.projection.rotate()[0];
+
+        // let yaw = priv.projection.rotate()[0];
 
         // if scaling changes, ignore translation (otherwise touch zooms are weird)
         if (scale !== priv.slast) {
             priv.projection.scale(scale);
         } else {
-            const angle = (((360.0 * dx) / conf.width) * priv.scaleExtent[0]) / scale;
+            // const angle = (((360.0 * dx) / conf.width) * priv.scaleExtent[0]) / scale;
 
             // use x translation to rotate based on current scale
-            priv.projection.rotate([yaw + angle, 0, 0]);
+            // priv.projection.rotate([yaw + angle, 0, 0]);
 
             // use y translation to translate projection, clamped by min/max
             let b = priv.mercatorBounds(priv.projection, conf.maxLatitude);
