@@ -13,20 +13,58 @@
 /* ================================================================== */
 .ins-c-map-nav {
   position: relative;
-  display: flex;
-  flex-flow: column nowrap;
   grid-column-start: col-start 2;
   background: var(--map-nav-bg);
+  overflow-y: auto;
   
 
-  &--is-expanded {
-
+  .group-list {
+    max-width: 20rem;
+    opacity: 1;
+    transition: .3s;
   }
+
+  ul {
+    @include reset;
+    list-style-type: none;
+    display: flex;
+    flex-flow: column nowrap;
+    opacity: 1;
+    transition: .3s;
+  }
+
+  li {
+    padding: var(--global-padding) var(--global-margin);
+    white-space: nowrap;
+    border-bottom: 1px solid #cfcfcf;
+  }
+
+  &--is-collapsed {
+    .group-list {
+      max-width: 0;
+      overflow: hidden;
+      opacity: 0;
+    }
+  }
+
+  &--is-collapsed ul {
+    opacity: 0;
+  }
+
 
   button {
     text-align: left;
     border: none;
     border-bottom: 1px solid darken(#f5f5f5, 10);
+  }
+
+
+  .toggle-map {
+    position: absolute;
+    right: calc(100% + 20px);
+    right: 0;
+    top: 0;
+    z-index: 9;
   }
 }
 
@@ -35,7 +73,7 @@
 /* ================================================================== */
 .view-toggle {
   position: absolute;
-  right: var(--global-margin);
+  right: calc(100% + var(--global-margin));
   top: var(--global-padding);
   display: inline-flex;
 }

@@ -12,15 +12,29 @@
   // Content
   section.content.pmaas-map
     .map#map
+    nav.ins-c-map-nav(ng-class="{'ins-c-map-nav--is-collapsed': navCollapsed}")
       .view-toggle
         button.button-sm
           i.fa.fa-list
         button.button-sm
           i.fa.fa-globe
-    nav.map-nav(ng-class="{'--is-expanded': navExpanded}")
-      button(ng-click="navExpanded = !navExpanded") toggle
-      button.button-default.button-lg.button-strong All
-      button.button-default.button-lg.button-strong Public Cloud
-      button.button-default.button-lg.button-strong Private Cloud
-      button.button-default.button-lg.button-strong Virtual
-      button.button-default.button-lg.button-strong Physical
+            
+      button.toggle-map(ng-click="navCollapsed = !navCollapsed") toggle
+      ul
+        li 
+          .group-list
+            div Self-Service Cloud
+            span Azure Europe | OpenShift
+        li
+          .group-list
+            div Summit Demo
+            span Private Cloud | OpenStack & OpenShift
+        li
+          .group-list
+            div Summit Demo
+            span aws East | OpenShift
+      //- button.button-default.button-lg.button-strong All
+      //- button.button-default.button-lg.button-strong Public Cloud
+      //- button.button-default.button-lg.button-strong Private Cloud
+      //- button.button-default.button-lg.button-strong Virtual
+      //- button.button-default.button-lg.button-strong Physical

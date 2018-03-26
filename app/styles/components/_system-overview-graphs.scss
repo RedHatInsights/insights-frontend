@@ -107,24 +107,24 @@
 
 
 
-//.ins-l-peer-ranking {
-//   @include build-grid(lg max-content 1fr 1fr);
-//   padding: 0;
-//
-// .ins-l-peer-ranking-overview {
-//   width: max-content;
-//   // height: fit-content;
-// }
-//
+.ins-l-peer-ranking {
+  @include build-grid(lg max-content 1fr 1fr);
+  padding: 0;
 
-  //.ins-l-peer-ranking-detail {
-  //
-  //  > * {
-  //    flex-basis: calc(100% - #{$flex-gutter)});
-  //
-  //    @include media-query(sm) { flex-basis: calc(50% - #{$flex-gutter)}); }
-  //    @include media-query(xl) { flex-basis: calc(33.33% - #{$flex-gutter)}); }
-  //    @media screen and (min-width: 1550px) { flex-basis: calc(25% - #{$flex-gutter)}); }
-  //  }
-  //}
-//}
+.ins-l-peer-ranking-overview {
+  width: max-content;
+  // height: fit-content;
+}
+
+
+  .ins-l-peer-ranking-detail {
+  
+   > * {
+     flex-basis: calc(100% - #{$flex-gutter)});
+  
+     @include media-query(sm) { flex-basis: calc(50% - #{$flex-gutter)}); }
+     @include media-query(xl) { flex-basis: calc(33.33% - #{$flex-gutter)}); }
+     @media screen and (min-width: 1550px) { flex-basis: calc(25% - #{$flex-gutter)}); }
+   }
+  }
+}
