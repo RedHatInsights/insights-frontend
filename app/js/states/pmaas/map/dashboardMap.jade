@@ -17,7 +17,8 @@
           i.fa.fa-list
         button.button-sm
           i.fa.fa-globe
-    nav.map-nav(ng-click='toggleMapNav()')
+    nav.map-nav(ng-class="{'--is-expanded': navExpanded}")
+      button(ng-click="navExpanded = !navExpanded") toggle
       button.button-default.button-lg.button-strong All
       button.button-default.button-lg.button-strong Public Cloud
       button.button-default.button-lg.button-strong Private Cloud
