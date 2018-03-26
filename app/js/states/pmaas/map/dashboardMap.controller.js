@@ -34,7 +34,7 @@ priv.getConf = () => {
     const ret = {
         width: div.scrollWidth,
         height: div.scrollHeight,
-        rotate: 0,
+        rotate: -10,
         maxLatitude: 86
     };
 
@@ -51,7 +51,7 @@ priv.getScale = (projection, maxLatitude, width) => {
 priv.reInit = (conf) => {
     priv.projection
         .rotate([conf.rotate, 0])
-        .scale(1)
+        .scale(priv.scaleExtent[0])
         .translate([conf.width / 2, conf.height / 2]);
 
     // priv.zoom
@@ -133,47 +133,9 @@ priv.updatePin = (drawable, parent) => {
 };
 
 priv.redraw = () => {
-    const conf = priv.getConf();
-
     if (d3.event) {
-        let scale = d3.event.scale;
-        let t = d3.event.translate;
-
-        // let dx = t[0] - priv.tlast[0];
-
-        let dy = t[1] - priv.tlast[1];
-
-        // let yaw = priv.projection.rotate()[0];
-
-        // if scaling changes, ignore translation (otherwise touch zooms are weird)
-        if (scale !== priv.slast) {
-            priv.projection.scale(scale);
-        } else {
-            // const angle = (((360.0 * dx) / conf.width) * priv.scaleExtent[0]) / scale;
-
-            // use x translation to rotate based on current scale
-            // priv.projection.rotate([yaw + angle, 0, 0]);
-
-            // use y translation to translate projection, clamped by min/max
-            let b = priv.mercatorBounds(priv.projection, conf.maxLatitude);
-
-            if (b[0][1] + dy > 0) {
-                dy = -b[0][1];
-            } else if (b[1][1] + dy < conf.height) {
-                dy = conf.height - b[1][1];
-            }
-
-            //priv.projection.translate([tp[0], tp[1] + dy]);
-        }
-
-        // save last values.  resetting zoom.translate() and scale() would
-        // seem equivalent but doesn't seem to work reliably?
-        priv.slast = scale;
-        priv.tlast = t;
-
-        for (const pin of priv.pins) {
-            priv.updatePin(pin.drawable, pin.parent);
-        }
+        priv.projection.scale(d3.event.scale);
+        priv.pins.forEach(p => priv.updatePin(p.drawable, p.parent));
     }
 
     priv.svg.selectAll('path').attr('d', priv.path);
