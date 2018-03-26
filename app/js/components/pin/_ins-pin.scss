@@ -10,6 +10,26 @@
 \*------------------------------------*/
 
 .ins-c-pin {
-  width: 40px;
+  width: 60px;
   height: auto;
+  position: absolute;
+  
+  .st1 { fill: #92d400; }
+  
+  &--has-error {
+    .st1{fill: #a30000;}
+  }
+
+  &:hover {
+  }
+}
+
+.ins-c-pin.pin1 {
+  left: 10%;
+  top: 10%;
+}
+
+.ins-c-pin.pin2 {
+  left: 20%;
+  top: 20%;
 }
