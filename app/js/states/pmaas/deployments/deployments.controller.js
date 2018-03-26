@@ -74,7 +74,7 @@ const charts = [
             ['RHEL', 1050],
             ['Openshift', 100],
             ['Openstack', 50],
-            ['Available', 25],
+            ['Available', 25]
         ],
         title: '98%',
         color: {
