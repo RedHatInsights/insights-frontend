@@ -92,11 +92,22 @@ priv.init = (conf) => {
         .enter().append('path')
         .attr('d', (d) => {
             if (d.id === 'USA' || d.id === 'CAN') {
-                const pin = priv.centroids.append('circle')
+                let pin;
+                if (d.id === 'USA') {
+                    pin = priv.centroids.append('svg:image')
                       .attr('data-toggle-target', d.id)
-                      .attr('r', '8px')
-                      .attr('fill', 'red')
+                      .attr('xlink:href', 'static/images/i_pin-good.svg')
+                      .attr('width', 30)
+                      .attr('height', 30)
                       .style('display', 'inline');
+                } else {
+                    pin = priv.centroids.append('svg:image')
+                      .attr('data-toggle-target', d.id)
+                      .attr('xlink:href', 'static/images/i_pin-has-error.svg')
+                      .attr('width', 30)
+                      .attr('height', 30)
+                      .style('display', 'inline');
+                }
 
                 priv.updatePin(pin, d);
 
