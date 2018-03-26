@@ -36,6 +36,6 @@ list-group
                   ng-bind-html=':: recommendation.rule.resolution | trust_html',
                   target-blank='')
            .text-center.border-top(ng-show='recommendation.rule.more_info')
-        recommendation-graph(ng-if='recommendation.showGraph')
+        recommendation-graph
 
     list-item-footer.more-info(collapse="!show.moreInfo")
