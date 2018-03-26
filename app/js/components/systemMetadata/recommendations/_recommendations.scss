@@ -37,6 +37,10 @@
   // this should be a grid, but the plotly graphs aren't resizing smaller when
   // resizing the screen smaller, only bigger.  This will have to do for now
 
+  .recommendation-detail {
+    @include rem('padding-right', 20px);
+  }
+
   .recommendation-detail,
   .recommendation-graph {
     display: inline-block;
