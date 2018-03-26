@@ -14,10 +14,34 @@
 
   .tabs-hack { height: 100%; }
 
-  .machine-learning-graphs {
-    display: inline-flex;
-    align-items: center;
-    height: 100%;
+  .machine-learning-graphs-container {
+    // this should be a grid, but the plotly graphs aren't resizing smaller when
+    // resizing the screen smaller, only bigger. This will have to do for now
+
+    @include media-query(sm) {
+      .ml-graph {
+        height: 240px;
+        width: 100%;
+        display: inline-block;
+      }
+    }
+
+    @include media-query(lg) {
+      .ml-graph {
+        height: 240px;
+        width: 50%;
+        display: inline-block;
+
+      }
+    }
+
+    @include media-query(xl) {
+      .ml-graph {
+        height: 240px;
+        width: 33%;
+        display: inline-block;
+      }
+    }
   }
 }
 

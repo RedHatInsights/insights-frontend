@@ -57,12 +57,10 @@ const latencyTrace = {
     }
 };
 
-const latencyData = [latencyTrace];
+const data = [latencyTrace];
 
-const latencyLayout = {
-    autosize: false,
-    width: 260,
-    height: 240,
+const layout = {
+    autosize: true,
     title: 'Network Latency',
     xaxis: {
         title: 'Latency (ms)',
@@ -96,9 +94,20 @@ const latencyLayout = {
  * @ngInject
  */
 function latencyGraphCtrl($scope, $element) {
-    const latencyNode = d3.select($element[0]).append('div').node();
+    const node = d3.select($element[0])
+        .append('div')
+        .style({
+            width: '100%',
+            height: '250px'
+        })
+        .node();
 
-    Plotly.newPlot(latencyNode, latencyData, latencyLayout, {displayModeBar: false});
+    Plotly.newPlot(node, data, layout, {displayModeBar: false});
+
+    window.addEventListener('resize', function () {
+        console.log('resizing latency');
+        Plotly.Plots.resize(node);
+    });
 }
 
 function latencyGraph() {
@@ -113,4 +122,4 @@ function latencyGraph() {
     };
 }
 
-componentsModule.directive('latencyGraph', latencyGraph);
+componentsModule.directive('latencyGraph',  ['$window', '$timeout', latencyGraph]);

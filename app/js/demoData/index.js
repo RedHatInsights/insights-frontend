@@ -2,6 +2,7 @@
 'use strict';
 
 const reports = require('./reports');
+const recommendations = require('./recommendations');
 
 const pub  = {
     vars: {
@@ -80,6 +81,7 @@ pub.getDemoSystem = (systemId) => {
         product_code: 'rhel',
         report_count: 11,
         reports: reports.getReports(),
+        recommendations: recommendations.getRecommendations(),
         acks: [],
         parent_id: null,
         stale_ack: false,

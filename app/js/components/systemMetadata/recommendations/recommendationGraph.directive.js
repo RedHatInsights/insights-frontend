@@ -4,25 +4,25 @@ const componentsModule = require('../../');
 const Plotly = require('plotly.js/lib/index');
 const d3 = Plotly.d3;
 
-let tenantMtuPoints = [];
+let accessMtuPoints = [];
 
-tenantMtuPoints.push(1235);
-tenantMtuPoints.push(1400);
+accessMtuPoints.push(1235);
+accessMtuPoints.push(1400);
 
 for (let i = 0; i < 2; i++) {
-    tenantMtuPoints.push(1425);
+    accessMtuPoints.push(1425);
 }
 
 for (let i = 0; i < 5; i++) {
-    tenantMtuPoints.push(1500);
+    accessMtuPoints.push(1500);
 }
 
 for (let i = 0; i < 90; i++) {
-    tenantMtuPoints.push(1545);
+    accessMtuPoints.push(1545);
 }
 
-const tenantMtuTrace = {
-    x: tenantMtuPoints,
+const accessMtuTrace = {
+    x: accessMtuPoints,
     name: 'MTU',
     type: 'histogram',
     autobinx: false,
@@ -40,7 +40,7 @@ const tenantMtuTrace = {
     }
 };
 
-const data = [tenantMtuTrace];
+const data = [accessMtuTrace];
 
 const layout = {
     autosize: true,
@@ -78,7 +78,7 @@ const layout = {
 /**
  * @ngInject
  */
-function tenantMtuGraphCtrl($scope, $element) {
+function recommendationGraphCtrl($scope, $element) {
     const node = d3.select($element[0])
         .append('div')
         .style({
@@ -95,17 +95,17 @@ function tenantMtuGraphCtrl($scope, $element) {
     });
 }
 
-function tenantMtuGraph() {
+function recommendationGraph() {
     return {
         templateUrl:
-            'js/components/systemOverviewGraphs/tenantMtuGraph/tenantMtuGraph.html',
+            'js/components/systemMetadata/recommendations/recommendationGraph.html',
         restrict: 'E',
         replace: true,
-        controller: tenantMtuGraphCtrl,
+        controller: recommendationGraphCtrl,
         scope: {
             data: '='
         }
     };
 }
 
-componentsModule.directive('tenantMtuGraph',  ['$window', tenantMtuGraph]);
+componentsModule.directive('recommendationGraph',  ['$window', recommendationGraph]);

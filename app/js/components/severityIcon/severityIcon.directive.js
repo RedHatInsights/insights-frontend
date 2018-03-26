@@ -41,7 +41,9 @@ function severityIconCtrl($scope, gettextCatalog) {
     priv.typeMap = {
         impact: gettextCatalog.getString('Impact'),
         likelihood: gettextCatalog.getString('Likelihood'),
-        severity: gettextCatalog.getString('Total Risk')
+        severity: gettextCatalog.getString('Total Risk'),
+        confidence: gettextCatalog.getString('Confidence'),
+        reliability: gettextCatalog.getString('Reliability')
     };
 
     // pre compute this so the digest cycles dont re-run iconClass
@@ -73,10 +75,6 @@ function severityIconCtrl($scope, gettextCatalog) {
     };
 
     $scope.getClass = (type) => {
-        if (type === 'severity') {
-            return 'total-risk';
-        }
-
         return type;
     };
 

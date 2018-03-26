@@ -5,25 +5,22 @@ const Plotly = require('plotly.js/lib/index');
 const d3 = Plotly.d3;
 
 let storageMtuPoints = [];
-for (let i = 0; i < 40; i++) {
+
+for (let i = 0; i < 2; i++) {
     storageMtuPoints.push(1500);
 }
 
 for (let i = 0; i < 3; i++) {
-    storageMtuPoints.push(2500);
+    storageMtuPoints.push(1545);
 }
 
-for (let i = 0; i < 7; i++) {
-    storageMtuPoints.push(4500);
-}
-
-for (let i = 0; i < 40; i++) {
+for (let i = 0; i < 95; i++) {
     storageMtuPoints.push(9000);
 }
 
 const storageMtuTrace = {
     x: storageMtuPoints,
-    name: 'Storage MTU',
+    name: 'MTU',
     type: 'histogram',
     autobinx: false,
     xbins: {
@@ -40,19 +37,18 @@ const storageMtuTrace = {
     }
 };
 
-const storageMtuData = [storageMtuTrace];
+const data = [storageMtuTrace];
 
-const mtuLayout = {
-    autosize: false,
-    width: 260,
-    height: 240,
-    title: 'Network Storage MTU',
+const layout = {
+    autosize: true,
+    title: 'Storage Network MTU',
     xaxis: {
         title: 'MTU Size',
         range: [0, 12000]
     },
     yaxis: {
-        title: 'Percentage'
+        title: 'Percentage',
+        range: [0, 100]
     },
     margin: {
         l: 50,
@@ -67,7 +63,7 @@ const mtuLayout = {
             x0: 9000,
             y0: -3,
             x1: 9000,
-            y1: 45,
+            y1: 103,
             line: {
                 color: 'rgb(0, 150, 0, 1)',
                 width: 2
@@ -79,9 +75,20 @@ const mtuLayout = {
  * @ngInject
  */
 function storageMtuGraphCtrl($scope, $element) {
-    const storageMtuNode = d3.select($element[0]).append('div').node();
+    const node = d3.select($element[0])
+        .append('div')
+        .style({
+            width: '100%',
+            height: '250px'
+        })
+        .node();
 
-    Plotly.newPlot(storageMtuNode, storageMtuData, mtuLayout, {displayModeBar: false});
+    Plotly.newPlot(node, data, layout, {displayModeBar: false});
+
+    window.addEventListener('resize', function () {
+        console.log('resizing storage mtu graph');
+        Plotly.Plots.resize(node);
+    });
 }
 
 function storageMtuGraph() {
@@ -97,4 +104,4 @@ function storageMtuGraph() {
     };
 }
 
-componentsModule.directive('storageMtuGraph', storageMtuGraph);
+componentsModule.directive('storageMtuGraph',  ['$window', storageMtuGraph]);

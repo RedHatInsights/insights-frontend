@@ -2,31 +2,40 @@
   .detail-part
     .spinner.spinner-lg
     | {{:: getLoadingMessage()}}
-//- .text-right
-  expand-all-button(ng-hide='!system.reports || !system.reports.length || loading.isLoading')
-p.text-center(ng-if='(!system.reports || !system.reports.length) && !loading.isLoading && !system.__fake && !errorMessage')
+p.text-center(ng-if='(!system.recommendations || !system.recommendations.length) && !loading.isLoading && !system.__fake && !errorMessage')
   span.icon.icon-inline.success
     i.fa.fa-check-circle
     span(translate) No actions
 div(ng-if='!loading.isLoading && !system.__fake && errorMessage', ng-bind-html=':: errorMessage | trust_html')
-//- rule-summary.rule-summary.system-overlay-item.content-block(report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports track by report.rule_id')
 list-group
-  list-item(expandable report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports track by report.rule_id')
+  list-item(expandable recommendation='recommendation', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='recommendation in system.recommendations track by recommendation.rule_id')
     list-item-header-expandable
       .main-info
-        incident-icon(rule-id='report.rule_id')
-        strong.title {{:: report.rule.category }} > {{:: report.rule.description }}
-        //ansible-icon(value='report.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
-        ansible-icon(value='report.rule.ansible' hide-label="true")
+        strong.title {{:: recommendation.rule.category }} > {{:: recommendation.rule.description }}
+        ansible-icon(value='recommendation.rule.ansible' hide-label="true")
       .risk-summaries.card-header-risk-summaries
-        all-severity-icons.inline(rule='report.rule')
-        risk-of-change(change-risk='report.rule.resolution_risk')
+        ml-severity-icons.inline(rule='recommendation.rule')
+        risk-of-change(label='"Optimization Potential:"' change-risk='recommendation.rule.optimization')
 
-    list-item-content
-      .flex
-        .rule-reason(md-flex-100)
-        .rule-resolution(md-flex-100)
-        .recommended-kbase(ng-if='report.rule.node_id' node='report.rule.node_id')
-        .text-center.border-top(ng-show='report.rule.more_info')
+      list-item-content.recommendation-expanded-content
+        .flex.recommendation-detail
+          .detail-part
+            h4.section-heading(translate)
+              i.fa.fa-crosshairs(aria-hidden="true") &nbsp;
+              strong(translate) Detected issues
+            .reason
+              .detail-content(ng-if="recommendation.rule.reason !== 'INSIGHTS-ERROR-INTERPOLATION'",
+              ng-bind-html=':: recommendation.rule.reason | trust_html',
+              target-blank='')
+              .detail-part
+                .detail-content.answer
+                  h4.section-heading(translate)
+                    i.fa.fa-thumbs-up(aria-hidden="true") &nbsp;
+                    strong(translate) Steps to resolve
+                  span(ng-if="recommendation.rule.resolution !== 'INSIGHTS-ERROR-INTERPOLATION'",
+                  ng-bind-html=':: recommendation.rule.resolution | trust_html',
+                  target-blank='')
+           .text-center.border-top(ng-show='recommendation.rule.more_info')
+        recommendation-graph
 
     list-item-footer.more-info(collapse="!show.moreInfo")

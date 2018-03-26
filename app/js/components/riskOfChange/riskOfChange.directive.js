@@ -7,7 +7,8 @@ function riskOfChange() {
     return {
         scope: {
             changeRisk: '<',
-            hideLabel: '<'
+            hideLabel: '<',
+            label: '<'
         },
         templateUrl: 'js/components/riskOfChange/riskOfChange.html',
         restrict: 'E',

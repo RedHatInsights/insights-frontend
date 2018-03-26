@@ -1,7 +1,6 @@
 .risk-of-change#riskOfChange
   .icon-inline
-    img.icon.icon-med.icon-risk-of-change(src="./static/images/i_risk-of-change.svg", alt="Risk of change icon", aria-hidden=true)
-    span.title(ng-hide='hideLabel') Risk of change:&nbsp;
+    span.title(ng-hide='hideLabel') {{ label || 'Risk of Change:' }}&nbsp;
     b.alert-text.alert-text-green(ng-if='changeRisk === 1', translate) Very Low
     b.alert-text.alert-text-blue(ng-if='changeRisk === 2', translate) Low
     b.alert-text.alert-text-orange(ng-if='changeRisk === 3', translate) Moderate

@@ -9,6 +9,11 @@
   flex: auto;
 }
 
+.recommendations .list-group.list-view-pf {
+  padding: 0;
+  margin: 0;
+}
+
 .recommendations .list-view-pf-main-info {
   display: grid;
   @include rem('grid-gap', $global-padding);
@@ -21,5 +26,56 @@
       grid-area: bulleye; }
     .title {grid-area: title; }
     .ansible-icon { grid-area: ansible-icon; }
+  }
+}
+
+.recommendations .list-group-item-container {
+  @include rem('margin-left', 30px);
+}
+
+.recommendations .recommendation-expanded-content {
+  // this should be a grid, but the plotly graphs aren't resizing smaller when
+  // resizing the screen smaller, only bigger.  This will have to do for now
+
+  .recommendation-detail,
+  .recommendation-graph {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  @include media-query(sm) {
+    .recommendation-detail,
+    .recommendation-graph {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  @include media-query(lg) {
+    .recommendation-detail,
+    .recommendation-graph {
+      height: 100%;
+      width: 50%;
+    }
+  }
+}
+
+.colored-box-container {
+  padding: 20px;
+  .colored-box {
+    background-color: red;
+  }
+}
+
+
+.opt-potential {
+  display: inline-block;
+
+  .alert-text { white-space: nowrap; }
+}
+
+.icon-group-severity + .opt-potential {
+  @include media-query(sm){
+    @include rem('margin-left', $global-padding/2);
   }
 }

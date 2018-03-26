@@ -16,15 +16,15 @@ function recommendationsCtrl($scope,
 
     $scope.getLoadingMessage = function () {
         if ($scope.system.toString) {
-            return gettextCatalog.getString('Loading report(s) for {{name}}…', {
+            return gettextCatalog.getString('Loading recommendation(s) for {{name}}…', {
                 name: $scope.system.toString
             });
         }
 
-        return gettextCatalog.getString('Loading report(s)…');
+        return gettextCatalog.getString('Loading recommendation(s)…');
     };
 
-    function getSystemReports() {
+    function getSystemRecommendations() {
         $scope.loading.isLoading = true;
         System.getSystemReports($scope.machineId)
             .success(function (system) {
@@ -32,13 +32,19 @@ function recommendationsCtrl($scope,
 
                 // order by severity desc, resolution_risk asc except for cases where
                 // rule_id is selected - in that case the given report goes first
-                $scope.system.reports = orderBy($scope.system.reports, [report => {
-                    if ($scope.rule_id && $scope.rule_id === report.rule_id) {
-                        return 0;
-                    }
+                $scope.system.recommendations = orderBy($scope.system.recommendations, [
+                    report => {
+                        if ($scope.rule_id && $scope.rule_id === report.rule_id) {
+                            return 0;
+                        }
 
-                    return 1;
-                }, 'rule.severityNum', 'rule.resolution_risk'], ['asc', 'desc', 'asc']);
+                        return 1;
+                    },
+
+                    'rule.severityNum', 'rule.resolution_risk'
+                ], [
+                    'asc', 'desc', 'asc'
+                ]);
 
                 $scope.loading.isLoading = false;
             })
@@ -52,7 +58,7 @@ function recommendationsCtrl($scope,
                             config);
                 }
 
-                $scope.loading.reportsLoading = false;
+                $scope.loading.recommendationsLoading = false;
             });
     }
 
@@ -70,7 +76,7 @@ function recommendationsCtrl($scope,
 
         if ($scope.system) {
             $scope.system.reports = [];
-            getSystemReports();
+            getSystemRecommendations();
         }
     }
 }
@@ -79,7 +85,7 @@ function recommendations() {
     return {
         controller: recommendationsCtrl,
         templateUrl: 'js/components/systemMetadata/recommendations/recommendations.html',
-        restrict: 'E',
+        restrict: 'EC',
         scope: {
             system: '=',
             machineId: '=',
