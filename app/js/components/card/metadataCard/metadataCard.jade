@@ -5,10 +5,10 @@
         strong {{:: system.toString }}
       .host-info
         .hostname
-          span.pficon-screen.status-icon
+          i.pficon-screen
           span {{ system.hostname }}
         .status-check
-          span.fa.fa-clock-o.status-icon
+          i.fa.fa-clock-o
           span.hostname Last Check: {{::system.last_check_in | timeAgo }}
 
       .card-pf-top-element

@@ -475,14 +475,19 @@ $card-footer: "md-card-footer";
 	padding-top: 10px;
 }
 
-.status-icon {
-	margin-right: 12px;
+.status-icon + .status-icon {
+	@include rem('margin-left', 15px);
 }
 
 .host-info {
 	font-size: 12px;
 	margin: 0 auto;
 	width: fit-content;
+  //i { @include rem('margin-right', 10px); }
+}
+
+.host-info, .reliability-status {
+  i { @include rem('margin-right', 10px); }
 }
 
 .card-pf-items.status-list {
