@@ -6,9 +6,9 @@ const d3 = require('d3');
 const topojson = require('topojson');
 const world = require('./dashboardMap.json');
 const pinLocations = {
-    USA: { issues: true,  offset: [  30, -30 ] },
-    CAN: { issues: false, offset: [ -50, -190 ] },
-    DEU: { issues: false, offset: [  25,  45 ] }
+    USA: {issues: true,  offset: [30, -30]},
+    CAN: {issues: false, offset: [-50, -190]},
+    DEU: {issues: false, offset: [25, 45]}
 };
 
 const priv = {
