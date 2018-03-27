@@ -8,7 +8,7 @@ constantsModule.constant('DemoData', {
     systems: {
         "resources": [
             {
-                "toString": "apache0.us-east.redhat.com",
+                "toString": "apache0.us-west.redhat.com",
                 "isCheckingIn": true,
                 "system_id": "d18df352-7ac6-5754-a211-593f23f02ad3",
                 "display_name": null,
