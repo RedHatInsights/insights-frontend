@@ -80,12 +80,20 @@ section.grid-pmaas .c3-legend-item {
 }
 
 
+/* Inventory
+/* ================================================================== */
+.page-inventory {
+  .data-filters { margin-bottom: 0; }
+  section.content { padding-top: 0; }
+}
+
+
 /* Deployments
 /* ================================================================== */
 section.ins-l-pmaas-deployments {
   display: grid;
   grid-rows: 2;
-  
+
   .ins-l-pmaas-deployments_cards {
     @include build-grid(md 1fr 1fr, lg 1fr 1fr 1fr 1fr);
     .c3-chart-arc text { display: none; }
@@ -96,6 +104,7 @@ section.ins-l-pmaas-deployments {
       display: grid;
       grid-template-columns: min-content 1fr 5fr;
       i { @include rem('margin-right', 15px); }
+      b { @include rem('margin-right', 5px); }
     }
 
     text.c3-chart-arcs-title {

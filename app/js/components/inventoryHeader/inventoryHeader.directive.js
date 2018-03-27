@@ -5,7 +5,7 @@ const componentsModule = require('../');
 const keyBy = require('lodash/keyBy');
 const c3 = require('c3');
 const d3 = require('d3');
-const donutSize = 60;
+const donutSize = 55;
 const donutThickness = 5;
 
 const donutVals     = {

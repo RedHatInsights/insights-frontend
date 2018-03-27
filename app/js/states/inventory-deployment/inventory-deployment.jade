@@ -94,7 +94,7 @@
 
     .row.row-short(ng-if='!loading')
       .col-sm-12
-        pagination.pull-right.pagination-blue(
+        pagination.pull-right(
           ng-if="totalSystems() > pager.perPage",
           total-items="totalSystems()",
           ng-model="pager.currentPage",
