@@ -202,9 +202,13 @@ function InventoryDeploymentCtrl(
             // K.I.S.S. Order hack for the demo
             for (const system of response.resources) {
                 system.order = 0;
+
                 if (system.optimization === 'high') { system.order = 3; }
+
                 if (system.optimization === 'moderate') { system.order = 2; }
+
                 if (system.optimization === 'low') { system.order = 1; }
+
             }
 
             $scope.systems = response.resources;
