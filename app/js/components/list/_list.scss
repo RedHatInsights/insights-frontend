@@ -9,34 +9,49 @@
 /* Vars
 /* ================================================================== */
 :root {
-  --list-group-item-header-padding: $global-padding;
+  --list-group-item-header--Padding: $global-padding;
 }
 
 /* List group
 /* ================================================================== */
 .list-group.list-view-pf {
-  @include rem('padding', $global-margin);
+  @include rem('padding', $global-padding);
   background: #f5f5f5;
+}
+
+
+
+.list-group-item-container {
+  @include build-grid(grid-gap $global-margin);
+  padding: var(--global-margin);
+  margin: 0;
 }
 
 
 /* List item base
 /* ================================================================== */
+.list-group-item {
+  padding: 0;
+}
 
 
 /* List item header
 /* ================================================================== */
+.list-group-item-header {
+  padding: $global-padding;
+  margin: 0;
+}
 
 
 /* List item header expandable
 /* ================================================================== */
 .list-group-item-header.list-group-item-header--Expandable {
-  display: flex;
   align-items: first baseline;
-  padding: var(--list-group-item-header-padding) calc(#{var(--list-group-item-header-padding)}/2);
+  padding: $global-padding;
+  @include build-grid(grid-gap $global-padding, max-content auto);
 
   > * {
-    margin: 0 calc(calc(#{var(--list-group-item-header-padding)}/2);
+    margin: 0 var(--list-group-item-header--Padding);
   }
 }
 

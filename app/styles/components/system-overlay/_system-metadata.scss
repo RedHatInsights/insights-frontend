@@ -138,7 +138,7 @@ system-metadata { display: block; }
 
 
 .ins-l-system-metadata {
-    @include build-grid(md max-content 1fr);
+    @include build-grid(sm 1fr, md max-content 1fr);
     grid-template-rows: auto;
 }
 

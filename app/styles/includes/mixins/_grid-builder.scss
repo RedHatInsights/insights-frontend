@@ -44,6 +44,12 @@ body {
   height: 100%;
 }
 
+
+// Base variables
+$global-grid-gap: $global-margin;
+$global-grid-padding: $global-grid-gap;
+
+
 // Breakpoints
 $sm: 768px;
 $md: 992px;
@@ -77,54 +83,81 @@ $xl: 1440px;
 }
 
 
-/* Mixin: assign-cols
-/* Purpose: Define grid template values
-/* Options: responsive || non-responsive
-/* Usage: @include assign-rows();
-/* ================================================================== */
-@mixin assign-cols($values, $breakpoint: null, $responsive: null) {
+.cell {
+  padding: 1rem;
+  background: lightgray;
+}
 
-  // If not responsive
-  @if $responsive == null {
-    grid-template-columns: $values;
-  } 
 
-  // If responsive
-  @else {
-    @include media-query($breakpoint) {
-      grid-template-columns: $values;
-    }
+// Replace matching string
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  @if $index { @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace); }
+  @return $string;
+}
+
+
+// Grid 
+$grid-map: (
+  list-eval-responsive: (
+    sm, 
+    md, 
+    lg, 
+    xl
+  ),
+  list-eval-property: (
+    grid-gap, 
+    repeat, 
+    padding
+  ),
+  list-eval-keyword: (
+    auto, 
+    min-content, 
+    max-content
+  ),
+  list-eval-rows: (
+    rows-sm, 
+    rows-md, 
+    rows-lg, 
+    row-xl
+  )
+);
+
+$row-map: (
+  
+);
+
+// Check for value in list
+@function list-contains($list, $var) {
+  @if index($list, $var) { 
+    @return true; 
+  } @else { 
+    @return false 
+  };
+}
+
+
+// Build classnames e.g. col-pf- + 1 + sm
+@function construct-type($arg) {
+  @return is + str-replace($arg, 'list-eval', '');
+}
+
+
+// If list has values
+@function is-valid-list($value-count, $list: ()) {
+  @if length($list) > $value-count {
+    @return true;
+  } @else {
+    @warn 'mixin build-grid: Argument in argument list must contain at least two values';
   }
 }
 
 
-/* Mixin: assign-rows
-/* Purpose: Define grid template rows
-/* Options: responsive || non-responsive
-/* Usage: @include assign-rows();
-/* ================================================================== */
-@mixin assign-rows($rows, $breakpoint: null, $responsive: null) {
+// Assign values
+@mixin assign-values($prop, $val, $breakpoint: null) {
   // If not responsive
-  @if $responsive == null { grid-template-rows: $rows; } 
-
-  // If responsive
-  @else {
-    @include media-query($breakpoint) {
-      grid-template-rows: $rows;
-    }
-  }
-}
-
-
-/* Mixin: assign-value
-/* Purpose: Define grid template rows
-/* Options: responsive || non-responsive
-/* Usage: @include assign-rows();
-/* ================================================================== */
-@mixin assign-value($prop, $val, $breakpoint: null, $responsive: null) {
-  // If not responsive
-  @if $responsive == null { 
-    #{$prop}: $val; 
+  @if $breakpoint == null { 
+    #{$prop}: $val;
   } 
 
   // If responsive
@@ -135,250 +168,152 @@ $xl: 1440px;
   }
 }
 
-/* Function: string replace
-/* Purpose: Remove strings from string, e.g. remove 'sm, md, lg, xl' from list argument
-/* Options: none
-/* Usage: str-replace($source-string, 'matching-term', 'new-string');
-/* ================================================================== */
-@function str-replace($string, $search, $replace: '') {
-  $index: str-index($string, $search);
-  
-  @if $index {
-    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+
+// If value is a number has a unit
+@function is-valid-number($val) {
+  @if type-of($val) == number and not unitless($val) {
+    @return true; 
+  } @else {
+    @return false;
   }
-  
-  @return $string;
 }
 
 
-/* Function: increment value
-/* Purpose: simple function that increments value
-/* Options: none
-/* Usage: $val: increment($val);
-/* ================================================================== */
-@function increment($val){
+// Increment value
+@function increment($val) {
   $val: $val + 1;
   @return $val;
-};
+}
 
 
-/* Mixin: evaluate-values
-/* Purpose: Loop through arglist items and evaluate
-/* Options: 
-/* Usage: 
-/* ================================================================== */
-@mixin evaluate-list ($values, $first-numeric-index: 1, $breakpoint: null, $responsive: null) {
-  // We'll use this to evaluate whether or not arglist arguments are preceeded with a responsive value
-  // Local vars
-  $first-numeric-value: 1; // value to evaluate
-  $first-value: nth($values, $first-numeric-value); // value to evaluate
+// Find type of requested value
+@function evaluate-type($value, $list: ()) {
+  @each $key, $prop in $grid-map {
+    @if list-contains($prop, $value) { 
+      @return construct-type($key);
+    } 
+  }
+
+  @if length($list == 0) {
+    @return false;
+  }
+}
+
+
+// Find type of requested value
+@function evaluate-type2($value) {
+  @if type-of($value) == number and not unitless($value) {
+    @return 'is-number-and-unit';
+  }
+  @else if type-of($value) == number and unitless($value) {
+    @return 'is-unitless-number';
+  } @else {
+    @each $key, $prop in $grid-map {
+      @if list-contains($prop, $value) { 
+        @return construct-type($key);
+      }
+    }
+  }
+
+  @return false;
+}
+
+
+
+@mixin return-values($arg, $index: 1, $breakpoint: null, $prop: 'grid-template-columns', $val: 1fr, $is-responsive: null, $list: ()) {
+  $length: length($arg);
+
+  $type: evaluate-type2(nth($arg,$index));
+  $is-responsive: if($type == is-responsive, true, false);
   
-  
-  /* Test for responsive
-  /* ================================================================== */
-  
-  // True: if $arg is preceeded with a responsive value, if so increment first-numeric-value
-  @if $first-value == grid-gap or $first-value == repeat or $first-value == padding {
-    $first-numeric-index: 2;
-    $first-numeric-value: nth($values, $first-numeric-index);
-    $breakpoint: null;
-    $responsive: null;
+  @if $is-responsive and $length > 1 {
+    $breakpoint: nth($arg, 1);
+    $is-responsive: true;
+    $index: $index + 1;
+    $type: evaluate-type2(nth($arg,$index));
   }
   
-  @else if $first-value == sm or $first-value == md or $first-value == lg or $first-value == xl or $first-value == rows-sm or $first-value == rows-md or $first-value == rows-lg or $first-value == rows-xl {
-    $responsive: true;
-    $first-numeric-index: increment($first-numeric-index);
-    $first-numeric-value: nth($values, $first-numeric-index);
-    $breakpoint: $first-value;
 
-    // If first arg = sm,md,lg,xl,rows-sm,rows-md,rows-lg, rows-xl second arg = grid-gap, repeat, pad
-    @if $first-numeric-value == grid-gap or $first-numeric-value == repeat or $first-numeric-value == padding {
-      $first-numeric-index: increment($first-numeric-index);
-      // @warn $first-numeric-value;
-      $first-numeric-value: nth($values, $first-numeric-index);
-      $first-value: nth($values, 2);
+  $is-property: if($type == is-property, true, false);
+  $is-number: if($type == is-number-and-unit, true, false);
+  $is-unitless-number: if($type == is-unitless-number, true, false);
+  $is-empty: if($arg == null, true, false);
+  $is-repeat: if(nth($arg, $index) == repeat, true, false);
+
+  
+  @if $is-property and not $is-repeat {
+    @if ($is-responsive and $length != 3) or (not $is-responsive and $length != 2) {
+      @warn 'Incorrect number of arguments. Grid-gap and padding have only one numeric value. e.g. grid-gap 20px.'
+    } 
+    
+    @else {
+      $prop: nth($arg, $index);
+      $index: $index + 1;
+      $val: nth($arg, $index);
+      
+      @if evaluate-type2($val) == is-number-and-unit { $val: nth($arg, $index); }
+      @else { @warn $val 'Value must be numeric with unit assignment'; }
     }
+  }
+  
+  @if $is-repeat {
+    @if ($is-responsive and $length != 4) or (not $is-responsive and $length != 3) {
+      @warn 'Repeat requires two numeric values. The first value is unitless, second value has unit assignment.';
+    } 
+    
+    @else {
+      $prop: 'grid-template-columns';
+      $index: $index + 1;
+
+      @for $i from $index through $length { 
+        $list: append($list, nth($arg, $i)); 
+      }       
+      
+      @if length($list) == 2 and evaluate-type2(nth($list, 1)) == is-unitless-number and evaluate-type2(nth($list, 2)) == is-number-and-unit {
+        $val: repeat(#{nth($list, 1)}, #{nth($list, 2)});
+      }
+      
+      @else {
+        @warn 'First value for repeat must be unitless, the second value must be numeric with a unit assignment. e.g. repeat 2 1fr';
+      }
+    }
+  }
+
+  @else if evaluate-type2(nth($arg, $index)) == is-number-and-unit or evaluate-type2(nth($arg, $index)) == is-keyword {
+    
+    @for $i from $index through length($arg) {
+      $val: nth($arg, $i);
+      $list: append($list, $val);
+    }
+    
+    $val: $list;    
   } 
-
-  // False: leave/reset $breakpoint, $responsive variabless
-  @else {
-    $breakpoint: null;
-    $responsive: null;
-  }
-
-
-  /* If first value = grid-gap or padding
-  /* ================================================================== */
-  @if $first-value == grid-gap or $first-value == padding {
-    @include assign-value($first-value, $first-numeric-value, $breakpoint, $responsive);
-  }
-
   
-  /* Else/If first value = repeat
-  /* ================================================================== */
-  @else if $first-value == repeat {
-    $val: repeat($first-numeric-value, 1fr);
-    @include assign-value(grid-template-columns, $val, $breakpoint, $responsive);
-  }   
-
-  
-  /* Else/If values has breakpoint value
-  /* ================================================================== */
-  @else if $first-value == rows-sm or $first-value == rows-md or $first-value == rows-lg or $first-value == rows-xl {
-    $breakpoint: str-replace($first-value, 'rows-', '');
-    
-    // Create empty list
-    $list: ();
-
-    @for $i from $first-numeric-index through length($values) {
-      $val: nth($values, $i);
-
-      @if type-of($val) == number and unitless($val) and $val != auto and $val != max-content and $val != min-content {
-        @warn 'Missing unit value for: "' + $val + 
-        '" If explicitly defining grid values, a unit must be included ';
-      } 
-
-      $list: append($list, $val);
-    }
-
-    @include assign-value(grid-template-rows, $list, $breakpoint, $responsive); 
-  }
-  
-  
-  /* Else/If values are set explicitly and have unit assignment
-  /* ================================================================== */
-  @else if type-of($first-numeric-value) == number or $first-numeric-value == auto or $first-numeric-value == min-content or $first-numeric-value == max-content {
-
-    // Create empty list
-    $list: ();
-
-    @for $i from $first-numeric-index through length($values) {
-      $val: nth($values, $i);
-
-      @if type-of($val) == number and unitless($val) and $val != auto and $val != max-content and $val != min-content {
-        @warn 'Missing unit value for: "' + $val + 
-        '" If explicitly defining grid values, a unit must be included ';
-      } 
-
-      $list: append($list, $val);
-    }     
-
-    @include assign-value(grid-template-columns, $list, $breakpoint, $responsive); // Apply
-  }
+  @include assign-values($prop, $val, $breakpoint);
 }
 
 
-/* Mixin: build-grid
-/* Purpose: Set base styling for grids, pass in comma separated arglist
-/* Usage: @include build-grid();
-/* ================================================================== */
 @mixin build-grid($args...) {
-
-  // Base styling
   display: grid;
-  grid-gap: var(--global-grid-gap);
-  padding: var(--global-margin);
+  grid-gap: $global-grid-gap;
+  padding: $global-grid-padding;
   box-sizing: border-box;
-
-  // Call 
-  @each $arg in $args { 
-    @include evaluate-list($arg); 
-  }
+    
+  @each $arg in $args {
+    @include return-values($arg); 
+  } 
 }
 
-.cell {
-  padding: 1rem;
-  background: lightgray;
+// Usage: grid cell
+@mixin grid-rows() {
+  
+} 
+
+
+
+.build-me {
+
+  // @include build-grid(repeat 2 1fr, grid-gap 120px, sm grid-gap 40px);
+  height: 100%;
 }
-
-
-
-
-/* Usage
-/* ================================================================== */
-
-
-
-
-
-// // build classnames e.g. col-pf- + 1 + sm
-// @function construct-classname($i, $classname, $breakpoint: null) {
-//   @if $breakpoint == null { @return $classname + '-' + $i; }
-//   @else { @return $classname + '-' + $i + '-' + $breakpoint; }
-// }
-
-
-// // Emit values
-// @mixin emit-props($i, $map, $increment: false) {
-//   @if $map has-values() {
-//     @each $key, $value in $map {
-//       @if $increment == true { #{$key}: #{$value} $i; } 
-//       @else { #{$key}: #{$value}; }
-//     }
-//   }
-// }
-
-
-// CSS output + incremental values
-// @mixin print-declarations($i, $classname, $orientation, $map, $base-properties: (), $incremental-properties: (), $override-defaults: null) {
-
-//   @if map-has-key($map, base-properties) { $base-properties: map-get($map, base-properties); } 
-//   @if map-has-key($map, incremental-properties) { $incremental-properties: map-get($map, incremental-properties); }
-//   @if length($base-properties) > 0 { $override-defaults: true; }
-
-//   .#{$classname} {
-    
-//     // Fallbacks if no base or incremental styling is defined
-//     $base-style: map-get($base-style, #{$orientation}-base-properties);
-//     $incremental-style: map-get($incremental-style, #{$orientation}-incremental-properties);
-
-//     // Loop through each definition in base style
-//     @include emit-props($i, $base-style, false);
-    
-//     // Loop through each definition in base style
-//     @include emit-props($i, $incremental-style, true);
-    
-//     // If user has defined custom base styling
-//     @if $override-defaults {
-//       @include emit-props($i, $base-properties, false);
-//       @include emit-props($i, $incremental-properties, true);
-//     }
-//   }
-// }
-
-
-// // Loop through 
-// @mixin loop($classname, $orientation, $map, $start-at, $count, $breakpoint) {
-//   @for $i from $start-at through $count {
-//     $new-name: construct-classname($i, $classname, $breakpoint);
-//     @include print-declarations($i, $new-name, $orientation, $map);
-//   }
-// }
-
-
-// // Init
-// @mixin pf-create-grid-item($map, $count: 12, $orientation: column, $rowspan: 0, $offset: 0, $start-at: 1, $breakpoints: null) {
-//   $index: 1;
-//   $classname: '';
-  
-//   // If a map is passed as name
-//   @if type-of($map) == 'map' {
-//     $classname: map-get($map, name);
-//     $orientation: map-get($map, orientation);
-//     $count: map-get($map, count);
-    
-//     @if map-has-key($map, breakpoints) { $breakpoints: map-get($map, breakpoints); }
-//     @if map-has-key($map, start-at) { $start-at: map-get($map, start-at); }
-//   } 
-  
-//   @else { $classname: $map; }
-  
-//   @include loop($classname, $orientation, $map, $start-at, $count, null);
-
-//   @each $breakpoint in $breakpoints {
-//     @include media-query($breakpoint) {
-//       @include loop($classname, $orientation, $map, $start-at, $count, $breakpoint);
-//     }
-//   }
-// }
 

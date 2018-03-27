@@ -225,7 +225,6 @@
 }
 
 .detail-part {
-  @include rem('margin-bottom', 22px);
   position: relative;
 
   .detail-content { @include font-size(13px, 26px); }
