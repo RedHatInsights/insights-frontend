@@ -1,0 +1,36 @@
+section.deployment-header
+  .page-title
+    h1
+      span.text(translate) {{:: nameTranslated}}
+    h2
+      span.text(translate) {{:: regionTranslated}}
+      span.text(translate) {{:: typeTranslated}}
+
+  .donut-charts
+    .header-donut-chart
+      .chart.chart-vulnerability
+      .chart-info
+        .chart-title {{charts.vulnerability.name}}
+        b {{charts.vulnerability.title}} &nbsp;
+        span Secure
+
+    .header-donut-chart
+      .chart.chart-compliance
+      .chart-info
+        .chart-title {{charts.compliance.name}}
+        b {{charts.compliance.title}} &nbsp;
+        span Compliant
+
+    .header-donut-chart
+      .chart.chart-advisor
+      .chart-info
+        .chart-title {{charts.advisor.name}}
+        b {{charts.advisor.title}} &nbsp;
+        span Optimized
+
+    .header-donut-chart
+      .chart.chart-subscription
+      .chart-info
+        .chart-title {{charts.subscription.name}}
+        b {{charts.subscription.title}} &nbsp;
+        span Utilized
