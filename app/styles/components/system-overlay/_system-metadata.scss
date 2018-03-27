@@ -148,3 +148,46 @@ system-metadata { display: block; }
     grid-column: span 2;
   }
 }
+
+
+.ins-l-system__metadata-list-header .list-view-pf-main-info {
+  display: grid;
+  @include rem('grid-gap', $global-padding); 
+  align-items: first baseline;
+  
+  grid-template-columns: auto max-content;
+
+  // @include media-query(xl) {
+  //   grid-template-columns: 4fr 4fr max-content;
+  // }
+
+  @media screen and (min-width: 1900px) {
+
+    > *:nth-child(2) {
+      order: 3;
+    }
+
+    > *:nth-child(3) {
+      order: 2;
+    }  
+  }
+
+  // @media screen and (min-width: 2200px) {
+  //   grid-template-columns: 9fr 4fr max-content;
+  // }
+}
+
+
+.ins-l-system__metadata-list-header.ins-tab__rule-summary .list-view-pf-main-info {
+
+  @media screen and (min-width: 1900px) {
+    grid-template-columns: 7fr 4fr max-content;
+  }
+}
+
+.ins-l-system__metadata-list-header.ins-tab__recommendations .list-view-pf-main-info {
+
+  @media screen and (min-width: 1900px) {
+    grid-template-columns: 7fr 5fr max-content;
+  }
+}
