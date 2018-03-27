@@ -115,7 +115,7 @@
   grid-column: span 2;
 
   .percentile-title {
-    margin: 1.875rem 0 1.875rem 1.875rem;
+    margin: 1.875rem 0 0 1.875rem;
   }
 
   @include media-query(xl) {
