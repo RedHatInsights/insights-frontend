@@ -50,7 +50,7 @@ const layout = {
         range: [500, 2000]
     },
     yaxis: {
-        title: 'Percentage',
+        title: '% of Total Systems',
         range: [0, 100]
 
     },
@@ -64,9 +64,9 @@ const layout = {
     shapes: [
         {
             type: 'line',
-            x0: 800,
-            y0: -3,
-            x1: 800,
+            x0: 950,
+            y0: -20,
+            x1: 950,
             y1: 103,
             line: {
                 color: 'rgb(200, 0, 0, 1)',

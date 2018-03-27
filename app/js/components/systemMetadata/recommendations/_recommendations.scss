@@ -39,6 +39,14 @@
 
   .recommendation-detail {
     @include rem('padding-right', 20px);
+
+    //.section-heading {
+    //  @include rem('margin-top', $global-padding);
+    //}
+  }
+
+  .recommendation-graph .svg-container {
+    width: 100% !important;
   }
 
   .recommendation-detail,

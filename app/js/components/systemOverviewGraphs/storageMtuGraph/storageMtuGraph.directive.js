@@ -47,7 +47,7 @@ const layout = {
         range: [0, 12000]
     },
     yaxis: {
-        title: 'Percentage',
+        title: '% of Total Systems',
         range: [0, 100]
     },
     margin: {
@@ -61,7 +61,7 @@ const layout = {
         {
             type: 'line',
             x0: 9000,
-            y0: -3,
+            y0: -9,
             x1: 9000,
             y1: 103,
             line: {

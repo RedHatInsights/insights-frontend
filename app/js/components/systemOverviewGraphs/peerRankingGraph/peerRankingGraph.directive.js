@@ -13,7 +13,7 @@ for (let i = -13; i <= 0; i++) {
 }
 
 const sampleTrace = {
-    name: 'Ranking',
+    name: 'System',
     type: 'scatter',
     mode: 'lines',
     x: timeArray,
