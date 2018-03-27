@@ -34,6 +34,16 @@
   padding: 0;
 }
 
+.list-group-item.expanded {
+  border: solid 1px #bbb;
+  box-shadow: 0 2px 6px rgba(3,3,3,.2);
+  z-index: 99;
+
+  .list-group-item-header {
+    background: #edf8ff;
+  }
+}
+
 
 /* List item header
 /* ================================================================== */
@@ -49,10 +59,6 @@
   align-items: first baseline;
   padding: $global-padding;
   @include build-grid(grid-gap $global-padding, max-content auto);
-
-  > * {
-    margin: 0 var(--list-group-item-header--Padding);
-  }
 }
 
 .list-view-pf-expand {

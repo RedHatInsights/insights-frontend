@@ -43,3 +43,11 @@ topbar .home-link md-icon {
 topbar .home-link .st0 {
   fill: #fff;
 }
+
+topbar .navbar-toggle {
+  &:hover,
+  &:active,
+  &:focus {
+    background: none;
+  }
+}

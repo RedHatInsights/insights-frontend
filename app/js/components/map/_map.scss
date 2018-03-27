@@ -1,0 +1,43 @@
+.ins-l-pmaas-map .map {
+  position: relative;
+
+}
+
+// .ins-l-pmaas-map .page-header .c3-chart-arcs {
+//   display: grid;
+//   background: blue;
+// }
+
+.ins-l-pmaas-map .c3-chart-arcs text { 
+  display: none;
+}
+
+.ins-l-pmaas-map .page-header {
+  @include build-grid(repeat 2 1fr, sm repeat 4 1fr, lg auto max-content max-content max-content max-content);
+  grid-template-rows: max-content max-content;
+  align-items: center;
+  box-sizing: border-box;
+
+  @include media-query(lg) { grid-template-rows: max-content; }
+
+  .button-group {
+    grid-column: span 2;
+
+    @include media-query(sm) { grid-column: span 4; }
+    @include media-query(lg) { grid-column: unset; }
+  }
+}
+
+.header-donut-chart {
+  display: grid;
+  grid-template-columns: min-content auto;
+  align-items: center;
+  @include font-size(12px, 1);
+
+  .chart-title { text-transform: capitalize; }
+  .chart-info > * { margin: 2px 0; }
+}
+
+.ins-l-pmaas-map .page-header {
+  padding: $global-padding;
+}

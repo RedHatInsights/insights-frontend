@@ -6,7 +6,7 @@ const keyBy = require('lodash/keyBy');
 const c3 = require('c3');
 const d3 = require('d3');
 const donutSize = 180;
-const donutThickness = 13;
+const donutThickness = 8;
 
 const donutVals     = {
     size: {

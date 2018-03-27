@@ -1,5 +1,15 @@
 $bg-dark-header: #4c4c4c;
 
+.fa.alert-success {
+	color: #3f9c35;
+	background: none;
+}
+
+.fa.alert-danger {
+	color: #c00;
+	background: none;
+}
+
 .alert.alert-danger {
 	background: rgba(204,0,0,.8);
 	color: #fff;

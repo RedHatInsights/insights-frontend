@@ -2,6 +2,7 @@
 'use strict';
 
 const statesModule = require('../../');
+const keyBy = require('lodash/keyBy');
 const d3 = require('d3');
 const topojson = require('topojson');
 const world = require('./dashboardMap.json');
@@ -16,7 +17,89 @@ const priv = {
     slast: null,
     pins: []
 };
+const c3 = require('c3');
+const donutSize = 50;
+const donutThickness = 4;
 
+const donutVals     = {
+    size: {
+        width: donutSize,
+        height: donutSize
+    },
+    donut: { width: donutThickness },
+    data: { type: 'donut' },
+    legend: { show: false }
+};
+
+function donutSettings(obj) {
+    return Object.assign({}, donutVals, obj);
+}
+
+const charts = [
+    {
+        name: 'vulnerability',
+        columns: [
+            ['Secure systems', 982],
+            ['Vulnerable systems', 218]
+        ],
+        title: '82%',
+        color: {
+            pattern: [
+                '#0088CE',
+                '#d1d1d1'
+            ]
+        }
+    },
+
+    {
+        name: 'compliance',
+        columns: [
+            ['Compliant systems', 816],
+            ['Noncompliant systems', 384]
+        ],
+        title: '68%',
+        color: {
+            pattern: [
+                '#0088CE',
+                '#d1d1d1'
+            ]
+        }
+    },
+
+    {
+        name: 'advisor',
+        columns: [
+            ['Rules evaluated', 90],
+            ['Rules passed', 65]
+        ],
+        title: '58%',
+        color: {
+            pattern: [
+                '#0088CE',
+                '#d1d1d1'
+            ]
+        }
+    },
+
+    {
+        name: 'subscription',
+        columns: [
+            ['RHEL', 1050],
+            ['Openshift', 100],
+            ['Openstack', 50],
+            ['Available', 25]
+        ],
+        title: '98%',
+        color: {
+            pattern: [
+                '#cc0000',
+                '#0088CE',
+                '#2d7623',
+                '#d1d1d1'
+            ]
+        }
+    }
+];
 // returns the angle in degrees between two points on the map
 // used for the x tranlation for infinite scroll
 // const getAngle = (p1, p2) => (Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180) / Math.PI;
@@ -141,12 +224,68 @@ priv.redraw = () => {
     priv.svg.selectAll('path').attr('d', priv.path);
 };
 
-function DashboardMapCtrl($timeout) {
+
+function generateCharts(chartData) {
+    for (const data of chartData) {
+        c3.generate(donutSettings({
+            bindto: `.chart-${data.name}`,
+            data: {
+                columns: data.columns,
+                type: 'donut',
+                labels: false
+            },
+            donut: {
+                title: data.title,
+                width: donutThickness
+            },
+            color: data.color
+        }));
+    }
+}
+
+
+function DashboardMapCtrl($timeout, $scope) {
     $timeout(() => {
         priv.init(priv.getConf());
     }, 0.25);
 
     window.onresize = () => priv.reInit(priv.getConf());
+
+    $scope.charts = keyBy(charts, 'name');
+    generateCharts(charts);
+
+    d3.select('.chart-vulnerability').select('.c3-chart-arcs-title')
+        .append('tspan')
+        .attr('dy', 25)
+        .attr('x', 0)
+        .text('Secure');
+
+    d3.select('.chart-compliance').select('.c3-chart-arcs-title')
+        .append('tspan')
+        .attr('dy', 25)
+        .attr('x', 0)
+        .text('Compliant');
+
+    d3.select('.chart-advisor').select('.c3-chart-arcs-title')
+        .append('tspan')
+        .attr('dy', 25)
+        .attr('x', 0)
+        .text('Optimized');
+
+    d3.select('.chart-subscription').select('.c3-chart-arcs-title')
+        .append('tspan')
+        .attr('dy', 25)
+        .attr('x', 0)
+        .text('Utilized');
+
+    d3.select('.container')
+        .insert('div', '.chart')
+        .attr('class', 'legend')
+        .selectAll('span')
+        .data(['data1', 'data2', 'data3'])
+        .enter().append('span')
+        .attr('data-id', function (id) { return id; })
+        .html(function (id) { return id; });  
 }
 
 statesModule.controller('DashboardMapCtrl', DashboardMapCtrl);

@@ -27,6 +27,10 @@ h2.headline {
   font-weight: 100;
 }
 
+.subtitle {
+  text-transform: uppercase;
+}
+
 .headline.headline-medium {
   @include font-size(32px);
 }

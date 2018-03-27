@@ -9,30 +9,79 @@
       button.button-default.button-lg.button-strong Virtual
       button.button-default.button-lg.button-strong Physical
 
+    .header-donut-chart
+      .chart.chart-vulnerability
+      .chart-info
+        .chart-title {{charts.vulnerability.name}}
+        b {{charts.vulnerability.title}} &nbsp;
+        span Secure
+
+    .header-donut-chart
+      .chart.chart-compliance
+      .chart-info
+        .chart-title {{charts.compliance.name}}
+        b {{charts.compliance.title}} &nbsp;
+        span Compliant
+    
+    .header-donut-chart
+      .chart.chart-advisor
+      .chart-info
+        .chart-title {{charts.advisor.name}}
+        b {{charts.advisor.title}} &nbsp;
+        span Optimized
+
+    .header-donut-chart
+      .chart.chart-subscription
+      .chart-info
+        .chart-title {{charts.subscription.name}}
+        b {{charts.subscription.title}} &nbsp;
+        span Utilized
+
+
   // Content
   section.content.pmaas-map
     .map#map
-    nav.ins-c-map-nav(ng-class="{'ins-c-map-nav--is-collapsed': navCollapsed}")
+      zoom
+        .zoom-in
+        .zoon-out
       .view-toggle
         button.button-sm
           i.fa.fa-list
         button.button-sm
           i.fa.fa-globe
-            
-      button.toggle-map(ng-click="navCollapsed = !navCollapsed") toggle
-      ul
+    nav.ins-c-map-nav(ng-class="{'ins-c-map-nav--is-collapsed': navCollapsed}")
+      header
+        .header-info
+          h3.header-title Deployments
+          .count
+            span.num 1
+            i.fa.fa-check-circle.alert-success
+          .count
+            span.num 1
+            i.fa.fa-times-circle.alert-danger
+
+        button.toggle-map(ng-click="navCollapsed = !navCollapsed")
+          i.fa.fa-angle-double-left
+
+      ul.list-deployments
         li 
-          .group-list
-            div Self-Service Cloud
-            span Azure Europe | OpenShift
+          a.list-group(ui-sref="app.dashboard-deployment")
+            i.fa.fa-check-circle.alert-success
+            span.title Self-Service Cloud
+            span.subtitle 
+              b Azure Europe | OpenShift
         li
-          .group-list
-            div Summit Demo
-            span Private Cloud | OpenStack & OpenShift
+          a.list-group(ui-sref="app.dashboard-deployment")
+            i.fa.fa-times-circle.alert-danger
+            span.title Summit Demo
+            span.subtitle 
+              b Private Cloud | OpenStack & OpenShift
         li
-          .group-list
-            div Summit Demo
-            span aws East | OpenShift
+          a.list-group(ui-sref="app.dashboard-deployment")
+            i.fa.fa-check-circle.alert-success
+            span.title Summit Demo
+            span.subtitle 
+              b aws East | OpenShift
       //- button.button-default.button-lg.button-strong All
       //- button.button-default.button-lg.button-strong Public Cloud
       //- button.button-default.button-lg.button-strong Private Cloud

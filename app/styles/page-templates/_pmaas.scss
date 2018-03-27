@@ -50,10 +50,6 @@ section.grid-pmaas .c3-legend-item {
   height: 100%;
 }
 
-.ins-l-pmaas-map .page-header {
-  padding: var(--global-padding);
-  padding: $global-padding;
-}
 
 .ins-l-pmaas-map .page-header + section.content { padding: 0; }
 
@@ -79,7 +75,7 @@ section.grid-pmaas .c3-legend-item {
   > svg {
     width: 100%;
     max-height: 100%;
-    
+
     path {
       fill: #fff;
       opacity: .2;
@@ -94,6 +90,7 @@ section.grid-pmaas .c3-legend-item {
 section.ins-l-pmaas-deployments {
   display: grid;
   grid-rows: 2;
+  
   .ins-l-pmaas-deployments_cards {
     @include build-grid(md 1fr 1fr, lg 1fr 1fr 1fr 1fr);
     .c3-chart-arc text { display: none; }

@@ -4,6 +4,13 @@
 /**
  * This document defines the styling for the pmaas layout
 **/
+:root {
+  --list-group--PaddingTop: $global-padding;
+  --list-group--PaddingRight: $global-margin;
+  --list-group--PaddingBottom: $global-padding;
+  --list-group--PaddingLeft: $global-margin;
+}
+
 
 /*------------------------------------*\
   #SECTION-TITLE
@@ -13,18 +20,22 @@
 /* ================================================================== */
 .ins-c-map-nav {
   position: relative;
+  grid-gap: unset;
   grid-column-start: col-start 2;
+  grid-template-columns: max-content auto;
+  grid-template-rows: min-content 1fr;
+  padding: 0;
   background: var(--map-nav-bg);
   overflow-y: auto;
+  overflow-x: hidden;
   
-
-  .group-list {
-    max-width: 20rem;
-    opacity: 1;
-    transition: .3s;
+  h1,
+  h2,
+  h3 {
+    margin: 0;
   }
 
-  ul {
+  ul.list-deployments {
     @include reset;
     list-style-type: none;
     display: flex;
@@ -34,46 +45,119 @@
   }
 
   li {
-    padding: var(--global-padding) var(--global-margin);
-    white-space: nowrap;
     border-bottom: 1px solid #cfcfcf;
+    max-width: 30rem;
+    opacity: 1;
+    transition: .4s ease-out;
   }
 
-  &--is-collapsed {
-    .group-list {
-      max-width: 0;
-      overflow: hidden;
-      opacity: 0;
-    }
-  }
-
-  &--is-collapsed ul {
+  &--is-collapsed ul.list-deployments {
     opacity: 0;
   }
 
-
-  button {
-    text-align: left;
-    border: none;
-    border-bottom: 1px solid darken(#f5f5f5, 10);
+  &--is-collapsed li {
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
   }
 
+  .list-group {
+    @include build-grid(grid-gap $global-padding, max-content auto);
+    grid-row-gap: 0;
+    margin: 0;
+    padding: $global-padding;
+    white-space: nowrap;
+    border: none;
+    color: $base-color;
+    transition: .3s;
 
-  .toggle-map {
-    position: absolute;
-    right: calc(100% + 20px);
-    right: 0;
-    top: 0;
-    z-index: 9;
+    &:hover {
+      background: rgba(255,255,255,.5);
+      // box-shadow: 0 2px 8px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .fa {
+      align-self: center;
+      grid-row: span 2;
+      font-size: 1.4rem;
+    }
+
+    span.title,
+    span.subtitle {
+
+    }
   }
 }
 
+.ins-c-map-nav header {
+  display: flex;
+  padding: $global-padding;
+  align-self: start;
+  align-items: center;
+  border-bottom: 2px solid #cfcfcf;
+  // border-bottom: 4px solid #dedede;
+
+  .toggle-map {
+    margin-left: auto;
+    z-index: 2; 
+  }
+
+  .header-info {
+    display: flex;
+
+    > .count {
+      position: relative;
+      padding: 0 $global-padding;
+    }
+
+    > *:nth-child(2) {
+      margin-left: auto;
+    }
+  }
+}
+
+.ins-c-map-nav .toggle-map {
+  padding: $global-padding/2 $global-padding;
+  font-size: 24px;
+  background: none;
+  text-align: left;
+  border: 1px solid darken(#f5f5f5, 10);
+  border-radius: 4px;
+}
+
+.ins-c-map-nav header .header-info {
+  flex: 1;
+  align-items: center;
+  max-width: 30rem;
+  overflow: hidden;
+  transition: .3s;
+  opacity: 1;
+}
+
+.ins-c-map-nav--is-collapsed header .header-info {
+  max-width: 0;  
+  white-space: nowrap;
+  opacity: 0;
+  padding: 0;
+}
+
+.ins-c-map-nav header .header-title {
+  @include font-size(24px, 1);
+  font-weight: 300;
+  transition: .3s;
+}
+
+.ins-c-map-nav--is-collapsed {
+  @include build-grid(0 auto);
+  grid-gap: unset;
+  padding: 0;
+}
 
 /* View toggle
 /* ================================================================== */
 .view-toggle {
   position: absolute;
-  right: calc(100% + var(--global-margin));
+  right: var(--global-margin);
   top: var(--global-padding);
   display: inline-flex;
 }
