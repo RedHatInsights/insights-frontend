@@ -45,25 +45,25 @@ constantsModule.constant('Products', {
     },
     ocp: {
         shortName: 'OCP',
-        fullName: 'Openshift Compute Platform',
+        fullName: 'OpenShift Compute Platform',
         code: 'ocp',
         icon: '',
         roles: {
             cluster: {
                 code: 'cluster',
-                fullName: 'Red Hat Openshift Compute Platform',
+                fullName: 'Red Hat OpenShift Compute Platform',
                 shortName: 'Deployment',
                 icon: 'fa-cubes'
             },
             master: {
                 code: 'master',
-                fullName: 'Red Hat Openshift Compute Platform Master',
+                fullName: 'Red Hat OpenShift Compute Platform Master',
                 shortName: 'Master',
                 icon: 'fa-home'
             },
             node: {
                 code: 'node',
-                fullName: 'Red Hat Openshift Compute Platform Node',
+                fullName: 'Red Hat OpenShift Compute Platform Node',
                 shortName: 'Node',
                 icon: 'fa-cogs'
             }

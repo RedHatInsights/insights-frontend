@@ -444,7 +444,7 @@ constantsModule.constant('DemoData', {
             role: "cluster",
             product_code: "ocp",
             imageClass: "fa-cubes",
-            displayName: "Red Hat Openshift Compute Platform",
+            displayName: "Red Hat OpenShift Compute Platform",
             displayNameShort: "OCP Deployment"
         },
         {
@@ -545,7 +545,7 @@ constantsModule.constant('DemoData', {
             role: "master",
             product_code: "ocp",
             imageClass: "fa-home",
-            displayName: "Red Hat Openshift Compute Platform Master",
+            displayName: "Red Hat OpenShift Compute Platform Master",
             displayNameShort: "OCP Master"
         },
         {
@@ -553,7 +553,7 @@ constantsModule.constant('DemoData', {
             role: "node",
             product_code: "ocp",
             imageClass: "fa-cogs",
-            displayName: "Red Hat Openshift Compute Platform Node",
+            displayName: "Red Hat OpenShift Compute Platform Node",
             displayNameShort: "OCP Node"
         }
     ]
