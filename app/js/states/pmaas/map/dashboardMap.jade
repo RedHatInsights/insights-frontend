@@ -22,7 +22,7 @@
         .chart-title {{charts.compliance.name}}
         b {{charts.compliance.title}} &nbsp;
         span Compliant
-    
+
     .header-donut-chart
       .chart.chart-advisor
       .chart-info
@@ -64,26 +64,21 @@
           i.fa.fa-angle-double-left
 
       ul.list-deployments
-        li 
-          a.list-group(ui-sref="app.dashboard-deployment")
+        li
+          a.list-group(ui-sref="app.dashboard-deployment({deployment_id: 'azure-europe'})")
             i.fa.fa-check-circle.alert-success
             span.title Self-Service Cloud
-            span.subtitle 
+            span.subtitle
               b Azure Europe | OpenShift
         li
-          a.list-group(ui-sref="app.dashboard-deployment")
+          a.list-group(ui-sref="app.dashboard-deployment({deployment_id: 'priv-openstack'})")
             i.fa.fa-times-circle.alert-danger
             span.title Summit Demo
-            span.subtitle 
+            span.subtitle
               b Private Cloud | OpenStack & OpenShift
         li
-          a.list-group(ui-sref="app.dashboard-deployment")
+          a.list-group(ui-sref="app.dashboard-deployment({deployment_id: 'aws-east'})")
             i.fa.fa-check-circle.alert-success
             span.title Summit Demo
-            span.subtitle 
+            span.subtitle
               b aws East | OpenShift
-      //- button.button-default.button-lg.button-strong All
-      //- button.button-default.button-lg.button-strong Public Cloud
-      //- button.button-default.button-lg.button-strong Private Cloud
-      //- button.button-default.button-lg.button-strong Virtual
-      //- button.button-default.button-lg.button-strong Physical
