@@ -33,41 +33,21 @@
   margin-left: 0;
 }
 
-.recommendations .recommendation-expanded-content {
+.recommendations .list-group-item-container.recommendation-expanded-content {
   // this should be a grid, but the plotly graphs aren't resizing smaller when
   // resizing the screen smaller, only bigger.  This will have to do for now
+  @include media-query(xl) {
+      @include build-grid(1fr 1fr);
+  }
 
   .recommendation-detail {
     @include rem('padding-right', 20px);
-
-    //.section-heading {
-    //  @include rem('margin-top', $global-padding);
-    //}
   }
 
-  .recommendation-graph .svg-container {
-    width: 100% !important;
-  }
-
-  .recommendation-detail,
   .recommendation-graph {
-    display: inline-block;
-    vertical-align: top;
-  }
-
-  @include media-query(sm) {
-    .recommendation-detail,
-    .recommendation-graph {
-      height: 100%;
-      width: 100%;
-    }
-  }
-
-  @include media-query(lg) {
-    .recommendation-detail,
-    .recommendation-graph {
-      height: 100%;
-      width: 50%;
+    display: flex;
+    .svg-container {
+      width: 100% !important;
     }
   }
 }

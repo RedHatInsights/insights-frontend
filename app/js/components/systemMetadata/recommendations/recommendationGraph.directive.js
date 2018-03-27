@@ -83,15 +83,23 @@ function recommendationGraphCtrl($scope, $element) {
         .append('div')
         .style({
             width: '100%',
-            height: '250px'
+            height: '350px'
         })
         .node();
 
     Plotly.newPlot(node, data, layout, {displayModeBar: false});
 
     window.addEventListener('resize', function () {
-        console.log('resizing access network mtu graph');
-        Plotly.Plots.resize(node);
+        let s = window.getComputedStyle(node);
+        let e = s.display;
+
+        // console.log('$scope', $scope);
+        // console.log('resizing access network mtu graph', node);
+        // console.log('s', s);
+        // console.log('e', e);
+        if (e && e !== 'none') {
+            Plotly.Plots.resize(node);
+        }
     });
 }
 

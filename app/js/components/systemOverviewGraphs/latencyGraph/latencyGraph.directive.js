@@ -105,8 +105,10 @@ function latencyGraphCtrl($scope, $element) {
     Plotly.newPlot(node, data, layout, {displayModeBar: false});
 
     window.addEventListener('resize', function () {
-        console.log('resizing latency');
-        Plotly.Plots.resize(node);
+        let e = window.getComputedStyle(node).display;
+        if (e && e !== 'none') {
+            Plotly.Plots.resize(node);
+        }
     });
 }
 
