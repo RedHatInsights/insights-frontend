@@ -100,6 +100,7 @@ const charts = [
         }
     }
 ];
+
 // returns the angle in degrees between two points on the map
 // used for the x tranlation for infinite scroll
 // const getAngle = (p1, p2) => (Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180) / Math.PI;
@@ -224,7 +225,6 @@ priv.redraw = () => {
     priv.svg.selectAll('path').attr('d', priv.path);
 };
 
-
 function generateCharts(chartData) {
     for (const data of chartData) {
         c3.generate(donutSettings({
@@ -242,7 +242,6 @@ function generateCharts(chartData) {
         }));
     }
 }
-
 
 function DashboardMapCtrl($timeout, $scope) {
     $timeout(() => {
@@ -285,7 +284,7 @@ function DashboardMapCtrl($timeout, $scope) {
         .data(['data1', 'data2', 'data3'])
         .enter().append('span')
         .attr('data-id', function (id) { return id; })
-        .html(function (id) { return id; });  
+        .html(function (id) { return id; });
 }
 
 statesModule.controller('DashboardMapCtrl', DashboardMapCtrl);
