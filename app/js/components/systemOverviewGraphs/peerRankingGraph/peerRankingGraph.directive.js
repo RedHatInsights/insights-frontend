@@ -38,21 +38,24 @@ const data = [sampleTrace, industryTrace];
 
 const layout = {
     autosize: true,
-    title: 'Peer Ranking Trend (2 weeks)',
+    legend: {
+        x: 0.75,
+        y: 1
+    },
     xaxis: {
         autorange: true,
         type: 'date'
     },
     yaxis: {
         autorange: false,
-        range: [40, 60],
+        range: [40, 65],
         type: 'linear'
     },
     margin: {
         l: 50,
         r: 30,
         b: 50,
-        t: 60,
+        t: 0,
         pad: 4
     }
 };
@@ -65,7 +68,7 @@ function peerRankingGraphCtrl($scope, $element) {
         .append('div')
         .style({
             width: '100%',
-            height: '250px'
+            height: '200px'
         })
         .node();
 

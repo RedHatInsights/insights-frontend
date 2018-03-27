@@ -110,7 +110,12 @@
 }
 
 .peer-ranking-graph {
+  border: solid 1px lightgrey;
+  box-shadow:0 1px 1px rgba(3, 3, 3, 0.175);
   grid-column: span 2;
+
+  .percentile-title {
+    margin: 1.875rem 0 1.875rem 1.875rem;
 
   @include media-query(xl) {
     grid-column: auto;
