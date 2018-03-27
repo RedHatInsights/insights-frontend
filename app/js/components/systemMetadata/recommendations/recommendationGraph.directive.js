@@ -50,7 +50,7 @@ const layout = {
         range: [500, 2000]
     },
     yaxis: {
-        title: 'Percentage',
+        title: '% of Total Systems',
         range: [0, 100]
 
     },
