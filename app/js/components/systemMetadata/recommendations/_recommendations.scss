@@ -1,36 +1,11 @@
-.recommendations {
-  .list-view-pf-main-info {
-    display: flex;
+.recommendations .list-group-item-header {
+  .list-view-pf-checkbox {
+    margin: 0 10px 0 0;
+    padding: 0 10px 0 0;
+    input[type='checkbox'] {
+      @include rem('margin-top', 2px);
+    }
   }
-}
-
-.recommendations .risk-summaries {
-  display: flex;
-  flex: auto;
-}
-
-.recommendations .list-group.list-view-pf {
-  // padding: 0;
-  // margin: 0;
-}
-
-.recommendations .list-view-pf-main-info {
-  display: grid;
-  @include rem('grid-gap', $global-padding);
-  .main-info {
-    display: grid;
-    grid-template-areas: "bulleye title ansible-icon";
-    grid-template-columns: min-content auto min-content;
-    .fa-bullseye {
-      @include rem('margin-right', 5px);
-      grid-area: bulleye; }
-    .title {grid-area: title; }
-    .ansible-icon { grid-area: ansible-icon; }
-  }
-}
-
-.recommendations .list-group-item-container {
-  margin-left: 0;
 }
 
 .recommendations .list-group-item-container.recommendation-expanded-content {
@@ -51,14 +26,6 @@
     }
   }
 }
-
-.colored-box-container {
-  padding: 20px;
-  .colored-box {
-    background-color: red;
-  }
-}
-
 
 .opt-potential {
   display: inline-block;

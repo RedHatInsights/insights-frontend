@@ -85,12 +85,6 @@ function storageMtuGraphCtrl($scope, $element) {
 
     Plotly.newPlot(node, data, layout, {displayModeBar: false});
 
-    window.addEventListener('resize', function () {
-        let e = window.getComputedStyle(node).display;
-        if (e && e !== 'none') {
-            Plotly.Plots.resize(node);
-        }
-    });
 }
 
 function storageMtuGraph() {

@@ -27,3 +27,13 @@
 .rule-summaries .list-group-item-container {
   // @include rem('margin-left', 30px);
 }
+
+.rule-summaries .list-group-item-header {
+  .list-view-pf-checkbox {
+    margin: 0 10px 0 0;
+    padding: 0 10px 0 0;
+    input[type='checkbox'] {
+      @include rem('margin-top', 2px);
+    }
+  }
+}
