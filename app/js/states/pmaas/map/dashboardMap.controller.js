@@ -6,8 +6,35 @@ const keyBy = require('lodash/keyBy');
 const d3 = require('d3');
 const topojson = require('topojson');
 const world = require('./dashboardMap.json');
+const c3 = require('c3');
+const donutSize = 50;
+const donutThickness = 4;
+
+const donutVals = {
+    size: {
+        width: donutSize,
+        height: donutSize
+    },
+    donut: { width: donutThickness },
+    data: { type: 'donut' },
+    legend: { show: false }
+};
+
+const pinConfig = {
+    height: 20,
+    width: 20,
+    offsetx: 10,
+    offsety: 20
+};
+
 const pinLocations = {
-    USA: {issues: true,  offset: [30, -30]},
+    USA: {
+        issues: true,
+        offset: [30, -30],
+        cities: [
+            [-122.490402, 37.786453] // San fran
+        ]
+    },
     CAN: {issues: false, offset: [-50, -190]},
     DEU: {issues: false, offset: [25, 45]}
 };
@@ -16,19 +43,6 @@ const priv = {
     tlast: [0, 0],
     slast: null,
     pins: []
-};
-const c3 = require('c3');
-const donutSize = 50;
-const donutThickness = 4;
-
-const donutVals     = {
-    size: {
-        width: donutSize,
-        height: donutSize
-    },
-    donut: { width: donutThickness },
-    data: { type: 'donut' },
-    legend: { show: false }
 };
 
 function donutSettings(obj) {
@@ -159,11 +173,13 @@ priv.init = (conf) => {
 
     priv.projection.scale(priv.scaleExtent[0]);
 
+    console.log(priv.projection(pinLocations.USA.cities[0]));
+
     priv.zoom = d3.behavior.zoom()
         .scaleExtent(priv.scaleExtent)
         .scale(priv.projection.scale())
-        .translate([0, 0]); // not linked directly to projection
-    // .on('zoom', priv.redraw);
+        .translate([0, 0]) // not linked directly to projection
+        .on('zoom', priv.redraw);
 
     priv.path = d3.geo.path()
         .projection(priv.projection);
@@ -172,6 +188,7 @@ priv.init = (conf) => {
         .append('svg')
         .attr('width', conf.width)
         .attr('height', conf.height)
+        .on('click', function () {console.log(priv.projection(d3.mouse(this)));})
         .call(priv.zoom);
 
     priv.centroids = priv.svg.append('g')
@@ -180,20 +197,24 @@ priv.init = (conf) => {
     priv.svg.selectAll('path')
         .data(topojson.feature(world, world.objects.countries).features)
         .enter().append('path')
-        .attr('d', (d) => {
-            if (pinLocations[d.id]) {
-                const pin = priv.centroids.append('svg:image')
-                      .attr('data-toggle-target', d.id)
-                      .attr('xlink:href', 'static/images/i_pin-good.svg')
-                      .attr('width', 50)
-                      .attr('height', 50)
-                      .style('display', 'inline');
+        .attr('d', d => {
+            if (pinLocations[d.id] && pinLocations[d.id].cities) {
+                const pin = priv.centroids.selectAll('svg')
+                    .data(pinLocations[d.id].cities)
+                    .enter()
+                    .append('svg:image')
+                    .attr('x', d => priv.projection(d)[0] - pinConfig.offsetx)
+                    .attr('y', d => priv.projection(d)[1] - pinConfig.offsety)
+                    .attr('width', () => pinConfig.width)
+                    .attr('height', () => pinConfig.height)
+                    .style('display', 'inline')
+                    .call(priv.zoom);
 
                 if (pinLocations[d.id].issues) {
                     pin.attr('xlink:href', 'static/images/i_pin-has-error.svg');
                 }
 
-                priv.updatePin(pin, d);
+                //priv.updatePin(pin, d);
 
                 priv.pins.push({
                     parent: d,
@@ -217,9 +238,13 @@ priv.updatePin = (drawable, parent) => {
 };
 
 priv.redraw = () => {
-    if (d3.event) {
+    const e = d3.event;
+    if (e) {
+        console.log(e);
         priv.projection.scale(d3.event.scale);
-        priv.pins.forEach(p => priv.updatePin(p.drawable, p.parent));
+        priv.pins.forEach(p => {
+            p.drawable.attr('transform', `translate(${e.translate})scale(${e.scale})`);
+        });
     }
 
     priv.svg.selectAll('path').attr('d', priv.path);
