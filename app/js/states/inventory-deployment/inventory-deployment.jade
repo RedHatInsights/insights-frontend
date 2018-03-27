@@ -86,80 +86,11 @@
 
     .inventory.card-list.card-pf-view
       card.card-pf-view.card-pf-view-select.card-pf-view-single-select(
-        ng-repeat='system in systems track by system.system_id',
+        ng-repeat='system in systems track by system.system_id | orderBy: "order"',
         system='system',
         ui-sref="app.system-overview({id: system.system_id})"
         )
         metadata-card(system='system')
-        //- card-content
-        //-   .display-name.text-center
-        //-     strong {{:: system.toString }}
-        //-   .host-info
-        //-     .hostname
-        //-       span.pficon-screen.status-icon
-        //-       span {{ system.hostname }}
-        //-     .status-check
-        //-       span.fa.fa-clock-o.status-icon
-        //-       span.hostname Last Check: {{::system.last_check_in | timeAgo }}
-
-        //-   .card-pf-top-element
-        //-     type-icon.type.card-pf-icon(type-id='system.system_type_id' include-text='false')
-
-        //-   .card-pf-items.status-list
-        //-     .card-pf-item.optimization-label.text-center
-        //-         optimization-label(level='system.optimization')
-        //-     .card-pf-item.text-center
-        //-       span Optimization Potential
-        //-     .card-pf-item.reliability-status.text-center
-        //-         bar-status-icon.status-icon(status='system.reliability')
-        //-         a(href="#") Reliability
-        //-     .card-pf-item.system-tags.text-center
-        //-         .fa.fa-database.status-icon
-        //-         .pficon-network.status-icon
-        //-         .pficon-cluster.status-icon
-
-    //- .row.row-short
-    //-   .col-md-12
-    //-     table(ng-if='getListType() === listTypes.table')
-    //-       thead
-    //-         tr
-    //-           th.min
-    //-             md-checkbox.md-accent.md-hue-1.md-checkbox-list(
-    //-               tooltip="{{:: 'Select All' | translate}}",
-    //-               type="checkbox",
-    //-               aria-label='Select All Systems Checkbox',
-    //-               md-indeterminate="{{ checkboxes.indeterminate || false }}",
-    //-               ng-model='checkboxes.checked',
-    //-               ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
-    //-           th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'system_type_id':sorter.reverse", ng-click="sorter.sort('system_type_id')", translate) System Type
-    //-           th.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse", ng-click="sorter.sort('toString')", translate) System Name
-    //-           th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'last_check_in':sorter.reverse", ng-click="sorter.sort('last_check_in')", translate) Last Check In
-    //-           th.min.sortable(ng-class="sorter.predicate | sortClass:'report_count':sorter.reverse", ng-click="sorter.sort('report_count')", translate) Status
-    //-       tbody(ng-if='!loading')
-
-    //-         tr(ng-repeat='system in systems track by system.system_id',
-    //-            ng-class="{'stale': !system.isCheckingIn}",
-    //-            ng-click='checkboxes.rowClick($event, system.system_id)',
-    //-            ng-mousedown='checkboxes.rowClick($event, system.system_id)',
-    //-            data-id="{{:: system.system_id}}"
-    //-         )
-    //-           td.min
-    //-             md-checkbox.md-accent.md-hue-1.md-checkbox-list(
-    //-               type='checkbox',
-    //-               aria-label='Select System Checkbox',
-    //-               ng-model='checkboxes.items[system.system_id]',
-    //-               ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();')
-    //-           td.fit-content
-    //-             type-icon(type-id='system.system_type_id', include-text='true')
-    //-           td.fit-content
-    //-             a(ng-click="showActions(system)") {{:: system.toString}}
-    //-           td.fit-content {{:: system.last_check_in | timeAgo }}
-    //-           td.fit-content
-    //-             a.action-count.icon-inline(ng-click='showActions(system)')
-    //-               span.text(translate, translate-n="system.report_count", translate-plural="{{:: $count}} Actions") {{:: system.report_count}} Action
-    //-               i.fa(ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count, 'success': !system.report_count, 'fail': system.report_count}")
-    //-               span.sr-only Time to destination by car:
-
 
     .row.row-short(ng-if='!loading')
       .col-sm-12
