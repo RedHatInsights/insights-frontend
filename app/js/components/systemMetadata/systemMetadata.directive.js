@@ -18,6 +18,17 @@ function systemMetadataCtrl(
         reportsLoading: true
     };
 
+    $scope.actionChoices = [{
+        id: 'APPLY',
+        label: 'Apply Now'
+    }, {
+        id: 'NEW',
+        label: 'Create New Playbook'
+    }, {
+        id: 'ADD',
+        label: 'Add to Existing Playbook'
+    }];
+
     if ($scope.system && $scope.system.system_id) {
         $scope.loading.pageLoading = true;
         System.getSystemMetadata($scope.system.system_id)

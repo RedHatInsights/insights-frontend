@@ -41,3 +41,21 @@ system-overview-graphs
         md-tab(label='Infrastructure')
           md-content
             p Infrastructure
+
+  .action-dropdown
+    md-menu(md-offset="-95 46")
+      md-button.button-filter(
+      type='button',
+      data-toggle='dropdown',
+      aria-haspopup='true',
+      aria-expanded='false',
+      ng-click='$mdMenu.open($event)')
+        span.text.active(ng-model='label') Action
+        span.caret
+      md-menu-content
+        md-menu-item
+          a Apply Now
+        md-menu-item
+          a Create New Playbook
+        md-menu-item
+          a Add to Existing Playbook

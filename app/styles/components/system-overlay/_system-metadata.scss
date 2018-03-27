@@ -144,6 +144,14 @@ system-metadata { display: block; }
 
 .ins-l-system-metadata-summary {
 
+  position: relative;
+  .action-dropdown {
+    //absolute positioning because of the md-tabs-wrapper
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+  }
+
   @include media-query(md) {
     grid-column: span 2;
   }
