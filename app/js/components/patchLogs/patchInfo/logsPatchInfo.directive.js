@@ -2,11 +2,15 @@
 'use strict';
 
 var componentsModule = require('../../');
+var moment = require('moment');
 
 /**
  * @ngInject
  */
-function logsPatchInfoCtrl() {
+function logsPatchInfoCtrl($scope) {
+    $scope.patch1date = moment().subtract(1, 'd').format('MM/DD/YYYY');
+    $scope.patch2date = moment().subtract(2, 'd').format('MM/DD/YYYY');
+    $scope.patch3date = moment().subtract(3, 'd').format('MM/DD/YYYY');
 }
 
 /**

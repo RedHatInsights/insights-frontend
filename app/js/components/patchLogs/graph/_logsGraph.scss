@@ -1,1 +1,6 @@
-.logs-graph{}
+.logs-graph {
+  display: flex;
+  .svg-container {
+    width: 100% !important;
+  }
+}

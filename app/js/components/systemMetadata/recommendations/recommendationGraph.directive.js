@@ -32,9 +32,9 @@ const accessMtuTrace = {
         size: 50
     },
     marker: {
-        color: 'rgba(39, 188, 255, 0.4)',
+        color: 'rgba(39, 188, 255, 0.3)',
         line: {
-            color: 'rgba(39, 188, 255, 0.4)',
+            color: 'rgba(39, 188, 255, 0.7)',
             width: 1
         }
     }
@@ -79,10 +79,13 @@ const layout = {
  * @ngInject
  */
 function recommendationGraphCtrl($scope, $element) {
+
+    // styling to fixed width for the demo.  If the screen is resized while
+    // the graph is offscreen, it's sized to a tiny width.
     const node = d3.select($element[0])
         .append('div')
         .style({
-            width: '100%',
+            width: '450px',
             height: '350px'
         })
         .node();

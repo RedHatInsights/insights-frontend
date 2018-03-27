@@ -49,9 +49,9 @@ const latencyTrace = {
         size: 5
     },
     marker: {
-        color: 'rgba(39, 188, 255, 0.4)',
+        color: 'rgba(39, 188, 255, 0.3)',
         line: {
-            color: 'rgba(39, 188, 255, 0.4)',
+            color: 'rgba(39, 188, 255, 0.7)',
             width: 1
         }
     }
@@ -103,6 +103,13 @@ function latencyGraphCtrl($scope, $element) {
         .node();
 
     Plotly.newPlot(node, data, layout, {displayModeBar: false});
+
+    window.addEventListener('resize', function () {
+        let e = window.getComputedStyle(node).display;
+        if (e && e !== 'none') {
+            Plotly.Plots.resize(node);
+        }
+    });
 }
 
 function latencyGraph() {

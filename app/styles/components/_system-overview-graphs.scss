@@ -110,6 +110,8 @@
 }
 
 .peer-ranking-graph {
+  display: flex;
+  flex-direction: column;
   border: solid 1px lightgrey;
   box-shadow:0 1px 1px rgba(3, 3, 3, 0.175);
   grid-column: span 2;
