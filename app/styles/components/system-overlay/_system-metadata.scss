@@ -191,3 +191,17 @@ system-metadata { display: block; }
     grid-template-columns: 7fr 5fr max-content;
   }
 }
+
+.ins-l-system__metadata-list-header {
+  .incident-icon { padding: 0 $global-padding; }
+
+  @media screen and (min-width: 1900px) {  
+    .title {
+      display: inline-flex;
+    }
+
+    .incident-icon {
+      margin-left: auto;
+    }
+  }
+}

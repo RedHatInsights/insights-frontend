@@ -14,7 +14,7 @@ list-group
   list-item(expandable report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports track by report.rule_id')
     list-item-header-expandable.ins-l-system__metadata-list-header.ins-tab__rule-summary
       strong.title {{:: report.rule.category }} > {{:: report.rule.description }}
-        incident-icon(rule-id='report.rule_id')
+        incident-icon.incident-icon(rule-id='report.rule_id')
       //ansible-icon(value='report.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
       ansible-icon(value='report.rule.ansible' hide-label="true")
       .risk-summaries.card-header-risk-summaries
