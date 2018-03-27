@@ -199,12 +199,11 @@ priv.init = (conf) => {
 
     priv.svg = d3.select('.map')
         .append('svg')
-        .attr('id', 'svgMap')
         .attr('width', conf.width)
         .attr('height', conf.height)
         .on('click', function () {console.log(priv.projection(d3.mouse(this)));});
 
-    priv.popover = d3.select('#svgMap')
+    priv.popover = d3.select('#map')
         .append('div')
         .attr('id', 'popover')
         .style('display', 'none');
@@ -223,8 +222,8 @@ priv.init = (conf) => {
                     .append('svg:image')
                     .attr('x', d => priv.projection(d.array)[0] - pinConfig.offsetx)
                     .attr('y', d => priv.projection(d.array)[1] - pinConfig.offsety)
-                    .attr('width', pinConfig.width)
-                    .attr('height', pinConfig.height)
+                    .attr('width', () => pinConfig.width)
+                    .attr('height', () => pinConfig.height)
                     .attr('xlink:href', d => {
                         if (d.name === 'San Francisco') {
                             return 'static/images/i_pin-has-error.svg';
@@ -232,21 +231,26 @@ priv.init = (conf) => {
                             return 'static/images/i_pin-good.svg';
                         }
                     })
-                    .style('display', 'inline');
+                    .style('display', 'inline')
+                    .on('mouseenter', function (d) {
+                        const svg = priv.svg[0][0];
+                        const pt = svg.createSVGPoint();
 
-                // .on('mouseover', function (d) {
-                //     if (d3.event) {
-                //         priv.popover.attr('width', 8)
-                //             .attr('height', 8)
-                //             .attr('x', () => priv.projection(d.array)[0] + 25)
-                //             .attr('y', () => priv.projection(d.array)[1] - 30)
-                //             .style('color', '#222')
-                //             .style('background', '#fff')
-                //             .style('border-radius', '3px')
-                //             .style('display', 'inline')
-                //             .html('hello');
-                //     }
-                // });
+                        pt.x = priv.projection(d.array)[0];
+                        pt.y = priv.projection(d.array)[1];
+
+                        // Transform it back to SVG coordinate space
+                        const svgCoord = pt.matrixTransform(svg.getCTM().inverse());
+
+                        priv.popover.style('display', 'inline')
+                            .attr('style', `left:${svgCoord.x}px;top:${svgCoord.y}px`)
+                            .style('position', 'absolute')
+                            .style('color', '#222')
+                            .style('background', '#fff')
+                            .style('border-radius', '3px')
+                            .style('display', 'inline')
+                            .html('hello');
+                    });
 
                 //priv.updatePin(pin, d);
 
@@ -274,6 +278,7 @@ priv.updatePin = (drawable, parent) => {
 priv.redraw = () => {
     const e = d3.event;
     if (e) {
+        console.log(e);
         priv.projection.scale(d3.event.scale);
         priv.pins.forEach(p => {
             p.drawable.attr('transform', `translate(${e.translate})scale(${e.scale})`);
