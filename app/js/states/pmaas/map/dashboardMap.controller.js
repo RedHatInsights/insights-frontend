@@ -33,10 +33,20 @@ const pinLocations = {
         offset: [30, -30],
         coordinates: [{
             name: 'San Francisco',
-            array: [-122.490402, 37.786453]
+            array: [-122.490402, 37.786453],
+            popover: {
+                title: 'Summit Demo',
+                subtitle: 'Private Cloud | OpenStack & OpenShift',
+                issue: true
+            }
         }, {
             name: 'virgina',
-            array: [-78.024902, 37.926868]
+            array: [-78.024902, 37.926868],
+            popover: {
+                title: 'Summit Demo',
+                subtitle: 'aws East | OpenShift',
+                issue: false
+            }
         }]
     },
     CAN: {
@@ -49,7 +59,12 @@ const pinLocations = {
         offset: [25, 45],
         coordinates: [{
             name: 'germany',
-            array: [10, 52.520008]
+            array: [10, 52.520008],
+            popover: {
+                title: 'Self-Service Cloud',
+                subtitle: 'Azure Europe | OpenShift',
+                issue: false
+            }
         }]
     }
 };
@@ -178,7 +193,7 @@ priv.reInit = (conf) => {
     priv.redraw();
 };
 
-priv.init = (conf) => {
+priv.init = (conf, $scope) => {
     priv.projection = d3.geo.mercator()
         .rotate([conf.rotate, 0])
         .scale(1)
@@ -215,10 +230,12 @@ priv.init = (conf) => {
         .enter().append('path')
         .attr('d', d => {
             if (pinLocations[d.id] && pinLocations[d.id].coordinates) {
+                const data = [];
                 const pin = priv.centroids.selectAll('svg')
                     .data(pinLocations[d.id].coordinates)
                     .enter()
                     .append('svg:image')
+                    .attr('d', d => data.push(d))
                     .attr('x', d => priv.projection(d.array)[0] - pinConfig.offsetx)
                     .attr('y', d => priv.projection(d.array)[1] - pinConfig.offsety)
                     .attr('width', () => pinConfig.width)
@@ -232,6 +249,8 @@ priv.init = (conf) => {
                     })
                     .style('display', 'inline')
                     .on('mouseenter', function (d) {
+                        $scope.popover = d.popover;
+                        $scope.$apply();
                         const svg = priv.svg[0][0];
                         const pt = svg.createSVGPoint();
 
@@ -249,14 +268,19 @@ priv.init = (conf) => {
                             .style('background', '#fff')
                             .style('border-radius', '3px')
                             .style('display', 'inline');
+
+                        console.log($scope);
                     });
 
-                //priv.updatePin(pin, d);
-
-                priv.pins.push({
-                    parent: d,
-                    drawable: pin
-                });
+                if (data.length > 0) {
+                    pin[0].forEach((p, i) => {
+                        priv.pins.push({
+                            parent: d,
+                            drawable: p,
+                            data: data[i]
+                        });
+                    });
+                }
             }
         });
 
@@ -306,8 +330,10 @@ function generateCharts(chartData) {
 }
 
 function DashboardMapCtrl($timeout, $scope) {
+    $scope.popover = {};
+
     $timeout(() => {
-        priv.init(priv.getConf());
+        priv.init(priv.getConf(), $scope);
     }, 0.25);
 
     window.onresize = () => priv.reInit(priv.getConf());

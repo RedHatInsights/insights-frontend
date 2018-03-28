@@ -42,12 +42,13 @@
   section.content.pmaas-map
     .map#map
       // this is an unnecessary wrapper, remove it
-      .ins-c-map-popover#popover
+      .ins-c-map-popover#popover(ng-if="!loadingPop", style="display: none;")
         .ins-c-map-popover__header
-          i.fa.fa-times-circle.alert-danger
+          i.fa.fa-times-circle.alert-danger(ng-if="popover.issue")
+          i.fa.fa-check-circle.alert-success(ng-if="!popover.issue")
           .chart-info
-            span Self-Service Cloud
-            .subtitle Azure Europe | OpenShift
+            span {{popover.title}}
+            .subtitle {{popover.subtitle}}
         .ins-c-map-popover__body
           .donut-chart.pf-is-with-text.pf-is-small
             .chart-info
