@@ -50,7 +50,7 @@ $text-max-width: 200px;
   width: auto;
   position: static;
   overflow-x: initial;
-  overflow-y: initial;
+  overflow-y: auto;
 }
 
 .nav-pf-vertical .list-group-item.active > a, 

@@ -1,5 +1,9 @@
 
 .platform-grid {
+  main { 
+    // min-height: 100%; 
+  }
+
   @include media-query(sm){
     display: grid;
     grid-template-areas: "topbar"
