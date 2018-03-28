@@ -3,11 +3,11 @@
   // Page Header
   section.page-header
     .button-group.filter-group
-      button.button-default.button-lg.button-strong All
-      button.button-default.button-lg.button-strong Public Cloud
-      button.button-default.button-lg.button-strong Private Cloud
-      button.button-default.button-lg.button-strong Virtual
-      button.button-default.button-lg.button-strong Physical
+      button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.all)", autofocus) All
+      button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.publicCloud)") Public Cloud
+      button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.privateCloud)") Private Cloud
+      button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.virtual)") Virtual
+      button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.physical)") Physical
 
     .donut-chart.pf-is-with-text.pf-is-small
       .chart.chart-vulnerability
@@ -43,7 +43,6 @@
     .map#map
       // this is an unnecessary wrapper, remove it
       .ins-c-map-popover#popover(ng-if="!loadingPop", style="display: none;")
-        i.fa.fa-times.pull-right(ng-click="closePopover()")
         .ins-c-map-popover__header
           i.fa.fa-times-circle.alert-danger(ng-if="popover.issues")
           i.fa.fa-check-circle.alert-success(ng-if="!popover.issues")

@@ -10,6 +10,14 @@ const c3 = require('c3');
 const donutSize = 50;
 const donutThickness = 4;
 
+const deployment_types = {
+    all: 'all',
+    privateCloud: 'privc',
+    publicCloud: 'pubc',
+    virtual: 'virtual',
+    physical: 'physical'
+};
+
 const donutVals = {
     size: {
         width: donutSize,
@@ -34,6 +42,7 @@ const pinLocations = {
         coordinates: [{
             name: 'San Francisco',
             array: [-122.490402, 37.786453],
+            type: deployment_types.privateCloud,
             popover: {
                 title: 'Summit Demo',
                 subtitle: 'Private Cloud | OpenStack & OpenShift'
@@ -41,6 +50,7 @@ const pinLocations = {
             issues: true
         }, {
             name: 'virgina',
+            type: deployment_types.virtual,
             array: [-78.024902, 37.926868],
             popover: {
                 title: 'Summit Demo',
@@ -60,6 +70,7 @@ const pinLocations = {
         coordinates: [{
             name: 'germany',
             array: [10, 52.520008],
+            type: deployment_types.publicCloud,
             popover: {
                 title: 'Self-Service Cloud',
                 subtitle: 'Azure Europe | OpenShift'
@@ -277,7 +288,7 @@ priv.init = (conf, $scope) => {
                     pin[0].forEach((p, i) => {
                         priv.pins.push({
                             parent: d,
-                            drawable: p,
+                            drawable: d3.select(p),
                             data: data[i]
                         });
                     });
@@ -332,7 +343,20 @@ function generateCharts(chartData) {
 
 function DashboardMapCtrl($timeout, $scope) {
     $scope.popover = {};
+    $scope.deployment_types = deployment_types;
     $scope.closePopover = () => priv.popover.style('display', 'none');
+
+    $scope.filterPins = function (filter) {
+        priv.pins.forEach(p => {
+            console.log(p);
+            if (p.data.type === filter ||
+                filter === deployment_types.all) {
+                p.drawable.style('display', 'inline');
+            } else {
+                p.drawable.style('display', 'none');
+            }
+        });
+    };
 
     $timeout(() => {
         priv.init(priv.getConf(), $scope);
