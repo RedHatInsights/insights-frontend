@@ -1,36 +1,36 @@
-.data-filters {
-  @include rem('margin', $global-padding);
+/* ==================================================================
+/* Inventory view
+/* ================================================================== */
+/**
+ * This document defines the styling for the inventory layout
+**/
 
-  .filter-group {
-    label {
-      // display: block;
-    }
-  }  
+:root {
+  --ins-p-data-filters--Padding: #{$ins-global--spacer--lg};
+  --ins-p-data-filters--Margin: #{$ins-global--spacer--lg};
 
-  & + section.content {
-    @include rem('padding-top', $global-padding);
-  }
+}
+
+.ins-p-data-filters {
+  padding: var(--ins-p-data-filters--Padding);
 
   .radio-inline label {
     font-weight: 100;
   }
-}
 
-.data-filters .filters,
-.data-filters .active-filters {
-  display: flex;
-  flex-wrap: wrap;
+  &__filters,
+  &__active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
 
-  > * {
-    @include rem('margin', $global-padding/2 $global-padding);
-
-    // @include media-query(sm){ @include rem('margin', 0 $global-padding); }
+    > * {
+      @include rem('margin', $global-padding/2 $global-padding);
+    }
   }
 }
 
-.data-filters .active-filters {
-  align-items: baseline;
-}
+
 
 
 .data-filters.tags .active-filters {

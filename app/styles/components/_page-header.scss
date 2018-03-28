@@ -56,10 +56,6 @@
     flex: 1;
     font-size: var(--ins-p-page-header__title--FontSize);
     font-weight: var(--ins-p-page-header__title--FontWeight);
-  }
-
-  &__title {
-    // @include font-size(24px, 1.5);
     margin: 0;
   }
 

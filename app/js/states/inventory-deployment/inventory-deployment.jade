@@ -1,109 +1,107 @@
-.page-inventory
-  section
-    inventory-header(name='Summit Demo', region='Private Cloud', type='OpenStack & OpenShift')
-  table-filters
-    search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder="{{:: 'Find a system' | translate}}")
-    actions-select
+inventory-header(name='Summit Demo', region='Private Cloud', type='OpenStack & OpenShift')
+table-filters
+  search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder="{{:: 'Find a system' | translate}}")
+  actions-select
 
-    // Non-functioning filters
+  // Non-functioning filters
 
-    // Optimization Potential
-    .filter-group.optimization-potential-select
-      label(translate) Optimization Potential
-      md-menu(md-offset="0 38")
-        md-button.button-filter(
-          type='button',
-          data-toggle='dropdown',
-          aria-haspopup='true',
-          aria-expanded='false',
-          ng-click='$mdMenu.open($event)')
-          span.text.active(ng-model='label') All
-          span.caret
-        md-menu-content
-          md-menu-item
-            a High
-          md-menu-item
-            a Moderate
-          md-menu-item
-            a Low
+  // Optimization Potential
+  .filter-group.optimization-potential-select
+    label(translate) Optimization Potential
+    md-menu(md-offset="0 38")
+      md-button.button-filter(
+        type='button',
+        data-toggle='dropdown',
+        aria-haspopup='true',
+        aria-expanded='false',
+        ng-click='$mdMenu.open($event)')
+        span.text.active(ng-model='label') All
+        span.caret
+      md-menu-content
+        md-menu-item
+          a High
+        md-menu-item
+          a Moderate
+        md-menu-item
+          a Low
 
-    // Reliability Filter
-    .filter-group.reliability-select
-      label(translate) Reliability
-      md-menu(md-offset="0 38")
-        md-button.button-filter(
-          type='button',
-          data-toggle='dropdown',
-          aria-haspopup='true',
-          aria-expanded='false',
-          ng-click='$mdMenu.open($event)')
-          span.text.active(ng-model='label') All
-          span.caret
-        md-menu-content
-          md-menu-item
-            a High
-          md-menu-item
-            a Moderate
-          md-menu-item
-            a Low
+  // Reliability Filter
+  .filter-group.reliability-select
+    label(translate) Reliability
+    md-menu(md-offset="0 38")
+      md-button.button-filter(
+        type='button',
+        data-toggle='dropdown',
+        aria-haspopup='true',
+        aria-expanded='false',
+        ng-click='$mdMenu.open($event)')
+        span.text.active(ng-model='label') All
+        span.caret
+      md-menu-content
+        md-menu-item
+          a High
+        md-menu-item
+          a Moderate
+        md-menu-item
+          a Low
 
-    // Tags Filter
-    .filter-group.tags-select
-      label(translate) Tags
-      md-menu(md-offset="0 38")
-        md-button.button-filter(
-          type='button',
-          data-toggle='dropdown',
-          aria-haspopup='true',
-          aria-expanded='false',
-          ng-click='$mdMenu.open($event)')
-          span.text.active(ng-model='label') All
-          span.caret
-        md-menu-content
-          md-menu-item
-            a DMZ
-          md-menu-item
-            a Prod
+  // Tags Filter
+  .filter-group.tags-select
+    label(translate) Tags
+    md-menu(md-offset="0 38")
+      md-button.button-filter(
+        type='button',
+        data-toggle='dropdown',
+        aria-haspopup='true',
+        aria-expanded='false',
+        ng-click='$mdMenu.open($event)')
+        span.text.active(ng-model='label') All
+        span.caret
+      md-menu-content
+        md-menu-item
+          a DMZ
+        md-menu-item
+          a Prod
 
-  .rha-notifications
-  section.content
-    .table-utilities
+  //- .rha-notifications
+section.table-utilities
 
-    .card-table-header(ng-if='getListType() === listTypes.card')
-      md-checkbox.md-accent.md-hue-1.md-checkbox-list.checkbox(
-        tooltip="{{:: 'Select All' | translate}}",
-        aria-label='Select All Systems Checkbox',
-        tooltip-trigger='mouseenter',
-        tooltip-append-to-body='true',
-        tooltip-placement='top',
-        type="checkbox",
-        md-indeterminate="{{ checkboxes.indeterminate || false }}",
-        ng-model='checkboxes.checked',
-        ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
-      label.type(translate, ng-click="sort('system_type_id')") &nbsp; Type
-      strong.hostname(translate, ng-click="sort('toString')") Name &nbsp;
-      strong.action-count(translate, ng-click="sort('report_count')") Action Count
+section.ins-l-inventory
+  //- .card-table-header(ng-if='getListType() === listTypes.card')
+  //-   md-checkbox.md-accent.md-hue-1.md-checkbox-list.checkbox(
+  //-     tooltip="{{:: 'Select All' | translate}}",
+  //-     aria-label='Select All Systems Checkbox',
+  //-     tooltip-trigger='mouseenter',
+  //-     tooltip-append-to-body='true',
+  //-     tooltip-placement='top',
+  //-     type="checkbox",
+  //-     md-indeterminate="{{ checkboxes.indeterminate || false }}",
+  //-     ng-model='checkboxes.checked',
+  //-     ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
+  //-   label.type(translate, ng-click="sort('system_type_id')") &nbsp; Type
+  //-   strong.hostname(translate, ng-click="sort('toString')") Name &nbsp;
+  //-   strong.action-count(translate, ng-click="sort('report_count')") Action Count
 
-    .inventory.card-list.card-pf-view
-      card.card-pf-view.card-pf-view-select.card-pf-view-single-select(
-        ng-repeat='system in systems track by system.system_id | orderBy: "order"',
-        system='system',
-        ui-sref="app.system-overview({id: system.system_id})"
-        )
-        metadata-card(system='system')
+  //- .inventory.card-list.card-pf-view
+  card.card-pf-view.card-pf-view-select.card-pf-view-single-select(
+    ng-repeat='system in systems track by system.system_id | orderBy: "order"',
+    system='system',
+    ui-sref="app.system-overview({id: system.system_id})"
+    )
+    metadata-card(system='system')
 
-    .row.row-short(ng-if='!loading')
-      .col-sm-12
-        pagination.pull-right(
-          ng-if="totalSystems() > pager.perPage",
-          total-items="totalSystems()",
-          ng-model="pager.currentPage",
-          items-per-page="pager.perPage",
-          ng-change="doScroll()")
+  .row.row-short(ng-if='!loading')
+    .col-sm-12
+      pagination.pull-right(
+        ng-if="totalSystems() > pager.perPage",
+        total-items="totalSystems()",
+        ng-model="pager.currentPage",
+        items-per-page="pager.perPage",
+        ng-change="doScroll()")
 
-  .animate-wrapper.margin-top
-    .row.row-short.ng-animate-enabled(ng-if='loading')
-      .col-xs-12
-        .load.text-center
-          .spinner.spinner-lg
-          span(translate) Loading system information…
+.animate-wrapper.margin-top
+  .row.row-short.ng-animate-enabled(ng-if='loading')
+    .col-xs-12
+      .load.text-center
+        .spinner.spinner-lg
+        span(translate) Loading system information…

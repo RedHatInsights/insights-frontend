@@ -11,9 +11,9 @@
 }
 
 
-section.pmaas-map .page-header{};
+.pmaas-map .page-header{};
 
-section.grid-pmaas .card-pf {
+.grid-pmaas .card-pf {
 
 }
 
@@ -22,13 +22,13 @@ section.grid-pmaas .card-pf {
 //   @include rem('padding', $global-margin);
 // }
 
-section.grid-pmaas .c3-legend-item-tile {
+.grid-pmaas .c3-legend-item-tile {
   width: 12px;
   height: 12px;
   background: gray;
 }
 
-section.grid-pmaas .c3-legend-item {
+.grid-pmaas .c3-legend-item {
   display: grid;
   grid-template-columns: max-content max-content auto;
   grid-gap: $global-padding/2;
@@ -90,9 +90,11 @@ section.grid-pmaas .c3-legend-item {
 
 /* Deployments
 /* ================================================================== */
-section.ins-l-pmaas-deployments {
+.ins-l-pmaas-deployments {
   display: grid;
   grid-rows: 2;
+  height: 100%;
+  grid-template-rows: max-content auto;
 
   .ins-l-pmaas-deployments_cards {
     @include build-grid(md 1fr 1fr, lg 1fr 1fr 1fr 1fr);
@@ -114,15 +116,14 @@ section.ins-l-pmaas-deployments {
 
   .ins-l-pmaas-deployments_logs{
     @include build-grid(sm 1fr, md 1fr 1fr);
-    @include rem('margin', 0 -30px);
-    @include rem('padding', $global-margin $global-margin*2);
+    @include rem('padding', $global-margin);
     background: #fff;
   }
 }
 
 .c3-chart-arcs-title tspan { font-size: 12px; }
 
-section.ins-l-pmaas-deployments .c3-legend-item-tile {
+.ins-l-pmaas-deployments .c3-legend-item-tile {
   .blue { color: #0088CE; }
   .gray { color: #d1d1d1; }
   .red { color: #cc0000; }

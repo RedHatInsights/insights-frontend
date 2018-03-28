@@ -1,0 +1,14 @@
+/* ==================================================================
+/* Inventory view
+/* ================================================================== */
+/**
+ * This document defines the styling for the inventory layout
+**/
+
+
+/* Inventory layout
+/* ================================================================== */
+.ins-l-inventory {
+  @include build-grid(1fr, sm repeat 2 1fr, md repeat 4 1fr);
+  padding-top: 0;
+}

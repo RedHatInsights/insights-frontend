@@ -1,7 +1,7 @@
 .ins-l-pmaas-map
 
   // Page Header
-  section.page-header
+  header.ins-p-page-header.page-header.header
     .button-group.filter-group
       button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.all)", autofocus) All
       button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.publicCloud)") Public Cloud
@@ -39,7 +39,7 @@
 
 
   // Content
-  section.content.pmaas-map
+  .pmaas-map
     .map#map
       // this is an unnecessary wrapper, remove it
       .ins-c-map-popover#popover(ng-if="!loadingPop", style="display: none;")

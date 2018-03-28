@@ -1,6 +1,6 @@
-section#data-filters.data-filters(ng-class="{tags: hasTags()}")
-  .filters(ng-transclude)
-  .active-filters(ng-if='hasTags()', ng-model='tags')
+section#data-filters.ins-p-data-filters(ng-class="{tags: hasTags()}")
+  .ins-p-data-filters__filters(ng-transclude)
+  .ins-p-data-filters__active-filters(ng-if='hasTags()', ng-model='tags')
     strong(translate) Active filters:&nbsp;
     // remove filter on click
     button.button-active-filter.button-tag(ng-repeat="(key, value) in tags", ng-click='removeFilter(key)')

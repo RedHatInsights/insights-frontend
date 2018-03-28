@@ -1,3 +1,8 @@
+.platform-grid main {
+  height: 100%;
+  grid-template-rows: max-content auto;
+}
+
 .platform-grid {
   @include media-query(sm){
     display: grid;
