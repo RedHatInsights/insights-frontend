@@ -61,7 +61,9 @@ const data = [latencyTrace];
 
 const layout = {
     autosize: true,
-    title: 'Network Latency',
+    font: {
+        family: 'overpass, helvetica'
+    },
     xaxis: {
         title: 'Latency (ms)',
         range: [0, 100]
@@ -70,11 +72,10 @@ const layout = {
         title: '% of Total Systems'
     },
     margin: {
-        l: 50,
-        r: 30,
-        b: 60,
-        t: 60,
-        pad: 4
+        l: 40,
+        r: 0,
+        b: 40,
+        t: 20
     },
     shapes: [
         {
@@ -98,7 +99,7 @@ function latencyGraphCtrl($scope, $element) {
         .append('div')
         .style({
             width: '100%',
-            height: '250px'
+            height: '200px'
         })
         .node();
 

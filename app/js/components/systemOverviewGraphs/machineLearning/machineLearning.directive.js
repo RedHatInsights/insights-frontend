@@ -13,7 +13,7 @@ function machineLearning() {
         templateUrl:
             'js/components/systemOverviewGraphs/machineLearning/machineLearning.html',
         restrict: 'E',
-        replace: true,
+        replace: false,
         controller: machineLearningCtrl,
         scope: {}
     };

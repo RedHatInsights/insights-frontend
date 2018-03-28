@@ -41,21 +41,22 @@ const data = [storageMtuTrace];
 
 const layout = {
     autosize: true,
-    title: 'Storage Network MTU',
+    font: {
+        family: 'overpass, helvetica'
+    },
     xaxis: {
         title: 'MTU Size',
         range: [0, 12000]
     },
     yaxis: {
         title: '% of Total Systems',
-        range: [0, 100]
+        range: [0, 99]
     },
     margin: {
-        l: 50,
-        r: 30,
-        b: 60,
-        t: 60,
-        pad: 4
+        l: 40,
+        r: 0,
+        b: 40,
+        t: 20
     },
     shapes: [
         {
@@ -79,7 +80,7 @@ function storageMtuGraphCtrl($scope, $element) {
         .append('div')
         .style({
             width: '100%',
-            height: '250px'
+            height: '200px'
         })
         .node();
 

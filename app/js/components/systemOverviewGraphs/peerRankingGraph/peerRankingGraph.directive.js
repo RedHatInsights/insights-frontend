@@ -38,13 +38,17 @@ const data = [sampleTrace, industryTrace];
 
 const layout = {
     autosize: true,
+    font: {
+        family: 'overpass, helvetica'
+    },
     legend: {
         x: 0.75,
         y: 1
     },
     xaxis: {
         autorange: true,
-        type: 'date'
+        type: 'date',
+        linecolor: 'rgba(238, 238, 238, 1)'
     },
     yaxis: {
         autorange: false,
@@ -52,11 +56,10 @@ const layout = {
         type: 'linear'
     },
     margin: {
-        l: 50,
+        l: 30,
         r: 30,
         b: 50,
-        t: 0,
-        pad: 4
+        t: 0
     }
 };
 

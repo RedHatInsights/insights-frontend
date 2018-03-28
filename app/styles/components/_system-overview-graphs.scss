@@ -12,141 +12,131 @@
 
 .system-overview-graphs {
 
-  .tabs-hack { height: 100%; }
+  padding-bottom: 0;
 
+  md-content {
+    @include rem('margin-top', $global-margin);
+  }
+
+  .card-pf {
+    border: solid 1px #d1d1d1;
+    box-shadow: 0 1px 1px rgba(3, 3, 3, .175);
+  }
+
+  .card-pf.graph-card {
+    grid-gap: 0;
+  }
+
+  .plotly .main-svg {
+    width: 100%;
+  }
+
+  .peer-ranking,
   .machine-learning-graphs-container {
-    // this should be a flex grid, but the plotly graphs aren't resizing smaller when
-    // resizing the screen smaller, only bigger. This will have to do for now
-
-    .ml-graph {
-      height: 240px;
-      display: inline-block;
-    }
-
-    @include media-query(sm) {
-      .ml-graph { width: 100%; }
-    }
-
-    @include media-query(lg) {
-      .ml-graph { width: 50%; }
-    }
-
-    @include media-query(xl) {
-      .ml-graph { width: 33%; }
-    }
+    padding: 0;
   }
 }
 
 .peer-ranking {
-  // display: block;
-
-  .percentile-title {
-    // @include rem('padding', $global-padding)
-  }
-
-  .percentile-container {
-    display: block;
-
-    .percentile { display: inline-block; }
-
-    .pficon-trend-down { color: #C80000; }
-
-    .pficon-trend-up { color: #5cb85c; }
-  }
-
-  .peer-ranking-overview {
-    @include rem('padding', $global-margin);
-    border: solid 1px lightgrey;
-    box-shadow: 0 1px 1px rgba(3, 3, 3, .175);
-    // @include rem('width', 240px);
-    // @include rem('height', 240px);
-    // @include font-size(20px);
-    // @include rem('margin-right', $global-padding);
-    // @include rem('margin-bottom', $global-padding);
-    // display: inline-block;
-    // vertical-align: top;
-
-    // .percentile { @include rem('padding', $global-padding); }
-
-    h1.percentile-number {
-      @include font-size(46px);
-      // margin-bottom: 0;
-      // margin-top: 0;
-    }
-
-    .percentile-container .percentile-trend {
-      // display: flex;
-      // flex-direction: column;
-      // justify-content: center;
-    }
-
-    .scan-info {
-      // font-size: 14px;
-      // @include rem('padding', 0 $global-padding);
-    }
-  }
-
-  @include media-query(sm) {
-    .peer-ranking-graph {
-      // width: 100%;
-      // display: block;
-    }
-  }
-
-  @include media-query(xl) {
-    .peer-ranking-overview {
-      // display: inline-block;
-    }
-
-    .peer-ranking-graph {
-      // width: calc(100% - 600px);
-      // display: inline-block;
-    }
-  }
-}
-
-.plotly .main-svg {
-  width: 100%;
-}
-
-.peer-ranking-graph {
-  display: flex;
-  flex-direction: column;
-  border: solid 1px lightgrey;
-  box-shadow:0 1px 1px rgba(3, 3, 3, 0.175);
-  grid-column: span 2;
-
-  .percentile-title {
-    margin: 1.875rem 0 0 1.875rem;
-  }
-
-  @include media-query(xl) {
-    grid-column: auto;
-  }
-
-  .svg-container {
-    width: 100% !important;
-  }
-}
-
-.ins-l-peer-ranking {
   @include build-grid(repeat 2 1fr, xl max-content max-content auto);
   padding: 0;
 
-.ins-l-peer-ranking-overview {
-  width: max-content;
-  // height: fit-content;
-}
+  .peer-ranking-card {
 
+    .percentile-number {
+      @include font-size(36px);
+      color: #72767b;
+    }
 
-  .ins-l-peer-ranking-detail {
-  
-   > * {
-     flex-basis: calc(100% - #{$flex-gutter)});
-  
-     @include media-query(sm) { flex-basis: calc(50% - #{$flex-gutter)}); }
-     @include media-query(xl) { flex-basis: calc(33.33% - #{$flex-gutter)}); }
-     @media screen and (min-width: 1550px) { flex-basis: calc(25% - #{$flex-gutter)}); }
-   }
+    .peer-ranking-graph {
+      width: 100%;
+
+      .svg-container {
+        width: 100% !important;
+      }
+    }
+  }
+
+  .peer-ranking-card.peer-ranking-trend {
+    grid-column: span 2;
+
+    @include media-query(xl) {
+      grid-column: auto;
+    }
   }
 }
+
+.machine-learning-graphs-container {
+  @include media-query(sm) {
+    @include build-grid(1fr);
+  }
+
+  @include media-query(lg) {
+    @include build-grid(1fr 1fr);
+  }
+
+  @include media-query(xl) {
+    @include build-grid(1fr 1fr 1fr);
+  }
+
+  .ml-graph {
+    .svg-container {
+      width: 100% !important;
+    }
+  }
+}
+
+///* System Overview Graph Cards
+///* ================================================================== */
+//.card-sog-heading,
+//.card-sog-body,
+//.card-sog-footer {
+//  background: none;
+//  border: none;
+//  //height: fit-content;
+//}
+//
+//.card-sog {
+//  //display: grid;
+//  grid-gap: var(--global-margin);
+//  margin: 0;
+//  border: solid 1px #d1d1d1;
+//  box-shadow: 0 1px 1px rgba(3, 3, 3, .175);
+//}
+//
+//.card-sog .card-sog-heading{
+//  padding: var(--global-padding);
+//  //border-bottom: 1px solid #d1d1d1;
+//  height: 54px;
+//}
+//
+//.card-sog .card-sog-heading .card-sog-title {
+//  @include font-size(16px);
+//  font-weight: 400;
+//  margin: 0;
+//}
+//
+//.card-sog .card-sog-body {
+//  //@include build-grid(grid-gap $global-margin);
+//  padding: var(--global-padding);
+//  height: calc(100% - 54px);
+//  display: flex;
+//  align-items: center;
+//  //justify-content: center;
+//}
+//
+//.card-sog.text-center {
+//  text-align: center;
+//}
+//
+//.card-sog.text-left {
+//  text-align: left;
+//}
+//
+//.card-sog .card-sog-item {
+//  @include font-size(14px, 1);
+//}
+//
+//.card-sog-footer {
+//  padding: var(--global-padding);
+//}

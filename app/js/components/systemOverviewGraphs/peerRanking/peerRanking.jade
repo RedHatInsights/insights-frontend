@@ -1,23 +1,34 @@
-.peer-ranking-overview
-  .percentile-title All Systems
-  .percentile-container
-    .percentile.percentile-text
-      h1.percentile-number 45th
-      p Percentile
-  .scan-info
-    .number-systems
-      span of
-      strong  2.5 M
-      span  Similar Systems
-.peer-ranking-overview
-  .percentile-title Industry
-  .percentile-container
-    .percentile.percentile-text
-      h1.percentile-number 57th
-      p Percentile
-  .scan-info
-    .number-systems
-      span of
-      strong  100 K
-      span  Similar Systems
-peer-ranking-graph
+.peer-ranking
+  .card-pf.peer-ranking-card
+    .card-pf-heading
+      h2.card-pf-title All Systems
+    .card-pf-body
+      .percentile-container
+        .percentile.percentile-text
+          span.percentile-number 45th
+          span  Percentile
+        .number-systems
+          span of
+          strong  2.5 M
+          span  Similar Systems
+    .card-pf-footer
+
+  .card-pf.peer-ranking-card
+    .card-pf-heading
+      h2.card-pf-title Industry
+    .card-pf-body
+      .percentile-container
+        .percentile.percentile-text
+          span.percentile-number 57th
+          span  Percentile
+        .number-systems
+          span of
+          strong  100 K
+          span  Similar Systems
+    .card-pf-footer
+
+  .card-pf.peer-ranking-card.graph-card.peer-ranking-trend
+    .card-pf-heading
+      h2.card-pf-title Peer Ranking Trend
+    .card-pf-body
+      peer-ranking-graph

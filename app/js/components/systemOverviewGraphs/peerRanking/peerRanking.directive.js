@@ -14,7 +14,7 @@ function peerRanking() {
         templateUrl:
             'js/components/systemOverviewGraphs/peerRanking/peerRanking.html',
         restrict: 'E',
-        replace: false,
+        replace: true,
         controller: peerRankingCtrl,
         scope: {}
     };
