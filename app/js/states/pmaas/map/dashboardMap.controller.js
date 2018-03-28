@@ -323,10 +323,14 @@ priv.redraw = () => {
     priv.svg.selectAll('path').attr('d', priv.path);
 };
 
-function generateCharts(chartData) {
+function generateCharts(chartData, popover) {
     for (const data of chartData) {
+        const bindto = popover ? `.chart-${data.name}-popover` :
+            `.chart-${data.name}`;
+        console.log(bindto);
+
         c3.generate(donutSettings({
-            bindto: `.chart-${data.name}`,
+            bindto: bindto,
             data: {
                 columns: data.columns,
                 type: 'donut',
@@ -348,7 +352,6 @@ function DashboardMapCtrl($timeout, $scope) {
 
     $scope.filterPins = function (filter) {
         priv.pins.forEach(p => {
-            console.log(p);
             if (p.data.type === filter ||
                 filter === deployment_types.all) {
                 p.drawable.style('display', 'inline');
@@ -360,6 +363,36 @@ function DashboardMapCtrl($timeout, $scope) {
 
     $timeout(() => {
         priv.init(priv.getConf(), $scope);
+        generateCharts(charts, true);
+
+        d3.select('.chart-vulnerability-popover')
+        .select('.c3-chart-arcs-title')
+        .append('tspan')
+        .attr('dy', 25)
+        .attr('x', 0)
+        .text('Secure');
+
+        d3.select('.chart-compliance-popover')
+            .select('.c3-chart-arcs-title')
+            .append('tspan')
+            .attr('dy', 25)
+            .attr('x', 0)
+            .text('Compliant');
+
+        d3.select('.chart-advisor-popover')
+            .select('.c3-chart-arcs-title')
+            .append('tspan')
+            .attr('dy', 25)
+            .attr('x', 0)
+            .text('Optimized');
+
+        d3.select('.chart-subscription-popover')
+            .select('.c3-chart-arcs-title')
+            .append('tspan')
+            .attr('dy', 25)
+            .attr('x', 0)
+            .text('Utilized');
+        console.log(d3.select('.chart-vulnerability-popover'));
     }, 250);
 
     window.onresize = () => priv.reInit(priv.getConf());

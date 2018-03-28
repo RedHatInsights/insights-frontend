@@ -43,6 +43,7 @@
     .map#map
       // this is an unnecessary wrapper, remove it
       .ins-c-map-popover#popover(ng-if="!loadingPop", style="display: none;")
+        i.fa.fa-times.pull-right(ng-click="closePopover()")
         .ins-c-map-popover__header
           i.fa.fa-times-circle.alert-danger(ng-if="popover.issues")
           i.fa.fa-check-circle.alert-success(ng-if="!popover.issues")
@@ -51,13 +52,32 @@
             .subtitle {{popover.subtitle}}
         .ins-c-map-popover__body
           .donut-chart.pf-is-with-text.pf-is-small
+            .chart.chart-vulnerability-popover#vulnerability-popover
             .chart-info
-              .chart-title Vulnerability
-              b 82%  
+              .chart-title {{charts.vulnerability.name}}
+              b {{charts.vulnerability.title}} &nbsp;
               span Secure
-          .placeholder
-          .placeholder
-          .placeholder
+
+          .donut-chart.pf-is-with-text.pf-is-small
+            .chart.chart-compliance-popover#compliance-popover
+            .chart-info
+              .chart-title {{charts.compliance.name}}
+              b {{charts.compliance.title}} &nbsp;
+              span Compliant
+
+          .donut-chart.pf-is-with-text.pf-is-small
+            .chart.chart-advisor-popover#advisor-popover
+            .chart-info
+              .chart-title {{charts.advisor.name}}
+              b {{charts.advisor.title}} &nbsp;
+              span Optimized
+
+          .donut-chart.pf-is-with-text.pf-is-small
+            .chart.chart-subscription-popover#subscription-popover
+            .chart-info
+              .chart-title {{charts.subscription.name}}
+              b {{charts.subscription.title}} &nbsp;
+              span Utilized
       .ins-c-zoom
         button
           i.fa.fa-plus
