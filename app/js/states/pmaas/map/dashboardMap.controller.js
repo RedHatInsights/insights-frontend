@@ -203,10 +203,8 @@ priv.init = (conf) => {
         .attr('height', conf.height)
         .on('click', function () {console.log(priv.projection(d3.mouse(this)));});
 
-    priv.popover = d3.select('#map')
-        .append('div')
+    priv.popover = d3.select('#popover')
         .attr('id', 'popover')
-        .attr('class', 'ins-c-map-popover')
         .style('display', 'none');
 
     priv.centroids = priv.svg.append('g')
@@ -242,9 +240,10 @@ priv.init = (conf) => {
 
                         // Transform it back to SVG coordinate space
                         const svgCoord = pt.matrixTransform(svg.getCTM().inverse());
+                        const pos = `left:${svgCoord.x}px;top:${svgCoord.y - 100}px`;
 
                         priv.popover.style('display', 'inline')
-                            .attr('style', `left:${svgCoord.x}px;top:${svgCoord.y}px`)
+                            .attr('style', pos)
                             .style('position', 'absolute')
                             .style('color', '#222')
                             .style('background', '#fff')

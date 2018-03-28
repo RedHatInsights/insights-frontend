@@ -42,22 +42,21 @@
   section.content.pmaas-map
     .map#map
       // this is an unnecessary wrapper, remove it
-      .popover-block 
-        .ins-c-map-popover
-          .ins-c-map-popover__header
-            i.fa.fa-times-circle.alert-danger
+      .ins-c-map-popover#popover
+        .ins-c-map-popover__header
+          i.fa.fa-times-circle.alert-danger
+          .chart-info
+            span Self-Service Cloud
+            .subtitle Azure Europe | OpenShift
+        .ins-c-map-popover__body
+          .donut-chart.pf-is-with-text.pf-is-small
             .chart-info
-              span Self-Service Cloud
-              .subtitle Azure Europe | OpenShift
-          .ins-c-map-popover__body
-            .donut-chart.pf-is-with-text.pf-is-small
-              .chart-info
-                .chart-title Vulnerability
-                b 82%  
-                span Secure
-            .placeholder
-            .placeholder
-            .placeholder      
+              .chart-title Vulnerability
+              b 82%  
+              span Secure
+          .placeholder
+          .placeholder
+          .placeholder
       .ins-c-zoom
         button
           i.fa.fa-plus
