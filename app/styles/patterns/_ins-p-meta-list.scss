@@ -1,0 +1,30 @@
+/* ==================================================================
+/* Meta list
+/* ================================================================== */
+/**
+ * This document defines the styling for the page header
+**/
+
+$ins-p-meta-list__item--Padding:  $ins-global--spacer--sm;
+$ins-p-meta-list__item--Margin:   $ins-global--spacer--sm;
+
+:root {
+  // --ins-p-page-header__subtitle-: var(--ins-global--spacer-sm);
+  --ins-p-meta-list__item--Padding: $ins-p-page-header__item--Padding;
+  --ins-p-meta-list__item--Margin: $ins-p-page-header__item--Margin;
+}
+
+
+/* Meta list base styling
+/* ================================================================== */
+.ins-p-meta-list {
+  &__item {
+    i + span {
+      margin-left: var(--ins-p-meta-list__item--Margin);
+    }
+  }
+
+  &.ins-is-horizontal {
+    display: flex;
+  }
+}

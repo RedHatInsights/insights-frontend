@@ -1,0 +1,12 @@
+// Strip units
+@function ins-strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+@function ins-size-prem($pxval, $base: $ins-global--space-size-root) {
+  @return ins-strip-unit($pxval) / $base * 1rem;
+}
+
+@function ins-font-prem($pxval, $base: $ins-global--font-size-root) {
+  @return ins-strip-unit($pxval) / $base * 1rem;
+}

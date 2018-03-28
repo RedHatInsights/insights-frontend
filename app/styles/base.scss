@@ -1,6 +1,7 @@
 $define-fa: true !default;
 // Include Settings / Functions
 //==================================================================*/
+@import 'includes/functions';
 @import 'includes/vars';
 @import 'includes/colors';
 @import 'includes/mixins';
@@ -158,6 +159,11 @@ $define-fa: true !default;
 
 
 @import 'ins/ins-l--flex';
+
+
+/* Patterns
+/* ================================================================== */
+@import 'patterns/ins-p-meta-list';
 
 
 // System Overlay

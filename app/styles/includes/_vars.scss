@@ -3,6 +3,45 @@ $global-padding: 15px;
 $global-margin: 30px;
 $namespace: 'ins-';
 
+$ins-global--space-size-root:            14;
+$ins-global--font-size-root:             14 !default; //for fonts
+
+$ins-global--body--FontSize:             ins-font-prem(14px);
+
+$ins-global--spacer--sm:                 ins-size-prem(15px) !default;
+$ins-global--spacer--md:                 ins-size-prem(24px) !default;
+$ins-global--spacer--lg:                 ins-size-prem(30px) !default;
+
+$ins-global--hero-title--FontSize:       ins-font-prem(48px) !default;
+$ins-global--main-title--FontSize:       ins-font-prem(32px) !default;
+$ins-global--secondary-title--FontSize:  ins-font-prem(24px) !default;
+$ins-global--sub-title--FontSize:        ins-font-prem(19px) !default;
+$ins-global--body--FontSize:             ins-font-prem(16px) !default;
+$ins-global--caption--FontSize:          ins-font-prem(12px) !default;
+
+
+// Font Weight
+$ins-global--FontWeight--light:           300;
+$ins-global--FontWeight--normal:          500;
+$ins-global--FontWeight--semi-bold:       600;
+$ins-global--FontWeight--bold:            700;
+
+
+// Font Size
+$ins-global--FontSize--base:              ins-font-prem(14px) !default;
+$ins-global--FontSize--sm:                ins-font-prem(16px) !default;
+$ins-global--FontSize--md:                ins-font-prem(24px) !default;
+$ins-global--FontSize--lg:                ins-font-prem(32px) !default;
+$ins-global--FontSize--xl:                ins-font-prem(48px) !default;
+
+
+// Line Height
+$ins-global--LineHeight--sm:               1.2 !default;
+$ins-global--LineHeight--md:               1.5 !default;
+$ins-global--LineHeight--lg:               1.8 !default;
+
+
+// Colors
 
 
 :root {
@@ -12,6 +51,8 @@ $namespace: 'ins-';
   --global-grid-gap: #{$global-margin};
 
   --insights-namespace: #{$namespace};
+  --ins-global--spacer-sm: $ins-global--spacer-sm;
+  --ins-global--spacer-lg: $ins-global--spacer-lg;
 }
 
 
@@ -30,7 +71,7 @@ $lg: 1200px;
 $xl: 1440px;
 
 
-$base-font-size: 16px;
+$base-font-size: 14px;
 $base-color: #4c4c4c;
 $base-font-family: 'overpass', Arial, Helvetica, sans-serif;
 $brand-gray: $base-color;

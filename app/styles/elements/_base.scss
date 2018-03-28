@@ -4,7 +4,19 @@ $min_font: 14px;
 $max_font: 16px;
 
 html {
+  font-size: unset;
+  font-size: 14px;
+
   // @include fluid-type($min_width, $max_width, $min_font, $max_font);
+}
+
+[class^="ins-"],
+[class^="ins-"]::before,
+[class^="ins-"]::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: $ins-global--body--FontSize;
 }
 
 button, 

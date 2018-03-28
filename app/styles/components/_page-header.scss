@@ -1,9 +1,35 @@
+/* ==================================================================
+/* Page header
+/* ================================================================== */
+/**
+ * This document defines the styling for the page header
+**/
+
+
+:root {
+  --ins-p-page-header--Padding: #{$ins-global--spacer--lg};
+  --ins-p-page-header--Margin: #{$ins-global--spacer--lg};
+
+  --ins-p-page-header__title--Margin:         #{$ins-global--spacer--sm};
+  --ins-p-page-header__title--Padding:        #{$ins-global--spacer--sm};
+  --ins-p-page-header__title--FontSize:       #{$ins-global--FontSize--md};
+  --ins-p-page-header__title--FontWeight:     #{$ins-global--FontWeight--light};
+
+  --ins-p-page-header__subtitle--Margin:      #{$ins-global--spacer--sm};
+  --ins-p-page-header__subtitle--Padding:     #{$ins-global--spacer--sm};
+  --ins-p-page-header__subtitle--FontSize:    #{$ins-global--FontSize--base};
+  --ins-p-page-header__subtitle--FontWeight:  #{$ins-global--FontWeight--bold};
+  --ins-p-page-header__subtitle--LineHeight:  #{$ins-global--LineHeight--lg};
+}
+
+@warn $ins-global--LineHeight--md;
+
 .page-header {
   background: #fff;
   border-bottom: 1px solid #d1d1d1;
   box-shadow: 0 1px 0 rgba(3,3,3,.045);
   margin: 0;
-  @include rem('padding', $global-margin);
+  padding: var(--ins-p-page-header--Padding);
 
 	h1 {
 		@include font-size(24px, 1);
@@ -13,4 +39,57 @@
 			margin-right: 10px;
 		}
 	}
+}
+
+/* Page header styling
+/* ================================================================== */
+.ins-p-page-header {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #d1d1d1;
+  box-shadow: 0 1px 0 rgba(3,3,3,.045);
+  margin: 0;
+  padding: var(--ins-p-page-header--Padding);
+
+  &__title {
+    font-size: var(--ins-p-page-header__title--FontSize);
+    font-weight: var(--ins-p-page-header__title--FontWeight);
+  }
+
+  &__title {
+    flex: 1;
+  }
+
+  &__title {
+    // @include font-size(24px, 1.5);
+    margin: 0;
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: var(--ins-p-page-header__subtitle--FontSize);
+    font-weight: var(--ins-p-page-header__subtitle--FontWeight);
+    line-height: var(--ins-p-page-header__subtitle--LineHeight);
+    text-transform: uppercase;
+
+    span + span {
+      padding-left: var(--ins-p-page-header__subtitle--Padding);
+      margin-left: var(--ins-p-page-header__subtitle--Margin);
+      border-left: 1px solid $base-color;
+    }
+  }
+
+  &.ins-has-charts,
+  &.ins-has-meta-list {
+    .ins-p-chart-list, 
+    .ins-p-meta-list {
+      margin-left: auto;
+    }
+  }
+
+  &__charts,
+  &__meta {
+    margin-left: auto;
+  }
 }
