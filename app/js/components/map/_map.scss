@@ -5,6 +5,13 @@
  * This document defines the styling for the pmaas layout
 **/
 
+.insights-app-dashboard-map .platform-grid main {
+  height: 100%;
+}
+
+.insights-app-dashboard-map .ins-p-page-header {
+  padding: $global-padding;
+}
 
 /* Map base styling
 /* ================================================================== */

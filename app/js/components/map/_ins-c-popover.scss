@@ -67,5 +67,11 @@
   .ins-p-chart-list {
     @include build-grid(1fr, sm repeat 2 1fr);
     padding: 0;
+    grid-row-gap: $global-padding;
+    margin: 0;
+
+    .ins-p-chart-list__item {
+      margin: 0;
+    }
   }
 }
