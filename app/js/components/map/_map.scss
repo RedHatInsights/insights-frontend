@@ -6,7 +6,9 @@
 **/
 
 .insights-app-dashboard-map .platform-grid main {
-  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%
 }
 
 .insights-app-dashboard-map .ins-p-page-header {
@@ -51,7 +53,7 @@
 
 .ins-l-pmaas-map .map {
   position: relative;
-  height: 100%;
+  // height: 100%;
 }
 
 // Hide text
