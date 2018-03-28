@@ -36,17 +36,17 @@ const pinLocations = {
             array: [-122.490402, 37.786453],
             popover: {
                 title: 'Summit Demo',
-                subtitle: 'Private Cloud | OpenStack & OpenShift',
-                issue: true
-            }
+                subtitle: 'Private Cloud | OpenStack & OpenShift'
+            },
+            issues: true
         }, {
             name: 'virgina',
             array: [-78.024902, 37.926868],
             popover: {
                 title: 'Summit Demo',
-                subtitle: 'aws East | OpenShift',
-                issue: false
-            }
+                subtitle: 'aws East | OpenShift'
+            },
+            issues: false
         }]
     },
     CAN: {
@@ -62,9 +62,9 @@ const pinLocations = {
             array: [10, 52.520008],
             popover: {
                 title: 'Self-Service Cloud',
-                subtitle: 'Azure Europe | OpenShift',
-                issue: false
-            }
+                subtitle: 'Azure Europe | OpenShift'
+            },
+            issues: false
         }]
     }
 };
@@ -241,7 +241,7 @@ priv.init = (conf, $scope) => {
                     .attr('width', () => pinConfig.width)
                     .attr('height', () => pinConfig.height)
                     .attr('xlink:href', d => {
-                        if (d.name === 'San Francisco') {
+                        if (d.issues) {
                             return 'static/images/i_pin-has-error.svg';
                         } else {
                             return 'static/images/i_pin-good.svg';
@@ -250,7 +250,9 @@ priv.init = (conf, $scope) => {
                     .style('display', 'inline')
                     .on('mouseenter', function (d) {
                         $scope.popover = d.popover;
+                        $scope.popover.issues = d.issues;
                         $scope.$apply();
+
                         const svg = priv.svg[0][0];
                         const pt = svg.createSVGPoint();
 

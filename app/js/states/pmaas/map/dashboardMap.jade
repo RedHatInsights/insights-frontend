@@ -44,8 +44,8 @@
       // this is an unnecessary wrapper, remove it
       .ins-c-map-popover#popover(ng-if="!loadingPop", style="display: none;")
         .ins-c-map-popover__header
-          i.fa.fa-times-circle.alert-danger(ng-if="popover.issue")
-          i.fa.fa-check-circle.alert-success(ng-if="!popover.issue")
+          i.fa.fa-times-circle.alert-danger(ng-if="popover.issues")
+          i.fa.fa-check-circle.alert-success(ng-if="!popover.issues")
           .chart-info
             span {{popover.title}}
             .subtitle {{popover.subtitle}}
