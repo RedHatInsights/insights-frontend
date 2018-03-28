@@ -55,7 +55,6 @@
   }
 
   &__body {
-    @include build-grid(1fr 1fr);
     padding: $global-margin;
 
     .placeholder {
@@ -63,5 +62,10 @@
       height: 50px;
       background: lightgray;
     }
+  }
+
+  .ins-p-chart-list {
+    @include build-grid(1fr, sm repeat 2 1fr);
+    padding: 0;
   }
 }

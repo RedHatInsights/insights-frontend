@@ -23,7 +23,7 @@
   &__item {
     display: flex;
     flex: 1;
-    align-items: first baseline;
+    align-items: center;
     margin: 0 var(--ins-p-meta-list__item--Margin);
     font-size: var(--ins-p-meta-list__item--FontSize);
 
@@ -52,22 +52,31 @@
   }
 }
 
-/* Donut chart
+/* Overrides
 /* ================================================================== */
-.donut-chart {
-  @include build-grid(min-content auto);
-  grid-gap: 0;
-  align-items: center;
-  padding: 0;
-
-
-  .pf-is-with-text {
-    text-align: left;
-    .chart-title { text-transform: capitalize; }
-    .chart-info { line-height: 1.2; }
-  }
-
-  &.pf-is-small {
-    @include font-size(12px);
+.ins-p-chart-list {
+  .c3-chart-arc text,
+  .c3-chart-arcs-title {
+    display: none;
   }
 }
+
+/* Donut chart
+/* ================================================================== */
+// .donut-chart {
+//   @include build-grid(min-content auto);
+//   grid-gap: 0;
+//   align-items: center;
+//   padding: 0;
+
+
+//   .pf-is-with-text {
+//     text-align: left;
+//     .chart-title { text-transform: capitalize; }
+//     .chart-info { line-height: 1.2; }
+//   }
+
+//   &.pf-is-small {
+//     @include font-size(12px);
+//   }
+// }
