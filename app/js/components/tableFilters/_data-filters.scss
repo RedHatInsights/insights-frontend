@@ -24,8 +24,8 @@
     flex-wrap: wrap;
     align-items: baseline;
 
-    > * {
-      @include rem('margin', $global-padding/2 $global-padding);
+    > * + * {
+      margin-left: var(--ins-p-data-filters--Margin);
     }
   }
 }
@@ -43,14 +43,6 @@
 
 }
 
-.data-filters .table-search { 
-  flex: 1 1 100%;
-
-  @include media-query(sm){ 
-    flex: 0 1 0%; 
-    align-self: flex-end;
-  }
-}
 
 
 .data-filters .filter-group.filter-group-radios { 

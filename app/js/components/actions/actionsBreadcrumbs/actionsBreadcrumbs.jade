@@ -1,4 +1,4 @@
-.breadcrumbs
+section.breadcrumbs
   ol(ng-if="getCrumbs().length")
     li(ng-repeat='crumb in getCrumbs() track by crumb.label', ng-class="{active: $last}" ng-show="getCrumbs().length > 1")
       a(ng-hide="$last", ng-click='crumbClick(crumb)') {{:: crumb.label | translate | titlecase}}

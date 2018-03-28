@@ -9,7 +9,7 @@
     grid-template-areas: "topbar"
                       "main"
                       "primary-nav";    
-    height: 100vh;
+    min-height: 100vh;
     grid-template-rows: max-content 1fr;
   }
 

@@ -1,15 +1,14 @@
-.page-system-overview
-  // TODO Make breadcrumbs from any state
-  .breadcrumbs
-      ol
-        li
-          a(ui-sref='app.inventory-deployment')
-            span(translate) Inventory
-        li
-          span {{system.hostname}}
-  page-header(title="System Overview")
+// TODO Make breadcrumbs from any state
+section.breadcrumbs
+    ol
+      li
+        a(ui-sref='app.inventory-deployment')
+          span(translate) Inventory
+      li
+        span {{system.hostname}}
+page-header(title="System Overview")
 
-  .text-center(ng-if='loading.pageLoading')
-    .spinner.spinner-lg
+.text-center(ng-if='loading.pageLoading')
+  .spinner.spinner-lg
 
-  system-metadata.ins-l-system-metadata(system='system', ng-if="!loading.pageLoading")
+system-metadata.ins-l-system-metadata(system='system', ng-if="!loading.pageLoading")

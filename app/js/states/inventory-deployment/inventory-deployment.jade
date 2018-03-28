@@ -90,14 +90,12 @@ section.ins-l-inventory
     )
     metadata-card(system='system')
 
-  .row.row-short(ng-if='!loading')
-    .col-sm-12
-      pagination.pull-right(
-        ng-if="totalSystems() > pager.perPage",
-        total-items="totalSystems()",
-        ng-model="pager.currentPage",
-        items-per-page="pager.perPage",
-        ng-change="doScroll()")
+  pagination(
+    ng-if="totalSystems() > pager.perPage && !loading",
+    total-items="totalSystems()",
+    ng-model="pager.currentPage",
+    items-per-page="pager.perPage",
+    ng-change="doScroll()")
 
 .animate-wrapper.margin-top
   .row.row-short.ng-animate-enabled(ng-if='loading')

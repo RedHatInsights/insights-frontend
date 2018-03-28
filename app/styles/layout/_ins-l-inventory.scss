@@ -10,5 +10,14 @@
 /* ================================================================== */
 .ins-l-inventory {
   @include build-grid(1fr, sm repeat 2 1fr, md repeat 4 1fr);
-  padding-top: 0;
+  padding: 0 $global-padding;
+
+  .pagination {
+    grid-column: span 1;
+    justify-self: end;
+    margin: 0;
+
+    @include media-query(sm) { grid-column: span 2; }
+    @include media-query(md) { grid-column: span 4; }
+  }
 }

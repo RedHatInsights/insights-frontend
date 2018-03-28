@@ -76,6 +76,14 @@
   margin: 0;
 }
 
+.list-item-header-text {
+  display: flex;
+
+  .list-view-pf-checkbox {
+    align-self: flex-start;
+  }
+}
+
 
 /* List item header expandable
 /* ================================================================== */
