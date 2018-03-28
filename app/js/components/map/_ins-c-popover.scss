@@ -1,0 +1,51 @@
+/* ==================================================================
+/* Map popovers
+/* ================================================================== */
+/**
+ * This document defines the styling for the pmaas layout
+**/
+
+
+.ins-c-map-popover {
+  position: relative;
+  @include build-grid(1fr 1fr);
+  grid-template-rows: max-content max-content;
+  margin-top: -70px;
+  margin-left: 28px;
+  padding: 0;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.3);
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent; 
+    
+    border-right:10px solid #fff; 
+  }
+
+  &__header {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: $global-margin $global-margin 0 $global-margin;
+    padding-bottom: $global-padding;
+
+    border-bottom: 1px solid #cfcfcf;
+
+  }
+
+  &__body {
+    @include build-grid(1fr 1fr);
+    padding: $global-margin;
+
+    .placeholder {
+      width: 120px;
+      height: 50px;
+      background: lightgray;
+    }
+  }
+}

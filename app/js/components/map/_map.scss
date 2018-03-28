@@ -1,3 +1,13 @@
+/* ==================================================================
+/* Map layout
+/* ================================================================== */
+/**
+ * This document defines the styling for the pmaas layout
+**/
+
+
+/* Base styling
+/* ================================================================== */
 .ins-l-pmaas-map {
   background: linear-gradient(135deg, #0088ce, #00b9e4);
   display: grid;
@@ -28,6 +38,7 @@
 
   @include media-query(md) { grid-template-rows: max-content; }
 
+  // Page header filters
   .button-group {
     grid-column: span 4;
 
@@ -46,19 +57,21 @@
 
 /* Donut chart
 /* ================================================================== */
-.header-donut-chart {
+
+.donut-chart {
   @include build-grid(min-content auto);
   grid-gap: 0;
   align-items: center;
   padding: 0;
-  @include font-size(12px);
-  text-align: center;
 
-  text-align: left;
 
-  @include media-query(md) { 
+  .pf-is-with-text {
+    text-align: left;
+    .chart-title { text-transform: capitalize; }
+    .chart-info { line-height: 1.2; }
   }
 
-  .chart-title { text-transform: capitalize; }
-  .chart-info { line-height: 1.2; }
+  &.pf-is-small {
+    @include font-size(12px);
+  }
 }

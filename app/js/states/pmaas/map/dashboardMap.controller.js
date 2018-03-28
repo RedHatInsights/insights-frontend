@@ -206,6 +206,7 @@ priv.init = (conf) => {
     priv.popover = d3.select('#map')
         .append('div')
         .attr('id', 'popover')
+        .attr('class', 'ins-c-map-popover')
         .style('display', 'none');
 
     priv.centroids = priv.svg.append('g')
@@ -249,7 +250,7 @@ priv.init = (conf) => {
                             .style('background', '#fff')
                             .style('border-radius', '3px')
                             .style('display', 'inline')
-                            .html('hello');
+                            .html('<div class="ins-c-map-popover__header"><span>Self-Service Cloud</span><span class="subtitle">Azure Europe | OpenShift</span></div><div class="ins-c-map-popover__body"><div class="donut-chart pf-is-with-text"><div class="chart-info"><div class="chart-title">Vulnerability</div><b>82% &nbsp;</b><span>Secure</span></div></div><div class="placeholder"></div><div class="placeholder"></div><div class="placeholder"></div></div>');
                     });
 
                 //priv.updatePin(pin, d);

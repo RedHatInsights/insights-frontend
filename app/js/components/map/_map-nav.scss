@@ -51,11 +51,30 @@
     transition: .4s ease-out;
   }
 
-  &--is-collapsed ul.list-deployments {
+  &.pf-is-collapsed {
+    @include build-grid(0 auto);
+    grid-gap: unset;
+    padding: 0;
+
+    header { padding: $global-padding $global-padding; }
+
+    header .header-info {
+      max-width: 0;  
+      white-space: nowrap;
+      opacity: 0;
+      padding: 0;
+    }
+
+    .toggle-map i {
+      transform: scaleX(1);
+    }
+  }
+
+  &.pf-is-collapsed ul.list-deployments {
     opacity: 0;
   }
 
-  &--is-collapsed li {
+  &.pf-is-collapsed li {
     max-width: 0;
     overflow: hidden;
     opacity: 0;
@@ -65,7 +84,7 @@
     @include build-grid(grid-gap $global-padding, max-content auto);
     grid-row-gap: 0;
     margin: 0;
-    padding: $global-padding;
+    padding: 22px $global-margin;
     white-space: nowrap;
     border: none;
     color: $base-color;
@@ -90,20 +109,34 @@
 }
 
 .ins-c-map-nav header {
-  display: flex;
-  padding: $global-padding;
+  display: grid;
+  grid-template-columns: auto max-content;
+  padding: $global-padding $global-padding $global-padding $global-margin;
   align-self: start;
   align-items: center;
   border-bottom: 2px solid #cfcfcf;
+  transition: .3s;
   // border-bottom: 4px solid #dedede;
 
   .toggle-map {
+    transition: 2s;
+  }
+
+  .toggle-map i {
     margin-left: auto;
-    z-index: 2; 
+    z-index: 2;
+    transform: scaleX(-1);
+    transition: 1s;
   }
 
   .header-info {
     display: flex;
+    flex: 1;
+    align-items: center;
+    max-width: 30rem;
+    overflow: hidden;
+    transition: .3s;
+    opacity: 1;
 
     > .count {
       position: relative;
@@ -113,6 +146,12 @@
     > *:nth-child(2) {
       margin-left: auto;
     }
+  }
+
+  .header-title {
+    @include font-size(24px, 1);
+    font-weight: 300;
+    transition: .3s;
   }
 }
 
@@ -125,33 +164,10 @@
   border-radius: 4px;
 }
 
-.ins-c-map-nav header .header-info {
-  flex: 1;
-  align-items: center;
-  max-width: 30rem;
-  overflow: hidden;
-  transition: .3s;
-  opacity: 1;
-}
 
-.ins-c-map-nav--is-collapsed header .header-info {
-  max-width: 0;  
-  white-space: nowrap;
-  opacity: 0;
-  padding: 0;
-}
 
-.ins-c-map-nav header .header-title {
-  @include font-size(24px, 1);
-  font-weight: 300;
-  transition: .3s;
-}
 
-.ins-c-map-nav--is-collapsed {
-  @include build-grid(0 auto);
-  grid-gap: unset;
-  padding: 0;
-}
+
 
 /* View toggle
 /* ================================================================== */
