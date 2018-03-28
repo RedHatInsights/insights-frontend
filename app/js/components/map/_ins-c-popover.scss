@@ -6,14 +6,25 @@
 **/
 
 
+.popover-block {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+
 .ins-c-map-popover {
   position: relative;
-  @include build-grid(1fr 1fr);
+  @include build-grid(1fr);
   grid-template-rows: max-content max-content;
+  grid-gap: 0;
   margin-top: -70px;
   margin-left: 28px;
   padding: 0;
+  background: #fff;
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
 
   &::before {
     content: '';
@@ -30,12 +41,17 @@
 
   &__header {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: max-content 1fr;
+    grid-column: span 2;
+    grid-gap: $global-padding;
+    align-items: center;
     margin: $global-margin $global-margin 0 $global-margin;
     padding-bottom: $global-padding;
-
     border-bottom: 1px solid #cfcfcf;
 
+    i {
+      @include font-size(24px);
+    }
   }
 
   &__body {

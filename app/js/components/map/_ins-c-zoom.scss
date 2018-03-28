@@ -1,3 +1,24 @@
 .ins-c-zoom {
-  
+  display: grid;
+  grid-template-columns: 1fr;
+  position: absolute;
+  bottom: $global-margin;
+  right: $global-margin;
+
+  button {
+    background: rgba(255,255,255,.2);
+    border: none;
+    padding: 14px;
+
+    &:hover {
+      background: rgba(255,255,255,.3);
+    }
+
+    i {
+    }
+
+    &:first-child {
+      border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+  }
 }
