@@ -58,24 +58,3 @@
     }
   }
 }
-
-
-/* Donut chart
-/* ================================================================== */
-.donut-chart {
-  @include build-grid(min-content auto);
-  grid-gap: 0;
-  align-items: center;
-  padding: 0;
-
-
-  .pf-is-with-text {
-    text-align: left;
-    .chart-title { text-transform: capitalize; }
-    .chart-info { line-height: 1.2; }
-  }
-
-  &.pf-is-small {
-    @include font-size(12px);
-  }
-}

@@ -1,36 +1,36 @@
-section.deployment-header
-  .page-title
-    h1
-      span.text(translate) {{:: nameTranslated}}
-    h2
+.ins-p-page-header.ins-has-chart-list(ng-transclude)
+  .ins-p-page-header__page-title
+    h1.ins-p-page-header__title(translate) {{:: nameTranslated}}
+    h2.ins-p-page-header__subtitle
       span.text(translate) {{:: regionTranslated}}
       span.text(translate) {{:: typeTranslated}}
 
-  .donut-charts
-    .donut-chart.pf-is-with-text.pf-is-small
-      .chart.chart-vulnerability
-      .chart-info
-        .chart-title {{charts.vulnerability.name}}
+  .ins-p-chart-list
+
+    .ins-p-chart-list__item
+      .chart-compliance
+      .ins-p-chart-list__item__info
+        .ins-p-chart-list__item__info__title {{charts.vulnerability.name}}
         b {{charts.vulnerability.title}} &nbsp;
         span Secure
 
-    .donut-chart.pf-is-with-text.pf-is-small
-      .chart.chart-compliance
-      .chart-info
-        .chart-title {{charts.compliance.name}}
+    .ins-p-chart-list__item
+      .chart-compliance
+      .ins-p-chart-list__item__info
+        .ins-p-chart-list__item__info__title{{charts.compliance.name}}
         b {{charts.compliance.title}} &nbsp;
         span Compliant
 
-    .donut-chart.pf-is-with-text.pf-is-small
-      .chart.chart-advisor
-      .chart-info
-        .chart-title {{charts.advisor.name}}
+    .ins-p-chart-list__item
+      .chart-advisor
+      .ins-p-chart-list__item__info
+        .ins-p-chart-list__item__info__title {{charts.advisor.name}}
         b {{charts.advisor.title}} &nbsp;
         span Optimized
 
-    .donut-chart.pf-is-with-text.pf-is-small
-      .chart.chart-subscription
-      .chart-info
-        .chart-title {{charts.subscription.name}}
+    .ins-p-chart-list__item
+      .chart-subscription
+      .ins-p-chart-list__item__info
+        .ins-p-chart-list__item__info__title {{charts.subscription.name}}
         b {{charts.subscription.title}} &nbsp;
         span Utilized
