@@ -9,28 +9,28 @@
       button.button-default.button-lg.button-strong Virtual
       button.button-default.button-lg.button-strong Physical
 
-    .header-donut-chart
+    .donut-chart.pf-is-with-text.pf-is-small
       .chart.chart-vulnerability
       .chart-info
         .chart-title {{charts.vulnerability.name}}
         b {{charts.vulnerability.title}} &nbsp;
         span Secure
 
-    .header-donut-chart
+    .donut-chart.pf-is-with-text.pf-is-small
       .chart.chart-compliance
       .chart-info
         .chart-title {{charts.compliance.name}}
         b {{charts.compliance.title}} &nbsp;
         span Compliant
 
-    .header-donut-chart
+    .donut-chart.pf-is-with-text.pf-is-small
       .chart.chart-advisor
       .chart-info
         .chart-title {{charts.advisor.name}}
         b {{charts.advisor.title}} &nbsp;
         span Optimized
 
-    .header-donut-chart
+    .donut-chart.pf-is-with-text.pf-is-small
       .chart.chart-subscription
       .chart-info
         .chart-title {{charts.subscription.name}}
@@ -72,7 +72,7 @@
         button.button-sm
           i.fa.fa-globe
 
-    nav.ins-c-map-nav(ng-class="{'ins-c-map-nav--is-collapsed': navCollapsed}")
+    nav.ins-c-map-nav(ng-class="{'pf-is-collapsed': navCollapsed}")
       header
         .header-info
           h3.header-title Deployments

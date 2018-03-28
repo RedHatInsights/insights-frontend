@@ -137,6 +137,7 @@
     overflow: hidden;
     transition: .3s;
     opacity: 1;
+    white-space: nowrap;
 
     > .count {
       position: relative;
