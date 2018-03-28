@@ -1,0 +1,116 @@
+/*global require*/
+'use strict';
+
+const componentsModule = require('../');
+const has = require('lodash/has');
+
+/**
+ * @ngInject
+ */
+function reliabilityIconCtrl($scope, gettextCatalog) {
+    const priv = {};
+
+    priv.iconClass = function iconClass (level) {
+        switch (level) {
+            case 1:
+                return 'low';
+            case 2:
+                return 'med';
+            case 3:
+                return 'high';
+            case 4:
+                return 'critical';
+            default:
+                return 'unknown';
+        }
+    };
+
+    priv.checkTypes = function () {
+        // check to ensure a valid type is given!
+        if ($scope.type && $scope.type) {
+            if (has(priv.typeMap, $scope.type)) {
+                return;
+            }
+
+            throw new Error('Invalid severity-icon type selected! ' + $scope.type);
+        }
+
+        throw new Error('No severity-icon type selected! ' + $scope.type);
+    };
+
+    priv.typeMap = {
+        impact: gettextCatalog.getString('Impact'),
+        likelihood: gettextCatalog.getString('Likelihood'),
+        severity: gettextCatalog.getString('Total Risk'),
+        confidence: gettextCatalog.getString('Confidence'),
+        reliability: gettextCatalog.getString('Reliability')
+    };
+
+    // pre compute this so the digest cycles dont re-run iconClass
+    // we really only use this once since the refactor
+    // it is nice an delcaritive though, leaving it in for now
+    priv.sevClassMap = {
+        // for now handle the stringed severity... this will go away once sevs are 1 - 4
+        LOW: priv.iconClass(1),
+        MEDIUM: priv.iconClass(2),
+        HIGH: priv.iconClass(3),
+        VERY_HIGH: priv.iconClass(4),
+        UNKNOWN: priv.iconClass(-1),
+        1: priv.iconClass(1),
+        2: priv.iconClass(2),
+        3: priv.iconClass(3),
+        4: priv.iconClass(4)
+    };
+
+    priv.numberToStringMap = {
+        1: gettextCatalog.getString('Low'),
+        2: gettextCatalog.getString('Medium'),
+        3: gettextCatalog.getString('High'),
+        4: gettextCatalog.getString('Very High'),
+        LOW: gettextCatalog.getString('Low'),
+        MEDIUM: gettextCatalog.getString('Medium'),
+        HIGH: gettextCatalog.getString('High'),
+        VERY_HIGH: gettextCatalog.getString('Very High'),
+        UNKNOWN: gettextCatalog.getString('Unknown')
+    };
+
+    $scope.getClass = (type) => {
+        return type;
+    };
+
+    // init the var on the scope
+    // it should not change and there is no point in re calculating it
+    $scope.init = function init () {
+        priv.checkTypes();
+
+        if (!$scope.severity) {
+            $scope.severity = 'UNKNOWN';
+        }
+
+        // if a type is specified and the label is not overridden
+        // set the label per the typeMap
+        if ($scope.type && !$scope.label) {
+            $scope.label = priv.typeMap[$scope.type];
+        }
+
+        $scope.tooltip = `${priv.typeMap[$scope.type]}: ` +
+            `${priv.numberToStringMap[$scope.severity]}`;
+        $scope.sevClass = priv.sevClassMap[$scope.severity];
+    };
+}
+
+function reliabilityIcon () {
+    return {
+        scope: {
+            type: '@',
+            label: '@',
+            severity: '<'
+        },
+        templateUrl: 'js/components/severityIcon/reliabilityIcon.html',
+        restrict: 'E',
+        replace: true,
+        controller: reliabilityIconCtrl
+    };
+}
+
+componentsModule.directive('reliabilityIcon', reliabilityIcon);

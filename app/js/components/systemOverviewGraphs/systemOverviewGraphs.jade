@@ -1,7 +1,9 @@
 .system-overview-graphs.ins-c-card.ins-c-card--tabbed
   md-tabs(md-dynamic-height='', md-border-bottom='')
     md-tab.tab-content(md-on-select="setActive('peerRanking')", label='Peer Ranking', md-active='activeTab === "peerRanking"')
+      //peer-ranking.peer-ranking.ins-l-peer-ranking
     md-tab.tab-content(md-on-select="setActive('machineLearning')", label='Machine Learning', md-active='activeTab === "machineLearning"')
+      //machine-learning
     md-tab.tab-content(md-on-select="setActive('anomalyDetection')", label='Anomaly Detection', md-active='activeTab === "anomalyDetection"')
 
   // hack to kill the 200MB tab usage

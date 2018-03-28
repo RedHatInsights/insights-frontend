@@ -62,3 +62,68 @@ i.severity-icon {
     border-radius: 4px;
   }
 }
+
+.reliability {
+  display: inline-block;
+
+  .title {
+    display: inline-block;
+    font-weight: 700;
+  }
+
+  // set margin-left of the second element
+  i + .title,
+  .title + i {
+    @include rem('margin-left', $global-padding/2);
+  }
+}
+
+.reliability + .reliability { @include rem('margin-left', $global-padding); }
+
+i.reliability-icon {
+  font-family: 'insights-icons';
+  @include font-size(22px);
+  line-height: 1;
+  position: relative;
+  display: inline-block;
+  font-style: normal !important;
+
+  & + i.reliability-icon {
+    @include rem('margin-left', 15px);
+  }
+
+  // remapping the '.severity-bars' and setting as the background
+  &:before {
+    content: "\e900";
+    position: absolute;
+    color: #bfbfbf;
+  }
+
+  &:after { position: relative; }
+
+  &.low:after {
+    content: "\e901";
+    color: #f39800;
+  }
+
+  &.med:after {
+    content: "\e902";
+    color: #dec800;
+  }
+
+  &.high:after {
+    content: "\e903";
+    color: #94d400;
+  }
+
+  &.critical:after {
+    content: "\e904";
+    color: #94d400;
+  }
+
+  &.total-risk {
+    @include rem('padding-bottom', 4px);
+    box-shadow: 0 0 0 2px #AFAFAF;
+    border-radius: 4px;
+  }
+}

@@ -57,7 +57,7 @@ const layout = {
     margin: {
         l: 50,
         r: 30,
-        b: 50,
+        b: 60,
         t: 60,
         pad: 4
     },
