@@ -1,0 +1,51 @@
+.metadata-card {
+  .ins-c-card__body.card-pf-body { justify-content: center; }
+
+  .card.card-pf {
+    min-height: 420px;
+  }
+
+  // Card title
+  .display-name { @include font-size(16px); }
+
+
+  // Meta information
+  .host-info, .reliability-status {
+    i { @include rem('margin-right', 10px); }
+  }
+
+  .host-info { font-weight: 300; }
+
+  .status-check .pficon-info {
+    @include rem('margin-left', 5px);
+    color: $blue-light;
+  }
+
+  // Middle
+  .tile i { font-size: 18px; }
+
+  // Bottom
+  .system-tags {
+    margin-top: 0;
+    & > * { color: $gray-md; }
+    div + div { @include rem('margin-left', 10px); }
+  }
+
+  .type-tags {
+    padding: 0;
+    @include rem('margin-top', 10px);
+  }
+  .type-tags span {
+    @include rem('padding', 5px 15px);
+    @include rem('margin', 0 5px);
+    background: #F5F5F5;
+    border-radius: 5px;
+  }
+
+  .tile {
+    &.high { @include tile(#8DCF19, #429321); }
+    &.moderate { @include tile(#FFCD59, #F0AD4E); }
+    &.low { @include tile(#FFA953, #D85911); }
+    &.critical { @include tile(#cc0000, #89061A); }
+  }
+}

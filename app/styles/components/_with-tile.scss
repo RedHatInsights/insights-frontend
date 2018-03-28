@@ -1,8 +1,8 @@
 $tile-left-position: 30px;
 
 .tile {
-  @include tile(#00AEFF);
-  @include rem('padding', $global-padding 0);
+  @include tile(#00AEFF, #03A8EA);
+  @include rem('margin', 10px 0);
   &-ghost {
     i {
       background: none;
@@ -16,6 +16,9 @@ $tile-left-position: 30px;
     display: flex;
     justify-content: center;
   }
+  &-sm i{
+    @include rem('padding', 10px);
+  }
 }
 
 .with-tile {
@@ -26,5 +29,27 @@ $tile-left-position: 30px;
   .tile {
     position: absolute;
     left: -$tile-left-position;
+  }
+}
+
+.tile-with-text {
+  display: flex;
+  align-items: center;
+  .tile {
+    display: inline;
+    @include rem('margin-right', 10px);
+  }
+  .tile-label {
+    display: grid;
+    text-transform: capitalize;
+    span:first-of-type {
+      @include font-size(14px);
+      font-weight: 700;
+    }
+    span:nth-of-type(2) {
+      @include font-size(13px);
+      font-weight: 300;
+      color: $gray-md;
+    }
   }
 }

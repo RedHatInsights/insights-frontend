@@ -65,3 +65,13 @@
        font-weight: 700;
        font-style: italic;
 }
+
+@font-face {
+  font-family: 'ins-battery';
+  src: url('../static/fonts/ins-battery.eot');
+  src: url('../static/fonts/ins-battery.eot?#iefix') format('embedded-opentype'),
+       url('../static/fonts/ins-battery.woff') format('woff'),
+       url('../static/fonts/ins-battery.ttf')  format('truetype');
+       font-weight: 700;
+       font-style: normal;
+}

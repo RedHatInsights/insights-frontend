@@ -88,7 +88,7 @@ pub.getDemoSystem = (systemId) => {
         type: 'machine',
         product: 'rhel',
         optimization: 'high',
-        reliability: 'warning'
+        reliability: 'critical'
 
     };
 };

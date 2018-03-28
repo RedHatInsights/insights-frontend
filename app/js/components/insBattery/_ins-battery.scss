@@ -1,0 +1,44 @@
+@mixin setBatteryFont() {
+  font-family: "ins-battery";
+  font-size: 15px;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Setting the icons
+.ins-battery-1:before {
+  @include setBatteryFont;
+  content: "\b0001";
+}
+
+.ins-battery-2:before {
+  @include setBatteryFont;
+  content: "\b0002";
+}
+
+.ins-battery-3:before {
+  @include setBatteryFont;
+  content: "\b0003";
+}
+
+.ins-battery-4:before {
+  @include setBatteryFont;
+  content: "\b0004";
+}
+
+// Default Styling
+.ins-battery-1 { color: #cc0000; }
+.ins-battery-2 { color: #ec7a08; }
+.ins-battery-3 { color: #f0ab00; }
+.ins-battery-4 { color: #3f9c35; }
+
+
+// Used in a tile
+.tile i.ins-battery { display: block; }

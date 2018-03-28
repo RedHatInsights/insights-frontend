@@ -13,22 +13,37 @@
           i.pficon-info(ng-if='!system.isCheckingIn', tooltip="New Image Available")
 
       .card-pf-top-element
-        .text-center.optimization-label
-          optimization-label(level='system.optimization')
-        .text-center
-          span Optimization Potential
+        .tile-with-text
+          .optimization-tile.tile.tile-sm(class='{{system.optimization}}', tooltip='Optimization: {{system.optimization}}')
+            ins-battery(status='{{system.optimization}}')
+          .tile-label
+            span Optimization
+            span {{::system.optimization}}
 
-      .card-pf-items.status-list
-        .card-pf-item.reliability-status.text-center
-            bar-status-icon.status-icon(status='system.reliability')
+        .tile-with-text
+          .reliability-tile.tile.tile-sm(class='{{system.reliability}}' tooltip='Reliability: {{system.optimization}}')
+            ins-battery(status='{{system.reliability}}')
+          .tile-label
             span Reliability
-      .card-pf-bottom-element.text-center
-        .card-pf-item.system-tags.text-center
-          //type-icon.status-icon(type-id='system.system_type_id' include-text='false')
-          .fa.fa-linux.status-icon
-          .fa.fa-database.status-icon
-          .pficon-network.status-icon
-          .pficon-cluster.status-icon
-        .card-pf-items.type-tags.text-center
+            span {{::system.reliability}}
+
+      //- .card-pf-top-element
+      //-   .text-center.optimization-label
+      //-     optimization-label(level='system.optimization')
+      //-   .text-center
+      //-     span Optimization Potential
+
+      //- .card-pf-items.status-list
+      //-   .card-pf-item.reliability-status.text-center
+      //-       bar-status-icon.status-icon(status='system.reliability')
+      //-       span Reliability
+      .card-pf-middle-element.text-center
+        .card-pf-item.type-tags.text-center
           span Prod
           span DMZ
+      .card-pf-bottom-element.text-center
+        .card-pf-items.system-tags.text-center
+          .fa.fa-linux.status-icon(tooltip='Linux')
+          .fa.fa-database.status-icon(tooltip='Database')
+          .pficon-network.status-icon(tooltip='Network')
+          .pficon-cluster.status-icon(tooltip='Server')

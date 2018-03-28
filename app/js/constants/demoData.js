@@ -26,7 +26,7 @@ constantsModule.constant('DemoData', {
                 "product_name": "Apache",
                 "system_status": "error",
                 "infra_status": "warning",
-                "reliability": "warning",
+                "reliability": "critical",
                 "optimization":  "high",
                 "report_count": 11,
                 "policies": {
@@ -59,7 +59,7 @@ constantsModule.constant('DemoData', {
                 "product_name": "OpenShift",
                 "system_status": "ok",
                 "infra_status": "ok",
-                "reliability": "ok",
+                "reliability": "moderate",
                 "optimization":  "moderate",
                 "report_count": 11,
                 "policies": {
@@ -92,7 +92,7 @@ constantsModule.constant('DemoData', {
                 "product_name": "SQL Server",
                 "system_status": "ok",
                 "infra_status": "ok",
-                "reliability": "ok",
+                "reliability": "moderate",
                 "optimization":  "low",
                 "report_count": 11,
                 "policies": {
@@ -125,7 +125,7 @@ constantsModule.constant('DemoData', {
                 "product_name": "Hadoop",
                 "system_status": "ok",
                 "infra_status": "ok",
-                "reliability": "ok",
+                "reliability": "moderate",
                 "optimization":  "low",
                 "report_count": 11,
                 "policies": {
@@ -158,7 +158,7 @@ constantsModule.constant('DemoData', {
                 "product_name": "OpenStack",
                 "system_status": "ok",
                 "infra_status": "ok",
-                "reliability": "ok",
+                "reliability": "moderate",
                 "optimization":  "low",
                 "report_count": 11,
                 "policies": {
@@ -191,7 +191,7 @@ constantsModule.constant('DemoData', {
                 "product_name": "JBoss",
                 "system_status": "ok",
                 "infra_status": "ok",
-                "reliability": "ok",
+                "reliability": "moderate",
                 "optimization":  "low",
                 "report_count": 11,
                 "policies": {
@@ -224,7 +224,7 @@ constantsModule.constant('DemoData', {
                 "product_name": "RHEV",
                 "system_status": "ok",
                 "infra_status": "ok",
-                "reliability": "ok",
+                "reliability": "moderate",
                 "optimization":  "low",
                 "report_count": 11,
                 "policies": {
@@ -257,7 +257,7 @@ constantsModule.constant('DemoData', {
                 "product_name": "OpenShift",
                 "system_status": "ok",
                 "infra_status": "ok",
-                "reliability": "ok",
+                "reliability": "moderate",
                 "optimization":  "low",
                 "report_count": 11,
                 "policies": {
@@ -290,7 +290,7 @@ constantsModule.constant('DemoData', {
                 "product_name": "OpenShift",
                 "system_status": "ok",
                 "infra_status": "ok",
-                "reliability": "ok",
+                "reliability": "moderate",
                 "optimization":  "low",
                 "report_count": 11,
                 "policies": {
@@ -323,7 +323,7 @@ constantsModule.constant('DemoData', {
                 "product_name": "OpenShift",
                 "system_status": "ok",
                 "infra_status": "ok",
-                "reliability": "ok",
+                "reliability": "moderate",
                 "optimization":  "low",
                 "report_count": 11,
                 "policies": {
@@ -356,7 +356,7 @@ constantsModule.constant('DemoData', {
                 "product_name": "OpenShift",
                 "system_status": "ok",
                 "infra_status": "ok",
-                "reliability": "ok",
+                "reliability": "moderate",
                 "optimization":  "low",
                 "report_count": 11,
                 "policies": {
@@ -389,7 +389,7 @@ constantsModule.constant('DemoData', {
                 "product_name": "OpenShift",
                 "system_status": "ok",
                 "infra_status": "ok",
-                "reliability": "ok",
+                "reliability": "moderate",
                 "optimization":  "low",
                 "report_count": 11,
                 "policies": {

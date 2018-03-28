@@ -1,4 +1,4 @@
-.ins-p-page-header.ins-has-chart-list(ng-transclude)
+.ins-p-page-header.ins-has-chart-list.inventory-header
   .ins-p-page-header__page-title
     h1.ins-p-page-header__title(translate) {{:: nameTranslated}}
     h2.ins-p-page-header__subtitle
@@ -8,7 +8,7 @@
   .ins-p-chart-list
 
     .ins-p-chart-list__item
-      .chart-compliance
+      .chart-vulnerability
       .ins-p-chart-list__item__info
         .ins-p-chart-list__item__info__title {{charts.vulnerability.name}}
         b {{charts.vulnerability.title}} &nbsp;
