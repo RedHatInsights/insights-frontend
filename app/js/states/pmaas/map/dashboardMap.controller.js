@@ -235,6 +235,7 @@ priv.init = (conf, $scope) => {
                     .data(pinLocations[d.id].coordinates)
                     .enter()
                     .append('svg:image')
+                    .style('padding', '25px')
                     .attr('d', d => data.push(d))
                     .attr('x', d => priv.projection(d.array)[0] - pinConfig.offsetx)
                     .attr('y', d => priv.projection(d.array)[1] - pinConfig.offsety)
@@ -248,7 +249,7 @@ priv.init = (conf, $scope) => {
                         }
                     })
                     .style('display', 'inline')
-                    .on('mouseenter', function (d) {
+                    .on('mouseover', function (d) {
                         $scope.popover = d.popover;
                         $scope.popover.issues = d.issues;
                         $scope.$apply();
@@ -270,8 +271,6 @@ priv.init = (conf, $scope) => {
                             .style('background', '#fff')
                             .style('border-radius', '3px')
                             .style('display', 'inline');
-
-                        console.log($scope);
                     });
 
                 if (data.length > 0) {
@@ -333,10 +332,11 @@ function generateCharts(chartData) {
 
 function DashboardMapCtrl($timeout, $scope) {
     $scope.popover = {};
+    $scope.closePopover = () => priv.popover.style('display', 'none');
 
     $timeout(() => {
         priv.init(priv.getConf(), $scope);
-    }, 0.25);
+    }, 250);
 
     window.onresize = () => priv.reInit(priv.getConf());
 

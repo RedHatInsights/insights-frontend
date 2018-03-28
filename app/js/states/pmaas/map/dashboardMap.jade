@@ -43,6 +43,7 @@
     .map#map
       // this is an unnecessary wrapper, remove it
       .ins-c-map-popover#popover(ng-if="!loadingPop", style="display: none;")
+        i.fa.fa-times.pull-right(ng-click="closePopover()")
         .ins-c-map-popover__header
           i.fa.fa-times-circle.alert-danger(ng-if="popover.issues")
           i.fa.fa-check-circle.alert-success(ng-if="!popover.issues")
