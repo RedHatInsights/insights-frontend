@@ -5,26 +5,39 @@
  * This document defines the styling for the page header
 **/
 
-$ins-p-meta-list__item--Padding:  $ins-global--spacer--sm;
-$ins-p-meta-list__item--Margin:   $ins-global--spacer--sm;
 
 :root {
-  // --ins-p-page-header__subtitle-: var(--ins-global--spacer-sm);
-  --ins-p-meta-list__item--Padding: $ins-p-page-header__item--Padding;
-  --ins-p-meta-list__item--Margin: $ins-p-page-header__item--Margin;
+  --ins-p-meta-list--Margin: #{-$ins-global--spacer--sm};
+  --ins-p-meta-list__item--Padding: #{$ins-global--spacer--sm};
+  --ins-p-meta-list__item--Margin: #{$ins-global--spacer--sm};
+  --ins-p-meta-list__item--FontSize: #{$ins-global--FontSize--sm};
 }
 
 
 /* Meta list base styling
 /* ================================================================== */
 .ins-p-meta-list {
+  display: flex;
+  margin: var(--ins-p-meta-list--Margin);
+  
   &__item {
+    display: flex;
+    flex: 1;
+    align-items: first baseline;
+    margin: 0 var(--ins-p-meta-list__item--Margin);
+    font-size: var(--ins-p-meta-list__item--FontSize);
+
+    i {
+      color: #c7c7c7;
+      line-height: 0;
+    }
+
     i + span {
       margin-left: var(--ins-p-meta-list__item--Margin);
     }
   }
 
-  &.ins-is-horizontal {
-    display: flex;
+  &.ins-is-vertical {
+    flex-flow: column nowrap;
   }
 }

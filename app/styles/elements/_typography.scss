@@ -51,3 +51,27 @@ p + p {
   @include rem('margin-bottom', $global-padding);
 }
 
+
+.ins-is--FontSize--base {
+  font-size: $ins-global--FontSize--base;
+}
+
+.ins-is--FontSize--sm {
+  font-size: $ins-global--FontSize--sm;
+}
+
+.ins-is--FontSize--md {
+  font-size: $ins-global--FontSize--md;
+}
+
+.ins-is--FontSize--lg {
+  font-size: $ins-global--FontSize--lg;
+}
+
+.ins-is--FontSize--xl {
+  font-size: $ins-global--FontSize--xl;
+}
+
+.ins-is--light--FontWeight {
+  font-weight: $ins-global--FontWeight--light;
+}
