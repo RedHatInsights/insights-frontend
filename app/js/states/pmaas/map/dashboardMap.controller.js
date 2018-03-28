@@ -47,7 +47,8 @@ const pinLocations = {
                 title: 'Summit Demo',
                 subtitle: 'Private Cloud | OpenStack & OpenShift'
             },
-            issues: true
+            issues: true,
+            deployment_id: 'azure-europe'
         }, {
             name: 'virgina',
             type: deployment_types.virtual,
@@ -56,7 +57,8 @@ const pinLocations = {
                 title: 'Summit Demo',
                 subtitle: 'aws East | OpenShift'
             },
-            issues: false
+            issues: false,
+            deployment_id: 'aws-east'
         }]
     },
     CAN: {
@@ -75,7 +77,8 @@ const pinLocations = {
                 title: 'Self-Service Cloud',
                 subtitle: 'Azure Europe | OpenShift'
             },
-            issues: false
+            issues: false,
+            deployment_id: 'priv-openstack'
         }]
     }
 };
@@ -204,7 +207,7 @@ priv.reInit = (conf) => {
     priv.redraw();
 };
 
-priv.init = (conf, $scope) => {
+priv.init = (conf, $scope, $state) => {
     priv.projection = d3.geo.mercator()
         .rotate([conf.rotate, 0])
         .scale(1)
@@ -260,18 +263,23 @@ priv.init = (conf, $scope) => {
                         }
                     })
                     .style('display', 'inline')
+                    .on('click', d => {
+                        const params = {deployment_id: d.deployment_id};
+                        $state.go('app.dashboard-deployment', params);
+                    })
                     .on('mouseover', function (d) {
                         $scope.popover = d.popover;
                         $scope.popover.issues = d.issues;
                         $scope.$apply();
 
+                        // used to switch from DOM coordingates into SVG
+                        // coordinates.
                         const svg = priv.svg[0][0];
                         const pt = svg.createSVGPoint();
 
                         pt.x = priv.projection(d.array)[0];
                         pt.y = priv.projection(d.array)[1];
 
-                        // Transform it back to SVG coordinate space
                         const svgCoord = pt.matrixTransform(svg.getCTM().inverse());
                         const pos = `left:${svgCoord.x}px;top:${svgCoord.y - 100}px`;
 
@@ -345,7 +353,7 @@ function generateCharts(chartData, popover) {
     }
 }
 
-function DashboardMapCtrl($timeout, $scope) {
+function DashboardMapCtrl($timeout, $scope, $state) {
     $scope.popover = {};
     $scope.deployment_types = deployment_types;
     $scope.closePopover = () => priv.popover.style('display', 'none');
@@ -362,7 +370,7 @@ function DashboardMapCtrl($timeout, $scope) {
     };
 
     $timeout(() => {
-        priv.init(priv.getConf(), $scope);
+        priv.init(priv.getConf(), $scope, $state);
         generateCharts(charts, true);
 
         d3.select('.chart-vulnerability-popover')
@@ -392,7 +400,6 @@ function DashboardMapCtrl($timeout, $scope) {
             .attr('dy', 25)
             .attr('x', 0)
             .text('Utilized');
-        console.log(d3.select('.chart-vulnerability-popover'));
     }, 250);
 
     window.onresize = () => priv.reInit(priv.getConf());
