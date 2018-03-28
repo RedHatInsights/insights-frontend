@@ -5,10 +5,11 @@ md-tabs {
 
 md-tab-content .list-group {
   margin-top: $global-margin;
+  margin-bottom: 0;
   padding: 0;
   background: none;
 }
 
-.card-pf-view-tabs {
-  
+.card-pf-view-tabs > .ins-c-card {
+  grid-template-rows: auto;
 }
