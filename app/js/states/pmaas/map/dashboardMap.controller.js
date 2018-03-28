@@ -114,8 +114,8 @@ const charts = [
         name: 'subscription',
         columns: [
             ['RHEL', 1050],
-            ['Openshift', 100],
-            ['Openstack', 50],
+            ['OpenShift', 100],
+            ['OpenStack', 50],
             ['Available', 25]
         ],
         title: '98%',
