@@ -41,6 +41,28 @@
   // Content
   section.content.pmaas-map
     .map#map
+      // this is an unnecessary wrapper, remove it
+      .popover-block 
+        .ins-c-map-popover
+          .ins-c-map-popover__header
+            i.fa.fa-times-circle.alert-danger
+            .chart-info
+              span Self-Service Cloud
+              .subtitle Azure Europe | OpenShift
+          .ins-c-map-popover__body
+            .donut-chart.pf-is-with-text.pf-is-small
+              .chart-info
+                .chart-title Vulnerability
+                b 82%  
+                span Secure
+            .placeholder
+            .placeholder
+            .placeholder      
+      .ins-c-zoom
+        button
+          i.fa.fa-plus
+        button
+          i.fa.fa-minus
       zoom
         .zoom-in
         .zoon-out
@@ -49,6 +71,7 @@
           i.fa.fa-list
         button.button-sm
           i.fa.fa-globe
+
     nav.ins-c-map-nav(ng-class="{'ins-c-map-nav--is-collapsed': navCollapsed}")
       header
         .header-info
