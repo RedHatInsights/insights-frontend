@@ -29,10 +29,11 @@ const charts = [
             ['Secure systems', 982],
             ['Vulnerable systems', 218]
         ],
+        state: 'moderate',
         title: '82%',
         color: {
             pattern: [
-                '#0088CE',
+                '#f0ab00',
                 '#d1d1d1'
             ]
         }
@@ -44,10 +45,11 @@ const charts = [
             ['Compliant systems', 816],
             ['Noncompliant systems', 384]
         ],
+        state: 'critical',
         title: '68%',
         color: {
             pattern: [
-                '#0088CE',
+                '#cc0000',
                 '#d1d1d1'
             ]
         }
@@ -59,10 +61,11 @@ const charts = [
             ['Rules evaluated', 90],
             ['Rules passed', 65]
         ],
+        state: 'critical',
         title: '58%',
         color: {
             pattern: [
-                '#0088CE',
+                '#cc0000',
                 '#d1d1d1'
             ]
         }
@@ -79,14 +82,15 @@ const charts = [
         title: '98%',
         color: {
             pattern: [
-                '#cc0000',
-                '#0088CE',
-                '#2d7623',
+                '#004368',
+                '#0088ce',
+                '#7dc3e8',
                 '#d1d1d1'
             ]
         }
     }
 ];
+
 
 function generateCharts(chartData) {
     for (const data of chartData) {

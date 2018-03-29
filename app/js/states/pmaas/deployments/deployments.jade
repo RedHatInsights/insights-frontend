@@ -18,7 +18,7 @@ deployment-header(name='Summit Demo', region='Private Cloud', type='OpenStack & 
         .legend.text-left
           .c3-legend-item
             .c3-legend-item-tile
-              i.fa.fa-square.blue
+              i.fa.fa-square(class='{{charts.vulnerability.state}}')
             b {{charts.vulnerability.columns[0][1]}}
             span {{charts.vulnerability.columns[0][0]}}
 
@@ -39,7 +39,7 @@ deployment-header(name='Summit Demo', region='Private Cloud', type='OpenStack & 
         .legend.text-left
           .c3-legend-item
             .c3-legend-item-tile
-              i.fa.fa-square.blue
+              i.fa.fa-square(class='{{charts.compliance.state}}')
             b {{charts.compliance.columns[0][1]}}
             span {{charts.compliance.columns[0][0]}}
 
@@ -61,7 +61,7 @@ deployment-header(name='Summit Demo', region='Private Cloud', type='OpenStack & 
         .legend.text-left
           .c3-legend-item
             .c3-legend-item-tile
-              i.fa.fa-square.blue
+              i.fa.fa-square(class='{{charts.advisor.state}}')
             b {{charts.advisor.columns[0][1]}}
             span {{charts.advisor.columns[0][0]}}
 
@@ -81,19 +81,19 @@ deployment-header(name='Summit Demo', region='Private Cloud', type='OpenStack & 
         .legend.text-left
           .c3-legend-item
             .c3-legend-item-tile
-              i.fa.fa-square.red
+              i.fa.fa-square.blue-rhel
             b {{charts.subscription.columns[0][1]}}
             span {{charts.subscription.columns[0][0]}}
 
           .c3-legend-item
             .c3-legend-item-tile
-              i.fa.fa-square.blue
+              i.fa.fa-square.blue-openshift
             b {{charts.subscription.columns[1][1]}}
             span {{charts.subscription.columns[1][0]}}
 
           .c3-legend-item
             .c3-legend-item-tile
-              i.fa.fa-square.green
+              i.fa.fa-square.blue-openstack
             b {{charts.subscription.columns[2][1]}}
             span {{charts.subscription.columns[2][0]}}
 

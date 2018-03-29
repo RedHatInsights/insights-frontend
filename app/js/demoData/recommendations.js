@@ -29,7 +29,7 @@ pub.getRecommendations = (accountNumber, systemId) => {
                 '<p>Parameter Value is used in 0.75% of the similar deployments.  Parameter Value is in the 2σ interval</p>' +
                 '<p>Predictive accuracy of a model is <strong>very high.</strong></p>',
                 resolution: '<p>Red Hat recommends that you change <code>global_physnet_mtu</code> setting in <code>/etc/neutron/neutron.conf</code>  file to fix this issue.</p>' +
-                '<p>Run this Ansible playbook:&nbsp;&nbsp; ' +
+                '<p>Download this Ansible playbook:&nbsp;&nbsp; ' +
                 '<md-icon md-svg-src="static/images/l_ansible-blue.svg" alt="This rule has Ansible support. Use the Planner to generate an Ansible Playbook." class="material-icons" role="img" aria-hidden="true"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2032 2027.2" style="enable-background:new 0 0 2032 2027.2;" xml:space="preserve" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">\n' +
                 '<style type="text/css">\n' +
                 '\t.st0{fill:#08C0FC;}\n' +

@@ -101,6 +101,8 @@
     @include build-grid(md 1fr 1fr, lg 1fr 1fr 1fr 1fr);
     .c3-chart-arc text { display: none; }
 
+    .legend { @include rem('height', 50px); }
+
     // This isn't right yet
     .c3-legend-item {
       @include font-size(14px);
@@ -125,12 +127,19 @@
 .c3-chart-arcs-title tspan { font-size: 12px; }
 
 .ins-l-pmaas-deployments .c3-legend-item-tile {
-  .blue { color: #0088CE; }
+  .blue-rhel { color: #004368; }
+  .blue-openshift { color: #0088ce; }
+  .blue-openstack { color: #7dc3e8; }
   .gray { color: #d1d1d1; }
-  .red { color: #cc0000; }
-  .green { color: #2d7623; }
+  .critical { color: #cc0000; }
+  .good { color: #2d7623; }
+  .moderate { color: #f0ab00}
 }
 
 
 // Hack for now, debug later
 actions-select { display: none; }
+
+div.recommendations {
+  .ins-l-split--lg { padding: 0x; }
+}

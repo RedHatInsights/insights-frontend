@@ -1,4 +1,9 @@
+system-metadata {
+  .ins-c-card { grid-template-rows: max-content; }
+}
+
 .metadata-card {
+
   .ins-c-card__body.card-pf-body { justify-content: center; }
 
   .card.card-pf {
@@ -27,8 +32,9 @@
   // Bottom
   .system-tags {
     margin-top: 0;
+    @include font-size(18px);
     & > * { color: $gray-md; }
-    div + div { @include rem('margin-left', 10px); }
+    div + div { @include rem('margin-left', 15px); }
   }
 
   .type-tags {
