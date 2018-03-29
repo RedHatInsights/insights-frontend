@@ -8,18 +8,18 @@ p.text-center(ng-if='(!system.recommendations || !system.recommendations.length)
     span(translate) No actions
 div(ng-if='!loading.isLoading && !system.__fake && errorMessage', ng-bind-html=':: errorMessage | trust_html')
 list-group
-  list-item(expandable recommendation='recommendation', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='recommendation in system.recommendations track by recommendation.rule_id')
-    list-item-header-expandable.ins-l-system__metadata-list-header.ins-tab__recommendations
+  list-item.ins-p-list-group__item--is-expandable(expandable recommendation='recommendation', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='recommendation in system.recommendations track by recommendation.rule_id')
+    list-item-header-expandable
       .list-item-header-text
         .list-view-pf-checkbox
           input.action(type='checkbox', ng-model='isSelected', ng-click='$event.stopPropagation();')
         strong.title {{:: recommendation.rule.category }} > {{:: recommendation.rule.description }}
-      ansible-icon(value='recommendation.rule.ansible' hide-label="true")
       .risk-summaries.card-header-risk-summaries
         ml-reliability-icons.inline(rule='recommendation.rule')
         risk-of-change(label='"Optimization Potential:"' change-risk='recommendation.rule.optimization')
+      ansible-icon(value='recommendation.rule.ansible' hide-label="true")
 
-    list-item-content.recommendation-expanded-content
+    list-item-content
       .recommendation-detail
         .detail-part
           h4.section-heading(translate)

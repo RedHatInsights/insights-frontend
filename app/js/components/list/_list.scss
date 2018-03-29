@@ -9,13 +9,113 @@
 /* Vars
 /* ================================================================== */
 :root {
-  --list-group-item-header--Padding: $global-padding;
+  // --list-group-item-header--Padding: $global-padding;
+  // --list-group-item-header--Margin: $global-padding;
+
+  --ins-p-group__item__header--Padding: #{$ins-global--spacer--lg};
+  --ins-p-group__item__header--Margin: #{$ins-global--spacer--lg};
+
+  --ins-p-group__item__body--Padding: #{$ins-global--spacer--sm};
+  --ins-p-group__item__body--Margin: #{$ins-global--spacer--lg};
+
+
+
+  // --ins-p-group__item--Margin:         #{$ins-global--spacer--sm};
+  // --ins-p-group__item--Padding:        #{$ins-global--spacer--sm};
+  // --ins-p-group__item--FontSize:       #{$ins-global--FontSize--md};
+  // --ins-p-group__item--FontWeight:     #{$ins-global--FontWeight--light};
+
+  // --ins-p-page-header__subtitle--Margin:      #{$ins-global--spacer--sm};
+  // --ins-p-page-header__subtitle--Padding:     #{$ins-global--spacer--sm};
+  // --ins-p-page-header__subtitle--FontSize:    #{$ins-global--FontSize--base};
+  // --ins-p-page-header__subtitle--FontWeight:  #{$ins-global--FontWeight--bold};
+  // --ins-p-page-header__subtitle--LineHeight:  #{$ins-global--LineHeight--lg};
+
 }
 
 /* List group
 /* ================================================================== */
-.list-group.list-view-pf {  }
+.ins-p-list-group { 
 
+
+  &__item {
+    position: relative;
+    padding: 0;
+    border: 1px solid rgba(0,0,0,.15);
+
+    &:not(:first-child) {
+      border-top: none;
+    }
+  }
+}
+
+
+/* List group item expandable
+/* ================================================================== */
+.ins-p-list-group__item.ins-p-list-group__item--is-expandable {
+  
+  &__header {
+    padding: var(--ins-p-group__item__header--Padding);
+    background: red;
+
+    &:hover,
+    &.expanded {
+      border-color: rgba(0,0,0,.075);
+      background: #edf8ff;
+    }
+
+
+    .list-group-item-header {
+      background: #fff;
+    }
+
+    .list-group-item-container {
+      @include build-grid(grid-gap $global-margin);
+      margin: 0 var(--global-margin) var(--global-margin);
+      padding: var(--global-margin);
+      background: #fff;
+    }    
+  }
+
+  &__item__body {
+    margin: 0 $global-margin $global-margin;
+    padding: $global-margin;
+    background: #fff;
+  }
+
+
+  &__content {
+
+  }
+
+  .caret {
+    @include font-size(18px, 1);
+    transform: rotate(-90deg);
+    transition: .4s;
+  }
+
+  // State - expanded
+  &.expanded {
+    border-color: #bbb;
+    background: #edf8ff;
+    box-shadow: 0 4px 8px 0px rgba(3, 3, 3, 0.1);
+    z-index: 99;
+
+    .ins-p-list-group__item__header {
+      background: #edf8ff;
+    }
+
+    .caret {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+
+/* Old
+/* ================================================================== */
+/* ================================================================== */
+/* ================================================================== */
 
 /* List item base
 /* ================================================================== */
@@ -39,7 +139,8 @@
 
 /* Expandable list item
 /* ================================================================== */
-[expandable].list-group-item {
+[expandable].list-group-item,
+[expandable].ins-p-list-group-item  {
   background: #edf8ff;
 
   .list-group-item-header {
@@ -56,7 +157,8 @@
 
 
 // Expanded
-[expandable].list-group-item.expanded { 
+[expandable].list-group-item.expanded,
+[expandable].ins-p-list-group-item.is-expanded { 
   border: solid 1px #bbb;
   box-shadow: 0 2px 6px rgba(3,3,3,.2);
   z-index: 99;

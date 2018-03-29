@@ -185,31 +185,43 @@ system-metadata { display: block; }
   // }
 }
 
+// .ins-tab--has-checkbox .list-view-pf-main-info .list-item-header-text {
+//   display: grid;
+//   grid-row-gap: 10px;
+//   grid-template-columns: max-content 1fr max-content;
+//   grid-template-rows: auto auto;
+// }
 
-.ins-l-system__metadata-list-header.ins-tab__rule-summary .list-view-pf-main-info {
+// .ins-tab--has-checkbox .list-view-pf-main-info .card-header-risk-summaries {
+//   grid-column-start: 2;
+//   grid-row-start: 2;
+// }
 
-  @media screen and (min-width: 1900px) {
-    grid-template-columns: 7fr 4fr max-content;
-  }
-}
+// .ins-l-system__metadata-list-header.ins-tab__rule-summary .list-view-pf-main-info {
 
-.ins-l-system__metadata-list-header.ins-tab__recommendations .list-view-pf-main-info {
 
-  @media screen and (min-width: 1900px) {
-    grid-template-columns: 7fr 5fr max-content;
-  }
-}
+//   @media screen and (min-width: 1900px) {
+//     grid-template-columns: 7fr 4fr max-content;
+//   }
+// }
 
-.ins-l-system__metadata-list-header {
-  .incident-icon { padding: 0 $global-padding; }
+// .ins-l-system__metadata-list-header.ins-tab__recommendations .list-view-pf-main-info {
 
-  @media screen and (min-width: 1900px) {  
-    .title {
-      display: inline-flex;
-    }
+//   @media screen and (min-width: 1900px) {
+//     grid-template-columns: 7fr 5fr max-content;
+//   }
+// }
 
-    .incident-icon {
-      margin-left: auto;
-    }
-  }
-}
+// .ins-l-system__metadata-list-header {
+//   .incident-icon { padding: 0 $global-padding; }
+
+//   @media screen and (min-width: 1900px) {  
+//     .title {
+//       display: inline-flex;
+//     }
+
+//     .incident-icon {
+//       margin-left: auto;
+//     }
+//   }
+// }
