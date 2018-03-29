@@ -1,0 +1,15 @@
+/* ==================================================================
+/* Layout utilities
+/* ================================================================== */
+/**
+ * This document defines the styling split layout
+**/
+
+
+/* Center content
+/* ================================================================== */
+.ins-l-center-content {
+  @supports (display: grid) {
+    align-content: center;
+  }
+}

@@ -38,6 +38,11 @@ $define-fa: true !default;
 @import 'layout/ins-l-split';
 
 
+// Utilities
+//==================================================================*/
+@import 'utilities/ins-l-utilities';
+
+
 // Include Vendors (used to override bower imports)
 //==================================================================*/
 @import 'vendor/c3';

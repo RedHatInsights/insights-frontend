@@ -56,6 +56,8 @@
     padding: var(--ins-p-group__item__header--Padding) var(--ins-p-group__item__header--Padding) var(--ins-p-group__item__header--Padding) var(--ins-p-group__item__header--PaddingLeft);
     transition: .3s;
 
+    &__toggle { align-self: baseline; }
+
     &__toggle .caret {
       @include font-size(18px, 1);
       transform: rotate(-90deg);
@@ -101,10 +103,11 @@
     @include build-grid(max-content max-content auto);
     padding: var(--ins-p-group__item__header--Padding) var(--ins-p-group__item__header--Padding) var(--ins-p-group__item__header--Padding) var(--ins-p-group__item__header--PaddingLeft);
     grid-gap: var(--ins-p-group__item__header--GridGap);
+    align-items: baseline;
   }
 
   .ins-p-list-group__item__header__checkbox {
-    align-self: start;
+    align-self: baseline;
     padding-right: var(--ins-p-group__item__header--PaddingLeft);
     border-right: 1px solid var(--ins-p-group__item--BorderColor);
   }
@@ -118,6 +121,7 @@
   grid-template-rows: max-content max-content;
   grid-gap: var(--ins-p-group__item__header--GridGap);;
   padding: 0;
+  align-items: baseline;
 
   @include media-query(xl) {
     grid-template-rows: max-content;
