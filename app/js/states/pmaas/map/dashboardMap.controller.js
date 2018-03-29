@@ -10,6 +10,14 @@ const c3 = require('c3');
 const donutSize = 50;
 const donutThickness = 4;
 
+const priv = {
+    tlast: [0, 0],
+    slast: null,
+    pins: [],
+    lastScale: 1,
+    transitionTime: 200
+};
+
 const deployment_types = {
     all: 'all',
     privateCloud: 'privc',
@@ -51,7 +59,7 @@ const pinLocations = {
             deployment_id: 'azure-europe'
         }, {
             name: 'virgina',
-            type: deployment_types.virtual,
+            type: deployment_types.publicCloud,
             array: [-78.024902, 37.926868],
             popover: {
                 title: 'Summit Demo',
@@ -81,12 +89,6 @@ const pinLocations = {
             deployment_id: 'priv-openstack'
         }]
     }
-};
-
-const priv = {
-    tlast: [0, 0],
-    slast: null,
-    pins: []
 };
 
 function donutSettings(obj) {
@@ -163,6 +165,18 @@ const charts = [
 // used for the x tranlation for infinite scroll
 // const getAngle = (p1, p2) => (Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180) / Math.PI;
 
+priv.getCoords = d => {
+    // used to switch from DOM coordingates into SVG
+    // coordinates.
+    const svg = priv.svg[0][0];
+    const pt = svg.createSVGPoint();
+
+    pt.x = priv.projection(d.array)[0];
+    pt.y = priv.projection(d.array)[1];
+
+    return pt.matrixTransform(svg.getCTM().inverse());
+};
+
 priv.mercatorBounds = (projection, maxlat) => {
     // find the top left and bottom right of current projection
     const yaw = projection.rotate()[0];
@@ -196,9 +210,9 @@ priv.reInit = (conf) => {
         .scale(priv.scaleExtent[0])
         .translate([conf.width / 2, conf.height / 2]);
 
-    // priv.zoom
-    //     .scale(priv.projection.scale())
-    //     .translate([0, 0]);
+    priv.zoom
+        .scale(priv.projection.scale())
+        .translate([0, 0]);
 
     priv.svg
         .attr('width', conf.width)
@@ -211,11 +225,11 @@ priv.init = (conf, $scope, $state) => {
     priv.projection = d3.geo.mercator()
         .rotate([conf.rotate, 0])
         .scale(1)
-        .translate([conf.width / 2, (conf.height / 2) + 100]);
+        .translate([conf.width / 2, (conf.height / 2) + 150]);
 
     priv.scaleExtent = priv.getScale(priv.projection, conf.maxLatitude, conf.width);
-
     priv.projection.scale(priv.scaleExtent[0]);
+    priv.slast = priv.scaleExtent[0];
 
     priv.zoom = d3.behavior.zoom()
         .scaleExtent(priv.scaleExtent)
@@ -230,7 +244,7 @@ priv.init = (conf, $scope, $state) => {
         .append('svg')
         .attr('width', conf.width)
         .attr('height', conf.height)
-        .on('click', function () {console.log(priv.projection(d3.mouse(this)));});
+        .call(priv.zoom);
 
     priv.popover = d3.select('#popover')
         .attr('id', 'popover')
@@ -250,6 +264,7 @@ priv.init = (conf, $scope, $state) => {
                     .enter()
                     .append('svg:image')
                     .style('padding', '25px')
+                    .style('cursor', 'pointer')
                     .attr('d', d => data.push(d))
                     .attr('x', d => priv.projection(d.array)[0] - pinConfig.offsetx)
                     .attr('y', d => priv.projection(d.array)[1] - pinConfig.offsety)
@@ -267,21 +282,15 @@ priv.init = (conf, $scope, $state) => {
                         const params = {deployment_id: d.deployment_id};
                         $state.go('app.dashboard-deployment', params);
                     })
-                    .on('mouseover', function (d) {
+                    .on('mouseover', d => {
                         $scope.popover = d.popover;
                         $scope.popover.issues = d.issues;
                         $scope.$apply();
 
-                        // used to switch from DOM coordingates into SVG
-                        // coordinates.
-                        const svg = priv.svg[0][0];
-                        const pt = svg.createSVGPoint();
-
-                        pt.x = priv.projection(d.array)[0];
-                        pt.y = priv.projection(d.array)[1];
-
-                        const svgCoord = pt.matrixTransform(svg.getCTM().inverse());
+                        const svgCoord = priv.getCoords(d);
                         const pos = `left:${svgCoord.x}px;top:${svgCoord.y - 100}px`;
+
+                        priv.selectedPin = d;
 
                         priv.popover.style('display', 'inline')
                             .attr('style', pos)
@@ -307,35 +316,65 @@ priv.init = (conf, $scope, $state) => {
     priv.redraw();
 };
 
-priv.updatePin = (drawable, parent) => {
-    drawable.attr('transform', () => {
-        const centroid = priv.path.centroid(parent);
-        window.p = parent;
-        window.test = priv.path;
-        centroid[0] = centroid[0] - pinLocations[parent.id].offset[0];
-        centroid[1] = centroid[1] - pinLocations[parent.id].offset[1];
-        return `translate(${centroid})`;
-    });
-};
-
 priv.redraw = () => {
-    const e = d3.event;
-    if (e) {
-        console.log(e);
-        priv.projection.scale(d3.event.scale);
-        priv.pins.forEach(p => {
-            p.drawable.attr('transform', `translate(${e.translate})scale(${e.scale})`);
-        });
+    if (d3.event) {
+        const scale = d3.event.scale;
+        const t = d3.event.translate;
+        const conf = priv.getConf();
+
+        if (scale !== priv.slast) {
+            priv.projection.scale(scale);
+        } else {
+            let dx = t[0] - priv.tlast[0];
+            let dy = t[1] - priv.tlast[1];
+            let yaw = priv.projection.rotate()[0];
+            let tp = priv.projection.translate();
+
+            const angle = 360.0 * dx / conf.width * priv.scaleExtent[0] / scale;
+
+            // use x translation to rotate based on current scale
+            priv.projection.rotate([yaw + angle, 0, 0]);
+
+            // use y translation to translate projection, clamped by min/max
+            const b = priv.mercatorBounds(priv.projection, priv.maxlatitude);
+
+            if (b[0][1] + dy > 0) {
+                dy = -b[0][1];
+            } else if (b[1][1] + dy < conf.height) {
+                dy = conf.height - b[1][1];
+            }
+
+            priv.projection.translate([tp[0], tp[1] + dy]);
+        }
+
+        priv.slast = scale;
+        priv.tlast = t;
+        priv.popover.style('display', 'none');
+        priv.updatePins();
     }
 
     priv.svg.selectAll('path').attr('d', priv.path);
+};
+
+priv.updatePins = (transition) => {
+    priv.pins.forEach(p => {
+        if (transition) {
+            p.drawable.transition()
+                .duration(priv.transitionTime)
+                .attr('x', d => priv.projection(d.array)[0] - pinConfig.offsetx)
+                .attr('y', d => priv.projection(d.array)[1] - pinConfig.offsety);
+        } else {
+            p.drawable
+                .attr('x', d => priv.projection(d.array)[0] - pinConfig.offsetx)
+                .attr('y', d => priv.projection(d.array)[1] - pinConfig.offsety);
+        }
+    });
 };
 
 function generateCharts(chartData, popover) {
     for (const data of chartData) {
         const bindto = popover ? `.chart-${data.name}-popover` :
             `.chart-${data.name}`;
-        console.log(bindto);
 
         c3.generate(donutSettings({
             bindto: bindto,
@@ -354,11 +393,33 @@ function generateCharts(chartData, popover) {
 }
 
 function DashboardMapCtrl($timeout, $scope, $state) {
+    window.priv = priv;
     $scope.popover = {};
     $scope.deployment_types = deployment_types;
-    $scope.closePopover = () => priv.popover.style('display', 'none');
 
-    $scope.filterPins = function (filter) {
+    $scope.closePopover = () => {
+        priv.popover.style('display', 'none');
+        priv.selectedPin = null;
+    };
+
+    $scope.zoom = (zoomIn) => {
+        if ((priv.projection.scale() === priv.scaleExtent[1] && zoomIn) ||
+            (priv.projection.scale() === priv.scaleExtent[0]) && !zoomIn) {
+            return;
+        }
+
+        priv.lastScale = zoomIn ? priv.lastScale + 1 : priv.lastScale - 1;
+        priv.popover.style('display', 'none');
+        priv.projection.scale(priv.lastScale * priv.scaleExtent[0]);
+        priv.slast = priv.projection.scale();
+        priv.updatePins(true);
+        priv.svg.selectAll('path')
+            .transition()
+            .duration(priv.transitionTime)
+            .attr('d', priv.path);
+    };
+
+    $scope.filterPins = filter => {
         priv.pins.forEach(p => {
             if (p.data.type === filter ||
                 filter === deployment_types.all) {
@@ -400,7 +461,7 @@ function DashboardMapCtrl($timeout, $scope, $state) {
             .attr('dy', 25)
             .attr('x', 0)
             .text('Utilized');
-    }, 250);
+    }, 750);
 
     window.onresize = () => priv.reInit(priv.getConf());
 
