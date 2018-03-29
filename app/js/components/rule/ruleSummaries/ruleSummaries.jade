@@ -11,18 +11,17 @@ p.text-center(ng-if='(!system.reports || !system.reports.length) && !loading.isL
 div(ng-if='!loading.isLoading && !system.__fake && errorMessage', ng-bind-html=':: errorMessage | trust_html')
 //- rule-summary.rule-summary.system-overlay-item.content-block(report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports track by report.rule_id')
 list-group
-  list-item.ins-p-list-group__item--is-expandable(expandable report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports track by report.rule_id')
+  list-item.ins-p-list-group__item--is-expandable.ins-p-list-group__item--has-checkbox(expandable report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports track by report.rule_id')
     list-item-header-expandable
-      .list-item-header-text
-        .list-view-pf-checkbox
-          input.action(type='checkbox', ng-model='isSelected', ng-click='$event.stopPropagation();')
+      .ins-l-list-group__item__header--has-severities-and-ansible-support
+        //- .list-item-header-text
         strong.title {{:: report.rule.category }} > {{:: report.rule.description }}
           incident-icon.incident-icon(rule-id='report.rule_id')
         //ansible-icon(value='report.rule.ansible' ng-if='config.isPlannerEnabled' hide-label="true")
-        .risk-summaries.card-header-risk-summaries
+        .risk-summaries.card-header-risk-summaries.ins-c-risk-summaries
           all-severity-icons.inline(rule='report.rule')
           risk-of-change(change-risk='report.rule.resolution_risk')
-        ansible-icon(value='report.rule.ansible' hide-label="true")
+        ansible-icon.ins-c-ansible-support(value='report.rule.ansible' hide-label="true")
 
     list-item-content
       .rule-reason

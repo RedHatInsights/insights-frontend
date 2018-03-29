@@ -15,6 +15,63 @@
   padding: $global-padding;
 }
 
+.insights-app-dashboard-map .ins-p-page-header {
+  @include build-grid(1fr, sm auto max-content);
+
+  .ins-p-chart-list {
+    @include build-grid(1fr, sm repeat 2 1fr);
+    margin: 0;
+    padding: 0;
+    grid-gap: $global-padding;
+    grid-template-rows: max-content max-content;
+
+    @include media-query(sm) {
+      margin: 0;
+    }
+
+    @include media-query(md) {
+      margin: $global-padding $global-padding $global-padding auto;
+    }
+    
+    @include media-query(xl) {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: unset;
+      margin: 0 0 -$global-padding auto;
+    }
+    // > *:nth-child(3),
+    // > *:nth-child(4) {
+    //   grid-row-start: 2;
+    // }
+  }
+}
+
+// .insights-app-dashboard-map .ins-p-page-header {
+//   @include build-grid(max-content, lg 1fr max-content);
+//   grid-template-rows: max-content max-content;
+//   padding: $global-padding;
+
+//   @include media-query(lg) {
+//     grid-template-rows: unset;
+//   }
+
+//   .ins-p-chart-list {
+//     grid-row-start: 2;
+//     margin-left: -$global-padding;
+//     flex: 0;
+
+//     @include media-query(lg) {
+//       grid-row-start: unset;
+//       margin-left: auto;
+//       flex: 1;
+//     }
+
+//     &__item {
+//       flex: 0;
+//     }
+//   }
+// }
+
+
 /* Map base styling
 /* ================================================================== */
 .ins-l-pmaas-map {

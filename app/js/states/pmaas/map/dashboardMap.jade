@@ -1,6 +1,27 @@
 // Page Header
 header.ins-p-page-header.ins-has-chart-list
-  .button-group.filter-group
+  md-menu(md-offset="0 38").hidden-lg
+    md-button.button-filter(
+      type='button',
+      data-toggle='dropdown',
+      aria-haspopup='true',
+      aria-expanded='false',
+      ng-click='$mdMenu.open($event)')
+      span.text.active(ng-model='label') All
+      span.caret
+    md-menu-content
+      md-menu-item
+        a All
+      md-menu-item
+        a Public Cloud
+      md-menu-item
+        a Private Cloud
+      md-menu-item
+        a Virtual
+      md-menu-item
+        a Physical
+
+  .button-group.filter-group.visible-lg
     button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.all)", autofocus) All
     button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.publicCloud)") Public Cloud
     button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.privateCloud)") Private Cloud

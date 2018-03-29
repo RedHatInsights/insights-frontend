@@ -1,0 +1,11 @@
+/* ==================================================================
+/* Layout split
+/* ================================================================== */
+/**
+ * This document defines the styling split layout
+**/
+
+
+.ins-l-split {
+  @include build-grid(1fr, sm repeat 2 1fr);
+}

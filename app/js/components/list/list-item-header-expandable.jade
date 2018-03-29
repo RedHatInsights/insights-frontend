@@ -1,4 +1,8 @@
 //- .ins-p-list-group__item.ins-p-list-group__item--is-expandable.list-group-item-header.list-group-item-header--Expandable(ng-click='listItem.toggleContent()')
 .ins-p-list-group__item__header(ng-click='listItem.toggleContent()')
-  span.caret
+  span.ins-p-list-group__item__header__toggle
+    .caret
+  // this needs to be optional
+  .ins-p-list-group__item__header__checkbox
+    input(type='checkbox', ng-model='isSelected', ng-click='$event.stopPropagation();')
   .ins-p-list-group__item__header__content(ng-transclude)
