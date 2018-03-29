@@ -138,8 +138,19 @@ system-metadata { display: block; }
 
 
 .ins-l-system-metadata {
-    @include build-grid(sm 1fr, md max-content 1fr);
+    @include build-grid(sm 1fr, md max-content 1fr, lg 1fr 2fr);
     grid-template-rows: auto;
+
+    @include media-query(xl) { grid-template-columns: minmax(max-content, 350px) 1fr}
+    
+
+  > *:first-child {
+    align-self: start;
+
+    @include media-query(xl) {
+      align-self: stretch;
+    }
+  }
 }
 
 .ins-l-system-metadata-summary {

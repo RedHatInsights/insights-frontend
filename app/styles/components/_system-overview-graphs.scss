@@ -37,7 +37,44 @@
   }
 }
 
-.peer-ranking {
+// .peer-ranking {
+//   @include build-grid(repeat 2 1fr, xl max-content max-content auto);
+//   padding: 0;
+
+//   .peer-ranking-card {
+
+//     .percentile-number {
+//       @include font-size(36px);
+//       color: #72767b;
+//     }
+
+//     .peer-ranking-graph {
+//       width: 100%;
+
+//       .svg-container {
+//         width: 100% !important;
+//       }
+//     }
+//   }
+
+//   .peer-ranking-card.peer-ranking-trend {
+//     grid-column: span 2;
+
+//     @include media-query(xl) {
+//       grid-column: auto;
+//     }
+//   }
+// }
+
+
+/* System overview graphs pattern
+/* ================================================================== */
+.ins-c-card.ins-p-system-overview-graphs {
+  display: initial;
+}
+
+
+.ins-l-peer-ranking {
   @include build-grid(repeat 2 1fr, xl max-content max-content auto);
   padding: 0;
 
