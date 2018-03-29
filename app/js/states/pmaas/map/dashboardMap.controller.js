@@ -190,7 +190,7 @@ priv.getConf = () => {
     const ret = {
         width: div.scrollWidth,
         height: div.scrollHeight,
-        rotate: -10,
+        rotate: 50,
         maxLatitude: 86
     };
 
@@ -201,7 +201,7 @@ priv.getScale = (projection, maxLatitude, width) => {
     // set up the scale extent and initial scale for the projection
     const bounds = priv.mercatorBounds(priv.projection, maxLatitude);
     const scale  = width / (bounds[1][0] - bounds[0][0]);
-    return [scale, 15 * scale];
+    return [1.25 * scale, 4 * scale];
 };
 
 priv.reInit = (conf) => {
@@ -218,6 +218,7 @@ priv.reInit = (conf) => {
         .attr('width', conf.width)
         .attr('height', conf.height);
 
+    priv.updatePins();
     priv.redraw();
 };
 
@@ -263,13 +264,16 @@ priv.init = (conf, $scope, $state) => {
                     .data(pinLocations[d.id].coordinates)
                     .enter()
                     .append('svg:image')
-                    .style('padding', '25px')
+                    .style('stroke-width', 100)
+                    .style('stroke-opacity', 0)
+                    .style('stroke', '#ff0')
+                    .style('z-index', 1000)
                     .style('cursor', 'pointer')
+                    .attr('width', () => pinConfig.width)
+                    .attr('height', () => pinConfig.height)
                     .attr('d', d => data.push(d))
                     .attr('x', d => priv.projection(d.array)[0] - pinConfig.offsetx)
                     .attr('y', d => priv.projection(d.array)[1] - pinConfig.offsety)
-                    .attr('width', () => pinConfig.width)
-                    .attr('height', () => pinConfig.height)
                     .attr('xlink:href', d => {
                         if (d.issues) {
                             return 'static/images/i_pin-has-error.svg';
@@ -282,7 +286,7 @@ priv.init = (conf, $scope, $state) => {
                         const params = {deployment_id: d.deployment_id};
                         $state.go('app.dashboard-deployment', params);
                     })
-                    .on('mouseover', d => {
+                    .on('mouseenter', d => {
                         $scope.popover = d.popover;
                         $scope.popover.issues = d.issues;
                         $scope.$apply();
@@ -395,6 +399,7 @@ function generateCharts(chartData, popover) {
 function DashboardMapCtrl($timeout, $scope, $state) {
     window.priv = priv;
     $scope.popover = {};
+    $scope.selectedPinType = deployment_types.all;
     $scope.deployment_types = deployment_types;
 
     $scope.closePopover = () => {
@@ -424,6 +429,7 @@ function DashboardMapCtrl($timeout, $scope, $state) {
     };
 
     $scope.filterPins = filter => {
+        $scope.selectedPinType = filter;
         priv.pins.forEach(p => {
             if (p.data.type === filter ||
                 filter === deployment_types.all) {
@@ -465,7 +471,7 @@ function DashboardMapCtrl($timeout, $scope, $state) {
             .attr('dy', 25)
             .attr('x', 0)
             .text('Utilized');
-    }, 750);
+    }, 800);
 
     window.onresize = () => priv.reInit(priv.getConf());
 

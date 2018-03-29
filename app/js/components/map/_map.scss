@@ -43,6 +43,8 @@
     padding-left: $global-padding;
     padding-right: $global-padding;
 
+    &.active {background: $gray-lite}
+
     @include media-query(xl) {
       padding-left: var(--global-margin);
       padding-right: var(--global-margin);      

@@ -22,11 +22,16 @@ header.ins-p-page-header.ins-has-chart-list
         a Physical
 
   .button-group.filter-group.visible-lg
-    button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.all)", autofocus) All
-    button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.publicCloud)") Public Cloud
-    button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.privateCloud)") Private Cloud
-    button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.virtual)") Virtual
-    button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.physical)") Physical
+    button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.all)",
+      ng-class="{active: selectedPinType === deployment_types.all}", autofocus) All
+    button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.publicCloud)",
+      ng-class="{active: selectedPinType === deployment_types.publicCloud}") Public Cloud
+    button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.privateCloud)",
+      ng-class="{active: selectedPinType === deployment_types.privateCloud}") Private Cloud
+    button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.virtual)",
+      ng-class="{active: selectedPinType === deployment_types.virtual}") Virtual
+    button.button-default.button-lg.button-strong(ng-click="filterPins(deployment_types.physical)",
+      ng-class="{active: selectedPinType === deployment_types.physical}") Physical
 
   .ins-p-chart-list
     .ins-p-chart-list__item
