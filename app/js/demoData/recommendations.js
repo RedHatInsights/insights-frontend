@@ -21,9 +21,9 @@ pub.getRecommendations = (accountNumber, systemId) => {
                 rule_id: 'ACCESS_NETWORK_MTU_MISMATCH',
                 summary: 'Non-optimal MTU setting chosen causing degraded performance',
                 generic: '',
-                confidence: 4,
-                likelihood: 3,
-                reliability: 3,
+                confidence: 'high',
+                likelihood: 'moderate',
+                reliability: 'moderate',
                 reason: '<p>This system is running on OpenStack Platform 10. and Neutron network service. Red Hat analysed that <strong>93%</strong> of our customers running a similar deployment, have configured the MTU of the tenant network to 1545.</p>' +
                 '<p>This systems configuration of the MTU of the tenant network is currently configured to be 950</p>' +
                 '<p>Parameter Value is used in 0.75% of the similar deployments.  Parameter Value is in the 2σ interval</p>' +
@@ -61,9 +61,9 @@ pub.getRecommendations = (accountNumber, systemId) => {
                 rule_id: 'BARE_METAL_APACHE',
                 summary: 'Non-optimal hardware configuration causing less than optimal performance',
                 generic: '',
-                confidence: 2,
-                likelihood: 2,
-                reliability: 2,
+                confidence: 'moderate',
+                likelihood: 'low',
+                reliability: 'low',
                 reason: '<p>This system would be more performant using baremental</p>\n<ul>\n\n\n\n\n\n</ul>\n',
                 resolution: '<p>Red Hat recommends using a baremetal hardware configuration</p>'
             }
@@ -84,9 +84,9 @@ pub.getRecommendations = (accountNumber, systemId) => {
                 rule_id: 'SECURITY_ERRATA',
                 summary: 'Unapplied Errata',
                 generic: '',
-                confidence: 2,
-                likelihood: 2,
-                reliability: 2,
+                confidence: 'low',
+                likelihood: 'low',
+                reliability: 'low',
                 reason: '<p>This system is insecure because some errata has not been applied</p>\n',
                 resolution: '<p>Red Hat recommends that you apply all errata</p>'
             }
@@ -107,9 +107,9 @@ pub.getRecommendations = (accountNumber, systemId) => {
                 rule_id: 'SECURITY_ERRATA',
                 summary: 'System Monitoring Anomalies',
                 generic: '',
-                confidence: 1,
-                likelihood: 1,
-                reliability: 1,
+                confidence: 'critical',
+                likelihood: 'critical',
+                reliability: 'critical',
                 reason: '<p>This system has encountered minor anomalies that may require manual intervention</p>\n',
                 resolution: '<p>Red Hat recommends that you investigate anomalies</p>'
             }

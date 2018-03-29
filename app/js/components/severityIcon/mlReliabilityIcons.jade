@@ -1,7 +1,7 @@
 ul.icon-group.icon-group-severity
   li
-    reliability-icon(type='confidence', severity='rule.confidence')
+    ins-battery(status='{{rule.confidence}}', label="Confidence")
   li
-    reliability-icon(type='likelihood', severity='rule.likelihood')
+    ins-battery(status='{{rule.likelihood}}' label="Likelihood")
   li
-    reliability-icon(type='reliability', severity='rule.reliability')
+    ins-battery(status='{{rule.reliability}}', label="Reliability")

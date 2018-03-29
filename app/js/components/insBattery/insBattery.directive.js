@@ -16,7 +16,6 @@ function insBatteryCtrl($scope) {
             break;
         case 'moderate':
             $scope.statusClass = 'ins-battery-3';
-            console.log($scope);
             break;
         case 'low':
             $scope.statusClass = 'ins-battery-2';
@@ -31,7 +30,8 @@ function insBatteryCtrl($scope) {
 function insBattery() {
     return {
         scope: {
-            status: '@'
+            status: '@',
+            label: '@'
         },
         templateUrl: 'js/components/insBattery/insBattery.html',
         restrict: 'E',

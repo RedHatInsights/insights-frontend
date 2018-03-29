@@ -1,1 +1,3 @@
-i.ins-battery(class="{{statusClass}}")
+.ins-battery
+  i.ins-battery(class="{{statusClass}}")
+  span.title(ng-if='label', translate) {{:: label}}

@@ -39,6 +39,13 @@
 .ins-battery-3 { color: #f0ab00; }
 .ins-battery-4 { color: #3f9c35; }
 
+.ins-battery {
+  display: inline;
+  span.title {
+    font-weight: 700;
+    @include rem('margin', 0 10px);
+  }
+}
 
 // Used in a tile
 .tile i.ins-battery { display: block; }
