@@ -409,9 +409,13 @@ function DashboardMapCtrl($timeout, $scope, $state) {
         }
 
         priv.lastScale = zoomIn ? priv.lastScale + 1 : priv.lastScale - 1;
+
+        const scale = priv.lastScale * priv.scaleExtent[0];
+
+        priv.slast = scale;
         priv.popover.style('display', 'none');
-        priv.projection.scale(priv.lastScale * priv.scaleExtent[0]);
-        priv.slast = priv.projection.scale();
+        priv.projection.scale(scale);
+        priv.zoom.scale(scale);
         priv.updatePins(true);
         priv.svg.selectAll('path')
             .transition()
