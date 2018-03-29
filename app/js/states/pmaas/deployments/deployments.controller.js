@@ -91,7 +91,6 @@ const charts = [
     }
 ];
 
-
 function generateCharts(chartData) {
     for (const data of chartData) {
         c3.generate(donutSettings({
