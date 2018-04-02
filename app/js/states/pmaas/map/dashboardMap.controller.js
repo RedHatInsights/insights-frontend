@@ -207,11 +207,8 @@ priv.getScale = (projection, maxLatitude, width) => {
 };
 
 priv.reInit = (conf) => {
-    priv.projection.scale(1);
-
     priv.scaleExtent = priv.getScale(priv.projection, conf.maxLatitude, conf.width);
-    priv.projection.scale(priv.scaleExtent[0]);
-    priv.slast = priv.scaleExtent[0];
+    priv.slast = priv.projection.scale();
     priv.tlast = priv.projection.translate();
 
     priv.zoom
@@ -349,7 +346,7 @@ priv.redraw = () => {
 
             // use y translation to translate projection, clamped by min/max
             const b = priv.mercatorBounds(priv.projection, conf.maxLatitude);
-            console.log(b);
+
             if (b[0][1] + dy > 0) {
                 dy = 0;
             } else if (b[1][1] + dy < conf.height) {
