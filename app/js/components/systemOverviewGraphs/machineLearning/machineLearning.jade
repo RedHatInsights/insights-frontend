@@ -1,15 +1,15 @@
 .machine-learning-graphs-container
-  .card-pf.graph-card
+  .card-pf.graph-card(ng-if="system.show_recommendation_graphs")
     .card-pf-heading
       h2.card-pf-title Network Latency
     .card-pf-body
       latency-graph(system="system")
-  .card-pf.graph-card
+  .card-pf.graph-card(ng-if="system.show_recommendation_graphs")
     .card-pf-heading
       h2.card-pf-title Access Network MTU
     .card-pf-body
       tenant-mtu-graph(system="system")
-  .card-pf.graph-card
+  .card-pf.graph-card(ng-if="system.show_recommendation_graphs")
     .card-pf-heading
       h2.card-pf-title Storage Network MTU
     .card-pf-body

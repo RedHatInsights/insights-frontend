@@ -19,8 +19,7 @@ const layout = {
         linecolor: 'rgba(238, 238, 238, 1)'
     },
     yaxis: {
-        autorange: false,
-        range: [40, 69],
+        autorange: true,
         type: 'linear'
     },
     margin: {

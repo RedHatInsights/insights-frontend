@@ -49,8 +49,10 @@ pub.getSystems = () => {
                 },
                 metadata: {},
                 groups: [],
-                peer_rankings: generatePeerRankings(),
-                industry_peer_ranking: 57,
+                peer_rankings: generatePeerRankings(
+                    [53, 54, 54, 54, 53, 54, 54, 55, 45, 45, 45, 45, 45, 45],
+                    [62, 63, 62, 63, 63, 65, 64, 64, 55, 55, 56, 56, 56, 57]),
+                show_recommendation_graphs: true
             },
             {
                 toString: "openshift0.us-west.redhat.com",
@@ -83,7 +85,10 @@ pub.getSystems = () => {
                 },
                 metadata: {},
                 reports: {},
-                groups: []
+                groups: [],
+                peer_rankings: generatePeerRankings(
+                    [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
             },
             {
                 toString: "sqlserver1.us-east.redhat.com",
@@ -116,7 +121,10 @@ pub.getSystems = () => {
                 },
                 metadata: {},
                 reports: {},
-                groups: []
+                groups: [],
+                peer_rankings: generatePeerRankings(
+                    [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
             },
             {
                 toString: "hadooop1.us-west.redhat.com",
@@ -149,7 +157,10 @@ pub.getSystems = () => {
                 },
                 metadata: {},
                 reports: {},
-                groups: []
+                groups: [],
+                peer_rankings: generatePeerRankings(
+                    [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
             },
             {
                 toString: "openstack10.us-east.redhat.com",
@@ -182,7 +193,10 @@ pub.getSystems = () => {
                 },
                 metadata: {},
                 reports: {},
-                groups: []
+                groups: [],
+                peer_rankings: generatePeerRankings(
+                    [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
             },
             {
                 toString: "jboss1.us-west.redhat.com",
@@ -215,7 +229,10 @@ pub.getSystems = () => {
                 },
                 metadata: {},
                 reports: {},
-                groups: []
+                groups: [],
+                peer_rankings: generatePeerRankings(
+                    [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
             },
             {
                 toString: "rhev1.us-east.redhat.com",
@@ -248,7 +265,10 @@ pub.getSystems = () => {
                 },
                 metadata: {},
                 reports: {},
-                groups: []
+                groups: [],
+                peer_rankings: generatePeerRankings(
+                    [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
             },
             {
                 toString: "openshift11.us-west.redhat.com",
@@ -281,7 +301,10 @@ pub.getSystems = () => {
                 },
                 metadata: {},
                 reports: {},
-                groups: []
+                groups: [],
+                peer_rankings: generatePeerRankings(
+                    [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
             },
             {
                 toString: "openshift12.us-east.redhat.com",
@@ -314,7 +337,10 @@ pub.getSystems = () => {
                 },
                 metadata: {},
                 reports: {},
-                groups: []
+                groups: [],
+                peer_rankings: generatePeerRankings(
+                    [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
             },
             {
                 toString: "openshift13.us-west.redhat.com",
@@ -347,7 +373,10 @@ pub.getSystems = () => {
                 },
                 metadata: {},
                 reports: {},
-                groups: []
+                groups: [],
+                peer_rankings: generatePeerRankings(
+                    [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
             },
             {
                 toString: "openshift14.us-east.redhat.com",
@@ -380,7 +409,10 @@ pub.getSystems = () => {
                 },
                 metadata: {},
                 reports: {},
-                groups: []
+                groups: [],
+                peer_rankings: generatePeerRankings(
+                    [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
             },
             {
                 toString: "openshift15.us-west.redhat.com",
@@ -413,7 +445,10 @@ pub.getSystems = () => {
                 },
                 metadata: {},
                 reports: {},
-                groups: []
+                groups: [],
+                peer_rankings: generatePeerRankings(
+                    [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
             }
         ],
         total: 272
@@ -426,6 +461,7 @@ pub.getSystems = () => {
         fixedSystem.recommendations = [];
         fixedSystem.reliability = 'high';
         fixedSystem.optimization = 'high';
+        fixedSystem.show_recommendation_graphs = false;
 
         let all_sys_rankings = fixedSystem.peer_rankings.all_systems.y;
         all_sys_rankings[all_sys_rankings.length-1] = 54;
@@ -436,9 +472,7 @@ pub.getSystems = () => {
     return systems;
 };
 
-function generatePeerRankings () {
-    let allSystemsY =   [53, 54, 54, 54, 53, 54, 54, 55, 45, 45, 45, 45, 45, 45];
-    let industryY =     [62, 63, 62, 63, 63, 65, 64, 64, 55, 55, 56, 56, 56, 57];
+function generatePeerRankings (allSystemsY, industryY) {
     let timeArray =     [];
 
     for (let i = -13; i <= 0; i++) {
