@@ -207,14 +207,12 @@ priv.getScale = (projection, maxLatitude, width) => {
 };
 
 priv.reInit = (conf) => {
-    priv.projection
-        .rotate([conf.rotate, 0])
-        .scale(1)
-        .translate([conf.width / 2, (conf.height / 2) + 150]);
+    priv.projection.scale(1);
 
     priv.scaleExtent = priv.getScale(priv.projection, conf.maxLatitude, conf.width);
     priv.projection.scale(priv.scaleExtent[0]);
     priv.slast = priv.scaleExtent[0];
+    priv.tlast = priv.projection.translate();
 
     priv.zoom
         .scale(priv.projection.scale())
