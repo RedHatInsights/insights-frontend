@@ -52,7 +52,7 @@ const pinLocations = {
             array: [-122.490402, 37.786453],
             type: deployment_types.privateCloud,
             popover: {
-                title: 'Summit Demo',
+                title: 'San Francisco On-Stage',
                 subtitle: 'Private Cloud | OpenStack & OpenShift'
             },
             issues: true,
@@ -62,8 +62,8 @@ const pinLocations = {
             type: deployment_types.publicCloud,
             array: [-78.024902, 37.926868],
             popover: {
-                title: 'Summit Demo',
-                subtitle: 'aws East | OpenShift'
+                title: 'US East Cloud',
+                subtitle: 'aws US-East-2 | OpenShift'
             },
             issues: false,
             deployment_id: 'aws-east'
@@ -82,8 +82,8 @@ const pinLocations = {
             array: [10, 52.520008],
             type: deployment_types.publicCloud,
             popover: {
-                title: 'Self-Service Cloud',
-                subtitle: 'Azure Europe | OpenShift'
+                title: 'Germany Cloud',
+                subtitle: 'Azure West Europe | OpenShift'
             },
             issues: false,
             deployment_id: 'priv-openstack'
