@@ -1,6 +1,24 @@
-/*global angular, require*/
+/*global require*/
 'use strict';
 
+const statesModule = require('../');
+const demoData = require('../../demoData');
+
+/**
+ * @ngInject
+ */
+function DigestsCtrl($scope) {
+    $scope.resetDemo = function () {
+        demoData.reset();
+        $scope.demoDataFixed = demoData.isFixed();
+    };
+
+    $scope.demoDataFixed = demoData.isFixed();
+}
+
+statesModule.controller('DigestsCtrl', DigestsCtrl);
+
+/*
 const statesModule = require('../');
 const takeRight = require('lodash/takeRight');
 const last = require('lodash/last');
@@ -9,10 +27,12 @@ const filter = require('lodash/filter');
 const sum = require('lodash/sum');
 const URI = require('urijs');
 const TIME_PERIOD = 30;
+const demoData = require('../../demoData');
 
 /**
  * @ngInject
  */
+/*
 function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
                      InventoryService, Severities, InsightsConfig, User, MIN_SCORE) {
 
@@ -118,7 +138,17 @@ function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
         return date.getMonth() + '-' + date.getDay() + '-' + date.getFullYear();
     };
 
+    $scope.resetDemo = function () {
+        demoData.reset();
+        $scope.demoDataFixed = demoData.isFixed();
+    };
+
+    $scope.demoDataFixed = demoData.isFixed();
+
     function loadData () {
+        //skipping data load for demo
+        return;
+
         let digestPromise = DigestService.digestsByType('eval');
         let systemPromise = System.getSystemsLatest({
             report_count: 'gt0',
@@ -278,3 +308,5 @@ function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
 }
 
 statesModule.controller('DigestsCtrl', DigestsCtrl);
+*/
+

@@ -19,14 +19,12 @@ function System(
     Utils,
     FilterService,
     Products,
-    PreferenceService,
-    DataUtils,
-    DemoData) {
+    PreferenceService) {
 
     var root = InsightsConfig.apiRoot;
     var _systemDfd;
     var _systemStatusDfd;
-
+    /*
     //XXX: this needs to be refactored/simplified
     function decorateSystemType(systemType) {
         if (systemType.product_code === Products.docker.code) {
@@ -117,7 +115,7 @@ function System(
 
         return systemTypes;
     }
-
+    */
     $rootScope.$on('reload:data', function () {
         _systemDfd = null;
     });
@@ -140,11 +138,11 @@ function System(
         },
 
         getSystemTypes: function () {
-            decorateSystemTypes(demoData.systemTypes);
+            // decorateSystemTypes(demoData.systemTypes);
             return {
                 then: () => {
                     return {
-                        data: demoData.systemTypes
+                        data: demoData.getSystemTypes()
                     };
                 }
             };
@@ -177,7 +175,7 @@ function System(
         },
 
         getSystemsLatest: function () {
-            return $q.resolve(DemoData.systems);
+            return $q.resolve(demoData.getSystems());
 
             // var url = root + 'systems';
             // url += AccountService.current('?');

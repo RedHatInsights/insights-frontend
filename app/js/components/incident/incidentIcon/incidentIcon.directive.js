@@ -6,14 +6,14 @@ var componentsModule = require('../../');
 /**
  * @ngInject
  */
-function incidentIconCtrl($rootScope, $scope, gettextCatalog, IncidentsService) {
+function incidentIconCtrl($rootScope, $scope, gettextCatalog) {
     $scope.tooltip = gettextCatalog.getString('This is an incident. ' +
         'An incident means that this has already occurred.');
 
-    IncidentsService.init().then(() => {
-        $scope.isIncident = IncidentsService.isIncident($scope.ruleId) &&
-            $rootScope.isBeta;
-    });
+    // IncidentsService.init().then(() => {
+    //     $scope.isIncident = IncidentsService.isIncident($scope.ruleId) &&
+    //         $rootScope.isBeta;
+    // });
 }
 
 function incidentIcon() {

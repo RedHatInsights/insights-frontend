@@ -31,9 +31,6 @@ timeArray.push(moment().subtract(3, 'd').format('YYYY-MM-DD'));
 timeArray.push(moment().subtract(2, 'd').format('YYYY-MM-DD'));
 timeArray.push(moment().subtract(1, 'd').format('YYYY-MM-DD'));
 
-console.log(timeArray);
-console.log(timeArray.length);
-
 const systemsUpdated = {
     name: 'System',
     type: 'scatter',

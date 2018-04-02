@@ -1,9 +1,11 @@
 /*global module*/
+const fix = require('./fix');
+
 
 const pub = {};
 
 pub.getRecommendations = (accountNumber, systemId) => {
-    return [
+    let recommendations = [
         {
             id: 1,
             rule_id: 1,
@@ -115,6 +117,8 @@ pub.getRecommendations = (accountNumber, systemId) => {
             }
         }
     ];
+
+    return fix.isFixed() ? [] : recommendations;
 };
 
 module.exports = pub;

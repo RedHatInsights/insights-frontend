@@ -64,6 +64,10 @@ function SystemOverviewCtrl(
         return $scope.system.system_id;
     };
 
+    $rootScope.$on('reloadDemoData', function () {
+        init();
+    });
+
     init();
 }
 

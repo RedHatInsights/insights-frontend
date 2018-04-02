@@ -2,6 +2,7 @@
 
 var componentsModule = require('../');
 const find = require('lodash/find');
+const demoData = require('../../demoData');
 
 /**
  * @ngInject
@@ -29,18 +30,6 @@ function systemMetadataCtrl(
         label: 'Add to Existing Playbook'
     }];
 
-    if ($scope.system && $scope.system.system_id) {
-        $scope.loading.pageLoading = true;
-        System.getSystemMetadata($scope.system.system_id)
-        .then(function (metadata) {
-            $scope.initialMetadata =
-                SystemsService.getInitialSystemMetadata($scope.system, metadata.data);
-            $scope.systemMetadata =
-                SystemsService.getSystemMetadata($scope.system, metadata.data);
-            $scope.loading.pageLoading = false;
-        });
-    }
-
     $scope.getSystemType = function () {
         return find($scope.systemMetadata, {category: 'system'}).type;
     };
@@ -60,6 +49,31 @@ function systemMetadataCtrl(
     $scope.networkSorter = function (value) {
         return parseInt(value.port);
     };
+
+    $scope.applyRec = function () {
+        demoData.applyFixes();
+        $rootScope.$emit('reloadDemoData');
+        loadData();
+    };
+
+    loadData();
+
+    function loadData() {
+        if ($scope.system && $scope.system.system_id) {
+            $scope.loading.pageLoading = true;
+            System.getSystemMetadata($scope.system.system_id)
+                .then(function (metadata) {
+                    $scope.initialMetadata =
+                        SystemsService.getInitialSystemMetadata(
+                            $scope.system,
+                            metadata.data
+                        );
+                    $scope.systemMetadata =
+                        SystemsService.getSystemMetadata($scope.system, metadata.data);
+                    $scope.loading.pageLoading = false;
+                });
+        }
+    }
 }
 
 function systemMetadata() {

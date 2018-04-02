@@ -39,7 +39,7 @@ list-group
             .kbase-articles(ng-show='recommendation.rule.more_info')
               h4.section-heading(translate)
                 i.fa.fa-circular.fa-lightbulb-o(aria-hidden="true") &nbsp;
-                strong(translate) Related Knowledgebase articles:
+                strong(translate) Related Knowledgebase articles
               span(ng-if="recommendation.rule.more_info",
               ng-bind-html=':: recommendation.rule.more_info | trust_html',
               target-blank='')

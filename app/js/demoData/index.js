@@ -1,17 +1,26 @@
 /*global module, require*/
 'use strict';
 
-const reports = require('./reports');
-const recommendations = require('./recommendations');
+const find = require('lodash/find');
+const fix = require('./fix');
+const systems = require('./systems');
 
 const pub  = {
     vars: {
         accountNumber: '6',
-
-        // Use this as the system id for the demo??
-        demoSystemId: 'd18df352-7ac6-5754-a211-593f23f02ad3',
-        demoSystemName: 'apache0.us-west.redhat.com'
     }
+};
+
+pub.isFixed = () => {
+  return fix.isFixed();
+};
+
+pub.reset = () => {
+    return fix.reset();
+};
+
+pub.applyFixes = () => {
+    return fix.applyFixes();
 };
 
 pub.getIncidents = () => {
@@ -62,35 +71,12 @@ pub.getSystemMetadata = (systemId) => {
     };
 };
 
-pub.getDemoSystem = (systemId) => {
-    return {
-        toString: pub.vars.demoSystemName,
-        isCheckingIn: true,
-        system_id: systemId,
-        display_name: null,
-        remote_branch: null,
-        remote_leaf: null,
-        account_number: '6',
-        hostname: pub.vars.demoSystemName,
-        last_check_in: '2018-03-15T04:01:01.000Z',
-        created_at: '2016-09-30T19:19:40.000Z',
-        updated_at: '2018-03-20T13:17:48.000Z',
-        unregistered_at: null,
-        system_type_id: 105,
-        role: 'host',
-        product_code: 'rhel',
-        report_count: 11,
-        reports: reports.getReports(),
-        recommendations: recommendations.getRecommendations(),
-        acks: [],
-        parent_id: null,
-        stale_ack: false,
-        type: 'machine',
-        product: 'rhel',
-        optimization: 'high',
-        reliability: 'critical'
+pub.getSystems = () => {
+    return systems.getSystems();
+};
 
-    };
+pub.getDemoSystem = (systemId) => {
+    return find(systems.getSystems().resources, {'system_id' : systemId});
 };
 
 pub.user = {
@@ -205,82 +191,158 @@ pub.getPolicies = (systemId) => {
         }};
 };
 
-pub.systemTypes = [
-    {
-        id: 325,
-        role: 'cluster',
-        product_code: 'ocp'
-    },
-    {
-        id: 69,
-        role: 'cluster',
-        product_code: 'osp'
-    },
-    {
-        id: 315,
-        role: 'cluster',
-        product_code: 'rhev'
-    },
-    {
-        id: 49,
-        role: 'compute',
-        product_code: 'osp'
-    },
-    {
-        id: 19,
-        role: 'container',
-        product_code: 'docker'
-    },
-    {
-        id: 39,
-        role: 'controller',
-        product_code: 'osp'
-    },
-    {
-        id: 59,
-        role: 'director',
-        product_code: 'osp'
-    },
-    {
-        id: 79,
-        role: 'host',
-        product_code: 'aep'
-    },
-    {
-        id: 9,
-        role: 'host',
-        product_code: 'docker'
-    },
-    {
-        id: 105,
-        role: 'host',
-        product_code: 'rhel'
-    },
-    {
-        id: 99,
-        role: 'hypervisor',
-        product_code: 'rhev'
-    },
-    {
-        id: 29,
-        role: 'image',
-        product_code: 'docker'
-    },
-    {
-        id: 89,
-        role: 'manager',
-        product_code: 'rhev'
-    },
-    {
-        id: 335,
-        role: 'master',
-        product_code: 'ocp'
-    },
-    {
-        id: 345,
-        role: 'node',
-        product_code: 'ocp'
-    }
-];
+pub.getSystemTypes = () => {
+    return [
+        {
+            id: 1001,
+            role: 'host',
+            product_code: 'apache',
+            imageClass: 'fa-globe',
+            displayName: 'Web Server',
+            displayNameShort: 'Web Server'
+        },
+        {
+            id: 1002,
+            role: 'host',
+            product_code: 'database',
+            imageClass: 'fa-database',
+            displayName: 'Database Server',
+            displayNameShort: 'Database'
+        },
+        {
+            id: 1003,
+            role: 'host',
+            product_code: 'app',
+            imageClass: 'fa-cubes',
+            displayName: 'Application',
+            displayNameShort: 'Application Server'
+        },
+        {
+            id: 1004,
+            role: 'host',
+            product_code: 'network',
+            imageClass: 'pficon-network',
+            displayName: 'Network',
+            displayNameShort: 'Network'
+        },
+        {
+            id: 325,
+            role: 'cluster',
+            product_code: 'ocp',
+            imageClass: 'fa-cubes',
+            displayName: 'Red Hat OpenShift Compute Platform',
+            displayNameShort: 'OCP Deployment'
+        },
+        {
+            id: 69,
+            role: 'cluster',
+            product_code: 'osp',
+            imageClass: 'fa-cubes',
+            displayName: 'Red Hat OpenStack Platform Deployment',
+            displayNameShort: 'OSP Deployment'
+        },
+        {
+            id: 315,
+            role: 'cluster',
+            product_code: 'rhev',
+            imageClass: 'fa-object-group',
+            displayName: 'Red Hat Virtualization Deployment',
+            displayNameShort: 'RHV Deployment'
+        },
+        {
+            id: 49,
+            role: 'compute',
+            product_code: 'osp',
+            imageClass: 'fa-cogs',
+            displayName: 'Red Hat OpenStack Platform Compute Node',
+            displayNameShort: 'OSP Compute'
+        },
+        {
+            id: 19,
+            role: 'container',
+            product_code: 'docker',
+            imageClass: 'fa-cube',
+            displayName: 'Red Hat Container',
+            displayNameShort: 'Container'
+        },
+        {
+            id: 39,
+            role: 'controller',
+            product_code: 'osp',
+            imageClass: 'fa-wrench',
+            displayName: 'Red Hat OpenStack Platform Controller Node',
+            displayNameShort: 'OSP Controller'
+        },
+        {
+            id: 59,
+            role: 'director',
+            product_code: 'osp',
+            imageClass: 'fa-home',
+            displayName: 'Red Hat OpenStack Platform Director',
+            displayNameShort: 'OSP Director'
+        },
+        {
+            id: 79,
+            role: 'host',
+            product_code: 'aep'
+        },
+        {
+            id: 9,
+            role: 'host',
+            product_code: 'docker',
+            imageClass: 'fa-ship',
+            displayName: 'Red Hat Container Host',
+            displayNameShort: 'Container Host'
+        },
+        {
+            id: 105,
+            role: 'host',
+            product_code: 'rhel',
+            imageClass: 'fa-linux',
+            displayName: 'Red Hat Enterprise Linux',
+            displayNameShort: 'RHEL Server'
+        },
+        {
+            id: 99,
+            role: 'hypervisor',
+            product_code: 'rhev',
+            imageClass: 'fa-server',
+            displayName: 'Red Hat Virtualization Hypervisor',
+            displayNameShort: 'RHV Hypervisor'
+        },
+        {
+            id: 29,
+            role: 'image',
+            product_code: 'docker',
+            imageClass: 'fa-archive',
+            displayName: 'Red Hat Container Image',
+            displayNameShort: 'Container Image'
+        },
+        {
+            id: 89,
+            role: 'manager',
+            product_code: 'rhev',
+            imageClass: 'fa-building',
+            displayName: 'Red Hat Virtualization Manager',
+            displayNameShort: 'RHV Manager'
+        },
+        {
+            id: 335,
+            role: 'master',
+            product_code: 'ocp',
+            imageClass: 'fa-home',
+            displayName: 'Red Hat OpenShift Compute Platform Master',
+            displayNameShort: 'OCP Master'
+        },
+        {
+            id: 345,
+            role: 'node',
+            product_code: 'ocp',
+            imageClass: 'fa-cogs',
+            displayName: 'Red Hat OpenShift Compute Platform Node',
+            displayNameShort: 'OCP Node'
+        }
+    ];
+};
 
 module.exports = pub;

@@ -2,12 +2,13 @@
 
 var componentsModule = require('../');
 var find = require('lodash/find');
+var demoData = require('../../demoData');
 
 /**
  * @ngInject
  */
-function typeIconCtrl($scope, SystemsService, DemoData) {
-    var systemType = find(DemoData.systemTypes, {id: parseInt($scope.typeId)});
+function typeIconCtrl($scope) {
+    var systemType = find(demoData.systemTypes, {id: parseInt($scope.typeId)});
 
     $scope.systemTypeIcon = '';
     $scope.systemTypeDisplayName = '';
