@@ -105,7 +105,7 @@ const charts = [
         title: '82%',
         color: {
             pattern: [
-                '#0088CE',
+                '#f0ab00',
                 '#d1d1d1'
             ]
         }
@@ -120,7 +120,7 @@ const charts = [
         title: '68%',
         color: {
             pattern: [
-                '#0088CE',
+                '#cc0000',
                 '#d1d1d1'
             ]
         }
@@ -135,7 +135,7 @@ const charts = [
         title: '58%',
         color: {
             pattern: [
-                '#0088CE',
+                '#cc0000',
                 '#d1d1d1'
             ]
         }
@@ -152,9 +152,9 @@ const charts = [
         title: '98%',
         color: {
             pattern: [
-                '#cc0000',
-                '#0088CE',
-                '#2d7623',
+                '#004368',
+                '#0088ce',
+                '#7dc3e8',
                 '#d1d1d1'
             ]
         }
