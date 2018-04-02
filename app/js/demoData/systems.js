@@ -1,13 +1,12 @@
 const moment = require('moment');
-const fix = require('./fix');
+const storedData = require('./storedData');
 const reports = require('./reports');
 const recommendations = require('./recommendations');
 
 const pub = {};
 
 pub.getSystems = () => {
-    let lastCheckInTime = moment().subtract(1, 'h').toDate();
-
+    let lastCheckInTime = storedData.getLastCheckDate();
 
     let systems = {
         resources: [
@@ -455,9 +454,9 @@ pub.getSystems = () => {
     };
 
 
-    if (fix.isFixed()) {
+    if (storedData.isFixed()) {
         let fixedSystem = systems.resources[0];
-        fixedSystem.last_check_in = moment().subtract(1, 'minutes').toDate();
+        fixedSystem.last_check_in = storedData.getLastFixedDate();
         fixedSystem.recommendations = [];
         fixedSystem.reliability = 'high';
         fixedSystem.optimization = 'high';

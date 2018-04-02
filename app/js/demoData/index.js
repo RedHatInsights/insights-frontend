@@ -2,7 +2,7 @@
 'use strict';
 
 const find = require('lodash/find');
-const fix = require('./fix');
+const storedData = require('./storedData');
 const systems = require('./systems');
 
 const pub  = {
@@ -12,15 +12,15 @@ const pub  = {
 };
 
 pub.isFixed = () => {
-  return fix.isFixed();
+  return storedData.isFixed();
 };
 
 pub.reset = () => {
-    return fix.reset();
+    return storedData.reset();
 };
 
 pub.applyFixes = () => {
-    return fix.applyFixes();
+    return storedData.applyFixes();
 };
 
 pub.getIncidents = () => {
