@@ -70,7 +70,6 @@ function peerRankingGraphCtrl($scope, $element) {
         .node();
 
     $scope.$watch('system', function (system) {
-        console.log('update peer ranking graph');
         Plotly.newPlot(node, getData(system), layout, {displayModeBar: false});
     });
 

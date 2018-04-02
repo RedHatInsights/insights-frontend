@@ -72,7 +72,7 @@ pub.getSystems = () => {
                 system_status: "ok",
                 infra_status: "ok",
                 reliability: "high",
-                optimization: "moderate",
+                optimization: "high",
                 report_count: 11,
                 policies: {
                     total: 0,

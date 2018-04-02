@@ -11,30 +11,31 @@ const capitalize = require('lodash/capitalize');
 //TODO turn this into a static 3 bar icon to do 1/2/3/4 bars according.
 function insBatteryCtrl($scope) {
 
-    switch ($scope.status) {
-        case 'high':
-            $scope.statusClass = 'ins-battery-4';
-            break;
-        case 'moderate':
-            $scope.statusClass = 'ins-battery-3';
-            break;
-        case 'low':
-            $scope.statusClass = 'ins-battery-2';
-            break;
-        case 'critical':
-            $scope.statusClass = 'ins-battery-1';
-            break;
-    }
+    $scope.$watch('status', function (status) {
+        switch (status) {
+            case 'high':
+                $scope.statusClass = 'ins-battery-4';
+                break;
+            case 'moderate':
+                $scope.statusClass = 'ins-battery-3';
+                break;
+            case 'low':
+                $scope.statusClass = 'ins-battery-2';
+                break;
+            case 'critical':
+                $scope.statusClass = 'ins-battery-1';
+                break;
+        }
 
-    $scope.tooltipStatus = capitalize($scope.status);
-    console.log($scope.tooltipLabel);
+        $scope.tooltipStatus = capitalize(status);
+        console.log($scope.tooltipLabel);
 
-    if ($scope.label) {
-        $scope.tooltip = $scope.label + ': ' + $scope.tooltipStatus;
-    } else {
-        $scope.tooltip = $scope.type + ': ' + $scope.tooltipStatus;
-    }
-
+        if ($scope.label) {
+            $scope.tooltip = $scope.label + ': ' + $scope.tooltipStatus;
+        } else {
+            $scope.tooltip = $scope.type + ': ' + $scope.tooltipStatus;
+        }
+    });
 }
 
 function insBattery() {
