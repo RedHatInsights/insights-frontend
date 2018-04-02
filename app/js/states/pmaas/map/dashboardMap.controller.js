@@ -182,15 +182,17 @@ priv.mercatorBounds = (projection, maxlat) => {
     const yaw = projection.rotate()[0];
     const xymax = projection([-yaw + 180 - 1e-6,-maxlat]);
     const xymin = projection([-yaw - 180 + 1e-6, maxlat]);
+    xymin[1] += 400;
+    xymax[1] -= 600;
     return [xymin, xymax];
 };
 
 priv.getConf = () => {
     const div = document.querySelector('#map');
     const ret = {
-        width: div.scrollWidth,
-        height: div.scrollHeight,
-        rotate: 50,
+        width: window.innerWidth,
+        height: div.offsetHeight,
+        rotate: 0,
         maxLatitude: 86
     };
 
@@ -201,18 +203,22 @@ priv.getScale = (projection, maxLatitude, width) => {
     // set up the scale extent and initial scale for the projection
     const bounds = priv.mercatorBounds(priv.projection, maxLatitude);
     const scale  = width / (bounds[1][0] - bounds[0][0]);
-    return [1.25 * scale, 4 * scale];
+    return [1.1 * scale, 4 * scale];
 };
 
 priv.reInit = (conf) => {
     priv.projection
         .rotate([conf.rotate, 0])
-        .scale(priv.scaleExtent[0])
-        .translate([conf.width / 2, conf.height / 2]);
+        .scale(1)
+        .translate([conf.width / 2, (conf.height / 2) + 150]);
+
+    priv.scaleExtent = priv.getScale(priv.projection, conf.maxLatitude, conf.width);
+    priv.projection.scale(priv.scaleExtent[0]);
+    priv.slast = priv.scaleExtent[0];
 
     priv.zoom
         .scale(priv.projection.scale())
-        .translate([0, 0]);
+        .translate(priv.projection.translate());
 
     priv.svg
         .attr('width', conf.width)
@@ -243,6 +249,7 @@ priv.init = (conf, $scope, $state, $timeout) => {
 
     priv.svg = d3.select('.map')
         .append('svg')
+        .style('display', 'block')
         .attr('width', conf.width)
         .attr('height', conf.height)
         .call(priv.zoom);
@@ -343,12 +350,12 @@ priv.redraw = () => {
             priv.projection.rotate([yaw + angle, 0, 0]);
 
             // use y translation to translate projection, clamped by min/max
-            const b = priv.mercatorBounds(priv.projection, priv.maxlatitude);
-
+            const b = priv.mercatorBounds(priv.projection, conf.maxLatitude);
+            console.log(b);
             if (b[0][1] + dy > 0) {
-                dy = -b[0][1];
+                dy = 0;
             } else if (b[1][1] + dy < conf.height) {
-                dy = conf.height - b[1][1];
+                dy = 0;
             }
 
             priv.projection.translate([tp[0], tp[1] + dy]);
@@ -404,6 +411,12 @@ function DashboardMapCtrl($timeout, $scope, $state) {
     $scope.popover = {};
     $scope.selectedPinType = deployment_types.all;
     $scope.deployment_types = deployment_types;
+
+    $scope.$watch('navCollapsed', (n, o) => {
+        if (n !== o) {
+            $timeout(() => priv.reInit(priv.getConf()), 200);
+        }
+    });
 
     $scope.closePopover = () => {
         priv.popover.style('display', 'none');
@@ -474,9 +487,9 @@ function DashboardMapCtrl($timeout, $scope, $state) {
             .attr('dy', 25)
             .attr('x', 0)
             .text('Utilized');
-    }, 800);
+    }, 1500);
 
-    window.onresize = () => priv.reInit(priv.getConf());
+    window.onresize = () => $timeout(() => priv.reInit(priv.getConf()), 200);
 
     $scope.charts = keyBy(charts, 'name');
     generateCharts(charts);
