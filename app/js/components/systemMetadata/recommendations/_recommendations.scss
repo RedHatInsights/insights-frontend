@@ -27,6 +27,10 @@
   }
 }
 
+.icon.icon-inline.success.no-recommendations {
+  @include rem('margin-top', 48px);
+}
+
 .opt-potential {
   display: inline-block;
 

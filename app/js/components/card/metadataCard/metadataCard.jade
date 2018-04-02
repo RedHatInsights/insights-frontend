@@ -9,7 +9,7 @@
           span openshift0.us-west.redhat.com
         .status-check
           i.fa.fa-clock-o
-          span.hostname Last Check: {{::system.last_check_in | timeAgo }}
+          span.hostname Last Check: {{system.last_check_in | timeAgo }}
           i.pficon-info(ng-if='!system.isCheckingIn', tooltip="New Image Available")
 
       .card-pf-top-element
@@ -18,14 +18,14 @@
             ins-battery(status='{{system.optimization}}', type='Optimization')
           .tile-label
             span Optimization
-            span {{::system.optimization}}
+            span {{system.optimization}}
 
         .tile-with-text
           .reliability-tile.tile.tile-sm(class='{{system.reliability}}')
             ins-battery(status='{{system.reliability}}', type='Reliability')
           .tile-label
             span Reliability
-            span {{::system.reliability}}
+            span {{system.reliability}}
 
       //- .card-pf-top-element
       //-   .text-center.optimization-label

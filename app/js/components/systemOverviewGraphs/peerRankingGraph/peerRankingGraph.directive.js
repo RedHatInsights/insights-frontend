@@ -1,40 +1,8 @@
 'use strict';
 
-const moment = require('moment');
 const componentsModule = require('../../');
 const Plotly = require('plotly.js/lib/index');
 const d3 = Plotly.d3;
-
-let timeArray = [];
-
-for (let i = -13; i <= 0; i++) {
-    let d = moment().add(i, 'd').format('YYYY-MM-DD');
-    timeArray.push(d);
-}
-
-const sampleTrace = {
-    name: 'System',
-    type: 'scatter',
-    mode: 'lines',
-    x: timeArray,
-    y: [53, 54, 54, 54, 53, 54, 54, 55, 45, 45, 45, 45, 45, 45],
-    marker: {
-        color: 'rgba(39, 188, 255, 1)'
-    }
-};
-
-const industryTrace = {
-    name: 'Industry',
-    type: 'scatter',
-    mode: 'lines',
-    x: timeArray,
-    y: [48, 49, 49, 49, 50, 50, 49, 48, 48, 47, 47, 48, 48, 48],
-    marker: {
-        color: 'rgba(128, 128, 128, 1)'
-    }
-};
-
-const data = [sampleTrace, industryTrace];
 
 const layout = {
     autosize: true,
@@ -42,7 +10,7 @@ const layout = {
         family: 'overpass, helvetica'
     },
     legend: {
-        x: 0.75,
+        x: 0.65,
         y: 1
     },
     xaxis: {
@@ -52,7 +20,7 @@ const layout = {
     },
     yaxis: {
         autorange: false,
-        range: [40, 65],
+        range: [40, 69],
         type: 'linear'
     },
     margin: {
@@ -62,6 +30,32 @@ const layout = {
         t: 0
     }
 };
+
+function getData(system) {
+    let allSystemsRankings = {
+        name: 'System',
+        type: 'scatter',
+        mode: 'lines',
+        x: system.peer_rankings.all_systems.x,
+        y: system.peer_rankings.all_systems.y,
+        marker: {
+            color: 'rgba(39, 188, 255, 1)'
+        }
+    };
+
+    let industryRankings = {
+        name: 'Industry',
+        type: 'scatter',
+        mode: 'lines',
+        x: system.peer_rankings.industry.x,
+        y: system.peer_rankings.industry.y,
+        marker: {
+            color: 'rgba(128, 128, 128, 1)'
+        }
+    };
+
+    return [allSystemsRankings, industryRankings];
+}
 
 /**
  * @ngInject
@@ -75,7 +69,12 @@ function peerRankingGraphCtrl($scope, $element) {
         })
         .node();
 
-    Plotly.newPlot(node, data, layout, {displayModeBar: false});
+    $scope.$watch('system', function (system) {
+        console.log('update peer ranking graph');
+        Plotly.newPlot(node, getData(system), layout, {displayModeBar: false});
+    });
+
+    Plotly.newPlot(node, getData($scope.system), layout, {displayModeBar: false});
 
     window.addEventListener('resize', function () {
         let e = window.getComputedStyle(node).display;
@@ -93,7 +92,7 @@ function peerRankingGraph() {
         replace: true,
         controller: peerRankingGraphCtrl,
         scope: {
-            data: '='
+            system: '='
         }
     };
 }

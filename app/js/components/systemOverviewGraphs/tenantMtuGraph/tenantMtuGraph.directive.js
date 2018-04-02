@@ -106,7 +106,7 @@ function tenantMtuGraph() {
         replace: true,
         controller: tenantMtuGraphCtrl,
         scope: {
-            data: '='
+            system: '='
         }
     };
 }

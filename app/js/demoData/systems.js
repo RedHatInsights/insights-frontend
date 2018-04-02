@@ -6,18 +6,10 @@ const recommendations = require('./recommendations');
 const pub = {};
 
 pub.getSystems = () => {
+    let lastCheckInTime = moment().subtract(1, 'h').toDate();
 
 
-
-    let lastCheckInTime = moment().subtract(12, 'minutes').toDate();
-    let fixedCheckInTime = lastCheckInTime;
-    if (fix.isFixed()) {
-        fixedCheckInTime = moment().subtract(1, 'minutes').toDate();
-    }
-
-    console.log('old checkin', lastCheckInTime);
-
-    return {
+    let systems = {
         resources: [
             {
                 toString: "apache0.us-west.redhat.com",
@@ -28,7 +20,7 @@ pub.getSystems = () => {
                 remote_leaf: null,
                 account_number: "6",
                 hostname: "apache0.us-east.redhat.com",
-                last_check_in: fixedCheckInTime,
+                last_check_in: lastCheckInTime,
                 created_at: "2016-09-30T19:19:40.000Z",
                 updated_at: "2018-03-15T04:01:01.000Z",
                 unregistered_at: null,
@@ -39,8 +31,8 @@ pub.getSystems = () => {
                 product_name: "Rhel",
                 system_status: "error",
                 infra_status: "warning",
-                reliability: "critical",
-                optimization: "high",
+                reliability: "low",
+                optimization: "critical",
                 report_count: 11,
                 reports: reports.getReports(),
                 recommendations: recommendations.getRecommendations(),
@@ -56,7 +48,9 @@ pub.getSystems = () => {
                     policies_error: 0
                 },
                 metadata: {},
-                groups: []
+                groups: [],
+                peer_rankings: generatePeerRankings(),
+                industry_peer_ranking: 57,
             },
             {
                 toString: "openshift0.us-west.redhat.com",
@@ -77,7 +71,7 @@ pub.getSystems = () => {
                 product_name: "OpenShift",
                 system_status: "ok",
                 infra_status: "ok",
-                reliability: "moderate",
+                reliability: "high",
                 optimization: "moderate",
                 report_count: 11,
                 policies: {
@@ -110,8 +104,8 @@ pub.getSystems = () => {
                 product_name: "SQL Server",
                 system_status: "ok",
                 infra_status: "ok",
-                reliability: "moderate",
-                optimization: "low",
+                reliability: "high",
+                optimization: "high",
                 report_count: 11,
                 policies: {
                     total: 0,
@@ -143,8 +137,8 @@ pub.getSystems = () => {
                 product_name: "Hadoop",
                 system_status: "ok",
                 infra_status: "ok",
-                reliability: "moderate",
-                optimization: "low",
+                reliability: "high",
+                optimization: "high",
                 report_count: 11,
                 policies: {
                     total: 0,
@@ -176,8 +170,8 @@ pub.getSystems = () => {
                 product_name: "OpenStack",
                 system_status: "ok",
                 infra_status: "ok",
-                reliability: "moderate",
-                optimization: "low",
+                reliability: "high",
+                optimization: "high",
                 report_count: 11,
                 policies: {
                     total: 0,
@@ -209,8 +203,8 @@ pub.getSystems = () => {
                 product_name: "JBoss",
                 system_status: "ok",
                 infra_status: "ok",
-                reliability: "moderate",
-                optimization: "low",
+                reliability: "high",
+                optimization: "high",
                 report_count: 11,
                 policies: {
                     total: 0,
@@ -242,8 +236,8 @@ pub.getSystems = () => {
                 product_name: "RHEV",
                 system_status: "ok",
                 infra_status: "ok",
-                reliability: "moderate",
-                optimization: "low",
+                reliability: "high",
+                optimization: "high",
                 report_count: 11,
                 policies: {
                     total: 0,
@@ -275,8 +269,8 @@ pub.getSystems = () => {
                 product_name: "OpenShift",
                 system_status: "ok",
                 infra_status: "ok",
-                reliability: "moderate",
-                optimization: "low",
+                reliability: "high",
+                optimization: "high",
                 report_count: 11,
                 policies: {
                     total: 0,
@@ -308,8 +302,8 @@ pub.getSystems = () => {
                 product_name: "OpenShift",
                 system_status: "ok",
                 infra_status: "ok",
-                reliability: "moderate",
-                optimization: "low",
+                reliability: "high",
+                optimization: "high",
                 report_count: 11,
                 policies: {
                     total: 0,
@@ -341,8 +335,8 @@ pub.getSystems = () => {
                 product_name: "OpenShift",
                 system_status: "ok",
                 infra_status: "ok",
-                reliability: "moderate",
-                optimization: "low",
+                reliability: "high",
+                optimization: "high",
                 report_count: 11,
                 policies: {
                     total: 0,
@@ -374,8 +368,8 @@ pub.getSystems = () => {
                 product_name: "OpenShift",
                 system_status: "ok",
                 infra_status: "ok",
-                reliability: "moderate",
-                optimization: "low",
+                reliability: "high",
+                optimization: "high",
                 report_count: 11,
                 policies: {
                     total: 0,
@@ -407,8 +401,8 @@ pub.getSystems = () => {
                 product_name: "OpenShift",
                 system_status: "ok",
                 infra_status: "ok",
-                reliability: "moderate",
-                optimization: "low",
+                reliability: "high",
+                optimization: "high",
                 report_count: 11,
                 policies: {
                     total: 0,
@@ -423,8 +417,47 @@ pub.getSystems = () => {
             }
         ],
         total: 272
+    };
+
+
+    if (fix.isFixed()) {
+        let fixedSystem = systems.resources[0];
+        fixedSystem.last_check_in = moment().subtract(1, 'minutes').toDate();
+        fixedSystem.recommendations = [];
+        fixedSystem.reliability = 'high';
+        fixedSystem.optimization = 'high';
+
+        let all_sys_rankings = fixedSystem.peer_rankings.all_systems.y;
+        all_sys_rankings[all_sys_rankings.length-1] = 54;
+        let industry_rankings = fixedSystem.peer_rankings.industry.y;
+        industry_rankings[industry_rankings.length-1] = 65;
     }
+
+    return systems;
 };
+
+function generatePeerRankings () {
+    let allSystemsY =   [53, 54, 54, 54, 53, 54, 54, 55, 45, 45, 45, 45, 45, 45];
+    let industryY =     [62, 63, 62, 63, 63, 65, 64, 64, 55, 55, 56, 56, 56, 57];
+    let timeArray =     [];
+
+    for (let i = -13; i <= 0; i++) {
+        let d = moment().add(i, 'd').format('YYYY-MM-DD');
+        timeArray.push(d);
+    }
+
+    return {
+        all_systems: {
+            x: timeArray,
+            y: allSystemsY
+        },
+        industry: {
+            x: timeArray,
+            y: industryY
+        }
+    }
+}
+
 
 module.exports = pub;
 

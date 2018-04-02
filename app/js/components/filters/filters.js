@@ -212,6 +212,26 @@ function cached (fn, keyFn, $rootScope, ...events) {
     return wrapped;
 }
 
+function nth() {
+    return function (n) {
+        if (!Number.isInteger(n)) {
+            return '';
+        }
+
+        let nStr = '' + n;
+        switch (nStr[nStr.length - 1]) {
+            case '1':
+                return nStr + 'st';
+            case '2':
+                return nStr + 'nd';
+            case '3':
+                return nStr + 'rd';
+            default:
+                return nStr + 'th';
+        }
+    };
+}
+
 componentsModule.filter('trust_html', trust_html);
 componentsModule.filter('titlecase', titlecase);
 componentsModule.filter('sortClass', sortClass);
@@ -227,6 +247,7 @@ componentsModule.filter('isEmpty', function () {
 });
 
 componentsModule.filter('timeAgo', timeAgo);
+componentsModule.filter('nth', nth);
 
 componentsModule.filter('searchMaintenancePlans', function ($filter, $rootScope, Events) {
     return cached(

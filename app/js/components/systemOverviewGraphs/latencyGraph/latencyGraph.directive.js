@@ -120,7 +120,7 @@ function latencyGraph() {
         replace: true,
         controller: latencyGraphCtrl,
         scope: {
-            data: '='
+            system: '='
         }
     };
 }

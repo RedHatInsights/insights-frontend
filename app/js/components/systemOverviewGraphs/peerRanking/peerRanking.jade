@@ -5,7 +5,7 @@
     .card-pf-body
       .percentile-container
         .percentile.percentile-text
-          span.percentile-number 45th
+          span.percentile-number {{getCurrentAllSystemRank(system)}}
           span  Percentile
         .number-systems
           span of
@@ -19,7 +19,7 @@
     .card-pf-body
       .percentile-container
         .percentile.percentile-text
-          span.percentile-number 57th
+          span.percentile-number {{getCurrentIndustryRank(system)}}
           span  Percentile
         .number-systems
           span of
@@ -31,4 +31,4 @@
     .card-pf-heading
       h2.card-pf-title Peer Ranking Trend
     .card-pf-body
-      peer-ranking-graph
+      peer-ranking-graph(system)

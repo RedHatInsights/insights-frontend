@@ -102,7 +102,7 @@ function storageMtuGraph() {
         replace: true,
         controller: storageMtuGraphCtrl,
         scope: {
-            data: '='
+            system: '='
         }
     };
 }

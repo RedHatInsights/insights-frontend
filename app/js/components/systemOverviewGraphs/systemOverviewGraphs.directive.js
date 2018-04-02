@@ -14,6 +14,7 @@ function systemOverviewGraphsCtrl($scope) {
 function systemOverviewGraphs() {
     return {
         scope: {
+            system: '='
         },
         templateUrl: 'js/components/systemOverviewGraphs/systemOverviewGraphs.html',
         restrict: 'E',

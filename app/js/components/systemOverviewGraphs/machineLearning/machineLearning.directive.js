@@ -15,7 +15,9 @@ function machineLearning() {
         restrict: 'E',
         replace: false,
         controller: machineLearningCtrl,
-        scope: {}
+        scope: {
+            system: '='
+        }
     };
 }
 
