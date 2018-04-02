@@ -14,15 +14,15 @@
 
       .card-pf-top-element
         .tile-with-text
-          .optimization-tile.tile.tile-sm(class='{{system.optimization}}', tooltip='Optimization: {{system.optimization}}')
-            ins-battery(status='{{system.optimization}}')
+          .optimization-tile.tile.tile-sm(class='{{system.optimization}}')
+            ins-battery(status='{{system.optimization}}', type='Optimization')
           .tile-label
             span Optimization
             span {{::system.optimization}}
 
         .tile-with-text
-          .reliability-tile.tile.tile-sm(class='{{system.reliability}}' tooltip='Reliability: {{system.optimization}}')
-            ins-battery(status='{{system.reliability}}')
+          .reliability-tile.tile.tile-sm(class='{{system.reliability}}')
+            ins-battery(status='{{system.reliability}}', type='Reliability')
           .tile-label
             span Reliability
             span {{::system.reliability}}

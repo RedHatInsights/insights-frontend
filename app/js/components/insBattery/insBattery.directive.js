@@ -2,6 +2,7 @@
 'use strict';
 
 const componentsModule = require('../');
+const capitalize = require('lodash/capitalize');
 
 /**
  * @ngInject
@@ -25,13 +26,23 @@ function insBatteryCtrl($scope) {
             break;
     }
 
+    $scope.tooltipStatus = capitalize($scope.status);
+    console.log($scope.tooltipLabel);
+
+    if ($scope.label) {
+        $scope.tooltip = $scope.label + ': ' + $scope.tooltipStatus;
+    } else {
+        $scope.tooltip = $scope.type + ': ' + $scope.tooltipStatus;
+    }
+
 }
 
 function insBattery() {
     return {
         scope: {
             status: '@',
-            label: '@'
+            label: '@',
+            type: '@'
         },
         templateUrl: 'js/components/insBattery/insBattery.html',
         restrict: 'E',
