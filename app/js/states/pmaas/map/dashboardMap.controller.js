@@ -222,7 +222,7 @@ priv.reInit = (conf) => {
     priv.redraw();
 };
 
-priv.init = (conf, $scope, $state) => {
+priv.init = (conf, $scope, $state, $timeout) => {
     priv.projection = d3.geo.mercator()
         .rotate([conf.rotate, 0])
         .scale(1)
@@ -296,13 +296,16 @@ priv.init = (conf, $scope, $state) => {
 
                         priv.selectedPin = d;
 
-                        priv.popover.style('display', 'inline')
-                            .attr('style', pos)
+                        priv.popover.attr('style', pos)
+                            .style('display', 'none')
                             .style('position', 'absolute')
                             .style('color', '#222')
                             .style('background', '#fff')
-                            .style('border-radius', '3px')
-                            .style('display', 'inline');
+                            .style('border-radius', '3px');
+
+                        $timeout(() => {
+                            priv.popover.style('display', 'inline');
+                        }, 1000);
                     });
 
                 if (data.length > 0) {
@@ -407,7 +410,7 @@ function DashboardMapCtrl($timeout, $scope, $state) {
         priv.selectedPin = null;
     };
 
-    $scope.zoom = (zoomIn) => {
+    $scope.zoom = zoomIn => {
         if ((priv.projection.scale() === priv.scaleExtent[1] && zoomIn) ||
             (priv.projection.scale() === priv.scaleExtent[0]) && !zoomIn) {
             return;
@@ -441,7 +444,7 @@ function DashboardMapCtrl($timeout, $scope, $state) {
     };
 
     $timeout(() => {
-        priv.init(priv.getConf(), $scope, $state);
+        priv.init(priv.getConf(), $scope, $state, $timeout);
         generateCharts(charts, true);
 
         d3.select('.chart-vulnerability-popover')
