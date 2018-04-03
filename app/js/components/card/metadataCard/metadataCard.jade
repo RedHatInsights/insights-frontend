@@ -39,11 +39,7 @@
       //-       span Reliability
       .card-pf-middle-element.text-center
         .card-pf-item.type-tags.text-center
-          span Prod
-          span DMZ
+          span(ng-repeat="tag in system.type_tags") {{tag}}
       .card-pf-bottom-element.text-center
         .card-pf-items.system-tags.text-center
-          .fa.fa-linux.status-icon(tooltip='Linux')
-          .fa.fa-database.status-icon(tooltip='Database')
-          .pficon-network.status-icon(tooltip='Network')
-          .pficon-cluster.status-icon(tooltip='Server')
+          div(ng-repeat="tag in system.system_tags", class="{{tag.icon}}" tooltip="{{tag.name}}")

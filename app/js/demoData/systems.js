@@ -51,7 +51,25 @@ pub.getSystems = () => {
                 peer_rankings: generatePeerRankings(
                     [53, 54, 54, 54, 53, 54, 54, 55, 45, 45, 45, 45, 45, 45],
                     [62, 63, 62, 63, 63, 65, 64, 64, 55, 55, 56, 56, 56, 57]),
-                show_recommendation_graphs: true
+                show_recommendation_graphs: true,
+                type_tags: [
+                    'Prod',
+                    'DMZ'
+                ],
+                system_tags: [
+                    {
+                        name: 'Linux',
+                        icon: 'fa fa-linux status-icon'
+                    },
+                    {
+                        name: 'Load Balancer',
+                        icon: 'pficon-network status-icon'
+                    },
+                    {
+                        name: 'Server',
+                        icon: 'pficon-cluster status-icon'
+                    }
+                ]
             },
             {
                 toString: "openshift0.us-west.redhat.com",
@@ -87,7 +105,22 @@ pub.getSystems = () => {
                 groups: [],
                 peer_rankings: generatePeerRankings(
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
-                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
+                type_tags: [
+                    'Prod',
+                    'DMZ'
+                ],
+                system_tags: [
+                    {
+                        name: 'Linux',
+                        icon: 'fa fa-linux status-icon'
+                    },
+                    {
+                        name: 'Server',
+                        icon: 'pficon-cluster status-icon'
+                    }
+                ]
+
             },
             {
                 toString: "sqlserver1.us-east.redhat.com",
@@ -123,7 +156,17 @@ pub.getSystems = () => {
                 groups: [],
                 peer_rankings: generatePeerRankings(
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
-                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
+                type_tags: [
+                    'Prod',
+                    'DMZ'
+                ],
+                system_tags: [
+                    {
+                        name: 'Database',
+                        icon: 'fa fa-database status-icon'
+                    }
+                ]
             },
             {
                 toString: "hadooop1.us-west.redhat.com",
@@ -159,7 +202,26 @@ pub.getSystems = () => {
                 groups: [],
                 peer_rankings: generatePeerRankings(
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
-                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
+                type_tags: [
+                    'Prod',
+                    'DMZ'
+                ],
+                system_tags: [
+                    {
+                        name: 'Linux',
+                        icon: 'fa fa-linux status-icon'
+                    },
+                    {
+                        name: 'Database',
+                        icon: 'fa fa-database status-icon'
+                    },
+                    {
+                        name: 'Server',
+                        icon: 'pficon-cluster status-icon'
+                    }
+                ]
+
             },
             {
                 toString: "openstack10.us-east.redhat.com",
@@ -195,7 +257,22 @@ pub.getSystems = () => {
                 groups: [],
                 peer_rankings: generatePeerRankings(
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
-                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
+                type_tags: [
+                    'Prod',
+                    'DMZ'
+                ],
+                system_tags: [
+                    {
+                        name: 'Linux',
+                        icon: 'fa fa-linux status-icon'
+                    },
+                    {
+                        name: 'Network',
+                        icon: 'pficon-network status-icon'
+                    }
+                ]
+
             },
             {
                 toString: "jboss1.us-west.redhat.com",
@@ -231,7 +308,22 @@ pub.getSystems = () => {
                 groups: [],
                 peer_rankings: generatePeerRankings(
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
-                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
+                type_tags: [
+                    'Prod',
+                    'DMZ'
+                ],
+                system_tags: [
+                    {
+                        name: 'Linux',
+                        icon: 'fa fa-linux status-icon'
+                    },
+                    {
+                        name: 'Server',
+                        icon: 'pficon-cluster status-icon'
+                    }
+                ]
+
             },
             {
                 toString: "rhev1.us-east.redhat.com",
@@ -267,7 +359,18 @@ pub.getSystems = () => {
                 groups: [],
                 peer_rankings: generatePeerRankings(
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
-                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
+                type_tags: [
+                    'Prod',
+                    'DMZ'
+                ],
+                system_tags: [
+                    {
+                        name: 'Linux',
+                        icon: 'fa fa-linux status-icon'
+                    }
+                ]
+
             },
             {
                 toString: "openshift11.us-west.redhat.com",
@@ -303,7 +406,21 @@ pub.getSystems = () => {
                 groups: [],
                 peer_rankings: generatePeerRankings(
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
-                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
+                type_tags: [
+                    'Prod',
+                    'DMZ'
+                ],
+                system_tags: [
+                    {
+                        name: 'Linux',
+                        icon: 'fa fa-linux status-icon'
+                    },
+                    {
+                        name: 'Server',
+                        icon: 'pficon-cluster status-icon'
+                    }
+                ]
             },
             {
                 toString: "openshift12.us-east.redhat.com",
@@ -339,7 +456,21 @@ pub.getSystems = () => {
                 groups: [],
                 peer_rankings: generatePeerRankings(
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
-                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
+                type_tags: [
+                    'Prod',
+                    'DMZ'
+                ],
+                system_tags: [
+                    {
+                        name: 'Linux',
+                        icon: 'fa fa-linux status-icon'
+                    },
+                    {
+                        name: 'Server',
+                        icon: 'pficon-cluster status-icon'
+                    }
+                ]
             },
             {
                 toString: "openshift13.us-west.redhat.com",
@@ -375,7 +506,21 @@ pub.getSystems = () => {
                 groups: [],
                 peer_rankings: generatePeerRankings(
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
-                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
+                type_tags: [
+                    'Prod',
+                    'DMZ'
+                ],
+                system_tags: [
+                    {
+                        name: 'Linux',
+                        icon: 'fa fa-linux status-icon'
+                    },
+                    {
+                        name: 'Server',
+                        icon: 'pficon-cluster status-icon'
+                    }
+                ]
             },
             {
                 toString: "openshift14.us-east.redhat.com",
@@ -411,7 +556,21 @@ pub.getSystems = () => {
                 groups: [],
                 peer_rankings: generatePeerRankings(
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
-                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
+                type_tags: [
+                    'Prod',
+                    'DMZ'
+                ],
+                system_tags: [
+                    {
+                        name: 'Linux',
+                        icon: 'fa fa-linux status-icon'
+                    },
+                    {
+                        name: 'Server',
+                        icon: 'pficon-cluster status-icon'
+                    }
+                ]
             },
             {
                 toString: "openshift15.us-west.redhat.com",
@@ -447,7 +606,21 @@ pub.getSystems = () => {
                 groups: [],
                 peer_rankings: generatePeerRankings(
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
-                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65])
+                    [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
+                type_tags: [
+                    'Prod',
+                    'DMZ'
+                ],
+                system_tags: [
+                    {
+                        name: 'Linux',
+                        icon: 'fa fa-linux status-icon'
+                    },
+                    {
+                        name: 'Server',
+                        icon: 'pficon-cluster status-icon'
+                    }
+                ]
             }
         ],
         total: 272
