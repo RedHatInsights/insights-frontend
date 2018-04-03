@@ -5,6 +5,7 @@ const find = require('lodash/find');
 const storedData = require('./storedData');
 const systems = require('./systems');
 const deployments = require('./deployments');
+const charts = require('./charts');
 
 const pub  = {
     vars: {
@@ -82,6 +83,10 @@ pub.getDemoSystem = (systemId) => {
 
 pub.getDemoDeployment = () => {
     return deployments.getDemoDeployment();
+};
+
+pub.generateDeploymentDonutChartData = () => {
+    return charts.generateDeploymentDonutChartData();
 };
 
 pub.user = {

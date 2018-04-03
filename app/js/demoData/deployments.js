@@ -14,7 +14,7 @@ pub.getDemoDeployment = () => {
         deployment.issues = false;
         deployment.ratings.advisor.score = 72;
         deployment.ratings.advisor.passed = 65;
-        deployment.ratings.advisor.state = 'good';
+        deployment.ratings.advisor.state = 'moderate';
         let a = deployment.ratings_history.advisor.y;
         a[a.length - 1] = 72;
     }
@@ -27,14 +27,14 @@ function generateRatings() {
         vulnerability: {
             secure: 982,
             vulnerable: 218,
-            state: 'good',
+            state: 'moderate',
             score: 82
         },
 
         compliance: {
             compliant: 816,
             nonCompliant: 218,
-            state: 'good',
+            state: 'moderate',
             score: 78
         },
 
