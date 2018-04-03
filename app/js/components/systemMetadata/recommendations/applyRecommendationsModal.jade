@@ -1,0 +1,17 @@
+.main-content.updatable(ng-class='{updating: loader.loading}')
+  .spinner.spinner-lg(ng-if='loader.loading')
+  .modal-actions
+  .modal-header
+    h1(translate) Applying Recommendations
+  .modal-body
+    .progress-description
+      .spinner.spinner-xs.spinner-inline
+      strong Applying:
+      span {{recNumber}}. {{ recDesc }}
+    .progress.progress-label-top-right
+      .progress-bar(style="width: {{progressPercent}}%")
+        span {{progressPercent}}% ({{recNumber}} of {{recTotal}})
+  .modal-footer
+
+
+

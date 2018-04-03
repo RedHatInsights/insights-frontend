@@ -10,6 +10,8 @@ const demoData = require('../../demoData');
 function systemMetadataCtrl(
     $rootScope,
     $scope,
+    $modal,
+    $timeout,
     InsightsConfig,
     System,
     SystemsService) {
@@ -51,9 +53,18 @@ function systemMetadataCtrl(
     };
 
     $scope.applyRec = function () {
-        demoData.applyFixes();
-        $rootScope.$emit('reloadDemoData');
-        loadData();
+        return $modal.open({
+            templateUrl: 'js/components/systemMetadata/recommendations/' +
+                         'applyRecommendationsModal.html',
+            windowClass: 'apply-recommendations-modal ng-animate-enabled',
+            backdropClass: 'system-backdrop ng-animate-enabled',
+            controller: 'applyRecommendationsModalCtrl',
+            resolve: {}
+        }).result.finally(() => {
+            demoData.applyFixes();
+            $rootScope.$emit('reloadDemoData');
+            loadData();
+        });
     };
 
     loadData();
