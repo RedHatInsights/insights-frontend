@@ -3,93 +3,109 @@
 
 const statesModule = require('../../');
 const keyBy = require('lodash/keyBy');
+const demoData = require('../../../demoData');
 const c3 = require('c3');
 const d3 = require('d3');
 const donutSize = 180;
 const donutThickness = 8;
 
-const donutVals     = {
+const donutVals = {
     size: {
         width: donutSize,
         height: donutSize
     },
-    donut: { width: donutThickness },
-    data: { type: 'donut' },
-    legend: { show: false }
+    donut: {width: donutThickness},
+    data: {type: 'donut'},
+    legend: {show: false}
 };
 
 function donutSettings(obj) {
     return Object.assign({}, donutVals, obj);
 }
 
-const charts = [
-    {
-        name: 'vulnerability',
-        columns: [
-            ['Secure systems', 982],
-            ['Vulnerable systems', 218]
-        ],
-        state: 'moderate',
-        title: '82%',
-        color: {
-            pattern: [
-                '#f0ab00',
-                '#d1d1d1'
-            ]
-        }
-    },
-
-    {
-        name: 'compliance',
-        columns: [
-            ['Compliant systems', 816],
-            ['Noncompliant systems', 384]
-        ],
-        state: 'critical',
-        title: '68%',
-        color: {
-            pattern: [
-                '#cc0000',
-                '#d1d1d1'
-            ]
-        }
-    },
-
-    {
-        name: 'advisor',
-        columns: [
-            ['Rules evaluated', 90],
-            ['Rules passed', 65]
-        ],
-        state: 'critical',
-        title: '58%',
-        color: {
-            pattern: [
-                '#cc0000',
-                '#d1d1d1'
-            ]
-        }
-    },
-
-    {
-        name: 'subscription',
-        columns: [
-            ['RHEL', 1050],
-            ['OpenShift', 100],
-            ['OpenStack', 50],
-            ['Available', 25]
-        ],
-        title: '98%',
-        color: {
-            pattern: [
-                '#004368',
-                '#0088ce',
-                '#7dc3e8',
-                '#d1d1d1'
-            ]
-        }
+function stateToColor(state) {
+    switch (state) {
+        case 'critical':
+            return '#cc0000';
+        case 'moderate':
+            return '#f0ab00';
+        default:
+            return '#0088ce';
     }
-];
+}
+
+function generateChartData() {
+    const ratings = demoData.getDemoDeployment().ratings;
+
+    return [
+        {
+            name: 'vulnerability',
+            columns: [
+                ['Secure systems', ratings.vulnerability.secure],
+                ['Vulnerable systems', ratings.vulnerability.vulnerable]
+            ],
+            state: ratings.vulnerability.state,
+            title: ratings.vulnerability.score + '%',
+            color: {
+                pattern: [
+                    stateToColor(ratings.vulnerability.state),
+                    '#d1d1d1'
+                ]
+            }
+        },
+
+        {
+            name: 'compliance',
+            columns: [
+                ['Compliant systems', ratings.compliance.compliant],
+                ['Noncompliant systems', ratings.compliance.nonCompliant]
+            ],
+            state: ratings.compliance.state,
+            title: ratings.compliance.score + '%',
+            color: {
+                pattern: [
+                    stateToColor(ratings.compliance.state),
+                    '#d1d1d1'
+                ]
+            }
+        },
+
+        {
+            name: 'advisor',
+            columns: [
+                ['Rules evaluated', ratings.advisor.rules],
+                ['Rules passed', ratings.advisor.passed]
+            ],
+            state: ratings.advisor.state,
+            title: ratings.advisor.score + '%',
+            color: {
+                pattern: [
+                    stateToColor(ratings.advisor.state),
+                    '#d1d1d1'
+                ]
+            }
+        },
+
+        {
+            name: 'subscription',
+            columns: [
+                ['RHEL', ratings.subscription.rhel],
+                ['OpenShift', ratings.subscription.openshift],
+                ['OpenStack', ratings.subscription.openstack],
+                ['Available', ratings.subscription.available]
+            ],
+            title: ratings.subscription.score + '%',
+            color: {
+                pattern: [
+                    '#004368',
+                    '#0088ce',
+                    '#7dc3e8',
+                    '#d1d1d1'
+                ]
+            }
+        }
+    ];
+}
 
 function generateCharts(chartData) {
     for (const data of chartData) {
@@ -113,8 +129,9 @@ function generateCharts(chartData) {
  * @ngInject
  */
 function DeploymentsCtrl($scope) {
-    $scope.charts = keyBy(charts, 'name');
-    generateCharts(charts);
+    let chartData = generateChartData();
+    $scope.charts = keyBy(chartData, 'name');
+    generateCharts(chartData);
 
     d3.select('.chart-vulnerability').select('.c3-chart-arcs-title')
         .append('tspan')

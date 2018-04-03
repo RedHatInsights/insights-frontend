@@ -2,6 +2,7 @@
 'use strict';
 
 const statesModule = require('../../');
+const demoData = require('../../../demoData');
 const keyBy = require('lodash/keyBy');
 const d3 = require('d3');
 const topojson = require('topojson');
@@ -43,47 +44,49 @@ const pinConfig = {
     offsety: 40
 };
 
-const pinLocations = {
-    USA: {
-        issues: true,
-        offset: [30, -30],
-        coordinates: [{
-            name: 'San Francisco',
-            array: [-122.490402, 37.786453],
-            type: deployment_types.privateCloud,
+function generatePinLocations() {
+    return {
+        USA: {
             issues: true,
-            deployment_id: 'azure-europe',
-            title: 'San Francisco On-Stage',
-            subtitle: 'Private Cloud | OpenStack & OpenShift'
-        }, {
-            name: 'virgina',
-            type: deployment_types.publicCloud,
-            array: [-78.024902, 37.926868],
+            offset: [30, -30],
+            coordinates: [{
+                name: 'San Francisco',
+                array: [-122.490402, 37.786453],
+                type: deployment_types.privateCloud,
+                issues: demoData.getDemoDeployment().issues,
+                deployment_id: 'azure-europe',
+                title: 'San Francisco On-Stage',
+                subtitle: 'Private Cloud | OpenStack & OpenShift'
+            }, {
+                name: 'virgina',
+                type: deployment_types.publicCloud,
+                array: [-78.024902, 37.926868],
+                issues: false,
+                deployment_id: 'aws-east',
+                title: 'US East Cloud',
+                subtitle: 'aws US-East-2 | OpenShift'
+            }]
+        },
+        CAN: {
             issues: false,
-            deployment_id: 'aws-east',
-            title: 'US East Cloud',
-            subtitle: 'aws US-East-2 | OpenShift'
-        }]
-    },
-    CAN: {
-        issues: false,
-        offset: [-50, -190],
-        coordinates: []
-    },
-    DEU: {
-        issues: false,
-        offset: [25, 45],
-        coordinates: [{
-            name: 'germany',
-            array: [10, 52.520008],
-            type: deployment_types.publicCloud,
+            offset: [-50, -190],
+            coordinates: []
+        },
+        DEU: {
             issues: false,
-            deployment_id: 'priv-openstack',
-            title: 'Germany Cloud',
-            subtitle: 'Azure West Europe | OpenShift'
-        }]
-    }
-};
+            offset: [25, 45],
+            coordinates: [{
+                name: 'germany',
+                array: [10, 52.520008],
+                type: deployment_types.publicCloud,
+                issues: false,
+                deployment_id: 'priv-openstack',
+                title: 'Germany Cloud',
+                subtitle: 'Azure West Europe | OpenShift'
+            }]
+        }
+    };
+}
 
 function donutSettings(obj) {
     return Object.assign({}, donutVals, obj);
@@ -218,6 +221,9 @@ priv.reInit = (conf) => {
 };
 
 priv.init = (conf, $scope, $state, $timeout) => {
+    const pinLocations = generatePinLocations();
+    priv.pins = [];
+
     priv.projection = d3.geo.mercator()
         .rotate([conf.rotate, 0])
         .scale(1)
@@ -404,6 +410,14 @@ function DashboardMapCtrl($timeout, $scope, $state) {
     $scope.selectedDeployments = [];
     $scope.selectedPinType = deployment_types.all;
     $scope.deployment_types = deployment_types;
+
+    if (demoData.isFixed()) {
+        $scope.numGoodPins = 3;
+        $scope.numIssues = 0;
+    } else {
+        $scope.numGoodPins = 2;
+        $scope.numIssues = 1;
+    }
 
     // $scope.$watch('navCollapsed', (n, o) => {
     //     if (n !== o) {

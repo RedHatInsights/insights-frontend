@@ -28,7 +28,7 @@ function applyRecommendationsModalCtrl($scope, $modalInstance, $interval, $timeo
             $scope.recNumber = 4;
             $scope.recDesc = 'Updating Rec 4';
         }
-    }, 100, 100).then(() => {
+    }, 50, 100).then(() => {
         $timeout(() => {
             $modalInstance.close();
         }, 1000);

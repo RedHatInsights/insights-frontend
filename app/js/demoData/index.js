@@ -4,6 +4,7 @@
 const find = require('lodash/find');
 const storedData = require('./storedData');
 const systems = require('./systems');
+const deployments = require('./deployments');
 
 const pub  = {
     vars: {
@@ -77,6 +78,10 @@ pub.getSystems = () => {
 
 pub.getDemoSystem = (systemId) => {
     return find(systems.getSystems().resources, {'system_id' : systemId});
+};
+
+pub.getDemoDeployment = () => {
+    return deployments.getDemoDeployment();
 };
 
 pub.user = {

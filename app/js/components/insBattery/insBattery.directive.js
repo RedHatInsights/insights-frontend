@@ -28,7 +28,6 @@ function insBatteryCtrl($scope) {
         }
 
         $scope.tooltipStatus = capitalize(status);
-        console.log($scope.tooltipLabel);
 
         if ($scope.label) {
             $scope.tooltip = $scope.label + ': ' + $scope.tooltipStatus;

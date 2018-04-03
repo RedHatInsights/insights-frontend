@@ -126,10 +126,10 @@ section.ins-l-pmaas-map
       .header-info
         h3.header-title Deployments
         .count
-          span.num 2 &nbsp;
+          span.num {{numGoodPins}} &nbsp;
           i.fa.fa-check-circle.alert-success
-        .count
-          span.num 1 &nbsp;
+        .count(ng-show="numIssues")
+          span.num {{numIssues}} &nbsp;
           i.fa.fa-times-circle.alert-danger
 
       button.toggle-map(ng-click="navCollapsed = !navCollapsed; temp(selectedDeployments)")
