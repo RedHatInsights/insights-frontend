@@ -285,10 +285,9 @@ priv.init = (conf, $scope, $state, $timeout) => {
                     .on('mouseenter', d => {
                         $scope.popover = {
                             title: d.title,
-                            subtitle: d.subtitle
+                            subtitle: d.subtitle,
+                            issues: d.issues
                         };
-
-                        $scope.popover.issues = d.issues;
                         $scope.$apply();
 
                         const svgCoord = priv.getCoords(d);
@@ -296,7 +295,7 @@ priv.init = (conf, $scope, $state, $timeout) => {
 
                         priv.selectedPin = d;
 
-                        priv.popover
+                        priv.popover.attr('style', pos)
                             .style('display', 'none')
                             .style('position', 'absolute')
                             .style('color', '#222')
@@ -304,8 +303,7 @@ priv.init = (conf, $scope, $state, $timeout) => {
                             .style('border-radius', '3px');
 
                         $timeout(() => {
-                            priv.popover.attr('style', pos)
-                            .style('display', 'inline');
+                            priv.popover.style('display', 'inline');
                         }, 1000);
                     });
 
@@ -441,7 +439,7 @@ function DashboardMapCtrl($timeout, $scope, $state) {
 
     $scope.filterPins = filter => {
         $scope.selectedPinType = filter;
-        $scope.selectedDeployments = [];
+        priv.popover.style('display', 'none');
         priv.pins.forEach(p => {
             if (p.data.type === filter ||
                 filter === deployment_types.all) {
