@@ -132,25 +132,14 @@ section.ins-l-pmaas-map
           span.num 1 &nbsp;
           i.fa.fa-times-circle.alert-danger
 
-      button.toggle-map(ng-click="navCollapsed = !navCollapsed")
+      button.toggle-map(ng-click="navCollapsed = !navCollapsed; temp(selectedDeployments)")
         i.fa.fa-angle-double-left
 
     ul.list-deployments
-      li
-        a.list-group(ui-sref="app.dashboard-deployment({deployment_id: 'azure-europe'})")
-          i.fa.fa-check-circle.alert-success
-          span.title Germany Cloud
+      li(ng-repeat="deployment in selectedDeployments")
+        a.list-group(ui-sref="app.dashboard-deployment({deployment_id: deployment.deployment_id})")
+          i.fa.fa-check-circle.alert-success(ng-if="!deployment.issues")
+          i.fa.fa-times-circle.alert-danger(ng-if="deployment.issues")
+          span.title {{ deployment.title }}
           span.subtitle
-            b Azure West Europe | OpenShift
-      li
-        a.list-group(ui-sref="app.dashboard-deployment({deployment_id: 'priv-openstack'})")
-          i.fa.fa-times-circle.alert-danger
-          span.title San Francisco On-Stage
-          span.subtitle
-            b Private Cloud | OpenStack & OpenShift
-      li
-        a.list-group(ui-sref="app.dashboard-deployment({deployment_id: 'aws-east'})")
-          i.fa.fa-check-circle.alert-success
-          span.title US East Cloud
-          span.subtitle
-            b aws US-East-2 | OpenShift
+            b {{ deployment.subtitle }}

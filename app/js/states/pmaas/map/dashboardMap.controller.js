@@ -51,22 +51,18 @@ const pinLocations = {
             name: 'San Francisco',
             array: [-122.490402, 37.786453],
             type: deployment_types.privateCloud,
-            popover: {
-                title: 'San Francisco On-Stage',
-                subtitle: 'Private Cloud | OpenStack & OpenShift'
-            },
             issues: true,
-            deployment_id: 'azure-europe'
+            deployment_id: 'azure-europe',
+            title: 'San Francisco On-Stage',
+            subtitle: 'Private Cloud | OpenStack & OpenShift'
         }, {
             name: 'virgina',
             type: deployment_types.publicCloud,
             array: [-78.024902, 37.926868],
-            popover: {
-                title: 'US East Cloud',
-                subtitle: 'aws US-East-2 | OpenShift'
-            },
             issues: false,
-            deployment_id: 'aws-east'
+            deployment_id: 'aws-east',
+            title: 'US East Cloud',
+            subtitle: 'aws US-East-2 | OpenShift'
         }]
     },
     CAN: {
@@ -81,12 +77,10 @@ const pinLocations = {
             name: 'germany',
             array: [10, 52.520008],
             type: deployment_types.publicCloud,
-            popover: {
-                title: 'Germany Cloud',
-                subtitle: 'Azure West Europe | OpenShift'
-            },
             issues: false,
-            deployment_id: 'priv-openstack'
+            deployment_id: 'priv-openstack',
+            title: 'Germany Cloud',
+            subtitle: 'Azure West Europe | OpenShift'
         }]
     }
 };
@@ -289,7 +283,11 @@ priv.init = (conf, $scope, $state, $timeout) => {
                         $state.go('app.dashboard-deployment', params);
                     })
                     .on('mouseenter', d => {
-                        $scope.popover = d.popover;
+                        $scope.popover = {
+                            title: d.title,
+                            subtitle: d.subtitle
+                        };
+
                         $scope.popover.issues = d.issues;
                         $scope.$apply();
 
@@ -298,7 +296,7 @@ priv.init = (conf, $scope, $state, $timeout) => {
 
                         priv.selectedPin = d;
 
-                        priv.popover.attr('style', pos)
+                        priv.popover
                             .style('display', 'none')
                             .style('position', 'absolute')
                             .style('color', '#222')
@@ -306,7 +304,8 @@ priv.init = (conf, $scope, $state, $timeout) => {
                             .style('border-radius', '3px');
 
                         $timeout(() => {
-                            priv.popover.style('display', 'inline');
+                            priv.popover.attr('style', pos)
+                            .style('display', 'inline');
                         }, 1000);
                     });
 
@@ -404,6 +403,7 @@ function generateCharts(chartData, popover) {
 function DashboardMapCtrl($timeout, $scope, $state) {
     window.priv = priv;
     $scope.popover = {};
+    $scope.selectedDeployments = [];
     $scope.selectedPinType = deployment_types.all;
     $scope.deployment_types = deployment_types;
 
@@ -441,9 +441,11 @@ function DashboardMapCtrl($timeout, $scope, $state) {
 
     $scope.filterPins = filter => {
         $scope.selectedPinType = filter;
+        $scope.selectedDeployments = [];
         priv.pins.forEach(p => {
             if (p.data.type === filter ||
                 filter === deployment_types.all) {
+                $scope.selectedDeployments.push(p.data);
                 p.drawable.style('display', 'inline');
             } else {
                 p.drawable.style('display', 'none');
@@ -453,6 +455,7 @@ function DashboardMapCtrl($timeout, $scope, $state) {
 
     $timeout(() => {
         priv.init(priv.getConf(), $scope, $state, $timeout);
+        $scope.filterPins(deployment_types.all);
         generateCharts(charts, true);
 
         d3.select('.chart-vulnerability-popover')
