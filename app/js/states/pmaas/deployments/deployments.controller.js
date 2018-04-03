@@ -73,8 +73,8 @@ function generateChartData() {
         {
             name: 'advisor',
             columns: [
-                ['Rules evaluated', ratings.advisor.rules],
-                ['Rules passed', ratings.advisor.passed]
+                ['Rules passed', ratings.advisor.passed],
+                ['Rules failed', ratings.advisor.failed]
             ],
             state: ratings.advisor.state,
             title: ratings.advisor.score + '%',

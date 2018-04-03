@@ -92,71 +92,89 @@ function donutSettings(obj) {
     return Object.assign({}, donutVals, obj);
 }
 
-const charts = [
-    {
-        name: 'vulnerability',
-        columns: [
-            ['Secure systems', 982],
-            ['Vulnerable systems', 218]
-        ],
-        title: '82%',
-        color: {
-            pattern: [
-                '#f0ab00',
-                '#d1d1d1'
-            ]
-        }
-    },
-
-    {
-        name: 'compliance',
-        columns: [
-            ['Compliant systems', 816],
-            ['Noncompliant systems', 384]
-        ],
-        title: '68%',
-        color: {
-            pattern: [
-                '#cc0000',
-                '#d1d1d1'
-            ]
-        }
-    },
-
-    {
-        name: 'advisor',
-        columns: [
-            ['Rules evaluated', 90],
-            ['Rules passed', 65]
-        ],
-        title: '58%',
-        color: {
-            pattern: [
-                '#cc0000',
-                '#d1d1d1'
-            ]
-        }
-    },
-
-    {
-        name: 'subscription',
-        columns: [
-            ['RHEL', 1050],
-            ['OpenShift', 100],
-            ['OpenStack', 50],
-            ['Available', 25]
-        ],
-        title: '98%',
-        color: {
-            pattern: [
-                '#004368',
-                '#0088ce',
-                '#7dc3e8',
-                '#d1d1d1'
-            ]
-        }
+function stateToColor(state) {
+    switch (state) {
+        case 'critical':
+            return '#cc0000';
+        case 'moderate':
+            return '#f0ab00';
+        default:
+            return '#0088ce';
     }
-];
+}
+
+function generateChartData() {
+    const ratings = demoData.getDemoDeployment().ratings;
+
+    return [
+        {
+            name: 'vulnerability',
+            columns: [
+                ['Secure systems', ratings.vulnerability.secure],
+                ['Vulnerable systems', ratings.vulnerability.vulnerable]
+            ],
+            state: ratings.vulnerability.state,
+            title: ratings.vulnerability.score + '%',
+            color: {
+                pattern: [
+                    stateToColor(ratings.vulnerability.state),
+                    '#d1d1d1'
+                ]
+            }
+        },
+
+        {
+            name: 'compliance',
+            columns: [
+                ['Compliant systems', ratings.compliance.compliant],
+                ['Noncompliant systems', ratings.compliance.nonCompliant]
+            ],
+            state: ratings.compliance.state,
+            title: ratings.compliance.score + '%',
+            color: {
+                pattern: [
+                    stateToColor(ratings.compliance.state),
+                    '#d1d1d1'
+                ]
+            }
+        },
+
+        {
+            name: 'advisor',
+            columns: [
+                ['Rules passed', ratings.advisor.passed],
+                ['Rules failed', ratings.advisor.failed]
+            ],
+            state: ratings.advisor.state,
+            title: ratings.advisor.score + '%',
+            color: {
+                pattern: [
+                    stateToColor(ratings.advisor.state),
+                    '#d1d1d1'
+                ]
+            }
+        },
+
+        {
+            name: 'subscription',
+            columns: [
+                ['RHEL', ratings.subscription.rhel],
+                ['OpenShift', ratings.subscription.openshift],
+                ['OpenStack', ratings.subscription.openstack],
+                ['Available', ratings.subscription.available]
+            ],
+            title: ratings.subscription.score + '%',
+            color: {
+                pattern: [
+                    '#004368',
+                    '#0088ce',
+                    '#7dc3e8',
+                    '#d1d1d1'
+                ]
+            }
+        }
+    ];
+}
 
 // returns the angle in degrees between two points on the map
 // used for the x tranlation for infinite scroll
@@ -469,7 +487,7 @@ function DashboardMapCtrl($timeout, $scope, $state) {
     $timeout(() => {
         priv.init(priv.getConf(), $scope, $state, $timeout);
         $scope.filterPins(deployment_types.all);
-        generateCharts(charts, true);
+        generateCharts(generateChartData(), true);
 
         d3.select('.chart-vulnerability-popover')
         .select('.c3-chart-arcs-title')
@@ -502,8 +520,9 @@ function DashboardMapCtrl($timeout, $scope, $state) {
 
     window.onresize = () => $timeout(() => priv.reInit(priv.getConf()), 200);
 
-    $scope.charts = keyBy(charts, 'name');
-    generateCharts(charts);
+    let chartData = generateChartData();
+    $scope.charts = keyBy(chartData, 'name');
+    generateCharts(chartData);
 
     d3.select('.chart-vulnerability').select('.c3-chart-arcs-title')
         .append('tspan')

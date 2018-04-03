@@ -39,8 +39,8 @@ function generateRatings() {
         },
 
         advisor: {
-            rules: 90,
             passed: 52,
+            failed: 38,
             state: 'critical',
             score: 58
         },
