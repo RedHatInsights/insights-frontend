@@ -405,11 +405,11 @@ function DashboardMapCtrl($timeout, $scope, $state) {
     $scope.selectedPinType = deployment_types.all;
     $scope.deployment_types = deployment_types;
 
-    $scope.$watch('navCollapsed', (n, o) => {
-        if (n !== o) {
-            $timeout(() => priv.reInit(priv.getConf()), 200);
-        }
-    });
+    // $scope.$watch('navCollapsed', (n, o) => {
+    //     if (n !== o) {
+    //         $timeout(() => priv.reInit(priv.getConf()), 200);
+    //     }
+    // });
 
     $scope.closePopover = () => {
         priv.popover.style('display', 'none');
@@ -439,6 +439,7 @@ function DashboardMapCtrl($timeout, $scope, $state) {
 
     $scope.filterPins = filter => {
         $scope.selectedPinType = filter;
+        $scope.selectedDeployments = [];
         priv.popover.style('display', 'none');
         priv.pins.forEach(p => {
             if (p.data.type === filter ||
