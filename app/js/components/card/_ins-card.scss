@@ -5,6 +5,14 @@
  * This document defines the styling for the pmaas layout
 **/
 
+/* Vars
+/* ================================================================== */
+:root {
+  --ins-c-card--Padding:          #{$ins-global--spacer--lg};
+  --ins-c-card--GridGap:          #{$ins-global--spacer--lg};
+  --ins-c-card--BorderColor:      #{$pf-black-300};
+}
+
 /*------------------------------------*\
   #SECTION-TITLE
 \*------------------------------------*/
@@ -12,14 +20,37 @@
 .ins-c-card {
   display: grid;
   grid-template-rows: max-content auto;
-  @include rem('grid-gap', $global-margin);
-  @include rem('padding', $global-margin);
+  grid-gap: var(--ins-c-card--GridGap);
+  padding: var(--ins-c-card--Padding) 0;
   background: #fff;
   box-shadow: 0 1px 1px rgba(3,3,3,.175);
+  transition: .3s;
+
+  &__header,
+  &__body,
+  &__footer {
+    display: grid;
+    grid-gap: var(--ins-c-card--GridGap);
+    padding: 0 var(--ins-c-card--Padding);
+    border: none;
+  }
 
 
   &__header {
-    background: red;
+    padding-bottom: var(--ins-c-card--Padding);
+    border-bottom: 1px solid var(--ins-c-card--BorderColor);
+
+    &__title {
+      margin: 0;
+      @include font-size(20px, 1);
+      font-weight: 300;
+      line-height: 1;      
+    }
+
+    &.no-border {
+      padding-bottom: 0;
+      border: none;
+    }
   }
 
   &__body {
@@ -40,6 +71,15 @@
 
   &__tab-content {
     // overflow-x: auto;
+  }
+
+
+
+  &.is-clickable {
+    &:hover {
+      box-shadow: 0 1px 6px rgba(3,3,3,.35);
+      cursor: pointer;
+    }
   }
 }
 
