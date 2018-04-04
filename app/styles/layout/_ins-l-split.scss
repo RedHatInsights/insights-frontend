@@ -10,14 +10,16 @@
 /* ================================================================== */
 .ins-l-split {
   @include build-grid(1fr, sm repeat 2 1fr);
+  padding: 0;
   
   &--md,
   &--lg,
   &--xl {
     @include media-query(sm) { @include build-grid(1fr); }
+    padding: 0;
   }
 
-  &--md { @include media-query(md) { grid-template-columns: repeat(2, 1fr); } }
-  &--lg { @include media-query(lg) { grid-template-columns: repeat(2, 1fr); } }
-  &--xl { @include media-query(xl) { grid-template-columns: repeat(2, 1fr); } }
+  &--md { @include media-query(md) { grid-template-columns: repeat(2, 1fr); padding: 0; } }
+  &--lg { @include media-query(lg) { grid-template-columns: repeat(2, 1fr); padding: 0; } }
+  &--xl { @include media-query(xl) { grid-template-columns: repeat(2, 1fr); padding: 0; } }
 }

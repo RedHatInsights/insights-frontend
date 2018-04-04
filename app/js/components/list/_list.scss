@@ -73,7 +73,7 @@
   }
 
   .ins-p-list-group__item__body {
-    margin: 0 $global-margin $global-margin;
+    // margin: 0 $global-margin $global-margin;
     padding: $global-margin;
     background: #fff;
   }
@@ -90,6 +90,10 @@
       background: #edf8ff;
       
       &__toggle .caret{ transform: rotate(0deg); }
+    }
+
+    .ins-p-list-group__item__body {
+      border-top: 1px solid #bbb;
     }
   }
 }
