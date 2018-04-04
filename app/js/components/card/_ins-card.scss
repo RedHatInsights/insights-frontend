@@ -69,6 +69,10 @@
     grid-template-rows: max-content 1fr;
   }
 
+  &.is-tabbed {
+    padding: var(--ins-c-card--Padding);
+  }
+
   &__tab-content {
     // overflow-x: auto;
   }
