@@ -95,7 +95,7 @@ function logsGraphCtrl($scope, $element) {
         .append('div')
         .style({
             width: '100%',
-            height: '200px'
+            height: '160px'
         })
         .node();
 
