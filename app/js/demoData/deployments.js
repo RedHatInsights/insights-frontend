@@ -20,7 +20,7 @@ pub.getDemoDeployment = () => {
         deployment.ratings.advisor.failed = 21;
         deployment.ratings.advisor.state = 'moderate';
         let a = deployment.ratings_history.advisor.y;
-        a[a.length - 1] = 72;
+        a[a.length - 1] = deployment.ratings.advisor.score;
     }
 
     return deployment;
