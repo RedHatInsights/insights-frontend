@@ -15,8 +15,9 @@ pub.getDemoDeployment = () => {
 
     if (storedData.isFixed()) {
         deployment.issues = false;
-        deployment.ratings.advisor.score = 72;
-        deployment.ratings.advisor.passed = 65;
+        deployment.ratings.advisor.score = 76;
+        deployment.ratings.advisor.passed = 69;
+        deployment.ratings.advisor.failed = 21;
         deployment.ratings.advisor.state = 'moderate';
         let a = deployment.ratings_history.advisor.y;
         a[a.length - 1] = 72;
