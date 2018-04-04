@@ -6,7 +6,7 @@
       .host-info
         .hostname
           i.pficon-screen
-          span openshift0.us-west.redhat.com
+          span {{:: system.hostname }}
         .status-check
           i.fa.fa-clock-o
           span.hostname Last Check: {{system.last_check_in | timeAgo }}

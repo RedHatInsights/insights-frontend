@@ -1,3 +1,7 @@
+.logs-graph-title {
+  @include font-size(20px);
+}
+
 .logs-graph {
   display: flex;
   .svg-container {

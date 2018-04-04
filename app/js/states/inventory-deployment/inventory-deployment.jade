@@ -1,4 +1,5 @@
-inventory-header(name='San Francisco On-Stage', region='Private Cloud', type='OpenStack & OpenShift')
+inventory-header(name='{{deployment.name}}', region='{{deployment.region}}', type='{{deployment.type}}')
+
 table-filters
   search-box(on-search='filter.setSearchTerm(model); filter.doFilter();', throttle='1000', placeholder="{{:: 'Find a system' | translate}}")
   actions-select

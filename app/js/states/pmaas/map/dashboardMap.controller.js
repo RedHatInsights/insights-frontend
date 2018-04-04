@@ -53,7 +53,7 @@ function generatePinLocations() {
                 name: 'San Francisco',
                 array: [-122.490402, 37.786453],
                 type: deployment_types.privateCloud,
-                issues: demoData.getDemoDeployment().issues,
+                issues: false,
                 deployment_id: 'azure-europe',
                 title: 'San Francisco On-Stage',
                 subtitle: 'Private Cloud | OpenStack & OpenShift'
@@ -61,7 +61,7 @@ function generatePinLocations() {
                 name: 'virgina',
                 type: deployment_types.publicCloud,
                 array: [-78.024902, 37.926868],
-                issues: false,
+                issues: demoData.getDemoDeployment().issues,
                 deployment_id: 'aws-east',
                 title: 'US East Cloud',
                 subtitle: 'aws US-East-2 | OpenShift'

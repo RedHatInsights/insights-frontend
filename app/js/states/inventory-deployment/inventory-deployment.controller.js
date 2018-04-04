@@ -5,6 +5,7 @@ const statesModule = require('../');
 const find = require('lodash/find');
 const pick = require('lodash/pick');
 const diff = require('lodash/difference');
+const demoData = require('../../demoData');
 
 /**
  * @ngInject
@@ -38,6 +39,7 @@ function InventoryDeploymentCtrl(
 
     $scope.Group = Group;
     $scope.filter = FilterService;
+    $scope.deployment = demoData.getDemoDeployment();
 
     function updateParams(params) {
         params = FilterService.updateParams(params);

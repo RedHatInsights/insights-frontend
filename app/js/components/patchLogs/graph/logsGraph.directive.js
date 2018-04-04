@@ -67,11 +67,6 @@ function generateData() {
 const layout = {
     autosize: true,
     showlegend: true,
-    title: 'Score History',
-    titlefont: {
-        family: 'overpass, helvetica',
-        size: 20
-    },
     font: {
         family: 'overpass, helvetica'
     },
@@ -80,14 +75,13 @@ const layout = {
         type: 'date'
     },
     yaxis: {
-        autorange: false,
-        range: [50, 100]
+        autorange: true
     },
     margin: {
         l: 30,
         r: 0,
         b: 20,
-        t: 40,
+        t: 0,
         pad: 4
     }
 };
@@ -97,6 +91,7 @@ const layout = {
  */
 function logsGraphCtrl($scope, $element) {
     const node = d3.select($element[0])
+        .select('.logs-graph')
         .append('div')
         .style({
             width: '100%',

@@ -11,14 +11,14 @@ pub.getSystems = () => {
     let systems = {
         resources: [
             {
-                toString: "apache0.us-west.redhat.com",
+                toString: "apache0.us-east-2.redhat.com",
                 isCheckingIn: true,
                 system_id: "d18df352-7ac6-5754-a211-593f23f02ad3",
                 display_name: null,
                 remote_branch: null,
                 remote_leaf: null,
                 account_number: "6",
-                hostname: "apache0.us-east.redhat.com",
+                hostname: "apache0.us-east-2.redhat.com",
                 last_check_in: lastCheckInTime,
                 created_at: "2016-09-30T19:19:40.000Z",
                 updated_at: "2018-03-15T04:01:01.000Z",
@@ -107,8 +107,7 @@ pub.getSystems = () => {
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
                     [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
                 type_tags: [
-                    'Prod',
-                    'DMZ'
+                    'Prod'
                 ],
                 system_tags: [
                     {
@@ -158,8 +157,7 @@ pub.getSystems = () => {
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
                     [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
                 type_tags: [
-                    'Prod',
-                    'DMZ'
+                    'Prod'
                 ],
                 system_tags: [
                     {
@@ -204,8 +202,7 @@ pub.getSystems = () => {
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
                     [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
                 type_tags: [
-                    'Prod',
-                    'DMZ'
+                    'Prod'
                 ],
                 system_tags: [
                     {
@@ -259,8 +256,7 @@ pub.getSystems = () => {
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
                     [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
                 type_tags: [
-                    'Prod',
-                    'DMZ'
+                    'Prod'
                 ],
                 system_tags: [
                     {
@@ -310,8 +306,7 @@ pub.getSystems = () => {
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
                     [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
                 type_tags: [
-                    'Prod',
-                    'DMZ'
+                    'Prod'
                 ],
                 system_tags: [
                     {
@@ -361,8 +356,7 @@ pub.getSystems = () => {
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
                     [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
                 type_tags: [
-                    'Prod',
-                    'DMZ'
+                    'Prod'
                 ],
                 system_tags: [
                     {
@@ -408,8 +402,7 @@ pub.getSystems = () => {
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
                     [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
                 type_tags: [
-                    'Prod',
-                    'DMZ'
+                    'Prod'
                 ],
                 system_tags: [
                     {
@@ -458,8 +451,7 @@ pub.getSystems = () => {
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
                     [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
                 type_tags: [
-                    'Prod',
-                    'DMZ'
+                    'Prod'
                 ],
                 system_tags: [
                     {
@@ -508,8 +500,7 @@ pub.getSystems = () => {
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
                     [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
                 type_tags: [
-                    'Prod',
-                    'DMZ'
+                    'Prod'
                 ],
                 system_tags: [
                     {
@@ -558,8 +549,7 @@ pub.getSystems = () => {
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
                     [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
                 type_tags: [
-                    'Prod',
-                    'DMZ'
+                    'Prod'
                 ],
                 system_tags: [
                     {
@@ -608,8 +598,7 @@ pub.getSystems = () => {
                     [53, 54, 54, 54, 53, 54, 54, 55, 53, 54, 54, 54, 53, 54],
                     [62, 63, 62, 63, 63, 65, 64, 64, 62, 63, 62, 63, 63, 65]),
                 type_tags: [
-                    'Prod',
-                    'DMZ'
+                    'Prod'
                 ],
                 system_tags: [
                     {

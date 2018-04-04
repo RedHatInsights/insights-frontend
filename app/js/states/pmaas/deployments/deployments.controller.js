@@ -45,6 +45,8 @@ function generateCharts(chartData) {
  * @ngInject
  */
 function DeploymentsCtrl($scope) {
+    $scope.deployment = demoData.getDemoDeployment();
+
     let chartData = demoData.generateDeploymentDonutChartData();
     $scope.charts = keyBy(chartData, 'name');
     generateCharts(chartData);
