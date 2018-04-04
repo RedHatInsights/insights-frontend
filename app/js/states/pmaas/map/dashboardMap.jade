@@ -68,9 +68,9 @@ section.ins-l-pmaas-map
   //- .pmaas-map
   .map#map
     // this is an unnecessary wrapper, remove it
-    .ins-c-map-popover#popover(ng-if="!loadingPop", style="display: none;")
+    .ins-c-map-popover#popover(ng-if="!loadingPop")
       i.fa.fa-times.pull-right(ng-click="closePopover()")
-      
+
       .ins-c-map-popover__header
         i.fa.fa-times-circle.alert-danger(ng-if="popover.issues")
         i.fa.fa-check-circle.alert-success(ng-if="!popover.issues")
@@ -126,10 +126,10 @@ section.ins-l-pmaas-map
       .header-info
         h3.header-title Deployments
         .count
-          span.num {{numGoodPins}} &nbsp;
+          span.num 2 &nbsp;
           i.fa.fa-check-circle.alert-success
-        .count(ng-show="numIssues")
-          span.num {{numIssues}} &nbsp;
+        .count
+          span.num 1 &nbsp;
           i.fa.fa-times-circle.alert-danger
 
       button.toggle-map(ng-click="navCollapsed = !navCollapsed; temp(selectedDeployments)")
@@ -140,6 +140,6 @@ section.ins-l-pmaas-map
         a.list-group(ui-sref="app.dashboard-deployment({deployment_id: deployment.deployment_id})")
           i.fa.fa-check-circle.alert-success(ng-if="!deployment.issues")
           i.fa.fa-times-circle.alert-danger(ng-if="deployment.issues")
-          span.title {{ deployment.title }}
+          span.title {{:: deployment.title}}
           span.subtitle
-            b {{ deployment.subtitle }}
+            b {{:: deployment.subtitle}}

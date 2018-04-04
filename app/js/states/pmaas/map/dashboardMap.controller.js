@@ -192,7 +192,7 @@ priv.init = (conf, $scope, $state, $timeout) => {
 
     priv.svg.selectAll('path')
         .data(topojson.feature(world, world.objects.countries).features)
-        .enter().append('path')
+        .enter().insert('path', 'g')
         .attr('d', d => {
             if (pinLocations[d.id] && pinLocations[d.id].coordinates) {
                 const data = [];
@@ -200,11 +200,7 @@ priv.init = (conf, $scope, $state, $timeout) => {
                     .data(pinLocations[d.id].coordinates)
                     .enter()
                     .append('svg:image')
-                    .style('stroke-width', 100)
-                    .style('stroke-opacity', 0)
-                    .style('stroke', '#ff0')
-                    .style('z-index', 1000)
-                    .style('cursor', 'pointer')
+                    .attr('cursor', 'pointer')
                     .attr('width', () => pinConfig.width)
                     .attr('height', () => pinConfig.height)
                     .attr('d', d => data.push(d))
@@ -231,7 +227,10 @@ priv.init = (conf, $scope, $state, $timeout) => {
                         $scope.$apply();
 
                         const svgCoord = priv.getCoords(d);
-                        const pos = `left:${svgCoord.x}px;top:${svgCoord.y - 100}px`;
+                        const pos = [
+                            `left:${svgCoord.x}px;`,
+                            `top:${svgCoord.y - 100}px`
+                        ].join('');
 
                         priv.selectedPin = d;
 
@@ -244,7 +243,7 @@ priv.init = (conf, $scope, $state, $timeout) => {
 
                         $timeout(() => {
                             priv.popover.style('display', 'inline');
-                        }, 1000);
+                        }, priv.transitionTime);
                     });
 
                 if (data.length > 0) {
@@ -352,12 +351,6 @@ function DashboardMapCtrl($timeout, $scope, $state) {
         $scope.numGoodPins = 2;
         $scope.numIssues = 1;
     }
-
-    // $scope.$watch('navCollapsed', (n, o) => {
-    //     if (n !== o) {
-    //         $timeout(() => priv.reInit(priv.getConf()), 200);
-    //     }
-    // });
 
     $scope.closePopover = () => {
         priv.popover.style('display', 'none');
