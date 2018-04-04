@@ -69,10 +69,10 @@ function peerRankingGraphCtrl($scope, $element) {
         .node();
 
     $scope.$watch('system', function (system) {
-        Plotly.newPlot(node, getData(system), layout, {displayModeBar: false});
+        if (system) {
+            Plotly.newPlot(node, getData(system), layout, {displayModeBar: false});
+        }
     });
-
-    Plotly.newPlot(node, getData($scope.system), layout, {displayModeBar: false});
 
     window.addEventListener('resize', function () {
         let e = window.getComputedStyle(node).display;
