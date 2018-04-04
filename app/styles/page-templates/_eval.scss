@@ -7,16 +7,6 @@
 
 .eval {
   .text-icon {
-    i {
-      //line-height: 1;
-      //display: inline-block;
-      //float: left;
-      //@include rem('margin-right', $global-margin);
-      //
-      //@include media-query(md) {
-      //  @include font-size(100px);
-      //}
-    }
 
     i + span {
       float: left;

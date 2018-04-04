@@ -4,12 +4,5 @@
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
 
-  .row.row-short {
-    margin-top: 0px;
-  }
-
-  //@include rem('padding', $global-padding);
-  //border: 1px solid $gray-light;
-  //background: #f2f5f7;
-
+  .row.row-short { margin-top: 0; }
 }

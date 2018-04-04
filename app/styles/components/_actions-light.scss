@@ -1,15 +1,6 @@
 $action-border: $gray-dark;
 
 .actions-light {
-
-  //@include media-query(sm) {
-  //	float: right;
-  //}
-
-  //>:first-child {
-  //  border-right: 2px solid #646464;
-  //}
-
   .action {
     width: 50%;
     float: left;
@@ -20,12 +11,9 @@ $action-border: $gray-dark;
       @include rem('padding', 0 $global-margin);
     }
 
-    &:first-child {
-      border-right: 1px solid $action-border;
-    }
+    &:first-child { border-right: 1px solid $action-border; }
 
-    @include media-query(sm) {
-    }
+    @include media-query(sm) { }
   }
 
   .num {
@@ -35,25 +23,15 @@ $action-border: $gray-dark;
     text-align: center;
   }
 
-  .text {
-     text-align: center;
-  }
+  .text { text-align: center; }
 }
 
 .actions {
-    .performance-color {
-        background: $performance-color;
-    }
+  .performance-color { background: $performance-color; }
 
-    .availability-color {
-        background: $availability-color;
-    }
+  .availability-color { background: $availability-color; }
 
-    .security-color {
-        background: $security-color;
-    }
+  .security-color { background: $security-color; }
 
-    .stability-color {
-        background: $stability-color;
-    }
+  .stability-color { background: $stability-color; }
 }

@@ -1,6 +1,4 @@
-div.icon-inline {
-  display: flex;
-}
+div.icon-inline { display: flex; }
 
 .icon-inline {
   display: inline-flex;
@@ -9,15 +7,15 @@ div.icon-inline {
 
   > * + * { margin-left: $global-padding/2; }
 
-  .alert-text { 
+  .alert-text {
     @include font-size(14px);
     @include rem('margin-top', -4px);
   }
-  
+
   i.fa { line-height: 1.4; }
 
-  .icon-risk-of-change { 
-    align-self: center; 
+  .icon-risk-of-change {
+    align-self: center;
     margin-bottom: 4px;
   }
 }

@@ -59,26 +59,17 @@
 		}
 	}
 
-	.fa-check {
-		//width: 30px;
-		//height: 30px;
-		//background: #fff;
-		//border-radius: 50%;
-		//text-align: center;
-		//line-height: 2;
-	}
-
 	.spinner-box {
 		@include rem('padding', $global-padding);
 		height: 75px;
 		background: $gray-light;
 		border: 1px solid $gray-border-med;
 		width: 100%;
- 
+
 		.loading-text {
-		@include rem('padding', $global-padding);
+		  @include rem('padding', $global-padding);
 		}
-    }
+  }
 
 	.block-md {
 		text-align: center;
@@ -94,13 +85,8 @@
 		}
 	}
 
-	.block-md + .block-md {
-		border-left: none;
-		//background: darken(#3D84C7, 20);
+	.block-md + .block-md { border-left: none; }
 
-		//.count { background: #406E9A; }
-	}
-	
 
 	.gauge {
 		position: relative;
@@ -152,7 +138,7 @@
 		@include font-size(32px);
 		line-height: 2;
 	}
-	
+
 	.count-text {
 		@include rem('margin-top', 6px);
 		display: block;

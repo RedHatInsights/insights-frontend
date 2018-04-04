@@ -3,7 +3,7 @@
     display: grid;
     grid-template-areas: "topbar"
                       "main"
-                      "primary-nav";    
+                      "primary-nav";
     height: 100vh;
   }
 
@@ -11,10 +11,9 @@
   @include media-query(sm){
     grid-template-columns: max-content 1fr;
     grid-template-areas: "topbar topbar"
-                        "primary-nav main";    
+                        "primary-nav main";
   }
 
-  // @include media-query(md) { grid-template-rows: minmax(30px, max-content) 1fr; }
 }
 
 .view-content {

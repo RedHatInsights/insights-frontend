@@ -32,18 +32,6 @@ $platform-summary-a-span-color: #36bbff;
 
     align-content: center;
   }
-
-
-  // @include media-query(lg){
-  //   grid-template-columns: repeat(2, 1fr);
-  //   grid-template-rows: repeat(4, auto);
-  //   grid-template-areas: "pie-chart ."
-  //                         "pie-chart risk-summary"
-  //                         "pie-chart incident-summary"
-  //                         "pie-chart .";
-
-  //   align-items: center;
-  // }
 }
 
 .actions-overview .actions-pie-chart { grid-area: pie-chart; }
@@ -54,7 +42,6 @@ $platform-summary-a-span-color: #36bbff;
 
 .action-categories {
   .category-list {
-    //@include reset;
     margin: 0;
     padding: 0;
     list-style-type: none;
@@ -70,13 +57,9 @@ aside + aside {
   @include rem('margin-top', $global-margin);
 }
 
-aside.content-block {
-  background: #fff;
-}
+aside.content-block { background: #fff; }
 
-.insights-app-actions .wrapper {
-  min-height: 720px;
-}
+.insights-app-actions .wrapper { min-height: 720px; }
 
 .actions-page .featured-content {
   @include rem('margin-top', $global-margin);
@@ -89,11 +72,11 @@ aside.content-block {
 
 .actions-page {
 
-    input.filter {
-    @include rem('margin-bottom', $global-padding);
-    }
+  input.filter {
+  @include rem('margin-bottom', $global-padding);
+  }
 
-    .rule-groups { overflow: hidden; }
+  .rule-groups { overflow: hidden; }
 }
 
 section.metrics {
@@ -162,6 +145,4 @@ section.action-categories {
   }
 }
 
-.extra-topics {
-  margin: auto;
-}
+.extra-topics { margin: auto; }

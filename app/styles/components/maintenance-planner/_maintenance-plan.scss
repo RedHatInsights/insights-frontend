@@ -16,9 +16,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 	}
 }
 
-.maintenance-page-select {
-}
-
 .maintenance-page {
 
   h3 { line-height: 1; }
@@ -69,9 +66,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 				text-transform: none;
 			}
 
-			.btn + .btn {
-				@include rem('margin-left', 8px);
-			}
+			.btn + .btn { @include rem('margin-left', 8px); }
 		}
 
 		form {
@@ -94,9 +89,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 		@include rem('padding', 8px $global-margin);
 	}
 
-        .search {
-            @include rem('margin-bottom', $global-margin);
-        }
+  .search { @include rem('margin-bottom', $global-margin); }
 
   md-card + md-card {@include rem('margin-top', $global-margin);}
 
@@ -214,25 +207,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 	}
 
 	span.btn.ui-select-toggle {
-		//@include rem('padding', $global-padding/2 $global-padding);
-		//display: inline-block;
-		//width: auto;
-		//color: #fff;
-		//float: left;
-		//@include rem('padding-right', $global-margin);
-		////background: $gray-light;
-		////color: $gray-dark;
-		//border-radius: 0;
-		//box-shadow: none;
-    //
-		//.text-muted {
-		//	color: white;
-		//}
-
-		&:hover {
-			//background: none;
-		}
-
 		.glyphicon.glyphicon-remove {
 			@include rem('margin-left', 12px);
 		}
@@ -249,8 +223,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 		h2.title {
 			display: inline-block;
-			//text-transform: uppercase;
-			//@include font-size(16px);
 
 			i {
 				@include font-size(18px);
@@ -283,8 +255,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 		h2 {
 			position: relative;
-			//@include font-size(18px, 18px);
-			//@include rem('margin', 0 0 4px);
 			@include rem('padding-right', 34px);
 		}
 
@@ -346,11 +316,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 				@include rem('padding', $global-padding $global-padding/2);
 			}
 
-			//.fa.fa-trash-0 {
-			//	position: relative;
-			//	z-index: 9;
-			//}
-
 			.toggle {
 				position: absolute;
 				right: 0;
@@ -376,7 +341,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 					display: inline-block;
 					opacity: 0;
 					@include font-size(14px);
-					//font-weight: 400;
 					transition: .2s;
 					text-align: right;
 
@@ -462,10 +426,7 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 		}
 	}
 
-	.notification-content {
-		//padding-top: 0;
-		text-align: left;
-	}
+	.notification-content { text-align: left; }
 
 	.footer-link {
 		display: block;
@@ -506,8 +467,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 	}
 
 	.overflow {
-		//width: 100%;
-		//display: block;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -515,7 +474,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 	.btn-primary {
 		@include rem('padding', 10px 10px);
-		//border-radius: 4px;
 		background: $maintenance-button-bg;
 		text-transform: uppercase;
 
@@ -538,8 +496,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 
 	.add-system-toggle {
 		position: relative;
-		//@include rem('margin-bottom', 20px);
-		//@include rem('padding-bottom', 20px);
 		text-align: right;
 		transition-duration: .2s;
 		overflow: hidden;
@@ -553,7 +509,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 	// Account Select
 	.account-select {
 		@include clearfix;
-		//@include rem('margin-bottom', $global-padding);
 
 		.select-to-add { float: left; }
 		.ui-select-choices { width: 100%; }
@@ -565,12 +520,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 		box-shadow: none;
 		outline: none;
 	}
-
-	//.show-system select.account-select {
-	//	@include rem('margin-bottom', $global-padding);
-	//	transition: margin-bottom 2s;
-	//}
-	//
 
 	.account-selector {
 		@include clearfix;
@@ -585,32 +534,13 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 			font-weight: 700;
 			@include font-size(18px, 18px);
 		}
-
-		.available-actions {
-			//margin-bottom: 20px;
-		}
 	}
 
 	.pagination { margin-bottom: 0; }
   .plan-footer { border-top: 1px solid $maintenance-plan-border-color; }
 }
 
-
-
-
-
-// Account Selector
-//.account-selector {
-//	width: 100%;
-//	display: block;
-//	transform: scale(1);
-//	opacity: 1;
-//	@include rem('margin-bottom', $global-padding);
-//	animation: animIn .3s ease-in-out;
-//}
-
 .hide-system .account-selector { display: none; }
-//.add-system-toggle.show-system { @include rem('padding-bottom', 38px); }
 
 .maintenance-plan, .widget {
 
@@ -701,9 +631,7 @@ div[class^="col-"], div[class*=" col-"] { transition: .4s; }
 		box-shadow: none;
 	}
 
-  textarea {
-    min-height: 100px;
-  }
+  textarea { min-height: 100px; }
 
 	.form-group { @include rem('margin-bottom', $global-padding); }
 	.duration { width: 70px; }
@@ -724,9 +652,8 @@ div[class^="col-"], div[class*=" col-"] { transition: .4s; }
     margin-left: -20px;
     margin-top: -20px;
   }
-  > :not(.spinner) {
-    opacity: .3;
-  }
+
+  > :not(.spinner) { opacity: .3; }
 }
 
 .maintenance-modal {
@@ -748,18 +675,14 @@ div[class^="col-"], div[class*=" col-"] { transition: .4s; }
     padding: 0;
     box-shadow: none;
   }
-
-  .ui-select-container {
-  }
 }
 
 table.maintenance-table {
   text-align: left;
   @include rem('margin', 10px 0px);
 
-  thead tr th {
-    background: #fff;
-  }
+  thead tr th { background: #fff; }
+
   th:not(.filter), td { @include rem('padding', 8px 20px); }
 
   th.filter input {
@@ -779,13 +702,9 @@ table.maintenance-table {
   }
 }
 
-.play + .play {
-    margin-top: $global-padding;
-}
+.play + .play { margin-top: $global-padding; }
 
-.play{
-	padding-bottom: $global-padding;
-}
+.play { padding-bottom: $global-padding; }
 
 .playbook-tab{
 	.systems{
@@ -853,6 +772,4 @@ table.maintenance-table {
   &.save{ color: #fff; }
 }
 
-table.maintenance-table a.text.action {
-  flex: inherit;
-}
+table.maintenance-table a.text.action { flex: inherit; }

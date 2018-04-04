@@ -1,7 +1,6 @@
 .platform-select {
 	@include rem('margin', 0 -15px);
 	@include rem('padding', $global-margin);
-	//background: url('../static/images/bg_product-select2.jpg');
 	background-image: url('https://www.redhat.com/profiles/rh/themes/redhatdotcom/img/home/bkgd-cloud-home-2000x488.jpg');
 	background-size: cover;
 	border-bottom: 8px solid #d9d9d9;
@@ -47,21 +46,10 @@
 		background: url("https://www.redhat.com/files/webux/img/bandbg/header-detail-tech-product_linux-2000x941.jpg") center;
 		background: #01447b;
 
-		//&:hover { background: darken(#494949, 20); }
 		&:active, &:active a { color: #fff; }
-
-		//&:active {
-		//	background: darken(#494949, 20);
-		//}
-
-
-		&:active .platform {
-			//border-bottom-color: #2b2b2b;
-		}
 	}
 
 	.platform {
-		//border-bottom: 6px solid $red;
 		@include rem('padding-bottom', 8px);
 
 		@include media-query(sm) { height: 54px; }
@@ -76,13 +64,9 @@
 		a {
 			color: #fff;
 
-			span {
-				color: $platform-summary-a-span-color;
-			}
+			span { color: $platform-summary-a-span-color; }
 
-			&:active {
-				text-decoration: underline;
-			}
+			&:active { text-decoration: underline; }
 		}
 	}
 
@@ -90,43 +74,24 @@
 		border: none;
 
 		@include media-query(sm) { @include rem('height', 100px); }
-
-		//&:after {
-		//	content: '';
-		//	position: absolute;
-		//	width: 40px;
-		//	background: $red;
-		//	height: 8px;
-		//	left: $global-padding;
-		//	bottom: 0;
-		//	transition: .2s;
-		//}
 	}
 
 
 	a.platform {
 		opacity: .8;
 
-		&:hover {
-			opacity: 1;
-		}
+		&:hover { opacity: 1; }
 	}
 }
 
-.platform-select + section {
-	margin-top: 0;
-}
+.platform-select + section { margin-top: 0; }
 
 .platform-select.active {
-	//background: #d9d9d9;
-
 	.platform {
 		height: auto;
 		border: none;
 
-		.content {
-			display: none;
-		}
+		.content { display: none; }
 	}
 }
 

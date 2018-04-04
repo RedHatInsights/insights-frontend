@@ -3,47 +3,31 @@
 }
 
 .announcement {
-
-
-  &.acked {
-    .header {
-      background: #fff;
-    }
-  }
+  &.acked .header { background: #fff; }
 
 	// Acked announcement
 	&.read {
 		color: rgba(100,100,100,.7);
 
-		.header {
-			background: #fff;
-		}
+		.header { background: #fff; }
 	}
 
-	input + span {
-		margin-left: 0;
-	}
+	input + span { margin-left: 0; }
 }
 
-li.announcement{ 
+li.announcement{
   display: flex;
   justify-content: space-between;
 }
 
 .message-status-toggle {
   i {
-    //position: absolute;
-    //right: $global-padding;
-    //top: 0;
-    //margin: 0;
     float: none;
     display: inline;
     color: $gray-dark;
     @include font-size(16px);
     line-height: 1;
 
-    &.acked {
-      color: $green;
-    }
+    &.acked { color: $green; }
   }
 }

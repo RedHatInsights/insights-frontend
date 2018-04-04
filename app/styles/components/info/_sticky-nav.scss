@@ -7,28 +7,20 @@
 	border-bottom: 1px solid #ddd;
 	border-bottom: 1px solid #ECECEC;
 	display: none;
-//	background: #c00;
-//	background: #424b57;
-//	background: #e62235;
-//	background: #5e6a71;
 	background: #FAFAFA;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 
-	@include media-query (md) {
-		display: block;
-	}
+	@include media-query (md) { display: block; }
 
 	ul {
 		margin: 0;
 		padding: 0;
 	}
 
-	li {
-		display: inline-block;
-	}
+	li { display: inline-block; }
 
 	a {
 		position: relative;
@@ -40,58 +32,8 @@
 		font-weight: 700;
 		transition: .2s;
 		text-transform: uppercase;
-
-		&.active {
-
-		}
 	}
 }
-
-//.sticky-nav.stuck {
-//	position: fixed;
-//	z-index: 5;
-//	background: rgba(250,250,250,.95);
-//	border-bottom-width: 5px;
-//
-//	transition: .3s, ease-in-out;
-//
-//	&:hover {
-//		background: rgba(250,250,250,1);
-//		opacity: 1;
-//		transition: .1s, ease-in-out;
-//
-//		a, a.active {
-//			@include rem('padding', 22px 24px 22px 0);
-//
-//			&:after {
-//				bottom: 8px;
-//			}
-//		}
-//	}
-//
-//	a {
-//		opacity: .8;
-//		@include rem('padding', 14px 24px 14px 0);
-//
-//		&.active, &:hover {
-//			opacity: 1;
-//			color: #c00;
-//		}
-//
-//		&.active {
-//			&:after {
-//				content: '';
-//				width: 20px;
-//				height: 4px;
-//				position: absolute;
-//				bottom: 0;
-//				left: 0;
-//				background: #000;
-//				transition: .2s;
-//			}
-//		}
-//	}
-//}
 
 .line-button-wrap {
 	position: absolute;
@@ -114,10 +56,7 @@ $button-size: 40px;
 	}
 
 	// rotate the lines to form the x shape
-	&:before{
-		transform: rotate3d(0,0,1,45deg);
-	}
-	&:after{
-		transform: rotate3d(0,0,1,-45deg);
-	}
+	&:before{ transform: rotate3d(0,0,1,45deg); }
+
+	&:after{ transform: rotate3d(0,0,1,-45deg); }
 }

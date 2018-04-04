@@ -1,11 +1,9 @@
 // Layout
 //==================================================================*/
 .platform-grid > topbar {
-  grid-area: topbar;  
+  grid-area: topbar;
 
   .cell {
-    @include media-query(sm) {
-      align-items: center;
-    }
+    @include media-query(sm) { align-items: center; }
   }
 }

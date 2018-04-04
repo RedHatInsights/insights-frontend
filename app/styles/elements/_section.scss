@@ -9,32 +9,17 @@ section.content {
 }
 section.content.content-gray { background: $gray-light; }
 
-// section.full-width {
-// 	width: auto;
-// 	@include rem('padding', $global-margin);
-
-
-//   .content-wrap & {
-//     @include media-query(sm) {
-//       @include rem('margin-left', -30px);
-//       @include rem('margin-right', -30px);
-//     }
-//   }
-// }
-
 section.gray {
 	background: $gray-light;
   @include rem('padding', $global-margin);
 }
 
 .section-title,
-.section-title-red { 
+.section-title-red {
   @include font-size(16px, 21px);
   text-transform: uppercase;
 }
 
 .section-title-red { color: $brand-primary; }
 
-section.content + section.content {
-  margin-top: 0;
-}
+section.content + section.content { margin-top: 0; }

@@ -7,11 +7,11 @@
 .content-tabs {
 
 	.content-block { margin: 0;  }
-	
-	.content-block, 
+
+	.content-block,
 	.add-actions + .content-block { @include rem('margin-top', $global-margin); }
 
-	.nav {	
+	.nav {
 		padding: 0;
 		background: #f2f5f7;
 	}

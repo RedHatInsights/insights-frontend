@@ -36,10 +36,6 @@
     .group-title.group-title-table + .group-content {
       @include rem('margin-top', $global-margin);
     }
-
-    .group-content {
-
-    }
   }
 }
 
@@ -51,26 +47,11 @@
 .modal-header i.svg {
   @include rem('width', 54px);
   @include rem('margin-right', 12px);
-
-  //& + h1,
-  //& + h2,
-  //& + h3,
-  //& + h4 { @include rem('margin-left', 12px); }
-  //
-  //h1 + &,
-  //h2 + &,
-  //h3 + &,
-  //h4 + & { @include rem('margin-right', 12px); }
-
 }
 
-.modal-content {
-	background: #fff;
-}
-
+.modal-content { background: #fff; }
 
 .modal-title {
-	//@include rem('margin', 0 0 $global-padding);
 	text-overflow: ellipsis;
 	width: 100%;
 	@include font-size(18px);
@@ -114,52 +95,37 @@
 }
 
 .modal-playbook {
-    
-    .modal-dialog {
-        @include media-query(md) {
-            width: 795px;
-        }
-    }
-
+  .modal-dialog {
+    @include media-query(md) { width: 795px; }
+  }
 }
 
 .handcrafted-content-modal {
 
 	.modal-dialog {
-		@include media-query(md) {
-			width: 795px;
-		}
+		@include media-query(md) { width: 795px; }
 	}
 
-	.modal-content {
-		@include rem('padding', $global-margin);
-	}
+	.modal-content { @include rem('padding', $global-margin); }
 }
 
 .ui-select-match,
-ul.ui-select-choices {
-	padding: 0 !important;
-}
+ul.ui-select-choices { padding: 0 !important; }
 
-.ui-select-toggle {
-	height: 34px;
-}
+.ui-select-toggle { height: 34px; }
 
-.ui-select-container + p {
-    margin-top: 5px !important;
-}
+.ui-select-container + p { margin-top: 5px !important; }
 
 .updatable.updating {
-    position: relative;
+  position: relative;
 
-    .spinner {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-left: -20px;
-        margin-top: -20px;
-    }
-    > :not(.spinner) {
-        opacity: .3;
-    }
+  .spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -20px;
+    margin-top: -20px;
+  }
+
+  > :not(.spinner) { opacity: .3; }
 }
