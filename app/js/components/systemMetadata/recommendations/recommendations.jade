@@ -2,10 +2,9 @@
   .detail-part
     .spinner.spinner-lg
     | {{:: getLoadingMessage()}}
-p.text-center(ng-if='(!system.recommendations || !system.recommendations.length) && !loading.isLoading && !system.__fake && !errorMessage')
-  span.icon.icon-inline.success.no-recommendations
-    i.fa.fa-check-circle
-    span(translate) No actions
+
+no-actions(ng-if='(!system.recommendations || !system.recommendations.length) && !loading.isLoading && !system.__fake && !errorMessage')
+
 div(ng-if='!loading.isLoading && !system.__fake && errorMessage', ng-bind-html=':: errorMessage | trust_html')
 list-group
   list-item.ins-p-list-group__item--is-expandable.ins-p-list-group__item--has-checkbox(expandable recommendation='recommendation', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='recommendation in system.recommendations track by recommendation.rule_id')

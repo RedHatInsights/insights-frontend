@@ -4,10 +4,7 @@
     | {{:: getLoadingMessage()}}
 //- .text-right
   expand-all-button(ng-hide='!system.reports || !system.reports.length || loading.isLoading')
-p.text-center(ng-if='(!system.reports || !system.reports.length) && !loading.isLoading && !system.__fake && !errorMessage')
-  span.icon.icon-inline.success
-    i.fa.fa-check-circle
-    span(translate) No actions
+no-actions(text="No actions", ng-if='(!system.reports || !system.reports.length) && !loading.isLoading && !system.__fake && !errorMessage')
 div(ng-if='!loading.isLoading && !system.__fake && errorMessage', ng-bind-html=':: errorMessage | trust_html')
 //- rule-summary.rule-summary.system-overlay-item.content-block(report='report', rule-id='rule_id', rule-filter='ruleFilter', ng-repeat='report in system.reports track by report.rule_id')
 list-group
