@@ -262,7 +262,7 @@ priv.init = (conf, $scope, $state, $timeout) => {
     priv.redraw();
 };
 
-priv.redraw = () => {
+priv.redraw = function () {
     if (d3.event) {
         const scale = d3.event.scale;
         const t = d3.event.translate;
@@ -271,7 +271,7 @@ priv.redraw = () => {
 
         if (scale !== priv.slast) {
             if (scale < priv.slast) {
-                const dy = tp[1] - priv.projectionHeight;
+                const dy = tp[1] - conf.projectionHeight;
                 priv.projection.translate([tp[0], tp[1] - dy]);
             }
 
