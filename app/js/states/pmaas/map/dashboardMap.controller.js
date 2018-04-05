@@ -124,7 +124,8 @@ priv.getConf = () => {
         width: window.innerWidth,
         height: div.offsetHeight,
         rotate: 0,
-        maxLatitude: 86
+        maxLatitude: 86,
+        projectionHeight: (div.offsetHeight / 2) + 150
     };
 
     return ret;
@@ -161,7 +162,7 @@ priv.init = (conf, $scope, $state, $timeout) => {
     priv.projection = d3.geo.mercator()
         .rotate([conf.rotate, 0])
         .scale(1)
-        .translate([conf.width / 2, (conf.height / 2) + 150]);
+        .translate([conf.width / 2, conf.projectionHeight]);
 
     priv.scaleExtent = priv.getScale(priv.projection, conf.maxLatitude, conf.width);
     priv.projection.scale(priv.scaleExtent[0]);
@@ -265,17 +266,22 @@ priv.redraw = () => {
     if (d3.event) {
         const scale = d3.event.scale;
         const t = d3.event.translate;
+        const tp = priv.projection.translate();
         const conf = priv.getConf();
 
         if (scale !== priv.slast) {
+            if (scale < priv.slast) {
+                const dy = tp[1] - priv.projectionHeight;
+                priv.projection.translate([tp[0], tp[1] - dy]);
+            }
+
             priv.projection.scale(scale);
         } else {
             let dx = t[0] - priv.tlast[0];
             let dy = t[1] - priv.tlast[1];
             let yaw = priv.projection.rotate()[0];
-            let tp = priv.projection.translate();
 
-            const angle = 360.0 * dx / conf.width * priv.scaleExtent[0] / scale;
+            const angle = ((360.0 * dx) / conf.width) * priv.scaleExtent[0] / scale;
 
             // use x translation to rotate based on current scale
             priv.projection.rotate([yaw + angle, 0, 0]);
