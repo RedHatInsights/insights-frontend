@@ -186,10 +186,10 @@ pub.getOverallRatingsDonutChartData = () => {
 
     if (storedData.isFixed()) {
         overallRatings.advisor = {
-            passed: 81,
-            failed: 9,
+            passed: 254,
+            failed: 16,
             state: 'high',
-            score: 90
+            score: 94
         }
     } else {
         overallRatings.advisor = {

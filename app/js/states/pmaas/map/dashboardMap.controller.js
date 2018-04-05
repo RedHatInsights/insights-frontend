@@ -219,9 +219,9 @@ priv.init = (conf, $scope, $state, $timeout) => {
                         $state.go('app.dashboard-deployment', params);
                     })
                     .on('mouseenter', d => {
-                        let chartData = demoData.getDeploymentDonutChartData(d.deployment_id);
-                        $scope.popoverCharts = keyBy(chartData, 'name');
-                        generateCharts(chartData, true);
+                        let cd = demoData.getDeploymentDonutChartData(d.deployment_id);
+                        $scope.popoverCharts = keyBy(cd, 'name');
+                        generateCharts(cd, true);
 
                         $scope.popover = {
                             title: d.title,
