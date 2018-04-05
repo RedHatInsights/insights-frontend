@@ -84,22 +84,21 @@ section.ins-l-inventory
   //-   strong.action-count(translate, ng-click="sort('report_count')") Action Count
 
   //- .inventory.card-list.card-pf-view
-  card.card-pf-view.card-pf-view-select.card-pf-view-single-select(
+  metadata-card.is-clickable(
     ng-repeat='system in systems track by system.system_id | orderBy: "order"',
     system='system',
     ui-sref="app.system-overview({id: system.system_id})"
     )
-    metadata-card(system='system')
 
-  pagination(
-    ng-if="totalSystems() > pager.perPage && !loading",
-    total-items="totalSystems()",
-    ng-model="pager.currentPage",
-    items-per-page="pager.perPage",
-    ng-change="doScroll()")
+pagination(
+  ng-if="totalSystems() > pager.perPage && !loading",
+  total-items="totalSystems()",
+  ng-model="pager.currentPage",
+  items-per-page="pager.perPage",
+  ng-change="doScroll()")
 
-.animate-wrapper.margin-top
-  .row.row-short.ng-animate-enabled(ng-if='loading')
+.animate-wrapper.margin-top(ng-if='loading')
+  .row.row-short.ng-animate-enabled
     .col-xs-12
       .load.text-center
         .spinner.spinner-lg

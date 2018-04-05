@@ -1,45 +1,37 @@
-.metadata-card
-  .inventory
-    card-content
-      .display-name.text-center
-        strong {{:: system.toString }}
-      .host-info
-        .hostname
-          i.pficon-screen
-          span {{:: system.hostname }}
-        .status-check
-          i.fa.fa-clock-o
-          span.hostname Last Check: {{system.last_check_in | timeAgo }}
-          i.pficon-info(ng-if='!system.isCheckingIn', tooltip="New Image Available")
+.ins-c-card.metadata-card
+  header.ins-c-card__header.card-pf-heading.no-border
+    .display-name.text-center
+      strong {{:: system.toString }}
 
-      .card-pf-top-element
-        .tile-with-text
-          .optimization-tile.tile.tile-sm(class='{{system.optimization}}')
-            ins-battery(status='{{system.optimization}}', type='Optimization')
-          .tile-label
-            span Optimization
-            span {{system.optimization}}
+  .ins-c-card__body.card-pf-body
+    .host-info
+      .hostname
+        i.pficon-screen
+        span {{:: system.hostname }}
+      .status-check
+        i.fa.fa-clock-o
+        span.hostname Last Check: {{system.last_check_in | timeAgo }}
+        i.pficon-info(ng-if='!system.isCheckingIn', tooltip="New Image Available")
 
-        .tile-with-text
-          .reliability-tile.tile.tile-sm(class='{{system.reliability}}')
-            ins-battery(status='{{system.reliability}}', type='Reliability')
-          .tile-label
-            span Reliability
-            span {{system.reliability}}
+    .card-pf-top-element
+      .tile-with-text
+        .optimization-tile.tile.tile-sm(class='{{system.optimization}}')
+          ins-battery(status='{{system.optimization}}', type='Optimization')
+        .tile-label
+          span Optimization
+          span {{system.optimization}}
 
-      //- .card-pf-top-element
-      //-   .text-center.optimization-label
-      //-     optimization-label(level='system.optimization')
-      //-   .text-center
-      //-     span Optimization Potential
+      .tile-with-text
+        .reliability-tile.tile.tile-sm(class='{{system.reliability}}')
+          ins-battery(status='{{system.reliability}}', type='Reliability')
+        .tile-label
+          span Reliability
+          span {{system.reliability}}
 
-      //- .card-pf-items.status-list
-      //-   .card-pf-item.reliability-status.text-center
-      //-       bar-status-icon.status-icon(status='system.reliability')
-      //-       span Reliability
-      .card-pf-middle-element.text-center
-        .card-pf-item.type-tags.text-center
-          span(ng-repeat="tag in system.type_tags") {{tag}}
-      .card-pf-bottom-element.text-center
-        .card-pf-items.system-tags.text-center
-          div(ng-repeat="tag in system.system_tags", class="{{tag.icon}}" tooltip="{{tag.name}}")
+  footer.ins-c-card__footer.card-pf-footer
+    .card-pf-middle-element.text-center
+      .card-pf-item.type-tags.text-center
+        span(ng-repeat="tag in system.type_tags") {{tag}}
+    .card-pf-bottom-element.text-center
+      .card-pf-items.system-tags.text-center
+        div(ng-repeat="tag in system.system_tags", class="{{tag.icon}}" tooltip="{{tag.name}}")

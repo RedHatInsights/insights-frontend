@@ -6,18 +6,15 @@
 **/
 
 
+
 /* Inventory layout
 /* ================================================================== */
 .ins-l-inventory {
-  @include build-grid(1fr, sm repeat 2 1fr, md repeat 4 1fr);
+  @include build-grid(1fr, md repeat 2 1fr, lg repeat 3 1fr, xl repeat 3 1fr);
   padding: 0 $global-margin;
+}
 
-  .pagination {
-    grid-column: span 1;
-    justify-self: end;
-    margin: 0;
-
-    @include media-query(sm) { grid-column: span 2; }
-    @include media-query(md) { grid-column: span 4; }
-  }
+.nav-desktop-collapsed .ins-l-inventory {
+  @include build-grid(1fr, sm repeat 2 1fr, lg repeat 3 1fr, xl repeat 3 1fr);
+  padding: 0 $global-margin;
 }

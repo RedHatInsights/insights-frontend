@@ -1,3 +1,17 @@
+/* ==================================================================
+/* List component
+/* ================================================================== */
+/**
+ * This document defines the styling for the list component
+**/
+
+
+/* Vars
+/* ================================================================== */
+:root {
+  --ins-pagination--Padding:           #{$ins-global--spacer--lg};
+}
+
 $pagination-gray-color: #c6c6c6;
 $pagination-gray-background: #c6c6c6;
 $pagination-width: 16px;
@@ -6,7 +20,16 @@ $pagination-blue-color: #0088ce;
 $pagination-blue-background: #0088ce;
 
 .pagination {
+  display: flex;
+  margin: 0;
+  padding: var(--ins-pagination--Padding);
 
+  > *:first-child {
+    margin-left: auto;
+  }
+}
+
+.pagination {
 
 	a {
 		font-weight: 700;
