@@ -32,7 +32,7 @@ const layout = {
 
 function getData(system) {
     let allSystemsRankings = {
-        name: 'System',
+        name: 'All Systems',
         type: 'scatter',
         mode: 'lines',
         x: system.peer_rankings.all_systems.x,
