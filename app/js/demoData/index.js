@@ -85,8 +85,52 @@ pub.getDemoDeployment = () => {
     return deployments.getDemoDeployment();
 };
 
-pub.generateDeploymentDonutChartData = () => {
-    return charts.generateDeploymentDonutChartData();
+pub.getDemoDeploymentDonutChartData = () => {
+    return charts.generateRatingsDonutChartData(deployments.getDemoDeployment().ratings);
+};
+
+pub.getOverallRatingsDonutChartData = () => {
+    let overallRatings = {
+        vulnerability: {
+            secure: 1141,
+            vulnerable: 59,
+            state: 'high',
+            score: 95
+        },
+
+        compliance: {
+            compliant: 1096,
+            nonCompliant: 104,
+            state: 'high',
+            score: 91
+        },
+
+        subscription: {
+            rhel: 1050,
+            openshift: 100,
+            openstack: 50,
+            available: 25,
+            score: 98
+        },
+    };
+
+    if (storedData.isFixed()) {
+        overallRatings.advisor = {
+            passed: 52,
+                failed: 38,
+                state: 'high',
+                score: 90
+        }
+    } else {
+        overallRatings.advisor = {
+            passed: 76,
+            failed: 14,
+            state: 'moderate',
+            score: 84
+        }
+    }
+
+    return charts.generateRatingsDonutChartData(overallRatings);
 };
 
 pub.user = {

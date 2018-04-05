@@ -396,7 +396,10 @@ function DashboardMapCtrl($timeout, $scope, $state) {
     $timeout(() => {
         priv.init(priv.getConf(), $scope, $state, $timeout);
         $scope.filterPins(deployment_types.all);
-        generateCharts(demoData.generateDeploymentDonutChartData(), true);
+
+        let chartData = demoData.getDemoDeploymentDonutChartData();
+        $scope.popoverCharts = keyBy(chartData, 'name');
+        generateCharts(chartData, true);
 
         d3.select('.chart-vulnerability-popover')
         .select('.c3-chart-arcs-title')
@@ -429,7 +432,7 @@ function DashboardMapCtrl($timeout, $scope, $state) {
 
     window.onresize = () => $timeout(() => priv.reInit(priv.getConf()), 200);
 
-    let chartData = demoData.generateDeploymentDonutChartData();
+    let chartData = demoData.getOverallRatingsDonutChartData();
     $scope.charts = keyBy(chartData, 'name');
     generateCharts(chartData);
 

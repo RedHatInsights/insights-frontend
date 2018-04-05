@@ -1,5 +1,4 @@
 /*global module*/
-const deployments = require('./deployments');
 
 const pub = {};
 function stateToColor(state) {
@@ -15,9 +14,7 @@ function stateToColor(state) {
     }
 }
 
-pub.generateDeploymentDonutChartData = () => {
-    const ratings = deployments.getDemoDeployment().ratings;
-
+pub.generateRatingsDonutChartData = (ratings) => {
     return [
         {
             name: 'vulnerability',

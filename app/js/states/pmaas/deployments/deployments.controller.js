@@ -47,7 +47,7 @@ function generateCharts(chartData) {
 function DeploymentsCtrl($scope) {
     $scope.deployment = demoData.getDemoDeployment();
 
-    let chartData = demoData.generateDeploymentDonutChartData();
+    let chartData = demoData.getDemoDeploymentDonutChartData();
     $scope.charts = keyBy(chartData, 'name');
     generateCharts(chartData);
 

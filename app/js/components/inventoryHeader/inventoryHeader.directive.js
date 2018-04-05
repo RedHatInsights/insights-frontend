@@ -52,7 +52,7 @@ function inventoryHeaderCtrl($scope, gettextCatalog) {
         $scope.typeTranslated = gettextCatalog.getString($scope.type);
     }
 
-    let chartData = demoData.generateDeploymentDonutChartData();
+    let chartData = demoData.getDemoDeploymentDonutChartData();
     $scope.charts = keyBy(chartData, 'name');
     generateCharts(chartData);
 
