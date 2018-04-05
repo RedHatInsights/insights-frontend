@@ -6,20 +6,20 @@
         span.fa.fa-dashboard
         span.text Overview
 
-    li.list-group-item(ui-sref='app.dashboard-deployment({ deployment_id: "abcdef" })' ui-sref-active='active')
-      a(ui-sref='app.dashboard-deployment', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
-        span.fa.fa-dashboard
-        span.text Demo Step2
+    //- li.list-group-item(ui-sref='app.dashboard-deployment({ deployment_id: "abcdef" })' ui-sref-active='active')
+    //-   a(ui-sref='app.dashboard-deployment', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
+    //-     span.fa.fa-dashboard
+    //-     span.text Demo Step2
 
-    li.list-group-item(ui-sref='app.inventory-deployment({ deployment_id: "abcdef" })' ui-sref-active='active')
-      a(ui-sref='app.inventory-deployment', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
-        span.fa.fa-dashboard
-        span.text Demo Step3
+    //- li.list-group-item(ui-sref='app.inventory-deployment({ deployment_id: "abcdef" })' ui-sref-active='active')
+    //-   a(ui-sref='app.inventory-deployment', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
+    //-     span.fa.fa-dashboard
+    //-     span.text Demo Step3
 
-    li.list-group-item(ui-sref='app.system-overview({ deployment_id: "abcdef", id: "d18df352-7ac6-5754-a211-593f23f02ad3" })' ui-sref-active='active')
-      a(ui-sref='app.system-overview', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
-        span.fa.fa-dashboard
-        span.text Demo Step4
+    //- li.list-group-item(ui-sref='app.system-overview({ deployment_id: "abcdef", id: "d18df352-7ac6-5754-a211-593f23f02ad3" })' ui-sref-active='active')
+    //-   a(ui-sref='app.system-overview', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
+    //-     span.fa.fa-dashboard
+    //-     span.text Demo Step4
 
     li.list-group-item(ui-sref='app.inventory-deployment', ng-class='isActive(states.inventoryDeployment)', ui-sref-active='active')
       a(ui-sref='app.inventory-deployment', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
@@ -30,3 +30,17 @@
       a(ui-sref='app.digests', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
         i.fa.fa-bar-chart
         span.text(translate) Executive Report
+
+    li.list-group-item.nav-dropdown
+      md-menu(md-offset="0 46", md-position-mode="target-right target")
+        a(md-ink-ripple="#FFF" , ng-click='$mdMenu.open()')
+          i.fa.fa-cogs
+          span.text Configuration &nbsp;
+          span.caret
+        md-menu-content
+          md-menu-item(ui-sref='app.dashboard-deployment({ deployment_id: "abcdef" })')
+            a(ui-sref='app.dashboard-deployment') Demo Step 2
+          md-menu-item(ui-sref='app.inventory-deployment({ deployment_id: "abcdef" })')
+            a(ui-sref='app.inventory-deployment') Demo Step 3
+          md-menu-item(ui-sref='app.system-overview({ deployment_id: "abcdef", id: "d18df352-7ac6-5754-a211-593f23f02ad3" })')
+            a(ui-sref='app.system-overview') Demo Step 4

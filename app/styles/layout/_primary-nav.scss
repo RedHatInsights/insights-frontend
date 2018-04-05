@@ -4,3 +4,31 @@
   // grid-auto-rows: minmax(125px, auto);
   // grid-gap: .5rem;
 }
+
+
+.md-open-menu-container {
+  z-index: 100000;
+}
+
+.nav-dropdown {
+  a {
+    align-items: center;
+    @include rem('padding', 17px 25px);
+    &:hover {
+      background: #393f44;
+      i { color: #39a5dc}
+      span { color: #fff; }
+    }
+  }
+
+  i {
+    @include font-size(20px);
+    color: #72767b;
+  }
+
+  span {
+    @include font-size(14px);
+    color: #d1d1d1;
+    font-weight: 400;
+  }
+}
