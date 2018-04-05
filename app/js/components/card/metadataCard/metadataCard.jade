@@ -1,14 +1,14 @@
 .ins-c-card.metadata-card
   header.ins-c-card__header.card-pf-heading.no-border
-    .display-name.text-center
-      strong {{:: system.toString }}
+    .display-name.text-center.is-truncated
+      strong(title="{{:: system.toString }}") {{:: system.toString }}
 
   .ins-c-card__body.card-pf-body
-    .host-info
-      .hostname
+    ul.ins-p-list.ins-p-list--basic.host-info
+      li.ins-p-list__item.icon-inline.hostname
         i.pficon-screen
         span {{:: system.hostname }}
-      .status-check
+      li.ins-p-list__item.icon-inline.status-check
         i.fa.fa-clock-o
         span.hostname Last Check: {{system.last_check_in | timeAgo }}
         i.pficon-info(ng-if='!system.isCheckingIn', tooltip="New Image Available")
@@ -28,7 +28,7 @@
           span Reliability
           span {{system.reliability}}
 
-  footer.ins-c-card__footer.card-pf-footer
+  footer.ins-c-card__footer
     .card-pf-middle-element.text-center
       .card-pf-item.type-tags.text-center
         span(ng-repeat="tag in system.type_tags") {{tag}}

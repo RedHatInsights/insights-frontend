@@ -15,9 +15,9 @@ system-metadata, .ins-l-inventory {
 
 
   // Meta information
-  .host-info, .reliability-status {
-    i { @include rem('margin-right', 10px); }
-  }
+  // .host-info, .reliability-status {
+  //   i { @include rem('margin-right', 10px); }
+  // }
 
   .host-info { font-weight: 300; }
 

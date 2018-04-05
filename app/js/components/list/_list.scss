@@ -23,6 +23,19 @@
 
   --ins-p-group__item--BorderColor:               #e0e0e0;
   --ins-p-group__item--hover--BorderColor:        #bbb;
+
+  --ins-p-list--Margin:                           #{$ins-global--spacer--xs};
+}
+
+.ins-p-list {
+
+  &__item + &__item {
+    margin-top: var(--ins-p-list--Margin);
+  }
+
+  &--basic {
+    @include reset;
+  }
 }
 
 /* List group

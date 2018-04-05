@@ -11,10 +11,16 @@
 /* ================================================================== */
 .ins-l-inventory {
   @include build-grid(1fr, md repeat 2 1fr, lg repeat 3 1fr, xl repeat 3 1fr);
-  padding: 0 $global-margin;
+  padding: 0 $global-margin $global-margin;
+
+  @media screen and (min-width: 1800px) { grid-template-columns: repeat(4, 1fr); }
+  @media screen and (min-width: 2200px) { grid-template-columns: repeat(5, 1fr); }
 }
 
 .nav-desktop-collapsed .ins-l-inventory {
-  @include build-grid(1fr, sm repeat 2 1fr, lg repeat 3 1fr, xl repeat 3 1fr);
+  @include build-grid(1fr, sm repeat 2 1fr, lg repeat 3 1fr, xl repeat 4 1fr);
   padding: 0 $global-margin;
+
+  @media screen and (min-width: 1800px) { grid-template-columns: repeat(5, 1fr); }
+  @media screen and (min-width: 2200px) { grid-template-columns: repeat(6, 1fr); }
 }
