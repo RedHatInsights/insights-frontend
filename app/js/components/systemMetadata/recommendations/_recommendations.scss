@@ -6,8 +6,18 @@
       @include rem('margin-top', 2px);
     }
   }
+
 }
 
+.ins-p-list-group__item__header {
+  .risk-summaries .icon-group-severity li:last-of-type {
+    .ins-battery {
+      border-left: 2px solid $gray-lite;
+      @include rem('padding-left', 25px);
+      span { font-weight: 700; }
+    }
+  }
+}
 .recommendations .list-group-item-container.recommendation-expanded-content {
   // this should be a grid, but the plotly graphs aren't resizing smaller when
   // resizing the screen smaller, only bigger.  This will have to do for now

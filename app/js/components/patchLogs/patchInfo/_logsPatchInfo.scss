@@ -1,5 +1,9 @@
 .logs-patch-info{
   .patch + .patch { @include rem('margin-top', $global-margin/2); }
+  b.patch-date {
+    display: block;
+    @include rem('padding-bottom', 5px);
+  }
   .patch-info-name, .patch-info-link { display: inline; }
   .patch-info-link {
     @include rem('margin-left', 5px);

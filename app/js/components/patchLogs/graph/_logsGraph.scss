@@ -1,5 +1,5 @@
 .logs-graph-title {
-  margin: 0;
+  @include rem('margin', 0 0 15px 0);
   @include font-size(20px);
 }
 
