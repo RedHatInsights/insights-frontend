@@ -1,34 +1,17 @@
 .no-actions {
   @include rem('margin', 40px 0 20px 0);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  .success-wrapper {
-    display: grid;
-    grid-template-areas: "check text"
-                          "check text-sm";
-    grid-column-gap: 15px;
-    align-items: center;
+  i { @include font-size(48px); }
 
-    > i {
-      grid-area: check;
-      @include font-size(48px);
-    }
+  span { color: #575757; }
 
-    > span:first-of-type {
-      grid-area: text;
-      @include font-size(28px);
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    > span { grid-area: text-sm; }
-
-    span {
-      text-align: left;
-      color: #3f9c35;
-    }
-
+  span:first-of-type {
+    font-weight: 700;
+    text-transform: uppercase;
+    @include font-size(28px);
   }
 }
