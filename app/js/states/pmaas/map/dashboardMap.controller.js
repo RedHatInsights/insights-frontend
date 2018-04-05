@@ -54,7 +54,7 @@ function generatePinLocations() {
                 array: [-122.490402, 37.786453],
                 type: deployment_types.privateCloud,
                 issues: false,
-                deployment_id: 'azure-europe',
+                deployment_id: 'priv-openstack',
                 title: 'San Francisco On-Stage',
                 subtitle: 'Private Cloud | OpenStack & OpenShift'
             }, {
@@ -80,7 +80,7 @@ function generatePinLocations() {
                 array: [10, 52.520008],
                 type: deployment_types.publicCloud,
                 issues: false,
-                deployment_id: 'priv-openstack',
+                deployment_id: 'azure-europe',
                 title: 'Germany Cloud',
                 subtitle: 'Azure West Europe | OpenShift'
             }]
@@ -219,6 +219,10 @@ priv.init = (conf, $scope, $state, $timeout) => {
                         $state.go('app.dashboard-deployment', params);
                     })
                     .on('mouseenter', d => {
+                        let chartData = demoData.getDeploymentDonutChartData(d.deployment_id);
+                        $scope.popoverCharts = keyBy(chartData, 'name');
+                        generateCharts(chartData, true);
+
                         $scope.popover = {
                             title: d.title,
                             subtitle: d.subtitle,

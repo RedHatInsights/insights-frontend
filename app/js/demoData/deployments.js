@@ -5,6 +5,7 @@ const pub = {};
 
 pub.getDemoDeployment = () => {
     let deployment = {
+        id: 'aws-east',
         name:'US East Cloud',
         region:'AWS US-East-2',
         type:'OpenShift',

@@ -89,6 +89,76 @@ pub.getDemoDeploymentDonutChartData = () => {
     return charts.generateRatingsDonutChartData(deployments.getDemoDeployment().ratings);
 };
 
+pub.getDeploymentDonutChartData = (deploymentID) => {
+    let ratings;
+    switch (deploymentID) {
+        case 'priv-openstack':
+            ratings = {
+                vulnerability: {
+                    secure: 1121,
+                    vulnerable: 79,
+                    state: 'high',
+                    score: 93
+                },
+
+                compliance: {
+                    compliant: 1096,
+                    nonCompliant: 104,
+                    state: 'high',
+                    score: 92
+                },
+                advisor: {
+                    passed: 89,
+                    failed: 1,
+                    state: 'high',
+                    score: 99
+                },
+                subscription: {
+                    rhel: 1090,
+                    openshift: 100,
+                    openstack: 10,
+                    available: 5,
+                    score: 99
+                },
+            };
+            break;
+        case 'azure-europe':
+            ratings = {
+                vulnerability: {
+                    secure: 1141,
+                    vulnerable: 59,
+                    state: 'high',
+                    score: 97
+                },
+
+                compliance: {
+                    compliant: 1096,
+                    nonCompliant: 104,
+                    state: 'high',
+                    score: 90
+                },
+                advisor: {
+                    passed: 84,
+                    failed: 6,
+                    state: 'high',
+                    score: 93
+                },
+                subscription: {
+                    rhel: 1010,
+                    openshift: 75,
+                    openstack: 75,
+                    available: 40,
+                    score: 96
+                },
+            };
+            break;
+        default:
+            ratings = deployments.getDemoDeployment().ratings;
+    }
+
+    return charts.generateRatingsDonutChartData(ratings);
+};
+
 pub.getOverallRatingsDonutChartData = () => {
     let overallRatings = {
         vulnerability: {
@@ -116,10 +186,10 @@ pub.getOverallRatingsDonutChartData = () => {
 
     if (storedData.isFixed()) {
         overallRatings.advisor = {
-            passed: 52,
-                failed: 38,
-                state: 'high',
-                score: 90
+            passed: 81,
+            failed: 9,
+            state: 'high',
+            score: 90
         }
     } else {
         overallRatings.advisor = {
