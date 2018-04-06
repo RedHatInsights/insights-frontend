@@ -1,8 +1,8 @@
 .nav-pf-vertical.primary-nav
   account-select
   ul.list-group
-    li.list-group-item(ui-sref='app.dashboard-map' ui-sref-active='active')
-      a(ui-sref='app.dashboard-map', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
+    li.list-group-item(ng-class='isActive(states.overview)')
+      a(ui-sref='app.dashboard-map', ui-sref-active='active', ng-class='isActive(states.overview)', md-ink-ripple, ng-click="toggleLeft()")
         span.fa.fa-dashboard
         span.text Overview
 
@@ -21,13 +21,13 @@
     //-     span.fa.fa-dashboard
     //-     span.text Demo Step4
 
-    li.list-group-item(ui-sref='app.inventory-deployment', ng-class="{'active': isActive(states.inventoryDeployment)}", ui-sref-active='active')
-      a(ui-sref='app.inventory-deployment', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
+    li.list-group-item(ng-class='isActive(states.inventoryDeployment)')
+      a(ui-sref='app.inventory-deployment', ui-sref-active='active', ng-class='isActive(states.inventoryDeployment)', md-ink-ripple, ng-click="toggleLeft()")
         i.fa.fa-database
         span.text(translate) Inventory
 
-    li.list-group-item(ui-sref='app.digests' ui-sref-active='active' ng)
-      a(ui-sref='app.digests', ui-sref-active='current', md-ink-ripple, ng-click="toggleLeft()")
+    li.list-group-item(ui-sref='app.digests', ui-sref-active='active')
+      a(ui-sref='app.digests', ui-sref-active='active', md-ink-ripple, ng-click="toggleLeft()")
         i.fa.fa-bar-chart
         span.text(translate) Executive Report
 

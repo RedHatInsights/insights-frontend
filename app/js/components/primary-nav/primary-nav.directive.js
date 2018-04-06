@@ -49,14 +49,16 @@ function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User, InsightsJwt
         inventoryDeployment: [
             'app.inventory-deployment',
             'app.system-overview'
+        ],
+        overview: [
+            'app.dashboard-map',
+            'app.dashboard-deployment'
         ]
     };
 
     $scope.isActive = function (states) {
         return {
-            current: states.some(state => {
-                $state.is(state);
-            })
+            active: states.some(state => $state.is(state))
         };
     };
 
