@@ -1,6 +1,12 @@
 // Page Header
 deployment-header(name='{{deployment.name}}', region='{{deployment.region}}', type='{{deployment.type}}')
-
+section.breadcrumbs
+    ol
+      li
+        a(ui-sref='app.dashboard-map')
+          span(translate) Deployments
+      li
+        span {{deployment.name}}
 
 // Content
 .ins-l-pmaas-deployments
