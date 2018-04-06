@@ -8,7 +8,7 @@ function stateToColor(state) {
         case 'moderate':
             return '#f0ab00';
         case 'high':
-            return '#2d7623';
+            return '#3f9c35';
         default:
             return '#0088ce';
     }

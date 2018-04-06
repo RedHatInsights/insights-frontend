@@ -80,7 +80,7 @@ const layout = {
     margin: {
         l: 30,
         r: 0,
-        b: 20,
+        b: 40,
         t: 0,
         pad: 4
     }
