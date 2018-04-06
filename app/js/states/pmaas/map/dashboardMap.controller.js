@@ -263,6 +263,7 @@ priv.init = (conf, $scope, $state, $timeout) => {
         });
 
     priv.redraw();
+    $scope.loading = false;
 };
 
 priv.redraw = () => {
@@ -343,6 +344,7 @@ function generateCharts(chartData, popover) {
 
 function DashboardMapCtrl($timeout, $scope, $state) {
     window.priv = priv;
+    $scope.loading = true;
     $scope.popover = {};
     $scope.selectedDeployments = [];
     $scope.selectedPinType = deployment_types.all;
@@ -379,6 +381,25 @@ function DashboardMapCtrl($timeout, $scope, $state) {
         priv.svg.selectAll('path')
             .transition()
             .duration(priv.transitionTime)
+            .attr('d', priv.path);
+    };
+
+    $scope.recenter = () => {
+        const conf = priv.getConf();
+
+        priv.projection.rotate([conf.rotate, 0])
+            .translate([conf.width / 2, (conf.height / 2) + 150]);
+
+        priv.slast = priv.projection.scale();
+        priv.tlast = priv.projection.translate();
+
+        priv.zoom
+            .scale(priv.projection.scale())
+            .translate(priv.projection.translate());
+
+        priv.updatePins();
+
+        priv.svg.selectAll('path')
             .attr('d', priv.path);
     };
 
