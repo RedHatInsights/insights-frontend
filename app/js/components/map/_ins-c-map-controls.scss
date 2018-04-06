@@ -8,7 +8,7 @@
 
 /* Zoom base styling
 /* ================================================================== */
-.ins-c-zoom {
+.ins-c-map-controls{
   display: grid;
   grid-template-columns: 1fr;
   position: absolute;
@@ -25,11 +25,10 @@
       background: rgba(255,255,255,.3);
     }
 
-    i {
+    &:first-child {
+      @include rem('margin-bottom', 15px);
     }
 
-    &:first-child {
-      border-bottom: 1px solid rgba(0,0,0,.1);
-    }
+    &:nth-child(2) { border-bottom: 1px solid rgba(0,0,0,.1); }
   }
 }

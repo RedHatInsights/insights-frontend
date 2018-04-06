@@ -106,8 +106,9 @@ section.ins-l-pmaas-map
               .ins-p-chart-list__item__info__title {{charts.subscription.name}}
               b {{popoverCharts.subscription.title}} &nbsp;
               span Utilized
-
-    .ins-c-zoom
+    .ins-c-map-controls
+      button(ng-click="recenter")
+        i.fa.fa-crosshairs
       button(ng-click="zoom(true)")
         i.fa.fa-plus
       button(ng-click="zoom(false)")
