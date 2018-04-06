@@ -143,3 +143,11 @@ actions-select { display: none; }
 div.recommendations {
   .ins-l-split--lg { padding: 0x; }
 }
+
+.map .map-load {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .spinner { border-top: 4px solid rgba(255, 255 255, .2); }
+}

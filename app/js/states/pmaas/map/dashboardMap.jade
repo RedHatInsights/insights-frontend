@@ -67,7 +67,8 @@ section.ins-l-pmaas-map
   // Content
   //- .pmaas-map
   .map#map
-    .spinner.spinner-lg(ng-if="loading")
+    .map-load(ng-if="loading")
+      .spinner.spinner-lg
     // this is an unnecessary wrapper, remove it
     .ins-c-map-popover#popover(ng-if="!loadingPop")
       i.fa.fa-times.pull-right(ng-click="closePopover()")
