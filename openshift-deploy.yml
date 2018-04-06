@@ -1,0 +1,75 @@
+# assuming a user is logged in and using a project, will create demo app in project
+# minishift start
+# oc login
+# oc new-project insights
+# oc process -f openshift-deploy.yml | oc create -f -
+# visit http://demo-insights.openshift-host.local/insightsbeta/dashboard/map/
+
+apiVersion: v1
+kind: Template
+metadata:
+  name: ansible-service-broker
+
+objects:
+
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      app: demo
+    name: demo
+  spec:
+    strategy:
+      type: Recreate
+    replicas: 1
+    selector:
+      app: demo
+      deploymentconfig: demo
+    template:
+      metadata:
+        labels:
+          app: demo
+          deploymentconfig: demo
+      spec:
+        containers:
+          - image: docker.io/iphands/insightsfrontend:${CONTAINER_TAG}
+            imagePullPolicy: Always
+            name: insightsfrontend
+            ports:
+              - containerPort: 8080
+                protocol: TCP
+
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: demo
+    name: demo
+  spec:
+    ports:
+      - name: 8080-tcp
+        port: 8080
+        protocol: TCP
+        targetPort: 8080
+    selector:
+      app: demo
+
+- apiVersion: v1
+  kind: Route
+  metadata:
+    labels:
+      app: demo
+    name: demo
+  spec:
+    port:
+      targetPort: 8080-tcp
+    to:
+      kind: Service
+      name: demo
+
+parameters:
+- description: container-tag
+  displayname: project
+  name: CONTAINER_TAG
+  value: "9384b6454ddc1f0fe7d82b30afdfacc39cc8c653"
