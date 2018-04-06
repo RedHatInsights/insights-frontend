@@ -388,6 +388,7 @@ function DashboardMapCtrl($timeout, $scope, $state) {
         const conf = priv.getConf();
 
         priv.projection.rotate([conf.rotate, 0])
+            .scale(priv.scaleExtent[0])
             .translate([conf.width / 2, (conf.height / 2) + 150]);
 
         priv.slast = priv.projection.scale();
