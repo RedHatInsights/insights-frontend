@@ -22,17 +22,15 @@ section.breadcrumbs
           .center-text
             h1 {{charts.vulnerability.columns[0][1]}}
         .legend.text-left
-          .c3-legend-item
-            .c3-legend-item-tile
-              i.fa.fa-square(class='{{charts.vulnerability.state}}')
-            b {{charts.vulnerability.columns[0][1]}}
-            span {{charts.vulnerability.columns[0][0]}}
+          .c3-legend-item-tile
+            i.fa.fa-square(class='{{charts.vulnerability.state}}')
+          b {{charts.vulnerability.columns[0][1]}}
+          span {{charts.vulnerability.columns[0][0]}}
 
-          .c3-legend-item
-            .c3-legend-item-tile
-              i.fa.fa-square.gray
-            b {{charts.vulnerability.columns[1][1]}}
-            span {{charts.vulnerability.columns[1][0]}}
+          .c3-legend-item-tile
+            i.fa.fa-square.gray
+          b {{charts.vulnerability.columns[1][1]}}
+          span {{charts.vulnerability.columns[1][0]}}
 
 
     .card-pf.card-pf-view.card-pf-view-select.card-pf-view-single-select.text-center(ui-sref='app.inventory-deployment({ deployment_id: "abcdef" })')
@@ -43,17 +41,15 @@ section.breadcrumbs
         // Donut chart
         .chart-compliance
         .legend.text-left
-          .c3-legend-item
-            .c3-legend-item-tile
-              i.fa.fa-square(class='{{charts.compliance.state}}')
-            b {{charts.compliance.columns[0][1]}}
-            span {{charts.compliance.columns[0][0]}}
+          .c3-legend-item-tile
+            i.fa.fa-square(class='{{charts.compliance.state}}')
+          b {{charts.compliance.columns[0][1]}}
+          span {{charts.compliance.columns[0][0]}}
 
-          .c3-legend-item
-            .c3-legend-item-tile
-              i.fa.fa-square.gray
-            b {{charts.compliance.columns[1][1]}}
-            span {{charts.compliance.columns[1][0]}}
+          .c3-legend-item-tile
+            i.fa.fa-square.gray
+          b {{charts.compliance.columns[1][1]}}
+          span {{charts.compliance.columns[1][0]}}
 
     .card-pf.card-pf-view.card-pf-view-select.card-pf-view-single-select.text-center(ui-sref='app.inventory-deployment({ deployment_id: "abcdef" })')
       .card-pf-heading.no-border
@@ -65,17 +61,15 @@ section.breadcrumbs
         .chart-advisor
 
         .legend.text-left
-          .c3-legend-item
-            .c3-legend-item-tile
-              i.fa.fa-square(class='{{charts.advisor.state}}')
-            b {{charts.advisor.columns[0][1]}}
-            span {{charts.advisor.columns[0][0]}}
+          .c3-legend-item-tile
+            i.fa.fa-square(class='{{charts.advisor.state}}')
+          b {{charts.advisor.columns[0][1]}}
+          span {{charts.advisor.columns[0][0]}}
 
-          .c3-legend-item
-            .c3-legend-item-tile
-              i.fa.fa-square.gray
-            b {{charts.advisor.columns[1][1]}}
-            span {{charts.advisor.columns[1][0]}}
+          .c3-legend-item-tile
+            i.fa.fa-square.gray
+          b {{charts.advisor.columns[1][1]}}
+          span {{charts.advisor.columns[1][0]}}
 
     .card-pf.card-pf-view.card-pf-view-select.card-pf-view-single-select.text-center(ui-sref='app.inventory-deployment({ deployment_id: "abcdef" })')
       .card-pf-heading.no-border
@@ -85,23 +79,20 @@ section.breadcrumbs
         // Donut chart
         .chart-subscription
         .legend.text-left
-          .c3-legend-item
-            .c3-legend-item-tile
-              i.fa.fa-square.blue-rhel
-            b {{charts.subscription.columns[0][1]}}
-            span {{charts.subscription.columns[0][0]}}
+          .c3-legend-item-tile
+            i.fa.fa-square.blue-rhel
+          b {{charts.subscription.columns[0][1]}}
+          span {{charts.subscription.columns[0][0]}}
 
-          .c3-legend-item
-            .c3-legend-item-tile
-              i.fa.fa-square.blue-openshift
-            b {{charts.subscription.columns[1][1]}}
-            span {{charts.subscription.columns[1][0]}}
+          .c3-legend-item-tile
+            i.fa.fa-square.blue-openshift
+          b {{charts.subscription.columns[1][1]}}
+          span {{charts.subscription.columns[1][0]}}
 
-          .c3-legend-item
-            .c3-legend-item-tile
-              i.fa.fa-square.blue-openstack
-            b {{charts.subscription.columns[2][1]}}
-            span {{charts.subscription.columns[2][0]}}
+          .c3-legend-item-tile
+            i.fa.fa-square.blue-openstack
+          b {{charts.subscription.columns[2][1]}}
+          span {{charts.subscription.columns[2][0]}}
 
   .ins-l-pmaas-deployments_logs
     logs-graph

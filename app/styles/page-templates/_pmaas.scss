@@ -101,15 +101,14 @@
     @include build-grid(md 1fr 1fr, lg 1fr 1fr 1fr 1fr);
     .c3-chart-arc text { display: none; }
 
-    .legend { @include rem('height', 50px); }
-
-    // This isn't right yet
-    .c3-legend-item {
-      @include font-size(14px);
+    .legend {
       display: grid;
-      grid-template-columns: min-content 1fr 5fr;
-      i { @include rem('margin-right', 15px); }
-      b { @include rem('margin-right', 5px); }
+      grid-template-columns: repeat(3, max-content);
+      margin-left: auto;
+      margin-right: auto;
+      @include rem('height', 50px);
+
+      b { @include rem('margin', 0 10px); }
     }
 
     text.c3-chart-arcs-title {
