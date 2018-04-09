@@ -35,7 +35,7 @@
       md-menu(md-offset="0 46", md-position-mode="target-right target")
         a(md-ink-ripple="#FFF" , ng-click='$mdMenu.open()')
           i.fa.fa-cogs
-          span.text Configuration &nbsp;
+          span.text(translate) Configuration &nbsp;
           span.caret
         md-menu-content
           md-menu-item(ui-sref='app.dashboard-deployment({ deployment_id: "abcdef" })')

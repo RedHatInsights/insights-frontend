@@ -12,13 +12,14 @@
 
 .nav-dropdown {
   a {
-    align-items: center;
+    span { @include rem('line-height', 26px); }
     @include rem('padding', 17px 25px);
     &:hover {
       background: #393f44;
       i { color: #39a5dc}
       span { color: #fff; }
     }
+    .caret { line-height: 26px; }
   }
 
   i {
