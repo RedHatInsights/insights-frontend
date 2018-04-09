@@ -12,7 +12,7 @@ pub.getRecommendations = (accountNumber, systemId) => {
             showGraph: true,
             rule: {
                 category: "Stability",
-                description: "Outlier in Underlying Network/System Configuration Parameter (Access Network MTU)",
+                description: "Network/System Configuration of Public Cloud (AWS) (Network MTU)",
                 severity: 'WARN',
                 optimization: 'high',
                 ansible: true,
@@ -24,11 +24,11 @@ pub.getRecommendations = (accountNumber, systemId) => {
                 confidence: 'high',
                 likelihood: 'moderate',
                 reliability: 'moderate',
-                reason: '<p>This system is running on OpenStack Platform 10. and Neutron network service. Red Hat analysed that <strong>93%</strong> of our customers running a similar deployment, have configured the MTU of the tenant network to 1545.</p>' +
-                '<p>This systems configuration of the MTU of the tenant network is currently configured to be 950</p>' +
-                '<p>Parameter Value is used in 0.75% of the similar deployments.  Parameter Value is in the 2σ interval</p>' +
+                reason: '<p>This system is running on AWS <strong>EC2-VPC m4.xlarge</strong> instances. Red Hat analysed that <strong>93%</strong> of our customers running a similar deployment, have configured a security group with an inbound custom ICMP rule that returns Destination Unreachable instructing the originating host to use the lowest MTU size along the network path.</p>' +
+                '<p>The security group “incoming AMQ” not is configured with a ICMP rule to support path MTU discovery (PMTUD).</p>' +
+                '<p>Parameter Value is used in 0.05% of the similar deployments.  Parameter Value is in the 3σ interval.</p>' +
                 '<p>Predictive accuracy of a model is <strong>very high.</strong></p>',
-                resolution: '<p>Red Hat recommends that you change <code>global_physnet_mtu</code> setting in <code>/etc/neutron/neutron.conf</code>  file to fix this issue.</p>' +
+                resolution: '<p>Reconfigure security group “incoming AMQ” to include rule:</p><p><code style="display:block;white-space:pre-wrap">Protocol type\tProtocol number\tICMP type\t\t\tICMP code\t\t\t\t\t\tSource IP\nICMP\t\t1\t\t3 (Destination Unreachable)\t4 (Fragmentation Needed and Don\'t Fragment was Set)\t0.0.0.0</code></p>' +
                 '<p>Download this Ansible playbook:&nbsp;&nbsp; ' +
                 '<md-icon md-svg-src="static/images/l_ansible-blue.svg" alt="This rule has Ansible support. Use the Planner to generate an Ansible Playbook." class="material-icons" role="img" aria-hidden="true"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2032 2027.2" style="enable-background:new 0 0 2032 2027.2;" xml:space="preserve" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">\n' +
                 '<style type="text/css">\n' +
@@ -40,7 +40,7 @@ pub.getRecommendations = (accountNumber, systemId) => {
                 '\tl522.5,422.1c21,17,36.2,24.7,55.9,24.7c39.5,0,74-29.6,74-72.3C1507.7,1439.4,1505.3,1428.3,1500.8,1416.5L1500.8,1416.5z"></path>\n' +
                 '</svg></md-icon><a href="static/misc/ai_fixes.yml" download> Download</a></p>',
                 more_info: '<ul>' +
-                '<li><a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/12/html/networking_guide/sec-mtu">Chapter 9. Configure MTU Settings - Red Hat OpenStack Platform 12 Networking Guide</a></li>' +
+                '<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html#sg-rules-path-mtu">Security Group Rules Reference</a></li>' +
                 '<li><a href="https://access.redhat.com/solutions/3059091">How to set MTU per Port/Subnet/Network in Neutron</a></li>' +
                 '</ul>'
             }

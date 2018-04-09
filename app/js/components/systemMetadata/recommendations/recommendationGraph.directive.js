@@ -1,96 +1,42 @@
 'use strict';
 
 const componentsModule = require('../../');
-const Plotly = require('plotly.js/lib/index');
-const d3 = Plotly.d3;
+const c3 = require('c3');
 
-let accessMtuPoints = [];
+function generateC3PieChart() {
+    let pieData = {
+        type: 'pie',
+        colors: {
+            'Path MTU Discovery': '#bee1f4',
+            Other: '#0088ce'
+        },
+        columns: [
+            ['Path MTU Discovery', 93],
+            ['Other', 7]
+        ]
+    };
 
-accessMtuPoints.push(1235);
-accessMtuPoints.push(1400);
-
-for (let i = 0; i < 2; i++) {
-    accessMtuPoints.push(1425);
-}
-
-for (let i = 0; i < 5; i++) {
-    accessMtuPoints.push(1500);
-}
-
-for (let i = 0; i < 90; i++) {
-    accessMtuPoints.push(1545);
-}
-
-const accessMtuTrace = {
-    x: accessMtuPoints,
-    name: 'MTU',
-    type: 'histogram',
-    autobinx: false,
-    xbins: {
-        start: 0,
-        end: 2000,
-        size: 50
-    },
-    marker: {
-        color: 'rgba(39, 188, 255, 0.3)',
-        line: {
-            color: 'rgba(39, 188, 255, 0.7)',
-            width: 1
+    let pieChartBottomConfig = {
+        bindto: '.recommendation-graph',
+        data: pieData,
+        legend: {
+            show: true,
+            position: 'bottom'
+        },
+        size: {
+            width: 350,
+            height: 350
         }
-    }
-};
+    };
 
-const data = [accessMtuTrace];
-
-const layout = {
-    autosize: true,
-    title: 'Access Network MTU',
-    xaxis: {
-        title: 'MTU Size',
-        range: [500, 2000]
-    },
-    yaxis: {
-        title: '% of Total Systems',
-        range: [0, 100]
-
-    },
-    margin: {
-        l: 50,
-        r: 30,
-        b: 50,
-        t: 60,
-        pad: 4
-    },
-    shapes: [
-        {
-            type: 'line',
-            x0: 950,
-            y0: -3,
-            x1: 950,
-            y1: 103,
-            line: {
-                color: 'rgb(200, 0, 0, 1)',
-                width: 2
-            }
-        }]
-};
+    c3.generate(pieChartBottomConfig);
+}
 
 /**
  * @ngInject
  */
-function recommendationGraphCtrl($scope, $element) {
-
-    // styling to fixed width for the demo.  If the screen is resized while
-    // the graph is offscreen, it's sized to a tiny width.
-    const node = d3.select($element[0])
-        .append('div')
-        .style({
-            width: '450px',
-            height: '350px'
-        })
-        .node();
-
-    Plotly.newPlot(node, data, layout, {displayModeBar: false});
+function recommendationGraphCtrl($scope, $element, $timeout) {
+    $timeout(generateC3PieChart());
 }
 
 function recommendationGraph() {
@@ -106,4 +52,4 @@ function recommendationGraph() {
     };
 }
 
-componentsModule.directive('recommendationGraph',  ['$window', recommendationGraph]);
+componentsModule.directive('recommendationGraph', ['$window', recommendationGraph]);

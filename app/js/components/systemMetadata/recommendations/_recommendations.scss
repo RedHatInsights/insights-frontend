@@ -18,11 +18,11 @@
     }
   }
 }
-.recommendations .list-group-item-container.recommendation-expanded-content {
-  // this should be a grid, but the plotly graphs aren't resizing smaller when
-  // resizing the screen smaller, only bigger.  This will have to do for now
-  @include media-query(xl) {
-      @include build-grid(1fr 1fr);
+
+.recommendation-container {
+  display: block;
+  @media screen and (min-width: 1700px) {
+    display: inline-flex;
   }
 
   .recommendation-detail {
@@ -30,7 +30,7 @@
   }
 
   .recommendation-graph {
-    display: flex;
+    @include rem('max-width', 350px);
     .svg-container {
       width: 100% !important;
     }
