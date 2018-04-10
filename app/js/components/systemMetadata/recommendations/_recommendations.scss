@@ -38,8 +38,17 @@
     @include rem('max-width', 350px);
     .recommendation-graph-title {
       text-align: center;
+      @include rem('margin-top', 20px);
       font-weight: 400;
       @include font-size(20px);
+    }
+
+    .recommendation-graph {
+      .pielayer text.slicetext {
+        font-weight: 700;
+        position: relative;
+        text-shadow: 0 0 12px #000;
+      }
     }
     .svg-container {
       width: 100% !important;
