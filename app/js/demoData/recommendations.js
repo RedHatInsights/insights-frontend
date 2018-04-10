@@ -25,9 +25,9 @@ pub.getRecommendations = (accountNumber, systemId) => {
                 likelihood: 'moderate',
                 reliability: 'moderate',
                 reason: '<p>This system is running on AWS <strong>EC2-VPC m4.xlarge</strong> instances. Red Hat analysed that <strong>93%</strong> of our customers running a similar deployment, have configured a security group with an inbound custom ICMP rule that returns Destination Unreachable instructing the originating host to use the lowest MTU size along the network path.</p>' +
-                '<p>The security group “incoming AMQ” not is configured with a ICMP rule to support path MTU discovery (PMTUD).</p>' +
+                '<p>The security group “incoming AMQ” is not configured with a ICMP rule to support path MTU discovery (PMTUD).</p>' +
                 '<p>Parameter Value is used in 0.05% of the similar deployments.  Parameter Value is in the 3σ interval.</p>' +
-                '<p>Predictive accuracy of a model is <strong>very high.</strong></p>',
+                '<p>Predictive accuracy of the model is <strong>very high.</strong></p>',
                 resolution: '<p>Reconfigure security group “incoming AMQ” to include rule:</p><p><code style="display:block;white-space:pre-wrap">Protocol type\tProtocol number\tICMP type\t\t\tICMP code\t\t\t\t\t\tSource IP\nICMP\t\t1\t\t3 (Destination Unreachable)\t4 (Fragmentation Needed and Don\'t Fragment was Set)\t0.0.0.0</code></p>' +
                 '<p>Download this Ansible playbook:&nbsp;&nbsp; ' +
                 '<md-icon md-svg-src="static/images/l_ansible-blue.svg" alt="This rule has Ansible support. Use the Planner to generate an Ansible Playbook." class="material-icons" role="img" aria-hidden="true"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2032 2027.2" style="enable-background:new 0 0 2032 2027.2;" xml:space="preserve" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">\n' +
