@@ -19,7 +19,8 @@ var data = [{
         family: 'overpass, helvetica',
         color: '#FFF',
         size: 16
-    }
+    },
+    hoverinfo: 'none'
 }];
 
 var layout = {
