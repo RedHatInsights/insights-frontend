@@ -21,16 +21,26 @@
 
 .recommendation-container {
   display: block;
+
   @media screen and (min-width: 1700px) {
-    display: inline-flex;
+    display: flex;
   }
 
   .recommendation-detail {
     @include rem('padding-right', 20px);
+    width: 100%;
+    @media screen and (min-width: 1700px) {
+      width: calc(100% - 350px);
+    }
   }
 
-  .recommendation-graph {
+  .recommendation-graph-container {
     @include rem('max-width', 350px);
+    .recommendation-graph-title {
+      text-align: center;
+      font-weight: 400;
+      @include font-size(20px);
+    }
     .svg-container {
       width: 100% !important;
     }

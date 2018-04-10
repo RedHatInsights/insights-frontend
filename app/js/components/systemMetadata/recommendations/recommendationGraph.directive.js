@@ -3,21 +3,21 @@
 const componentsModule = require('../../');
 const c3 = require('c3');
 
-function generateC3PieChart() {
+function generateC3PieChart(c3class) {
     let pieData = {
         type: 'pie',
         colors: {
-            'Path MTU Discovery': '#bee1f4',
-            Other: '#0088ce'
+            Present: '#ededed',
+            'Not Present': '#0088ce'
         },
         columns: [
-            ['Path MTU Discovery', 93],
-            ['Other', 7]
+            ['Present', 93],
+            ['Not Present', 7]
         ]
     };
 
     let pieChartBottomConfig = {
-        bindto: '.recommendation-graph',
+        bindto: '.' + c3class,
         data: pieData,
         legend: {
             show: true,
@@ -36,7 +36,8 @@ function generateC3PieChart() {
  * @ngInject
  */
 function recommendationGraphCtrl($scope, $element, $timeout) {
-    $timeout(generateC3PieChart());
+    $scope.c3class = 'recommendation-graph-' + $scope.recommendation.id;
+    $timeout(() => generateC3PieChart($scope.c3class));
 }
 
 function recommendationGraph() {
@@ -47,7 +48,7 @@ function recommendationGraph() {
         replace: true,
         controller: recommendationGraphCtrl,
         scope: {
-            data: '='
+            recommendation: '='
         }
     };
 }

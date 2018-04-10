@@ -27,9 +27,9 @@ const tenantMtuTrace = {
     type: 'histogram',
     autobinx: false,
     xbins: {
-        start: 0,
-        end: 2000,
-        size: 50
+        start: 1,
+        end: 12000,
+        size: 400
     },
     marker: {
         color: 'rgba(39, 188, 255, 0.3)',
@@ -49,12 +49,11 @@ const layout = {
     },
     xaxis: {
         title: 'MTU Size',
-        range: [500, 2000]
+        range: [0, 12000]
     },
     yaxis: {
         title: '% of Total Systems',
-        range: [0, 99]
-
+        range: [0, 109]
     },
     margin: {
         l: 40,
@@ -65,9 +64,9 @@ const layout = {
     shapes: [
         {
             type: 'line',
-            x0: 950,
+            x0: 9000,
             y0: -20,
-            x1: 950,
+            x1: 9000,
             y1: 103,
             line: {
                 color: 'rgb(200, 0, 0, 1)',

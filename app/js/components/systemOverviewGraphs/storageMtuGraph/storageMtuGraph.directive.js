@@ -50,7 +50,7 @@ const layout = {
     },
     yaxis: {
         title: '% of Total Systems',
-        range: [0, 99]
+        range: [0, 109]
     },
     margin: {
         l: 40,

@@ -52,7 +52,7 @@ pub.getRecommendations = (accountNumber, systemId) => {
             account_number: accountNumber,
             rule: {
                 category: "Deployment",
-                description: "Bare metal deployment delivers better performance with Apache Load Balancers",
+                description: "Architecture Review - Bare metal deployment delivers better performance with Apache Load Balancers",
                 severity: 'INFO',
                 optimization: 'moderate',
                 ansible: true,
