@@ -1,5 +1,4 @@
 // TODO Make breadcrumbs from any state
-page-header(title="System Overview")
 section.breadcrumbs
     ol
       li
@@ -7,6 +6,7 @@ section.breadcrumbs
           span(translate) Inventory
       li
         span {{system.hostname}}
+page-header(title="System Overview")
 
 .text-center(ng-if='loading.pageLoading')
   .spinner.spinner-lg

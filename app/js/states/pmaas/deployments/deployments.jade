@@ -1,5 +1,4 @@
 // Page Header
-deployment-header(name='{{deployment.name}}', region='{{deployment.region}}', type='{{deployment.type}}')
 section.breadcrumbs
     ol
       li
@@ -7,6 +6,7 @@ section.breadcrumbs
           span(translate) Deployments
       li
         span {{deployment.name}}
+deployment-header(name='{{deployment.name}}', region='{{deployment.region}}', type='{{deployment.type}}')
 
 // Content
 .ins-l-pmaas-deployments
