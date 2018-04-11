@@ -71,8 +71,8 @@ function generatePinLocations() {
                 type: deployment_types.publicCloud,
                 issues: false,
                 deployment_id: 'azure-south-central-us',
-                title: 'South Central US Cloud',
-                subtitle: 'Azure South-Central-US | OpenShift'
+                title: 'US South Cloud',
+                subtitle: 'Azure South Central US | OpenShift'
             }]
         },
         CAN: {
