@@ -3,7 +3,7 @@ $breadcrumbs-border: #E2E2E2;
 
 .breadcrumbs {
   background-color: $breadcrumbs-bg;
-  @include rem('padding', 20px $global-margin);
+  @include rem('padding', 16px $global-margin);
   border-bottom: 1px solid $breadcrumbs-border;
   overflow-x: auto;
 

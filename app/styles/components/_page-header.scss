@@ -8,6 +8,8 @@
 
 :root {
   --ins-p-page-header--Padding: #{$ins-global--spacer--lg};
+  --ins-p-page-header--PaddingLeftRight: #{$ins-global--spacer--lg};
+  --ins-p-page-header--PaddingTopBottom: #{$ins-global--hero-title--PaddingTopBottom};
   --ins-p-page-header--Margin: #{$ins-global--spacer--lg};
 
   --ins-p-page-header__title--Margin:         #{$ins-global--spacer--sm};
@@ -50,7 +52,7 @@
   border-bottom: 1px solid #d1d1d1;
   box-shadow: 0 1px 0 rgba(3,3,3,.045);
   margin: 0;
-  padding: var(--ins-p-page-header--Padding);
+  padding: var(--ins-p-page-header--PaddingTopBottom) var(--ins-p-page-header--PaddingLeftRight);
 
   &__title {
     flex: 1;
