@@ -6,27 +6,34 @@ const componentsModule = require('../../');
 /**
  * @ngInject
  */
-function applyRecommendationsModalCtrl($scope, $modalInstance, $interval, $timeout) {
+function applyRecommendationsModalCtrl($scope,
+                                       $modalInstance,
+                                       $interval,
+                                       $timeout,
+                                       recommendations) {
+    console.log('applyRecommendationsModalCtrl recommendations', recommendations);
+    console.log('applyRecommendationsModalCtrl $scope', $scope);
+    console.log('applyRecommendationsModalCtrl $scope.resolve', $scope.resolve);
     $scope.recNumber = 1;
     $scope.recTotal = 4;
-    $scope.recDesc = 'Updating MTU setting';
+    $scope.recDesc = recommendations[0].rule.description;
     $scope.progressPercent = 0;
     $interval(() => {
         $scope.progressPercent++;
 
-        if ($scope.progressPercent >= 25) {
-            $scope.recNumber = 2;
-            $scope.recDesc = 'Updating Rec 2';
-        }
-
         if ($scope.progressPercent >= 50) {
-            $scope.recNumber = 3;
-            $scope.recDesc = 'Updating Rec 3';
+            $scope.recNumber = 2;
+            $scope.recDesc = recommendations[1].rule.description;
         }
 
-        if ($scope.progressPercent >= 75) {
+        if ($scope.progressPercent >= 60) {
+            $scope.recNumber = 3;
+            $scope.recDesc = recommendations[2].rule.description;
+        }
+
+        if ($scope.progressPercent >= 90) {
             $scope.recNumber = 4;
-            $scope.recDesc = 'Updating Rec 4';
+            $scope.recDesc = recommendations[3].rule.description;
         }
     }, 50, 100).then(() => {
         $timeout(() => {

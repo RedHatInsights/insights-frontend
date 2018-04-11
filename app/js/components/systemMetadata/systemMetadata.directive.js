@@ -53,13 +53,22 @@ function systemMetadataCtrl(
     };
 
     $scope.applyRec = function () {
+        if (!$scope.system.recommendations ||
+            $scope.system.recommendations.length === 0) {
+            return;
+        }
+
         return $modal.open({
             templateUrl: 'js/components/systemMetadata/recommendations/' +
                          'applyRecommendationsModal.html',
             windowClass: 'apply-recommendations-modal ng-animate-enabled',
             backdropClass: 'system-backdrop ng-animate-enabled',
             controller: 'applyRecommendationsModalCtrl',
-            resolve: {}
+            resolve: {
+                recommendations: function () {
+                    return $scope.system.recommendations;
+                }
+            }
         }).result.finally(() => {
             demoData.applyFixes();
             $rootScope.$emit('reloadDemoData');
