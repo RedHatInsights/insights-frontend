@@ -865,3 +865,12 @@ table.maintenance-table a.text.action {
     .risk-of-change { @include rem('padding-top', $global-padding); }
   }
 }
+
+.maintenance-plan {
+  .content-tabs .tab-playbook:not(.disabled) {
+    background: rgba(0, 183, 255, .7);
+    span { color: #fff; }
+    &:hover, &.active { background: #00B7FF; }
+    .ansible-icon md-icon svg .st0 { fill: #fff; }
+  }
+}
