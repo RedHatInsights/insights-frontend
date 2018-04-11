@@ -65,6 +65,14 @@ function generatePinLocations() {
                 deployment_id: 'aws-east',
                 title: 'US East Cloud',
                 subtitle: 'aws US-East-2 | OpenShift'
+            }, {
+                name: 'texas',
+                array: [-95.366302, 29.761993],
+                type: deployment_types.publicCloud,
+                issues: false,
+                deployment_id: 'azure-south-central-us',
+                title: 'South Central US Cloud',
+                subtitle: 'Azure South-Central-US | OpenShift'
             }]
         },
         CAN: {
@@ -75,15 +83,7 @@ function generatePinLocations() {
         DEU: {
             issues: false,
             offset: [25, 45],
-            coordinates: [{
-                name: 'germany',
-                array: [10, 52.520008],
-                type: deployment_types.publicCloud,
-                issues: false,
-                deployment_id: 'azure-europe',
-                title: 'Germany Cloud',
-                subtitle: 'Azure West Europe | OpenShift'
-            }]
+            coordinates: []
         }
     };
 }
@@ -123,7 +123,7 @@ priv.getConf = () => {
     const ret = {
         width: window.innerWidth,
         height: div.offsetHeight,
-        rotate: 0,
+        rotate: 45,
         maxLatitude: 86
     };
 
