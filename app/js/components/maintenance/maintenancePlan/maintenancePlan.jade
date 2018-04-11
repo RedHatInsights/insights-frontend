@@ -222,13 +222,14 @@
               ng-change="pager.update()")
 
           // Playbook Tab
-          tab.tab-blue(
+          tab.tab-playbook(
             role="tabpanel",
             disable='!ansibleSupport',
             ng-init='setupTabActivator($parent)',
-            select='tabSelected("playbook"); prepareAnsibleTab()')
+            select='tabSelected("playbook"); prepareAnsibleTab()'
+            md-ink-ripple="#fff")
             tab-heading
-              ansible-icon.inline-right(value='ansibleSupport', show-tooltip='false', white='true')
+              ansible-icon.inline-right(value='ansibleSupport', show-tooltip='false')
               strong(translate) Playbook
             .spinner(ng-show='playbookTabLoader.loading')
             .playbooks(ng-hide='playbookTabLoader.loading')
