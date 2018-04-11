@@ -1,3 +1,10 @@
+section.breadcrumbs
+    ol
+      li
+        a(ui-sref='app.inventory-deployment')
+          span(translate) Inventory
+      li
+        span {{deployment.name}}
 inventory-header(name='{{deployment.name}}', region='{{deployment.region}}', type='{{deployment.type}}')
 
 table-filters
