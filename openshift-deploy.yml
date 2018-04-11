@@ -32,7 +32,7 @@ objects:
           deploymentconfig: demo
       spec:
         containers:
-          - image: docker.io/iphands/insightsfrontend:${CONTAINER_TAG}
+          - image: docker.io/iphands/insightsfrontend:features-mice
             imagePullPolicy: Always
             name: insightsfrontend
             ports:
@@ -67,9 +67,3 @@ objects:
     to:
       kind: Service
       name: demo
-
-parameters:
-- description: container-tag
-  displayname: project
-  name: CONTAINER_TAG
-  value: "9384b6454ddc1f0fe7d82b30afdfacc39cc8c653"
