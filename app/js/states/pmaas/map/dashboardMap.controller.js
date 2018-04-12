@@ -58,9 +58,9 @@ function generatePinLocations() {
                 title: 'San Francisco On-Stage',
                 subtitle: 'Private Cloud | OpenStack & OpenShift'
             }, {
-                name: 'virgina',
+                name: 'ohio',
                 type: deployment_types.publicCloud,
-                array: [-78.024902, 37.926868],
+                array: [-82.996216, 40.367474],
                 issues: demoData.getDemoDeployment().issues,
                 deployment_id: 'aws-east',
                 title: 'US East Cloud',
