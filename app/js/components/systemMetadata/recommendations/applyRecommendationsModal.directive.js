@@ -21,19 +21,14 @@ function applyRecommendationsModalCtrl($scope,
     $interval(() => {
         $scope.progressPercent++;
 
-        if ($scope.progressPercent >= 50) {
+        if ($scope.progressPercent >= 80) {
             $scope.recNumber = 2;
             $scope.recDesc = recommendations[1].rule.description;
         }
 
-        if ($scope.progressPercent >= 60) {
+        if ($scope.progressPercent >= 90) {
             $scope.recNumber = 3;
             $scope.recDesc = recommendations[2].rule.description;
-        }
-
-        if ($scope.progressPercent >= 90) {
-            $scope.recNumber = 4;
-            $scope.recDesc = recommendations[3].rule.description;
         }
     }, 50, 100).then(() => {
         $timeout(() => {

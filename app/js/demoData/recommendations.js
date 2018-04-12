@@ -46,29 +46,6 @@ pub.getRecommendations = (accountNumber, systemId) => {
             }
         },
         {
-            id: 2,
-            rule_id: 2,
-            system_id: systemId,
-            account_number: accountNumber,
-            rule: {
-                category: "Deployment",
-                description: "Architecture Review - Bare metal deployment delivers better performance with Apache Load Balancers",
-                severity: 'INFO',
-                optimization: 'moderate',
-                ansible: true,
-                ansible_fix: true,
-                ansible_mitigation: false,
-                rule_id: 'BARE_METAL_APACHE',
-                summary: 'Non-optimal hardware configuration causing less than optimal performance',
-                generic: '',
-                confidence: 'moderate',
-                likelihood: 'low',
-                reliability: 'low',
-                reason: '<p>This system would be more performant using baremental</p>\n<ul>\n\n\n\n\n\n</ul>\n',
-                resolution: '<p>Red Hat recommends using a baremetal hardware configuration</p>'
-            }
-        },
-        {
             id: 3,
             rule_id: 3,
             system_id: systemId,
