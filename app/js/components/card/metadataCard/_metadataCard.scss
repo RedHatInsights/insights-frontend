@@ -19,7 +19,10 @@ system-metadata, .ins-l-inventory {
   //   i { @include rem('margin-right', 10px); }
   // }
 
-  .host-info { font-weight: 300; }
+  .host-info {
+    font-weight: 300;
+    overflow-x: hidden;
+  }
 
   .status-check .pficon-info {
     @include rem('margin-left', 5px);

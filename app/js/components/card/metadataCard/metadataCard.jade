@@ -7,7 +7,7 @@
     ul.ins-p-list.ins-p-list--basic.host-info
       li.ins-p-list__item.icon-inline.hostname
         i.pficon-screen
-        span {{:: system.hostname }}
+        span.is-truncated {{:: system.hostname }}
       li.ins-p-list__item.icon-inline.status-check
         i.fa.fa-clock-o
         span.hostname Last Check: {{system.last_check_in | timeAgo }}
