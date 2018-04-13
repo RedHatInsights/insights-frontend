@@ -10,6 +10,13 @@
 system-metadata { display: block; }
 
 
+.metadata-card > * {
+  overflow-wrap: break-word;
+  word-break: break-all;
+  hyphens: auto;
+}
+
+
 // Setting initial grid
 //==================================================================*/
 
