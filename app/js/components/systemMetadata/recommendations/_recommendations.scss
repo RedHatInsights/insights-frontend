@@ -32,6 +32,12 @@
     @media screen and (min-width: 1700px) {
       width: calc(100% - 350px);
     }
+
+    code {
+      background-color: #f5f5f5;
+      border: 1px solid #bbbbbb;
+      color: #363636;
+    }
   }
 
   .recommendation-graph-container {
