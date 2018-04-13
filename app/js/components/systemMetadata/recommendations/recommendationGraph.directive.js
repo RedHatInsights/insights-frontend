@@ -9,7 +9,7 @@ var data = [{
     labels: ['Present (standard configurations)', 'Not Present (includes your system)'],
     type: 'pie',
     marker: {
-        colors: ['#ededed', '#0088ce'],
+        colors: ['#7dbdc3', '#007a87'],
         line: {
             color: '#FFF',
             width: 1
@@ -43,18 +43,30 @@ var layout = {
     annotations: [
         {
             x: 0.45,
-            y: 0.75,
+            y: 0.73,
             text: 'Your System',
             showarrow: true,
             arrowhead: 7,
-            ax: -60,
-            ay: 0
+            arrowcolor: '#fff',
+            ax: -67,
+            ay: 0,
+            font: {
+                family: 'overpass, helvetica',
+                size: 16,
+                color: '#fff'
+            }
         },
         {
             x: 0.5,
-            y: 0.40,
+            y: 0.35,
             text: 'Standard Configuration',
-            showarrow: false
+            showarrow: false,
+            arrowcolor: '#fff',
+            font: {
+                family: 'overpass, helvetica',
+                size: 16,
+                color: '#fff'
+            }
         }
     ]
 };
