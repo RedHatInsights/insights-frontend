@@ -89,8 +89,7 @@ function rhaTelemetryDonut(
                                 const elem = document.querySelector(selector);
                                 angular.element(elem).on('touchend click', function () {
                                     $state.go('app.topic', {
-                                        id: category.toLowerCase(),
-                                        product: FilterService.getSelectedProduct()
+                                        id: category.toLowerCase()
                                     });
                                 });
                             });
