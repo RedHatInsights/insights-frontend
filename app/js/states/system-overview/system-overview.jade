@@ -9,8 +9,45 @@ section.breadcrumbs
           span US East Cloud
       li 
         span {{system.hostname}}
+inventory-header(name='US East Cloud', region='AWS US-EAST-2', type='OpenShift')
 
-page-header(title="System Overview")
+//- page-header(title="System Overview")
+//- header.ins-p-page-header.ins-has-chart-list.inventory-header
+//-   .ins-p-page-header__page-title
+//-     h1.ins-p-page-header__title(translate) {{:: nameTranslated}}
+//-     h2.ins-p-page-header__subtitle
+//-       span.text(translate) {{:: regionTranslated}}
+//-       span.text(translate) {{:: typeTranslated}}
+
+//-   .ins-p-chart-list
+
+//-     .ins-p-chart-list__item
+//-       .chart-vulnerability
+//-       .ins-p-chart-list__item__info
+//-         .ins-p-chart-list__item__info__title {{charts.vulnerability.name}}
+//-         b {{charts.vulnerability.title}} &nbsp;
+//-         span Secure
+
+//-     .ins-p-chart-list__item
+//-       .chart-compliance
+//-       .ins-p-chart-list__item__info
+//-         .ins-p-chart-list__item__info__title {{charts.compliance.name}}
+//-         b {{charts.compliance.title}} &nbsp;
+//-         span Compliant
+
+//-     .ins-p-chart-list__item
+//-       .chart-advisor
+//-       .ins-p-chart-list__item__info
+//-         .ins-p-chart-list__item__info__title {{charts.advisor.name}}
+//-         b {{charts.advisor.title}} &nbsp;
+//-         span Optimized
+
+//-     .ins-p-chart-list__item
+//-       .chart-subscription
+//-       .ins-p-chart-list__item__info
+//-         .ins-p-chart-list__item__info__title {{charts.subscription.name}}
+//-         b {{charts.subscription.title}} &nbsp;
+//-         span Utilized
 
 .text-center(ng-if='loading.pageLoading')
   .spinner.spinner-lg
