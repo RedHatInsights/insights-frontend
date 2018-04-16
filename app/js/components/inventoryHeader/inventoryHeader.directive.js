@@ -44,26 +44,32 @@ function generateCharts(chartData) {
 /**
  * @ngInject
  */
-function inventoryHeaderCtrl($scope, gettextCatalog) {
+function inventoryHeaderCtrl($scope, gettextCatalog, $rootScope) {
 
     function init() {
         $scope.nameTranslated = gettextCatalog.getString($scope.name);
         $scope.regionTranslated = gettextCatalog.getString($scope.region);
         $scope.typeTranslated = gettextCatalog.getString($scope.type);
+
+        d3.select('.container .chart').remove();
+
+        let chartData = demoData.getDemoDeploymentDonutChartData();
+        $scope.charts = keyBy(chartData, 'name');
+        generateCharts(chartData);
+
+        d3.select('.container')
+            .insert('div', '.chart')
+            .attr('class', 'legend')
+            .selectAll('span')
+            .data(['data1', 'data2', 'data3'])
+            .enter().append('span')
+            .attr('data-id', function (id) { return id; })
+            .html(function (id) { return id; });
     }
 
-    let chartData = demoData.getDemoDeploymentDonutChartData();
-    $scope.charts = keyBy(chartData, 'name');
-    generateCharts(chartData);
-
-    d3.select('.container')
-        .insert('div', '.chart')
-        .attr('class', 'legend')
-        .selectAll('span')
-        .data(['data1', 'data2', 'data3'])
-        .enter().append('span')
-        .attr('data-id', function (id) { return id; })
-        .html(function (id) { return id; });
+    $rootScope.$on('reloadDemoData', function () {
+        init();
+    });
 
     init();
 }
