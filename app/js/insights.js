@@ -96,6 +96,7 @@ if (isPortal) {
     const Jwt = require('jwt-redhat').default;
 
     window.insightsGlobal.jwtLoginCustom = () => {
+
         const keys = [
             'jwt-redhat-lf/refresh_fail_count',
             'rh_jwt',
