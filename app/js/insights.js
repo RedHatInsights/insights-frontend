@@ -95,9 +95,14 @@ if (isPortal) {
 
     const Jwt = require('jwt-redhat').default;
 
+    window.insightsGlobal.jwtLoginCustom = () => {
+        window.localStorage.clear();
+        Jwt.login();
+    };
+
     Jwt.onInit(() => {
         if (!Jwt.isAuthenticated()) {
-            Jwt.login();
+            window.insightsGlobal.jwtLoginCustom();
         } else {
             whenDomReady(bootstrap);
         }
