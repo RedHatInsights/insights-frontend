@@ -28,7 +28,8 @@
             td.fit-content.text-center {{:: package.fix.nevra}}
 
       h2.section-title.section-title-red(translate) CVE Information
-      p.text-center(ng-if='!cves.length', translate) No applicable CVEs
+      .spinner(ng-if='cveLoader.loading')
+      p.text-center(ng-if='!cves.length && !cveLoader.loading', translate) No applicable CVEs
       table(ng-if='cves.length')
         thead
           tr
