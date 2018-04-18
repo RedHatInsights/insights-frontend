@@ -31,3 +31,10 @@
             span.hits(translate, translate-n='rhsa.system_count', translate-plural='{{:: $count}} systems') 1 system
 
       cve-summary(ng-if='selectedRHSA && selectedRHSA.cves.length', style='order: {{cveOrder}}', cves='selectedRHSA.cves')
+    .footer
+      pagination.pull-right.pagination-blue(
+        ng-if="total > pager.perPage",
+        total-items="total",
+        ng-model="pager.currentPage",
+        items-per-page="pager.perPage",
+        ng-change="getErrata(false)")
