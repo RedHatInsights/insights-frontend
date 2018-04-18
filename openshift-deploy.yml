@@ -33,7 +33,7 @@ objects:
       spec:
         containers:
           - image: docker.io/iphands/insightsfrontend:features-mice
-            imagePullPolicy: Always
+            imagePullPolicy: IfNotPresent
             name: insightsfrontend
             ports:
               - containerPort: 8080
