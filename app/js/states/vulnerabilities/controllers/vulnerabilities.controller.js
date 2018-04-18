@@ -23,7 +23,7 @@ function VulnerabilitiesCtrl($location,
                              VulnerabilitiesViews) {
 
     $scope.views = VulnerabilitiesViews;
-    $scope.pager = new Utils.Pager();
+    $scope.pager = new Utils.Pager(10);
 
     $scope.data = {
         vulnerabilities: [],
