@@ -23,7 +23,7 @@ function VulnerabilitiesCtrl($location,
                              VulnerabilitiesViews) {
 
     $scope.views = VulnerabilitiesViews;
-    $scope.pager = new Utils.Pager();
+    $scope.pager = new Utils.Pager(10);
 
     $scope.data = {
         vulnerabilities: [],
@@ -75,7 +75,7 @@ function VulnerabilitiesCtrl($location,
         }
 
         $scope.loading = true;
-        Vulnerability[resource](params)
+        return Vulnerability[resource](params)
         .then(res => {
             $scope.data.total = res.data.total;
             $scope.data.vulnerabilities = res.data.resources;
@@ -101,6 +101,9 @@ function VulnerabilitiesCtrl($location,
         if (view !== $scope.selectedView) {
             $location.search('root_view', view);
             $scope.selectedView = view;
+            $scope.changingView = true;
+            $scope.$broadcast(Events.filters.reset);
+            $scope.changingView = false;
             getData();
         }
     };
@@ -116,11 +119,13 @@ function VulnerabilitiesCtrl($location,
 
     $scope.$on('reload:data', getData);
     $scope.$on('group:change', getData);
-    $scope.$on(Events.filters.reset, getData);
     $scope.$on(Events.filters.daysKnown, (event, selection) => {
         if (params.public_date !== selection.filter) {
             params.public_date = selection.filter;
-            getData();
+
+            if (!$scope.changingView) {
+                return getData();
+            }
         }
     });
 
@@ -132,7 +137,10 @@ function VulnerabilitiesCtrl($location,
         }
 
         params.severity = filter;
-        getData();
+
+        if (!$scope.changingView) {
+            getData();
+        }
     });
 }
 

@@ -7,3 +7,5 @@ constantsModule.constant('VulnerabilitiesViews', {
     errata: 'Errata',
     cve: 'CVEs'
 });
+
+constantsModule.constant('CVEImpactLevels', ['Low', 'Medium', 'High', 'Critical']);

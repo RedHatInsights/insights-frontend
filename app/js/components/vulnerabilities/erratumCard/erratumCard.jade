@@ -28,12 +28,13 @@
             td.fit-content.text-center {{:: package.fix.nevra}}
 
       h2.section-title.section-title-red(translate) CVE Information
-      p.text-center(ng-if='!cves.length', translate) No applicable CVEs
+      .spinner(ng-if='cveLoader.loading')
+      p.text-center(ng-if='!cves.length && !cveLoader.loading', translate) No applicable CVEs
       table(ng-if='cves.length')
         thead
           tr
             th.sortable(translate, ng-class="cveSorter.getSortClass('cve_id')", ng-click="cveSorter.sort('cve_id')") CVE
-            th.sortable.min.fit-content(translate, ng-class="cveSorter.getSortClass('impact')", ng-click="cveSorter.sort('impact')") Impact
+            th.sortable.min.fit-content(translate, ng-class="cveSorter.getSortClass('impactNum')", ng-click="cveSorter.sort('impactNum')") Impact
             th.sortable.min.fit-content.text-center(translate, ng-class="cveSorter.getSortClass('score')", ng-click="cveSorter.sort('score')") Score
             th.sortable.min.fit-content(translate, ng-class="cveSorter.getSortClass('public_date')", ng-click="cveSorter.sort('public_date')") Public Date
             th.min.fit-content Details

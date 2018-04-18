@@ -33,7 +33,13 @@ function ViewPackageCtrl($q,
 
     breadcrumbs.init($stateParams);
 
-    const errataParams = $scope.errataParams = {};
+    $scope.pager = new Utils.Pager(12);
+
+    const errataParams = $scope.errataParams = {
+        page_size: $scope.pager.perPage,
+        sort_by: 'severity',
+        sort_dir: 'DESC'
+    };
 
     function initPageHeader() {
         $scope.pageHeaderSubtitle = [
@@ -67,10 +73,16 @@ function ViewPackageCtrl($q,
         });
     });
 
-    const getErrata = $scope.errataLoader.bind(() => {
+    $scope.getErrata = $scope.errataLoader.bind((resetPager = true) => {
+        if (resetPager) {
+            $scope.pager.currentPage = 1;
+        }
+
         resetSelection();
+        errataParams.page = $scope.pager.currentPage - 1;
         return Vulnerability.getPackageErrata(package_id, errataParams).then(errata => {
             $scope.rhsas = errata.data.resources;
+            $scope.total = errata.data.total;
 
             if ($scope.rhsas.length === 1) {
                 $scope.indexMe(1);
@@ -90,7 +102,7 @@ function ViewPackageCtrl($q,
     });
 
     getDetails();
-    getErrata();
+    $scope.getErrata();
 
     function round (x, to) {
         return Math.ceil(x / to) * to;
@@ -149,7 +161,7 @@ function ViewPackageCtrl($q,
         }
 
         errataParams.severity = filter;
-        getErrata();
+        $scope.getErrata();
     });
 
     $scope.search = function (model) {
@@ -159,7 +171,7 @@ function ViewPackageCtrl($q,
             errataParams.search_term = model;
         }
 
-        getErrata();
+        $scope.getErrata();
     };
 
     $scope.$on('telemetry:esc', function ($event) {
