@@ -3,7 +3,7 @@
 
 const componentsModule = require('../../');
 
-function erratumCardCtrl($q, $scope, $stateParams, Utils, Vulnerability) {
+function erratumCardCtrl($q, $scope, $stateParams, DataUtils, Utils, Vulnerability) {
     $scope.defaultExpanded = $scope.erratum.erratum_id === $stateParams.rhsa_id;
 
     $scope.toggleContent = function (ctx) {
@@ -18,7 +18,10 @@ function erratumCardCtrl($q, $scope, $stateParams, Utils, Vulnerability) {
         const results = $scope.erratum.cves.map(Vulnerability.getCVE);
         $q.all(results)
         .then(results => results.map(res => res.data))
-        .then(results => $scope.cves = results);
+        .then(results => {
+            results.forEach(DataUtils.cveImpactNum);
+            $scope.cves = results;
+        });
     }
 
     if ($scope.defaultExpanded) {
