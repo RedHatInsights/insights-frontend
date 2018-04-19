@@ -128,10 +128,10 @@ constantsModule.constant('DaysKnownFilters', [
     }, {
         title: '45',
         tag: 'Days Known: 45 days or older',
-        filter: '-45days'
+        filter: '45'
     }, {
         title: '90',
         tag: 'Days Known: 90 days or older',
-        filter: '-90days'
+        filter: '90'
     }
 ]);

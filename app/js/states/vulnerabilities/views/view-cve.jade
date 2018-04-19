@@ -6,7 +6,7 @@
     aside.page-header-aside.icon-inline
       vulnerability-severity-icon.severity(impact='cve.impact')
       .cve-score
-        span(translate) Score:
+        span(translate) CVSS Score:
         span {{cve.score}}
     .description
       section.associated-rules(ng-if='cve.insights_rules.length')

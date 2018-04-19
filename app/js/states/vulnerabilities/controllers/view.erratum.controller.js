@@ -67,7 +67,7 @@ function ViewErratumCtrl($filter,
         .then(results => $scope.cves = map(results, 'data'))
         .catch(res => {
             if (res.status === 404) {
-                $state.go('app.vulnerabilities', {root_view: 'RHSAs'});
+                $state.go('app.vulnerabilities', {root_view: 'Errata'});
             }
         });
     });

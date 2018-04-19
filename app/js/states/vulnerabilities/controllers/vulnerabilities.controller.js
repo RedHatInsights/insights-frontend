@@ -120,8 +120,12 @@ function VulnerabilitiesCtrl($location,
     $scope.$on('reload:data', getData);
     $scope.$on('group:change', getData);
     $scope.$on(Events.filters.daysKnown, (event, selection) => {
-        if (params.public_date !== selection.filter) {
-            params.public_date = selection.filter;
+        const value = selection.filter ?
+            `lt${moment().subtract(selection.filter, 'days').format('YYYY-MM-DD')}` :
+            selection.filter;
+
+        if (params.public_date !== value) {
+            params.public_date = value;
 
             if (!$scope.changingView) {
                 return getData();

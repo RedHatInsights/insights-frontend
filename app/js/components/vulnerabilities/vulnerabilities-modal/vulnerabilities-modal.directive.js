@@ -15,30 +15,8 @@ function vulnerabilitiesModalCtrl($scope,
                                   System,
                                   SystemModalTabs) {
 
-    $scope.sorter = new Utils.Sorter(
-        {
-            predicate: $location.search().sort_by || 'id',
-            reverse: $location.search().reverse || false
-        },
-        order);
-
-    function order () {
-        $location.search('sort_by', $scope.sorter.predicate);
-        $location.search('reverse', $scope.sorter.reverse);
-
-        // TODO: use this once api is available
-        // getData();
-
-        $scope.allVulnerabilities = $filter('orderBy')(
-            $scope.allVulnerabilities,
-            [($scope.sorter.reverse ?
-                '-' + $scope.sorter.predicate :
-                $scope.sorter.predicate)]);
-    }
-
-    $scope.getRuleHits = function (rhsa) {
-        return rhsa.rule_hits === 1 ? '1 Hit' : `${rhsa.rule_hits} Hits`;
-    };
+    $scope.pager = new Utils.Pager(10);
+    $scope.loader = new Utils.Loader();
 
     $scope.goToRule = function () {
         const params = $location.search();
@@ -49,9 +27,8 @@ function vulnerabilitiesModalCtrl($scope,
         $location.search(params);
     };
 
-    getData();
-    function getData() {
-        System.getVulnerabilities($scope.systemId, {
+    const getData = $scope.loader.bind(() => {
+        return System.getVulnerabilities($scope.systemId, {
             sort_by: 'severity',
             sort_dir: 'DESC',
             page_size: 1000 // TODO: paginate modal?
@@ -63,8 +40,9 @@ function vulnerabilitiesModalCtrl($scope,
                 erratum => erratum.erratum_id === $stateParams.rhsa_id
             ], ['desc']);
         });
-    }
+    });
 
+    getData();
     $scope.$on('reload:data', getData);
 }
 
