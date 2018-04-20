@@ -6,8 +6,9 @@
         i.fa.fa-server.fa-2x.md-whiteframe-3dp(ng-if="getSystemType() !== 'Virtual'", tooltip="{{:: 'Server type: Physical' | translate}}")
 
       .text
-        h2.name.ellipsis-overflow.editable(ng-if='!edit.value', ng-dblclick='rename()') {{ edit.name }}
+        h2.name.ellipsis-overflow.editable(ng-if='system.display_name || system.hostname && !edit.value', ng-dblclick='rename()') {{ edit.name }}
           renameable-property(value='system.display_name || system.hostname', update-function='rename(newValue)', allow-null='true')
+        h2.name.ellipsis-overflow(ng-if='!system.display_name && !system.hostname') {{:: getUUID() }}
 
         .hostname.ellipsis-overflow
           b Hostname:&nbsp;
