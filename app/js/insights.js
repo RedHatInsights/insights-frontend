@@ -126,6 +126,8 @@ if (isPortal) {
     angular.module('insights').config(require('./base_routes'));
 }
 
+angular.module('insights').run(require('./boot'));
+
 // Common routes
 angular.module('insights').config(require('./routes'));
 
