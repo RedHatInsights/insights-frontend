@@ -1,5 +1,5 @@
-$topbar-bg: #F5F5F5;
-$topbar-text-color: $base-color;
+$topbar-bg: #1D1D1D;
+$topbar-text-color: #fff;
 $topbar-border-color: #ddd;
 
 
@@ -7,7 +7,7 @@ topbar {
   display: block;
   @include rem('padding', $global-margin);
   background: $topbar-bg;
-  border-bottom: 4px solid $topbar-border-color;
+  //border-bottom: 4px solid $topbar-border-color;
 
   @include media-query(sm){
     @include rem('padding', 0 $global-padding 0 0);

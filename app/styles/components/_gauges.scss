@@ -1,3 +1,9 @@
+.digests-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .gauge.gauge-circle {
   width: 100px;
   height: 100px;
