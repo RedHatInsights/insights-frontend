@@ -19,7 +19,7 @@
   section.content(ng-show='!loading && systemsTilTen > 0')
     h1(translate) Executive Reporting requires 10 or more systems to be registered with Insights.
     h2(translate) Please register
-      span(translate, translate-n='systemsTilTen', translate-plural='{{:: $count}} more systems') {{:: systemsTilTen}} more system
+      span(translate, translate-n='systemsTilTen', translate-plural='{{:: $count}} more systems') {{:: systemsTilTen}} &nbsp; more system
       | &nbsp;to enable reporting for your account.
 
   section.content(ng-show='!loading && noData')
