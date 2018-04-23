@@ -25,7 +25,9 @@ $breadcrumbs-border: #E2E2E2;
   }
 
   ol > li + li:before {
-    content: "/ ";
+    content: "\f054 ";
+    font-family: 'FontAwesome';
+    @include font-size(10px);
     padding: 0 5px;
     color: #ccc;
   }

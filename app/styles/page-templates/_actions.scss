@@ -165,3 +165,13 @@ section.action-categories {
 .extra-topics {
   margin: auto;
 }
+
+.actions-page .topic-detail-header{
+  grid-gap: 5px;
+  .page-header {
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: 0;
+  }
+  p { @include rem('margin-bottom', $global-margin); }
+}

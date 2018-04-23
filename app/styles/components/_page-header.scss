@@ -23,6 +23,7 @@
   display: flex;
   margin: 0;
   @include font-size(18px, 23px);
+  font-weight: 400;
 
   @include media-query(md){ @include font-size(24px, 1); }
 
