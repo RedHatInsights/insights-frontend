@@ -20,7 +20,6 @@ function InventoryService($modal, FilterService, System, InsightsConfig) {
     inventoryService._systemModal = null;
 
     inventoryService.showSystemModal = function (system, loadSystem, activeTab) {
-
         function displayModal(system) {
             if (typeof InsightsConfig.systemShowSystem === 'function') {
                 InsightsConfig.systemShowSystem(system);

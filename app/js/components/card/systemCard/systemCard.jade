@@ -20,6 +20,11 @@
           strong.hostname {{:: system.toString }}
           span(ng-if='!system.isCheckingIn') &nbsp;(stale system)
 
+        a.action-count.icon-inline(ng-click='showActions(system, false, modalTabs.vulnerabilities); $event.stopPropagation();')
+          span.text(translate, translate-n="system.vulnerability_count", translate-plural="{{:: $count}} Vulnerabilities") {{:: system.vulnerability_count}} Vulnerability
+          span(ng-class="{'success': !system.vulnerability_count, 'fail': system.vulnerability_count}")
+            i.fa(ng-class="{'no-action': !system.vulnerability_count, 'yes-action': system.vulnerability_count}")
+
         a.action-count.icon-inline(ng-click='showActions(); $event.stopPropagation();')
           span.text(translate, translate-n="system.report_count", translate-plural="{{:: $count}} Actions") {{:: system.report_count}} Action
           span(ng-class="{'success': !system.report_count, 'fail': system.report_count}")

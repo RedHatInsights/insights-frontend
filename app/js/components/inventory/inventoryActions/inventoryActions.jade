@@ -38,7 +38,7 @@
           translate) Unregister
   .col-xs-8.col-sm-8.text-center
     span(ng-hide='reloading')
-      h3.system-count(translate, translate-n='totalSystems()', translate-plural='{{:: $count}} Systems') 1 System
+      h3.system-count(translate, translate-n='totalSystems()', translate-plural='{{$count}} Systems') 1 System
       small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; ({{totalSystemsSelected}} Selected
         span(ng-if='allSelected && pager.perPage < totalSystems()') .
           a(ng-if='!reallyAllSelected', ng-click='reallySelectAll()', translate) &nbsp;Select All Systems.

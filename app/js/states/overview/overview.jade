@@ -13,6 +13,7 @@
       card-content
         handcrafted-content
     new-systems
+
     card.card-accent.widget.widget-actions-summary
       card-header.gray
         .card-header-title
@@ -23,6 +24,9 @@
           a(translate, ui-sref="app.actions") View actions
       card-content
         severity-summary(stats='stats')
+
+    //- TODO: VMaaS rollout
+    vulnerabilities-widget(ng-if='isInternal')
 
     incident-lite(ng-if="isBeta")
 
@@ -35,6 +39,6 @@
             span.light(translate) Your Experience
       card-content
         goals-lite
+
     maintenance-plan-lite(ng-if='config.isPlannerEnabled')
     new-rules
-

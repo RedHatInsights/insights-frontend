@@ -1,0 +1,65 @@
+.page-vulnerabilities-rhsa
+  breadcrumbs
+  .spinner(ng-if='loader.loading')
+  .rha-notifications
+  section.vulnerability-details-header(ng-if='!loader.loading')
+    page-header(title="{{rhsa_id}}", subtitle="pageHeaderSubtitle", link="{{:: rhsa.url}}")
+    aside.page-header-aside.severity
+      vulnerability-severity-icon(severity='rhsa.severity')
+    .description
+      h2.section-title.section-title-red Summary
+      span {{:: rhsa.synopsis}}
+      h2.section-title.section-title-red Description
+      span {{:: rhsa.summary}}
+      .solution
+        h2.section-title.section-title-red Solution
+        span {{:: rhsa.solution}}
+
+    aside.description-aside
+      h2.section-title.section-title-red(translate) Affected Packages
+      ul.affected-package-list
+        li.affected-package(ng-repeat="package in rhsa.packages")
+          a(ui-sref='app.vulnerabilities-package({package_id: package, selected_rhsa: rhsa.erratum_id})') {{:: package}}
+
+  cve-summary(cves='cves', ng-if='cves.length')
+
+  section.vulnerability-tables
+    .primary
+      table-filters
+        search-box(placeholder="{{'Find a system' | translate}}", on-search='search(model)')
+      .table-header
+        .table-header-title
+          h3.system-count(translate, translate-n='rhsa.systems.length', translate-plural='{{:: $count}} Impacted Systems') 1 Impacted System
+          small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; {{checkboxes.totalChecked}} Selected
+            span(ng-if='allSelected && pager.perPage < affectedSystems.length')
+              a(ng-if='!reallyAllSelected', ng-click='reallySelectAll()') &nbsp;Select All Systems.
+              a(ng-if='reallyAllSelected', ng-click='deselectAll()') &nbsp;Deselect All Systems.
+
+      table
+        thead
+          tr
+            th.min.sortable(ng-class="sorter.getSortClass('system_type_id')", ng-click="sorter.sort('system_type_id')", translate) Type
+            th.sortable(ng-class="sorter.getSortClass('toString')", ng-click="sorter.sort('toString')", translate) Name
+            th.min.fit-content.sortable(ng-class="sorter.getSortClass('last_check_in')", ng-click="sorter.sort('last_check_in')", translate) Last Check In
+        tbody(ng-if='systemLoader.loading')
+          tr
+            td(colspan='3')
+              .spinner.spinner-lg
+        tbody(ng-if='!systemLoader.loading')
+          tr(ng-if='!total')
+            td.text-center(colspan='3')
+              strong(translate) No systems found
+          tr(ng-class="{'stale': !system.isCheckingIn}",
+             ng-repeat='system in affectedSystems track by system.system_id')
+            td.fit-content
+              type-icon(type-id='system.system_type_id', include-text='true')
+            td.break
+              a(ng-click='showSystem(system.system_id)') {{:: system.toString }}
+            td.fit-content {{:: system.last_check_in | timeAgo}}
+      .footer
+        pagination.pull-right.pagination-blue(
+          ng-if="total > pager.perPage",
+          total-items="total",
+          ng-model="pager.currentPage",
+          items-per-page="pager.perPage",
+          ng-change="getSystems(false)")

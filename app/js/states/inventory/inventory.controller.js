@@ -31,7 +31,8 @@ function InventoryCtrl(
         ListTypeService,
         ActionbarService,
         Export,
-        Group) {
+        Group,
+        SystemModalTabs) {
 
     const DEFAULT_PAGE_SIZE = 15;
     const DEFAULT_PREDICATE = 'toString';
@@ -67,6 +68,7 @@ function InventoryCtrl(
     $scope.actionFilter = null;
     $scope.loading = InventoryService.loading;
     $scope.reloading = false;
+    $scope.modalTabs = SystemModalTabs;
 
     FilterService.parseBrowserQueryParams();
 
@@ -180,6 +182,8 @@ function InventoryCtrl(
             // programmatic page starts at 0 while ui page starts at 1
             query.page = ($scope.pager.currentPage - 1);
         }
+
+        query.include = 'vulnerability_count';
 
         return query;
     }

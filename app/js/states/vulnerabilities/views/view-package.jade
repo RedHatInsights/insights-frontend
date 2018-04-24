@@ -1,0 +1,40 @@
+.page-vulnerabilities-package
+  breadcrumbs
+  .rha-notifications
+  section.vulnerability-details-header(ng-if='!detailsLoader.loading')
+    page-header(title="Package: {{:: package.name}}", subtitle="pageHeaderSubtitle")
+    .description {{:: package.description}}
+  .spinner(ng-if='detailsLoader.loading')
+
+  table-filters
+    search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
+    rhsa-severity-select
+
+  section.content-wrap
+    // TODO make Summary Card a component
+    .spinner(ng-if='errataLoader.loading')
+    .text-center(ng-if='!errataLoader.loading && !rhsas.length && isEmpty(errataParams)')
+      strong(translate) No vulnerabilities found
+    .text-center(ng-if='!errataLoader.loading && !rhsas.length && !isEmpty(errataParams)')
+      strong(translate) No vulnerabilities match search criteria
+    .card-list-tiles.card-list-rhsa(ng-if='!errataLoader.loading')
+      card.card-rhsa(ng-repeat='rhsa in rhsas track by rhsa.erratum_id', ng-click='indexMe($index + 1); toggleShowCVEs(rhsa)', ng-class='{active: isSelected(rhsa)}', style="order: {{$index + 1}}")
+        card-content
+          .icon
+            vulnerability-severity-icon(severity='rhsa.severity', show-label='false')
+          strong.rhsa-link
+            a(ui-sref='app.vulnerabilities-package-erratum({rhsa_id: rhsa.erratum_id, package_id: package.name, root_view: selectedView})',
+              ng-click="$event.stopPropagation()") {{:: rhsa.erratum_id }}
+          .cve-count
+            span(translate, translate-n='rhsa.cve_count', translate-plural='{{$count}} CVEs') 1 CVE
+            .pipe |
+            span.hits(translate, translate-n='rhsa.system_count', translate-plural='{{$count}} systems') 1 system
+
+      cve-summary(ng-if='selectedRHSA && selectedRHSA.cves.length', style='order: {{cveOrder}}', cves='selectedRHSA.cves')
+    .footer
+      pagination.pull-right.pagination-blue(
+        ng-if="total > pager.perPage",
+        total-items="total",
+        ng-model="pager.currentPage",
+        items-per-page="pager.perPage",
+        ng-change="getErrata(false)")

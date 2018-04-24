@@ -8,12 +8,18 @@ var componentsModule = require('../../');
  */
 function TrimmedTextCtrl($scope) {
     $scope.showTooltip = false;
-    if ($scope.text.length > $scope.length) {
-        $scope.trimmedText = $scope.text.slice(0, $scope.length) + '…';
-        $scope.showTooltip = true;
-    } else {
-        $scope.trimmedText = $scope.text;
+
+    setTrimmedText();
+    function setTrimmedText() {
+        if ($scope.text.length > $scope.length) {
+            $scope.trimmedText = $scope.text.slice(0, $scope.length) + '…';
+            $scope.showTooltip = true;
+        } else {
+            $scope.trimmedText = $scope.text;
+        }
     }
+
+    $scope.$watch('text', setTrimmedText);
 }
 
 function trimmedText() {
