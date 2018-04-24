@@ -1249,7 +1249,7 @@ angular.module('ui.bootstrap.pagination', [])
   itemsPerPage: 10,
   boundaryLinks: false,
   directionLinks: true,
-  firstText: 'First',
+  firstText: '‹',
   previousText: 'Previous',
   nextText: 'Next',
   lastText: 'Last',
@@ -2287,7 +2287,7 @@ angular.module("template/pagination/pager.html", []).run(["$templateCache", func
 angular.module("template/pagination/pagination.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("template/pagination/pagination.html",
     "<ul class=\"pagination\">\n" +
-    "  <li ng-if=\"::boundaryLinks\" ng-class=\"{disabled: noPrevious()||ngDisabled}\"><a href ng-click=\"selectPage(1, $event)\">{{::getText('first')}}</a></li>\n" +
+    "  <li ng-if=\"::directionLinks\" ng-class=\"{disabled: noPrevious()||ngDisabled}\"><a href ng-click=\"selectPage(1, $event)\">{{::getText('first')}}</a></li>\n" +
     "  <li ng-if=\"::directionLinks\" ng-class=\"{disabled: noPrevious()||ngDisabled}\"><a href ng-click=\"selectPage(page - 1, $event)\">{{::getText('previous')}}</a></li>\n" +
     "  <li ng-repeat=\"page in pages track by $index\" ng-class=\"{active: page.active,disabled: ngDisabled&&!page.active}\"><a href ng-click=\"selectPage(page.number, $event)\">{{page.text}}</a></li>\n" +
     "  <li ng-if=\"::directionLinks\" ng-class=\"{disabled: noNext()||ngDisabled}\"><a href ng-click=\"selectPage(page + 1, $event)\">{{::getText('next')}}</a></li>\n" +
