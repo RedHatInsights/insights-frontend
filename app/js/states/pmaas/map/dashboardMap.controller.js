@@ -382,7 +382,6 @@ function DashboardMapCtrl($timeout, $scope, $state) {
         const currentRotate = priv.projection.rotate();
         const currentScale = priv.projection.scale();
         const currentTrans = priv.projection.translate();
-        let transitions = 0;
 
         if (zoomIn) {
             priv.projection.translate(priv.usaCenter.translate);
@@ -396,17 +395,10 @@ function DashboardMapCtrl($timeout, $scope, $state) {
         priv.popover.style('display', 'none');
         priv.projection.scale(scale);
         priv.zoom.scale(scale);
-        priv.pins.forEach(p => p.drawable.style('display', 'none'));
+        priv.updatePins(true);
         priv.svg.selectAll('path')
             .transition()
             .duration(priv.transitionTime)
-            .each('start', () => transitions++)
-            .each('end', () => {
-                if (--transitions === 0) {
-                    priv.updatePins();
-                    priv.pins.forEach(p => p.drawable.style('display', 'inline'));
-                }
-            })
             .attrTween('d', function (d) {
                 const r = d3.interpolate(currentRotate, priv.projection.rotate());
                 const s = d3.interpolate(currentScale, priv.projection.scale());
