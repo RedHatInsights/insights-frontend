@@ -8,7 +8,8 @@
       .text
         h2.name.ellipsis-overflow.editable(ng-if='system.display_name || system.hostname && !edit.value', ng-dblclick='rename()') {{ edit.name }}
           renameable-property(value='system.display_name || system.hostname', update-function='rename(newValue)', allow-null='true')
-        h2.name.ellipsis-overflow(ng-if='!system.display_name && !system.hostname') {{:: getUUID() }}
+        h2.name.ellipsis-overflow(ng-if='!system.display_name && !system.hostname')
+          renameable-property(value='getUUID()', update-function='rename(newValue)', allow-null='true')
 
         .hostname.ellipsis-overflow
           b Hostname:&nbsp;
