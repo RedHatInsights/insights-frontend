@@ -16,7 +16,12 @@ const priv = {
     slast: null,
     pins: [],
     lastScale: 1,
-    transitionTime: 200
+    transitionTime: 200,
+    zooming: false,
+    usaCenter: {
+        rotate: [71.91403381872318, 0, 0],
+        translate: [872.5, 768.0000305175781]
+    }
 };
 
 const deployment_types = {
@@ -123,7 +128,7 @@ priv.getConf = () => {
     const ret = {
         width: window.innerWidth,
         height: div.offsetHeight,
-        rotate: 45,
+        rotate: -25,
         maxLatitude: 86
     };
 
@@ -134,7 +139,7 @@ priv.getScale = (projection, maxLatitude, width) => {
     // set up the scale extent and initial scale for the projection
     const bounds = priv.mercatorBounds(priv.projection, maxLatitude);
     const scale  = width / (bounds[1][0] - bounds[0][0]);
-    return [1.1 * scale, 4 * scale];
+    return [scale, 4 * scale];
 };
 
 priv.reInit = (conf) => {
@@ -267,7 +272,7 @@ priv.init = (conf, $scope, $state, $timeout) => {
 };
 
 priv.redraw = () => {
-    if (d3.event) {
+    if (d3.event && !priv.zooming) {
         const scale = d3.event.scale;
         const t = d3.event.translate;
         const tp = priv.projection.translate();
@@ -364,24 +369,60 @@ function DashboardMapCtrl($timeout, $scope, $state) {
     };
 
     $scope.zoom = zoomIn => {
+        const conf = priv.getConf();
         if ((priv.projection.scale() === priv.scaleExtent[1] && zoomIn) ||
             (priv.projection.scale() === priv.scaleExtent[0]) && !zoomIn) {
             return;
         }
 
+        priv.zooming = true;
         priv.lastScale = zoomIn ? priv.lastScale + 1 : priv.lastScale - 1;
 
         const scale = priv.lastScale * priv.scaleExtent[0];
+        const currentRotate = priv.projection.rotate();
+        const currentScale = priv.projection.scale();
+        const currentTrans = priv.projection.translate();
+        let transitions = 0;
+
+        if (zoomIn) {
+            priv.projection.translate(priv.usaCenter.translate);
+            priv.projection.rotate(priv.usaCenter.rotate);
+        } else {
+            priv.projection.translate([conf.width / 2, (conf.height / 2) + 150]);
+            priv.projection.rotate([conf.rotate, 0, 0]);
+        }
 
         priv.slast = scale;
         priv.popover.style('display', 'none');
         priv.projection.scale(scale);
         priv.zoom.scale(scale);
-        priv.updatePins(true);
+        priv.pins.forEach(p => p.drawable.style('display', 'none'));
         priv.svg.selectAll('path')
             .transition()
             .duration(priv.transitionTime)
-            .attr('d', priv.path);
+            .each('start', () => transitions++)
+            .each('end', () => {
+                if (--transitions === 0) {
+                    priv.updatePins();
+                    priv.pins.forEach(p => p.drawable.style('display', 'inline'));
+                }
+            })
+            .attrTween('d', function (d) {
+                const r = d3.interpolate(currentRotate, priv.projection.rotate());
+                const s = d3.interpolate(currentScale, priv.projection.scale());
+                const trans = d3.interpolate(currentTrans, priv.projection.translate());
+                return function (t) {
+                    const pow = 1;
+                    priv.projection
+                        .rotate(r(Math.pow(t, pow)))
+                        .scale(s(Math.pow(t, pow)))
+                        .translate(trans(Math.pow(t, pow)));
+                    priv.path.projection(priv.projection);
+                    return priv.path(d);
+                };
+            });
+
+        priv.zooming = false;
     };
 
     $scope.recenter = () => {
