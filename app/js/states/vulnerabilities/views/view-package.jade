@@ -26,9 +26,9 @@
             a(ui-sref='app.vulnerabilities-package-erratum({rhsa_id: rhsa.erratum_id, package_id: package.name, root_view: selectedView})',
               ng-click="$event.stopPropagation()") {{:: rhsa.erratum_id }}
           .cve-count
-            span(translate, translate-n='rhsa.cve_count', translate-plural='{{:: $count}} CVEs') 1 CVE
+            span(translate, translate-n='rhsa.cve_count', translate-plural='{{$count}} CVEs') 1 CVE
             .pipe |
-            span.hits(translate, translate-n='rhsa.system_count', translate-plural='{{:: $count}} systems') 1 system
+            span.hits(translate, translate-n='rhsa.system_count', translate-plural='{{$count}} systems') 1 system
 
       cve-summary(ng-if='selectedRHSA && selectedRHSA.cves.length', style='order: {{cveOrder}}', cves='selectedRHSA.cves')
     .footer
