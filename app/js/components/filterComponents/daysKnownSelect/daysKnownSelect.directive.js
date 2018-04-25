@@ -20,15 +20,24 @@ function daysKnownSelectCtrl($rootScope,
     // index for $scope.options
     const DEFAULT_OPTION = 'All';
 
+    function parseUrlParam () {
+        const paramValue = $location.search()[Events.filters.daysKnown];
+        if (paramValue) {
+            const found = find($scope.options, {title: paramValue});
+            if (found) {
+                return found;
+            }
+        }
+
+        return find($scope.options, {title: DEFAULT_OPTION});
+    }
+
     /**
      * Initializes days known filter by checking for the url for
      * the previous filter or defaults to showing all rhsas/pacakges/cves.
      */
     (function init() {
-        let option = $location.search()[Events.filters.daysKnown] ?
-                     $location.search()[Events.filters.daysKnown] :
-                     DEFAULT_OPTION;
-        $scope.selected = find($scope.options, {title: option});
+        $scope.selected = parseUrlParam();
         $rootScope.$broadcast(Events.filters.tag,
                               $scope.selected.tag,
                               Events.filters.daysKnown);

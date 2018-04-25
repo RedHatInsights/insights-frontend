@@ -61,6 +61,10 @@ function ViewCveCtrl($q,
 
             initPageHeader();
             getRules(res.data);
+        }).catch(res => {
+            if (res.status === 404) {
+                $state.go('app.vulnerabilities', {root_view: 'CVEs'});
+            }
         });
     });
 

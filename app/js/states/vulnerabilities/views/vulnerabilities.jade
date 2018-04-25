@@ -86,7 +86,7 @@
             tr
               th.fit-content.nowrap.sortable(translate, ng-class="sorter.getSortClass('cve_id')", ng-click="sorter.sort('cve_id')") CVE Name
               th.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('impact')", ng-click="sorter.sort('impact')") Impact
-              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('score')", ng-click="sorter.sort('score')") Score
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('score')", ng-click="sorter.sort('score')") CVSS Score
               th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('public_date')", ng-click="sorter.sort('public_date')") Days Known
               th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('public_date')", ng-click="sorter.sort('public_date')") Public Date
           tbody(ng-if='loading')
