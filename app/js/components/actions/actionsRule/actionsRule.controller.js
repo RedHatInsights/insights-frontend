@@ -16,7 +16,7 @@ function ActionsRuleCtrl(
         $state,
         $stateParams,
         $timeout,
-        ActionsBreadcrumbs,
+        BreadcrumbsService,
         FilterService,
         IncidentsService,
         InsightsConfig,
@@ -37,6 +37,7 @@ function ActionsRuleCtrl(
         Export,
         Group) {
 
+    const ActionsBreadcrumbs = BreadcrumbsService;
     const REVERSE_TO_DIRECTION = {
         false: 'ASC',
         true: 'DESC'

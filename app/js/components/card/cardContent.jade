@@ -1,2 +1,2 @@
-md-card-content(ng-hide='card.expandable && (card.collapsed || card.loading)', ng-transclude)
+md-card-content.card-content(ng-hide='card.expandable && (card.collapsed || card.loading)', ng-transclude)
   .spinner.spinner-xs(ng-show='card.loading', ng-if='card.expandable')

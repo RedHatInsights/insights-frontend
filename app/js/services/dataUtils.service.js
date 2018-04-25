@@ -5,7 +5,7 @@ var servicesModule = require('./');
 const clone = require('lodash/clone');
 const some = require('lodash/some');
 
-function DataUtils(Utils, Severities) {
+function DataUtils(Utils, Severities, CVEImpactLevels) {
     var service = {};
 
     service.readArray = function (fn) {
@@ -123,6 +123,10 @@ function DataUtils(Utils, Severities) {
 
     service.readRuleState = function (rule) {
         rule.state = getRuleState(rule);
+    };
+
+    service.cveImpactNum = function (cve) {
+        cve.impactNum = CVEImpactLevels.indexOf(cve.impact);
     };
 
     return service;

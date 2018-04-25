@@ -95,18 +95,38 @@ if (isPortal) {
 
     const Jwt = require('jwt-redhat').default;
 
+    window.insightsGlobal.jwtLoginCustom = () => {
+
+        const keys = [
+            'jwt-redhat-lf/refresh_fail_count',
+            'rh_jwt',
+            'rh_refresh_token'
+        ];
+
+        for (const key of keys) {
+            window.localStorage.removeItem(key);
+        }
+
+        Jwt.login();
+    };
+
     Jwt.onInit(() => {
         if (!Jwt.isAuthenticated()) {
-            Jwt.login();
+            window.insightsGlobal.jwtLoginCustom();
         } else {
             whenDomReady(bootstrap);
         }
     });
 
-    Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
+    Jwt.init({
+        keycloakOptions: { clientId: 'customer-portal' },
+        keycloakInitOptions: { responseMode: 'query' }
+    });
 } else {
     angular.module('insights').config(require('./base_routes'));
 }
+
+angular.module('insights').run(require('./boot'));
 
 // Common routes
 angular.module('insights').config(require('./routes'));

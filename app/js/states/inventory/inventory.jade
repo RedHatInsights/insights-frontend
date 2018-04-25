@@ -24,6 +24,7 @@
         ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
       label.type(translate, ng-click="sort('system_type_id')") &nbsp; Type
       strong.hostname(translate, ng-click="sort('toString')") Name &nbsp;
+      strong.vulnerability-count(translate, ng-click="sort('vulnerability_count')") Vulnerability Count
       strong.action-count(translate, ng-click="sort('report_count')") Action Count
 
     .system-cards.card-list(ng-if='getListType() === listTypes.card && !loading')
@@ -50,9 +51,11 @@
               th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'system_type_id':sorter.reverse", ng-click="sorter.sort('system_type_id')", translate) System Type
               th.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse", ng-click="sorter.sort('toString')", translate) System Name
               th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'last_check_in':sorter.reverse", ng-click="sorter.sort('last_check_in')", translate) Last Check In
-              th.min.sortable(ng-class="sorter.predicate | sortClass:'report_count':sorter.reverse", ng-click="sorter.sort('report_count')", translate) Status
-          tbody(ng-if='!loading')
 
+              //- TODO: VMaaS rollout
+              th.sortable.min.fit-content(ng-if='isInternal', ng-class="sorter.predicate | sortClass:'vulnerability_count':sorter.reverse", ng-click="sorter.sort('vulnerability_count')", translate) Vulnerabilities
+              th.min.sortable(ng-class="sorter.predicate | sortClass:'report_count':sorter.reverse", ng-click="sorter.sort('report_count')", translate) Actions
+          tbody(ng-show='!loading')
             tr(ng-repeat='system in systems track by system.system_id',
                ng-class="{'stale': !system.isCheckingIn}",
                ng-click='checkboxes.rowClick($event, system.system_id)',
@@ -68,11 +71,17 @@
               td.fit-content
                 type-icon(type-id='system.system_type_id', include-text='true')
               td.fit-content
-                a(ng-click="showActions(system)") {{:: system.toString}}
-              td.fit-content {{:: system.last_check_in | timeAgo }}
-              td.fit-content
-                a.action-count.icon-inline(ng-click='showActions(system)')
-                  span.text(translate, translate-n="system.report_count", translate-plural="{{:: $count}} Actions") {{:: system.report_count}} Action
+                a(ng-click="showActions(system)") {{system.toString}}
+              td.fit-content {{ system.last_check_in | timeAgo }}
+
+              //- TODO: VMaaS rollout
+              td.fit-content.text-center.min(ng-if='isInternal')
+                a.action-count-with-icon(ng-click="showActions(system, false, modalTabs.vulnerabilities)")
+                  span.text {{:: system.vulnerability_count}}
+                  i.fa(ng-class="{'no-action': !system.vulnerability_count, 'yes-action': system.vulnerability_count, 'success': !system.vulnerability_count, 'fail': system.vulnerability_count}")
+              td.fit-content.text-center.min
+                a.action-count-with-icon(ng-click='showActions(system)')
+                  span.text {{:: system.report_count}}
                   i.fa(ng-class="{'no-action': !system.report_count, 'yes-action': system.report_count, 'success': !system.report_count, 'fail': system.report_count}")
                   span.sr-only Time to destination by car:
 

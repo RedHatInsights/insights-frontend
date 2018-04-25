@@ -1,0 +1,57 @@
+.vulnerabilities-widget
+  card.card-accent.widget.widget-new-systems
+    card-header.gray
+      .card-header-title
+        span.icon-inline
+          i.fa.fa-stethoscope
+          span(translate)  Vulnerabilities Summary
+      .card-header-cta
+        a(translate, ui-sref="app.vulnerabilities({root_view: 'Errata'})") View Vulnerabilities
+    card-content
+      .spinner(ng-if='loader.loading')
+      .rhsa-overview(ng-if='!loader.loading')
+        ul
+          li
+            .pointer(ng-if="percentages.critical", ui-sref="app.vulnerabilities({rhsaSeverity: 'Critical', root_view: 'Errata'})")
+              .metrics
+                strong {{:: 'Critical' | translate}}
+                span.num &nbsp;({{:: percentages.critical | number:1 }}%)
+              .progress-bar
+                .progress.critical(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='percentages.critical / 100 | toWidth')
+                .bar
+            .no-errors(ng-if="!percentages.critical")
+              i.fa.fa-check-circle.inline-right.green(aria-hidden="true")
+              span(translate) You have no vulnerabilities of critical severity
+          li
+            .pointer(ng-if="percentages.important", ui-sref="app.vulnerabilities({rhsaSeverity: 'Important', root_view: 'Errata'})")
+              .metrics
+                strong {{:: 'Important' | translate}}
+                span.num &nbsp;({{:: percentages.important | number:1 }}%)
+              .progress-bar
+                .progress.important(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='percentages.important / 100 | toWidth')
+                .bar
+            .no-errors(ng-if="!percentages.important")
+              i.fa.fa-check-circle.inline-right.green(aria-hidden="true")
+              span(translate) You have no vulnerabilities of important severity
+          li
+            .pointer(ng-if="percentages.moderate", ui-sref="app.vulnerabilities({rhsaSeverity: 'Moderate', root_view: 'Errata'})")
+              .metrics
+                strong {{:: 'Moderate' | translate}}
+                span.num &nbsp;({{:: percentages.moderate | number:1 }}%)
+              .progress-bar
+                .progress.moderate(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='percentages.moderate / 100 | toWidth')
+                .bar
+            .no-errors(ng-if="!percentages.moderate")
+              i.fa.fa-check-circle.inline-right.green(aria-hidden="true")
+              span(translate) You have no vulnerabilities of moderate severity
+          li
+            .pointer(ng-if="percentages.low", ui-sref="app.vulnerabilities({rhsaSeverity: 'Low', root_view: 'Errata'})")
+              .metrics
+                strong {{:: 'Low' | translate}}
+                span.num &nbsp;({{:: percentages.low | number:1 }}%)
+              .progress-bar
+                .progress.low(role="progressbar", aria-valuemin="0", aria-valuemax="100", ng-style='percentages.low / 100 | toWidth')
+                .bar
+            .no-errors(ng-if="!percentages.low")
+              i.fa.fa-check-circle.inline-right.green(aria-hidden="true")
+              span(translate) You have no vulnerabilities of low severity

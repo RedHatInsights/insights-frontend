@@ -856,3 +856,21 @@ table.maintenance-table {
 table.maintenance-table a.text.action {
   flex: inherit;
 }
+
+.maintenance-plan {
+  md-card-content.two-columns.flex{
+    margin: 0;
+    .systems { margin: 0; }
+    .resolution { margin: 0; }
+    .risk-of-change { @include rem('padding-top', $global-padding); }
+  }
+}
+
+.maintenance-plan {
+  .content-tabs .tab-playbook:not(.disabled) {
+    background: rgba(0, 183, 255, .7);
+    span { color: #fff; }
+    &:hover, &.active { background: #00B7FF; }
+    .ansible-icon md-icon svg .st0 { fill: #fff; }
+  }
+}

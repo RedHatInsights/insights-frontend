@@ -257,11 +257,11 @@ function Utils($filter, $rootScope, Events) {
         this.cb = cb;
     };
 
-    utils.Sorter.prototype.sort = function (name) {
+    utils.Sorter.prototype.sort = function (name, ...args) {
         this.reverse = (this.predicate === name) ? !this.reverse : false;
         this.predicate = name;
         if (this.cb) {
-            this.cb();
+            this.cb.call(null, ...args);
         }
     };
 

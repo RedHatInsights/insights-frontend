@@ -1,6 +1,6 @@
 'use strict';
 
-var apiModule = require('./');
+const apiModule = require('./');
 const URI = require('urijs');
 
 /**
@@ -10,14 +10,14 @@ function System(
     $http,
     $q,
     $rootScope,
-    InsightsConfig,
     AccountService,
-    Group,
-    Utils,
+    DataUtils,
     FilterService,
-    Products,
+    Group,
+    InsightsConfig,
     PreferenceService,
-    DataUtils) {
+    Products,
+    Utils) {
 
     var root = InsightsConfig.apiRoot;
     var _systemDfd;
@@ -253,6 +253,19 @@ function System(
             url.segment(systemId);
             url.segment('policies');
             url.addSearch(AccountService.queryParam());
+            return $http.get(url.toString());
+        },
+
+        getVulnerabilities (systemId, params) {
+            const url = URI(root);
+            url.segment('systems');
+            url.segment(systemId);
+            url.segment('errata');
+            url.addSearch(AccountService.queryParam());
+            if (params) {
+                url.addSearch(params);
+            }
+
             return $http.get(url.toString());
         }
     };

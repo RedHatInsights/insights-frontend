@@ -75,7 +75,7 @@ function maintenanceCategorySelectCtrl($location, $timeout,
 function maintenanceCategorySelect() {
 
     return {
-        templateUrl: 'js/components/maintenance/maintenanceCategorySelect/' +
+        templateUrl: 'js/components/filterComponents/maintenanceCategorySelect/' +
             'maintenanceCategorySelect.html',
         restrict: 'E',
         controller: maintenanceCategorySelectCtrl,

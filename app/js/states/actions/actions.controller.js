@@ -12,7 +12,7 @@ function ActionsCtrl(
     $stateParams,
     $state,
     ActionbarService,
-    ActionsBreadcrumbs,
+    BreadcrumbsService,
     Categories,
     Export,
     FilterService,
@@ -27,6 +27,8 @@ function ActionsCtrl(
     TopicService) {
 
     const params = $state.params;
+    const ActionsBreadcrumbs = BreadcrumbsService;
+
     $scope.loading = true;
     $scope.stats = {};
     $scope.show = {
