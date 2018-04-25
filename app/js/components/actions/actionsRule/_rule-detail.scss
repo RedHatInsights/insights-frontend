@@ -77,3 +77,11 @@
 .rule-detail-summary {
   grid-area: rule-detail;
 }
+
+.actions-rule {
+  .rule-detail-header {
+    border-bottom: 0;
+    .page-header { @include rem('padding', $global-padding*2 0); }
+  }
+  section.content { background: #fff; }
+}

@@ -59,8 +59,11 @@ topbar {
   .beta-switch { display: inline-block; }
 
   menu span + span { padding-left: 15px; }
-  menu.notifications{ 
+  menu.notifications{
     padding: 0;
+    .dropdown a:hover, .dropdown a:focus {
+      color: $blue-light;
+    }
   }
 
   .help, 

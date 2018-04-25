@@ -6,6 +6,6 @@ section.page-header(ng-transclude)
     a(ng-if="link.length > 0", href="{{:: link}}", target="_blank")
       i.fa.fa-external-link
   //- subtitle is an array
-  .page-subtitle
+  .page-subtitle(ng-if="subtitle")
     dl
       dd.text(ng-repeat="subtitle_part in subtitle") {{:: subtitle_part }}
