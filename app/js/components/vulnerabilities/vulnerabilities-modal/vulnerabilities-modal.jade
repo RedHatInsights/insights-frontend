@@ -1,0 +1,12 @@
+.vulnerabilities-modal
+  .content-wrap
+    expand-all-button.toggle-expand-right
+    .spinner(ng-if='loader.loading')
+    erratum-card(ng-repeat='rhsa in rhsas | limitTo:pager.perPage:pager.offset track by rhsa.erratum_id', erratum='rhsa')
+    .footer
+      pagination.pull-right.pagination-blue(
+        ng-if="rhsas.length > pager.perPage",
+        total-items="rhsas.length",
+        ng-model="pager.currentPage",
+        items-per-page="pager.perPage",
+        ng-change='pager.update()')

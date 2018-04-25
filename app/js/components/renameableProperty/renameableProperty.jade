@@ -1,6 +1,6 @@
-.renameableProperty
-  .name.ellipsis-overflow.editable(ng-mouseenter="editIcon=true", ng-mouseleave="editIcon=false", ng-show='!edit.value', ng-dblclick='rename(newValue)') {{edit.name}}
-    .edit-toggle.i.fa.fa-pencil-square-o#edit-toggle(ng-show="editIcon", ng-click='rename()')
+.renameableProperty(ng-mouseenter="editIcon=true", ng-mouseleave="editIcon=false")
+  .name.ellipsis-overflow.editable(ng-show='!edit.value', ng-dblclick='rename(newValue)') {{edit.name}}
+  .edit-toggle.i.fa.fa-pencil-square-o#edit-toggle(ng-if='!edit.value', ng-show="editIcon", ng-click='rename()')
   input#renameable-property-input(
       ng-if='edit.value',
       type='text',

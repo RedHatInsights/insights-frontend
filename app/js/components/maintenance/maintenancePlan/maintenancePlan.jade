@@ -222,13 +222,14 @@
               ng-change="pager.update()")
 
           // Playbook Tab
-          tab.tab-blue(
+          tab.tab-playbook(
             role="tabpanel",
             disable='!ansibleSupport',
             ng-init='setupTabActivator($parent)',
-            select='tabSelected("playbook"); prepareAnsibleTab()')
+            select='tabSelected("playbook"); prepareAnsibleTab()'
+            md-ink-ripple="#fff")
             tab-heading
-              ansible-icon.inline-right(value='ansibleSupport', show-tooltip='false', white='true')
+              ansible-icon.inline-right(value='ansibleSupport', show-tooltip='false')
               strong(translate) Playbook
             .spinner(ng-show='playbookTabLoader.loading')
             .playbooks(ng-hide='playbookTabLoader.loading')
@@ -262,12 +263,12 @@
                   p(translate) This playbook&nbsp;
                     b.text-success(translate) does not require a system reboot.
 
-                card-content.gray(ng-if='systemsToReboot.length')
-                  .systems
+                card-content.gray.two-columns.flex(ng-if='systemsToReboot.length')
+                  .systems(md-flex-50)
                     h4.section-title(translate) Systems:
                     expandable-system-list(systems='systemsToReboot')
 
-                  .resolution
+                  .resolution(md-flex-50)
                     .toggle.push-bottom-narrow(ng-click="plan.allow_reboot = !plan.allow_reboot; allowRebootChanged()")
                       input(type="checkbox", ng-checked='plan.allow_reboot')
                       b(translate) Reboot systems automatically

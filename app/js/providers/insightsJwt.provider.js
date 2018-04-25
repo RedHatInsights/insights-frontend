@@ -31,7 +31,10 @@ function InsightsJwt() {
     return {
         $get: function ($cookies) {
             // this only get got once
-            Jwt.init({ clientId: 'customer-portal' }, { responseMode: 'query' });
+            Jwt.init({
+                keycloakOptions: { clientId: 'customer-portal' },
+                keycloakInitOptions: { responseMode: 'query' }
+            });
             Jwt.hack = {};
             Jwt.hack.cookies = $cookies;
             return Jwt;

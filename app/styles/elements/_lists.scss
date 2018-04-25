@@ -100,12 +100,11 @@ li.icon-inline { display: flex; }
 }
 
 ul.pre-code {
-	@include rem('padding', $global-padding);
+	@include rem('padding', 9.5px);
 	list-style-type: none;
-	background: #DCDFE1;
-	//background: #fff;
-	border: 5px solid darken(#DCDFE1, 10);
-	//border: 5px solid #ececec;
+	background: #f5f5f5;
+	border: 1px solid #ccc;
+  border-radius: 5px;
 
 	li {
 		display: inline;

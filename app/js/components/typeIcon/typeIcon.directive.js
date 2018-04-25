@@ -22,8 +22,8 @@ function typeIconCtrl($scope, SystemsService) {
 function typeIcon() {
     return {
         scope: {
-            typeId: '=',
-            includeText: '='
+            typeId: '<',
+            includeText: '<'
         },
         templateUrl: 'js/components/typeIcon/typeIcon.html',
         restrict: 'EC',

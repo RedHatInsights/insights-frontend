@@ -19,13 +19,15 @@ function systemCardCtrl(
     $q,
     AnsibleService,
     MaintenanceService,
-    InsightsConfig) {
+    InsightsConfig,
+    SystemModalTabs) {
 
     $scope.getSystemName = Utils.getSystemDisplayName;
     $scope.hostnameTitle = null;
     $scope.selected = false;
     $scope.plans = MaintenanceService.plans.all;
     $scope.config = InsightsConfig;
+    $scope.modalTabs = SystemModalTabs;
 
     $scope.systemHostnameHover = function ($event) {
         var element = $event.relatedTarget;
