@@ -50,7 +50,7 @@ module.exports = {
 
             .custom.performWithStash(function (stash, done) {
                 client.expect.element(el.systemModal.firstRule.s).text.to.equal(`Security > ${stash.ruleNamePage3}`.trim());
-                client.expect.element(el.systemModal.hostname.s).text.to.equal(stash.systemNamePage3);
+                client.expect.element(el.systemModal.displayName.s).text.to.equal(stash.systemNamePage3);
                 client.custom.waitAndClick(el.systemModal.exButton).pause(125);
                 done();
 
@@ -67,7 +67,7 @@ module.exports = {
             .custom.waitAndClick(el.inventory.firstSystemInTable)
             .custom.waitAll('systemModal')
             .custom.performWithStash(function (stash, done) {
-                client.expect.element(el.systemModal.hostname.s).text.to.equal(stash.systemName);
+                client.expect.element(el.systemModal.displayName.s).text.to.equal(stash.systemName);
                 client.custom.waitAndClick(el.systemModal.exButton);
                 client.custom.waitAll('nav');
                 done();
