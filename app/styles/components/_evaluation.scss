@@ -1,42 +1,127 @@
-$eval-header-font-size: 40px;
-$eval-subheader-font-size: 25px;
+$eval-header-font-size: 30px;
+$eval-subheader-font-size: 24px;
 $eval-content-font-size: 16px;
 
-.eval{
+
+// Page Background
+.page-eval{
+  display: grid;
+  min-height: 100vh;
+  width: 100vw;
+  @include gradient($black-base);
+}
+
+// Red Hat Insights Logo
+.eval-header md-icon{
+  @include rem('margin-top', $global-margin);
+  @include rem('width', 225px);
+  height: auto;
+  & svg {
+    fill: #fff;
+  }
+}
+
+
+// Card styling
+.eval-cards{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  md-card {
+    @include rem('margin', $global-margin);
+    max-width: 1200px;
+  }
+
+  md-card-content { @include rem('padding', $global-padding*3); }
+
+
+  // Header styles
+  h1,h2,h3 { @include rem('margin', 15px 0px); }
 
 	h1.eval-header{ @include font-size($eval-header-font-size); }
 
 	h2.eval-subhead{
 		@include font-size($eval-subheader-font-size);
-		font-family: overpass;
-		text-transform: uppercase;
-
+    font-weight: 500;
 	}
 
-	h3.eval-content{
-		@include font-size($eval-content-font-size);
-		font-weight: 500;
-	}
+	h3.eval-content{ @include font-size($eval-content-font-size); }
 
 	hr.eval-hr{ border-color: $brand-tert-med; }
 
-	ul.sales-info{
-		list-style-type: none;
-		.fa{
-			color: $text-color;
-		}
-	}
 
-	.flexgrid.equalheights .content-block-card { 
-		height: 100%
-	}
-
+  // Sales Card Grid
 	.sales-cards{
-		@include rem(margin-top, $global-margin);
+    display: block;
+    @include media-query(sm) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "card card"
+                          "card card"
+                          "link link";
+    }
+
+    > span {
+      grid-area: link;
+      text-decoration: underline;
+    }
+
+    ul.sales-info {
+      list-style-type: none;
+      i { color: $text-color; }
+    }
 	}
 
-	.md-button span {
-		//@include rem('line-height', 10px);
-		line-height: 10px;
-	}
+  .status-available p:first-of-type, .status-available #terms { text-align: left; }
+  .status-available > * { @include rem('margin-top', 15px); }
+
+  .md-button + .md-button { @include rem('margin-left', $global-margin); }
+
+  .md-button { @include rem('margin-top', $global-margin/2); }
+}
+
+
+// Footer Styles
+.page-eval .eval-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  @include rem('margin-bottom', $global-margin);
+
+  .redhat-logo {
+    width: 100px;
+    height: auto;
+    @include rem('margin-right', $global-padding);
+  }
+
+  .copyright, nav { @include rem('margin-top', 5px); }
+  .copyright { color: #fff; }
+  nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+
+    & li {
+      position: relative;
+      @include rem('padding-left', 0);
+      text-decoration: underline;
+      a { color: #fff; }
+    }
+
+    & li + li {
+      @include rem('margin-left', $global-padding);
+      @include rem('padding-left', $global-padding);
+
+      &::before {
+        content: '|';
+        position: absolute;
+        left: 0;
+        color: $gray;
+      }
+    }
+  }
 }

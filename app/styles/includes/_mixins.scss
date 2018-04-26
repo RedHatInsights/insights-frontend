@@ -283,6 +283,13 @@
   }
 }
 
+// Generate Gradient
+// =================================================================/
+@mixin gradient($gradient-color-base) {
+  $gradient-secondary-color: darken($gradient-color-base, 7%);
+  background: $gradient-color-base;
+  background: linear-gradient(to bottom, $gradient-color-base 0%, $gradient-secondary-color 100%);
+}
 
 // Generate Hue Map
 // INPUTS --

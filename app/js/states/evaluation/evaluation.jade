@@ -1,171 +1,155 @@
-.text-center
-  i.fa.spinner-lg.spinner(ng-if='loading')
-section.content(ng-if='!loading && !error')
+.page-eval.text-center
+  .eval-header
+    md-icon(md-svg-src="./static/images/l_insights-inline.svg")
+  .eval-cards
+    i.fa.spinner-lg.spinner(ng-if='loading')
+    card.md-whiteframe-15dp(ng-if='!loading && !error')
+      card-content
+        .status-current(ng-if='status.current')
+          h1.eval-header(translate) You are currently on a {{:: status.current.systems}} system evaluation of Red Hat Insights
+          hr.eval-hr
+          h2.eval-subhead(translate) Your evaluation will expire on
+            strong {{:: getExpiration()}}.
+          md-button.md-raised.md-primary(href="https://access.redhat.com/products/red-hat-insights#getstarted", translate) Getting started guide
+          md-button.md-raised.md-primary(ui-sref='app.overview', translate) Go to the application
 
-  .status-current(ng-if='status.current')
-    .row.text-center
-      .col-sm-12.col-md-8.col-md-offset-2
-        h1.eval-header(translate) You are currently on a {{:: status.current.systems}} system evaluation of Red Hat Insights
-        hr.eval-hr
-        h2.eval-subhead(translate) Your evaluation will expire on
-          strong {{:: getExpiration()}}.
+        .status-expired(ng-if="status.expired")
+          h1.eval-header(translate) Your evaluation has expired
+          h2.eval-subhead(translate) Thank you for trying Red Hat Insights
+          hr.eval-hr
+          h3.eval-content(translate) Please contact sales to purchase Insights
 
-    .row.text-center
-      .col-lg-3.col-lg-offset-3
-        a(href="https://access.redhat.com/products/red-hat-insights#getstarted")
-          md-button.md-raised.md-primary(translate) Getting started guide
-      .col-lg-3
-        md-button.md-raised.md-primary(ui-sref='app.overview', translate) Go to the application
+          .sales-cards
+            card
+              card-header.gray
+                h4(translate) North America
+              card-content
+                ul.sales-info
+                  li
+                    span.icon-inline
+                      i.fa.fa-phone
+                      span #[a(href="tel:19197543700") +1 (888) REDHAT-1 or +1 (919) 754 3700]
+                  li
+                    span.icon-inline
+                      i.fa.fa-fax
+                      span #[a(href="fax:19197543701") +1 (919) 754 3701]
 
-  .status-expired(ng-if="status.expired")
-    .row.text-center
-      .col-sm-12.col-md-8.col-md-offset-2
-        h1.eval-header(translate) Your evaluation has expired
-        h2.eval-subhead(translate) Thank you for trying Red Hat Insights
-        hr.eval-hr
-        h3.eval-content(translate) Please contact sales to purchase Insights
 
-    .flexgrid.equalheights.sales-cards
-      .row
-        .col-sm-12.col-md-4.col-md-offset-2
-          card
-            card-header.gray
-              h4(translate) North America
-            card-content
-              ul.sales-info
-                li
-                  span.icon-inline
-                    i.fa.fa-phone
-                    span #[a(href="tel:19197543700") +1 (888) REDHAT-1 or +1 (919) 754 3700]
-                li
-                  span.icon-inline
-                    i.fa.fa-fax
-                    span #[a(href="fax:19197543701") +1 (919) 754 3701]
+            card
+              card-header.gray
+                h4(translate) Asia Pacific
+              card-content
+                ul.sales-info
+                  li
+                    span.icon-inline
+                      i.fa.fa-phone
+                      span #[a(href="tel:6564904200") +65 6490 4200]
+                  li
+                    span.icon-inline
+                      i.fa.fa-fax
+                      span #[a(href="fax:6564904201") +65 6490 4201]
+                  li
+                    span.icon-inline
+                      i.fa.fa-phone
+                      span #[a(href="tel:1800733428") 1800 733 428 (Australia)]
+                  li
+                    span.icon-inline
+                      i.fa.fa-phone
+                      span #[a(href="tel:0800733428") 0800 733 428 (New Zealand)]
 
-        .col-sm-12.col-md-4
-          card
-            card-header.gray
-              h4(translate) Asia Pacific
-            card-content
-              ul.sales-info
-                li
-                  span.icon-inline
-                    i.fa.fa-phone
-                    span #[a(href="tel:6564904200") +65 6490 4200]
-                li
-                  span.icon-inline
-                    i.fa.fa-fax
-                    span #[a(href="fax:6564904201") +65 6490 4201]
-                li
-                  span.icon-inline
-                    i.fa.fa-phone
-                    span #[a(href="tel:1800733428") 1800 733 428 (Australia)]
-                li
-                  span.icon-inline
-                    i.fa.fa-phone
-                    span #[a(href="tel:0800733428") 0800 733 428 (New Zealand)]
 
-    .flexgrid.equalheights
-      .row
-        .col-sm-12.col-md-4.col-md-offset-2
-          card
-            card-header.gray
-              h4(translate) Europe, Middle East, and Africa
-            card-content
-              ul.sales-info
-                li
-                  span.icon-inline
-                    i.fa.fa-phone
-                    span #[a(href="tel:0080073342835") +00800 7334 2835]
-                li
-                  span.icon-inline
-                    i.fa.fa-fax
-                    span #[a(href="fax:441252548117") +44 1252 548 117]
+            card
+              card-header.gray
+                h4(translate) Europe, Middle East, and Africa
+              card-content
+                ul.sales-info
+                  li
+                    span.icon-inline
+                      i.fa.fa-phone
+                      span #[a(href="tel:0080073342835") +00800 7334 2835]
+                  li
+                    span.icon-inline
+                      i.fa.fa-fax
+                      span #[a(href="fax:441252548117") +44 1252 548 117]
 
-        .col-sm-12.col-md-4
-          card
-            card-header.gray
-              h4(translate) Latin America
-            card-content
-              ul.sales-info
-                li
-                  span.icon-inline
-                    i.fa.fa-phone
-                    span #[a(href="tel:541143297300") +54 (11) 4329-7300]
-                li
-                  span.icon-inline
-                    i.fa.fa-fax
-                    span #[a(href="fax:541143425292") +54 (11) 4342-5292]
-                li
-                  span.icon-inline
-                    i.fa.fa-phone
-                    span #[a(href="tel:551135296000") +55 (11) 3529-6000 (Brazil)]
+            card
+              card-header.gray
+                h4(translate) Latin America
+              card-content
+                ul.sales-info
+                  li
+                    span.icon-inline
+                      i.fa.fa-phone
+                      span #[a(href="tel:541143297300") +54 (11) 4329-7300]
+                  li
+                    span.icon-inline
+                      i.fa.fa-fax
+                      span #[a(href="fax:541143425292") +54 (11) 4342-5292]
+                  li
+                    span.icon-inline
+                      i.fa.fa-phone
+                      span #[a(href="tel:551135296000") +55 (11) 3529-6000 (Brazil)]
 
-        .col-md-12.text-center
-          span #[a(href="https://engage.redhat.com/content/contact-japan-sales", translate) Customers in Japan, please use this form to contact sales in Japan.]
+            span #[a(href="https://engage.redhat.com/content/contact-japan-sales", translate) Customers in Japan, please use this form to contact sales in Japan.]
 
-  .status-available(ng-if='getNonLegacyEval() && !successfulActivation')
-    .row.text-center
-      .col-sm-12.col-md-10.col-md-offset-1
-        h1.eval-header(translate)
-          span Your {{:: getNonLegacyEval().systems}} system {{:: getNonLegacyEval().duration}} day evaluation is ready.
-        hr.eval-hr
-    .row.text-center
-      .col-sm-12
-        h2.eval-subhead(translate) READ AND ACCEPT THESE TERMS TO GET STARTED.
-    .row
-      .col-md-8.col-md-offset-2
-        p(translate)
-          | Red Hat is providing each Red Hat Subscription Evaluation for evaluation purposes subject to the terms of the
-          a(href='http://www.redhat.com/licenses/', target='_blank') Red Hat Enterprise Agreement
-          | . If you use the Red Hat Subscription for any purpose other than
-          b evaluation
-          | , you agree to pay Red Hat the Subscription Fee(s) for each Unit pursuant to the Enterprise Agreement, which is in addition to any and all other remedies available to Red Hat under applicable law.
-        #terms(translate)
-          | Examples of situations where you would incur additional fees and be in violation of the Agreement include, but are not limited to:
-          ul
-            li
-              | Using the service provided under the evaluation program for a production installation,
-            li Offering support services to third parties, or
-            li
-              | Complementing or supplementing third party support services with services received through the Red Hat Subscription evaluation program.
-        p(translate)
-          | By proceeding, I acknowledge that I have read and agree to the terms and conditions of the
-          a(href='http://www.redhat.com/licenses/', target='_blank') Red Hat Enterprise Agreement
-          |  which governs my use.
-    .row.text-center
-      .col-sm-12
-        md-button.md-raised.md-primary(ng-click="activateNonLegacy()", translate) Agree and Get Started
-    .row.text-center
-      .col-sm-12
-        p
-          a(href='https://access.redhat.com/insights/splash/', translate) Decline
-          br
-          small(translate)
-            | If you decline, you will not receive an evaluation at this time and will be redirected to additional information on Red Hat Insights
-    .row.text-center
-      .col-sm-12(ng-if='getLegacyEval() && !successfulActivation' style='margin-top:60px')
-        a(ng-click='activateLegacy()', translate) Looking for the legacy 10 system evaluation? Click here to activate.
+        .status-available(ng-if='getNonLegacyEval() && !successfulActivation')
+          h1.eval-header(translate)
+            span Your {{:: getNonLegacyEval().systems}} system {{:: getNonLegacyEval().duration}} day evaluation is ready.
+          hr.eval-hr
+          h2.eval-subhead(translate) READ AND ACCEPT THESE TERMS TO GET STARTED.
+          p(translate)
+            | Red Hat is providing each Red Hat Subscription Evaluation for evaluation purposes subject to the terms of the
+            a(href='http://www.redhat.com/licenses/', target='_blank') Red Hat Enterprise Agreement
+            | . If you use the Red Hat Subscription for any purpose other than
+            b evaluation
+            | , you agree to pay Red Hat the Subscription Fee(s) for each Unit pursuant to the Enterprise Agreement, which is in addition to any and all other remedies available to Red Hat under applicable law.
+          #terms(translate)
+            | Examples of situations where you would incur additional fees and be in violation of the Agreement include, but are not limited to:
+            ul
+              li
+                | Using the service provided under the evaluation program for a production installation,
+              li Offering support services to third parties, or
+              li
+                | Complementing or supplementing third party support services with services received through the Red Hat Subscription evaluation program.
+          p(translate)
+            | By proceeding, I acknowledge that I have read and agree to the terms and conditions of the
+            a(href='http://www.redhat.com/licenses/', target='_blank') Red Hat Enterprise Agreement
+            |  which governs my use.
+          md-button.md-raised.md-primary(ng-click="activateNonLegacy()", translate) Agree and Get Started
+          p
+            a(href='https://access.redhat.com/insights/splash/', translate) Decline
+            br
+            small(translate)
+              | If you decline, you will not receive an evaluation at this time and will be redirected to additional information on Red Hat Insights
+          .legacy-eval(ng-if='getLegacyEval() && !successfulActivation' style='margin-top:60px')
+            a(ng-click='activateLegacy()', translate) Looking for the legacy 10 system evaluation? Click here to activate.
 
-  .status-purchased(ng-if='status.purchased')
-    .row.text-center
-      .col-sm-12.col-md-8.col-md-offset-2
-        span.green.i.fa.fa-check.fa-4x(aria-hidden="true")
-        h1.eval-header(translate) Thank you!
-        hr.eval-hr
-        h2.eval-subhead(translate) Thank you for purchasing Red Hat Insights
+        .status-purchased(ng-if='status.purchased')
+          span.green.i.fa.fa-check.fa-4x(aria-hidden="true")
+          h1.eval-header(translate) Thank you!
+          hr.eval-hr
+          h2.eval-subhead(translate) Thank you for purchasing Red Hat Insights
+          md-button.md-raised.md-primary(ui-sref='app.overview', translate) Continue to Insights
 
-    .row.text-center
-      .col-sm-12
-        md-button.md-raised.md-primary(ui-sref='app.overview', translate) Continue to Insights
-
-.status-error(ng-if='error')
-  .row.text-center
-    .col-sm-12.col-md-8.col-md-offset-2
-      h1.eval-header(translate) Oops!
-      h2.eval-subhead(translate) There was an error
-      hr.eval-hr
-      h3.eval-content(translate) {{:: error}}
-  .row.text-center
-    .col-sm-12
-      button.btn.btn-md.btn-accent(ui-sref='app.overview', translate) Try Again
+    card.md-whiteframe-15dp(ng-if='error')
+      card-content
+        .status-error
+          h1.eval-header(translate) Oops!
+          h2.eval-subhead(translate) There was an error
+          hr.eval-hr
+          h3.eval-content(translate) {{:: error}}
+          md-button.md-raised.md-primary(ui-sref='app.overview', translate) Try Again
+  .eval-footer
+    .redhat-logo
+      a.redhat-link(href="https://www.redhat.com/" target="_blank")
+        span.hidden(translate) Red Hat
+        img(src="./static/images/rh-logo-white.svg" aria-label="Red Hat")
+    .copyright Copyright © 2017 Red Hat, Inc.
+    nav.footer-nav(role="navigation")
+      ul
+        li
+          a.privacy-policy(href="http://www.redhat.com/en/about/privacy-policy") Privacy Policy
+        li
+          a.terms-of-use(href="https://access.redhat.com/help/terms/") Customer Portal Terms of Use
+        li
+          a.all-policies(href="http://www.redhat.com/en/about/all-policies-guidelines") All Policies and Guidelines
