@@ -2,7 +2,7 @@
   .eval-header
     md-icon(md-svg-src="./static/images/l_insights-inline.svg")
   .eval-cards
-    i.fa.spinner-lg.spinner(ng-if='loading')
+    i.fa.spinner-lg.spinner.spinner-white(ng-if='loading')
     card.md-whiteframe-15dp(ng-if='!loading && !error')
       card-content
         .status-current(ng-if='status.current')
