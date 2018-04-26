@@ -33,7 +33,7 @@ $eval-content-font-size: 16px;
     max-width: 1200px;
   }
 
-  md-card-content { @include rem('padding', $global-margin); }
+  md-card-content { @include rem('padding', $global-padding*3); }
 
 
   // Header styles
