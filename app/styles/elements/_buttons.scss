@@ -267,6 +267,20 @@ button.simple,
     }
 }
 
+.md-button.ins-pull-right{
+  display: flex;
+  margin-left: auto;
+  margin-right: 0;
+  @include rem('margin-bottom', $global-margin);
+}
+
+.button-group__pull-right {
+  display: flex;
+  justify-content: flex-end;
+  @include rem('margin-bottom', $global-margin);
+  button + button { @include rem('margin-left', 10px); }
+}
+
 
 $brand_red: #cc0000;
 
