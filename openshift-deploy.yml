@@ -32,7 +32,7 @@ objects:
           deploymentconfig: demo
       spec:
         containers:
-          - image: docker.io/iphands/insightsfrontend:features-mice
+          - image: docker.io/redhatinsights/insights-frontend:features-mice
             imagePullPolicy: IfNotPresent
             name: insightsfrontend
             ports:
