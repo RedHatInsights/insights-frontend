@@ -16,7 +16,7 @@
             span Associated Insights Rules:
         .spinner(ng-if='ruleLoader.loading')
         ul(ng-if='!ruleLoader.loading')
-          li(ng-repeat='rule in rules track by rule_id')
+          li(ng-repeat='rule in rules track by rule.rule_id')
             a(ui-sref='app.actions-rule({category: rule.category, rule: rule.rule_id})')
               | {{:: rule.category }} #{'>'} {{:: rule.description }}
 
