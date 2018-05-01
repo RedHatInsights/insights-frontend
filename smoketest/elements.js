@@ -11,7 +11,8 @@ const obj =  {
     },
     actions: {
         page1: {
-            donutHole: '.donut-container .donut-hole'
+            donutHole: '.donut-container .donut-hole',
+            firstLegendItem: 'table.legend td:nth-of-type(1) a .desc span'
         },
         page2: {
             firstRuleInTable: '.topic-rule-list .legend-item:nth-of-type(1) td:nth-of-type(1)',
@@ -78,9 +79,9 @@ const obj =  {
     }
 };
 
-['security', 'availability', 'stability', 'performance'].forEach(function (category) {
-    obj.actions.page1['legend_' + category] = 'table.legend td a.' + category;
-});
+// ['security', 'availability', 'stability', 'performance'].forEach(function (category) {
+//     obj.actions.page1['legend_' + category] = 'table.legend td a.' + category;
+// });
 
 var i = 1;
 ['overview',
