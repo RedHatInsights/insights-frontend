@@ -32,7 +32,7 @@ const layout = {
 
 function getData(system) {
     let allSystemsRankings = {
-        name: 'All Systems',
+        name: 'All Industries',
         type: 'scatter',
         mode: 'lines',
         x: system.peer_rankings.all_systems.x,
@@ -43,7 +43,7 @@ function getData(system) {
     };
 
     let industryRankings = {
-        name: 'Industry',
+        name: 'Financial Industry',
         type: 'scatter',
         mode: 'lines',
         x: system.peer_rankings.industry.x,
