@@ -86,6 +86,7 @@ const obj =  {
 var i = 1;
 ['overview',
  'actions',
+ 'vulnerabilities',
  'inventory',
  'planner',
  'policies',
