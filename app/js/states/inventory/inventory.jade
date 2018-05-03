@@ -52,8 +52,7 @@
               th.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse", ng-click="sorter.sort('toString')", translate) System Name
               th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'last_check_in':sorter.reverse", ng-click="sorter.sort('last_check_in')", translate) Last Check In
 
-              //- TODO: VMaaS rollout
-              th.sortable.min.fit-content(ng-if='isInternal', ng-class="sorter.predicate | sortClass:'vulnerability_count':sorter.reverse", ng-click="sorter.sort('vulnerability_count')", translate) Vulnerabilities
+              th.sortable.min.fit-content(ng-class="sorter.predicate | sortClass:'vulnerability_count':sorter.reverse", ng-click="sorter.sort('vulnerability_count')", translate) Vulnerabilities
               th.min.sortable(ng-class="sorter.predicate | sortClass:'report_count':sorter.reverse", ng-click="sorter.sort('report_count')", translate) Actions
           tbody(ng-show='!loading')
             tr(ng-repeat='system in systems track by system.system_id',
@@ -74,8 +73,7 @@
                 a(ng-click="showActions(system)") {{system.toString}}
               td.fit-content {{ system.last_check_in | timeAgo }}
 
-              //- TODO: VMaaS rollout
-              td.fit-content.text-center.min(ng-if='isInternal')
+              td.fit-content.text-center.min
                 a.action-count-with-icon(ng-click="showActions(system, false, modalTabs.vulnerabilities)")
                   span.text {{:: system.vulnerability_count}}
                   i.fa(ng-class="{'no-action': !system.vulnerability_count, 'yes-action': system.vulnerability_count, 'success': !system.vulnerability_count, 'fail': system.vulnerability_count}")
