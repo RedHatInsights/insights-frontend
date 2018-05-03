@@ -19,12 +19,11 @@ function RuleSummaryCtrl(
         moreInfo: false
     };
 
-    $scope.initCollapsed = false;
+    $scope.initCollapsed = true;
 
-    if (($scope.ruleFilter && $scope.ruleId && $scope.ruleId !== $scope.report.rule_id) ||
-        (!$scope.ruleFilter && !$scope.ruleId) ||
-        ($scope.report.rule_id !== $location.search().selectedRule)) {
-        $scope.initCollapsed = true;
+    if (($scope.ruleFilter && $scope.ruleId && $scope.ruleId === $scope.report.rule_id) ||
+        ($scope.report.rule_id === $location.search().selectedRule)) {
+        $scope.initCollapsed = false;
     }
 
     $scope.$watch(function () {
