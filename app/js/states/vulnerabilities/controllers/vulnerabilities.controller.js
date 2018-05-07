@@ -111,7 +111,9 @@ function VulnerabilitiesCtrl($location,
     $scope.search = function (model) {
         if (params.search_term !== model) {
             params.search_term = model;
-            getData();
+            if (!$scope.changingView) {
+                getData();
+            }
         }
     };
 
