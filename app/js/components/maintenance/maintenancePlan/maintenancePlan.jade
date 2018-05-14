@@ -307,11 +307,12 @@
         .btn-group.pull-right(ng-if='ansibleRunner')
           button.btn.btn-sm.btn-open-blue.action(
             ng-disabled='!ansibleSupport',
+            ng-click="runPlaybook('run')",
             aria-haspopup='true',
             aria-expanded='false')
             i.svg.ansible-icon.inline-right
               img(src='static/images/l_ansible-blue.svg')
-            span(translate, ng-click="runPlaybook('run')") Run Playbook
+            span(translate) Run Playbook
           button.btn.btn-sm.btn-open-blue.action.dropdown-toggle(
             data-toggle='dropdown',
             ng-if='ansibleSupport')
