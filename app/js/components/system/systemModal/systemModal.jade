@@ -14,6 +14,7 @@
       md-content
         policies-modal(system-id='system.system_id')
 
-    md-tab(label='Vulnerabilities', ng-if='hasVulnerabilities')
+    //- TODO: VMaaS rollout
+    md-tab(label='Vulnerabilities', ng-if='hasVulnerabilities && isInternal')
       md-content
         vulnerabilities-modal(system-id='system.system_id')

@@ -25,7 +25,8 @@
       card-content
         severity-summary(stats='stats')
 
-    vulnerabilities-widget
+    //- TODO: VMaaS rollout
+    vulnerabilities-widget(ng-if='isInternal')
 
     incident-lite(ng-if="isBeta")
 
