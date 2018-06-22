@@ -6,7 +6,7 @@ const URI = require('urijs');
 /**
 * @ngInject
 */
-function Export($http, InsightsConfig, AccountService, $window) {
+function Export($http, InsightsConfig, AccountService, $window, User) {
 
     return {
         getReports: function (topic, rule, group, stale) {
@@ -38,7 +38,11 @@ function Export($http, InsightsConfig, AccountService, $window) {
             const uri = URI(InsightsConfig.apiRoot);
             uri.segment('exports');
             uri.segment('systems');
-            uri.addSearch({include: 'vulnerabilities'});
+
+            // TODO: VMaaS rollout
+            if (User.current && User.current.is_internal) {
+                uri.addSearch({include: 'vulnerabilities'});
+            }
 
             if (group) {
                 uri.addSearch('group', group);
