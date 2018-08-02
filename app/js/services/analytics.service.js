@@ -47,6 +47,7 @@ priv.pendoBlob = function () { (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{
 function AnalyticsService(InsightsConfig, $location, IgnoreAccountList, User) {
     pub.initPendo = function () {
         priv.pendoBlob();
+        User.init();
         User.asyncCurrent((user) => {
             if (typeof window.pendo !== 'undefined') {
                 const pendoConf = {
