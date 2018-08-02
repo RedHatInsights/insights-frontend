@@ -2,6 +2,7 @@
 'use strict';
 
 var servicesModule = require('./');
+var md5 = require('md5');
 var priv = {};
 var pub = {};
 
@@ -47,12 +48,13 @@ priv.pendoBlob = function () { (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{
 function AnalyticsService(InsightsConfig, $location, IgnoreAccountList, User) {
     pub.initPendo = function () {
         priv.pendoBlob();
+        User.init();
         User.asyncCurrent((user) => {
             if (typeof window.pendo !== 'undefined') {
                 const pendoConf = {
                     apiKey: 'f210c485-387f-43ad-4eee-f55bab22507f',
                     visitor: {
-                        id: user.sso_username,
+                        id: md5(user.sso_username),
                         internal: user.is_internal,
                         lang: user.locale
                     },
