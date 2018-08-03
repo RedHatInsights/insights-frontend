@@ -94,6 +94,7 @@
     "karma-should": "~1.0.x",
     "lodash": "~4.17.x",
     "map-stream": "~0.0.x",
+    "md5": "^2.2.1",
     "merge-stream": "~1.0.x",
     "moment": "~2.18.x",
     "moment-timezone": "~0.5.x",
