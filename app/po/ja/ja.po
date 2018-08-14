@@ -7,7 +7,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 "MIME-Version: 1.0\n"
-"PO-Revision-Date: 2018-06-07 04:25+0000\n"
+"PO-Revision-Date: 2018-06-24 11:20+0000\n"
 "Last-Translator: kmoriguc <kmoriguc@redhat.com>\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -1692,7 +1692,7 @@ msgid ""
 msgstr ""
 "アカウントのレポーティングを有効にするには、<span translate=\"translate\" translate-n="
 "\"systemsTilTen\" translate-plural=\"{{:: $count}} more systems\">{{:: "
-"systemsTilTen}} &nbsp; 追加システム</span>&nbsp;を登録してください。"
+"systemsTilTen}} &nbsp; システム</span>&nbsp;を追加登録してください。"
 
 #: services/group.service.js:17
 msgid "Please specify a system group name"
@@ -1952,7 +1952,7 @@ msgstr "変更のリスク: 中"
 
 #: components/filterComponents/riskOfChangeSelect/riskOfChangeSelect.directive.js:20
 msgid "Risk of Change: Very Low"
-msgstr "変更のリスク: とても低い"
+msgstr "変更のリスク: 非常に低い"
 
 #: js/states/actions/actions.html:1
 msgid "Risk summary"
@@ -2281,7 +2281,7 @@ msgstr "障害が発生したシステム"
 
 #: js/states/policies/views/list-policies.html:1
 msgid "Systems Passing"
-msgstr "合格したシステム"
+msgstr "パスしたシステム"
 
 #: js/components/overview/widgets/goals/goalsLite.html:1
 msgid "Systems Registered"
@@ -2411,7 +2411,7 @@ msgstr ""
 
 #: states/policies/controllers/list.policies.controller.js:10
 msgid "This policy has checks that are not passing"
-msgstr "このポリシーには合格していないチェックがあります"
+msgstr "このポリシーにはパスしていないチェックがあります"
 
 #: js/components/maintenance/resolutionModal/resolutionModal.html:1
 msgid "This resolution requires a system reboot"
@@ -2902,7 +2902,7 @@ msgstr "なし"
 
 #: states/policies/controllers/view.policy.controller.js:18
 msgid "passed"
-msgstr "合格"
+msgstr "パス"
 
 #: constants/categories.js:14
 msgid "performance"
@@ -3012,7 +3012,7 @@ msgstr[0] "{{:: policy.checks_fail}} のチェックが失敗"
 #: js/components/policies/policiesModal/policiesModal.html:1
 msgid "{{:: policy.checks_pass}} Check passed"
 msgid_plural "{{:: $count}} Checks passed"
-msgstr[0] "{{:: policy.checks_pass}} のチェックが合格"
+msgstr[0] "{{:: policy.checks_pass}} のチェックがパス"
 
 #: js/components/incident/incidentSummary/incidentSummary.html:1
 msgid "{{:: ruleHits}} issue"
