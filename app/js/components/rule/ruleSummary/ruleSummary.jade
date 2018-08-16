@@ -15,4 +15,11 @@ card.card-rule-summary(expandable='true', init-collapsed='initCollapsed', on-tog
       .rule-resolution(md-flex-100)
       .recommended-kbase(ng-if='report.rule.node_id' node='report.rule.node_id')
       .text-center.border-top(ng-show='report.rule.more_info')
+        .nomar.push-top-narrow.pointer(ng-click='show.moreInfo = !show.moreInfo')
+          a.link
+            strong {{show.moreInfo ? 'Hide' : 'Show'}}  more info &nbsp;
+            i.fa(ng-class="{'fa-caret-up': show.moreInfo, 'fa-caret-down': !show.moreInfo}")
   card-footer.footer.more-info.ng-animate-enabled(collapse="!show.moreInfo")
+    div(ng-bind-html='report.rule.more_info_html | trust_html',
+      ng-show='report.rule.more_info',
+      target-blank='')
