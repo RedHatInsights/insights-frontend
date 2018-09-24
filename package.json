@@ -84,7 +84,7 @@
     "guppy-pre-push": "~0.2.x",
     "jshint": "^2.9.4",
     "jshint-stylish": "~2.2.x",
-    "jwt-redhat": "0.1.0",
+    "jwt-redhat": "https://github.com/RedHatInsights/jwt-redhat.git#build0.1.0.insights",
     "karma": "~2.0.x",
     "karma-babel-preprocessor": "~7.0.x",
     "karma-browserify": "~5.1.x",
