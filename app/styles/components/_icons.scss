@@ -4,6 +4,16 @@
 
 .i-mute { color: #CACACA; }
 
+.i__link {
+  color: #11baf2;
+  cursor: pointer;
+  &:hover { color: #00a4ca}
+  &[disabled="disabled"] {
+    color: $gray-lite;
+    cursor: not-allowed;
+  }
+}
+
 i.fa.category-icon {
   font-family: 'FontAwesome';
 

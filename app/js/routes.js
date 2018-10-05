@@ -145,6 +145,57 @@ function Routes($stateProvider) {
             }
         });
 
+    // Vulnerabilities routes
+    $stateProvider
+        .state('app.vulnerabilities', {
+            url: '/vulnerabilities?root_view&offline&online&' +
+                 'rhsaSeverity&daysKnown&sort_by&reverse',
+            templateUrl: 'js/states/vulnerabilities/views/vulnerabilities.html',
+            controller: 'VulnerabilitiesCtrl',
+            title: 'Vulnerabilities',
+            reloadOnSearch: false
+        })
+
+        .state('app.vulnerabilities-package', {
+            url: '/vulnerabilities/package/:package_id?root_view&selected_rhsa',
+            templateUrl: 'js/states/vulnerabilities/views/view-package.html',
+            controller: 'ViewPackageCtrl',
+            title: 'Vulnerabilities',
+            reloadOnSearch: false
+        })
+
+        // Used so you can back track to the package using breadcrumbs
+        .state('app.vulnerabilities-package-erratum', {
+            url: '/vulnerabilities/package/:package_id/erratum/:rhsa_id?root_view&cve',
+            templateUrl: 'js/states/vulnerabilities/views/view-erratum.html',
+            controller: 'ViewErratumCtrl',
+            title: 'Vulnerabilities',
+            reloadOnSearch: false
+        })
+
+        .state('app.vulnerabilities-erratum', {
+            url: '/vulnerabilities/erratum/:rhsa_id?root_view&cve',
+            templateUrl: 'js/states/vulnerabilities/views/view-erratum.html',
+            controller: 'ViewErratumCtrl',
+            title: 'Vulnerabilities',
+            reloadOnSearch: false
+        })
+
+        .state('app.vulnerabilities-cve', {
+            url: '/vulnerabilities/CVE/:cve_id?root_view',
+            templateUrl: 'js/states/vulnerabilities/views/view-cve.html',
+            controller: 'ViewCveCtrl',
+            title: 'Vulnerabilities'
+        })
+
+        // Used so you can back track to the package using breadcrumbs
+        .state('app.vulnerabilities-package-cve', {
+            url: '/vulnerabilities/Package/:package_id/CVE/:cve_id?root_view',
+            templateUrl: 'js/states/vulnerabilities/views/view-cve.html',
+            controller: 'ViewCveCtrl',
+            title: 'Vulnerabilities'
+        });
+
     // Common announcements routes
     $stateProvider
         .state('app.announcements', {

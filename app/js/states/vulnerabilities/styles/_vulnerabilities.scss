@@ -1,0 +1,161 @@
+// Vars
+$card: "md-card";
+$card-header: "md-card-header";
+$card-content: "md-card-content";
+$card-footer: "md-card-footer";
+
+.page-vulnerabilities,
+.page-vulnerabilities-cve,
+.page-vulnerabilities-package,
+.page-vulnerabilities-rhsa,
+.vulnerabilities-modal,
+.vulnerabilities-widget {
+
+  .critical { color: $vul-critical; }
+  .important { color: $vul-important; }
+  .moderate { color: $vul-moderate; }
+  .low { color: $vul-low; }
+
+  .impact { text-transform: capitalize; }
+}
+
+
+
+
+// Card vulnerability header content
+//==================================================================*/
+
+.card-vulnerabilities .card-header-content {
+  flex-flow: column wrap;
+
+  @include media-query(sm){ flex-flow: row wrap; }
+
+  > .package-info {
+    flex: 1;
+  }
+
+  > .vul-state {
+    @include rem('margin-top', $global-padding);
+    @include media-query(sm){ margin-top: 0; }
+  }
+}
+
+.vul-state {
+  > * {
+    &:first-child { margin-left: 0px; }
+    @include rem('margin-left', 5px);
+    @include media-query(sm){ @include rem('margin-left', $global-padding); }
+  }
+}
+
+
+// Vulnerabiltiies Embedded Card
+// TODO: Update to global component
+//==================================================================*/
+
+
+.page-vulnerabilities { md-card { @include rem('margin-top', $global-padding); } }
+
+.page-vulnerabilities,
+.vulnerabilities-modal{
+
+  .card-header-title {
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .package-info {
+    .date, .version {
+      display: inline-block;
+      color: $black-base;
+      @include rem('margin-top', 5px);
+      font-weight: 500;
+    }
+    .version { @include rem('margin-left', $global-margin); }
+  }
+
+  .vul-state {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .embedded-card{
+    box-shadow: none;
+    border-radius: 5px;
+    &.card-content { padding: 0px; }
+  }
+}
+
+
+// Severities are returned in all lowercase. Capitalize first letter
+//==================================================================*/
+
+.severity-rhsa, .impact-cve {
+  text-transform: capitalize;
+}
+
+
+// View Switcher Links
+//==================================================================*/
+
+.page-vulnerabilities .view-switcher {
+ @include rem('margin-right', $global-margin);
+}
+
+.view-switcher {
+  margin-left: auto;
+
+  button.md-button {
+    margin-left: 10px;
+    border-radius: 30px;
+    padding: 10px;
+    transition: all .2s ease-in;
+    transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+
+    &.active {
+      background: $primary;
+      a { color: #fff; }
+    }
+  }
+}
+
+
+// Add spacing between bottom of main page and footer
+//==================================================================*/
+
+.page-vulnerabilities,
+.page-vulnerabilities-cve,
+.page-vulnerabilities-package,
+.page-vulnerabilities-rhsa {
+  @include rem('margin-bottom', $global-margin);
+}
+
+
+// Capitalizing the RHSA/CVE in the breadcrumbs
+//==================================================================*/
+
+.page-vulnerabilities-cve,
+.page-vulnerabilities-rhsa {
+  .breadcrumbs span { text-transform: uppercase; }
+}
+
+
+// Page Header Styling
+//==================================================================*/
+
+.page-vulnerabilities-cve,
+.page-vulnerabilities-rhsa,
+.page-vulnerabilities-package {
+  .page-header {
+    h1 { display: inline-block; }
+    .fa-external-link {
+      @include font-size(20px);
+      @include rem('padding-left', 10px);
+    }
+    .page-subtitle dl dd {
+      display: inline;
+      & + dd {@include rem('margin-left', $global-margin); }
+    }
+  }
+}

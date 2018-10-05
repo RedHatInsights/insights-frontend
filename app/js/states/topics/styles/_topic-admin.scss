@@ -1,0 +1,12 @@
+.page-topic-admin {
+
+  table {
+    @include rem('margin', $global-margin 0);
+  }
+
+  .action-icons {
+   i + i  { @include rem('margin-right', 10px); }
+   i[aria-hidden="true"]:not(:first-of-type) + i { @include rem('margin-left', 10px);  }
+  }
+
+}

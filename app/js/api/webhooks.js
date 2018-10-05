@@ -4,7 +4,8 @@ const apiModule = require('./');
 const URI = require('urijs');
 const pick = require('lodash/pick');
 
-const WEBHOOK_ATTRS = ['active', 'url', 'firehose', 'event_types', 'certificate'];
+const WEBHOOK_ATTRS =
+    ['active', 'url', 'firehose', 'event_types', 'certificate', 'group_id'];
 
 /**
  * @ngInject

@@ -37,13 +37,15 @@ function buildEvents(eventRoots) {
 
 let _EVENT_ROOTS = [{
     name: 'cards',
-    events: ['expandAll', 'collapseAll']
+    events: ['expandAll', 'collapseAll', 'toggleCard']
 }, {
     name: 'filters',
     events: ['actionsSelect',
              'age',
              'categorySelect',
              'checkInSelect',
+             'daysKnown',
+             'rhsaSeverity',
              'incident',
              'maintenanceCategorySelect',
              'populatedProducts',
@@ -51,9 +53,12 @@ let _EVENT_ROOTS = [{
              'riskOfChangeSelect',
              'totalRisk',
              'tag',
+             'multipleTags',
+             'removeMultipleTags',
              'removeTag',
              'ansibleSupport',
              'ruleStatus',
+             'ruleHit',
              'likelihood',
              'impact']
 }, {

@@ -1,0 +1,32 @@
+.page-vulnerabilities-cve
+  breadcrumbs
+  .spinner(ng-if='loader.loading')
+  section.vulnerability-details-cve(ng-if='!loader.loading')
+    page-header(title="{{:: cve.cve_id}}", subtitle="pageHeaderSubtitle", link="{{:: cve.link}}")
+    aside.page-header-aside.icon-inline
+      vulnerability-severity-icon.severity(impact='cve.impact')
+      .cve-score
+        span(translate) CVSS Score:
+        span {{cve.score}}
+    .description
+      section
+        h2.section-title.section-title-red(translate) Description
+        span {{cve.description}}
+
+      section.associated-rules(ng-if='cve.insights_rules.length')
+        h2.section-title.section-title-red
+          .icon-inline
+            i.fa.fa-book
+            span Associated Insights Rules:
+        .spinner(ng-if='ruleLoader.loading')
+        ul(ng-if='!ruleLoader.loading')
+          li(ng-repeat='rule in rules track by rule.rule_id')
+            a(ui-sref='app.actions-rule({category: rule.category, rule: rule.rule_id})')
+              | {{:: rule.category }} #{'>'} {{:: rule.description }}
+
+      section.associated-rhsa(ng-if='cve.errata.length')
+        h2.section-title.section-title-red(translate) Associated RHSAs:
+        ul
+          li(ng-repeat='rhsa in cve.errata')
+            a(ui-sref='app.vulnerabilities-erratum({rhsa_id: rhsa, cve: cve.cve_id, root_view: selectedView})')
+              | {{:: rhsa}}

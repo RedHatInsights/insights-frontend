@@ -34,8 +34,9 @@ module.exports = {
             .custom.waitAndClick(el.nav.actions)
             .custom.waitAll('nav')
             .custom.waitAll('actions.page1')
+            .custom.getTextAndAddToStash(el.actions.page1.firstLegendItem.s, 'legendItemPage1')
+            .custom.waitAndClick(el.actions.page1.firstLegendItem)
 
-            .custom.waitAndClick(el.actions.page1.legend_security)
             .custom.waitAll('nav')
             .custom.waitAll('actions.page2')
 
@@ -49,8 +50,8 @@ module.exports = {
             .custom.waitAll('systemModal')
 
             .custom.performWithStash(function (stash, done) {
-                client.expect.element(el.systemModal.firstRule.s).text.to.equal(`Security > ${stash.ruleNamePage3}`.trim());
-                client.expect.element(el.systemModal.hostname.s).text.to.equal(stash.systemNamePage3);
+                client.expect.element(el.systemModal.firstRule.s).text.to.equal(`${stash.legendItemPage1} > ${stash.ruleNamePage3}`.trim());
+                client.expect.element(el.systemModal.displayName.s).text.to.equal(stash.systemNamePage3);
                 client.custom.waitAndClick(el.systemModal.exButton).pause(125);
                 done();
 
@@ -67,7 +68,7 @@ module.exports = {
             .custom.waitAndClick(el.inventory.firstSystemInTable)
             .custom.waitAll('systemModal')
             .custom.performWithStash(function (stash, done) {
-                client.expect.element(el.systemModal.hostname.s).text.to.equal(stash.systemName);
+                client.expect.element(el.systemModal.displayName.s).text.to.equal(stash.systemName);
                 client.custom.waitAndClick(el.systemModal.exButton);
                 client.custom.waitAll('nav');
                 done();

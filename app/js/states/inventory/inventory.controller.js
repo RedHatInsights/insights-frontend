@@ -31,7 +31,8 @@ function InventoryCtrl(
         ListTypeService,
         ActionbarService,
         Export,
-        Group) {
+        Group,
+        SystemModalTabs) {
 
     const DEFAULT_PAGE_SIZE = 15;
     const DEFAULT_PREDICATE = 'toString';
@@ -67,9 +68,9 @@ function InventoryCtrl(
     $scope.actionFilter = null;
     $scope.loading = InventoryService.loading;
     $scope.reloading = false;
+    $scope.modalTabs = SystemModalTabs;
 
     FilterService.parseBrowserQueryParams();
-    System.getProductSpecificData();
 
     let params = $state.params;
 
@@ -182,6 +183,8 @@ function InventoryCtrl(
             query.page = ($scope.pager.currentPage - 1);
         }
 
+        query.include = 'vulnerability_count';
+
         return query;
     }
 
@@ -193,14 +196,6 @@ function InventoryCtrl(
         }
 
         function getSystemsResponseHandler(response) {
-            let systems = [];
-
-            if (FilterService.getParentNode()) {
-                systems = response;
-            } else {
-                systems = response.resources;
-            }
-
             $scope.systems = response.resources;
             InventoryService.setTotal(response.total);
 
@@ -209,15 +204,7 @@ function InventoryCtrl(
 
         let query = buildRequestQueryParams(true);
 
-        let promise = null;
-        if (FilterService.getParentNode() !== null) {
-            query.includeSelf = true;
-            promise = System.getSystemLinks(FilterService.getParentNode(), query);
-        } else {
-            promise = System.getSystemsLatest(query);
-        }
-
-        promise.success(getSystemsResponseHandler)
+        System.getSystemsLatest(query).success(getSystemsResponseHandler)
             .error(function () {
                 $scope.errored = true;
             }).finally(function () {
@@ -320,28 +307,12 @@ function InventoryCtrl(
     };
 
     $scope.reallySelectAll = function () {
-        function getAllSystems() {
-
-            // For when ALL are selected, not just all visible
-            // condensed version of 'getData()'
-            let query = buildRequestQueryParams(false);
-            let promise = null;
-
-            if (FilterService.getParentNode() !== null) {
-                query.includeSelf = true;
-                promise = System.getSystemLinks(FilterService.getParentNode(), query);
-            } else {
-                promise = System.getSystemsLatest(query);
-            }
-
-            return promise;
-        }
 
         // select ALL, not just all visible
         if ($scope.allSystems === null) {
             // first load of all systems
             $scope.loading = true;
-            getAllSystems().then(res => {
+            System.getSystemsLatest(buildRequestQueryParams(false)).then(res => {
                 $scope.allSystems = res.data.resources;
                 $scope.reallyAllSelected = true;
                 $scope.totalSystemsSelected = $scope.allSystems.length;

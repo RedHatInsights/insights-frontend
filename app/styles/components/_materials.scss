@@ -172,3 +172,10 @@ md-content{
   color: $f-disabled !important;
   i { color: $f-disabled !important; }
 }
+
+
+.gradient-test{
+  width: 200px;
+  height: 200px;
+  @include hue-map(0,50,90);
+}

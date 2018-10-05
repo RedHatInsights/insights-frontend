@@ -18,10 +18,12 @@ function TopicRuleListCtrl(
         IncidentsService,
         QuickFilters,
         PermalinkService,
-        ActionsBreadcrumbs,
+        BreadcrumbsService,
         InsightsConfig,
         ActionbarService,
         Export) {
+
+    const ActionsBreadcrumbs = BreadcrumbsService;
 
     FilterService.parseBrowserQueryParams();
     FilterService.setShowFilters(false);
@@ -34,19 +36,14 @@ function TopicRuleListCtrl(
     }
 
     function getData() {
-        let product;
         let promises = [];
-
-        if (FilterService.getSelectedProduct() !== 'all') {
-            product = FilterService.getSelectedProduct();
-        }
 
         // preload incidents topic to prevent multiple calls from incidentIcon
         const initIncidents = IncidentsService.init();
 
         promises.push(initIncidents);
 
-        const initTopic = Topic.get($stateParams.id, product, 'resolution_risk')
+        const initTopic = Topic.get($stateParams.id, 'resolution_risk')
         .success(function (topic) {
             if (topic.hidden && !$scope.isInternal) {
                 return notFound();

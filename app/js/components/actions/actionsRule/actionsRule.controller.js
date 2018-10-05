@@ -16,7 +16,7 @@ function ActionsRuleCtrl(
         $state,
         $stateParams,
         $timeout,
-        ActionsBreadcrumbs,
+        BreadcrumbsService,
         FilterService,
         IncidentsService,
         InsightsConfig,
@@ -37,6 +37,7 @@ function ActionsRuleCtrl(
         Export,
         Group) {
 
+    const ActionsBreadcrumbs = BreadcrumbsService;
     const REVERSE_TO_DIRECTION = {
         false: 'ASC',
         true: 'DESC'
@@ -181,8 +182,6 @@ function ActionsRuleCtrl(
                 }, 1);
             });
 
-        let productSpecific = System.getProductSpecificData();
-
         let systemsPromise =
             RhaTelemetryActionsService.initActionsRule($scope.pager)
             .then(function () {
@@ -206,7 +205,7 @@ function ActionsRuleCtrl(
             });
 
         $q.all([SystemsService.getSystemTypesAsync(), incidentsPromise,
-            topicBreadCrumbPromise, productSpecific, systemsPromise])
+            topicBreadCrumbPromise, systemsPromise])
             .finally(function () {
                 $scope.loading = false;
                 let machine_id = $location.search().machine;

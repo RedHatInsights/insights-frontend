@@ -2,9 +2,12 @@
 $button-primary-bg: $blue;
 $button-primary-color: #fff;
 
-.button-group{
+.button-group {
   display: inline;
-  a + a { @include rem('margin', 5px); }
+
+  > a, > .button-split {
+    & + a, & + .button-split {@include rem('margin-left', 5px);}
+  }
 }
 
 .button-tag {
@@ -14,9 +17,9 @@ $button-primary-color: #fff;
   background: $gray-light;
   align-items: center;
 
-  i { 
+  i {
     @include font-size(20px, 1);
-    @include rem('margin-left', 6px); 
+    @include rem('margin-left', 6px);
   }
 }
 
@@ -63,7 +66,7 @@ button.tag {
 
 
 a,
-.btn, 
+.btn,
 button {
     outline: none;
     border: none;
@@ -262,6 +265,20 @@ button.simple,
             margin-left: 12px !important;
         }
     }
+}
+
+.md-button.md-button__pull-right{
+  display: flex;
+  margin-left: auto;
+  margin-right: 0;
+  @include rem('margin-bottom', $global-margin);
+}
+
+.button-group__pull-right {
+  display: flex;
+  justify-content: flex-end;
+  @include rem('margin-bottom', $global-margin);
+  button + button { @include rem('margin-left', 10px); }
 }
 
 

@@ -1,6 +1,7 @@
 .renameableProperty{
+  display: flex;
   .edit-toggle{ 
     cursor: pointer;
-    @include rem('padding-left', 10px);
+    @include rem('padding-left', 5px);
   }
 }

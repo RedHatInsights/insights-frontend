@@ -1,0 +1,121 @@
+.page-vulnerabilities
+  .rha-notifications
+  section
+    page-header(title="Vulnerabilities", icon="fa-stethoscope")
+
+  .table-header
+    table-filters
+      search-box(ng-if="selectedView === views.package", placeholder="{{'Search Packages' | translate}}",
+                 on-search='search(model)')
+      search-box(ng-if="selectedView === views.errata", placeholder="{{'Search RHSAs' | translate}}",
+                 on-search='search(model)')
+      search-box(ng-if="selectedView === views.cve", placeholder="{{'Search CVEs' | translate}}",
+                 on-search='search(model)')
+      days-known-select(ng-if="selectedView === views.cve")
+      rhsa-severity-select(ng-if='selectedView === views.errata')
+
+    .view-switcher.button-tabs
+      b View by:
+      md-button(ng-click="changeView(views.cve)",
+        ng-class="{active: selectedView === views.cve}")
+        a {{:: views.cve }}
+      md-button(ng-click="changeView(views.errata)",
+        ng-class="{active: selectedView === views.errata}")
+        a {{:: views.errata }}
+      md-button(ng-click="changeView(views.package)",
+        ng-class="{active: selectedView === views.package}")
+        a {{:: views.package }}
+
+  .content-wrap
+      .vulnerabilities-package-view(ng-if="selectedView === views.package")
+        table
+          thead
+            tr
+              th.fit-content.nowrap.sortable(ng-class="sorter.getSortClass('name')", ng-click="sorter.sort('name')", translate) Package Name
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('system_count')", ng-click="sorter.sort('system_count')") Systems
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('erratum_count')", ng-click="sorter.sort('erratum_count')") RHSAs
+          tbody(ng-if='loading')
+            tr
+              td(colspan='4')
+                .spinner.spinner-lg
+          tbody(ng-if='!loading')
+            tr(ng-if='!data.total')
+              td.text-center(colspan='5')
+                strong(translate) No vulnerable packages found
+            tr(ng-repeat='vulnerability in data.vulnerabilities track by vulnerability.name')
+              td.fit-content.nowrap
+                a(ui-sref='app.vulnerabilities-package({package_id: vulnerability.name, root_view: selectedView})') {{:: vulnerability.name}}
+              td.text-center.fit-content.nowrap
+                span {{:: vulnerability.system_count}}
+              td.text-center.fit-content.nowrap
+                span {{:: vulnerability.erratum_count}}
+      .vulnerabilities-rhsa-view(ng-if="selectedView === views.errata")
+        table
+          thead
+            tr
+              th.fit-content.nowrap.sortable(translate, ng-class="sorter.getSortClass('erratum_id')", ng-click="sorter.sort('erratum_id')") RHSA Name
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('severity')", ng-click="sorter.sort('severity')") Severity
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('system_count')", ng-click="sorter.sort('system_count')") Systems
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('package_count')", ng-click="sorter.sort('package_count')") Packages
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('cve_count')", ng-click="sorter.sort('cve_count')") CVEs
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('issued')", ng-click="sorter.sort('issued')") Release Date
+          tbody(ng-if='loading')
+            tr
+              td(colspan='6')
+                .spinner.spinner-lg
+          tbody(ng-if='!loading')
+            tr(ng-if='!data.total')
+              td.text-center(colspan='6')
+                strong(translate) No vulnerabilities found
+            tr(ng-repeat='vulnerability in data.vulnerabilities track by vulnerability.erratum_id')
+              td.fit-content.nowrap
+                a(ui-sref='app.vulnerabilities-erratum({rhsa_id: vulnerability.erratum_id, root_view: selectedView})') {{:: vulnerability.erratum_id}}
+              td.fit-content.nowrap
+                vulnerability-severity-icon(severity='vulnerability.severity')
+              td.text-center.fit-content.nowrap
+                span {{:: vulnerability.system_count}}
+              td.text-center.fit-content.nowrap
+                span {{:: vulnerability.package_count}}
+              td.text-center.fit-content.nowrap
+                span {{:: vulnerability.cve_count}}
+              td.text-center.fit-content.nowrap
+                span {{:: vulnerability.issued | moment: 'LL'}}
+      .vulnerabilities-cve-view(ng-if="selectedView === views.cve")
+        table
+          thead
+            tr
+              th.fit-content.nowrap.sortable(translate, ng-class="sorter.getSortClass('cve_id')", ng-click="sorter.sort('cve_id')") CVE Name
+              th.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('impact')", ng-click="sorter.sort('impact')") Impact
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('score')", ng-click="sorter.sort('score')") CVSS Score
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('public_date')", ng-click="sorter.sort('public_date')") Days Known
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('public_date')", ng-click="sorter.sort('public_date')") Public Date
+          tbody(ng-if='loading')
+            tr
+              td(colspan='5')
+                .spinner.spinner-lg
+          tbody(ng-if='!loading')
+            tr(ng-if='!data.total')
+              td.text-center(colspan='5')
+                strong(translate) No vulnerabilities found
+            tr(ng-repeat='vulnerability in data.vulnerabilities track by vulnerability.cve_id')
+              td.fit-content.nowrap
+                a(ng-disabled='!vulnerability.errata[0].length',
+                  ui-sref='app.vulnerabilities-cve({cve_id: vulnerability.cve_id, root_view: selectedView})')
+                  | {{:: vulnerability.cve_id}}
+                // TODO: special handling if there are more than one errata
+              td.fit-content.nowrap
+                vulnerability-severity-icon(impact='vulnerability.impact')
+              td.text-center.fit-content.nowrap
+                span {{:: vulnerability.score}}
+              td.days-known.text-center.fit-content.nowrap
+                span(ng-if="vulnerability.days_known <= 90") {{:: vulnerability.days_known}}
+                span(ng-if="vulnerability.days_known > 90") Over 90
+              td.text-center.fit-content.nowrap
+                span {{:: vulnerability.public_date | moment: 'LL'}}
+      .footer
+        pagination.pull-right.pagination-blue(
+          ng-if="data.total > pager.perPage",
+          total-items="data.total",
+          ng-model="pager.currentPage",
+          items-per-page="pager.perPage",
+          ng-change="getData(false)")

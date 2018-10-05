@@ -1,0 +1,18 @@
+.filter-group.filter-rhsa-severity
+  label(translate) Severity
+  md-menu(md-offset="0 38")
+    md-button.button-filter(
+      type='button',
+      data-toggle='dropdown',
+      aria-haspopup='true',
+      aria-expanded='false',
+      ng-click='$mdMenu.open($event);')
+      span {{getSelectedString() | translate}}
+      span.caret
+    md-menu-content.rhsa-severities
+      md-menu-item(ng-repeat='(key, option) in options')
+        md-button(md-prevent-menu-close="md-prevent-menu-close")
+          md-checkbox(ng-model="option.selected", aria-label="RHSA Filter Checkbox")
+            .icon-inline
+              i.fa.fa-shield(ng-class="option.title", ng-if="option.title != 'All'")
+              span {{option.title | translate}}

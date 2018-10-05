@@ -26,7 +26,16 @@ function OnRun($rootScope, AlertService, gettextCatalog, $cookies,
     // now provides a standard api of getters, setters etc.
     let lang = CoercionService.coerce($cookies.get('rh_locale'));
     gettextCatalog.setCurrentLanguage(lang);
-    moment.locale(lang);
+
+    // We only support moment in en or ja
+    // We want to default to en in cases where its not en or ja
+    // Case 02170402 had this issue. Customer set their lang
+    // to de and got ja moment stuff
+    if (lang && lang === 'ja') {
+        moment.locale('ja');
+    } else {
+        moment.locale('en');
+    }
 
     if ($cookies.get('locale_debug')) {
         gettextCatalog.debug = true;

@@ -37,3 +37,9 @@
     input { width: 100%; }
   }
 }
+
+.header-sm {
+  color: $red;
+  text-transform: uppercase;
+  @include rem('margin-bottom', 5px);
+}

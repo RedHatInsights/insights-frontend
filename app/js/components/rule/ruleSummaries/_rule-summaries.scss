@@ -1,3 +1,17 @@
 .rule-summary + .rule-summary {
   @include rem('margin-top', $global-margin);
 }
+
+.rule-summary {
+  .risk-summary-icon-group {
+    display: flex;
+    flex-direction: row;
+    @include rem('padding-top', 5px);
+  }
+}
+
+.rule-summary .card-header-title{
+  display: flex;
+  flex-wrap: wrap;
+  .title { flex: 1; }
+}

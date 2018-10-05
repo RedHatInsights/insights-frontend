@@ -17,15 +17,6 @@ $maintenance-tab-namespace: ".content-block.maintenance-plan .content-tabs";
 }
 
 .maintenance-page-select {
-  input.ui-select-search,
-    ul.ui-select-choices {
-      @include media-query(xs) { min-width: 582px; }
-      @include media-query(sm) { min-width: 483px; }
-      @include media-query(md) { min-width: 663px; }
-      @include media-query(lg) { min-width: 827px; }
-    }
-
-    ul.ui-select-choices { padding-left: 0; }
 }
 
 .maintenance-page {
@@ -759,9 +750,6 @@ div[class^="col-"], div[class*=" col-"] { transition: .4s; }
   }
 
   .ui-select-container {
-    input, span {
-      width: 100% !important;
-    }
   }
 }
 
@@ -867,4 +855,22 @@ table.maintenance-table {
 
 table.maintenance-table a.text.action {
   flex: inherit;
+}
+
+.maintenance-plan {
+  md-card-content.two-columns.flex{
+    margin: 0;
+    .systems { margin: 0; }
+    .resolution { margin: 0; }
+    .risk-of-change { @include rem('padding-top', $global-padding); }
+  }
+}
+
+.maintenance-plan {
+  .content-tabs .tab-playbook:not(.disabled) {
+    background: rgba(0, 183, 255, .7);
+    span { color: #fff; }
+    &:hover, &.active { background: #00B7FF; }
+    .ansible-icon md-icon svg .st0 { fill: #fff; }
+  }
 }

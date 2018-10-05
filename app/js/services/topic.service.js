@@ -11,9 +11,8 @@ function TopicService(Topic) {
 
     service.topics = [];
 
-    service.reload = function (product) {
-        var p = (product && product !== 'all') ? {product: product} : null;
-        return Topic.getAll(p, limit).then(function (resp) {
+    service.reload = function () {
+        return Topic.getAll(null, limit).then(function (resp) {
             service.topics = resp.data;
         });
     };
