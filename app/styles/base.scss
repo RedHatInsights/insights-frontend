@@ -40,7 +40,7 @@ $define-fa: true !default;
 @import '../../node_modules/ui-select/dist/select';
 @import '../../node_modules/sweetalert2/dist/sweetalert2';
 @import '../../node_modules/c3/c3';
-@import '../../node_modules/ng-table/dist/ng-table';
+@import '../../node_modules/ng-table/bundles/ng-table';
 @import '../../node_modules/angular-material/angular-material.scss';
 
 .flexgrid {
@@ -107,7 +107,7 @@ $define-fa: true !default;
 @import 'components/error-infos';
 @import 'components/header';
 @import 'components/utilities-tray';
-// @import 'components/filters';
+@import 'components/filters';
 @import 'components/icons';
 @import 'components/announcements';
 @import 'components/dashboard';
@@ -166,15 +166,19 @@ $define-fa: true !default;
 @import 'components/renameable-property';
 @import 'components/with-tile';
 
+
+
 // System Overlay
 //==================================================================*/
 @import 'components/system-overlay/system-overlay';
 @import 'components/system-overlay/system-metadata';
 @import 'components/system-overlay/view-system-groups';
 
+
 // Forms
 //==================================================================*/
 @import 'components/forms/radio-group';
+
 
 // Maintenance Plan
 //==================================================================*/
@@ -200,6 +204,7 @@ $define-fa: true !default;
 // UI Filters
 //==================================================================*/
 @import 'components/ui-filters/ui-filters';
+
 
 // used to be Namespaced
 //==================================================================*/

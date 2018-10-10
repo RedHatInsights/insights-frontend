@@ -9,6 +9,7 @@ const get = require('lodash/get');
 const isEmpty = require('lodash/isEmpty');
 const find = require('lodash/find');
 const moment = require('moment-timezone');
+const sortBy = require('lodash/sortBy');
 
 const REPORT_NEW = 'report:new';
 const REPORT_RESOLVED = 'report:resolved';
@@ -21,9 +22,33 @@ function WebhookEditCtrl(
     $state,
     $stateParams,
     gettextCatalog,
+    Group,
     Severities,
     Utils,
     Webhooks) {
+
+    const nullGroup = {
+        id: null,
+        display_name: gettextCatalog.getString('All Systems (no filtering)')
+    };
+
+    $scope.groups = Group.groups;
+    $scope.group = {
+        selected: nullGroup
+    };
+
+    $scope.$watchCollection('groups', importGroup);
+
+    function importGroup () {
+        $scope.group.groups = [nullGroup, ...(sortBy(Group.groups, 'display_name'))];
+
+        if ($scope.webhook && $scope.webhook.group_id) {
+            const group = find(Group.groups, {id: $scope.webhook.group_id});
+            if (group) {
+                $scope.group.selected = group;
+            }
+        }
+    }
 
     $scope.severities = Severities.filter(item => item.value !== 'All').reverse();
     $scope.eventTypes = [{
@@ -119,6 +144,8 @@ function WebhookEditCtrl(
             $scope.webhook.certificate = null;
         }
 
+        $scope.webhook.group_id = $scope.group.selected.id;
+
         const fn = (isNew() ? 'create' : 'update');
         return Webhooks[fn]($scope.webhook)
         .success(() => $state.go('app.config', {tab: 'webhooks'}))
@@ -152,6 +179,7 @@ function WebhookEditCtrl(
             .success(webhook => {
                 $scope.webhook = webhook;
                 importEventTypes(webhook);
+                importGroup();
             })
             .catch(() => $state.go('app.config', {tab: 'webhooks'}));
         }

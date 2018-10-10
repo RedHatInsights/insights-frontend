@@ -11,7 +11,8 @@ const obj =  {
     },
     actions: {
         page1: {
-            donutHole: '.donut-container .donut-hole'
+            donutHole: '.donut-container .donut-hole',
+            firstLegendItem: 'table.legend td:nth-of-type(1) a .desc span'
         },
         page2: {
             firstRuleInTable: '.topic-rule-list .legend-item:nth-of-type(1) td:nth-of-type(1)',
@@ -59,7 +60,8 @@ const obj =  {
     },
     systemModal: {
         exButton:  '.modal-dialog .fa.fa-close',
-        hostname:  'system-metadata md-card h2 .name',
+        displayName:  'system-metadata md-card h2 .name',
+        uuid: 'system-metadata md-card .uuid span',
         firstRule: 'rule-summary:nth-of-type(1) .title'
     },
     nav: {
@@ -77,9 +79,9 @@ const obj =  {
     }
 };
 
-['security', 'availability', 'stability', 'performance'].forEach(function (category) {
-    obj.actions.page1['legend_' + category] = 'table.legend td a.' + category;
-});
+// ['security', 'availability', 'stability', 'performance'].forEach(function (category) {
+//     obj.actions.page1['legend_' + category] = 'table.legend td a.' + category;
+// });
 
 var i = 1;
 ['overview',

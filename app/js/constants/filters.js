@@ -48,6 +48,21 @@ constantsModule.constant('RuleStatusFilters', {
     }
 });
 
+constantsModule.constant('RuleHitFilters', {
+    all: {
+        title: 'All',
+        tag: null
+    },
+    ruleHit: {
+        title: 'Rule Hit',
+        tag: 'Insights Rule Hit: Has Rule Hits'
+    },
+    noRuleHit: {
+        title: 'No Rule Hit',
+        tag: 'Insights Rule Hit: No Rule Hits'
+    }
+});
+
 constantsModule.constant('LikelihoodFilters', [
     {
         title: 'All',
@@ -83,5 +98,40 @@ constantsModule.constant('ImpactFilters', [
     }, {
         title: 'Critical',
         tag: 'Impact: Critical'
+    }
+]);
+
+constantsModule.constant('RhsaSeverityFilters', [
+    {
+        title: 'All',
+        tag: null
+    }, {
+        title: 'Critical',
+        tag: 'RHSA Severity: Critical'
+    }, {
+        title: 'Important',
+        tag: 'RHSA Severity: Important'
+    }, {
+        title: 'Moderate',
+        tag: 'RHSA Severity: Moderate'
+    }, {
+        title: 'Low',
+        tag: 'RHSA Severity: Low'
+    }
+]);
+
+constantsModule.constant('DaysKnownFilters', [
+    {
+        title: 'All',
+        tag: null,
+        filter: undefined
+    }, {
+        title: '45',
+        tag: 'Days Known: 45 days or older',
+        filter: '45'
+    }, {
+        title: '90',
+        tag: 'Days Known: 90 days or older',
+        filter: '90'
     }
 ]);

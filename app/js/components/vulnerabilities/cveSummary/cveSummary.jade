@@ -1,0 +1,40 @@
+.cve-summary
+  card.card-cve-summary
+    card-content
+      card.rule-hit(expandable='true', ng-if="selectedCVE.insights_rules.length")
+        card-header-expandable
+          .title.icon-inline
+            i.fa.fa-book(aria-hidden='true')
+            span Associated Insights Rules ({{selectedCVE.insights_rules.length}})
+        card-content.card-content(collapse="card.collapsed")
+          .spinner.spinner-sm(ng-if='ruleLoader.loading')
+          incident-icon(rule-id='report.rule_id', ng-if='selectedRule && !ruleLoader.loading')
+          .title(ng-if='!ruleLoader.loading')
+            ul
+              li(ng-repeat='rule in rules track by rule.rule_id')
+                a(ui-sref='app.actions-rule({category: rule.category, rule: rule.rule_id})')
+                  |{{:: rule.category }} #{'>'} {{:: rule.description }}
+
+      ul.cve-id
+        li(ng-repeat='cve in cves track by cve.cve_id', ng-click='selectCVE(cve)')
+          a(ng-class='{active: cve.cve_id === selectedCVE.cve_id}') {{ cve.cve_id }}
+          i.fa.fa-book(ng-if='cve.insights_rules.length', tooltip="{{'This CVE has associated Insights Rules' | translate}}")
+
+      .description
+        h2.section-title.section-title-red {{selectedCVE.cve_id}}
+        p {{selectedCVE.description}}
+        a.cve-page-redirect(ng-href='{{selectedCVE.link}}', target='_blank') View in Portal
+          i.fa.fa-external-link
+      .cve-information
+        .impact
+          b Impact:&nbsp;
+          vulnerability-severity-icon(severity='selectedCVE.impact')
+        .public-date
+          b Public Date:
+          |  {{selectedCVE.public_date | moment: 'LL' }}
+        .iava(ng-if='selectedCVE.iava')
+          b IAVA:
+          |  {{selectedCVE.iava }}
+        .cwe(ng-if='selectedCVE.cwes.length > 0')
+          b CWEs:
+            a(ng-repeat="cwe in selectedCVE.cwes", href="{{:: cwe.link}}", target="_blank") {{:: cwe.id }}

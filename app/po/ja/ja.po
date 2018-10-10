@@ -1,30 +1,106 @@
-# Michelle Kim <mkim@redhat.com>, 2016. #zanata
-# kmoriguc <kmoriguc@redhat.com>, 2016. #zanata
-# kmoriguc <kmoriguc@redhat.com>, 2017. #zanata
+# pahuang <pahuang@redhat.com>, 2017. #zanata
+# kmoriguc <kmoriguc@redhat.com>, 2018. #zanata
+# pahuang <pahuang@redhat.com>, 2018. #zanata
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 "MIME-Version: 1.0\n"
-"PO-Revision-Date: 2017-03-08 04:35+0000\n"
+"PO-Revision-Date: 2018-07-05 09:29+0000\n"
 "Last-Translator: kmoriguc <kmoriguc@redhat.com>\n"
 "Language-Team: \n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Zanata 3.9.6\n"
-
-#: js/components/inventory/inventoryActions/inventoryActions.html:1
-msgid "&nbsp; ({{numberOfSelected()}} Selected)"
-msgstr "&nbsp; ({{numberOfSelected()}} を選択)"
+"X-Generator: Zanata 4.6.0\n"
 
 #: js/components/actions/actionsRule/actionsRule.html:1
-msgid "&nbsp; Name"
-msgstr "&nbsp; 名前"
+msgid ""
+"&nbsp; ({{numberOfSelected()}} Selected<span ng-if=\"allSelected &amp;&amp; "
+"pager.perPage &lt; totalRuleSystems\">.<a ng-if=\"!reallyAllSelected\" ng-"
+"click=\"reallySelectAll()\">&nbsp;Select All Systems.</a><a ng-if="
+"\"reallyAllSelected\" ng-click=\"deselectAll()\">&nbsp;Deselect All Systems."
+"</a></span><span>)</span>"
+msgstr ""
+"&nbsp; ({{numberOfSelected()}} を選択<span ng-if=\"allSelected &amp;&amp; pager."
+"perPage &lt; totalRuleSystems\"><a ng-if=\"!reallyAllSelected\" ng-click="
+"\"reallySelectAll()\">&nbsp;全システムを選択</a><a ng-if=\"reallyAllSelected\" ng-"
+"click=\"deselectAll()\">&nbsp;全システムの選択を解除</a></span><span>)</span>"
+
+#: js/components/inventory/inventoryActions/inventoryActions.html:1
+msgid ""
+"&nbsp; ({{totalSystemsSelected}} Selected<span ng-if=\"allSelected "
+"&amp;&amp; pager.perPage &lt; totalSystems()\">.<a ng-if="
+"\"!reallyAllSelected\" ng-click=\"reallySelectAll()\" translate="
+"\"translate\">&nbsp;Select All Systems.</a><a ng-if=\"reallyAllSelected\" ng-"
+"click=\"deselectAll()\" translate=\"translate\">&nbsp;Deselect All Systems.</"
+"a></span><span>)</span>"
+msgstr ""
+"&nbsp; ({{totalSystemsSelected}} を選択<span ng-if=\"allSelected &amp;&amp; "
+"pager.perPage &lt; totalSystems()\"><a ng-if=\"!reallyAllSelected\" ng-click="
+"\"reallySelectAll()\" translate=\"translate\">&nbsp;全システムを選択</a><a ng-if="
+"\"reallyAllSelected\" ng-click=\"deselectAll()\" translate="
+"\"translate\">&nbsp;全システムの選択を解除</a></span><span>)</span>"
+
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "&nbsp; This is a plan suggested by Red Hat"
+msgstr "&nbsp; Red Hat が提案するプラン"
+
+#: js/components/actions/actionsRule/actionsRule.html:1
+#: js/states/inventory/inventory.html:1
+msgid "&nbsp; Type"
+msgstr "&nbsp; タイプ"
+
+#: js/states/vulnerabilities/views/view-erratum.html:1
+msgid ""
+"&nbsp; {{checkboxes.totalChecked}} Selected<span ng-if=\"allSelected "
+"&amp;&amp; pager.perPage &lt; affectedSystems.length\"><a ng-if="
+"\"!reallyAllSelected\" ng-click=\"reallySelectAll()\">&nbsp;Select All "
+"Systems.</a><a ng-if=\"reallyAllSelected\" ng-click="
+"\"deselectAll()\">&nbsp;Deselect All Systems.</a></span>"
+msgstr ""
+"&nbsp; {{checkboxes.totalChecked}} を選択<span ng-if=\"allSelected &amp;&amp; "
+"pager.perPage &lt; affectedSystems.length\"><a ng-if=\"!reallyAllSelected\" "
+"ng-click=\"reallySelectAll()\">&nbsp;全システムを選択</a><a ng-if="
+"\"reallyAllSelected\" ng-click=\"deselectAll()\">&nbsp;全システムの選択を解除</a></"
+"span>"
 
 #: js/states/maintenance/maintenance.html:1
 msgid "&nbsp;Create a plan"
 msgstr "&nbsp;プランを作成"
+
+#: js/components/inventory/inventoryActions/inventoryActions.html:1
+msgid "&nbsp;Deselect All Systems."
+msgstr "&nbsp;全システムの選択を解除"
+
+#: js/components/incident/incidentSummary/incidentSummary.html:1
+msgid ""
+"&nbsp;It is imperative that these incidents be addressed to ensure optimal "
+"performance."
+msgstr "&nbsp;パフォーマンスの最適化を図るには、これらのインシデントに対処する必要があります。"
+
+#: js/components/inventory/inventoryActions/inventoryActions.html:1
+msgid "&nbsp;Select All Systems."
+msgstr "&nbsp;全システムを選択"
+
+#: js/components/incident/incidentSummary/incidentSummary.html:1
+msgid "&nbsp;is an INCIDENT affecting"
+msgid_plural "&amp;nbsp;are INCIDENTS affecting"
+msgstr[0] "&nbsp;影響を与えるインシデント"
+
+#: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLite.html:1
+msgid "&nbsp;using&nbsp;"
+msgstr "&nbsp;使用中&nbsp;"
+
+#: js/components/incident/incidentSummary/incidentSummary.html:1
+msgid "&nbsp;{{:: incidentSystemCount}} system."
+msgid_plural "&amp;nbsp;{{:: $count}} systems."
+msgstr[0] "&nbsp;{{:: incidentSystemCount}} 台のシステム"
+
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "(1 system)"
+msgid_plural "({{$count}} systems)"
+msgstr[0] "(1 台のシステム)"
 
 #: js/components/feedback/feedbackModal.html:1
 msgid ""
@@ -35,15 +111,39 @@ msgstr ""
 "(Red Hat に登録されているメールアドレスを変更するには&nbsp;<a translate=\"translate\" href=\"https:"
 "//www.redhat.com/wapps/ugc/protected/emailChange.html\">こちらをクリック</a>)"
 
-#: js/states/splash/splash.html:1
-msgid ""
-"...With Red Hat Insights, we can resolve critical issues before they occur. "
-"We no longer have to look at individual systems because we have one tool "
-"that gives us much more comprehensive and actionable information on our "
-"infrastructure."
-msgstr ""
-"...Red Hat Insights では、重大な問題を発生前に解決できます。インフラストラクチャーを包括的に捉えた情報や、すぐに使用できる詳細が 1 "
-"つのツールで入手できるため、システムを個別に確認する必要がありません。"
+#: js/components/maintenance/expandableSystemList/expandableSystemList.html:1
+msgid "+ {{systems.length - limit}} more"
+msgstr "+ {{systems.length - limit}} 台"
+
+#: js/components/groupSelect/groupSelect.html:1
+msgid "- Show all systems -"
+msgstr "- 全システムを表示 -"
+
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "- edit ({{play.ansible_resolutions.length}} options)"
+msgstr "- 編集 ({{play.ansible_resolutions.length}} オプション)"
+
+#: js/states/vulnerabilities/views/view-package.html:1
+#: states/vulnerabilities/controllers/view.erratum.controller.js:44
+msgid "1 CVE"
+msgid_plural "{{$count}} CVEs"
+msgstr[0] "1 CVE"
+
+#: js/components/actions/actionsRule/actionsRule.html:1
+msgid "1 Impacted Deployment"
+msgid_plural "{{:: $count}} Impacted Deployments"
+msgstr[0] "1 つのデプロイメントに影響"
+
+#: js/components/actions/actionsRule/actionsRule.html:1
+#: js/states/vulnerabilities/views/view-erratum.html:1
+msgid "1 Impacted System"
+msgid_plural "{{:: $count}} Impacted Systems"
+msgstr[0] "1 台のシステムに影響"
+
+#: states/vulnerabilities/controllers/view.erratum.controller.js:42
+msgid "1 Package"
+msgid_plural "{{$count}} Packages"
+msgstr[0] "1 パッケージ"
 
 #: js/components/rule/ruleGroupCard/ruleGroupCard.html:1
 msgid "1 Rule in this group"
@@ -54,363 +154,330 @@ msgstr[0] "このグループの {{$count}} 件のルール"
 #: js/components/rule/ruleGroupCard/ruleGroupCard.html:1
 #: js/components/topics/otherTopic/otherTopic.html:1
 #: js/components/topics/topicRuleList/topicRuleList.html:1
+#: js/states/actions/actions.html:1
 msgid "1 System"
 msgid_plural "{{$count}} Systems"
 msgstr[0] "{{$count}} 台のシステム"
 
+#: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLite.html:1
+msgid "1 issue can be resolved automatically"
+msgid_plural "{{:: $count}} issues can be resolved automatically"
+msgstr[0] "{{:: $count}} 件の問題が自動的に解決可能"
+
 #: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLiteTable/maintenancePlanLiteTable.html:1
 msgid "1 minute"
-msgid_plural "{{$count}} minutes"
-msgstr[0] "{{$count}} 分"
+msgid_plural "{{:: $count}} minutes"
+msgstr[0] "{{:: $count}} 分"
 
-#: components/topbar/alerts/alerts.directive.js:35
+#: components/topbar/alerts/alerts.directive.js:34
 msgid "1 new system not checking in"
 msgid_plural "{{count}} new systems not checking in"
 msgstr[0] "{{count}} 台の新規システムがチェックインしていません"
 
-#: js/components/group/views/group.html:1
+#: js/states/vulnerabilities/views/view-package.html:1
 msgid "1 system"
 msgid_plural "{{$count}} systems"
 msgstr[0] "{{$count}} 台のシステム"
 
-#: components/overview/widgets/actionsLite/actionsLite.directive.js:32
-msgid "1 system affected by {{id}} issues"
-msgid_plural "{{count}} systems affected by {{id}} issues"
-msgstr[0] "{{$count}} 台のシステムが {{id}} 件の問題で影響を受けています"
-
-#: components/inventory/inventoryActions/inventoryActions.directive.js:81
+#: components/inventory/inventoryActions/inventoryActions.directive.js:80
 msgid "1 system cannot be unregistered"
 msgid_plural "{{count}} systems cannot be unregistered"
 msgstr[0] "{{$count}} 台のシステムが登録解除できません"
 
-#: js/states/splash/splash.html:1
-msgid "2016 Summit Announcement"
-msgstr "2016 Summit のお知らせ"
+#: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLite.html:1
+msgid "<b>Actions</b>"
+msgstr "<b>アクション</b>"
 
-#: js/states/info/info.html:1
-msgid ""
-"<a ui-sref=\"info.security\">Learn more </a> about how Red Hat Insights "
-"keeps your data secure while enabling you to proactively manage systems."
-msgstr ""
-"Red Hat Insights を使用して、システムをプロアクティブに管理しながらデータの安全を確保する方法については<a ui-sref="
-"\"info.security\">こちら</a>を参照してください。"
-
-#: components/system/systemSummaryTable/systemSummaryTable.directive.js:358
-msgid ""
-"<h5>This will unregister the selected system from Red Hat Insights.</"
-"h5><p>To undo this action<code>redhat-access-insights --register</code>must "
-"be run from the unregistered system.</p>"
-msgid_plural ""
-"<h5>This will unregister the {{count}} selected systems from Red Hat "
-"Insights.</h5><p>To undo this action <code>redhat-access-insights --"
-"register</code>must be run from each unregistered system.</p>"
-msgstr[0] ""
-"<h5>選択した {{count}} 件のシステムで Red Hat Insights 登録が解除されます。</"
-"h5><p>この処理を取り消すには、登録解除したシステムから <code>redhat-access-insights --register</"
-"code> を実行する必要があります。</p>"
+#: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLite.html:1
+msgid "<b>Newest Plans</b>"
+msgstr "<b>最新のプラン</b>"
 
 #: js/components/rule/ruleReason/ruleReason.html:1
 msgid ""
-"<i aria-hidden=\"true\" class=\"fa fa-crosshairs\">&nbsp;</i>Detected issues"
-msgstr "<i aria-hidden=\"true\" class=\"fa fa-crosshairs\">&nbsp;</i>検出された問題"
-
-#: js/components/platformFilter/platformFilter.html:1
-msgid "<i aria-hidden=\"true\" class=\"fa fa-refresh\"></i>View all platforms"
-msgstr "<i aria-hidden=\"true\" class=\"fa fa-refresh\"></i>すべてのプラットフォームを表示"
+"<i aria-hidden=\"true\" class=\"fa fa-crosshairs\">&nbsp;</i><strong "
+"translate=\"translate\">Detected issues</strong>"
+msgstr ""
+"<i aria-hidden=\"true\" class=\"fa fa-crosshairs\">&nbsp;</i><strong "
+"translate=\"translate\">検出された問題</strong>"
 
 #: js/components/rule/ruleResolution/ruleResolution.html:1
 msgid ""
-"<i aria-hidden=\"true\" class=\"fa fa-thumbs-up\">&nbsp;</i>Steps to resolve"
-msgstr "<i aria-hidden=\"true\" class=\"fa fa-thumbs-up\">&nbsp;</i>解決までの手順"
+"<i aria-hidden=\"true\" class=\"fa fa-thumbs-up\">&nbsp;</i><strong "
+"translate=\"translate\">Steps to resolve</strong>"
+msgstr ""
+"<i aria-hidden=\"true\" class=\"fa fa-thumbs-up\">&nbsp;</i><strong "
+"translate=\"translate\">解決の手順</strong>"
 
-#: js/states/overview/overview.html:1
+#: js/states/digests/digests.html:1
 msgid ""
-"<i class=\"fa fa-bar-chart\"></i><span translate=\"translate\">Overview</"
+"<i ng-if=\"resolvedIssues &gt; 0\" class=\"fa fa-check-circle green\"></i><i "
+"ng-if=\"resolvedIssues === 0\" class=\"fa fa-exclamation-circle red\"></"
+"i>&nbsp;You've resolved&nbsp;<strong ng-class=\"{&quot;green&quot;: "
+"resolvedIssues &gt; 0, &quot;red&quot;: resolvedIssues === 0}\" translate="
+"\"translate\" translate-n=\"resolvedIssues\" translate-plural=\"{{:: "
+"$count}} issues\">{{resolvedIssues}} issue</strong>&nbsp;in the past {{:: "
+"timePeriod()}} days."
+msgstr ""
+"<i ng-if=\"resolvedIssues &gt; 0\" class=\"fa fa-check-circle green\"></i><i "
+"ng-if=\"resolvedIssues === 0\" class=\"fa fa-exclamation-circle red\"></"
+"i>&nbsp;&nbsp;<strong ng-class=\"{&quot;green&quot;: resolvedIssues &gt; 0, "
+"&quot;red&quot;: resolvedIssues === 0}\" translate=\"translate\" translate-n="
+"\"resolvedIssues\" translate-plural=\"{{:: $count}} "
+"issues\">{{resolvedIssues}} 件の問題を</strong>&nbsp;過去 {{:: timePeriod()}} "
+"日間に解決。"
+
+#: js/components/filterComponents/ansibleSupportTriState/ansibleSupportTriState.html:1
+msgid ""
+"<input type=\"radio\" name=\"ansibleSupportFilterRadio\" ng-model="
+"\"showAnsibleSupport\" value=\"{{:: k}}\" ng-click="
+"\"filterAnsibleSupport(k)\"><span>{{:: v.title | translate}}</span>"
+msgstr ""
+"<input type=\"radio\" name=\"ansibleSupportFilterRadio\" ng-model="
+"\"showAnsibleSupport\" value=\"{{:: k}}\" ng-click="
+"\"filterAnsibleSupport(k)\"><span>{{:: v.title | translate}}</span>"
+
+#: js/components/filterComponents/incidentsTriState/incidentsTriState.html:1
+msgid ""
+"<input type=\"radio\" name=\"incidentFilterRadio\" ng-model="
+"\"showIncidents\" value=\"{{:: k}}\" ng-click="
+"\"filterIncidents(k)\"><span>{{:: v.title | translate}}</span>"
+msgstr ""
+"<input type=\"radio\" name=\"incidentFilterRadio\" ng-model="
+"\"showIncidents\" value=\"{{:: k}}\" ng-click="
+"\"filterIncidents(k)\"><span>{{:: v.title | translate}}</span>"
+
+#: js/components/filterComponents/ruleHitTriState/ruleHitTriState.html:1
+msgid ""
+"<input type=\"radio\" name=\"ruleHitFilterRadio\" ng-model=\"ruleHit\" value="
+"\"{{:: k}}\" ng-click=\"filterRuleHit(k)\"><span>{{:: v.title | translate}}</"
 "span>"
-msgstr "<i class=\"fa fa-bar-chart\"></i><span translate=\"translate\">概要</span>"
+msgstr ""
+"<input type=\"radio\" name=\"ruleHitFilterRadio\" ng-model=\"ruleHit\" value="
+"\"{{:: k}}\" ng-click=\"filterRuleHit(k)\"><span>{{:: v.title | translate}}</"
+"span>"
+
+#: js/components/filterComponents/ruleStatusTriState/ruleStatusTriState.html:1
+msgid ""
+"<input type=\"radio\" name=\"ruleStatusFilterRadio\" ng-model="
+"\"showRuleStatus\" value=\"{{:: k}}\" ng-click="
+"\"filterRuleStatus(k)\"><span>{{:: v.title | translate}}</span>"
+msgstr ""
+"<input type=\"radio\" name=\"ruleStatusFilterRadio\" ng-model="
+"\"showRuleStatus\" value=\"{{:: k}}\" ng-click="
+"\"filterRuleStatus(k)\"><span>{{:: v.title | translate}}</span>"
 
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 msgid ""
-"<i class=\"fa fa-download inline-right\"></i><span translate="
-"\"translate\">Export CSV</span>"
+"<md-button class=\"btn-sm md-button-ghost-blue md-primary\"><i class=\"fa fa-"
+"download inline-right\"></i><span translate=\"translate\">Export CSV</span></"
+"md-button>"
 msgstr ""
-"<i class=\"fa fa-download inline-right\"></i><span translate="
-"\"translate\">CSV にエクスポート</span>"
+"<md-button class=\"btn-sm md-button-ghost-blue md-primary\"><i class=\"fa fa-"
+"download inline-right\"></i><span translate=\"translate\">CSV でエクスポート</"
+"span></md-button>"
+
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid ""
+"<md-button ng-disabled=\"!ansibleSupport\" class=\"btn-sm md-button-ghost-"
+"blue md-primary\"><i class=\"svg ansible-icon inline-right\"><img src="
+"\"static/images/l_ansible-blue.svg\"></i><span translate="
+"\"translate\">Download Playbook</span></md-button>"
+msgstr ""
+"<md-button ng-disabled=\"!ansibleSupport\" class=\"btn-sm md-button-ghost-"
+"blue md-primary\"><i class=\"svg ansible-icon inline-right\"><img src="
+"\"static/images/l_ansible-blue.svg\"></i><span translate="
+"\"translate\">Playbook をダウンロード</span></md-button>"
+
+#: js/components/rule/ruleToggle/ruleToggle.html:1
+msgid "<span>Enable Rule</span>"
+msgstr "<span>ルールを有効にする</span>"
 
 #: js/states/evaluation/evaluation.html:1
 msgid ""
-"<span aria-hidden=\"true\" class=\"icon-check-alt\"></span>&nbsp;Thank you "
-"for purchasing Red Hat Insights."
+"<span>Your {{:: getNonLegacyEval().systems}} system {{:: getNonLegacyEval()."
+"duration}} day evaluation is ready.</span>"
 msgstr ""
-"<span aria-hidden=\"true\" class=\"icon-check-alt\"></span>&nbsp;Red Hat "
-"Insights をご購入いただき、ありがとうございます。"
+"<span>{{:: getNonLegacyEval().systems}} システムは {{:: getNonLegacyEval()."
+"duration}} 日間の評価が行えます。</span>"
 
-#: js/states/evaluation/evaluation.html:1
-msgid ""
-"<span aria-hidden=\"true\" class=\"icon-check-alt\"></span>&nbsp;Your "
-"{{getNonLegacyEval().systems}} system {{getNonLegacyEval().duration}} day "
-"evaluation is ready."
-msgstr ""
-"<span aria-hidden=\"true\" class=\"icon-check-alt\"></span>&nbsp;お客様の Your "
-"{{getNonLegacyEval().systems}} システムにおける {{getNonLegacyEval().duration}} "
-"日間の評価の準備ができました。"
+#: js/components/filterComponents/ansibleSupportTriState/ansibleSupportTriState.html:1
+msgid "<strong>Ansible Support</strong>"
+msgstr "<strong>Ansible サポート</strong>"
 
-#: js/components/actions/actionsCategory/actionsCategory.html:1
-msgid "<span>Hide this rule&nbsp;&nbsp;</span><i class=\"fa fa-eye-slash\"></i>"
-msgstr "<span>このルールを表示しない&nbsp;&nbsp;</span><i class=\"fa fa-eye-slash\"></i>"
-
-#: js/components/actions/actionsDetails/actionsDetails.html:1
-msgid "<span>Hide</span>"
-msgstr "<span>表示しない</span>"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"<strong> Important:</strong> All virtual machines must be registered to the "
-"same Red Hat account as the CloudForms appliance."
-msgstr ""
-"<strong> 重要:</strong> すべての仮想マシンは、CloudForms アプライアンスと同じ Red Hat "
-"アカウントに登録する必要があります。"
-
-#: js/states/getting-started/views/getting-started-direct.html:1
-msgid ""
-"<strong>Note: </strong>Registration with <a href=\"https://access.redhat.com/"
-"solutions/11216\" target=\"_blank\">Red Hat Network Classic </a> is also "
-"available but requires <a href=\"#classic\" relative-hash=\"relative-hash\" "
-"permalink=\"permalink\">additional configuration steps.</a>"
-msgstr ""
-"<strong>注記: </strong><a href=\"https://access.redhat.com/solutions/11216\" "
-"target=\"_blank\">Red Hat Network Classic </a> を使用した登録も可能ですが、<a href="
-"\"#classic\" relative-hash=\"relative-hash\" permalink="
-"\"permalink\">追加の設定手順</a>が必要になります。"
-
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"<strong>Note: </strong>Registration with <a href=\"https://access.redhat.com/"
-"solutions/11216\" target=\"_blank\">Red Hat Network Classic </a>is also "
-"available but requires <a href=\"#classic\" relative-hash=\"relative-hash\" "
-"permalink=\"permalink\">additional configuration steps.</a>"
-msgstr ""
-"<strong>注記: </strong><a href=\"https://access.redhat.com/solutions/11216\" "
-"target=\"_blank\">Red Hat Network Classic </a> を使用した登録も可能ですが、<a href="
-"\"#classic\" relative-hash=\"relative-hash\" permalink="
-"\"permalink\">追加の設定手順</a>が必要になります。"
-
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"<strong>Note: </strong>The Coordinator will attempt to auto-configure the "
-"communication to Red Hat based on the subscription-management information on "
-"the Undercloud node. However, using a proxy and/or using <a href=\"https://"
-"access.redhat.com/solutions/11216\" target=\"_blank\">Red Hat Network "
-"Classic</a>credentials is available but requires <a href=\"#proxy\" relative-"
-"hash=\"relative-hash\" permalink=\"permalink\">additional configuration "
-"steps.</a>"
-msgstr ""
-"<strong>注記: </strong>コーディネーターはアンダークラウドノードの subscription-management 情報を基に Red "
-"Hat への通知の自動設定を試みます。プロキシや <a href=\"https://access.redhat.com/solutions/"
-"11216\" target=\"_blank\">Red Hat Network Classic</a> の認証情報の使用も可能ですが、<a href="
-"\"#proxy\" relative-hash=\"relative-hash\" permalink=\"permalink\">追加の設定手順</"
-"a>が必要になります。"
-
-#: js/components/config/hidden/hidden.html:1
 #: js/components/config/settings/settings.html:1
 msgid ""
-"<strong>Note: </strong>These are account wide. You must be an Org Admin to "
+"<strong>Note:</strong>These are account wide. You must be an Org Admin to "
 "make these changes."
-msgstr "<strong>注記: </strong>この変更はアカウント全体に適用されます。変更を実施するには、組織管理者である必要があります。"
+msgstr "<strong>注記: </strong>この変更はアカウント全体に適用されます。変更を適用するには、組織管理者である必要があります。"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"<strong>Note:&nbsp;</strong>The Satellite Server organization to which the "
-"CloudForms appliance is registered must have Insights enabled."
+#: js/components/systemMetadata/systemMetadata.html:1
+msgid "<strong>{{:: value.label}}</strong><br><span>{{:: value.value}}</span>"
 msgstr ""
-"<strong>注記:&nbsp;</strong>CloudForms アプライアンスが登録されている Satellite "
-"サーバーの組織では、Insights が有効になっている必要があります。"
+"<strong>{{:: value.label}}</strong><br><span>{{:: value.value}}</span>"
 
-#: js/states/info/info.html:1
-msgid ""
-"<strong>The Insights engine </strong>is powered by the unparalleled "
-"expertise that comes from over 700 Red Hat Certified Engineers, over 30,000 "
-"documented technical solutions, and over 1,000,000 resolved issues. Based on "
-"Red Hat’s continuously expanding knowledge base, which includes expertise in "
-"third-party hardware and software integration, deterministic rules are "
-"constantly being created."
-msgstr ""
-"<strong>Insights エンジン</strong>は、700 名以上の Red Hat 認定エンジニア、30,000 "
-"ページ以上の文書化された技術ソリューション、そして1,000,000 "
-"件以上にも及ぶ解決済みの問題から構成される、他に類を見ない規模の専門技術を利用するためのシステムです。日々拡大し、サードパーティのハードウェアとソフトウエアに関する技術も含まれる "
-"Red Hat ナレッジベースに基づいた決定論的法則が常に更新されます。"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"A Smart State Analysis must be run once on all RHEL virtual machines you "
-"have registered to Red Hat Insights.  This step is only required once. If a "
-"new virtual machine is created afterward, then a Smart State Analysis need "
-"only be run on that new virtual machine after it has been registered to "
-"Insights."
-msgstr ""
-"Smart State Analysis は、Red Hat Insights に登録したすべての RHEL 仮想マシンで 1 "
-"回実行する必要があります。この手順が必要となるのは、一度だけです。その後に新たな仮想マシンが作成された場合は、この新規仮想マシンを Insights "
-"に登録した後で、同マシン上で Smart State Analysis を実行する必要があります。"
-
-#: js/states/getting-started/views/getting-started-sat6.html:1
-msgid ""
-"A manifest must be downloaded and imported into the Satellite Organization "
-"in which Insights will be enabled.\n"
-"For more information on managing manifests, see the official Satellite 6<a "
-"href=\"https://access.redhat.com/documentation/en-US/Red_Hat_Satellite/6.1/"
-"html/Installation_Guide/chap-Red_Hat_Satellite-Installation_Guide-"
-"Populating_Red_Hat_Satellite_with_Content.html#sect-Red_Hat_Satellite-"
-"Installation_Guide-Setting_up_a_Manifest\"> documentation.</a>"
-msgstr ""
-"マニフェストをダウンロードして、Insights を有効にする Satellite 組織にインポートされていること。\n"
-"マニフェスト管理についての詳細情報は、公式の Satellite 6 <a href=\"https://access.redhat.com/"
-"documentation/en-US/Red_Hat_Satellite/6.1/html/Installation_Guide/chap-"
-"Red_Hat_Satellite-Installation_Guide-"
-"Populating_Red_Hat_Satellite_with_Content.html#sect-Red_Hat_Satellite-"
-"Installation_Guide-Setting_up_a_Manifest\">ドキュメンテーション</a>を参照してください。"
-
-#: services/maintenance.service.js:322
+#: services/maintenance.service.js:292
 msgid "A plan was not completed on time"
 msgid_plural "{{$count}} plans were not completed on time"
-msgstr[0] "{{$count}} 件のプランが予定時間に完了しませんでした"
+msgstr[0] "{{$count}} 件のプランが予定時間内に完了しませんでした"
+
+#: components/webhooks/webhookStatusIcon/webhookStatusIcon.directive.js:31
+msgid "A recent delivery failed"
+msgstr "最新の配信が失敗しました"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid ""
+"A webhook can be configured to only receive events relevant to the given "
+"group of systems"
+msgstr "webhook は、特定のシステムグループに関連するイベントのみを受信するように設定できます"
 
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 msgid "Accept"
 msgstr "適用"
 
-#: js/states/splash/splash.html:1
-msgid "Act on advice you can trust"
-msgstr "信頼できるアドバイスに基づく行動"
-
-#: js/components/actions/actions.html:1
 #: js/components/maintenance/maintenanceTable/maintenanceTableActions.html:1
+#: js/components/maintenance/maintenanceTable/maintenanceTableMulti.html:1
 msgid "Action"
-msgid_plural "Actions"
-msgstr[0] "アクション"
+msgstr "アクション"
 
 #: js/components/actions/actionsRule/actionsRule.html:1
+#: js/states/inventory/inventory.html:1
 msgid "Action Count"
 msgstr "アクション数"
 
+#: js/states/digests/digests.html:1
+msgid "Action Trends"
+msgstr "アクションのトレンド"
+
+#: js/components/config/webhooks/webhooks.html:1
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 #: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLiteTable/maintenancePlanLiteTable.html:1
-#: js/components/sideNav/actionsSideNav/actionsSideNav.html:1
+#: js/components/primary-nav/primary-nav.html:1
+#: js/states/inventory/inventory.html:1
 msgid "Actions"
 msgstr "アクション"
+
+#: js/states/overview/overview.html:1
+msgid "Actions Summary"
+msgstr "アクションのサマリー"
+
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "Actions available for group: {{selected.group.display_name}}&nbsp;"
+msgstr "アクションが利用可能なグループ: {{selected.group.display_name}}&nbsp;"
+
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "Actions available for selected system"
+msgid_plural "Actions available for {{$count}} selected systems"
+msgstr[0] "{{$count}} 台のシステムで利用可能なアクション"
+
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "Actions available for your inventory"
+msgstr "インベントリーで利用可能なアクション"
 
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 msgid "Actions resolved"
 msgstr "解決済みアクション"
 
-#: js/states/overview/overview.html:1
-msgid "Actions&nbsp;"
-msgstr "アクション&nbsp;"
-
 #: js/components/actions/actionsRule/actionsRule.html:1
 #: js/components/inventory/inventoryActions/inventoryActions.html:1
-msgid "Actions<i class=\"caret dropdown-caret\"></i>"
-msgstr "アクション<i class=\"caret dropdown-caret\"></i>"
+msgid "Actions<span class=\"caret\"></span>"
+msgstr "アクション<span class=\"caret\"></span>"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-#: js/states/getting-started/views/getting-started-direct.html:1
-#: js/states/getting-started/views/getting-started-sat5.html:1
-#: js/states/getting-started/views/getting-started-sat6.html:2
-msgid "Activate your evaluation"
-msgstr "評価を有効にする"
+#: js/components/config/webhooks/webhooks.html:1
+#: js/states/config/views/webhook-edit.html:1
+msgid "Active"
+msgstr "アクティブ"
 
-#: js/components/group/views/form.html:1
-msgid "Add Group"
-msgstr "グループを追加する"
+#: js/states/digests/digests.html:1
+msgid "Active Systems"
+msgstr "アクティブなシステム"
+
+#: js/components/collapsibleFilter/collapsibleFilter.html:1
+#: js/components/tableFilters/tableFilters.html:1
+msgid "Active filters:&nbsp;"
+msgstr "アクティブなフィルター:&nbsp;"
 
 #: js/components/system/systemTable/systemTable.html:1
 msgid "Add Systems"
 msgstr "システムを追加する"
 
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
-msgid "Add action"
+msgid "Add actions"
 msgstr "アクションを追加する"
 
-#: js/components/maintenance/maintenancePlanBar/maintenancePlanBar.html:1
-msgid "Add details&nbsp;<i class=\"fa fa-plus\"></i>"
-msgstr "詳細を追加する&nbsp;<i class=\"fa fa-plus\"></i>"
+#: js/states/config/views/webhook-edit.html:1
+msgid "Add certificate"
+msgstr "証明書を追加する"
 
-#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
-msgid "Add system"
-msgstr "システムを追加する"
+#: js/components/inventory/inventoryActions/inventoryActions.html:1
+msgid ""
+"Add to existing Plan/Playbook<ansible-icon value=\"isFixableSelected() "
+"&amp;&amp; (plans.future.length || plans.unscheduled.length)\" show-tooltip="
+"\"false\" class=\"inline-left\"></ansible-icon>"
+msgstr ""
+"既存のプラン/Playbook に追加する<ansible-icon value=\"isFixableSelected() &amp;&amp; "
+"(plans.future.length || plans.unscheduled.length)\" show-tooltip=\"false\" "
+"class=\"inline-left\"></ansible-icon>"
 
 #: js/components/actions/actionsRule/actionsRule.html:1
-#: js/components/card/systemCard/systemCard.html:1
-#: js/components/inventory/inventoryActions/inventoryActions.html:1
-msgid "Add to plan"
-msgstr "プランに追加する"
+msgid ""
+"Add to existing Plan/Playbook<ansible-icon value=\"plans.future.length || "
+"plans.unscheduled.length\" show-tooltip=\"false\" class=\"inline-left\"></"
+"ansible-icon>"
+msgstr ""
+"既存のプラン/Playbook に追加する<ansible-icon value=\"plans.future.length || plans."
+"unscheduled.length\" show-tooltip=\"false\" class=\"inline-left\"></ansible-"
+"icon>"
+
+#: js/components/config/webhooks/webhooks.html:1
+msgid "Add webhook"
+msgstr "webhook を追加する"
 
 #: js/states/security/security.html:1
 msgid "Additional Resources"
-msgstr "その他のリソース"
-
-#: js/states/getting-started/views/getting-started.html:1
-#: js/states/info/info.html:1
-msgid "Additional resources"
 msgstr "その他のリソース"
 
 #: js/components/system/addSystemModal/addSystemModal.html:1
 msgid "Advanced configuration"
 msgstr "高度な設定"
 
-#: components/filterComponents/actionsSelect/actionsSelect.directive.js:18
+#: components/filterComponents/actionsSelect/actionsSelect.directive.js:24
 msgid "Affected"
 msgstr "影響あり"
+
+#: js/components/rule/ruleResolution/ruleResolution.html:1
+msgid "Affected Hosts"
+msgstr "影響を受けるホスト"
+
+#: js/states/vulnerabilities/views/view-erratum.html:1
+msgid "Affected Packages"
+msgstr "影響を受けるパッケージ"
+
+#: js/components/maintenance/maintenanceTable/maintenanceTableMulti.html:1
+msgid "Affected Systems"
+msgstr "影響を受けるシステム"
 
 #: js/components/system/addSystemModal/addSystemModal.html:1
 msgid ""
 "After registration, the Insights client will upload initial system "
 "information to Red Hat Insights. You should be able to immediately see your "
-"system in the <a ui-sref=\"app.inventory\" ng-click=\"close()\">Insights "
-"user interface.</a>"
+"system in the&nbsp;<a ui-sref=\"app.inventory\" ng-click="
+"\"close()\">Insights user interface.</a>"
 msgstr ""
-"登録が終わると、Insights クライアントがシステム初期情報を Red Hat Insights にアップロードします。<a ui-sref="
-"\"app.inventory\" ng-click=\"close()\">Insights ユーザーインターフェース</"
+"登録が終わると、Insights クライアントがシステム初期情報を Red Hat Insights にアップロードします。&nbsp;<a ui-"
+"sref=\"app.inventory\" ng-click=\"close()\">Insights ユーザーインターフェース</"
 "a>でシステムをすぐに確認できます。"
 
-#: js/states/getting-started/views/getting-started-direct.html:1
-msgid ""
-"After registration, the Insights client will upload initial system "
-"information to Red Hat Insights. You should be able to immediately see your "
-"system in the <a ui-sref=\"app.inventory\">Insights user interface.</a>"
-msgstr ""
-"登録が終わると、Insights クライアントがシステム初期情報を Red Hat Insights にアップロードします。<a ui-sref="
-"\"app.inventory\">Insights ユーザーインターフェース</a>でシステムをすぐに確認できます。"
+#: js/components/filterComponents/ageSelect/ageSelect.html:1
+msgid "Age"
+msgstr "経過時間"
 
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"After registration, the Insights client will upload initial system metadata "
-"to Red Hat Insights. You should be able to immediately see your system in "
-"the Insights user interface."
-msgstr ""
-"登録が終わると、Insights クライアントがシステム初期情報を Red Hat Insights にアップロードします。Insights "
-"ユーザーインターフェースでシステムをすぐに確認できます。"
+#: components/filterComponents/ageSelect/ageSelect.directive.js:30
+msgid "Age:  Days"
+msgstr "経過時間:  日間"
 
-#: js/states/getting-started/views/getting-started-containers.html:1
-msgid ""
-"After running the Insights client, it will upload initial system and image "
-"information to Red Hat Insights. You should be able to immediately see your "
-"system and image information in the Insights user interface."
-msgstr ""
-"Insights クライアントの実行後、システムとイメージの初期情報が Red Hat Insights にアップロードされます。Insights "
-"ユーザーインターフェースでこの情報をすぐに確認できます。"
-
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"After the above command finishes, the Insights Coordinator has uploaded the "
-"initial deployment information to Red Hat Insights. \n"
-"You should be able to immediately see your stack in the <a href=\"https://"
-"access.redhat.com/insightsbeta\" target=\"_blank\">Insights user interface.</"
-"a>"
-msgstr ""
-"上記のコマンドが完了すると、Insights Coordinator はデプロイメント初期情報を Red Hat Insights "
-"にアップロードします。 \n"
-"<a href=\"https://access.redhat.com/insightsbeta\" target="
-"\"_blank\">Insights ユーザーインターフェース</a> でスタックをすぐに確認できます。"
+#: components/filterComponents/ageSelect/ageSelect.directive.js:23
+msgid "Age: Today"
+msgstr "経過時間: 本日"
 
 #: js/states/evaluation/evaluation.html:1
 msgid "Agree and Get Started"
@@ -424,24 +491,27 @@ msgstr "アラート"
 msgid "Alerts&nbsp;"
 msgstr "アラート&nbsp;"
 
-#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
-#: js/components/maintenance/maintenancePlanBar/maintenancePlanBar.html:1
-msgid "Alias (optional)"
-msgstr "エイリアス (オプション)"
-
-#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
-msgid "Alias:&nbsp;"
-msgstr "エイリアス:&nbsp;"
-
-#: components/filterComponents/actionsSelect/actionsSelect.directive.js:13
+#: components/filterComponents/actionsSelect/actionsSelect.directive.js:18
+#: components/filterComponents/ageSelect/ageSelect.directive.js:18
+#: components/filterComponents/categorySelect/categorySelect.directive.js:16
 #: components/filterComponents/checkInSelect/checkInSelect.directive.js:13
-#: components/severities/severities.js:11
+#: components/filterComponents/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:19
+#: components/filterComponents/riskOfChangeSelect/riskOfChangeSelect.directive.js:15
 msgid "All"
 msgstr "すべて"
 
+#: js/states/digests/digests.html:1
+msgid "All Rule hits"
+msgstr "すべてのルール"
+
 #: js/components/groupSelect/groupSelect.html:1
-msgid "All Groups"
-msgstr "すべてのグループ"
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "All Systems"
+msgstr "すべてのシステム"
+
+#: states/config/webhook-edit.controller.js:32
+msgid "All Systems (no filtering)"
+msgstr "すべてのシステム (フィルタリングなし)"
 
 #: js/states/security/security.html:1
 msgid ""
@@ -451,18 +521,6 @@ msgid ""
 msgstr ""
 "Red Hat サーバーとの TLS "
 "トラフィックは、アプリケーションに含まれる信頼できる証明書ですべて照合されるため、中間者攻撃などにより通信が妨害されることはありません。"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"All appliances configured for the UI role that will be used to view Red Hat "
-"Insights reports must be registered for Red Hat updates.  In the CloudForms "
-"Management Engine UI, navigate to <strong>Configure -&gt; Configuration</"
-"strong>. Select a zone and verify that the appropriate appliance is "
-"registered."
-msgstr ""
-"Red Hat Insights レポートの表示に使用される UI ロールを設定したアプライアンスはすべて、Red Hat "
-"の更新を登録する必要があります。CloudForms Management Engine で、<strong>構成 -&gt; 設定管理</"
-"strong> に移動します。ゾーンを選択して、適切なアプライアンスが登録されていることを確認します。"
 
 #: js/states/security/security.html:1
 msgid ""
@@ -497,151 +555,143 @@ msgstr "お客様の保存データを格納している全ボリュームは、
 msgid "An error occurred. Please try again later.&nbsp;"
 msgstr "エラーが発生しました。後でもう一度やり直してください。&nbsp;"
 
-#: js/states/evaluation/evaluation.html:1
-msgid "An error occurred. Please try again: {{error}}"
-msgstr "エラーが発生しました。もう一度やり直してください: {{error}}"
+#: js/components/incident/incidentLite/incidentLite.html:1
+msgid ""
+"An&nbsp;<strong translate=\"translate\">incident&nbsp;</strong><span "
+"translate=\"translate\">is an issue that is currently or has already "
+"affected systems.&nbsp;</span><a ui-sref=\"app.topic({id: 'incidents'})\" "
+"class=\"link\"><strong translate=\"translate\">View incidents</strong></a>"
+msgstr ""
+"&nbsp;<strong translate=\"translate\">インシデントとは&nbsp;</strong><span translate="
+"\"translate\">現在またはすでにシステムに影響を与えている問題です。&nbsp;</span><a ui-sref=\"app."
+"topic({id: 'incidents'})\" class=\"link\"><strong translate="
+"\"translate\">インシデントの表示</strong></a>"
+
+#: js/components/incident/incidentSummary/incidentSummary.html:1
+msgid ""
+"An&nbsp;<strong>incident&nbsp;</strong>is an issue that is currently or has "
+"already affected systems. You have 0 issues that are INCIDENTS."
+msgstr ""
+"&nbsp;<strong>インシデント&nbsp;</strong> "
+"とは、現在またはすでにシステムに影響を与えている問題です。インシデントとなっている問題はありません。"
 
 #: js/components/userInfo/userInfo.html:1
-#: js/states/announcements/announcements.html:1
 msgid "Announcements"
 msgstr "お知らせ"
 
+#: js/components/maintenance/maintenanceTable/maintenanceTableMulti.html:1
+#: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLite.html:1
 #: js/components/topics/topicRuleList/topicRuleList.html:1
-#: js/states/getting-started/views/getting-started-sat5.html:1
 msgid "Ansible"
 msgstr "Ansible"
 
-#: js/states/splash/splash.html:1
-msgid ""
-"Ansible integration will soon be available for Red Hat Insights. If you’re "
-"interested in being an early adopter and participating in the private beta, "
-"please email us at insights@redhat.com."
-msgstr ""
-"Ansible 統合は、Red Hat Insights "
-"でまもなく利用可能になります。早期にこれを採用してプライベートのベータ版に参加を希望される場合は、その旨を insights@redhat.com "
-"まで電子メールでお知らせください。"
-
-#: components/maintenance/maintenancePlan/maintenancePlan.directive.js:206
-#: components/maintenance/maintenancePlan/maintenancePlan.directive.js:70
+#: services/sweetalert.service.js:12
 msgid "Are you sure?"
 msgstr "よろしいですか?"
 
-#: js/states/getting-started/views/getting-started-sat6.html:3
-msgid "Assign Red Hat Insights Roles to Users"
-msgstr "Red Hat Insights ロールをユーザーに割り当てる"
+#: js/states/evaluation/evaluation.html:1
+msgid "Asia Pacific"
+msgstr "アジア太平洋"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid "Assign Red Hat Insights to user roles"
-msgstr "Red Hat Insights をユーザーロールに割り当てる"
+#: js/states/vulnerabilities/views/view-cve.html:1
+msgid "Associated RHSAs:"
+msgstr "関連する RHSA:"
 
-#: js/states/splash/splash.html:1
-msgid "Automate your response"
-msgstr "応答の自動化"
-
-#: js/states/actions/actions.html:1
-#: js/states/info/info.html:1
+#: components/filterComponents/categorySelect/categorySelect.directive.js:20
 msgid "Availability"
-msgstr "アベイラビリティ"
+msgstr "アベイラビリティー"
 
 #: components/system/systemTable/systemTable.directive.js:20
 msgid "Available Systems"
 msgstr "利用可能なシステム"
 
-#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
-msgid "Available actions for 1 system"
-msgid_plural "Available actions for {{$count}} systems"
-msgstr[0] "{{$count}} 台のシステムで利用可能なアクション"
-
-#: js/states/splash/splash.html:1
-msgid "Avoid firefighting"
-msgstr "事後対応を避ける"
-
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"Before proceeding with installing Red Hat Insights on RHV, ensure the "
-"following prerequisites are met:"
-msgstr "RHV でのRed Hat Insights のインストール前に、以下の条件を満たしていることを確認してください。"
-
-#: js/states/getting-started/views/getting-started-containers.html:1
-msgid ""
-"Before proceeding with installing Red Hat Insights, ensure the following "
-"prerequisites are met:"
-msgstr "Red Hat Insights のインストール前に、以下の条件を満たしていることを確認してください。"
-
-#: js/states/getting-started/views/getting-started-osp.html:1
-msgid ""
-"Before proceeding with installing the Red Hat Insights for OpenStack Private "
-"Beta, ensure the following prerequisites are met:"
-msgstr ""
-"Red Hat Insights for OpenStack Private Beta "
-"のインストール前に、以下の条件を満たしていることを確認してください。"
-
 #: js/components/betaSwitchButton/betaSwitchButton.html:1
-msgid "Beta"
-msgstr "ベータ"
+msgid "Beta options"
+msgstr "ベータオプション"
 
 #: js/components/topbar/topbar.html:1
 msgid "Browser Support"
 msgstr "ブラウザーサポート"
 
-#: js/states/getting-started/views/getting-started-sat6.html:3
-msgid ""
-"By default, only administrators can view Insights Report and Configuration "
-"screens. You can give users who are not administrators access to the "
-"Insights screens by assigning them the appropriate roles as follows."
-msgstr ""
-"デフォルトでは、Insights "
-"レポートおよび設定画面の表示ができるのは管理者のみです。以下のようにユーザーに適切なロールを割り当てると、管理者以外のユーザーも Insights "
-"画面にアクセスできるようになります。"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"By default, only super administrators can view Insights Report and "
-"Configuration screens. You can give users who are not super administrators "
-"access to the Insights screens by assigning the appropriate features to "
-"their roles."
-msgstr ""
-"デフォルトでは、スーパー管理者だけが Insights "
-"のレポート画面と設定画面を表示できます。ロールに適切な機能を割り当てると、スーパー管理者でなくてもこれらの画面にアクセスできるようになります。"
-
 #: js/states/evaluation/evaluation.html:1
 msgid ""
 "By proceeding, I acknowledge that I have read and agree to the terms and "
-"conditions of the <a href=\"http://www.redhat.com/licenses/\" target="
+"conditions of the<a href=\"http://www.redhat.com/licenses/\" target="
 "\"_blank\">Red Hat Enterprise Agreement</a> which governs my use."
 msgstr ""
-"実行することによって、<a href=\"http://www.redhat.com/licenses/\" target=\"_blank\">Red "
-"Hat Enterprise Agreement</a> にある契約書への同意および承諾を表明したことになります。"
+"続行すると、<a href=\"http://www.redhat.com/licenses/\" target=\"_blank\">Red Hat "
+"Enterprise Agreement</a> にある契約条件を読み、同意したことになります。"
+
+#: js/components/vulnerabilities/erratumCard/erratumCard.html:1
+msgid "CVE"
+msgstr "CVE"
+
+#: components/vulnerabilities/vulnerabilitySeverityIcon/vulnerabilitySeverityIcon.directive.js:27
+msgid "CVE Impact: {{impact}}"
+msgstr "CVE の影響: {{impact}}"
+
+#: js/components/vulnerabilities/erratumCard/erratumCard.html:1
+msgid "CVE Information"
+msgstr "CVE 情報"
+
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "CVE Name"
+msgstr "CVE 名"
+
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "CVEs"
+msgstr "CVE"
+
+#: js/components/vulnerabilities/erratumCard/erratumCard.html:1
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "CVSS Score"
+msgstr "CVSS スコア"
+
+#: js/states/vulnerabilities/views/view-cve.html:1
+msgid "CVSS Score:"
+msgstr "CVSS スコア:"
 
 #: js/components/feedback/feedbackModal.html:1
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
-#: js/components/maintenance/maintenancePlanBar/maintenancePlanBar.html:1
 #: js/components/maintenance/maintenanceTable/maintenanceTableFooter.html:1
+#: js/components/maintenance/resolutionModal/resolutionModal.html:1
+#: js/states/config/views/webhook-edit.html:1
+#: services/sweetalert.service.js:17
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: js/components/config/hidden/hidden.html:1
+#: js/components/digest/digestGraph.html:1
+#: js/components/filterComponents/categorySelect/categorySelect.html:1
 msgid "Category"
 msgstr "カテゴリー"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid ""
-"Check the status of the RPM installation by navigating to the "
-"<strong>Schedule --&gt; Pending Actions</strong> page."
-msgstr ""
-"RPM のインストール状況を確認するには、<strong>スケジュール --&gt; 保留中のアクション</strong>ページに移動します"
+#: components/filterComponents/categorySelect/categorySelect.directive.js:21
+msgid "Category: Availability"
+msgstr "カテゴリー: アベイラビリティー"
 
-#: components/filterComponents/checkInSelect/checkInSelect.directive.js:18
+#: components/filterComponents/categorySelect/categorySelect.directive.js:29
+msgid "Category: Performance"
+msgstr "カテゴリー: パフォーマンス"
+
+#: components/filterComponents/categorySelect/categorySelect.directive.js:33
+msgid "Category: Security"
+msgstr "カテゴリー: セキュリティー"
+
+#: components/filterComponents/categorySelect/categorySelect.directive.js:25
+msgid "Category: Stability"
+msgstr "カテゴリー: 安定性"
+
+#: components/filterComponents/checkInSelect/checkInSelect.directive.js:19
 msgid "Checking In"
 msgstr "チェックイン"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid "Chef"
-msgstr "Chef"
+#: js/states/policies/views/view-policy.html:2
+msgid "Checks<span>&nbsp;{{:: resource.status}}</span>"
+msgstr "チェック<span>&nbsp;{{:: resource.status}}</span>"
 
-#: js/states/info/info.html:1
-msgid "Clear, tailored, and actionable intelligence"
-msgstr "分かりやすく、編集済みで、すぐに使用できる情報"
+#: js/components/maintenance/resolutionModal/resolutionModal.html:1
+msgid "Choose Resolution"
+msgstr "解決策を選択"
 
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 msgid "Click to add/remove actions for this system"
@@ -671,9 +721,17 @@ msgstr "コードはピアレビューを受けています。"
 msgid "Collapse All"
 msgstr "折りたたむ"
 
+#: js/components/systemMetadata/systemMetadata.html:1
+msgid "Collapse Table"
+msgstr "テーブルを閉じる"
+
 #: js/components/feedback/feedbackModal.html:1
 msgid "Comment"
 msgstr "コメント"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid "Common Name (CN):"
+msgstr "共通名 (CN):"
 
 #: js/states/security/security.html:1
 msgid ""
@@ -687,106 +745,146 @@ msgid ""
 "network ACLs."
 msgstr "Red Hat との通信は、監査およびネットワーク ACL 用の安全なプロキシで送信できます。"
 
-#: js/components/sideNav/sideNav.html:7
+#: js/components/primary-nav/primary-nav.html:1
 msgid "Configuration"
 msgstr "設定"
 
-#: js/states/getting-started/views/getting-started-containers.html:1
-#: js/states/getting-started/views/getting-started-direct.html:1
-#: js/states/getting-started/views/getting-started-osp.html:3
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid "Configure Insights Client to use an HTTP proxy"
-msgstr "Insights Client が HTTP プロキシを使用するよう設定する"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid "Configure Smart State Analysis"
-msgstr "Smart State Analysis の設定"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"Configure the Smart State Analysis profile for your appliances to collect "
-"the contents of the file <strong>/etc/redhat-access-insights/machine-id</"
-"strong>"
-msgstr ""
-"アプライアンスの Smart State Analysis プロファイルが <strong>/etc/redhat-access-insights/"
-"machine-id</strong> ファイルのコンテンツを収集するように設定します。"
-
 #: js/components/overview/widgets/goals/goalsLite.html:1
-msgid ""
-"Congratulations! You have registered 10/10 available systems. To register "
-"more systems &nbsp;"
-msgstr "設定完了: 登録可能な 10 台すべての登録が完了しました。さらにシステムを登録 &nbsp;"
+msgid "Congratulations! You have registered all available systems."
+msgstr "おめでとうございます! 利用可能な全システムの登録が完了しました。"
 
 #: js/components/gettingStartedTabs/gettingStartedTabs.html:1
 msgid "Containers"
-msgstr "Containers"
+msgstr "コンテナー"
 
 #: js/states/evaluation/evaluation.html:1
 msgid "Continue to Insights"
 msgstr "Insights に進む"
 
-#: js/components/actions/actionsCategory/actionsCategory.html:1
-#: js/components/actions/actionsDetails/actionsDetails.html:1
-msgid "Count"
-msgstr "アクション数"
+#: services/group.service.js:76
+msgid "Create"
+msgstr "作成"
+
+#: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLite.html:1
+msgid "Create a new Plan/Playbook"
+msgstr "新規プラン/Playbook の作成"
+
+#: js/components/inventory/inventoryActions/inventoryActions.html:1
+msgid ""
+"Create a new Plan/Playbook<ansible-icon value=\"isFixableSelected()\" show-"
+"tooltip=\"false\" class=\"inline-left\"></ansible-icon>"
+msgstr ""
+"新規プラン/Playbook の作成<ansible-icon value=\"isFixableSelected()\" show-tooltip="
+"\"false\" class=\"inline-left\"></ansible-icon>"
 
 #: js/components/actions/actionsRule/actionsRule.html:1
-msgid "Create Playbook"
-msgstr "Playbook を作成"
+msgid ""
+"Create a new Plan/Playbook<ansible-icon value=\"true\" show-tooltip="
+"\"false\" class=\"inline-left\"></ansible-icon>"
+msgstr ""
+"新規プラン/Playbook の作成<ansible-icon value=\"true\" show-tooltip=\"false\" class="
+"\"inline-left\"></ansible-icon>"
 
-#: js/components/group/views/form.html:1
-msgid "Create a new group"
-msgstr "新しいグループを作成"
+#: services/group.service.js:42
+#: services/group.service.js:73
+msgid "Create new System Group"
+msgstr "新規システムグループの作成"
 
-#: components/maintenance/maintenanceModal/maintenanceModal.directive.js:226
-#: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLite.html:1
-msgid "Create a new plan"
-msgstr "新しいプランを作成"
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "Create new plan"
+msgstr "新規プランの作成"
 
-#: js/components/card/systemCard/systemCard.html:1
-msgid "Create playbook"
-msgstr "Playbook を作成"
+#: js/components/groupSelect/groupSelect.html:1
+msgid "Create new system group"
+msgstr "新規システムグループの作成"
 
-#: js/components/config/groups/groups.html:1
-msgid "Creating group …"
-msgstr "グループを作成しています..."
-
-#: components/severityIcon/severityIcon.directive.js:21
+#: components/severityIcon/severityIcon.directive.js:67
+#: components/severityIcon/severityIcon.directive.js:71
 #: js/components/actions/severitySummary/severitySummary.html:1
+#: js/components/overview/widgets/vulnerabilitiesWidget/vulnerabilitiesWidget.html:1
 msgid "Critical"
 msgstr "重大"
 
-#: js/states/info/info.html:1
-msgid "Datasheet"
-msgstr "データシート"
+#: components/maintenance/maintenancePlan/maintenancePlan.directive.js:146
+msgid "Current Group"
+msgstr "現在のグループ"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid "Custom certificate"
+msgstr "カスタム証明書"
+
+#: js/components/primary-nav/primary-nav.html:1
+msgid "Customer Portal"
+msgstr "カスタマーポータル"
+
+#: js/states/evaluation/evaluation.html:1
+msgid "Customers in Japan, please use this form to contact sales in Japan."
+msgstr "日本国内のお客様は、こちらのフォームを使用して営業チームにご連絡ください。"
 
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
-msgid "Date:&nbsp;"
-msgstr "日付:&nbsp;"
+msgid "Customize Playbook Run"
+msgstr "Playbook 実行のカスタマイズ"
+
+#: components/maintenance/maintenancePlan/maintenancePlan.directive.js:140
+msgid ""
+"Date, time and duration of a maintenance window can be defined here. If a "
+"maintenance window for this plan is set then Insights will verify that all "
+"the actions in this plan are resolved once the window ends. Insights will "
+"warn you this plan is not fully resolved when the maintenance window ends."
+msgstr ""
+"メンテナンスの日時と期間は、ここで定義できます。このプランのメンテナンス期間が設定されていれば、メンテナンス後に Insights "
+"が、同プランの全アクションが解決されていることを検証します。メンテナンス後に Insights は、このプランが完全に解決されていないことを警告します。"
+
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid ""
+"Date:&nbsp;<i tooltip=\"{{editDateTooltip}}\" class=\"fa fa-question-"
+"circle\"></i>"
+msgstr ""
+"日付:&nbsp;<i tooltip=\"{{editDateTooltip}}\" class=\"fa fa-question-"
+"circle\"></i>"
+
+#: js/components/filterComponents/daysKnownSelect/daysKnownSelect.html:1
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "Days Known"
+msgstr "既知の日数"
+
+#: states/vulnerabilities/controllers/view.cve.controller.js:32
+msgid "Days Public: {{days_known}}"
+msgstr "公開日数: {{days_known}}"
 
 #: js/states/evaluation/evaluation.html:1
 msgid "Decline"
 msgstr "拒否する"
 
 #: js/components/betaSwitchButton/betaSwitchButton.html:1
-msgid "Default to"
-msgstr "既定"
+msgid ""
+"Default to Insights Beta<md-checkbox ng-show=\"isOnBeta()\" ng-model="
+"\"isOptedIn\" aria-label=\"Beta Button\" class=\"md-accent md-hue-1 beta-"
+"checkbox\"> </md-checkbox>"
+msgstr ""
+"Insights Beta をデフォルトにする<md-checkbox ng-show=\"isOnBeta()\" ng-model="
+"\"isOptedIn\" aria-label=\"Beta Button\" class=\"md-accent md-hue-1 beta-"
+"checkbox\"> </md-checkbox>"
 
-#: js/components/group/views/group.html:1
-msgid "Delete Group"
-msgstr "グループを削除する"
+#: js/components/groupSelect/groupSelect.html:1
+msgid "Delete group"
+msgstr "グループの削除"
 
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 msgid "Delete this plan"
 msgstr "このプランを削除する"
 
-#: js/states/info/info.html:1
-msgid "Delivered via"
-msgstr "配信方法"
+#: js/states/vulnerabilities/views/view-cve.html:1
+msgid "Description"
+msgstr "説明"
 
-#: js/components/filterComponents/productFilters/osp/ospDeploymentSelect/ospDeploymentSelect.html:1
-msgid "Deployment"
-msgstr "デプロイメント"
+#: js/components/rule/ruleReason/ruleReason.html:1
+msgid "Detected issues"
+msgstr "検出された問題"
+
+#: js/states/config/views/config.html:1
+msgid "Dev"
+msgstr "Dev"
 
 #: js/states/security/security.html:1
 msgid "Development Best Practices"
@@ -796,53 +894,62 @@ msgstr "開発のベストプラクティス"
 msgid "Direct"
 msgstr "直接登録"
 
+#: js/components/demoAccountSwitcher/demoAccountSwitcher.html:1
+msgid "Disable Demo Account"
+msgstr "デモアカウントを無効にする"
+
 #: js/components/topbar/alerts/alerts.html:1
 msgid "Dismiss"
 msgstr "破棄"
 
 #: js/components/inventory/inventoryActions/unregisterConflict.html:1
 msgid "Do you want to proceed with the remaining 1 system?"
-msgid_plural "Do you want to proceed with the remaining {{$count}} systems?"
+msgid_plural ""
+"Do you want to proceed with the remaining {{:: $count}} systems?"
 msgstr[0] "残りの {{$count}} システムを処理しますか?"
+
+#: js/states/digests/digests.html:1
+msgid "Download PDF"
+msgstr "PDF をダウンロード"
+
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "Download Playbook"
+msgstr "Playbook をダウンロード"
+
+#: js/components/buttons/button-split/button-split.html:1
+msgid "Dropdown text"
+msgstr "ドロップダウンテキスト"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid ""
+"Due to sensitive nature of data that Red Hat Insights operates on HTTPS is "
+"required. For cases when your server does not use a certificate signed by "
+"a&nbsp;"
+msgstr ""
+"データの機密性のため、Red Hat Insights は HTTPS 上で操作する必要があります。お使いのサーバーが、&nbsp; "
+"で署名された証明書を使用しない場合"
 
 #: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLiteTable/maintenancePlanLiteTable.html:1
 msgid "Duration"
 msgstr "期間"
 
-#: js/components/maintenance/maintenancePlanBar/maintenancePlanBar.html:1
-msgid "Duration (minutes)"
-msgstr "期間 (分)"
-
-#: components/severities/severities.js:14
-msgid "ERROR"
-msgstr "エラー"
-
+#: js/components/config/webhooks/webhooks.html:1
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+#: js/states/overview/overview.html:1
 msgid "Edit"
 msgstr "編集"
 
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"Edit /etc/redhat-access-insights/redhat-access-insights.conf and add "
-"no_schedule=True. This value should already exist at the bottom of the file "
-"so it will just need to be uncommented and changed to True, but should it "
-"not exist it will need to be added."
-msgstr ""
-"/etc/redhat-access-insights/redhat-access-insights.conf を編集して no_schedule="
-"True を追加します。この値は同ファイルの下部にすでに存在するため、コメントを解除して値を True "
-"に変更します。ただし値が存在しない場合は追加する必要があります。"
+#: js/states/config/views/webhook-edit.html:1
+msgid "Edit certificate"
+msgstr "証明書の編集"
 
 #: js/components/feedback/feedbackModal.html:1
 msgid "Email"
 msgstr "電子メール"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid "Enable Red Hat Insights"
-msgstr "Red Hat Insights を有効にする"
-
-#: js/states/getting-started/views/getting-started-containers.html:1
-msgid "Enable the Red Hat Insights Repository"
-msgstr "Red Hat Insights のリポジトリーを有効にする"
+#: js/components/demoAccountSwitcher/demoAccountSwitcher.html:1
+msgid "Enable Demo Account"
+msgstr "デモアカウントを有効にする"
 
 #: js/states/security/security.html:1
 msgid ""
@@ -851,40 +958,29 @@ msgid ""
 msgstr ""
 "登録はオプトインとなります。したがって、お客様の明確な同意がなければシステムからデータは収集されません。収集頻度は日次または週次で設定できます。"
 
-#: js/states/splash/splash.html:1
-msgid ""
-"Ensure integration of high­-priority security analysis in an operations­-"
-"friendly workflow with a view of all actions prioritized by level of risk."
-msgstr "作業のしやすいワークフローにおける優先度の高いセキュリティー分析とリスクに応じて優先順位付けされたアクションの一括表示が統合されています。"
+#: js/components/webhooks/webhookStatusModal/webhookStatusModal.html:1
+msgid "Error:&nbsp;"
+msgstr "エラー:&nbsp;"
 
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"Ensure that the RHV Manager can SSH into all individual hypervisor nodes, "
-"and that the SSH fingerprints have been accepted for all hypervisor nodes. "
-"The manager must have access to all of the individual hypervisors via public "
-"key access (defined in the configuration files, or by running --configure)."
-msgstr ""
-"RHV Manager がハイパーバイザーの各ノードに対して SSH が実行可能で、さらにすべてのノードで SSH "
-"フィンガープリントが受信済みであることを確認します。公開鍵へのアクセス (設定ファイルで定義、または --configure を実行) "
-"により、Manager がすべてのハイパーバイザーにアクセス可能であること。"
+#: js/states/evaluation/evaluation.html:1
+msgid "Europe, Middle East, and Africa"
+msgstr "ヨーロッパ、中東、およびアフリカ"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid "Ensure that you're running Satellite 5.7."
-msgstr "Satellite 5.7 を実行していること。"
+#: js/components/webhooks/webhookStatusModal/webhookStatusModal.html:1
+msgid "Event Id"
+msgstr "イベント Id"
 
-#: js/states/getting-started/views/getting-started-sat6.html:1
-msgid "Ensure that you’re running the latest Satellite 6.1."
-msgstr "最新の Satellite 6.1 を実行していること。"
+#: js/components/webhooks/webhookStatusModal/webhookStatusModal.html:1
+msgid "Event Type"
+msgstr "イベントタイプ"
 
-#: js/states/getting-started/views/getting-started-sat6.html:1
-msgid ""
-"Ensure that you’ve synchronized the latest RHEL 6.7 and RHEL 7.1.z RPMs to "
-"your Satellite, and that they are available to your clients."
-msgstr "最新の RHEL 6.7 と RHEL 7.1.z RPM が Satellite と同期しており、これらがクライアントで利用できること。"
+#: js/components/config/webhooks/webhooks.html:1
+msgid "Event Types"
+msgstr "イベントタイプ"
 
-#: js/components/group/views/form.html:1
-msgid "Enter new group name"
-msgstr "新しいグループ名を入力する"
+#: js/states/config/views/webhook-edit.html:1
+msgid "Every event (no filtering)"
+msgstr "すべてのイベント (フィルタリングなし)"
 
 #: js/states/evaluation/evaluation.html:1
 msgid ""
@@ -900,136 +996,86 @@ msgstr ""
 "li><li>サポートサービスをサードパーティーに提供する、</li><li>サードパーティーのサポートサービスを Red Hat "
 "サブスクリプション評価プログラムで補完もしくは補足する。</li></ul>"
 
-#: js/states/splash/splash.html:1
-msgid "Executive brief"
-msgstr "エグゼブティブブリーフ"
+#: js/components/primary-nav/primary-nav.html:1
+msgid "Executive Report"
+msgstr "エグゼクティブレポート"
+
+#: js/states/digests/digests.html:1
+msgid ""
+"Executive Reporting requires 10 or more systems to be registered with "
+"Insights."
+msgstr "エグゼクティブレポートをご覧になるには、10 台以上のシステムを Insights に登録する必要があります。"
 
 #: js/components/expandAllButton/expandAllButton.html:1
 msgid "Expand All"
 msgstr "展開する"
 
-#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
-msgid "Export CSV"
-msgstr "CSV にエクスポートする"
+#: js/components/systemMetadata/systemMetadata.html:1
+msgid "Expand Table"
+msgstr "テーブルを展開する"
 
-#: js/states/rules/views/admin-rules.html:1
-msgid "Export all rules (CSV)"
-msgstr "全ルールをエクスポートする (CSV)"
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+#: services/actionbar.service.js:30
+msgid "Export CSV"
+msgstr "CSV でエクスポート"
 
 #: js/states/actions/actions.html:1
 msgid "Featured Topics"
 msgstr "注目トピック"
 
-#: js/components/system/systemSummaryTable/systemSummaryTable.html:1
 #: js/components/system/systemTable/systemTable.html:1
 msgid "Filter"
 msgstr "フィルタリング"
 
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"Firewall rules must allow Red Hat Insights to make outbound connections to "
-"https://api.redhat.com:443 and https://cert-api.access.redhat.com:443"
-msgstr ""
-"ファイアウォールのルールで、Red Hat Insights による https://api.redhat.com:443 および https://"
-"cert-api.access.redhat.com:443 への発信接続が許可されていること。"
+#: js/components/groupSelect/groupSelect.html:1
+msgid "Find A Group"
+msgstr "グループを検索"
 
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"Firewall rules must allow the Insights Coordinator to make outbound "
-"connections to https://api.access.redhat.com:443 and https://cert-api.access."
-"redhat.com:443"
-msgstr ""
-"ファイアウォールのルールで、Insights コーディネーターによる https://api.access.redhat.com:443 および "
-"https://cert-api.access.redhat.com:443 への発信接続が許可されていること。"
+#: js/components/actions/actionsRule/actionsRule.html:1
+#: js/states/inventory/inventory.html:1
+#: js/states/vulnerabilities/views/view-erratum.html:1
+msgid "Find a system"
+msgstr "システムを検索"
+
+#: js/components/vulnerabilities/erratumCard/erratumCard.html:1
+msgid "Fix Version"
+msgstr "バージョンを修正"
 
 #: js/components/overview/widgets/goals/goalsLite.html:1
-msgid "Fix all of your<br>{{securityErrors}} security issues"
-msgstr "セキュリティーに関する {{securityErrors}} 件の問題を<br>すべて修復する"
+msgid "Fix all of your<br>{{:: securityErrors}} security issues"
+msgstr "セキュリティーに関する<br>{{:: securityErrors}} 件の問題をすべて修復する"
 
 #: js/components/overview/widgets/goals/goalsLite.html:1
-msgid "Fix all of your<br>{{stabilityErrors}} stability issues"
-msgstr "安定性に関する {{stabilityErrors}} 件の問題を<br>すべて修復する"
-
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"Follow this set of instructions to install the Insights Coordinator and "
-"Client packages."
-msgstr "以下の手順にしたがって Insights コーディネーターとクライアントのパッケージをインストールします。"
-
-#: js/states/info/info.html:1
-msgid ""
-"For analysis by the Insights engine, a minimal subset of information "
-"commonly provided in a standard support case is collected by the Insights "
-"client. This data is collected via secure protocols at defined intervals "
-"then analyzed and discarded at the next upload, or no longer than two weeks "
-"later."
-msgstr ""
-"Insights エンジンによって解析が行われるため、一般的なサポートケースで通常提供される最低限の情報が Insights "
-"クライアントによって収集されます。このデータは、指定した間隔で安全なプロトコルを通して収集され、解析され、次のアップロード時、あるいは 2 "
-"週間後に破棄されます。"
+msgid "Fix all of your<br>{{:: stabilityErrors}} stability issues"
+msgstr "安定性に関する<br>{{:: stabilityErrors}} 件の問題をすべて修復する"
 
 #: js/components/system/addSystemModal/addSystemModal.html:1
 msgid ""
-"For more advanced configuration see the <a href=\"https://access.redhat.com/"
-"products/red-hat-insights#getstarted\" target=\"_blank\" ng-click="
-"\"close()\" translate=\"translate\">getting started guide</a>."
+"For more advanced configuration see the&nbsp;<a href=\"{{:: "
+"gettingStartedLink}}\" target=\"_blank\" ng-click=\"close()\" translate="
+"\"translate\">getting started guide</a>."
 msgstr ""
-"高度な設定については、<a href=\"https://access.redhat.com/products/red-hat-"
-"insights#getstarted\" target=\"_blank\" ng-click=\"close()\" translate="
-"\"translate\">スタートガイド</a> を参照してください。"
+"高度な設定については&nbsp;<a href=\"{{:: gettingStartedLink}}\" target=\"_blank\" ng-"
+"click=\"close()\" translate=\"translate\">スタートガイド</a> を参照してください。"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"For more information on how to configure and run Smart State Analysis, see "
-"the official CloudForms &nbsp;<a href=\"https://access.redhat.com/"
-"documentation/en-US/Red_Hat_CloudForms/3.2/html/Insight_Guide/sect-"
-"Virtual_Machines.html#sect-"
-"Analyzing_Virtual_Machines_and_Templates\">documentation.</a>"
-msgstr ""
-"Smart State Analysis の設定および実行方法については、CloudForms の<a href=\"https://access."
-"redhat.com/documentation/en-US/Red_Hat_CloudForms/3.2/html/Insight_Guide/"
-"sect-Virtual_Machines.html#sect-"
-"Analyzing_Virtual_Machines_and_Templates\">ドキュメンテーション</a>を参照してください。"
-
-#: js/states/getting-started/views/getting-started-sat6.html:3
-msgid ""
-"For more information on roles refer to the official Satellite 6 <a href="
-"\"https://access.redhat.com/documentation/en-US/Red_Hat_Satellite/6.1/html/"
-"User_Guide/chap-Red_Hat_Satellite-User_Guide-Users_and_Roles."
-"html\">documentation.</a>"
-msgstr ""
-"ロールに関する詳細については、公式の Satellite 6 <a href=\"https://access.redhat.com/"
-"documentation/en-US/Red_Hat_Satellite/6.1/html/User_Guide/chap-"
-"Red_Hat_Satellite-User_Guide-Users_and_Roles.html\">ドキュメンテーション</a>を参照してください。"
-
-#: components/maintenance/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:23
-#: components/maintenance/maintenanceModal/maintenanceModal.directive.js:236
+#: components/filterComponents/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:35
+#: components/maintenance/maintenanceModal/maintenanceModal.directive.js:346
 msgid "Future plans"
 msgstr "今後のプラン"
 
-#: js/states/splash/splash.html:1
-msgid ""
-"Get in-­depth analysis of risks on an individual system, topic, or site­-"
-"wide level, so you can address them before they affect your business."
-msgstr "個別システムやトピック、またはサイト全体のレベルのリスクの詳細な分析を手に入れることで、ビジネスに影響が生じる前に対処できます。"
-
 #: js/components/topbar/topbar.html:1
-#: js/states/getting-started/views/getting-started.html:1
 msgid "Getting Started"
 msgstr "スタートガイド"
 
 #: js/states/evaluation/evaluation.html:1
-#: js/states/splash/splash.html:1
 msgid "Getting started guide"
 msgstr "スタートガイド"
 
-#: js/states/info/info.html:1
 #: js/states/security/security.html:1
 msgid "Getting started with Red Hat Insights"
 msgstr "Red Hat Insights の使用を開始する"
 
 #: js/states/evaluation/evaluation.html:1
-#: js/states/splash/splash.html:1
 msgid "Go to the application"
 msgstr "アプリケーションに移動"
 
@@ -1037,38 +1083,65 @@ msgstr "アプリケーションに移動"
 msgid "Goals"
 msgstr "目標"
 
+#: services/group.service.js:47
+msgid "Group Systems"
+msgstr "グループシステム"
+
+#: components/groupSelect/groupSelect.directive.js:111
+msgid "Group created"
+msgstr "作成済みグループ"
+
+#: js/components/groupSelect/groupSelect.html:1
+msgid "Group filter:"
+msgstr "グループフィルター:"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid ""
+"Group filter<i tooltip=\"{{&quot;A webhook can be configured to only receive "
+"events relevant to the given group of systems&quot; | translate}}\" class="
+"\"fa fa-question-circle inline-left\"></i>"
+msgstr ""
+"グループフィルター<i tooltip=\"{{&quot;A webhook can be configured to only receive "
+"events relevant to the given group of systems&quot; | translate}}\" class="
+"\"fa fa-question-circle inline-left\"></i>"
+
+#: services/group.service.js:77
+msgid "Group name"
+msgstr "グループ名"
+
+#: js/components/groupSelect/groupSelect.html:1
+msgid "Group select"
+msgstr "グループの選択"
+
+#: js/components/inventory/inventoryActions/inventoryActions.html:1
+msgid "Group systems"
+msgstr "グループシステム"
+
 #: js/components/rule/ruleGroupCard/ruleGroupCard.html:1
 msgid "Group: &nbsp;"
 msgstr "グループ: &nbsp;"
 
-#: js/components/groupSelect/groupSelect.html:1
-#: js/states/config/views/config.html:1
-msgid "Groups"
-msgstr "グループ"
+#: js/components/viewSystemGroups/viewSystemGroups.html:1
+msgid "Groups:"
+msgstr "グループ:"
 
-#: js/components/config/groups/groups.html:1
-msgid "Groups List"
-msgstr "グループリスト"
+#: components/filterComponents/actionsSelect/actionsSelect.directive.js:27
+msgid "Health: Affected"
+msgstr "健全性: 影響あり"
 
-#: components/filterComponents/actionsSelect/actionsSelect.directive.js:23
+#: components/filterComponents/actionsSelect/actionsSelect.directive.js:33
+msgid "Health: Healthy"
+msgstr "健全性: 正常"
+
+#: components/filterComponents/actionsSelect/actionsSelect.directive.js:30
 msgid "Healthy"
 msgstr "正常"
-
-#: js/states/splash/splash.html:1
-msgid ""
-"Hear Mayo Clinic explain how they used Red Hat Insights to proactively "
-"intercept security risks."
-msgstr "Mayo Clinic が Red Hat Insights でセキュリティーリスクをどのように事前阻止したのか、説明をご覧ください。"
 
 #: js/components/topbar/topbar.html:1
 msgid "Help"
 msgstr "ヘルプ"
 
-#: js/components/config/hidden/hidden.html:1
-#: js/states/config/views/config.html:1
-msgid "Hidden Rules"
-msgstr "非表示に設定されているルール"
-
+#: js/components/maintenance/expandableSystemList/expandableSystemList.html:1
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 msgid "Hide"
 msgstr "非表示"
@@ -1077,15 +1150,19 @@ msgstr "非表示"
 msgid "Hide Ignored"
 msgstr "無視したものを表示しない"
 
-#: js/components/filterComponents/productFilters/docker/dockerHostSelect/dockerHostSelect.html:1
-msgid "Host"
-msgstr "ホスト"
+#: components/filterComponents/riskOfChangeSelect/riskOfChangeSelect.directive.js:31
+#: components/severityIcon/severityIcon.directive.js:66
+#: components/severityIcon/severityIcon.directive.js:70
+#: js/components/actions/severitySummary/severitySummary.html:1
+#: js/components/riskOfChange/riskOfChange.html:1
+msgid "High"
+msgstr "高"
 
-#: js/components/actions/actionsRule/actionsRule.html:1
-msgid "Host &nbsp;"
-msgstr "ホスト &nbsp;"
+#: js/states/digests/digests.html:1
+msgid "Hits"
+msgstr "該当"
 
-#: js/components/actions/actionsCategory/actionsCategory.html:1
+#: js/states/digests/digests.html:1
 msgid "Hostname"
 msgstr "ホスト名"
 
@@ -1094,153 +1171,65 @@ msgstr "ホスト名"
 msgid "INACTIVE"
 msgstr "非アクティブ"
 
-#: components/severities/severities.js:12
-msgid "INFO"
-msgstr "情報"
-
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"If issues arise with these commands, examine /etc/redhat-access-insights/"
-"redhat-access-insights.conf and ensure everything is set properly."
-msgstr ""
-"これらのコマンドで問題が生じた場合、/etc/redhat-access-insights/redhat-access-insights.conf "
-"ですべての値が適切に設定されていることを確認してください。"
-
-#: js/states/getting-started/views/getting-started-sat6.html:2
-msgid ""
-"If you are using Red Hat Satellite’s configuration management provided by "
-"Puppet this process can be automated by applying the preinstalled Puppet "
-"class 'access_insights_clients'. This class can be imported from the Puppet "
-"Master into the appropriate Puppet environment and applied to hosts that you "
-"wish to subscribe to Red Hat Insights.\n"
-"For more information on using on Puppet with Satellite 6, refer to the "
-"official <a href=\"https://access.redhat.com/documentation/en-US/"
-"Red_Hat_Satellite/6.1/html/User_Guide/chap-Red_Hat_Satellite-User_Guide-"
-"Configuring_the_Provisioning_Environment.html#sect-Red_Hat_Satellite-"
-"User_Guide-Creating_a_Host_Group\">documentation.</a>"
-msgstr ""
-"Puppet で Red Hat Satellite の設定管理を行っている場合、プリインストールされた Puppet クラス "
-"'access_insights_clients' を適用してこのプロセスを自動化できます。このクラスは Puppet Master から適切な "
-"Puppet 環境にインポートし、Red Hat Insights をサブスクライブするホストに適用することができます。Satellite 6 での "
-"Puppet の使用についての詳細情報は、公式の<a href=\"https://access.redhat.com/documentation/en-"
-"US/Red_Hat_Satellite/6.1/html/User_Guide/chap-Red_Hat_Satellite-User_Guide-"
-"Configuring_the_Provisioning_Environment.html#sect-Red_Hat_Satellite-"
-"User_Guide-Creating_a_Host_Group\">ドキュメンテーション</a>を参照してください。"
+#: js/components/systemMetadata/systemMetadata.html:1
+msgid "IP Address"
+msgstr "IP アドレス"
 
 #: js/states/evaluation/evaluation.html:1
 msgid ""
 "If you decline, you will not receive an evaluation at this time and will be "
-"redirected to the Red Hat Customer Portal."
-msgstr "拒否した場合は今回の評価を受け取ることができず、Red Hat カスタマーポータルにリダイレクトされます。"
-
-#: js/states/getting-started/views/getting-started-direct.html:1
-msgid ""
-"If you have a web based proxy between your system and the Internet, you can "
-"configure the Insights client to connect through it:"
-msgstr ""
-"システムとインターネットとの間に web ベースのプロキシがある場合は、そこから接続するように Insights クライアントを設定できます。"
-
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"If you have a web-based proxy between your system and the Internet, you can "
-"configure the Insights client to connect through it using the following "
-"commands on the RHV Manager:"
-msgstr ""
-"システムとインターネットの間に Web ベースのプロキシがある場合、RHV Manager で以下のコマンドを使用して、Insights "
-"クライアントをプロキシ経由で接続するよう設定します。"
-
-#: js/states/getting-started/views/getting-started-containers.html:1
-#: js/states/getting-started/views/getting-started-osp.html:3
-msgid ""
-"If you have a web-based proxy between your system and the Internet, you can "
-"configure the Insights client to connect through it:"
-msgstr "システムとインターネットの間に Web ベースのプロキシがある場合、Insights クライアントをプロキシ経由で接続するよう設定します。"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-#: js/states/getting-started/views/getting-started-direct.html:1
-#: js/states/getting-started/views/getting-started-sat5.html:1
-#: js/states/getting-started/views/getting-started-sat6.html:2
-msgid ""
-"If you have purchased an Insights subscription, please skip this step and "
-"proceed to the next step."
-msgstr "Insights のサブスクリプションを購入されている場合は、このステップを省略し、次のステップに進んでください。"
-
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid ""
-"If you see a red exclamation, click it to see the reports about your system."
-msgstr "赤色の感嘆符が表示されている場合は、そのマークをクリックするとシステムに関するレポートが表示されます。"
-
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"If you've registered your system with Red Hat Network Classic you'll also "
-"need to add a username and password using the following commands on the RHV "
-"Manager:"
-msgstr ""
-"Red Hat Network Classic にシステムを登録している場合は、RHV Manager "
-"で以下のコマンドを使用してユーザー名とパスワードを追加する必要があります。"
-
-#: js/states/getting-started/views/getting-started-containers.html:1
-#: js/states/getting-started/views/getting-started-direct.html:1
-#: js/states/getting-started/views/getting-started-osp.html:3
-msgid ""
-"If you've registered your system with Red Hat Network Classic you'll also "
-"need to add a username and password:"
-msgstr "Red Hat Network Classic にシステムを登録している場合は、ユーザー名とパスワードを追加する必要があります。"
+"redirected to additional information on Red Hat Insights"
+msgstr "拒否した場合は今回の評価を受け取ることができず、Red Hat Insights の追加情報にリダイレクトされます。"
 
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 msgid "Ignore"
 msgstr "無視"
 
-#: js/components/actions/actionsRule/actionsRule.html:1
-msgid "Impacted Deployments"
-msgstr "影響を受けるデプロイメント"
+#: components/rule/ruleToggle/ruleToggle.directive.js:10
+msgid "Ignore Rule"
+msgstr "ルールを無視"
 
-#: js/components/actions/actionsRule/actionsRule.html:1
-msgid "Impacted Systems ({{allSystems.length}})"
-msgstr "影響を受けるシステム ({{allSystems.length}})"
+#: components/severityIcon/severityIcon.directive.js:42
+#: js/components/filterComponents/impactSelect/impactSelect.html:1
+#: js/components/topics/topicRuleList/topicRuleList.html:1
+#: js/components/vulnerabilities/erratumCard/erratumCard.html:1
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "Impact"
+msgstr "影響"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"In addition to the feature controls above, a user can only view Insights "
-"reports on those virtual machines to which the user has permission to view "
-"in CloudForms."
-msgstr "またユーザーは、CloudForms で表示する権限を持っている仮想マシンでのみ、Insights レポートを表示することができます。"
+#: js/states/digests/digests.html:1
+msgid "Impacted Systems"
+msgstr "影響を受けるシステム"
 
-#: js/states/getting-started/views/getting-started-sat6.html:1
-msgid ""
-"In order for the Red Hat Satellite Server to be an Insights client, please "
-"follow the <a ui-sref=\"info.getting-started.direct\">direct</a> "
-"registration instructions and run the following command prior to installing "
-"the redhat-access-insights client."
-msgstr ""
-"Red Hat Satellite Server を Insights のクライアントとするために、<a ui-sref=\"info.getting-"
-"started.direct\">直接登録</a>の手順に従い、redhat-access-insights "
-"クライアントのインストール前に以下のコマンドを実行してください。"
+#: js/components/overview/widgets/vulnerabilitiesWidget/vulnerabilitiesWidget.html:1
+msgid "Important"
+msgstr "重要"
+
+#: js/states/actions/actions.html:1
+msgid "Incident summary"
+msgstr "インシデントサマリー"
+
+#: js/components/filterComponents/incidentsTriState/incidentsTriState.html:1
+#: js/components/incident/incidentLite/incidentLite.html:1
+#: js/components/incident/incidentSummary/incidentSummary.html:1
+msgid "Incidents"
+msgstr "インシデント"
 
 #: js/components/overview/widgets/goals/goalsLite.html:1
 msgid "Increase your uptime!"
-msgstr "稼働時間の増加に"
-
-#: components/severityIcon/severityIcon.directive.js:13
-#: js/components/actions/severitySummary/severitySummary.html:1
-msgid "Info"
-msgstr "情報"
+msgstr "稼働時間を増加"
 
 #: js/states/security/security.html:1
 msgid "Infrastructure Security"
 msgstr "インフラストラクチャーのセキュリティー"
 
-#: js/components/insightsLogo/insightsLogo.html:1
-msgid "Insights"
-msgstr "Insights"
-
 #: js/components/topbar/topbar.html:1
 msgid "Insights API Documentation"
 msgstr "Insights API ドキュメント"
 
-#: js/states/info/info.html:1
-msgid "Insights powered by Red Hat"
-msgstr "Red Hat の技術が集結した Insights"
+#: js/components/filterComponents/ruleHitTriState/ruleHitTriState.html:1
+msgid "Insights Rule Hit"
+msgstr "Insights ルールの該当"
 
 #: js/states/security/security.html:1
 msgid ""
@@ -1252,93 +1241,61 @@ msgstr ""
 "製品セキュリティーチームによるセキュリティーレビューを受けています。このチームは、Red Hat "
 "ポートフォリオに含まれるすべての製品におけるセキュリティー問題に対応しています。"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid "Install RPM on Systems"
-msgstr "システムに RPM をインストールする"
-
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid "Install redhat-access-plugin-sat5:"
-msgstr "redhat-access-plugin-sat5 をインストールします。"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid "Install the RPM in the virtual machine:"
-msgstr "仮想マシンに RPM をインストールします。"
-
-#: js/states/getting-started/views/getting-started-sat6.html:2
-msgid "Install the RPM:"
-msgstr "RPM をインストールします。"
-
-#: js/states/getting-started/views/getting-started-containers.html:1
-msgid "Install the Red Hat Insights Client"
-msgstr "Red Hat Insights クライアントをインストールする"
-
 #: js/components/system/addSystemModal/addSystemModal.html:1
-msgid ""
-"Install the Red Hat Insights Client and Register Up to 10 Systems for Free"
-msgstr "Red Hat Insights クライアントをインストールし、最大 10 台のシステムを無料登録する"
-
-#: js/states/getting-started/views/getting-started-direct.html:1
-msgid "Install the Red Hat Insights Client and Register Your Systems"
+msgid "Install the Red Hat Insights Client and Register More Systems"
 msgstr "Red Hat Insights クライアントをインストールし、システムを登録する"
 
 #: js/components/system/addSystemModal/addSystemModal.html:1
-#: js/states/getting-started/views/getting-started-direct.html:1
 msgid "Install the Red Hat Insights RPM:"
 msgstr "Red Hat Insights の RPM をインストールします。"
 
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid "Install the Red Hat Insights client"
-msgstr "Red Hat Insights クライアントをインストールする"
-
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid "Install the Red Hat Insights for OpenStack Private Beta Components"
-msgstr "Red Hat Insights for OpenStack Private Beta コンポーネントをインストールする"
-
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"Install the Red Hat Insights for OpenStack Private Beta Repositories on the "
-"Undercloud"
-msgstr "Red Hat Insights for OpenStack Private Beta リポジトリーをアンダークラウドにインストールする"
-
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid "Install the repositories"
-msgstr "リポジトリーをインストールする"
+#: js/components/vulnerabilities/erratumCard/erratumCard.html:1
+msgid "Installed Version"
+msgstr "インストール済みのバージョン"
 
 #: js/states/security/security.html:1
 msgid "Introduction"
 msgstr "はじめに"
 
-#: js/states/splash/splash.html:1
-msgid "Introduction to Red Hat Insights"
-msgstr "Red Hat Insights について"
+#: js/states/config/views/webhook-edit.html:1
+msgid "Invalid certificate"
+msgstr "無効な証明書"
 
-#: js/components/sideNav/sideNav.html:7
+#: js/components/primary-nav/primary-nav.html:1
 msgid "Inventory"
 msgstr "インベントリー"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid "Issuer Common Name (CN):"
+msgstr "発行者の共通名 (CN):"
 
 #: js/states/actions/actions.html:1
 msgid "Issues"
 msgstr "問題"
 
+#: js/components/incident/incidentLite/incidentLite.html:1
+msgid "Issues are incidents"
+msgstr "問題はインシデントです"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid "Issuing Organization (O)"
+msgstr "発行組織 (O)"
+
 #: js/components/system/systemTable/systemTable.html:1
 msgid "Items"
-msgstr "表示するアイテム数"
+msgstr "アイテム"
 
-#: js/states/splash/splash.html:1
-msgid ""
-"It’s important to have a company like Red Hat that’s working toward the same "
-"goals we are, that understands our business and what we’re trying to "
-"accomplish, and understands our infrastructure and our businesses. As the "
-"market continues to change and new technologies are released, we’ll continue "
-"to change as well, and we expect Red Hat to be an important partner to help "
-"us on that journey."
-msgstr ""
-"弊社のビジネスや目標を理解し、インフラストラクチャーとビジネスを理解し、一緒に同じゴールに向かって進んでくれる Red Hat "
-"のような企業と関係を持つことが大事です。市場は常に変化し、新しい技術が次々にリリースされるため、私たちも変化し続けます。Red Hat "
-"が重要なパートナーとして私たちの変化を助けてくれることを期待します。"
+#: js/states/rules/list-rules.html:1
+msgid "Knowledgebase"
+msgstr "ナレッジベース"
 
-#: components/inventory/inventoryActions/inventoryActions.directive.js:120
+#: components/filterComponents/ageSelect/ageSelect.directive.js:29
+msgid "Last  Days"
+msgstr "日前"
+
+#: components/inventory/inventoryActions/inventoryActions.directive.js:113
 #: js/states/inventory/inventory.html:1
+#: js/states/vulnerabilities/views/view-erratum.html:1
 msgid "Last Check In"
 msgstr "最終チェックイン"
 
@@ -1351,117 +1308,111 @@ msgstr "最終チェックイン"
 msgid "Last check in:"
 msgstr "最終チェックイン:"
 
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"Last, run the following command to complete the installation and view any "
-"messages from the Coordinator during the execution and upload of the archive:"
-""
-msgstr ""
-"最後に以下のコマンドを実行してインストールを完了します。アーカイブの実行およびアップロード中にコーディネーターからメッセージが表示されることがあります。"
-
 #: js/states/overview/overview.html:1
 msgid "Latest"
 msgstr "最新"
 
-#: js/states/getting-started/views/getting-started.html:1
-msgid "Learn More about Red Hat Insights"
-msgstr "Red Hat Insights について"
-
-#: js/states/splash/splash.html:1
-msgid ""
-"Learn about the benefits Insights can provide and technical requirements."
-msgstr "Insights が提供する利点と技術要件について"
+#: js/states/evaluation/evaluation.html:1
+msgid "Latin America"
+msgstr "中南米"
 
 #: js/components/system/addSystemModal/upgradeSubscription.html:1
 msgid "Learn more about Red Hat Insights availability"
-msgstr "Red Hat Insights アベイラビリティについて"
+msgstr "Red Hat Insights のアベイラビリティーについて"
 
 #: js/components/betaSwitchButton/betaSwitchButton.html:1
-msgid "Leave"
-msgstr "切替"
+msgid "Leave Beta"
+msgstr "Beta から切り替える"
 
-#: js/states/info/info.html:1
-msgid "Lightweight data collection"
-msgstr "収集するデータの軽量化"
-
-#: js/states/info/info.html:1
-msgid ""
-"Like all products and services from Red Hat, Red Hat Insights is developed "
-"with a focus on security and rigorous deployment controls."
-msgstr ""
-"Red Hat のその他のすべての製品およびサービスと同様、Red Hat Insights "
-"の開発にあたって、セキュリティーと正確なデプロイメント制御に力を入れてきました。"
-
-#: js/components/actions/actionsCategory/actionsCategory.html:1
-#: js/components/actions/actionsDetails/actionsDetails.html:1
-msgid "Loading Reports…"
-msgstr "レポートをロードしています…"
+#: components/severityIcon/severityIcon.directive.js:43
+#: js/components/filterComponents/likelihoodSelect/likelihoodSelect.html:1
+#: js/components/topics/topicRuleList/topicRuleList.html:1
+msgid "Likelihood"
+msgstr "可能性"
 
 #: js/components/config/settings/settings.html:1
 msgid "Loading Settings"
-msgstr "ロード設定"
+msgstr "設定を読み込み中"
 
-#: js/components/config/groups/groups.html:1
-msgid "Loading group list info …"
-msgstr "グループリスト情報をロードしています…"
-
-#: js/components/config/hidden/hidden.html:1
-msgid "Loading hidden rules…"
-msgstr "非表示のルールをロードしています…"
-
-#: js/states/maintenance/maintenance.html:2
+#: js/states/maintenance/maintenance.html:1
 msgid "Loading plans…"
-msgstr "プランをロードしています…"
+msgstr "プランを読み込み中"
+
+#: js/states/policies/views/list-policies.html:1
+#: js/states/policies/views/view-policy.html:2
+msgid "Loading policy information…"
+msgstr "ポリシー情報を読み込み中"
+
+#: components/rule/ruleSummaries/ruleSummaries.directive.js:20
+msgid "Loading report(s) for {{name}}…"
+msgstr "{{name}} のレポートを読み込み中"
+
+#: components/rule/ruleSummaries/ruleSummaries.directive.js:25
+msgid "Loading report(s)…"
+msgstr "レポートを読み込み中"
 
 #: js/states/inventory/inventory.html:1
 msgid "Loading system information…"
-msgstr "システム情報をロードしています…"
+msgstr "システム情報を読み込み中"
 
-#: js/states/getting-started/views/getting-started.html:1
-#: js/states/info/info.html:1
 #: js/states/security/security.html:1
 msgid "Log in to Red Hat Insights"
 msgstr "Red Hat Insights にログインする"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid ""
-"Log in to the Satellite Administrator account. Navigate to the <strong>Admin "
-"--&gt; Insights</strong> page. Before enabling Insights, click 'Test "
-"Connection to Red Hat Insights API'. If the test is successful you will see "
-"a green check circle next to the button. Otherwise you will see a red circle "
-"and a log will appear. When the test is successful, select \"Enable Insights "
-"Service\" then click the \"Update\" button. The Red Hat Insights GUI pieces "
-"will now appear in Satellite."
-msgstr ""
-"Satellite 管理者アカウントにログインします。<strong>管理者 --&gt; Insights</strong> "
-"ページに移動します。Insights を有効にする前に、「Red Hat Insights API への接続をテスト」 "
-"をクリックします。テストが成功すると、ボタンの横に緑色のチェックが表示されます。失敗すると、赤い丸印とログが表示されます。テストが成功したら、「Insights "
-"サービスを有効にする」をクリックしてから「アップデート」ボタンをクリックします。これで Red Hat Insights の GUI が "
-"Satellite に表示されます。"
+#: js/components/primary-nav/primary-nav.html:1
+msgid "Logout"
+msgstr "ログアウト"
 
 #: js/states/evaluation/evaluation.html:1
 msgid "Looking for the legacy 10 system evaluation? Click here to activate."
 msgstr "レガシーの 10 システムの評価をお求めですか? こちらをクリックしてアクティベートしてください。"
 
+#: components/filterComponents/riskOfChangeSelect/riskOfChangeSelect.directive.js:23
+#: components/severityIcon/severityIcon.directive.js:64
+#: components/severityIcon/severityIcon.directive.js:68
+#: js/components/actions/severitySummary/severitySummary.html:1
+#: js/components/overview/widgets/vulnerabilitiesWidget/vulnerabilitiesWidget.html:1
+#: js/components/riskOfChange/riskOfChange.html:1
+msgid "Low"
+msgstr "低"
+
+#: components/filterComponents/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:36
+msgid "Maintenance: Future plans"
+msgstr "メンテナンス: 今後のプラン"
+
+#: components/filterComponents/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:32
+msgid "Maintenance: Not scheduled plans"
+msgstr "メンテナンス: 予定されていないプラン"
+
+#: components/filterComponents/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:28
+msgid "Maintenance: Past plans"
+msgstr "メンテナンス: 過去のプラン"
+
+#: components/filterComponents/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:24
+msgid "Maintenance: Suggestions"
+msgstr "メンテナンス: 提案"
+
 #: js/components/config/messaging/messaging.html:1
 msgid ""
 "Manage Red Hat Insights email subscriptions for your personal login. All "
 "emails will be sent to the email address associated with your login. To "
-"update your address see <a href=\"https://www.redhat.com/wapps/ugc/protected/"
-"personalInfo.html\" target=\"_blank\">Personal Info</a>."
+"update your address see&nbsp;<a href=\"https://www.redhat.com/wapps/ugc/"
+"protected/personalInfo.html\" target=\"_blank\">Personal Info</a>."
 msgstr ""
 "ログインアカウントでの Red Hat Insights "
-"メールの購読を管理します。ログインで登録されているメールアドレスにすべてのメールが送信されます。メールアドレスは<a href=\"https://"
-"www.redhat.com/wapps/ugc/protected/personalInfo.html\" target="
+"メールの購読を管理します。ログインで登録されているメールアドレスにすべてのメールが送信されます。メールアドレスは&nbsp;<a href="
+"\"https://www.redhat.com/wapps/ugc/protected/personalInfo.html\" target="
 "\"_blank\">お客様情報</a>で変更することができます。"
 
 #: js/components/userInfo/userInfo.html:1
 msgid "Marketing"
 msgstr "マーケティング"
 
-#: js/states/splash/splash.html:1
-msgid "Master complexity"
-msgstr "複雑性を克服"
+#: components/severityIcon/severityIcon.directive.js:65
+#: components/severityIcon/severityIcon.directive.js:69
+#: js/components/actions/severitySummary/severitySummary.html:1
+msgid "Medium"
+msgstr "中"
 
 #: js/components/userInfo/userInfo.html:1
 msgid "Mentions"
@@ -1477,7 +1428,17 @@ msgstr "メッセージ"
 
 #: js/components/config/messaging/messaging.html:1
 msgid "Messaging Preferences"
-msgstr "メールでのメッセージ購読"
+msgstr "メッセージ設定"
+
+#: components/filterComponents/riskOfChangeSelect/riskOfChangeSelect.directive.js:27
+#: js/components/overview/widgets/vulnerabilitiesWidget/vulnerabilitiesWidget.html:1
+#: js/components/riskOfChange/riskOfChange.html:1
+msgid "Moderate"
+msgstr "中"
+
+#: js/states/actions/actions.html:1
+msgid "More Featured Topics"
+msgstr "その他のトピック"
 
 #: js/components/topbar/topbar.html:1
 msgid "More Info"
@@ -1487,63 +1448,131 @@ msgstr "詳細"
 msgid "More topics"
 msgstr "その他のトピック"
 
-#: components/inventory/inventoryActions/inventoryActions.directive.js:112
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "Multiple resolutions available. Click here to select a different one."
+msgstr "複数の解決策があります。他の解決策を選択するには、こちらをクリックしてください。"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid "Must be a valid https URL"
+msgstr "有効な https URL である必要があります。"
+
+#: components/inventory/inventoryActions/inventoryActions.directive.js:105
 #: js/components/actions/actionsRule/actionsRule.html:1
-#: js/components/system/systemSummaryTable/systemSummaryTable.html:1
+#: js/states/vulnerabilities/views/view-erratum.html:1
 msgid "Name"
 msgstr "名前"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid ""
-"Navigate to the <strong>Systems --&gt; Insights --&gt; Setup</strong> tab as "
-"an Organization Administrator. Select the systems to install the redhat-"
-"access-insights RPM onto, then click \"Apply\"."
-msgstr ""
-"組織管理者として <strong>システム --&gt; Insights --&gt; セットアップ</strong> タブに移動します。redhat-"
-"access-insights RPM のインストール先となるシステムを選択し、「適用」をクリックします。"
+#: js/components/actions/actionsRule/actionsRule.html:1
+#: js/states/inventory/inventory.html:1
+msgid "Name &nbsp;"
+msgstr "名前 &nbsp;"
 
-#: js/states/maintenance/maintenance.html:2
+#: services/group.service.js:22
+msgid "Name already used"
+msgstr "その名はすでに存在します"
+
+#: js/components/systemMetadata/systemMetadata.html:1
+msgid "Network"
+msgstr "ネットワーク"
+
+#: states/config/webhook-edit.controller.js:68
+msgid "New policy"
+msgstr "新規ポリシー"
+
+#: states/config/webhook-edit.controller.js:74
+msgid "New policy result"
+msgstr "新規ポリシーの結果"
+
+#: states/config/webhook-edit.controller.js:56
+msgid "New report identified"
+msgstr "新たなレポートが見つかりました"
+
+#: js/states/maintenance/maintenance.html:1
 msgid "New suggested plan<i class=\"fa fa-plus-circle\"></i>"
 msgstr "新しく提案されたプラン<i class=\"fa fa-plus-circle\"></i>"
+
+#: states/config/webhook-edit.controller.js:62
+msgid "New system registered"
+msgstr "新たなシステムが登録されました"
 
 #: js/components/overview/widgets/newSystems/newSystems.html:1
 msgid "Newest Systems"
 msgstr "最新のシステム"
 
+#: components/maintenance/maintenanceTable/maintenanceTable.controller.js:58
+msgid "No"
+msgstr "いいえ"
+
 #: js/components/rule/ruleSummaries/ruleSummaries.html:1
 msgid "No actions"
 msgstr "アクションなし"
 
-#: js/states/maintenance/maintenance.html:2
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "No actions available on selected systems."
+msgstr "選択されたシステムでは利用可能ななアクションはありません。"
+
+#: js/components/vulnerabilities/erratumCard/erratumCard.html:1
+msgid "No applicable CVEs"
+msgstr "該当する CVE はありません"
+
+#: js/states/maintenance/maintenance.html:1
 msgid "No plans"
 msgstr "プランなし"
 
-#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
-msgid "No problems to fix on selected systems."
-msgstr "選択されたシステムに修復する問題はありません。"
+#: js/states/vulnerabilities/views/view-erratum.html:1
+msgid "No systems found"
+msgstr "システムは見つかりませんでした"
 
 #: js/components/overview/widgets/newSystems/newSystems.html:1
 msgid "No systems registered"
 msgstr "システムは登録されていません"
 
-#: components/maintenance/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:20
-#: components/maintenance/maintenanceModal/maintenanceModal.directive.js:238
+#: js/states/vulnerabilities/views/view-package.html:1
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "No vulnerabilities found"
+msgstr "脆弱性は見つかりませんでした"
+
+#: js/states/vulnerabilities/views/view-package.html:1
+msgid "No vulnerabilities match search criteria"
+msgstr "指定の条件に一致する脆弱性はありません"
+
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "No vulnerable packages found"
+msgstr "脆弱性パッケージは見つかりませんでした"
+
+#: js/components/config/webhooks/webhooks.html:1
+msgid "No webhooks configured"
+msgstr "webhooks は設定されていません"
+
+#: js/states/evaluation/evaluation.html:1
+msgid "North America"
+msgstr "北米"
+
+#: components/filterComponents/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:31
+#: components/maintenance/maintenanceModal/maintenanceModal.directive.js:348
 msgid "Not scheduled plans"
 msgstr "プランはスケジュールされていません"
 
-#: components/inventory/inventoryActions/inventoryActions.directive.js:124
+#: components/inventory/inventoryActions/inventoryActions.directive.js:117
 msgid "Number of Actions"
 msgstr "アクション数"
+
+#: components/groupSelect/groupSelect.directive.js:112
+#: services/group.service.js:51
+msgid "OK"
+msgstr "OK"
 
 #: js/states/security/security.html:1
 msgid "On Premise Security"
 msgstr "オンプレミスのセキュリティー"
 
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"Once configured, this next step installs Red Hat Insights on the RHV Manager "
-"and all of the hypervisor nodes."
-msgstr "設定が完了したら、RHV Manager とハイパーバイザーの全ノードに Red Hat Insights をインストールします。"
+#: js/states/config/views/webhook-edit.html:1
+msgid "Only selected event types"
+msgstr "選択したイベントタイプのみ"
+
+#: js/states/evaluation/evaluation.html:1
+msgid "Oops!"
+msgstr "申し訳ございません"
 
 #: js/components/gettingStartedTabs/gettingStartedTabs.html:1
 msgid "Openstack"
@@ -1553,12 +1582,9 @@ msgstr "Openstack"
 msgid "Optimize&nbsp;"
 msgstr "最適化:&nbsp;"
 
-#: js/states/getting-started/views/getting-started-containers.html:1
-#: js/states/getting-started/views/getting-started-direct.html:1
-#: js/states/getting-started/views/getting-started-osp.html:3
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid "Optional Configuration Steps"
-msgstr "オプションの設定手順"
+#: js/states/config/views/webhook-edit.html:1
+msgid "Organization (O)"
+msgstr "組織 (O)"
 
 #: js/states/security/security.html:1
 msgid ""
@@ -1569,89 +1595,137 @@ msgstr ""
 "弊社内の 3 "
 "層から成るインフラストラクチャーは、複数の物理ネットワークに区画分けされかつファイアウォールが設定され、最大限のセキュリティーのためにサービスを分離しています。"
 
-#: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLiteTable/maintenancePlanLiteTable.html:1
-msgid "Overdue Plans"
-msgstr "期限超過したプラン"
+#: js/states/digests/digests.html:1
+msgid "Overall score"
+msgstr "総合スコア"
 
-#: js/components/sideNav/sideNav.html:7
-#: js/states/overview/overview.html:1
+#: js/components/primary-nav/primary-nav.html:1
 msgid "Overview"
 msgstr "概要"
+
+#: js/states/policies/views/view-policy.html:1
+msgid "POLICY ID"
+msgstr "ポリシー ID"
+
+#: js/components/vulnerabilities/erratumCard/erratumCard.html:1
+msgid "Package Information"
+msgstr "パッケージ情報"
+
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "Package Name"
+msgstr "パッケージ名"
+
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "Packages"
+msgstr "パッケージ"
+
+#: js/components/vulnerabilities/erratumCard/erratumCard.html:1
+msgid "Packages Installed"
+msgstr "インストール済みパッケージ"
 
 #: js/components/feedback/feedbackModal.html:1
 msgid "Page Reported"
 msgstr "レポートされたページ"
 
-#: components/maintenance/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:17
+#: components/filterComponents/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:27
 msgid "Past plans"
 msgstr "過去のプラン"
 
-#: js/states/actions/actions.html:1
+#: components/filterComponents/categorySelect/categorySelect.directive.js:28
 #: translations.html:11
 msgid "Performance"
 msgstr "パフォーマンス"
-
-#: components/rule/ruleToggle/ruleToggle.directive.js:10
-msgid "Permanently Ignore Rule"
-msgstr "このルールを永続的に無視する"
 
 #: js/states/security/security.html:1
 msgid "Personally Identifiable Information is not collected."
 msgstr "個人情報は収集されません。"
 
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "Plan / Playbook Builder"
+msgstr "プラン / Playbook ビルダー"
+
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "Plan Name"
+msgstr "プラン名"
+
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
-msgid "Plan {{plan.maintenance_id}} (Date not set)"
-msgstr "プラン {{plan.maintenance_id}} (日付は未設定)"
+msgid "Plan Name:&nbsp;"
+msgstr "プラン名:&nbsp;"
 
 #: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLite.html:1
-msgid "Plan&nbsp;"
-msgstr "プラン&nbsp;"
+msgid "Plan Summary"
+msgstr "プランサマリー"
 
-#: js/components/sideNav/sideNav.html:7
-#: js/states/maintenance/maintenance.html:2
+#: js/components/filterComponents/maintenanceCategorySelect/maintenanceCategorySelect.html:1
+msgid "Plan type"
+msgstr "プランタイプ"
+
+#: js/components/primary-nav/primary-nav.html:1
 msgid "Planner"
 msgstr "プランナー"
 
-#: js/components/filterComponents/productSelect/productSelect.html:1
-msgid "Platform"
-msgstr "プラットフォーム"
+#: js/states/maintenance/maintenance.html:1
+msgid "Plans"
+msgstr "プラン"
+
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "Playbook"
+msgstr "Playbook"
+
+#: js/components/maintenance/resolutionModal/resolutionModal.html:1
+msgid "Playbook Settings&nbsp;"
+msgstr "Playbook 選択&nbsp;"
+
+#: js/states/digests/digests.html:1
+msgid "Please check back later."
+msgstr "あとで確認してください。"
 
 #: js/states/evaluation/evaluation.html:1
-msgid "Please contact sales to purchase Insights."
-msgstr "Insights のご購入についてはセールス担当者にご連絡ください。"
+msgid "Please contact sales to purchase Insights"
+msgstr "Insights のご購入については営業担当者にご連絡ください。"
 
-#: js/states/splash/splash.html:1
+#: js/states/digests/digests.html:1
 msgid ""
-"Predict and prevent problems before they occur in your IT infrastructure "
-"with actionable intelligence powered by Red Hat."
-msgstr "インフラストラクチャーで問題が発生する前に予測、阻止しながら、Red Hat からすぐに利用できるインテリジェンスをお届けします。"
+"Please register<span translate=\"translate\" translate-n=\"systemsTilTen\" "
+"translate-plural=\"{{:: $count}} more systems\">{{:: systemsTilTen}} &nbsp; "
+"more system</span>&nbsp;to enable reporting for your account."
+msgstr ""
+"アカウントのレポーティングを有効にするには、<span translate=\"translate\" translate-n="
+"\"systemsTilTen\" translate-plural=\"{{:: $count}} more systems\">{{:: "
+"systemsTilTen}} &nbsp; システム</span>&nbsp;を追加登録してください。"
 
-#: js/states/splash/splash.html:1
-msgid "Predictive Risk Analytics for IT"
-msgstr "IT の予測リスク分析"
+#: services/group.service.js:17
+msgid "Please specify a system group name"
+msgstr "システムグループ名を指定してください"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-#: js/states/getting-started/views/getting-started-sat5.html:1
-#: js/states/getting-started/views/getting-started-sat6.html:1
-msgid "Prerequisites"
-msgstr "前提条件"
+#: js/components/primary-nav/primary-nav.html:1
+#: js/states/policies/views/view-policy.html:1
+msgid "Policies"
+msgstr "ポリシー"
 
-#: js/states/getting-started/views/getting-started-containers.html:1
-msgid "Prerequisites for Installing Red Hat Insights"
-msgstr "Red Hat Insights インストールの前提条件"
+#: js/states/policies/views/list-policies.html:1
+msgid "Policy"
+msgstr "ポリシー"
 
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid "Prerequisites for Installing Red Hat Insights for RHV"
-msgstr "Red Hat Insights for RHV インストールの前提条件"
+#: states/config/webhook-edit.controller.js:71
+msgid "Policy removed"
+msgstr "ポリシーが削除されました"
 
-#: js/states/getting-started/views/getting-started-osp.html:1
-msgid ""
-"Prerequisites for Installing the Red Hat Insights for OpenStack Private Beta"
-msgstr "Red Hat Insights for OpenStack Private Beta インストールの前提条件"
+#: states/config/webhook-edit.controller.js:77
+msgid "Policy result removed"
+msgstr "ポリシー結果が削除されました"
 
-#: js/states/info/info.html:1
-msgid "Proactive systems management"
-msgstr "プロアクティブなシステム管理"
+#: js/components/systemMetadata/systemMetadata.html:1
+msgid "Port"
+msgstr "ポート"
+
+#: js/components/systemMetadata/systemMetadata.html:1
+msgid "Process Name"
+msgstr "プロセス名"
+
+#: js/components/topbar/topbar.html:1
+msgid "Product Documentation"
+msgstr "製品ドキュメント"
 
 #: js/components/userInfo/userInfo.html:1
 msgid "Profile"
@@ -1665,68 +1739,67 @@ msgstr "システム保護に役立てましょう"
 msgid "Provide feedback"
 msgstr "フィードバックを提供する"
 
+#: js/components/vulnerabilities/erratumCard/erratumCard.html:1
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "Public Date"
+msgstr "公開日"
+
+#: states/vulnerabilities/controllers/view.cve.controller.js:29
+msgid "Public Date: {{date}}"
+msgstr "公開日: {{date}}"
+
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 msgid "Publish"
 msgstr "発行"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid "Puppet"
-msgstr "Puppet"
+#: js/components/overview/widgets/newRules/newRules.html:1
+msgid "Published {{:: rule.publish_date | timeAgo}}"
+msgstr "{{:: rule.publish_date | timeAgo}} に公開"
 
 #: js/states/evaluation/evaluation.html:1
 msgid "READ AND ACCEPT THESE TERMS TO GET STARTED."
 msgstr "同意書を読んでこれに同意し、開始する。"
 
-#: js/states/getting-started/views/getting-started-containers.html:1
-msgid ""
-"RHEL firewall rules must allow Red Hat Insights to make outbound connections "
-"to https://api.access.redhat.com:443 and https://cert-api.access.redhat.com:"
-"443"
-msgstr ""
-"RHEL ファイアウォールルールで Red Hat Insights に https://api.access.redhat.com:443 および "
-"https://cert-api.access.redhat.com:443 へのアウトバウンド接続を許可する"
+#: states/vulnerabilities/controllers/view.package.controller.js:46
+msgid "RHSA Count: {{count}}"
+msgstr "RHSA 数: {{count}}"
+
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "RHSA Name"
+msgstr "RHSA 名"
+
+#: components/vulnerabilities/vulnerabilitySeverityIcon/vulnerabilitySeverityIcon.directive.js:22
+msgid "RHSA Severity: {{severity}}"
+msgstr "RHSA 重大度: {{severity}}"
+
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "RHSAs"
+msgstr "RHSAs"
 
 #: js/components/gettingStartedTabs/gettingStartedTabs.html:1
 msgid "RHV"
 msgstr "RHV"
 
-#: js/states/splash/splash.html:1
-msgid "Read Blog Posts"
-msgstr "ブログ投稿を読む"
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "Reboot Required"
+msgstr "再起動が必要です"
 
-#: js/states/splash/splash.html:1
-msgid "Read More"
-msgstr "詳細を読む"
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "Reboot systems automatically"
+msgstr "システムを自動で再起動"
 
-#: js/states/splash/splash.html:1
-msgid "Real-Time Risk Assessment"
-msgstr "リアルタイムのリスク評価"
+#: components/webhooks/webhookStatusIcon/webhookStatusIcon.directive.js:28
+msgid "Recent deliveries successful"
+msgstr "最新の配信が成功"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid "Red Hat CloudForms version 4.0 or later"
-msgstr "Red Hat CloudForms バージョン 4.0 以降"
+#: js/components/content-info/content-info.html:1
+#: js/states/evaluation/evaluation.html:1
+msgid "Red Hat"
+msgstr "Red Hat"
 
-#: js/states/info/info.html:1
-msgid "Red Hat Customer Portal"
-msgstr "Red Hat カスタマーポータル"
-
-#: js/states/getting-started/views/getting-started-containers.html:1
-msgid ""
-"Red Hat Enterprise Linux (RHEL) 7.0 or later host configured to run "
-"containers"
-msgstr "Red Hat Enterprise Linux (RHEL) 7.0 およびそれ以降のホストでコンテナーの実行が設定されていること。"
-
-#: js/states/info/info.html:1
-msgid "Red Hat Enterprise Linux 6"
-msgstr "Red Hat Enterprise Linux 6"
-
-#: js/states/info/info.html:1
-msgid "Red Hat Enterprise Linux 7"
-msgstr "Red Hat Enterprise Linux 7"
-
-#: js/states/splash/splash.html:1
-msgid "Red Hat Insights Blog"
-msgstr "Red Hat Insights ブログ"
+#: js/components/topbar/topbar.html:1
+msgid "Red Hat Insights"
+msgstr "Red Hat Insights"
 
 #: js/states/security/security.html:1
 msgid ""
@@ -1743,32 +1816,6 @@ msgid ""
 "rather than entire logs."
 msgstr "Red Hat Insights は、ログ全体ではなく、対象を絞ったシステム情報と最小限のシステム情報の両方を収集します。"
 
-#: js/states/info/info.html:1
-msgid ""
-"Red Hat Insights is a hosted service designed to help you proactively "
-"identify and resolve technical issues in Red Hat Enterprise Linux and Red "
-"Hat Cloud Infrastructure environments. Decreasing time spent discovering, "
-"researching, and resolving critical issues allows you to focus on driving "
-"high value, strategic initiatives."
-msgstr ""
-"Red Hat Insights はホスティングサービスとして、Red Hat Enterprise Linux および Red Hat Cloud "
-"Infrastructure "
-"環境で技術的な問題をプロアクティブに特定し解決するために設計されました。重要な問題の発見、調査、解決にかかる時間を減らすことで、価値の高い戦略的なイニシアチブを発揮することに力を注ぐことができます。"
-
-#: js/states/info/info.html:1
-msgid ""
-"Red Hat Insights is available for current Red Hat customers on Red Hat "
-"Enterprise Linux, delivered through either the Customer Portal or Red Hat "
-"Satellite. Your current subscription includes Red Hat Insights for up to 10 "
-"systems. To enroll additional systems, contact <a href=\"http://www.redhat."
-"com/en/about/contact/sales\">sales</a>."
-msgstr ""
-"Red Hat Insights は、Red Hat Enterprise Linux "
-"を利用しているユーザーを対象としたサービスで、カスタマーポータルまたは Red Hat Setellite "
-"のいずれかから配信されます。現在のサブスクリプションでは最大 10 "
-"台のシステムを無料でサブスクライブできます。サブスクライブするシステムを追加する場合は<a href=\"http://www.redhat.com/"
-"en/about/contact/sales\">営業担当者</a>までご連絡ください。"
-
 #: js/states/security/security.html:1
 msgid ""
 "Red Hat Insights provides a mechanism for customers to get actionable "
@@ -1783,34 +1830,6 @@ msgstr ""
 "Hat "
 "がホストしているまたは提供しているツールをご使用のお客様環境に関する設定データの処理も行います。ここでは、これらのツールによりこのデータを安全に送信、処理、および解析するために "
 "Red Hat が講じているセキュリティー対策について説明します。"
-
-#: js/states/splash/splash.html:1
-msgid ""
-"Red Hat Insights provides comprehensive analytics across your physical, "
-"virtual, cloud, and container platforms empowering you to take the guesswork "
-"out of remediation."
-msgstr ""
-"Red Hat Insights "
-"では、物理、仮想、クラウド、およびコンテナーのプラットフォームに対する包括的な解析により、推測しながら問題修復することがなくなります。"
-
-#: js/states/info/info.html:1
-msgid "Red Hat Insights supports"
-msgstr "Red Hat Insights 対象バージョン"
-
-#: js/states/getting-started/views/getting-started-containers.html:1
-#: js/states/getting-started/views/getting-started-direct.html:1
-#: js/states/getting-started/views/getting-started-osp.html:3
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid "Red Hat Network Classic Instructions"
-msgstr "Red Hat Network Classic を使用する"
-
-#: js/states/info/info.html:1
-msgid "Red Hat Satellite 5"
-msgstr "Red Hat Satellite 5"
-
-#: js/states/info/info.html:1
-msgid "Red Hat Satellite 6"
-msgstr "Red Hat Satellite 6"
 
 #: js/states/security/security.html:1
 msgid ""
@@ -1827,83 +1846,69 @@ msgstr "Red Hat は、これらツールの継続的進化に合わせて、セ�
 #: js/states/evaluation/evaluation.html:1
 msgid ""
 "Red Hat is providing each Red Hat Subscription Evaluation for evaluation "
-"purposes subject to the terms of the <a href=\"http://www.redhat.com/"
-"licenses/\" target=\"_blank\">Red Hat Enterprise Agreement</a>. If you use "
-"the Red Hat Subscription for any purpose other than <b>evaluation</b>, you "
-"agree to pay Red Hat the Subscription Fee(s) for each Unit pursuant to the "
-"Enterprise Agreement, which is in addition to any and all other remedies "
-"available to Red Hat under applicable law."
+"purposes subject to the terms of the<a href=\"http://www.redhat.com/licenses/"
+"\" target=\"_blank\">Red Hat Enterprise Agreement</a>. If you use the Red "
+"Hat Subscription for any purpose other than<b>evaluation</b>, you agree to "
+"pay Red Hat the Subscription Fee(s) for each Unit pursuant to the Enterprise "
+"Agreement, which is in addition to any and all other remedies available to "
+"Red Hat under applicable law."
 msgstr ""
 "Red Hat は、<a href=\"http://www.redhat.com/licenses/\" target=\"_blank\">Red "
-"Hat Enterprise Agreement</a> の条件の下で、評価目的で Red Hat サブスクリプション評価を提供しています。<b>評価</"
-"b> 目的以外で Red Hat サブスクリプションをご使用になられると、エンタープライズ同意書に準じて各ユニットに対してサブスクリプション料金を "
-"Red Hat に支払うことに同意することになります。これは、該当法規の下で Red Hat が利用可能なあらゆる救済に追加されるものです。"
+"Hat エンタープライズ同意書</a> の条件の下で、評価目的で Red Hat サブスクリプション評価版を提供しています。<b>評価</b> "
+"目的以外で Red Hat サブスクリプションをご使用になると、エンタープライズ同意書に準じて各ユニットに対してサブスクリプション料金を Red Hat "
+"に支払うことに同意することになります。これは、適用される法律に基づいて Red Hat に提供されるその他の救済策とは別のものです。"
 
-#: js/components/playbook/playbookModal.html:1
-msgid "Refreshing settings. Please select systems to start a new playbook..."
-msgstr "設定を最新の情報に更新しています。システムを選択して、新しい Playbook を開始してください..."
-
-#: js/states/getting-started/views/getting-started-sat5.html:1
-#: js/states/getting-started/views/getting-started-sat6.html:2
-msgid "Register Your Systems"
-msgstr "システムの登録"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid "Register Your Virtual Machines"
-msgstr "仮想マシンの登録"
-
-#: js/components/overview/widgets/goals/goalsLite.html:1
-msgid "Register more systems"
+#: js/components/inventory/inventoryActions/inventoryActions.html:1
+msgid "Register More"
 msgstr "システムの追加登録"
 
 #: js/states/actions/actions.html:1
 msgid "Register more systems."
 msgstr "システムを追加登録する。"
 
-#: js/components/system/systemSummaryTable/systemSummaryTable.html:1
-msgid "Register new system"
-msgstr "新しいシステムを登録する"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid "Register the system to Insights service:"
-msgstr "Insights サービスにシステムを登録します。"
-
 #: js/components/system/addSystemModal/addSystemModal.html:1
-#: js/states/getting-started/views/getting-started-direct.html:1
 msgid "Register the system to Red Hat Insights"
 msgstr "Red Hat Insights にシステムを登録する"
 
-#: js/states/getting-started/views/getting-started-sat6.html:2
-msgid "Register the system:"
-msgstr "システムを登録します。"
-
 #: js/components/system/addSystemModal/addSystemModal.html:1
-#: js/states/getting-started/views/getting-started-direct.html:1
 msgid ""
 "Register your system for updates with Red Hat Subscription Manager to "
 "resolve software dependencies:"
 msgstr "Red Hat Subscription Manager での更新のためにシステムを登録し、ソフトウェアの依存関係を解決します。"
 
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid "Registration"
-msgstr "登録"
-
-#: components/inventory/inventoryActions/inventoryActions.directive.js:116
+#: components/inventory/inventoryActions/inventoryActions.directive.js:109
 #: js/components/overview/widgets/newSystems/newSystems.html:1
 msgid "Registration Date"
 msgstr "登録日"
 
 #: js/components/recommendedKbase/recommendedKbase.html:1
 msgid "Related Knowledgebase articles:"
-msgstr "関連ナレッジ:"
+msgstr "関連ナレッジアーティクル:"
 
-#: js/states/splash/splash.html:1
-msgid "Related Resources"
-msgstr "関連リソース"
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "Release Date"
+msgstr "リリース日"
+
+#: states/vulnerabilities/controllers/view.erratum.controller.js:39
+msgid "Release Date: {{date}}"
+msgstr "リリース日: {{date}}"
+
+#: js/components/config/webhooks/webhooks.html:1
+msgid "Remove"
+msgstr "削除"
 
 #: js/components/system/systemTable/systemTable.html:1
 msgid "Remove Systems"
 msgstr "システムを削除する"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid "Remove certificate"
+msgstr "証明書を削除"
+
+#: js/components/inventory/inventoryActions/inventoryActions.html:1
+msgid "Remove system from group"
+msgid_plural "Remove systems from group"
+msgstr[0] "グループからシステムを削除する"
 
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 msgid "Remove this action"
@@ -1913,49 +1918,67 @@ msgstr "このアクションを削除する"
 msgid "Remove this system"
 msgstr "このシステムを削除する"
 
+#: states/config/webhook-edit.controller.js:59
+msgid "Report resolved"
+msgstr "解決策済みレポート"
+
 #: js/components/actions/actionsRule/actionsRule.html:1
 msgid "Reported"
 msgstr "報告済み"
 
-#: js/components/overview/widgets/goals/goalsLite.html:1
-msgid "Request an Insights evaluation"
-msgstr "Insights 評価をリクエストする"
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "Resolution:"
+msgstr "解決策:"
 
-#: js/states/splash/splash.html:1
-msgid ""
-"Resolve issues quickly and take the guesswork out of remediation using "
-"tailored resolutions created by domain experts and cross-­referenced against "
-"thousands of similar environments."
-msgstr ""
-"数千もの同様の環境に相互参照した、特定分野の専門家による独自の解決策を使用することで、問題が迅速に解決し、推測しながら問題修復することがなくなります。"
+#: js/components/webhooks/webhookStatusModal/webhookStatusModal.html:1
+msgid "Result"
+msgstr "結果"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid "Restart Satellite"
-msgstr "Satellite を再起動します。"
+#: js/components/filterComponents/riskOfChangeSelect/riskOfChangeSelect.html:1
+msgid "Risk of Change"
+msgstr "変更のリスク"
 
-#: js/components/config/hidden/hidden.html:1
+#: components/filterComponents/riskOfChangeSelect/riskOfChangeSelect.directive.js:32
+msgid "Risk of Change: High"
+msgstr "変更のリスク: 高"
+
+#: components/filterComponents/riskOfChangeSelect/riskOfChangeSelect.directive.js:24
+msgid "Risk of Change: Low"
+msgstr "変更のリスク: 低"
+
+#: components/filterComponents/riskOfChangeSelect/riskOfChangeSelect.directive.js:28
+msgid "Risk of Change: Moderate"
+msgstr "変更のリスク: 中"
+
+#: components/filterComponents/riskOfChangeSelect/riskOfChangeSelect.directive.js:20
+msgid "Risk of Change: Very Low"
+msgstr "変更のリスク: 非常に低い"
+
+#: js/states/actions/actions.html:1
+msgid "Risk summary"
+msgstr "リスクサマリー"
+
 #: js/components/topics/topicRuleList/topicRuleList.html:1
+#: js/states/digests/digests.html:1
 msgid "Rule"
 msgstr "ルール"
 
+#: js/components/filterComponents/ruleStatusTriState/ruleStatusTriState.html:1
+msgid "Rule Status"
+msgstr "ルールのステータス"
+
+#: js/components/primary-nav/primary-nav.html:1
 #: js/components/rule/ruleBreadcrumb/ruleBreadcrumb.html:1
-#: js/components/sideNav/sideNav.html:7
 msgid "Rules"
 msgstr "ルール"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid "Run Smart State Analysis on RHEL virtual machines"
-msgstr "RHEL 仮想マシンで Smart State Analysis を実行する"
+#: js/components/overview/widgets/newRules/newRules.html:1
+msgid "Rules Added in the past 15 days"
+msgstr "過去 15 日以内に追加されたルール"
 
-#: js/states/getting-started/views/getting-started-containers.html:1
-msgid "Run and Register the Red Hat Insights Client"
-msgstr "Red Hat Insights クライアントを実行して登録する"
-
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"Run the following commands on the RHV Manager to obtain the Red Hat Insights "
-"repositories:"
-msgstr "RHV Manager で以下のコマンドを実行して Red Hat Insights リポジトリーを取得します。"
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "Run Playbook"
+msgstr "Playbook の実行"
 
 #: js/components/gettingStartedTabs/gettingStartedTabs.html:1
 msgid "Satellite 5"
@@ -1965,64 +1988,78 @@ msgstr "Satellite 5"
 msgid "Satellite 6"
 msgstr "Satellite 6"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid ""
-"Satellite Organizations with Insights must be running in Connected mode. Any "
-"firewalls or proxies through which the Satellite server communicates to Red "
-"Hat must allow https communications to <a href=\"https://access.redhat."
-"com\">https://access.redhat.com</a>"
-msgstr ""
-"Insights を使用する Satellite 組織が接続モードで稼働していること。Red Hat に接続する Satellite "
-"サーバーが使用するファイアウォールまたはプロキシでは <a href=\"https://access.redhat.com\">https://"
-"access.redhat.com</a> への https 通信が許可されていること。"
-
-#: js/states/getting-started/views/getting-started-sat6.html:2
-msgid ""
-"Satellite Organizations with Insights must be running in Connected mode. Any "
-"firewalls or proxies through which the Satellite server communicates to Red "
-"Hat must allow https communications to <a href=\"https://cert-api.access."
-"redhat.com\">https://cert-api.access.redhat.com</a>"
-msgstr ""
-"Insights を使用する Satellite 組織が接続モードで稼働していること。Red Hat に接続する Satellite "
-"サーバーが使用するファイアウォールまたはプロキシでは <a href=\"https://cert-api.access.redhat."
-"com\">https://cert-api.access.redhat.com</a> への https 通信が許可されていること。"
-
 #: js/components/config/settings/settings.html:1
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 #: js/components/maintenance/maintenanceTable/maintenanceTableFooter.html:1
+#: js/components/maintenance/resolutionModal/resolutionModal.html:1
+#: js/states/config/views/webhook-edit.html:1
 msgid "Save"
 msgstr "保存"
 
-#: js/components/maintenance/maintenancePlanBar/maintenancePlanBar.html:1
-msgid "Save &amp; create another&nbsp;<i class=\"fa fa-save\"></i>"
-msgstr "保存 &amp; 追加で作成&nbsp;<i class=\"fa fa-save\"></i>"
-
 #: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLiteTable/maintenancePlanLiteTable.html:1
+#: js/states/maintenance/maintenance.html:1
 msgid "Scheduled Plans"
 msgstr "予定されているプラン"
 
-#: js/components/actions/actionsRuleFilters/actionsRuleFilters.html:1
-#: js/components/inventory/inventoryFilters/inventoryFilters.html:1
-msgid "Search"
-msgstr "検索"
+#: js/states/digests/digests.html:1
+msgid "Score History"
+msgstr "スコア履歴"
 
-#: components/filterComponents/searchBox/searchBox.directive.js:22
+#: js/states/digests/digests.html:1
+msgid "Score is excellent"
+msgstr "すぐれたスコアです"
+
+#: js/states/digests/digests.html:1
+msgid "Score is good"
+msgstr "よいスコアです"
+
+#: js/states/digests/digests.html:1
+msgid "Score is poor"
+msgstr "よくないスコアです"
+
+#: js/states/digests/digests.html:1
+msgid "Score needs attention"
+msgstr "注意が必要なスコアです"
+
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "Search CVEs"
+msgstr "CVE の検索"
+
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "Search Packages"
+msgstr "パッケージの検索"
+
+#: js/states/vulnerabilities/views/view-package.html:1
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
+msgid "Search RHSAs"
+msgstr "RHSA の検索"
+
+#: js/states/maintenance/maintenance.html:1
+msgid "Search plans"
+msgstr "プランの検索"
+
+#: js/states/policies/views/list-policies.html:1
+msgid "Search policies"
+msgstr "ポリシーの検索"
+
+#: js/states/rules/list-rules.html:1
+#: js/states/topics/views/topic-list.html:1
+msgid "Search rules"
+msgstr "ルールの検索"
+
+#: js/states/policies/views/view-policy.html:1
+msgid "Search systems"
+msgstr "システムの検索"
+
+#: components/filterComponents/searchBox/searchBox.directive.js:23
 msgid "Search…"
 msgstr "検索…"
 
-#: js/components/actions/actionsDetails/actionsDetails.html:1
-msgid "Section"
-msgstr "セクション"
-
+#: components/filterComponents/categorySelect/categorySelect.directive.js:32
 #: js/components/topbar/topbar.html:1
-#: js/states/actions/actions.html:1
 #: js/states/security/security.html:1
 msgid "Security"
 msgstr "セキュリティー"
-
-#: js/states/info/info.html:1
-msgid "Security comes standard"
-msgstr "セキュリティーがスタンダードに"
 
 #: js/states/security/security.html:1
 msgid ""
@@ -2042,11 +2079,12 @@ msgstr ""
 "お客様のシステムのセキュリティーは最重要事項であり、Red Hat 製品に同梱されているソフトウェアが最高基準を満たすよう、Red Hat "
 "Insights では徹底的に尽力しています。"
 
-#: js/states/splash/splash.html:1
-msgid "See Insights in Action"
-msgstr "Insights のデモ動画"
+#: js/components/card/systemCard/systemCard.html:1
+msgid "Select"
+msgstr "選択"
 
-#: js/components/inventory/inventoryActions/inventoryActions.html:1
+#: js/components/actions/actionsRule/actionsRule.html:1
+#: js/states/inventory/inventory.html:1
 msgid "Select All"
 msgstr "すべて選択"
 
@@ -2054,19 +2092,35 @@ msgstr "すべて選択"
 msgid "Select Visible"
 msgstr "表示されているものを選択"
 
-#: components/maintenance/maintenanceTable/maintenanceTable.controller.js:48
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "Select group"
+msgstr "グループを選択"
+
+#: components/maintenance/maintenanceTable/maintenanceTable.controller.js:49
 msgid "Select overlapping actions?"
 msgstr "重複するアクションを選択しますか?"
+
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "Select system"
+msgstr "システムを選択"
 
 #: js/components/gettingStartedTabs/gettingStartedTabs.html:1
 msgid "Select your registration method"
 msgstr "登録方法を選択"
 
-#: components/inventory/inventoryActions/inventoryActions.directive.js:45
+#: components/inventory/inventoryActions/inventoryActions.directive.js:44
 msgid ""
 "Selected systems cannot be unregistered alone. Remove their respective "
 "deployment."
 msgstr "選択したシステムを一度に登録解除することはできません。それぞれのデプロイメントを削除してください。"
+
+#: js/components/systemMetadata/systemMetadata.html:1
+msgid "Server type: Physical"
+msgstr "サーバータイプ: 物理"
+
+#: js/components/systemMetadata/systemMetadata.html:1
+msgid "Server type: Virtual"
+msgstr "サーバータイプ: 仮想"
 
 #: js/components/config/settings/settings.html:1
 msgid "Setting"
@@ -2077,29 +2131,10 @@ msgstr "設定"
 msgid "Settings"
 msgstr "設定"
 
-#: js/components/actions/actionsDetails/actionsDetails.html:1
-#: js/components/topics/topicRuleList/topicRuleList.html:1
-msgid "Sev"
-msgstr "重大度"
-
-#: js/components/maintenance/maintenanceTable/maintenanceTableActions.html:1
+#: js/components/filterComponents/rhsaSeveritySelect/rhsaSeveritySelect.html:1
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
 msgid "Severity"
 msgstr "重大度"
-
-#: js/states/actions/actions.html:1
-msgid "Severity summary"
-msgstr "重大度のサマリー"
-
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid ""
-"Shortly after you execute `redhat-access-insights --register` on at least "
-"one machine, navigate to <strong>Systems --&gt; Overview</strong> in "
-"Satellite. Find the system you registered. The status should either be a "
-"green check or a red exclamation point."
-msgstr ""
-"`redhat-access-insights --register` を最低 1 台のマシンで実行した後、Satellite の "
-"<strong>システム --&gt; 概要</strong> "
-"に移動して、登録したシステムを見つけます。ステータスが緑色のチェックマークか赤色の感嘆符になっています。"
 
 #: js/states/announcements/announcements.html:1
 msgid "Show hidden"
@@ -2109,30 +2144,36 @@ msgstr "非表示を表示"
 msgid "Show rules without actions ({{hiddenCount}} more)"
 msgstr "アクションのないルールを表示 (他 {{hiddenCount}} 件)"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"Smart State Analysis capability is enabled for Red Hat Enterprise Linux "
-"virtual machines."
-msgstr "Smart State Analysis 機能は Red Hat Enterprise Linux 仮想マシンに有効です。"
+#: js/components/maintenance/resolutionModal/resolutionModal.html:1
+msgid "Skip and use defaults"
+msgstr "スキップしてデフォルトを使用"
 
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 msgid "Snooze this plan"
 msgstr "このプランを休止する"
 
-#: js/components/inventory/inventoryActions/inventoryActions.html:1
-msgid "Sort Direction"
-msgstr "方向を並び替え"
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid ""
+"Some of the resolutions above require system reboot in order for the changes "
+"to take effect. This playbook&nbsp;<b ng-if=\"plan.allow_reboot\" class="
+"\"red\">will reboot the systems automatically.</b><span ng-if=\"!plan."
+"allow_reboot\"><b>will not reboot the systems.&nbsp;</b>The systems will "
+"need to be rebooted manually.</span>"
+msgstr ""
+"上記の解決策の中には、変更の適用にシステムの再起動が必要になるものもあります。この playbook&nbsp;<b ng-if=\"plan."
+"allow_reboot\" class=\"red\">は、自動的にシステムを再起動します。</b><span ng-if=\"!plan."
+"allow_reboot\"><b>は、自動でシステムを再起動しません。&nbsp;</b>システムは、手動で再起動する必要があります。</span>"
 
-#: js/components/inventory/inventoryActions/inventoryActions.html:1
-msgid "Sort Field"
-msgstr "フィールドを並び替え"
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "Specific System"
+msgstr "特定のシステム"
 
-#: js/states/actions/actions.html:1
+#: components/filterComponents/categorySelect/categorySelect.directive.js:24
 #: translations.html:10
 msgid "Stability"
 msgstr "安定性"
 
-#: components/filterComponents/checkInSelect/checkInSelect.directive.js:23
+#: components/filterComponents/checkInSelect/checkInSelect.directive.js:25
 msgid "Stale"
 msgstr "古い"
 
@@ -2140,24 +2181,27 @@ msgstr "古い"
 msgid "Start"
 msgstr "開始"
 
-#: js/states/splash/splash.html:1
-msgid "Start proactively finding and fixing infrastructure risks today"
-msgstr "インフラストラクチャーのリスクを今すぐプロアクティブに見つけて修正する"
-
-#: js/components/maintenance/maintenancePlanBar/maintenancePlanBar.html:1
-msgid "Start time"
-msgstr "開始時間"
-
 #: js/components/announcements/announcementsScroll/announcementsScroll.html:1
 msgid "Start/End:&nbsp;"
 msgstr "開始/終了:&nbsp;"
 
+#: js/components/config/webhooks/webhooks.html:1
 #: js/components/maintenance/maintenanceTable/maintenanceTableActions.html:1
 #: js/components/maintenance/maintenanceTable/maintenanceTableSystems.html:1
-#: js/components/system/systemSummaryTable/systemSummaryTable.html:1
-#: js/states/inventory/inventory.html:1
 msgid "Status"
 msgstr "ステータス"
+
+#: components/filterComponents/checkInSelect/checkInSelect.directive.js:22
+msgid "Status: Checking In"
+msgstr "ステータス: チェックイン"
+
+#: components/filterComponents/checkInSelect/checkInSelect.directive.js:28
+msgid "Status: Stale"
+msgstr "ステータス: 古い"
+
+#: js/components/rule/ruleResolution/ruleResolution.html:1
+msgid "Steps to resolve"
+msgstr "解決手順"
 
 #: js/components/feedback/feedbackModal.html:1
 msgid "Submit"
@@ -2169,41 +2213,75 @@ msgid ""
 "prefer not be monitored by Red Hat Insights."
 msgstr "Red Hat Insights による監視を望まないコマンド、ファイル、またはメタデータをブラックリストに追加できます。"
 
-#: components/maintenance/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:14
+#: js/components/webhooks/webhookStatusModal/webhookStatusModal.html:1
+msgid "Success"
+msgstr "成功"
+
+#: js/states/maintenance/maintenance.html:1
+msgid "Suggested Plans"
+msgstr "提案されたプラン"
+
+#: components/filterComponents/maintenanceCategorySelect/maintenanceCategorySelect.directive.js:23
 msgid "Suggestions"
 msgstr "提案"
 
-#: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLite.html:1
-#: js/states/overview/overview.html:1
+#: js/states/policies/views/view-policy.html:1
 msgid "Summary"
 msgstr "サマリー"
 
 #: js/components/maintenance/maintenanceTable/maintenanceTableSystems.html:1
 #: js/components/overview/widgets/newSystems/newSystems.html:1
+#: js/components/systemMetadata/systemMetadata.html:1
 msgid "System"
 msgstr "システム"
+
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "System Group"
+msgstr "システムグループ"
 
 #: js/components/filterComponents/actionsSelect/actionsSelect.html:1
 msgid "System Health"
 msgstr "システムの状態"
 
 #: js/states/inventory/inventory.html:1
+#: js/states/policies/views/view-policy.html:1
 msgid "System Name"
 msgstr "システム名"
-
-#: js/components/filterComponents/checkInSelect/checkInSelect.html:1
-msgid "System Status"
-msgstr "システムステータス"
 
 #: js/states/inventory/inventory.html:1
 msgid "System Type"
 msgstr "システムタイプ"
 
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
-#: js/components/playbook/playbookModal.html:1
+msgid "System reboot is required to resolve this issue"
+msgstr "この問題を解決するには、システムを再起動する必要があります"
+
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "System reboot summary"
+msgstr "システム再起動サマリー"
+
+#: states/config/webhook-edit.controller.js:65
+msgid "System unregistered"
+msgstr "登録解除されたシステム"
+
+#: js/components/incident/incidentSummary/incidentSummary.html:1
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 #: js/components/topics/topicRuleList/topicRuleList.html:1
+#: js/states/vulnerabilities/views/vulnerabilities.html:1
 msgid "Systems"
 msgstr "システム"
+
+#: js/states/policies/views/list-policies.html:1
+msgid "Systems Erroring"
+msgstr "エラーが発生したシステム"
+
+#: js/states/policies/views/list-policies.html:1
+msgid "Systems Failing"
+msgstr "障害が発生したシステム"
+
+#: js/states/policies/views/list-policies.html:1
+msgid "Systems Passing"
+msgstr "パスしたシステム"
 
 #: js/components/overview/widgets/goals/goalsLite.html:1
 msgid "Systems Registered"
@@ -2213,70 +2291,33 @@ msgstr "登録されているシステム"
 msgid "Systems in This Group"
 msgstr "このグループのシステム"
 
-#: js/states/actions/actions.html:1
-msgid "Systems with critical actions"
-msgstr "重大なアクションのあるシステム"
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "Systems:"
+msgstr "システム:"
 
-#: js/states/splash/splash.html:1
-msgid "TRY IT"
-msgstr "試してみる"
+#: js/states/config/views/webhook-edit.html:1
+msgid "Target URL"
+msgstr "ターゲット URL"
 
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"The Client cron job and Coordinator cron jobs cannot be symlinked "
-"simultaneously or conflicts will occur. The following command will remove "
-"the symlink that will have been created in /etc/cron.daily for the Client:"
-msgstr ""
-"クライアントの cron ジョブとコーディネーターの cron "
-"ジョブで同時にシンボリックリンクを作成することはできません。作成すると競合が生じます。以下のコマンドで /etc/cron.daily "
-"に作成されたクライアント向けのシンボリックリンクを削除します。"
+#: js/states/digests/digests.html:1
+msgid "Ten Most Impacted Systems"
+msgstr "影響が大きかったシステムトップ 10"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"The CloudForms 4.0 appliance must be registered to either Satellite Server "
-"version 6.1.5 or later or to Customer Portal Subscription Management hosted "
-"subscription service."
-msgstr ""
-"Satellite Server バージョン 6.1.5 以降またはカスタマーポータル Subscription Management "
-"ホストサブスクリプションサービスのいずれかに CloudForms 4.0 アプライアンスを登録する必要があります。"
+#: js/components/config/webhooks/webhooks.html:1
+msgid "Test event"
+msgstr "テストイベント"
 
-#: js/states/info/info.html:1
-msgid ""
-"The Insights engine delivers results for review through the Insights UI in "
-"Red Hat Satellite and in the Red Hat Customer Portal. Through the intuitive "
-"Insights UI, configuration issues discovered during analysis are clearly "
-"displayed and prioritized by severity. Tailored remediation steps are "
-"presented to help you optimize workloads and confidently resolve critical "
-"issues and prevent future issues."
-msgstr ""
-"Insights エンジンは、Red Hat Satellite および Red Hat カスタマーポータルの Insights "
-"ユーザーインターフェイスによってレビューされた結果を配信します。この直感的な Insights "
-"ユーザーインターフェイスからは、解析中に見つかった設定問題が重要度別に分かりやすく表示され優先順位が付けられます。そして、作業負荷を最適化し、重要な問題を確実に解決し、その後問題が発生しないようにする改善手順が示されます。"
+#: js/states/evaluation/evaluation.html:1
+msgid "Thank you for purchasing Red Hat Insights"
+msgstr "Red Hat Insights をご購入いただきありがとうございます"
 
-#: js/states/getting-started/views/getting-started-osp.html:1
-msgid ""
-"The OSP Director node (also referred to as the Undercloud in these "
-"directions) must have the rhel-7-server-rh-common-rpms repository\n"
-"enabled."
-msgstr ""
-"OSP Director ノード (アンダークラウドとも呼ぶ) で rhel-7-server-rh-common-rpms "
-"リポジトリーが有効になっていること。"
+#: js/states/evaluation/evaluation.html:1
+msgid "Thank you for trying Red Hat Insights"
+msgstr "Red Hat Insights をお試しいただきありがとうございました"
 
-#: js/states/getting-started/views/getting-started-osp.html:1
-msgid ""
-"The OpenStack deployment must be Red Hat OpenStack Platform (OSP) 7 or later "
-"and set up with the OSP Director."
-msgstr ""
-"OpenStack デプロイメントは Red Hat OpenStack Platform (OSP) 7 およびそれ以降で、OSP Director "
-"とセットアップされていること。"
-
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"The RHV deployment must be Red Hat Enterprise Virtualization (RHV) 3.5 or "
-"later and RHV Manager must be running Red Hat Enterprise Linux 6.7 or later."
-msgstr ""
-"RHV のデプロイメントは Red Hat Enterprise Virtualization (RHV) 3.5 またはそれ以降で、RHV "
-"Manager が Red Hat Enterprise Linux 6.7 または以降で稼働していること。"
+#: js/states/evaluation/evaluation.html:1
+msgid "Thank you!"
+msgstr "ありがとうございました。"
 
 #: js/states/security/security.html:1
 msgid ""
@@ -2295,141 +2336,52 @@ msgstr ""
 "クライアントシステムから Red Hat サーバーへのデフォルトのコミュニケーションモデルは、相互 TLS またはデジタル証明書を使用した 2 "
 "方向認証で行います。"
 
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"The following command installs Red Hat Insights on the RHV Manager, which "
-"will collect information from all the virtualization hosts in the "
-"environment."
-msgstr ""
-"以下のコマンドで RHV Manager に Red Hat Insights "
-"をインストールし、環境内のすべてのすべての仮想ホストから情報を収集します。"
-
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"The following command will configure the Coordinator and Client "
-"installations:<pre class=\"code-block code-terminal\"><code class=\"language-"
-"shell\">stack@undercloud $ sudo insights-coordinator-rhosp --configure</"
-"code></pre>"
-msgstr ""
-"以下のコマンドでコーディネーターとクライアントのインストールを設定します: <pre class=\"code-block code-"
-"terminal\"><code class=\"language-shell\">stack@undercloud $ sudo insights-"
-"coordinator-rhosp --configure</code></pre>"
-
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"The following command will install the Client on the Undercloud and "
-"Overcloud nodes and register the stack with Red Hat Insights:"
-msgstr ""
-"以下のコマンドでアンダークラウドノードとオーバークラウドノードにクライアントをインストールし、Red Hat Insights にスタックを登録します。"
-
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"The following command will install the OpenStack Coordinator on the "
-"Undercloud node:"
-msgstr "以下のコマンドでアンダークラウドノードに OpenStack Coordinator をインストールします。"
-
-#: js/states/getting-started/views/getting-started-containers.html:1
-msgid "The following command will install the Red Hat Insights client:"
-msgstr "以下のコマンドで Red Hat Insights クライアントをインストールします。"
-
-#: js/states/getting-started/views/getting-started-containers.html:1
-msgid "The following command will run and register the Insights client:"
-msgstr "以下のコマンドで Insights クライアントを実行および登録します。"
-
 #: js/components/inventory/inventoryActions/unregisterConflict.html:1
 msgid "The following systems types cannot be unregistered on their own:"
 msgstr "以下のシステムタイプは自分で登録解除することはできません:"
 
-#: js/states/getting-started/views/getting-started-containers.html:1
-#: js/states/getting-started/views/getting-started-osp.html:3
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid "The initial analysis results will be available shortly thereafter."
-msgstr "初期解析の結果はすぐに確認できます。"
-
 #: js/components/system/addSystemModal/addSystemModal.html:1
-#: js/states/getting-started/views/getting-started-direct.html:1
 msgid "The initial analysis results will be available shorty thereafter."
 msgstr "初期解析の結果はすぐに確認できます。"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid ""
-"There are multiple ways to automate this process including Red Hat "
-"Satellite's built-in<a href=\"https://access.redhat.com/documentation/en-US/"
-"Red_Hat_Satellite/5.7/html/Getting_Started_Guide/sect-"
-"Managing_Configuration_Channels.html\" target=\"_blank\"> Configuration "
-"Management Channels.</a>"
-msgstr ""
-"このプロセスを自動化する方法は複数あります。たとえば、Red Hat Satellite に組み込まれている<a href=\"https://"
-"access.redhat.com/documentation/en-US/Red_Hat_Satellite/5.7/html/"
-"Getting_Started_Guide/sect-Managing_Configuration_Channels.html\" target="
-"\"_blank\">設定管理チャンネル</a>を使用します。"
+#: js/components/topics/topicRuleList/topicRuleList.html:1
+msgid "There are no actions for the selected filters.&nbsp;"
+msgstr "選択したフィルターにはアクションがありません。&nbsp;"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid ""
-"There are multiple ways to automate this process. See the <a href="
-"\"#register\" relative-hash=\"relative-hash\" permalink="
-"\"permalink\">Register Systems</a> section for details."
-msgstr ""
-"このプロセスを自動化する方法は複数あります。詳細は「<a href=\"#register\" relative-hash=\"relative-"
-"hash\" permalink=\"permalink\">システムの登録</a>」を参照してください。"
+#: js/states/policies/views/view-policy.html:2
+msgid "There are no policies for the selected options.&nbsp;"
+msgstr "選択したオプションにはポリシーがありません。&nbsp;"
+
+#: js/states/rules/list-rules.html:1
+msgid "There are no rules for the selected filters.&nbsp;"
+msgstr "選択したフィルターにはルールがありません。&nbsp;"
 
 #: js/states/topics/views/edit-topics.html:1
 msgid "There is 1 rule currently tagged with this tag."
 msgid_plural "There are {{$count}} rules currently tagged with this tag."
 msgstr[0] "現在 {{$count}} 件のルールがタグ付けされています。"
 
-#: js/components/actions/actions.html:1
-msgid ""
-"There is <strong>1 </strong>action detected from systems in your "
-"organization."
-msgid_plural ""
-"There are &lt;strong&gt;{{$count}}&lt;/strong&gt; actions detected from "
-"systems in your organization."
-msgstr[0] "組織内のシステムで検出されたアクションの数は <strong>{{$count}}</strong> です。"
-
-#: js/components/actions/actions.html:2
-msgid ""
-"There is <strong>1</strong>{{getCategory() | translate}} action detected "
-"from systems in your organization."
-msgid_plural ""
-"There are &lt;strong&gt;{{$count}}&lt;/strong&gt; "
-"{{getCategory()|translate}} actions detected from systems in your "
-"organization."
-msgstr[0] ""
-"組織内のシステムで <strong>{{$count}}</strong>{{getCategory() | translate}} "
-"件のアクションが検出されました。"
-
 #: js/components/rule/ruleReason/ruleReason.html:1
 #: js/components/rule/ruleResolution/ruleResolution.html:1
 msgid "There was a problem obtaining action details. Please try again later."
 msgstr "アクションの詳細を取得中に問題が発生しました。後でもう一度やり直してください。"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"These steps can be automated using the configuration tool of your choice."
-msgstr "この手順は、設定ツールを使用して自動化することができます。"
+#: js/states/evaluation/evaluation.html:1
+msgid "There was an error"
+msgstr "エラーが発生しました"
+
+#: js/components/vulnerabilities/cveSummary/cveSummary.html:1
+msgid "This CVE has associated Insights Rules"
+msgstr "この CVE には、関連する Insights ルールがあります"
 
 #: js/components/maintenance/maintenanceTable/maintenanceTableActions.html:1
 #: js/components/maintenance/maintenanceTable/maintenanceTableSystems.html:1
 msgid "This action is already part of another plan"
 msgstr "このアクションは、すでに別のプランに含まれています"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid ""
-"This could take some time depending on your Satellite configuration. <a href="
-"\"https://access.redhat.com/documentation/en-US/Red_Hat_Satellite/5.7/html/"
-"Installation_Guide/Enabling_Push_to_Clients.html\">Enabling push to clients</"
-"a> will speed up the install. When the RPM is installed you are ready to "
-"move on to the next step."
-msgstr ""
-"このプロセスは、Satellite の設定によっては時間がかかる場合があります。<a href=\"https://access.redhat.com/"
-"documentation/en-US/Red_Hat_Satellite/5.7/html/Installation_Guide/"
-"Enabling_Push_to_Clients.html\">クライアントへのプッシュを有効にする</a>とインストールが速まります。RPM "
-"のインストールが完了したら、次の手順に進みます。"
-
-#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
-msgid "This is a plan suggested by Red Hat"
-msgstr "Red Hat が提案するプラン"
+#: components/incident/incidentIcon/incidentIcon.directive.js:10
+msgid "This is an incident. An incident means that this has already occurred."
+msgstr "これはインシデントです。インシデントとは、すでに発生したことを意味します。"
 
 #: js/components/statusIcon/statusIcon.html:1
 msgid ""
@@ -2441,17 +2393,43 @@ msgstr "この問題はまだ解決されていません。このフィールド
 msgid "This issue has been resolved"
 msgstr "この問題は解決しています"
 
-#: components/ansibleIcon/ansibleIcon.directive.js:12
-msgid ""
-"This rule has Ansible support. Use the Planner to generate an Ansible "
-"playbook."
-msgstr "このルールには Ansible サポートがあります。プランナーを使って Ansible playbook を生成してください。"
+#: js/components/actions/actionsRule/actionsRule.html:1
+msgid "This issue is an incident, it has already occurred."
+msgstr "この問題はインシデントです。すでに発生しています。"
 
-#: components/ansibleIcon/ansibleIcon.directive.js:17
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "This plan is empty"
+msgstr "このプランは空です。"
+
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid ""
+"This playbook&nbsp;<b translate=\"translate\" class=\"text-success\">does "
+"not require a system reboot.</b>"
+msgstr ""
+"この playbook&nbsp;<b translate=\"translate\" class=\"text-"
+"success\">は、システムの再起動が必要ありません。</b>"
+
+#: states/policies/controllers/list.policies.controller.js:10
+msgid "This policy has checks that are not passing"
+msgstr "このポリシーにはパスしていないチェックがあります"
+
+#: js/components/maintenance/resolutionModal/resolutionModal.html:1
+msgid "This resolution requires a system reboot"
+msgstr "この解決策では、システムの再起動が必要です"
+
+#: components/ansibleIcon/ansibleIcon.directive.js:12
+msgid "This rule has Ansible support."
+msgstr "このルールは Ansible 対応です。"
+
+#: js/components/vulnerabilityIcon/vulnerabilityIcon.html:1
+msgid "This rule has a vulnerability hit"
+msgstr "このルールには、該当する脆弱性があります"
+
+#: components/ansibleIcon/ansibleIcon.directive.js:13
 msgid "This rules does not have Ansible support"
 msgstr "このルールには Ansible サポートがありません"
 
-#: components/maintenance/maintenanceTable/maintenanceTable.controller.js:49
+#: components/maintenance/maintenanceTable/maintenanceTable.controller.js:50
 msgid ""
 "This selection contains an action that  is already part of another plan. Do "
 "you want to include this action?"
@@ -2460,166 +2438,56 @@ msgid_plural ""
 "plan. Do you want to include these actions?"
 msgstr[0] "別のプランにすでに含まれている {{count}} 件のアクションが選択されています。これらのアクションを対象にしますか?"
 
-#: js/components/system/systemModal/systemModal.html:1
+#: js/components/maintenance/resolutionModal/resolutionModal.html:1
+msgid ""
+"This setting can be changed anytime in the&nbsp;<strong translate="
+"\"translate\">Playbook Settings&nbsp;</strong>tab"
+msgstr ""
+"この設定は&nbsp;<strong translate=\"translate\">Playbook Settings&nbsp;</"
+"strong>タブでいつでも変更できます"
+
+#: js/components/systemMetadata/systemMetadata.html:1
 msgid "This system is not checking in."
 msgstr "このシステムはチェックインしていません。"
 
-#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
-#: js/components/maintenance/maintenancePlanBar/maintenancePlanBar.html:1
-msgid "Timezone:&nbsp;"
-msgstr "タイムゾーン:&nbsp;"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-#: js/states/getting-started/views/getting-started-direct.html:1
-#: js/states/getting-started/views/getting-started-sat5.html:1
-#: js/states/getting-started/views/getting-started-sat6.html:2
-msgid ""
-"To begin using Red Hat Insights, please visit  <a href=\"https://access."
-"redhat.com/insights/evaluation\">https://access.redhat.com/insights/"
-"evaluation</a> to activate any available evaluations associated with your "
-"account. This step must be completed prior to any system registration with "
-"Insights."
-msgstr ""
-"Red Hat Insights の使用を開始するには、<a href=\"https://access.redhat.com/insights/"
-"evaluation\">https://access.redhat.com/insights/evaluation</a> "
-"に移動して、ご自分のアカウントに関連付けられている評価をアクティベートしてください。このステップは、システムを Insights "
-"に登録する前に完了しておく必要があります。"
-
-#: js/states/getting-started/views/getting-started-sat6.html:3
-msgid ""
-"To give users Insights report and rule viewing access, assign them the "
-"\"Insights Viewer\" role. In addition, users must be granted the "
-"\"view_content_host\" permission."
-msgstr ""
-"Insights レポートやルールの表示を可能にするには、ユーザーに \"Insights Viewer\" "
-"ロールを割り当て、\"view_content_host\" のパーミッションを付与する必要があります。"
-
-#: js/states/getting-started/views/getting-started-sat6.html:3
-msgid ""
-"To give users access to all Insights screens, including the \"Manage\" "
-"screen, assign them the \"Insights Admin\" role. In addition, users must be "
-"granted the \"view_content_host\" permission."
-msgstr ""
-"Insights で「管理」画面を含むすべての画面を利用できるようにするには、ユーザーに \"Insights Admin\" ロールを割り当て、さらに "
-"\"view_content_host\" パーミッションを付与する必要があります。"
+#: js/components/webhooks/webhookStatusModal/webhookStatusModal.html:1
+msgid "Timestamp"
+msgstr "タイムスタンプ"
 
 #: js/components/system/addSystemModal/upgradeSubscription.html:1
 msgid "To increase your available Red Hat Insights registrations, please"
 msgstr "Red Hat Insights 登録数を増やすには以下を実行してください。"
 
-#: js/states/getting-started/views/getting-started-sat6.html:2
-msgid ""
-"To register Satellite clients to Red Hat Insights, you'll need to install "
-"the client rpm and then register the system."
-msgstr ""
-"Satellite クライアントを Red Hat Insights に登録するには、クライアントの rpm "
-"をインストールしてシステムを登録する必要があります。"
+#: components/filterComponents/ageSelect/ageSelect.directive.js:22
+msgid "Today"
+msgstr "今日"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid "To register a system manually:"
-msgstr "システムを手動で登録するには、以下のコマンドを実行します。"
+#: components/severityIcon/severityIcon.directive.js:44
+#: js/components/filterComponents/totalRiskSelect/totalRiskSelect.html:1
+#: js/components/maintenance/maintenanceTable/maintenanceTableActions.html:1
+#: js/components/maintenance/maintenanceTable/maintenanceTableMulti.html:1
+#: js/components/topics/topicRuleList/topicRuleList.html:1
+#: js/states/digests/digests.html:1
+msgid "Total Risk"
+msgstr "総合リスク"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"To register virtual machines to Red Hat Insights, you'll need to install the "
-"Insights client RPM and then register virtual machines to the Insights "
-"service."
-msgstr ""
-"仮想マシンを Red Hat Insights に登録するには、Insights クライアントの RPM をインストールしてから、Insights "
-"サービスに仮想マシンを登録する必要があります。"
-
-#: js/states/getting-started/views/getting-started-osp.html:2
-msgid ""
-"To start the installation, the Red Hat Insights for OpenStack Private Beta "
-"repositories must be installed on the OSP Director node."
-msgstr ""
-"インストールを開始するには、Red Hat Insights for OpenStack Private Beta リポジトリーを OSP "
-"Director ノードにインストールする必要があります。"
-
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"To start the installation, the Red Hat Insights repositories must be "
-"installed."
-msgstr "インストールを開始するには、Red Hat Insights リポジトリーをインストールする必要があります。"
-
-#: js/states/getting-started/views/getting-started-containers.html:1
-msgid ""
-"To start the installation, the Red Hat Insights repository must be enabled:"
-msgstr "インストールを開始するには、Red Hat Insights リポジトリーを有効にする必要があります。"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"To view Insights reports in the CloudForms UI, navigate to <strong>Red Hat "
-"Insights -&gt; Overview</strong>."
-msgstr ""
-"CloudForms で Insights レポートを表示するには <strong>Red Hat Insights -&gt; 概要</strong> "
-"に移動します。"
-
-#: js/states/getting-started/views/getting-started-sat6.html:3
-msgid ""
-"To view Insights reports, navigate to <strong>Insights -&gt; Overview</"
-"strong> in the Satellite 6 UI."
-msgstr ""
-"Insights レポートを表示するには、Satellite 6 で <strong>Insights -&gt; 概要</strong> "
-"に移動します。"
-
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid ""
-"To view an overview of all system reports, navigate to <strong>Systems --"
-"&gt; Insights</strong>."
-msgstr "全システムのレポート概要を表示するには、<strong>システム --&gt; Insights</strong> に移動します。"
-
-#: js/states/getting-started/views/getting-started-sat6.html:3
-msgid ""
-"To view and manage Insights rules, navigate to <strong>Insights -&gt; Rules</"
-"strong>."
-msgstr "Insights のルールを表示および管理するには、<strong>Insights -&gt; ルール</strong>に移動します。"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"To view and manage Insights rules, navigate to <strong>Red Hat Insights -"
-"&gt; Rules</strong>."
-msgstr ""
-"Access Insights ルールを表示して管理するには、<strong>Red Hat Insights -&gt; ルール</strong> "
-"に移動します。"
-
-#: js/states/getting-started/views/getting-started-sat6.html:3
-msgid ""
-"To view connection status or enable/disable Red Hat Insights globally for an "
-"Organization, navigate to <strong>Insights -&gt; Manage</strong>."
-msgstr ""
-"接続状況を表示する、または Red Hat Insights を組織全体で有効/無効にするには、<strong>Insights -&gt; 管理</"
-"strong>に移動します。"
-
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid ""
-"To view the list of systems that are reporting data to Insights, navigate to "
-"<strong>Red Hat Insights -&gt; Systems</strong>."
-msgstr ""
-"Insights にデータを報告するシステムを一覧表示するには、<strong>Red Hat Insights -&gt; システム</"
-"strong>に移動します。"
-
-#: js/states/getting-started/views/getting-started-sat6.html:3
-msgid ""
-"To view the list of systems that are reporting data to Red Hat Insights, "
-"navigate to <strong>Insights -&gt; Systems</strong>."
-msgstr ""
-"Red Hat Insights にデータを報告するシステムを一覧表示するには、<strong>Insights -&gt; システム</"
-"strong>に移動します。"
+#: js/states/evaluation/evaluation.html:1
+msgid "Try Again"
+msgstr "もう一度試す"
 
 #: js/components/betaSwitchButton/betaSwitchButton.html:1
 msgid "Try Insights Beta"
 msgstr "Insights Beta を試す"
 
-#: components/inventory/inventoryActions/inventoryActions.directive.js:128
+#: components/inventory/inventoryActions/inventoryActions.directive.js:121
 #: js/components/actions/actionsRule/actionsRule.html:1
-#: js/components/system/systemSummaryTable/systemSummaryTable.html:1
+#: js/states/vulnerabilities/views/view-erratum.html:1
 msgid "Type"
 msgstr "タイプ"
 
-#: js/components/maintenance/maintenancePlanBar/maintenancePlanBar.html:1
-msgid "UTC time:&nbsp;"
-msgstr "時間 (UTC):&nbsp;"
+#: js/components/config/webhooks/webhooks.html:1
+msgid "URL"
+msgstr "URL"
 
 #: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
 msgid "UTC&nbsp;"
@@ -2628,6 +2496,29 @@ msgstr "UTC&nbsp;"
 #: components/rule/ruleToggle/ruleToggle.directive.js:12
 msgid "Unignore Rule"
 msgstr "このルールを無視しない"
+
+#: components/severityIcon/severityIcon.directive.js:72
+msgid "Unknown"
+msgstr "不明"
+
+#: components/webhooks/webhookStatusIcon/webhookStatusIcon.directive.js:25
+msgid "Unknown - no recent deliveries"
+msgstr "不明 - 最近の配信はありません"
+
+#: components/maintenance/maintenanceModal/maintenanceModal.directive.js:361
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+#: services/maintenance.service.js:386
+msgid "Unnamed plan"
+msgstr "無名プラン"
+
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "Unnamed plan ({{plan.maintenance_id}})"
+msgstr "無名プラン ({{plan.maintenance_id}})"
+
+#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
+msgid "Unnamed plan ({{selected.plan.maintenance_id}})"
+msgstr "無名プラン ({{selected.plan.maintenance_id}})"
 
 #: js/components/card/systemCard/systemCard.html:1
 #: js/components/inventory/inventoryActions/inventoryActions.html:1
@@ -2638,46 +2529,34 @@ msgstr "登録解除"
 msgid "Unregister their entire deployment to remove them."
 msgstr "デプロイメント全体を登録解除して、デプロイメントを削除します。"
 
-#: js/components/system/systemSummaryTable/systemSummaryTable.html:1
-msgid "Unregister {{getSystemsLabel()}}"
-msgid_plural "Unregister {{$count}} {{getSystemsLabel()}}"
-msgstr[0] "登録解除: {{$count}} 件の {{getSystemsLabel()}}"
-
 #: js/components/config/messaging/messaging.html:1
 msgid "Update"
 msgstr "アップデート"
 
-#: js/components/actions/actions.html:1
+#: components/groupSelect/groupSelect.directive.js:103
 msgid ""
-"Use this chart to drill down and discover problems within your organization."
-msgstr "このチャートは、組織内の問題をセクション別に表示します。"
+"Use <strong>Actions</strong> dropdown in the inventory to add systems to the "
+"<code>{{name}}</code> group"
+msgstr ""
+"インベントリーの <strong>アクション</strong> ドロップダウンを使用してシステムを <code>{{name}}</code> "
+"グループに追加します"
 
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid "Validate Data was Reported"
-msgstr "データ報告の確認"
+#: components/ansibleIcon/ansibleIcon.directive.js:10
+msgid "Use the Planner to generate an Ansible Playbook."
+msgstr "プランナーを使用して Ansible Playbook を生成します。"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid "Valid until"
+msgstr "有効期間"
 
 #: js/components/config/settings/settings.html:1
 msgid "Value"
 msgstr "値"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid "Verify CloudForms Appliance registration"
-msgstr "CloudForms アプライアンスの登録確認"
-
-#: js/states/getting-started/views/getting-started-sat6.html:2
-msgid "Verify Connection to Red Hat Insights"
-msgstr "Red Hat Insights への接続を確認する"
-
-#: js/states/getting-started/views/getting-started-sat6.html:2
-msgid ""
-"Verify that the Satellite server can successfully communicate with Red Hat "
-"Insights.  In the Satellite UI, navigate to <strong>Insights -&gt; Manage</"
-"strong>. Verify that the engine connection status is \"Connected\" and that "
-"the account number displayed is correct for your organization."
-msgstr ""
-"Satellite サーバーが Red Hat Insights と正常に接続されていることを確認します。Satellite "
-"で、<strong>Insights -&gt; 管理</"
-"strong>に移動します。エンジンの接続状態が「接続済み」となっており、表示されているアカウント番号が組織のものであることを確認します。"
+#: components/filterComponents/riskOfChangeSelect/riskOfChangeSelect.directive.js:19
+#: js/components/riskOfChange/riskOfChange.html:1
+msgid "Very Low"
+msgstr "非常に低い"
 
 #: js/components/bullhorn/bullhorn.html:1
 msgid "View All"
@@ -2686,80 +2565,128 @@ msgstr "すべてを表示する"
 #: js/components/rule/ruleGroupCard/ruleGroupCard.html:1
 msgid "View Impacted System (1)"
 msgid_plural "View Impacted Systems ({{$count}})"
-msgstr[0] "影響を受けるシステム ({{$count}}) を確認する"
+msgstr[0] "影響を受けるシステム ({{$count}}) を表示"
+
+#: js/components/topics/topicRuleList/topicRuleList.html:1
+msgid "View Impacted Systems"
+msgstr "影響を受けるシステムを表示"
 
 #: js/states/rules/list-rules.html:1
-msgid "View Impacted Systems ({{rule.impacted_systems}})"
-msgstr "影響を受けるシステムを確認する ({{rule.impacted_systems}})"
+msgid "View Impacted Systems ({{:: rule.impacted_systems}})"
+msgstr "影響を受けるシステムを表示 ({{:: rule.impacted_systems}})"
+
+#: js/components/vulnerabilities/erratumCard/erratumCard.html:1
+msgid "View In Portal"
+msgstr "ポータルで確認"
+
+#: js/components/maintenance/resolutionModal/resolutionModal.html:1
+msgid "View Less"
+msgstr "少なく"
 
 #: js/components/topics/otherTopic/otherTopic.html:1
+#: js/states/actions/actions.html:1
 msgid "View More"
-msgstr "詳細表示"
+msgstr "詳細"
 
-#: js/states/splash/splash.html:1
-msgid "View Press Release"
-msgstr "プレスリリースを表示する"
+#: js/components/maintenance/resolutionModal/resolutionModal.html:1
+msgid "View More ({{systems.length - listLimit}})"
+msgstr "詳細 ({{systems.length - listLimit}})"
 
-#: js/states/getting-started/views/getting-started-cloudforms.html:1
-msgid "View Reports and Manage Red Hat Insights From the CloudForms UI"
-msgstr "CloudForms からレポートを表示して Red Hat Insights を管理する"
-
-#: js/states/splash/splash.html:1
-msgid "View Virtual Event"
-msgstr "仮想イベントを表示する"
+#: js/components/overview/widgets/vulnerabilitiesWidget/vulnerabilitiesWidget.html:1
+msgid "View Vulnerabilities"
+msgstr "脆弱性を表示"
 
 #: js/states/overview/overview.html:1
 msgid "View actions"
-msgstr "アクションを表示する"
+msgstr "アクションを表示"
+
+#: js/components/overview/widgets/newRules/newRules.html:1
+msgid "View all {{:: rules.length}} new rules"
+msgstr "すべての {{:: rules.length}} 新規ルールを表示"
+
+#: js/components/incident/incidentLite/incidentLite.html:1
+#: js/components/incident/incidentSummary/incidentSummary.html:1
+msgid "View incidents"
+msgstr "インシデントを表示"
 
 #: js/components/overview/widgets/newSystems/newSystems.html:1
 msgid "View inventory"
-msgstr "インベントリーを表示する"
+msgstr "インベントリーを表示"
 
 #: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLite.html:1
 msgid "View planner"
-msgstr "プランナーを表示する"
+msgstr "プランナーを表示"
+
+#: js/components/overview/widgets/newRules/newRules.html:1
+msgid "View rules"
+msgstr "ルールを表示"
 
 #: js/components/overview/widgets/goals/goalsLite.html:1
 msgid "View security issues"
-msgstr "セキュリティーの問題を表示する"
+msgstr "セキュリティー問題を表示"
 
 #: js/components/overview/widgets/goals/goalsLite.html:1
 msgid "View stability issues"
-msgstr "安定性の問題を表示する"
+msgstr "安定性の問題を表示"
 
-#: js/states/getting-started/views/getting-started-sat6.html:3
-msgid "Viewing Reports and Managing Access From the Satellite UI"
-msgstr "Satellite からレポートを表示し、アクセスを管理する"
+#: js/components/overview/widgets/newRules/newRules.html:1
+msgid "View the new rule"
+msgstr "新規ルールを表示"
 
-#: js/states/splash/splash.html:1
-msgid "Virtual Security Event"
-msgstr "仮想セキュリティーイベント"
+#: js/components/primary-nav/primary-nav.html:1
+#: js/states/inventory/inventory.html:1
+msgid "Vulnerabilities"
+msgstr "脆弱性"
 
-#: components/severities/severities.js:13
-msgid "WARN"
-msgstr "警告"
+#: js/components/overview/widgets/vulnerabilitiesWidget/vulnerabilitiesWidget.html:1
+msgid "Vulnerabilities Summary"
+msgstr "脆弱性サマリー"
 
-#: js/states/splash/splash.html:1
+#: js/states/inventory/inventory.html:1
+msgid "Vulnerability Count"
+msgstr "脆弱性数"
+
+#: components/config/webhooks/webhooks.directive.js:30
+msgid "Webhook configuration will be lost"
+msgstr "Webhook 設定は失われます"
+
+#: components/webhooks/webhookStatusIcon/webhookStatusIcon.directive.js:22
+msgid "Webhook inactive"
+msgstr "Webhook が非アクティブ"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid "Webhook triggers"
+msgstr "Webhook が起動"
+
+#: js/components/config/webhooks/webhooks.html:1
+#: js/states/config/views/config.html:1
+msgid "Webhooks"
+msgstr "Webhooks"
+
+#: js/components/config/webhooks/webhooks.html:1
 msgid ""
-"Want to learn about the newest Red Hat Insights features and discover how to "
-"get the most out of the Insights service?"
-msgstr "Red Hat Insights の最新機能と Insights サービスの詳細をご覧ください。"
+"Webhooks allow external services to be notified of updates in Red Hat "
+"Insights. An HTTP POST request will be issued for a configured URL every "
+"time an event occurs in Red Hat Insights.&nbsp; See&nbsp;<a translate="
+"\"translate\" target=\"_blank\" href=\"https://access.redhat.com/r/insights/"
+"docs/#api-Webhooks\">webhook documentation</a>&nbsp; for more details."
+msgstr ""
+"Webhooks を使用すると、外部サービスで Red Hat Insights 内の更新通知を受け取ることができます。Red Hat Insights "
+"でイベントが発生する度に、設定された URL に HTTP POST リクエストが発行されます。&nbsp; 詳細は&nbsp;<a translate="
+"\"translate\" target=\"_blank\" href=\"https://access.redhat.com/r/insights/"
+"docs/#api-Webhooks\">webhook documentation</a>&nbsp; を参照してください。"
 
-#: components/severityIcon/severityIcon.directive.js:17
-#: js/components/actions/severitySummary/severitySummary.html:1
-msgid "Warning"
-msgstr "警告"
-
-#: js/states/getting-started/views/getting-started-sat5.html:1
-msgid ""
-"We've also provided several options for popular configuration management "
-"tools below:"
-msgstr "また、以下の一般向け設定管理ツールも使用可能です。"
+#: js/components/config/webhooks/webhooks.html:1
+msgid "Webhooks are currently a Tech Preview."
+msgstr "Webhooks は現在、テクノロジープレビューとなっています。"
 
 #: translations.html:8
 msgid "Weekly Summary"
 msgstr "週次サマリー"
+
+#: js/states/digests/digests.html:1
+msgid "Weekly action count by category"
+msgstr "カテゴリー別週次アクション数"
 
 #: translations.html:9
 msgid ""
@@ -2767,40 +2694,32 @@ msgid ""
 "percentage of systems checking in, new alerts, and critical detections."
 msgstr "週次サマリーでは、チェックインしているシステムの割合、新しい警告、および重大な検出を含む選択したメトリクスの概要が表示されます。"
 
-#: js/states/getting-started/views/getting-started-rhv.html:1
-msgid ""
-"When configuring your RHV Manager for Red Hat Insights, be sure to have your "
-"RHV Manager API and Hypervisor SSH information ready; Red Hat Insights will "
-"guide you through the configuration."
-msgstr ""
-"RHV Manager で Red Hat Insights を設定する場合、RHV Manager API および Hypervisor SSH "
-"の情報を用意してください。Red Hat Insights で設定手順が示されます。"
+#: js/components/maintenance/resolutionModal/resolutionModal.html:1
+msgid "Would you like to:"
+msgstr "以下を希望されますか:"
 
-#: components/maintenance/maintenancePlan/maintenancePlan.directive.js:207
+#: services/sweetalert.service.js:15
+msgid "Yes"
+msgstr "はい"
+
+#: components/maintenance/maintenancePlan/maintenancePlan.directive.js:329
 msgid "You are about to send a plan suggestion to the customer."
 msgstr "提案プランを顧客に送付しようとしています。"
 
 #: js/states/evaluation/evaluation.html:1
 msgid ""
-"You are currently on a {{status.current.systems}} system evaluation of Red "
-"Hat Insights. It will expire on {{getExpiration()}}."
-msgstr ""
-"現在 Red Hat Insights で {{status.current.systems}} システム評価を行なっています。これは "
-"{{getExpiration()}} に期限切れとなります。"
+"You are currently on a {{:: status.current.systems}} system evaluation of "
+"Red Hat Insights"
+msgstr "現在 Red Hat Insights で {{:: status.current.systems}} システム評価を行なっています"
 
-#: js/components/config/hidden/hidden.html:1
-msgid "You currently have 1 hidden rule."
-msgid_plural "You currently have {{$count}} hidden rules."
-msgstr[0] "非表示のルールが {{$count}} 個あります。"
-
-#: services/maintenance.service.js:352
+#: services/maintenance.service.js:322
 msgid "You have a new plan suggestion"
 msgid_plural "You have {{$count}} new plan suggestions"
 msgstr[0] "{{$count}} 件の新しいプランの提案があります"
 
 #: js/components/overview/widgets/maintenancePlanLite/maintenancePlanLite.html:1
 msgid "You have a new plan suggestion (1 action)"
-msgid_plural "You have a new plan suggestion ({{$count}} actions)"
+msgid_plural "You have a new plan suggestion ({{:: $count}} actions)"
 msgstr[0] "新しいプランの提案があります ({{$count}} 件のアクション)"
 
 #: js/components/topbar/alerts/alerts.html:1
@@ -2815,18 +2734,46 @@ msgstr "お知らせはありません"
 msgid "You have no announcements."
 msgstr "通知はありません。"
 
-#: js/components/actions/severitySummary/severitySummary.html:1
-msgid "You have no issues of critical severity"
-msgstr "重大な問題はありません"
+#: js/components/overview/widgets/goals/goalsLite.html:1
+msgid "You have no high severity security errors"
+msgstr "重大度「高」のセキュリティーエラーはありません"
 
-#: js/components/actions/severitySummary/severitySummary.html:1
-msgid "You have no issues of info severity"
-msgstr "重大な情報の問題はありません"
+#: js/components/overview/widgets/goals/goalsLite.html:1
+msgid "You have no high severity stability errors"
+msgstr "重大度「高」の安定性エラーはありません"
 
 #: js/components/actions/severitySummary/severitySummary.html:1
 #: js/components/actions/systemSummary/systemSummary.html:1
-msgid "You have no issues of warning severity"
-msgstr "重大な警告の問題はありません"
+msgid "You have no issues of critical severity"
+msgstr "重大度「重大」の問題はありません"
+
+#: js/components/actions/severitySummary/severitySummary.html:1
+msgid "You have no issues of high severity"
+msgstr "重大度「高」の問題はありません"
+
+#: js/components/actions/severitySummary/severitySummary.html:1
+msgid "You have no issues of low severity"
+msgstr "重大度「低」の問題はありません"
+
+#: js/components/actions/severitySummary/severitySummary.html:1
+msgid "You have no issues of medium severity"
+msgstr "重大度「中」の問題はありません"
+
+#: js/components/overview/widgets/vulnerabilitiesWidget/vulnerabilitiesWidget.html:1
+msgid "You have no vulnerabilities of critical severity"
+msgstr "重大度「重大」の脆弱性はありません"
+
+#: js/components/overview/widgets/vulnerabilitiesWidget/vulnerabilitiesWidget.html:1
+msgid "You have no vulnerabilities of important severity"
+msgstr "重大度「重要」の脆弱性はありません"
+
+#: js/components/overview/widgets/vulnerabilitiesWidget/vulnerabilitiesWidget.html:1
+msgid "You have no vulnerabilities of low severity"
+msgstr "重大度「低度」の脆弱性はありません"
+
+#: js/components/overview/widgets/vulnerabilitiesWidget/vulnerabilitiesWidget.html:1
+msgid "You have no vulnerabilities of moderate severity"
+msgstr "重大度「中程度」の脆弱性はありません"
 
 #: js/components/system/addSystemModal/upgradeSubscription.html:1
 msgid ""
@@ -2844,50 +2791,55 @@ msgid ""
 "Insights."
 msgstr "Red Hat Insights に無料で登録できるシステムの数は 10 台までです。"
 
-#: components/group/group.directive.js:12
+#: services/group.service.js:87
 msgid "You will not be able to recover <code>{{name}}</code>"
 msgstr "<code>{{name}}</code> は復元することができません。"
 
-#: components/maintenance/maintenancePlan/maintenancePlan.directive.js:71
+#: components/maintenance/maintenancePlan/maintenancePlan.directive.js:191
 msgid "You will not be able to recover this maintenance plan"
 msgstr "このメンテナンスプランは復元することができません。"
-
-#: js/components/overview/widgets/goals/goalsLite.html:1
-msgid "You've fixed all of the high severity security errors"
-msgstr "重大度「高」のセキュリティーエラーはすべて修復済みです"
-
-#: js/components/overview/widgets/goals/goalsLite.html:1
-msgid "You've fixed all of the high severity stability errors"
-msgstr "重大度「高」の安定性エラーはすべて修復済みです"
 
 #: js/states/overview/overview.html:1
 msgid "Your Experience"
 msgstr "実感してください。"
 
-#: js/states/splash/splash.html:1
-msgid "Your current subscription provides a free 30-day evaluation"
-msgstr "今お使いのサブスクリプションで 30 日間無料でお試しいただけます。"
+#: js/states/evaluation/evaluation.html:1
+msgid "Your evaluation has expired"
+msgstr "評価版の有効期限が切れています"
 
 #: js/states/evaluation/evaluation.html:1
-msgid "Your evaluation has expired. Thank you for trying Red Hat Insights."
-msgstr "評価は期限切れとなりました。Red Hat Insights をお試しいただきありがとうございました。"
+msgid "Your evaluation will expire on<strong>{{:: getExpiration()}}.</strong>"
+msgstr "評価版は <strong>{{:: getExpiration()}}</strong> に期限切れになります。"
+
+#: js/states/digests/digests.html:1
+msgid ""
+"Your initial executive report is currently processing - this may take some "
+"time."
+msgstr "初回エグゼクティブレポートの処理中です。時間がかかる場合があります。"
+
+#: components/gaugeMarker/gaugeMarker.directive.js:42
+msgid "Your score has decreased by"
+msgstr "スコアが以下の分、減少しました。"
+
+#: components/gaugeMarker/gaugeMarker.directive.js:37
+msgid "Your score has increased by"
+msgstr "スコアが以下の分、増加しました。"
+
+#: components/gaugeMarker/gaugeMarker.directive.js:47
+msgid "Your score has not changed"
+msgstr "スコアに変更はありません"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid "a custom certificate can be configured."
+msgstr "カスタム証明書の設定が可能です。"
 
 #: constants/categories.js:11
 msgid "all"
 msgstr "すべて"
 
-#: js/states/splash/splash.html:1
-msgid ""
-"automates your IT troubleshooting to achieve infrastructure optimization. "
-"Scale rapidly and confidently with emerging technologies in both physical "
-"and virtual environments using expert Red Hat guidance."
-msgstr ""
-"IT のトラブルシューティングを自動化してインフラストラクチャーの最適化を達成します。専門的な Red Hat "
-"のガイダンスを使用することで、物理および仮想環境の両方で新たな技術によるスケーリングが迅速かつ自信を持って行うことができます。"
-
 #: constants/categories.js:12
 msgid "availability"
-msgstr "アベイラビリティ"
+msgstr "アベイラビリティー"
 
 #: js/components/feedback/feedbackModal.html:1
 msgid "click here"
@@ -2897,35 +2849,72 @@ msgstr "こちらをクリック"
 msgid "contact your Red Hat sales representative"
 msgstr "Red Hat 営業担当にお問い合わせください。"
 
-#: js/components/maintenance/maintenanceModal/maintenanceModal.html:1
-#: js/components/maintenance/maintenancePlanBar/maintenancePlanBar.html:1
-msgid "e.g. PHX datacenter regular outage"
-msgstr "例: PHX データセンターの定期的な停電"
+#: js/components/maintenance/maintenancePlan/maintenancePlan.html:1
+msgid "does not require a system reboot."
+msgstr "システム再起動は必要ありません。"
+
+#: states/policies/controllers/view.policy.controller.js:20
+msgid "errored"
+msgstr "エラー"
+
+#: states/policies/controllers/view.policy.controller.js:19
+msgid "failed"
+msgstr "失敗"
 
 #: js/components/system/addSystemModal/addSystemModal.html:1
 msgid "getting started guide"
 msgstr "スタートガイド"
 
-#: js/components/system/systemModal/systemModal.html:1
-msgid "hostname:"
-msgstr "ホスト名:"
-
 #: js/components/rule/ruleGroupCard/ruleGroupCard.html:1
 msgid "inactive"
 msgstr "非アクティブ"
+
+#: js/components/incident/incidentLite/incidentLite.html:1
+#: js/components/incident/incidentSummary/incidentSummary.html:1
+msgid "incident&nbsp;"
+msgstr "インシデント&nbsp;"
+
+#: js/components/incident/incidentSummary/incidentSummary.html:1
+msgid "incidents"
+msgstr "インシデント"
+
+#: js/components/incident/incidentLite/incidentLite.html:1
+msgid ""
+"is an issue that is currently or has already affected systems. You currently "
+"have no incidents."
+msgstr "とは、現在またはすでにシステムに影響を与えている問題です。現在、インシデントはありません。"
+
+#: js/components/incident/incidentLite/incidentLite.html:1
+msgid "is an issue that is currently or has already affected systems.&nbsp;"
+msgstr "とは、現在またはすでにシステムに影響を与えている問題です。&nbsp;"
+
+#: js/states/hidden/components/components.html:1
+msgid "item 1"
+msgstr "アイテム 1"
+
+#: js/states/hidden/components/components.html:1
+msgid "item 2"
+msgstr "アイテム 2"
 
 #: js/components/card/systemCard/systemCard.html:1
 msgid "never"
 msgstr "なし"
 
-#: js/states/evaluation/evaluation.html:1
-#: js/states/splash/splash.html:1
-msgid "or"
-msgstr "または"
+#: states/policies/controllers/view.policy.controller.js:18
+msgid "passed"
+msgstr "パス"
 
 #: constants/categories.js:14
 msgid "performance"
 msgstr "パフォーマンス"
+
+#: components/gaugeMarker/gaugeMarker.directive.js:13
+msgid "points"
+msgstr "ポイント"
+
+#: js/components/overview/widgets/goals/goalsLite.html:1
+msgid "registering systems."
+msgstr "システムの登録"
 
 #: constants/categories.js:15
 msgid "security"
@@ -2939,16 +2928,131 @@ msgstr "安定性"
 msgid "to purchase Insights or request a 90 day evaluation."
 msgstr "Insights を購入する、または 90 日間の試用をリクエストする。"
 
+#: js/components/policies/policiesModal/policiesModal.html:1
+msgid "translate"
+msgstr "変換する"
+
+#: js/states/config/views/webhook-edit.html:1
+msgid "trusted authority&nbsp;"
+msgstr "信頼できる機関&nbsp;"
+
+#: states/policies/controllers/view.policy.controller.js:21
+msgid "unknown"
+msgstr "不明"
+
+#: js/components/config/webhooks/webhooks.html:1
+msgid "webhook documentation"
+msgstr "webhook ドキュメント"
+
+#: js/states/actions/actions.html:1
+msgid "{{:: category.id | titlecase}}"
+msgstr "{{:: category.id | titlecase}}"
+
+#: js/states/digests/digests.html:1
+msgid "{{:: digestError}}"
+msgstr "{{:: digestError}}"
+
+#: js/states/evaluation/evaluation.html:1
+msgid "{{:: error}}"
+msgstr "{{:: error}}"
+
+#: js/components/systemMetadata/systemMetadata.html:1
+msgid "{{:: facts.label}}"
+msgstr "{{:: facts.label}}"
+
+#: js/components/systemMetadata/systemMetadata.html:1
+msgid "{{:: facts.value}}"
+msgstr "{{:: facts.value}}"
+
 #: js/components/feedback/feedbackModal.html:1
 msgid ""
-"{{ feedbackInfo.user.email }}&nbsp;<small translate=\"translate\">(to change "
-"your Red Hat email address&nbsp;<a translate=\"translate\" href=\"https://"
-"www.redhat.com/wapps/ugc/protected/emailChange.html\">click here</a>)</"
-"small>"
+"{{:: feedbackInfo.user.email }}&nbsp;<small translate=\"translate\">(to "
+"change your Red Hat email address&nbsp;<a translate=\"translate\" href="
+"\"https://www.redhat.com/wapps/ugc/protected/emailChange.html\">click here</"
+"a>)</small>"
 msgstr ""
-"{{ feedbackInfo.user.email }}&nbsp;<small translate=\"translate\">(Red Hat "
+"{{:: feedbackInfo.user.email }}&nbsp;<small translate=\"translate\">(Red Hat "
 "に登録されているメールアドレスを変更するには&nbsp;<a translate=\"translate\" href=\"https://www."
 "redhat.com/wapps/ugc/protected/emailChange.html\">こちらをクリック</a>)</small>"
+
+#: js/states/policies/views/view-policy.html:1
+msgid "{{:: getCheckCount(resource)}} Check\n"
+"{{:: resource.status}}"
+msgid_plural "{{:: $count}} Checks {{:: resource.status}}"
+msgstr[0] "{{:: $count}} チェック {{:: resource.status}}"
+
+#: js/components/viewSystemGroups/viewSystemGroups.html:1
+msgid "{{:: group.display_name | translate}} &nbsp;&nbsp;"
+msgstr "{{:: group.display_name | translate}} &nbsp;&nbsp;"
+
+#: js/components/severityIcon/severityIcon.html:1
+msgid "{{:: label}}"
+msgstr "{{:: label}}"
+
+#: js/components/overview/widgets/goals/goalsLite.html:1
+msgid ""
+"{{:: maxFreeSystems - systemCount}} more Insights entitlements "
+"available&nbsp;"
+msgstr "{{:: maxFreeSystems - systemCount}} の Insights エンタイトルメントが利用可能&nbsp;"
+
+#: js/components/filterComponents/actionsSelect/actionsSelect.html:1
+msgid "{{:: option.label}}"
+msgstr "{{:: option.label}}"
+
+#: js/components/policies/policiesModal/policiesModal.html:1
+msgid "{{:: policy.checks_error}} Check errored"
+msgid_plural "{{:: $count}} Checks errored"
+msgstr[0] "{{:: policy.checks_error}} のチェックにエラー"
+
+#: js/components/policies/policiesModal/policiesModal.html:1
+msgid "{{:: policy.checks_fail}} Check failed"
+msgid_plural "{{:: $count}} Checks failed"
+msgstr[0] "{{:: policy.checks_fail}} のチェックが失敗"
+
+#: js/components/policies/policiesModal/policiesModal.html:1
+msgid "{{:: policy.checks_pass}} Check passed"
+msgid_plural "{{:: $count}} Checks passed"
+msgstr[0] "{{:: policy.checks_pass}} のチェックがパス"
+
+#: js/components/incident/incidentSummary/incidentSummary.html:1
+msgid "{{:: ruleHits}} issue"
+msgid_plural " {{:: $count}} issues"
+msgstr[0] " {{:: $count}} の問題"
+
+#: js/components/overview/widgets/newRules/newRules.html:1
+msgid "{{:: rules.length}} new rules"
+msgstr "{{:: rules.length}} 新規ルール"
+
+#: js/components/actions/systemSummary/systemSummary.html:1
+msgid ""
+"{{:: stats.systems.affected}} of {{:: stats.systems.total}} systems have "
+"critical issues"
+msgstr ""
+"{{:: stats.systems.total}} のうち {{:: stats.systems.affected}} "
+"台のシステムに重大な問題があります"
+
+#: js/components/card/systemCard/systemCard.html:1
+msgid "{{:: system.report_count}} Action"
+msgid_plural "{{:: $count}} Actions"
+msgstr[0] "{{:: $count}} のアクション"
+
+#: js/components/card/systemCard/systemCard.html:1
+msgid "{{:: system.vulnerability_count}} Vulnerability"
+msgid_plural "{{:: $count}} Vulnerabilities"
+msgstr[0] "{{:: $count}} の脆弱性"
+
+#: js/states/digests/digests.html:1
+msgid "{{:: systemsTilTen}} &nbsp; more system"
+msgid_plural "{{:: $count}} more systems"
+msgstr[0] "{{:: $count}} 台のシステム"
+
+#: js/components/pageHeader/pageHeader.html:1
+msgid "{{:: titleTranslated}}"
+msgstr "{{:: titleTranslated}}"
+
+#: js/components/collapsibleFilter/collapsibleFilter.html:1
+msgid "{{:: value | translate}}"
+msgstr "{{:: value | translate}}"
 
 #: js/components/topics/topicDetails/topicDetails.html:1
 msgid "{{::topic.title}}"
@@ -2959,27 +3063,28 @@ msgstr "{{::topic.title}}"
 msgid "{{announcementError}}"
 msgstr "{{announcementError}}"
 
-#: js/components/sideNav/actionsSideNav/actionsSideNav.html:1
-msgid "{{c | translate | titlecase}} (1)"
-msgid_plural "{{c | translate | titlecase}} ({{$count}})"
-msgstr[0] "{{c | translate | titlecase}} ({{$count}})"
+#: js/components/incident/incidentLite/incidentLite.html:1
+msgid "{{incidentCount}} of {{stats.rules.total}}"
+msgstr "全 {{stats.rules.total}} のうち {{incidentCount}}"
 
-#: js/components/systemMetadata/systemMetadata.html:1
-msgid "{{data.label}}"
-msgstr "{{data.label}}"
+#: js/components/rule/ruleGroupCard/ruleGroupCard.html:1
+msgid "{{index + 1}} of {{plugin.rules.length}}: {{rule.description}}"
+msgstr "{{plugin.rules.length}} の {{index + 1}} : {{rule.description}}"
 
-#: js/components/systemMetadata/systemMetadata.html:1
-msgid "{{data.value}}"
-msgstr "{{data.value}}"
+#: js/components/tableFilters/tableFilters.html:1
+msgid "{{key | translate}}"
+msgstr "{{key | translate}}"
 
-#: js/components/overview/widgets/goals/goalsLite.html:1
-msgid ""
-"{{maxFreeSystems - systemCount}} more Insights entitlements available&nbsp;"
-msgstr "{{maxFreeSystems - systemCount}} Insights エンタイトルメントが利用可能&nbsp;"
+#: js/states/digests/digests.html:1
+msgid "{{resolvedIssues}} issue"
+msgid_plural "{{:: $count}} issues"
+msgstr[0] "{{:: $count}} 件の問題"
 
-#: js/components/card/systemCard/systemCard.html:1
-#: js/states/inventory/inventory.html:1
-msgid "{{system.report_count}} Action"
-msgid_plural "{{$count}} Actions"
-msgstr[0] "{{$count}} 件のアクション"
+#: js/components/filterComponents/actionsSelect/actionsSelect.html:1
+msgid "{{selected.label}}"
+msgstr "{{selected.label}}"
+
+#: js/components/tableFilters/tableFilters.html:1
+msgid "{{value | translate}}"
+msgstr "{{value | translate}}"
 

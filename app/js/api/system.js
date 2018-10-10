@@ -1,7 +1,6 @@
 'use strict';
 
-var apiModule = require('./');
-var find = require('lodash/find');
+const apiModule = require('./');
 const URI = require('urijs');
 
 /**
@@ -11,14 +10,14 @@ function System(
     $http,
     $q,
     $rootScope,
-    InsightsConfig,
     AccountService,
-    Group,
-    Utils,
+    DataUtils,
     FilterService,
-    Products,
+    Group,
+    InsightsConfig,
     PreferenceService,
-    DataUtils) {
+    Products,
+    Utils) {
 
     var root = InsightsConfig.apiRoot;
     var _systemDfd;
@@ -230,109 +229,6 @@ function System(
                     AccountService.current());
         },
 
-        populateOCPDeployments: function () {
-            var query = {
-                product_code: 'ocp',
-                role: 'cluster'
-            };
-            return this.getSystemsLatest(query).then(function (response) {
-                var selectedDeployment;
-                var ocpDeployments;
-                if (response && response.data && response.data.resources) {
-                    ocpDeployments = response.data.resources;
-                    ocpDeployments.splice(0, 0, {
-                        display_name: 'All Deployments',
-                        system_id: 'all'
-                    });
-                    FilterService.setOCPDeployments(ocpDeployments);
-
-                    if (!FilterService.getSelectedOCPDeployment().system_id) {
-                        FilterService.setSelectedOCPDeployment(ocpDeployments[0]);
-                    } else {
-                        selectedDeployment = find(
-                            FilterService.getOCPDeployments(),
-                            {
-                                system_id:
-                                    FilterService.getSelectedOCPDeployment().system_id
-                            });
-                        FilterService.setSelectedOCPDeployment(selectedDeployment);
-                    }
-                }
-            });
-        },
-
-        populateOSPDeployments: function () {
-            var query = {
-                product_code: 'osp',
-                role: 'cluster'
-            };
-            return this.getSystemsLatest(query).then(function (response) {
-                var selectedDeployment;
-                var ospDeployments;
-                if (response && response.data && response.data.resources) {
-                    ospDeployments = response.data.resources;
-                    ospDeployments.splice(0, 0, {
-                        display_name: 'All Deployments',
-                        system_id: 'all'
-                    });
-                    FilterService.setOSPDeployments(ospDeployments);
-
-                    if (!FilterService.getSelectedOSPDeployment().system_id) {
-                        FilterService.setSelectedOSPDeployment(ospDeployments[0]);
-                    } else {
-                        selectedDeployment = find(
-                            FilterService.getOSPDeployments(),
-                            {
-                                system_id:
-                                    FilterService.getSelectedOSPDeployment().system_id
-                            });
-                        FilterService.setSelectedOSPDeployment(selectedDeployment);
-                    }
-                }
-            });
-        },
-
-        populateDockerHosts: function () {
-            var query = {
-                product_code: 'docker',
-                role: 'host'
-            };
-            return this.getSystemsLatest(query).then(function (response) {
-                var selectedDeployment;
-                var dockerHosts;
-                if (response && response.data && response.data.resources) {
-                    dockerHosts = response.data.resources;
-                    dockerHosts.splice(0, 0, {
-                        hostname: 'All Hosts',
-                        system_id: 'all'
-                    });
-                    FilterService.setDockerHosts(dockerHosts);
-
-                    if (!FilterService.getSelectedDockerHost().system_id) {
-                        FilterService.setSelectedDockerHost(dockerHosts[0]);
-                    } else {
-                        selectedDeployment = find(
-                            FilterService.getDockerHosts(),
-                            {system_id: FilterService.getSelectedDockerHost().system_id});
-                        FilterService.setSelectedDockerHost(selectedDeployment);
-                    }
-                }
-            });
-        },
-
-        getProductSpecificData: function () {
-            var defer;
-            if (FilterService.getSelectedProduct() === 'docker') {
-                return this.populateDockerHosts();
-            } else if (FilterService.getSelectedProduct() === 'osp') {
-                return this.populateOSPDeployments();
-            } else {
-                defer = $q.defer();
-                defer.resolve();
-                return defer.promise;
-            }
-        },
-
         getSystemGroups: function (systemId) {
             const uri = URI(InsightsConfig.apiRoot);
             uri.segment('systems');
@@ -357,6 +253,19 @@ function System(
             url.segment(systemId);
             url.segment('policies');
             url.addSearch(AccountService.queryParam());
+            return $http.get(url.toString());
+        },
+
+        getVulnerabilities (systemId, params) {
+            const url = URI(root);
+            url.segment('systems');
+            url.segment(systemId);
+            url.segment('errata');
+            url.addSearch(AccountService.queryParam());
+            if (params) {
+                url.addSearch(params);
+            }
+
             return $http.get(url.toString());
         }
     };

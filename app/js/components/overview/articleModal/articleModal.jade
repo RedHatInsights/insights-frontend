@@ -5,10 +5,8 @@
       label.control-label.col-sm-2(for='title') Article
       .col-sm-10
         ui-select(ng-model='selected.article', append-to-body='false', on-select='load($item.id)', search-enabled='false')
-          ui-select-match.form-control.ui-select-match(placeholder='Select an article')
-            | {{selected.article.id}}
-          ui-select-choices.ui-select-choices(repeat="article in articles")
-            | {{article.id}}
+          ui-select-match.form-control.ui-select-match(placeholder='Select an article') {{selected.article.id}}
+          ui-select-choices.ui-select-choices(repeat="article in articles") {{article.id}}
     .form-group.row.row-short(ng-class="{'has-error': articleForm.title.$invalid && articleForm.title.$dirty}")
       label.control-label.col-sm-2(for='title') Title
       .col-sm-10

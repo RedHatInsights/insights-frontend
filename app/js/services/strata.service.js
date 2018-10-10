@@ -1,12 +1,14 @@
+/*global require*/
 'use strict';
 
 const servicesModule = require('./');
 const urijs = require('urijs');
+const get = require('lodash/get');
 const SEARCH_URL = 'https://access.redhat.com/rs/search';
 const OPTS = Object.freeze({
     headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
+        Accept: 'application/vnd.redhat.solr+json',
         'X-Omit': 'WWW-Authenticate'
     }
 });
@@ -17,11 +19,13 @@ const OPTS = Object.freeze({
 function StrataService ($http, $q) {
 
     function search (field, value) {
-        const uri = urijs(SEARCH_URL).addSearch('keyword', `${field}:${value}`);
+        const uri = urijs(SEARCH_URL).addSearch('q', `${field}:${value}`);
         return $http.get(uri.toString(), OPTS)
         .then(function (res) {
-            if (res.data && res.data.search_result) {
-                return res.data.search_result;
+            const docs = get(res, 'data.response.docs');
+
+            if (docs && docs.length) {
+                return docs;
             }
 
             return $q.reject('no results');
@@ -31,10 +35,6 @@ function StrataService ($http, $q) {
     return {
         searchById: function (query) {
             return search('id', query);
-        },
-
-        searchByUri: function (query) {
-            return search('view_uri', query);
         }
     };
 }

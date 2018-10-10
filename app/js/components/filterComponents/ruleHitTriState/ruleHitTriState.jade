@@ -1,0 +1,8 @@
+.filter-group
+    label
+        strong(translate) Insights Rule Hit
+    .radio-group
+        .radio-inline(ng-repeat='(k, v) in RuleHitFilters')
+            label(translate)
+                input(type="radio", name='ruleHitFilterRadio' ng-model="ruleHit", value='{{:: k}}', ng-click='filterRuleHit(k)')
+                span {{:: v.title | translate}}

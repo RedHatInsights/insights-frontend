@@ -3,8 +3,8 @@ import re
 
 jaderegex = r'^([^\.\s\{\}\(\)\#\/\|]+).*$'
 js_component_regex = '.*componentsModule.directive\((.*?)\,.*\).*'
-
 seen_components = {}
+cwd = os.getcwd()
 
 def process_paren(line, paren):
     # sort and count parentheses
@@ -26,7 +26,7 @@ def parseJade(jadefile):
     # reconstruct multi-line declarations, keep track of parens
     paren = 0
     open_lines = []
-    basicfpath = jadefile.split('insights-frontend/')[1]
+    basicfpath = jadefile.split(cwd)[1]
     with open(jadefile, 'r') as jfil:
         for line in jfil:
             l = line.strip()

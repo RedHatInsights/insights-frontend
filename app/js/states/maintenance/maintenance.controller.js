@@ -73,6 +73,7 @@ EditToggleHandler.prototype.transition = function (id) {
  * @ngInject
  */
 function MaintenanceCtrl(
+    $document,
     $location,
     $scope,
     $timeout,
@@ -86,7 +87,8 @@ function MaintenanceCtrl(
     $state,
     $rootScope,
     SystemsService,
-    Events) {
+    Events,
+    sweetAlert) {
 
     $scope.isDefined = angular.isDefined;
     $scope.loader = new Utils.Loader();
@@ -208,6 +210,19 @@ function MaintenanceCtrl(
     $rootScope.$on('reload:data', function () {
         $scope.loader.loading = false; // disable loader throttling for reload
         $scope.loadPlans(true);
+    });
+
+    // mass removal of plans for internal users
+    let deleteCounter = 0;
+    $document.on('keydown', event => {
+        deleteCounter = (event.keyCode === 46) ? deleteCounter + 1 : 0;
+        if (deleteCounter > 6 && $scope.isInternal) {
+            deleteCounter = 0;
+            const plans = MaintenanceService.plans;
+            sweetAlert({ text: 'Do you really want to delete ALL plans?' })
+            .then(() => sweetAlert({ title: `REALLY ALL ${plans.all.length} PLANS?` }))
+            .then(() => plans.all.forEach(Maintenance.deletePlan));
+        }
     });
 }
 

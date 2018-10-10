@@ -5,7 +5,7 @@ var servicesModule = require('./');
 /**
  * @ngInject
  */
-function AccountService($rootScope, User, InsightsConfig) {
+function AccountService($rootScope, $q, User, InsightsConfig) {
     var user = User.current;
     var account = user.account_number;
     var storage_account = window.sessionStorage.getItem(InsightsConfig.acctKey);
@@ -36,6 +36,15 @@ function AccountService($rootScope, User, InsightsConfig) {
 
         number: function () {
             return account;
+        },
+
+        numberAsync () {
+            const dfd = $q.defer();
+            User.asyncCurrent(user =>
+                dfd.resolve(window.sessionStorage.getItem(InsightsConfig.acctKey) ||
+                    user.account_number));
+
+            return dfd.promise;
         },
 
         queryParam: function () {

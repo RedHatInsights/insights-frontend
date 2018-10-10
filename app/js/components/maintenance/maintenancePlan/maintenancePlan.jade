@@ -222,13 +222,14 @@
               ng-change="pager.update()")
 
           // Playbook Tab
-          tab.tab-blue(
+          tab.tab-playbook(
             role="tabpanel",
             disable='!ansibleSupport',
             ng-init='setupTabActivator($parent)',
-            select='tabSelected("playbook"); prepareAnsibleTab()')
+            select='tabSelected("playbook"); prepareAnsibleTab()'
+            md-ink-ripple="#fff")
             tab-heading
-              ansible-icon.inline-right(value='ansibleSupport', show-tooltip='false', white='true')
+              ansible-icon.inline-right(value='ansibleSupport', show-tooltip='false')
               strong(translate) Playbook
             .spinner(ng-show='playbookTabLoader.loading')
             .playbooks(ng-hide='playbookTabLoader.loading')
@@ -262,12 +263,12 @@
                   p(translate) This playbook&nbsp;
                     b.text-success(translate) does not require a system reboot.
 
-                card-content.gray(ng-if='systemsToReboot.length')
-                  .systems
+                card-content.gray.two-columns.flex(ng-if='systemsToReboot.length')
+                  .systems(md-flex-50)
                     h4.section-title(translate) Systems:
                     expandable-system-list(systems='systemsToReboot')
 
-                  .resolution
+                  .resolution(md-flex-50)
                     .toggle.push-bottom-narrow(ng-click="plan.allow_reboot = !plan.allow_reboot; allowRebootChanged()")
                       input(type="checkbox", ng-checked='plan.allow_reboot')
                       b(translate) Reboot systems automatically
@@ -299,7 +300,18 @@
               span(translate) Ignore
 
         .button-group
-          a(translate, ng-click='downloadPlaybook()')
+          button-split.md-button-ghost-blue.md-primary(
+            ng-disabled='!ansibleSupport',
+            ng-if='ansibleRunner')
+            button-split-main(ng-click="runPlaybook('run')")
+              i.svg.ansible-icon.inline-right
+                img(src='static/images/l_ansible-blue.svg')
+              span(translate) Run Playbook
+            button-split-item
+              md-button.action(translate, ng-click="runPlaybook('customize')") Customize Playbook Run
+            button-split-item
+              md-button.action(translate, ng-click='downloadPlaybook()') Download Playbook
+          a(translate, ng-click='downloadPlaybook()', ng-if='!ansibleRunner')
             md-button.btn-sm.md-button-ghost-blue.md-primary(ng-disabled='!ansibleSupport')
               i.svg.ansible-icon.inline-right
                 img(src='static/images/l_ansible-blue.svg')

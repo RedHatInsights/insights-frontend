@@ -1,3 +1,4 @@
 [submodule "static"]
+    ignore = all
 	path = static
 	url = git@github.com:RedHatInsights/insights-frontend-assets.git

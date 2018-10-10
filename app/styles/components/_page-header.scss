@@ -35,3 +35,10 @@
 
   i { margin-right: $global-padding/2; }
 }
+
+.page-header .page-subtitle {
+  color: $gray-md;
+  @include rem('margin-top', 10px);
+  span + span { @include rem("margin-left", 20px); }
+  dl { margin-bottom: 0; }
+}

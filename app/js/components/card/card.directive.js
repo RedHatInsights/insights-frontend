@@ -31,6 +31,8 @@ function CardCtrl($scope, Utils, Events, $q) {
         }
     };
 
+    $scope.$on(Events.cards.toggleCard, $scope.toggleContent);
+
     $scope.$on(Events.cards.expandAll, function () {
         if ($scope.collapsed) {
             $scope.toggleContent();

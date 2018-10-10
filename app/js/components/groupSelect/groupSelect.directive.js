@@ -18,6 +18,7 @@ function groupSelectCtrl(
     $timeout,
     gettextCatalog,
     sweetAlert,
+    AccountService,
     Utils,
     Events,
     Group,
@@ -141,7 +142,11 @@ function groupSelectCtrl(
     function restoreGroupSelection() {
         const storedGroup = Utils.localStorage.getItem(storageKey, true);
         if (storedGroup && storedGroup.id) {
-            $scope.triggerChange(storedGroup);
+            AccountService.numberAsync().then(number => {
+                if (number === storedGroup.account_number) {
+                    $scope.triggerChange(storedGroup);
+                }
+            });
         }
     }
 

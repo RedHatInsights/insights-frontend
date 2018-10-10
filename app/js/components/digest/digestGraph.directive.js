@@ -49,11 +49,21 @@ function digestGraphController($scope) {
         Plotly.Plots.resize(graphNode);
     });
 
-    $scope.toggleTrace = function toggleTrace(trace) {
-        trace.enable = !trace.enabled;
-        const val = trace.enabled ? true : 'legendonly';
-        Plotly.restyle(graphNode, 'visible', [val], [trace.index]);
-    };
+    $scope.$watch('traces', (newTraces, oldTraces) => {
+        let newTrace;
+        newTraces.forEach((trace, index) => {
+            if (trace.index === oldTraces[index].index &&
+                trace.enabled !== oldTraces[index].enabled) {
+                newTrace = trace;
+            }
+        });
+
+        if (newTrace) {
+            newTrace.enable = !newTrace.enabled;
+            const val = newTrace.enabled ? true : 'legendonly';
+            Plotly.restyle(graphNode, 'visible', [val], [newTrace.index]);
+        }
+    }, true);
 
     // THIS MUST BE AFTER THE GRAPH IS BUILT
     priv.initTraces($scope, graphNode);
