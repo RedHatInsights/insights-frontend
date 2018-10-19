@@ -5,11 +5,11 @@ node_js:
 - '8'
 install:
 - npm install
+script:
 - gulp views
 - gulp styles
-script:
-- ./node_modules/.bin/gulp lint
-- ./node_modules/.bin/gulp test
+- gulp lint
+- gulp test
 deploy:
   provider: script
   script: bash deploy.sh
