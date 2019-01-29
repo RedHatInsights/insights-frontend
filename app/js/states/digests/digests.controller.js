@@ -121,7 +121,6 @@ function DigestsCtrl($scope, $http, DigestService, System, Rule, AccountService,
     function loadData () {
         let digestPromise = DigestService.digestsByType('eval');
         let systemPromise = System.getSystemsLatest({
-            report_count: 'gt0',
             sort_by: 'report_count',
             sort_dir: 'DESC',
             page_size: 10,
