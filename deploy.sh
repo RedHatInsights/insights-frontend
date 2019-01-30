@@ -46,5 +46,7 @@ yes | cp -r * ~/insights-frontend-build
 cd ~/insights-frontend-build
 git add -A
 git commit -m "Auto-update via Travis build: ${TRAVIS_BUILD_NUMBER}"
+git fetch origin
+git rebase origin/${DEPLOY_BRANCH}
 git push origin ${DEPLOY_BRANCH}
-cd - 
+cd -
