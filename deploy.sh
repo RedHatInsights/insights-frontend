@@ -25,7 +25,7 @@ git checkout -b ${DEPLOY_BRANCH}
 cd -
 
 # Build with 'gulp prod' and then get tag from package.json
-node --max_old_space_size=4096 --optimize_for_size --stack_size=4096 ./node_modules/.bin/gulp prod
+node --max_old_space_size=4096 --optimize_for_size --stack_size=4096 gulp prod
 export PKG_TAG=$(node -e 'console.log(require("./package.json").version)')
 
 # Add some of our tags into the html content
