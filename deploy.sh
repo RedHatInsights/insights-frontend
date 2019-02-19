@@ -2,7 +2,7 @@
 set -e
 
 if [ "${TRAVIS_BRANCH}" == "master" ]; then DEPLOY_BRANCH="prod-beta"; fi
-if [ "${TRAVIS_BRANCH}" == "stable" ]; then DEPLOY_BRANCH="prod-stable"; fi
+if [ "${TRAVIS_BRANCH}" == "prod-stable" ]; then DEPLOY_BRANCH="prod-stable"; fi
 if [ -z "${DEPLOY_BRANCH}" ]; then
     echo "Not configured to deploy anything for this branch: ${TRAVIS_BRANCH}"
     exit 1
