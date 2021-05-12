@@ -22,5 +22,12 @@ gulp.task('clean', function () {
 });
 
 gulp.task('clean-all', ['clean'], function (cb) {
-    return del([config.browserify.cacheFile, './package-lock.json'], cb);
+    var toDelete = [config.browserify.cacheFile];
+
+    // Satellite has specific module dependencies: don't delete the package-lock
+    if (!global.isSat) {
+        toDelete.push('./package-lock.json');
+    }
+
+    return del(toDelete, cb);
 });
