@@ -26,6 +26,8 @@ gulp.task('styles', ['make-compontents-scss'], function () {
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({ browsers: "> 5%" }))
         .pipe(replace('../fonts', '../static/fonts'))
+        // fix asset paths for satellite
+        .pipe(gulpif(global.isSat, replace('/static/', '/insights/')))
         .pipe(gulpif(global.isRelease, cleanCSS()))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(config.styles.dest))

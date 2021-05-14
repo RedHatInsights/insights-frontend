@@ -17,6 +17,7 @@ const babel = require('gulp-babel');
 const plumber = require('gulp-plumber');
 const banify = require('banify');
 const rename = require('gulp-rename');
+const replace = require('gulp-replace');
 
 gulp.task('browserify', ['bro']);
 
@@ -47,6 +48,7 @@ gulp.task('bro', function () {
                 console.log('babel error');
                 console.log(e);
             })))
+           .pipe(gulpif(global.isSat, replace('static/images/', '/assets/insights/')))
            .pipe(rename('insights.unmin.js'))
            .pipe(gulp.dest(config.scripts.dest))
            .pipe(rename('insights.js'))
