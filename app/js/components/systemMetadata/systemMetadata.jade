@@ -57,22 +57,18 @@
                 span {{:: value.value}}
 
     #network.tab-pane(role='network')
-      .row
-        .col-sm-12
-          .table-responsive(ng-if="!disableTab('network')")
-            table
-              thead
-                tr
-                  th.ellipsis-overflow(translate) Process Name
-                  th.ellipsis-overflow(translate) IP Address
-                  th.ellipsis-overflow(translate) Port
-              tbody
-                tr(ng-repeat="values in tabsContent.network.data | orderBy:[networkSorter, 'name', 'ip_addr']", ng-if="$index < rowLimit || showAll")
-                  td.ellipsis-overflow {{:: values.name }}
-                  td.ellipsis-overflow {{:: values.ip_addr }}
-                  td.ellipsis-overflow {{:: values.port }}
-      .row.row-short
-        .col-sm-12.text-center
-          a.link.expandTableButton(ng-if="showExpandTableBtn()", ng-click="toggleExpandTable()")
-            strong(translate, ng-if="showAll") Collapse Table
-            strong(translate, ng-if="!showAll") Expand Table
+      table(ng-if="!disableTab('network')")
+        thead
+          tr
+            th.ellipsis-overflow(translate) Process Name
+            th.ellipsis-overflow(translate) IP Address
+            th.ellipsis-overflow(translate) Port
+        tbody
+          tr(ng-repeat="values in tabsContent.network.data | orderBy:[networkSorter, 'name', 'ip_addr']", ng-if="$index < rowLimit || showAll")
+            td.ellipsis-overflow {{:: values.name }}
+            td.ellipsis-overflow {{:: values.ip_addr }}
+            td.ellipsis-overflow {{:: values.port }}
+      .expandTableButton.text-center
+        a.link(ng-if="showExpandTableBtn()", ng-click="toggleExpandTable()")
+          strong(translate, ng-if="showAll") Collapse Table
+          strong(translate, ng-if="!showAll") Expand Table
