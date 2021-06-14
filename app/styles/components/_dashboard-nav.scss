@@ -48,7 +48,7 @@ $dashboard-nav-input-bg: #322e31;
 		@include rem('padding', 2px 6px);
 		@include rem('margin-bottom', 5px);
 		float: right;
-		color: #999999;
+		color: #fff;
 
 		&:hover { color: #f0f0f0; }
 	}

@@ -1,16 +1,9 @@
 .page-header {
+  //display: flex;
   position: relative;
-  @include rem ('margin', 0 $global-margin);
-  @include rem ('padding', $global-margin 0);
-  border: none;
-
-  &::before,
-  &::after {
-    content:"";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
+  margin: 0;
+  @include rem ('padding', $global-margin);
+  border-bottom: 1px solid #d1d1d1;
 
   &::before {
     width: 25vw;
@@ -30,6 +23,7 @@
   display: flex;
   margin: 0;
   @include font-size(18px, 23px);
+  font-weight: 400;
 
   @include media-query(md){ @include font-size(24px, 1); }
 

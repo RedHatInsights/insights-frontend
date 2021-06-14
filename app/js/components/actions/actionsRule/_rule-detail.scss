@@ -18,7 +18,9 @@
   }
 
   grid-gap: $global-margin;
-  @include rem('margin', 0 $global-margin);
+  margin: 0;
+  @include rem('padding', 0 $global-margin);
+  border-bottom: 1px solid #d1d1d1;
 
   .detail,
   .meta { @include rem('padding', 0 $global-padding); }
@@ -74,4 +76,12 @@
 
 .rule-detail-summary {
   grid-area: rule-detail;
+}
+
+.actions-rule {
+  .rule-detail-header {
+    border-bottom: 0;
+    .page-header { @include rem('padding', $global-padding*2 0); }
+  }
+  section.content { background: #fff; }
 }

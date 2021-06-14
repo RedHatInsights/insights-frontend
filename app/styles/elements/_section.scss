@@ -6,6 +6,7 @@ $bg-gray: $gray-light;
 section.content { 
   width: 100%;
   @include rem('padding', $global-margin); 
+  background: #F5F5F5;
 }
 section.content.content-gray { background: $gray-light; }
 
@@ -21,6 +22,10 @@ section.content.content-gray { background: $gray-light; }
 //     }
 //   }
 // }
+
+section.content.content-white {
+  background: #fff;
+}
 
 section.gray {
 	background: $gray-light;

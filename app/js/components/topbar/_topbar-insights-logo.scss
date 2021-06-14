@@ -3,8 +3,14 @@ topbar .insights-logo {
 
   @include media-query(sm){ display: inline-flex; }
 
-  .home-link md-icon {
-    @include rem('width', 120px);
+  .home-link, .home-link md-icon {
+    .st0 { fill: #fff; }
+    @include rem('width', 180px);
+  }
+
+  button.toggle-fullscreen md-icon{
+    color: #fff;
+    @include font-size(20px);
   }
 
   button {

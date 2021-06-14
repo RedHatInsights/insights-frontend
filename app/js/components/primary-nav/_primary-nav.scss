@@ -1,5 +1,4 @@
 $primary-nav-bg: #292e34;
-$primary-nav-bg: #454853;
 $dashboard-nav-border-color: #403b3f;
 $dashboard-nav-header-bg: #4d464b;
 $dashboard-nav-input-bg: #322e31;
@@ -22,8 +21,12 @@ $aside_anchor_hover_bg: gray;
   a,
   button {
     color: #fff;
-    font-weight: 700;
+    font-weight: 400;
     position: relative;
+    align-items: center;
+    color: #d1d1d1;
+    span {@include font-size(14px); }
+    i { @include font-size(20px); }
   }
 
   ul {
@@ -41,7 +44,7 @@ $aside_anchor_hover_bg: gray;
     display: flex;
     flex-direction: row;
     margin: 0;
-    @include rem('padding', $global-padding $global-margin $global-padding $global-padding);
+    @include rem('padding', 17px 25px);
 
     text-align: center;
     @include font-size(14px, 1);
@@ -55,8 +58,9 @@ $aside_anchor_hover_bg: gray;
   ul li a.current,
   ul li button:hover {
     background: rgba(255,255,255,.075);
-    box-shadow: inset 6px 0 0 $blue-light;
-    text-decoration: none;    
+    box-shadow: inset 3px 0 0 $blue-light;
+    text-decoration: none;
+    color: #fff;
   }
 
   ul li a.current .fa {
@@ -74,7 +78,7 @@ $aside_anchor_hover_bg: gray;
 //==================================================================*/
 
 .primary-nav ul li a,
-.primary-nav ul li button { @include media-query(md) { @include rem('padding', 24px 34px 24px 24px); } }
+.primary-nav ul li button { @include media-query(md) { @include rem('padding', 17px 25px); } }
 
 .platform-grid.collapsed .primary-nav ul li a, 
 button.toggle-fullscreen {
@@ -102,7 +106,7 @@ topbar .toggle-fullscreen {
     @include rem('padding', $global-padding/2);
     border: none;
     box-shadow: none;
-    background: #292b31;
+    background: #1d1d1d;
   }
 
   .internal {

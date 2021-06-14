@@ -1,4 +1,7 @@
 .topbar-utilities {
   display: flex;
   align-items: center;
+  .md-button, .md-button *:hover {
+    color: #fff;
+  }
 }

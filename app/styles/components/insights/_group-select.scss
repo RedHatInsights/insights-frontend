@@ -10,6 +10,14 @@
 	}
 }
 
+.group-select a.link {
+  color: #00B7FF;
+}
+
+#group-select .text span, #group-select .caret {
+  color: #fff;
+}
+
 .table-filters {
 
 	select {
@@ -28,7 +36,7 @@
 }
 
 .group-select .add-group {
-  opacity: .5;
+  opacity: .8;
   transition: .2s;
 
   &:hover {
