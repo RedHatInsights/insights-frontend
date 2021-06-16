@@ -106,6 +106,8 @@ Code for the [Insights plugin for Satellite](https://github.com/redhataccess/for
 **Building For Satellite**
 
 1. `git checkout satellite` 
-2. Make your code changes and commit them. Don't forget to update the version number in package.json
+2. Make your code changes, commit and push them. Don't forget to:
+   - update the version number in package.json
+   - `git tag` your commit with the new version number 
 3. `gulp sat`
-4. Copy the built build/js/insights.unmin.js and build/css/sat6.css to the [plugin](https://github.com/redhataccess/foreman-plugin) project
+4. Copy resulting build/js/insights.unmin.js and build/css/sat6.css to the [plugin](https://github.com/redhataccess/foreman-plugin) project
