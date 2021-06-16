@@ -3,6 +3,8 @@
 [![dependencies Status](https://david-dm.org/RedHatInsights/insights-frontend/status.svg)](https://david-dm.org/RedHatInsights/insights-frontend)
 [![devDependencies Status](https://david-dm.org/RedHatInsights/insights-frontend/dev-status.svg)](https://david-dm.org/RedHatInsights/insights-frontend?type=dev)
 
+**Notice:** This project has been replaced by [insights-advisor-frontend](https://github.com/RedHatInsights/insights-advisor-frontend).
+
 Development
 ---
 **Requirements**
@@ -96,3 +98,14 @@ Make sure you submit a merge request for master first. There may be cases where 
 5. Create a [new pull request](https://github.com/ansible/insights-frontend/compare?expand=1). Use your feature branch as the source branch and `stable-X.Y` as the target branch. Assign the merge request to someone for review.
 
 When submitting a trivial change (e.g. a simple typo fix) that applies cleanly to both master and stable-X.Y branches you can skips the steps described in this section. Instead, only send a merge request against the master branch (as described in "Contributing your changes to master (/insightsbeta)" section). In addition, use merge request label "stable" on the merge request. The label indicates to the reviewer that besides a merge to the master branch, they should also cherry-pick the change to the stable-X.Y branch. Use this shortcut only for simple changes after you verified that the change applies cleanly to both branches. Otherwise, the reviewer will likely reject your merge request.
+
+## Satellite plugin
+
+Code for the [Insights plugin for Satellite](https://github.com/redhataccess/foreman-plugin) resides in the "[satellite](https://github.com/RedHatInsights/insights-frontend/tree/satellite)" branch.
+
+**Building For Satellite**
+
+1. `git checkout satellite` 
+2. Make your code changes and commit them. Don't forget to update the version number in package.json
+3. `gulp sat`
+4. Copy the built build/js/insights.unmin.js and build/css/sat6.css to the [plugin](https://github.com/redhataccess/foreman-plugin) project
